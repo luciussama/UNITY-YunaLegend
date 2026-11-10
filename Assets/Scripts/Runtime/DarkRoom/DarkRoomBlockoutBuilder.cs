@@ -117,9 +117,9 @@ namespace YunaLegend.DarkRoom
             // Etapa 2: A Fuga Acelerada com pulos crescentes ate o Poster na parede (10 a 21)
             var lastStage1 = stage1[stage1.Count - 1];
             float stage2FirstPlatWidth = 2.2f;
-            float gapStage1To2 = 2.4f;
+            float gapStage1To2 = 2.32f;
             float stage2StartX = lastStage1.x + (lastStage1.width * 0.5f) + gapStage1To2 + (stage2FirstPlatWidth * 0.5f);
-            var stage2 = DarkRoomThreeStageCircuitGenerator.GenerateStage2Platforms(stage2StartX, lastStage1.y + 0.35f);
+            var stage2 = DarkRoomThreeStageCircuitGenerator.GenerateStage2Platforms(stage2StartX, lastStage1.y + 0.32f);
             BuildPlatformList(stage2, stage2Root, "Etapa2_Fuga");
 
             // Etapa 3: A Subida Caotica Reversa (22 a 37) da direita para a esquerda apos a queda cinematica

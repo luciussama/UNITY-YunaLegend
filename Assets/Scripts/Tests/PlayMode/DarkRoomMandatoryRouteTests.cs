@@ -199,5 +199,51 @@ namespace YunaLegend.Tests
                 Assert.IsTrue(landed, $"Real CharacterController cannot jump {source} -> {target}; position={player.transform.position}; reached={reached}; speed={speed}; height={height}");
             }
         }
+
+        [Test]
+        public void ContinuousEscapeRun_JumpsAllPlatformsWithoutOvershoot()
+        {
+            // Simula uma corrida humana contínua por toda a Fuga (Plat 9 a 21)
+            // Em cada plataforma, Yuna corre e salta antes da borda frontal, comprovando pouso seguro sem overshoot.
+            manager.StartStage2Escape();
+            Assert.AreEqual(9, manager.CurrentPlatformIndex);
+
+            player.ResetPlayer(new Vector3(39.0f, -2.8f, 0f), 1f);
+            player.RestoreRouteSupport(9);
+
+            for (int target = 10; target <= 21; target++)
+            {
+                int source = target - 1;
+                var sourceMarker = Marker(source);
+                var targetMarker = Marker(target);
+
+                // Corre ate 0.35m antes da borda frontal da plataforma atual
+                float takeoffX = sourceMarker.transform.position.x + (sourceMarker.spec.width * 0.5f) - 0.35f;
+                while (player.transform.position.x < takeoffX && !player.IsDead)
+                {
+                    Tick(1);
+                }
+
+                Assert.IsFalse(player.IsDead, $"Yuna morreu antes de decolar da plat {source}");
+
+                // Salta em direcao a proxima plataforma
+                Jump();
+
+                // Aguarda o pouso na plataforma de destino
+                int timeout = 160;
+                while (manager.CurrentPlatformIndex != target && timeout > 0 && !player.IsDead)
+                {
+                    Tick(1);
+                    timeout--;
+                }
+
+                Assert.IsFalse(player.IsDead, $"Yuna morreu no salto {source} -> {target}. Posicao: {player.transform.position}, Limites Destino: [{targetMarker.transform.position.x - targetMarker.spec.width * 0.5f} .. {targetMarker.transform.position.x + targetMarker.spec.width * 0.5f}]");
+                Assert.AreEqual(target, manager.CurrentPlatformIndex, $"Nao alcancou a plataforma {target} no tempo esperado");
+
+                // Comprova que o ponto de pouso nao ultrapassou a borda frontal (sem overshoot)
+                float targetRightEdge = targetMarker.transform.position.x + (targetMarker.spec.width * 0.5f);
+                Assert.LessOrEqual(player.transform.position.x, targetRightEdge, $"Overshoot na plat {target}: Yuna pousou alem da borda frontal!");
+            }
+        }
     }
 }

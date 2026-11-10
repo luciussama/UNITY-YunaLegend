@@ -57,7 +57,7 @@ namespace YunaLegend.DarkRoom
         // Culmina na Plataforma 21: O Poster da Porta Falsa na parede (x ~ 90.5m, y ~ 1.58m).
         // Conexao com Castelo: começa exatamente apos o fim do Castelinho (x=41.10m) + gap 1.6m.
         // -------------------------------------------------------------
-        public static List<PlatformSpec> GenerateStage2Platforms(float startX = 43.90f, float startY = -3.27f)
+        public static List<PlatformSpec> GenerateStage2Platforms(float startX = 44.42f, float startY = -3.27f)
         {
             var list = new List<PlatformSpec>();
             string[] names = new[]
@@ -84,7 +84,7 @@ namespace YunaLegend.DarkRoom
                 int index = 10 + i;
                 float progress = (float)i / (names.Length - 1); // 0 a 1
 
-                float w = (i == 11) ? 3.6f : Mathf.Lerp(2.2f, 1.5f, progress);
+                float w = (i == 11) ? 3.8f : Mathf.Lerp(2.2f, 1.8f, progress);
                 float h = (i == 11) ? 1.4f : 0.65f;
                 float d = 1.8f;
 
@@ -94,10 +94,10 @@ namespace YunaLegend.DarkRoom
                 if (i < names.Length - 1)
                 {
                     float nextProgress = (float)(i + 1) / (names.Length - 1);
-                    float nextW = (i + 1 == 11) ? 3.6f : Mathf.Lerp(2.2f, 1.5f, nextProgress);
-                    // Vãos escalados exatamente para a distância de um pulo real crescente (2.4m a 4.8m)
-                    float gap = Mathf.Lerp(2.4f, 4.8f, progress);
-                    float deltaY = Mathf.Lerp(0.35f, 0.50f, progress);
+                    float nextW = (i + 1 == 11) ? 3.8f : Mathf.Lerp(2.2f, 1.8f, nextProgress);
+                    // Vãos calibrados matematicamente pela parábola física real para aterrissar com margem segura sem overshoot
+                    float gap = Mathf.Lerp(2.32f, 4.75f, progress);
+                    float deltaY = Mathf.Lerp(0.32f, 0.48f, progress);
 
                     currentX += (w * 0.5f) + gap + (nextW * 0.5f);
                     currentY += deltaY;
