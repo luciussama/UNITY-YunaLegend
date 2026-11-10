@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -44,7 +44,7 @@ namespace YunaLegend.EditorScripts
             dirLight.intensity = 0.8f;
             lightGo.transform.rotation = Quaternion.Euler(45f, -30f, 0f);
 
-            // 3. Gerar Blockout Completo das 28 plataformas + piso corrido
+            // 3. Gerar Blockout Completo das 38 plataformas em 3 etapas canonicas + piso corrido
             var blockoutRoot = GameObject.Find("DarkRoom_Blockout_Root");
             if (blockoutRoot == null) blockoutRoot = new GameObject("DarkRoom_Blockout_Root");
             var builder = blockoutRoot.GetComponent<DarkRoomBlockoutBuilder>();
@@ -56,7 +56,7 @@ namespace YunaLegend.EditorScripts
             if (yunaGo == null)
             {
                 yunaGo = new GameObject("Yuna_Player");
-                yunaGo.transform.position = new Vector3(2.0f, -6.0f, 0f); // Topo da plataforma 0
+                yunaGo.transform.position = DarkRoomStartLayout.Position; // Largada no piso, antes do urso
 
                 var cc = yunaGo.AddComponent<CharacterController>();
                 cc.height = 1.4f;
@@ -87,7 +87,7 @@ namespace YunaLegend.EditorScripts
             }
             else
             {
-                yunaGo.transform.position = new Vector3(2.0f, -6.0f, 0f);
+                yunaGo.transform.position = DarkRoomStartLayout.Position;
             }
 
             // 5. Instanciar Nanda (Fadinha Guia com luz ambar)
@@ -119,6 +119,8 @@ namespace YunaLegend.EditorScripts
 
             // 6. Conectar Camera ao Transform da Yuna
             sideCam.SetTarget(yunaGo.transform);
+            sideCam.ConfigureSection(DarkRoomStartLayout.CameraY);
+            sideCam.SnapToTargetX(DarkRoomStartLayout.StartX, DarkRoomStartLayout.CameraOffset);
 
             var yunaCtrl = yunaGo.GetComponent<Yuna25DPlayerController>();
             var nandaGuide = nandaGo.GetComponent<NandaFairyGuide>();
@@ -141,6 +143,7 @@ namespace YunaLegend.EditorScripts
             soProgression.FindProperty("nanda").objectReferenceValue = nandaGuide;
             soProgression.FindProperty("openingSequence").objectReferenceValue = opening;
             soProgression.FindProperty("cameraRunner").objectReferenceValue = sideCam;
+            soProgression.FindProperty("blockoutBuilder").objectReferenceValue = builder;
             soProgression.ApplyModifiedProperties();
 
             var soOpening = new SerializedObject(opening);

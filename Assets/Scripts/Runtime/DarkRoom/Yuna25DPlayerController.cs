@@ -20,8 +20,7 @@ namespace YunaLegend.DarkRoom
         [Header("Fisica de Salto Calibrada")]
         [SerializeField] private float jumpHeight = 3.0f;
         [SerializeField] private float gravity = 28f;
-        [SerializeField] private float fallMultiplier = 1.8f;
-        [SerializeField] private float lowJumpMultiplier = 2.4f;
+        [Tooltip("Tolerancia ao saltar logo apos deixar uma borda.")]
         [SerializeField] private float coyoteTime = 0.12f;
         [SerializeField] private float jumpBufferTime = 0.14f;
 
@@ -44,13 +43,38 @@ namespace YunaLegend.DarkRoom
         private bool jumpHeld;
         private bool wasGrounded;
         private bool isDead;
+        private bool isCinematicFalling;
+        private int lastLandedPlatformIndex = -1;
 
         public event Action OnGameOverTriggered;
+        public event Action<int> OnPlatformLanded;
+        public event Action OnCinematicFallLanded;
 
         public bool IsGrounded => controller != null && controller.isGrounded;
         public Vector3 Velocity => velocity;
         public float RunDirection { get => runDirection; set => SetRunDirection(value); }
-        public bool AutoRunActive { get => autoRunActive; set => autoRunActive = value; }
+        public bool IsCinematicFalling => isCinematicFalling;
+        public bool AutoRunActive
+        {
+            get => autoRunActive;
+            set
+            {
+                if (autoRunActive != value)
+                {
+                    jumpBufferCounter = 0f;
+                    jumpHeld = false;
+                    requireJumpRelease = true;
+                }
+                autoRunActive = value;
+            }
+        }
+        private bool requireJumpRelease = true;
+
+        public void PrepareForOpening(Vector3 position)
+        {
+            ResetPlayer(position);
+            AutoRunActive = false;
+        }
         public bool IsDead => isDead;
 
         private void Awake()
@@ -62,19 +86,156 @@ namespace YunaLegend.DarkRoom
             }
         }
 
+        private bool floorLaunchAllowed;
+
+        public float RunSpeed => runSpeed;
+        public float JumpHeight => jumpHeight;
+
+        private DarkRoomPlatformMarker[] routePlatforms;
+        private float lastSupportTop;
+        private bool hasRouteSupport;
+        private bool launchJumped;
+
+        public void AllowFloorLaunch(float x)
+        {
+
+            floorLaunchAllowed = true;
+            launchJumped = false;
+            hasRouteSupport = false;
+            routePlatforms = FindObjectsByType<DarkRoomPlatformMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        }
+
+        public void ValidateMandatoryRoute()
+        {
+            if (isDead || isCinematicFalling || !autoRunActive || !floorDeathActive) return;
+            if (routePlatforms == null)
+                routePlatforms = FindObjectsByType<DarkRoomPlatformMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+            int nextIndex = lastLandedPlatformIndex < 0 ? (runDirection > 0 ? 0 : 22) : lastLandedPlatformIndex + 1;
+            float lowestReachableTop = lastSupportTop;
+            foreach (var marker in routePlatforms)
+            {
+                if (marker == null || !marker.gameObject.activeInHierarchy || marker.spec.index != nextIndex) continue;
+                lowestReachableTop = Mathf.Min(lastSupportTop, marker.GetTopCenterWorld().y);
+                float farEdge = marker.transform.position.x + runDirection * marker.spec.width * 0.5f;
+                if (runDirection * (transform.position.x - farEdge) > controller.radius)
+                    TriggerDeath("A plataforma obrigatória ficou para trás.");
+                break;
+            }
+
+            if (hasRouteSupport && velocity.y < 0f && transform.position.y < lowestReachableTop - 0.55f)
+                TriggerDeath("Yuna falhou o salto e caiu da rota.");
+            if (floorLaunchAllowed && launchJumped && controller.isGrounded && !hasRouteSupport)
+                TriggerDeath("Yuna voltou ao chão sem alcançar a primeira plataforma.");
+        }
+
         private void Update()
         {
+            if (Time.timeScale == 0f) return;
             if (isDead) return;
 
-            ReadJumpInput();
-            UpdateTimers();
-            ApplyForwardRun();
-            ApplyJumpAndGravity();
+            // Queda cinematica real (sem controle horizontal, apenas gravidade ate o chao)
+            if (isCinematicFalling)
+            {
+                velocity.x = 0f;
+                velocity.y -= gravity * Time.deltaTime;
+                controller.Move(velocity * Time.deltaTime);
+                Enforce2DPlane();
 
-            controller.Move(velocity * Time.deltaTime);
+                if (controller.isGrounded && velocity.y <= 0f)
+                {
+                    isCinematicFalling = false;
+                    velocity = Vector3.zero;
+                    PlaySound(landSfx);
+                    OnCinematicFallLanded?.Invoke();
+                }
+                return;
+            }
+
+            if (!autoRunActive) return;
+
+            ReadJumpInput();
+            TickMovement(Time.deltaTime);
+        }
+
+        public void TickMovement(float deltaTime)
+        {
+            if (isDead || !autoRunActive || isCinematicFalling || deltaTime <= 0f) return;
+            UpdateTimers(deltaTime);
+            ApplyForwardRun();
+            ApplyJumpAndGravity(deltaTime);
+
+            // Midpoint displacement keeps the ballistic arc consistent across frame rates.
+            Vector3 displacement = velocity * deltaTime;
+            displacement.y += 0.5f * gravity * deltaTime * deltaTime;
+            controller.Move(displacement);
             Enforce2DPlane();
             DetectLanding();
+            ValidateMandatoryRoute();
             CheckFloorDeath();
+        }
+
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            if (isDead) return;
+            if (autoRunActive && floorDeathActive && !isCinematicFalling && velocity.y <= 0f
+                && hit.normal.x * runDirection < -0.5f
+                && hit.collider.GetComponentInParent<DarkRoomPlatformMarker>() != null)
+            {
+                TriggerDeath("Yuna não alcançou o topo da plataforma obrigatória.");
+                return;
+            }
+            if (hit.normal.y > 0.5f)
+            {
+
+                // Progression is notified only after validating the mandatory landing below.
+
+                var marker = hit.collider.GetComponentInParent<DarkRoomPlatformMarker>();
+                if (marker != null && !isCinematicFalling && velocity.y <= 0f)
+                {
+                    int idx = marker.spec.index;
+                    int expected = lastLandedPlatformIndex < 0 ? (runDirection > 0 ? 0 : 22) : lastLandedPlatformIndex + 1;
+                    if (idx != lastLandedPlatformIndex && idx != expected)
+                    {
+                        TriggerDeath("Uma plataforma obrigatória foi pulada.");
+                        return;
+                    }
+                    floorLaunchAllowed = false;
+                    hasRouteSupport = true;
+                    lastSupportTop = marker.GetTopCenterWorld().y;
+                    if (idx != lastLandedPlatformIndex)
+                    {
+                        lastLandedPlatformIndex = idx;
+                        OnPlatformLanded?.Invoke(idx);
+                    }
+                }
+            }
+        }
+
+        public void RestoreRouteSupport(int index)
+        {
+            lastLandedPlatformIndex = index;
+            routePlatforms = FindObjectsByType<DarkRoomPlatformMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            foreach (var marker in routePlatforms)
+            {
+                if (marker.spec.index != index) continue;
+                lastSupportTop = marker.GetTopCenterWorld().y;
+                hasRouteSupport = true;
+                break;
+            }
+        }
+
+        public void ResetLastPlatformIndex()
+        {
+            lastLandedPlatformIndex = -1;
+        }
+
+        public void StartCinematicFall()
+        {
+            autoRunActive = false;
+            isCinematicFalling = true;
+            floorDeathActive = false; // Nao letal nesta cena
+            velocity = Vector3.zero;
         }
 
         private void ReadJumpInput()
@@ -85,19 +246,30 @@ namespace YunaLegend.DarkRoom
                 return;
             }
 
-            // O jogador controla APENAS o pulo: Teclado (Espaço/Seta Cima/W), Gamepad (Botão Sul) ou Toque
-            bool jumpPressed = false;
-            jumpHeld = false;
+            bool rawJumpHeld = false;
+            bool rawJumpPressed = false;
 
             if (Keyboard.current != null)
             {
                 if (Keyboard.current.spaceKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame || Keyboard.current.wKey.wasPressedThisFrame)
                 {
-                    jumpPressed = true;
+                    rawJumpPressed = true;
                 }
                 if (Keyboard.current.spaceKey.isPressed || Keyboard.current.upArrowKey.isPressed || Keyboard.current.wKey.isPressed)
                 {
-                    jumpHeld = true;
+                    rawJumpHeld = true;
+                }
+            }
+
+            if (Mouse.current != null)
+            {
+                if (Mouse.current.leftButton.wasPressedThisFrame)
+                {
+                    rawJumpPressed = true;
+                }
+                if (Mouse.current.leftButton.isPressed)
+                {
+                    rawJumpHeld = true;
                 }
             }
 
@@ -105,27 +277,44 @@ namespace YunaLegend.DarkRoom
             {
                 if (Gamepad.current.buttonSouth.wasPressedThisFrame)
                 {
-                    jumpPressed = true;
+                    rawJumpPressed = true;
                 }
                 if (Gamepad.current.buttonSouth.isPressed)
                 {
-                    jumpHeld = true;
+                    rawJumpHeld = true;
                 }
             }
 
-            if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+            if (Touchscreen.current != null)
             {
-                jumpPressed = true;
-                jumpHeld = true;
+                if (Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+                {
+                    rawJumpPressed = true;
+                }
+                if (Touchscreen.current.primaryTouch.press.isPressed)
+                {
+                    rawJumpHeld = true;
+                }
             }
 
-            if (jumpPressed)
+            // Regra 4.1: comando que avanca o dialogo/abertura nao pode vazar como pulo no frame seguinte
+            if (requireJumpRelease)
+            {
+                if (!rawJumpHeld)
+                {
+                    requireJumpRelease = false;
+                }
+                return;
+            }
+
+            jumpHeld = rawJumpHeld;
+            if (rawJumpPressed)
             {
                 jumpBufferCounter = jumpBufferTime;
             }
         }
 
-        private void UpdateTimers()
+        private void UpdateTimers(float deltaTime)
         {
             if (controller.isGrounded)
             {
@@ -133,10 +322,10 @@ namespace YunaLegend.DarkRoom
             }
             else
             {
-                coyoteCounter -= Time.deltaTime;
+                coyoteCounter -= deltaTime;
             }
 
-            jumpBufferCounter -= Time.deltaTime;
+            jumpBufferCounter -= deltaTime;
         }
 
         private void ApplyForwardRun()
@@ -155,34 +344,24 @@ namespace YunaLegend.DarkRoom
             transform.rotation = Quaternion.Euler(0f, targetRotationY, 0f);
         }
 
-        private void ApplyJumpAndGravity()
+        private void ApplyJumpAndGravity(float deltaTime)
         {
             if (controller.isGrounded && velocity.y < 0f)
             {
                 velocity.y = -2f;
             }
 
-            // Salto calibrado com timing exigente
+            // A press commits the whole arc; releasing never cuts its height.
             if (jumpBufferCounter > 0f && coyoteCounter > 0f)
             {
                 velocity.y = Mathf.Sqrt(2f * gravity * jumpHeight);
+                if (floorLaunchAllowed) launchJumped = true;
                 jumpBufferCounter = 0f;
                 coyoteCounter = 0f;
                 PlaySound(jumpSfx);
             }
 
-            if (velocity.y < 0f)
-            {
-                velocity.y -= gravity * fallMultiplier * Time.deltaTime;
-            }
-            else if (velocity.y > 0f && !jumpHeld)
-            {
-                velocity.y -= gravity * lowJumpMultiplier * Time.deltaTime;
-            }
-            else
-            {
-                velocity.y -= gravity * Time.deltaTime;
-            }
+            velocity.y -= gravity * deltaTime;
         }
 
         private void Enforce2DPlane()
@@ -204,8 +383,37 @@ namespace YunaLegend.DarkRoom
             wasGrounded = controller.isGrounded;
         }
 
+        public void SetRunSpeed(float speed)
+        {
+            runSpeed = speed;
+        }
+
+        public void SetJumpHeight(float height)
+        {
+            jumpHeight = height;
+        }
+
+        public void SetFloorDeathActive(bool active)
+        {
+            floorDeathActive = active;
+        }
+
+        private bool floorDeathActive = true;
+
         private void CheckFloorDeath()
         {
+            if (!floorDeathActive) return;
+
+            if (floorLaunchAllowed)
+            {
+                // Permite a arrancada inicial no chão no início da Fase 3 antes de atingir a Plataforma 22
+                if (!hasRouteSupport)
+                {
+                    return;
+                }
+                floorLaunchAllowed = false;
+            }
+
             // Qualquer queda no chao da sala e Game Over imediato
             if (transform.position.y <= floorDeathY)
             {
@@ -230,10 +438,24 @@ namespace YunaLegend.DarkRoom
 
         public void ResetPlayer(Vector3 startPosition, float dir = 1f)
         {
+            if (controller == null) controller = GetComponent<CharacterController>();
+            bool wasEnabled = controller.enabled;
+            controller.enabled = false;
+            transform.position = startPosition;
+            controller.enabled = wasEnabled;
             isDead = false;
+            isCinematicFalling = false;
+            lastLandedPlatformIndex = -1;
             runDirection = dir;
             velocity = Vector3.zero;
-            transform.position = startPosition;
+            coyoteCounter = 0f;
+            jumpBufferCounter = 0f;
+            wasGrounded = false;
+            floorLaunchAllowed = false;
+            launchJumped = false;
+            hasRouteSupport = false;
+            routePlatforms = null;
+            requireJumpRelease = true;
             autoRunActive = true;
         }
 

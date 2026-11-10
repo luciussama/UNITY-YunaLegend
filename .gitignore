@@ -23,8 +23,10 @@ MemoryCaptures/
 *.pdb
 *.opendb
 *.VC.db
+*.slnx
 
-# OS generated
+# Logs & temp builds
+*.log
 .DS_Store
 Thumbs.db
 desktop.ini

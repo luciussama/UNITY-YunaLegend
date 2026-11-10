@@ -15,6 +15,10 @@ namespace YunaLegend.DarkRoom
         [SerializeField] private bool autoStart = true;
         [SerializeField] private bool allowSkip = true;
 
+        [Header("Depuracao / Prototipo Rapido")]
+        [Tooltip("Quando ativado, pula automaticamente a abertura cinematica de 42.5s para iniciar o teste de gameplay")]
+        [SerializeField] private bool skipOpeningForQuickTest = true;
+
         [Header("Eventos e Callbacks")]
         public Action OnOpeningStarted;
         public Action<string> OnPoeticLineDisplayed;
@@ -56,14 +60,35 @@ namespace YunaLegend.DarkRoom
 
         private IEnumerator RunOpeningTimeline()
         {
+            isOpeningFinished = false;
+            if (yuna != null)
+            {
+                var platforms = FindObjectsByType<DarkRoomPlatformMarker>(FindObjectsSortMode.None);
+                foreach (var platform in platforms)
+                {
+                    if (platform.spec.index == 0)
+                    {
+                        yuna.PrepareForOpening(DarkRoomStartLayout.Position);
+                        yuna.AllowFloorLaunch(yuna.transform.position.x);
+                        nanda?.SetTargetPlatform(0);
+                        break;
+                    }
+                }
+            }
             OnOpeningStarted?.Invoke();
+
+            // Aguarda os outros Start registrarem os eventos antes de liberar a corrida.
+            yield return null;
+            if (skipOpeningForQuickTest)
+            {
+                FinishOpening();
+                yield break;
+            }
 
             // Bloquear controles do jogador durante a cutscene
             if (yuna != null)
             {
                 yuna.AutoRunActive = false;
-                // Posicao inicial na Plataforma 0 (Cabeca do Urso em X = 2.0, Y = -6.5)
-                yuna.transform.position = new Vector3(2.0f, -6.5f, 0f);
             }
 
             // 1. 0.0s a 4.0s - Fade-in na penumbra e chegada da luz

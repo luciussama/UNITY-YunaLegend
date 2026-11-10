@@ -19,10 +19,9 @@ namespace YunaLegend.DarkRoom
             }
         }
 
-        private void OnControllerColliderHit(ControllerColliderHit hit)
+        public void OnCharacterLanded(Yuna25DPlayerController player)
         {
-            // Detecta quando o jogador aterrissa sobre a plataforma por cima
-            if (hit.normal.y > 0.6f && marker != null && progression != null)
+            if (marker != null && progression != null)
             {
                 progression.NotifyPlatformLanded(marker.spec.index);
             }

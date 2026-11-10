@@ -63,8 +63,8 @@ namespace YunaLegend.Dialogue
 
         // Cutscene do Castelo (Plataforma 9)
         public static readonly string PoeticCastle = "De longe, a porta ainda cumpria sua promessa.";
-        public static readonly DialogueLine CastleNanda = new DialogueLine(SpeakerId.Nanda, "A porta e por ali. Anda, vem comigo!");
-        public static readonly DialogueLine CastleYuna = new DialogueLine(SpeakerId.Menina, "Daqui parece perto. La embaixo, nao.");
+        public static readonly DialogueLine CastleNanda = new DialogueLine(SpeakerId.Nanda, "A porta é por ali. Anda, vem comigo!");
+        public static readonly DialogueLine CastleYuna = new DialogueLine(SpeakerId.Menina, "Daqui parece perto. Lá embaixo, não.");
 
         // Plot Twist da Porta Falsa (Plataforma 21)
         public static readonly DialogueLine FalseDoorYuna = new DialogueLine(
@@ -74,11 +74,11 @@ namespace YunaLegend.Dialogue
             isPlotTwistStyle: true
         );
 
-        public static readonly string PoeticFalseDoor = "A madeira caiu.\nA promessa ficou de pe.";
+        public static readonly string PoeticFalseDoor = "A madeira caiu.\nA promessa ficou de pé.";
 
         public static readonly DialogueLine FalseDoorNanda = new DialogueLine(
             SpeakerId.Nanda,
-            "Eu tambem achei. Droga... Vamos olhar por ali.",
+            "Eu também achei. Droga... Vamos olhar por ali.",
             NandaMood.Annoyed
         );
 

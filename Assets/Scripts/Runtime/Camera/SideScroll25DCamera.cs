@@ -25,18 +25,25 @@ namespace YunaLegend.Camera25D
         [SerializeField] private bool autoScrollActive = false;
 
         [Header("Margem de Esmagamento da Tela (Screen Crush)")]
+        [Tooltip("Define se a camera causa derrota por esmagamento ao ficar para tras")]
+        [SerializeField] private bool screenCrushActive = false;
+
         [Tooltip("Distancia maxima atras do centro da camera antes de considerar esmagamento")]
         [SerializeField] private float maxDistanceBehindCamera = 7.5f;
 
         [Header("Posicionamento Fixo Inviolavel (Regra 3.2)")]
-        [SerializeField] private float fixedY = -4.0f;
-        [SerializeField] private float fixedZ = -14.0f;
+        [SerializeField] private float fixedY = -4.5f;
+        [SerializeField] private float fixedZ = -16.0f;
         [SerializeField] private float fixedFov = 45.0f;
 
         private Camera targetCamera;
 
         public bool AutoScrollActive { get => autoScrollActive; set => autoScrollActive = value; }
         public float ScrollDirection { get => scrollDirection; set => scrollDirection = Mathf.Sign(value); }
+        public bool ScreenCrushActive { get => screenCrushActive; set => screenCrushActive = value; }
+        public float FixedY => fixedY;
+        public float FixedZ => fixedZ;
+        public float FixedFov => fixedFov;
 
         private void Awake()
         {
@@ -48,7 +55,7 @@ namespace YunaLegend.Camera25D
         {
             if (autoScrollActive)
             {
-                // Avanco estrito e continuo no eixo X
+                // Avanco estrito e continuo no eixo X (sem qualquer oscilacao em Y ou Z)
                 float newX = transform.position.x + (scrollDirection * scrollSpeed * Time.deltaTime);
                 transform.position = new Vector3(newX, fixedY, fixedZ);
 
@@ -58,13 +65,13 @@ namespace YunaLegend.Camera25D
             else if (playerTarget != null && !Application.isPlaying)
             {
                 // No editor, acompanha Yuna no X para visualizacao
-                transform.position = new Vector3(playerTarget.transform.position.x + 2.0f, fixedY, fixedZ);
+                transform.position = new Vector3(playerTarget.transform.position.x + DarkRoomStartLayout.CameraOffset, fixedY, fixedZ);
             }
         }
 
         private void CheckScreenCrush()
         {
-            if (playerTarget == null || playerTarget.IsDead) return;
+            if (!screenCrushActive || playerTarget == null || playerTarget.IsDead) return;
 
             float camX = transform.position.x;
             float playerX = playerTarget.transform.position.x;
@@ -87,6 +94,15 @@ namespace YunaLegend.Camera25D
             }
         }
 
+        public void ConfigureSection(float targetFixedY, float targetFixedZ = -16.0f, float targetFov = 45.0f)
+        {
+            fixedY = targetFixedY;
+            fixedZ = targetFixedZ;
+            fixedFov = targetFov;
+            ApplyFixedProperties();
+            transform.position = new Vector3(transform.position.x, fixedY, fixedZ);
+        }
+
         private void ApplyFixedProperties()
         {
             if (targetCamera != null)
@@ -102,6 +118,11 @@ namespace YunaLegend.Camera25D
             {
                 playerTarget = newTarget.GetComponent<Yuna25DPlayerController>();
             }
+        }
+
+        public void SnapToTargetX(float targetX, float offset = 3.5f)
+        {
+            transform.position = new Vector3(targetX + offset, fixedY, fixedZ);
         }
 
         public void SetScrollState(bool active, float dir = 1f, float speed = 5.2f)

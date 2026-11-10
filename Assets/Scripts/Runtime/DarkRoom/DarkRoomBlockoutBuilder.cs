@@ -13,12 +13,34 @@ namespace YunaLegend.DarkRoom
         [Header("Materiais Base")]
         [SerializeField] private Material defaultPlatformMaterial;
 
-        [Header("Estrutura Gerada")]
-        [SerializeField] private Transform rampAscentRoot;
-        [SerializeField] private Transform returnChaoticRoot;
+        [Header("Estrutura Gerada (3 Etapas Canônicas)")]
+        [SerializeField] private Transform stage1Root;
+        [SerializeField] private Transform stage2Root;
+        [SerializeField] private Transform stage3Root;
         [SerializeField] private Transform floorRoot;
 
+        private DarkRoomPlatformMarker[] temporalPlatforms;
+
         public float CoordinateScale => coordinateScale;
+
+        public void ShowTemporalSection(DarkRoomPhase phase, int platformIndex = -1, bool falling = false)
+        {
+            if (temporalPlatforms == null)
+                temporalPlatforms = GetComponentsInChildren<DarkRoomPlatformMarker>(true);
+
+            // Keep the castle only while it is still the takeoff surface for the escape.
+            foreach (var marker in temporalPlatforms)
+            {
+                if (marker == null) continue;
+                int index = marker.spec.index;
+                bool visible = !falling && (phase == DarkRoomPhase.Phase1Ascent
+                    ? index <= 9
+                    : phase == DarkRoomPhase.Phase2Escape
+                        ? (index >= 10 && index <= 21) || (index == 9 && platformIndex < 10)
+                        : index >= 22);
+                marker.gameObject.SetActive(visible);
+            }
+        }
 
         [ContextMenu("Construir Blockout Completo")]
         public void BuildBlockout()
@@ -28,15 +50,29 @@ namespace YunaLegend.DarkRoom
 
             BuildFloor();
 
-            // Gera a subida constante em rampa (Fase 1 + 2 unificadas ate o Poster na parede)
-            var ascentList = DarkRoomRampPlatformGenerator.GenerateAscentRampPlatforms();
-            BuildPlatformList(ascentList, rampAscentRoot, "SubidaConstante");
+            // Etapa 1: Subida calma ate o Castelinho de Blocos (0 a 9)
+            var stage1 = DarkRoomThreeStageCircuitGenerator.GenerateStage1Platforms();
+            BuildPlatformList(stage1, stage1Root, "Etapa1_Castelo");
 
-            // Gera a corrida reversa caotica (Fase 3 apos o poster)
-            var returnList = DarkRoomRampPlatformGenerator.GenerateReturnChaoticPlatforms();
-            BuildPlatformList(returnList, returnChaoticRoot, "VoltaCaotica");
+            // Etapa 2: A Fuga Acelerada com pulos crescentes ate o Poster na parede (10 a 21)
+            var lastStage1 = stage1[stage1.Count - 1];
+            float stage2FirstPlatWidth = 2.4f;
+            float gapStage1To2 = 1.6f;
+            float stage2StartX = lastStage1.x + (lastStage1.width * 0.5f) + gapStage1To2 + (stage2FirstPlatWidth * 0.5f);
+            var stage2 = DarkRoomThreeStageCircuitGenerator.GenerateStage2Platforms(stage2StartX, lastStage1.y + 0.35f);
+            BuildPlatformList(stage2, stage2Root, "Etapa2_Fuga");
 
-            Debug.Log($"[DarkRoomBlockoutBuilder] Trilha Runner gerada: {ascentList.Count} plataformas na subida constante e {returnList.Count} na volta.");
+            // Etapa 3: A Subida Caotica Reversa (22 a 37) da direita para a esquerda apos a queda cinematica
+            var lastStage2 = stage2[stage2.Count - 1];
+            float posterWallX = lastStage2.x;
+            var stage3 = DarkRoomThreeStageCircuitGenerator.GenerateStage3Platforms(posterWallX, DarkRoomReturnLayout.FloorY);
+            BuildPlatformList(stage3, stage3Root, "Etapa3_Caotica");
+
+            temporalPlatforms = null;
+            ShowTemporalSection(DarkRoomPhase.Phase1Ascent);
+
+            Debug.Log($"[DarkRoomBlockoutBuilder] Circuito Canônico em 3 Etapas gerado com sucesso! " +
+                      $"Etapa 1: {stage1.Count} | Etapa 2: {stage2.Count} | Etapa 3: {stage3.Count} plataformas.");
         }
 
         [ContextMenu("Limpar Blockout")]
@@ -59,8 +95,9 @@ namespace YunaLegend.DarkRoom
         private void EnsureRoots()
         {
             floorRoot = CreateGroup("00_Piso_Madeira_Escura");
-            rampAscentRoot = CreateGroup("01_Subida_Constante_Rampa");
-            returnChaoticRoot = CreateGroup("02_Volta_Caotica_Reversa");
+            stage1Root = CreateGroup("01_Etapa1_SubidaAoCastelo");
+            stage2Root = CreateGroup("02_Etapa2_AFugaAcelerada");
+            stage3Root = CreateGroup("03_Etapa3_SubidaCaoticaReversa");
         }
 
         private Transform CreateGroup(string groupName)
@@ -72,7 +109,7 @@ namespace YunaLegend.DarkRoom
 
         private void BuildFloor()
         {
-            // Chao escuro da sala: qualquer queda aqui e Game Over imediato
+            // Chao escuro da sala: qualquer queda aqui e Game Over imediato (exceto na queda cinematica)
             float worldY = -9.6f;
             float worldWidth = 140.0f;
             float worldDepth = 12.0f;
@@ -81,7 +118,7 @@ namespace YunaLegend.DarkRoom
             var floorGo = GameObject.CreatePrimitive(PrimitiveType.Cube);
             floorGo.name = "Chao_Escuro_Sala";
             floorGo.transform.SetParent(floorRoot, false);
-            floorGo.transform.position = new Vector3(worldWidth * 0.5f - 10f, worldY, 0f);
+            floorGo.transform.position = new Vector3(55.0f, worldY, 0f);
             floorGo.transform.localScale = new Vector3(worldWidth, thickness, worldDepth);
 
             // Colisor de chao
