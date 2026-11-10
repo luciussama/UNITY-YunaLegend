@@ -84,7 +84,7 @@ namespace YunaLegend.DarkRoom
                 int index = 10 + i;
                 float progress = (float)i / (names.Length - 1); // 0 a 1
 
-                float w = (i == 11) ? 3.6f : Mathf.Lerp(2.4f, 1.6f, progress);
+                float w = (i == 11) ? 3.6f : Mathf.Lerp(2.2f, 1.5f, progress);
                 float h = (i == 11) ? 1.4f : 0.65f;
                 float d = 1.8f;
 
@@ -94,9 +94,10 @@ namespace YunaLegend.DarkRoom
                 if (i < names.Length - 1)
                 {
                     float nextProgress = (float)(i + 1) / (names.Length - 1);
-                    float nextW = (i + 1 == 11) ? 3.6f : Mathf.Lerp(2.4f, 1.6f, nextProgress);
-                    float gap = Mathf.Lerp(1.6f, 2.69f, progress);
-                    float deltaY = Mathf.Lerp(0.35f, 0.55f, progress);
+                    float nextW = (i + 1 == 11) ? 3.6f : Mathf.Lerp(2.2f, 1.5f, nextProgress);
+                    // Vãos escalados exatamente para a distância de um pulo real crescente (2.4m a 4.8m)
+                    float gap = Mathf.Lerp(2.4f, 4.8f, progress);
+                    float deltaY = Mathf.Lerp(0.35f, 0.50f, progress);
 
                     currentX += (w * 0.5f) + gap + (nextW * 0.5f);
                     currentY += deltaY;

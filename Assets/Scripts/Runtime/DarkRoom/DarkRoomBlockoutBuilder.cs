@@ -116,8 +116,8 @@ namespace YunaLegend.DarkRoom
 
             // Etapa 2: A Fuga Acelerada com pulos crescentes ate o Poster na parede (10 a 21)
             var lastStage1 = stage1[stage1.Count - 1];
-            float stage2FirstPlatWidth = 2.4f;
-            float gapStage1To2 = 1.6f;
+            float stage2FirstPlatWidth = 2.2f;
+            float gapStage1To2 = 2.4f;
             float stage2StartX = lastStage1.x + (lastStage1.width * 0.5f) + gapStage1To2 + (stage2FirstPlatWidth * 0.5f);
             var stage2 = DarkRoomThreeStageCircuitGenerator.GenerateStage2Platforms(stage2StartX, lastStage1.y + 0.35f);
             BuildPlatformList(stage2, stage2Root, "Etapa2_Fuga");
@@ -172,14 +172,14 @@ namespace YunaLegend.DarkRoom
         {
             // Chao escuro da sala: qualquer queda aqui e Game Over imediato (exceto na queda cinematica)
             float worldY = -9.6f;
-            float worldWidth = 140.0f;
+            float worldWidth = 170.0f;
             float worldDepth = 12.0f;
             float thickness = 1.0f;
 
             var floorGo = GameObject.CreatePrimitive(PrimitiveType.Cube);
             floorGo.name = "Chao_Escuro_Sala";
             floorGo.transform.SetParent(floorRoot, false);
-            floorGo.transform.position = new Vector3(55.0f, worldY, 0f);
+            floorGo.transform.position = new Vector3(60.0f, worldY, 0f);
             floorGo.transform.localScale = new Vector3(worldWidth, thickness, worldDepth);
 
             var floorRenderer = floorGo.GetComponent<MeshRenderer>();
@@ -236,7 +236,7 @@ namespace YunaLegend.DarkRoom
             if (sceneryRoot == null) return;
 
             // 1. Parede monumental de fundo em azul-indigo noturno (sem qualquer colisor)
-            var wall = CreateVisualOnlyObject("Parede_Fundo_Monumental", sceneryRoot, new Vector3(55f, 4.0f, 7.5f), new Vector3(160f, 32f, 1.0f), wallpaperMaterial != null ? wallpaperMaterial : wardrobeMaterial, PrimitiveType.Cube);
+            var wall = CreateVisualOnlyObject("Parede_Fundo_Monumental", sceneryRoot, new Vector3(60f, 4.0f, 7.5f), new Vector3(180f, 32f, 1.0f), wallpaperMaterial != null ? wallpaperMaterial : wardrobeMaterial, PrimitiveType.Cube);
 
             // 2. Guarda-roupa monumental de carvalho (ao fundo da Etapa 1)
             var wardrobe = CreateVisualOnlyObject("GuardaRoupa_Carvalho_Fundo", sceneryRoot, new Vector3(10f, 1.0f, 5.8f), new Vector3(14f, 20f, 3.5f), wardrobeMaterial, PrimitiveType.Cube);
@@ -256,7 +256,7 @@ namespace YunaLegend.DarkRoom
             CreateVisualOnlyObject("Livro_Gigante_Verde", shelf.transform, new Vector3(0.08f, 0.14f, -0.3f), new Vector3(0.20f, 0.25f, 0.7f), bookGreenMaterial, PrimitiveType.Cube);
 
             // 5. Relogio Cuco Monumental de Mogno (proximo a parede do poster)
-            var clock = CreateVisualOnlyObject("RelogioCuco_Monumental", sceneryRoot, new Vector3(88f, 3.5f, 5.2f), new Vector3(5.5f, 20f, 2.8f), dresserOakMaterial != null ? dresserOakMaterial : wardrobeMaterial, PrimitiveType.Cube);
+            var clock = CreateVisualOnlyObject("RelogioCuco_Monumental", sceneryRoot, new Vector3(103f, 3.5f, 5.2f), new Vector3(5.5f, 20f, 2.8f), dresserOakMaterial != null ? dresserOakMaterial : wardrobeMaterial, PrimitiveType.Cube);
 
             // Mostrador dourado do relogio
             CreateVisualOnlyObject("Mostrador_Dourado", clock.transform, new Vector3(0f, 0.22f, -0.52f), new Vector3(0.45f, 0.04f, 0.45f), brassGoldMaterial, PrimitiveType.Cylinder, Quaternion.Euler(90f, 0f, 0f));
