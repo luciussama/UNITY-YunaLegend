@@ -40,6 +40,10 @@ namespace YunaLegend.DarkRoom
         [SerializeField] private DialogueLine activeDialogue = null;
         [SerializeField] private string activePoeticLine = null;
 
+        [Header("Musica de Fundo (BGM)")]
+        [SerializeField] private AudioSource bgmAudioSource;
+        [SerializeField] private AudioClip bgmMusicClip;
+
         public DarkRoomPhase CurrentPhase => currentPhase;
         public DarkRoomPhase CurrentCheckpoint => currentCheckpoint;
         public int CurrentPlatformIndex => currentPlatformIndex;
@@ -84,6 +88,15 @@ namespace YunaLegend.DarkRoom
 
         private void Start()
         {
+            if (bgmAudioSource != null && bgmMusicClip != null)
+            {
+                bgmAudioSource.clip = bgmMusicClip;
+                bgmAudioSource.loop = true;
+                bgmAudioSource.volume = 0.50f;
+                bgmAudioSource.spatialBlend = 0f;
+                if (!bgmAudioSource.isPlaying) bgmAudioSource.Play();
+            }
+
             if (openingSequence != null)
             {
                 openingSequence.OnOpeningCompleted += HandleOpeningCompleted;
@@ -591,6 +604,11 @@ namespace YunaLegend.DarkRoom
         {
             isPaused = !isPaused;
             Time.timeScale = isPaused ? 0f : 1f;
+            if (bgmAudioSource != null)
+            {
+                if (isPaused) bgmAudioSource.Pause();
+                else bgmAudioSource.UnPause();
+            }
             Debug.Log($"[DarkRoomProgression] Pausa: {(isPaused ? "Ativada" : "Desativada")}");
         }
 

@@ -232,7 +232,8 @@ namespace YunaLegend.EditorScripts
             // Injetar e persistir AudioClips dinamicos em Yuna via SerializedObject
             if (yunaCtrl != null)
             {
-                var jumpClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/jump_airy.wav");
+                var jumpClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/jump-girl.wav");
+                if (jumpClip == null) jumpClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/jump_airy.wav");
                 var landWoodClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/land_wood.wav");
                 var footstep1 = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/footstep_wood_1.wav");
                 var footstep2 = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/footstep_wood_2.wav");
@@ -263,13 +264,23 @@ namespace YunaLegend.EditorScripts
                 EditorUtility.SetDirty(yunaCtrl);
             }
 
-            // 7. Configurar Gerenciador de Abertura e Progressao
+            // 7. Configurar Gerenciador de Abertura e Progressao e Trilha Sonora (BGM)
             var managerGo = GameObject.Find("DarkRoom_GameManager");
             if (managerGo == null) managerGo = new GameObject("DarkRoom_GameManager");
             var progression = managerGo.GetComponent<DarkRoomProgressionManager>();
             if (progression == null) progression = managerGo.AddComponent<DarkRoomProgressionManager>();
             var opening = managerGo.GetComponent<DarkRoomOpeningSequence>();
             if (opening == null) opening = managerGo.AddComponent<DarkRoomOpeningSequence>();
+
+            // Configurar AudioSource para Trilha Sonora (BGM) em looping continuo
+            var bgmClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/Music/High-Frequency Violin.mp3");
+            var bgmAudioSource = managerGo.GetComponent<AudioSource>();
+            if (bgmAudioSource == null) bgmAudioSource = managerGo.AddComponent<AudioSource>();
+            bgmAudioSource.playOnAwake = true;
+            bgmAudioSource.loop = true;
+            bgmAudioSource.volume = 0.50f;
+            bgmAudioSource.spatialBlend = 0f; // Som 2D envolvente
+            if (bgmClip != null) bgmAudioSource.clip = bgmClip;
 
             // Vinculacao via SerializedObject para persistir referencias na cena
             var soProgression = new SerializedObject(progression);
@@ -278,7 +289,10 @@ namespace YunaLegend.EditorScripts
             soProgression.FindProperty("openingSequence").objectReferenceValue = opening;
             soProgression.FindProperty("cameraRunner").objectReferenceValue = sideCam;
             soProgression.FindProperty("blockoutBuilder").objectReferenceValue = builder;
+            soProgression.FindProperty("bgmAudioSource").objectReferenceValue = bgmAudioSource;
+            soProgression.FindProperty("bgmMusicClip").objectReferenceValue = bgmClip;
             soProgression.ApplyModifiedProperties();
+            EditorUtility.SetDirty(progression);
 
             var soOpening = new SerializedObject(opening);
             soOpening.FindProperty("yuna").objectReferenceValue = yunaCtrl;
