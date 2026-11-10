@@ -44,6 +44,9 @@ namespace YunaLegend.DarkRoom
         [SerializeField] private AudioSource bgmAudioSource;
         [SerializeField] private AudioClip bgmMusicClip;
 
+        [Header("Tipografia Narrativa (Fonte Caveat)")]
+        [SerializeField] private Font caveatFont;
+
         public DarkRoomPhase CurrentPhase => currentPhase;
         public DarkRoomPhase CurrentCheckpoint => currentCheckpoint;
         public int CurrentPlatformIndex => currentPlatformIndex;
@@ -664,6 +667,11 @@ namespace YunaLegend.DarkRoom
             return false;
         }
 
+        public void ConfigureUiFont(Font font)
+        {
+            caveatFont = font;
+        }
+
         // =============================================================
         // RENDERIZACAO DE INTERFACE EM TEMPO REAL (OnGUI)
         // =============================================================
@@ -678,13 +686,14 @@ namespace YunaLegend.DarkRoom
                 Vector3 screen = camera != null ? camera.WorldToScreenPoint(target) : new Vector3(Screen.width * 0.5f, 140f, 1f);
                 if (screen.z > 0f)
                 {
-                    float width = Mathf.Min(360f, Screen.width - 20f);
+                    float width = Mathf.Min(380f, Screen.width - 20f);
                     var rect = new Rect(Mathf.Clamp(screen.x - width * 0.5f, 10f, Screen.width - width - 10f),
-                        Mathf.Clamp(Screen.height - screen.y - 65f, 50f, Screen.height - 90f), width, 78f);
-                    var style = new GUIStyle(GUI.skin.box) { wordWrap = true, fontSize = 16 };
+                        Mathf.Clamp(Screen.height - screen.y - 65f, 50f, Screen.height - 90f), width, 82f);
+                    var style = new GUIStyle(GUI.skin.box) { wordWrap = true, fontSize = 15, alignment = TextAnchor.MiddleCenter };
+                    style.normal.textColor = new Color(1.0f, 0.98f, 0.92f);
                     bool nearTakeoff = yuna != null && yuna.transform.position.x >= DarkRoomStartLayout.FirstPlatformX - 3.4f;
-                    string cue = nearTakeoff ? "NANDA: Pule agora! ↓" : "NANDA: Prepare o primeiro salto →";
-                    GUI.Box(rect, cue + "\nEspaço / W / Clique / Toque: aperte uma vez.\nO salto é inteiro; não precisa segurar.", style);
+                    string cue = nearTakeoff ? "✦ NANDA: Pule agora! ↓" : "✦ NANDA: Prepare o primeiro salto →";
+                    GUI.Box(rect, cue + "\nAperte uma vez: Espaço / W / Clique / Toque.\nO arco do pulo é completo; não precisa segurar.", style);
                 }
             }
 
@@ -694,12 +703,12 @@ namespace YunaLegend.DarkRoom
                 Vector3 screen = camera != null ? camera.WorldToScreenPoint(ReturnJumpCuePosition) : Vector3.back;
                 if (screen.z > 0f && screen.x >= 0f && screen.x <= Screen.width && screen.y >= 0f && screen.y <= Screen.height)
                 {
-                    float width = Mathf.Min(340f, Screen.width - 20f);
+                    float width = Mathf.Min(360f, Screen.width - 20f);
                     var rect = new Rect(Mathf.Clamp(screen.x - width * 0.5f, 10f, Screen.width - width - 10f),
-                        Mathf.Clamp(Screen.height - screen.y - 65f, 50f, Screen.height - 90f),                         width, 64f);
-                                            var style = new GUIStyle(GUI.skin.box) { fontSize = 18, wordWrap = true, fontStyle = FontStyle.Bold, alignment = TextAnchor.MiddleCenter };
-                    style.normal.textColor = Color.white;
-                    GUI.Box(rect, DarkRoomReturnLayout.JumpCue + "\nAperte uma vez: Espaço / W / Clique / Toque.\nNão precisa segurar.", style);
+                        Mathf.Clamp(Screen.height - screen.y - 65f, 50f, Screen.height - 90f), width, 68f);
+                    var style = new GUIStyle(GUI.skin.box) { fontSize = 16, wordWrap = true, fontStyle = FontStyle.Bold, alignment = TextAnchor.MiddleCenter };
+                    style.normal.textColor = new Color(1.0f, 0.92f, 0.50f);
+                    GUI.Box(rect, "✦ NANDA: " + DarkRoomReturnLayout.JumpCue + "! ✦\nAperte uma vez: Espaço / W / Clique / Toque.\nNão precisa segurar.", style);
                 }
             }
 
@@ -725,97 +734,108 @@ namespace YunaLegend.DarkRoom
         private void DrawStageHud()
         {
             GUIStyle style = new GUIStyle(GUI.skin.box);
-            style.fontSize = 14;
+            style.fontSize = 13;
             style.fontStyle = FontStyle.Bold;
             style.alignment = TextAnchor.MiddleRight;
-            style.normal.textColor = Color.white;
+            style.normal.textColor = new Color(0.96f, 0.94f, 0.88f);
 
             string hudText = "";
             if (currentPhase == DarkRoomPhase.Phase1Ascent)
             {
-                hudText = $"✦ QUARTO ESCURO ✦ Subida ao Castelo | Plat {Mathf.Max(0, currentPlatformIndex)}/9";
+                hudText = $"✦ QUARTO ESCURO ✦ Subida ao Castelo • Plat {Mathf.Max(0, currentPlatformIndex)}/9";
             }
             else if (currentPhase == DarkRoomPhase.Phase2Escape)
             {
                 int lvl = Mathf.Clamp(currentPlatformIndex - 9, 1, 12);
-                hudText = $"⚡ FUGA: PULO NÍVEL {lvl}/12 | Plat {currentPlatformIndex}/21";
+                hudText = $"⚡ A FUGA ACELERADA • Pulo {lvl}/12 • Plat {currentPlatformIndex}/21";
             }
             else if (currentPhase == DarkRoomPhase.Phase3ChaoticAscent)
             {
                 int lvl = Mathf.Clamp(currentPlatformIndex - 21, 1, 16);
-                hudText = $"🌪️ SUBIDA CAÓTICA: NÍVEL {lvl}/15 | Plat {currentPlatformIndex}/37 (← Reverso)";
+                hudText = $"🌪️ SUBIDA CAÓTICA • Nível {lvl}/15 • Plat {currentPlatformIndex}/37 (← Reverso)";
             }
 
-            GUI.Label(new Rect(Screen.width - 450, 15, 435, 30), hudText, style);
+            GUI.Label(new Rect(Screen.width - 460, 15, 445, 30), hudText, style);
         }
 
         private void DrawDialogueBox()
         {
-            float boxWidth = Mathf.Min(760, Screen.width - 40);
-            float boxHeight = 140;
+            float boxWidth = Mathf.Min(780, Screen.width - 40);
+            float boxHeight = 145;
             float boxX = (Screen.width - boxWidth) * 0.5f;
-            float boxY = Screen.height - boxHeight - 30;
+            float boxY = Screen.height - boxHeight - 35;
 
-            // Narracao poetica sobre a cena
+            // Narracao poetica sobre a cena com a fonte manuscrita Caveat
             if (!string.IsNullOrEmpty(activePoeticLine))
             {
                 GUIStyle poeticStyle = new GUIStyle(GUI.skin.label);
-                poeticStyle.fontSize = 18;
-                poeticStyle.fontStyle = FontStyle.Italic;
+                if (caveatFont != null) poeticStyle.font = caveatFont;
+                poeticStyle.fontSize = 28;
+                poeticStyle.fontStyle = FontStyle.Normal;
                 poeticStyle.alignment = TextAnchor.MiddleCenter;
-                poeticStyle.normal.textColor = new Color(0.98f, 0.95f, 0.85f);
-                GUI.Label(new Rect(boxX, boxY - 50, boxWidth, 40), $"\"{activePoeticLine}\"", poeticStyle);
+                poeticStyle.normal.textColor = new Color(1.0f, 0.98f, 0.90f);
+
+                // Sombra da narracao para contraste e legibilidade impecavel
+                GUIStyle shadowStyle = new GUIStyle(poeticStyle);
+                shadowStyle.normal.textColor = new Color(0.04f, 0.03f, 0.08f, 0.85f);
+                GUI.Label(new Rect(boxX + 2, boxY - 58, boxWidth, 50), $"\"{activePoeticLine}\"", shadowStyle);
+                GUI.Label(new Rect(boxX, boxY - 60, boxWidth, 50), $"\"{activePoeticLine}\"", poeticStyle);
             }
 
             if (activeDialogue == null) return;
 
-            // Fundo da caixa
+            // Fundo da caixa estilizada
             Color origColor = GUI.color;
-            Color borderColor = activeDialogue.isPlotTwistStyle ? new Color(0.95f, 0.25f, 0.25f) : new Color(0.85f, 0.65f, 0.25f);
+            Color borderColor = activeDialogue.isPlotTwistStyle ? new Color(0.85f, 0.25f, 0.25f) : new Color(0.88f, 0.72f, 0.32f);
 
-            // Borda externa
+            // Borda externa dourada de filigrana
             GUI.color = borderColor;
             GUI.Box(new Rect(boxX - 3, boxY - 3, boxWidth + 6, boxHeight + 6), GUIContent.none);
 
-            // Interior aveludado escuro
-            GUI.color = new Color(0.08f, 0.06f, 0.12f, 0.95f);
+            // Interior aveludado noturno
+            GUI.color = new Color(0.06f, 0.05f, 0.12f, 0.94f);
             GUI.Box(new Rect(boxX, boxY, boxWidth, boxHeight), GUIContent.none);
             GUI.color = origColor;
 
-            // Rótulo de quem fala
+            // Rótulo do personagem com icone tematico
             GUIStyle speakerStyle = new GUIStyle(GUI.skin.label);
-            speakerStyle.fontSize = 16;
+            speakerStyle.fontSize = 17;
             speakerStyle.fontStyle = FontStyle.Bold;
-            speakerStyle.normal.textColor = activeDialogue.speaker == SpeakerId.Nanda ? new Color(1.0f, 0.85f, 0.3f) : new Color(1.0f, 0.65f, 0.75f);
+            speakerStyle.normal.textColor = activeDialogue.speaker == SpeakerId.Nanda ? new Color(1.0f, 0.88f, 0.35f) : new Color(1.0f, 0.68f, 0.75f);
 
-            string speakerName = activeDialogue.speaker == SpeakerId.Nanda ? "NANDA" : "MENINA";
-            GUI.Label(new Rect(boxX + 25, boxY + 15, 200, 25), speakerName, speakerStyle);
+            string speakerName = activeDialogue.speaker == SpeakerId.Nanda ? "✦ NANDA" : "✿ MENINA";
+            GUI.Label(new Rect(boxX + 25, boxY + 16, 220, 26), speakerName, speakerStyle);
 
             // Texto da fala
             GUIStyle textStyle = new GUIStyle(GUI.skin.label);
-            textStyle.fontSize = 16;
-            textStyle.normal.textColor = new Color(0.98f, 0.98f, 0.95f);
+            textStyle.fontSize = 17;
+            textStyle.normal.textColor = new Color(0.98f, 0.97f, 0.92f);
             textStyle.wordWrap = true;
-            GUI.Label(new Rect(boxX + 25, boxY + 45, boxWidth - 50, 55), activeDialogue.text, textStyle);
+            GUI.Label(new Rect(boxX + 25, boxY + 48, boxWidth - 50, 58), activeDialogue.text, textStyle);
 
-            // Indicador para continuar
+            // Indicador elegante para avancar
             GUIStyle continueStyle = new GUIStyle(GUI.skin.label);
-            continueStyle.fontSize = 12;
+            continueStyle.fontSize = 13;
             continueStyle.fontStyle = FontStyle.Italic;
             continueStyle.alignment = TextAnchor.LowerRight;
-            continueStyle.normal.textColor = new Color(0.95f, 0.85f, 0.5f);
-            GUI.Label(new Rect(boxX + 25, boxY + boxHeight - 28, boxWidth - 50, 20), "Espaço / Clique / Botão A para continuar ➔", continueStyle);
+            continueStyle.normal.textColor = new Color(0.96f, 0.82f, 0.35f);
+            GUI.Label(new Rect(boxX + 25, boxY + boxHeight - 28, boxWidth - 50, 22), "[ Espaço / Clique / Botão A para continuar ▾ ]", continueStyle);
         }
 
         private void DrawGameOverScreen()
         {
-            float w = 480;
-            float h = 180;
+            float w = 520;
+            float h = 200;
             float x = (Screen.width - w) * 0.5f;
             float y = (Screen.height - h) * 0.5f;
 
             Color origColor = GUI.color;
-            GUI.color = new Color(0.05f, 0.02f, 0.08f, 0.92f);
+            // Borda rubi envelhecida
+            GUI.color = new Color(0.72f, 0.22f, 0.25f);
+            GUI.Box(new Rect(x - 2, y - 2, w + 4, h + 4), GUIContent.none);
+
+            // Fundo escuro aveludado
+            GUI.color = new Color(0.04f, 0.03f, 0.09f, 0.94f);
             GUI.Box(new Rect(x, y, w, h), GUIContent.none);
             GUI.color = origColor;
 
@@ -823,16 +843,21 @@ namespace YunaLegend.DarkRoom
             titleStyle.fontSize = 20;
             titleStyle.fontStyle = FontStyle.Bold;
             titleStyle.alignment = TextAnchor.MiddleCenter;
-            titleStyle.normal.textColor = new Color(0.95f, 0.35f, 0.35f);
-            GUI.Label(new Rect(x, y + 20, w, 30), "✦ A PENUMBRA ENGOLIU O CAMINHO ✦", titleStyle);
+            titleStyle.normal.textColor = new Color(0.92f, 0.32f, 0.32f);
+            GUI.Label(new Rect(x, y + 18, w, 28), "✦ A PENUMBRA LEVOU YUNA... ✦", titleStyle);
 
+            // Frase poetica de encorajamento com a fonte Caveat
             GUIStyle subStyle = new GUIStyle(GUI.skin.label);
-            subStyle.fontSize = 14;
+            if (caveatFont != null) subStyle.font = caveatFont;
+            subStyle.fontSize = 25;
             subStyle.alignment = TextAnchor.MiddleCenter;
-            subStyle.normal.textColor = Color.white;
-            GUI.Label(new Rect(x, y + 60, w, 25), "Mas a luz da fadinha ainda chama por você...", subStyle);
+            subStyle.normal.textColor = new Color(0.98f, 0.96f, 0.88f);
+            GUI.Label(new Rect(x + 20, y + 54, w - 40, 48), "\"Mas quem não desiste sempre encontra o caminho de volta.\"", subStyle);
 
-            if (GUI.Button(new Rect(x + (w - 220) * 0.5f, y + 105, 220, 42), "Tentar de Novo (Espaço / A)"))
+            GUIStyle btnStyle = new GUIStyle(GUI.skin.button);
+            btnStyle.fontSize = 15;
+            btnStyle.fontStyle = FontStyle.Bold;
+            if (GUI.Button(new Rect(x + (w - 280) * 0.5f, y + 124, 280, 46), "◆ TENTAR DE NOVO (Espaço / A) ◆", btnStyle))
             {
                 RetryCurrentCheckpoint();
             }
@@ -844,8 +869,8 @@ namespace YunaLegend.DarkRoom
             style.fontSize = 22;
             style.fontStyle = FontStyle.Bold;
             style.alignment = TextAnchor.MiddleCenter;
-            style.normal.textColor = Color.yellow;
-            GUI.Label(new Rect((Screen.width - 250) * 0.5f, 60, 250, 50), "⏸ JOGO PAUSADO [P]", style);
+            style.normal.textColor = new Color(1.0f, 0.88f, 0.35f);
+            GUI.Label(new Rect((Screen.width - 260) * 0.5f, 60, 260, 52), "⏸ JOGO PAUSADO [P]", style);
         }
     }
 }

@@ -321,6 +321,15 @@ namespace YunaLegend.EditorScripts
             soProgression.FindProperty("blockoutBuilder").objectReferenceValue = builder;
             soProgression.FindProperty("bgmAudioSource").objectReferenceValue = bgmAudioSource;
             soProgression.FindProperty("bgmMusicClip").objectReferenceValue = bgmClip;
+
+            // Injetar e persistir a fonte manuscrita Caveat.ttf na interface
+            var caveatFont = AssetDatabase.LoadAssetAtPath<Font>("Assets/Fonts/Caveat.ttf");
+            if (caveatFont != null)
+            {
+                progression.ConfigureUiFont(caveatFont);
+                soProgression.FindProperty("caveatFont").objectReferenceValue = caveatFont;
+            }
+
             soProgression.ApplyModifiedProperties();
             EditorUtility.SetDirty(progression);
 
