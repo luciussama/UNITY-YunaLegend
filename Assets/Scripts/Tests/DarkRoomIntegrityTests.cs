@@ -205,7 +205,7 @@ namespace YunaLegend.Tests
             for (int i = 0; i < s3.Count - 1; i++)
             {
                 float progress = (float)i / (s3.Count - 1);
-                float vX = Mathf.Lerp(4.2f, 6.6f, progress);
+                float vX = Mathf.Lerp(4.2f, 7.0f, progress);
                 float jumpH = Mathf.Lerp(2.6f, 3.9f, progress);
                 float deltaY = s3[i + 1].y - s3[i].y;
                 float gap = (s3[i].x - s3[i].width * 0.5f) - (s3[i + 1].x + s3[i + 1].width * 0.5f);

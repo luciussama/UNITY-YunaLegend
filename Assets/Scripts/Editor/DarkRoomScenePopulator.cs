@@ -19,6 +19,7 @@ namespace YunaLegend.EditorScripts
             DarkRoomRenderPipelineSetup.Configure();
             DarkRoomArtAssetBuilder.GenerateAllArtAssets();
             DarkRoomAudioAssetBuilder.GenerateAllSfx();
+            DarkRoomVfxBuilder.GenerateAllVfx();
 
             // 1. Configurar Camera 2.5D
             var camGo = GameObject.Find("Main Camera (2.5D SideScroll)");
@@ -52,6 +53,22 @@ namespace YunaLegend.EditorScripts
             dirLight.color = new Color(0.58f, 0.68f, 0.95f);
             dirLight.intensity = 0.85f;
             lightGo.transform.rotation = Quaternion.Euler(48f, -28f, 0f);
+
+            // 2c. Foco de Luar Real Difuso na Janela Monumental (URP Spot Light nativo com sombras suaves reais)
+            var moonSpotGo = GameObject.Find("Window_Moonlight_Spot");
+            if (moonSpotGo == null) moonSpotGo = new GameObject("Window_Moonlight_Spot");
+            moonSpotGo.transform.position = new Vector3(30f, 6.0f, 6.0f);
+            moonSpotGo.transform.rotation = Quaternion.Euler(48f, -28f, 0f);
+
+            var spotLight = moonSpotGo.GetComponent<Light>();
+            if (spotLight == null) spotLight = moonSpotGo.AddComponent<Light>();
+            spotLight.type = LightType.Spot;
+            spotLight.color = new Color(0.65f, 0.78f, 1.0f);
+            spotLight.intensity = 5.2f;
+            spotLight.range = 30f;
+            spotLight.spotAngle = 60f;
+            spotLight.innerSpotAngle = 22f; // Difusao gradual e suave nas bordas do feixe
+            spotLight.shadows = LightShadows.Soft; // Sombras suaves reais da engine
 
             // 2b. Global Volume de Pos-Processamento URP (Bloom etereo, Vignette aconchegante)
             var volumeGo = GameObject.Find("DarkRoom_GlobalVolume");
@@ -93,7 +110,9 @@ namespace YunaLegend.EditorScripts
                 LoadMat("M_Castle_TurretBlue"),
                 LoadMat("M_TrainTrack_Wood"),
                 LoadMat("M_FalseDoor_Poster"),
-                LoadMat("M_DreamPortal_Gold")
+                LoadMat("M_DreamPortal_Gold"),
+                LoadMat("M_Moonbeam_Shaft"),
+                LoadMat("M_AmbientDust_Particle")
             );
 
             builder.BuildBlockout();

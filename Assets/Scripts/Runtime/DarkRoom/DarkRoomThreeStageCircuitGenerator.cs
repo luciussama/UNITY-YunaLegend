@@ -114,7 +114,7 @@ namespace YunaLegend.DarkRoom
         // Inicia no chao apos a queda da porta falsa (wallX - 3.2m), subindo para a ESQUERDA.
         // Termina na Plataforma 37: O Verdadeiro Portal dos Sonhos (largura 4.5m).
         // -------------------------------------------------------------
-        public static List<PlatformSpec> GenerateStage3Platforms(float wallX = 90.50f, float floorDropY = DarkRoomReturnLayout.FloorY)
+        public static List<PlatformSpec> GenerateStage3Platforms(float wallX = 104.26f, float floorDropY = DarkRoomReturnLayout.FloorY)
         {
             var list = new List<PlatformSpec>();
             string[] names = new[]
@@ -145,7 +145,7 @@ namespace YunaLegend.DarkRoom
                 int index = 22 + i;
                 float progress = (float)i / (names.Length - 1); // 0 a 1
 
-                float w = (i == 15) ? 4.5f : Mathf.Lerp(DarkRoomReturnLayout.FirstPlatformWidth, 1.27f, progress);
+                float w = (i == 15) ? 4.5f : Mathf.Lerp(DarkRoomReturnLayout.FirstPlatformWidth, 1.30f, progress);
                 float h = (i == 15) ? 1.4f : 0.6f;
                 float d = 1.8f;
 
@@ -155,9 +155,10 @@ namespace YunaLegend.DarkRoom
                 if (i < names.Length - 1)
                 {
                     float nextProgress = (float)(i + 1) / (names.Length - 1);
-                    float nextW = (i + 1 == 15) ? 4.5f : Mathf.Lerp(2.2f, 1.27f, nextProgress);
-                    float gap = Mathf.Lerp(1.8f, 4.6f, progress);
-                    float deltaY = Mathf.Lerp(0.40f, 0.55f, progress);
+                    float nextW = (i + 1 == 15) ? 4.5f : Mathf.Lerp(2.2f, 1.30f, nextProgress);
+                    // Vãos escalados progressivamente para a distância exata de cada pulo (2.50m a 6.10m)
+                    float gap = Mathf.Lerp(2.50f, 6.10f, progress);
+                    float deltaY = Mathf.Lerp(0.38f, 0.50f, progress);
 
                     currentX -= ((w * 0.5f) + gap + (nextW * 0.5f)); // Sentido X decrescente (esquerda)
                     currentY += deltaY;

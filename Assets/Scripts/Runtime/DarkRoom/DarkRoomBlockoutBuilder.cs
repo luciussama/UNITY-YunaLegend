@@ -36,6 +36,8 @@ namespace YunaLegend.DarkRoom
         [SerializeField] private Material trainTrackMaterial;
         [SerializeField] private Material falseDoorPosterMaterial;
         [SerializeField] private Material dreamPortalMaterial;
+        [SerializeField] private Material moonbeamShaftMaterial;
+        [SerializeField] private Material ambientDustMaterial;
 
         [Header("Estrutura Gerada (3 Etapas Canônicas)")]
         [SerializeField] private Transform stage1Root;
@@ -72,7 +74,8 @@ namespace YunaLegend.DarkRoom
             Material teddyPlush, Material toyRed, Material toyYellow, Material toyBlue, Material toyGreen,
             Material toyAbc, Material drum, Material velvet, Material musicBox, Material brassGold,
             Material dresser, Material bookBlue, Material bookBurgundy, Material bookGreen, Material bookPages,
-            Material castleBlocks, Material castleTurret, Material trainTrack, Material falseDoorPoster, Material dreamPortal)
+            Material castleBlocks, Material castleTurret, Material trainTrack, Material falseDoorPoster, Material dreamPortal,
+            Material moonbeamShaft = null, Material ambientDust = null)
         {
             floorMaterial = floor;
             wallpaperMaterial = wallpaper;
@@ -98,6 +101,8 @@ namespace YunaLegend.DarkRoom
             trainTrackMaterial = trainTrack;
             falseDoorPosterMaterial = falseDoorPoster;
             dreamPortalMaterial = dreamPortal;
+            moonbeamShaftMaterial = moonbeamShaft;
+            ambientDustMaterial = ambientDust;
             defaultPlatformMaterial = dresserOakMaterial;
         }
 
@@ -260,6 +265,32 @@ namespace YunaLegend.DarkRoom
 
             // Mostrador dourado do relogio
             CreateVisualOnlyObject("Mostrador_Dourado", clock.transform, new Vector3(0f, 0.22f, -0.52f), new Vector3(0.45f, 0.04f, 0.45f), brassGoldMaterial, PrimitiveType.Cylinder, Quaternion.Euler(90f, 0f, 0f));
+
+            // 6. Poeira Estelar / Motes Magicos Flutuantes no Quarto
+            if (ambientDustMaterial != null)
+            {
+                var dustGo = new GameObject("DarkRoom_AmbientDustMotes");
+                dustGo.transform.SetParent(sceneryRoot, false);
+                dustGo.transform.position = new Vector3(55f, 0f, 1.5f);
+                var dustPs = dustGo.AddComponent<ParticleSystem>();
+                var dustRend = dustGo.GetComponent<ParticleSystemRenderer>();
+                if (dustRend != null) dustRend.sharedMaterial = ambientDustMaterial;
+
+                var dMain = dustPs.main;
+                dMain.loop = true;
+                dMain.startLifetime = 7.0f;
+                dMain.startSpeed = 0.12f;
+                dMain.startSize = 0.09f;
+                dMain.startColor = new Color(0.85f, 0.92f, 1.0f, 0.45f);
+                dMain.maxParticles = 140;
+
+                var dEm = dustPs.emission;
+                dEm.rateOverTime = 25f;
+
+                var dShape = dustPs.shape;
+                dShape.shapeType = ParticleSystemShapeType.Box;
+                dShape.scale = new Vector3(160f, 18f, 6f);
+            }
         }
 
         private void BuildPlatformList(List<PlatformSpec> platforms, Transform parent, string prefix)

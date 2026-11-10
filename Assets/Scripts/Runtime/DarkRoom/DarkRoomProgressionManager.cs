@@ -263,7 +263,7 @@ namespace YunaLegend.DarkRoom
                 // Corrida Reversa (22 a 37): acentuacao gradual extrema de velocidade e pulo
                 int chaoticLevel = Mathf.Clamp(platformIndex - 21, 1, 16);
                 float progress = (chaoticLevel - 1) / 15.0f;
-                float speed = Mathf.Lerp(4.2f, 6.6f, progress);
+                float speed = Mathf.Lerp(4.2f, 7.0f, progress);
                 float jumpH = Mathf.Lerp(2.6f, 3.9f, progress);
 
                 if (yuna != null)
