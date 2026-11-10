@@ -39,6 +39,10 @@ namespace YunaLegend.EditorScripts
             var camData = camGo.GetComponent<UniversalAdditionalCameraData>();
             if (camData == null) camData = camGo.AddComponent<UniversalAdditionalCameraData>();
 
+            // Adicionar AudioListener obrigatorio da Unity para ouvir os sons do jogo
+            var listener = camGo.GetComponent<AudioListener>();
+            if (listener == null) listener = camGo.AddComponent<AudioListener>();
+
             // 2. Luz de luar (Directional Light azulada de conto de fadas)
             var lightGo = GameObject.Find("Moonlight Directional Light");
             if (lightGo == null) lightGo = new GameObject("Moonlight Directional Light");
@@ -207,31 +211,56 @@ namespace YunaLegend.EditorScripts
             sideCam.SnapToTargetX(DarkRoomStartLayout.StartX, DarkRoomStartLayout.CameraOffset);
 
             var yunaCtrl = yunaGo.GetComponent<Yuna25DPlayerController>();
+            var yunaAudioSource = yunaGo.GetComponent<AudioSource>();
+            if (yunaAudioSource == null) yunaAudioSource = yunaGo.AddComponent<AudioSource>();
+            yunaAudioSource.playOnAwake = false;
+            yunaAudioSource.spatialBlend = 0f; // Audio 2D claro e presente
+
             var nandaGuide = nandaGo.GetComponent<NandaFairyGuide>();
             if (nandaGuide != null)
             {
                 nandaGuide.SetYuna(yunaGo.transform);
                 var fairyTwinkleClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/fairy_twinkle.wav");
                 nandaGuide.ConfigureAudio(fairyTwinkleClip);
+
+                var soNanda = new SerializedObject(nandaGuide);
+                soNanda.FindProperty("twinkleSfx").objectReferenceValue = fairyTwinkleClip;
+                soNanda.ApplyModifiedProperties();
+                EditorUtility.SetDirty(nandaGuide);
             }
 
-            // Injetar AudioClips dinamicos em Yuna
+            // Injetar e persistir AudioClips dinamicos em Yuna via SerializedObject
             if (yunaCtrl != null)
             {
                 var jumpClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/jump_airy.wav");
                 var landWoodClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/land_wood.wav");
-                var footsteps = new AudioClip[]
-                {
-                    AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/footstep_wood_1.wav"),
-                    AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/footstep_wood_2.wav"),
-                    AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/footstep_wood_3.wav")
-                };
+                var footstep1 = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/footstep_wood_1.wav");
+                var footstep2 = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/footstep_wood_2.wav");
+                var footstep3 = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/footstep_wood_3.wav");
                 var landPlushClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/land_plush.wav");
                 var drumBounceClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/drum_strike.wav");
                 var comicFallClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/comic_fall_thud.wav");
                 var gameOverClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/game_over_fall.wav");
 
+                var footsteps = new AudioClip[] { footstep1, footstep2, footstep3 };
                 yunaCtrl.ConfigureAudioClips(jumpClip, landWoodClip, footsteps, landPlushClip, drumBounceClip, comicFallClip, gameOverClip);
+
+                var soYuna = new SerializedObject(yunaCtrl);
+                soYuna.FindProperty("jumpSfx").objectReferenceValue = jumpClip;
+                soYuna.FindProperty("landSfx").objectReferenceValue = landWoodClip;
+                soYuna.FindProperty("landPlushSfx").objectReferenceValue = landPlushClip;
+                soYuna.FindProperty("drumBounceSfx").objectReferenceValue = drumBounceClip;
+                soYuna.FindProperty("comicFallThudSfx").objectReferenceValue = comicFallClip;
+                soYuna.FindProperty("gameOverSfx").objectReferenceValue = gameOverClip;
+
+                var footstepsProp = soYuna.FindProperty("footstepWoodClips");
+                footstepsProp.arraySize = 3;
+                footstepsProp.GetArrayElementAtIndex(0).objectReferenceValue = footstep1;
+                footstepsProp.GetArrayElementAtIndex(1).objectReferenceValue = footstep2;
+                footstepsProp.GetArrayElementAtIndex(2).objectReferenceValue = footstep3;
+
+                soYuna.ApplyModifiedProperties();
+                EditorUtility.SetDirty(yunaCtrl);
             }
 
             // 7. Configurar Gerenciador de Abertura e Progressao

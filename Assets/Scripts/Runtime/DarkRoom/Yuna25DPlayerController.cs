@@ -91,6 +91,11 @@ namespace YunaLegend.DarkRoom
             {
                 audioSource = GetComponent<AudioSource>();
             }
+            if (audioSource != null)
+            {
+                audioSource.playOnAwake = false;
+                audioSource.spatialBlend = 0f;
+            }
         }
 
         private bool floorLaunchAllowed;
