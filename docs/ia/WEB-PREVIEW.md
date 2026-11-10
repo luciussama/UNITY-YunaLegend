@@ -6,6 +6,12 @@ A build Web é uma exportação deste projeto Unity/C#, não a versão HTML lega
 
 A IA pode acessar e jogar **https://luciussama.github.io/legendGirl/** para observar e comparar comportamento, ritmo, interface e percurso. Usar exclusivamente a URL como referência. **Não clonar, copiar, importar nem migrar código legado para este projeto.** Essa regra também está no [AGENTS.md](../../AGENTS.md) e no diário SQLite.
 
+## Pipeline de renderização
+
+Os materiais do quarto usam URP Simple Lit. O projeto precisa do asset `Assets/Settings/DarkRoomPipeline.asset` em Graphics e nos níveis de Quality; apenas instalar o pacote URP não ativa o pipeline. Materiais URP no Built-in aparecem magenta. O menu **YunaLegend > Configurar Renderizacao URP** restaura essa atribuição sem reconstruir a cena. A construção da cena também executa essa configuração. Após atualizar o projeto com o Editor aberto, confira Graphics/Quality antes de recompilar a Web.
+
+A correção de pipeline não constitui aprovação artística: a comparação visual da nova build Web com a referência ainda precisa ser concluída.
+
 ## Compilar
 
 Requer Unity `6000.3.28f1` com **WebGL Build Support**, adicionado pelo Unity Hub. No Editor, use **YunaLegend > Build Web de avaliacao**. A cena salva `Assets/Scenes/DarkRoom_Gameplay.unity` é compilada; alterações não salvas não fazem parte da build.

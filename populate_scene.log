@@ -1,32 +1,24 @@
-VBCSCompilerServerWatchdog: watching VBCSCompiler (PID 35668)
+VBCSCompilerServerWatchdog: watching VBCSCompiler (PID 21636)
 [Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-sergi" at "2026-11-10T17:47:26.5845309Z"
 Built from '6000.3/respin/6000.3.28f1-21f78c3e21d1' branch; Version is '6000.3.28f1 (8f082d2fe476) revision 9373741'; Using compiler version '194234433'; Build Type 'Release'
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-sergi" at "2026-11-09T23:14:13.2185237Z"
-OS: 'Windows 11  (10.0.26220) Professional' Language: 'pt' Physical Memory: 24292 MB
+OS: 'Windows 11  (10.0.26320) Professional' Language: 'pt' Physical Memory: 24292 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
 System  architecture: x64
 Process architecture: x64
-Date: 2026-11-09T23:14:13Z
-[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 33988, path: "C:/Users/sergi/AppData/Roaming/UnityHub/external-modules/licensingClient/Unity.Licensing.Client.exe")
+Date: 2026-11-10T17:47:26Z
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 25484, path: "C:/Program Files/Unity Hub/UnityLicensingClient_V1/Unity.Licensing.Client.exe")
 [Licensing::Module] LicensingClient has failed validation; ignoring
-[Licensing::Client] Handshaking with LicensingClient:
-  Version:                 1.19.0+4cc3dda
-  Session Id:              46ec6661fd4348ea92582a3acdb20e15
-  Correlation Id:          38d8b77f26b3382136ebf012adb1ef52
-  External correlation Id: 3605930924253443100
-  Machine Id:              2OqD5cYTrUamvjAl+tM0bOflbEw=
-[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-sergi" (connect: 0.00s, validation: 0.00s, handshake: 0.05s)
-[Licensing::IpcConnector] Successfully connected to: "LicenseClient-sergi-notifications" at "2026-11-09T23:14:13.2678294Z"
-[Licensing::Module] Error: Access token is unavailable; failed to update
-[Licensing::Client] Successfully resolved entitlement details
-[Licensing::Module] License group:
-  Id: 4674284276976-UnityPersXXXX
-  Product: Unity Personal
-  Type: Assigned
-  Expiration: Unlimited
-[Licensing::Client] Successfully updated license, isAsync: True, time: 0.00
-[Licensing::Client] Successfully resolved entitlement details
-[Licensing::Module] Licensing Background thread has ended after 0.05s
+[Licensing::Client] Error: HandshakeResponse reported an error:
+	ResponseCode: 505
+	ResponseStatus: Unsupported protocol version '1.19.0'.
+[Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-sergi"
+[Licensing::IpcConnector] LicenseClient-sergi channel disconnected successfully.
+[Licensing::IpcConnector] Channel LicenseClient-sergi-1.19.0 doesn't exist
+[Licensing::Module] Successfully launched the LicensingClient (PId: 33848)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-sergi-1.19.0" at "2026-11-10T17:47:26.6590664Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 33848, path: "C:/Program Files/Unity/Hub/Editor/6000.3.28f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
 
 COMMAND LINE ARGUMENTS:
 C:\Program Files\Unity\Hub\Editor\6000.3.28f1\Editor\Unity.exe
@@ -40,4 +32,404 @@ YunaLegend.EditorScripts.DarkRoomScenePopulator.PopulateDarkRoomScene
 populate_scene.log
 Successfully changed project path to: C:\Users\sergi\repos\UNITY-YunaLegend
 C:/Users/sergi/repos/UNITY-YunaLegend
-Exiting without the bug reporter. Application will terminate with return code 1
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.19.0+4cc3dda
+  Session Id:              5bcfe6cfceb74588b4b703add1467a98
+  Correlation Id:          946c81ae0c6a2edfb198cb898d0b657c
+  External correlation Id: 2480486942813989074
+  Machine Id:              2OqD5cYTrUamvjAl+tM0bOflbEw=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-sergi-1.19.0" (connect: 0.04s, validation: 0.04s, handshake: 0.02s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-sergi-1.19.0-notifications" at "2026-11-10T17:47:26.7212843Z"
+[Licensing::Module] Connected to LicensingClient (PId: 33848, launch time: 0.00, total connection time: 0.10s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-remapper-allocator-initial-capacity=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 4674284276976-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.00
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Licensing Background thread has ended after 0.15s
+Player connection [19504]  Target information:
+
+Player connection [19504]  * "[IP] 192.168.68.103 [Port] 55504 [Flags] 2 [Guid] 357549254 [EditorId] 357549254 [Version] 1048832 [Id] WindowsEditor(7,WinGame) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [19504]  * "[IP] 100.93.98.19 [Port] 55504 [Flags] 2 [Guid] 357549254 [EditorId] 357549254 [Version] 1048832 [Id] WindowsEditor(7,WinGame) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [19504] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [19504] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Package Manager] Connected to IPC stream "Upm-24716" after 0.2 seconds.
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Artifact Garbage Collection - Removed 37 unused hashed content files
+Refreshing native plugins compatible for Editor in 0.06 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 6000.3.28f1 (8f082d2fe476)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.3.28f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/sergi/repos/UNITY-YunaLegend/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+d3d12: failed to query info queue interface (0x80004002).
+Direct3D:
+    Version:         Direct3D 12 [level 12.2]
+    Renderer:        NVIDIA GeForce RTX 5070 (ID=0x2f04)
+    Vendor:          NVIDIA
+    VRAM:            11943 MB
+    App VRAM Budget: 11175 MB
+    Driver:          32.0.16.2101
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.3.28f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.3.28f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.3.28f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56716
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.3.28f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.3.28f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+[Licensing::Client] Successfully resolved entitlement details
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.3.28f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Registered in 0.004497 seconds.
+- Loaded All Assemblies, in  0.383 seconds
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Package Manager log level set to [2]
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.354 seconds
+Domain Reload Profiling: 733ms
+	BeginReloadAssembly (123ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (32ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (52ms)
+	LoadAllAssembliesAndSetupDomain (162ms)
+		LoadAssemblies (119ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (158ms)
+			TypeCache.Refresh (156ms)
+				TypeCache.ScanAssembly (144ms)
+			BuildScriptInfoCaches (0ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (354ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (322ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (55ms)
+			SetLoadedEditorAssemblies (3ms)
+			BeforeProcessingInitializeOnLoad (70ms)
+			ProcessInitializeOnLoadAttributes (124ms)
+			ProcessInitializeOnLoadMethodAttributes (70ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 37 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.inputsystem@1.13.1 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.inputsystem@e2c83221d2dc)
+    com.unity.timeline@1.8.7 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.timeline@c58b4ee65782)
+    com.unity.ide.visualstudio@2.0.29 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.ide.visualstudio@42af3a235209)
+    com.unity.ide.rider@3.1.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.ide.rider@570989d4a882)
+    com.unity.editorcoroutines@1.1.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.editorcoroutines@87a15ed012c2)
+    com.unity.performance.profile-analyzer@1.4.2 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.performance.profile-analyzer@5491650411cd)
+    com.unity.testtools.codecoverage@1.3.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.testtools.codecoverage@19a841221620)
+    com.unity.searcher@4.9.5 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.searcher@a463122f2c00)
+    com.unity.burst@1.8.31 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.burst@bfa84123c21a)
+    com.unity.mathematics@1.3.3 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.mathematics@19a9377c4ffa)
+    com.unity.collections@2.7.1 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.collections@88d5bf65ce66)
+    com.unity.settings-manager@2.1.1 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.settings-manager@0b8638c5ce86)
+    com.unity.nuget.mono-cecil@1.11.6 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.nuget.mono-cecil@ecb9724e46ff)
+    com.unity.test-framework.performance@3.5.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.test-framework.performance@8b56083ec0f0)
+  Built-in packages:
+    com.unity.feature.development@1.0.2 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.feature.development@767aadbc6eb7)
+    com.unity.render-pipelines.universal@17.3.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.render-pipelines.universal@029be7ffa662)
+    com.unity.textmeshpro@5.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.textmeshpro@53f43edfd2e0)
+    com.unity.ugui@2.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.ugui@44a561608371)
+    com.unity.modules.ai@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.modules.ai)
+    com.unity.modules.androidjni@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.modules.androidjni)
+    com.unity.modules.animation@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.modules.animation)
+    com.unity.modules.assetbundle@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.modules.assetbundle)
+    com.unity.modules.audio@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.modules.audio)
+    com.unity.modules.physics@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.modules.physics)
+    com.unity.modules.ui@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.modules.ui)
+    com.unity.modules.uielements@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.modules.uielements)
+    com.unity.modules.imgui@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.modules.imgui)
+    com.unity.modules.jsonserialize@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.modules.jsonserialize)
+    com.unity.modules.hierarchycore@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.modules.hierarchycore)
+    com.unity.modules.director@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.modules.director)
+    com.unity.modules.particlesystem@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.modules.particlesystem)
+    com.unity.render-pipelines.core@17.3.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.render-pipelines.core@3424017a4ec3)
+    com.unity.shadergraph@17.3.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.shadergraph@d526115bb944)
+    com.unity.render-pipelines.universal-config@17.0.3 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.render-pipelines.universal-config@8dc1aab4af1d)
+    com.unity.test-framework@1.6.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.test-framework@bd7f943e9647)
+    com.unity.modules.terrain@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.modules.terrain)
+    com.unity.ext.nunit@2.0.5 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Library\PackageCache\com.unity.ext.nunit@d8c07649098d)
+[Package Manager] com.unity.textmeshpro is deprecated: This package is no longer supported. TextMeshPro functionalities are now included in the com.unity.ugui package. To continue using them, consider adding it to your project dependencies.
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.01 seconds
+Starting: C:\Program Files\Unity\Hub\Editor\6000.3.28f1\Editor\Data\Tools\BuildPipeline\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/2000b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: C:/Users/sergi/repos/UNITY-YunaLegend
+DisplayProgressbar: Compiling Scripts
+ExitCode: 0 Duration: 0s272ms
+[581/732    0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+*** Tundra build success (0.25 seconds), 1 items updated, 732 evaluated
+AssetDatabase: script compilation time: 0.653968s
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.699 seconds
+Refreshing native plugins compatible for Editor in 0.25 ms, found 0 plugins.
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.196 seconds
+Domain Reload Profiling: 2890ms
+	BeginReloadAssembly (292ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (24ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (147ms)
+	RebuildCommonClasses (28ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (24ms)
+	LoadAllAssembliesAndSetupDomain (339ms)
+		LoadAssemblies (280ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (150ms)
+			TypeCache.Refresh (112ms)
+				TypeCache.ScanAssembly (103ms)
+			BuildScriptInfoCaches (27ms)
+			ResolveRequiredComponents (7ms)
+	FinalizeReload (2197ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1958ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (29ms)
+			SetLoadedEditorAssemblies (3ms)
+			BeforeProcessingInitializeOnLoad (123ms)
+			ProcessInitializeOnLoadAttributes (1744ms)
+			ProcessInitializeOnLoadMethodAttributes (51ms)
+			AfterProcessingInitializeOnLoad (8ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (28ms)
+Asset Pipeline Refresh (id=403d687ac0f311543b30514d8f76b381): Total: 3.928 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=2493 ms
+		Asset DB Callback time: managed=29 ms, native=13 ms
+		Scripting: domain reloads=1, domain reload time=699 ms, compile time=655 ms, other=36 ms
+		Project Asset Count: scripts=919, non-scripts=1862
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 15.460ms
+	ApplyChangesToAssetFolders: 0.481ms
+	Scan: 71.988ms
+	OnSourceAssetsModified: 0.002ms
+	CategorizeAssetsWithTransientArtifact: 17.877ms
+	ProcessAssetsWithTransientArtifactChanges: 34.056ms
+	CategorizeAssets: 32.452ms
+	ImportOutOfDateAssets: 2202.387ms (1544.611ms without children)
+		CompileScripts: 655.182ms
+		ReloadNativeAssets: 0.026ms
+		UnloadImportedAssets: 1.736ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.390ms
+		InitializingProgressBar: 0.000ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 0.442ms
+	PostProcessAllAssets: 29.483ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.002ms
+	UnloadStreamsBegin: 2.059ms
+	PersistCurrentRevisions: 0.094ms
+	UnloadStreamsEnd: 0.001ms
+	GenerateScriptTypeHashes: 1.799ms
+	Untracked: 1521.226ms
+
+Application.AssetDatabase Initial Refresh End
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
+Scanning for USB devices : 2.967ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-Yuna Legend - O Quarto dos Brinquedos
+Unloading 19 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 4174 unused Assets / (4.5 MB). Loaded Objects now: 5040.
+Memory consumption went from 180.6 MB to 176.1 MB.
+Total: 6.843800 ms (FindLiveObjects: 0.322400 ms CreateObjectMapping: 0.238700 ms MarkObjects: 4.954800 ms  DeleteObjects: 1.327300 ms)
+
+Opening scene 'Assets/Scenes/DarkRoom_Gameplay.unity'
+Unloading 26 Unused Serialized files (Serialized files now loaded: 0)
+Loaded scene 'Assets/Scenes/DarkRoom_Gameplay.unity'
+	Deserialize:            12.066 ms
+	Integration:            159.788 ms
+	Integration of assets:  0.127 ms
+	Thread Wait Time:       0.034 ms
+	Total Operation Time:   172.016 ms
+Unloading 3 unused Assets / (1.8 KB). Loaded Objects now: 5580.
+Memory consumption went from 170.3 MB to 170.3 MB.
+Total: 5.251800 ms (FindLiveObjects: 0.224700 ms CreateObjectMapping: 0.154200 ms MarkObjects: 4.847900 ms  DeleteObjects: 0.023900 ms)
+
+Start importing ProjectSettings/QualitySettings.asset using Guid(00000000000000009000000000000000) (LibraryAssetImporter) -> (artifact id: '5fc8380fe97906b025d92f6610b9d1ad') in 0.0066894 seconds
+Start importing ProjectSettings/GraphicsSettings.asset using Guid(00000000000000006100000000000000) (LibraryAssetImporter) -> (artifact id: '0865ce512293b9fcb6de141a347c30f1') in 0.0022408 seconds
+Refreshing native plugins compatible for Editor in 0.27 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=c7b441f7a356b524eb6857cae2cd816c): Total: 0.108 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+DARKROOM_URP_CONFIGURED: Assets/Settings/DarkRoomPipeline.asset
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+YunaLegend.EditorScripts.DarkRoomRenderPipelineSetup:Configure () (at Assets/Scripts/Editor/DarkRoomRenderPipelineSetup.cs:55)
+YunaLegend.EditorScripts.DarkRoomScenePopulator:PopulateDarkRoomScene () (at Assets/Scripts/Editor/DarkRoomScenePopulator.cs:19)
+
+(Filename: Assets/Scripts/Editor/DarkRoomRenderPipelineSetup.cs Line: 55)
+
+Asset Pipeline Refresh (id=d99705142874313498e48e68a5ba5e70): Total: 0.040 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+Start importing Assets/Materials/M_Yuna_Skin.mat using Guid(205eb7a28c22aa24bb9ed20c64e4adb1) (NativeFormatImporter) -> (artifact id: '44f724020d4e98f5e11ad46355a38e4a') in 0.0049821 seconds
+Start importing Assets/Materials/M_Book_GoldPages.mat using Guid(606ed67c0af7646408b77f0fc18058bb) (NativeFormatImporter) -> (artifact id: '6f17a7be67c3f1fa39e101628849bcac') in 0.0020161 seconds
+Start importing Assets/Materials/M_ToyBlock_ABC.mat using Guid(a1c4cc3ad97067b40973722f40610587) (NativeFormatImporter) -> (artifact id: 'fbc18c9fbeca112df64366cc84333ea3') in 0.0018424 seconds
+Start importing Assets/Materials/M_RoyalVelvet_Purple.mat using Guid(b1431993efbf242438603cd973f50a6a) (NativeFormatImporter) -> (artifact id: '4aee026a01b3aefc9c648fb6890e6fb0') in 0.0019322 seconds
+Start importing Assets/Materials/M_CircusDrum.mat using Guid(c166dc53c29040841a8051d200f0f502) (NativeFormatImporter) -> (artifact id: '548bb143858422876a50f4d5cc317225') in 0.0018 seconds
+Start importing Assets/Materials/M_ToyBlock_Red.mat using Guid(042255b3b389cd84db316c2ef89380c6) (NativeFormatImporter) -> (artifact id: '8903f115c9255078df26b9ff491ac9e2') in 0.0018036 seconds
+Start importing Assets/Materials/M_ToyBlock_Yellow.mat using Guid(3427b913025502c439db75a8d10c72a5) (NativeFormatImporter) -> (artifact id: '1ac537a19b93420fa5677f52de5698ca') in 0.0017426 seconds
+Start importing Assets/Materials/M_FalseDoor_Poster.mat using Guid(645be52f66cb8d24da11455843878a79) (NativeFormatImporter) -> (artifact id: '23055fec44c9f7c506d7427780ece095') in 0.0016228 seconds
+Start importing Assets/Materials/M_Yuna_Ribbon.mat using Guid(641d23b8ee34e46479b64d411735385f) (NativeFormatImporter) -> (artifact id: '1e08118f187bc20fe20c391e91951fa6') in 0.0017263 seconds
+Start importing Assets/Materials/M_Yuna_Dress.mat using Guid(74f0f2ce0f92f074398cd3872c9dbc50) (NativeFormatImporter) -> (artifact id: 'a8fdf0ef3bd3da779c8abcf1e6c99ad7') in 0.0015992 seconds
+Start importing Assets/Materials/M_Background_Wall.mat using Guid(d51e793ea8c01264abb75be5c230f712) (NativeFormatImporter) -> (artifact id: '5c9b1b63fdb9b0e02d8a7fb6aa57d1b6') in 0.0018822 seconds
+Start importing Assets/Materials/M_Nanda_Glow.mat using Guid(27452a7bea69d7142b3f87e8f898ac79) (NativeFormatImporter) -> (artifact id: 'f8cf513b645ee3d3747df978a9e8d2fe') in 0.0016302 seconds
+Start importing Assets/Materials/M_ToyBlock_Green.mat using Guid(27ae2db2728764e4c8adbb056a3e0711) (NativeFormatImporter) -> (artifact id: '99951607c4d0c28be6467d441ad87c1d') in 0.0017864 seconds
+Start importing Assets/Materials/M_TeddyPlush.mat using Guid(974156e0e454df34a92386882ada73ea) (NativeFormatImporter) -> (artifact id: '2debe7c91fd1a834a40d6015614e0491') in 0.0017184 seconds
+Start importing Assets/Materials/M_Castle_TurretBlue.mat using Guid(d7f01c0f1b8ff124681d17dea844fe55) (NativeFormatImporter) -> (artifact id: '65ae9d6a9f4bfd85106348c907b9b053') in 0.0018873 seconds
+Start importing Assets/Materials/M_DreamPortal_Gold.mat using Guid(b8394bdb37966584f8174c4936465f85) (NativeFormatImporter) -> (artifact id: '80a63a327a50e014ef3535d6862817af') in 0.0020345 seconds
+Start importing Assets/Materials/M_Moonlit_Window.mat using Guid(f8b0dbe98cf455f40bf170c6f40f295e) (NativeFormatImporter) -> (artifact id: 'b2c304d6f3bcfb9ba98ee431ca5129ca') in 0.0018258 seconds
+Start importing Assets/Materials/M_ToyBlock_Blue.mat using Guid(49e2a461ed2f5dc42ad2a2701f7adf2c) (NativeFormatImporter) -> (artifact id: 'a1a06d4d12979e43be99db0579a86497') in 0.0017036 seconds
+Start importing Assets/Materials/M_DarkOak_Floor.mat using Guid(c9455a7e4c4ae6242914b32181c222db) (NativeFormatImporter) -> (artifact id: '8f3dcccdc01925482d21866bb8560a3f') in 0.0017608 seconds
+Start importing Assets/Materials/M_Book_Burgundy.mat using Guid(4a5432700c8044d49889965583138224) (NativeFormatImporter) -> (artifact id: 'b0e859feab8c7395c7b9ded1263cc10a') in 0.0017662 seconds
+Start importing Assets/Materials/M_TrainTrack_Wood.mat using Guid(ea403ea9596ba9640b4142ee39cc606e) (NativeFormatImporter) -> (artifact id: '236d3438009d544dc632d7abb06d58bb') in 0.0017562 seconds
+Start importing Assets/Materials/M_Book_Covers.mat using Guid(2c5c268fe53db604da5d0822cee3ac5c) (NativeFormatImporter) -> (artifact id: '17c19815f01c578fbd4a9b51f4edc753') in 0.0019797 seconds
+Start importing Assets/Materials/M_Dresser_Oak.mat using Guid(5c5443c775463364982b4326e62e2391) (NativeFormatImporter) -> (artifact id: '28795a1bf95c9c9e3f6bab61cbd9317a') in 0.0016912 seconds
+Start importing Assets/Materials/M_Castle_Blocks.mat using Guid(bcb3b20fdc9681442bb9e3ee00b50fd4) (NativeFormatImporter) -> (artifact id: '6a9ce58da995e684e78ba2b37769da1d') in 0.0021436 seconds
+Start importing Assets/Materials/M_MusicBox_Rosewood.mat using Guid(fce293d4889721143a0c7544b8fd565f) (NativeFormatImporter) -> (artifact id: '0859efef3c2fb2b2e68f379131bbc51c') in 0.0021547 seconds
+Start importing Assets/Materials/M_Book_Green.mat using Guid(0df33eb00da7b1b47bacb16fcb38d7d3) (NativeFormatImporter) -> (artifact id: 'f41bc2145c9af1332c58db46b87be678') in 0.0018703 seconds
+Start importing Assets/Materials/M_Book_Blue.mat using Guid(8d8d9a370048d2c4bae9027f523c6b4f) (NativeFormatImporter) -> (artifact id: '03420c0dfe4a089d8d5f2ca08a030325') in 0.0018711 seconds
+Start importing Assets/Materials/M_GiantWardrobe.mat using Guid(8e96fe81003e09a48a6ab79dc6602881) (NativeFormatImporter) -> (artifact id: 'a5bc90781124db42f1916610344c9d1d') in 0.001901 seconds
+Start importing Assets/Materials/M_Brass_Gold.mat using Guid(2f296ea013b42df458c0cec7612d9ace) (NativeFormatImporter) -> (artifact id: '439c0c5400e414e2131a93c8c640950d') in 0.0017129 seconds
+Start importing Assets/DefaultVolumeProfile.asset using Guid(49aa0b001c7a28c45ab1f10789ee955e) (NativeFormatImporter) -> (artifact id: '29286891913e5549e17709fcd9098c0e') in 0.0017149 seconds
+Refreshing native plugins compatible for Editor in 0.25 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=faa405381ccc82c45b1e381e96f64f35): Total: 0.111 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+[DarkRoomArtAssetBuilder] Texturas ilustradas canônicas geradas com sucesso!
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+YunaLegend.EditorScripts.DarkRoomArtAssetBuilder:GenerateAllArtAssets () (at Assets/Scripts/Editor/DarkRoomArtAssetBuilder.cs:97)
+YunaLegend.EditorScripts.DarkRoomScenePopulator:PopulateDarkRoomScene () (at Assets/Scripts/Editor/DarkRoomScenePopulator.cs:20)
+
+(Filename: Assets/Scripts/Editor/DarkRoomArtAssetBuilder.cs Line: 97)
+
+[DarkRoomBlockoutBuilder] Circuito Canônico em 3 Etapas gerado com sucesso! Etapa 1: 10 | Etapa 2: 12 | Etapa 3: 16 plataformas.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+YunaLegend.DarkRoom.DarkRoomBlockoutBuilder:BuildBlockout () (at Assets/Scripts/Runtime/DarkRoom/DarkRoomBlockoutBuilder.cs:134)
+YunaLegend.EditorScripts.DarkRoomScenePopulator:PopulateDarkRoomScene () (at Assets/Scripts/Editor/DarkRoomScenePopulator.cs:94)
+
+(Filename: Assets/Scripts/Runtime/DarkRoom/DarkRoomBlockoutBuilder.cs Line: 134)
+
+Start importing Assets/Scenes/DarkRoom_Gameplay.unity using Guid(a9465ee75c37b874e94c21c0fcf9b22b) (DefaultImporter) -> (artifact id: 'da37dd9a084429a8253755ad908a82e9') in 0.001114 seconds
+Refreshing native plugins compatible for Editor in 0.23 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=00fc9894d7936b34c9833f46d1e6a844): Total: 0.028 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+[DarkRoomScenePopulator] Cena DarkRoom_Gameplay populada com Direção Artística e salva com sucesso!
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+YunaLegend.EditorScripts.DarkRoomScenePopulator:PopulateDarkRoomScene () (at Assets/Scripts/Editor/DarkRoomScenePopulator.cs:238)
+
+(Filename: Assets/Scripts/Editor/DarkRoomScenePopulator.cs Line: 238)
+
+Batchmode quit successfully invoked - shutting down!
+Killing ADB server in 2,071732 seconds.
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.
+[Licensing::IpcConnector] LicenseClient-sergi-1.19.0-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-sergi-1.19.0 channel disconnected successfully.
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup mono
+Exiting batchmode successfully now!
+Exiting without the bug reporter. Application will terminate with return code 0
