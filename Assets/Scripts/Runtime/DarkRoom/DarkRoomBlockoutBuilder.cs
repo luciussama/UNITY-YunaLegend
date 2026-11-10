@@ -38,6 +38,7 @@ namespace YunaLegend.DarkRoom
         [SerializeField] private Material dreamPortalMaterial;
         [SerializeField] private Material moonbeamShaftMaterial;
         [SerializeField] private Material ambientDustMaterial;
+        [SerializeField] private Material moonlightFloorShadowMaterial;
 
         [Header("Estrutura Gerada (3 Etapas Canônicas)")]
         [SerializeField] private Transform stage1Root;
@@ -75,7 +76,7 @@ namespace YunaLegend.DarkRoom
             Material toyAbc, Material drum, Material velvet, Material musicBox, Material brassGold,
             Material dresser, Material bookBlue, Material bookBurgundy, Material bookGreen, Material bookPages,
             Material castleBlocks, Material castleTurret, Material trainTrack, Material falseDoorPoster, Material dreamPortal,
-            Material moonbeamShaft = null, Material ambientDust = null)
+            Material moonbeamShaft = null, Material ambientDust = null, Material floorShadow = null)
         {
             floorMaterial = floor;
             wallpaperMaterial = wallpaper;
@@ -103,6 +104,7 @@ namespace YunaLegend.DarkRoom
             dreamPortalMaterial = dreamPortal;
             moonbeamShaftMaterial = moonbeamShaft;
             ambientDustMaterial = ambientDust;
+            moonlightFloorShadowMaterial = floorShadow;
             defaultPlatformMaterial = dresserOakMaterial;
         }
 
@@ -249,8 +251,20 @@ namespace YunaLegend.DarkRoom
             // Beiral decorativo superior do guarda-roupa
             CreateVisualOnlyObject("Beiral_GuardaRoupa", wardrobe.transform, new Vector3(0f, 0.52f, 0f), new Vector3(1.06f, 0.08f, 1.15f), brassGoldMaterial != null ? brassGoldMaterial : wardrobeMaterial, PrimitiveType.Cube);
 
-            // 3. Janela monumental com luar azulado (ao fundo da transicao Etapa 1 -> 2)
-            CreateVisualOnlyObject("Janela_Monumental_Luar", sceneryRoot, new Vector3(30f, 4.5f, 6.2f), new Vector3(10f, 14f, 0.4f), windowMaterial != null ? windowMaterial : castleBlocksMaterial, PrimitiveType.Cube);
+            // 3. Janela monumental com luar azulado e grande lua cheia visivel (ao fundo da transicao Etapa 1 -> 2)
+            CreateVisualOnlyObject("Janela_Monumental_Luar", sceneryRoot, new Vector3(30f, 3.5f, 5.0f), new Vector3(16f, 22f, 0.4f), windowMaterial != null ? windowMaterial : castleBlocksMaterial, PrimitiveType.Cube);
+
+            // 3b. Projecao diagonal de Luar no Piso com sombra da esquadria da janela (fiel ao desenho canonico)
+            if (moonlightFloorShadowMaterial != null)
+            {
+                CreateVisualOnlyObject("Projecao_Luar_Piso", sceneryRoot, new Vector3(32f, -9.05f, 0.5f), new Vector3(18f, 0.02f, 10f), moonlightFloorShadowMaterial, PrimitiveType.Cube);
+            }
+
+            // 3c. Feixe aereo translucido difuso de luar (haze etereo, nao solido)
+            if (moonbeamShaftMaterial != null)
+            {
+                CreateVisualOnlyObject("Feixe_Luar_Translucido", sceneryRoot, new Vector3(32f, -2.0f, 2.8f), new Vector3(16f, 20f, 0.1f), moonbeamShaftMaterial, PrimitiveType.Quad, Quaternion.Euler(52f, -24f, 0f));
+            }
 
             // 4. Estante gigante de livros ilustrados (ao fundo da Fuga Acelerada)
             var shelf = CreateVisualOnlyObject("Estante_Gigante_Livros", sceneryRoot, new Vector3(58f, 2.5f, 5.6f), new Vector3(18f, 18f, 3.2f), wardrobeMaterial, PrimitiveType.Cube);

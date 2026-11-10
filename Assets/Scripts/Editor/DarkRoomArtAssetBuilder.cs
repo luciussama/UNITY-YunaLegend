@@ -27,6 +27,8 @@ namespace YunaLegend.EditorScripts
             SaveTextureAsPng(GenerateTrainTrackTexture(), Path.Combine(MaterialsFolder, "T_TrainTrack_Wood.png"));
             SaveTextureAsPng(GenerateWallpaperTexture(), Path.Combine(MaterialsFolder, "T_Victorian_Wallpaper.png"));
             SaveTextureAsPng(GenerateMoonlitWindowTexture(), Path.Combine(MaterialsFolder, "T_Moonlit_Window.png"));
+            SaveTextureAsPng(GenerateWindowCookieTexture(), Path.Combine(MaterialsFolder, "T_Window_Cookie.png"));
+            SaveTextureAsPng(GenerateMoonlightFloorShadowTexture(), Path.Combine(MaterialsFolder, "T_Moonlight_Floor_Shadow.png"));
             SaveTextureAsPng(GenerateDreamPortalTexture(), Path.Combine(MaterialsFolder, "T_DreamPortal.png"));
             SaveTextureAsPng(GenerateFalseDoorPosterTexture(), Path.Combine(MaterialsFolder, "T_FalseDoor_Poster.png"));
 
@@ -43,6 +45,7 @@ namespace YunaLegend.EditorScripts
             var trackTex = LoadTexture("T_TrainTrack_Wood.png");
             var wallpaperTex = LoadTexture("T_Victorian_Wallpaper.png");
             var windowTex = LoadTexture("T_Moonlit_Window.png");
+            var floorShadowTex = LoadTexture("T_Moonlight_Floor_Shadow.png");
             var portalTex = LoadTexture("T_DreamPortal.png");
             var doorTex = LoadTexture("T_FalseDoor_Poster.png");
 
@@ -52,6 +55,7 @@ namespace YunaLegend.EditorScripts
             CreateUrpMaterial("M_GiantWardrobe", new Color(0.36f, 0.24f, 0.15f), 0.32f, oakTex, null, new Vector2(4f, 5f));
             CreateUrpMaterial("M_Dresser_Oak", new Color(0.46f, 0.32f, 0.20f), 0.36f, oakTex, null, new Vector2(2f, 1.5f));
             CreateUrpMaterial("M_TrainTrack_Wood", Color.white, 0.38f, trackTex, null, new Vector2(3f, 1f));
+            CreateUrpMaterial("M_Moonlight_Floor_Projection", new Color(0.75f, 0.88f, 1.0f, 0.70f), 0.20f, floorShadowTex);
 
             // Brinquedos e Blocos em têmpera pastel envelhecida
             CreateUrpMaterial("M_TeddyPlush", Color.white, 0.12f, plushTex);
@@ -674,38 +678,212 @@ namespace YunaLegend.EditorScripts
             int size = 512;
             var tex = new Texture2D(size, size, TextureFormat.RGBA32, true);
 
-            var darkFrame = new Color(0.14f, 0.12f, 0.16f);
-            var glassGlow = new Color(0.60f, 0.72f, 0.88f); // Luar suave aquarelado
-            var leadSeam = new Color(0.08f, 0.06f, 0.10f);
+            var darkFrame = new Color(0.18f, 0.12f, 0.08f);   // Madeira escura da esquadria
+            var frameBevel = new Color(0.32f, 0.22f, 0.14f);  // Chanfro da madeira
+            var nightSky = new Color(0.04f, 0.06f, 0.16f);    // Céu noturno profundo
+            var moonGlow = new Color(0.70f, 0.82f, 1.0f);     // Halo azulado do luar
+            var moonCore = new Color(0.98f, 0.98f, 0.90f);    // Núcleo branco-marfim da lua
+            var glassTint = new Color(0.45f, 0.62f, 0.85f);   // Vidro iluminado
 
-            int border = 32;
+            float cx = size * 0.5f;
+            float cy = size * 0.5f;
+
+            // Posição e raio da lua visível através do vitral
+            Vector2 moonCenter = new Vector2(cx, size * 0.68f);
+            float moonRadius = 68f;
+
+            int outerBorder = 32;
 
             for (int y = 0; y < size; y++)
             {
                 for (int x = 0; x < size; x++)
                 {
-                    float nx = (x - size * 0.5f) / (size * 0.5f);
-                    float archTop = size * 0.5f + Mathf.Sqrt(Mathf.Max(0, 1.0f - nx * nx)) * (size * 0.45f);
+                    // Formato do arco gótico no topo
+                    float nx = (x - cx) / cx;
+                    float archTop = cy + Mathf.Sqrt(Mathf.Max(0, 1.0f - nx * nx)) * (size * 0.44f);
 
-                    if (y > archTop || x < border || x > size - border || y < border)
+                    // Parede externa / moldura exterior
+                    if (y > archTop || x < outerBorder || x > size - outerBorder || y < outerBorder)
                     {
                         tex.SetPixel(x, y, darkFrame);
                         continue;
                     }
 
-                    int d1 = (x + y) % 48;
-                    int d2 = (x - y + 1024) % 48;
-                    bool isLead = (d1 <= 3 || d2 <= 3);
-
-                    if (isLead)
+                    // Chanfro interno da moldura
+                    bool isBevel = (x < outerBorder + 6 || x > size - outerBorder - 6 || y < outerBorder + 6 || y > archTop - 6);
+                    if (isBevel)
                     {
-                        tex.SetPixel(x, y, leadSeam);
+                        tex.SetPixel(x, y, frameBevel);
+                        continue;
+                    }
+
+                    // Esquadrias / Travessas de madeira (Mullions verticais e Transoms horizontais)
+                    // 2 travessas verticais dividindo em 3 baías
+                    bool isVertMullion1 = Mathf.Abs(x - (cx - 72f)) < 7f;
+                    bool isVertMullion2 = Mathf.Abs(x - (cx + 72f)) < 7f;
+
+                    // 3 travessas horizontais
+                    bool isHorizTransom1 = Mathf.Abs(y - 140f) < 6f;
+                    bool isHorizTransom2 = Mathf.Abs(y - 250f) < 6f;
+                    bool isHorizTransom3 = Mathf.Abs(y - 355f) < 6f;
+
+                    // Arco superior gótico interno
+                    bool isInnerArch = Mathf.Abs(y - (cy + Mathf.Sqrt(Mathf.Max(0, 1.0f - nx * nx)) * (size * 0.32f))) < 5f && y > 355f;
+
+                    if (isVertMullion1 || isVertMullion2 || isHorizTransom1 || isHorizTransom2 || isHorizTransom3 || isInnerArch)
+                    {
+                        float woodNoise = (Mathf.PerlinNoise(x * 0.1f, y * 0.05f) - 0.5f) * 0.08f;
+                        tex.SetPixel(x, y, darkFrame + new Color(woodNoise, woodNoise, woodNoise, 0f));
+                        continue;
+                    }
+
+                    // Fundo da Janela: Céu Noturno + Grande Lua Brilhante
+                    float distToMoon = Vector2.Distance(new Vector2(x, y), moonCenter);
+                    float wash = WatercolorWash(x, y);
+
+                    if (distToMoon <= moonRadius)
+                    {
+                        // Disco da Lua: núcleo marfim com relevo de crateras e gradiente
+                        float moonNoise = Mathf.PerlinNoise(x * 0.04f, y * 0.04f) * 0.15f - 0.075f;
+                        float moonEdge = Mathf.Clamp01((moonRadius - distToMoon) / 8f);
+                        var moonCol = Color.Lerp(moonGlow, moonCore, moonEdge) + new Color(moonNoise, moonNoise, moonNoise, 0f);
+                        tex.SetPixel(x, y, moonCol * wash);
                     }
                     else
                     {
-                        float wash = WatercolorWash(x, y);
-                        float grad = (float)y / size * 0.35f + 0.65f;
-                        tex.SetPixel(x, y, glassGlow * grad * wash);
+                        // Halo do Luar e Céu Noturno
+                        float haloIntensity = Mathf.Exp(-(distToMoon - moonRadius) * 0.022f);
+                        float glassGrad = Mathf.Clamp01((float)y / size * 0.4f + 0.4f);
+
+                        var skyCol = Color.Lerp(nightSky, glassTint * glassGrad, 0.4f);
+                        var finalCol = Color.Lerp(skyCol, moonGlow, haloIntensity * 0.85f);
+
+                        // Estrelinhas distantes no céu
+                        float star = Mathf.PerlinNoise(x * 0.12f, y * 0.12f);
+                        if (star > 0.85f)
+                        {
+                            finalCol += new Color(0.4f, 0.4f, 0.5f) * (star - 0.85f) * 4f;
+                        }
+
+                        tex.SetPixel(x, y, finalCol * wash);
+                    }
+                }
+            }
+
+            tex.Apply();
+            return tex;
+        }
+
+        public static Texture2D GenerateWindowCookieTexture()
+        {
+            int size = 256;
+            var tex = new Texture2D(size, size, TextureFormat.RGBA32, false);
+
+            float cx = size * 0.5f;
+            float cy = size * 0.5f;
+            int outerBorder = 18;
+
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    float nx = (x - cx) / cx;
+                    float archTop = cy + Mathf.Sqrt(Mathf.Max(0, 1.0f - nx * nx)) * (size * 0.44f);
+
+                    // Parede externa / moldura bloqueia a luz (preto = sombra)
+                    if (y > archTop || x < outerBorder || x > size - outerBorder || y < outerBorder)
+                    {
+                        tex.SetPixel(x, y, Color.black);
+                        continue;
+                    }
+
+                    // Travessas de madeira bloqueiam a luz (projetam a sombra do vitral!)
+                    bool isVert1 = Mathf.Abs(x - (cx - 36f)) < 4f;
+                    bool isVert2 = Mathf.Abs(x - (cx + 36f)) < 4f;
+                    bool isHoriz1 = Mathf.Abs(y - 70f) < 4f;
+                    bool isHoriz2 = Mathf.Abs(y - 125f) < 4f;
+                    bool isHoriz3 = Mathf.Abs(y - 180f) < 4f;
+                    bool isInnerArch = Mathf.Abs(y - (cy + Mathf.Sqrt(Mathf.Max(0, 1.0f - nx * nx)) * (size * 0.32f))) < 3f && y > 180f;
+
+                    if (isVert1 || isVert2 || isHoriz1 || isHoriz2 || isHoriz3 || isInnerArch)
+                    {
+                        tex.SetPixel(x, y, Color.black); // Sombra da esquadria
+                    }
+                    else
+                    {
+                        // Vidro deixa a luz passar (branco/brilhante = luz projetada no piso e objetos!)
+                        float distCenter = Vector2.Distance(new Vector2(x, y), new Vector2(cx, size * 0.65f)) / (size * 0.5f);
+                        float intensity = Mathf.Clamp01(1.0f - distCenter * 0.4f);
+                        tex.SetPixel(x, y, new Color(intensity, intensity, intensity, 1f));
+                    }
+                }
+            }
+
+            tex.Apply();
+            return tex;
+        }
+
+        private static Texture2D GenerateMoonlightFloorShadowTexture()
+        {
+            int width = 512;
+            int height = 512;
+            var tex = new Texture2D(width, height, TextureFormat.RGBA32, true);
+
+            var moonColor = new Color(0.72f, 0.86f, 1.0f); // Azul claro luar
+            var shadowColor = new Color(0.08f, 0.10f, 0.16f); // Sombra da esquadria
+
+            float cx = width * 0.5f;
+
+            for (int y = 0; y < height; y++)
+            {
+                float normY = (float)y / height; // 0 na frente (perto da camera), 1 no fundo (perto da parede)
+
+                // Perspectiva trapezoidal: mais larga na frente, estreitando em direcao a janela no fundo
+                float trapWidth = Mathf.Lerp(width * 0.88f, width * 0.50f, normY);
+                float xMin = cx - trapWidth * 0.5f;
+                float xMax = cx + trapWidth * 0.5f;
+
+                // Suavidade e decaimento nas bordas externas do lago de luz
+                float edgeY = Mathf.SmoothStep(0f, 0.12f, normY) * Mathf.SmoothStep(1f, 0.88f, normY);
+
+                for (int x = 0; x < width; x++)
+                {
+                    if (x < xMin || x > xMax)
+                    {
+                        tex.SetPixel(x, y, Color.clear);
+                        continue;
+                    }
+
+                    float normXInTrap = (x - xMin) / trapWidth; // 0..1 dentro do feixe
+                    float edgeX = Mathf.SmoothStep(0f, 0.10f, normXInTrap) * Mathf.SmoothStep(1f, 0.90f, normXInTrap);
+                    float poolAlpha = edgeX * edgeY * 0.70f;
+
+                    // Sombras das travessas da esquadria projetadas no chao:
+                    // 2 travessas verticais (dividindo em 3 colunas de luz)
+                    bool isMullion1 = Mathf.Abs(normXInTrap - 0.35f) < 0.035f;
+                    bool isMullion2 = Mathf.Abs(normXInTrap - 0.65f) < 0.035f;
+
+                    // 3 travessas horizontais (dividindo em 4 fileiras de luz)
+                    bool isTransom1 = Mathf.Abs(normY - 0.28f) < 0.025f;
+                    bool isTransom2 = Mathf.Abs(normY - 0.55f) < 0.025f;
+                    bool isTransom3 = Mathf.Abs(normY - 0.78f) < 0.025f;
+
+                    // Arco superior na extremidade do feixe
+                    bool isArchShadow = (normY > 0.85f) && (Mathf.Abs(normXInTrap - 0.5f) > 0.35f);
+
+                    bool isShadow = isMullion1 || isMullion2 || isTransom1 || isTransom2 || isTransom3 || isArchShadow;
+
+                    if (isShadow)
+                    {
+                        // Sombra escura das barras de madeira da janela sobre a luz
+                        tex.SetPixel(x, y, new Color(shadowColor.r, shadowColor.g, shadowColor.b, poolAlpha * 0.25f));
+                    }
+                    else
+                    {
+                        // Luz brilhante passando pelos vidros retangulares da janela!
+                        float centerBright = Mathf.Clamp01(1.0f - Mathf.Abs(normXInTrap - 0.5f) * 0.8f);
+                        float finalAlpha = poolAlpha * (0.65f + centerBright * 0.35f);
+                        tex.SetPixel(x, y, new Color(moonColor.r, moonColor.g, moonColor.b, finalAlpha));
                     }
                 }
             }

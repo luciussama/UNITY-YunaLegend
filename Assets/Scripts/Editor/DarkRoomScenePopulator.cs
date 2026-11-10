@@ -63,12 +63,42 @@ namespace YunaLegend.EditorScripts
             var spotLight = moonSpotGo.GetComponent<Light>();
             if (spotLight == null) spotLight = moonSpotGo.AddComponent<Light>();
             spotLight.type = LightType.Spot;
-            spotLight.color = new Color(0.65f, 0.78f, 1.0f);
-            spotLight.intensity = 5.2f;
-            spotLight.range = 30f;
-            spotLight.spotAngle = 60f;
-            spotLight.innerSpotAngle = 22f; // Difusao gradual e suave nas bordas do feixe
+            spotLight.color = new Color(0.70f, 0.84f, 1.0f);
+            spotLight.intensity = 8.5f;
+            spotLight.range = 35f;
+            spotLight.spotAngle = 65f;
+            spotLight.innerSpotAngle = 20f; // Difusao gradual e suave nas bordas do feixe
             spotLight.shadows = LightShadows.Soft; // Sombras suaves reais da engine
+
+            // Cookie de luz com a esquadria da janela canonica para projetar a sombra das travessas
+            var cookieTex = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Materials/T_Window_Cookie.png");
+            if (cookieTex != null)
+            {
+                spotLight.cookie = cookieTex;
+            }
+
+            // 2d. Feixe de Luar Translucido Difuso no ar (haze etereo, nao solido)
+            var beamGo = GameObject.Find("Window_Moonbeam_DiffuseShaft");
+            if (beamGo == null) beamGo = new GameObject("Window_Moonbeam_DiffuseShaft");
+            beamGo.transform.position = new Vector3(34f, 1.0f, 5.2f);
+            beamGo.transform.rotation = Quaternion.Euler(48f, -28f, 0f);
+            beamGo.transform.localScale = new Vector3(14f, 22f, 0.2f);
+
+            var beamFilter = beamGo.GetComponent<MeshFilter>();
+            if (beamFilter == null)
+            {
+                beamFilter = beamGo.AddComponent<MeshFilter>();
+                var tempQuad = GameObject.CreatePrimitive(PrimitiveType.Quad);
+                beamFilter.sharedMesh = tempQuad.GetComponent<MeshFilter>().sharedMesh;
+                Object.DestroyImmediate(tempQuad);
+            }
+            var beamCol = beamGo.GetComponent<Collider>();
+            if (beamCol != null) Object.DestroyImmediate(beamCol);
+
+            var beamRend = beamGo.GetComponent<MeshRenderer>();
+            if (beamRend == null) beamRend = beamGo.AddComponent<MeshRenderer>();
+            var shaftMat = LoadMat("M_Moonbeam_Shaft");
+            if (shaftMat != null) beamRend.sharedMaterial = shaftMat;
 
             // 2b. Global Volume de Pos-Processamento URP (Bloom etereo, Vignette aconchegante)
             var volumeGo = GameObject.Find("DarkRoom_GlobalVolume");
@@ -112,7 +142,8 @@ namespace YunaLegend.EditorScripts
                 LoadMat("M_FalseDoor_Poster"),
                 LoadMat("M_DreamPortal_Gold"),
                 LoadMat("M_Moonbeam_Shaft"),
-                LoadMat("M_AmbientDust_Particle")
+                LoadMat("M_AmbientDust_Particle"),
+                LoadMat("M_Moonlight_Floor_Projection")
             );
 
             builder.BuildBlockout();

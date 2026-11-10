@@ -29,7 +29,7 @@ namespace YunaLegend.EditorScripts
             // 2. Criar Materiais Transparentes / Aditivos URP
             CreateParticleMaterial("M_FairySparkle_Particle", new Color(1.0f, 0.90f, 0.45f, 1f), sparkleTex, isAdditive: true);
             CreateParticleMaterial("M_AmbientDust_Particle", new Color(0.80f, 0.90f, 1.0f, 0.7f), sparkleTex, isAdditive: true);
-            CreateParticleMaterial("M_Moonbeam_Shaft", new Color(0.60f, 0.78f, 1.0f, 0.38f), shaftTex, isAdditive: true);
+            CreateParticleMaterial("M_Moonbeam_Shaft", new Color(0.65f, 0.80f, 1.0f, 0.18f), shaftTex, isAdditive: true);
             CreateParticleMaterial("M_LandingPuff_Particle", new Color(0.90f, 0.85f, 0.75f, 0.6f), sparkleTex, isAdditive: false);
 
             AssetDatabase.SaveAssets();
