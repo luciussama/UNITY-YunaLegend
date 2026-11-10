@@ -18,6 +18,7 @@ namespace YunaLegend.EditorScripts
 
             DarkRoomRenderPipelineSetup.Configure();
             DarkRoomArtAssetBuilder.GenerateAllArtAssets();
+            DarkRoomAudioAssetBuilder.GenerateAllSfx();
 
             // 1. Configurar Camera 2.5D
             var camGo = GameObject.Find("Main Camera (2.5D SideScroll)");
@@ -210,6 +211,27 @@ namespace YunaLegend.EditorScripts
             if (nandaGuide != null)
             {
                 nandaGuide.SetYuna(yunaGo.transform);
+                var fairyTwinkleClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/fairy_twinkle.wav");
+                nandaGuide.ConfigureAudio(fairyTwinkleClip);
+            }
+
+            // Injetar AudioClips dinamicos em Yuna
+            if (yunaCtrl != null)
+            {
+                var jumpClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/jump_airy.wav");
+                var landWoodClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/land_wood.wav");
+                var footsteps = new AudioClip[]
+                {
+                    AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/footstep_wood_1.wav"),
+                    AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/footstep_wood_2.wav"),
+                    AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/footstep_wood_3.wav")
+                };
+                var landPlushClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/land_plush.wav");
+                var drumBounceClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/drum_strike.wav");
+                var comicFallClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/comic_fall_thud.wav");
+                var gameOverClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/game_over_fall.wav");
+
+                yunaCtrl.ConfigureAudioClips(jumpClip, landWoodClip, footsteps, landPlushClip, drumBounceClip, comicFallClip, gameOverClip);
             }
 
             // 7. Configurar Gerenciador de Abertura e Progressao

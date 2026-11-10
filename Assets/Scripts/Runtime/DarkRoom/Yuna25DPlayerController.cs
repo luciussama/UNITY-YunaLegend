@@ -31,10 +31,17 @@ namespace YunaLegend.DarkRoom
         [Header("Restricao de Eixo 2.5D")]
         [SerializeField] private float lockedZ = 0f;
 
-        [Header("Audio SFX")]
+        [Header("Audio SFX Dinamico")]
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip jumpSfx;
         [SerializeField] private AudioClip landSfx;
+        [SerializeField] private AudioClip[] footstepWoodClips;
+        [SerializeField] private AudioClip landPlushSfx;
+        [SerializeField] private AudioClip drumBounceSfx;
+        [SerializeField] private AudioClip comicFallThudSfx;
+        [SerializeField] private AudioClip gameOverSfx;
+
+        private float footstepTimer;
 
         private CharacterController controller;
         private Vector3 velocity;
@@ -146,7 +153,7 @@ namespace YunaLegend.DarkRoom
                 {
                     isCinematicFalling = false;
                     velocity = Vector3.zero;
-                    PlaySound(landSfx);
+                    PlaySound(comicFallThudSfx != null ? comicFallThudSfx : landSfx);
                     OnCinematicFallLanded?.Invoke();
                 }
                 return;
@@ -158,10 +165,46 @@ namespace YunaLegend.DarkRoom
             TickMovement(Time.deltaTime);
         }
 
+        public void ConfigureAudioClips(AudioClip jump, AudioClip landWood, AudioClip[] footsteps, AudioClip landPlush, AudioClip drumBounce, AudioClip comicFall, AudioClip gameOver)
+        {
+            jumpSfx = jump;
+            landSfx = landWood;
+            footstepWoodClips = footsteps;
+            landPlushSfx = landPlush;
+            drumBounceSfx = drumBounce;
+            comicFallThudSfx = comicFall;
+            gameOverSfx = gameOver;
+        }
+
+        private void UpdateFootsteps(float deltaTime)
+        {
+            if (!autoRunActive || isDead || isCinematicFalling || !controller.isGrounded) return;
+
+            footstepTimer -= deltaTime;
+            if (footstepTimer <= 0f)
+            {
+                float interval = 0.28f / Mathf.Max(0.5f, runSpeed / 3.6f);
+                footstepTimer = interval;
+
+                if (footstepWoodClips != null && footstepWoodClips.Length > 0 && audioSource != null)
+                {
+                    int idx = UnityEngine.Random.Range(0, footstepWoodClips.Length);
+                    var clip = footstepWoodClips[idx];
+                    if (clip != null)
+                    {
+                        audioSource.pitch = UnityEngine.Random.Range(0.92f, 1.08f);
+                        audioSource.PlayOneShot(clip, 0.40f);
+                        audioSource.pitch = 1.0f;
+                    }
+                }
+            }
+        }
+
         public void TickMovement(float deltaTime)
         {
             if (isDead || !autoRunActive || isCinematicFalling || deltaTime <= 0f) return;
             UpdateTimers(deltaTime);
+            UpdateFootsteps(deltaTime);
             ApplyForwardRun();
             ApplyJumpAndGravity(deltaTime);
 
@@ -358,7 +401,12 @@ namespace YunaLegend.DarkRoom
                 if (floorLaunchAllowed) launchJumped = true;
                 jumpBufferCounter = 0f;
                 coyoteCounter = 0f;
-                PlaySound(jumpSfx);
+                if (audioSource != null && jumpSfx != null)
+                {
+                    audioSource.pitch = Mathf.Lerp(0.95f, 1.25f, Mathf.Clamp01((runSpeed - 3.6f) / 2.4f));
+                    audioSource.PlayOneShot(jumpSfx, 0.65f);
+                    audioSource.pitch = 1.0f;
+                }
             }
 
             velocity.y -= gravity * deltaTime;
@@ -378,7 +426,10 @@ namespace YunaLegend.DarkRoom
         {
             if (!wasGrounded && controller.isGrounded)
             {
-                PlaySound(landSfx);
+                AudioClip clipToPlay = landSfx;
+                if (lastLandedPlatformIndex == 0 && landPlushSfx != null) clipToPlay = landPlushSfx;
+                else if (lastLandedPlatformIndex == 5 && drumBounceSfx != null) clipToPlay = drumBounceSfx;
+                PlaySound(clipToPlay);
             }
             wasGrounded = controller.isGrounded;
         }
@@ -427,6 +478,10 @@ namespace YunaLegend.DarkRoom
             isDead = true;
             autoRunActive = false;
             velocity = Vector3.zero;
+            if (audioSource != null && gameOverSfx != null)
+            {
+                audioSource.PlayOneShot(gameOverSfx, 0.70f);
+            }
             Debug.Log($"[GameOver]: {reason}");
             OnGameOverTriggered?.Invoke();
         }

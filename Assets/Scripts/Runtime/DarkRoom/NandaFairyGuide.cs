@@ -27,6 +27,10 @@ namespace YunaLegend.DarkRoom
         [SerializeField] private int currentTargetPlatformIndex = 0;
         [SerializeField] private bool isGuidingAhead = true;
 
+        [Header("Audio SFX")]
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip twinkleSfx;
+
         private Vector3 currentVelocity;
         private Vector3 targetPosition;
         private NandaMood currentMood = NandaMood.Normal;
@@ -34,6 +38,23 @@ namespace YunaLegend.DarkRoom
 
         public NandaMood Mood => currentMood;
         public int CurrentTargetPlatformIndex => currentTargetPlatformIndex;
+
+        public void ConfigureAudio(AudioClip twinkle)
+        {
+            twinkleSfx = twinkle;
+            if (audioSource == null) audioSource = GetComponent<AudioSource>();
+            if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+            audioSource.spatialBlend = 0.5f;
+        }
+
+        public void PlayTwinkle()
+        {
+            if (audioSource != null && twinkleSfx != null)
+            {
+                audioSource.PlayOneShot(twinkleSfx, 0.55f);
+            }
+        }
 
         private void Awake()
         {
@@ -102,12 +123,14 @@ namespace YunaLegend.DarkRoom
         {
             currentTargetPlatformIndex++;
             ApplyMood(NandaMood.Happy);
+            PlayTwinkle();
         }
 
         public void SetTargetPlatform(int index)
         {
             currentTargetPlatformIndex = index;
             isGuidingAhead = true;
+            PlayTwinkle();
         }
 
         public void ReturnToYuna(string dialogueMessage = null)
