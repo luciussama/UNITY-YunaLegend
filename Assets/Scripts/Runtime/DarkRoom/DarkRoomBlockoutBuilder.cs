@@ -40,7 +40,7 @@ namespace YunaLegend.DarkRoom
         [SerializeField] private Material ambientDustMaterial;
         [SerializeField] private Material moonlightFloorShadowMaterial;
 
-        [Header("Estrutura Gerada (3 Etapas Canônicas)")]
+        [Header("Estrutura Gerada (3 Etapas CanÃ´nicas)")]
         [SerializeField] private Transform stage1Root;
         [SerializeField] private Transform stage2Root;
         [SerializeField] private Transform stage3Root;
@@ -138,7 +138,7 @@ namespace YunaLegend.DarkRoom
             temporalPlatforms = null;
             ShowTemporalSection(DarkRoomPhase.Phase1Ascent);
 
-            Debug.Log($"[DarkRoomBlockoutBuilder] Circuito Canônico em 3 Etapas gerado com sucesso! " +
+            Debug.Log($"[DarkRoomBlockoutBuilder] Circuito CanÃ´nico em 3 Etapas gerado com sucesso! " +
                       $"Etapa 1: {stage1.Count} | Etapa 2: {stage2.Count} | Etapa 3: {stage3.Count} plataformas.");
         }
 
@@ -254,18 +254,6 @@ namespace YunaLegend.DarkRoom
             // 3. Janela monumental com luar azulado e grande lua cheia visivel (ao fundo da transicao Etapa 1 -> 2)
             CreateVisualOnlyObject("Janela_Monumental_Luar", sceneryRoot, new Vector3(30f, 3.5f, 5.0f), new Vector3(16f, 22f, 0.4f), windowMaterial != null ? windowMaterial : castleBlocksMaterial, PrimitiveType.Cube);
 
-            // 3b. Projecao diagonal de Luar no Piso com sombra da esquadria da janela (fiel ao desenho canonico)
-            if (moonlightFloorShadowMaterial != null)
-            {
-                CreateVisualOnlyObject("Projecao_Luar_Piso", sceneryRoot, new Vector3(32f, -9.05f, 0.5f), new Vector3(18f, 0.02f, 10f), moonlightFloorShadowMaterial, PrimitiveType.Cube);
-            }
-
-            // 3c. Feixe aereo translucido difuso de luar (haze etereo, nao solido)
-            if (moonbeamShaftMaterial != null)
-            {
-                CreateVisualOnlyObject("Feixe_Luar_Translucido", sceneryRoot, new Vector3(32f, -2.0f, 2.8f), new Vector3(16f, 20f, 0.1f), moonbeamShaftMaterial, PrimitiveType.Quad, Quaternion.Euler(52f, -24f, 0f));
-            }
-
             // 4. Estante gigante de livros ilustrados (ao fundo da Fuga Acelerada)
             var shelf = CreateVisualOnlyObject("Estante_Gigante_Livros", sceneryRoot, new Vector3(58f, 2.5f, 5.6f), new Vector3(18f, 18f, 3.2f), wardrobeMaterial, PrimitiveType.Cube);
 
@@ -376,7 +364,7 @@ namespace YunaLegend.DarkRoom
                 case 20: return wardrobeMaterial != null ? wardrobeMaterial : dresserOakMaterial;
                 case 21: return falseDoorPosterMaterial != null ? falseDoorPosterMaterial : wardrobeMaterial;
 
-                // Etapa 3: Subida Caótica Reversa (22 a 37)
+                // Etapa 3: Subida CaÃ³tica Reversa (22 a 37)
                 case 22: return toyBlockAbcMaterial != null ? toyBlockAbcMaterial : toyBlockRedMaterial;
                 case 23: return royalVelvetMaterial != null ? royalVelvetMaterial : toyBlockBlueMaterial;
                 case 24: return dresserOakMaterial != null ? dresserOakMaterial : wardrobeMaterial;

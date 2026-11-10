@@ -64,7 +64,7 @@ namespace YunaLegend.EditorScripts
             if (spotLight == null) spotLight = moonSpotGo.AddComponent<Light>();
             spotLight.type = LightType.Spot;
             spotLight.color = new Color(0.70f, 0.84f, 1.0f);
-            spotLight.intensity = 8.5f;
+            spotLight.intensity = 0.65f;
             spotLight.range = 35f;
             spotLight.spotAngle = 65f;
             spotLight.innerSpotAngle = 20f; // Difusao gradual e suave nas bordas do feixe
@@ -77,28 +77,8 @@ namespace YunaLegend.EditorScripts
                 spotLight.cookie = cookieTex;
             }
 
-            // 2d. Feixe de Luar Translucido Difuso no ar (haze etereo, nao solido)
-            var beamGo = GameObject.Find("Window_Moonbeam_DiffuseShaft");
-            if (beamGo == null) beamGo = new GameObject("Window_Moonbeam_DiffuseShaft");
-            beamGo.transform.position = new Vector3(34f, 1.0f, 5.2f);
-            beamGo.transform.rotation = Quaternion.Euler(48f, -28f, 0f);
-            beamGo.transform.localScale = new Vector3(14f, 22f, 0.2f);
-
-            var beamFilter = beamGo.GetComponent<MeshFilter>();
-            if (beamFilter == null)
-            {
-                beamFilter = beamGo.AddComponent<MeshFilter>();
-                var tempQuad = GameObject.CreatePrimitive(PrimitiveType.Quad);
-                beamFilter.sharedMesh = tempQuad.GetComponent<MeshFilter>().sharedMesh;
-                Object.DestroyImmediate(tempQuad);
-            }
-            var beamCol = beamGo.GetComponent<Collider>();
-            if (beamCol != null) Object.DestroyImmediate(beamCol);
-
-            var beamRend = beamGo.GetComponent<MeshRenderer>();
-            if (beamRend == null) beamRend = beamGo.AddComponent<MeshRenderer>();
-            var shaftMat = LoadMat("M_Moonbeam_Shaft");
-            if (shaftMat != null) beamRend.sharedMaterial = shaftMat;
+            var oldBeam = GameObject.Find("Window_Moonbeam_DiffuseShaft");
+            if (oldBeam != null) Object.DestroyImmediate(oldBeam);
 
             // 2b. Global Volume de Pos-Processamento URP (Bloom etereo, Vignette aconchegante)
             var volumeGo = GameObject.Find("DarkRoom_GlobalVolume");
