@@ -54,20 +54,20 @@ namespace YunaLegend.EditorScripts
             dirLight.intensity = 0.85f;
             lightGo.transform.rotation = Quaternion.Euler(48f, -28f, 0f);
 
-            // 2c. Foco de Luar Real Difuso na Janela Monumental (URP Spot Light nativo com sombras suaves reais)
+            // 2c. Foco de Luar Real Difuso na Janela (URP Spot Light nativo com sombras suaves reais)
             var moonSpotGo = GameObject.Find("Window_Moonlight_Spot");
             if (moonSpotGo == null) moonSpotGo = new GameObject("Window_Moonlight_Spot");
-            moonSpotGo.transform.position = new Vector3(30f, 6.0f, 6.0f);
-            moonSpotGo.transform.rotation = Quaternion.Euler(48f, -28f, 0f);
+            moonSpotGo.transform.position = new Vector3(29.5f, 2.5f, 5.8f);
+            moonSpotGo.transform.rotation = Quaternion.Euler(40f, -22f, 0f);
 
             var spotLight = moonSpotGo.GetComponent<Light>();
             if (spotLight == null) spotLight = moonSpotGo.AddComponent<Light>();
             spotLight.type = LightType.Spot;
             spotLight.color = new Color(0.70f, 0.84f, 1.0f);
-            spotLight.intensity = 0.65f;
-            spotLight.range = 35f;
-            spotLight.spotAngle = 65f;
-            spotLight.innerSpotAngle = 20f; // Difusao gradual e suave nas bordas do feixe
+            spotLight.intensity = 0.40f;
+            spotLight.range = 14f;
+            spotLight.spotAngle = 36f;
+            spotLight.innerSpotAngle = 14f; // Difusao gradual e suave nas bordas do feixe
             spotLight.shadows = LightShadows.Soft; // Sombras suaves reais da engine
 
             // Cookie de luz com a esquadria da janela canonica para projetar a sombra das travessas

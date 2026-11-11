@@ -485,7 +485,7 @@ namespace YunaLegend.DarkRoom
             velocity = Vector3.zero;
             if (audioSource != null && gameOverSfx != null)
             {
-                audioSource.PlayOneShot(gameOverSfx, 0.70f);
+                audioSource.PlayOneShot(gameOverSfx, 0.14f); // 20% do volume anterior (0.70)
             }
             Debug.Log($"[GameOver]: {reason}");
             OnGameOverTriggered?.Invoke();

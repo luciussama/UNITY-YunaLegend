@@ -251,8 +251,8 @@ namespace YunaLegend.DarkRoom
             // Beiral decorativo superior do guarda-roupa
             CreateVisualOnlyObject("Beiral_GuardaRoupa", wardrobe.transform, new Vector3(0f, 0.52f, 0f), new Vector3(1.06f, 0.08f, 1.15f), brassGoldMaterial != null ? brassGoldMaterial : wardrobeMaterial, PrimitiveType.Cube);
 
-            // 3. Janela monumental com luar azulado e grande lua cheia visivel (ao fundo da transicao Etapa 1 -> 2)
-            CreateVisualOnlyObject("Janela_Monumental_Luar", sceneryRoot, new Vector3(30f, 3.5f, 5.0f), new Vector3(16f, 22f, 0.4f), windowMaterial != null ? windowMaterial : castleBlocksMaterial, PrimitiveType.Cube);
+            // 3. Janela com luar azulado e lua visivel (proporcao canonica de quarto infantil: 2.85m x 4.15m)
+            CreateVisualOnlyObject("Janela_Monumental_Luar", sceneryRoot, new Vector3(29.5f, 1.35f, 6.2f), new Vector3(2.85f, 4.15f, 0.20f), windowMaterial != null ? windowMaterial : castleBlocksMaterial, PrimitiveType.Cube);
 
             // 4. Estante gigante de livros ilustrados (ao fundo da Fuga Acelerada)
             var shelf = CreateVisualOnlyObject("Estante_Gigante_Livros", sceneryRoot, new Vector3(58f, 2.5f, 5.6f), new Vector3(18f, 18f, 3.2f), wardrobeMaterial, PrimitiveType.Cube);
