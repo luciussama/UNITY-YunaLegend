@@ -171,8 +171,8 @@ namespace YunaLegend.Tests
                 builder.ShowTemporalSection(phase, source);
                 float direction = target <= 21 ? 1f : -1f;
                 float progress = target <= 21 ? Mathf.Clamp01((source - 10f) / 11f) : Mathf.Clamp01((source - 22f) / 15f);
-                float speed = target <= 9 ? 3.6f : target <= 21 ? Mathf.Lerp(4f, 6f, progress) : Mathf.Lerp(4.2f, 7.0f, progress);
-                float height = target <= 9 ? 2.4f : target <= 21 ? Mathf.Lerp(2.5f, 3.4f, progress) : Mathf.Lerp(2.6f, 3.9f, progress);
+                float speed = target <= 9 ? 3.6f : target <= 21 ? Mathf.Lerp(4f, 6f, progress) : Mathf.Lerp(DarkRoomReturnLayout.RunSpeed, DarkRoomReturnLayout.EndRunSpeed, progress);
+                float height = target <= 9 ? 2.4f : target <= 21 ? Mathf.Lerp(2.5f, 3.4f, progress) : Mathf.Lerp(DarkRoomReturnLayout.JumpHeight, DarkRoomReturnLayout.EndJumpHeight, progress);
                 bool landed = false;
                 int consecutive = 0, longestWindow = 0;
                 int reached = -1;
@@ -249,52 +249,57 @@ namespace YunaLegend.Tests
         [Test]
         public void ContinuousReverseRun_JumpsAllPlatformsWithoutOvershoot()
         {
-            // Simula uma corrida humana contínua por toda a Volta Caótica Reversa (Plat 22 a 37)
-            // Em cada plataforma, Yuna corre para a esquerda e salta antes da borda frontal, comprovando pouso seguro sem overshoot.
-            player.RestoreRouteSupport(21);
-            player.ResetPlayer(new Vector3(Marker(21).transform.position.x, -9f, 0f));
-            player.RestoreRouteSupport(21);
-            manager.StartPhase3AfterPlotTwist();
-            Assert.AreEqual(21, manager.CurrentPlatformIndex);
-
-            // Inicia no chão após a queda, corre e atinge a plataforma 22
-            Tick(348);
-            Jump();
-            for (int i = 0; i < 180 && manager.CurrentPlatformIndex == 21 && !player.IsDead; i++) Tick(1);
-            Assert.IsFalse(player.IsDead);
-            Assert.AreEqual(22, manager.CurrentPlatformIndex);
-
-            for (int target = 23; target <= 37; target++)
+            // Simula duas corridas humanas contínuas por toda a Volta Caótica Reversa (Plat 22 a 37):
+            // 1) Saltando a partir do CENTRO de cada plataforma (ritmo natural humano)
+            // 2) Saltando a 0.35m da borda esquerda frontal de cada plataforma
+            foreach (bool jumpFromCenter in new[] { true, false })
             {
-                int source = target - 1;
-                var sourceMarker = Marker(source);
-                var targetMarker = Marker(target);
+                player.RestoreRouteSupport(21);
+                player.ResetPlayer(new Vector3(Marker(21).transform.position.x, -9f, 0f));
+                player.RestoreRouteSupport(21);
+                manager.StartPhase3AfterPlotTwist();
+                Assert.AreEqual(21, manager.CurrentPlatformIndex);
 
-                // No sentido reverso (esquerda), a borda dianteira de decolagem é a borda ESQUERDA da plataforma
-                float takeoffX = sourceMarker.transform.position.x - (sourceMarker.spec.width * 0.5f) + 0.35f;
-                while (player.transform.position.x > takeoffX && !player.IsDead)
-                {
-                    Tick(1);
-                }
-
-                Assert.IsFalse(player.IsDead, $"Yuna morreu antes de decolar da plat {source}");
-
-                // Salta em direcao a proxima plataforma a esquerda
+                // Inicia no chão após a queda, corre e atinge a plataforma 22
+                Tick(348);
                 Jump();
+                for (int i = 0; i < 180 && manager.CurrentPlatformIndex == 21 && !player.IsDead; i++) Tick(1);
+                Assert.IsFalse(player.IsDead);
+                Assert.AreEqual(22, manager.CurrentPlatformIndex);
 
-                int timeout = 180;
-                while (manager.CurrentPlatformIndex != target && timeout > 0 && !player.IsDead)
+                for (int target = 23; target <= 37; target++)
                 {
-                    Tick(1);
-                    timeout--;
+                    int source = target - 1;
+                    var sourceMarker = Marker(source);
+                    var targetMarker = Marker(target);
+
+                    float takeoffX = jumpFromCenter
+                        ? sourceMarker.transform.position.x
+                        : sourceMarker.transform.position.x - (sourceMarker.spec.width * 0.5f) + 0.35f;
+                    while (player.transform.position.x > takeoffX && !player.IsDead)
+                    {
+                        Tick(1);
+                    }
+
+                    Assert.IsFalse(player.IsDead, $"Yuna morreu antes de decolar da plat {source} (jumpFromCenter={jumpFromCenter})");
+
+                    // Salta em direcao a proxima plataforma a esquerda
+                    Jump();
+
+                    int timeout = 180;
+                    while (manager.CurrentPlatformIndex != target && timeout > 0 && !player.IsDead)
+                    {
+                        Tick(1);
+                        timeout--;
+                    }
+
+                    Assert.IsFalse(player.IsDead, $"Yuna morreu no salto reverso {source} -> {target} (jumpFromCenter={jumpFromCenter}). Posicao: {player.transform.position}, Limites Destino: [{targetMarker.transform.position.x - targetMarker.spec.width * 0.5f} .. {targetMarker.transform.position.x + targetMarker.spec.width * 0.5f}]");
+                    Assert.AreEqual(target, manager.CurrentPlatformIndex, $"Nao alcancou a plataforma {target} no tempo esperado (jumpFromCenter={jumpFromCenter})");
+
+                    // Comprova que o ponto de pouso nao ultrapassou a borda frontal (sem overshoot para a esquerda)
+                    float targetFarLeftEdge = targetMarker.transform.position.x - (targetMarker.spec.width * 0.5f);
+                    Assert.GreaterOrEqual(player.transform.position.x, targetFarLeftEdge, $"Overshoot na plat {target}: Yuna pousou alem da borda esquerda!");
                 }
-
-                Assert.IsFalse(player.IsDead, $"Yuna morreu no salto reverso {source} -> {target}. Posicao: {player.transform.position}, Limites Destino: [{targetMarker.transform.position.x - targetMarker.spec.width * 0.5f} .. {targetMarker.transform.position.x + targetMarker.spec.width * 0.5f}]");
-                Assert.AreEqual(target, manager.CurrentPlatformIndex, $"Nao alcancou a plataforma {target} no tempo esperado");
-
-                // Comprova que o ponto de pouso nao ultrapassou a borda frontal (sem overshoot para a esquerda)
-                float targetFarLeftEdge = targetMarker.transform.position.x - (targetMarker.spec.width * 0.5f);
-                Assert.GreaterOrEqual(player.transform.position.x, targetFarLeftEdge, $"Overshoot na plat {target}: Yuna pousou alem da borda esquerda!");
             }
         }
     }

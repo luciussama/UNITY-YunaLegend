@@ -138,27 +138,28 @@ namespace YunaLegend.DarkRoom
             };
 
             float currentX = wallX - DarkRoomReturnLayout.FirstPlatformOffset;
-            float currentY = floorDropY + 1.20f;
+            float currentY = floorDropY + 0.40f;
 
             for (int i = 0; i < names.Length; i++)
             {
                 int index = 22 + i;
                 float progress = (float)i / (names.Length - 1); // 0 a 1
 
-                float w = (i == 15) ? 4.5f : Mathf.Lerp(DarkRoomReturnLayout.FirstPlatformWidth, 1.30f, progress);
+                float w = (i == 15) ? 4.5f : Mathf.Lerp(DarkRoomReturnLayout.FirstPlatformWidth, DarkRoomReturnLayout.EndPlatformWidth, progress);
                 float h = (i == 15) ? 1.4f : 0.6f;
                 float d = 1.8f;
+                float centerY = (i == 15) ? (currentY - 0.40f) : currentY;
 
                 Color tint = (i == 15) ? new Color(1.0f, 0.90f, 0.40f) : Color.HSVToRGB(0.55f + progress * 0.4f, 0.75f, 0.85f);
-                list.Add(new PlatformSpec(index, names[i], DarkRoomPhase.Phase3ChaoticAscent, currentX, DarkRoomReturnLayout.PlatformCenterY(i, currentY), w, d, h, tint, "Etapa 3 - Subida Caotica Reversa"));
+                list.Add(new PlatformSpec(index, names[i], DarkRoomPhase.Phase3ChaoticAscent, currentX, DarkRoomReturnLayout.PlatformCenterY(i, centerY), w, d, h, tint, "Etapa 3 - Subida Caotica Reversa"));
 
                 if (i < names.Length - 1)
                 {
                     float nextProgress = (float)(i + 1) / (names.Length - 1);
-                    float nextW = (i + 1 == 15) ? 4.5f : Mathf.Lerp(2.2f, 1.30f, nextProgress);
-                    // Vãos escalados progressivamente para a distância exata de cada pulo (2.50m a 6.10m)
-                    float gap = Mathf.Lerp(2.50f, 6.10f, progress);
-                    float deltaY = Mathf.Lerp(0.38f, 0.50f, progress);
+                    float nextW = (i + 1 == 15) ? 4.5f : Mathf.Lerp(DarkRoomReturnLayout.FirstPlatformWidth, DarkRoomReturnLayout.EndPlatformWidth, nextProgress);
+                    // Vãos calibrados com a parabola real para que o pulo a partir da plataforma encaixe no centro da proxima (1.90m a 4.65m)
+                    float gap = Mathf.Lerp(1.90f, 4.65f, progress);
+                    float deltaY = Mathf.Lerp(0.36f, 0.46f, progress);
 
                     currentX -= ((w * 0.5f) + gap + (nextW * 0.5f)); // Sentido X decrescente (esquerda)
                     currentY += deltaY;

@@ -4,9 +4,9 @@ using YunaLegend.DarkRoom;
 namespace YunaLegend.Camera25D
 {
     /// <summary>
-    /// Regra Inviolavel 3.2: A camera em jogabilidade lateral move-se estritamente no eixo X.
-    /// Proibida qualquer oscilacao vertical (Y), zoom (FOV) ou inclinacao em reacao a pulos ou pousos.
-    /// Modo Runner: avanca de forma constante e esmaga o jogador caso ele fique para tras da borda da tela.
+    /// Recorte lateral fechado, orientado ao proximo salto. Acompanha a altura do
+    /// percurso sem perseguir o arco de cada pulo; na queda acompanha a menina.
+    /// FOV e inclinacao permanecem estaveis. Direcao revisada pelo usuario em 11/11/2026.
     /// </summary>
     [ExecuteAlways]
     public class SideScroll25DCamera : MonoBehaviour
@@ -31,10 +31,34 @@ namespace YunaLegend.Camera25D
         [Tooltip("Distancia maxima atras do centro da camera antes de considerar esmagamento")]
         [SerializeField] private float maxDistanceBehindCamera = 7.5f;
 
-        [Header("Posicionamento Fixo Inviolavel (Regra 3.2)")]
+        [Header("Enquadramento de referencia / fallback")]
         [SerializeField] private float fixedY = -4.5f;
         [SerializeField] private float fixedZ = -16.0f;
         [SerializeField] private float fixedFov = 45.0f;
+
+        [Header("Recorte fechado do proximo salto")]
+        [SerializeField] private bool closeRouteFraming = true;
+        [SerializeField] private float minimumViewWidth = 10.5f;
+        [SerializeField] private float maximumViewWidth = 20f;
+        [SerializeField] private float verticalFramingOffset = 1.9f;
+        [SerializeField] private float framingSmoothTime = 0.28f;
+
+        private NandaFairyGuide guide;
+        private DarkRoomPlatformMarker[] platforms;
+        private int framedTarget = -1;
+        private float routeWidth;
+        private float routeY;
+        private float framingYVelocity;
+        private float framingZVelocity;
+        private bool routeOverview;
+        private bool returningFromOverview;
+        private Vector3 overviewPosition;
+        private Vector3 overviewVelocity;
+
+        public bool IsRouteOverview => routeOverview;
+
+        public float ViewWidth => 2f * Mathf.Abs(transform.position.z) * Mathf.Tan(fixedFov * Mathf.Deg2Rad * 0.5f) * Aspect;
+        private float Aspect => targetCamera != null ? Mathf.Max(1f, targetCamera.aspect) : 16f / 9f;
 
         private Camera targetCamera;
 
@@ -53,20 +77,113 @@ namespace YunaLegend.Camera25D
 
         private void LateUpdate()
         {
+            if (routeOverview)
+            {
+                transform.position = Vector3.SmoothDamp(transform.position, overviewPosition, ref overviewVelocity, 0.55f);
+                return;
+            }
             if (autoScrollActive)
             {
-                // Avanco estrito e continuo no eixo X (sem qualquer oscilacao em Y ou Z)
+                // Rolagem horizontal do runner, com espaco de antecipacao proporcional ao recorte.
                 float newX = transform.position.x + (scrollDirection * scrollSpeed * Time.deltaTime);
-                transform.position = new Vector3(newX, fixedY, fixedZ);
+                if (playerTarget != null && playerTarget.AutoRunActive && !playerTarget.IsDead)
+                {
+                    float lead = closeRouteFraming ? ViewWidth * 0.18f : 3.5f;
+                    float desiredX = playerTarget.transform.position.x + (scrollDirection * lead);
+                    newX = Mathf.MoveTowards(newX, desiredX, scrollSpeed * 0.65f * Time.deltaTime);
+                }
+                transform.position = new Vector3(newX, transform.position.y, transform.position.z);
+
+                UpdateRouteFraming(false);
 
                 // Deteccao de Esmagamento pela borda da tela
                 CheckScreenCrush();
             }
-            else if (playerTarget != null && !Application.isPlaying)
+            else if (playerTarget != null)
             {
-                // No editor, acompanha Yuna no X para visualizacao
-                transform.position = new Vector3(playerTarget.transform.position.x + DarkRoomStartLayout.CameraOffset, fixedY, fixedZ);
+                if (!Application.isPlaying)
+                    SnapToTargetX(playerTarget.transform.position.x, DarkRoomStartLayout.CameraOffset);
+                else
+                    UpdateRouteFraming(false);
             }
+        }
+
+        private DarkRoomPlatformMarker FindPlatform(int index)
+        {
+            if (platforms == null)
+                platforms = Object.FindObjectsByType<DarkRoomPlatformMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            foreach (var platform in platforms)
+                if (platform != null && platform.spec.index == index) return platform;
+            return null;
+        }
+
+        private void SelectRouteFrame(int index)
+        {
+            if (playerTarget == null) return;
+            var target = FindPlatform(index);
+            // At the beginning of both runs, the current support is the room floor.
+            var support = index == 0 || index == 22 ? null : FindPlatform(index - 1);
+            float anchorX = support != null ? support.transform.position.x : playerTarget.transform.position.x;
+            float anchorY = support != null ? support.GetTopCenterWorld().y : playerTarget.transform.position.y;
+            float reach = target != null ? Mathf.Abs(target.transform.position.x - anchorX) + target.spec.width * 0.5f + 0.7f : 0f;
+            routeWidth = Mathf.Clamp(reach / 0.68f, minimumViewWidth, maximumViewWidth);
+            routeY = (target != null ? Mathf.Lerp(anchorY, target.GetTopCenterWorld().y, 0.3f) : anchorY) + verticalFramingOffset;
+            framedTarget = index;
+        }
+
+        private void UpdateRouteFraming(bool snap)
+        {
+            if (!closeRouteFraming || playerTarget == null)
+            {
+                transform.position = new Vector3(transform.position.x, fixedY, fixedZ);
+                return;
+            }
+            if (guide == null) guide = Object.FindFirstObjectByType<NandaFairyGuide>();
+            int index = guide != null ? guide.CurrentTargetPlatformIndex : 0;
+            if (framedTarget != index || routeWidth <= 0f) SelectRouteFrame(index);
+            ApplyRouteFrame(snap);
+        }
+
+        private void ApplyRouteFrame(bool snap)
+        {
+            float desiredY = playerTarget.IsCinematicFalling || !autoScrollActive
+                ? playerTarget.transform.position.y + verticalFramingOffset : routeY;
+            float desiredZ = -routeWidth / (2f * Mathf.Tan(fixedFov * Mathf.Deg2Rad * 0.5f) * Aspect);
+            float y = snap ? desiredY : Mathf.SmoothDamp(transform.position.y, desiredY, ref framingYVelocity, framingSmoothTime);
+            float z = snap ? desiredZ : Mathf.SmoothDamp(transform.position.z, desiredZ, ref framingZVelocity, framingSmoothTime);
+            transform.position = new Vector3(transform.position.x, y, z);
+            if (snap) framingYVelocity = framingZVelocity = 0f;
+        }
+
+        // Also used by editor evidence capture: selects an actual route target, never new geometry.
+        public void SnapToRouteFraming(int nextPlatformIndex)
+        {
+            if (playerTarget == null) return;
+            SelectRouteFrame(nextPlatformIndex);
+            ApplyRouteFrame(true);
+            float direction = nextPlatformIndex >= 22 ? -1f : 1f;
+            transform.position = new Vector3(playerTarget.transform.position.x + direction * routeWidth * 0.18f, transform.position.y, transform.position.z);
+        }
+
+        public void BeginCastleRouteOverview()
+        {
+            var castle = FindPlatform(9);
+            var door = FindPlatform(21);
+            if (castle == null || door == null) return;
+            float left = castle.transform.position.x - castle.spec.width * 0.5f;
+            float right = door.transform.position.x + door.spec.width * 0.5f;
+            float width = right - left + 3f;
+            float depth = width / (2f * Mathf.Tan(fixedFov * Mathf.Deg2Rad * 0.5f) * Aspect);
+            overviewPosition = new Vector3((left + right) * 0.5f, (castle.GetTopCenterWorld().y + door.GetTopCenterWorld().y) * 0.5f + 1f, -depth);
+            overviewVelocity = Vector3.zero;
+            routeOverview = true;
+        }
+
+        public void EndRouteOverview()
+        {
+            returningFromOverview = routeOverview;
+            routeOverview = false;
+            framedTarget = -1;
         }
 
         private void CheckScreenCrush()
@@ -75,11 +192,12 @@ namespace YunaLegend.Camera25D
 
             float camX = transform.position.x;
             float playerX = playerTarget.transform.position.x;
+            float margin = closeRouteFraming ? Mathf.Min(maxDistanceBehindCamera, ViewWidth * 0.5f - 0.6f) : maxDistanceBehindCamera;
 
             if (scrollDirection > 0f)
             {
                 // Andando para a direita: se o jogador ficar muito atras da borda esquerda
-                if (playerX < camX - maxDistanceBehindCamera)
+                if (playerX < camX - margin)
                 {
                     playerTarget.TriggerDeath("Yuna foi engolida pela penumbra da tela!");
                 }
@@ -87,7 +205,7 @@ namespace YunaLegend.Camera25D
             else
             {
                 // Andando para a esquerda (Volta Caotica): se o jogador ficar para tras na borda direita
-                if (playerX > camX + maxDistanceBehindCamera)
+                if (playerX > camX + margin)
                 {
                     playerTarget.TriggerDeath("Yuna foi engolida pela penumbra da tela!");
                 }
@@ -100,7 +218,8 @@ namespace YunaLegend.Camera25D
             fixedZ = targetFixedZ;
             fixedFov = targetFov;
             ApplyFixedProperties();
-            transform.position = new Vector3(transform.position.x, fixedY, fixedZ);
+            if (!returningFromOverview)
+                transform.position = new Vector3(transform.position.x, fixedY, fixedZ);
         }
 
         private void ApplyFixedProperties()
@@ -117,12 +236,24 @@ namespace YunaLegend.Camera25D
             if (newTarget != null)
             {
                 playerTarget = newTarget.GetComponent<Yuna25DPlayerController>();
+                framedTarget = -1;
+                platforms = null;
+                guide = null;
             }
         }
 
         public void SnapToTargetX(float targetX, float offset = 3.5f)
         {
+            Vector3 previous = transform.position;
             transform.position = new Vector3(targetX + offset, fixedY, fixedZ);
+            if (playerTarget != null && closeRouteFraming)
+            {
+                UpdateRouteFraming(true);
+                transform.position = new Vector3(targetX + Mathf.Sign(offset) * routeWidth * 0.18f, transform.position.y, transform.position.z);
+            }
+            if (returningFromOverview)
+                transform.position = new Vector3(transform.position.x, previous.y, previous.z);
+            returningFromOverview = false;
         }
 
         public void SetScrollState(bool active, float dir = 1f, float speed = 5.2f)

@@ -1,0 +1,222 @@
+[
+  {
+    "path": "Evidence/audit-2026-11-11/capture.log",
+    "bytes": 36875,
+    "sha256": "a5265d1e235a031ced8501ce2a96437974fe68c67c50ddece1bfb10e00633242"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/comparison-start-castle.png",
+    "bytes": 315263,
+    "sha256": "22f59bfaad531549e3f825d03950161a0d34bd266bdd61174124059c7762bc3b"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/DIAGNOSTICO.md",
+    "bytes": 18799,
+    "sha256": "f29e652ee93881811214482dac0b07756f6eee2a110b2ffd1401424f6a068db7"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/luma-measurements.csv",
+    "bytes": 2015,
+    "sha256": "a56352f21db55ed5c5d1a8c9f7f892545d904125384f686d9c0d267c9d054e0a"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/measurements.json",
+    "bytes": 11842,
+    "sha256": "62f687464500e21b25fbe9e626e88db39e98ede857e5af9a9801b9b0b721d3ff"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/source-snapshot.json",
+    "bytes": 4253,
+    "sha256": "ea02d73fd5adc0f67cbc8370c3dfdfe665cb8d88c56911980ec8b027e6b9edab"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/tools/analyze_captures.py",
+    "bytes": 7133,
+    "sha256": "de84bbb4302aa192535ab0682ec3a0817c151feee999c11b63b6b33d9a20bbe9"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/tools/requirements.txt",
+    "bytes": 28,
+    "sha256": "4f02948e6d11533a6981aaaa8ce66084db8ce771c4ecb6afbc5ae2e637903bdf"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/tools/VisualAuditCapture.cs.txt",
+    "bytes": 8703,
+    "sha256": "d735253ebee0089a4e6acdbf6864d29f815982852ae058f461b45ccdd43ea77e"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-01-start-gray.png",
+    "bytes": 53651,
+    "sha256": "3f1cc4f10f846b8e389d8b95541d57e6b5ec4f5f956d072a609fbdf39b1599bd"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-01-start-roi.png",
+    "bytes": 114881,
+    "sha256": "aa107c45cd73ec8584a190b7dff723bcdae85e573974688b2fd851be45d65c12"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-01-start-squint.png",
+    "bytes": 6814,
+    "sha256": "6f920e329ed136c63b3e2e808d14c197867fd96ea8cf939f0dc029b28dce5910"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-01-start.png",
+    "bytes": 154508,
+    "sha256": "2575adda9ae138f4ad7aa11522d686a0c81b6b25668b40781db7239093c14438"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-02-castle-gray.png",
+    "bytes": 61645,
+    "sha256": "e2153c1a324508d3539aff663577c84c688fa0ddd02f4fa8827476517cf5548c"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-02-castle-roi.png",
+    "bytes": 128564,
+    "sha256": "1abd32bd131f82d802f06fa2538f6fa42fbbe8d1ed99951c2eb533fb5585db79"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-02-castle-squint.png",
+    "bytes": 8137,
+    "sha256": "ab49257d590a6ce5ed4a43404fecc012476517d683c7ee430c82f8e89ce53497"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-02-castle.png",
+    "bytes": 157340,
+    "sha256": "1db0189c09e4338e622e54524662f3cc7c4c91c683edec1c79ad14326733882e"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-03-false-door-gray.png",
+    "bytes": 36936,
+    "sha256": "af1b340db7622f6086b54aa9e375466c3d3e116548b5090190cf2fbc95d5b184"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-03-false-door-roi.png",
+    "bytes": 83178,
+    "sha256": "f2e5d920c99f8ea94a4de1f1f7435698347a87d8075fa1d6d524ffbfa68dd286"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-03-false-door-squint.png",
+    "bytes": 5228,
+    "sha256": "0f3731a911bb20285e2dfab4ef18741d6a45fdb14fffedad185ff3b21fa388ff"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-03-false-door.png",
+    "bytes": 101545,
+    "sha256": "4e15932d71039564bba4c22adb1a39dfa10be6cbb1d27af2fe8b0528f681827a"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-04-portal-gray.png",
+    "bytes": 82822,
+    "sha256": "b5ec73c1ef15b3a74d86151bbfcb784596402da6d623a99baeef59eaf8905d1a"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-04-portal-roi.png",
+    "bytes": 145865,
+    "sha256": "d949c4a7128b9e3bc0cd88dbeb7a948b587a46d5e56c9201cbc9973f59c51585"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-04-portal-squint.png",
+    "bytes": 9903,
+    "sha256": "3d88ca3966360f28ac91634063c6e18990fe46ba943c984a2876f0f3c4cb9533"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-04-portal.png",
+    "bytes": 180952,
+    "sha256": "148b0c80709e1ed3697a1e13e22459a60cdeaddae148e54e9c8adbae94dbdc66"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-four-points-color.png",
+    "bytes": 207518,
+    "sha256": "ef2ce293641315239ac609cb46c05d9aabcf08e37999215034e53b4287a855bf"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-four-points-gray.png",
+    "bytes": 120153,
+    "sha256": "054c9f49c58688f0adfa88d22f174e5e48287f93e845adfdb0147b20be0c915b"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/unity-metadata.json",
+    "bytes": 43754,
+    "sha256": "b6162b83cb7a80fe621e97d492592de49e6766236f0d5a9a4f674cf032a70318"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/web-01-blocks.jpg",
+    "bytes": 29330,
+    "sha256": "429a0a316d89d499ec26ba2902f62fbb0d2a28845c491084950fd1f858b94fa3"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/web-01-drum.jpg",
+    "bytes": 29687,
+    "sha256": "7b02014d1238fa250174a1be5e24f34ddc50124437ef070ff7b7d8d157214fba"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/web-01-jump.jpg",
+    "bytes": 24521,
+    "sha256": "74e3c638d377c1af9f77d891bcf667d9daa157410076c1e9548022c8632c8d4f"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/web-01-opening.jpg",
+    "bytes": 22431,
+    "sha256": "c17b973d5fb7737ae7b6bcab6044121c9b193d6436d7a58d5178db179276146a"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/web-01-start-game-gray.png",
+    "bytes": 105998,
+    "sha256": "737ced490f8561d45ed367d22f66d8121377c601e45749421dc89602327244b4"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/web-01-start.jpg",
+    "bytes": 26685,
+    "sha256": "0afe66ed18889e9f070970113aa1d8e18650d25f4788e6571715aab00dfafe17"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/web-01-vanity.jpg",
+    "bytes": 27086,
+    "sha256": "fa0497e216b1835da189353bf2559dbdfce5d1dee6248c3f3e7c7fa643522f33"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/web-02-castle-dialogue.jpg",
+    "bytes": 42464,
+    "sha256": "f437ae0b745d71a73a692c252d5fbc1f93b072b3dac0adf4b6ddad37f24c7740"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/web-02-castle-game-gray.png",
+    "bytes": 120544,
+    "sha256": "e647d76b2e1eac58f55512cae8464430256a18b6da6ca546490b9bb8fa6d7271"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/web-02-castle.jpg",
+    "bytes": 36858,
+    "sha256": "1e476d1901f64e61b4e31041a9e6f588ef316619d0cd5625dbeef2f2e15ce916"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/web-02-clock-shelf.jpg",
+    "bytes": 29867,
+    "sha256": "8610ca164dfcbc93cac2929e7c4e0bb2082970b130a67592d2fcb77707b0d84a"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/web-02-escape-start.jpg",
+    "bytes": 30957,
+    "sha256": "5bb0c588fc3d87db32a29bd5160af14fff927049e5378700c44553e784b5f63f"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/web-02-globe-approach.jpg",
+    "bytes": 27576,
+    "sha256": "07265decac5a17ade77193b1747c1e57d4274572fd47341a6dca1f3e4af22abd"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/web-attempt-01-gameover.jpg",
+    "bytes": 24262,
+    "sha256": "26583cef549d9429a3fce70cc962d7eb0e0524328d2daaba7b92d49dc0b4c864"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/web-attempt-02-gameover.jpg",
+    "bytes": 24331,
+    "sha256": "fed5c6c3923862cd5958e8c389399a4a63986407290ae26a2ea470a8bfb18353"
+  },
+  {
+    "path": "Evidence/audit-2026-11-11/web-attempt-03-fall.jpg",
+    "bytes": 26746,
+    "sha256": "73dec95dc1749a6bfb499ea11cbf11247beb8413f7743face19def4d45a25516"
+  }
+]

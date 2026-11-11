@@ -107,6 +107,8 @@ namespace YunaLegend.DarkRoom
         private float lastSupportTop;
         private bool hasRouteSupport;
         private bool launchJumped;
+        private float airborneHorizontalSpeed = -1f;
+        private float? cinematicFallTargetX;
 
         public void AllowFloorLaunch(float x)
         {
@@ -146,10 +148,18 @@ namespace YunaLegend.DarkRoom
             if (Time.timeScale == 0f) return;
             if (isDead) return;
 
-            // Queda cinematica real (sem controle horizontal, apenas gravidade ate o chao)
+            // Queda cinematica real (sem controle horizontal do jogador, alinhando suavemente ao ponto de partida do retorno)
             if (isCinematicFalling)
             {
-                velocity.x = 0f;
+                if (cinematicFallTargetX.HasValue && Time.deltaTime > 0f)
+                {
+                    float nextX = Mathf.MoveTowards(transform.position.x, cinematicFallTargetX.Value, 3.5f * Time.deltaTime);
+                    velocity.x = (nextX - transform.position.x) / Time.deltaTime;
+                }
+                else
+                {
+                    velocity.x = 0f;
+                }
                 velocity.y -= gravity * Time.deltaTime;
                 controller.Move(velocity * Time.deltaTime);
                 Enforce2DPlane();
@@ -157,6 +167,7 @@ namespace YunaLegend.DarkRoom
                 if (controller.isGrounded && velocity.y <= 0f)
                 {
                     isCinematicFalling = false;
+                    cinematicFallTargetX = null;
                     velocity = Vector3.zero;
                     PlaySound(comicFallThudSfx != null ? comicFallThudSfx : landSfx);
                     OnCinematicFallLanded?.Invoke();
@@ -278,10 +289,12 @@ namespace YunaLegend.DarkRoom
             lastLandedPlatformIndex = -1;
         }
 
-        public void StartCinematicFall()
+        public void StartCinematicFall(float? targetLandingX = null)
         {
             autoRunActive = false;
             isCinematicFalling = true;
+            cinematicFallTargetX = targetLandingX;
+            airborneHorizontalSpeed = -1f;
             floorDeathActive = false; // Nao letal nesta cena
             velocity = Vector3.zero;
         }
@@ -384,12 +397,92 @@ namespace YunaLegend.DarkRoom
                 return;
             }
 
-            // Corrida constante para a frente sem controle de X pelo jogador
-            velocity.x = runDirection * runSpeed;
+            if (controller.isGrounded && velocity.y <= 0f)
+            {
+                airborneHorizontalSpeed = -1f;
+            }
+
+            // Corrida constante no chao/plataforma; no ar usa a velocidade horizontal calibrada para encaixar no proximo objeto
+            float activeHorizontalSpeed = (!controller.isGrounded && airborneHorizontalSpeed > 0f) ? airborneHorizontalSpeed : runSpeed;
+            velocity.x = runDirection * activeHorizontalSpeed;
 
             // Orientacao visual: virada para a direita ou esquerda
             float targetRotationY = runDirection >= 0 ? 90f : -90f;
             transform.rotation = Quaternion.Euler(0f, targetRotationY, 0f);
+        }
+
+        private float ComputeJumpHorizontalSpeed()
+        {
+            // Mantem a arrancada inicial da Fase 1 no chao estritamente balistica base; aplica o alinhamento de pouso em toda a Volta (runDirection < 0) e em saltos entre plataformas
+            if (runDirection > 0f && !hasRouteSupport)
+            {
+                return runSpeed;
+            }
+
+            if (routePlatforms == null || routePlatforms.Length == 0)
+            {
+                routePlatforms = FindObjectsByType<DarkRoomPlatformMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            }
+
+            int nextIndex = lastLandedPlatformIndex < 0 ? (runDirection > 0f ? 0 : 22) : lastLandedPlatformIndex + 1;
+            DarkRoomPlatformMarker targetMarker = null;
+            foreach (var marker in routePlatforms)
+            {
+                if (marker != null && marker.gameObject.activeInHierarchy && marker.spec.index == nextIndex)
+                {
+                    targetMarker = marker;
+                    break;
+                }
+            }
+
+            if (targetMarker == null)
+            {
+                return runSpeed;
+            }
+
+            float targetTopY = targetMarker.GetTopCenterWorld().y;
+            float dy = targetTopY - transform.position.y;
+            if (dy >= jumpHeight - 0.05f)
+            {
+                return runSpeed;
+            }
+
+            float tUp = Mathf.Sqrt(2f * jumpHeight / gravity);
+            float tDown = Mathf.Sqrt(2f * Mathf.Max(0.05f, jumpHeight - dy) / gravity);
+            float tFlight = tUp + tDown;
+            if (tFlight <= 0.01f)
+            {
+                return runSpeed;
+            }
+
+            float baseReach = runSpeed * tFlight;
+            float distToCenter = runDirection * (targetMarker.transform.position.x - transform.position.x);
+            float targetWidth = targetMarker.spec.width;
+
+            if (!hasRouteSupport)
+            {
+                // Arrancada no chao na Etapa 3 (rumo a Plataforma 22): encaixa o salto no centro-entrada se o jogador saltar na janela de aproximacao
+                if (distToCenter < 0.45f * baseReach || distToCenter > 1.35f * baseReach)
+                {
+                    return runSpeed;
+                }
+
+                float idealFloorReach = distToCenter - (0.10f * targetWidth);
+                float desiredFloorReach = Mathf.Lerp(baseReach, idealFloorReach, 0.75f);
+                return Mathf.Clamp(desiredFloorReach / tFlight, 0.65f * runSpeed, 1.25f * runSpeed);
+            }
+
+            // Salto entre plataformas: mira a zona central-frontal da proxima plataforma (12% antes do centro) para evitar salto curto ou overshoot
+            if (distToCenter <= 0f || distToCenter > (1.60f * baseReach + 0.5f * targetWidth))
+            {
+                return runSpeed;
+            }
+
+            float idealReach = distToCenter - (0.12f * targetWidth);
+            float desiredReach = Mathf.Lerp(baseReach, idealReach, 0.75f);
+            float minMultiplier = runDirection < 0f ? 0.72f : 0.80f;
+            float maxMultiplier = runDirection < 0f ? 1.32f : 1.22f;
+            return Mathf.Clamp(desiredReach / tFlight, minMultiplier * runSpeed, maxMultiplier * runSpeed);
         }
 
         private void ApplyJumpAndGravity(float deltaTime)
@@ -403,6 +496,8 @@ namespace YunaLegend.DarkRoom
             if (jumpBufferCounter > 0f && coyoteCounter > 0f)
             {
                 velocity.y = Mathf.Sqrt(2f * gravity * jumpHeight);
+                airborneHorizontalSpeed = ComputeJumpHorizontalSpeed();
+                velocity.x = runDirection * airborneHorizontalSpeed;
                 if (floorLaunchAllowed) launchJumped = true;
                 jumpBufferCounter = 0f;
                 coyoteCounter = 0f;
@@ -505,6 +600,8 @@ namespace YunaLegend.DarkRoom
             controller.enabled = wasEnabled;
             isDead = false;
             isCinematicFalling = false;
+            cinematicFallTargetX = null;
+            airborneHorizontalSpeed = -1f;
             lastLandedPlatformIndex = -1;
             runDirection = dir;
             velocity = Vector3.zero;

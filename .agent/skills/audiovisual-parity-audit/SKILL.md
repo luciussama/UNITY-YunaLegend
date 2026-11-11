@@ -25,6 +25,7 @@ Baseado nas melhores práticas da indústria para remasters e traduções **2D p
 - **Separação de Planos (Foreground / Midground / Background)**: Em escala de cinza (*Squint Test*), a personagem (Yuna), a guia (Nanda) e a superfície de pouso das plataformas devem destacar-se imediatamente contra o fundo noturno.
 - **Luz Localizada vs. Luz Global**: O quarto escuro canônico utiliza máscara de penumbra (`#101522` normal / `#080b14` dramático) com *pools* radiais suaves centrados na fada, leve halo na menina, compensação sutil nas plataformas próximas e feixes translúcidos nas janelas (opacidade máx. `0.019` que decai a zero antes do piso, sem estourar o chão com manchas duras).
 - **Sinergia de Pós-Processamento**: Bloom e Vignette devem reforçar a atmosfera etérea sem lavar as cores base nem criar artefatos estourados.
+- **Exceção narrativa de câmera (11/11/2026)**: na pausa do castelo, conferir panorama tutorial do caminho até a porta falsa com Nanda indicando a saída; ao iniciar a Fuga, conferir retorno suave ao close do próximo salto.
 
 ### 1.2. Leitura de Silhueta, Escala e Proporção (Silhouette & Scale Accuracy)
 - **Unidade de Referência Humana**: Usar sempre a altura da Yuna (`44px` no canônico = `1.40m` na Unity, fator `~0.0318 m/px`) como régua antropométrica para validar móveis, janelas, quadros e brinquedos.
@@ -32,7 +33,7 @@ Baseado nas melhores práticas da indústria para remasters e traduções **2D p
 - **Silhueta Contínua**: Objetos decorativos não podem gerar blocos retangulares sem leitura de forma (ex.: cubos de cor sólida gigantes sem recorte ou moldura).
 
 ### 1.3. Tradução de Camadas de Profundidade (2D Parallax $\rightarrow$ 2.5D Z-Depth)
-No canônico 2D, a sensação de profundidade vem de coeficientes de paralaxe distintos em relação a `camX`. Na Unity 2.5D (câmera perspectiva com `FOV = 45°` em `Z = -16m`), esses planos devem ser traduzidos em distâncias `Z` coerentes (ou compensação de paralaxe) e escalados para compensar a perspectiva:
+No canônico 2D, a sensação de profundidade vem de coeficientes de paralaxe distintos em relação a `camX`. Na Unity 2.5D, esses planos devem ser traduzidos em distâncias `Z` coerentes (ou compensação de paralaxe) e escalados para compensar a perspectiva. **Revisão de câmera solicitada pelo usuário em 11/11/2026:** manter FOV 45°, usar recorte mais fechado orientado ao próximo salto e acompanhar suavemente a altura do percurso e a queda. Z=-16m é a referência histórica da auditoria, não um requisito do novo enquadramento. Validar o solo visível na largada/queda e fora do quadro nas partes altas, sem oscilar com cada arco de salto:
 - **Parede de fundo e papel de parede** (`0.15x` no canônico) $\rightarrow$ plano mais profundo (`Z = 7.5m`).
 - **Guirlanda de bandeirolas no alto** (`0.20x` no canônico) $\rightarrow$ plano superior de fundo (`Z = 6.8m`).
 - **Janelas noturnas em arco** (`0.30x` no canônico, `wx = [780, 1950]`) $\rightarrow$ plano médio-fundo (`Z = 6.2m`).

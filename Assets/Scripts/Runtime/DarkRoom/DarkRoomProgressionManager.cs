@@ -263,11 +263,11 @@ namespace YunaLegend.DarkRoom
             }
             else if (currentPhase == DarkRoomPhase.Phase3ChaoticAscent)
             {
-                // Corrida Reversa (22 a 37): acentuacao gradual extrema de velocidade e pulo
+                // Corrida Reversa (22 a 37): acentuacao gradual calibrada de velocidade e pulo
                 int chaoticLevel = Mathf.Clamp(platformIndex - 21, 1, 16);
                 float progress = (chaoticLevel - 1) / 15.0f;
-                float speed = Mathf.Lerp(4.2f, 7.0f, progress);
-                float jumpH = Mathf.Lerp(2.6f, 3.9f, progress);
+                float speed = Mathf.Lerp(DarkRoomReturnLayout.RunSpeed, DarkRoomReturnLayout.EndRunSpeed, progress);
+                float jumpH = Mathf.Lerp(DarkRoomReturnLayout.JumpHeight, DarkRoomReturnLayout.EndJumpHeight, progress);
 
                 if (yuna != null)
                 {
@@ -299,6 +299,10 @@ namespace YunaLegend.DarkRoom
         {
             if (cameraRunner != null) cameraRunner.SetScrollState(false);
             if (yuna != null) yuna.AutoRunActive = false;
+            // Breve demonstracao do caminho: revelar a Fuga enquanto o controle esta pausado.
+            blockoutBuilder?.ShowTemporalSection(DarkRoomPhase.Phase2Escape, 9);
+            nanda?.SetTargetPlatform(21);
+            cameraRunner?.BeginCastleRouteOverview();
 
             activeCutscene = CutsceneType.CastleRest;
             cutsceneStep = 0;
@@ -368,6 +372,7 @@ namespace YunaLegend.DarkRoom
 
         public void StartStage2Escape()
         {
+            cameraRunner?.EndRouteOverview();
             currentPhase = DarkRoomPhase.Phase2Escape;
             currentCheckpoint = DarkRoomPhase.Phase2Escape;
             currentPlatformIndex = 9;
@@ -413,10 +418,10 @@ namespace YunaLegend.DarkRoom
             OnPlotTwistTriggered?.Invoke();
             Debug.Log("[DarkRoomProgression] Yuna alcancou o Poster da Porta Falsa na parede! Iniciando queda cinematica real...");
 
-            // Inicia queda cinematica real usando gravidade do CharacterController
+            // Inicia queda cinematica real usando gravidade do CharacterController, alinhando ao X de partida do retorno
             if (yuna != null)
             {
-                yuna.StartCinematicFall();
+                yuna.StartCinematicFall(ReturnStartPosition.x);
             }
             else
             {
@@ -443,6 +448,7 @@ namespace YunaLegend.DarkRoom
 
         public void StartPhase3AfterPlotTwist()
         {
+            cameraRunner?.EndRouteOverview();
             activeCutscene = CutsceneType.None;
             activeDialogue = null;
             activePoeticLine = null;
@@ -511,6 +517,7 @@ namespace YunaLegend.DarkRoom
 
         public void RetryCurrentCheckpoint()
         {
+            cameraRunner?.EndRouteOverview();
             isGameOver = false;
             activeCutscene = CutsceneType.None;
             activeDialogue = null;

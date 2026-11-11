@@ -205,9 +205,9 @@ namespace YunaLegend.Tests
             for (int i = 0; i < s3.Count - 1; i++)
             {
                 float progress = (float)i / (s3.Count - 1);
-                float vX = Mathf.Lerp(4.2f, 7.0f, progress);
-                float jumpH = Mathf.Lerp(2.6f, 3.9f, progress);
-                float deltaY = s3[i + 1].y - s3[i].y;
+                float vX = Mathf.Lerp(DarkRoomReturnLayout.RunSpeed, DarkRoomReturnLayout.EndRunSpeed, progress);
+                float jumpH = Mathf.Lerp(DarkRoomReturnLayout.JumpHeight, DarkRoomReturnLayout.EndJumpHeight, progress);
+                float deltaY = (s3[i + 1].y + s3[i + 1].height * 0.5f) - (s3[i].y + s3[i].height * 0.5f);
                 float gap = (s3[i].x - s3[i].width * 0.5f) - (s3[i + 1].x + s3[i + 1].width * 0.5f);
 
                 float vY0 = Mathf.Sqrt(2f * g * jumpH);
@@ -344,7 +344,7 @@ namespace YunaLegend.Tests
         }
 
         [Test]
-        public void Test_CameraFixedSectionProperties_NoVerticalJumpOscillation()
+        public void Test_CameraSectionFallbackKeepsLensAndRotationStable()
         {
             var camGo = new GameObject("CamTest");
             var cam = camGo.AddComponent<Camera>();
@@ -354,6 +354,8 @@ namespace YunaLegend.Tests
             Assert.AreEqual(-4.5f, sideCam.FixedY);
             Assert.AreEqual(-16.0f, sideCam.FixedZ);
             Assert.AreEqual(45.0f, sideCam.FixedFov);
+            Assert.AreEqual(45.0f, cam.fieldOfView);
+            Assert.Less(Quaternion.Angle(Quaternion.identity, camGo.transform.rotation), 0.01f);
 
             sideCam.ConfigureSection(-1.5f, -16.0f, 45.0f);
             Assert.AreEqual(-1.5f, sideCam.FixedY);

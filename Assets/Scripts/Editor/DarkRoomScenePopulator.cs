@@ -151,6 +151,14 @@ namespace YunaLegend.EditorScripts
                 LoadMat("M_FloorProp_Plush")
             );
 
+            builder.ConfigureWallDecorations(
+                LoadMat("M_WallDecor_Wood"), LoadMat("M_WallDecor_Lilac"),
+                LoadMat("M_WallDecor_Glass"), new[] {
+                    LoadMat("M_WallDrawing_Sun"), LoadMat("M_WallDrawing_Castle"),
+                    LoadMat("M_WallDrawing_Rainbow"), LoadMat("M_WallDrawing_Cat"),
+                    LoadMat("M_WallCostume_Hat"), LoadMat("M_WallCostume_Cape"),
+                    LoadMat("M_WallCostume_Scarf") });
+            builder.ConfigureWallSail(LoadMat("M_WallDecor_Sail"));
             builder.BuildBlockout();
 
             // 4. Instanciar Yuna (jogadora 2.5D) com visual estilizado e CharacterController

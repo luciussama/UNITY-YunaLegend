@@ -7,7 +7,7 @@ using UnityEngine.Rendering.Universal;
 
 namespace YunaLegend.EditorScripts
 {
-    public static class DarkRoomArtAssetBuilder
+    public static partial class DarkRoomArtAssetBuilder
     {
         private const string MaterialsFolder = "Assets/Materials";
 
@@ -39,6 +39,8 @@ namespace YunaLegend.EditorScripts
             SaveTextureAsPng(GenerateFalseDoorPosterTexture(), Path.Combine(MaterialsFolder, "T_FalseDoor_Poster.png"));
 
             AssetDatabase.Refresh();
+
+            GenerateWallDecorationAssets();
 
             // Recarregar texturas importadas do AssetDatabase
             var oakTex = LoadTexture("T_DarkOak_Planks.png");

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace YunaLegend.DarkRoom
 {
     [ExecuteAlways]
-    public class DarkRoomBlockoutBuilder : MonoBehaviour
+    public partial class DarkRoomBlockoutBuilder : MonoBehaviour
     {
         [Header("Configuracao de Escala")]
         [Tooltip("Fator de conversao entre as coordenadas de design 2D do roteiro e unidades 3D da Unity")]
@@ -287,6 +287,8 @@ namespace YunaLegend.DarkRoom
             var winMat = windowMaterial != null ? windowMaterial : castleBlocksMaterial;
             CreateWindowWithMoonbeam("Janela_Monumental_Luar", 29.5f, winMat);
             CreateWindowWithMoonbeam("Janela_Monumental_Luar_2", 73.75f, winMat);
+
+            BuildWallDecorations();
 
             // 2b. Cenografia Decorativa de Piso (roomScenery: tapetes e brinquedos em miniatura fora da linha de colisao Z=0)
             BuildFloorScenery();
