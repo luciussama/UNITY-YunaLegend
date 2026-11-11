@@ -1,0 +1,118 @@
+﻿using System.IO;
+using System.Linq;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using YunaLegend.Camera25D;
+using YunaLegend.DarkRoom;
+using YunaLegend.EditorScripts;
+
+/// <summary>Capturas de inspecao das plataformas 00 (urso) e 01 (pilha de livros).</summary>
+public static class DarkRoomPlatformArtCapture
+{
+    private static string Output
+    {
+        get
+        {
+            var args = System.Environment.GetCommandLineArgs();
+            int index = System.Array.IndexOf(args, "-yunaArtCaptureOutput");
+            return index >= 0 && index + 1 < args.Length ? args[index + 1] : "Evidence/platform-art-capture";
+        }
+    }
+
+    public static void Run()
+    {
+        Directory.CreateDirectory(Output);
+        EditorSceneManager.OpenScene("Assets/Scenes/DarkRoom_Gameplay.unity");
+
+        var camera = Camera.main;
+        camera.aspect = 16f / 9f;
+        var side = camera.GetComponent<SideScroll25DCamera>();
+        if (side != null) side.enabled = false;
+
+        var markers = Object.FindObjectsByType<DarkRoomPlatformMarker>(
+            FindObjectsInactive.Include, FindObjectsSortMode.None);
+        var bear = markers.Single(m => m.spec.index == 0);
+        var books = markers.Single(m => m.spec.index == 1);
+        Vector3 bearTop = bear.GetTopCenterWorld();
+        Vector3 booksTop = books.GetTopCenterWorld();
+
+        if (side != null) side.SnapToRouteFraming(0);
+        Save(camera, "01-gameplay-start.png");
+        Debug.Log($"PLATFORM00_START top={bearTop} size={bear.spec.width}x{bear.spec.height}x{bear.spec.depth}");
+        Debug.Log($"PLATFORM01_CONTACT top={booksTop} offset={books.spec.contact.offsetX} tilt={books.spec.contact.tiltDegrees} w={books.spec.contact.width}");
+
+        var key = new GameObject("InspectionKey").AddComponent<Light>();
+        key.type = LightType.Point;
+        key.intensity = 2.4f;
+        key.range = 9f;
+        key.color = new Color(1f, 0.96f, 0.9f);
+        key.transform.position = bearTop + new Vector3(-2.2f, 2.2f, -3.0f);
+
+        var fill = new GameObject("InspectionFill").AddComponent<Light>();
+        fill.type = LightType.Directional;
+        fill.intensity = 0.45f;
+        fill.color = new Color(0.75f, 0.82f, 1f);
+        fill.transform.rotation = Quaternion.Euler(28f, -35f, 0f);
+
+        SetCamera(camera, bearTop + new Vector3(0.55f, 1.05f, -4.6f), bearTop + new Vector3(0f, 0.15f, 0f));
+        Save(camera, "02-bear-front.png");
+
+        SetCamera(camera, bearTop + new Vector3(2.6f, 1.5f, -3.3f), bearTop + new Vector3(0f, 0.15f, 0f));
+        Save(camera, "03-bear-three-quarter.png");
+
+        SetCamera(camera, bearTop + new Vector3(4.6f, 0.55f, -1.4f), bearTop + new Vector3(0f, 0.1f, 0f));
+        Save(camera, "04-bear-side.png");
+
+        // Livros: frente, tres quartos e topo (luz de inspecao reposicionada sobre a pilha).
+        key.transform.position = booksTop + new Vector3(-1.7f, 1.9f, -2.6f);
+        key.range = 12f; key.intensity = 5.0f;
+        SetCamera(camera, booksTop + new Vector3(0.2f, 0.9f, -4.4f), booksTop + new Vector3(0f, -0.05f, 0f));
+        Save(camera, "06-books-front.png");
+
+        SetCamera(camera, booksTop + new Vector3(2.4f, 1.4f, -3.4f), booksTop + new Vector3(0f, -0.05f, 0f));
+        Save(camera, "07-books-three-quarter.png");
+
+        SetCamera(camera, booksTop + new Vector3(0.1f, 3.2f, -2.6f), booksTop + new Vector3(0f, -0.1f, 0f));
+        Save(camera, "08-books-top.png");
+
+        // Escala real de jogo, apenas luzes da cena: urso + livros no mesmo enquadramento.
+        var player = Object.FindFirstObjectByType<Yuna25DPlayerController>();
+        if (player != null)
+        {
+            player.transform.position = new Vector3(-0.9f, DarkRoomStartLayout.StartY, 0f);
+        }
+        Object.DestroyImmediate(key.gameObject);
+        Object.DestroyImmediate(fill.gameObject);
+
+        SetCamera(camera,
+            new Vector3(booksTop.x - 6.4f, booksTop.y + 1.05f, -16f),
+            new Vector3(booksTop.x - 2.2f, booksTop.y - 0.30f, 0f));
+        camera.fieldOfView = 45f;
+        Save(camera, "05-gameplay-approach.png");
+
+        // Approved close framing, scene lights only, prepared preview poses.
+        if (player != null) player.transform.position = bearTop + Vector3.up * .03f;
+        var fairy = Object.FindFirstObjectByType<NandaFairyGuide>();
+        if (fairy != null) { fairy.SetTargetPlatform(1); fairy.transform.position = booksTop + new Vector3(0f, 1.2f, -.15f); }
+        camera.transform.rotation = Quaternion.identity;
+        if (side != null) side.SnapToRouteFraming(1);
+        Save(camera, "09-gameplay-books-close.png");
+        Debug.Log("PLATFORM_ART_CAPTURE_COMPLETE: 9 static HDR views; inspection lighting only in 02-04 and 06-08; no scene saved.");
+    }
+
+    private static void SetCamera(Camera camera, Vector3 position, Vector3 lookAt)
+    {
+        camera.transform.position = position;
+        camera.transform.rotation = Quaternion.LookRotation(lookAt - position, Vector3.up);
+    }
+
+    private static void Save(Camera camera, string name)
+    {
+        var image = DarkRoomStartCapture.RenderDisplayImage(camera, 1280, 720);
+        File.WriteAllBytes(Path.Combine(Output, name), image.EncodeToPNG());
+        Object.DestroyImmediate(image);
+        Debug.Log("PLATFORM00_SHOT " + name);
+    }
+}
+
+

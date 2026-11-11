@@ -11,6 +11,20 @@ Este projeto utiliza Unity (motor de jogos; scripts normalmente em C#). O diári
 - O banco `docs/ia/diario.sqlite3` faz parte do projeto e deve acompanhar as alterações no controle de versão. Evite merges binários: em trabalho paralelo, coordene a integração dos históricos e nunca descarte um banco silenciosamente.
 - Caso não tenha acesso a Python, use qualquer cliente SQLite seguindo o esquema e o protocolo do [guia](docs/ia/README.md). Se não puder gravar no banco, informe o impedimento antes de modificar o projeto.
 
+## REGRA OBRIGATÓRIA — formato das plataformas
+
+**Leia antes de modelar qualquer plataforma.** Registrada no diário na entrada **305** (11/11/2026, a pedido do usuário).
+
+- As plataformas **não são caixas uniformes**. Cada objeto tem silhueta, tamanho e apoio próprios (urso de pelúcia, pilha diagonal de livros, tambor cilíndrico, castelinho…). É proibido achatá-las ou redimensioná-las para caber num colisor padrão.
+- A **superfície de contato pertence ao objeto**: pode ser deslocada do centro, mais estreita que o volume, inclinada (pilha diagonal), escalonada ou múltipla.
+- Colisor, cálculo de vão/pulo, enquadramento de câmera e testes **devem se adaptar ao formato real da superfície**; nunca adaptar o objeto ao colisor.
+- Implementação vigente: `PlatformSpec.contact` (`PlatformContactSurface` com `offsetX`/`offsetY`, `tiltDegrees`, `width`, `depth`); `DarkRoomPlatformMarker.GetTopCenterWorld()` e `GetContactRotation()` leem essa superfície; o colisor é construído a partir dela (caixa cheia quando o contato é o padrão; laje rotacionada quando há inclinação/deslocamento). O gerador usa o módulo de layout só para posição/topo, não para o formato.
+- Ao modelar: defina **primeiro** onde os pés da criança pousam, modele a malha para o topo visível coincidir com essa superfície e valide por teste que o topo do colisor é igual ao topo visível.
+
+### Atualização de implementação: urso arredondado
+
+A plataforma 00 agora usa cinco MeshColliders estáticos derivados das malhas visíveis da cabeça, orelhas e banqueta; não usa o antigo BoxCollider de profundidade 2,23 m. Essa mudança acompanha o arredondamento artístico sem manter apoio invisível. A plataforma 01 mantém a laje inclinada sobre a capa superior. O esquema de metadados de contato ainda representa um plano e sua migração para múltiplas áreas/consumidores unificados continua pendente; não alegar que a regra inteira está concluída só porque os testes passam. Ver `docs/ia/INVESTIGACAO-HANDOFF-2026-11-11.md` e o relatório de arte em `Evidence/painted-platforms-2026-11-11/README.md`.
+
 ## Referência jogável e comparação
 
 A IA tem autonomia para acessar e jogar o legado **exclusivamente pela URL https://luciussama.github.io/legendGirl/** e comparar seu comportamento e apresentação com a fase Unity em desenvolvimento. Essa autorização é para observação e comparação: **não copiar, migrar ou importar código legado, não clonar o repositório legado nem utilizar uma cópia local dele neste projeto**. A implementação permanece nativa Unity/C#. A build Web da Unity é uma exportação deste projeto, não uma retomada da implementação HTML antiga.

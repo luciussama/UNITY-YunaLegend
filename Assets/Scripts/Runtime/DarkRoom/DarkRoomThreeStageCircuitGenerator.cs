@@ -5,6 +5,33 @@ namespace YunaLegend.DarkRoom
 {
     public static class DarkRoomThreeStageCircuitGenerator
     {
+        // Altura com que o modulo de layout da Etapa 1 foi calibrado (vaos, topos e camera).
+        // A rota continua ancorada nesse modulo; a geometria visivel e o colisor de cada
+        // plataforma usam as medidas canonicas de DarkRoomPlatformGeometry.
+        public const float LayoutPlatformHeight = 0.7f;
+
+        // Largura de layout da ultima plataforma da Etapa 1 (castelinho), usada para a
+        // transicao calibrada rumo a Etapa 2.
+        public const float LayoutLastStage1Width = 4.2f;
+
+        /// <summary>
+        /// Inicio da Etapa 2 preservando as distancias ja validadas: o modulo de layout da
+        /// Etapa 1 continua sendo a referencia, e nao a largura visivel de cada objeto.
+        /// </summary>
+        public static float Stage2StartX(PlatformSpec lastStage1, float firstStage2Width, float gap)
+        {
+            return lastStage1.x + (LayoutLastStage1Width * 0.5f) + gap + (firstStage2Width * 0.5f);
+        }
+
+        /// <summary>
+        /// Altura central da primeira plataforma da Etapa 2, derivada do topo real da ultima
+        /// plataforma da Etapa 1 (os objetos podem ter alturas diferentes do modulo antigo).
+        /// </summary>
+        public static float Stage2StartY(PlatformSpec lastStage1, float verticalGap)
+        {
+            return (lastStage1.y + lastStage1.height * 0.5f) - (LayoutPlatformHeight * 0.5f) + verticalGap;
+        }
+
         // -------------------------------------------------------------
         // ETAPA 1: A Subida ao Castelo (0 a 9) - Calma e Acolhedora
         // Velocidade base: 3.6 m/s, pulo base: 2.4m, gap uniforme: 1.4m.
@@ -27,23 +54,35 @@ namespace YunaLegend.DarkRoom
                 "09_Castelinho_Blocos_Descanso"
             };
 
-            float currentX = DarkRoomStartLayout.FirstPlatformX;
+            float layoutX = DarkRoomStartLayout.FirstPlatformX;
             float currentY = -6.5f;
 
             for (int i = 0; i < names.Length; i++)
             {
-                float w = (i == 9) ? 4.2f : (i == 0 ? 3.0f : 2.6f);
-                float h = (i == 9) ? 1.4f : 0.7f;
-                float d = 1.8f;
+                // Modulo de layout preservado (rota e camera ja validadas).
+                float layoutW = (i == 9) ? 4.2f : (i == 0 ? 3.0f : 2.6f);
+
+                // Geometria canonica do objeto: cada plataforma tem o seu proprio tamanho e
+                // a sua superficie de pouso, em vez do antigo 2,6 m x 0,7 m uniforme.
+                var geometry = DarkRoomPlatformGeometry.Get(i);
+                float w = geometry.Width;
+                float h = geometry.Height;
+                float d = geometry.Depth;
+
+                float nominalTopY = DarkRoomStartLayout.PlatformCenterY(i, currentY) + LayoutPlatformHeight * 0.5f;
+                // A plataforma 00 encosta no piso: o topo nasce da altura real do objeto.
+                float topY = i == 0 ? DarkRoomPlatformGeometry.FloorSurfaceY + h : nominalTopY;
+                float centerY = topY - h * 0.5f;
+
                 Color tint = (i == 9) ? new Color(0.25f, 0.45f, 0.75f) : Color.HSVToRGB(i * 0.08f, 0.5f, 0.85f);
 
-                list.Add(new PlatformSpec(i, names[i], DarkRoomPhase.Phase1Ascent, currentX, DarkRoomStartLayout.PlatformCenterY(i, currentY), w, d, h, tint, "Etapa 1 - Subida Calma"));
+                list.Add(new PlatformSpec(i, names[i], DarkRoomPhase.Phase1Ascent, layoutX, centerY, w, d, h, tint, "Etapa 1 - Subida Calma"));
 
                 if (i < names.Length - 1)
                 {
-                    float nextW = (i + 1 == 9) ? 4.2f : 2.6f;
+                    float nextLayoutW = (i + 1 == 9) ? 4.2f : 2.6f;
                     float gap = 1.4f; // Vao introdutorio para o salto balistico por toque.
-                    currentX += (w * 0.5f) + gap + (nextW * 0.5f);
+                    layoutX += (layoutW * 0.5f) + gap + (nextLayoutW * 0.5f);
                     currentY += 0.32f; // Subida suave constante
                 }
             }

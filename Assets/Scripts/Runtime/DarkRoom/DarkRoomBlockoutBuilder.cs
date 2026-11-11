@@ -17,6 +17,7 @@ namespace YunaLegend.DarkRoom
         [SerializeField] private Material wardrobeMaterial;
         [SerializeField] private Material windowMaterial;
         [SerializeField] private Material teddyPlushMaterial;
+        [SerializeField] private Material[] platformArtMaterials;
         [SerializeField] private Material toyBlockRedMaterial;
         [SerializeField] private Material toyBlockYellowMaterial;
         [SerializeField] private Material toyBlockBlueMaterial;
@@ -90,7 +91,8 @@ namespace YunaLegend.DarkRoom
             Material moonbeamShaft = null, Material ambientDust = null, Material floorShadow = null, Material baseboard = null, Material bunting = null,
             Material mandalaRug = null, Material stripedRug = null,
             Material floorPropRed = null, Material floorPropYellow = null, Material floorPropBlue = null,
-            Material floorPropGreen = null, Material floorPropCream = null, Material floorPropBurgundy = null, Material floorPropPlush = null)
+            Material floorPropGreen = null, Material floorPropCream = null, Material floorPropBurgundy = null, Material floorPropPlush = null,
+            Material[] platformArt = null)
         {
             floorMaterial = floor;
             wallpaperMaterial = wallpaper;
@@ -130,6 +132,7 @@ namespace YunaLegend.DarkRoom
             floorPropCreamMaterial = floorPropCream;
             floorPropBurgundyMaterial = floorPropBurgundy;
             floorPropPlushMaterial = floorPropPlush;
+            platformArtMaterials = platformArt;
             defaultPlatformMaterial = dresserOakMaterial;
         }
 
@@ -150,8 +153,9 @@ namespace YunaLegend.DarkRoom
             var lastStage1 = stage1[stage1.Count - 1];
             float stage2FirstPlatWidth = 2.2f;
             float gapStage1To2 = 2.32f;
-            float stage2StartX = lastStage1.x + (lastStage1.width * 0.5f) + gapStage1To2 + (stage2FirstPlatWidth * 0.5f);
-            var stage2 = DarkRoomThreeStageCircuitGenerator.GenerateStage2Platforms(stage2StartX, lastStage1.y + 0.32f);
+            float stage2StartX = DarkRoomThreeStageCircuitGenerator.Stage2StartX(lastStage1, stage2FirstPlatWidth, gapStage1To2);
+            float stage2StartY = DarkRoomThreeStageCircuitGenerator.Stage2StartY(lastStage1, 0.32f);
+            var stage2 = DarkRoomThreeStageCircuitGenerator.GenerateStage2Platforms(stage2StartX, stage2StartY);
             BuildPlatformList(stage2, stage2Root, "Etapa2_Fuga");
 
             // Etapa 3: A Subida Caotica Reversa (22 a 37) da direita para a esquerda apos a queda cinematica
@@ -203,10 +207,10 @@ namespace YunaLegend.DarkRoom
         private void BuildFloor()
         {
             // Chao escuro da sala: qualquer queda aqui e Game Over imediato (exceto na queda cinematica)
-            float worldY = -9.6f;
+            float thickness = 1.0f;
+            float worldY = DarkRoomPlatformGeometry.FloorSurfaceY - thickness * 0.5f;
             float worldWidth = 170.0f;
             float worldDepth = 12.0f;
-            float thickness = 1.0f;
 
             var floorGo = GameObject.CreatePrimitive(PrimitiveType.Cube);
             floorGo.name = "Chao_Escuro_Sala";
@@ -576,35 +580,86 @@ namespace YunaLegend.DarkRoom
                 platGo.transform.SetParent(parent, false);
                 platGo.transform.position = new Vector3(spec.x, spec.y, 0f);
 
-                // Malha visual natural 3D
-                var visual = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                visual.name = "Visual_3D";
-                visual.transform.SetParent(platGo.transform, false);
-                visual.transform.localPosition = Vector3.zero;
-                visual.transform.localScale = new Vector3(spec.width, spec.height, spec.depth);
+                var geometry = DarkRoomPlatformGeometry.Get(spec.index);
+                // A superficie de contato pertence ao objeto: pode estar deslocada, ser mais
+                // estreita ou inclinada. O colisor segue o objeto, nunca o contrario.
+                var contact = DarkRoomPlatformGeometry.GetContact(spec.index);
+                GameObject visual = null;
 
-                // Material estilizado
-                var mat = ResolveMaterialForSpec(spec);
-                var renderer = visual.GetComponent<MeshRenderer>();
-                if (renderer != null && mat != null)
+                if (geometry.HasModel)
                 {
-                    renderer.sharedMaterial = mat;
+                    // Modelo dedicado (malhas nativas): a superficie visivel coincide com a
+                    // superficie de contato declarada.
+                    visual = DarkRoomPlatformArt.Build(geometry, contact, platformArtMaterials, platGo.transform);
                 }
 
-                // Detalhes visuais tematicos em 3D (exclusivamente visuais, sem colisores e fora da linha de corrida Z=0)
-                AddPlatformDecorativeDetails(visual, spec, mat);
-
-                // Colisor de caixa solido no topo (intocado para garantir fisica 100% perfeita)
-                var collider = visual.GetComponent<BoxCollider>();
-                if (collider != null)
+                if (visual == null)
                 {
-                    collider.isTrigger = false;
+                    // Blockout provisorio: caixa com as dimensoes canonicas do objeto.
+                    // A caixa e apenas visual; o colisor de pouso e criado separadamente.
+                    visual = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    visual.name = "Visual_3D";
+                    visual.transform.SetParent(platGo.transform, false);
+                    visual.transform.localPosition = Vector3.zero;
+                    visual.transform.localScale = new Vector3(spec.width, spec.height, spec.depth);
+
+                    var mat = ResolveMaterialForSpec(spec);
+                    var renderer = visual.GetComponent<MeshRenderer>();
+                    if (renderer != null && mat != null)
+                    {
+                        renderer.sharedMaterial = mat;
+                    }
+
+                    var primitiveCollider = visual.GetComponent<BoxCollider>();
+                    if (primitiveCollider != null) DestroySafe(primitiveCollider);
+
+                    // Detalhes visuais tematicos em 3D (exclusivamente visuais, sem colisores)
+                    AddPlatformDecorativeDetails(visual, spec, mat);
+                }
+
+                // Colisor de contato: mesma superficie de pouso do objeto.
+                var contactGo = new GameObject("Contacto_Fisico");
+                contactGo.transform.SetParent(platGo.transform, false);
+                if (!DarkRoomPlatformArt.TryBuildShapeContact(spec.index, visual, contactGo.transform))
+                {
+                    var contactCollider = contactGo.AddComponent<BoxCollider>();
+
+                    if (!contact.IsCustom)
+                    {
+                        contactCollider.size = new Vector3(spec.width, spec.height, spec.depth);
+                        contactCollider.center = Vector3.zero;
+                    }
+                    else
+                    {
+                        // Laje fina rotacionada: o topo do colisor e o tampo do objeto.
+                        float thickness = Mathf.Min(0.35f, spec.height * 0.35f);
+                        var rotation = Quaternion.Euler(0f, 0f, contact.tiltDegrees);
+                        var surfaceCenter = new Vector3(contact.offsetX, spec.height * 0.5f + contact.offsetY, 0f);
+                        contactGo.transform.localRotation = rotation;
+                        contactGo.transform.localPosition = surfaceCenter - rotation * new Vector3(0f, thickness * 0.5f, 0f);
+                        contactCollider.size = new Vector3(
+                            contact.EffectiveWidth(spec.width),
+                            thickness,
+                            contact.EffectiveDepth(spec.depth));
+                        contactCollider.center = Vector3.zero;
+                    }
+
+                    contactCollider.isTrigger = false;
                 }
 
                 platGo.AddComponent<PlatformCollisionDetector>();
                 var marker = platGo.AddComponent<DarkRoomPlatformMarker>();
-                marker.spec = spec;
+                var resolved = spec;
+                resolved.contact = contact;
+                marker.spec = resolved;
             }
+        }
+
+        private static void DestroySafe(Object target)
+        {
+            if (target == null) return;
+            if (Application.isPlaying) Destroy(target);
+            else DestroyImmediate(target);
         }
 
         private Material ResolveMaterialForSpec(PlatformSpec spec)

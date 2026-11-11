@@ -19,6 +19,30 @@ namespace YunaLegend.EditorScripts
             // 1. Gerar Texturas Procedurais de Alta Fidelidade (PNG)
             SaveTextureAsPng(GenerateOakPlanksTexture(), Path.Combine(MaterialsFolder, "T_DarkOak_Planks.png"));
             SaveTextureAsPng(GeneratePlushTexture(), Path.Combine(MaterialsFolder, "T_TeddyPlush.png"));
+            GenerateBearFurTextures(out var bearFurAlbedo, out var bearFurNormal);
+            SaveTextureAsPng(bearFurAlbedo, Path.Combine(MaterialsFolder, "T_Bear_Fur.png"));
+            SaveTextureAsPng(bearFurNormal, Path.Combine(MaterialsFolder, "T_Bear_Fur_Normal.png"), asNormalMap: true);
+
+            GenerateBearMuzzleTextures(out var bearMuzzleAlbedo, out var bearMuzzleNormal);
+            SaveTextureAsPng(bearMuzzleAlbedo, Path.Combine(MaterialsFolder, "T_Bear_Muzzle.png"));
+            SaveTextureAsPng(bearMuzzleNormal, Path.Combine(MaterialsFolder, "T_Bear_Muzzle_Normal.png"), asNormalMap: true);
+
+            GenerateBearWoodTextures(out var bearWoodAlbedo, out var bearWoodNormal);
+            SaveTextureAsPng(bearWoodAlbedo, Path.Combine(MaterialsFolder, "T_Bear_Wood.png"));
+            SaveTextureAsPng(bearWoodNormal, Path.Combine(MaterialsFolder, "T_Bear_Wood_Normal.png"), asNormalMap: true);
+
+            GenerateBookLeatherTextures(out var bookLeatherAlbedo, out var bookLeatherNormal);
+            SaveTextureAsPng(bookLeatherAlbedo, Path.Combine(MaterialsFolder, "T_Book_Leather.png"));
+            SaveTextureAsPng(bookLeatherNormal, Path.Combine(MaterialsFolder, "T_Book_Leather_Normal.png"), asNormalMap: true);
+
+            GenerateBookPagesTextures(out var bookPagesAlbedo, out var bookPagesNormal);
+            SaveTextureAsPng(bookPagesAlbedo, Path.Combine(MaterialsFolder, "T_Book_Pages.png"));
+            SaveTextureAsPng(bookPagesNormal, Path.Combine(MaterialsFolder, "T_Book_Pages_Normal.png"), asNormalMap: true);
+
+            SaveTextureAsPng(GenerateBookSpinesAtlas(), Path.Combine(MaterialsFolder, "T_Book_Spines.png"));
+
+            SaveTextureAsPng(GenerateBearVelvetTexture(), Path.Combine(MaterialsFolder, "T_Bear_Velvet.png"));
+            SaveTextureAsPng(GenerateBearButtonTexture(), Path.Combine(MaterialsFolder, "T_Bear_Button.png"));
             SaveTextureAsPng(GenerateAbcBlocksTexture(), Path.Combine(MaterialsFolder, "T_ToyBlock_ABC.png"));
             SaveTextureAsPng(GenerateCastleBlocksTexture(), Path.Combine(MaterialsFolder, "T_Castle_Blocks.png"));
             SaveTextureAsPng(GenerateCircusDrumTexture(), Path.Combine(MaterialsFolder, "T_CircusDrum.png"));
@@ -45,6 +69,18 @@ namespace YunaLegend.EditorScripts
             // Recarregar texturas importadas do AssetDatabase
             var oakTex = LoadTexture("T_DarkOak_Planks.png");
             var plushTex = LoadTexture("T_TeddyPlush.png");
+            var bearFurTex = LoadTexture("T_Bear_Fur.png");
+            var bearFurNormalTex = LoadTexture("T_Bear_Fur_Normal.png");
+            var bearMuzzleTex = LoadTexture("T_Bear_Muzzle.png");
+            var bearMuzzleNormalTex = LoadTexture("T_Bear_Muzzle_Normal.png");
+            var bearWoodTex = LoadTexture("T_Bear_Wood.png");
+            var bearWoodNormalTex = LoadTexture("T_Bear_Wood_Normal.png");
+            var bookLeatherTex = LoadTexture("T_Book_Leather.png");
+            var bookLeatherNormalTex = LoadTexture("T_Book_Leather_Normal.png");
+            var bookPagesTex = LoadTexture("T_Book_Pages.png");
+            var bookSpinesTex = LoadTexture("T_Book_Spines.png");
+            var bearVelvetTex = LoadTexture("T_Bear_Velvet.png");
+            var bearButtonTex = LoadTexture("T_Bear_Button.png");
             var abcTex = LoadTexture("T_ToyBlock_ABC.png");
             var pastelWoodTex = LoadTexture("T_Pastel_ToyWood.png");
             var contourEmissionTex = LoadTexture("T_Platform_ContourEmission.png");
@@ -64,24 +100,46 @@ namespace YunaLegend.EditorScripts
             var doorTex = LoadTexture("T_FalseDoor_Poster.png");
 
             // 2. Criar / Atualizar Materiais URP com Paleta Legend of Mana e Hierarquia de Penumbra:
-            // - Quarto em penumbra: piso sem emissão própria; parede, rodapé, varal e tapetes em penumbra profunda
-            // - Plataformas puláveis: emissão muito tênue concentrada nas bordas (contourEmissionTex), quase um contorno luminoso
-            // - Brinquedos decorativos de chão (M_FloorProp_*): quase sem emissão própria, iluminados apenas pelo luar da janela, Nanda e Yuna
+            // - Quarto em penumbra: piso sem emissÃƒÂ£o prÃƒÂ³pria; parede, rodapÃƒÂ©, varal e tapetes em penumbra profunda
+            // - Plataformas pulÃƒÂ¡veis: emissÃƒÂ£o muito tÃƒÂªnue concentrada nas bordas (contourEmissionTex), quase um contorno luminoso
+            // - Brinquedos decorativos de chÃƒÂ£o (M_FloorProp_*): quase sem emissÃƒÂ£o prÃƒÂ³pria, iluminados apenas pelo luar da janela, Nanda e Yuna
             CreateUrpMaterial("M_DarkOak_Floor", new Color(0.42f, 0.28f, 0.18f), 0.32f, oakTex, null, new Vector2(35f, 3f));
             CreateUrpMaterial("M_GiantWardrobe", new Color(0.38f, 0.26f, 0.17f), 0.28f, oakTex, new Color(0.18f, 0.15f, 0.13f), new Vector2(1f, 1f), Vector2.zero, false, contourEmissionTex);
             CreateUrpMaterial("M_Dresser_Oak", new Color(0.48f, 0.34f, 0.22f), 0.30f, oakTex, new Color(0.22f, 0.18f, 0.15f), new Vector2(1f, 1f), Vector2.zero, false, contourEmissionTex);
             CreateUrpMaterial("M_TrainTrack_Wood", Color.white, 0.32f, trackTex, new Color(0.20f, 0.18f, 0.15f), new Vector2(1f, 1f), Vector2.zero, false, contourEmissionTex);
             CreateUrpMaterial("M_Moonlight_Floor_Projection", new Color(0.75f, 0.88f, 1.0f, 0.70f), 0.20f, floorShadowTex);
 
-            // Plataformas Puláveis: Brinquedos e Blocos em têmpera pastel com contorno luminoso muito tênue
-            CreateUrpMaterial("M_TeddyPlush", Color.white, 0.12f, plushTex, new Color(0.22f, 0.19f, 0.16f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+            // Plataformas PulÃƒÂ¡veis: Brinquedos e Blocos em tÃƒÂªmpera pastel com contorno luminoso muito tÃƒÂªnue
+            // Pelucia tostada: o tom quente vem da textura multiplicada por um albedo bege,
+            // com emissao baixa para nao lavar a forma no quarto escuro.
+            CreateUrpMaterial("M_TeddyPlush", new Color(0.82f, 0.66f, 0.52f), 0.12f, plushTex, new Color(0.11f, 0.09f, 0.07f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+            // Materiais da plataforma 00, na ordem de PlatformArtMaterialIndex:
+            // pelo, focinho, madeira, veludo, botao, linha e nariz.
+            // Pelo, focinho e madeira usam o mesmo mapa de contorno das demais plataformas:
+            // a emissao tenue acompanha a silhueta visivel (UV projetada da frente).
+            CreateUrpMaterial("M_Bear_Fur", Color.white, 0.14f, bearFurTex, new Color(0.34f, 0.23f, 0.11f), Vector2.one, Vector2.zero, false, contourEmissionTex, bearFurNormalTex, 1.1f);
+            CreateUrpMaterial("M_Bear_Muzzle", Color.white, 0.12f, bearMuzzleTex, new Color(0.30f, 0.26f, 0.18f), Vector2.one, Vector2.zero, false, contourEmissionTex, bearMuzzleNormalTex, 0.55f);
+            CreateUrpMaterial("M_Bear_Wood", Color.white, 0.16f, bearWoodTex, new Color(0.22f, 0.13f, 0.055f), Vector2.one, Vector2.zero, false, contourEmissionTex, bearWoodNormalTex, 1.4f);
+            CreateUrpMaterial("M_Bear_Velvet", Color.white, 0.24f, bearVelvetTex, new Color(0.12f, 0.02f, 0.022f));
+            CreateUrpMaterial("M_Bear_Button", Color.white, 0.62f, bearButtonTex, new Color(0.05f, 0.03f, 0.018f));
+            CreateUrpMaterial("M_Bear_Thread", new Color(0.74f, 0.50f, 0.18f), 0.18f, pastelWoodTex, new Color(0.14f, 0.08f, 0.02f));
+            CreateUrpMaterial("M_Bear_Nose", new Color(0.24f, 0.12f, 0.055f), 0.55f, null, new Color(0.035f, 0.02f, 0.012f));
+            // Capas de couro dos livros (plataforma 01): mesma textura, tingida por material.
+            CreateUrpMaterial("M_Book_Leather_Brown", new Color(0.60f, 0.46f, 0.33f), 0.22f, bookLeatherTex, new Color(0.13f, 0.10f, 0.06f), Vector2.one, Vector2.zero, false, null, bookLeatherNormalTex, 0.9f);
+            CreateUrpMaterial("M_Book_Leather_Dark", new Color(0.38f, 0.29f, 0.22f), 0.22f, bookLeatherTex, new Color(0.10f, 0.07f, 0.05f), Vector2.one, Vector2.zero, false, null, bookLeatherNormalTex, 0.9f);
+            CreateUrpMaterial("M_Book_Leather_Burgundy", new Color(0.52f, 0.33f, 0.30f), 0.22f, bookLeatherTex, new Color(0.11f, 0.06f, 0.055f), Vector2.one, Vector2.zero, false, null, bookLeatherNormalTex, 0.9f);
+            CreateUrpMaterial("M_Book_Leather_Green", new Color(0.40f, 0.42f, 0.31f), 0.22f, bookLeatherTex, new Color(0.08f, 0.09f, 0.06f), Vector2.one, Vector2.zero, false, null, bookLeatherNormalTex, 0.9f);
+            CreateUrpMaterial("M_Book_Leather_Ochre", new Color(0.62f, 0.49f, 0.34f), 0.22f, bookLeatherTex, new Color(0.13f, 0.10f, 0.06f), Vector2.one, Vector2.zero, false, null, bookLeatherNormalTex, 0.9f);
+            CreateUrpMaterial("M_Book_Pages", Color.white, 0.10f, bookPagesTex, new Color(0.16f, 0.14f, 0.10f));
+            // Lombadas pintadas: titulos e ornamentos num atlas de cinco faixas.
+            CreateUrpMaterial("M_Book_Spines", Color.white, 0.20f, bookSpinesTex, new Color(0.10f, 0.08f, 0.05f));
             CreateUrpMaterial("M_ToyBlock_ABC", Color.white, 0.24f, abcTex, new Color(0.22f, 0.20f, 0.18f), Vector2.one, Vector2.zero, false, contourEmissionTex);
             CreateUrpMaterial("M_ToyBlock_Red", new Color(0.84f, 0.48f, 0.44f), 0.22f, pastelWoodTex, new Color(0.24f, 0.15f, 0.14f), Vector2.one, Vector2.zero, false, contourEmissionTex);
             CreateUrpMaterial("M_ToyBlock_Yellow", new Color(0.90f, 0.74f, 0.46f), 0.22f, pastelWoodTex, new Color(0.25f, 0.21f, 0.14f), Vector2.one, Vector2.zero, false, contourEmissionTex);
             CreateUrpMaterial("M_ToyBlock_Blue", new Color(0.48f, 0.64f, 0.78f), 0.22f, pastelWoodTex, new Color(0.15f, 0.20f, 0.26f), Vector2.one, Vector2.zero, false, contourEmissionTex);
             CreateUrpMaterial("M_ToyBlock_Green", new Color(0.52f, 0.68f, 0.56f), 0.22f, pastelWoodTex, new Color(0.16f, 0.22f, 0.18f), Vector2.one, Vector2.zero, false, contourEmissionTex);
 
-            // Brinquedos Decorativos de Piso (roomScenery): sem contorno luminoso de plataforma, em penumbra até receberem luz do luar/Nanda/Yuna
+            // Brinquedos Decorativos de Piso (roomScenery): sem contorno luminoso de plataforma, em penumbra atÃƒÂ© receberem luz do luar/Nanda/Yuna
             CreateUrpMaterial("M_FloorProp_Red", new Color(0.84f, 0.48f, 0.44f), 0.20f, pastelWoodTex, new Color(0.055f, 0.032f, 0.030f));
             CreateUrpMaterial("M_FloorProp_Yellow", new Color(0.90f, 0.74f, 0.46f), 0.20f, pastelWoodTex, new Color(0.060f, 0.050f, 0.032f));
             CreateUrpMaterial("M_FloorProp_Blue", new Color(0.48f, 0.64f, 0.78f), 0.20f, pastelWoodTex, new Color(0.034f, 0.046f, 0.058f));
@@ -90,13 +148,13 @@ namespace YunaLegend.EditorScripts
             CreateUrpMaterial("M_FloorProp_Burgundy", new Color(0.68f, 0.38f, 0.42f), 0.20f, pastelWoodTex, new Color(0.048f, 0.028f, 0.032f));
             CreateUrpMaterial("M_FloorProp_Plush", Color.white, 0.12f, plushTex, new Color(0.055f, 0.046f, 0.038f));
 
-            // Tecidos, couro e metais envelhecidos (Plataformas Puláveis)
+            // Tecidos, couro e metais envelhecidos (Plataformas PulÃƒÂ¡veis)
             CreateUrpMaterial("M_CircusDrum", Color.white, 0.28f, drumTex, new Color(0.22f, 0.18f, 0.16f), Vector2.one, Vector2.zero, false, contourEmissionTex);
             CreateUrpMaterial("M_RoyalVelvet_Purple", Color.white, 0.18f, velvetTex, new Color(0.20f, 0.16f, 0.24f), Vector2.one, Vector2.zero, false, contourEmissionTex);
             CreateUrpMaterial("M_MusicBox_Rosewood", new Color(0.62f, 0.38f, 0.42f), 0.32f, oakTex, new Color(0.20f, 0.14f, 0.16f), Vector2.one, Vector2.zero, false, contourEmissionTex);
             CreateUrpMaterial("M_Brass_Gold", new Color(0.88f, 0.74f, 0.44f), 0.45f, pastelWoodTex, new Color(0.24f, 0.20f, 0.12f), Vector2.one, Vector2.zero, false, contourEmissionTex);
 
-            // Livros Ilustrados antigos de conto de fadas (Plataformas Puláveis)
+            // Livros Ilustrados antigos de conto de fadas (Plataformas PulÃƒÂ¡veis)
             CreateUrpMaterial("M_Book_Covers", Color.white, 0.28f, bookTex, new Color(0.20f, 0.18f, 0.16f), Vector2.one, Vector2.zero, false, contourEmissionTex);
             CreateUrpMaterial("M_Book_Blue", new Color(0.44f, 0.56f, 0.68f), 0.26f, pastelWoodTex, new Color(0.16f, 0.20f, 0.25f), Vector2.one, Vector2.zero, false, contourEmissionTex);
             CreateUrpMaterial("M_Book_Burgundy", new Color(0.66f, 0.38f, 0.42f), 0.26f, pastelWoodTex, new Color(0.22f, 0.14f, 0.16f), Vector2.one, Vector2.zero, false, contourEmissionTex);
@@ -109,7 +167,7 @@ namespace YunaLegend.EditorScripts
             CreateUrpMaterial("M_FalseDoor_Poster", Color.white, 0.35f, doorTex, new Color(0.18f, 0.18f, 0.20f), Vector2.one, Vector2.zero, false, contourEmissionTex);
             CreateUrpMaterial("M_DreamPortal_Gold", Color.white, 0.65f, portalTex, new Color(0.90f, 0.75f, 0.35f) * 1.8f);
 
-            // Personagens: Nanda (maior fonte de luz, brilho intenso dourado) e Yuna (emissão muito tênue, quase um contorno luminoso)
+            // Personagens: Nanda (maior fonte de luz, brilho intenso dourado) e Yuna (emissÃƒÂ£o muito tÃƒÂªnue, quase um contorno luminoso)
             CreateUrpMaterial("M_Nanda_Glow", new Color(1.0f, 0.94f, 0.68f), 0.85f, pastelWoodTex, new Color(1.0f, 0.86f, 0.38f) * 3.8f);
             CreateUrpMaterial("M_Yuna_Dress", new Color(0.94f, 0.90f, 0.82f), 0.22f, pastelWoodTex, new Color(0.20f, 0.18f, 0.16f), Vector2.one, Vector2.zero, false, contourEmissionTex);
             CreateUrpMaterial("M_Yuna_Ribbon", new Color(0.72f, 0.28f, 0.32f), 0.28f, pastelWoodTex, new Color(0.20f, 0.08f, 0.09f), Vector2.one, Vector2.zero, false, contourEmissionTex);
@@ -125,11 +183,13 @@ namespace YunaLegend.EditorScripts
 
             DarkRoomValueHierarchySetup.ConfigureMaterials();
 
+            DarkRoomPaintedPlatformSetup.ConfigureMaterials();
+
             // 3. Configurar Volume URP de Pos-Processamento
             ConfigurePostProcessingVolume();
 
             AssetDatabase.SaveAssets();
-            Debug.Log("[DarkRoomArtAssetBuilder] Texturas ilustradas canônicas geradas com sucesso!");
+            Debug.Log("[DarkRoomArtAssetBuilder] Texturas ilustradas canÃƒÂ´nicas geradas com sucesso!");
         }
 
         private static void EnsureFolderExists(string folder)
@@ -145,14 +205,23 @@ namespace YunaLegend.EditorScripts
             return AssetDatabase.LoadAssetAtPath<Texture2D>(Path.Combine(MaterialsFolder, filename));
         }
 
-        private static void SaveTextureAsPng(Texture2D tex, string path)
+        private static void SaveTextureAsPng(Texture2D tex, string path, bool asNormalMap = false)
         {
             var bytes = tex.EncodeToPNG();
             File.WriteAllBytes(path, bytes);
             UnityEngine.Object.DestroyImmediate(tex);
+
+            if (!asNormalMap) return;
+
+            AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
+            var importer = AssetImporter.GetAtPath(path) as TextureImporter;
+            if (importer == null) return;
+            importer.textureType = TextureImporterType.NormalMap;
+            importer.sRGBTexture = false;
+            importer.SaveAndReimport();
         }
 
-        private static void CreateUrpMaterial(string name, Color baseColor, float smoothness, Texture2D tex = null, Color? emission = null, Vector2? tiling = null, Vector2? offset = null, bool alphaClip = false, Texture2D emissionMapOverride = null)
+        private static void CreateUrpMaterial(string name, Color baseColor, float smoothness, Texture2D tex = null, Color? emission = null, Vector2? tiling = null, Vector2? offset = null, bool alphaClip = false, Texture2D emissionMapOverride = null, Texture2D normalMap = null, float normalScale = 1f)
         {
             var matPath = $"{MaterialsFolder}/{name}.mat";
             var mat = AssetDatabase.LoadAssetAtPath<Material>(matPath);
@@ -193,6 +262,18 @@ namespace YunaLegend.EditorScripts
                 mat.SetTexture("_BaseMap", tex);
                 mat.SetTextureScale("_BaseMap", scaleVal);
                 mat.SetTextureOffset("_BaseMap", offsetVal);
+            }
+
+            if (normalMap != null)
+            {
+                mat.SetTexture("_BumpMap", normalMap);
+                mat.SetFloat("_BumpScale", normalScale);
+                mat.EnableKeyword("_NORMALMAP");
+            }
+            else if (mat.HasProperty("_BumpMap"))
+            {
+                mat.SetTexture("_BumpMap", null);
+                mat.DisableKeyword("_NORMALMAP");
             }
 
             if (emission.HasValue)
@@ -261,7 +342,7 @@ namespace YunaLegend.EditorScripts
             var highlight = new Color(0.52f, 0.35f, 0.20f);
             var nailCol = new Color(0.70f, 0.60f, 0.35f);
 
-            int plankHeight = 128; // 4 tábuas horizontais
+            int plankHeight = 128; // 4 tÃƒÂ¡buas horizontais
 
             for (int y = 0; y < height; y++)
             {
@@ -293,14 +374,14 @@ namespace YunaLegend.EditorScripts
                         continue;
                     }
 
-                    // Pregos de latão nas extremidades das pranchas
+                    // Pregos de latÃƒÂ£o nas extremidades das pranchas
                     if (distToVertSeam == 18 && (yInPlank == 22 || yInPlank == plankHeight - 22))
                     {
                         tex.SetPixel(x, y, nailCol);
                         continue;
                     }
 
-                    // Grão de madeira rico com múltiplas frequências
+                    // GrÃƒÂ£o de madeira rico com mÃƒÂºltiplas frequÃƒÂªncias
                     float perlin = Mathf.PerlinNoise(x * 0.012f, y * 0.004f);
                     float grain = Mathf.Sin(x * 0.08f + perlin * 14.0f) * 0.12f;
                     float fineGrain = (Mathf.PerlinNoise(x * 0.06f, y * 0.02f) - 0.5f) * 0.08f;
@@ -331,8 +412,8 @@ namespace YunaLegend.EditorScripts
             // 4 quadrantes de 256x256 com paleta Legend of Mana pastel envelhecida
             // Q0 (top-left): Terracota empoeirado com letra "A"
             // Q1 (top-right): Ocre suave / mostarda com letra "B"
-            // Q2 (bottom-left): Azul ardósia pastel com letra "C"
-            // Q3 (bottom-right): Verde sálvia com Estrela de brinquedo
+            // Q2 (bottom-left): Azul ardÃƒÂ³sia pastel com letra "C"
+            // Q3 (bottom-right): Verde sÃƒÂ¡lvia com Estrela de brinquedo
 
             DrawToyBlockQuad(tex, 0, 256, 256, new Color(0.72f, 0.38f, 0.35f), 'A');
             DrawToyBlockQuad(tex, 256, 256, 256, new Color(0.82f, 0.65f, 0.38f), 'B');
@@ -433,8 +514,8 @@ namespace YunaLegend.EditorScripts
             int size = 512;
             var tex = new Texture2D(size, size, TextureFormat.RGBA32, true);
 
-            var stoneBlue = new Color(0.40f, 0.50f, 0.62f);  // Ardósia cobalto envelhecida
-            var stoneGrey = new Color(0.58f, 0.60f, 0.64f);  // Calcário antigo aquarelado
+            var stoneBlue = new Color(0.40f, 0.50f, 0.62f);  // ArdÃƒÂ³sia cobalto envelhecida
+            var stoneGrey = new Color(0.58f, 0.60f, 0.64f);  // CalcÃƒÂ¡rio antigo aquarelado
             var mortarDark = new Color(0.24f, 0.26f, 0.32f); // Argamassa suave
             var goldRim = new Color(0.82f, 0.68f, 0.38f);    // Ouro envelhecido
             var toothBlue = new Color(0.34f, 0.44f, 0.56f);  // Ameias azuis desbotadas
@@ -495,7 +576,7 @@ namespace YunaLegend.EditorScripts
 
             var crimson = new Color(0.70f, 0.32f, 0.30f);  // Terracota carmim envelhecido
             var ivory = new Color(0.92f, 0.88f, 0.80f);    // Marfim pergaminho suave
-            var goldBand = new Color(0.82f, 0.68f, 0.35f); // Latão com pátina
+            var goldBand = new Color(0.82f, 0.68f, 0.35f); // LatÃƒÂ£o com pÃƒÂ¡tina
             var brassDark = new Color(0.42f, 0.34f, 0.20f);
 
             int rimHeight = 44;
@@ -582,15 +663,552 @@ namespace YunaLegend.EditorScripts
             return tex;
         }
 
+        private static float Fbm(float x, float y, int octaves)
+        {
+            float sum = 0f, amplitude = 0.5f, frequency = 1f, total = 0f;
+            for (int i = 0; i < octaves; i++)
+            {
+                sum += Mathf.PerlinNoise(x * frequency, y * frequency) * amplitude;
+                total += amplitude;
+                frequency *= 2.07f;
+                amplitude *= 0.5f;
+            }
+            return total > 0f ? sum / total : 0f;
+        }
+
+        /// <summary>Converte um campo de altura em normal map (Sobel + forca), sem asset externo.</summary>
+        private static Texture2D BuildNormalFromHeight(float[,] height, int size, float strength)
+        {
+            var tex = new Texture2D(size, size, TextureFormat.RGBA32, true);
+            var pixels = new Color[size * size];
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    int xl = Mathf.Max(0, x - 1), xr = Mathf.Min(size - 1, x + 1);
+                    int yb = Mathf.Max(0, y - 1), yt = Mathf.Min(size - 1, y + 1);
+                    float dx = (height[xr, y] - height[xl, y]) * strength;
+                    float dy = (height[x, yt] - height[x, yb]) * strength;
+                    var n = new Vector3(-dx, -dy, 1f).normalized;
+                    pixels[y * size + x] = new Color(n.x * 0.5f + 0.5f, n.y * 0.5f + 0.5f, n.z * 0.5f + 0.5f, 1f);
+                }
+            }
+            tex.SetPixels(pixels);
+            tex.Apply();
+            return tex;
+        }
+
+        /// <summary>
+        /// Pelo pintado: base fBm + milhares de fios desenhados como linhas com curva curta,
+        /// variacao de tom e ponta clara. Gera albedo e normal map do mesmo campo de altura.
+        /// </summary>
+        private static void GenerateBearFurTextures(out Texture2D albedo, out Texture2D normal)
+        {
+            const int size = 1024;
+            var height = new float[size, size];
+            var tip = new float[size, size];
+
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    height[x, y] = Fbm(x * 0.02f, y * 0.02f, 4) * 0.5f;
+                }
+            }
+
+            var rng = new System.Random(20261111);
+            const int strands = 11000;
+            for (int s = 0; s < strands; s++)
+            {
+                float sx = (float)rng.NextDouble() * size;
+                float sy = (float)rng.NextDouble() * size;
+                float length = 10f + (float)rng.NextDouble() * 30f;
+                float angle = Mathf.PI * 0.5f + ((float)rng.NextDouble() - 0.5f) * 0.9f;
+                float bend = ((float)rng.NextDouble() - 0.5f) * 1.1f;
+                float strength = 0.30f + (float)rng.NextDouble() * 0.70f;
+                float shade = (float)rng.NextDouble();
+
+                for (float t = 0f; t < length; t += 0.7f)
+                {
+                    float a = angle + bend * (t / length);
+                    int px = Mathf.RoundToInt(sx + Mathf.Cos(a) * t);
+                    int py = Mathf.RoundToInt(sy + Mathf.Sin(a) * t);
+                    if (px < 1 || py < 1 || px >= size - 1 || py >= size - 1) continue;
+                    float taper = 1f - t / length;
+                    height[px, py] += strength * taper * 0.7f;
+                    tip[px, py] = Mathf.Max(tip[px, py], shade * taper);
+                }
+            }
+
+            var deep = new Color(0.24f, 0.10f, 0.028f);
+            var mid = new Color(0.48f, 0.235f, 0.075f);
+            var light = new Color(0.74f, 0.46f, 0.19f);
+            var pixels = new Color[size * size];
+
+            for (int y = 0; y < size; y++)
+            {
+                float vertical = y / (float)(size - 1);
+                for (int x = 0; x < size; x++)
+                {
+                    float h = Mathf.Clamp01(height[x, y] * 0.75f);
+                    float strand = tip[x, y];
+                    float blotch = Fbm(x * 0.008f, y * 0.010f, 3);
+                    float paintLight = Mathf.Lerp(0.55f, 1f, vertical) * (0.78f + h * 0.32f);
+                    float lum = Mathf.Clamp01(paintLight * 0.75f + strand * 0.28f + blotch * 0.22f);
+
+                    Color c = Color.Lerp(deep, light, lum);
+                    c = Color.Lerp(c, mid, 0.30f - strand * 0.15f);
+                    float fine = (Mathf.PerlinNoise(x * 0.9f, y * 0.9f) - 0.5f) * 0.06f;
+                    pixels[y * size + x] = new Color(
+                        Mathf.Clamp01(c.r + fine), Mathf.Clamp01(c.g + fine), Mathf.Clamp01(c.b + fine), 1f);
+                }
+            }
+
+            albedo = new Texture2D(size, size, TextureFormat.RGBA32, true);
+            albedo.SetPixels(pixels);
+            albedo.Apply();
+            normal = BuildNormalFromHeight(height, size, 3.2f);
+        }
+
+        private static void GenerateBearMuzzleTextures(out Texture2D albedo, out Texture2D normal)
+        {
+            const int size = 512;
+            var height = new float[size, size];
+            var pixels = new Color[size * size];
+            var cream = new Color(0.93f, 0.86f, 0.70f);
+            var shade = new Color(0.72f, 0.62f, 0.45f);
+
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    float grain = Fbm(x * 0.35f, y * 0.35f, 3);
+                    float fine = (Mathf.PerlinNoise(x * 1.3f, y * 1.3f) - 0.5f) * 0.6f;
+                    float dx = (x / (float)size - 0.5f) * 2f;
+                    float dy = (y / (float)size - 0.5f) * 2f;
+                    float edge = Mathf.Clamp01(Mathf.Sqrt(dx * dx + dy * dy));
+
+                    height[x, y] = grain * 0.5f + fine * 0.12f;
+                    float lum = 1f + (grain - 0.5f) * 0.16f + fine * 0.05f;
+                    Color c = Color.Lerp(cream, shade, Mathf.Pow(edge, 4f) * 0.5f);
+                    pixels[y * size + x] = new Color(
+                        Mathf.Clamp01(c.r * lum), Mathf.Clamp01(c.g * lum), Mathf.Clamp01(c.b * lum), 1f);
+                }
+            }
+
+            albedo = new Texture2D(size, size, TextureFormat.RGBA32, true);
+            albedo.SetPixels(pixels);
+            albedo.Apply();
+            normal = BuildNormalFromHeight(height, size, 1.6f);
+        }
+
+        private static void GenerateBearWoodTextures(out Texture2D albedo, out Texture2D normal)
+        {
+            const int size = 1024;
+            var height = new float[size, size];
+            var pixels = new Color[size * size];
+            const int planks = 12;
+            float plankWidth = size / (float)planks;
+            var dark = new Color(0.09f, 0.05f, 0.02f);
+            var mid = new Color(0.26f, 0.15f, 0.065f);
+            var light = new Color(0.46f, 0.28f, 0.13f);
+
+            for (int y = 0; y < size; y++)
+            {
+                float vertical = y / (float)(size - 1);
+                for (int x = 0; x < size; x++)
+                {
+                    int plank = Mathf.Clamp((int)(x / plankWidth), 0, planks - 1);
+                    float u = (x - plank * plankWidth) / plankWidth;
+                    float seam = Mathf.Min(u, 1f - u);
+
+                    float grain = Fbm(x * 0.02f + plank * 13.7f, y * 0.004f, 4);
+                    float streak = Fbm(x * 0.55f, y * 0.01f, 2);
+                    float h;
+                    float lum;
+
+                    if (seam < 0.016f)
+                    {
+                        h = -0.6f;
+                        lum = 0.08f + grain * 0.10f;
+                    }
+                    else
+                    {
+                        float bevel = Mathf.SmoothStep(0f, 1f, seam * 10f);
+                        h = (grain * 0.7f + streak * 0.3f) * bevel;
+                        lum = 0.25f + (grain * 0.75f + streak * 0.25f) * bevel * 0.9f;
+                    }
+
+                    float verticalShade = Mathf.Lerp(0.55f, 1f, Mathf.Clamp01((vertical - 0.04f) / 0.16f)) *
+                                          Mathf.Lerp(0.55f, 1f, Mathf.Clamp01((0.96f - vertical) / 0.16f));
+
+                    Color c = Color.Lerp(dark, light, Mathf.Clamp01(lum * verticalShade));
+                    c = Color.Lerp(c, mid, 0.25f);
+                    pixels[y * size + x] = c;
+                    height[x, y] = h;
+                }
+            }
+
+            albedo = new Texture2D(size, size, TextureFormat.RGBA32, true);
+            albedo.SetPixels(pixels);
+            albedo.Apply();
+            normal = BuildNormalFromHeight(height, size, 4.0f);
+        }
+
+        private static void GenerateBookLeatherTextures(out Texture2D albedo, out Texture2D normal)
+        {
+            const int size = 512;
+            var height = new float[size, size];
+            var pixels = new Color[size * size];
+
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    float grain = Fbm(x * 0.012f, y * 0.012f, 4);
+                    float pore = Fbm(x * 0.30f, y * 0.30f, 2);
+                    float sheen = Fbm(x * 0.004f, y * 0.006f, 2);
+
+                    height[x, y] = grain * 0.7f + pore * 0.35f;
+                    float lum = 0.70f + (grain - 0.5f) * 0.30f + (pore - 0.5f) * 0.22f + (sheen - 0.5f) * 0.10f;
+                    if (pore < 0.30f) lum *= 0.84f;
+
+                    lum = Mathf.Clamp01(lum);
+                    pixels[y * size + x] = new Color(lum, lum * 0.96f, lum * 0.92f, 1f);
+                }
+            }
+
+            albedo = new Texture2D(size, size, TextureFormat.RGBA32, true);
+            albedo.SetPixels(pixels);
+            albedo.Apply();
+            normal = BuildNormalFromHeight(height, size, 2.2f);
+        }
+
+        private static void GenerateBookPagesTextures(out Texture2D albedo, out Texture2D normal)
+        {
+            const int size = 256;
+            var height = new float[size, size];
+            var pixels = new Color[size * size];
+            var cream = new Color(0.90f, 0.85f, 0.72f);
+            var shade = new Color(0.66f, 0.60f, 0.48f);
+
+            for (int y = 0; y < size; y++)
+            {
+                bool sheetLine = (y % 9 == 0);
+                for (int x = 0; x < size; x++)
+                {
+                    float grain = Fbm(x * 0.45f, y * 0.10f, 3);
+                    float fibre = (Mathf.PerlinNoise(x * 1.4f, y * 0.25f) - 0.5f) * 0.10f;
+
+                    float lum = 0.95f + (grain - 0.5f) * 0.12f + fibre;
+                    Color c = Color.Lerp(cream, shade, sheetLine ? 0.55f : 0.10f);
+                    pixels[y * size + x] = new Color(
+                        Mathf.Clamp01(c.r * lum), Mathf.Clamp01(c.g * lum), Mathf.Clamp01(c.b * lum), 1f);
+                    height[x, y] = grain * 0.4f + (sheetLine ? -0.25f : 0f);
+                }
+            }
+
+            albedo = new Texture2D(size, size, TextureFormat.RGBA32, true);
+            albedo.SetPixels(pixels);
+            albedo.Apply();
+            normal = BuildNormalFromHeight(height, size, 1.1f);
+        }
+
+        private static readonly System.Collections.Generic.Dictionary<char, string[]> PixelFont =
+            new System.Collections.Generic.Dictionary<char, string[]>
+        {
+            {'A', new[]{".###.","#...#","#...#","#####","#...#","#...#","#...#"}},
+            {'B', new[]{"####.","#...#","#...#","####.","#...#","#...#","####."}},
+            {'C', new[]{".###.","#...#","#....","#....","#....","#...#",".###."}},
+            {'D', new[]{"####.","#...#","#...#","#...#","#...#","#...#","####."}},
+            {'E', new[]{"#####","#....","#....","####.","#....","#....","#####"}},
+            {'F', new[]{"#####","#....","#....","####.","#....","#....","#...."}},
+            {'G', new[]{".###.","#...#","#....","#.###","#...#","#...#",".###."}},
+            {'H', new[]{"#...#","#...#","#...#","#####","#...#","#...#","#...#"}},
+            {'I', new[]{"#####","..#..","..#..","..#..","..#..","..#..","#####"}},
+            {'J', new[]{"..###","...#.","...#.","...#.","#..#.","#..#.",".##.."}},
+            {'K', new[]{"#...#","#..#.","#.#..","##...","#.#..","#..#.","#...#"}},
+            {'L', new[]{"#....","#....","#....","#....","#....","#....","#####"}},
+            {'M', new[]{"#...#","##.##","#.#.#","#...#","#...#","#...#","#...#"}},
+            {'N', new[]{"#...#","##..#","#.#.#","#..##","#...#","#...#","#...#"}},
+            {'O', new[]{".###.","#...#","#...#","#...#","#...#","#...#",".###."}},
+            {'P', new[]{"####.","#...#","#...#","####.","#....","#....","#...."}},
+            {'Q', new[]{".###.","#...#","#...#","#...#","#.#.#","#..#.",".##.#"}},
+            {'R', new[]{"####.","#...#","#...#","####.","#.#..","#..#.","#...#"}},
+            {'S', new[]{".####","#....","#....",".###.","....#","....#","####."}},
+            {'T', new[]{"#####","..#..","..#..","..#..","..#..","..#..","..#.."}},
+            {'U', new[]{"#...#","#...#","#...#","#...#","#...#","#...#",".###."}},
+            {'V', new[]{"#...#","#...#","#...#","#...#","#...#",".#.#.","..#.."}},
+            {'W', new[]{"#...#","#...#","#...#","#.#.#","#.#.#","##.##","#...#"}},
+            {'X', new[]{"#...#","#...#",".#.#.","..#..",".#.#.","#...#","#...#"}},
+            {'Y', new[]{"#...#","#...#",".#.#.","..#..","..#..","..#..","..#.."}},
+            {'Z', new[]{"#####","....#","...#.","..#..",".#...","#....","#####"}},
+            {'&', new[]{".##..","#..#.","#.#..",".#...","#.#.#","#..#.",".##.#"}},
+            {'\'', new[]{"..#..","..#..",".....",".....",".....",".....","....."}},
+            {'.', new[]{".....",".....",".....",".....",".....","..#..","..#.."}},
+            {' ', new[]{".....",".....",".....",".....",".....",".....","....."}}
+        };
+
+        private static int MeasurePixelText(string text, int scale)
+        {
+            return text.Length * 6 * scale;
+        }
+
+        private static void DrawPixelText(Color[] pixels, int width, int height, string text, int startX, int startY, int scale, Color color)
+        {
+            int cursor = startX;
+            foreach (char raw in text)
+            {
+                char c = char.ToUpperInvariant(raw);
+                if (!PixelFont.TryGetValue(c, out var glyph)) { cursor += 6 * scale; continue; }
+                for (int row = 0; row < 7; row++)
+                {
+                    string line = glyph[row];
+                    for (int col = 0; col < line.Length; col++)
+                    {
+                        if (line[col] != '#') continue;
+                        for (int sy = 0; sy < scale; sy++)
+                        {
+                            int y = startY + (6 - row) * scale + sy;
+                            if (y < 0 || y >= height) continue;
+                            for (int sx = 0; sx < scale; sx++)
+                            {
+                                int x = cursor + col * scale + sx;
+                                if (x < 0 || x >= width) continue;
+                                pixels[y * width + x] = color;
+                            }
+                        }
+                    }
+                }
+                cursor += 6 * scale;
+            }
+        }
+
+        /// <summary>
+        /// Atlas das lombadas: uma faixa por livro, com couro pastel, filetes dourados,
+        /// ornamentos de canto, costura pontilhada e o titulo gravado em ouro.
+        /// </summary>
+        private static Texture2D GenerateBookSpinesAtlas()
+        {
+            const int width = 1024;
+            const int stripHeight = 128;
+            const int strips = 5;
+            const int height = stripHeight * strips;
+            var tex = new Texture2D(width, height, TextureFormat.RGBA32, true);
+            var pixels = new Color[width * height];
+
+            string[][] titles =
+            {
+                new[] { "NURSERY", "TALES" },
+                new[] { "MYTHS" },
+                new[] { "FAIRY TALES" },
+                new[] { "EASTCERT & DOERS" },
+                new[] { "SORTMENT" }
+            };
+
+            Color[] leatherTints =
+            {
+                new Color(0.55f, 0.36f, 0.28f),
+                new Color(0.60f, 0.44f, 0.31f),
+                new Color(0.46f, 0.40f, 0.34f),
+                new Color(0.40f, 0.43f, 0.33f),
+                new Color(0.38f, 0.29f, 0.22f)
+            };
+
+            var gold = new Color(0.82f, 0.66f, 0.34f);
+            var goldLight = new Color(0.94f, 0.82f, 0.52f);
+            var stitch = new Color(0.78f, 0.62f, 0.34f);
+
+            for (int s = 0; s < strips; s++)
+            {
+                int baseY = (strips - 1 - s) * stripHeight;
+                Color tint = leatherTints[s];
+
+                for (int y = 0; y < stripHeight; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        float grain = Fbm(x * 0.02f, y * 0.03f + s * 7f, 3);
+                        float shade = 0.82f + (grain - 0.5f) * 0.32f;
+                        // sombreamento vertical pintado (bordas mais escuras)
+                        float vertical = y / (float)(stripHeight - 1);
+                        shade *= Mathf.Lerp(0.72f, 1.05f, Mathf.Sin(vertical * Mathf.PI));
+                        pixels[(baseY + y) * width + x] = new Color(
+                            Mathf.Clamp01(tint.r * shade),
+                            Mathf.Clamp01(tint.g * shade),
+                            Mathf.Clamp01(tint.b * shade), 1f);
+                    }
+                }
+
+                // Filetes dourados duplos.
+                for (int inset = 0; inset < 2; inset++)
+                {
+                    int offset = 8 + inset * 5;
+                    for (int x = 14; x < width - 14; x++)
+                    {
+                        SetSafe(pixels, width, height, baseY + offset, x, gold);
+                        SetSafe(pixels, width, height, baseY + stripHeight - 1 - offset, x, gold);
+                    }
+                    for (int y = 14; y < stripHeight - 14; y++)
+                    {
+                        SetSafe(pixels, width, height, baseY + y, offset + 6, gold);
+                        SetSafe(pixels, width, height, baseY + y, width - 1 - offset - 6, gold);
+                    }
+                }
+
+                // Costura pontilhada logo abaixo do filete superior e acima do inferior.
+                for (int x = 26; x < width - 26; x += 14)
+                {
+                    for (int k = 0; k < 5; k++)
+                    {
+                        SetSafe(pixels, width, height, baseY + stripHeight - 20, x + k, stitch);
+                        SetSafe(pixels, width, height, baseY + 20, x + k, stitch);
+                    }
+                }
+
+                // Ornamentos de canto (arabesco simples em ouro).
+                DrawCornerFlourish(pixels, width, height, 34, baseY + 26, 1, goldLight);
+                DrawCornerFlourish(pixels, width, height, width - 35, baseY + 26, -1, goldLight);
+                DrawCornerFlourish(pixels, width, height, 34, baseY + stripHeight - 27, 1, goldLight);
+                DrawCornerFlourish(pixels, width, height, width - 35, baseY + stripHeight - 27, -1, goldLight);
+
+                // Titulo centralizado, uma ou duas linhas.
+                var lines = titles[s];
+                int scale = lines.Length > 1 ? 5 : 7;
+                int totalHeight = lines.Length * 7 * scale + (lines.Length - 1) * 6 * scale;
+                int startY = baseY + (stripHeight - totalHeight) / 2;
+
+                for (int lineIndex = 0; lineIndex < lines.Length; lineIndex++)
+                {
+                    string line = lines[lineIndex];
+                    int textWidth = MeasurePixelText(line, scale) - scale;
+                    int x = (width - textWidth) / 2;
+                    int y = startY + (lines.Length - 1 - lineIndex) * (7 * scale + 6 * scale);
+                    // sombra e relevo para leitura em relevo
+                    DrawPixelText(pixels, width, height, line, x + scale, y - scale, scale, new Color(0.16f, 0.09f, 0.04f));
+                    DrawPixelText(pixels, width, height, line, x, y, scale, goldLight);
+                    DrawPixelText(pixels, width, height, line, x, y - scale, scale, gold);
+                }
+            }
+
+            tex.SetPixels(pixels);
+            tex.Apply();
+            return tex;
+        }
+
+        private static void SetSafe(Color[] pixels, int width, int height, int y, int x, Color color)
+        {
+            if (x < 0 || x >= width || y < 0 || y >= height) return;
+            pixels[y * width + x] = color;
+        }
+
+        private static void DrawCornerFlourish(Color[] pixels, int width, int height, int cx, int cy, int dir, Color color)
+        {
+            for (int i = 0; i < 16; i++)
+            {
+                int x = cx + dir * i;
+                int y = cy + Mathf.RoundToInt(Mathf.Sin(i * 0.35f) * 3f);
+                SetSafe(pixels, width, height, y, x, color);
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                SetSafe(pixels, width, height, cy + i, cx + dir * 3, color);
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                SetSafe(pixels, width, height, cy + 10 + i, cx + dir * (6 + i), color);
+                SetSafe(pixels, width, height, cy + 10 + i, cx + dir * (7 + i), color);
+            }
+        }
+
+        private static Texture2D GenerateBearVelvetTexture()
+        {
+            int size = 256;
+            var tex = new Texture2D(size, size, TextureFormat.RGBA32, true);
+            var dark = new Color(0.42f, 0.06f, 0.08f);
+            var mid = new Color(0.72f, 0.12f, 0.15f);
+            var light = new Color(0.92f, 0.30f, 0.30f);
+
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    float warp = Mathf.PerlinNoise(x * 0.012f, y * 0.02f) * 2.2f;
+                    float fold = Mathf.Sin((x / (float)size) * Mathf.PI * 7f + warp);
+                    float sheen = Mathf.Clamp01(0.5f + fold * 0.5f);
+                    float fine = (Mathf.PerlinNoise(x * 0.5f, y * 0.5f) - 0.5f) * 0.10f;
+
+                    Color c = Color.Lerp(mid, light, Mathf.Pow(sheen, 2.2f) * 0.85f);
+                    c = Color.Lerp(dark, c, 0.35f + sheen * 0.65f);
+                    float f = 1f + fine;
+                    tex.SetPixel(x, y, new Color(c.r * f, c.g * f, c.b * f, 1f));
+                }
+            }
+
+            tex.Apply();
+            return tex;
+        }
+
+        private static Texture2D GenerateBearButtonTexture()
+        {
+            int size = 128;
+            var tex = new Texture2D(size, size, TextureFormat.RGBA32, true);
+            var rim = new Color(0.14f, 0.065f, 0.025f);
+            var innerDark = new Color(0.22f, 0.11f, 0.045f);
+            var innerLight = new Color(0.30f, 0.16f, 0.07f);
+            var thread = new Color(0.78f, 0.50f, 0.20f);
+            var gloss = new Color(0.95f, 0.78f, 0.50f);
+
+            for (int y = 0; y < size; y++)
+            {
+                float dy = (y + 0.5f) / size * 2f - 1f;
+                for (int x = 0; x < size; x++)
+                {
+                    float dx = (x + 0.5f) / size * 2f - 1f;
+                    float r = Mathf.Sqrt(dx * dx + dy * dy);
+                    Color c;
+
+                    if (r > 0.88f)
+                    {
+                        c = rim;
+                    }
+                    else if (r > 0.62f)
+                    {
+                        float rimShade = Mathf.InverseLerp(0.62f, 0.88f, r);
+                        c = Color.Lerp(rim, innerDark, 0.25f + rimShade * 0.35f);
+                    }
+                    else
+                    {
+                        c = Color.Lerp(innerLight, innerDark, r / 0.62f);
+                    }
+
+                    // Costura em X no centro do botao.
+                    if (r < 0.40f && (Mathf.Abs(dx + dy) < 0.045f || Mathf.Abs(dx - dy) < 0.045f))
+                    {
+                        c = thread;
+                    }
+                    // Brilho de verniz no alto a esquerda.
+                    float gx = dx + 0.26f;
+                    float gy = dy - 0.26f;
+                    float glossMask = Mathf.Clamp01(1f - Mathf.Sqrt(gx * gx + gy * gy) / 0.26f);
+                    if (glossMask > 0f) c = Color.Lerp(c, gloss, glossMask * glossMask * 0.85f);
+
+                    tex.SetPixel(x, y, c);
+                }
+            }
+
+            tex.Apply();
+            return tex;
+        }
+
         private static Texture2D GenerateBookCoversTexture()
         {
             int size = 512;
             var tex = new Texture2D(size, size, TextureFormat.RGBA32, true);
-
-            var leatherBlue = new Color(0.32f, 0.44f, 0.56f); // Couro azul ardósia envelhecido
+            var leatherBlue = new Color(0.32f, 0.44f, 0.56f); // Couro azul ardÃƒÂ³sia envelhecido
             var leatherBurg = new Color(0.55f, 0.28f, 0.32f); // Couro vinho envelhecido
-            var goldFoil = new Color(0.84f, 0.70f, 0.38f);    // Douramento antigo com pátina
-            var pagesCream = new Color(0.92f, 0.88f, 0.78f);   // Páginas creme pergaminho
+            var goldFoil = new Color(0.84f, 0.70f, 0.38f);    // Douramento antigo com pÃƒÂ¡tina
+            var pagesCream = new Color(0.92f, 0.88f, 0.78f);   // PÃƒÂ¡ginas creme pergaminho
             var pageLines = new Color(0.68f, 0.62f, 0.52f);
 
             for (int y = 0; y < size; y++)
@@ -637,7 +1255,7 @@ namespace YunaLegend.EditorScripts
 
             var deepViolet = new Color(0.44f, 0.32f, 0.48f);   // Ameixa empoeirado
             var brightViolet = new Color(0.58f, 0.44f, 0.62f); // Lavanda suave
-            var goldButton = new Color(0.82f, 0.68f, 0.35f);   // Botão de latão antigo
+            var goldButton = new Color(0.82f, 0.68f, 0.35f);   // BotÃƒÂ£o de latÃƒÂ£o antigo
 
             int diamondSize = 64;
 
@@ -680,7 +1298,7 @@ namespace YunaLegend.EditorScripts
 
             var darkSleeper = new Color(0.34f, 0.24f, 0.18f); // Madeira envelhecida
             var gravel = new Color(0.20f, 0.18f, 0.20f);
-            var brassRail = new Color(0.82f, 0.68f, 0.38f);   // Trilhos de latão envelhecido
+            var brassRail = new Color(0.82f, 0.68f, 0.38f);   // Trilhos de latÃƒÂ£o envelhecido
             var railShadow = new Color(0.18f, 0.14f, 0.12f);
 
             for (int y = 0; y < size; y++)
@@ -1561,9 +2179,9 @@ namespace YunaLegend.EditorScripts
             var tex = new Texture2D(size, size, TextureFormat.RGBA32, true);
 
             var frameWood = new Color(0.40f, 0.26f, 0.16f);
-            var paintedDoor = new Color(0.36f, 0.48f, 0.62f); // Azul ardósia desbotado
+            var paintedDoor = new Color(0.36f, 0.48f, 0.62f); // Azul ardÃƒÂ³sia desbotado
             var posterPaper = new Color(0.92f, 0.88f, 0.78f); // Papel pergaminho antigo
-            var goldKnob = new Color(0.82f, 0.68f, 0.35f);    // Maçaneta de latão antigo
+            var goldKnob = new Color(0.82f, 0.68f, 0.35f);    // MaÃƒÂ§aneta de latÃƒÂ£o antigo
 
             for (int y = 0; y < size; y++)
             {

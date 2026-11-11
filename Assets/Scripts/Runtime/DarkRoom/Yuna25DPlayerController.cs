@@ -237,9 +237,13 @@ namespace YunaLegend.DarkRoom
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
             if (isDead) return;
+            var collidedPlatform = hit.collider.GetComponentInParent<DarkRoomPlatformMarker>();
+            // A curved landing can have both an upward and an opposing horizontal
+            // normal. Only an actual wall of a new obstacle is a missed landing;
+            // the current support's rounded ears/edges must not trigger defeat.
             if (autoRunActive && floorDeathActive && !isCinematicFalling && velocity.y <= 0f
-                && hit.normal.x * runDirection < -0.5f
-                && hit.collider.GetComponentInParent<DarkRoomPlatformMarker>() != null)
+                && hit.normal.x * runDirection < -0.5f && hit.normal.y <= 0.5f
+                && collidedPlatform != null && collidedPlatform.spec.index != lastLandedPlatformIndex)
             {
                 TriggerDeath("Yuna não alcançou o topo da plataforma obrigatória.");
                 return;

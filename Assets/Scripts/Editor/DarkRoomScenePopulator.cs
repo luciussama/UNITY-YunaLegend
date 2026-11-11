@@ -142,7 +142,26 @@ namespace YunaLegend.EditorScripts
                 LoadMat("M_FloorProp_Green"),
                 LoadMat("M_FloorProp_Cream"),
                 LoadMat("M_FloorProp_Burgundy"),
-                LoadMat("M_FloorProp_Plush")
+                LoadMat("M_FloorProp_Plush"),
+                new[] {
+                    LoadMat("M_Bear_Fur"),
+                    LoadMat("M_Bear_Muzzle"),
+                    LoadMat("M_Bear_Wood"),
+                    LoadMat("M_Bear_Velvet"),
+                    LoadMat("M_Bear_Button"),
+                    LoadMat("M_Bear_Thread"),
+                    LoadMat("M_Bear_Nose"),
+                    LoadMat("M_Book_Leather_Brown"),
+                    LoadMat("M_Book_Leather_Burgundy"),
+                    LoadMat("M_Book_Leather_Green"),
+                    LoadMat("M_Book_Leather_Dark"),
+                    LoadMat("M_Book_Pages"),
+                    LoadMat("M_Brass_Gold"),
+                    LoadMat("M_Bear_Velvet"),
+                    LoadMat("M_Book_Leather_Ochre"),
+                    LoadMat("M_Book_Spines"),
+                    LoadMat("M_Book_Painted_Cover")
+                }
             );
 
             builder.ConfigureWallDecorations(
