@@ -27,6 +27,11 @@ namespace YunaLegend.EditorScripts
             SaveTextureAsPng(GenerateTrainTrackTexture(), Path.Combine(MaterialsFolder, "T_TrainTrack_Wood.png"));
             SaveTextureAsPng(GenerateWallpaperTexture(), Path.Combine(MaterialsFolder, "T_Victorian_Wallpaper.png"));
             SaveTextureAsPng(GenerateWallBaseboardTexture(), Path.Combine(MaterialsFolder, "T_Wall_Baseboard.png"));
+            SaveTextureAsPng(GenerateWallBuntingTexture(), Path.Combine(MaterialsFolder, "T_Wall_Bunting.png"));
+            SaveTextureAsPng(GeneratePastelToyWoodTexture(), Path.Combine(MaterialsFolder, "T_Pastel_ToyWood.png"));
+            SaveTextureAsPng(GeneratePlatformContourEmissionTexture(), Path.Combine(MaterialsFolder, "T_Platform_ContourEmission.png"));
+            SaveTextureAsPng(GenerateMandalaRugTexture(), Path.Combine(MaterialsFolder, "T_Floor_Rug_Mandala.png"));
+            SaveTextureAsPng(GenerateStripedRugTexture(), Path.Combine(MaterialsFolder, "T_Floor_Rug_Striped.png"));
             SaveTextureAsPng(GenerateMoonlitWindowTexture(), Path.Combine(MaterialsFolder, "T_Moonlit_Window.png"));
             SaveTextureAsPng(GenerateWindowCookieTexture(), Path.Combine(MaterialsFolder, "T_Window_Cookie.png"));
             SaveTextureAsPng(GenerateMoonlightFloorShadowTexture(), Path.Combine(MaterialsFolder, "T_Moonlight_Floor_Shadow.png"));
@@ -39,6 +44,8 @@ namespace YunaLegend.EditorScripts
             var oakTex = LoadTexture("T_DarkOak_Planks.png");
             var plushTex = LoadTexture("T_TeddyPlush.png");
             var abcTex = LoadTexture("T_ToyBlock_ABC.png");
+            var pastelWoodTex = LoadTexture("T_Pastel_ToyWood.png");
+            var contourEmissionTex = LoadTexture("T_Platform_ContourEmission.png");
             var castleTex = LoadTexture("T_Castle_Blocks.png");
             var drumTex = LoadTexture("T_CircusDrum.png");
             var velvetTex = LoadTexture("T_Velvet_Purple.png");
@@ -46,55 +53,72 @@ namespace YunaLegend.EditorScripts
             var trackTex = LoadTexture("T_TrainTrack_Wood.png");
             var wallpaperTex = LoadTexture("T_Victorian_Wallpaper.png");
             var baseboardTex = LoadTexture("T_Wall_Baseboard.png");
+            var buntingTex = LoadTexture("T_Wall_Bunting.png");
+            var mandalaRugTex = LoadTexture("T_Floor_Rug_Mandala.png");
+            var stripedRugTex = LoadTexture("T_Floor_Rug_Striped.png");
             var windowTex = LoadTexture("T_Moonlit_Window.png");
             var floorShadowTex = LoadTexture("T_Moonlight_Floor_Shadow.png");
             var portalTex = LoadTexture("T_DreamPortal.png");
             var doorTex = LoadTexture("T_FalseDoor_Poster.png");
 
-            // 2. Criar / Atualizar Materiais URP com Paleta Legend of Mana (Tons pastéis, envelhecidos, aquarelados)
-            // Piso e Madeira nobre com pátina quente
-            CreateUrpMaterial("M_DarkOak_Floor", new Color(0.42f, 0.28f, 0.18f), 0.35f, oakTex, null, new Vector2(35f, 3f));
-            CreateUrpMaterial("M_GiantWardrobe", new Color(0.36f, 0.24f, 0.15f), 0.32f, oakTex, null, new Vector2(4f, 5f));
-            CreateUrpMaterial("M_Dresser_Oak", new Color(0.46f, 0.32f, 0.20f), 0.36f, oakTex, null, new Vector2(2f, 1.5f));
-            CreateUrpMaterial("M_TrainTrack_Wood", Color.white, 0.38f, trackTex, null, new Vector2(3f, 1f));
+            // 2. Criar / Atualizar Materiais URP com Paleta Legend of Mana e Hierarquia de Penumbra:
+            // - Quarto em penumbra: piso sem emissão própria; parede, rodapé, varal e tapetes em penumbra profunda
+            // - Plataformas puláveis: emissão muito tênue concentrada nas bordas (contourEmissionTex), quase um contorno luminoso
+            // - Brinquedos decorativos de chão (M_FloorProp_*): quase sem emissão própria, iluminados apenas pelo luar da janela, Nanda e Yuna
+            CreateUrpMaterial("M_DarkOak_Floor", new Color(0.42f, 0.28f, 0.18f), 0.32f, oakTex, null, new Vector2(35f, 3f));
+            CreateUrpMaterial("M_GiantWardrobe", new Color(0.38f, 0.26f, 0.17f), 0.28f, oakTex, new Color(0.18f, 0.15f, 0.13f), new Vector2(1f, 1f), Vector2.zero, false, contourEmissionTex);
+            CreateUrpMaterial("M_Dresser_Oak", new Color(0.48f, 0.34f, 0.22f), 0.30f, oakTex, new Color(0.22f, 0.18f, 0.15f), new Vector2(1f, 1f), Vector2.zero, false, contourEmissionTex);
+            CreateUrpMaterial("M_TrainTrack_Wood", Color.white, 0.32f, trackTex, new Color(0.20f, 0.18f, 0.15f), new Vector2(1f, 1f), Vector2.zero, false, contourEmissionTex);
             CreateUrpMaterial("M_Moonlight_Floor_Projection", new Color(0.75f, 0.88f, 1.0f, 0.70f), 0.20f, floorShadowTex);
 
-            // Brinquedos e Blocos em têmpera pastel envelhecida
-            CreateUrpMaterial("M_TeddyPlush", Color.white, 0.12f, plushTex);
-            CreateUrpMaterial("M_ToyBlock_ABC", Color.white, 0.35f, abcTex);
-            CreateUrpMaterial("M_ToyBlock_Red", new Color(0.72f, 0.38f, 0.35f), 0.32f);    // Terracota empoeirado
-            CreateUrpMaterial("M_ToyBlock_Yellow", new Color(0.82f, 0.65f, 0.38f), 0.32f); // Ocre antigo / mostarda suave
-            CreateUrpMaterial("M_ToyBlock_Blue", new Color(0.38f, 0.50f, 0.62f), 0.32f);   // Azul ardósia pastel
-            CreateUrpMaterial("M_ToyBlock_Green", new Color(0.42f, 0.54f, 0.44f), 0.32f);  // Verde sálvia / musgo seco
+            // Plataformas Puláveis: Brinquedos e Blocos em têmpera pastel com contorno luminoso muito tênue
+            CreateUrpMaterial("M_TeddyPlush", Color.white, 0.12f, plushTex, new Color(0.22f, 0.19f, 0.16f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+            CreateUrpMaterial("M_ToyBlock_ABC", Color.white, 0.24f, abcTex, new Color(0.22f, 0.20f, 0.18f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+            CreateUrpMaterial("M_ToyBlock_Red", new Color(0.84f, 0.48f, 0.44f), 0.22f, pastelWoodTex, new Color(0.24f, 0.15f, 0.14f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+            CreateUrpMaterial("M_ToyBlock_Yellow", new Color(0.90f, 0.74f, 0.46f), 0.22f, pastelWoodTex, new Color(0.25f, 0.21f, 0.14f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+            CreateUrpMaterial("M_ToyBlock_Blue", new Color(0.48f, 0.64f, 0.78f), 0.22f, pastelWoodTex, new Color(0.15f, 0.20f, 0.26f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+            CreateUrpMaterial("M_ToyBlock_Green", new Color(0.52f, 0.68f, 0.56f), 0.22f, pastelWoodTex, new Color(0.16f, 0.22f, 0.18f), Vector2.one, Vector2.zero, false, contourEmissionTex);
 
-            // Tecidos, couro e metais envelhecidos
-            CreateUrpMaterial("M_CircusDrum", Color.white, 0.35f, drumTex);
-            CreateUrpMaterial("M_RoyalVelvet_Purple", Color.white, 0.22f, velvetTex);
-            CreateUrpMaterial("M_MusicBox_Rosewood", new Color(0.55f, 0.30f, 0.35f), 0.42f, oakTex, null, new Vector2(1.5f, 1.5f));
-            CreateUrpMaterial("M_Brass_Gold", new Color(0.85f, 0.70f, 0.36f), 0.60f, null, new Color(0.25f, 0.20f, 0.08f)); // Latão com pátina
+            // Brinquedos Decorativos de Piso (roomScenery): sem contorno luminoso de plataforma, em penumbra até receberem luz do luar/Nanda/Yuna
+            CreateUrpMaterial("M_FloorProp_Red", new Color(0.84f, 0.48f, 0.44f), 0.20f, pastelWoodTex, new Color(0.055f, 0.032f, 0.030f));
+            CreateUrpMaterial("M_FloorProp_Yellow", new Color(0.90f, 0.74f, 0.46f), 0.20f, pastelWoodTex, new Color(0.060f, 0.050f, 0.032f));
+            CreateUrpMaterial("M_FloorProp_Blue", new Color(0.48f, 0.64f, 0.78f), 0.20f, pastelWoodTex, new Color(0.034f, 0.046f, 0.058f));
+            CreateUrpMaterial("M_FloorProp_Green", new Color(0.52f, 0.68f, 0.56f), 0.20f, pastelWoodTex, new Color(0.036f, 0.048f, 0.040f));
+            CreateUrpMaterial("M_FloorProp_Cream", new Color(0.94f, 0.89f, 0.78f), 0.16f, pastelWoodTex, new Color(0.065f, 0.060f, 0.052f));
+            CreateUrpMaterial("M_FloorProp_Burgundy", new Color(0.68f, 0.38f, 0.42f), 0.20f, pastelWoodTex, new Color(0.048f, 0.028f, 0.032f));
+            CreateUrpMaterial("M_FloorProp_Plush", Color.white, 0.12f, plushTex, new Color(0.055f, 0.046f, 0.038f));
 
-            // Livros Ilustrados antigos de conto de fadas
-            CreateUrpMaterial("M_Book_Covers", Color.white, 0.36f, bookTex);
-            CreateUrpMaterial("M_Book_Blue", new Color(0.32f, 0.44f, 0.56f), 0.35f);
-            CreateUrpMaterial("M_Book_Burgundy", new Color(0.55f, 0.28f, 0.32f), 0.35f);
-            CreateUrpMaterial("M_Book_Green", new Color(0.35f, 0.48f, 0.38f), 0.35f);
-            CreateUrpMaterial("M_Book_GoldPages", new Color(0.90f, 0.85f, 0.72f), 0.25f);
+            // Tecidos, couro e metais envelhecidos (Plataformas Puláveis)
+            CreateUrpMaterial("M_CircusDrum", Color.white, 0.28f, drumTex, new Color(0.22f, 0.18f, 0.16f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+            CreateUrpMaterial("M_RoyalVelvet_Purple", Color.white, 0.18f, velvetTex, new Color(0.20f, 0.16f, 0.24f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+            CreateUrpMaterial("M_MusicBox_Rosewood", new Color(0.62f, 0.38f, 0.42f), 0.32f, oakTex, new Color(0.20f, 0.14f, 0.16f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+            CreateUrpMaterial("M_Brass_Gold", new Color(0.88f, 0.74f, 0.44f), 0.45f, pastelWoodTex, new Color(0.24f, 0.20f, 0.12f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+
+            // Livros Ilustrados antigos de conto de fadas (Plataformas Puláveis)
+            CreateUrpMaterial("M_Book_Covers", Color.white, 0.28f, bookTex, new Color(0.20f, 0.18f, 0.16f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+            CreateUrpMaterial("M_Book_Blue", new Color(0.44f, 0.56f, 0.68f), 0.26f, pastelWoodTex, new Color(0.16f, 0.20f, 0.25f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+            CreateUrpMaterial("M_Book_Burgundy", new Color(0.66f, 0.38f, 0.42f), 0.26f, pastelWoodTex, new Color(0.22f, 0.14f, 0.16f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+            CreateUrpMaterial("M_Book_Green", new Color(0.46f, 0.60f, 0.50f), 0.26f, pastelWoodTex, new Color(0.16f, 0.21f, 0.18f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+            CreateUrpMaterial("M_Book_GoldPages", new Color(0.94f, 0.89f, 0.78f), 0.18f, pastelWoodTex, new Color(0.22f, 0.20f, 0.17f), Vector2.one, Vector2.zero, false, contourEmissionTex);
 
             // Castelinho e Portais
-            CreateUrpMaterial("M_Castle_Blocks", Color.white, 0.32f, castleTex, null, new Vector2(2f, 1f));
-            CreateUrpMaterial("M_Castle_TurretBlue", new Color(0.34f, 0.44f, 0.58f), 0.32f);
-            CreateUrpMaterial("M_FalseDoor_Poster", Color.white, 0.35f, doorTex);
+            CreateUrpMaterial("M_Castle_Blocks", Color.white, 0.28f, castleTex, new Color(0.20f, 0.20f, 0.24f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+            CreateUrpMaterial("M_Castle_TurretBlue", new Color(0.44f, 0.56f, 0.70f), 0.26f, pastelWoodTex, new Color(0.16f, 0.20f, 0.26f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+            CreateUrpMaterial("M_FalseDoor_Poster", Color.white, 0.35f, doorTex, new Color(0.18f, 0.18f, 0.20f), Vector2.one, Vector2.zero, false, contourEmissionTex);
             CreateUrpMaterial("M_DreamPortal_Gold", Color.white, 0.65f, portalTex, new Color(0.90f, 0.75f, 0.35f) * 1.8f);
 
-            // Personagens (Yuna e Nanda) em estilo conto de fadas
-            CreateUrpMaterial("M_Nanda_Glow", new Color(1.0f, 0.92f, 0.60f), 0.85f, null, new Color(1.0f, 0.85f, 0.40f) * 3.0f);
-            CreateUrpMaterial("M_Yuna_Dress", new Color(0.94f, 0.90f, 0.82f), 0.25f);  // Linho bege suave
-            CreateUrpMaterial("M_Yuna_Ribbon", new Color(0.72f, 0.28f, 0.32f), 0.35f); // Carmim desbotado
-            CreateUrpMaterial("M_Yuna_Skin", new Color(0.98f, 0.86f, 0.78f), 0.25f);
+            // Personagens: Nanda (maior fonte de luz, brilho intenso dourado) e Yuna (emissão muito tênue, quase um contorno luminoso)
+            CreateUrpMaterial("M_Nanda_Glow", new Color(1.0f, 0.94f, 0.68f), 0.85f, pastelWoodTex, new Color(1.0f, 0.86f, 0.38f) * 3.8f);
+            CreateUrpMaterial("M_Yuna_Dress", new Color(0.94f, 0.90f, 0.82f), 0.22f, pastelWoodTex, new Color(0.20f, 0.18f, 0.16f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+            CreateUrpMaterial("M_Yuna_Ribbon", new Color(0.72f, 0.28f, 0.32f), 0.28f, pastelWoodTex, new Color(0.20f, 0.08f, 0.09f), Vector2.one, Vector2.zero, false, contourEmissionTex);
+            CreateUrpMaterial("M_Yuna_Skin", new Color(0.98f, 0.86f, 0.78f), 0.22f, pastelWoodTex, new Color(0.20f, 0.17f, 0.15f), Vector2.one, Vector2.zero, false, contourEmissionTex);
 
-            // Cenografia Monumental
-            CreateUrpMaterial("M_Background_Wall", Color.white, 0.0f, wallpaperTex, new Color(0.76f, 0.76f, 0.84f), new Vector2(-15f, -2.5f), new Vector2(1f, 1f));
-            CreateUrpMaterial("M_Wall_Baseboard", Color.white, 0.08f, baseboardTex, new Color(0.68f, 0.68f, 0.76f), new Vector2(-30f, -1f), new Vector2(1f, 1f));
+            // Cenografia Monumental e de Piso em Penumbra Noturna (iluminadas pelo luar da janela e pela fadinha)
+            CreateUrpMaterial("M_Background_Wall", new Color(0.76f, 0.76f, 0.86f), 0.0f, wallpaperTex, new Color(0.22f, 0.22f, 0.28f), new Vector2(-15f, -2.5f), new Vector2(1f, 1f));
+            CreateUrpMaterial("M_Wall_Baseboard", new Color(0.76f, 0.74f, 0.84f), 0.06f, baseboardTex, new Color(0.16f, 0.15f, 0.20f), new Vector2(-30f, -1f), new Vector2(1f, 1f));
+            CreateUrpMaterial("M_Wall_Bunting", new Color(0.62f, 0.62f, 0.70f), 0.0f, buntingTex, new Color(0.13f, 0.13f, 0.16f), new Vector2(15f, 1f), Vector2.zero, alphaClip: true);
+            CreateUrpMaterial("M_Floor_Rug_Mandala", new Color(0.84f, 0.80f, 0.76f), 0.04f, mandalaRugTex, new Color(0.060f, 0.054f, 0.050f), Vector2.one, Vector2.zero, alphaClip: true);
+            CreateUrpMaterial("M_Floor_Rug_Striped", new Color(0.84f, 0.82f, 0.78f), 0.04f, stripedRugTex, new Color(0.060f, 0.056f, 0.054f), Vector2.one, Vector2.zero, alphaClip: true);
             CreateUrpMaterial("M_Moonlit_Window", Color.white, 0.0f, windowTex, new Color(0.78f, 0.84f, 0.96f) * 0.95f, new Vector2(-1f, -1f), new Vector2(1f, 1f), alphaClip: true);
 
             // 3. Configurar Volume URP de Pos-Processamento
@@ -124,7 +148,7 @@ namespace YunaLegend.EditorScripts
             UnityEngine.Object.DestroyImmediate(tex);
         }
 
-        private static void CreateUrpMaterial(string name, Color baseColor, float smoothness, Texture2D tex = null, Color? emission = null, Vector2? tiling = null, Vector2? offset = null, bool alphaClip = false)
+        private static void CreateUrpMaterial(string name, Color baseColor, float smoothness, Texture2D tex = null, Color? emission = null, Vector2? tiling = null, Vector2? offset = null, bool alphaClip = false, Texture2D emissionMapOverride = null)
         {
             var matPath = $"{MaterialsFolder}/{name}.mat";
             var mat = AssetDatabase.LoadAssetAtPath<Material>(matPath);
@@ -148,7 +172,7 @@ namespace YunaLegend.EditorScripts
             if (alphaClip)
             {
                 mat.SetFloat("_AlphaClip", 1f);
-                mat.SetFloat("_Cutoff", 0.5f);
+                mat.SetFloat("_Cutoff", 0.25f);
                 mat.EnableKeyword("_ALPHATEST_ON");
             }
             else
@@ -169,21 +193,53 @@ namespace YunaLegend.EditorScripts
 
             if (emission.HasValue)
             {
-                mat.EnableKeyword("_EMISSION");
                 mat.SetColor("_EmissionColor", emission.Value);
-                if (tex != null)
+                mat.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
+                MaterialEditor.FixupEmissiveFlag(mat);
+                mat.EnableKeyword("_EMISSION");
+                Texture2D emTex = emissionMapOverride != null ? emissionMapOverride : tex;
+                if (emTex != null)
                 {
-                    mat.SetTexture("_EmissionMap", tex);
+                    mat.SetTexture("_EmissionMap", emTex);
                     mat.SetTextureScale("_EmissionMap", scaleVal);
                     mat.SetTextureOffset("_EmissionMap", offsetVal);
                 }
             }
             else
             {
+                mat.SetColor("_EmissionColor", Color.black);
+                mat.SetTexture("_EmissionMap", null);
+                mat.globalIlluminationFlags = MaterialGlobalIlluminationFlags.EmissiveIsBlack;
                 mat.DisableKeyword("_EMISSION");
             }
 
             EditorUtility.SetDirty(mat);
+        }
+
+        private static Texture2D GeneratePlatformContourEmissionTexture()
+        {
+            int size = 256;
+            var tex = new Texture2D(size, size, TextureFormat.RGBA32, true);
+
+            // Mapa de emissao para plataformas pulaveis e Yuna:
+            // Interior muito tenue (0.14) para manter o corpo em penumbra e bordas/arestas (distEdge < 22px)
+            // subindo suavemente ate 1.0 para produzir o aspecto de contorno luminoso delicado no escuro.
+            int rimWidth = 22;
+
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    int distEdge = Mathf.Min(Mathf.Min(x, size - 1 - x), Mathf.Min(y, size - 1 - y));
+                    float rimFactor = 1.0f - Mathf.Clamp01((float)distEdge / rimWidth);
+                    float contour = Mathf.Lerp(0.14f, 1.0f, rimFactor * rimFactor);
+                    var c = new Color(contour, contour, contour, 1f);
+                    tex.SetPixel(x, y, c);
+                }
+            }
+
+            tex.Apply();
+            return tex;
         }
 
         // =========================================================================
@@ -756,6 +812,460 @@ namespace YunaLegend.EditorScripts
                     }
 
                     tex.SetPixel(x, y, c);
+                }
+            }
+
+            tex.Apply();
+            return tex;
+        }
+
+        private static Texture2D GenerateWallBuntingTexture()
+        {
+            int width = 1024;
+            int height = 128;
+            var tex = new Texture2D(width, height, TextureFormat.RGBA32, true);
+
+            // Paleta canonica exata de BackgroundRenderer.js (linhas 253-278):
+            // Cordao: rgba(120, 100, 150, 0.4) -> #786496
+            // Bandeirolas triangulares: ['#f43f5e', '#facc15', '#06b6d4', '#a855f7', '#10b981', '#fb923c']
+            var cordCol = new Color(120f / 255f, 100f / 255f, 150f / 255f, 1f);
+            Color[] flagColors = new Color[]
+            {
+                new Color(244f / 255f, 63f / 255f, 94f / 255f, 1f),   // #f43f5e (Rosa-carmim)
+                new Color(250f / 255f, 204f / 255f, 21f / 255f, 1f),  // #facc15 (Ouro)
+                new Color(6f / 255f, 182f / 255f, 212f / 255f, 1f),   // #06b6d4 (Ciano)
+                new Color(168f / 255f, 85f / 255f, 247f / 255f, 1f),  // #a855f7 (Lilas)
+                new Color(16f / 255f, 185f / 255f, 129f / 255f, 1f),  // #10b981 (Esmeralda)
+                new Color(251f / 255f, 146f / 255f, 60f / 255f, 1f),  // #fb923c (Laranja)
+            };
+
+            // 2 arcos canonicos de 180px por tile de 1024px (512px por arco, 5 bandeirolas por arco = 10 por tile)
+            int archPixels = 512;
+
+            for (int y = 0; y < height; y++)
+            {
+                // py canonico em [65..121] (56px verticais do topo para a base)
+                float py = 65.0f + (1.0f - (float)y / (height - 1)) * 56.0f;
+
+                for (int x = 0; x < width; x++)
+                {
+                    int archIndex = x / archPixels; // 0 ou 1
+                    float tArch = ((x % archPixels) / (float)archPixels); // 0..1 dentro do arco de 180px
+                    float px = tArch * 180.0f; // 0..180
+
+                    // Curva catenaria/quadratica do cordao (y = 70 nas pontas, descendo ate y = 102 no centro)
+                    float cordY = 70.0f + 4.0f * tArch * (1.0f - tArch) * 32.0f;
+
+                    Color outCol = Color.clear;
+
+                    // 1. Verificar se o pixel pertence a uma das 5 bandeirolas triangulares do arco (p = 0..4)
+                    for (int p = 0; p < 5; p++)
+                    {
+                        float tp = (p + 0.5f) / 5.0f;
+                        float flagCenterX = tp * 180.0f;
+                        float flagTopY = 70.0f + 4.0f * tp * (1.0f - tp) * 32.0f;
+
+                        float dy = py - flagTopY;
+                        if (dy >= -0.4f && dy <= 15.5f)
+                        {
+                            float halfW = 7.4f * (1.0f - Mathf.Clamp01(dy / 15.5f));
+                            float dx = Mathf.Abs(px - flagCenterX);
+                            if (dx <= halfW)
+                            {
+                                outCol = flagColors[(archIndex * 5 + p) % flagColors.Length];
+                                break;
+                            }
+                        }
+                    }
+
+                    // 2. Desenhar o cordao por cima da base das bandeirolas
+                    if (Mathf.Abs(py - cordY) <= 1.55f)
+                    {
+                        outCol = cordCol;
+                    }
+
+                    tex.SetPixel(x, y, outCol);
+                }
+            }
+
+            tex.Apply();
+            return tex;
+        }
+
+        private static Texture2D GeneratePastelToyWoodTexture()
+        {
+            int size = 256;
+            var tex = new Texture2D(size, size, TextureFormat.RGBA32, true);
+
+            // Textura neutra/quente aquarelada estilo Legend of Mana para brinquedos de madeira pintados em tempera pastel:
+            // - Bordas chanfradas desgastadas expondo madeira clara aquecida (como nos blocos empilhados e carrinho canonicos)
+            // - Veios sutis de madeira pintada e granulacao de aquarela (WatercolorWash)
+            var warmPaper = new Color(0.98f, 0.96f, 0.92f, 1f);
+            var wornPineEdge = new Color(1.00f, 0.92f, 0.76f, 1f);
+            var softGroove = new Color(0.76f, 0.68f, 0.60f, 1f);
+
+            int border = 16;
+
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    float wash = WatercolorWash(x * 1.4f, y * 1.4f);
+                    float grain = Mathf.Sin(y * 0.22f + Mathf.PerlinNoise(x * 0.03f, y * 0.03f) * 6.0f) * 0.045f;
+                    float brush = (Mathf.PerlinNoise(x * 0.08f, y * 0.025f) - 0.5f) * 0.07f;
+
+                    int distEdge = Mathf.Min(Mathf.Min(x, size - 1 - x), Mathf.Min(y, size - 1 - y));
+                    Color col;
+
+                    if (distEdge <= 3)
+                    {
+                        col = softGroove * wash;
+                    }
+                    else if (distEdge < border)
+                    {
+                        float edgeFactor = 1.0f - (float)(distEdge - 3) / (border - 3);
+                        float cornerWear = Mathf.PerlinNoise(x * 0.12f, y * 0.12f);
+                        float wearMask = Mathf.Clamp01(edgeFactor * (0.65f + cornerWear * 0.55f));
+                        col = Color.Lerp(warmPaper, wornPineEdge, wearMask) * (wash + grain * 0.5f);
+                    }
+                    else
+                    {
+                        float f = Mathf.Clamp(wash + grain + brush, 0.82f, 1.12f);
+                        col = new Color(
+                            Mathf.Clamp01(warmPaper.r * f),
+                            Mathf.Clamp01(warmPaper.g * f),
+                            Mathf.Clamp01(warmPaper.b * f),
+                            1f);
+                    }
+
+                    col.a = 1f;
+                    tex.SetPixel(x, y, col);
+                }
+            }
+
+            tex.Apply();
+            return tex;
+        }
+
+        private static Texture2D GenerateMandalaRugTexture()
+        {
+            int width = 512;
+            int height = 512;
+            var tex = new Texture2D(width, height, TextureFormat.RGBA32, true);
+
+            // Tapete circular persa/mandala aquarelado estilo Legend of Mana (paridade com mandala-rug.png):
+            // Fundo la escura quente (#241d1a), mandala de lotus de 8 pontas em terracota pastel (#b55845),
+            // ocre mel (#d4a362), creme pergaminho (#ead4aa) e salvia seca (#786e58), com 96 franjas de linho torcido na borda.
+            var darkWool = new Color(0.16f, 0.13f, 0.12f, 1f);
+            var terracotta = new Color(0.74f, 0.36f, 0.28f, 1f);
+            var honeyOchre = new Color(0.84f, 0.65f, 0.39f, 1f);
+            var parchmentCream = new Color(0.92f, 0.84f, 0.68f, 1f);
+            var sageTaupe = new Color(0.49f, 0.45f, 0.36f, 1f);
+            var fringeLight = new Color(0.76f, 0.64f, 0.48f, 1f);
+            var fringeDark = new Color(0.56f, 0.46f, 0.34f, 1f);
+
+            for (int y = 0; y < height; y++)
+            {
+                float ny = ((float)y / (height - 1) - 0.5f) * 2.0f; // -1..1
+                for (int x = 0; x < width; x++)
+                {
+                    float nx = ((float)x / (width - 1) - 0.5f) * 2.0f; // -1..1
+                    float r = Mathf.Sqrt(nx * nx + ny * ny);
+                    float angle = Mathf.Atan2(ny, nx);
+                    if (angle < 0f) angle += Mathf.PI * 2f;
+
+                    // 1. Franjas externas de linho/juta (r entre 0.86 e 0.98)
+                    float tasselIndex = angle / (Mathf.PI * 2f) * 96.0f;
+                    float tasselFrac = Mathf.Abs(tasselIndex - Mathf.Round(tasselIndex));
+                    float tasselJitter = (Mathf.PerlinNoise(Mathf.Round(tasselIndex) * 0.37f, 1.5f) - 0.5f) * 0.035f;
+                    float outerMaxR = 0.965f + tasselJitter;
+
+                    if (r > outerMaxR)
+                    {
+                        tex.SetPixel(x, y, Color.clear);
+                        continue;
+                    }
+
+                    float wash = WatercolorWash(x, y);
+                    float weave = (Mathf.Sin(x * 0.9f) * Mathf.Cos(y * 0.9f)) * 0.03f;
+
+                    if (r >= 0.855f)
+                    {
+                        // Fios individuais das franjas com separacao transparente nas pontas
+                        float fringeSpread = Mathf.Lerp(0.42f, 0.28f, (r - 0.855f) / 0.11f);
+                        if (tasselFrac > fringeSpread)
+                        {
+                            tex.SetPixel(x, y, Color.clear);
+                            continue;
+                        }
+                        Color fCol = Color.Lerp(fringeDark, fringeLight, 1.0f - tasselFrac / fringeSpread) * wash;
+                        fCol.a = 1f;
+                        tex.SetPixel(x, y, fCol);
+                        continue;
+                    }
+
+                    // 2. Corpo tecido do tapete (r < 0.855)
+                    float wave8 = Mathf.Cos(angle * 8f);
+                    float wave16 = Mathf.Cos(angle * 16f);
+                    float wave24 = Mathf.Cos(angle * 24f);
+
+                    Color col = darkWool;
+
+                    // Anel externo preto/cafe e friso dourado-ocre duplo (0.76 .. 0.855)
+                    if (r >= 0.82f)
+                    {
+                        col = darkWool * 0.90f;
+                    }
+                    else if (r >= 0.795f)
+                    {
+                        col = Color.Lerp(terracotta, honeyOchre, 0.5f + 0.5f * wave24);
+                    }
+                    else if (r >= 0.66f)
+                    {
+                        // Cinturao ornamental de 24 rosetas florais
+                        float rosetteR = 0.728f;
+                        float dr = Mathf.Abs(r - rosetteR);
+                        float petal = Mathf.Cos(angle * 24f);
+                        if (dr < 0.042f && petal > 0.15f)
+                        {
+                            col = (dr < 0.018f && petal > 0.65f) ? parchmentCream : terracotta;
+                        }
+                        else if (dr < 0.052f && Mathf.Abs(petal) <= 0.25f)
+                        {
+                            col = sageTaupe;
+                        }
+                    }
+                    else if (r >= 0.605f)
+                    {
+                        // Anel de perolas/renda creme-ocre (0.605 .. 0.66)
+                        if (Mathf.Abs(r - 0.632f) < 0.014f)
+                        {
+                            col = (wave24 > 0f) ? parchmentCream : honeyOchre;
+                        }
+                        else
+                        {
+                            col = terracotta * 0.85f;
+                        }
+                    }
+                    else
+                    {
+                        // Campo central com 8 arcos festonados e mandala de lotus de 8 pontas
+                        float archBoundary = 0.49f + wave8 * 0.075f;
+                        if (r > archBoundary)
+                        {
+                            // Cantoneiras em terracota/ocre com arabescos
+                            col = Color.Lerp(terracotta, honeyOchre, Mathf.Clamp01((r - archBoundary) * 9f));
+                            if (Mathf.Abs(r - (archBoundary + 0.02f)) < 0.012f)
+                            {
+                                col = parchmentCream;
+                            }
+                        }
+                        else
+                        {
+                            // Medallions paisley nos 8 gomos (r ~ 0.40, wave8 > 0.35)
+                            float paisleyR = 0.39f + wave16 * 0.02f;
+                            if (Mathf.Abs(r - paisleyR) < 0.065f && wave8 > 0.30f)
+                            {
+                                col = (Mathf.Abs(r - paisleyR) < 0.032f && wave8 > 0.65f) ? honeyOchre : terracotta;
+                            }
+
+                            // Estrela/Lotus central de 8 pontas (r < 0.29 + wave8 * 0.045)
+                            float starBoundary = 0.265f + wave8 * 0.045f;
+                            if (r <= starBoundary)
+                            {
+                                if (r >= starBoundary - 0.025f)
+                                {
+                                    col = parchmentCream;
+                                }
+                                else if (r >= 0.145f)
+                                {
+                                    col = (wave8 > 0.2f) ? honeyOchre : terracotta;
+                                    if (Mathf.Abs(r - 0.20f) < 0.016f && wave8 > 0.45f)
+                                    {
+                                        col = parchmentCream;
+                                    }
+                                }
+                                else if (r >= 0.065f)
+                                {
+                                    col = (wave16 > 0f) ? parchmentCream : sageTaupe;
+                                }
+                                else
+                                {
+                                    col = (r < 0.038f) ? honeyOchre : terracotta;
+                                }
+                            }
+                        }
+                    }
+
+                    col = new Color(
+                        Mathf.Clamp01((col.r + weave) * wash),
+                        Mathf.Clamp01((col.g + weave) * wash),
+                        Mathf.Clamp01((col.b + weave) * wash),
+                        1f);
+                    tex.SetPixel(x, y, col);
+                }
+            }
+
+            tex.Apply();
+            return tex;
+        }
+
+        private static Texture2D GenerateStripedRugTexture()
+        {
+            int width = 512;
+            int height = 512;
+            var tex = new Texture2D(width, height, TextureFormat.RGBA32, true);
+
+            // Tapete oval de la trancada em tons pasteis estilo Legend of Mana (paridade com oval-rug-v1.png):
+            // - Bordas externas trancadas em rosa-framboesa empoeirado (#b84a5e / #963648)
+            // - Aneis internos trancados em ocre-mel (#d99834) e creme-baunilha (#ecd8b4)
+            // - Centro tecido em azul-petroleo/salvia pastel (#2b7882 / #388a94)
+            // - Bordado floral central: margarida creme de 5 petalas no centro, 2 flores menores nas laterais,
+            //   folhas verde-salvia (#8c9e4e) e arabescos dourados (#d99834)
+            // - Pompons/borlas nas duas pontas laterais do oval
+            var berryLight = new Color(0.76f, 0.32f, 0.40f, 1f);
+            var berryDark = new Color(0.58f, 0.21f, 0.28f, 1f);
+            var honeyOchre = new Color(0.86f, 0.60f, 0.22f, 1f);
+            var creamBraid = new Color(0.93f, 0.85f, 0.71f, 1f);
+            var tealCenter = new Color(0.18f, 0.47f, 0.51f, 1f);
+            var tealLight = new Color(0.24f, 0.55f, 0.59f, 1f);
+            var sageLeaf = new Color(0.56f, 0.64f, 0.32f, 1f);
+            var flowerCream = new Color(0.95f, 0.89f, 0.76f, 1f);
+
+            for (int y = 0; y < height; y++)
+            {
+                float ny = ((float)y / (height - 1) - 0.5f) * 2.0f; // -1..1
+                for (int x = 0; x < width; x++)
+                {
+                    float nx = ((float)x / (width - 1) - 0.5f) * 2.0f; // -1..1
+
+                    // 1. Verificar pompons/borlas laterais nas extremidades esquerda/direita (|nx| entre 0.84 e 0.98, |ny| < 0.46)
+                    float absX = Mathf.Abs(nx);
+                    float rOval = Mathf.Sqrt((nx / 0.88f) * (nx / 0.88f) + (ny / 0.90f) * (ny / 0.90f));
+
+                    float wash = WatercolorWash(x, y);
+
+                    if (rOval > 1.0f)
+                    {
+                        // Desenhar os 6 tufos de borlas laterais (3 pares em ny = -0.32, -0.19, -0.06, +0.06, +0.19, +0.32)
+                        if (absX >= 0.82f && absX <= 0.985f && Mathf.Abs(ny) <= 0.42f)
+                        {
+                            float tuftIdx = (ny + 0.42f) / 0.12f;
+                            int idx = Mathf.FloorToInt(tuftIdx);
+                            float fracY = Mathf.Abs((tuftIdx - idx) - 0.5f) * 2.0f; // 0 no centro do tufo, 1 na borda
+                            float maxReach = 0.975f - Mathf.Abs(ny) * 0.14f - fracY * 0.055f;
+                            if (absX <= maxReach && fracY < 0.86f)
+                            {
+                                bool isCreamTuft = (idx % 2 == 1);
+                                float strandWave = Mathf.Sin(ny * 95f + absX * 25f) * 0.06f;
+                                Color tuftCol = (isCreamTuft ? creamBraid : honeyOchre) * (0.94f + strandWave - fracY * 0.15f) * wash;
+                                tuftCol.a = 1f;
+                                tex.SetPixel(x, y, tuftCol);
+                                continue;
+                            }
+                        }
+
+                        tex.SetPixel(x, y, Color.clear);
+                        continue;
+                    }
+
+                    // 2. Relevo de corda trancada (diagonal twist) para os aneis da borda
+                    float angle = Mathf.Atan2(ny, nx);
+                    float braidTwist = Mathf.Sin(angle * 56.0f + rOval * 42.0f) * 0.08f;
+                    Color col;
+
+                    if (rOval >= 0.78f)
+                    {
+                        // 3 aneis trancados externos em rosa-framboesa pastel
+                        float ringPhase = Mathf.Sin((rOval - 0.78f) / 0.22f * Mathf.PI * 3.0f);
+                        float shade = (ringPhase > 0f ? 1.04f : 0.92f) + braidTwist;
+                        col = Color.Lerp(berryDark, berryLight, Mathf.Clamp01(shade));
+                    }
+                    else if (rOval >= 0.71f)
+                    {
+                        // Anel trancado ocre-mel
+                        col = honeyOchre * (0.98f + braidTwist);
+                    }
+                    else if (rOval >= 0.64f)
+                    {
+                        // Anel trancado creme-baunilha
+                        col = creamBraid * (0.98f + braidTwist);
+                    }
+                    else
+                    {
+                        // 3. Centro tecido em azul-petroleo/salvia pastel com fileiras horizontais de trico
+                        float rowPhase = Mathf.Sin(ny * 78.0f);
+                        float stitchPhase = Mathf.Sin(nx * 90.0f + ny * 35.0f) * 0.04f;
+                        col = Color.Lerp(tealCenter, tealLight, 0.5f + 0.35f * rowPhase + stitchPhase);
+
+                        // 4. Bordado Floral Central estilo Legend of Mana:
+                        // (a) Folhas verde-salvia simetricas ao redor da flor central e flores laterais
+                        float sx = Mathf.Abs(nx);
+                        float sy = Mathf.Abs(ny);
+
+                        // Arabescos dourados em S partindo do centro (sx de 0.12 a 0.38)
+                        float scrollY = 0.16f * Mathf.Sin((sx - 0.10f) * 9.5f);
+                        float dScroll = Mathf.Abs(sy - Mathf.Abs(scrollY));
+                        if (sx >= 0.10f && sx <= 0.37f && dScroll < 0.024f)
+                        {
+                            col = honeyOchre;
+                        }
+
+                        // Folhas salvia diagonais (perto do centro em (0.14, 0.09) e (0.28, 0.13))
+                        float leaf1 = Vector2.Distance(new Vector2(sx * 0.85f + sy * 0.52f, -sx * 0.52f + sy * 0.85f), new Vector2(0.16f, 0.01f));
+                        float leaf2 = Vector2.Distance(new Vector2(sx * 0.80f - sy * 0.60f, sx * 0.60f + sy * 0.80f), new Vector2(0.18f, 0.19f));
+                        if (leaf1 < 0.048f || leaf2 < 0.045f)
+                        {
+                            col = sageLeaf;
+                        }
+
+                        // Pontinhos e botoes florais creme/ocre (acima/abaixo e nas pontas)
+                        if (Vector2.Distance(new Vector2(sx, sy), new Vector2(0f, 0.28f)) < 0.036f ||
+                            Vector2.Distance(new Vector2(sx, sy), new Vector2(0.55f, 0f)) < 0.032f)
+                        {
+                            col = flowerCream;
+                        }
+                        if (Vector2.Distance(new Vector2(sx, sy), new Vector2(0.09f, 0.22f)) < 0.022f ||
+                            Vector2.Distance(new Vector2(sx, sy), new Vector2(0.42f, 0.12f)) < 0.022f)
+                        {
+                            col = honeyOchre;
+                        }
+
+                        // (b) Flor central de 5 petalas creme com miolo ocre (em (0, 0), raio ~0.145)
+                        float rCenterFlower = Mathf.Sqrt(nx * nx + ny * ny);
+                        float aCenter = Mathf.Atan2(ny, nx);
+                        float petalRadius = 0.095f + Mathf.Abs(Mathf.Cos(aCenter * 2.5f)) * 0.055f;
+                        if (rCenterFlower <= 0.046f)
+                        {
+                            col = honeyOchre * (1.05f - rCenterFlower * 3.0f);
+                        }
+                        else if (rCenterFlower <= petalRadius)
+                        {
+                            float radialStitch = Mathf.Sin(aCenter * 25f) * 0.03f;
+                            col = flowerCream * (0.98f + radialStitch);
+                        }
+
+                        // (c) Duas flores laterais de 5 petalas creme com miolo ocre (em nx = +-0.42, ny = 0)
+                        float dxSide = sx - 0.42f;
+                        float rSideFlower = Mathf.Sqrt(dxSide * dxSide + ny * ny);
+                        float aSide = Mathf.Atan2(ny, dxSide);
+                        float sidePetalR = 0.062f + Mathf.Abs(Mathf.Cos(aSide * 2.5f)) * 0.036f;
+                        if (rSideFlower <= 0.030f)
+                        {
+                            col = honeyOchre;
+                        }
+                        else if (rSideFlower <= sidePetalR)
+                        {
+                            col = flowerCream;
+                        }
+                    }
+
+                    col = new Color(
+                        Mathf.Clamp01(col.r * wash),
+                        Mathf.Clamp01(col.g * wash),
+                        Mathf.Clamp01(col.b * wash),
+                        1f);
+                    tex.SetPixel(x, y, col);
                 }
             }
 

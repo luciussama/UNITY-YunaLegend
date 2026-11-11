@@ -14,8 +14,8 @@ namespace YunaLegend.DarkRoom
         [SerializeField] private Color normalColor = new Color(0.99f, 0.88f, 0.40f); // Dourado-ambar quente
         [SerializeField] private Color annoyedColor = new Color(0.95f, 0.45f, 0.20f);
         [SerializeField] private Color happyColor = new Color(1.0f, 0.95f, 0.60f);
-        [SerializeField] private float baseIntensity = 2.5f;
-        [SerializeField] private float lightRange = 7.0f;
+        [SerializeField] private float baseIntensity = 6.0f;
+        [SerializeField] private float lightRange = 11.5f;
 
         [Header("Comportamento de Voo e Mola")]
         [SerializeField] private float hoverSmoothTime = 0.35f;

@@ -44,47 +44,50 @@ namespace YunaLegend.EditorScripts
             var listener = camGo.GetComponent<AudioListener>();
             if (listener == null) listener = camGo.AddComponent<AudioListener>();
 
-            // 2. Luz de luar (Directional Light azulada de conto de fadas)
+            // 2. Penumbra Global do Quarto + Luz de luar tênue de preenchimento
+            RenderSettings.ambientMode = AmbientMode.Flat;
+            RenderSettings.ambientLight = new Color(0.03f, 0.03f, 0.06f);
+
             var lightGo = GameObject.Find("Moonlight Directional Light");
             if (lightGo == null) lightGo = new GameObject("Moonlight Directional Light");
             var dirLight = lightGo.GetComponent<Light>();
             if (dirLight == null) dirLight = lightGo.AddComponent<Light>();
             dirLight.type = LightType.Directional;
-            dirLight.color = new Color(0.58f, 0.68f, 0.95f);
-            dirLight.intensity = 0.85f;
+            dirLight.color = new Color(0.38f, 0.46f, 0.70f);
+            dirLight.intensity = 0.10f;
             lightGo.transform.rotation = Quaternion.Euler(48f, -28f, 0f);
 
-            // 2c. Foco de Luar Real Difuso na Janela (URP Spot Light nativo com sombras suaves reais)
+            // 2c. Foco de Luar Real Difuso na Janela 1 (unica fonte de luz ambiental que incide na sala e se espalha pelos objetos)
             var moonSpotGo = GameObject.Find("Window_Moonlight_Spot");
             if (moonSpotGo == null) moonSpotGo = new GameObject("Window_Moonlight_Spot");
-            moonSpotGo.transform.position = new Vector3(29.5f, 1.8f, 3.8f);
-            moonSpotGo.transform.rotation = Quaternion.Euler(18f, 14f, 0f);
+            moonSpotGo.transform.position = new Vector3(29.5f, 2.2f, 6.1f);
+            moonSpotGo.transform.LookAt(new Vector3(35.0f, -9.1f, 2.0f));
 
             var spotLight = moonSpotGo.GetComponent<Light>();
             if (spotLight == null) spotLight = moonSpotGo.AddComponent<Light>();
             spotLight.type = LightType.Spot;
-            spotLight.color = new Color(0.68f, 0.82f, 1.0f);
-            spotLight.intensity = 1.10f;
-            spotLight.range = 12f;
-            spotLight.spotAngle = 56f;
-            spotLight.innerSpotAngle = 16f; // Difusao gradual e suave nas bordas do feixe
+            spotLight.color = new Color(0.66f, 0.82f, 1.0f);
+            spotLight.intensity = 3.60f;
+            spotLight.range = 22f;
+            spotLight.spotAngle = 72f;
+            spotLight.innerSpotAngle = 22f; // Difusao gradual e suave nas bordas do feixe
             spotLight.shadows = LightShadows.Soft; // Sombras suaves reais da engine
             spotLight.cookie = null;
 
             // 2d. Foco de Luar Suave na 2a Janela Canonica (NIGHT_WINDOWS[1] = 1950 -> X=73.75m)
             var moonSpot2Go = GameObject.Find("Window_Moonlight_Spot_2");
             if (moonSpot2Go == null) moonSpot2Go = new GameObject("Window_Moonlight_Spot_2");
-            moonSpot2Go.transform.position = new Vector3(73.75f, 1.8f, 3.8f);
-            moonSpot2Go.transform.rotation = Quaternion.Euler(18f, 14f, 0f);
+            moonSpot2Go.transform.position = new Vector3(73.75f, 2.2f, 6.1f);
+            moonSpot2Go.transform.LookAt(new Vector3(79.25f, -9.1f, 2.0f));
 
             var spotLight2 = moonSpot2Go.GetComponent<Light>();
             if (spotLight2 == null) spotLight2 = moonSpot2Go.AddComponent<Light>();
             spotLight2.type = LightType.Spot;
-            spotLight2.color = new Color(0.68f, 0.82f, 1.0f);
-            spotLight2.intensity = 1.10f;
-            spotLight2.range = 12f;
-            spotLight2.spotAngle = 56f;
-            spotLight2.innerSpotAngle = 16f;
+            spotLight2.color = new Color(0.66f, 0.82f, 1.0f);
+            spotLight2.intensity = 3.60f;
+            spotLight2.range = 22f;
+            spotLight2.spotAngle = 72f;
+            spotLight2.innerSpotAngle = 22f;
             spotLight2.shadows = LightShadows.Soft;
             spotLight2.cookie = null;
 
@@ -135,7 +138,17 @@ namespace YunaLegend.EditorScripts
                 LoadMat("M_Moonbeam_Shaft"),
                 LoadMat("M_AmbientDust_Particle"),
                 LoadMat("M_Moonlight_Floor_Projection"),
-                LoadMat("M_Wall_Baseboard")
+                LoadMat("M_Wall_Baseboard"),
+                LoadMat("M_Wall_Bunting"),
+                LoadMat("M_Floor_Rug_Mandala"),
+                LoadMat("M_Floor_Rug_Striped"),
+                LoadMat("M_FloorProp_Red"),
+                LoadMat("M_FloorProp_Yellow"),
+                LoadMat("M_FloorProp_Blue"),
+                LoadMat("M_FloorProp_Green"),
+                LoadMat("M_FloorProp_Cream"),
+                LoadMat("M_FloorProp_Burgundy"),
+                LoadMat("M_FloorProp_Plush")
             );
 
             builder.BuildBlockout();
@@ -172,15 +185,15 @@ namespace YunaLegend.EditorScripts
                 if (bowCol != null) Object.DestroyImmediate(bowCol);
                 ApplyMat(bow, LoadMat("M_Yuna_Ribbon"));
 
-                // Luz halo suave da Yuna (Roteiro 01 - fill light sutil)
+                // Luz halo muito tenue da Yuna (contorno luminoso proximo)
                 var haloGo = new GameObject("Yuna_FillLight");
                 haloGo.transform.SetParent(yunaGo.transform, false);
                 haloGo.transform.localPosition = new Vector3(0f, 0.8f, 0f);
                 var fillLight = haloGo.AddComponent<Light>();
                 fillLight.type = LightType.Point;
-                fillLight.color = new Color(1.0f, 0.86f, 0.76f); // Tom pessego suave
-                fillLight.intensity = 1.0f;
-                fillLight.range = 4.2f;
+                fillLight.color = new Color(1.0f, 0.86f, 0.74f); // Tom pessego suave
+                fillLight.intensity = 0.55f;
+                fillLight.range = 2.6f;
 
                 yunaGo.AddComponent<AudioSource>();
                 yunaGo.AddComponent<Yuna25DPlayerController>();
@@ -205,45 +218,57 @@ namespace YunaLegend.EditorScripts
                         ApplyMat(newBow, LoadMat("M_Yuna_Ribbon"));
                     }
                 }
+                var haloTrans = yunaGo.transform.Find("Yuna_FillLight");
+                if (haloTrans != null)
+                {
+                    var fillLight = haloTrans.GetComponent<Light>();
+                    if (fillLight != null)
+                    {
+                        fillLight.color = new Color(1.0f, 0.86f, 0.74f);
+                        fillLight.intensity = 0.55f;
+                        fillLight.range = 2.6f;
+                    }
+                }
             }
 
-            // 5. Instanciar Nanda (Fadinha Guia com nucleo emissivo ambar quente)
+            // 5. Instanciar Nanda (Fadinha Guia: maior fonte de luz do quarto escuro)
             var nandaGo = GameObject.Find("Nanda_FairyGuide");
             if (nandaGo == null)
             {
                 nandaGo = new GameObject("Nanda_FairyGuide");
-                nandaGo.transform.position = new Vector3(2.8f, -5.2f, 0.2f);
+                nandaGo.transform.position = new Vector3(DarkRoomStartLayout.FirstPlatformX, -7.35f, -0.15f);
 
                 var sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 sphere.name = "Sparkle_Body";
                 sphere.transform.SetParent(nandaGo.transform, false);
-                sphere.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+                sphere.transform.localScale = new Vector3(0.28f, 0.28f, 0.28f);
                 var sphereCol = sphere.GetComponent<Collider>();
                 if (sphereCol != null) Object.DestroyImmediate(sphereCol);
                 ApplyMat(sphere, LoadMat("M_Nanda_Glow"));
 
                 var fairyLight = nandaGo.AddComponent<Light>();
                 fairyLight.type = LightType.Point;
-                fairyLight.color = new Color(1.0f, 0.85f, 0.35f); // Ambar dourado quente
-                fairyLight.intensity = 3.2f;
-                fairyLight.range = 8.5f;
+                fairyLight.color = new Color(1.0f, 0.85f, 0.38f); // Ambar dourado quente
+                fairyLight.intensity = 6.0f;
+                fairyLight.range = 11.5f;
 
                 nandaGo.AddComponent<NandaFairyGuide>();
             }
             else
             {
-                nandaGo.transform.position = new Vector3(2.8f, -5.2f, 0.2f);
+                nandaGo.transform.position = new Vector3(DarkRoomStartLayout.FirstPlatformX, -7.35f, -0.15f);
                 var sphere = nandaGo.transform.Find("Sparkle_Body");
                 if (sphere != null)
                 {
+                    sphere.localScale = new Vector3(0.28f, 0.28f, 0.28f);
                     ApplyMat(sphere.gameObject, LoadMat("M_Nanda_Glow"));
                 }
                 var fairyLight = nandaGo.GetComponent<Light>();
                 if (fairyLight != null)
                 {
-                    fairyLight.color = new Color(1.0f, 0.85f, 0.35f);
-                    fairyLight.intensity = 3.2f;
-                    fairyLight.range = 8.5f;
+                    fairyLight.color = new Color(1.0f, 0.85f, 0.38f);
+                    fairyLight.intensity = 6.0f;
+                    fairyLight.range = 11.5f;
                 }
             }
 
@@ -267,6 +292,8 @@ namespace YunaLegend.EditorScripts
 
                 var soNanda = new SerializedObject(nandaGuide);
                 soNanda.FindProperty("twinkleSfx").objectReferenceValue = fairyTwinkleClip;
+                soNanda.FindProperty("baseIntensity").floatValue = 6.0f;
+                soNanda.FindProperty("lightRange").floatValue = 11.5f;
                 soNanda.ApplyModifiedProperties();
                 EditorUtility.SetDirty(nandaGuide);
             }
