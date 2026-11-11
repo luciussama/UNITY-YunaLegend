@@ -43,6 +43,10 @@ namespace YunaLegend.Camera25D
         [SerializeField] private float verticalFramingOffset = 1.9f;
         [SerializeField] private float framingSmoothTime = 0.28f;
 
+        [SerializeField, Min(1f)] private float routeDistanceScale = 1.05f;
+
+        public float RouteDistanceScale { get => routeDistanceScale; set { routeDistanceScale = Mathf.Max(1f,value); framedTarget=-1; } }
+
         private NandaFairyGuide guide;
         private DarkRoomPlatformMarker[] platforms;
         private int framedTarget = -1;
@@ -123,10 +127,12 @@ namespace YunaLegend.Camera25D
             var target = FindPlatform(index);
             // At the beginning of both runs, the current support is the room floor.
             var support = index == 0 || index == 22 ? null : FindPlatform(index - 1);
-            float anchorX = support != null ? support.transform.position.x : playerTarget.transform.position.x;
+            float anchorX = support != null ? (support.spec.index==YieldingWoodFurniture.PlatformIndex?support.GetTakeoffPoint(scrollDirection,.35f).x:support.GetTopCenterWorld().x) : playerTarget.transform.position.x;
             float anchorY = support != null ? support.GetTopCenterWorld().y : playerTarget.transform.position.y;
-            float reach = target != null ? Mathf.Abs(target.transform.position.x - anchorX) + target.spec.width * 0.5f + 0.7f : 0f;
-            routeWidth = Mathf.Clamp(reach / 0.68f, minimumViewWidth, maximumViewWidth);
+            float reach = target != null ? (target.spec.index==YieldingWoodFurniture.PlatformIndex
+                ? Mathf.Abs(target.GetLandingPoint(scrollDirection).x-anchorX)+1.9f
+                : Mathf.Max(Mathf.Abs(target.Support.MinX-anchorX),Mathf.Abs(target.Support.MaxX-anchorX))+.7f) : 0f;
+            routeWidth = Mathf.Clamp(reach / 0.68f, minimumViewWidth, maximumViewWidth) * routeDistanceScale;
             routeY = (target != null ? Mathf.Lerp(anchorY, target.GetTopCenterWorld().y, 0.3f) : anchorY) + verticalFramingOffset;
             framedTarget = index;
         }
@@ -137,6 +143,13 @@ namespace YunaLegend.Camera25D
             {
                 transform.position = new Vector3(transform.position.x, fixedY, fixedZ);
                 return;
+            }
+            var current=FindPlatform(playerTarget.CurrentSupportIndex);
+            var traversal=current!=null?current.GetComponent<YieldingWoodFurniture>():null;
+            if(traversal!=null&&traversal.IsTraversing)
+            {
+                routeWidth=minimumViewWidth*routeDistanceScale;routeY=traversal.RestTopY+verticalFramingOffset;
+                framedTarget=-2;ApplyRouteFrame(snap);return;
             }
             if (guide == null) guide = Object.FindFirstObjectByType<NandaFairyGuide>();
             int index = guide != null ? guide.CurrentTargetPlatformIndex : 0;
@@ -170,8 +183,8 @@ namespace YunaLegend.Camera25D
             var castle = FindPlatform(9);
             var door = FindPlatform(21);
             if (castle == null || door == null) return;
-            float left = castle.transform.position.x - castle.spec.width * 0.5f;
-            float right = door.transform.position.x + door.spec.width * 0.5f;
+            float left = castle.Support.MinX;
+            float right = door.Support.MaxX;
             float width = right - left + 3f;
             float depth = width / (2f * Mathf.Tan(fixedFov * Mathf.Deg2Rad * 0.5f) * Aspect);
             overviewPosition = new Vector3((left + right) * 0.5f, (castle.GetTopCenterWorld().y + door.GetTopCenterWorld().y) * 0.5f + 1f, -depth);

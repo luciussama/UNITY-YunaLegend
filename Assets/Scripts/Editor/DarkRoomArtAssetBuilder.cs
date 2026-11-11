@@ -184,6 +184,7 @@ namespace YunaLegend.EditorScripts
             DarkRoomValueHierarchySetup.ConfigureMaterials();
 
             DarkRoomPaintedPlatformSetup.ConfigureMaterials();
+            DarkRoomFurnitureSetup.ConfigureMaterials();
 
             // 3. Configurar Volume URP de Pos-Processamento
             ConfigurePostProcessingVolume();

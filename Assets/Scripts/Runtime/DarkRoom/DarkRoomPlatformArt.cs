@@ -22,7 +22,11 @@ namespace YunaLegend.DarkRoom
         BookRibbon = 13,
         BookOchre = 14,
         BookSpine = 15,
-        BookCover = 16
+        BookCover = 16,
+        FurnitureWood = 17,
+        FurnitureShade = 18,
+        FurnitureTrim = 19,
+        FurnitureBrass = 20
     }
 
     /// <summary>
@@ -31,8 +35,66 @@ namespace YunaLegend.DarkRoom
     /// Cada modelo herda as dimensoes canonicas de <see cref="DarkRoomPlatformGeometry"/>
     /// e encosta a superficie de pouso na face superior do colisor de contato.
     /// </summary>
-    public static class DarkRoomPlatformArt
+    public static partial class DarkRoomPlatformArt
     {
+        public const float BearHeadSquareness = .90f;
+        public const float BearTopFlatten = .12f;
+
+        public static PlatformSupportShape[] GetSupportShapes(PlatformSpec spec)
+        {
+            if (spec.index == 0)
+            {
+                float w=spec.width,h=spec.height,bottom=-h*.5f;
+                float plinth=Mathf.Min(.32f,h*.30f), headHeight=h-plinth;
+                float depth=Mathf.Min(spec.depth*.74f,1.65f), radius=w*.16f;
+                float baseX=w*.5f+.26f,baseZ=Mathf.Min(depth*.50f,.84f),body=plinth*.8f,rim=plinth-body;
+                return new[] {
+                    PlatformSupportShape.MeshShape("Cabeca_Urso",CushionMesh(w,headHeight,depth,BearHeadSquareness,BearTopFlatten),new Vector3(0,bottom+plinth+headHeight*.5f,0),Vector3.one),
+                    PlatformSupportShape.MeshShape("Orelha_Esq",PrimitiveMesh(PrimitiveType.Sphere),new Vector3(-w*.44f,h*.5f-radius*.55f,-.05f),new Vector3(radius*2,radius*2,radius*.85f)),
+                    PlatformSupportShape.MeshShape("Orelha_Dir",PrimitiveMesh(PrimitiveType.Sphere),new Vector3(w*.44f,h*.5f-radius*.55f,-.05f),new Vector3(radius*2,radius*2,radius*.85f)),
+                    PlatformSupportShape.MeshShape("Base_Madeira",BeveledPlinthMesh(baseX,baseZ,body,.025f),new Vector3(0,bottom+body*.5f,0),Vector3.one),
+                    PlatformSupportShape.MeshShape("Base_Aro",BeveledPlinthMesh(baseX+.03f,baseZ+.03f,rim,.015f),new Vector3(0,bottom+body+rim*.5f,0),Vector3.one)
+                };
+            }
+            if(spec.index==YieldingWoodFurniture.PlatformIndex)
+            {
+                const float gap=.04f,plankThickness=.16f;
+                float width=(spec.width-gap)*.5f;
+                var left=PlatformSupportShape.Box(new Vector3(-(gap+width)*.5f,spec.height*.5f-plankThickness*.5f,0),Quaternion.identity,new Vector3(width,plankThickness,spec.depth));
+                var right=PlatformSupportShape.Box(new Vector3((gap+width)*.5f,spec.height*.5f-plankThickness*.5f,0),Quaternion.identity,new Vector3(width,plankThickness,spec.depth));
+                left.name="Tampo_Esquerdo";right.name="Tampo_Direito";
+                return new[]{left,right};
+            }
+            var contact=spec.contact;
+            if(!contact.IsCustom)
+                return new[]{PlatformSupportShape.Box(Vector3.zero,Quaternion.identity,new Vector3(spec.width,spec.height,spec.depth))};
+            float thickness=Mathf.Min(.35f,spec.height*.35f);
+            var rotation=Quaternion.Euler(0,0,contact.tiltDegrees);
+            var center=new Vector3(contact.offsetX,spec.height*.5f+contact.offsetY,0)-rotation*Vector3.up*thickness*.5f;
+            return new[]{PlatformSupportShape.Box(center,rotation,new Vector3(contact.EffectiveWidth(spec.width),thickness,contact.EffectiveDepth(spec.depth)))};
+        }
+
+        static GameObject AddSupportVisual(Transform parent, PlatformSupportShape shape, Material material) =>
+            AddPart(parent,shape.name,shape.mesh,material,shape.position,shape.rotation,shape.scale);
+
+        public static void BuildContact(PlatformSpec spec, Transform root)
+        {
+            var shapes=GetSupportShapes(spec);
+            if(shapes.Length==1&&shapes[0].mesh==null)
+            {
+                var shape=shapes[0];root.localPosition=shape.position;root.localRotation=shape.rotation;root.localScale=shape.scale;
+                root.gameObject.AddComponent<BoxCollider>().size=shape.boxSize;
+                return;
+            }
+            foreach(var shape in shapes)
+            {
+                var go=new GameObject(shape.name);go.transform.SetParent(root,false);
+                go.transform.localPosition=shape.position;go.transform.localRotation=shape.rotation;go.transform.localScale=shape.scale;
+                if(shape.mesh!=null)go.AddComponent<MeshCollider>().sharedMesh=shape.mesh;
+                else go.AddComponent<BoxCollider>().size=shape.boxSize;
+            }
+        }
+
         private static readonly Dictionary<string, Mesh> MeshCache = new Dictionary<string, Mesh>();
         private static readonly Dictionary<PrimitiveType, Mesh> PrimitiveCache = new Dictionary<PrimitiveType, Mesh>();
 
@@ -44,6 +106,8 @@ namespace YunaLegend.DarkRoom
             {
                 case DarkRoomPlatformGeometry.TeddyHeadArtKey:
                     return BuildTeddyBear(geometry, materials, parent);
+                case DarkRoomPlatformGeometry.YieldingFurnitureArtKey:
+                    return BuildYieldingFurniture(geometry,materials,parent);
                 case DarkRoomPlatformGeometry.BookStackArtKey:
                     return BuildBookStack(geometry, contact, materials, parent);
                 default:
@@ -88,26 +152,20 @@ namespace YunaLegend.DarkRoom
             float rx = w * 0.5f;
             float ry = headHeight * 0.5f / .88f; // Match the virtual radius used by the flattened mesh.
             float rz = headDepth * 0.5f;
-            const float headSquareness = 0.90f;
-            const float headTopFlatten = 0.12f;
+            const float headSquareness = BearHeadSquareness;
+            const float headTopFlatten = BearTopFlatten;
 
             var root = new GameObject("Visual_3D");
             root.transform.SetParent(parent, false);
             var stitches = new StitchBuilder();
 
-            // ---- Banqueta de madeira: mais larga que o urso, topo plano e circular ----
-            float plinthRadiusX = w * 0.5f + 0.26f;
-            float plinthRadiusZ = Mathf.Min(headDepth * 0.50f, 0.84f);
-            float bodyHeight = plinthHeight * 0.80f;
-            float rimHeight = plinthHeight - bodyHeight;
-            AddPart(root.transform, "Base_Madeira", BeveledPlinthMesh(plinthRadiusX, plinthRadiusZ, bodyHeight, .025f), wood,
-                new Vector3(0f, bottom + bodyHeight * 0.5f, 0f), Quaternion.identity, Vector3.one);
-            AddPart(root.transform, "Base_Aro", BeveledPlinthMesh(plinthRadiusX + .03f, plinthRadiusZ + .03f, rimHeight, .015f), wood,
-                new Vector3(0f, bottom + bodyHeight + rimHeight * 0.5f, 0f), Quaternion.identity, Vector3.one);
-
-            // ---- Cabeca de pelucia: massa redonda com topo plano de pouso ----
-            AddPart(root.transform, "Cabeca_Urso", CushionMesh(w, headHeight, headDepth, headSquareness, headTopFlatten), fur,
-                new Vector3(0f, headCenterY, 0f), Quaternion.identity, Vector3.one);
+            var supportSpec = new PlatformSpec(0,"Bear",DarkRoomPhase.Phase1Ascent,0,0,w,d,h,Color.white,"");
+            var supportShapes = GetSupportShapes(supportSpec);
+            float plinthRadiusX = w * .5f + .26f;
+            float plinthRadiusZ = Mathf.Min(headDepth * .50f, .84f);
+            AddSupportVisual(root.transform,supportShapes[3],wood);
+            AddSupportVisual(root.transform,supportShapes[4],wood);
+            AddSupportVisual(root.transform,supportShapes[0],fur);
 
             // ---- Orelhas redondas nos cantos superiores ----
             float earRadius = w * 0.16f;
@@ -115,9 +173,9 @@ namespace YunaLegend.DarkRoom
             {
                 string suffix = side < 0 ? "Esq" : "Dir";
                 var earCenter = new Vector3(side * w * 0.44f, top - earRadius * 0.55f, -0.05f);
-                AddPart(root.transform, $"Orelha_{suffix}", PrimitiveMesh(PrimitiveType.Sphere), fur,
-                    earCenter, Quaternion.identity,
-                    new Vector3(earRadius * 2f, earRadius * 2f, earRadius * 0.85f));
+                var earShape = supportShapes[side < 0 ? 1 : 2];
+                earCenter = earShape.position;
+                AddSupportVisual(root.transform,earShape,fur);
                 AddPart(root.transform, $"Orelha_Interna_{suffix}", PrimitiveMesh(PrimitiveType.Sphere), muzzle,
                     earCenter + new Vector3(0f, earRadius * 0.04f, -earRadius * 0.34f), Quaternion.identity,
                     new Vector3(earRadius * 1.05f, earRadius * 1.05f, earRadius * 0.30f));
@@ -604,16 +662,9 @@ namespace YunaLegend.DarkRoom
             if (index != 0) return false;
             // Static collision follows the head, ears and stool instead of a rectangular
             // invisible pad. Decorative stitches, face and bow do not block the runner.
-            foreach (string name in new[] { "Cabeca_Urso", "Orelha_Esq", "Orelha_Dir", "Base_Madeira", "Base_Aro" })
-            {
-                var part = visual.transform.Find(name);
-                var go = new GameObject(name);
-                go.transform.SetParent(contactRoot, false);
-                go.transform.localPosition = part.localPosition;
-                go.transform.localRotation = part.localRotation;
-                go.transform.localScale = part.localScale;
-                go.AddComponent<MeshCollider>().sharedMesh = part.GetComponent<MeshFilter>().sharedMesh;
-            }
+            var spec=new PlatformSpec(0,"Bear",DarkRoomPhase.Phase1Ascent,0,0,
+                DarkRoomPlatformGeometry.Get(0).Width,DarkRoomPlatformGeometry.Get(0).Depth,DarkRoomPlatformGeometry.Get(0).Height,Color.white,"");
+            BuildContact(spec,contactRoot);
             return true;
         }
 

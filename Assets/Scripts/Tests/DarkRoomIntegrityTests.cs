@@ -191,8 +191,8 @@ namespace YunaLegend.Tests
             {
                 float vX = 3.6f;
                 float jumpH = 2.4f;
-                float deltaY = s1[i + 1].y - s1[i].y;
-                float gap = (s1[i + 1].x - s1[i + 1].width * 0.5f) - (s1[i].x + s1[i].width * 0.5f);
+                float deltaY = s1[i + 1].TopSurfaceCenter.y - s1[i].TopSurfaceCenter.y;
+                float gap = PlatformSupportProfile.Gap(DarkRoomPlatformGeometry.GetSupportProfile(s1[i]), DarkRoomPlatformGeometry.GetSupportProfile(s1[i+1]), 1f);
 
                 float vY0 = Mathf.Sqrt(2f * g * jumpH);
                 float tUp = vY0 / g;
@@ -211,8 +211,8 @@ namespace YunaLegend.Tests
                 float progress = (float)i / (s2.Count - 1);
                 float vX = Mathf.Lerp(4.0f, 6.0f, progress);
                 float jumpH = Mathf.Lerp(2.5f, 3.4f, progress);
-                float deltaY = s2[i + 1].y - s2[i].y;
-                float gap = (s2[i + 1].x - s2[i + 1].width * 0.5f) - (s2[i].x + s2[i].width * 0.5f);
+                float deltaY = s2[i + 1].TopSurfaceCenter.y - s2[i].TopSurfaceCenter.y;
+                float gap = PlatformSupportProfile.Gap(DarkRoomPlatformGeometry.GetSupportProfile(s2[i]), DarkRoomPlatformGeometry.GetSupportProfile(s2[i+1]), 1f);
 
                 float vY0 = Mathf.Sqrt(2f * g * jumpH);
                 float tUp = vY0 / g;
@@ -231,8 +231,8 @@ namespace YunaLegend.Tests
                 float progress = (float)i / (s3.Count - 1);
                 float vX = Mathf.Lerp(DarkRoomReturnLayout.RunSpeed, DarkRoomReturnLayout.EndRunSpeed, progress);
                 float jumpH = Mathf.Lerp(DarkRoomReturnLayout.JumpHeight, DarkRoomReturnLayout.EndJumpHeight, progress);
-                float deltaY = (s3[i + 1].y + s3[i + 1].height * 0.5f) - (s3[i].y + s3[i].height * 0.5f);
-                float gap = (s3[i].x - s3[i].width * 0.5f) - (s3[i + 1].x + s3[i + 1].width * 0.5f);
+                float deltaY = s3[i + 1].TopSurfaceCenter.y - s3[i].TopSurfaceCenter.y;
+                float gap = PlatformSupportProfile.Gap(DarkRoomPlatformGeometry.GetSupportProfile(s3[i]), DarkRoomPlatformGeometry.GetSupportProfile(s3[i+1]), -1f);
 
                 float vY0 = Mathf.Sqrt(2f * g * jumpH);
                 float tUp = vY0 / g;

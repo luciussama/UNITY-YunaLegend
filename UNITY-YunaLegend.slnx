@@ -1,6 +1,6 @@
 ﻿<Solution>
   <Project Path="YunaLegend.Editor.csproj" />
   <Project Path="YunaLegend.Runtime.csproj" />
-  <Project Path="YunaLegend.RoutePhysics.Tests.csproj" />
   <Project Path="YunaLegend.Tests.csproj" />
+  <Project Path="YunaLegend.RoutePhysics.Tests.csproj" />
 </Solution>

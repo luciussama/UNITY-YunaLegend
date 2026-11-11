@@ -59,6 +59,8 @@ namespace YunaLegend.DarkRoom
         [SerializeField] private Transform floorRoot;
         [SerializeField] private Transform sceneryRoot;
 
+        [SerializeField] private AudioClip furnitureCrackSfx;
+        public void ConfigureFurnitureCrack(AudioClip clip) => furnitureCrackSfx=clip;
         private DarkRoomPlatformMarker[] temporalPlatforms;
 
         public float CoordinateScale => coordinateScale;
@@ -151,11 +153,8 @@ namespace YunaLegend.DarkRoom
 
             // Etapa 2: A Fuga Acelerada com pulos crescentes ate o Poster na parede (10 a 21)
             var lastStage1 = stage1[stage1.Count - 1];
-            float stage2FirstPlatWidth = 2.2f;
-            float gapStage1To2 = 2.32f;
-            float stage2StartX = DarkRoomThreeStageCircuitGenerator.Stage2StartX(lastStage1, stage2FirstPlatWidth, gapStage1To2);
-            float stage2StartY = DarkRoomThreeStageCircuitGenerator.Stage2StartY(lastStage1, 0.32f);
-            var stage2 = DarkRoomThreeStageCircuitGenerator.GenerateStage2Platforms(stage2StartX, stage2StartY);
+            var stage2Origin=DarkRoomThreeStageCircuitGenerator.Stage2Origin(lastStage1);
+            var stage2=DarkRoomThreeStageCircuitGenerator.GenerateStage2Platforms(stage2Origin.x,stage2Origin.y);
             BuildPlatformList(stage2, stage2Root, "Etapa2_Fuga");
 
             // Etapa 3: A Subida Caotica Reversa (22 a 37) da direita para a esquerda apos a queda cinematica
@@ -583,7 +582,7 @@ namespace YunaLegend.DarkRoom
                 var geometry = DarkRoomPlatformGeometry.Get(spec.index);
                 // A superficie de contato pertence ao objeto: pode estar deslocada, ser mais
                 // estreita ou inclinada. O colisor segue o objeto, nunca o contrario.
-                var contact = DarkRoomPlatformGeometry.GetContact(spec.index);
+                var contact = spec.contact;
                 GameObject visual = null;
 
                 if (geometry.HasModel)
@@ -620,38 +619,15 @@ namespace YunaLegend.DarkRoom
                 // Colisor de contato: mesma superficie de pouso do objeto.
                 var contactGo = new GameObject("Contacto_Fisico");
                 contactGo.transform.SetParent(platGo.transform, false);
-                if (!DarkRoomPlatformArt.TryBuildShapeContact(spec.index, visual, contactGo.transform))
-                {
-                    var contactCollider = contactGo.AddComponent<BoxCollider>();
-
-                    if (!contact.IsCustom)
-                    {
-                        contactCollider.size = new Vector3(spec.width, spec.height, spec.depth);
-                        contactCollider.center = Vector3.zero;
-                    }
-                    else
-                    {
-                        // Laje fina rotacionada: o topo do colisor e o tampo do objeto.
-                        float thickness = Mathf.Min(0.35f, spec.height * 0.35f);
-                        var rotation = Quaternion.Euler(0f, 0f, contact.tiltDegrees);
-                        var surfaceCenter = new Vector3(contact.offsetX, spec.height * 0.5f + contact.offsetY, 0f);
-                        contactGo.transform.localRotation = rotation;
-                        contactGo.transform.localPosition = surfaceCenter - rotation * new Vector3(0f, thickness * 0.5f, 0f);
-                        contactCollider.size = new Vector3(
-                            contact.EffectiveWidth(spec.width),
-                            thickness,
-                            contact.EffectiveDepth(spec.depth));
-                        contactCollider.center = Vector3.zero;
-                    }
-
-                    contactCollider.isTrigger = false;
-                }
+                DarkRoomPlatformArt.BuildContact(spec,contactGo.transform);
 
                 platGo.AddComponent<PlatformCollisionDetector>();
                 var marker = platGo.AddComponent<DarkRoomPlatformMarker>();
                 var resolved = spec;
                 resolved.contact = contact;
                 marker.spec = resolved;
+                if(spec.index==YieldingWoodFurniture.PlatformIndex)
+                    platGo.AddComponent<YieldingWoodFurniture>().Configure(furnitureCrackSfx);
             }
         }
 

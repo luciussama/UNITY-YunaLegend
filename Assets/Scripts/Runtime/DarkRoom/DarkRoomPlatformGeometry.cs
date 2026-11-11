@@ -56,6 +56,19 @@ namespace YunaLegend.DarkRoom
     /// </summary>
     public static class DarkRoomPlatformGeometry
     {
+        private static readonly System.Collections.Generic.Dictionary<string,PlatformSupportProfile> SupportCache =
+            new System.Collections.Generic.Dictionary<string,PlatformSupportProfile>();
+
+        public static PlatformSupportProfile GetSupportProfile(PlatformSpec spec)
+        {
+            string key=$"{spec.index}|{spec.width:R}|{spec.height:R}|{spec.depth:R}|{spec.contact.offsetX:R}|{spec.contact.offsetY:R}|{spec.contact.tiltDegrees:R}|{spec.contact.width:R}|{spec.contact.depth:R}";
+            if(!SupportCache.TryGetValue(key,out var local))
+            {
+                local=PlatformSupportProfile.FromShapes(DarkRoomPlatformArt.GetSupportShapes(spec),Matrix4x4.identity);
+                SupportCache[key]=local;
+            }
+            return local.Translated(new Vector3(spec.x,spec.y,0f));
+        }
         /// <summary>44 px de Yuna = 1,40 m (regua antropometrica da skill de paridade).</summary>
         public const float MetersPerDesignPixel = 0.0318f;
 
@@ -67,6 +80,7 @@ namespace YunaLegend.DarkRoom
 
         /// <summary>Chave do modelo da pilha diagonal de livros (plataforma 01).</summary>
         public const string BookStackArtKey = "book-stack";
+        public const string YieldingFurnitureArtKey = "yielding-furniture";
 
         public static bool TryGet(int index, out PlatformGeometry geometry)
         {
@@ -80,6 +94,7 @@ namespace YunaLegend.DarkRoom
                 // sobre uma pe cilindrica de madeira. A altura do catalogo (40 px) deixava o
                 // conjunto alto demais para a proporcao desenhada.
                 if (index == 0) height = ConceptTeddyHeight;
+                if (index == 2) { width = 8.4f; height = 2.3f; depth = 2.4f; } // User-authored long traversal furniture.
 
                 geometry = new PlatformGeometry(
                     index,
@@ -179,6 +194,7 @@ namespace YunaLegend.DarkRoom
             {
                 case 0: return TeddyHeadArtKey;
                 case 1: return BookStackArtKey;
+                case 2: return YieldingFurnitureArtKey;
                 default: return string.Empty;
             }
         }

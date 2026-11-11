@@ -5,31 +5,27 @@ namespace YunaLegend.DarkRoom
 {
     public static class DarkRoomThreeStageCircuitGenerator
     {
-        // Altura com que o modulo de layout da Etapa 1 foi calibrado (vaos, topos e camera).
-        // A rota continua ancorada nesse modulo; a geometria visivel e o colisor de cada
-        // plataforma usam as medidas canonicas de DarkRoomPlatformGeometry.
-        public const float LayoutPlatformHeight = 0.7f;
+        // Authored contact anchors preserve the approved rhythm while objects keep
+        // their own dimensions. Distances/clearances are measured from real support.
+        public const float Stage2OpeningGap = 2.115f;
+        private static readonly float[] Stage1ContactX = {0f,4.44f};
+        private static readonly float[] Stage1Gaps = {0f,1.25f,1.35f,1.2f,1.315f,1.185f,1.105f,1.06f,.985f};
+        private static readonly float[] Stage1ContactY = {0f,-7.55f,-6.8f,-6.05f,-4.87f,-4.55f,-4.23f,-3.91f,-3.59f,-3.27f};
 
-        // Largura de layout da ultima plataforma da Etapa 1 (castelinho), usada para a
-        // transicao calibrada rumo a Etapa 2.
-        public const float LayoutLastStage1Width = 4.2f;
-
-        /// <summary>
-        /// Inicio da Etapa 2 preservando as distancias ja validadas: o modulo de layout da
-        /// Etapa 1 continua sendo a referencia, e nao a largura visivel de cada objeto.
-        /// </summary>
-        public static float Stage2StartX(PlatformSpec lastStage1, float firstStage2Width, float gap)
+        public static Vector2 Stage2Origin(PlatformSpec lastStage1)
         {
-            return lastStage1.x + (LayoutLastStage1Width * 0.5f) + gap + (firstStage2Width * 0.5f);
+            var last=DarkRoomPlatformGeometry.GetSupportProfile(lastStage1);
+            var first=GenerateStage2Platforms(0f,0f)[0];
+            var next=DarkRoomPlatformGeometry.GetSupportProfile(first);
+            return new Vector2(last.MaxX+Stage2OpeningGap-next.MinX,
+                last.PointNear(lastStage1.x+lastStage1.contact.offsetX).y+.295f-next.PointNear(first.contact.offsetX).y);
         }
 
-        /// <summary>
-        /// Altura central da primeira plataforma da Etapa 2, derivada do topo real da ultima
-        /// plataforma da Etapa 1 (os objetos podem ter alturas diferentes do modulo antigo).
-        /// </summary>
-        public static float Stage2StartY(PlatformSpec lastStage1, float verticalGap)
+        private static float NextRootX(PlatformSpec from,PlatformSpec next,float gap,float direction)
         {
-            return (lastStage1.y + lastStage1.height * 0.5f) - (LayoutPlatformHeight * 0.5f) + verticalGap;
+            var a=DarkRoomPlatformGeometry.GetSupportProfile(from);
+            var b=DarkRoomPlatformGeometry.GetSupportProfile(next);
+            return direction>0f?a.MaxX+gap-b.MinX:a.MinX-gap-b.MaxX;
         }
 
         // -------------------------------------------------------------
@@ -54,37 +50,19 @@ namespace YunaLegend.DarkRoom
                 "09_Castelinho_Blocos_Descanso"
             };
 
-            float layoutX = DarkRoomStartLayout.FirstPlatformX;
-            float currentY = -6.5f;
-
             for (int i = 0; i < names.Length; i++)
             {
-                // Modulo de layout preservado (rota e camera ja validadas).
-                float layoutW = (i == 9) ? 4.2f : (i == 0 ? 3.0f : 2.6f);
-
-                // Geometria canonica do objeto: cada plataforma tem o seu proprio tamanho e
-                // a sua superficie de pouso, em vez do antigo 2,6 m x 0,7 m uniforme.
-                var geometry = DarkRoomPlatformGeometry.Get(i);
-                float w = geometry.Width;
-                float h = geometry.Height;
-                float d = geometry.Depth;
-
-                float nominalTopY = DarkRoomStartLayout.PlatformCenterY(i, currentY) + LayoutPlatformHeight * 0.5f;
-                // A plataforma 00 encosta no piso: o topo nasce da altura real do objeto.
-                float topY = i == 0 ? DarkRoomPlatformGeometry.FloorSurfaceY + h : nominalTopY;
-                float centerY = topY - h * 0.5f;
-
-                Color tint = (i == 9) ? new Color(0.25f, 0.45f, 0.75f) : Color.HSVToRGB(i * 0.08f, 0.5f, 0.85f);
-
-                list.Add(new PlatformSpec(i, names[i], DarkRoomPhase.Phase1Ascent, layoutX, centerY, w, d, h, tint, "Etapa 1 - Subida Calma"));
-
-                if (i < names.Length - 1)
-                {
-                    float nextLayoutW = (i + 1 == 9) ? 4.2f : 2.6f;
-                    float gap = 1.4f; // Vao introdutorio para o salto balistico por toque.
-                    layoutX += (layoutW * 0.5f) + gap + (nextLayoutW * 0.5f);
-                    currentY += 0.32f; // Subida suave constante
-                }
+                var geometry=DarkRoomPlatformGeometry.Get(i);
+                var spec=new PlatformSpec(i,names[i],DarkRoomPhase.Phase1Ascent,0,0,
+                    geometry.Width,geometry.Depth,geometry.Height,i==9?new Color(.25f,.45f,.75f):Color.HSVToRGB(i*.08f,.5f,.85f),"Etapa 1 - Subida Calma");
+                spec.contact=DarkRoomPlatformGeometry.GetContact(i);
+                var local=DarkRoomPlatformGeometry.GetSupportProfile(spec);
+                Vector3 primary=local.PointNear(spec.contact.offsetX);
+                float targetY=i==0?DarkRoomPlatformGeometry.FloorSurfaceY+geometry.Height:Stage1ContactY[i];
+                spec.x=i<2?DarkRoomStartLayout.FirstPlatformX+Stage1ContactX[i]-primary.x
+                    :NextRootX(list[i-1],spec,Stage1Gaps[i-1],1f);
+                spec.y=targetY-primary.y;
+                list.Add(spec);
             }
 
             return list;
@@ -96,7 +74,7 @@ namespace YunaLegend.DarkRoom
         // Culmina na Plataforma 21: O Poster da Porta Falsa na parede (x ~ 90.5m, y ~ 1.58m).
         // Conexao com Castelo: começa exatamente apos o fim do Castelinho (x=41.10m) + gap 1.6m.
         // -------------------------------------------------------------
-        public static List<PlatformSpec> GenerateStage2Platforms(float startX = 44.42f, float startY = -3.27f)
+        public static List<PlatformSpec> GenerateStage2Platforms(float? startX = null, float? startY = null)
         {
             var list = new List<PlatformSpec>();
             string[] names = new[]
@@ -115,31 +93,31 @@ namespace YunaLegend.DarkRoom
                 "21_Poster_Porta_Falsa_Parede"
             };
 
-            float currentX = startX;
-            float currentY = startY;
-
-            for (int i = 0; i < names.Length; i++)
+            if (!startX.HasValue || !startY.HasValue)
             {
-                int index = 10 + i;
-                float progress = (float)i / (names.Length - 1); // 0 a 1
-
-                float w = (i == 11) ? 3.8f : Mathf.Lerp(2.2f, 1.8f, progress);
-                float h = (i == 11) ? 1.4f : 0.65f;
-                float d = 1.8f;
-
-                Color tint = (i == 11) ? new Color(0.95f, 0.30f, 0.25f) : Color.HSVToRGB(0.1f + progress * 0.4f, 0.7f, 0.9f);
-                list.Add(new PlatformSpec(index, names[i], DarkRoomPhase.Phase2Escape, currentX, currentY, w, d, h, tint, "Etapa 2 - Fuga Acelerada"));
-
-                if (i < names.Length - 1)
+                var firstSection=GenerateStage1Platforms();
+                var origin=Stage2Origin(firstSection[firstSection.Count-1]);
+                startX=startX??origin.x;startY=startY??origin.y;
+            }
+            float currentX=startX.Value;
+            float supportY=startY.Value+.325f; // Authored first contact anchor, not a volume-height module.
+            for(int i=0;i<names.Length;i++)
+            {
+                int index=10+i;float progress=(float)i/(names.Length-1);
+                float w=i==11?3.8f:Mathf.Lerp(2.2f,1.8f,progress), h=i==11?1.4f:.65f;
+                var spec=new PlatformSpec(index,names[i],DarkRoomPhase.Phase2Escape,0,0,w,1.8f,h,
+                    i==11?new Color(.95f,.30f,.25f):Color.HSVToRGB(.1f+progress*.4f,.7f,.9f),"Etapa 2 - Fuga Acelerada");
+                spec.contact=DarkRoomPlatformGeometry.GetContact(index);
+                var local=DarkRoomPlatformGeometry.GetSupportProfile(spec);
+                spec.x=currentX;spec.y=supportY-local.PointNear(spec.contact.offsetX).y;
+                list.Add(spec);
+                if(i<names.Length-1)
                 {
-                    float nextProgress = (float)(i + 1) / (names.Length - 1);
-                    float nextW = (i + 1 == 11) ? 3.8f : Mathf.Lerp(2.2f, 1.8f, nextProgress);
-                    // Vãos calibrados matematicamente pela parábola física real para aterrissar com margem segura sem overshoot
-                    float gap = Mathf.Lerp(2.32f, 4.75f, progress);
-                    float deltaY = Mathf.Lerp(0.32f, 0.48f, progress);
-
-                    currentX += (w * 0.5f) + gap + (nextW * 0.5f);
-                    currentY += deltaY;
+                    float nextProgress=(float)(i+1)/(names.Length-1);
+                    var next=new PlatformSpec(index+1,"",spec.phase,0,0,i+1==11?3.8f:Mathf.Lerp(2.2f,1.8f,nextProgress),1.8f,i+1==11?1.4f:.65f,Color.white,"");
+                    next.contact=DarkRoomPlatformGeometry.GetContact(index+1);
+                    currentX=NextRootX(spec,next,Mathf.Lerp(2.32f,4.75f,progress),1f);
+                    supportY+=Mathf.Lerp(.32f,.48f,progress)+(i+1==11?.375f:0f);
                 }
             }
 
@@ -153,7 +131,7 @@ namespace YunaLegend.DarkRoom
         // Inicia no chao apos a queda da porta falsa (wallX - 3.2m), subindo para a ESQUERDA.
         // Termina na Plataforma 37: O Verdadeiro Portal dos Sonhos (largura 4.5m).
         // -------------------------------------------------------------
-        public static List<PlatformSpec> GenerateStage3Platforms(float wallX = 104.26f, float floorDropY = DarkRoomReturnLayout.FloorY)
+        public static List<PlatformSpec> GenerateStage3Platforms(float? wallX = null, float floorDropY = DarkRoomReturnLayout.FloorY)
         {
             var list = new List<PlatformSpec>();
             string[] names = new[]
@@ -176,32 +154,29 @@ namespace YunaLegend.DarkRoom
                 "37_O_Verdadeiro_Portal_Sonhos"
             };
 
-            float currentX = wallX - DarkRoomReturnLayout.FirstPlatformOffset;
-            float currentY = floorDropY + 0.40f;
-
-            for (int i = 0; i < names.Length; i++)
+            if (!wallX.HasValue)
             {
-                int index = 22 + i;
-                float progress = (float)i / (names.Length - 1); // 0 a 1
-
-                float w = (i == 15) ? 4.5f : Mathf.Lerp(DarkRoomReturnLayout.FirstPlatformWidth, DarkRoomReturnLayout.EndPlatformWidth, progress);
-                float h = (i == 15) ? 1.4f : 0.6f;
-                float d = 1.8f;
-                float centerY = (i == 15) ? (currentY - 0.40f) : currentY;
-
-                Color tint = (i == 15) ? new Color(1.0f, 0.90f, 0.40f) : Color.HSVToRGB(0.55f + progress * 0.4f, 0.75f, 0.85f);
-                list.Add(new PlatformSpec(index, names[i], DarkRoomPhase.Phase3ChaoticAscent, currentX, DarkRoomReturnLayout.PlatformCenterY(i, centerY), w, d, h, tint, "Etapa 3 - Subida Caotica Reversa"));
-
-                if (i < names.Length - 1)
+                var escape=GenerateStage2Platforms();wallX=escape[escape.Count-1].x;
+            }
+            float currentX=wallX.Value-DarkRoomReturnLayout.FirstPlatformOffset;
+            float supportY=floorDropY+.70f;
+            for(int i=0;i<names.Length;i++)
+            {
+                int index=22+i;float progress=(float)i/(names.Length-1);
+                float w=i==15?4.5f:Mathf.Lerp(DarkRoomReturnLayout.FirstPlatformWidth,DarkRoomReturnLayout.EndPlatformWidth,progress),h=i==15?1.4f:.6f;
+                var spec=new PlatformSpec(index,names[i],DarkRoomPhase.Phase3ChaoticAscent,0,0,w,1.8f,h,
+                    i==15?new Color(1f,.9f,.4f):Color.HSVToRGB(.55f+progress*.4f,.75f,.85f),"Etapa 3 - Subida Caotica Reversa");
+                spec.contact=DarkRoomPlatformGeometry.GetContact(index);
+                var local=DarkRoomPlatformGeometry.GetSupportProfile(spec);
+                spec.x=currentX;spec.y=supportY-local.PointNear(spec.contact.offsetX).y;
+                list.Add(spec);
+                if(i<names.Length-1)
                 {
-                    float nextProgress = (float)(i + 1) / (names.Length - 1);
-                    float nextW = (i + 1 == 15) ? 4.5f : Mathf.Lerp(DarkRoomReturnLayout.FirstPlatformWidth, DarkRoomReturnLayout.EndPlatformWidth, nextProgress);
-                    // Vãos calibrados com a parabola real para que o pulo a partir da plataforma encaixe no centro da proxima (1.90m a 4.65m)
-                    float gap = Mathf.Lerp(1.90f, 4.65f, progress);
-                    float deltaY = Mathf.Lerp(0.36f, 0.46f, progress);
-
-                    currentX -= ((w * 0.5f) + gap + (nextW * 0.5f)); // Sentido X decrescente (esquerda)
-                    currentY += deltaY;
+                    float nextProgress=(float)(i+1)/(names.Length-1);
+                    var next=new PlatformSpec(index+1,"",spec.phase,0,0,i+1==15?4.5f:Mathf.Lerp(DarkRoomReturnLayout.FirstPlatformWidth,DarkRoomReturnLayout.EndPlatformWidth,nextProgress),1.8f,i+1==15?1.4f:.6f,Color.white,"");
+                    next.contact=DarkRoomPlatformGeometry.GetContact(index+1);
+                    currentX=NextRootX(spec,next,Mathf.Lerp(1.90f,4.65f,progress),-1f);
+                    supportY+=Mathf.Lerp(.36f,.46f,progress);
                 }
             }
 

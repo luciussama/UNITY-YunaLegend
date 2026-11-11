@@ -61,7 +61,7 @@ namespace YunaLegend.EditorScripts
             var builder = Object.FindFirstObjectByType<DarkRoomBlockoutBuilder>();
             var serialized = new SerializedObject(builder);
             var array = serialized.FindProperty("platformArtMaterials");
-            array.arraySize = 17;
+            array.arraySize = Mathf.Max(17,array.arraySize);
             array.GetArrayElementAtIndex(16).objectReferenceValue = AssetDatabase.LoadAssetAtPath<Material>("Assets/Materials/M_Book_Painted_Cover.mat");
             serialized.ApplyModifiedPropertiesWithoutUndo();
             var materials = Enumerable.Range(0, array.arraySize).Select(i => (Material)array.GetArrayElementAtIndex(i).objectReferenceValue).ToArray();

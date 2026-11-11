@@ -551,11 +551,14 @@ namespace YunaLegend.DarkRoom
             {
                 currentPhase = DarkRoomPhase.Phase2Escape;
                 currentPlatformIndex = 9;
+                var castle = FindPlatform(9);
+                var checkpointTop = castle != null ? castle.GetTopCenterWorld()
+                    : DarkRoomThreeStageCircuitGenerator.GenerateStage1Platforms()[9].TopSurfaceCenter;
 
                 if (yuna != null)
                 {
                     // Retoma sobre o Castelinho de Blocos
-                    yuna.ResetPlayer(new Vector3(39.0f, -2.8f, 0f), 1f);
+                    yuna.ResetPlayer(checkpointTop + Vector3.up * .47f, 1f);
                     yuna.RestoreRouteSupport(9);
                     yuna.SetRunSpeed(4.0f);
                     yuna.SetJumpHeight(2.5f);
@@ -565,7 +568,7 @@ namespace YunaLegend.DarkRoom
                 if (cameraRunner != null)
                 {
                     cameraRunner.ConfigureSection(-1.5f, -16.0f, 45.0f);
-                    cameraRunner.SnapToTargetX(39.0f, 3.5f);
+                    cameraRunner.SnapToTargetX(checkpointTop.x, 3.5f);
                     cameraRunner.ScreenCrushActive = true;
                     float camSpeed = easyMode ? (4.0f * easyCameraSpeedMultiplier) : 4.0f;
                     cameraRunner.SetScrollState(true, 1f, camSpeed);

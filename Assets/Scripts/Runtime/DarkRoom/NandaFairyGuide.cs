@@ -31,6 +31,9 @@ namespace YunaLegend.DarkRoom
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip twinkleSfx;
 
+        private DarkRoomPlatformMarker traversalSupport;
+        public void SetTraversalSupport(DarkRoomPlatformMarker marker) => traversalSupport=marker;
+
         private Vector3 currentVelocity;
         private Vector3 targetPosition;
         private CharacterController yunaBody;
@@ -90,6 +93,12 @@ namespace YunaLegend.DarkRoom
         private void CalculateTargetPosition()
         {
             if (yunaTransform == null) { targetPosition = transform.position; return; }
+            if(traversalSupport!=null)
+            {
+                var support=traversalSupport.Support;
+                targetPosition=support.PointNear(Mathf.Min(yunaTransform.position.x+1.8f,support.MaxX-.35f))+new Vector3(0,1.2f,-.15f);
+                return;
+            }
             if (!isGuidingAhead || yunaTransform == null)
             {
                 // Paira ao redor do ombro da Yuna com oscilacao vertical suave

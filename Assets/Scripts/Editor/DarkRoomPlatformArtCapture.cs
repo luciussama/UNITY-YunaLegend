@@ -97,7 +97,26 @@ public static class DarkRoomPlatformArtCapture
         camera.transform.rotation = Quaternion.identity;
         if (side != null) side.SnapToRouteFraming(1);
         Save(camera, "09-gameplay-books-close.png");
-        Debug.Log("PLATFORM_ART_CAPTURE_COMPLETE: 9 static HDR views; inspection lighting only in 02-04 and 06-08; no scene saved.");
+        if (side != null)
+        {
+            side.RouteDistanceScale=1f;side.SnapToRouteFraming(1);
+            var before=camera.transform.position;float widthBefore=side.ViewWidth;
+            Save(camera,"10-camera-distance-100.png");
+            side.RouteDistanceScale=1.05f;side.SnapToRouteFraming(1);
+            Save(camera,"11-camera-distance-105.png");
+            File.WriteAllText(Path.Combine(Output,"camera-backoff.json"),JsonUtility.ToJson(new CameraBackoff {
+                before=before,after=camera.transform.position,widthBefore=widthBefore,widthAfter=side.ViewWidth,
+                fov=camera.fieldOfView,yuna=camera.WorldToViewportPoint(player.transform.position+Vector3.up*.7f),
+                next=camera.WorldToViewportPoint(booksTop)},true));
+        }
+        DarkRoomSupportSetup.WriteReport(Output);
+        Debug.Log("PLATFORM_ART_CAPTURE_COMPLETE:11 HDR views; camera A/B1.00vs1.05; no scene saved.");
+    }
+
+    [System.Serializable] private class CameraBackoff
+    {
+        public Vector3 before,after,yuna,next;
+        public float widthBefore,widthAfter,fov;
     }
 
     private static void SetCamera(Camera camera, Vector3 position, Vector3 lookAt)

@@ -62,7 +62,7 @@ namespace YunaLegend.DarkRoom
             this.contact = default;
         }
 
-        public Vector3 TopSurfaceCenter => new Vector3(x, y, 0f);
+        public Vector3 TopSurfaceCenter => DarkRoomPlatformGeometry.GetSupportProfile(this).PointNear(x + contact.offsetX);
     }
 
     public static class DarkRoomPlatformCatalog

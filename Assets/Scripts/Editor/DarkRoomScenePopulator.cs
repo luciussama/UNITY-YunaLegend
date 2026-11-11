@@ -160,7 +160,9 @@ namespace YunaLegend.EditorScripts
                     LoadMat("M_Bear_Velvet"),
                     LoadMat("M_Book_Leather_Ochre"),
                     LoadMat("M_Book_Spines"),
-                    LoadMat("M_Book_Painted_Cover")
+                    LoadMat("M_Book_Painted_Cover"),
+                    LoadMat("M_Furniture_Wood"), LoadMat("M_Furniture_Shade"),
+                    LoadMat("M_Furniture_Trim"), LoadMat("M_Furniture_Brass")
                 }
             );
 
@@ -172,6 +174,7 @@ namespace YunaLegend.EditorScripts
                     LoadMat("M_WallCostume_Hat"), LoadMat("M_WallCostume_Cape"),
                     LoadMat("M_WallCostume_Scarf") });
             builder.ConfigureWallSail(LoadMat("M_WallDecor_Sail"));
+            builder.ConfigureFurnitureCrack(AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/wood_furniture_crack.wav"));
             builder.BuildBlockout();
 
             // 4. Instanciar Yuna (jogadora 2.5D) com visual estilizado e CharacterController
@@ -331,10 +334,9 @@ namespace YunaLegend.EditorScripts
                 var landPlushClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/land_plush.wav");
                 var drumBounceClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/drum_strike.wav");
                 var comicFallClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/comic_fall_thud.wav");
-                var gameOverClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX/game_over_fall.wav");
 
                 var footsteps = new AudioClip[] { footstep1, footstep2, footstep3 };
-                yunaCtrl.ConfigureAudioClips(jumpClip, landWoodClip, footsteps, landPlushClip, drumBounceClip, comicFallClip, gameOverClip);
+                yunaCtrl.ConfigureAudioClips(jumpClip, landWoodClip, footsteps, landPlushClip, drumBounceClip, comicFallClip);
 
                 var soYuna = new SerializedObject(yunaCtrl);
                 soYuna.FindProperty("jumpSfx").objectReferenceValue = jumpClip;
@@ -342,7 +344,6 @@ namespace YunaLegend.EditorScripts
                 soYuna.FindProperty("landPlushSfx").objectReferenceValue = landPlushClip;
                 soYuna.FindProperty("drumBounceSfx").objectReferenceValue = drumBounceClip;
                 soYuna.FindProperty("comicFallThudSfx").objectReferenceValue = comicFallClip;
-                soYuna.FindProperty("gameOverSfx").objectReferenceValue = gameOverClip;
 
                 var footstepsProp = soYuna.FindProperty("footstepWoodClips");
                 footstepsProp.arraySize = 3;

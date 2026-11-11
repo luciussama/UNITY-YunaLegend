@@ -96,7 +96,7 @@ namespace YunaLegend.Tests
         {
             var contact = DarkRoomPlatformGeometry.GetContact(0);
             Assert.IsFalse(contact.IsCustom, "A plataforma 00 usa o topo da propria massa");
-            Assert.IsFalse(DarkRoomPlatformGeometry.GetContact(2).IsCustom);
+            Assert.IsFalse(DarkRoomPlatformGeometry.GetContact(3).IsCustom);
         }
 
         [Test]

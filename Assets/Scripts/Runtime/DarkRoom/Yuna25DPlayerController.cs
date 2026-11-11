@@ -39,7 +39,6 @@ namespace YunaLegend.DarkRoom
         [SerializeField] private AudioClip landPlushSfx;
         [SerializeField] private AudioClip drumBounceSfx;
         [SerializeField] private AudioClip comicFallThudSfx;
-        [SerializeField] private AudioClip gameOverSfx;
 
         private float footstepTimer;
 
@@ -56,6 +55,37 @@ namespace YunaLegend.DarkRoom
         public event Action OnGameOverTriggered;
         public event Action<int> OnPlatformLanded;
         public event Action OnCinematicFallLanded;
+
+        private float stumbleDelay,stumblePose,stumblePoseDuration;
+        private Transform stumbleVisual;
+        private Vector3 visualRestPosition;
+        private Quaternion visualRestRotation;
+        public int CurrentSupportIndex => lastLandedPlatformIndex;
+        public bool IsStumbling => stumbleDelay>0f||stumblePose>0f;
+        public float StumbleDelayRemaining => stumbleDelay;
+        public void BeginStumble(float delay,float recovery)
+        {
+            if(isDead)return;
+            stumbleDelay=Mathf.Max(0f,delay);stumblePoseDuration=Mathf.Max(0f,recovery);stumblePose=stumblePoseDuration;
+        }
+        public void EndStumble()
+        {
+            stumbleDelay=stumblePose=0f;
+            if(stumbleVisual!=null){stumbleVisual.localPosition=visualRestPosition;stumbleVisual.localRotation=visualRestRotation;}
+        }
+        private void LateUpdate()
+        {
+            if(stumbleVisual==null)
+            {
+                stumbleVisual=transform.Find("Body_Visual");
+                if(stumbleVisual==null)return;
+                visualRestPosition=stumbleVisual.localPosition;visualRestRotation=stumbleVisual.localRotation;
+            }
+            float pose=stumblePoseDuration>0f?Mathf.Sin((1f-stumblePose/stumblePoseDuration)*Mathf.PI):0f;
+            if(stumblePose<=0f||stumbleDelay>0f)pose=0f;
+            stumbleVisual.localRotation=Quaternion.AngleAxis(14f*pose,Vector3.right)*visualRestRotation;
+            stumbleVisual.localPosition=visualRestPosition+Vector3.down*(.045f*pose);
+        }
 
         public bool IsGrounded => controller != null && controller.isGrounded;
         public Vector3 Velocity => velocity;
@@ -130,8 +160,8 @@ namespace YunaLegend.DarkRoom
             foreach (var marker in routePlatforms)
             {
                 if (marker == null || !marker.gameObject.activeInHierarchy || marker.spec.index != nextIndex) continue;
-                lowestReachableTop = Mathf.Min(lastSupportTop, marker.GetTopCenterWorld().y);
-                float farEdge = marker.transform.position.x + runDirection * marker.spec.width * 0.5f;
+                lowestReachableTop = Mathf.Min(lastSupportTop, marker.Support.MinY);
+                float farEdge = runDirection > 0f ? marker.Support.MaxX : marker.Support.MinX;
                 if (runDirection * (transform.position.x - farEdge) > controller.radius)
                     TriggerDeath("A plataforma obrigatória ficou para trás.");
                 break;
@@ -181,7 +211,7 @@ namespace YunaLegend.DarkRoom
             TickMovement(Time.deltaTime);
         }
 
-        public void ConfigureAudioClips(AudioClip jump, AudioClip landWood, AudioClip[] footsteps, AudioClip landPlush, AudioClip drumBounce, AudioClip comicFall, AudioClip gameOver)
+        public void ConfigureAudioClips(AudioClip jump, AudioClip landWood, AudioClip[] footsteps, AudioClip landPlush, AudioClip drumBounce, AudioClip comicFall)
         {
             jumpSfx = jump;
             landSfx = landWood;
@@ -189,11 +219,11 @@ namespace YunaLegend.DarkRoom
             landPlushSfx = landPlush;
             drumBounceSfx = drumBounce;
             comicFallThudSfx = comicFall;
-            gameOverSfx = gameOver;
         }
 
         private void UpdateFootsteps(float deltaTime)
         {
+            if(deltaTime<=0f)return;
             if (!autoRunActive || isDead || isCinematicFalling || !controller.isGrounded) return;
 
             footstepTimer -= deltaTime;
@@ -219,9 +249,14 @@ namespace YunaLegend.DarkRoom
         public void TickMovement(float deltaTime)
         {
             if (isDead || !autoRunActive || isCinematicFalling || deltaTime <= 0f) return;
-            UpdateTimers(deltaTime);
-            UpdateFootsteps(deltaTime);
+            float delayed=Mathf.Min(stumbleDelay,deltaTime);
+            stumbleDelay=Mathf.Max(0f,stumbleDelay-delayed);
+            float activeTime=deltaTime-delayed;
+            stumblePose=Mathf.Max(0f,stumblePose-activeTime);
+            UpdateTimers(activeTime);
+            UpdateFootsteps(activeTime);
             ApplyForwardRun();
+            velocity.x*=activeTime/deltaTime;
             ApplyJumpAndGravity(deltaTime);
 
             // Midpoint displacement keeps the ballistic arc consistent across frame rates.
@@ -265,7 +300,7 @@ namespace YunaLegend.DarkRoom
                     }
                     floorLaunchAllowed = false;
                     hasRouteSupport = true;
-                    lastSupportTop = marker.GetTopCenterWorld().y;
+                    lastSupportTop = hit.point.y;
                     if (idx != lastLandedPlatformIndex)
                     {
                         lastLandedPlatformIndex = idx;
@@ -282,7 +317,7 @@ namespace YunaLegend.DarkRoom
             foreach (var marker in routePlatforms)
             {
                 if (marker.spec.index != index) continue;
-                lastSupportTop = marker.GetTopCenterWorld().y;
+                lastSupportTop = marker.Support.PointNear(transform.position.x).y;
                 hasRouteSupport = true;
                 break;
             }
@@ -444,7 +479,8 @@ namespace YunaLegend.DarkRoom
                 return runSpeed;
             }
 
-            float targetTopY = targetMarker.GetTopCenterWorld().y;
+            Vector3 landing = targetMarker.GetLandingPoint(runDirection, hasRouteSupport ? .12f : .10f);
+            float targetTopY = landing.y;
             float dy = targetTopY - transform.position.y;
             if (dy >= jumpHeight - 0.05f)
             {
@@ -460,8 +496,8 @@ namespace YunaLegend.DarkRoom
             }
 
             float baseReach = runSpeed * tFlight;
-            float distToCenter = runDirection * (targetMarker.transform.position.x - transform.position.x);
-            float targetWidth = targetMarker.spec.width;
+            float distToCenter = runDirection * (landing.x - transform.position.x);
+            float targetWidth = targetMarker.Support.RegionNear(landing.x).Width;
 
             if (!hasRouteSupport)
             {
@@ -471,7 +507,7 @@ namespace YunaLegend.DarkRoom
                     return runSpeed;
                 }
 
-                float idealFloorReach = distToCenter - (0.10f * targetWidth);
+                float idealFloorReach = distToCenter;
                 float desiredFloorReach = Mathf.Lerp(baseReach, idealFloorReach, 0.75f);
                 return Mathf.Clamp(desiredFloorReach / tFlight, 0.65f * runSpeed, 1.25f * runSpeed);
             }
@@ -482,7 +518,7 @@ namespace YunaLegend.DarkRoom
                 return runSpeed;
             }
 
-            float idealReach = distToCenter - (0.12f * targetWidth);
+            float idealReach = distToCenter;
             float desiredReach = Mathf.Lerp(baseReach, idealReach, 0.75f);
             float minMultiplier = runDirection < 0f ? 0.72f : 0.80f;
             float maxMultiplier = runDirection < 0f ? 1.32f : 1.22f;
@@ -497,7 +533,7 @@ namespace YunaLegend.DarkRoom
             }
 
             // A press commits the whole arc; releasing never cuts its height.
-            if (jumpBufferCounter > 0f && coyoteCounter > 0f)
+            if (stumbleDelay <= 0f && jumpBufferCounter > 0f && coyoteCounter > 0f)
             {
                 velocity.y = Mathf.Sqrt(2f * gravity * jumpHeight);
                 airborneHorizontalSpeed = ComputeJumpHorizontalSpeed();
@@ -582,10 +618,6 @@ namespace YunaLegend.DarkRoom
             isDead = true;
             autoRunActive = false;
             velocity = Vector3.zero;
-            if (audioSource != null && gameOverSfx != null)
-            {
-                audioSource.PlayOneShot(gameOverSfx, 0.14f); // 20% do volume anterior (0.70)
-            }
             Debug.Log($"[GameOver]: {reason}");
             OnGameOverTriggered?.Invoke();
         }
@@ -597,6 +629,7 @@ namespace YunaLegend.DarkRoom
 
         public void ResetPlayer(Vector3 startPosition, float dir = 1f)
         {
+            EndStumble();
             if (controller == null) controller = GetComponent<CharacterController>();
             bool wasEnabled = controller.enabled;
             controller.enabled = false;
