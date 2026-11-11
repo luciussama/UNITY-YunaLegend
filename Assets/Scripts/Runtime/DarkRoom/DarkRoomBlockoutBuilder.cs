@@ -39,6 +39,7 @@ namespace YunaLegend.DarkRoom
         [SerializeField] private Material moonbeamShaftMaterial;
         [SerializeField] private Material ambientDustMaterial;
         [SerializeField] private Material moonlightFloorShadowMaterial;
+        [SerializeField] private Material baseboardMaterial;
 
         [Header("Estrutura Gerada (3 Etapas CanÃ´nicas)")]
         [SerializeField] private Transform stage1Root;
@@ -76,7 +77,7 @@ namespace YunaLegend.DarkRoom
             Material toyAbc, Material drum, Material velvet, Material musicBox, Material brassGold,
             Material dresser, Material bookBlue, Material bookBurgundy, Material bookGreen, Material bookPages,
             Material castleBlocks, Material castleTurret, Material trainTrack, Material falseDoorPoster, Material dreamPortal,
-            Material moonbeamShaft = null, Material ambientDust = null, Material floorShadow = null)
+            Material moonbeamShaft = null, Material ambientDust = null, Material floorShadow = null, Material baseboard = null)
         {
             floorMaterial = floor;
             wallpaperMaterial = wallpaper;
@@ -105,6 +106,7 @@ namespace YunaLegend.DarkRoom
             moonbeamShaftMaterial = moonbeamShaft;
             ambientDustMaterial = ambientDust;
             moonlightFloorShadowMaterial = floorShadow;
+            baseboardMaterial = baseboard;
             defaultPlatformMaterial = dresserOakMaterial;
         }
 
@@ -203,12 +205,14 @@ namespace YunaLegend.DarkRoom
         private static Mesh cachedCubeMesh;
         private static Mesh cachedSphereMesh;
         private static Mesh cachedCylinderMesh;
+        private static Mesh cachedQuadMesh;
 
         private static Mesh GetPrimitiveSharedMesh(PrimitiveType type)
         {
             if (type == PrimitiveType.Cube && cachedCubeMesh != null) return cachedCubeMesh;
             if (type == PrimitiveType.Sphere && cachedSphereMesh != null) return cachedSphereMesh;
             if (type == PrimitiveType.Cylinder && cachedCylinderMesh != null) return cachedCylinderMesh;
+            if (type == PrimitiveType.Quad && cachedQuadMesh != null) return cachedQuadMesh;
 
             var temp = GameObject.CreatePrimitive(type);
             Mesh mesh = temp.GetComponent<MeshFilter>().sharedMesh;
@@ -217,6 +221,7 @@ namespace YunaLegend.DarkRoom
             if (type == PrimitiveType.Cube) cachedCubeMesh = mesh;
             else if (type == PrimitiveType.Sphere) cachedSphereMesh = mesh;
             else if (type == PrimitiveType.Cylinder) cachedCylinderMesh = mesh;
+            else if (type == PrimitiveType.Quad) cachedQuadMesh = mesh;
 
             return mesh;
         }
@@ -234,6 +239,10 @@ namespace YunaLegend.DarkRoom
 
             var renderer = go.AddComponent<MeshRenderer>();
             renderer.sharedMaterial = mat;
+            if (parent == sceneryRoot)
+            {
+                renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            }
 
             return go;
         }
@@ -242,33 +251,17 @@ namespace YunaLegend.DarkRoom
         {
             if (sceneryRoot == null) return;
 
-            // 1. Parede monumental de fundo em azul-indigo noturno (sem qualquer colisor)
-            var wall = CreateVisualOnlyObject("Parede_Fundo_Monumental", sceneryRoot, new Vector3(60f, 4.0f, 7.5f), new Vector3(180f, 32f, 1.0f), wallpaperMaterial != null ? wallpaperMaterial : wardrobeMaterial, PrimitiveType.Cube);
+            // 1. Parede monumental de fundo em violeta-indigo noturno (#0d0a14 / #17131d) e rodape continuo de madeira (#2b2138 / #3e3152) sem colisor
+            CreateVisualOnlyObject("Parede_Fundo_Monumental", sceneryRoot, new Vector3(60f, 4.0f, 7.5f), new Vector3(180f, 32f, 1.0f), wallpaperMaterial != null ? wallpaperMaterial : wardrobeMaterial, PrimitiveType.Cube);
+            var bbMat = baseboardMaterial != null ? baseboardMaterial : (wardrobeMaterial != null ? wardrobeMaterial : wallpaperMaterial);
+            CreateVisualOnlyObject("Rodape_Madeira_Fundo", sceneryRoot, new Vector3(60f, -8.55f, 6.08f), new Vector3(180f, 1.15f, 0.20f), bbMat, PrimitiveType.Cube);
 
-            // 2. Guarda-roupa monumental de carvalho (ao fundo da Etapa 1)
-            var wardrobe = CreateVisualOnlyObject("GuardaRoupa_Carvalho_Fundo", sceneryRoot, new Vector3(10f, 1.0f, 5.8f), new Vector3(14f, 20f, 3.5f), wardrobeMaterial, PrimitiveType.Cube);
+            // 2. Duas Janelas Noturnas Canonicas (NIGHT_WINDOWS = [780, 1950] -> X=29.5m e X=73.75m, escala 2.85m x 4.15m)
+            var winMat = windowMaterial != null ? windowMaterial : castleBlocksMaterial;
+            CreateWindowWithMoonbeam("Janela_Monumental_Luar", 29.5f, winMat);
+            CreateWindowWithMoonbeam("Janela_Monumental_Luar_2", 73.75f, winMat);
 
-            // Beiral decorativo superior do guarda-roupa
-            CreateVisualOnlyObject("Beiral_GuardaRoupa", wardrobe.transform, new Vector3(0f, 0.52f, 0f), new Vector3(1.06f, 0.08f, 1.15f), brassGoldMaterial != null ? brassGoldMaterial : wardrobeMaterial, PrimitiveType.Cube);
-
-            // 3. Janela com luar azulado e lua visivel (proporcao canonica de quarto infantil: 2.85m x 4.15m)
-            CreateVisualOnlyObject("Janela_Monumental_Luar", sceneryRoot, new Vector3(29.5f, 1.35f, 6.2f), new Vector3(2.85f, 4.15f, 0.20f), windowMaterial != null ? windowMaterial : castleBlocksMaterial, PrimitiveType.Cube);
-
-            // 4. Estante gigante de livros ilustrados (ao fundo da Fuga Acelerada)
-            var shelf = CreateVisualOnlyObject("Estante_Gigante_Livros", sceneryRoot, new Vector3(58f, 2.5f, 5.6f), new Vector3(18f, 18f, 3.2f), wardrobeMaterial, PrimitiveType.Cube);
-
-            // Livros gigantes na estante
-            CreateVisualOnlyObject("Livro_Gigante_Azul", shelf.transform, new Vector3(-0.35f, 0.15f, -0.3f), new Vector3(0.18f, 0.28f, 0.7f), bookBlueMaterial, PrimitiveType.Cube);
-            CreateVisualOnlyObject("Livro_Gigante_Bordo", shelf.transform, new Vector3(-0.15f, 0.18f, -0.3f), new Vector3(0.16f, 0.32f, 0.7f), bookBurgundyMaterial, PrimitiveType.Cube);
-            CreateVisualOnlyObject("Livro_Gigante_Verde", shelf.transform, new Vector3(0.08f, 0.14f, -0.3f), new Vector3(0.20f, 0.25f, 0.7f), bookGreenMaterial, PrimitiveType.Cube);
-
-            // 5. Relogio Cuco Monumental de Mogno (proximo a parede do poster)
-            var clock = CreateVisualOnlyObject("RelogioCuco_Monumental", sceneryRoot, new Vector3(103f, 3.5f, 5.2f), new Vector3(5.5f, 20f, 2.8f), dresserOakMaterial != null ? dresserOakMaterial : wardrobeMaterial, PrimitiveType.Cube);
-
-            // Mostrador dourado do relogio
-            CreateVisualOnlyObject("Mostrador_Dourado", clock.transform, new Vector3(0f, 0.22f, -0.52f), new Vector3(0.45f, 0.04f, 0.45f), brassGoldMaterial, PrimitiveType.Cylinder, Quaternion.Euler(90f, 0f, 0f));
-
-            // 6. Poeira Estelar / Motes Magicos Flutuantes no Quarto
+            // 3. Poeira Estelar / Motes Magicos Flutuantes no Quarto
             if (ambientDustMaterial != null)
             {
                 var dustGo = new GameObject("DarkRoom_AmbientDustMotes");
@@ -292,6 +285,36 @@ namespace YunaLegend.DarkRoom
                 var dShape = dustPs.shape;
                 dShape.shapeType = ParticleSystemShapeType.Box;
                 dShape.scale = new Vector3(160f, 18f, 6f);
+            }
+        }
+
+        private void CreateWindowWithMoonbeam(string windowName, float windowX, Material winMat)
+        {
+            CreateVisualOnlyObject(windowName, sceneryRoot, new Vector3(windowX, 1.35f, 6.2f), new Vector3(2.85f, 4.15f, 0.20f), winMat, PrimitiveType.Cube);
+
+            if (moonbeamShaftMaterial != null)
+            {
+                // Veu diagonal principal de luar azul-prateado suspenso no ar, extinguindo-se antes do piso (LightingSystem.js linhas 958-979)
+                CreateVisualOnlyObject(
+                    $"{windowName}_Feixe_Luar",
+                    sceneryRoot,
+                    new Vector3(windowX + 1.25f, -1.40f, 6.02f),
+                    new Vector3(4.00f, 8.20f, 1.0f),
+                    moonbeamShaftMaterial,
+                    PrimitiveType.Quad,
+                    Quaternion.Euler(0f, 0f, 20f)
+                );
+
+                // Segunda camada difusa mais larga para o halo atmosferico ao redor e abaixo da janela
+                CreateVisualOnlyObject(
+                    $"{windowName}_Halo_Luar",
+                    sceneryRoot,
+                    new Vector3(windowX + 0.70f, -0.40f, 6.06f),
+                    new Vector3(5.00f, 6.50f, 1.0f),
+                    moonbeamShaftMaterial,
+                    PrimitiveType.Quad,
+                    Quaternion.Euler(0f, 0f, 14f)
+                );
             }
         }
 

@@ -29,7 +29,7 @@ namespace YunaLegend.EditorScripts
             // 2. Criar Materiais Transparentes / Aditivos URP
             CreateParticleMaterial("M_FairySparkle_Particle", new Color(1.0f, 0.90f, 0.45f, 1f), sparkleTex, isAdditive: true);
             CreateParticleMaterial("M_AmbientDust_Particle", new Color(0.80f, 0.90f, 1.0f, 0.7f), sparkleTex, isAdditive: true);
-            CreateParticleMaterial("M_Moonbeam_Shaft", new Color(0.65f, 0.80f, 1.0f, 0.18f), shaftTex, isAdditive: true);
+            CreateParticleMaterial("M_Moonbeam_Shaft", Color.white, shaftTex, isAdditive: true);
             CreateParticleMaterial("M_LandingPuff_Particle", new Color(0.90f, 0.85f, 0.75f, 0.6f), sparkleTex, isAdditive: false);
 
             AssetDatabase.SaveAssets();
@@ -79,19 +79,35 @@ namespace YunaLegend.EditorScripts
 
             for (int y = 0; y < height; y++)
             {
-                float normY = (float)y / height; // 0 na base, 1 no topo (janela)
-                // Gradiente vertical: mais intenso no topo junto a janela, desaparecendo suavemente na base
-                float vertAlpha = Mathf.SmoothStep(0f, 1f, normY);
+                float normY = (float)y / (height - 1); // 0 na base (ar acima do piso), 1 no topo (interior da janela)
+
+                // Entrada suave dentro da vidraca no topo (normY 0.96 -> 0.76) e longa extincao gradual no ar antes do piso (normY 0.74 -> 0.04)
+                float topFadeIn = Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.96f, 0.76f, normY));
+                float bottomFadeOut = Mathf.Pow(Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.04f, 0.74f, normY)), 1.35f);
+                float vertAlpha = topFadeIn * bottomFadeOut;
+
+                // Abertura trapezoidal suave do feixe conforme desce (LightingSystem.js linhas 973-976)
+                float halfWidth = Mathf.Lerp(0.46f, 0.22f, normY);
 
                 for (int x = 0; x < width; x++)
                 {
-                    float normX = (float)x / width; // 0..1
-                    float distFromCenter = Mathf.Abs(normX - 0.5f) * 2f; // 0 no meio, 1 nas bordas
-                    float horizAlpha = Mathf.Clamp01(1.0f - distFromCenter);
-                    horizAlpha = Mathf.Pow(horizAlpha, 1.8f);
+                    float normX = (float)x / (width - 1); // 0..1
+                    float distFromCenter = Mathf.Abs(normX - 0.5f) / halfWidth;
+                    if (distFromCenter >= 1.0f)
+                    {
+                        tex.SetPixel(x, y, new Color(0.74f, 0.87f, 1.0f, 0f));
+                        continue;
+                    }
 
-                    float alpha = vertAlpha * horizAlpha;
-                    tex.SetPixel(x, y, new Color(1f, 1f, 1f, alpha));
+                    // Perfil Gaussiano suave nas laterais para aspecto etereo sem bordas marcadas
+                    float horizAlpha = Mathf.Pow(Mathf.Cos(distFromCenter * Mathf.PI * 0.5f), 2.2f);
+
+                    // Sutil divisao central da travessa vertical da janela
+                    float mullionDip = 1.0f - 0.14f * normY * Mathf.Exp(-Mathf.Pow((normX - 0.5f) / 0.045f, 2f));
+
+                    // Com _Blend=2 (SrcBlend=SrcAlpha, DstBlend=One), RGB guarda a cor pura do luar e Alpha controla a intensidade linear (zero borda de fog no quad)
+                    float alpha = Mathf.Clamp01(vertAlpha * horizAlpha * mullionDip);
+                    tex.SetPixel(x, y, new Color(0.74f, 0.87f, 1.0f, alpha * 0.11f));
                 }
             }
             tex.Apply();
@@ -125,10 +141,13 @@ namespace YunaLegend.EditorScripts
             if (isAdditive)
             {
                 mat.SetFloat("_Surface", 1f); // Transparent
-                mat.SetFloat("_Blend", 1f);   // Additive
+                mat.SetFloat("_Blend", 2f);   // Additive (SrcAlpha, One)
                 mat.SetInt("_SrcBlend", (int)BlendMode.SrcAlpha);
                 mat.SetInt("_DstBlend", (int)BlendMode.One);
+                mat.SetInt("_SrcBlendAlpha", (int)BlendMode.One);
+                mat.SetInt("_DstBlendAlpha", (int)BlendMode.One);
                 mat.SetInt("_ZWrite", 0);
+                mat.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
                 mat.renderQueue = (int)RenderQueue.Transparent + 10;
             }
             else

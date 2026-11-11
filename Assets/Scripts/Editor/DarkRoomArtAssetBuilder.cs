@@ -26,6 +26,7 @@ namespace YunaLegend.EditorScripts
             SaveTextureAsPng(GenerateBookCoversTexture(), Path.Combine(MaterialsFolder, "T_BookCovers.png"));
             SaveTextureAsPng(GenerateTrainTrackTexture(), Path.Combine(MaterialsFolder, "T_TrainTrack_Wood.png"));
             SaveTextureAsPng(GenerateWallpaperTexture(), Path.Combine(MaterialsFolder, "T_Victorian_Wallpaper.png"));
+            SaveTextureAsPng(GenerateWallBaseboardTexture(), Path.Combine(MaterialsFolder, "T_Wall_Baseboard.png"));
             SaveTextureAsPng(GenerateMoonlitWindowTexture(), Path.Combine(MaterialsFolder, "T_Moonlit_Window.png"));
             SaveTextureAsPng(GenerateWindowCookieTexture(), Path.Combine(MaterialsFolder, "T_Window_Cookie.png"));
             SaveTextureAsPng(GenerateMoonlightFloorShadowTexture(), Path.Combine(MaterialsFolder, "T_Moonlight_Floor_Shadow.png"));
@@ -44,6 +45,7 @@ namespace YunaLegend.EditorScripts
             var bookTex = LoadTexture("T_BookCovers.png");
             var trackTex = LoadTexture("T_TrainTrack_Wood.png");
             var wallpaperTex = LoadTexture("T_Victorian_Wallpaper.png");
+            var baseboardTex = LoadTexture("T_Wall_Baseboard.png");
             var windowTex = LoadTexture("T_Moonlit_Window.png");
             var floorShadowTex = LoadTexture("T_Moonlight_Floor_Shadow.png");
             var portalTex = LoadTexture("T_DreamPortal.png");
@@ -91,8 +93,9 @@ namespace YunaLegend.EditorScripts
             CreateUrpMaterial("M_Yuna_Skin", new Color(0.98f, 0.86f, 0.78f), 0.25f);
 
             // Cenografia Monumental
-            CreateUrpMaterial("M_Background_Wall", new Color(0.08f, 0.10f, 0.18f), 0.15f, wallpaperTex, null, new Vector2(10f, 2f));
-            CreateUrpMaterial("M_Moonlit_Window", Color.white, 0.75f, windowTex, new Color(0.50f, 0.65f, 0.85f) * 1.4f);
+            CreateUrpMaterial("M_Background_Wall", Color.white, 0.0f, wallpaperTex, new Color(0.76f, 0.76f, 0.84f), new Vector2(-15f, -2.5f), new Vector2(1f, 1f));
+            CreateUrpMaterial("M_Wall_Baseboard", Color.white, 0.08f, baseboardTex, new Color(0.68f, 0.68f, 0.76f), new Vector2(-30f, -1f), new Vector2(1f, 1f));
+            CreateUrpMaterial("M_Moonlit_Window", Color.white, 0.0f, windowTex, new Color(0.78f, 0.84f, 0.96f) * 0.95f, new Vector2(-1f, -1f), new Vector2(1f, 1f), alphaClip: true);
 
             // 3. Configurar Volume URP de Pos-Processamento
             ConfigurePostProcessingVolume();
@@ -121,7 +124,7 @@ namespace YunaLegend.EditorScripts
             UnityEngine.Object.DestroyImmediate(tex);
         }
 
-        private static void CreateUrpMaterial(string name, Color baseColor, float smoothness, Texture2D tex = null, Color? emission = null, Vector2? tiling = null)
+        private static void CreateUrpMaterial(string name, Color baseColor, float smoothness, Texture2D tex = null, Color? emission = null, Vector2? tiling = null, Vector2? offset = null, bool alphaClip = false)
         {
             var matPath = $"{MaterialsFolder}/{name}.mat";
             var mat = AssetDatabase.LoadAssetAtPath<Material>(matPath);
@@ -142,23 +145,38 @@ namespace YunaLegend.EditorScripts
             mat.SetColor("_BaseColor", baseColor);
             mat.SetFloat("_Smoothness", smoothness);
 
+            if (alphaClip)
+            {
+                mat.SetFloat("_AlphaClip", 1f);
+                mat.SetFloat("_Cutoff", 0.5f);
+                mat.EnableKeyword("_ALPHATEST_ON");
+            }
+            else
+            {
+                mat.SetFloat("_AlphaClip", 0f);
+                mat.DisableKeyword("_ALPHATEST_ON");
+            }
+
+            Vector2 scaleVal = tiling ?? Vector2.one;
+            Vector2 offsetVal = offset ?? Vector2.zero;
+
             if (tex != null)
             {
                 mat.SetTexture("_BaseMap", tex);
-                if (tiling.HasValue)
-                {
-                    mat.SetTextureScale("_BaseMap", tiling.Value);
-                }
-                else
-                {
-                    mat.SetTextureScale("_BaseMap", Vector2.one);
-                }
+                mat.SetTextureScale("_BaseMap", scaleVal);
+                mat.SetTextureOffset("_BaseMap", offsetVal);
             }
 
             if (emission.HasValue)
             {
                 mat.EnableKeyword("_EMISSION");
                 mat.SetColor("_EmissionColor", emission.Value);
+                if (tex != null)
+                {
+                    mat.SetTexture("_EmissionMap", tex);
+                    mat.SetTextureScale("_EmissionMap", scaleVal);
+                    mat.SetTextureOffset("_EmissionMap", offsetVal);
+                }
             }
             else
             {
@@ -645,27 +663,99 @@ namespace YunaLegend.EditorScripts
             int size = 512;
             var tex = new Texture2D(size, size, TextureFormat.RGBA32, true);
 
-            var indigo1 = new Color(0.08f, 0.10f, 0.18f);
-            var indigo2 = new Color(0.11f, 0.13f, 0.22f);
-            var starGold = new Color(0.45f, 0.40f, 0.55f);
+            // Paleta canonica exata de BackgroundRenderer.js (drawRoomWall):
+            // Fundo #0d0a14, listras verticais #17131d e estrelas douradas sutis #facc15 (alpha ~0.065)
+            var wallBase = new Color(13f / 255f, 10f / 255f, 20f / 255f, 1f);   // #0d0a14
+            var wallStripe = new Color(23f / 255f, 19f / 255f, 29f / 255f, 1f); // #17131d
+            var starGold = new Color(250f / 255f, 204f / 255f, 21f / 255f, 1f); // #facc15
 
-            int stripeW = 32;
+            int stripeW = 64;   // 4 ciclos de listras (128px cada) em 512px
+            int cellW = 128;    // Grade regular de estrelas alternadas
+            int cellH = 128;
 
             for (int y = 0; y < size; y++)
             {
+                int row = y / cellH;
+                int starCenterY = row * cellH + (cellH / 2);
+
                 for (int x = 0; x < size; x++)
                 {
-                    float wash = WatercolorWash(x, y);
                     bool isStripe = ((x / stripeW) % 2 == 0);
-                    var c = isStripe ? indigo2 : indigo1;
+                    Color c = isStripe ? wallStripe : wallBase;
 
-                    float starNoise = Mathf.PerlinNoise(x * 0.06f, y * 0.06f);
-                    if (starNoise > 0.80f)
+                    // Padrao regular alternado (staggered) de estrelas douradas sutis nas listras
+                    int col = x / cellW;
+                    int starCenterX = col * cellW + ((row % 2 == 0) ? (stripeW / 2) : (stripeW + stripeW / 2));
+
+                    float dx = Mathf.Abs(x - starCenterX);
+                    float dy = Mathf.Abs(y - starCenterY);
+                    // Losango/estrela de 4 pontas delicada (raio ~5.5px na textura 512x512)
+                    float diamondDist = Mathf.Pow(dx, 0.75f) + Mathf.Pow(dy, 0.75f);
+                    if (diamondDist <= 4.2f)
                     {
-                        c += starGold * (starNoise - 0.80f) * 2.0f;
+                        float starMask = Mathf.Clamp01((4.2f - diamondDist) / 1.4f);
+                        c = Color.Lerp(c, starGold, 0.068f * starMask);
                     }
 
-                    tex.SetPixel(x, y, c * wash);
+                    c.a = 1f;
+                    tex.SetPixel(x, y, c);
+                }
+            }
+
+            tex.Apply();
+            return tex;
+        }
+
+        private static Texture2D GenerateWallBaseboardTexture()
+        {
+            int width = 512;
+            int height = 128;
+            var tex = new Texture2D(width, height, TextureFormat.RGBA32, true);
+
+            // Paleta canonica do rodape em BackgroundRenderer.js (drawRoomWall):
+            // Corpo principal #2b2138, friso superior #3e3152 e sulcos discretos #1e1628
+            var bodyCol = new Color(43f / 255f, 33f / 255f, 56f / 255f, 1f);     // #2b2138
+            var trimCol = new Color(62f / 255f, 49f / 255f, 82f / 255f, 1f);     // #3e3152
+            var trimRim = new Color(77f / 255f, 60f / 255f, 104f / 255f, 1f);    // #4d3c68
+            var grooveCol = new Color(26f / 255f, 19f / 255f, 37f / 255f, 1f);   // #1a1325
+
+            for (int y = 0; y < height; y++)
+            {
+                // normY = 0 no topo do rodape (friso #3e3152), normY = 1 na base junto ao piso
+                float normY = 1.0f - (float)y / (height - 1);
+
+                for (int x = 0; x < width; x++)
+                {
+                    Color c;
+                    if (normY <= 0.045f)
+                    {
+                        c = trimRim;
+                    }
+                    else if (normY <= 0.18f)
+                    {
+                        c = trimCol;
+                    }
+                    else if (normY <= 0.22f)
+                    {
+                        c = grooveCol;
+                    }
+                    else if (normY >= 0.92f)
+                    {
+                        c = grooveCol;
+                    }
+                    else
+                    {
+                        // Corpo #2b2138 com discretas juntas verticais de lambril a cada 128px
+                        bool isPanelGroove = (x % 128 <= 2);
+                        float grain = (Mathf.PerlinNoise(x * 0.04f, y * 0.15f) - 0.5f) * 0.015f;
+                        c = isPanelGroove ? grooveCol : new Color(
+                            Mathf.Clamp01(bodyCol.r + grain),
+                            Mathf.Clamp01(bodyCol.g + grain),
+                            Mathf.Clamp01(bodyCol.b + grain),
+                            1f);
+                    }
+
+                    tex.SetPixel(x, y, c);
                 }
             }
 
@@ -678,95 +768,114 @@ namespace YunaLegend.EditorScripts
             int size = 512;
             var tex = new Texture2D(size, size, TextureFormat.RGBA32, true);
 
-            var darkFrame = new Color(0.18f, 0.12f, 0.08f);   // Madeira escura da esquadria
-            var frameBevel = new Color(0.32f, 0.22f, 0.14f);  // Chanfro da madeira
-            var nightSky = new Color(0.04f, 0.06f, 0.16f);    // Céu noturno profundo
-            var moonGlow = new Color(0.70f, 0.82f, 1.0f);     // Halo azulado do luar
-            var moonCore = new Color(0.98f, 0.98f, 0.90f);    // Núcleo branco-marfim da lua
-            var glassTint = new Color(0.45f, 0.62f, 0.85f);   // Vidro iluminado
+            // Paleta canonica exata de BackgroundRenderer.js (linhas 285-347)
+            var wallOutside = new Color(0.005f, 0.007f, 0.018f, 1f);  // Parede noturna atras do arco superior (sem emissao aparente)
+            var frameFill = new Color(0.102f, 0.075f, 0.145f, 1f);    // #1a1325 Moldura interna em tom profundo
+            var frameBorder = new Color(0.302f, 0.235f, 0.408f, 1f);  // #4d3c68 Contorno delicado da moldura
+            var nightSky = new Color(0.035f, 0.043f, 0.078f, 1f);     // #090b14 Vidro com ceu da meia-noite
+            var moonSilver = new Color(0.863f, 0.906f, 0.961f, 1f);   // #dce7f5 Lua crescente prateada
+            var moonHalo = new Color(0.55f, 0.68f, 0.90f, 1f);        // Brilho suave ao redor do crescente
+            var starWhite = new Color(0.973f, 0.980f, 0.988f, 1f);    // #f8fafc Estrelas cintilando na janela
+            var mullionCol = new Color(0.196f, 0.145f, 0.286f, 1f);   // #322549 Divisorias em cruz (2x2)
+            var curtainLilac = new Color(0.659f, 0.333f, 0.969f, 1f); // #a855f7 Cortinas translucidas lilases
 
-            float cx = size * 0.5f;
-            float cy = size * 0.5f;
+            // Coordenadas canonicas: janela de 90x130px (px em [0..90], py em [0..130] do topo para a base)
+            Vector2 archCenter = new Vector2(45f, 45f);
+            Vector2 moonOuterCenter = new Vector2(35f, 35f); // (sx + 35, 115 - 80)
+            Vector2 moonCutCenter = new Vector2(39f, 33f);   // (sx + 39, 113 - 80)
+            float moonOuterR = 12.0f;
+            float moonCutR = 10.0f;
 
-            // Posição e raio da lua visível através do vitral
-            Vector2 moonCenter = new Vector2(cx, size * 0.68f);
-            float moonRadius = 68f;
-
-            int outerBorder = 32;
+            Vector2 star1 = new Vector2(60f, 30f); // (sx + 60, 110 - 80)
+            Vector2 star2 = new Vector2(22f, 65f); // (sx + 22, 145 - 80)
+            Vector2 star3 = new Vector2(65f, 80f); // (sx + 65, 160 - 80)
 
             for (int y = 0; y < size; y++)
             {
+                // py = 0 no topo da textura (y = size - 1), py = 130 na base (y = 0)
+                float py = (1.0f - (float)y / (size - 1)) * 130.0f;
+
                 for (int x = 0; x < size; x++)
                 {
-                    // Formato do arco gótico no topo
-                    float nx = (x - cx) / cx;
-                    float archTop = cy + Mathf.Sqrt(Mathf.Max(0, 1.0f - nx * nx)) * (size * 0.44f);
+                    float px = ((float)x / (size - 1)) * 90.0f;
 
-                    // Parede externa / moldura exterior
-                    if (y > archTop || x < outerBorder || x > size - outerBorder || y < outerBorder)
+                    // 1. Silhueta externa: roundRect(0, 0, 90, 130, [45, 45, 4, 4])
+                    float distArch = Vector2.Distance(new Vector2(px, py), archCenter);
+                    bool outsideOuterArch = (py < 45f && distArch > 45f);
+
+                    if (outsideOuterArch)
                     {
-                        tex.SetPixel(x, y, darkFrame);
+                        tex.SetPixel(x, y, Color.clear);
                         continue;
                     }
 
-                    // Chanfro interno da moldura
-                    bool isBevel = (x < outerBorder + 6 || x > size - outerBorder - 6 || y < outerBorder + 6 || y > archTop - 6);
-                    if (isBevel)
+                    // Contorno externo #4d3c68 (espessura ~2.2px canonicos)
+                    bool isOuterStroke = (py < 45f)
+                        ? (distArch >= 42.6f)
+                        : (px <= 2.4f || px >= 87.6f || py >= 127.6f);
+
+                    // 2. Vidro interno: roundRect(6, 6, 78, 118, [39, 39, 2, 2]) -> px em [6..84], py em [6..124]
+                    bool insideGlass = (py < 45f)
+                        ? (distArch <= 39.0f)
+                        : (px >= 6.0f && px <= 84.0f && py <= 124.0f);
+
+                    Color col;
+
+                    if (!insideGlass)
                     {
-                        tex.SetPixel(x, y, frameBevel);
-                        continue;
-                    }
-
-                    // Esquadrias / Travessas de madeira (Mullions verticais e Transoms horizontais)
-                    // 2 travessas verticais dividindo em 3 baías
-                    bool isVertMullion1 = Mathf.Abs(x - (cx - 72f)) < 7f;
-                    bool isVertMullion2 = Mathf.Abs(x - (cx + 72f)) < 7f;
-
-                    // 3 travessas horizontais
-                    bool isHorizTransom1 = Mathf.Abs(y - 140f) < 6f;
-                    bool isHorizTransom2 = Mathf.Abs(y - 250f) < 6f;
-                    bool isHorizTransom3 = Mathf.Abs(y - 355f) < 6f;
-
-                    // Arco superior gótico interno
-                    bool isInnerArch = Mathf.Abs(y - (cy + Mathf.Sqrt(Mathf.Max(0, 1.0f - nx * nx)) * (size * 0.32f))) < 5f && y > 355f;
-
-                    if (isVertMullion1 || isVertMullion2 || isHorizTransom1 || isHorizTransom2 || isHorizTransom3 || isInnerArch)
-                    {
-                        float woodNoise = (Mathf.PerlinNoise(x * 0.1f, y * 0.05f) - 0.5f) * 0.08f;
-                        tex.SetPixel(x, y, darkFrame + new Color(woodNoise, woodNoise, woodNoise, 0f));
-                        continue;
-                    }
-
-                    // Fundo da Janela: Céu Noturno + Grande Lua Brilhante
-                    float distToMoon = Vector2.Distance(new Vector2(x, y), moonCenter);
-                    float wash = WatercolorWash(x, y);
-
-                    if (distToMoon <= moonRadius)
-                    {
-                        // Disco da Lua: núcleo marfim com relevo de crateras e gradiente
-                        float moonNoise = Mathf.PerlinNoise(x * 0.04f, y * 0.04f) * 0.15f - 0.075f;
-                        float moonEdge = Mathf.Clamp01((moonRadius - distToMoon) / 8f);
-                        var moonCol = Color.Lerp(moonGlow, moonCore, moonEdge) + new Color(moonNoise, moonNoise, moonNoise, 0f);
-                        tex.SetPixel(x, y, moonCol * wash);
+                        col = isOuterStroke ? frameBorder : frameFill;
                     }
                     else
                     {
-                        // Halo do Luar e Céu Noturno
-                        float haloIntensity = Mathf.Exp(-(distToMoon - moonRadius) * 0.022f);
-                        float glassGrad = Mathf.Clamp01((float)y / size * 0.4f + 0.4f);
+                        // Ceu da meia-noite com halo sutil ao redor da lua crescente
+                        float distMoon = Vector2.Distance(new Vector2(px, py), moonOuterCenter);
+                        float distCut = Vector2.Distance(new Vector2(px, py), moonCutCenter);
 
-                        var skyCol = Color.Lerp(nightSky, glassTint * glassGrad, 0.4f);
-                        var finalCol = Color.Lerp(skyCol, moonGlow, haloIntensity * 0.85f);
+                        float halo = Mathf.Exp(-Mathf.Max(0f, distMoon - moonOuterR * 0.6f) * 0.11f) * 0.22f;
+                        col = Color.Lerp(nightSky, moonHalo, halo);
 
-                        // Estrelinhas distantes no céu
-                        float star = Mathf.PerlinNoise(x * 0.12f, y * 0.12f);
-                        if (star > 0.85f)
+                        // Lua crescente prateada (#dce7f5 menos recorte #090b14)
+                        if (distMoon <= moonOuterR && distCut >= moonCutR - 0.8f)
                         {
-                            finalCol += new Color(0.4f, 0.4f, 0.5f) * (star - 0.85f) * 4f;
+                            float outerAA = Mathf.Clamp01((moonOuterR - distMoon) * 2.5f);
+                            float innerAA = Mathf.Clamp01((distCut - (moonCutR - 0.8f)) * 2.5f);
+                            float crescentMask = outerAA * innerAA;
+                            col = Color.Lerp(col, moonSilver, crescentMask);
                         }
 
-                        tex.SetPixel(x, y, finalCol * wash);
+                        // 3 Estrelas cintilantes (#f8fafc)
+                        float dS1 = Mathf.Max(Mathf.Abs(px - star1.x), Mathf.Abs(py - star1.y));
+                        float dS2 = Mathf.Max(Mathf.Abs(px - star2.x), Mathf.Abs(py - star2.y));
+                        float dS3 = Mathf.Max(Mathf.Abs(px - star3.x), Mathf.Abs(py - star3.y));
+                        if (dS1 <= 1.25f || dS2 <= 0.95f || dS3 <= 1.25f)
+                        {
+                            col = starWhite;
+                        }
+
+                        // Divisorias em cruz 2x2 da vidraca (#322549): vertical em px=45, horizontal em py=60 (140-80)
+                        bool isVertMullion = Mathf.Abs(px - 45.0f) <= 1.15f;
+                        bool isHorizMullion = Mathf.Abs(py - 60.0f) <= 1.15f;
+                        if (isVertMullion || isHorizMullion)
+                        {
+                            col = mullionCol;
+                        }
                     }
+
+                    // 3. Cortinas translucidas lilases nas duas laterais (rgba(168, 85, 247, 0.20))
+                    float t = Mathf.Clamp01(py / 130.0f);
+                    // Curva quadratica de (0) -> controle (19) -> base (7)
+                    float leftCurtainEdge = (1f - t) * (1f - t) * 1.5f + 2f * (1f - t) * t * 19.5f + t * t * 7.5f;
+                    float rightCurtainEdge = 90.0f - leftCurtainEdge;
+
+                    if (px <= leftCurtainEdge || px >= rightCurtainEdge)
+                    {
+                        float distToCurtainHem = Mathf.Min(Mathf.Abs(px - leftCurtainEdge), Mathf.Abs(px - rightCurtainEdge));
+                        float alphaCurtain = (distToCurtainHem < 1.2f) ? 0.36f : 0.24f;
+                        col = Color.Lerp(col, curtainLilac, alphaCurtain);
+                    }
+
+                    col.a = 1.0f;
+                    tex.SetPixel(x, y, col);
                 }
             }
 
@@ -779,41 +888,39 @@ namespace YunaLegend.EditorScripts
             int size = 256;
             var tex = new Texture2D(size, size, TextureFormat.RGBA32, false);
 
-            float cx = size * 0.5f;
-            float cy = size * 0.5f;
-            int outerBorder = 18;
+            Vector2 archCenter = new Vector2(45f, 45f);
 
             for (int y = 0; y < size; y++)
             {
+                float py = (1.0f - (float)y / (size - 1)) * 130.0f;
+
                 for (int x = 0; x < size; x++)
                 {
-                    float nx = (x - cx) / cx;
-                    float archTop = cy + Mathf.Sqrt(Mathf.Max(0, 1.0f - nx * nx)) * (size * 0.44f);
+                    float px = ((float)x / (size - 1)) * 90.0f;
+                    float distArch = Vector2.Distance(new Vector2(px, py), archCenter);
 
-                    // Parede externa / moldura bloqueia a luz (preto = sombra)
-                    if (y > archTop || x < outerBorder || x > size - outerBorder || y < outerBorder)
+                    bool insideGlass = (py < 45f)
+                        ? (distArch <= 39.0f)
+                        : (px >= 6.0f && px <= 84.0f && py <= 124.0f);
+
+                    if (!insideGlass)
                     {
                         tex.SetPixel(x, y, Color.black);
                         continue;
                     }
 
-                    // Travessas de madeira bloqueiam a luz (projetam a sombra do vitral!)
-                    bool isVert1 = Mathf.Abs(x - (cx - 36f)) < 4f;
-                    bool isVert2 = Mathf.Abs(x - (cx + 36f)) < 4f;
-                    bool isHoriz1 = Mathf.Abs(y - 70f) < 4f;
-                    bool isHoriz2 = Mathf.Abs(y - 125f) < 4f;
-                    bool isHoriz3 = Mathf.Abs(y - 180f) < 4f;
-                    bool isInnerArch = Mathf.Abs(y - (cy + Mathf.Sqrt(Mathf.Max(0, 1.0f - nx * nx)) * (size * 0.32f))) < 3f && y > 180f;
+                    // Sombra da divisoria em cruz 2x2 canonica (px=45, py=60)
+                    bool isVert = Mathf.Abs(px - 45.0f) <= 1.8f;
+                    bool isHoriz = Mathf.Abs(py - 60.0f) <= 1.8f;
 
-                    if (isVert1 || isVert2 || isHoriz1 || isHoriz2 || isHoriz3 || isInnerArch)
+                    if (isVert || isHoriz)
                     {
-                        tex.SetPixel(x, y, Color.black); // Sombra da esquadria
+                        tex.SetPixel(x, y, Color.black);
                     }
                     else
                     {
-                        // Vidro deixa a luz passar (branco/brilhante = luz projetada no piso e objetos!)
-                        float distCenter = Vector2.Distance(new Vector2(x, y), new Vector2(cx, size * 0.65f)) / (size * 0.5f);
-                        float intensity = Mathf.Clamp01(1.0f - distCenter * 0.4f);
+                        float distCenter = Vector2.Distance(new Vector2(px, py), new Vector2(45f, 55f)) / 65f;
+                        float intensity = Mathf.Clamp01(1.0f - distCenter * 0.45f);
                         tex.SetPixel(x, y, new Color(intensity, intensity, intensity, 1f));
                     }
                 }

@@ -57,25 +57,36 @@ namespace YunaLegend.EditorScripts
             // 2c. Foco de Luar Real Difuso na Janela (URP Spot Light nativo com sombras suaves reais)
             var moonSpotGo = GameObject.Find("Window_Moonlight_Spot");
             if (moonSpotGo == null) moonSpotGo = new GameObject("Window_Moonlight_Spot");
-            moonSpotGo.transform.position = new Vector3(29.5f, 2.5f, 5.8f);
-            moonSpotGo.transform.rotation = Quaternion.Euler(40f, -22f, 0f);
+            moonSpotGo.transform.position = new Vector3(29.5f, 1.8f, 3.8f);
+            moonSpotGo.transform.rotation = Quaternion.Euler(18f, 14f, 0f);
 
             var spotLight = moonSpotGo.GetComponent<Light>();
             if (spotLight == null) spotLight = moonSpotGo.AddComponent<Light>();
             spotLight.type = LightType.Spot;
-            spotLight.color = new Color(0.70f, 0.84f, 1.0f);
-            spotLight.intensity = 0.40f;
-            spotLight.range = 14f;
-            spotLight.spotAngle = 36f;
-            spotLight.innerSpotAngle = 14f; // Difusao gradual e suave nas bordas do feixe
+            spotLight.color = new Color(0.68f, 0.82f, 1.0f);
+            spotLight.intensity = 1.10f;
+            spotLight.range = 12f;
+            spotLight.spotAngle = 56f;
+            spotLight.innerSpotAngle = 16f; // Difusao gradual e suave nas bordas do feixe
             spotLight.shadows = LightShadows.Soft; // Sombras suaves reais da engine
+            spotLight.cookie = null;
 
-            // Cookie de luz com a esquadria da janela canonica para projetar a sombra das travessas
-            var cookieTex = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Materials/T_Window_Cookie.png");
-            if (cookieTex != null)
-            {
-                spotLight.cookie = cookieTex;
-            }
+            // 2d. Foco de Luar Suave na 2a Janela Canonica (NIGHT_WINDOWS[1] = 1950 -> X=73.75m)
+            var moonSpot2Go = GameObject.Find("Window_Moonlight_Spot_2");
+            if (moonSpot2Go == null) moonSpot2Go = new GameObject("Window_Moonlight_Spot_2");
+            moonSpot2Go.transform.position = new Vector3(73.75f, 1.8f, 3.8f);
+            moonSpot2Go.transform.rotation = Quaternion.Euler(18f, 14f, 0f);
+
+            var spotLight2 = moonSpot2Go.GetComponent<Light>();
+            if (spotLight2 == null) spotLight2 = moonSpot2Go.AddComponent<Light>();
+            spotLight2.type = LightType.Spot;
+            spotLight2.color = new Color(0.68f, 0.82f, 1.0f);
+            spotLight2.intensity = 1.10f;
+            spotLight2.range = 12f;
+            spotLight2.spotAngle = 56f;
+            spotLight2.innerSpotAngle = 16f;
+            spotLight2.shadows = LightShadows.Soft;
+            spotLight2.cookie = null;
 
             var oldBeam = GameObject.Find("Window_Moonbeam_DiffuseShaft");
             if (oldBeam != null) Object.DestroyImmediate(oldBeam);
@@ -123,7 +134,8 @@ namespace YunaLegend.EditorScripts
                 LoadMat("M_DreamPortal_Gold"),
                 LoadMat("M_Moonbeam_Shaft"),
                 LoadMat("M_AmbientDust_Particle"),
-                LoadMat("M_Moonlight_Floor_Projection")
+                LoadMat("M_Moonlight_Floor_Projection"),
+                LoadMat("M_Wall_Baseboard")
             );
 
             builder.BuildBlockout();
