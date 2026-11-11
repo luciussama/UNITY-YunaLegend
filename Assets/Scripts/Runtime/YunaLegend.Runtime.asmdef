@@ -1,9 +1,10 @@
-{
+﻿{
     "name": "YunaLegend.Runtime",
     "rootNamespace": "YunaLegend",
     "references": [
         "Unity.InputSystem",
         "Unity.TextMeshPro",
+        "UnityEngine.UI",
         "Unity.RenderPipelines.Universal.Runtime"
     ],
     "includePlatforms": [],

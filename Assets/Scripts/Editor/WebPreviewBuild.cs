@@ -26,7 +26,8 @@ namespace YunaLegend.EditorScripts
                 PlayerSettings.runInBackground = true;
                 var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
                 {
-                    scenes = new[] { "Assets/Scenes/DarkRoom_Gameplay.unity" },
+                    // A tela de entrada entra primeiro; o gameplay continua como segunda cena.
+                    scenes = new[] { "Assets/Scenes/TitleScreen.unity", "Assets/Scenes/DarkRoom_Gameplay.unity" },
                     locationPathName = output,
                     target = BuildTarget.WebGL,
                     options = BuildOptions.Development
