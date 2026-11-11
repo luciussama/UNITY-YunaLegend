@@ -63,7 +63,9 @@ namespace YunaLegend.RoutePhysics.Tests
                     delay+=before-player.StumbleDelayRemaining;furniture.Tick(1f/fps);player.SendMessage("LateUpdate");
                     maxSag=Mathf.Max(maxSag,furniture.CurrentSag);
                     var body=player.transform.Find("Body_Visual");
-                    if(player.IsStumbling&&Mathf.Abs(Mathf.DeltaAngle(0,body.localEulerAngles.x))>1f)sawPose=true;
+                    var view=body.GetComponent<YunaCharacterView>();
+                    float lean=view!=null?view.PoseLeanDegrees:Mathf.DeltaAngle(0,body.localEulerAngles.x);
+                    if(player.IsStumbling&&Mathf.Abs(lean)>1f)sawPose=true;
                 }
                 Assert.IsFalse(player.IsDead,$"death fps{fps}");Assert.AreEqual(3,player.CurrentSupportIndex,$"exit fps{fps}");
                 Assert.AreEqual(1,furniture.CrackCount);Assert.AreEqual(.08f,delay,.0001f,$"local delay fps{fps}");

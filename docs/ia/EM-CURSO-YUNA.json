@@ -1,0 +1,23 @@
+{
+  "flag": "EM_CURSO",
+  "em_curso": true,
+  "plano_ativo": 373,
+  "sessao": "2026-11-11-codex-yuna-modelo-92e3",
+  "commit_anterior": "4ceb98f",
+  "referencia_aprovada": "Evidence/yuna-concept-2026-11-11/yuna-3d-concept-v1.png",
+  "estado": "Fontes de malha/rig/view/captura escritos; primeira compilacao/geracao no clone. Ainda nao renderizado nem integrado.",
+  "arquivos": [
+    "Assets/Scripts/Editor/YunaCharacterModelBuilder.cs",
+    "Assets/Scripts/Editor/YunaCharacterModelCapture.cs",
+    "Assets/Scripts/Runtime/DarkRoom/YunaCharacterView.cs",
+    "Assets/Scripts/Runtime/DarkRoom/Yuna25DPlayerController.cs"
+  ],
+  "proximos_passos": [
+    "Compilar/gerar prefab+mesh no clone.",
+    "Inspecionar renders reais e corrigir geometria/semelhanca.",
+    "Validar skin/bones/animacoes,clockdepassos econtratoY0/1.4m.",
+    "Integrar visual incrementalmente sem alterar fisica/camera/rota/audio.",
+    "Registrar evidencias,limitacoes e estado de polimento."
+  ],
+  "limite": "Prancha aprovada e alvo de aparencia; estudo inicial nao equivale a modelo final."
+}

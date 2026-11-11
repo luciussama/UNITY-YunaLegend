@@ -95,7 +95,9 @@ namespace YunaLegend.EditorScripts
                     if(progress>.42f&&!furniture.HasCracked)Key("02-before-crack");
                     if(furniture.HasCracked)Key("03-crack-pause");
                     var body=player.transform.Find("Body_Visual");
-                    if(player.StumbleDelayRemaining<=0&&player.IsStumbling&&Mathf.Abs(Mathf.DeltaAngle(0,body.localEulerAngles.x))>8)Key("04-stumble");
+                    var view=body.GetComponent<YunaCharacterView>();
+                    float lean=view!=null?view.PoseLeanDegrees:Mathf.DeltaAngle(0,body.localEulerAngles.x);
+                    if(player.StumbleDelayRemaining<=0&&player.IsStumbling&&Mathf.Abs(lean)>8)Key("04-stumble");
                     if(!jumpedOut&&player.transform.position.x>=marker.GetTakeoffPoint(1f,.35f).x){QueueJump();jumpedOut=true;}
                 }
                 if(player.CurrentSupportIndex>=3)
@@ -127,7 +129,7 @@ namespace YunaLegend.EditorScripts
             var body=player.transform.Find("Body_Visual");
             samples.Add(new Sample {frame=frame,support=player.CurrentSupportIndex,cracks=furniture.CrackCount,gameTime=(frame-20)/60f,
                 player=player.transform.position,camera=camera.transform.position,sag=furniture.CurrentSag,delay=player.StumbleDelayRemaining,
-                poseAngle=Mathf.DeltaAngle(0,body.localEulerAngles.x),timeScale=Time.timeScale,cracked=furniture.HasCracked,stumbling=player.IsStumbling,file=path});
+                poseAngle=body.GetComponent<YunaCharacterView>()!=null?body.GetComponent<YunaCharacterView>().PoseLeanDegrees:Mathf.DeltaAngle(0,body.localEulerAngles.x),timeScale=Time.timeScale,cracked=furniture.HasCracked,stumbling=player.IsStumbling,file=path});
         }
     }
 }

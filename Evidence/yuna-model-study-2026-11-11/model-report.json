@@ -1,0 +1,20 @@
+{
+    "vertices": 44990,
+    "triangles": 81424,
+    "bones": 26,
+    "materials": 18,
+    "restBounds": {
+        "m_Center": {
+            "x": 0.0,
+            "y": 0.6999999284744263,
+            "z": -0.10456431657075882
+        },
+        "m_Extent": {
+            "x": 0.28584712743759158,
+            "y": 0.6999999284744263,
+            "z": 0.2952125668525696
+        }
+    },
+    "source": "Assets/Characters/Yuna/Yuna_Study.prefab",
+    "method": "Actual Unity SkinnedMeshRenderer renders, neutral inspection lights; poses applied to bones. Not ImageGen. First study, no final likeness claim."
+}

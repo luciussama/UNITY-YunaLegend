@@ -41,6 +41,9 @@ namespace YunaLegend.DarkRoom
         [SerializeField] private AudioClip comicFallThudSfx;
 
         private float footstepTimer;
+        private int footstepCount;
+        public float FootstepInterval => 0.28f / Mathf.Max(0.5f, runSpeed / 3.6f);
+        public float GaitPhase => Mathf.Repeat(footstepCount * .5f + .5f * (1f - footstepTimer / FootstepInterval), 1f);
 
         private CharacterController controller;
         private Vector3 velocity;
@@ -58,11 +61,14 @@ namespace YunaLegend.DarkRoom
 
         private float stumbleDelay,stumblePose,stumblePoseDuration;
         private Transform stumbleVisual;
+        private YunaCharacterView characterView;
         private Vector3 visualRestPosition;
         private Quaternion visualRestRotation;
         public int CurrentSupportIndex => lastLandedPlatformIndex;
         public bool IsStumbling => stumbleDelay>0f||stumblePose>0f;
         public float StumbleDelayRemaining => stumbleDelay;
+        public float StumblePoseAmount => stumbleDelay > 0f || stumblePoseDuration <= 0f || stumblePose <= 0f
+            ? 0f : Mathf.Sin((1f - stumblePose / stumblePoseDuration) * Mathf.PI);
         public void BeginStumble(float delay,float recovery)
         {
             if(isDead)return;
@@ -75,6 +81,8 @@ namespace YunaLegend.DarkRoom
         }
         private void LateUpdate()
         {
+            if (characterView == null) characterView = GetComponentInChildren<YunaCharacterView>();
+            if (characterView != null) return;
             if(stumbleVisual==null)
             {
                 stumbleVisual=transform.Find("Body_Visual");
@@ -229,8 +237,9 @@ namespace YunaLegend.DarkRoom
             footstepTimer -= deltaTime;
             if (footstepTimer <= 0f)
             {
-                float interval = 0.28f / Mathf.Max(0.5f, runSpeed / 3.6f);
+                float interval = FootstepInterval;
                 footstepTimer = interval;
+                footstepCount++;
 
                 if (footstepWoodClips != null && footstepWoodClips.Length > 0 && audioSource != null)
                 {
@@ -336,6 +345,9 @@ namespace YunaLegend.DarkRoom
             airborneHorizontalSpeed = -1f;
             floorDeathActive = false; // Nao letal nesta cena
             velocity = Vector3.zero;
+            footstepTimer = 0f;
+            footstepCount = 0;
+            GetComponentInChildren<YunaCharacterView>()?.ResetPose();
         }
 
         private void ReadJumpInput()
@@ -642,6 +654,9 @@ namespace YunaLegend.DarkRoom
             lastLandedPlatformIndex = -1;
             runDirection = dir;
             velocity = Vector3.zero;
+            footstepTimer = 0f;
+            footstepCount = 0;
+            GetComponentInChildren<YunaCharacterView>()?.ResetPose();
             coyoteCounter = 0f;
             jumpBufferCounter = 0f;
             wasGrounded = false;

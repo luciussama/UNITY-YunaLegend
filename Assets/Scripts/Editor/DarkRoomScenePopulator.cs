@@ -226,7 +226,7 @@ namespace YunaLegend.EditorScripts
             {
                 yunaGo.transform.position = DarkRoomStartLayout.Position;
                 var body = yunaGo.transform.Find("Body_Visual");
-                if (body != null)
+                if (body != null && body.GetComponent<YunaCharacterView>() == null)
                 {
                     ApplyMat(body.gameObject, LoadMat("M_Yuna_Dress"));
                     var bow = body.Find("Yuna_Ribbon");
@@ -254,6 +254,9 @@ namespace YunaLegend.EditorScripts
                     }
                 }
             }
+
+            // Reinstall the authored visual when available; rebuilding the room must not restore the capsule.
+            YunaCharacterModelBuilder.Install(yunaGo.GetComponent<Yuna25DPlayerController>());
 
             // 5. Instanciar Nanda (Fadinha Guia: maior fonte de luz do quarto escuro)
             var nandaGo = GameObject.Find("Nanda_FairyGuide");
