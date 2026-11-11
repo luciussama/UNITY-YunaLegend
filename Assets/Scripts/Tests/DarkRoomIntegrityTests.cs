@@ -12,6 +12,30 @@ namespace YunaLegend.Tests
     public class DarkRoomIntegrityTests
     {
         [Test]
+        public void Test_PersistedPostProcessingChainIncludesCameraVolumeAndRendererResources()
+        {
+            UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/DarkRoom_Gameplay.unity");
+            try
+            {
+                var camera = Camera.main;
+                var data = new UnityEditor.SerializedObject(camera.GetComponent("UniversalAdditionalCameraData"));
+                Assert.IsTrue(data.FindProperty("m_RenderPostProcessing").boolValue);
+                Assert.IsTrue(camera.allowHDR);
+                var volumeGo = GameObject.Find("DarkRoom_GlobalVolume");
+                var volume = new UnityEditor.SerializedObject(volumeGo.GetComponent("Volume"));
+                var profile = UnityEditor.AssetDatabase.LoadMainAssetAtPath("Assets/DefaultVolumeProfile.asset");
+                Assert.AreSame(profile, volume.FindProperty("sharedProfile").objectReferenceValue, "The runtime profile property must not replace a persisted sharedProfile link.");
+                Assert.AreNotEqual(0, data.FindProperty("m_VolumeLayerMask").intValue & (1 << volumeGo.layer));
+                var renderer = new UnityEditor.SerializedObject(UnityEditor.AssetDatabase.LoadMainAssetAtPath("Assets/Settings/DarkRoomRenderer.asset"));
+                Assert.IsNotNull(renderer.FindProperty("postProcessData").objectReferenceValue);
+            }
+            finally
+            {
+                UnityEditor.SceneManagement.EditorSceneManager.NewScene(UnityEditor.SceneManagement.NewSceneSetup.EmptyScene);
+            }
+        }
+
+        [Test]
         public void Test_PersistedSceneStartsOnFloorWithOnlyStage1Visible()
         {
             var scene = UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/DarkRoom_Gameplay.unity");

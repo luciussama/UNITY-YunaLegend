@@ -94,14 +94,8 @@ namespace YunaLegend.EditorScripts
             var oldBeam = GameObject.Find("Window_Moonbeam_DiffuseShaft");
             if (oldBeam != null) Object.DestroyImmediate(oldBeam);
 
-            // 2b. Global Volume de Pos-Processamento URP (Bloom etereo, Vignette aconchegante)
-            var volumeGo = GameObject.Find("DarkRoom_GlobalVolume");
-            if (volumeGo == null) volumeGo = new GameObject("DarkRoom_GlobalVolume");
-            var volume = volumeGo.GetComponent<Volume>();
-            if (volume == null) volume = volumeGo.AddComponent<Volume>();
-            volume.isGlobal = true;
-            var profile = AssetDatabase.LoadAssetAtPath<VolumeProfile>("Assets/DefaultVolumeProfile.asset");
-            if (profile != null) volume.profile = profile;
+            // 2b. Persistir a cadeia camera/Volume e o mesmo perfil utilizado na geracao de arte.
+            DarkRoomPostProcessingSetup.ConfigureScene(cam);
 
             // 3. Carregar Materiais e Gerar Blockout das 38 plataformas + piso + cenografia
             var blockoutRoot = GameObject.Find("DarkRoom_Blockout_Root");
@@ -385,6 +379,7 @@ namespace YunaLegend.EditorScripts
             soOpening.FindProperty("nanda").objectReferenceValue = nandaGuide;
             soOpening.ApplyModifiedProperties();
 
+            DarkRoomValueHierarchySetup.ConfigureScene();
             EditorSceneManager.SaveScene(scene);
             Debug.Log("[DarkRoomScenePopulator] Cena DarkRoom_Gameplay populada com Direção Artística e salva com sucesso!");
         }

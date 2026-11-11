@@ -123,6 +123,8 @@ namespace YunaLegend.EditorScripts
             CreateUrpMaterial("M_Floor_Rug_Striped", new Color(0.84f, 0.82f, 0.78f), 0.04f, stripedRugTex, new Color(0.060f, 0.056f, 0.054f), Vector2.one, Vector2.zero, alphaClip: true);
             CreateUrpMaterial("M_Moonlit_Window", Color.white, 0.0f, windowTex, new Color(0.78f, 0.84f, 0.96f) * 0.95f, new Vector2(-1f, -1f), new Vector2(1f, 1f), alphaClip: true);
 
+            DarkRoomValueHierarchySetup.ConfigureMaterials();
+
             // 3. Configurar Volume URP de Pos-Processamento
             ConfigurePostProcessingVolume();
 
@@ -1606,45 +1608,7 @@ namespace YunaLegend.EditorScripts
 
         private static void ConfigurePostProcessingVolume()
         {
-            var profilePath = "Assets/DefaultVolumeProfile.asset";
-            var profile = AssetDatabase.LoadAssetAtPath<VolumeProfile>(profilePath);
-            if (profile == null)
-            {
-                profile = ScriptableObject.CreateInstance<VolumeProfile>();
-                AssetDatabase.CreateAsset(profile, profilePath);
-            }
-
-            // Bloom
-            Bloom bloom;
-            if (!profile.TryGet(out bloom))
-            {
-                bloom = profile.Add<Bloom>(true);
-            }
-            bloom.threshold.Override(0.85f);
-            bloom.intensity.Override(1.25f);
-            bloom.scatter.Override(0.68f);
-
-            // Vignette
-            Vignette vignette;
-            if (!profile.TryGet(out vignette))
-            {
-                vignette = profile.Add<Vignette>(true);
-            }
-            vignette.intensity.Override(0.32f);
-            vignette.smoothness.Override(0.45f);
-            vignette.color.Override(new Color(0.03f, 0.02f, 0.08f));
-
-            // Color Adjustments
-            ColorAdjustments colorAdj;
-            if (!profile.TryGet(out colorAdj))
-            {
-                colorAdj = profile.Add<ColorAdjustments>(true);
-            }
-            colorAdj.postExposure.Override(0.15f);
-            colorAdj.contrast.Override(14f);
-            colorAdj.saturation.Override(12f);
-
-            EditorUtility.SetDirty(profile);
+            DarkRoomPostProcessingSetup.ConfigureProfile();
         }
     }
 }
