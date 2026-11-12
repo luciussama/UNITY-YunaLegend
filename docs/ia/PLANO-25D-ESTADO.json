@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-12T21:41:25.880058+00:00",
+  "updated_at": "2026-11-12T22:03:14.390539+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -188,16 +188,19 @@
         "art-yuna"
       ],
       "human_gate": false,
-      "status": "pending",
-      "owner": null,
+      "status": "active",
+      "owner": {
+        "session": "2026-11-12-codex-jump-t033-c91e",
+        "agent": "Codex (GPT-6)"
+      },
       "checkpoint": {
-        "done": "T03.1 aprovada; T03.2 v2 aprovada (humano) e revalidada a 60/120 Hz apos auditoria: loop 0,042 pose, grade 0,0 m, deriva do apoio 0,0 m, salto de tela 5,1/5,0 px; proveniencia reconciliada (prova 120 Hz em review-v2, 60 Hz em final-v2-60), manifest-v2 com 16 fontes + 19 evidencias, status e link corrigidos; parte DeepSeek aprovada e liberada",
-        "next": "Reserva T03 liberada. Proximo responsavel: T03.3 salto (subida/queda/pouso), que exige poses pintadas via imagegen; preparar fixture/cena/captura e medir apoio e continuidade juntos. Decisao aberta: arte com passada ~2,4x mais longa ou velocidade/cadencia ~1,63 m/s.",
-        "validation": "2 capturas novas success=True (60/120 Hz); prova 120Hz SHA f4a355dd igual a entregue; verification 120Hz 256 hashes; manifest-v2 16+19; plan/diary check OK",
-        "pending": "Arte do salto (imagegen); passo do corpo 0,307m; loop 30Hz 15,8px; orcamento de atlas conjunto; plataformas reais/dispositivos/retrato/audio; T03.4; commit desta reconciliacao",
-        "files": "Evidence/25d/T03.2;Evidence/25d/T03.2/reviews/T03.2-v2-aprovacao.md;Evidence/25d/T03.2/review-v2/manifest-v2.json;tools/make_run_manifest_v2.py;Evidence/25d/T03.1/README.md;Evidence/25d/Audit-2026-11-12",
-        "processes": "Capturas encerradas; nenhum Editor desta sessao ativo",
-        "updated_at": "2026-11-12T21:41:25.768636+00:00"
+        "done": "Atlas8poses/driver/cenaJump prontos;3ensaios14/14checks,checagemfinalcapturouRunSceneclone divergente",
+        "next": "AguardarPID41756 validacao30HzaposRunScenesincronizada;depois60/120serialemvalidated-* e montarreview-v1-verified",
+        "validation": "MainRunSHAea18e0...igualcloneaposcopy;nenhummudancaRuncheckout;naousarensaiosanteriorescomoprovaequivalenteantesrevalidar",
+        "pending": "Plano639emcurso;finalizarprovenienciaantesapresentacao;revisaohumanaT03.3pendente;T03.4naoiniciada",
+        "files": "Assets/Art/Illustrated25D/Yuna/Jump;Evidence/25d/T03.3;docs/ia/ESTADO-ATUAL-25D.md",
+        "processes": "Unity41756cloneBuild/Publish/Project;logBuild/25d-t033-validated-30.log;principaispreservados",
+        "updated_at": "2026-11-12T22:03:14.390539+00:00"
       }
     },
     {
@@ -1071,6 +1074,46 @@
       "session": "2026-11-12-deepseek-run-tail-4b7e",
       "reason": "Parte do DeepSeek aprovada e liberada para integracao apos revalidacao 60/120 Hz; T03.3 depende de imagegen ausente nesta sessao. Checkpoint preservado com proximo passo e pendencias.",
       "at": "2026-11-12T21:41:25.880058+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T03",
+      "session": "2026-11-12-dsh-t033-jump-6b2e",
+      "agent": "DeepSeek (deepseek-flash)",
+      "at": "2026-11-12T21:43:55.802633+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T03",
+      "session": "2026-11-12-codex-jump-t033-c91e",
+      "agent": "Codex (GPT-6)",
+      "reason": "Usuario escolheu explicitamente Transferir T03.3 para Codex nesta conversa; encerrar atuacao DeepSeek neste escopo. Git e processos conferidos,alteracoes preexistentes preservadas; plano628 segue autoria DeepSeek. Codex tem imagegen para poses. Sem presumir expiracao temporal.",
+      "from_session": "2026-11-12-dsh-t033-jump-6b2e",
+      "at": "2026-11-12T21:46:26.004711+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T03",
+      "session": "2026-11-12-codex-jump-t033-c91e",
+      "done": "T03.3 atlas8posesgerado;driver/capture implementados exclusivamenteJump;handoverautorizadopelousuario",
+      "next": "Conferir PID38564 e Build/25d-t033-attempt01-60.log;inspecionar prova/quadros antes proximo ensaio",
+      "validation": "RGBA1448x1086/8celulas;77fontescodigomain==clone;semtesteUnityconcluidoainda",
+      "pending": "Plano633emcurso;captura e contato/continuidade/auditoria pendentes;T03.3naoaprovada;T03.4naoiniciada",
+      "files": "Assets/Art/Illustrated25D/Yuna/Jump;Evidence/25d/T03.3",
+      "processes": "Unitybatch38564 no cloneBuild/Publish/Project;logBuild/25d-t033-attempt01-60.log;Editorprincipalpreservado",
+      "at": "2026-11-12T21:53:11.297276+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T03",
+      "session": "2026-11-12-codex-jump-t033-c91e",
+      "done": "Atlas8poses/driver/cenaJump prontos;3ensaios14/14checks,checagemfinalcapturouRunSceneclone divergente",
+      "next": "AguardarPID41756 validacao30HzaposRunScenesincronizada;depois60/120serialemvalidated-* e montarreview-v1-verified",
+      "validation": "MainRunSHAea18e0...igualcloneaposcopy;nenhummudancaRuncheckout;naousarensaiosanteriorescomoprovaequivalenteantesrevalidar",
+      "pending": "Plano639emcurso;finalizarprovenienciaantesapresentacao;revisaohumanaT03.3pendente;T03.4naoiniciada",
+      "files": "Assets/Art/Illustrated25D/Yuna/Jump;Evidence/25d/T03.3;docs/ia/ESTADO-ATUAL-25D.md",
+      "processes": "Unity41756cloneBuild/Publish/Project;logBuild/25d-t033-validated-30.log;principaispreservados",
+      "at": "2026-11-12T22:03:14.390539+00:00"
     }
   ]
 }
