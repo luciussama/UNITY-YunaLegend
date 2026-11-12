@@ -1,0 +1,158 @@
+{
+  "scope": "T03.2 v2: the delivered clip capture, the sources and scene that produced it, the per-rate and diagnostic proofs, the review GIFs and the human approval record. Raw frames stay in Build/ (outside Git); verification.json carries their 256 hashes.",
+  "clip": {
+    "samples": 128,
+    "simulation_hz": 120,
+    "cycles_per_clip": 11.005291938781738,
+    "loop_phase_residual_poses": 0.04233551025390625,
+    "mark_spacing_m": 1.0084848403930664
+  },
+  "sources": {
+    "Assets/Art/Illustrated25D/Yuna/Run/YunaRunIllustration.cs": {
+      "sha256": "6b273c17243888aae27a18740fa34ae0b3462e2ff8799320f5946e16c43d7aec",
+      "bytes": 4223
+    },
+    "Assets/Art/Illustrated25D/Yuna/Run/Editor/YunaRunReviewCapture.cs": {
+      "sha256": "124f6b663a9e4e812b8a250c936d914cf1e03e395e43516d31a07828d2e65e3d",
+      "bytes": 18850
+    },
+    "Assets/Art/Illustrated25D/Yuna/Run/YunaRunReview.unity": {
+      "sha256": "ea18e0ccc45264c9a34743275be10680983cfe27ff76c6f9af98b5c64fbd8f49",
+      "bytes": 196111
+    },
+    "Assets/Art/Illustrated25D/Yuna/Run/Yuna_Run_Atlas_v1.png": {
+      "sha256": "921aa127071c245072074c63e5be61ed091f00f8a9829d937769286df3966eff",
+      "bytes": 2280628
+    },
+    "Assets/Art/Illustrated25D/Yuna/Run/Run_Painted.mat": {
+      "sha256": "d66f07122111724deeb4b3c292cfe7824e6c586bf202445451150f3367f92efd",
+      "bytes": 1116
+    },
+    "Assets/Art/Illustrated25D/Yuna/Run/TechnicalMetreMarks.mat": {
+      "sha256": "81a4a2423aef836c6eb5b4b259d9c560f670e05e18b50a12410d688a1ef6605b",
+      "bytes": 1899
+    },
+    "Assets/Art/Illustrated25D/Yuna/Run/Frames/Run0.asset": {
+      "sha256": "414185a2bf99353da7606c5dc3e5b28531f6dfdae8519a571ca456e2fbed6774",
+      "bytes": 4901
+    },
+    "Assets/Art/Illustrated25D/Yuna/Run/Frames/Run1.asset": {
+      "sha256": "8e7233ec61d70b7f2ddf75196710ac59393dbb6a1209243a3955af3f2501ee15",
+      "bytes": 4905
+    },
+    "Assets/Art/Illustrated25D/Yuna/Run/Frames/Run2.asset": {
+      "sha256": "83754124da6197dae07cb9588cb5cfd59f8bef0710316628439859e23bba6550",
+      "bytes": 4905
+    },
+    "Assets/Art/Illustrated25D/Yuna/Run/Frames/Run3.asset": {
+      "sha256": "bf5b0d7cc0e8f60d23aa40d31ae3fdbdac959b96523c8564d5c75263b3125e93",
+      "bytes": 4910
+    },
+    "Assets/Art/Illustrated25D/Yuna/Run/Frames/Run4.asset": {
+      "sha256": "443e30889e02a697d4d840660950795688ecfa86828902d7a7460a6e9caa0f6e",
+      "bytes": 4893
+    },
+    "Assets/Art/Illustrated25D/Yuna/Run/Frames/Run5.asset": {
+      "sha256": "cb25eee73a9e404b3b2e1174a2ce38f5c217ea568211954e22fd8322a14fe649",
+      "bytes": 4897
+    },
+    "Assets/Art/Illustrated25D/Yuna/Run/Frames/Run6.asset": {
+      "sha256": "c688d43fa8850bae04d07e8b1758fef52fd71662e31c00c097a997fd4b530495",
+      "bytes": 4897
+    },
+    "Assets/Art/Illustrated25D/Yuna/Run/Frames/Run7.asset": {
+      "sha256": "278d0d447663605c7d4e1ac4a8fab3efa7999a12326999723b744018728ddcca",
+      "bytes": 4902
+    },
+    "tools/make_run_review.py": {
+      "sha256": "13a853e57862ff1421e19bb0605a8565016dad6d2a12272e9f8987a727644e7c",
+      "bytes": 4404
+    },
+    "tools/make_run_review_v2.py": {
+      "sha256": "23a5c0e8e70b9ed22208621a83ff83009b8bd9cfcf64e423f5a6bf5db562e1a2",
+      "bytes": 6926
+    }
+  },
+  "evidence": {
+    "Evidence/25d/T03.2/README.md": {
+      "sha256": "afd85d409ed0f70eefcf50b987537924c2621c48f4cadb302066b44ac747095c",
+      "bytes": 9495
+    },
+    "Evidence/25d/T03.2/review-v2/README.md": {
+      "sha256": "bf9857dd8c40225cfe418f130b3406372fc7a0b2e86c63b17457c5ede0db3a87",
+      "bytes": 8226
+    },
+    "Evidence/25d/T03.2/review-v2/run-proof.json": {
+      "sha256": "f4a355dd654ea09968d907c4bbabfa75d17b1fda04c6221f4d1037f0d3887197",
+      "bytes": 61344
+    },
+    "Evidence/25d/T03.2/review-v2/verification.json": {
+      "sha256": "21456ed8f6c6f1dac8e78b1e1261fc1204b1ed8c729d00910cddb0db2df196ee",
+      "bytes": 24743
+    },
+    "Evidence/25d/T03.2/review-v2/run-gameplay.gif": {
+      "sha256": "9a5ae0d634f0aa24401040fda61c52b23201139ab3bf22dde71c5f52016a9a75",
+      "bytes": 1322831
+    },
+    "Evidence/25d/T03.2/review-v2/run-detail.gif": {
+      "sha256": "6f22408fd67caea3c5ec185678d673bd86b43fb9a44bd6785948e71ba19b904e",
+      "bytes": 8566590
+    },
+    "Evidence/25d/T03.2/review-v2/run-detail-slow.gif": {
+      "sha256": "82e5c6e8c1ec5fa28a740af777c79cc6d42c509e78ea7f81998ef56d34158e7d",
+      "bytes": 8566590
+    },
+    "Evidence/25d/T03.2/reviews/T03.2-v2.md": {
+      "sha256": "a3e7838e5ed31f435879e58e31329f9da0b0a0525549c781f2f045194c2f8304",
+      "bytes": 2237
+    },
+    "Evidence/25d/T03.2/reviews/T03.2-v2-aprovacao.md": {
+      "sha256": "066593aeae54de169439e8ebaa0c75c0db036d360b2becf02a49a4eba55c0a87",
+      "bytes": 3289
+    },
+    "Evidence/25d/T03.2/validation-v2-60/run-proof.json": {
+      "sha256": "91b0e265f3280ecd597e67691e85a2327814ae173d6a31b8c3c055bcfa687b1f",
+      "bytes": 61364
+    },
+    "Evidence/25d/T03.2/validation-v2-60/verification.json": {
+      "sha256": "b33ce54ae6f45fab9b25da44676ecb6af918026486e598cac1d4246fdf658f6a",
+      "bytes": 24321
+    },
+    "Evidence/25d/T03.2/validation-v2-120/run-proof.json": {
+      "sha256": "f4a355dd654ea09968d907c4bbabfa75d17b1fda04c6221f4d1037f0d3887197",
+      "bytes": 61344
+    },
+    "Evidence/25d/T03.2/validation-v2-120/verification.json": {
+      "sha256": "3260eb4cc0ac5a3fa53c2e7a7961493ae4d6315e6e7df5e15b96c585e542b6f1",
+      "bytes": 24324
+    },
+    "Evidence/25d/T03.2/final-v2-30/run-proof.json": {
+      "sha256": "cbdf2c407960d3d0a8382a7cd18e113cc3d2bc7fc45deed0af58fd6976d53b8b",
+      "bytes": 61033
+    },
+    "Evidence/25d/T03.2/final-v2-30/verification.json": {
+      "sha256": "d57fe3dadd86f676b974c956702457188d7a239c994c2905e5b53bbad9b99090",
+      "bytes": 24367
+    },
+    "Evidence/25d/T03.2/final-v2-60/run-proof.json": {
+      "sha256": "91b0e265f3280ecd597e67691e85a2327814ae173d6a31b8c3c055bcfa687b1f",
+      "bytes": 61364
+    },
+    "Evidence/25d/T03.2/final-v2-60/verification.json": {
+      "sha256": "b33ce54ae6f45fab9b25da44676ecb6af918026486e598cac1d4246fdf658f6a",
+      "bytes": 24321
+    },
+    "Evidence/25d/T03.2/final-v2-smooth-60/run-proof.json": {
+      "sha256": "a19abab49fb5385a3ac2a5ad5d1910b27ec9801590e70b6ebc82d3858bea9ec9",
+      "bytes": 59924
+    },
+    "Evidence/25d/T03.2/final-v2-smooth-60/verification.json": {
+      "sha256": "a3af3bc97fb30681a675ebfa42e290889bdf6251e606d6217b359192f20cd016",
+      "bytes": 24775
+    }
+  },
+  "counts": {
+    "sources": 16,
+    "evidence": 19
+  }
+}

@@ -1,6 +1,7 @@
 # T03.1 v1 — repouso, respiração e piscada
 
-Estado: **em_revisao**. 12/11/2026, sessão `2026-11-12-codex-close-t02-c73a`,
+Estado: **aprovada** em 12/11/2026 ([revisão individual](reviews/T03.1-v1-aprovacao.md)).
+12/11/2026, sessão `2026-11-12-codex-close-t02-c73a`,
 Codex (GPT-6). T02 foi aceita como prova técnica/contratos; T03 segue ativa.
 
 ## Entrega

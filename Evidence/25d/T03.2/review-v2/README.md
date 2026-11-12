@@ -3,7 +3,7 @@
 12/11/2026, sessão `2026-11-12-deepseek-run-tail-4b7e`, DeepSeek (deepseek-flash).
 Pedido do usuário: corrigir o frame incorreto no final da corrida, identificado pelo
 Codex em [diário 595](../../../../docs/ia/diario.sqlite3) e na
-[investigação v1](../investigation-tail-v1/README.md). Estado: **em_revisao**.
+[investigação v1](../investigation-tail-v1/README.md). Estado: **aprovada** pelo usuário em 12/11/2026 ([registro](../reviews/T03.2-v2-aprovacao.md)); validação técnica a 60/120 Hz registrada em 12/11/2026.
 
 ## O que foi corrigido
 
@@ -37,6 +37,41 @@ Verificação: [`verification.json`](verification.json) e [`run-proof.json`](run
 | Erro da trajetória física | <0,001 m | **0,0000016 m** |
 | Colisor / escala / Gameplay / controlador | preservados | **preservados (SHA iguais)** |
 
+## Reconciliação com a auditoria de 12/11/2026
+
+A [auditoria](../Audit-2026-11-12/README.md) era de outra sessão (Codex) e apontou cinco
+divergências. Todas tratadas aqui, sem apagar histórico:
+
+1. **Proveniência da prova (prioridade alta).** `review-v2/run-proof.json` vinha da captura
+   de **60 Hz**, enquanto `verification.json` e os GIFs vinham dos quadros de **120 Hz**.
+   Corrigido: a prova em `review-v2/` é agora a captura de **120 Hz**
+   (`simulationHz: 120`, SHA256 `f4a355dd…`), e GIFs + `verification.json` foram
+   **regenerados da mesma captura** (`Build/25d/RunVal_120`). A prova de 60 Hz continua em
+   `../final-v2-60/` e a validação nova em `../validation-v2-60/`.
+2. **Manifesto.** A v1 não descrevia este estado; criado
+   [`manifest-v2.json`](manifest-v2.json) com SHA256 de fontes, cena, atlas, provas,
+   verificações, GIFs e registros de revisão (`tools/make_run_manifest_v2.py`).
+3. **Status desatualizados.** T03.1, T03.2 e este README diziam `em_revisao`; atualizados
+   para refletir as aprovações registradas.
+4. **Link quebrado.** `../review-v2/README.md` → `review-v2/README.md` no README da T03.2.
+5. **Diagnósticos v1 × v2.** A v2 corrige o **fechamento do clipe**; o driver continua
+   zerando a compensação fora do apoio, então o passo do corpo **não** foi resolvido. A
+   comparação com a variante sem compensação é uma medição, não a prova de que nenhuma
+   outra solução exista.
+
+### Validação fresca a 60 e 120 Hz (mesmo código entregue)
+
+| Taxa | Loop (pose) | Grade | Deriva do apoio | Maior passo do corpo | Parados | Salto no loop |
+| --- | --- | --- | --- | --- | --- | --- |
+| 60 Hz | 0,042 | 0,0 m | **0,0 m** | 0,2867 m | 21/127 | 5,1 px |
+| 120 Hz | 0,042 | 0,0 m | **0,0 m** | 0,3075 m | 21/127 | 5,0 px |
+
+Capturas `validation-v2-60/` e `validation-v2-120/` (prova + verificação, sem GIFs). A de
+120 Hz reproduziu **byte a byte** a prova da entrega (mesmo SHA256), o que confirma que o
+clipe entregue corresponde ao código atual; a de 60 Hz confirma que o fechamento não depende
+da taxa de simulação. O salto de loop a 30 Hz (15,8 px) continua registrado como limite
+conhecido da compensação, que não é função pura da fase.
+
 ## O que não foi corrigido — e por quê
 
 O **passo do corpo entre poses** continua: 21 de 127 intervalos têm corpo parado e o
@@ -53,7 +88,7 @@ próprio clipe:
 
 Enquanto o pé fica plantado, esses 0,44 m por apoio só podem aparecer como **passo do
 corpo** a cada troca de pose; se o corpo seguir o root, eles aparecem como **deriva do
-pé**. Não há terceira opção sem mudar arte ou velocidade. Para tornar isso explícito,
+pé**. A medição não encontrou terceira opção sem alterar arte ou velocidade: é um resultado medido, não uma prova formal de impossibilidade. Para tornar isso explícito,
 capturei também a variante sem compensação (diagnóstico, **não** candidata):
 
 | Variante (60 Hz) | Corpo | Apoio |

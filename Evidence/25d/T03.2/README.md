@@ -1,7 +1,9 @@
 # T03.2 v1 — corrida pintada em revisão
 
 12/11/2026, sessão `2026-11-12-codex-run-t032-f92c`, Codex (GPT-6).
-Estado: **em_revisao**, não aceita como animação final. Repouso T03.1 aprovado
+Estado: **v1 preservada como histórico; a corrida foi corrigida e aprovada na v2**
+([review-v2](review-v2/README.md), [aprovação](reviews/T03.2-v2-aprovacao.md)).
+A v1 não foi aceita como animação final; repouso T03.1 aprovado
 na conversa; corrida, salto e tropeço exigem suas próprias revisões.
 
 ## Material atual
@@ -125,11 +127,11 @@ Pastas `locked/`, `refined/`, `protected/` e `rejected-warp-runtime.cs.txt` são
 ensaios rejeitados, não candidatos aprovados. `attempt01*` registra a troca simples
 com deslizamento; `whole/` é o ensaio a 60 Hz antes de centrar o root motion;
 `fps30/60/120` registra saturação identificada na primeira regressão. `final30/60/120`
-e `review-v1/` são os resultados atuais. Nenhum registro anterior foi apagado.
+e `review-v1/` foram os resultados da v1. Nenhum registro anterior foi apagado.
 Exceção conhecida do indexador Editor.Search nos logs não impediu as capturas.
 
-Manifesto atual: `manifest-v1.json`. Nenhum commit, push, build ou publicação nova.
-T03.2 aguarda revisão individual antes de T03.3 (salto completo).
+Manifesto v1: `manifest-v1.json` (não descreve o estado v2; ver `review-v2/manifest-v2.json`). Na época desta v1 não houve commit, push, build ou publicação; o checkpoint foi publicado depois (diário 608/609).
+T03.2 foi revisada e **aprovada** em 12/11/2026 ([registro](reviews/T03.2-v2-aprovacao.md)); T03.3 (salto) não iniciado.
 
 ## v2 — fechamento do clipe (12/11/2026, sessão `2026-11-12-deepseek-run-tail-4b7e`)
 
@@ -144,5 +146,5 @@ O passo do corpo entre poses (até 0,307 m) permanece: a passada pintada é 0,63
 ciclo contra 2,016 m do controlador (3,19×). A [variante sem compensação](../../25d/T03.2/final-v2-smooth-60/run-detail.gif)
 mostra a outra ponta do compromisso (corpo liso, apoio derrapando 0,242 m). Arte mais
 longa ou velocidade/cadência compatíveis são decisão de direção, não de código.
-Material: [review-v2](../review-v2/README.md); revisão [T03.2-v2](reviews/T03.2-v2.md).
+Material: [review-v2](review-v2/README.md); revisão [T03.2-v2](reviews/T03.2-v2.md).
 A v1 é preservada como histórico e suas evidências não foram reescritas.

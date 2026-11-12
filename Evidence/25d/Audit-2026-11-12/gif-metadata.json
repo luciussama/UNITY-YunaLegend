@@ -1,0 +1,26 @@
+{
+  "Evidence\\25d\\T03.2\\review-v2\\run-detail-slow.gif": {
+    "frames": 128,
+    "duration_ms": 8540,
+    "size": [
+      640,
+      640
+    ]
+  },
+  "Evidence\\25d\\T03.2\\review-v2\\run-detail.gif": {
+    "frames": 128,
+    "duration_ms": 4270,
+    "size": [
+      640,
+      640
+    ]
+  },
+  "Evidence\\25d\\T03.2\\review-v2\\run-gameplay.gif": {
+    "frames": 128,
+    "duration_ms": 4270,
+    "size": [
+      1280,
+      720
+    ]
+  }
+}

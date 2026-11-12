@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-12T21:22:14.309144+00:00",
+  "updated_at": "2026-11-12T21:41:25.880058+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -188,19 +188,16 @@
         "art-yuna"
       ],
       "human_gate": false,
-      "status": "active",
-      "owner": {
-        "session": "2026-11-12-deepseek-run-tail-4b7e",
-        "agent": "DeepSeek (deepseek-flash)"
-      },
+      "status": "pending",
+      "owner": null,
       "checkpoint": {
-        "done": "T03.1 aprovada; T03.2 v2 aprovada pelo usuario apos os GIFs: clipe 128 quadros/11,0053 passadas, loop fase 0,0053 ciclo e grade 0,0 m, salto de tela 5,0 px, apoio deriva 0,0 m; aceito o passo do corpo ate 0,307 m como estado atual",
-        "next": "T03.3 salto (subida/queda/pouso) exige poses pintadas via imagegen, ausente nesta sessao; preparar fixture/cena/captura quando houver arte ou sessao com a ferramenta. Decisao aberta: arte com passada ~2,4x mais longa ou velocidade/cadencia ~1,63 m/s para eliminar o passo do corpo. Nao iniciar T03.4 antes de T03.3.",
-        "validation": "Aprovacao literal registrada; verification.json 120Hz loop 5,0px; support drift 0,0m; SHA Gameplay/controlador iguais; 30/60/120 success=True; checkpoint e plano OK",
-        "pending": "Arte do salto (imagegen ausente); passo do corpo 0,307m; loop 30Hz 15,8px; orcamento de atlas conjunto; plataformas reais/dispositivos/retrato/audio; T03.4; alteracoes em publicacao",
-        "files": "Evidence/25d/T03.2;Evidence/25d/T03.2/reviews/T03.2-v2-aprovacao.md;Assets/Art/Illustrated25D/Yuna/Run;docs/ia/ESTADO-ATUAL-25D.md",
-        "processes": "Capturas encerradas; nenhum Editor desta sessao ativo; copia Build/Publish/Project preservada",
-        "updated_at": "2026-11-12T21:22:14.309144+00:00"
+        "done": "T03.1 aprovada; T03.2 v2 aprovada (humano) e revalidada a 60/120 Hz apos auditoria: loop 0,042 pose, grade 0,0 m, deriva do apoio 0,0 m, salto de tela 5,1/5,0 px; proveniencia reconciliada (prova 120 Hz em review-v2, 60 Hz em final-v2-60), manifest-v2 com 16 fontes + 19 evidencias, status e link corrigidos; parte DeepSeek aprovada e liberada",
+        "next": "Reserva T03 liberada. Proximo responsavel: T03.3 salto (subida/queda/pouso), que exige poses pintadas via imagegen; preparar fixture/cena/captura e medir apoio e continuidade juntos. Decisao aberta: arte com passada ~2,4x mais longa ou velocidade/cadencia ~1,63 m/s.",
+        "validation": "2 capturas novas success=True (60/120 Hz); prova 120Hz SHA f4a355dd igual a entregue; verification 120Hz 256 hashes; manifest-v2 16+19; plan/diary check OK",
+        "pending": "Arte do salto (imagegen); passo do corpo 0,307m; loop 30Hz 15,8px; orcamento de atlas conjunto; plataformas reais/dispositivos/retrato/audio; T03.4; commit desta reconciliacao",
+        "files": "Evidence/25d/T03.2;Evidence/25d/T03.2/reviews/T03.2-v2-aprovacao.md;Evidence/25d/T03.2/review-v2/manifest-v2.json;tools/make_run_manifest_v2.py;Evidence/25d/T03.1/README.md;Evidence/25d/Audit-2026-11-12",
+        "processes": "Capturas encerradas; nenhum Editor desta sessao ativo",
+        "updated_at": "2026-11-12T21:41:25.768636+00:00"
       }
     },
     {
@@ -1055,6 +1052,25 @@
       "files": "Evidence/25d/T03.2;Evidence/25d/T03.2/reviews/T03.2-v2-aprovacao.md;Assets/Art/Illustrated25D/Yuna/Run;docs/ia/ESTADO-ATUAL-25D.md",
       "processes": "Capturas encerradas; nenhum Editor desta sessao ativo; copia Build/Publish/Project preservada",
       "at": "2026-11-12T21:22:14.309144+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T03",
+      "session": "2026-11-12-deepseek-run-tail-4b7e",
+      "done": "T03.1 aprovada; T03.2 v2 aprovada (humano) e revalidada a 60/120 Hz apos auditoria: loop 0,042 pose, grade 0,0 m, deriva do apoio 0,0 m, salto de tela 5,1/5,0 px; proveniencia reconciliada (prova 120 Hz em review-v2, 60 Hz em final-v2-60), manifest-v2 com 16 fontes + 19 evidencias, status e link corrigidos; parte DeepSeek aprovada e liberada",
+      "next": "Reserva T03 liberada. Proximo responsavel: T03.3 salto (subida/queda/pouso), que exige poses pintadas via imagegen; preparar fixture/cena/captura e medir apoio e continuidade juntos. Decisao aberta: arte com passada ~2,4x mais longa ou velocidade/cadencia ~1,63 m/s.",
+      "validation": "2 capturas novas success=True (60/120 Hz); prova 120Hz SHA f4a355dd igual a entregue; verification 120Hz 256 hashes; manifest-v2 16+19; plan/diary check OK",
+      "pending": "Arte do salto (imagegen); passo do corpo 0,307m; loop 30Hz 15,8px; orcamento de atlas conjunto; plataformas reais/dispositivos/retrato/audio; T03.4; commit desta reconciliacao",
+      "files": "Evidence/25d/T03.2;Evidence/25d/T03.2/reviews/T03.2-v2-aprovacao.md;Evidence/25d/T03.2/review-v2/manifest-v2.json;tools/make_run_manifest_v2.py;Evidence/25d/T03.1/README.md;Evidence/25d/Audit-2026-11-12",
+      "processes": "Capturas encerradas; nenhum Editor desta sessao ativo",
+      "at": "2026-11-12T21:41:25.768636+00:00"
+    },
+    {
+      "command": "release",
+      "task": "T03",
+      "session": "2026-11-12-deepseek-run-tail-4b7e",
+      "reason": "Parte do DeepSeek aprovada e liberada para integracao apos revalidacao 60/120 Hz; T03.3 depende de imagegen ausente nesta sessao. Checkpoint preservado com proximo passo e pendencias.",
+      "at": "2026-11-12T21:41:25.880058+00:00"
     }
   ]
 }
