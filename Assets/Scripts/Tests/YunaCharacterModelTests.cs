@@ -27,6 +27,8 @@ namespace YunaLegend.Tests
             foreach (string bone in new[] {"Head", "Ponytail", "Bow", "LeftHand", "RightHand", "LeftFoot", "RightFoot", "LeftSkirt", "RightSkirt"})
                 Assert.IsTrue(skin.bones.Any(b => b.name == bone), bone);
             Assert.AreEqual(skin.bones.Length, skin.sharedMesh.bindposes.Length);
+            Assert.Greater(skin.sharedMesh.normals.Count(n => n.z > .5f), 100);
+            Assert.Greater(skin.sharedMesh.normals.Count(n => n.z < -.5f), 100);
             foreach (var w in skin.sharedMesh.boneWeights)
             {
                 Assert.AreEqual(1, w.weight0 + w.weight1 + w.weight2 + w.weight3, .0001f);
@@ -60,6 +62,34 @@ namespace YunaLegend.Tests
                 float minY = vertices.Where((p, i) => boneWeights[i].boneIndex0 == index && boneWeights[i].weight0 > .99f).Min(p => p.y);
                 Assert.AreEqual(0, minY, .003f, $"{stance}, phase={phase}"); Object.DestroyImmediate(mesh);
             }
+        }
+        [Test] public void LandingBendsKneesWithBothSolesOnGround()
+        {
+            view.Evaluate(YunaStudyPose.Land, .2f); var mesh = Bake(); var weights = skin.sharedMesh.boneWeights; var vertices = mesh.vertices;
+            foreach (string foot in new[] {"LeftFoot", "RightFoot"})
+            {
+                int index = System.Array.FindIndex(skin.bones, b => b.name == foot);
+                Assert.AreEqual(0, vertices.Where((p, i) => weights[i].boneIndex0 == index && weights[i].weight0 > .99f).Min(p => p.y), .003f);
+            }
+            Object.DestroyImmediate(mesh);
+        }
+        [Test] public void ExistingFillStaysOnCameraSideInBothRunDirections()
+        {
+            var playerRoot = new GameObject("PresentationLightTest");
+            try
+            {
+                playerRoot.AddComponent<Yuna25DPlayerController>();
+                instance.transform.SetParent(playerRoot.transform, false);
+                var lamp = new GameObject("Yuna_FillLight").transform; lamp.SetParent(playerRoot.transform, false);
+                foreach (float angle in new[] {90f, -90f})
+                {
+                    playerRoot.transform.rotation = Quaternion.Euler(0, angle, 0);
+                    view.UpdatePresentationLight();
+                    Assert.AreEqual(-1.4f, lamp.position.z - playerRoot.transform.position.z, .0001f);
+                    Assert.AreEqual(Vector3.zero, playerRoot.transform.position);
+                }
+            }
+            finally { Object.DestroyImmediate(playerRoot); }
         }
     }
 }

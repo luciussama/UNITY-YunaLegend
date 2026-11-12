@@ -118,12 +118,13 @@ namespace YunaLegend.EditorScripts
 <style id=""yuna-mobile"">
   html, body { margin: 0; padding: 0; height: 100%; background: #0b0705; overflow: hidden; }
   body { -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
-  #unity-container, #unity-canvas { width: 100vw !important; height: 100vh !important; }
+  #unity-container { position: fixed !important; inset: 0 !important; transform: none !important; }
+  #unity-container, #unity-canvas { width: 100vw !important; height: 100vh !important; height: 100dvh !important; }
   #unity-canvas { touch-action: none; display: block; }
   #yuna-rotate { position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
     background: #0b0705; color: #f2e6c8; font-family: Georgia, serif; font-size: 18px; text-align: center;
     z-index: 50; padding: 24px; }
-  @media (orientation: portrait) and (max-width: 900px) { #yuna-rotate { display: flex; } }
+  #unity-footer { display: none; }
 </style>
 ";
             if (!html.Contains("yuna-mobile") && html.Contains("</head>"))

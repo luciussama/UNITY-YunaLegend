@@ -23,7 +23,13 @@ namespace YunaLegend.UI
 
         public bool IsOpen => dropdownRoot != null && dropdownRoot.activeSelf;
         public int ItemCount => itemScenes != null ? itemScenes.Length : 0;
-        public string CurrentPhaseScene { get; private set; }
+        private string selectedScene;
+        public string CurrentPhaseScene
+        {
+            get => !string.IsNullOrEmpty(selectedScene) ? selectedScene
+                : itemScenes != null && itemScenes.Length > 0 ? itemScenes[0] : null;
+            private set => selectedScene = value;
+        }
 
         private void Awake()
         {

@@ -47,6 +47,8 @@ namespace YunaLegend.EditorScripts
             if (m == null) { m = new Material(Shader.Find("Universal Render Pipeline/Lit")); AssetDatabase.CreateAsset(m, path); }
             ColorUtility.TryParseHtmlString(hex, out var color);
             m.SetColor("_BaseColor", color); m.SetFloat("_Smoothness", smoothness); m.SetFloat("_Metallic", metal ? .55f : 0);
+            // Same subdued readability floor as the previous Yuna materials, below Bloom's threshold.
+            m.SetColor("_EmissionColor", color.linear * .018f); m.EnableKeyword("_EMISSION");
             m.SetFloat("_Cull", 0); EditorUtility.SetDirty(m);
             materialIds[name] = materials.Count; materials.Add(m); indices.Add(new List<int>());
         }
@@ -63,7 +65,9 @@ namespace YunaLegend.EditorScripts
                 float ua = wrap ? u - e : Mathf.Max(0, u - e), ub = wrap ? u + e : Mathf.Min(1, u + e);
                 var du = point(ub, v) - point(ua, v);
                 var dv = point(u, Mathf.Min(1, v + e)) - point(u, Mathf.Max(0, v - e));
-                var normal = Vector3.Cross(du, dv).normalized;
+                // Normalize tangents first: their finite-difference cross product is
+                // smaller than Vector3.normalized's epsilon on this 1.4 m character.
+                var normal = Vector3.Cross(du.normalized, dv.normalized).normalized;
                 if (normal.sqrMagnitude < .1f) normal = Vector3.up;
                 vertices.Add(p); normals.Add(normal); uv.Add(new Vector2(u, v)); weights.Add(weight(p));
             }
@@ -90,15 +94,15 @@ namespace YunaLegend.EditorScripts
             float s = 1 - t; return s * s * s * a + 3 * s * s * t * b + 3 * s * t * t * c + t * t * t * d;
         }
         static void Strand(string mat, Vector3 a, Vector3 b, Vector3 c, Vector3 d, float radius,
-            float flat, Func<Vector3, BoneWeight> weight, int sides = 12, int length = 20, bool taper = true)
+            float flat, Func<Vector3, BoneWeight> weight, int sides = 12, int length = 20, bool taper = true, float tipScale = 1)
         {
             Surface(mat, sides, length, (u, v) => {
                 float t = Mathf.Clamp(v, .0001f, .9999f);
                 var p = Curve(a, b, c, d, t);
                 var tangent = (Curve(a, b, c, d, Mathf.Min(1, t + .001f)) - Curve(a, b, c, d, Mathf.Max(0, t - .001f))).normalized;
-                var axis = Mathf.Abs(Vector3.Dot(tangent, Vector3.forward)) > .9f ? Vector3.right : Vector3.forward;
-                var x = Vector3.Cross(tangent, axis).normalized; var z = Vector3.Cross(x, tangent).normalized;
-                float r = radius * (taper ? Mathf.Pow(Mathf.Sin(Pi * t), .4f) * (1 - .55f * t) : 1);
+                var axis = Mathf.Abs(Vector3.Dot(tangent, Vector3.right)) > .97f ? Vector3.up : Vector3.right;
+                var x = Vector3.Cross(tangent, axis).normalized; var z = Vector3.Cross(tangent, x).normalized;
+                float r = radius * Mathf.Lerp(1, tipScale, t) * (taper ? Mathf.Pow(Mathf.Sin(Pi * t), .4f) * (1 - .55f * t) : 1);
                 return p + r * (Mathf.Cos(u * 2 * Pi) * x + Mathf.Sin(u * 2 * Pi) * flat * z);
             }, weight);
         }
@@ -108,7 +112,7 @@ namespace YunaLegend.EditorScripts
                 var p = path(v); var tangent = (path(Mathf.Min(1, v + .001f)) - path(Mathf.Max(0, v - .001f))).normalized;
                 var x = Vector3.Cross(tangent, Vector3.forward).normalized;
                 if (x.sqrMagnitude < .1f) x = Vector3.right;
-                var z = Vector3.Cross(x, tangent).normalized;
+                var z = Vector3.Cross(tangent, x).normalized;
                 return p + radius * (Mathf.Cos(u * 2 * Pi) * x + Mathf.Sin(u * 2 * Pi) * z);
             }, _ => W(bone));
         }
@@ -136,10 +140,11 @@ namespace YunaLegend.EditorScripts
         }
         static void Face()
         {
-            Ellipsoid("Skin", V(0, 1.14f, .003f), V(.184f, .215f, .164f), "Head", 64, q => {
+            Ellipsoid("Skin", V(0, 1.16f, .003f), V(.184f, .200f, .164f), "Head", 80, q => {
                 // Broad toddler cheeks, smaller chin, slightly flattened eye plane.
                 float chin = Mathf.SmoothStep(.76f, 1, Mathf.InverseLerp(-1, -.1f, q.y));
                 q.x *= chin; if (q.z > 0) q.z *= 1 - .07f * Mathf.Exp(-Mathf.Pow((q.y - .12f) * 4, 2));
+                if (q.z > 0) q.z += NoseHeight(q.x * .184f, 1.16f + q.y * .20f) / .164f;
                 return q;
             });
             Ellipsoid("Skin", V(0, .99f, 0), V(.047f, .085f, .047f), "Neck");
@@ -148,20 +153,35 @@ namespace YunaLegend.EditorScripts
                 float x = side * .077f;
                 Ellipsoid("Skin", V(side * .18f, 1.137f, .005f), V(.025f, .040f, .019f), "Head");
                 Ellipsoid("Ear", V(side * .19f, 1.138f, .021f), V(.013f, .024f, .004f), "Head", 24);
-                Ellipsoid("EyeWhite", V(x, 1.172f, .151f), V(.049f, .059f, .029f), "Head", 40);
-                Ellipsoid("Lash", V(x, 1.173f, .180f), V(.028f, .034f, .004f), "Head", 32);
-                Ellipsoid("Iris", V(x, 1.173f, .184f), V(.025f, .031f, .004f), "Head", 32);
-                Ellipsoid("Pupil", V(x, 1.174f, .188f), V(.013f, .022f, .003f), "Head", 32);
-                Ellipsoid("EyeWhite", V(x - .008f, 1.187f, .191f), V(.006f, .008f, .002f), "Head", 16);
-                Ellipsoid("EyeWhite", V(x + .008f, 1.162f, .191f), V(.0025f, .003f, .001f), "Head", 12);
-                Line("Lash", t => V(x + .050f * Mathf.Cos(Pi * t), 1.171f + .060f * Mathf.Sin(Pi * t), .166f + .009f * Mathf.Sin(Pi * t)), .0025f, "Head");
-                Line("Skin", t => V(x + .049f * Mathf.Cos(Pi * (1 + t)), 1.172f + .059f * Mathf.Sin(Pi * (1 + t)), .166f), .0025f, "Head");
-                Line("HairDark", t => V(x + (t - .5f) * .083f, 1.255f + .010f * Mathf.Sin(Pi * t), .133f - .007f * Mathf.Abs(t - .5f)), .004f, "Head");
-                Ellipsoid("Blush", V(side * .112f, 1.113f, .134f), V(.025f, .012f, .004f), "Head", 24);
+                FacePatch("EyeWhite", x, 1.172f, .047f, .052f, .002f);
+                FacePatch("Lash", x, 1.173f, .027f, .033f, .004f);
+                FacePatch("Iris", x, 1.173f, .025f, .031f, .005f);
+                FacePatch("Pupil", x, 1.174f, .013f, .023f, .007f);
+                FacePatch("EyeWhite", x - .008f, 1.187f, .006f, .008f, .009f);
+                FacePatch("EyeWhite", x + .008f, 1.162f, .0025f, .003f, .009f);
+                Line("Lash", t => FacePoint(x + .047f * Mathf.Cos(Pi * t), 1.172f + .052f * Mathf.Sin(Pi * t), .004f), .002f, "Head");
+                Line("Skin", t => FacePoint(x + .047f * Mathf.Cos(Pi * (1 + t)), 1.172f + .052f * Mathf.Sin(Pi * (1 + t)), .003f), .002f, "Head");
+                Line("HairDark", t => FacePoint(x + (t - .5f) * .077f, 1.248f + .010f * Mathf.Sin(Pi * t), .002f), .003f, "Head");
             }
-            Ellipsoid("Skin", V(0, 1.126f, .168f), V(.018f, .025f, .025f), "Head", 32);
-            Line("Lip", t => V((t - .5f) * .051f, 1.078f + .010f * Mathf.Pow(2 * t - 1, 2), .155f - .007f * Mathf.Pow(2 * t - 1, 2)), .0022f, "Head");
-            Ellipsoid("LipSoft", V(0, 1.073f, .154f), V(.019f, .004f, .003f), "Head", 24);
+            Line("Lip", t => FacePoint((t - .5f) * .051f, 1.078f + .010f * Mathf.Pow(2 * t - 1, 2), .002f), .0018f, "Head");
+            Line("LipSoft", t => FacePoint((t - .5f) * .040f, 1.073f + .006f * Mathf.Pow(2 * t - 1, 2), .002f), .0014f, "Head");
+        }
+        static float NoseHeight(float x, float y) => .018f * Mathf.Exp(-Mathf.Pow(x / .019f, 2) - Mathf.Pow((y - 1.126f) / .025f, 2));
+        static Vector3 FacePoint(float x, float y, float offset)
+        {
+            float qy = (y - 1.16f) / .20f;
+            float chin = Mathf.SmoothStep(.76f, 1, Mathf.InverseLerp(-1, -.1f, qy));
+            float qx = x / (.184f * chin);
+            float z = .003f + .164f * Mathf.Sqrt(Mathf.Max(0, 1 - qx * qx - qy * qy))
+                * (1 - .07f * Mathf.Exp(-Mathf.Pow((qy - .12f) * 4, 2)));
+            return V(x, y, z + NoseHeight(x, y) + offset);
+        }
+        static void FacePatch(string mat, float x, float y, float rx, float ry, float offset)
+        {
+            Surface(mat, 40, 12, (u, v) => {
+                float r = Mathf.Clamp(1 - v, .0001f, .9999f), a = u * 2 * Pi;
+                return FacePoint(x + rx * r * Mathf.Cos(a), y + ry * r * Mathf.Sin(a), offset);
+            }, _ => W("Head"));
         }
         static void Hair()
         {
@@ -172,12 +192,12 @@ namespace YunaLegend.EditorScripts
                 return V(.191f * Mathf.Sin(phi) * Mathf.Cos(t) * grooves,
                     1.145f + .229f * Mathf.Cos(phi), .006f + .177f * Mathf.Sin(phi) * Mathf.Sin(t) * grooves);
             }, _ => W("Head"));
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < 6; i++)
             {
-                float x = -.15f + i * .034f;
-                Strand(i % 3 == 0 ? "HairLight" : "Hair", V(x * .7f - .015f, 1.34f, .07f),
-                    V(x - .02f, 1.36f, .14f), V(x + .025f, 1.27f, .186f),
-                    V(x + .035f, 1.245f - .025f * Mathf.Sin(i * .6f), .157f), .027f, .46f, _ => W("Head"));
+                float x = -.15f + i * .052f;
+                Strand("Hair", V(x * .65f - .035f, 1.34f, .07f),
+                    V(x - .055f, 1.37f, .14f), V(x + .02f, 1.28f, .184f),
+                    V(x + .035f, 1.245f - .025f * Mathf.Sin(i * .7f), .157f), .044f, .37f, _ => W("Head"));
             }
             for (int side = -1; side <= 1; side += 2)
             {
@@ -186,10 +206,12 @@ namespace YunaLegend.EditorScripts
                 Strand("HairLight", V(side * .17f, 1.22f, .07f), V(side * .21f, 1.15f, .10f),
                     V(side * .14f, 1.10f, .11f), V(side * .175f, 1.075f, .07f), .011f, .6f, _ => W("Head"));
             }
+            Strand("Hair", V(0, 1.31f, -.145f), V(0, 1.43f, -.31f), V(.03f, 1.08f, -.43f), V(0, .985f, -.30f),
+                .11f, .75f, p => Blend("Ponytail", "PonytailTip", Mathf.InverseLerp(1.26f, 1.04f, p.y)), 24, 32);
             for (int i = 0; i < 9; i++)
             {
                 float a = i * 2 * Pi / 9, x = Mathf.Cos(a) * .065f, z = Mathf.Sin(a) * .04f;
-                Strand(i % 3 == 0 ? "HairLight" : i % 3 == 1 ? "HairDark" : "Hair",
+                Strand(i % 4 == 0 ? "HairLight" : "Hair",
                     V(x * .2f, 1.31f, -.145f), V(x * 1.7f, 1.40f, -.31f + z),
                     V(x + .04f, 1.08f, -.43f + z), V(x * .5f - .015f, .985f + i * .006f, -.30f),
                     .047f, .85f, p => Blend("Ponytail", "PonytailTip", Mathf.InverseLerp(1.26f, 1.04f, p.y)), 16, 30);
@@ -209,8 +231,13 @@ namespace YunaLegend.EditorScripts
         static BoneWeight DressWeight(Vector3 p)
         {
             if (p.y > .77f) return Blend("Spine", "Chest", Mathf.InverseLerp(.77f, .94f, p.y));
-            string skirt = Mathf.Abs(p.x) > Mathf.Abs(p.z) ? (p.x < 0 ? "LeftSkirt" : "RightSkirt") : (p.z > 0 ? "FrontSkirt" : "BackSkirt");
-            return Blend("Hips", skirt, Mathf.InverseLerp(.76f, .48f, p.y));
+            float down = Mathf.InverseLerp(.76f, .48f, p.y);
+            float side = Mathf.Abs(p.x) / Mathf.Max(.0001f, Mathf.Abs(p.x) + Mathf.Abs(p.z));
+            return new BoneWeight {
+                boneIndex0 = boneList.IndexOf(bones["Hips"]), weight0 = 1 - down,
+                boneIndex1 = boneList.IndexOf(bones[p.x < 0 ? "LeftSkirt" : "RightSkirt"]), weight1 = down * side,
+                boneIndex2 = boneList.IndexOf(bones[p.z > 0 ? "FrontSkirt" : "BackSkirt"]), weight2 = down * (1 - side)
+            };
         }
         static Vector3 SkirtPoint(float u, float v, float extra = 0)
         {
@@ -237,21 +264,23 @@ namespace YunaLegend.EditorScripts
             // Rounded collar leaves and a narrow ruby edge lie over the bodice.
             for (int side = -1; side <= 1; side += 2)
             {
-                Surface("Ivory", 24, 14, (u, v) => {
-                    float a = u * Pi; return V(side * (.016f + .069f * v), .985f - .044f * Mathf.Sin(a) * v,
-                        .045f + .031f * Mathf.Sin(a) + .015f * v);
-                }, _ => W("Chest"), false);
-                Line("Ruby", t => V(side * (.016f + .069f * Mathf.Sin(Pi * t)), .985f - .044f * Mathf.Sin(Pi * t),
-                    .046f + .046f * Mathf.Sin(Pi * t)), .0018f, "Chest");
+                Surface("Ivory", 32, 12, (u, v) => {
+                    float a = u * 2 * Pi, r = Mathf.Clamp(1 - v, .0001f, .9999f);
+                    float y = .966f + .025f * r * Mathf.Sin(a);
+                    return V(side * .040f + .040f * r * Mathf.Cos(a), y,
+                        .073f + .008f * (1 - r * r) - .4f * (y - .955f));
+                }, _ => W("Chest"));
+                Line("Ruby", t => { float y = .966f + .025f * Mathf.Sin(t * 2 * Pi);
+                    return V(side * .04f + .04f * Mathf.Cos(t * 2 * Pi), y, .074f - .4f * (y - .955f)); }, .0015f, "Chest");
             }
             for (int side = -1; side <= 1; side += 2)
             {
                 string s = side < 0 ? "Left" : "Right";
                 Ellipsoid("Ivory", V(side * .15f, .922f, 0), V(.075f, .072f, .073f), s + "UpperArm", 32,
-                    q => V(q.x * (1 + .045f * Mathf.Sin(q.y * 20)), q.y, q.z));
+                    q => V(q.x * (1 + .012f * Mathf.Sin(q.y * 20)), q.y, q.z));
                 Strand("Skin", V(side * .178f, .887f, 0), V(side * .205f, .80f, 0),
                     V(side * .23f, .71f, .006f), V(side * .25f, .641f, .018f), .041f, .86f,
-                    p => Blend(s + "UpperArm", s + "LowerArm", Mathf.InverseLerp(.81f, .73f, p.y)), 24, 24, false);
+                    p => Blend(s + "UpperArm", s + "LowerArm", Mathf.InverseLerp(.81f, .73f, p.y)), 24, 24, false, .55f);
                 Ellipsoid("Skin", V(side * .257f, .612f, .019f), V(.024f, .041f, .015f), s + "Hand");
                 for (int f = 0; f < 4; f++)
                 {
@@ -272,7 +301,13 @@ namespace YunaLegend.EditorScripts
                     return V(side * .075f + r * Mathf.Cos(t), y, r * Mathf.Sin(t));
                 }, _ => W(s + "LowerLeg"));
                 Ellipsoid("Sole", V(side * .075f, .014f, .044f), V(.061f, .014f, .111f), s + "Foot", 40);
-                Ellipsoid("Shoe", V(side * .075f, .057f, .041f), V(.059f, .046f, .108f), s + "Foot", 40);
+                Surface("Shoe", 40, 20, (u, v) => {
+                    // A dome meeting the sole around its whole rim, rather than a
+                    // full ellipsoid whose raised toe appears detached when lifted.
+                    float p = Mathf.Max(.0001f, v) * Pi * .5f, a = u * 2 * Pi;
+                    return V(side * .075f + .059f * Mathf.Sin(p) * Mathf.Cos(a),
+                        .014f + .091f * Mathf.Cos(p), .041f + .108f * Mathf.Sin(p) * Mathf.Sin(a));
+                }, _ => W(s + "Foot"));
                 Line("Shoe", t => V(side * .075f + (t - .5f) * .106f, .095f + .012f * Mathf.Sin(t * Pi), .026f), .007f, s + "Foot");
                 Ellipsoid("Brass", V(side * .13f, .097f, .029f), V(.006f, .009f, .009f), s + "Foot", 16);
             }
@@ -295,6 +330,19 @@ namespace YunaLegend.EditorScripts
                 Material("Ruby", "#9D2834", .25f); Material("Ivory", "#E9DCC0", .12f); Material("Sock", "#E7E3D9", .10f);
                 Material("Shoe", "#4F3024", .28f); Material("Sole", "#2F211C", .16f); Material("Brass", "#A98A47", .35f, true);
                 Skeleton(); Face(); Hair(); Body();
+                // Bring the first study toward the approved four-head silhouette:
+                // a shorter face and narrower child shoulders, without rescaling feet or gameplay.
+                var headBones = new HashSet<int>(new[] {"Head", "Ponytail", "PonytailTip", "Bow"}.Select(n => boneList.IndexOf(bones[n])));
+                var armBones = new HashSet<int>(boneList.Select((b, i) => new { b.name, i })
+                    .Where(b => b.name.Contains("Arm") || b.name.EndsWith("Hand")).Select(b => b.i));
+                Vector3 neck = bones["Neck"].position;
+                for (int i = 0; i < vertices.Count; i++)
+                {
+                    if (headBones.Contains(weights[i].boneIndex0)) vertices[i] = neck + (vertices[i] - neck) * .88f;
+                    if (armBones.Contains(weights[i].boneIndex0)) vertices[i] = V(vertices[i].x * .70f, vertices[i].y, vertices[i].z);
+                }
+                foreach (int i in headBones) boneList[i].localPosition *= .88f;
+                foreach (int i in armBones) { var p = boneList[i].localPosition; p.x *= .70f; boneList[i].localPosition = p; }
                 float minY = vertices.Min(p => p.y), maxY = vertices.Max(p => p.y), scale = 1.4f / (maxY - minY);
                 for (int i = 0; i < vertices.Count; i++) vertices[i] = (vertices[i] - Vector3.up * minY) * scale;
                 foreach (var b in boneList) b.localPosition *= scale;
@@ -307,7 +355,18 @@ namespace YunaLegend.EditorScripts
                 string meshPath = Folder + "/Yuna_StudyMesh.asset";
                 var existing = AssetDatabase.LoadAssetAtPath<Mesh>(meshPath);
                 if (existing == null) AssetDatabase.CreateAsset(mesh, meshPath);
-                else { EditorUtility.CopySerialized(mesh, existing); UnityEngine.Object.DestroyImmediate(mesh); mesh = existing; }
+                else
+                {
+                    // Copy mesh buffers explicitly and mark the existing asset dirty;
+                    // native Mesh buffers must survive regeneration and reimport.
+                    existing.Clear(); existing.indexFormat = IndexFormat.UInt32;
+                    existing.vertices = mesh.vertices; existing.normals = mesh.normals; existing.uv = mesh.uv;
+                    existing.boneWeights = mesh.boneWeights; existing.bindposes = mesh.bindposes;
+                    existing.subMeshCount = mesh.subMeshCount;
+                    for (int i = 0; i < mesh.subMeshCount; i++) existing.SetTriangles(mesh.GetTriangles(i), i);
+                    existing.RecalculateBounds(); EditorUtility.SetDirty(existing);
+                    UnityEngine.Object.DestroyImmediate(mesh); mesh = existing;
+                }
                 var renderer = go.AddComponent<SkinnedMeshRenderer>(); renderer.sharedMesh = mesh; renderer.sharedMaterials = materials.ToArray();
                 renderer.bones = boneList.ToArray(); renderer.rootBone = bones["Hips"];
                 renderer.localBounds = new Bounds(V(0, .70f, 0), V(1.3f, 1.8f, 1.4f)); renderer.updateWhenOffscreen = false;

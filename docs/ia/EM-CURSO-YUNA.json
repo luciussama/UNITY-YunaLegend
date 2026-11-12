@@ -1,11 +1,11 @@
 {
   "flag": "EM_CURSO",
   "em_curso": true,
-  "plano_ativo": 373,
+  "plano_ativo": null,
   "sessao": "2026-11-11-codex-yuna-modelo-92e3",
   "commit_anterior": "4ceb98f",
   "referencia_aprovada": "Evidence/yuna-concept-2026-11-11/yuna-3d-concept-v1.png",
-  "estado": "Fontes de malha/rig/view/captura escritos; primeira compilacao/geracao no clone. Ainda nao renderizado nem integrado.",
+  "estado": "Primeiro estudo articulavel integrado no principal e marco tecnico373 concluido. Modelagem artistica segue EM_CURSO: rosto/cabelo/materiais/animacoes ainda precisam aproximar prancha aprovada.",
   "arquivos": [
     "Assets/Scripts/Editor/YunaCharacterModelBuilder.cs",
     "Assets/Scripts/Editor/YunaCharacterModelCapture.cs",
@@ -13,11 +13,28 @@
     "Assets/Scripts/Runtime/DarkRoom/Yuna25DPlayerController.cs"
   ],
   "proximos_passos": [
-    "Compilar/gerar prefab+mesh no clone.",
-    "Inspecionar renders reais e corrigir geometria/semelhanca.",
-    "Validar skin/bones/animacoes,clockdepassos econtratoY0/1.4m.",
-    "Integrar visual incrementalmente sem alterar fisica/camera/rota/audio.",
-    "Registrar evidencias,limitacoes e estado de polimento."
+    "Refinar rosto/proporcoes/cabelo segundo prancha aprovada; enviar imagens de progresso.",
+    "Consolidar UV/materiais e polir pele/tecido/sapatos.",
+    "Criar clips/transicoes finais de locomocao e tropeco; calibrar passada horizontal/sons.",
+    "Expressividade,abertura e acoes narrativas; Nanda continua pendente."
   ],
-  "limite": "Prancha aprovada e alvo de aparencia; estudo inicial nao equivale a modelo final."
+  "limite": "Prancha aprovada e alvo de aparencia; estudo inicial nao equivale a modelo final.",
+  "correcoes": "Normais/tangentes; boca fora da pele; punhos; referencias do gait clock; reset; preservacao visual ScenePopulator; IK de pouso; asmdefs atuais sincronizados no clone depois de CS0234 de UI externo.",
+  "novas_validacoes": "Testes de escala1.4m/skin/bones/poses/restauro/pes no solo/normais variadas escritos, ainda nao executados.",
+  "alteracoes_externas": "Entradas374-386/telaentrada/buildPages e commits posteriores sao trabalho de outro agente. Preservar cena atual e integrar incrementalmente.",
+  "documentacao_detalhada": "docs/ia/YUNA-ESTADO-MODELAGEM-2026-11-11.md",
+  "validacoes": {
+    "EditMode": "45/45 aprovados",
+    "PlayMode": "27/27 aprovados, incluindo repeticao sobre cena regenerada atual instalada no clone",
+    "captura_runtime": "79quadros,1estralo,saida03,max25.35graus,timeScale1;GIF640x360 salvo",
+    "guarda": "Integracao feita:1alterado/8removidos/2adicionados,inesperados0;demaisblocos/audio preservados",
+    "integridade_posterior": "Outra regeneracao externa alterou IDs/hash da cena principal, mas manteve referencia ao prefab; prefab/mesh iguais aos validados."
+  },
+  "assets_reais_atuais": "Assets/Characters/Yuna/Yuna_Study.prefab e Yuna_StudyMesh.asset (principal)",
+  "visualizacao_unity": {
+    "prefab": "Assets/Characters/Yuna/Yuna_Study.prefab",
+    "cena": "Assets/Scenes/DarkRoom_Gameplay.unity",
+    "observacao": "Reabrir cena se estava mostrando versao antiga em memoria. Nao foi observada janela do editor principal; integracao confirmada em disco porhash/guarda."
+  },
+  "marco_tecnico_concluido": 373
 }

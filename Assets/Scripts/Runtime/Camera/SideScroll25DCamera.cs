@@ -62,7 +62,13 @@ namespace YunaLegend.Camera25D
         public bool IsRouteOverview => routeOverview;
 
         public float ViewWidth => 2f * Mathf.Abs(transform.position.z) * Mathf.Tan(fixedFov * Mathf.Deg2Rad * 0.5f) * Aspect;
-        private float Aspect => targetCamera != null ? Mathf.Max(1f, targetCamera.aspect) : 16f / 9f;
+        private float Aspect => targetCamera != null ? Mathf.Max(.2f, targetCamera.aspect) : 16f / 9f;
+        private float framedAspect;
+        // Use viewport geometry rather than a user-agent guess: phones may rotate,
+        // and desktop windows can also be narrow. Never crop the next landing.
+        public static float ResponsiveMinimumWidth(float aspect, float desktopWidth)
+            => Mathf.Lerp(7f, desktopWidth, Mathf.InverseLerp(.6f, 1.6f, aspect));
+        private float ResponsiveMinimum => ResponsiveMinimumWidth(Aspect, minimumViewWidth);
 
         private Camera targetCamera;
 
@@ -81,6 +87,12 @@ namespace YunaLegend.Camera25D
 
         private void LateUpdate()
         {
+            if (targetCamera == null) targetCamera = GetComponent<Camera>();
+            if (Mathf.Abs(framedAspect - Aspect) > .005f)
+            {
+                framedAspect = Aspect;
+                framedTarget = -1;
+            }
             if (routeOverview)
             {
                 transform.position = Vector3.SmoothDamp(transform.position, overviewPosition, ref overviewVelocity, 0.55f);
@@ -132,7 +144,7 @@ namespace YunaLegend.Camera25D
             float reach = target != null ? (target.spec.index==YieldingWoodFurniture.PlatformIndex
                 ? Mathf.Abs(target.GetLandingPoint(scrollDirection).x-anchorX)+1.9f
                 : Mathf.Max(Mathf.Abs(target.Support.MinX-anchorX),Mathf.Abs(target.Support.MaxX-anchorX))+.7f) : 0f;
-            routeWidth = Mathf.Clamp(reach / 0.68f, minimumViewWidth, maximumViewWidth) * routeDistanceScale;
+            routeWidth = Mathf.Clamp(reach / 0.68f, ResponsiveMinimum, maximumViewWidth) * routeDistanceScale;
             routeY = (target != null ? Mathf.Lerp(anchorY, target.GetTopCenterWorld().y, 0.3f) : anchorY) + verticalFramingOffset;
             framedTarget = index;
         }
@@ -148,7 +160,7 @@ namespace YunaLegend.Camera25D
             var traversal=current!=null?current.GetComponent<YieldingWoodFurniture>():null;
             if(traversal!=null&&traversal.IsTraversing)
             {
-                routeWidth=minimumViewWidth*routeDistanceScale;routeY=traversal.RestTopY+verticalFramingOffset;
+                routeWidth=ResponsiveMinimum*routeDistanceScale;routeY=traversal.RestTopY+verticalFramingOffset;
                 framedTarget=-2;ApplyRouteFrame(snap);return;
             }
             if (guide == null) guide = Object.FindFirstObjectByType<NandaFairyGuide>();

@@ -64,6 +64,7 @@ namespace YunaLegend.RoutePhysics.Tests
                     maxSag=Mathf.Max(maxSag,furniture.CurrentSag);
                     var body=player.transform.Find("Body_Visual");
                     var view=body.GetComponent<YunaCharacterView>();
+                    if(view!=null)view.SendMessage("LateUpdate");
                     float lean=view!=null?view.PoseLeanDegrees:Mathf.DeltaAngle(0,body.localEulerAngles.x);
                     if(player.IsStumbling&&Mathf.Abs(lean)>1f)sawPose=true;
                 }

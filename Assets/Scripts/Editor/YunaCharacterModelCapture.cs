@@ -11,6 +11,17 @@ namespace YunaLegend.EditorScripts
 {
     public static class YunaCharacterModelCapture
     {
+        public static void BuildAndRun()
+        {
+            YunaCharacterModelBuilder.Build();
+            Run();
+        }
+        public static void BuildApplyAndRun()
+        {
+            YunaCharacterModelBuilder.Build();
+            YunaCharacterModelBuilder.ApplyToScene();
+            Run();
+        }
         static string Output
         {
             get { var args = System.Environment.GetCommandLineArgs(); int i = System.Array.IndexOf(args, "-yunaModelOutput");
@@ -18,8 +29,32 @@ namespace YunaLegend.EditorScripts
         }
         static void Save(Camera camera, string name, int width = 1024, int height = 1024)
         {
-            var image = DarkRoomStartCapture.RenderDisplayImage(camera, width, height);
-            File.WriteAllBytes(Path.Combine(Output, name + ".png"), image.EncodeToPNG()); Object.DestroyImmediate(image);
+            // In an on-demand EditMode capture, the GPU skinning cache may still
+            // contain the preceding pose. Bake the current bone matrices for this
+            // render only; the persisted prefab keeps its SkinnedMeshRenderer.
+            var renderers = Object.FindObjectsByType<SkinnedMeshRenderer>(FindObjectsSortMode.None);
+            var proxies = new System.Collections.Generic.List<GameObject>();
+            var meshes = new System.Collections.Generic.List<Mesh>();
+            try
+            {
+                foreach (var skin in renderers.Where(s => s.enabled))
+                {
+                    var mesh = new Mesh(); skin.BakeMesh(mesh); meshes.Add(mesh);
+                    var proxy = new GameObject("CaptureCurrentSkinPose"); proxies.Add(proxy);
+                    proxy.transform.SetParent(skin.transform, false);
+                    proxy.AddComponent<MeshFilter>().sharedMesh = mesh;
+                    proxy.AddComponent<MeshRenderer>().sharedMaterials = skin.sharedMaterials;
+                    skin.enabled = false;
+                }
+                var image = DarkRoomStartCapture.RenderDisplayImage(camera, width, height);
+                File.WriteAllBytes(Path.Combine(Output, name + ".png"), image.EncodeToPNG()); Object.DestroyImmediate(image);
+            }
+            finally
+            {
+                foreach (var proxy in proxies) Object.DestroyImmediate(proxy);
+                foreach (var mesh in meshes) Object.DestroyImmediate(mesh);
+                foreach (var skin in renderers) skin.enabled = true;
+            }
         }
         static void Lamp(string name, Vector3 angles, float intensity, Color color)
         {
@@ -59,7 +94,7 @@ namespace YunaLegend.EditorScripts
                 vertices = skin.sharedMesh.vertexCount, triangles = skin.sharedMesh.triangles.Length / 3,
                 bones = skin.bones.Length, materials = skin.sharedMaterials.Length,
                 restBounds = baked.bounds, source = YunaCharacterModelBuilder.PrefabPath,
-                method = "Actual Unity SkinnedMeshRenderer renders, neutral inspection lights; poses applied to bones. Not ImageGen. First study, no final likeness claim." }, true));
+                method = "Actual Unity geometry renders. Current SkinnedMeshRenderer bone poses sampled via BakeMesh for synchronous EditMode captures. Neutral inspection lights01-08; scene lights09-10. Not ImageGen. First study, no final likeness claim." }, true));
             Object.DestroyImmediate(baked); Object.DestroyImmediate(floor);
             EditorSceneManager.OpenScene("Assets/Scenes/DarkRoom_Gameplay.unity");
             var player = Object.FindFirstObjectByType<Yuna25DPlayerController>(); YunaCharacterModelBuilder.Install(player);
@@ -67,11 +102,16 @@ namespace YunaLegend.EditorScripts
             var bear = Object.FindObjectsByType<DarkRoomPlatformMarker>(FindObjectsSortMode.None).Single(p => p.spec.index == 0);
             player.transform.position = bear.GetTopCenterWorld();
             var actualView = player.GetComponentInChildren<YunaCharacterView>(); actualView.Evaluate(YunaStudyPose.Idle, 0);
+            actualView.UpdatePresentationLight();
+            var guide = Object.FindFirstObjectByType<NandaFairyGuide>();
+            if (guide != null) guide.transform.position = player.transform.position + new Vector3(1.8f, .95f, -.15f);
             camera = Camera.main; camera.aspect = 16f / 9f;
             var side = camera.GetComponent<SideScroll25DCamera>(); side.ScreenCrushActive = false; side.SnapToRouteFraming(1);
             Save(camera, "09-gameplay-bear", 1280, 720);
             var cabinet = Object.FindObjectsByType<DarkRoomPlatformMarker>(FindObjectsSortMode.None).Single(p => p.spec.index == 2);
             player.transform.position = cabinet.Support.PointNear(cabinet.transform.position.x - 1);
+            actualView.UpdatePresentationLight();
+            if (guide != null) guide.transform.position = player.transform.position + new Vector3(1.8f, .95f, -.15f);
             actualView.Evaluate(YunaStudyPose.Stumble, .18f, 1); side.SnapToRouteFraming(3);
             Save(camera, "10-gameplay-stumble", 1280, 720);
             Debug.Log("YUNA_MODEL_CAPTURE_COMPLETE:10 images; source scene not saved.");

@@ -15,6 +15,7 @@ namespace YunaLegend.DarkRoom
         Yuna25DPlayerController player;
         float phase, landing;
         bool grounded;
+        Transform fillLight;
         public YunaStudyPose CurrentPose { get; private set; }
         public float PoseLeanDegrees => joints.TryGetValue("Spine", out var spine)
             ? Mathf.DeltaAngle(0, spine.localEulerAngles.x) : 0;
@@ -33,6 +34,7 @@ namespace YunaLegend.DarkRoom
         void LateUpdate()
         {
             if (player == null) { Bind(); if (player == null) return; }
+            UpdatePresentationLight();
             float dt = Time.deltaTime;
             bool onGround = player.IsGrounded;
             if (onGround && !grounded) landing = .14f;
@@ -46,6 +48,14 @@ namespace YunaLegend.DarkRoom
             Evaluate(pose, pose == YunaStudyPose.Idle ? Time.time : phase,
                 pose == YunaStudyPose.Stumble ? player.StumblePoseAmount : 1);
         }
+        public void UpdatePresentationLight()
+        {
+            if (player == null) Bind();
+            if (player == null) return;
+            if (fillLight == null) fillLight = player.transform.Find("Yuna_FillLight");
+            // Keep the existing soft fill on the camera's side for either run direction.
+            if (fillLight != null) fillLight.position = player.transform.position + new Vector3(-.2f, 1.1f, -1.4f);
+        }
         void Rotate(string bone, float x, float y = 0, float z = 0)
         {
             if (joints.TryGetValue(bone, out var t)) t.localRotation = Quaternion.Euler(x, y, z);
@@ -56,7 +66,7 @@ namespace YunaLegend.DarkRoom
         }
         public void ResetPose()
         {
-            Bind(); phase = landing = 0; grounded = false;
+            Bind(); phase = landing = 0; grounded = false; CurrentPose = YunaStudyPose.Idle;
             foreach (var pair in joints) { pair.Value.localPosition = restPositions[pair.Key]; pair.Value.localRotation = Quaternion.identity; }
         }
         /// <param name="time">Run cycle in [0,1); idle time in seconds.</param>
@@ -76,7 +86,7 @@ namespace YunaLegend.DarkRoom
             }
             if (pose == YunaStudyPose.Run || pose == YunaStudyPose.Stumble)
             {
-                bounce = -.030f + .006f * Mathf.Cos(cycle * 4 * Mathf.PI);
+                bounce = -.040f + .004f * Mathf.Cos(cycle * 4 * Mathf.PI);
                 Position("Hips", Vector3.up * bounce);
                 SolveLeg("Left", cycle); SolveLeg("Right", Mathf.Repeat(cycle + .5f, 1));
                 lean = pose == YunaStudyPose.Stumble ? 26 * amount : 7;
@@ -93,6 +103,11 @@ namespace YunaLegend.DarkRoom
                 Position("Hips", Vector3.up * (pose == YunaStudyPose.Land ? -.04f : 0));
                 Rotate("LeftUpperLeg", -knee * .6f); Rotate("RightUpperLeg", -knee * .35f);
                 Rotate("LeftLowerLeg", knee); Rotate("RightLowerLeg", knee * .8f);
+                if (pose == YunaStudyPose.Land)
+                {
+                    PlaceLeg("Left", .055f, 0, 0);
+                    PlaceLeg("Right", -.055f, 0, 0);
+                }
                 Rotate("LeftUpperArm", -26, 0, -24); Rotate("RightUpperArm", -26, 0, 24);
                 Rotate("LeftLowerArm", -20); Rotate("RightLowerArm", -20);
                 Rotate("FrontSkirt", -12); Rotate("BackSkirt", 12);
@@ -104,10 +119,14 @@ namespace YunaLegend.DarkRoom
         void SolveLeg(string side, float cycle)
         {
             // Two-bone presentation IK: sole stays at y=0 during stance, foot swings clear during recovery.
-            var hip = joints[side + "UpperLeg"]; var shin = joints[side + "LowerLeg"]; var foot = joints[side + "Foot"];
             bool stance = cycle < .5f; float t = stance ? cycle * 2 : (cycle - .5f) * 2;
             float z = stance ? Mathf.Lerp(.16f, -.16f, t) : Mathf.Lerp(-.16f, .16f, t);
             float lift = stance ? 0 : .105f * Mathf.Sin(t * Mathf.PI);
+            PlaceLeg(side, z, lift, stance ? 0 : -Mathf.Sin(t * Mathf.PI) * 15);
+        }
+        void PlaceLeg(string side, float z, float lift, float pitch)
+        {
+            var hip = joints[side + "UpperLeg"]; var shin = joints[side + "LowerLeg"]; var foot = joints[side + "Foot"];
             Vector3 hipPoint = transform.InverseTransformPoint(hip.position);
             var target = new Vector3(hipPoint.x, .095f * unitScale + lift * unitScale, z * unitScale);
             float l1 = restPositions[side + "LowerLeg"].magnitude, l2 = restPositions[side + "Foot"].magnitude;
@@ -119,7 +138,7 @@ namespace YunaLegend.DarkRoom
             Quaternion upper = Quaternion.FromToRotation(Vector3.down, knee - hipPoint);
             Quaternion lower = Quaternion.FromToRotation(Vector3.down, target - knee);
             hip.localRotation = upper; shin.localRotation = Quaternion.Inverse(upper) * lower;
-            foot.localRotation = Quaternion.Inverse(lower) * Quaternion.Euler(stance ? 0 : -Mathf.Sin(t * Mathf.PI) * 15, 0, 0);
+            foot.localRotation = Quaternion.Inverse(lower) * Quaternion.Euler(pitch, 0, 0);
         }
     }
 }
