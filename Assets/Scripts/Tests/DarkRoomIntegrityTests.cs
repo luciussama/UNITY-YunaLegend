@@ -12,6 +12,30 @@ namespace YunaLegend.Tests
     public class DarkRoomIntegrityTests
     {
         [Test]
+        public void Test_PersistedPostProcessingChainIncludesCameraVolumeAndRendererResources()
+        {
+            UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/DarkRoom_Gameplay.unity");
+            try
+            {
+                var camera = Camera.main;
+                var data = new UnityEditor.SerializedObject(camera.GetComponent("UniversalAdditionalCameraData"));
+                Assert.IsTrue(data.FindProperty("m_RenderPostProcessing").boolValue);
+                Assert.IsTrue(camera.allowHDR);
+                var volumeGo = GameObject.Find("DarkRoom_GlobalVolume");
+                var volume = new UnityEditor.SerializedObject(volumeGo.GetComponent("Volume"));
+                var profile = UnityEditor.AssetDatabase.LoadMainAssetAtPath("Assets/DefaultVolumeProfile.asset");
+                Assert.AreSame(profile, volume.FindProperty("sharedProfile").objectReferenceValue, "The runtime profile property must not replace a persisted sharedProfile link.");
+                Assert.AreNotEqual(0, data.FindProperty("m_VolumeLayerMask").intValue & (1 << volumeGo.layer));
+                var renderer = new UnityEditor.SerializedObject(UnityEditor.AssetDatabase.LoadMainAssetAtPath("Assets/Settings/DarkRoomRenderer.asset"));
+                Assert.IsNotNull(renderer.FindProperty("postProcessData").objectReferenceValue);
+            }
+            finally
+            {
+                UnityEditor.SceneManagement.EditorSceneManager.NewScene(UnityEditor.SceneManagement.NewSceneSetup.EmptyScene);
+            }
+        }
+
+        [Test]
         public void Test_PersistedSceneStartsOnFloorWithOnlyStage1Visible()
         {
             var scene = UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/DarkRoom_Gameplay.unity");
@@ -167,8 +191,8 @@ namespace YunaLegend.Tests
             {
                 float vX = 3.6f;
                 float jumpH = 2.4f;
-                float deltaY = s1[i + 1].y - s1[i].y;
-                float gap = (s1[i + 1].x - s1[i + 1].width * 0.5f) - (s1[i].x + s1[i].width * 0.5f);
+                float deltaY = s1[i + 1].TopSurfaceCenter.y - s1[i].TopSurfaceCenter.y;
+                float gap = PlatformSupportProfile.Gap(DarkRoomPlatformGeometry.GetSupportProfile(s1[i]), DarkRoomPlatformGeometry.GetSupportProfile(s1[i+1]), 1f);
 
                 float vY0 = Mathf.Sqrt(2f * g * jumpH);
                 float tUp = vY0 / g;
@@ -187,8 +211,8 @@ namespace YunaLegend.Tests
                 float progress = (float)i / (s2.Count - 1);
                 float vX = Mathf.Lerp(4.0f, 6.0f, progress);
                 float jumpH = Mathf.Lerp(2.5f, 3.4f, progress);
-                float deltaY = s2[i + 1].y - s2[i].y;
-                float gap = (s2[i + 1].x - s2[i + 1].width * 0.5f) - (s2[i].x + s2[i].width * 0.5f);
+                float deltaY = s2[i + 1].TopSurfaceCenter.y - s2[i].TopSurfaceCenter.y;
+                float gap = PlatformSupportProfile.Gap(DarkRoomPlatformGeometry.GetSupportProfile(s2[i]), DarkRoomPlatformGeometry.GetSupportProfile(s2[i+1]), 1f);
 
                 float vY0 = Mathf.Sqrt(2f * g * jumpH);
                 float tUp = vY0 / g;
@@ -205,10 +229,10 @@ namespace YunaLegend.Tests
             for (int i = 0; i < s3.Count - 1; i++)
             {
                 float progress = (float)i / (s3.Count - 1);
-                float vX = Mathf.Lerp(4.2f, 6.6f, progress);
-                float jumpH = Mathf.Lerp(2.6f, 3.9f, progress);
-                float deltaY = s3[i + 1].y - s3[i].y;
-                float gap = (s3[i].x - s3[i].width * 0.5f) - (s3[i + 1].x + s3[i + 1].width * 0.5f);
+                float vX = Mathf.Lerp(DarkRoomReturnLayout.RunSpeed, DarkRoomReturnLayout.EndRunSpeed, progress);
+                float jumpH = Mathf.Lerp(DarkRoomReturnLayout.JumpHeight, DarkRoomReturnLayout.EndJumpHeight, progress);
+                float deltaY = s3[i + 1].TopSurfaceCenter.y - s3[i].TopSurfaceCenter.y;
+                float gap = PlatformSupportProfile.Gap(DarkRoomPlatformGeometry.GetSupportProfile(s3[i]), DarkRoomPlatformGeometry.GetSupportProfile(s3[i+1]), -1f);
 
                 float vY0 = Mathf.Sqrt(2f * g * jumpH);
                 float tUp = vY0 / g;
@@ -344,7 +368,7 @@ namespace YunaLegend.Tests
         }
 
         [Test]
-        public void Test_CameraFixedSectionProperties_NoVerticalJumpOscillation()
+        public void Test_CameraSectionFallbackKeepsLensAndRotationStable()
         {
             var camGo = new GameObject("CamTest");
             var cam = camGo.AddComponent<Camera>();
@@ -354,6 +378,8 @@ namespace YunaLegend.Tests
             Assert.AreEqual(-4.5f, sideCam.FixedY);
             Assert.AreEqual(-16.0f, sideCam.FixedZ);
             Assert.AreEqual(45.0f, sideCam.FixedFov);
+            Assert.AreEqual(45.0f, cam.fieldOfView);
+            Assert.Less(Quaternion.Angle(Quaternion.identity, camGo.transform.rotation), 0.01f);
 
             sideCam.ConfigureSection(-1.5f, -16.0f, 45.0f);
             Assert.AreEqual(-1.5f, sideCam.FixedY);

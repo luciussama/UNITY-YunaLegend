@@ -25,6 +25,12 @@ namespace YunaLegend.EditorScripts
                     "Packages/com.unity.render-pipelines.universal/Runtime/Data/PostProcessData.asset");
                 AssetDatabase.CreateAsset(renderer, RendererPath);
             }
+            // Repair existing renderers as well, so enabling the camera cannot leave a broken chain.
+            if (renderer.postProcessData == null)
+                renderer.postProcessData = AssetDatabase.LoadAssetAtPath<PostProcessData>(
+                    "Packages/com.unity.render-pipelines.universal/Runtime/Data/PostProcessData.asset");
+            if (renderer.postProcessData == null)
+                throw new InvalidOperationException("URP PostProcessData is missing.");
 
             var pipeline = AssetDatabase.LoadAssetAtPath<UniversalRenderPipelineAsset>(PipelinePath);
             if (pipeline == null)
@@ -33,6 +39,10 @@ namespace YunaLegend.EditorScripts
                 pipeline.supportsHDR = true;
                 AssetDatabase.CreateAsset(pipeline, PipelinePath);
             }
+            pipeline.supportsHDR = true;
+            pipeline.colorGradingMode = ColorGradingMode.HighDynamicRange;
+            EditorUtility.SetDirty(renderer);
+            EditorUtility.SetDirty(pipeline);
 
             GraphicsSettings.defaultRenderPipeline = pipeline;
             // No quality override may silently return the project to Built-in.

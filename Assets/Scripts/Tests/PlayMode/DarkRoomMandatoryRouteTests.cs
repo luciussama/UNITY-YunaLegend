@@ -171,17 +171,19 @@ namespace YunaLegend.Tests
                 builder.ShowTemporalSection(phase, source);
                 float direction = target <= 21 ? 1f : -1f;
                 float progress = target <= 21 ? Mathf.Clamp01((source - 10f) / 11f) : Mathf.Clamp01((source - 22f) / 15f);
-                float speed = target <= 9 ? 3.6f : target <= 21 ? Mathf.Lerp(4f, 6f, progress) : Mathf.Lerp(4.2f, 6.6f, progress);
-                float height = target <= 9 ? 2.4f : target <= 21 ? Mathf.Lerp(2.5f, 3.4f, progress) : Mathf.Lerp(2.6f, 3.9f, progress);
+                float speed = target <= 9 ? 3.6f : target <= 21 ? Mathf.Lerp(4f, 6f, progress) : Mathf.Lerp(DarkRoomReturnLayout.RunSpeed, DarkRoomReturnLayout.EndRunSpeed, progress);
+                float height = target <= 9 ? 2.4f : target <= 21 ? Mathf.Lerp(2.5f, 3.4f, progress) : Mathf.Lerp(DarkRoomReturnLayout.JumpHeight, DarkRoomReturnLayout.EndJumpHeight, progress);
                 bool landed = false;
                 int consecutive = 0, longestWindow = 0;
                 int reached = -1;
                 System.Action<int> handler = index => reached = index;
                 player.OnPlatformLanded += handler;
-                for (float inset = 0.05f; inset <= Marker(source).spec.width; inset += 0.1f)
+                foreach (var region in Marker(source).Support.Regions)
                 {
-                    var top = Marker(source).GetTopCenterWorld();
-                    top.x += direction * (Marker(source).spec.width * 0.5f - inset);
+                consecutive=0;
+                for (float inset = .05f; inset <= region.Width; inset += .1f)
+                {
+                    var top=region.At(direction>0f?region.MaxX-inset:region.MinX+inset);
                     player.ResetPlayer(top + Vector3.up * 0.03f, direction);
                     player.RestoreRouteSupport(source);
                     player.SetRunSpeed(0f); Tick(5);
@@ -193,10 +195,114 @@ namespace YunaLegend.Tests
                     consecutive = success ? consecutive + 1 : 0;
                     longestWindow = Mathf.Max(longestWindow, consecutive);
                 }
+                }
                 player.OnPlatformLanded -= handler;
                 Debug.Log($"ROUTE_WINDOW fps={fps} pair={source}->{target} seconds={longestWindow * 0.1f / speed:F3}");
                 Assert.GreaterOrEqual(longestWindow * 0.1f / speed, 0.10f, $"Timing window fps={fps} pair={source}->{target}");
                 Assert.IsTrue(landed, $"Real CharacterController cannot jump {source} -> {target}; position={player.transform.position}; reached={reached}; speed={speed}; height={height}");
+            }
+        }
+
+        [Test]
+        public void ContinuousEscapeRun_JumpsAllPlatformsWithoutOvershoot()
+        {
+            // Simula uma corrida humana contínua por toda a Fuga (Plat 9 a 21)
+            // Em cada plataforma, Yuna corre e salta antes da borda frontal, comprovando pouso seguro sem overshoot.
+            manager.StartStage2Escape();
+            Assert.AreEqual(9, manager.CurrentPlatformIndex);
+
+            player.ResetPlayer(Marker(9).GetTopCenterWorld()+Vector3.up*.05f,1f);
+            player.RestoreRouteSupport(9);
+
+            for (int target = 10; target <= 21; target++)
+            {
+                int source = target - 1;
+                var sourceMarker = Marker(source);
+                var targetMarker = Marker(target);
+
+                // Corre ate 0.35m antes da borda frontal da plataforma atual
+                float takeoffX = sourceMarker.GetTakeoffPoint(1f,.35f).x;
+                while (player.transform.position.x < takeoffX && !player.IsDead)
+                {
+                    Tick(1);
+                }
+
+                Assert.IsFalse(player.IsDead, $"Yuna morreu antes de decolar da plat {source}");
+
+                // Salta em direcao a proxima plataforma
+                Jump();
+
+                // Aguarda o pouso na plataforma de destino
+                int timeout = 160;
+                while (manager.CurrentPlatformIndex != target && timeout > 0 && !player.IsDead)
+                {
+                    Tick(1);
+                    timeout--;
+                }
+
+                Assert.IsFalse(player.IsDead, $"Yuna morreu no salto {source} -> {target}. Posicao: {player.transform.position}, Limites Destino: [{targetMarker.Support.MinX} .. {targetMarker.Support.MaxX}]");
+                Assert.AreEqual(target, manager.CurrentPlatformIndex, $"Nao alcancou a plataforma {target} no tempo esperado");
+
+                // Comprova que o ponto de pouso nao ultrapassou a borda frontal (sem overshoot)
+                float targetRightEdge = targetMarker.Support.MaxX;
+                Assert.LessOrEqual(player.transform.position.x, targetRightEdge, $"Overshoot na plat {target}: Yuna pousou alem da borda frontal!");
+            }
+        }
+
+        [Test]
+        public void ContinuousReverseRun_JumpsAllPlatformsWithoutOvershoot()
+        {
+            // Simula duas corridas humanas contínuas por toda a Volta Caótica Reversa (Plat 22 a 37):
+            // 1) Saltando a partir do CENTRO de cada plataforma (ritmo natural humano)
+            // 2) Saltando a 0.35m da borda esquerda frontal de cada plataforma
+            foreach (bool jumpFromCenter in new[] { true, false })
+            {
+                player.RestoreRouteSupport(21);
+                player.ResetPlayer(new Vector3(Marker(21).transform.position.x, -9f, 0f));
+                player.RestoreRouteSupport(21);
+                manager.StartPhase3AfterPlotTwist();
+                Assert.AreEqual(21, manager.CurrentPlatformIndex);
+
+                // Inicia no chão após a queda, corre e atinge a plataforma 22
+                Tick(348);
+                Jump();
+                for (int i = 0; i < 180 && manager.CurrentPlatformIndex == 21 && !player.IsDead; i++) Tick(1);
+                Assert.IsFalse(player.IsDead);
+                Assert.AreEqual(22, manager.CurrentPlatformIndex);
+
+                for (int target = 23; target <= 37; target++)
+                {
+                    int source = target - 1;
+                    var sourceMarker = Marker(source);
+                    var targetMarker = Marker(target);
+
+                    float takeoffX = jumpFromCenter
+                        ? sourceMarker.transform.position.x
+                        : sourceMarker.GetTakeoffPoint(-1f,.35f).x;
+                    while (player.transform.position.x > takeoffX && !player.IsDead)
+                    {
+                        Tick(1);
+                    }
+
+                    Assert.IsFalse(player.IsDead, $"Yuna morreu antes de decolar da plat {source} (jumpFromCenter={jumpFromCenter})");
+
+                    // Salta em direcao a proxima plataforma a esquerda
+                    Jump();
+
+                    int timeout = 180;
+                    while (manager.CurrentPlatformIndex != target && timeout > 0 && !player.IsDead)
+                    {
+                        Tick(1);
+                        timeout--;
+                    }
+
+                    Assert.IsFalse(player.IsDead, $"Yuna morreu no salto reverso {source} -> {target} (jumpFromCenter={jumpFromCenter}). Posicao: {player.transform.position}, Limites Destino: [{targetMarker.Support.MinX} .. {targetMarker.Support.MaxX}]");
+                    Assert.AreEqual(target, manager.CurrentPlatformIndex, $"Nao alcancou a plataforma {target} no tempo esperado (jumpFromCenter={jumpFromCenter})");
+
+                    // Comprova que o ponto de pouso nao ultrapassou a borda frontal (sem overshoot para a esquerda)
+                    float targetFarLeftEdge = targetMarker.Support.MinX;
+                    Assert.GreaterOrEqual(player.transform.position.x, targetFarLeftEdge, $"Overshoot na plat {target}: Yuna pousou alem da borda esquerda!");
+                }
             }
         }
     }

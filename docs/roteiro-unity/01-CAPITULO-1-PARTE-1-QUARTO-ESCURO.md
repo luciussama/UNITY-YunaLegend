@@ -62,7 +62,7 @@
      > **CAPÍTULO 1**
      > **Quarto de brinquedos**
 9. **`41.0s a 42.5s` — Revelação e Transição para o Jogo:**
-   - O cartão se dissipa suavemente, a câmera assume o enquadramento lateral fixo de jogabilidade e Nanda pousa sobre a **Plataforma 0 (Cabeça do Urso de Pelúcia)**, aguardando o primeiro salto.
+   - O cartão se dissipa suavemente, a câmera assume o enquadramento lateral fechado orientado ao próximo salto e Nanda pousa sobre a **Plataforma 0 (Cabeça do Urso de Pelúcia)**, aguardando o primeiro salto.
 
 ---
 

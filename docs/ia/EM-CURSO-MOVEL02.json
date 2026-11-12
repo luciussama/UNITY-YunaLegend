@@ -1,0 +1,96 @@
+{
+  "flag": "CONCLUIDO",
+  "em_curso": false,
+  "plano_ativo": null,
+  "agente": "Codex (GPT-6)",
+  "objetivo": "Plataforma02 apos livros: movel grande cedendo, estralo central, atraso local e tropeco; recalibrar entrada/saida e manter camera5%/GameOver silencioso.",
+  "usuario_confirmou": "Penteadeira02, logo depois dos livros; referencia anexada so de cor/estilo. Proxima execucao prioritaria apos fechar escopo atual: modelar Yuna e Nanda com pes/rig/animacoes/asas/voo; NAO iniciar personagens agora.",
+  "base_concluida": {
+    "plano": 337,
+    "resultado_diario": 345,
+    "testes": "34EditMode+24PlayMode=58 aprovados, XMLs em Evidence/supports-camera-2026-11-11.",
+    "apoios": "PlatformSupportProfile com segmentos/regioes reais Box/Mesh, curvas, inclinacoes, areas separadas sem ponte sobre vaos, upper envelope e cache invalidado por movimento.",
+    "consumidores": "gerador, marcador, movimento, alvo de salto, limite de derrota, camera e testes migrados; definicoes GetSupportShapes compartilhadas entre arte/fisica/autoria.",
+    "camera": "RouteDistanceScale1.05; largura10.5->11.025m, FOV45; panorama tutorial separado. camera-backoff.json registra razao.",
+    "gameover": "Retirados campo/atribuicao/PlayOneShot do clip eletronico. Derrota/evento/retry/demais sons preservados; arquivo legado nao apagado.",
+    "integracao": "Base integrada a Assets/Scenes/DarkRoom_Gameplay.unity com guarda de blocos:4 existentes alterados, arte/luzes/rota preservados; semPopulate/AudioGenerator."
+  },
+  "movel02_em_implementacao": {
+    "dimensoes": "8.4m largura,2.3m altura,2.4m profundidade. Topo originalY=-6.8, base deve repousar no pisoY=-9.1.",
+    "arte": "Novo DarkRoomYieldingFurnitureArt.cs (partial de DarkRoomPlatformArt): gavetas/prateleiras/molduras/puxadores em3D,4 grupos estaticos combinados+2tamp os+farpas; material de madeira original via image_gen, copiado ao projeto.",
+    "fisica": "GetSupportShapes(2) passa a2caixas de tampo com fenda real0.04m. YieldingWoodFurniture move visual/collider com mesma pose; cedimento ate0.075m, abertura adicional0.025m por lado depois do estralo.",
+    "evento": "Validado: estralo unico48%,pausa80ms locais+recuperacao280ms,saida normal,retry reseta.",
+    "personagem": "Yuna ganhou CurrentSupportIndex,BeginStumble/EndStumble, atraso parcial de deslocamento/footsteps sem parar gravidade e pose procedural no Body_Visual. Pose provisoria; personagem nao tem rig/pes ainda.",
+    "guia_camera": "Nanda.SetTraversalSupport acompanha trecho a frente; camera mantem close na travessia e volta a mirar apoio03 perto da saida. Entrada do movel mira regiao inicial em vez do centro distante.",
+    "layout": "Gerador coloca02 apos livros com gap1.25m e03 apos movel com gap1.35m; demais offsets propagados por superficies. Gaps posteriores preservados. Ainda precisa verificar medidas/testes.",
+    "audio_novo": "Assets/Audio/SFX/wood_furniture_crack.wav gerado uma vez deterministicamente (seed9352,mono44.1kHz16bit0.24s), ruido impulsivo filtrado+ressonancias amortecidas. Nao e novoGameOver.",
+    "setup": "DarkRoomFurnitureSetup.ConfigureMaterials/ApplyAndSave implementados; sourceScenePopulator/ArtAssetBuilder e biblioteca de materiais integrados; PaintedPlatformSetup preserva slots adicionais.",
+    "estado_da_cena_principal": "Movel integrado e validado; fratura reta provisoria e personagem proxy declarados no README."
+  },
+  "erro_atual": {
+    "resolvido": true,
+    "pendente": false,
+    "recuperacoes": "CS0136renomeado;retrycasteloagorausasuporte09;GUIDsmateriaisprincipaispreservados",
+    "ruido_editor": "UnityEditor.Search.SearchDatabase lancouArgumentOutOfRangeException noinicio dacapturafinal;capturaconcluiu normalmente com79quadros;semstackderuntimejogo."
+  },
+  "arquivos_principais_novos_ou_alterados": [
+    "Assets/Scripts/Runtime/DarkRoom/YieldingWoodFurniture.cs",
+    "Assets/Scripts/Runtime/DarkRoom/DarkRoomYieldingFurnitureArt.cs",
+    "Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformArt.cs",
+    "Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformGeometry.cs",
+    "Assets/Scripts/Runtime/DarkRoom/DarkRoomThreeStageCircuitGenerator.cs",
+    "Assets/Scripts/Runtime/DarkRoom/DarkRoomBlockoutBuilder.cs",
+    "Assets/Scripts/Runtime/DarkRoom/Yuna25DPlayerController.cs",
+    "Assets/Scripts/Runtime/DarkRoom/NandaFairyGuide.cs",
+    "Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformMarker.cs",
+    "Assets/Scripts/Runtime/Camera/SideScroll25DCamera.cs",
+    "Assets/Scripts/Editor/DarkRoomFurnitureSetup.cs",
+    "Assets/Scripts/Editor/DarkRoomScenePopulator.cs",
+    "Assets/Scripts/Editor/DarkRoomArtAssetBuilder.cs",
+    "Assets/Scripts/Editor/DarkRoomPaintedPlatformSetup.cs",
+    "Assets/Materials/T_Furniture_Wood_Painted.png",
+    "Assets/Audio/SFX/wood_furniture_crack.wav"
+  ],
+  "evidencias_e_backups": [
+    "Evidence/supports-camera-2026-11-11/README.md",
+    "Evidence/supports-camera-2026-11-11/editmode-final.xml",
+    "Evidence/supports-camera-2026-11-11/playmode.xml",
+    "Evidence/supports-camera-2026-11-11/support-geometry.json",
+    "Evidence/supports-camera-2026-11-11/camera-backoff.json",
+    "Evidence/supports-camera-2026-11-11/integration.json",
+    "Evidence/furniture02-2026-11-11/base-source/ (5fontes anteriores.txt+scene.unity.gz)",
+    "Build/furniture-scene-before.unity (baseline base integrada)",
+    "Build/supports-scene-before.unity (anterior abase)",
+    "Build/CameraFramingValidation (projetoUnityisolado)",
+    "Build/furniture-setup.log"
+  ],
+  "ambiente": {
+    "projeto": "C:/Users/sergi/repos/UNITY-YunaLegend",
+    "unity": "C:/Program Files/Unity/Hub/Editor/6000.3.28f1/Editor/Unity.exe",
+    "clone": "C:/Users/sergi/repos/UNITY-YunaLegend/Build/CameraFramingValidation",
+    "git": "semcommit/push nesta execucao; nao resetar trabalho anterior; editor principal estava aberto, nao imprimir CommandLine completa de processos pois pode conter credenciais"
+  },
+  "proximos_passos": [
+    "Proxima execucao prioritaria: modelar Yuna/Nanda com pes,rig eanimacoesincluindotropeco;asas/voofada.",
+    "Polimento futuroarmario: ruptura irregular localizada,envelhecimento/fibras/veios;semcorteretopontaaponta.",
+    "Selecionar passos reaisdemadeira casoousuarioautorize;nenhumabibliotecaimportada."
+  ],
+  "pendentes_antigos_preservados": [
+    72,
+    92,
+    97,
+    152,
+    164,
+    168,
+    178,
+    185
+  ],
+  "backlog_artistico_movel02": "Pedido posterior do usuario: fratura irregular de madeira envelhecida/fadigada, com veios ramificados, fibras rompidas, lascas e desgaste; evitar fenda reta de ponta a ponta ou aspecto mal montado. Anotado para polimento futuro, sem substituir a prioridade seguinte de Yuna/Nanda.",
+  "validacao_atual": {
+    "EditMode": "37/37 aprovados",
+    "PlayMode": "27/27 aprovados;inclui30/60/120fps,80ms,retorno/retry",
+    "integracao": "Concluida sobre cena atual regenerada,5blocos existentes alterados,1922preservados,unexpectedvazio;demais audios preservados porhash",
+    "captura": "79quadros reais,umestralo,saida03;GIF/PNG/JSONemEvidence/furniture02-2026-11-11"
+  },
+  "plano_concluido": 346
+}

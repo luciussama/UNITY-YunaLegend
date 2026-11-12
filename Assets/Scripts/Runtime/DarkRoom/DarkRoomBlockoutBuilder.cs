@@ -4,7 +4,7 @@ using UnityEngine;
 namespace YunaLegend.DarkRoom
 {
     [ExecuteAlways]
-    public class DarkRoomBlockoutBuilder : MonoBehaviour
+    public partial class DarkRoomBlockoutBuilder : MonoBehaviour
     {
         [Header("Configuracao de Escala")]
         [Tooltip("Fator de conversao entre as coordenadas de design 2D do roteiro e unidades 3D da Unity")]
@@ -17,6 +17,7 @@ namespace YunaLegend.DarkRoom
         [SerializeField] private Material wardrobeMaterial;
         [SerializeField] private Material windowMaterial;
         [SerializeField] private Material teddyPlushMaterial;
+        [SerializeField] private Material[] platformArtMaterials;
         [SerializeField] private Material toyBlockRedMaterial;
         [SerializeField] private Material toyBlockYellowMaterial;
         [SerializeField] private Material toyBlockBlueMaterial;
@@ -36,14 +37,30 @@ namespace YunaLegend.DarkRoom
         [SerializeField] private Material trainTrackMaterial;
         [SerializeField] private Material falseDoorPosterMaterial;
         [SerializeField] private Material dreamPortalMaterial;
+        [SerializeField] private Material moonbeamShaftMaterial;
+        [SerializeField] private Material ambientDustMaterial;
+        [SerializeField] private Material moonlightFloorShadowMaterial;
+        [SerializeField] private Material baseboardMaterial;
+        [SerializeField] private Material buntingMaterial;
+        [SerializeField] private Material mandalaRugMaterial;
+        [SerializeField] private Material stripedRugMaterial;
+        [SerializeField] private Material floorPropRedMaterial;
+        [SerializeField] private Material floorPropYellowMaterial;
+        [SerializeField] private Material floorPropBlueMaterial;
+        [SerializeField] private Material floorPropGreenMaterial;
+        [SerializeField] private Material floorPropCreamMaterial;
+        [SerializeField] private Material floorPropBurgundyMaterial;
+        [SerializeField] private Material floorPropPlushMaterial;
 
-        [Header("Estrutura Gerada (3 Etapas Canônicas)")]
+        [Header("Estrutura Gerada (3 Etapas CanÃ´nicas)")]
         [SerializeField] private Transform stage1Root;
         [SerializeField] private Transform stage2Root;
         [SerializeField] private Transform stage3Root;
         [SerializeField] private Transform floorRoot;
         [SerializeField] private Transform sceneryRoot;
 
+        [SerializeField] private AudioClip furnitureCrackSfx;
+        public void ConfigureFurnitureCrack(AudioClip clip) => furnitureCrackSfx=clip;
         private DarkRoomPlatformMarker[] temporalPlatforms;
 
         public float CoordinateScale => coordinateScale;
@@ -72,7 +89,12 @@ namespace YunaLegend.DarkRoom
             Material teddyPlush, Material toyRed, Material toyYellow, Material toyBlue, Material toyGreen,
             Material toyAbc, Material drum, Material velvet, Material musicBox, Material brassGold,
             Material dresser, Material bookBlue, Material bookBurgundy, Material bookGreen, Material bookPages,
-            Material castleBlocks, Material castleTurret, Material trainTrack, Material falseDoorPoster, Material dreamPortal)
+            Material castleBlocks, Material castleTurret, Material trainTrack, Material falseDoorPoster, Material dreamPortal,
+            Material moonbeamShaft = null, Material ambientDust = null, Material floorShadow = null, Material baseboard = null, Material bunting = null,
+            Material mandalaRug = null, Material stripedRug = null,
+            Material floorPropRed = null, Material floorPropYellow = null, Material floorPropBlue = null,
+            Material floorPropGreen = null, Material floorPropCream = null, Material floorPropBurgundy = null, Material floorPropPlush = null,
+            Material[] platformArt = null)
         {
             floorMaterial = floor;
             wallpaperMaterial = wallpaper;
@@ -98,6 +120,21 @@ namespace YunaLegend.DarkRoom
             trainTrackMaterial = trainTrack;
             falseDoorPosterMaterial = falseDoorPoster;
             dreamPortalMaterial = dreamPortal;
+            moonbeamShaftMaterial = moonbeamShaft;
+            ambientDustMaterial = ambientDust;
+            moonlightFloorShadowMaterial = floorShadow;
+            baseboardMaterial = baseboard;
+            buntingMaterial = bunting;
+            mandalaRugMaterial = mandalaRug;
+            stripedRugMaterial = stripedRug;
+            floorPropRedMaterial = floorPropRed;
+            floorPropYellowMaterial = floorPropYellow;
+            floorPropBlueMaterial = floorPropBlue;
+            floorPropGreenMaterial = floorPropGreen;
+            floorPropCreamMaterial = floorPropCream;
+            floorPropBurgundyMaterial = floorPropBurgundy;
+            floorPropPlushMaterial = floorPropPlush;
+            platformArtMaterials = platformArt;
             defaultPlatformMaterial = dresserOakMaterial;
         }
 
@@ -116,10 +153,8 @@ namespace YunaLegend.DarkRoom
 
             // Etapa 2: A Fuga Acelerada com pulos crescentes ate o Poster na parede (10 a 21)
             var lastStage1 = stage1[stage1.Count - 1];
-            float stage2FirstPlatWidth = 2.4f;
-            float gapStage1To2 = 1.6f;
-            float stage2StartX = lastStage1.x + (lastStage1.width * 0.5f) + gapStage1To2 + (stage2FirstPlatWidth * 0.5f);
-            var stage2 = DarkRoomThreeStageCircuitGenerator.GenerateStage2Platforms(stage2StartX, lastStage1.y + 0.35f);
+            var stage2Origin=DarkRoomThreeStageCircuitGenerator.Stage2Origin(lastStage1);
+            var stage2=DarkRoomThreeStageCircuitGenerator.GenerateStage2Platforms(stage2Origin.x,stage2Origin.y);
             BuildPlatformList(stage2, stage2Root, "Etapa2_Fuga");
 
             // Etapa 3: A Subida Caotica Reversa (22 a 37) da direita para a esquerda apos a queda cinematica
@@ -131,7 +166,7 @@ namespace YunaLegend.DarkRoom
             temporalPlatforms = null;
             ShowTemporalSection(DarkRoomPhase.Phase1Ascent);
 
-            Debug.Log($"[DarkRoomBlockoutBuilder] Circuito Canônico em 3 Etapas gerado com sucesso! " +
+            Debug.Log($"[DarkRoomBlockoutBuilder] Circuito CanÃ´nico em 3 Etapas gerado com sucesso! " +
                       $"Etapa 1: {stage1.Count} | Etapa 2: {stage2.Count} | Etapa 3: {stage3.Count} plataformas.");
         }
 
@@ -171,15 +206,15 @@ namespace YunaLegend.DarkRoom
         private void BuildFloor()
         {
             // Chao escuro da sala: qualquer queda aqui e Game Over imediato (exceto na queda cinematica)
-            float worldY = -9.6f;
-            float worldWidth = 140.0f;
-            float worldDepth = 12.0f;
             float thickness = 1.0f;
+            float worldY = DarkRoomPlatformGeometry.FloorSurfaceY - thickness * 0.5f;
+            float worldWidth = 170.0f;
+            float worldDepth = 12.0f;
 
             var floorGo = GameObject.CreatePrimitive(PrimitiveType.Cube);
             floorGo.name = "Chao_Escuro_Sala";
             floorGo.transform.SetParent(floorRoot, false);
-            floorGo.transform.position = new Vector3(55.0f, worldY, 0f);
+            floorGo.transform.position = new Vector3(60.0f, worldY, 0f);
             floorGo.transform.localScale = new Vector3(worldWidth, thickness, worldDepth);
 
             var floorRenderer = floorGo.GetComponent<MeshRenderer>();
@@ -196,12 +231,14 @@ namespace YunaLegend.DarkRoom
         private static Mesh cachedCubeMesh;
         private static Mesh cachedSphereMesh;
         private static Mesh cachedCylinderMesh;
+        private static Mesh cachedQuadMesh;
 
         private static Mesh GetPrimitiveSharedMesh(PrimitiveType type)
         {
             if (type == PrimitiveType.Cube && cachedCubeMesh != null) return cachedCubeMesh;
             if (type == PrimitiveType.Sphere && cachedSphereMesh != null) return cachedSphereMesh;
             if (type == PrimitiveType.Cylinder && cachedCylinderMesh != null) return cachedCylinderMesh;
+            if (type == PrimitiveType.Quad && cachedQuadMesh != null) return cachedQuadMesh;
 
             var temp = GameObject.CreatePrimitive(type);
             Mesh mesh = temp.GetComponent<MeshFilter>().sharedMesh;
@@ -210,6 +247,7 @@ namespace YunaLegend.DarkRoom
             if (type == PrimitiveType.Cube) cachedCubeMesh = mesh;
             else if (type == PrimitiveType.Sphere) cachedSphereMesh = mesh;
             else if (type == PrimitiveType.Cylinder) cachedCylinderMesh = mesh;
+            else if (type == PrimitiveType.Quad) cachedQuadMesh = mesh;
 
             return mesh;
         }
@@ -227,6 +265,10 @@ namespace YunaLegend.DarkRoom
 
             var renderer = go.AddComponent<MeshRenderer>();
             renderer.sharedMaterial = mat;
+            if (sceneryRoot != null && parent != null && (parent == sceneryRoot || parent.IsChildOf(sceneryRoot)))
+            {
+                renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            }
 
             return go;
         }
@@ -235,31 +277,298 @@ namespace YunaLegend.DarkRoom
         {
             if (sceneryRoot == null) return;
 
-            // 1. Parede monumental de fundo em azul-indigo noturno (sem qualquer colisor)
-            var wall = CreateVisualOnlyObject("Parede_Fundo_Monumental", sceneryRoot, new Vector3(55f, 4.0f, 7.5f), new Vector3(160f, 32f, 1.0f), wallpaperMaterial != null ? wallpaperMaterial : wardrobeMaterial, PrimitiveType.Cube);
+            // 1. Parede monumental de fundo em violeta-indigo noturno (#0d0a14 / #17131d), rodape continuo de madeira (#2b2138 / #3e3152) e varal de bandeirinhas no topo
+            CreateVisualOnlyObject("Parede_Fundo_Monumental", sceneryRoot, new Vector3(60f, 4.0f, 7.5f), new Vector3(180f, 32f, 1.0f), wallpaperMaterial != null ? wallpaperMaterial : wardrobeMaterial, PrimitiveType.Cube);
+            var bbMat = baseboardMaterial != null ? baseboardMaterial : (wardrobeMaterial != null ? wardrobeMaterial : wallpaperMaterial);
+            CreateVisualOnlyObject("Rodape_Madeira_Fundo", sceneryRoot, new Vector3(60f, -8.55f, 6.08f), new Vector3(180f, 1.15f, 0.20f), bbMat, PrimitiveType.Cube);
+            if (buntingMaterial != null)
+            {
+                CreateVisualOnlyObject("Varal_Bandeirinhas_Topo", sceneryRoot, new Vector3(60f, 3.55f, 6.45f), new Vector3(180f, 1.55f, 1.0f), buntingMaterial, PrimitiveType.Quad);
+            }
 
-            // 2. Guarda-roupa monumental de carvalho (ao fundo da Etapa 1)
-            var wardrobe = CreateVisualOnlyObject("GuardaRoupa_Carvalho_Fundo", sceneryRoot, new Vector3(10f, 1.0f, 5.8f), new Vector3(14f, 20f, 3.5f), wardrobeMaterial, PrimitiveType.Cube);
+            // 2. Duas Janelas Noturnas Canonicas (NIGHT_WINDOWS = [780, 1950] -> X=29.5m e X=73.75m, escala 2.85m x 4.15m)
+            var winMat = windowMaterial != null ? windowMaterial : castleBlocksMaterial;
+            CreateWindowWithMoonbeam("Janela_Monumental_Luar", 29.5f, winMat);
+            CreateWindowWithMoonbeam("Janela_Monumental_Luar_2", 73.75f, winMat);
 
-            // Beiral decorativo superior do guarda-roupa
-            CreateVisualOnlyObject("Beiral_GuardaRoupa", wardrobe.transform, new Vector3(0f, 0.52f, 0f), new Vector3(1.06f, 0.08f, 1.15f), brassGoldMaterial != null ? brassGoldMaterial : wardrobeMaterial, PrimitiveType.Cube);
+            BuildWallDecorations();
 
-            // 3. Janela monumental com luar azulado (ao fundo da transicao Etapa 1 -> 2)
-            CreateVisualOnlyObject("Janela_Monumental_Luar", sceneryRoot, new Vector3(30f, 4.5f, 6.2f), new Vector3(10f, 14f, 0.4f), windowMaterial != null ? windowMaterial : castleBlocksMaterial, PrimitiveType.Cube);
+            // 2b. Cenografia Decorativa de Piso (roomScenery: tapetes e brinquedos em miniatura fora da linha de colisao Z=0)
+            BuildFloorScenery();
 
-            // 4. Estante gigante de livros ilustrados (ao fundo da Fuga Acelerada)
-            var shelf = CreateVisualOnlyObject("Estante_Gigante_Livros", sceneryRoot, new Vector3(58f, 2.5f, 5.6f), new Vector3(18f, 18f, 3.2f), wardrobeMaterial, PrimitiveType.Cube);
+            // 3. Poeira Estelar / Motes Magicos Flutuantes no Quarto
+            if (ambientDustMaterial != null)
+            {
+                var dustGo = new GameObject("DarkRoom_AmbientDustMotes");
+                dustGo.transform.SetParent(sceneryRoot, false);
+                dustGo.transform.position = new Vector3(55f, 0f, 1.5f);
+                var dustPs = dustGo.AddComponent<ParticleSystem>();
+                var dustRend = dustGo.GetComponent<ParticleSystemRenderer>();
+                if (dustRend != null) dustRend.sharedMaterial = ambientDustMaterial;
 
-            // Livros gigantes na estante
-            CreateVisualOnlyObject("Livro_Gigante_Azul", shelf.transform, new Vector3(-0.35f, 0.15f, -0.3f), new Vector3(0.18f, 0.28f, 0.7f), bookBlueMaterial, PrimitiveType.Cube);
-            CreateVisualOnlyObject("Livro_Gigante_Bordo", shelf.transform, new Vector3(-0.15f, 0.18f, -0.3f), new Vector3(0.16f, 0.32f, 0.7f), bookBurgundyMaterial, PrimitiveType.Cube);
-            CreateVisualOnlyObject("Livro_Gigante_Verde", shelf.transform, new Vector3(0.08f, 0.14f, -0.3f), new Vector3(0.20f, 0.25f, 0.7f), bookGreenMaterial, PrimitiveType.Cube);
+                var dMain = dustPs.main;
+                dMain.loop = true;
+                dMain.startLifetime = 7.0f;
+                dMain.startSpeed = 0.12f;
+                dMain.startSize = 0.09f;
+                dMain.startColor = new Color(0.85f, 0.92f, 1.0f, 0.45f);
+                dMain.maxParticles = 140;
 
-            // 5. Relogio Cuco Monumental de Mogno (proximo a parede do poster)
-            var clock = CreateVisualOnlyObject("RelogioCuco_Monumental", sceneryRoot, new Vector3(88f, 3.5f, 5.2f), new Vector3(5.5f, 20f, 2.8f), dresserOakMaterial != null ? dresserOakMaterial : wardrobeMaterial, PrimitiveType.Cube);
+                var dEm = dustPs.emission;
+                dEm.rateOverTime = 25f;
 
-            // Mostrador dourado do relogio
-            CreateVisualOnlyObject("Mostrador_Dourado", clock.transform, new Vector3(0f, 0.22f, -0.52f), new Vector3(0.45f, 0.04f, 0.45f), brassGoldMaterial, PrimitiveType.Cylinder, Quaternion.Euler(90f, 0f, 0f));
+                var dShape = dustPs.shape;
+                dShape.shapeType = ParticleSystemShapeType.Box;
+                dShape.scale = new Vector3(160f, 18f, 6f);
+            }
+        }
+
+        private void CreateWindowWithMoonbeam(string windowName, float windowX, Material winMat)
+        {
+            CreateVisualOnlyObject(windowName, sceneryRoot, new Vector3(windowX, 1.35f, 6.2f), new Vector3(2.85f, 4.15f, 0.20f), winMat, PrimitiveType.Cube);
+
+            if (moonbeamShaftMaterial != null)
+            {
+                // Veu diagonal principal de luar azul-prateado suspenso no ar, extinguindo-se antes do piso (LightingSystem.js linhas 958-979)
+                CreateVisualOnlyObject(
+                    $"{windowName}_Feixe_Luar",
+                    sceneryRoot,
+                    new Vector3(windowX + 1.25f, -1.40f, 6.02f),
+                    new Vector3(4.00f, 8.20f, 1.0f),
+                    moonbeamShaftMaterial,
+                    PrimitiveType.Quad,
+                    Quaternion.Euler(0f, 0f, 20f)
+                );
+
+                // Segunda camada difusa mais larga para o halo atmosferico ao redor e abaixo da janela
+                CreateVisualOnlyObject(
+                    $"{windowName}_Halo_Luar",
+                    sceneryRoot,
+                    new Vector3(windowX + 0.70f, -0.40f, 6.06f),
+                    new Vector3(5.00f, 6.50f, 1.0f),
+                    moonbeamShaftMaterial,
+                    PrimitiveType.Quad,
+                    Quaternion.Euler(0f, 0f, 14f)
+                );
+            }
+        }
+
+        private void BuildFloorScenery()
+        {
+            var floorSceneryRoot = new GameObject("Cenografia_Piso_RoomScenery").transform;
+            floorSceneryRoot.SetParent(sceneryRoot, false);
+
+            var mandalaMat = mandalaRugMaterial != null ? mandalaRugMaterial : royalVelvetMaterial;
+            var stripedMat = stripedRugMaterial != null ? stripedRugMaterial : bookBlueMaterial;
+            Quaternion flatOnFloor = Quaternion.Euler(90f, 0f, 0f);
+
+            // 1. Tapetes canonicos (fluffy_rug e striped_rug de config.js / BackgroundRenderer.js) pousados sobre o piso (Y = -9.08m)
+            if (mandalaMat != null)
+            {
+                CreateVisualOnlyObject("Tapete_Mandala_Largada", floorSceneryRoot, new Vector3(-9.5f, -9.08f, 1.4f), new Vector3(4.2f, 2.2f, 1.0f), mandalaMat, PrimitiveType.Quad, flatOnFloor);
+                CreateVisualOnlyObject("Tapete_Mandala_Subida_1", floorSceneryRoot, new Vector3(14.0f, -9.08f, 3.5f), new Vector3(4.2f, 2.2f, 1.0f), mandalaMat, PrimitiveType.Quad, flatOnFloor);
+                CreateVisualOnlyObject("Tapete_Mandala_Castelo", floorSceneryRoot, new Vector3(34.5f, -9.08f, 3.8f), new Vector3(4.4f, 2.2f, 1.0f), mandalaMat, PrimitiveType.Quad, flatOnFloor);
+                CreateVisualOnlyObject("Tapete_Mandala_Fuga_1", floorSceneryRoot, new Vector3(62.0f, -9.08f, 3.8f), new Vector3(4.4f, 2.2f, 1.0f), mandalaMat, PrimitiveType.Quad, flatOnFloor);
+                CreateVisualOnlyObject("Tapete_Mandala_Fuga_2", floorSceneryRoot, new Vector3(95.0f, -9.08f, 3.8f), new Vector3(4.4f, 2.2f, 1.0f), mandalaMat, PrimitiveType.Quad, flatOnFloor);
+            }
+
+            if (stripedMat != null)
+            {
+                CreateVisualOnlyObject("Tapete_Listrado_Inicio", floorSceneryRoot, new Vector3(-2.5f, -9.08f, 3.6f), new Vector3(4.8f, 2.0f, 1.0f), stripedMat, PrimitiveType.Quad, flatOnFloor);
+                CreateVisualOnlyObject("Tapete_Listrado_Subida_2", floorSceneryRoot, new Vector3(25.5f, -9.08f, 3.8f), new Vector3(5.0f, 2.1f, 1.0f), stripedMat, PrimitiveType.Quad, flatOnFloor);
+                CreateVisualOnlyObject("Tapete_Listrado_Castelo", floorSceneryRoot, new Vector3(45.0f, -9.08f, 4.1f), new Vector3(5.2f, 2.1f, 1.0f), stripedMat, PrimitiveType.Quad, flatOnFloor);
+                CreateVisualOnlyObject("Tapete_Listrado_Fuga_2", floorSceneryRoot, new Vector3(78.0f, -9.08f, 4.0f), new Vector3(5.2f, 2.1f, 1.0f), stripedMat, PrimitiveType.Quad, flatOnFloor);
+            }
+
+            // 2. Brinquedos e objetos espalhados pelo piso (roomScenery em Z = 2.4m .. 4.4m, sem colisor, fora da linha Z=0)
+            // Regiao inicial (visivel em start-camera.png)
+            CreateOpenStoryBook(floorSceneryRoot, "Livro_Historias_Aberto_1", -13.2f, 2.5f);
+            CreatePlushBunny(floorSceneryRoot, "Coelhinho_Pelucia_1", -10.4f, 3.4f);
+            CreateSpilledMarbles(floorSceneryRoot, "Bolinhas_Gude_1", -6.2f, 2.4f);
+            CreateToyCar(floorSceneryRoot, "Carrinho_Brinquedo_1", -3.8f, 3.3f);
+            CreateScatteredBlocks(floorSceneryRoot, "Bloquinhos_Espalhados_1", -0.8f, 4.1f);
+
+            // Regiao intermediaria da Etapa 1
+            CreateToyTrain(floorSceneryRoot, "Trenzinho_Miniatura_1", 10.5f, 3.6f);
+            CreateRetroRobot(floorSceneryRoot, "Robo_Lata_Retro_1", 18.5f, 4.0f);
+            CreateOpenStoryBook(floorSceneryRoot, "Livro_Historias_Aberto_2", 24.0f, 3.5f);
+
+            // Regiao do Castelo e inicio da Fuga (visivel em castle-camera.png em Z = 3.5m .. 4.4m)
+            CreateSpilledMarbles(floorSceneryRoot, "Bolinhas_Gude_2", 31.2f, 3.7f);
+            CreateToyCar(floorSceneryRoot, "Carrinho_Brinquedo_2", 34.8f, 3.6f);
+            CreateRetroRobot(floorSceneryRoot, "Robo_Lata_Retro_2", 39.2f, 4.1f);
+            CreateOpenStoryBook(floorSceneryRoot, "Livro_Historias_Aberto_3", 43.2f, 3.8f);
+            CreateScatteredBlocks(floorSceneryRoot, "Bloquinhos_Espalhados_2", 47.5f, 4.2f);
+
+            // Regiao final (Etapas 2 e 3)
+            CreatePlushBunny(floorSceneryRoot, "Coelhinho_Pelucia_2", 53.5f, 3.8f);
+            CreateToyTrain(floorSceneryRoot, "Trenzinho_Miniatura_2", 58.0f, 3.9f);
+            CreateToyCar(floorSceneryRoot, "Carrinho_Brinquedo_3", 74.0f, 3.8f);
+            CreateRetroRobot(floorSceneryRoot, "Robo_Lata_Retro_3", 88.0f, 4.1f);
+            CreateScatteredBlocks(floorSceneryRoot, "Bloquinhos_Espalhados_3", 102.0f, 3.9f);
+        }
+
+        private void CreateOpenStoryBook(Transform parent, string baseName, float x, float z)
+        {
+            var root = new GameObject(baseName).transform;
+            root.SetParent(parent, false);
+            root.localPosition = new Vector3(x, -9.10f, z);
+
+            var coverMat = floorPropBurgundyMaterial != null ? floorPropBurgundyMaterial : (bookBurgundyMaterial != null ? bookBurgundyMaterial : bookBlueMaterial);
+            var pageMat = floorPropCreamMaterial != null ? floorPropCreamMaterial : (bookPagesMaterial != null ? bookPagesMaterial : defaultPlatformMaterial);
+            var ribbonMat = floorPropRedMaterial != null ? floorPropRedMaterial : (toyBlockRedMaterial != null ? toyBlockRedMaterial : coverMat);
+
+            CreateVisualOnlyObject("Capa_Base", root, new Vector3(0f, 0.04f, 0f), new Vector3(0.96f, 0.06f, 0.66f), coverMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Pagina_Esq", root, new Vector3(-0.22f, 0.09f, 0f), new Vector3(0.42f, 0.05f, 0.58f), pageMat, PrimitiveType.Cube, Quaternion.Euler(0f, 0f, -8f));
+            CreateVisualOnlyObject("Pagina_Dir", root, new Vector3(0.22f, 0.09f, 0f), new Vector3(0.42f, 0.05f, 0.58f), pageMat, PrimitiveType.Cube, Quaternion.Euler(0f, 0f, 8f));
+            CreateVisualOnlyObject("Fita_Marcadora", root, new Vector3(0.05f, 0.05f, -0.36f), new Vector3(0.08f, 0.03f, 0.28f), ribbonMat, PrimitiveType.Cube, Quaternion.Euler(0f, 18f, 0f));
+        }
+
+        private void CreateSpilledMarbles(Transform parent, string baseName, float x, float z)
+        {
+            var root = new GameObject(baseName).transform;
+            root.SetParent(parent, false);
+            root.localPosition = new Vector3(x, -9.10f, z);
+
+            Material[] mats = new Material[]
+            {
+                floorPropBlueMaterial != null ? floorPropBlueMaterial : toyBlockBlueMaterial,
+                floorPropRedMaterial != null ? floorPropRedMaterial : toyBlockRedMaterial,
+                floorPropBurgundyMaterial != null ? floorPropBurgundyMaterial : (royalVelvetMaterial != null ? royalVelvetMaterial : bookBlueMaterial),
+                floorPropGreenMaterial != null ? floorPropGreenMaterial : (toyBlockGreenMaterial != null ? toyBlockGreenMaterial : toyBlockBlueMaterial),
+                floorPropYellowMaterial != null ? floorPropYellowMaterial : (brassGoldMaterial != null ? brassGoldMaterial : toyBlockYellowMaterial)
+            };
+
+            Vector3[] offsets = new Vector3[]
+            {
+                new Vector3(-0.38f, 0.09f, -0.10f),
+                new Vector3(-0.16f, 0.09f, 0.14f),
+                new Vector3(0.04f, 0.09f, -0.06f),
+                new Vector3(0.24f, 0.09f, 0.12f),
+                new Vector3(0.42f, 0.09f, -0.08f)
+            };
+
+            for (int i = 0; i < offsets.Length; i++)
+            {
+                CreateVisualOnlyObject($"Bolinha_{i + 1}", root, offsets[i], new Vector3(0.18f, 0.18f, 0.18f), mats[i % mats.Length], PrimitiveType.Sphere);
+            }
+        }
+
+        private void CreateToyCar(Transform parent, string baseName, float x, float z)
+        {
+            var root = new GameObject(baseName).transform;
+            root.SetParent(parent, false);
+            root.localPosition = new Vector3(x, -9.10f, z);
+
+            // Carrinho de madeira pastel estilo Legend of Mana (paridade com toy-car.png:
+            // carroceria azul-ardosia pastel com faixa vermelha, para-lamas vermelhos, interior de madeira, farois amarelos e rodas escuras com calota vermelha)
+            var blueMat = floorPropBlueMaterial != null ? floorPropBlueMaterial : (toyBlockBlueMaterial != null ? toyBlockBlueMaterial : defaultPlatformMaterial);
+            var redMat = floorPropRedMaterial != null ? floorPropRedMaterial : (toyBlockRedMaterial != null ? toyBlockRedMaterial : blueMat);
+            var woodMat = floorPropCreamMaterial != null ? floorPropCreamMaterial : (dresserOakMaterial != null ? dresserOakMaterial : blueMat);
+            var yellowMat = floorPropYellowMaterial != null ? floorPropYellowMaterial : (toyBlockYellowMaterial != null ? toyBlockYellowMaterial : blueMat);
+            var wheelMat = floorPropBurgundyMaterial != null ? floorPropBurgundyMaterial : (wardrobeMaterial != null ? wardrobeMaterial : woodMat);
+
+            CreateVisualOnlyObject("Chassi_Azul", root, new Vector3(0f, 0.19f, 0f), new Vector3(0.84f, 0.22f, 0.44f), blueMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Cabine_Arredondada", root, new Vector3(-0.05f, 0.36f, 0f), new Vector3(0.48f, 0.22f, 0.38f), blueMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Moldura_Janela_Madeira", root, new Vector3(-0.04f, 0.35f, -0.195f), new Vector3(0.32f, 0.14f, 0.02f), woodMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Faixa_Central_Vermelha", root, new Vector3(0.02f, 0.475f, 0f), new Vector3(0.44f, 0.02f, 0.12f), redMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Parachoque_Dianteiro", root, new Vector3(0.42f, 0.12f, 0f), new Vector3(0.10f, 0.10f, 0.48f), redMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Paralama_FE", root, new Vector3(0.24f, 0.16f, -0.21f), new Vector3(0.28f, 0.16f, 0.06f), redMat, PrimitiveType.Sphere);
+            CreateVisualOnlyObject("Paralama_TE", root, new Vector3(-0.24f, 0.16f, -0.21f), new Vector3(0.28f, 0.16f, 0.06f), redMat, PrimitiveType.Sphere);
+            CreateVisualOnlyObject("Farol_Esq", root, new Vector3(0.43f, 0.22f, -0.13f), new Vector3(0.08f, 0.10f, 0.10f), yellowMat, PrimitiveType.Sphere);
+            CreateVisualOnlyObject("Farol_Dir", root, new Vector3(0.43f, 0.22f, 0.13f), new Vector3(0.08f, 0.10f, 0.10f), yellowMat, PrimitiveType.Sphere);
+            CreateVisualOnlyObject("Roda_FE", root, new Vector3(0.24f, 0.11f, -0.23f), new Vector3(0.22f, 0.22f, 0.09f), wheelMat, PrimitiveType.Sphere);
+            CreateVisualOnlyObject("Calota_FE", root, new Vector3(0.24f, 0.11f, -0.27f), new Vector3(0.10f, 0.10f, 0.04f), redMat, PrimitiveType.Sphere);
+            CreateVisualOnlyObject("Roda_TE", root, new Vector3(-0.24f, 0.11f, -0.23f), new Vector3(0.22f, 0.22f, 0.09f), wheelMat, PrimitiveType.Sphere);
+            CreateVisualOnlyObject("Calota_TE", root, new Vector3(-0.24f, 0.11f, -0.27f), new Vector3(0.10f, 0.10f, 0.04f), redMat, PrimitiveType.Sphere);
+        }
+
+        private void CreateScatteredBlocks(Transform parent, string baseName, float x, float z)
+        {
+            var root = new GameObject(baseName).transform;
+            root.SetParent(parent, false);
+            root.localPosition = new Vector3(x, -9.10f, z);
+
+            // Torre de blocos de madeira pintada com bordas desgastadas (paridade com stacking-blocks-v1.png:
+            // base retangular vermelha/terracota, bloco amarelo/ocre, bloco verde-salvia, telhadinho triangular azul no topo + cubo ABC lateral)
+            var redMat = floorPropRedMaterial != null ? floorPropRedMaterial : toyBlockRedMaterial;
+            var yellowMat = floorPropYellowMaterial != null ? floorPropYellowMaterial : toyBlockYellowMaterial;
+            var greenMat = floorPropGreenMaterial != null ? floorPropGreenMaterial : toyBlockGreenMaterial;
+            var blueMat = floorPropBlueMaterial != null ? floorPropBlueMaterial : toyBlockBlueMaterial;
+            var abcMat = floorPropCreamMaterial != null ? floorPropCreamMaterial : (toyBlockAbcMaterial != null ? toyBlockAbcMaterial : redMat);
+            CreateVisualOnlyObject("Bloco_Base_Terracota", root, new Vector3(0f, 0.12f, 0f), new Vector3(0.56f, 0.24f, 0.38f), redMat, PrimitiveType.Cube, Quaternion.Euler(0f, 6f, 0f));
+            CreateVisualOnlyObject("Bloco_Meio_Ocre", root, new Vector3(-0.02f, 0.34f, 0.01f), new Vector3(0.40f, 0.22f, 0.34f), yellowMat, PrimitiveType.Cube, Quaternion.Euler(0f, -8f, 0f));
+            CreateVisualOnlyObject("Bloco_Superior_Salvia", root, new Vector3(0.01f, 0.55f, 0f), new Vector3(0.34f, 0.22f, 0.32f), greenMat, PrimitiveType.Cube, Quaternion.Euler(0f, 5f, 0f));
+            CreateVisualOnlyObject("Telhado_Prisma_Azul", root, new Vector3(0.01f, 0.72f, 0f), new Vector3(0.28f, 0.28f, 0.30f), blueMat, PrimitiveType.Cube, Quaternion.Euler(0f, 5f, 45f));
+            CreateVisualOnlyObject("Bloco_ABC_Lateral", root, new Vector3(-0.46f, 0.16f, -0.06f), new Vector3(0.32f, 0.32f, 0.32f), abcMat, PrimitiveType.Cube, Quaternion.Euler(0f, 18f, 0f));
+        }
+
+        private void CreateRetroRobot(Transform parent, string baseName, float x, float z)
+        {
+            var root = new GameObject(baseName).transform;
+            root.SetParent(parent, false);
+            root.localPosition = new Vector3(x, -9.10f, z);
+
+            // Robo de lata retro estilo Legend of Mana (paridade com retro-robot.png:
+            // corpo azul-petroleo com ferrugem/terracota nas bordas, botas terracota, mostrador duplo creme/laranja no peito, olhos redondos amarelos e sirene vermelha)
+            var tealMat = floorPropBlueMaterial != null ? floorPropBlueMaterial : (toyBlockBlueMaterial != null ? toyBlockBlueMaterial : defaultPlatformMaterial);
+            var dialMat = floorPropCreamMaterial != null ? floorPropCreamMaterial : (bookPagesMaterial != null ? bookPagesMaterial : toyBlockYellowMaterial);
+            var yellowMat = floorPropYellowMaterial != null ? floorPropYellowMaterial : (toyBlockYellowMaterial != null ? toyBlockYellowMaterial : brassGoldMaterial);
+            var redMat = floorPropRedMaterial != null ? floorPropRedMaterial : (toyBlockRedMaterial != null ? toyBlockRedMaterial : dialMat);
+
+            CreateVisualOnlyObject("Bota_Esq", root, new Vector3(-0.11f, 0.07f, 0f), new Vector3(0.16f, 0.14f, 0.24f), redMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Bota_Dir", root, new Vector3(0.11f, 0.07f, 0f), new Vector3(0.16f, 0.14f, 0.24f), redMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Perna_Esq", root, new Vector3(-0.11f, 0.22f, 0f), new Vector3(0.12f, 0.18f, 0.16f), tealMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Perna_Dir", root, new Vector3(0.11f, 0.22f, 0f), new Vector3(0.12f, 0.18f, 0.16f), tealMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Corpo_Lata", root, new Vector3(0f, 0.46f, 0f), new Vector3(0.42f, 0.34f, 0.28f), tealMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Mostrador_Esq", root, new Vector3(-0.08f, 0.47f, -0.145f), new Vector3(0.13f, 0.20f, 0.03f), dialMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Mostrador_Dir", root, new Vector3(0.08f, 0.47f, -0.145f), new Vector3(0.13f, 0.20f, 0.03f), dialMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Braco_Esq", root, new Vector3(-0.26f, 0.44f, 0f), new Vector3(0.10f, 0.26f, 0.12f), tealMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Braco_Dir", root, new Vector3(0.26f, 0.44f, 0f), new Vector3(0.10f, 0.26f, 0.12f), tealMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Cabeca_Lata", root, new Vector3(0f, 0.74f, 0f), new Vector3(0.30f, 0.22f, 0.24f), tealMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Olho_Esq", root, new Vector3(-0.07f, 0.76f, -0.125f), new Vector3(0.08f, 0.08f, 0.03f), yellowMat, PrimitiveType.Sphere);
+            CreateVisualOnlyObject("Olho_Dir", root, new Vector3(0.07f, 0.76f, -0.125f), new Vector3(0.08f, 0.08f, 0.03f), yellowMat, PrimitiveType.Sphere);
+            CreateVisualOnlyObject("Orelha_Esq", root, new Vector3(-0.165f, 0.74f, 0f), new Vector3(0.05f, 0.09f, 0.09f), redMat, PrimitiveType.Sphere);
+            CreateVisualOnlyObject("Orelha_Dir", root, new Vector3(0.165f, 0.74f, 0f), new Vector3(0.05f, 0.09f, 0.09f), redMat, PrimitiveType.Sphere);
+            CreateVisualOnlyObject("Sirene_Topo", root, new Vector3(0f, 0.89f, 0f), new Vector3(0.12f, 0.10f, 0.12f), redMat, PrimitiveType.Sphere);
+        }
+
+        private void CreatePlushBunny(Transform parent, string baseName, float x, float z)
+        {
+            var root = new GameObject(baseName).transform;
+            root.SetParent(parent, false);
+            root.localPosition = new Vector3(x, -9.10f, z);
+
+            // Coelhinho de algodao costurado pastel (paridade com cotton-bunny-v1.png)
+            var plushMat = floorPropPlushMaterial != null ? floorPropPlushMaterial : (teddyPlushMaterial != null ? teddyPlushMaterial : toyBlockRedMaterial);
+            var creamMat = floorPropCreamMaterial != null ? floorPropCreamMaterial : (bookPagesMaterial != null ? bookPagesMaterial : toyBlockYellowMaterial);
+            var roseMat = floorPropBurgundyMaterial != null ? floorPropBurgundyMaterial : (bookBurgundyMaterial != null ? bookBurgundyMaterial : toyBlockRedMaterial);
+
+            CreateVisualOnlyObject("Corpo_Coelho", root, new Vector3(0f, 0.18f, 0f), new Vector3(0.30f, 0.32f, 0.26f), plushMat, PrimitiveType.Sphere);
+            CreateVisualOnlyObject("Pata_Esq", root, new Vector3(-0.11f, 0.08f, -0.10f), new Vector3(0.13f, 0.12f, 0.14f), creamMat, PrimitiveType.Sphere);
+            CreateVisualOnlyObject("Pata_Dir", root, new Vector3(0.11f, 0.08f, -0.10f), new Vector3(0.13f, 0.12f, 0.14f), creamMat, PrimitiveType.Sphere);
+            CreateVisualOnlyObject("Cabeca_Coelho", root, new Vector3(0f, 0.40f, -0.02f), new Vector3(0.28f, 0.26f, 0.25f), plushMat, PrimitiveType.Sphere);
+            CreateVisualOnlyObject("Focinho_Creme", root, new Vector3(0f, 0.37f, -0.13f), new Vector3(0.14f, 0.11f, 0.08f), creamMat, PrimitiveType.Sphere);
+            CreateVisualOnlyObject("Orelha_Esq", root, new Vector3(-0.08f, 0.62f, 0f), new Vector3(0.10f, 0.28f, 0.06f), plushMat, PrimitiveType.Sphere, Quaternion.Euler(0f, 0f, 14f));
+            CreateVisualOnlyObject("Orelha_Dir", root, new Vector3(0.08f, 0.62f, 0f), new Vector3(0.10f, 0.28f, 0.06f), plushMat, PrimitiveType.Sphere, Quaternion.Euler(0f, 0f, -14f));
+            CreateVisualOnlyObject("Orelha_Interna_Esq", root, new Vector3(-0.08f, 0.61f, -0.025f), new Vector3(0.06f, 0.20f, 0.03f), roseMat, PrimitiveType.Sphere, Quaternion.Euler(0f, 0f, 14f));
+            CreateVisualOnlyObject("Orelha_Interna_Dir", root, new Vector3(0.08f, 0.61f, -0.025f), new Vector3(0.06f, 0.20f, 0.03f), roseMat, PrimitiveType.Sphere, Quaternion.Euler(0f, 0f, -14f));
+        }
+
+        private void CreateToyTrain(Transform parent, string baseName, float x, float z)
+        {
+            var root = new GameObject(baseName).transform;
+            root.SetParent(parent, false);
+            root.localPosition = new Vector3(x, -9.10f, z);
+
+            var blueMat = floorPropBlueMaterial != null ? floorPropBlueMaterial : (toyBlockBlueMaterial != null ? toyBlockBlueMaterial : defaultPlatformMaterial);
+            var redMat = floorPropRedMaterial != null ? floorPropRedMaterial : (toyBlockRedMaterial != null ? toyBlockRedMaterial : blueMat);
+            var goldMat = floorPropYellowMaterial != null ? floorPropYellowMaterial : (brassGoldMaterial != null ? brassGoldMaterial : toyBlockYellowMaterial);
+
+            CreateVisualOnlyObject("Base_Locomotiva", root, new Vector3(0f, 0.16f, 0f), new Vector3(0.86f, 0.20f, 0.40f), redMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Caldeira", root, new Vector3(0.14f, 0.34f, 0f), new Vector3(0.48f, 0.24f, 0.34f), blueMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Cabine_Trem", root, new Vector3(-0.22f, 0.40f, 0f), new Vector3(0.32f, 0.34f, 0.38f), redMat, PrimitiveType.Cube);
+            CreateVisualOnlyObject("Chamine_Latao", root, new Vector3(0.26f, 0.54f, 0f), new Vector3(0.12f, 0.22f, 0.12f), goldMat, PrimitiveType.Cylinder);
         }
 
         private void BuildPlatformList(List<PlatformSpec> platforms, Transform parent, string prefix)
@@ -270,35 +579,63 @@ namespace YunaLegend.DarkRoom
                 platGo.transform.SetParent(parent, false);
                 platGo.transform.position = new Vector3(spec.x, spec.y, 0f);
 
-                // Malha visual natural 3D
-                var visual = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                visual.name = "Visual_3D";
-                visual.transform.SetParent(platGo.transform, false);
-                visual.transform.localPosition = Vector3.zero;
-                visual.transform.localScale = new Vector3(spec.width, spec.height, spec.depth);
+                var geometry = DarkRoomPlatformGeometry.Get(spec.index);
+                // A superficie de contato pertence ao objeto: pode estar deslocada, ser mais
+                // estreita ou inclinada. O colisor segue o objeto, nunca o contrario.
+                var contact = spec.contact;
+                GameObject visual = null;
 
-                // Material estilizado
-                var mat = ResolveMaterialForSpec(spec);
-                var renderer = visual.GetComponent<MeshRenderer>();
-                if (renderer != null && mat != null)
+                if (geometry.HasModel)
                 {
-                    renderer.sharedMaterial = mat;
+                    // Modelo dedicado (malhas nativas): a superficie visivel coincide com a
+                    // superficie de contato declarada.
+                    visual = DarkRoomPlatformArt.Build(geometry, contact, platformArtMaterials, platGo.transform);
                 }
 
-                // Detalhes visuais tematicos em 3D (exclusivamente visuais, sem colisores e fora da linha de corrida Z=0)
-                AddPlatformDecorativeDetails(visual, spec, mat);
-
-                // Colisor de caixa solido no topo (intocado para garantir fisica 100% perfeita)
-                var collider = visual.GetComponent<BoxCollider>();
-                if (collider != null)
+                if (visual == null)
                 {
-                    collider.isTrigger = false;
+                    // Blockout provisorio: caixa com as dimensoes canonicas do objeto.
+                    // A caixa e apenas visual; o colisor de pouso e criado separadamente.
+                    visual = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    visual.name = "Visual_3D";
+                    visual.transform.SetParent(platGo.transform, false);
+                    visual.transform.localPosition = Vector3.zero;
+                    visual.transform.localScale = new Vector3(spec.width, spec.height, spec.depth);
+
+                    var mat = ResolveMaterialForSpec(spec);
+                    var renderer = visual.GetComponent<MeshRenderer>();
+                    if (renderer != null && mat != null)
+                    {
+                        renderer.sharedMaterial = mat;
+                    }
+
+                    var primitiveCollider = visual.GetComponent<BoxCollider>();
+                    if (primitiveCollider != null) DestroySafe(primitiveCollider);
+
+                    // Detalhes visuais tematicos em 3D (exclusivamente visuais, sem colisores)
+                    AddPlatformDecorativeDetails(visual, spec, mat);
                 }
+
+                // Colisor de contato: mesma superficie de pouso do objeto.
+                var contactGo = new GameObject("Contacto_Fisico");
+                contactGo.transform.SetParent(platGo.transform, false);
+                DarkRoomPlatformArt.BuildContact(spec,contactGo.transform);
 
                 platGo.AddComponent<PlatformCollisionDetector>();
                 var marker = platGo.AddComponent<DarkRoomPlatformMarker>();
-                marker.spec = spec;
+                var resolved = spec;
+                resolved.contact = contact;
+                marker.spec = resolved;
+                if(spec.index==YieldingWoodFurniture.PlatformIndex)
+                    platGo.AddComponent<YieldingWoodFurniture>().Configure(furnitureCrackSfx);
             }
+        }
+
+        private static void DestroySafe(Object target)
+        {
+            if (target == null) return;
+            if (Application.isPlaying) Destroy(target);
+            else DestroyImmediate(target);
         }
 
         private Material ResolveMaterialForSpec(PlatformSpec spec)
@@ -331,7 +668,7 @@ namespace YunaLegend.DarkRoom
                 case 20: return wardrobeMaterial != null ? wardrobeMaterial : dresserOakMaterial;
                 case 21: return falseDoorPosterMaterial != null ? falseDoorPosterMaterial : wardrobeMaterial;
 
-                // Etapa 3: Subida Caótica Reversa (22 a 37)
+                // Etapa 3: Subida CaÃ³tica Reversa (22 a 37)
                 case 22: return toyBlockAbcMaterial != null ? toyBlockAbcMaterial : toyBlockRedMaterial;
                 case 23: return royalVelvetMaterial != null ? royalVelvetMaterial : toyBlockBlueMaterial;
                 case 24: return dresserOakMaterial != null ? dresserOakMaterial : wardrobeMaterial;

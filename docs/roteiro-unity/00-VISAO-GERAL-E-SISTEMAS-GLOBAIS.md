@@ -61,9 +61,10 @@ Estas regras definem a identidade física e artística do jogo e **devem ser seg
 4. **Exceção do Relógio Cuco (Plataforma 19 do Quarto Escuro):** A estrutura do relógio cuco preso à parede incorpora um suporte/base de madeira modelado fisicamente onde os pés da menina apoiam, sem linhas artificiais.
 
 ### 3.2. Comportamento da Câmera Lateral (2.5D)
-1. **Rolagem Estritamente Lateral Durante a Jogabilidade:** Nas seções de plataforma lateral (especialmente no Quarto Escuro), enquanto a jogadora está no controle, a câmera faz **apenas rolagem horizontal (eixo X)** para acompanhar Yuna e as plataformas.
-2. **Proibição de Oscilação Vertical por Salto:** É **proibido** mover a altura (Y), o zoom (FOV/Distância) ou a inclinação da câmera em reação ao pulo, ao estado aéreo, ao pouso ou à troca de plataforma da personagem. O enquadramento vertical e a distância da câmera são **fixos por seção/viewport**, garantindo que o jogador tenha uma referência visual perfeitamente estável para julgar a altura e a distância dos saltos.
-3. **Cortes e Movimentos Narrativos Isolados:** Zooms dramáticos, panorâmicas verticais e reenquadramentos pertencem **exclusivamente às cutscenes e momentos narrativos** (quando o controle de plataforma está pausado). Assim que a jogabilidade retorna, a câmera volta suavemente ao enquadramento lateral estável.
+1. **Recorte fechado acompanhando Yuna (direção revisada pelo usuário em 11/11/2026):** No Quarto Escuro, a câmera acompanha a menina e revela principalmente o próximo obstáculo. O enquadramento deve transmitir desorientação, sem fornecer uma vista geral de onde ela está no quarto. Esta orientação substitui a regra anterior de altura fixa por seção.
+2. **Altura do percurso e estabilidade do salto:** A altura da câmera acompanha suavemente a progressão dos apoios, sem perseguir o arco de cada salto. A distância é dimensionada pelo apoio atual e pelo próximo alvo, com transição suave quando o alvo muda. FOV e inclinação permanecem estáveis. O solo deve sair do quadro durante a subida e aparecer na aproximação inicial e na queda ao chão.
+3. **Queda e momentos narrativos:** Durante a queda, a câmera acompanha a menina verticalmente até o solo. Pausas e diálogos mantêm o foco nela; ao retomar a corrida, o enquadramento se orienta ao próximo salto, inclusive na inversão para a esquerda.
+4. **Demonstração do castelo:** Na breve pausa de Yuna sobre o castelo, a câmera se afasta para mostrar o restante do caminho até a porta falsa enquanto Nanda indica a saída, como um tutorial visual. Ao iniciar a Fuga, volta suavemente ao close. Esse panorama é uma exceção narrativa ao recorte restrito da jogabilidade.
 
 ---
 

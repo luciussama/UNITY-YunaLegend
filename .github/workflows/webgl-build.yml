@@ -1,0 +1,81 @@
+name: Build WebGL com Unity e publicar no Pages (opcional)
+
+# Alternativa ao fluxo "build local + pages.yml": compila a WebGL no proprio
+# GitHub Actions e publica. Exige segredo de licenca Unity e uma imagem
+# Docker do game-ci para a versao 6000.3.28f1.
+#
+# Segredos necessarios (Settings > Secrets and variables > Actions):
+#   UNITY_LICENSE   conteudo do arquivo .ulf da licenca (Personal serve)
+#   UNITY_EMAIL     e-mail da conta Unity
+#   UNITY_PASSWORD  senha da conta Unity
+#
+# Se a imagem unityci/editor:6000.3.28f1-webgl-3 nao existir no Docker Hub, use
+# um runner self-hosted com o Unity instalado (mude runs-on) ou o fluxo local.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Conferir segredo de licenca
+        env:
+          LICENSE: ${{ secrets.UNITY_LICENSE }}
+        run: |
+          if [ -z "$LICENSE" ]; then
+            echo "::error::Configure UNITY_LICENSE, UNITY_EMAIL e UNITY_PASSWORD antes de rodar este workflow."
+            exit 1
+          fi
+
+      - name: Cache da Library
+        uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-WebGL-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: Library-WebGL-
+
+      - name: Build WebGL
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          YUNA_WEB_OUTPUT: WebGL
+        with:
+          unityVersion: 6000.3.28f1
+          targetPlatform: WebGL
+          buildMethod: YunaLegend.EditorScripts.WebCiBuild.Build
+
+      - name: Conferir saida
+        run: |
+          if [ ! -f WebGL/index.html ]; then
+            echo "::error::A build nao gerou WebGL/index.html."
+            ls -la
+            exit 1
+          fi
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: WebGL
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

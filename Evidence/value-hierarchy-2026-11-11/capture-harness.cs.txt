@@ -1,0 +1,167 @@
+using System;
+using System.IO;
+using System.Linq;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
+using YunaLegend.DarkRoom;
+using YunaLegend.Camera25D;
+
+[InitializeOnLoad]
+public static class PostProcessingCapture
+{
+    const string Output = "C:/Users/sergi/repos/UNITY-YunaLegend/Evidence/value-hierarchy-2026-11-11/after";
+    static int step = -1;
+    static double next;
+    static bool initialized;
+    static Yuna25DPlayerController player;
+    static NandaFairyGuide fairy;
+    static DarkRoomProgressionManager manager;
+    static DarkRoomBlockoutBuilder builder;
+    static SideScroll25DCamera side;
+    static Camera camera;
+    static DarkRoomPlatformMarker[] markers;
+    static readonly string[] Names = {"01-start", "02-castle", "03-false-door", "04-portal", "05-fall-ground", "06-castle-overview"};
+    static readonly int[] Stands = {-1,9,20,36,-1,9};
+    static readonly int[] Targets = {0,10,21,37,21,21};
+    static readonly List<Shot> shots = new List<Shot>();
+
+    static PostProcessingCapture()
+    {
+        EditorApplication.playModeStateChanged += state => {
+            if (!SessionState.GetBool("PostProcessingRun", false)) return;
+            if (state == PlayModeStateChange.EnteredPlayMode) {
+                next=EditorApplication.timeSinceStartup+0.15;
+                EditorApplication.update += Tick;
+            }
+            if (state == PlayModeStateChange.EnteredEditMode) {
+                SessionState.SetBool("PostProcessingRun", false);
+                EditorApplication.Exit(0);
+            }
+        };
+    }
+    public static void Run()
+    {
+        Directory.CreateDirectory(Output);
+        EditorSceneManager.OpenScene("Assets/Scenes/DarkRoom_Gameplay.unity");
+        SessionState.SetBool("PostProcessingRun", true);
+        EditorApplication.EnterPlaymode();
+    }
+    static void Tick()
+    {
+        if (!EditorApplication.isPlaying || EditorApplication.timeSinceStartup < next) return;
+        try {
+            if(!initialized) {
+                player=UnityEngine.Object.FindFirstObjectByType<Yuna25DPlayerController>();
+                fairy=UnityEngine.Object.FindFirstObjectByType<NandaFairyGuide>();
+                manager=UnityEngine.Object.FindFirstObjectByType<DarkRoomProgressionManager>();
+                builder=UnityEngine.Object.FindFirstObjectByType<DarkRoomBlockoutBuilder>();
+                camera=Camera.main;camera.aspect=16f/9f;side=camera.GetComponent<SideScroll25DCamera>();
+                markers=UnityEngine.Object.FindObjectsByType<DarkRoomPlatformMarker>(FindObjectsInactive.Include,FindObjectsSortMode.None);
+                var opening=UnityEngine.Object.FindFirstObjectByType<DarkRoomOpeningSequence>();
+                opening.StopAllCoroutines();opening.enabled=false;
+                player.AutoRunActive=false;player.SetFloorDeathActive(false);player.enabled=false;
+                player.GetComponent<CharacterController>().enabled=false;
+                manager.enabled=false;side.SetScrollState(false);side.ScreenCrushActive=false;side.enabled=false;
+                Time.timeScale=1;
+                initialized=true;
+            } else {
+                Capture(Names[step]);
+            }
+            step++;
+            if(step==Names.Length) {
+                File.WriteAllText(Output+"/unity-metadata.json",JsonUtility.ToJson(new Report { shots=shots.ToArray() },true));
+                Debug.Log("VISUAL_AUDIT_COMPLETE: six controlled Play Mode states captured; no scene saved.");
+                EditorApplication.update -= Tick;
+                EditorApplication.ExitPlaymode();return;
+            }
+            Configure(step);
+            next=EditorApplication.timeSinceStartup+1.8;
+        } catch(Exception e) {
+            Debug.LogException(e);SessionState.SetBool("PostProcessingRun",false);EditorApplication.Exit(1);
+        }
+    }
+    static DarkRoomPlatformMarker Marker(int index) => markers.Single(m=>m.spec.index==index);
+    static void Configure(int i)
+    {
+        var phase=i==0?DarkRoomPhase.Phase1Ascent:i<3?DarkRoomPhase.Phase2Escape:DarkRoomPhase.Phase3ChaoticAscent;
+        builder.ShowTemporalSection(phase,Stands[i]);
+        player.ResetPlayer((i==0||i==4)?DarkRoomStartLayout.Position:Marker(Stands[i]).GetTopCenterWorld()+new Vector3(0,.03f,0));
+        player.AutoRunActive=false;player.SetFloorDeathActive(false);player.enabled=false;
+        player.GetComponent<CharacterController>().enabled=false;
+        player.SetRunDirection(i==3?-1:1);
+        float y=i==0?DarkRoomStartLayout.CameraY:i==3?DarkRoomReturnLayout.CameraY:-1.5f;
+        side.ConfigureSection(y,-16,45);
+        side.SnapToTargetX(player.transform.position.x,i==3?-3.5f:3.5f);
+        fairy.SetTargetPlatform(Targets[i]);
+        fairy.ApplyMood(YunaLegend.Dialogue.NandaMood.Normal);
+        fairy.transform.position=Marker(Targets[i]).GetTopCenterWorld()+new Vector3(0,1.2f,0);
+        if(i==4) {
+            builder.ShowTemporalSection(DarkRoomPhase.Phase2Escape,21,falling:true);
+            player.ResetPlayer(new Vector3(Marker(21).transform.position.x,DarkRoomStartLayout.StartY,0));
+            player.AutoRunActive=false;player.enabled=false;player.GetComponent<CharacterController>().enabled=false;
+            fairy.ReturnToYuna();
+        }
+        side.SnapToRouteFraming(Targets[i]);
+        if(i==5) {builder.ShowTemporalSection(DarkRoomPhase.Phase2Escape,9);fairy.SetTargetPlatform(21);fairy.transform.position=Marker(21).GetTopCenterWorld()+Vector3.up*1.2f;side.BeginCastleRouteOverview();side.enabled=true;}
+        Physics.SyncTransforms();
+    }
+    static VolumeProfile calibrated, legacy;
+    static void Capture(string name)
+    {
+        var data=camera.GetUniversalAdditionalCameraData();
+        var volume=GameObject.Find("DarkRoom_GlobalVolume").GetComponent<Volume>();
+        if(calibrated==null) {
+            calibrated=volume.sharedProfile;
+            legacy=ScriptableObject.CreateInstance<VolumeProfile>();
+            foreach(var component in calibrated.components) legacy.components.Add(UnityEngine.Object.Instantiate(component));
+            legacy.TryGet(out Bloom bloom);bloom.intensity.value=1.25f;bloom.threshold.value=.85f;bloom.scatter.value=.68f;bloom.clamp.value=65472f;
+            legacy.TryGet(out Vignette vignette);vignette.intensity.value=.32f;vignette.color.value=new Color(.03f,.02f,.08f);
+            legacy.TryGet(out ColorAdjustments color);color.postExposure.value=.15f;color.contrast.value=14f;color.saturation.value=12f;
+            legacy.TryGet(out Tonemapping tone);tone.mode.value=TonemappingMode.None;
+        }
+        volume.sharedProfile=calibrated;data.renderPostProcessing=true;data.antialiasing=AntialiasingMode.FastApproximateAntialiasing;data.dithering=true;
+        RenderVariant(name,"calibrated",data);
+        var subjects=new List<Subject> { Describe("Yuna",player.gameObject),Describe("Nanda",fairy.gameObject),Describe("NextPlatform_"+Targets[step],Marker(Targets[step]).gameObject) };
+        if(Stands[step]>=0) subjects.Add(Describe("StandingPlatform_"+Stands[step],Marker(Stands[step]).gameObject));
+        shots.Add(new Shot {name=name,camera=camera.transform.position,fov=camera.fieldOfView,player=player.transform.position,fairy=fairy.transform.position,
+            target=Targets[step],phase=step==0?"Phase1":step==3?"Phase3":"Phase2",subjects=subjects.ToArray(),
+            viewWidth=side.ViewWidth,groundViewportY=camera.WorldToViewportPoint(new Vector3(player.transform.position.x,DarkRoomReturnLayout.FloorY,0)).y,
+            postProcessing=data.renderPostProcessing,
+            lights=UnityEngine.Object.FindObjectsByType<Light>(FindObjectsSortMode.None).Select(l=>new Lamp{name=l.name,type=l.type.ToString(),intensity=l.intensity,range=l.range,position=l.transform.position}).ToArray()});
+        Debug.Log("POST_PROCESSING_AB_SHOT "+name+" with identical camera/actor poses for all three variants; calibrated postProcessing="+data.renderPostProcessing);
+    }
+    static void RenderVariant(string name,string variant,UniversalAdditionalCameraData data)
+    {
+        camera.aspect=16f/9f;
+        VolumeManager.instance.Update(camera.transform,data.volumeLayerMask);
+        var tex=YunaLegend.EditorScripts.DarkRoomStartCapture.RenderDisplayImage(camera,1280,720);
+        File.WriteAllBytes(Output+"/"+variant+"-"+name+".png",tex.EncodeToPNG());
+        UnityEngine.Object.DestroyImmediate(tex);
+    }
+    static Subject Describe(string label,GameObject go)
+    {
+        var renderers=go.GetComponentsInChildren<MeshRenderer>().Where(r=>r.enabled).ToArray();
+        var min=new Vector2(float.MaxValue,float.MaxValue);var max=new Vector2(float.MinValue,float.MinValue);
+        foreach(var r in renderers) {
+            var b=r.bounds;
+            foreach(int x in new[]{-1,1}) foreach(int y in new[]{-1,1}) foreach(int z in new[]{-1,1}) {
+                var v=camera.WorldToViewportPoint(b.center+Vector3.Scale(b.extents,new Vector3(x,y,z)));
+                var p=new Vector2(v.x*1280,(1-v.y)*720);min=Vector2.Min(min,p);max=Vector2.Max(max,p);
+            }
+        }
+        return new Subject {name=label,objectName=go.name,position=go.transform.position,boundsPixels=new Rect(min.x,min.y,max.x-min.x,max.y-min.y),
+            meshes=renderers.Select(r=>new Surface{name=r.name,mesh=r.GetComponent<MeshFilter>()?.sharedMesh?.name,material=r.sharedMaterial?.name,
+                baseColor=r.sharedMaterial!=null&&r.sharedMaterial.HasProperty("_BaseColor")?r.sharedMaterial.GetColor("_BaseColor"):Color.black,
+                emission=r.sharedMaterial!=null&&r.sharedMaterial.HasProperty("_EmissionColor")?r.sharedMaterial.GetColor("_EmissionColor"):Color.black,
+                emissionMap=r.sharedMaterial?.GetTexture("_EmissionMap")?.name}).ToArray()};
+    }
+    [Serializable] class Report {public string method="Controlled Play Mode snapshots. Player/manager/camera movement disabled; Nanda and particle animation active. No traversal or physics validation. Camera.Render excludes OnGUI overlays."; public Shot[] shots;}
+    [Serializable] class Shot {public string name,phase;public Vector3 camera,player,fairy;public float fov;public int target;public float viewWidth,groundViewportY;public bool postProcessing;public Subject[] subjects;public Lamp[] lights;}
+    [Serializable] class Subject {public string name,objectName;public Vector3 position;public Rect boundsPixels;public Surface[] meshes;}
+    [Serializable] class Surface {public string name,mesh,material,emissionMap;public Color baseColor,emission;}
+    [Serializable] class Lamp {public string name,type;public float intensity,range;public Vector3 position;}
+}

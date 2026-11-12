@@ -1,5 +1,9 @@
 # Diário compartilhado de IA
 
+**Direção vigente:** personagens 2D ilustrados em cenário com profundidade na Unity. Antes de atuar na migração, leia [PLANO-25D-OBRIGATORIO.md](PLANO-25D-OBRIGATORIO.md) e consulte `python tools\plan_25d.py status`. Recomendações antigas de refinamento 3D final foram substituídas; os registros históricos permanecem válidos como evidência do que ocorreu.
+
+> **Regra obrigatória do projeto:** o formato da plataforma manda no colisor — nunca o contrário. Leia o bloco “REGRA OBRIGATÓRIA — formato das plataformas” no [AGENTS.md](../../AGENTS.md) e a entrada **305** do diário antes de modelar qualquer objeto jogável.
+
 O arquivo [diario.sqlite3](diario.sqlite3) é o histórico persistente de desenvolvimento do projeto, independente de fornecedor de IA. O [protocolo da raiz](../../AGENTS.md) orienta os agentes; o banco pode ser aberto por qualquer cliente SQLite. Não é um sistema de saves do jogo nem uma dependência de execução da Unity.
 
 ## Uso com Python 3

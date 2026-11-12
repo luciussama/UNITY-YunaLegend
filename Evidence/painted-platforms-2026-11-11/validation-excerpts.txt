@@ -1,0 +1,29 @@
+== Build/painted-setup.log ==
+PAINTED_PLATFORMS_SAVED: no Populate/audio regeneration; bear collision follows visible meshes.
+Exiting batchmode successfully now!
+== Build/painted-setup-recovery.log ==
+InvalidOperationException: Texture not imported: Assets/Materials/T_Bear_Fur_Painted.png asset=T_Bear_Fur_Painted (UnityEngine.Cubemap)
+== Build/painted-setup-texture2d.log ==
+PAINTED_PLATFORMS_SAVED: no Populate/audio regeneration; bear collision follows visible meshes.
+Exiting batchmode successfully now!
+== Build/painted-setup-final.log ==
+PAINTED_PLATFORMS_SAVED: no Populate/audio regeneration; bear collision follows visible meshes.
+Exiting batchmode successfully now!
+== Build/painted-setup-integrate.log ==
+PAINTED_PLATFORMS_SAVED: no Populate/audio regeneration; bear collision follows visible meshes.
+Exiting batchmode successfully now!
+== Build/painted-start-recovery.log ==
+== Build/painted-playmode-final.log ==
+== Build/painted-editmode-integrated.log ==
+== Build/painted-capture-delivery.log ==
+PLATFORM00_SHOT 01-gameplay-start.png
+PLATFORM00_SHOT 02-bear-front.png
+PLATFORM00_SHOT 03-bear-three-quarter.png
+PLATFORM00_SHOT 04-bear-side.png
+PLATFORM00_SHOT 06-books-front.png
+PLATFORM00_SHOT 07-books-three-quarter.png
+PLATFORM00_SHOT 08-books-top.png
+PLATFORM00_SHOT 05-gameplay-approach.png
+PLATFORM00_SHOT 09-gameplay-books-close.png
+PLATFORM_ART_CAPTURE_COMPLETE: 9 static HDR views; inspection lighting only in 02-04 and 06-08; no scene saved.
+Exiting batchmode successfully now!

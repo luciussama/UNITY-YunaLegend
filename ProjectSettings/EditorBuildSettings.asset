@@ -4,6 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TitleScreen.unity
+    guid: 63165d40c322cd949af4abc1912fda67
+  - enabled: 1
+    path: Assets/Scenes/DarkRoom_Gameplay.unity
+    guid: a9465ee75c37b874e94c21c0fcf9b22b
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

@@ -1,5 +1,7 @@
 # Avaliação interativa da Unity no navegador
 
+> Para publicar a build como página no **GitHub Pages** (incluindo uso no celular), veja [WEB-DEPLOY.md](WEB-DEPLOY.md): build com gzip + fallback, threads desligadas, memória de celular, dois workflows e limites reais do mobile.
+
 A build Web é uma exportação deste projeto Unity/C#, não a versão HTML legada. Windows e Android continuam sendo destinos principais. Artefatos e cópias de validação ficam em `Build/` (ignorados pelo Git).
 
 ## Referência autorizada

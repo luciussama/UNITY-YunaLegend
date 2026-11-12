@@ -11,6 +11,26 @@ namespace YunaLegend.DarkRoom
     }
 
     [Serializable]
+    public struct PlatformContactSurface
+    {
+        /// <summary>Deslocamento do centro da superficie de pouso em relacao ao centro do volume.</summary>
+        public float offsetX;
+        public float offsetY;
+        /// <summary>Inclinacao do topo em graus no eixo Z (objetos empilhados na diagonal).</summary>
+        public float tiltDegrees;
+        /// <summary>Extensao util de pouso; 0 usa a largura do volume como fallback.</summary>
+        public float width;
+        public float depth;
+
+        public bool IsCustom =>
+            Mathf.Abs(offsetX) > 0.0001f || Mathf.Abs(offsetY) > 0.0001f ||
+            Mathf.Abs(tiltDegrees) > 0.01f || width > 0.0001f || depth > 0.0001f;
+
+        public float EffectiveWidth(float fallback) => width > 0.001f ? width : fallback;
+        public float EffectiveDepth(float fallback) => depth > 0.001f ? depth : fallback;
+    }
+
+    [Serializable]
     public struct PlatformSpec
     {
         public int index;
@@ -23,6 +43,8 @@ namespace YunaLegend.DarkRoom
         public float height;
         public Color tint;
         public string visualDescription;
+        /// <summary>Superficie real de pouso quando o objeto nao e uma caixa.</summary>
+        public PlatformContactSurface contact;
 
         public PlatformSpec(int index, string name, DarkRoomPhase phase, float x, float y, float width,
             float depth, float height, Color tint, string visualDescription)
@@ -37,9 +59,10 @@ namespace YunaLegend.DarkRoom
             this.height = height;
             this.tint = tint;
             this.visualDescription = visualDescription;
+            this.contact = default;
         }
 
-        public Vector3 TopSurfaceCenter => new Vector3(x, y, 0f);
+        public Vector3 TopSurfaceCenter => DarkRoomPlatformGeometry.GetSupportProfile(this).PointNear(x + contact.offsetX);
     }
 
     public static class DarkRoomPlatformCatalog

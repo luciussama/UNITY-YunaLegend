@@ -1,0 +1,38 @@
+[
+  {
+    "state": "01-start",
+    "cameraDistanceDelta": 0.0,
+    "playerPoseEqual": true,
+    "fovEqual": true
+  },
+  {
+    "state": "02-castle",
+    "cameraDistanceDelta": 0.0,
+    "playerPoseEqual": true,
+    "fovEqual": true
+  },
+  {
+    "state": "03-false-door",
+    "cameraDistanceDelta": 0.0,
+    "playerPoseEqual": true,
+    "fovEqual": true
+  },
+  {
+    "state": "04-portal",
+    "cameraDistanceDelta": 0.0,
+    "playerPoseEqual": true,
+    "fovEqual": true
+  },
+  {
+    "state": "05-fall-ground",
+    "cameraDistanceDelta": 0.0,
+    "playerPoseEqual": true,
+    "fovEqual": true
+  },
+  {
+    "state": "06-castle-overview",
+    "cameraDistanceDelta": 0.004023832139392015,
+    "playerPoseEqual": true,
+    "fovEqual": true
+  }
+]
