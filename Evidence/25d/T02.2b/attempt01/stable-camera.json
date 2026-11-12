@@ -1,0 +1,1087 @@
+{
+    "method": "Editor PlayMode normal KeyboardState events; unchanged physics and neutral painting. Perspective45, constant7.5m vertical span. Camera-only opt-in in isolated validation scene. Camera renders exclude IMGUI; not browser/device coverage.",
+    "reachedBear": true,
+    "reachedBooks": true,
+    "sourceGameplayUnchanged": true,
+    "gameplayBefore": "d507921b1244c2a3186ba820bc54a3eae8daf9208dcde677f7eed438c9e358ed",
+    "gameplayAfter": "d507921b1244c2a3186ba820bc54a3eae8daf9208dcde677f7eed438c9e358ed",
+    "controllerBefore": "d47aea951b8190c4a0557bb1521eaf4b37ccf57282b15e5daef07d94c0430d10",
+    "controllerAfter": "d47aea951b8190c4a0557bb1521eaf4b37ccf57282b15e5daef07d94c0430d10",
+    "minHeightPixels": 134.39993286132813,
+    "maxHeightPixels": 134.4000701904297,
+    "minDepth": 9.053300857543946,
+    "maxDepth": 9.053300857543946,
+    "samples": [
+        {
+            "frame": 18,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -9.039999961853028,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -8.061732292175293,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 1.4877142906188965,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 20,
+            "support": -1,
+            "label": "01-entry",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -8.920000076293946,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -8.017216682434082,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 1.4832626581192017,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 24,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -8.680000305175782,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -7.909914493560791,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 1.4725323915481568,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 30,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -8.319999694824219,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -7.70789909362793,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 1.4523308277130128,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 36,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -7.960000038146973,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -7.464921474456787,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 1.4280331134796143,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 42,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -7.599999904632568,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -7.190045356750488,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 1.4005454778671265,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 48,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -7.239999771118164,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -6.891101360321045,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.39996337890626,
+            "nextLandingX": 1.370651125907898,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 54,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -6.880000114440918,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -6.574405193328857,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 1.3389815092086793,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 60,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -6.519999980926514,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -6.244838714599609,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 1.3060247898101807,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 66,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -6.159999847412109,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -5.906064033508301,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 1.2721474170684815,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 72,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -5.799999713897705,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -5.560771942138672,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 1.2376182079315186,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 78,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -5.439999580383301,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -5.210907459259033,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 1.2026317119598389,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 84,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -5.079999923706055,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -4.857859134674072,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 1.1673269271850587,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 90,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -4.71999979019165,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -4.5026068687438969,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 1.1318016052246094,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 96,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -4.359999656677246,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -4.145837306976318,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.39996337890626,
+            "nextLandingX": 1.0961246490478516,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 102,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -3.999999761581421,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -3.788027763366699,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 1.0603437423706055,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 108,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -3.6399998664855959,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -3.429509162902832,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 1.0244919061660767,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 114,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -3.2799997329711916,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -3.0705080032348635,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 0.9885917901992798,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 120,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -2.919999599456787,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -2.711179733276367,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 0.9526589512825012,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 126,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -2.559999704360962,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -2.351630926132202,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 0.9167040586471558,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 132,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -2.1999998092651369,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -1.9919334650039673,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 0.8807343244552612,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 138,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -1.8399996757507325,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -1.6321357488632203,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 0.8447545766830444,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 144,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -1.4799996614456177,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -1.272270917892456,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.39996337890626,
+            "nextLandingX": 0.8087681531906128,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 150,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -1.119999647140503,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -0.9123609662055969,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 0.7727770805358887,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 156,
+            "support": -1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -0.7599996328353882,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -0.5524208545684815,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 0.7367830872535706,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 158,
+            "support": -1,
+            "label": "02-first-takeoff",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": -0.6399996280670166,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -0.4324359595775604,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 0.7247846126556397,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 162,
+            "support": -1,
+            "label": "",
+            "grounded": false,
+            "supportMeasured": false,
+            "player": {
+                "x": -0.39999961853027346,
+                "y": -8.383810043334961,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -0.1924608051776886,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 0.7007871270179749,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 168,
+            "support": -1,
+            "label": "",
+            "grounded": false,
+            "supportMeasured": false,
+            "player": {
+                "x": -0.03999960422515869,
+                "y": -7.612858772277832,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 0.1675127148628235,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.4000244140625,
+            "nextLandingX": 0.6647897958755493,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 174,
+            "support": -1,
+            "label": "",
+            "grounded": false,
+            "supportMeasured": false,
+            "player": {
+                "x": 0.32000041007995608,
+                "y": -7.061906814575195,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 0.5274951457977295,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.39999389648438,
+            "nextLandingX": 0.6287915110588074,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 180,
+            "support": -1,
+            "label": "",
+            "grounded": false,
+            "supportMeasured": false,
+            "player": {
+                "x": 0.6800004243850708,
+                "y": -6.730955123901367,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 0.8874835968017578,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.39999389648438,
+            "nextLandingX": 0.5927926898002625,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 186,
+            "support": -1,
+            "label": "",
+            "grounded": false,
+            "supportMeasured": false,
+            "player": {
+                "x": 1.0400004386901856,
+                "y": -6.620003700256348,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 1.2474758625030518,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.39999389648438,
+            "nextLandingX": 0.5567934513092041,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 192,
+            "support": -1,
+            "label": "",
+            "grounded": false,
+            "supportMeasured": false,
+            "player": {
+                "x": 1.4000004529953004,
+                "y": -6.72905158996582,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 1.6074708700180054,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.39999389648438,
+            "nextLandingX": 0.5207939743995667,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 198,
+            "support": -1,
+            "label": "",
+            "grounded": false,
+            "supportMeasured": false,
+            "player": {
+                "x": 1.760000467300415,
+                "y": -7.05810022354126,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 1.9674675464630128,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.4000701904297,
+            "nextLandingX": 0.4847942888736725,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 204,
+            "support": -1,
+            "label": "",
+            "grounded": false,
+            "supportMeasured": false,
+            "player": {
+                "x": 2.1200003623962404,
+                "y": -7.60714864730835,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 2.327465534210205,
+                "y": -7.02500057220459,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.39999389648438,
+            "nextLandingX": 0.4487944543361664,
+            "nextLandingY": 0.37000006437301638,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 207,
+            "support": 0,
+            "label": "03-bear",
+            "grounded": true,
+            "supportMeasured": true,
+            "player": {
+                "x": 2.3000004291534426,
+                "y": -7.920000076293945,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 2.507464647293091,
+                "y": -7.022614479064941,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 0.8711074590682983,
+            "nextLandingY": 0.4317466616630554,
+            "soleToSupport": 0.07999992370605469
+        },
+        {
+            "frame": 210,
+            "support": 0,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": true,
+            "player": {
+                "x": 2.4800004959106447,
+                "y": -7.920000076293945,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 2.6874637603759767,
+                "y": -6.991281986236572,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.4000701904297,
+            "nextLandingX": 0.8531075716018677,
+            "nextLandingY": 0.4275689721107483,
+            "soleToSupport": 0.07999992370605469
+        },
+        {
+            "frame": 216,
+            "support": 0,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": true,
+            "player": {
+                "x": 2.840000629425049,
+                "y": -7.790891647338867,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 3.0474631786346437,
+                "y": -6.8655290603637699,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 0.8171076774597168,
+            "nextLandingY": 0.4108019173145294,
+            "soleToSupport": 0.14748287200927735
+        },
+        {
+            "frame": 222,
+            "support": 0,
+            "label": "",
+            "grounded": false,
+            "supportMeasured": true,
+            "player": {
+                "x": 3.202803373336792,
+                "y": -6.992156982421875,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 3.407531261444092,
+                "y": -6.705142498016357,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 0.781100869178772,
+            "nextLandingY": 0.38941705226898196,
+            "soleToSupport": 0.8686642646789551
+        },
+        {
+            "frame": 228,
+            "support": 0,
+            "label": "",
+            "grounded": false,
+            "supportMeasured": false,
+            "player": {
+                "x": 3.566166877746582,
+                "y": -6.257871627807617,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 3.767977476119995,
+                "y": -6.562653541564941,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.39999389648438,
+            "nextLandingX": 0.7450562715530396,
+            "nextLandingY": 0.3704185485839844,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 234,
+            "support": 0,
+            "label": "",
+            "grounded": false,
+            "supportMeasured": false,
+            "player": {
+                "x": 3.929530382156372,
+                "y": -5.743586540222168,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 4.12895393371582,
+                "y": -6.511310577392578,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.39996337890626,
+            "nextLandingX": 0.7089585661888123,
+            "nextLandingY": 0.3635728061199188,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 240,
+            "support": 0,
+            "label": "",
+            "grounded": false,
+            "supportMeasured": false,
+            "player": {
+                "x": 4.292893886566162,
+                "y": -5.449301719665527,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 4.490456581115723,
+                "y": -6.511850833892822,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 0.6728082895278931,
+            "nextLandingY": 0.36364486813545229,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 246,
+            "support": 0,
+            "label": "",
+            "grounded": false,
+            "supportMeasured": false,
+            "player": {
+                "x": 4.656257152557373,
+                "y": -5.375016689300537,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 4.852413654327393,
+                "y": -6.5336713790893559,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.39999389648438,
+            "nextLandingX": 0.636612594127655,
+            "nextLandingY": 0.36655423045158389,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 252,
+            "support": 0,
+            "label": "",
+            "grounded": false,
+            "supportMeasured": false,
+            "player": {
+                "x": 5.019620895385742,
+                "y": -5.520731449127197,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 5.2147393226623539,
+                "y": -6.561443328857422,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.39999389648438,
+            "nextLandingX": 0.6003800630569458,
+            "nextLandingY": 0.3702571988105774,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 258,
+            "support": 0,
+            "label": "",
+            "grounded": false,
+            "supportMeasured": false,
+            "player": {
+                "x": 5.382984161376953,
+                "y": -5.886446475982666,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 5.5773491859436039,
+                "y": -6.588094711303711,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.39999389648438,
+            "nextLandingX": 0.5641190409660339,
+            "nextLandingY": 0.37381067872047427,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 264,
+            "support": 0,
+            "label": "",
+            "grounded": false,
+            "supportMeasured": false,
+            "player": {
+                "x": 5.746347427368164,
+                "y": -6.472161769866943,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 5.940173149108887,
+                "y": -6.610859394073486,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.39996337890626,
+            "nextLandingX": 0.5278366804122925,
+            "nextLandingY": 0.3768460154533386,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 270,
+            "support": 0,
+            "label": "",
+            "grounded": false,
+            "supportMeasured": false,
+            "player": {
+                "x": 6.109711170196533,
+                "y": -7.277876853942871,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 6.303154945373535,
+                "y": -6.629098892211914,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.40003967285157,
+            "nextLandingX": 0.49153852462768557,
+            "nextLandingY": 0.37927788496017458,
+            "soleToSupport": 0.0
+        },
+        {
+            "frame": 272,
+            "support": 1,
+            "label": "04-books",
+            "grounded": true,
+            "supportMeasured": true,
+            "player": {
+                "x": 6.230832099914551,
+                "y": -7.454518795013428,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 6.424176216125488,
+                "y": -6.631354331970215,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.3999786376953,
+            "nextLandingX": 0.8188570141792297,
+            "nextLandingY": 0.4775139093399048,
+            "soleToSupport": 0.08085489273071289
+        },
+        {
+            "frame": 276,
+            "support": 1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": true,
+            "player": {
+                "x": 6.470832347869873,
+                "y": -7.471301078796387,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 6.66621208190918,
+                "y": -6.583069324493408,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.39999389648438,
+            "nextLandingX": 0.7946533560752869,
+            "nextLandingY": 0.4710759222507477,
+            "soleToSupport": 0.0808553695678711
+        },
+        {
+            "frame": 282,
+            "support": 1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": true,
+            "player": {
+                "x": 6.830832481384277,
+                "y": -7.496474742889404,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 7.029022216796875,
+                "y": -6.434907913208008,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.39993286132813,
+            "nextLandingX": 0.7583723664283752,
+            "nextLandingY": 0.4513210952281952,
+            "soleToSupport": 0.0808553695678711
+        },
+        {
+            "frame": 288,
+            "support": 1,
+            "label": "",
+            "grounded": true,
+            "supportMeasured": true,
+            "player": {
+                "x": 7.190832138061523,
+                "y": -7.521648406982422,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 7.3913702964782719,
+                "y": -6.264812469482422,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.39999389648438,
+            "nextLandingX": 0.7221375107765198,
+            "nextLandingY": 0.4286417067050934,
+            "soleToSupport": 0.0808553695678711
+        },
+        {
+            "frame": 292,
+            "support": 1,
+            "label": "05-furniture-approach",
+            "grounded": true,
+            "supportMeasured": false,
+            "player": {
+                "x": 7.430832386016846,
+                "y": -7.541210651397705,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 7.632659912109375,
+                "y": -6.158735752105713,
+                "z": -9.053300857543946
+            },
+            "heightPixels": 134.4000244140625,
+            "nextLandingX": 0.6980085372924805,
+            "nextLandingY": 0.41449815034866335,
+            "soleToSupport": 0.0
+        }
+    ]
+}

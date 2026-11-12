@@ -1,0 +1,59 @@
+{
+    "method": "Unity Editor Play Mode: queued KeyboardState events through normal InputSystem/UI. No StartNewGame, SceneManager.LoadScene or retry callback invoked by harness. Saved opening quick-test setting preserved. Camera frames exclude IMGUI; screen captures are requested separately. Not manual browser/device coverage.",
+    "menuEnteredGameplay": false,
+    "reachedBear": false,
+    "reachedBooks": false,
+    "gameOverObserved": false,
+    "retryObserved": false,
+    "titleSelection": "Bandeira_Fases",
+    "uiModule": "InputSystemUIInputModule",
+    "screenshotWidth": 640,
+    "screenshotHeight": 480,
+    "samples": [
+        {
+            "frame": 18,
+            "support": -1,
+            "time": 0.30000001192092898,
+            "timeScale": 1.0,
+            "scene": "TitleScreen",
+            "input": "capture 00-title",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 24,
+            "support": -1,
+            "time": 0.4000000059604645,
+            "timeScale": 1.0,
+            "scene": "TitleScreen",
+            "input": "press Enter",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 27,
+            "support": -1,
+            "time": 0.44999998807907107,
+            "timeScale": 1.0,
+            "scene": "TitleScreen",
+            "input": "release",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        }
+    ]
+}

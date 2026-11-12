@@ -45,6 +45,21 @@ namespace YunaLegend.Camera25D
 
         [SerializeField, Min(1f)] private float routeDistanceScale = 1.05f;
 
+        [Header("Prova ilustrada — opt-in, sem alterar a câmera da fase principal")]
+        [SerializeField] private bool illustratedPilotFraming;
+        [SerializeField, Min(4f)] private float illustratedVerticalSpan = 7.5f;
+        [SerializeField, Min(.05f)] private float illustratedFollowTime = .45f;
+        private Vector3 illustratedVelocity;
+        public bool IllustratedPilotFraming => illustratedPilotFraming;
+
+        public void ConfigureIllustratedPilot(bool active, float verticalSpan = 7.5f)
+        {
+            illustratedPilotFraming = active;
+            illustratedVerticalSpan = Mathf.Max(4f, verticalSpan);
+            illustratedVelocity = Vector3.zero;
+            if (active && playerTarget != null) ApplyIllustratedFrame(true);
+        }
+
         public float RouteDistanceScale { get => routeDistanceScale; set { routeDistanceScale = Mathf.Max(1f,value); framedTarget=-1; } }
 
         private NandaFairyGuide guide;
@@ -96,6 +111,12 @@ namespace YunaLegend.Camera25D
             if (routeOverview)
             {
                 transform.position = Vector3.SmoothDamp(transform.position, overviewPosition, ref overviewVelocity, 0.55f);
+                return;
+            }
+            if (illustratedPilotFraming && playerTarget != null)
+            {
+                ApplyIllustratedFrame(false);
+                if (autoScrollActive) CheckScreenCrush();
                 return;
             }
             if (autoScrollActive)
@@ -151,6 +172,11 @@ namespace YunaLegend.Camera25D
 
         private void UpdateRouteFraming(bool snap)
         {
+            if (illustratedPilotFraming && playerTarget != null)
+            {
+                ApplyIllustratedFrame(snap);
+                return;
+            }
             if (!closeRouteFraming || playerTarget == null)
             {
                 transform.position = new Vector3(transform.position.x, fixedY, fixedZ);
@@ -180,10 +206,40 @@ namespace YunaLegend.Camera25D
             if (snap) framingYVelocity = framingZVelocity = 0f;
         }
 
+        private void ApplyIllustratedFrame(bool snap)
+        {
+            // A fixed distance preserves the painting's scale. Only X/Y follow the route.
+            float depth = illustratedVerticalSpan / (2f * Mathf.Tan(fixedFov * Mathf.Deg2Rad * .5f));
+            float direction = Mathf.Sign(playerTarget.RunDirection);
+            float width = illustratedVerticalSpan * Aspect;
+            var current = FindPlatform(playerTarget.CurrentSupportIndex);
+            float groundY = DarkRoomPlatformGeometry.FloorSurfaceY;
+            if (current != null && !current.Support.IsEmpty)
+            {
+                groundY = current.Support.PointNear(playerTarget.transform.position.x).y;
+            }
+            // The landing belongs to an actual support region, never the volume's center/width.
+            int nextIndex = playerTarget.CurrentSupportIndex < 0 ? 0 : playerTarget.CurrentSupportIndex + 1;
+            var next = FindPlatform(nextIndex);
+            float nextY = next != null && !next.Support.IsEmpty ? next.GetLandingPoint(direction).y : groundY;
+            float desiredY = groundY + 1.8f + Mathf.Clamp((nextY - groundY) * .25f, -.5f, .5f);
+            if (playerTarget.IsCinematicFalling || playerTarget.IsDead)
+                desiredY = playerTarget.transform.position.y + 1.8f;
+            // Compensate the lag of a damped camera following constant-speed travel.
+            float anticipation = playerTarget.AutoRunActive && !playerTarget.IsDead
+                ? direction * playerTarget.RunSpeed * illustratedFollowTime : 0f;
+            var desired = new Vector3(playerTarget.transform.position.x + direction * width * .18f + anticipation, desiredY, -depth);
+            var position = snap ? desired : Vector3.SmoothDamp(transform.position, desired, ref illustratedVelocity, illustratedFollowTime);
+            position.z = -depth;
+            transform.position = position;
+            if (snap) illustratedVelocity = Vector3.zero;
+        }
+
         // Also used by editor evidence capture: selects an actual route target, never new geometry.
         public void SnapToRouteFraming(int nextPlatformIndex)
         {
             if (playerTarget == null) return;
+            if (illustratedPilotFraming) { ApplyIllustratedFrame(true); return; }
             SelectRouteFrame(nextPlatformIndex);
             ApplyRouteFrame(true);
             float direction = nextPlatformIndex >= 22 ? -1f : 1f;
@@ -269,6 +325,7 @@ namespace YunaLegend.Camera25D
 
         public void SnapToTargetX(float targetX, float offset = 3.5f)
         {
+            if (illustratedPilotFraming && playerTarget != null) { ApplyIllustratedFrame(true); return; }
             Vector3 previous = transform.position;
             transform.position = new Vector3(targetX + offset, fixedY, fixedZ);
             if (playerTarget != null && closeRouteFraming)

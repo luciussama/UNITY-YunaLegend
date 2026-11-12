@@ -1,0 +1,19 @@
+# Evidence and archived originals have byte-level SHA manifests; never normalize them.
+/Archive/** -text -whitespace
+/Evidence/** -text -whitespace
+
+# Imported proof assets and capture sources are also covered by byte manifests.
+/Assets/Art/Illustrated25D.meta -text -whitespace
+/Assets/Art/Illustrated25D/** -text -whitespace
+/Assets/Scenes/Validation.meta -text -whitespace
+/Assets/Scenes/Validation/** -text -whitespace
+/Assets/Scripts/Editor/Illustrated*.cs* -text whitespace=cr-at-eol
+/Assets/Scripts/Runtime/DarkRoom/IllustratedCharacterFacing.cs* -text whitespace=cr-at-eol
+/Assets/Scripts/Tests/IllustratedCharacterFacingTests.cs* -text whitespace=cr-at-eol
+*.meta -whitespace
+
+# Preserve the existing Windows source representation used by the physics/camera proofs.
+/Assets/Scenes/DarkRoom_Gameplay.unity text eol=crlf
+/Assets/Scripts/Runtime/DarkRoom/Yuna25DPlayerController.cs text eol=crlf
+/Assets/Scripts/Runtime/Camera/SideScroll25DCamera.cs text eol=crlf
+/Assets/Scripts/Tests/PlayMode/DarkRoomCameraFramingTests.cs text eol=crlf

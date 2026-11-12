@@ -1,5 +1,7 @@
 # Diário compartilhado de IA
 
+Entrada curta da execução: [ESTADO-ATUAL-25D.md](ESTADO-ATUAL-25D.md). Handoffs/guias e evidências anteriores foram [arquivados](../../Archive/pre-25d-2026-11-12/README.md) a pedido do usuário. O diário permanece integral e append-only; caminhos antigos podem ser resolvidos por `python tools/archive_history.py resolve CAMINHO`.
+
 **Direção vigente:** personagens 2D ilustrados em cenário com profundidade na Unity. Antes de atuar na migração, leia [PLANO-25D-OBRIGATORIO.md](PLANO-25D-OBRIGATORIO.md) e consulte `python tools\plan_25d.py status`. Recomendações antigas de refinamento 3D final foram substituídas; os registros históricos permanecem válidos como evidência do que ocorreu.
 
 > **Regra obrigatória do projeto:** o formato da plataforma manda no colisor — nunca o contrário. Leia o bloco “REGRA OBRIGATÓRIA — formato das plataformas” no [AGENTS.md](../../AGENTS.md) e a entrada **305** do diário antes de modelar qualquer objeto jogável.

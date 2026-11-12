@@ -1,0 +1,1286 @@
+{
+  "unity": "6000.3.28f1",
+  "build_method": "YunaLegend.EditorScripts.WebCiBuild.Build",
+  "build_log": "Build/25d-baseline-web.log",
+  "sources": [
+    {
+      "path": "Assets/DefaultVolumeProfile.asset",
+      "sha256": "84311158e958232148023bb4820af24b771c2465782c945eac58d7b329936b99",
+      "clone_equal": false,
+      "clone_sha256": "8425e0521885493066abf71838a2c097f0b3d2d15af18a98a173a583dd165d9f",
+      "text_equal_ignoring_newlines": false
+    },
+    {
+      "path": "Assets/UniversalRenderPipelineGlobalSettings.asset",
+      "sha256": "abf941739aeb808f151cf86e9e4062fe34eb3879506f21b3d0d0d44cac36f386",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Fonts/Caveat.ttf",
+      "sha256": "0bdb6b660482d31531b3945849fba5916b3ef8695da7024a9e6b9ee3c4157988",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_AmbientDust_Particle.mat",
+      "sha256": "9aaab3d66b6f97e517f42b6b19721846afd10bae4ecbd33cc1fcbe28a249e060",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Background_Wall.mat",
+      "sha256": "d4adba986d7e8325315c6f8d0119289d7c452eb7626573c9e4a2e0006857aa8b",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Bear_Button.mat",
+      "sha256": "5eb81636f848bd44777c86e5cf4d4b97889fa3c781155dd0982065917793184a",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Bear_Fur.mat",
+      "sha256": "8391d0b75f46ea146a1dded31c0567ded4a27f4e32b031568554ef5466bc02e8",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Bear_Muzzle.mat",
+      "sha256": "f772be0ff237e5030e509b7473c4a004752e9c03c449bd8f6ce63f92123a7142",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Bear_Nose.mat",
+      "sha256": "d40a4a27fa2ed9de3b9cf7c88bc9eaf87610c8adf76d5b62badd7591f9ef2f09",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Bear_Thread.mat",
+      "sha256": "2b62b98bdcafcc6084b7c2db6ca14d6a21f0ca0451d55616db310e071a47ea48",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Bear_Velvet.mat",
+      "sha256": "c6c157bf855ef3bc492e534a3bb311190bf6599ad8b3f3c2a2d0cda6828253a9",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Bear_Wood.mat",
+      "sha256": "23248f8cc7b0b1c4e6fca3b8c172a0bd5dba43686572112eabd601ea1aacb20a",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Book_Blue.mat",
+      "sha256": "b3df8688e162a6c237281079ff03030da21d6a5e1e947f71e86b5dde3533bc46",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Book_Burgundy.mat",
+      "sha256": "d9c9a907f34ea6354fc1c3b2f4a841bcbaee957b829799cef90dceec9937a962",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Book_Covers.mat",
+      "sha256": "2ecdd63435391163777c3d2482c212cbdf6143d4b83944d34c4f592ffbfacf3f",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Book_GoldPages.mat",
+      "sha256": "e78801d61f304286822830dc1767ec23f849ec66409b282f8ec609d783e0f61c",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Book_Green.mat",
+      "sha256": "371668fc83b0cb51718d9d9cb0d2b56124e2dc824dae1282a3e46a2503592239",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Book_Leather_Brown.mat",
+      "sha256": "76369292cdd14efddddb5dd79c4e2e8341f8e141e05116f90d8e86e614bd3eec",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Book_Leather_Burgundy.mat",
+      "sha256": "7376d166aea8f4ef5a6d2a796f5f819ac54e35c1b32e0171c43e149c9713391f",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Book_Leather_Dark.mat",
+      "sha256": "b4a6d44b612fa48fdfb3b890d45829dc2666a7c41f625184bdb994c1cd61f76a",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Book_Leather_Green.mat",
+      "sha256": "3b6f827dd1a77b733a3889fa1a20999d8ca1a9ca24a646e45f56cd378cd42a36",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Book_Leather_Ochre.mat",
+      "sha256": "63922f12b39e255aed3dd1b0775203f5aeae4b453ca64116bb1ca12f1b1a8536",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Book_Pages.mat",
+      "sha256": "e8bf19533bd5619e0c05bf9371242b15752abdce4eadeae64756e2e9418e7723",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Book_Painted_Cover.mat",
+      "sha256": "d72e6bf979c77c83f095e989155f1155aea05eb986e4a40220af5b09e094617d",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Book_Spines.mat",
+      "sha256": "8a616ae3dab648bbea909795b5ac38d8e16950500ee8e970f88c3d5c44cc84cb",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Brass_Gold.mat",
+      "sha256": "ef40c68255ea2c375661bfc0c2d43be361ce5ade6d3cb81362b9d1ee2f47804f",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Castle_Blocks.mat",
+      "sha256": "831e14429fe4b5506e218e069fed55e23d49f294d8b8b8beec289996a9c52828",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Castle_TurretBlue.mat",
+      "sha256": "f86828cba38615316078b37513e83c07a923850fd639d12129abf086b23ff116",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_CircusDrum.mat",
+      "sha256": "cd1fc885c18143ada17043fd23cd13d6abee3ed47fe314e3553291e79b793c5d",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_DarkOak_Floor.mat",
+      "sha256": "9018303a3bf26092fc354ebd099ffc97a62cf56d3ddcd15edea633caf79a456c",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_DreamPortal_Gold.mat",
+      "sha256": "597924e658e2924c7fe400db7efaced93f03814e84fde426ef66793a132e7962",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Dresser_Oak.mat",
+      "sha256": "75a87482ffcd4cc158b77759a09721cecc8b01d94b4b47e7f00fe79c694d7ef1",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_FairySparkle_Particle.mat",
+      "sha256": "f5752036ab876bb715531afd548c2077c6db937abccc69176539218b45884959",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_FalseDoor_Poster.mat",
+      "sha256": "b446bbbc8d3760526de27696d623a0352b66f7a1e517fd055842e62dc33d9fca",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_FloorProp_Blue.mat",
+      "sha256": "923eb87a287387a23fe2cb8141f41d21cfc06cbbd62b5ea5e3f213a1b4bd5225",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_FloorProp_Burgundy.mat",
+      "sha256": "ba66df27d16aa504df08b4f108cf576a466df0cd5e510dc3ad71d3f6dee777f5",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_FloorProp_Cream.mat",
+      "sha256": "1786636a5dcc55ceff101340fff65211cdb205d753f4a30e59c0c60cba652aa0",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_FloorProp_Green.mat",
+      "sha256": "674488733b66c6460414d3a2241ee167c9f8012664bffe80e7b1b3eff3d55dd0",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_FloorProp_Plush.mat",
+      "sha256": "2fe0766e7c37ce98d396aecb22041ea6eb98a2a29c68ca018279c43ad769ddd3",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_FloorProp_Red.mat",
+      "sha256": "9b69a20c2a31e72752d59432ae55f2fdc8db2e6e9f47c11c4ea566c2276955a7",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_FloorProp_Yellow.mat",
+      "sha256": "e95a675db64081e0f1e9577f1a0393300a47180440cd01a3373454c49b522068",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Floor_Rug_Mandala.mat",
+      "sha256": "59720782ad10f3f32c2459ca365cf2873e2ef7944c6f172857f7492883f3fea3",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Floor_Rug_Striped.mat",
+      "sha256": "27e17ced97687625abdb491b3685dcf0813471c23f6ee11ab4aca3b3020b0860",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Furniture_Brass.mat",
+      "sha256": "aff63c677e46e1ee85452b9a2a322655f1297dc22f0572c5fb4048790355af53",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Furniture_Shade.mat",
+      "sha256": "1bfe20aca9b30042a1909f510b086481a4e88b6dbbfb0ff0e0aa6c31ac95cce9",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Furniture_Trim.mat",
+      "sha256": "1cbb7ac90e40d214edbf85cd4def01a066133ec10e56a3e6af2d9e652c52fdbf",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Furniture_Wood.mat",
+      "sha256": "d87e425b0bc984301d9c512675a697c9dc2a804af3f315eb2646f27cf3e73f4d",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_GiantWardrobe.mat",
+      "sha256": "b9bcb0d7dfb711897f98194b373c36e72243776e98d912bd283c9bb7f2868b4a",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_LandingPuff_Particle.mat",
+      "sha256": "4a96ca089edef3c3ffdceb00bfff3fccc2b95376242515d5d85d5cca13e2d426",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Moonbeam_Shaft.mat",
+      "sha256": "880bdc50e2cc82544b0e3b7725701e172214abfa558cdba38c7e83e235a2d417",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Moonlight_Floor_Projection.mat",
+      "sha256": "b0ba01b235a27285bc20311a2a3f2d38b281271b718266412af0df060aa10e21",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Moonlit_Window.mat",
+      "sha256": "e2c1b252f61f87d78841922b35343ea4544fd386aa7d8a0921497041c3aa7435",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_MusicBox_Rosewood.mat",
+      "sha256": "cd57d6c7936e1a3903e6713f9125694192d61ab72409f98bf938a841741e75f8",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Nanda_Glow.mat",
+      "sha256": "48904dffabbf798233948a3856fe44aeeb106ceeed92cbd5a7faf930112e78c2",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_RoyalVelvet_Purple.mat",
+      "sha256": "bdea9d8e5a0f9988baa75903e71ca12cc1d66c9d4b3b8637770a7ada22b384e6",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_TeddyPlush.mat",
+      "sha256": "f6569104c86faacdc51f55010cc703a7bcb3162ab88941a19796d5d8306693e9",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_ToyBlock_ABC.mat",
+      "sha256": "51706743c6e7a7dee7c35ef4bad39f45afa010db7a06faf4474e7baeb1243235",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_ToyBlock_Blue.mat",
+      "sha256": "a0bc7c6e7b5e42e1e15edd6831385275b1f22cf3993fc8dda1e3cc6f180d89d7",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_ToyBlock_Green.mat",
+      "sha256": "a845148c6f499a941b94902a3265eb483fd2dfaf3ab589cd7dec37b082f29634",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_ToyBlock_Red.mat",
+      "sha256": "b7cdf51c3c885b94bfdcbc5057c2dccd25ab908c2364e1576fb3ca2f38f6c961",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_ToyBlock_Yellow.mat",
+      "sha256": "9ae18b6cd103abcd4c06394c453393a66cb8ce59f6494187bb30b095412f5a06",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_TrainTrack_Wood.mat",
+      "sha256": "00ce49850938f39352b8bb0f06953dec0f2dc6b1e18b50bae4f958dfc133d3fa",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_WallCostume_Cape.mat",
+      "sha256": "a2d52d21c7360633fe338af841cc926bac6f8485be9ccae1dd09183f77e96520",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_WallCostume_Hat.mat",
+      "sha256": "1fff18db863c2e70bc714724efc3bcf2ae482f133988d83dd39481ed42055960",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_WallCostume_Scarf.mat",
+      "sha256": "5b9999b139cda9ae83b9b16f59d98c7f71daa6da26244b1b73ff7e5efd109c8b",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_WallDecor_Glass.mat",
+      "sha256": "c8df5b936ff05693e6b38e6f8c460b657d7732e67cfb6a8dec0ef6b8bc5a5740",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_WallDecor_Lilac.mat",
+      "sha256": "3f81c5705b3377cc3d0659d1847836524f02189cd7fd3d234c3d408a1c3da8d7",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_WallDecor_Sail.mat",
+      "sha256": "a7b580f74ee1527c6320a87267ddf5f02f905a49f2d120b6ac14a48ac11cd89d",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_WallDecor_Wood.mat",
+      "sha256": "d4c7f960155b4478defa02dbf821d58723fde6dacc42cb48d804aa5fdd997abc",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_WallDrawing_Castle.mat",
+      "sha256": "614e73d983bb6fb668a4496a561cbf95f6b7345d365db9a8f858eae8fd863e40",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_WallDrawing_Cat.mat",
+      "sha256": "8245ccd7a54891af02b81e4606058c21107344ce3b92cef704599015764effd9",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_WallDrawing_Rainbow.mat",
+      "sha256": "d0d8f3f95557789d8734acb6ce6fe026f6e8cec723e3ef6899f54d8cc3fa9ef1",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_WallDrawing_Sun.mat",
+      "sha256": "e4be1f34e5c74d054c1604a656c70a798b426e67effd4374337bfcf0fadef9b0",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Wall_Baseboard.mat",
+      "sha256": "7b359c87d4f6335017c848cdc73614ffca35e79a8a8ca94b9bd4f65be2c2079a",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Wall_Bunting.mat",
+      "sha256": "19ec128978e127434e23bc9fddab6cde7072e14dbc962be70be9c0c91899d9ea",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Yuna_Dress.mat",
+      "sha256": "d231241aa2d17a64cc3838bf1f6bd67c5ef8641e0525445110013a2409fe526d",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Yuna_Ribbon.mat",
+      "sha256": "6868b5e191790a8e79b6ad736ab60d7cf015813649d53bbba9269f0eff0512bb",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/M_Yuna_Skin.mat",
+      "sha256": "e047f41840ce6c5562e4f00805ab9aed474947563e7fa08cbf420c93cbe18a2a",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Bear_Button.png",
+      "sha256": "07cc124a31629ba3420dc2c9a150c2534f57906a6c60df61c7a02ad71f185ce6",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Bear_Fur.png",
+      "sha256": "168ec4ab235b085728acbc8e2b006a1687dc1fada3f11dbbcbad8675d7c01e60",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Bear_Fur_Normal.png",
+      "sha256": "63baf8450d119852e08e72a2c3ef1f3f1f6b785ac6a1e872e02542137abb1d9d",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Bear_Fur_Painted.png",
+      "sha256": "01d351274619ed563f53ed22da87db569675fbfa2df7edccfbb2d15f0021ec30",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Bear_Muzzle.png",
+      "sha256": "56f5cb4b7b7bac88d153ae746ca0d3007964690b3752ac27a505060223e01528",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Bear_Muzzle_Normal.png",
+      "sha256": "01e45779f3f8314ae2b8c9a03c5f66127be888ed927786e81dc2d53877cda0bb",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Bear_Velvet.png",
+      "sha256": "d15f4854740f96b3acdf51e0c5f954f5cbc4ecde5a7aad9154168b5084bf8c80",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Bear_Wood.png",
+      "sha256": "f6175cd6e730abaa7cc213e3f90e5aa94fa94441f43ac05fa5fdcb831a3ea59a",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Bear_Wood_Normal.png",
+      "sha256": "6104a5c60473284842994bc0ff27e2f567b277bb77af1f58b38f191802351070",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_BookCovers.png",
+      "sha256": "35675ebdcb6c2b89ee956b9af083618a90ba1b8804a63261edae4c5217c484f7",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Book_Cover_Painted.png",
+      "sha256": "97a7645528159abdeaed83db66203e62ae084a5ca9964ee22fffb5cf70675103",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Book_Leather.png",
+      "sha256": "3ec091cd70422dfad89756efcb760a41531680501bd01b4ca416647361a60751",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Book_Leather_Normal.png",
+      "sha256": "4931fbd1213bf354d1c8cd1b78996d088610b0b20c5a12ca0d904c5eb2115ac4",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Book_Pages.png",
+      "sha256": "a1a931bb49a393c3aa8f4d7b741e245cf13d1a6314cce7032d6a707e87d7945c",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Book_Pages_Normal.png",
+      "sha256": "6459be10f3e5687763ae13df2e8e0c16bb868c12fcd66e2d7b00b1b5638fd3cb",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Book_Spines.png",
+      "sha256": "51095b6dcda283c17969cc00addc21c806ccece631dda19ecfd69cda3c66843a",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Book_Spines_Painted.png",
+      "sha256": "ea18929ce66912c07221d1b15466f4a2ceac69485416cda51ac3da0636d7b206",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Castle_Blocks.png",
+      "sha256": "69b2cb9d4cfc10e10000b25691e647cb5b1bd159a3c1eb282ed523ab7b5f30b4",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_CircusDrum.png",
+      "sha256": "b61dbb7ca185812d795aaf74a463656a553a12ad12c14925571da99e4c048cf0",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_DarkOak_Planks.png",
+      "sha256": "f626a05518e562775a7095112ee78d05acf98d3b007447a7d38e83cfc0653325",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_DreamPortal.png",
+      "sha256": "d0734f88c68090cf99f2abf93c9249aecc8d0689ab2c31ab30caf25c5d8474e9",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_FalseDoor_Poster.png",
+      "sha256": "817f4edd210a3ba7efea392a94fb8cfedcf916ae7dc0a5d566b1cf14d8f22252",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Floor_Rug_Mandala.png",
+      "sha256": "c95561e121a8350116f20f3d3dd0dbe4799c3a35363b1d60aac779e51b3b93e8",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Floor_Rug_Striped.png",
+      "sha256": "d70bc9f4f309deeb5202cb3ab68214c83b7dc01325bf126de4dd1bc598ee3cc3",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Furniture_Wood_Painted.png",
+      "sha256": "846269a07396afcd64c05ec7ce9b9c1df2717a5eae172023e9a327e5568a20d8",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_LightShaft_Gradient.png",
+      "sha256": "5f1efc69f7089de6bb2b804387f6f4086aa73eaed6e3aa6d1b7e320ec2f3bf64",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Moonlight_Floor_Shadow.png",
+      "sha256": "87710aa5c7b75178fe6a6bd5dabde35b24856c5317b7b2ac8cbced7845120377",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Moonlit_Window.png",
+      "sha256": "bb0d099157dc1316750b27b1a3d0038fb757a42855ac6211242d476a0be83d2a",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Pastel_ToyWood.png",
+      "sha256": "628da78a2e01b71fb79a81f2185ec04de741524947345e483fd6cf243680c372",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Platform_ContourEmission.png",
+      "sha256": "281263cab3fdf85795b9ca7086dfe02dbfebc14c67c1f04ec8d7497883af9de6",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Sparkle_Glow.png",
+      "sha256": "8386ee984280de41907e99c5d65b6ee9669073e8d9c789af3c55336f8f5b7e01",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_TeddyPlush.png",
+      "sha256": "ee3b1afb66d996f38b798e0971ca049debfe41c6a2400a3ee505f32bc18ea5e0",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_ToyBlock_ABC.png",
+      "sha256": "fbff7d46218bd177c0b443001ae7cf30497ec643f35f2da32b7d3fe49bb56e7a",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_TrainTrack_Wood.png",
+      "sha256": "145db4d9d9e98bf426c2ab7d3f9ec2badf3e84dab50d1ae7880b5e1f38f72f16",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Velvet_Purple.png",
+      "sha256": "5b745056f2d85d32ae9e67e70edac078260c1b327e77990cbe99c7ebdcd32abc",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Victorian_Wallpaper.png",
+      "sha256": "6d016d847cd8f6a5240be28879c91a84a2ea57794782a001e8afe501123b712b",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_WallCostume_Cape.png",
+      "sha256": "10f044c25211687e9e527cf4bb177328dcde065f8b430df6871bdd221ce14494",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_WallCostume_Hat.png",
+      "sha256": "bd1740c566b43d7176f8af287a94510ccd58437d3aa81587ee2a750b353cdba1",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_WallCostume_Scarf.png",
+      "sha256": "8c97e4aa2f97b73f566754baf52d0ed32d50236120b7a4547b2aeb43d4ba72b7",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_WallDecor_Sail.png",
+      "sha256": "7dc6cc11503c14b28a94b9ba09b4eba5b42369f1476e83f62f7e5696f967444f",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_WallDrawing_Castle.png",
+      "sha256": "f3a93b0b475de6b05cd93f127d5fc5152926212346758e6ede8725b2c56afd8e",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_WallDrawing_Cat.png",
+      "sha256": "2038d7e8565e7574c9b6717f1da4ad718a8a147547ffa7b2de2907f6970f28c7",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_WallDrawing_Rainbow.png",
+      "sha256": "0bc6fdb027cac6e4804ed8814d328b615f70231c2322008e9e0efec072e070c5",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_WallDrawing_Sun.png",
+      "sha256": "90bdeac963a95541b57f17203c3f5a64b12c104fef278943bbae842916214436",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Wall_Baseboard.png",
+      "sha256": "e0d50f3fbd4ab646045bd928c77851ff0dba5e49a624f08e9c7446881876ccc4",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Wall_Bunting.png",
+      "sha256": "5d572a6b72e798d74a72dd8e7fbfb6a90a830ea0197a12340b7de7d27aa50d3e",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Materials/T_Window_Cookie.png",
+      "sha256": "b8e70074326d1ba70dbff5b3c294344536a5ef6ae50ba2eed0ca342b817004f2",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scenes/DarkRoom_Gameplay.unity",
+      "sha256": "d507921b1244c2a3186ba820bc54a3eae8daf9208dcde677f7eed438c9e358ed",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scenes/TitleScreen.unity",
+      "sha256": "a0667a1887f925975e2d70eec6ecb73fa1e0f8962d14872d841417bc069b13e5",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Settings/DarkRoomPipeline.asset",
+      "sha256": "7a0af144ca0f2a0cec4231d3585c1e6280587b28543114bd7c4c3417965939a6",
+      "clone_equal": false,
+      "clone_sha256": "5f84a8e23bd5f8008b6bb396d6b0d64f46c60098292d6f8631b24356f7d65c89",
+      "text_equal_ignoring_newlines": true
+    },
+    {
+      "path": "Assets/Settings/DarkRoomRenderer.asset",
+      "sha256": "6fc0a3ac4b879e8e152264db77f7c3b3ddd4c928426f61f4dbd784f4250252f6",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/ThirdParty/Licenses/Caveat-OFL.txt",
+      "sha256": "1f9d81d094273d82f3898a1ee8b598a717d050ecbf5ff7bede105b704880157b",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/ThirdParty/Licenses/Kenney-CC0-MIT.txt",
+      "sha256": "f755bf8f21002f8d5baedaf75564141d363971f3f7bc8c4062956b0b15a6f04f",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/ThirdParty/Models/character-starter.glb",
+      "sha256": "7112f6a08400914f9da546f3e6029e947cc9eab2b4a6da5eb99776111289efb1",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/DarkRoomArtAssetBuilder.cs",
+      "sha256": "7bc01ab2040d83326fcd6f1208c2cac90c69f4588bd635a76842c28575fe8f27",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/DarkRoomAudioAssetBuilder.cs",
+      "sha256": "dc45f82c800a3c93fbf9adc777d262dab95b35c78e8c86aa0170bb9a7e13f49a",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/DarkRoomFurnitureCapture.cs",
+      "sha256": "73344d1dc9859825211d9f9bb1f9481b2b175de51552dd8f249d83eccb0e9fd7",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/DarkRoomFurnitureSetup.cs",
+      "sha256": "f316b17b4217d21315236ceefaa0432c5232f9756ca0c88acd8423efe2bf2eb3",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/DarkRoomPaintedPlatformSetup.cs",
+      "sha256": "7b0abea8c905006e970324a9d8f95ce5bb866725a0d9c3a6ee48d7fe3fbebeaa",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/DarkRoomPlatformArtCapture.cs",
+      "sha256": "13b92da92f14fba32ab239b16d022d85147dbcd3088de946e0a9cace1ef2d6a6",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/DarkRoomPostProcessingSetup.cs",
+      "sha256": "d81e5e201f8b531445a2d40e64ba4d68d68c0d9e830b135303bfa270606aab7b",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/DarkRoomRenderPipelineSetup.cs",
+      "sha256": "3b892bdf4e9dd5e422571d2385516c5fcee8e022e0bd12643476ed97618c7c88",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/DarkRoomScenePopulator.cs",
+      "sha256": "e576fcc1ed7d7cb87641c2767a0573a0a675ab40057a7fc1ca16abb550a44248",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/DarkRoomStartCapture.cs",
+      "sha256": "314a17d69e0efc2e3dd86a807739c780767e7b301eb63342a89865b58aff80db",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/DarkRoomSupportSetup.cs",
+      "sha256": "582685878abf647bf0b47ec16fc0a354dd69fe7a04d5f20cf804b6909fe46df0",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/DarkRoomValueHierarchySetup.cs",
+      "sha256": "97450cc08ab074f37a32c1c6c200e129d35a1f2057a16bc110130e2f3ccb6bd3",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/DarkRoomVfxBuilder.cs",
+      "sha256": "25c57ac8ebff0be9fe95ddefc5caa56f4da72a32b7ae72cfe55d4344cb3d9b6b",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/DarkRoomWallArtAssets.cs",
+      "sha256": "3fd1bcb9a98652f8e4a5e524a3e6910834ef9cceed925323dda5f7c4d1d8907a",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/IllustratedBaselineCapture.cs",
+      "sha256": "abe814e9d0266a0b2d8a7c365d662e82f767b8f0e3bd46b73f8af5a0fce133fc",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/TitleScreenBuilder.cs",
+      "sha256": "d9ee81a50de945cd3d46f0ab6d4e27938b46c87b0c293a7100f5f0ff370d34a2",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/WebCiBuild.cs",
+      "sha256": "6185dcd31d0ae13ad244243878a357af7b81fc5ef51b6dec192e22e639eae28f",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/WebPreviewBuild.cs",
+      "sha256": "c276f043fff5b2eb319afd9cb92c740006c30548abb23b5e1775b09fe1ea23a5",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/YunaCharacterModelBuilder.cs",
+      "sha256": "ca8367c41504e2d175c4220b7f259221bc5db12d9c8300bda4c0655a72976b20",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/YunaCharacterModelCapture.cs",
+      "sha256": "baea35fec4d12baaed205181bafdb79543450c969c131fa9806c7aa5055059ae",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Editor/YunaLegend.Editor.asmdef",
+      "sha256": "0f179a60c74f2dd3408d5be74ef564f641ad7be0e4cffa111455c39a151683ca",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/YunaLegend.Runtime.asmdef",
+      "sha256": "787f1f74e954ee3a6e84dc54747d12d0e76251e65a97c1b841cedbb61af171af",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Tests/DarkRoomIntegrityTests.cs",
+      "sha256": "56e9ff5e4cd32c6c03ac7a02aac3a41e7790b904286a944fc794b3331ce24ea5",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Tests/DarkRoomPlatformGeometryTests.cs",
+      "sha256": "79ca21661d941fef2d9c90867a2bce558a3cac4397c8aed2b08a5e3cb6318dbf",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Tests/PlatformSupportProfileTests.cs",
+      "sha256": "a9e2aecad4e5e9e283a751a21f48dd6f86d07274a64069dfffe72b15cdec78d6",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Tests/ResponsiveCameraTests.cs",
+      "sha256": "b5d9de694ab4dd9bebf40d26a0ba5d775be832d199eabfe26df81418aa329545",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Tests/TitleScreenTests.cs",
+      "sha256": "9e7a1e6b5839bae9b49ba07f9275f5ced66905e6b56cb091b77a7fe67acfabaf",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Tests/YieldingFurnitureTests.cs",
+      "sha256": "525ae5b26d3da7a811e4365404b75dc35ea53d07d2e428d74f34d098484f214d",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Tests/YunaCharacterModelTests.cs",
+      "sha256": "15fc975c71edc50f1c62148d7bc9969c89be1ffed4ab93b5bd0cd9de571d98c0",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Tests/YunaLegend.Tests.asmdef",
+      "sha256": "c215956d395cef33ed48733c5968a9914e2c74c34b0bdc234c78670d9ccbea86",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Tests/PlayMode/DarkRoomCameraFramingTests.cs",
+      "sha256": "935320ebc52b15e2a0de00c05346bc5592cc670210d8a6c72d8cb1a54c3972e7",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Tests/PlayMode/DarkRoomMandatoryRouteTests.cs",
+      "sha256": "e34a7f903045b290faa717263ddffce652e4eb893aa59cb8c2212235a45bb95c",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Tests/PlayMode/DarkRoomReturnInputTests.cs",
+      "sha256": "9d1c15868b1a6bb7422603fb8aea3f6cbe1b6cc0d53f7a5bae3be3f327d702c2",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Tests/PlayMode/DarkRoomStartInputTests.cs",
+      "sha256": "c2e735e7d83263d8c10f95e76b8ad01a7ebce0a8ff7fd39da1cb318cb3ad5f83",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Tests/PlayMode/NandaSeparationTests.cs",
+      "sha256": "399bcd6d01ae1a37795dae31567cb63278fed203213f4cfa07fd1ff7dbb95453",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Tests/PlayMode/PlatformSupportPhysicsTests.cs",
+      "sha256": "0bc1bbe0f3ab72a4eca070bea7ec2cc229e17043aeaba92f7cf3985359e67e26",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Tests/PlayMode/YieldingFurniturePlayModeTests.cs",
+      "sha256": "c6028f2221089da8662df9667d843e87d0cd1ea854b4693ef3b0f0178afa0880",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Tests/PlayMode/YunaLegend.RoutePhysics.Tests.asmdef",
+      "sha256": "35b0fee0d3a7863f900289826db3adc622bf031e0535020ec2ec1e550af06954",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/Camera/SideScroll25DCamera.cs",
+      "sha256": "6aeee35cb08b6814d0f6eaac5d6f3b203ed65fcddab67093d2b8170b7857c916",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomBlockoutBuilder.cs",
+      "sha256": "e54b12a8d9f1a1c809687adececb04cda197cf453426692594ce65b92c994ad8",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomOpeningSequence.cs",
+      "sha256": "eef38bac9ba1dbffd3b19ac5fe89736d4362e259c9b5be4a553debe309ceb171",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformArt.cs",
+      "sha256": "7fc5507b63562bb980e9eb5ea1654703b6ed1733dccb8974fcd90743224d9cfd",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformCatalog.cs",
+      "sha256": "3cff736847704893443e0c491a2f0ab64a9a16ef33dc771d43f8e04772103f4c",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformGeometry.cs",
+      "sha256": "cea372c1b5a9feedbc9000ace2f4242c444fa883568da468a5110e102b95ee7c",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformMarker.cs",
+      "sha256": "cb06ddef4300e4d8d88b061a7917e4eedafee313786865aa5a5e2edb39b37757",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomProgressionManager.cs",
+      "sha256": "92009ad7237ef93eabc195b15c9547506ee25c7dd48e47e30dd7cf74cae8222a",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomRampPlatformGenerator.cs",
+      "sha256": "1d986d77b6060364a7e791dad8a20ca2dd6a2ca79d0f7b5c55abcac8d67f24a2",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomReturnLayout.cs",
+      "sha256": "71a935da08c42c8b4a684f16a38a3df1e0f5bca59087e14c0c71fcdef1188af1",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomStartLayout.cs",
+      "sha256": "e97cad90e4f7306c6229da5578c0eb80859aa407cf278b985cac921a35323619",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomThreeStageCircuitGenerator.cs",
+      "sha256": "bf7a652e7dc8191529b7a0f8fdc1d22f291a2404d44cb895b0e3492ede296ee3",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomWallDecorations.cs",
+      "sha256": "d79bf522918e4b5bef405c37d96d4c9a18fb6e330efbf47b91ae0c2d581fd16e",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomYieldingFurnitureArt.cs",
+      "sha256": "f27be0addc5e47739fd3de879e9d633b2f6da23b48d9e99e8edb8ac5fe92f2c0",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/NandaFairyGuide.cs",
+      "sha256": "5e594e55cb6cc54eb41b07d6cc37fd39540bfd2020e995a7afc0fd69fa71acde",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/PlatformCollisionDetector.cs",
+      "sha256": "84c7d45662a461f43d84023fe775c215ebb85e7d160b3cef8101e46240dc6254",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/PlatformSupportProfile.cs",
+      "sha256": "b7bc9a1d24b0adac03559d8c76252c882844369573f114fb73c85ffef3c531bb",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/YieldingWoodFurniture.cs",
+      "sha256": "c3f390ddb71f7a52944d61e6e65508cc7083f16ca8b99faca54f22a6ec01682f",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/Yuna25DPlayerController.cs",
+      "sha256": "d47aea951b8190c4a0557bb1521eaf4b37ccf57282b15e5daef07d94c0430d10",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/YunaCharacterView.cs",
+      "sha256": "6e5921713aa6b8d2e4df74ad269efe79911f2e20a4ad387b663cf9876021442e",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/Dialogue/DarkRoomDialogueScript.cs",
+      "sha256": "4d0cb7576e7a0c29ec677227c0696bf61193df905e831bf89dc7aa9956dbacc3",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/UI/TitleLegSwing.cs",
+      "sha256": "c03cf927bdcec10ebeb4f92c83fcac07b30a4b6b48ecfa718cde7778e7c69904",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/UI/TitlePhaseSelector.cs",
+      "sha256": "e0c41383d8009722830ed4a1ed8afa758ba61949e4402ddbabd75b6b694798a4",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Scripts/Runtime/UI/TitleScreenController.cs",
+      "sha256": "ab1588022dd008c064620ff76cfd1a1dac5ac76e8b9f04949711ab489497bb41",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Yuna_Study.prefab",
+      "sha256": "3a9b46871e33cfd0a1f8ac7a1410e51536e04062764cd1de7e5bb7eaf396eaad",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Yuna_StudyMesh.asset",
+      "sha256": "523e78e4bd93fd0c3a2fccf63f69a05a8a454316f44b7f05c505019ec67ab483",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Materials/Blush.mat",
+      "sha256": "0911e357101852e6e28328cc7767783bb26461d01d7328ffb7cf6205fe366b6a",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Materials/Brass.mat",
+      "sha256": "f8518959a385b95d1b301f8f405511e07b5479045abf884be968d2a298fec55b",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Materials/Ear.mat",
+      "sha256": "3847af5b98feec70ce00e46139736a3e45edb7e9d503e9fba0932f5b7c3c4d34",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Materials/EyeWhite.mat",
+      "sha256": "2c187cc1806eff90d05e321cf2ad760d86138f583fc27c8463181959d0de4842",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Materials/Hair.mat",
+      "sha256": "0101a24c9572a1acdd41aa9ec1dc387e2922c51a1115d9a244091a49da384201",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Materials/HairDark.mat",
+      "sha256": "7517a4513ffc00e0a315f89dbde9a040d0f24b2aff3067977df925895ad0c35a",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Materials/HairLight.mat",
+      "sha256": "d1d802e448e059a553377d72bda128d180e6393011975a07269b7087ea614da0",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Materials/Iris.mat",
+      "sha256": "c414ad6bee65bc0cddbd4af78666ae74fec4437aee0938c7529431281c40b55c",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Materials/Ivory.mat",
+      "sha256": "659bf70d6ac08785c93618bdce3284fcda1b9ba17f8d6e61698644ba1c09a6ac",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Materials/Lash.mat",
+      "sha256": "b7010f80d8f91ccaa33f97617091e9c202ded949d9c84b86dcbdfb1cd0914daf",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Materials/Lip.mat",
+      "sha256": "288fce778f5bb7fd3458c167501dd7e3db5a432b90ee8a288a928d3587990697",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Materials/LipSoft.mat",
+      "sha256": "273b795477737a6b882deb541b33d280893a04131de2c47147d1a6016a8f72d8",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Materials/Pupil.mat",
+      "sha256": "dfb22453a793e7dfa3a0980242bac544ad0eb6be7bfd44329e60baecf8c859f8",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Materials/Ruby.mat",
+      "sha256": "c07ec6b16c572d23953e9a9209aa0d9a74893207b150b69d0ec8c81a6723acc0",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Materials/Shoe.mat",
+      "sha256": "88020822bb54a8881f13c31fbaf33f6d407b58e5e7300a491cfcde347a759f32",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Materials/Skin.mat",
+      "sha256": "1f2f0b59176bb9b3bba550bd64f0d10009f465fc67e369db00f95e7cb813fe40",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Materials/Sock.mat",
+      "sha256": "261ad091fd6d73ad90893ce30357cdb6ac441e37a572ba861bc36e5ad38cf26b",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Characters/Yuna/Materials/Sole.mat",
+      "sha256": "c1a755b6f28e4dc0fafce27c88cb40de4d1bdc969394569ddd52dfbe4090a27a",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Audio/Music/High-Frequency Violin.mp3",
+      "sha256": "00138a198bcb647e940290c8873793bce2a32a1e88b0b6af15f169148577dad9",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Audio/SFX/comic_fall_thud.wav",
+      "sha256": "f62772de80c745c131ec5924c39970a1456d0b64ead8ef260f1e98fa29ac74c1",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Audio/SFX/drum_strike.wav",
+      "sha256": "bbdb6cd90044d808276351033cc9e6cfeb5812636fba59a3529b32c88cd41764",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Audio/SFX/fairy_twinkle.wav",
+      "sha256": "c12f81553da8871143823c264bb0d8341866dc271c34c5976d6f67ab3345a60f",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Audio/SFX/footstep_wood_1.wav",
+      "sha256": "1239ad537b64cedb0d857f6b7a90086e020832c931c1beb757094bca0e3aa995",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Audio/SFX/footstep_wood_2.wav",
+      "sha256": "c1d044eee057e0945d3bc8a49dbfb05c87a695d1e2501bed51ee1efafe624f34",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Audio/SFX/footstep_wood_3.wav",
+      "sha256": "a3c3da0870cd037ee93ca2713f759d4318d21c8bec09e2d3eb1fa59eb8d591a5",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Audio/SFX/game_over_fall.wav",
+      "sha256": "fcbe560c631c41115ab2d5bcfbd98b766fbc75fb5b5525158353b86e9cdc1cb3",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Audio/SFX/jump-girl.wav",
+      "sha256": "1b695f0f7b7274f12f787988d3c8ee7ce93f71da1a54dcb03b1596c61ec469a4",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Audio/SFX/jump.ogg",
+      "sha256": "f090c16689e9ec04c4bef80bfcbf68bc4b63ab4ce29f7fbb5cee05a5641d5694",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Audio/SFX/jump_airy.wav",
+      "sha256": "6f0240d32bdadf37250ac0ec6f8d2d1cc2bb5eebc6fa09477f967aedf8270363",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Audio/SFX/land.ogg",
+      "sha256": "145a1c17125dc4d344ac135bc5073e35ea12e19700ca30ee6e1e477010b4dca0",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Audio/SFX/land_plush.wav",
+      "sha256": "96fdd7c73310190e65996b1ccac63d62184c1dc1061c2e6f446c8265380de603",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Audio/SFX/land_wood.wav",
+      "sha256": "e6286e8f5b175f5221fe500c652f2d21ac8b3a17c17c76a83418f51554243130",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Audio/SFX/wood_furniture_crack.wav",
+      "sha256": "5c449f89a1ba2cd28275cfa73c1d6e18d53970cbb74d5e86ab13aef8fb24e451",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Art/UI/Title_Background.png",
+      "sha256": "d17bce62c9668414ce37b30b83f322af0416ba904e8b8d8ee85c879bdac1ab9e",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Art/UI/Title_Flag.png",
+      "sha256": "b3698d577a6808cfd0f36179650cbad74f7f15da96c22f02a404a0eb425d0c80",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Art/UI/Title_Gear.png",
+      "sha256": "87be8285177db33ba30a17ce292b304767a003b217ebc6b86b1cf2187fcec42a",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Art/UI/Title_LeftShade.png",
+      "sha256": "462eca147ec2ffe9143bb94fb491f09e4d00dc40fac00ae0271623955b674d34",
+      "clone_equal": true
+    },
+    {
+      "path": "Assets/Art/UI/Title_Leg.png",
+      "sha256": "6818007068d0d8212f0c4b4abe8fa4b25825e157a826335fc447cb972ae6863d",
+      "clone_equal": true
+    },
+    {
+      "path": "Packages/manifest.json",
+      "sha256": "5b6d3645e98eeaf4250dd0204bed3e567641d2dba70b0404a6af89ecd63c352c",
+      "clone_equal": true
+    },
+    {
+      "path": "Packages/packages-lock.json",
+      "sha256": "a95d1a0a9685f70a64effa9402dc039dc36441034677db7ce11b63c47a08c4ab",
+      "clone_equal": true
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "Build/25d/WebGL/index.html",
+      "sha256": "6a16c8f975a435ba653c9a8e0b94cf1625f9f0ae9345c92982c28c1e9c4d2c5f",
+      "bytes": 6614
+    },
+    {
+      "path": "Build/25d/WebGL/Build/WebGL.data.unityweb",
+      "sha256": "0c65586c47437f1d3e0db4693958c3d50fdf70c845c282d930bdcc2edf9d09a9",
+      "bytes": 17084520
+    },
+    {
+      "path": "Build/25d/WebGL/Build/WebGL.framework.js.unityweb",
+      "sha256": "91229d70518da375263c52c886b997412c69cd43b675d4de78ba4157afe8390f",
+      "bytes": 88447
+    },
+    {
+      "path": "Build/25d/WebGL/Build/WebGL.loader.js",
+      "sha256": "489dc150eddb38c0d50ed5fb91231ec8a2cb064c8bf0a595545d3637641b600b",
+      "bytes": 47867
+    },
+    {
+      "path": "Build/25d/WebGL/Build/WebGL.wasm.unityweb",
+      "sha256": "fbecf5bbb984878930383618988d0302ef5d69b207c6a82eb7156fe35c62dffa",
+      "bytes": 11571867
+    },
+    {
+      "path": "Build/25d/WebGL/TemplateData/favicon.ico",
+      "sha256": "9c13beb90ee8f70580d52a21d5233970d1c89e71e4a34a462c22610941c3c77f",
+      "bytes": 2305
+    },
+    {
+      "path": "Build/25d/WebGL/TemplateData/fullscreen-button.png",
+      "sha256": "21221581673a54b8139d408d4a3f8d2b879e86827d4b6fc53b995ff7a99ee3e9",
+      "bytes": 175
+    },
+    {
+      "path": "Build/25d/WebGL/TemplateData/MemoryProfiler.png",
+      "sha256": "0ce87be20d0c24ab6cb73b57de2004da261cc2a641e69319c6ae3fe11fc85483",
+      "bytes": 665
+    },
+    {
+      "path": "Build/25d/WebGL/TemplateData/progress-bar-empty-dark.png",
+      "sha256": "bbee7131afe8a3365906240d89184dc86234c119467f390bc4bc6802328fdb4d",
+      "bytes": 96
+    },
+    {
+      "path": "Build/25d/WebGL/TemplateData/progress-bar-empty-light.png",
+      "sha256": "143696c060ad43d6c30f19ff5f49000927a139a2a1e4c9f45fafaa2b90d7d2be",
+      "bytes": 109
+    },
+    {
+      "path": "Build/25d/WebGL/TemplateData/progress-bar-full-dark.png",
+      "sha256": "3306a6244dcb3926fca38a28e3ced589df8ff1beed955eb17c0bbf01c918bc62",
+      "bytes": 74
+    },
+    {
+      "path": "Build/25d/WebGL/TemplateData/progress-bar-full-light.png",
+      "sha256": "12395ea785480c5cdf12fade6e6cbf49666d5bb1cef7240c113dbcba6bdc5c87",
+      "bytes": 84
+    },
+    {
+      "path": "Build/25d/WebGL/TemplateData/style.css",
+      "sha256": "8e3625e108a61dcd1d31303376d9e02d7bdc08921d254e8f4359b892b3825caa",
+      "bytes": 1448
+    },
+    {
+      "path": "Build/25d/WebGL/TemplateData/unity-logo-dark.png",
+      "sha256": "c1b72d26c096487dabc948b54bc203f8dac7ed4e3f5733918798e858acb4b159",
+      "bytes": 3042
+    },
+    {
+      "path": "Build/25d/WebGL/TemplateData/unity-logo-light.png",
+      "sha256": "002990aea0d946833cadc1519d5b7e50a4570bd537a0517dd79a59d3eec84da7",
+      "bytes": 3077
+    },
+    {
+      "path": "Build/25d/WebGL/TemplateData/unity-logo-title-footer.png",
+      "sha256": "9e8b3bdb67c2446d16362fe59449d892100931dbbadfe6a9d923a4142b57a79f",
+      "bytes": 1151
+    },
+    {
+      "path": "Build/25d/WebGL/TemplateData/webmemd-icon.png",
+      "sha256": "c56f5494640cedda273aad38d58e6ab9da625d5b3f4d875c0ff92c6192a569c2",
+      "bytes": 1670
+    }
+  ],
+  "all_assets_packages_equal": false,
+  "runtime_validation": "Editor PlayMode normal InputSystem; WebGL not played in browser",
+  "publication": false,
+  "differences": {
+    "Assets/Settings/DarkRoomPipeline.asset": "Line endings only; parsed text identical.",
+    "Assets/DefaultVolumeProfile.asset": "Unity clone serialization has five active flags enabled for zero-effect default overrides: MotionBlur intensity0, LensDistortion intensity0, DepthOfField mode0, FilmGrain intensity0, ChromaticAberration intensity0. Both hashes retained; not byte-identical."
+  },
+  "success_marker": "YUNA_WEB_PAGES_OK; artifact exists"
+}

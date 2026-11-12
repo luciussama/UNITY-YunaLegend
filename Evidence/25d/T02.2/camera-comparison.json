@@ -1,0 +1,88 @@
+{
+    "method": "One PlayMode simulation, normal InputSystem keyboard. A/B rendered sequentially before next simulation update. Only projection differs: FOV45 versus orthographicSize=abs(camera.z)*tan(22.5deg), equivalent at running plane z0. Static approved Yuna painting; existing environment and fairy remain technical baseline, not final illustrated art.",
+    "gameplayBefore": "d507921b1244c2a3186ba820bc54a3eae8daf9208dcde677f7eed438c9e358ed",
+    "gameplayAfter": "d507921b1244c2a3186ba820bc54a3eae8daf9208dcde677f7eed438c9e358ed",
+    "textureHash": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+    "reachedBear": true,
+    "reachedBooks": true,
+    "gameplayUnchanged": true,
+    "pairedTransformsIdentical": true,
+    "pairedFrames": 46,
+    "samples": [
+        {
+            "frame": 20,
+            "support": -1,
+            "name": "01-entry",
+            "player": {
+                "x": -8.920000076293946,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "camera": {
+                "x": -5.061999797821045,
+                "y": -6.902559280395508,
+                "z": -18.88847541809082
+            },
+            "fov": 45.0,
+            "orthographicSize": 7.8238630294799809,
+            "playerPixelsA": 64.4183349609375,
+            "playerPixelsB": 64.4183349609375,
+            "spritePixelsA": 44.90425109863281,
+            "spritePixelsB": 44.90428924560547,
+            "landingLeftA": 0.6988627314567566,
+            "landingRightA": 0.8088628053665161,
+            "landingLeftB": 0.6988627314567566,
+            "landingRightB": 0.8088628053665161
+        },
+        {
+            "frame": 207,
+            "support": 0,
+            "name": "02-bear",
+            "player": {
+                "x": 2.3000004291534426,
+                "y": -7.920000076293945,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 5.971603870391846,
+                "y": -6.80857515335083,
+                "z": -13.809372901916504
+            },
+            "fov": 45.0,
+            "orthographicSize": 5.720029830932617,
+            "playerPixelsA": 88.11146545410156,
+            "playerPixelsB": 88.11146545410156,
+            "spritePixelsA": 61.42005920410156,
+            "spritePixelsB": 61.42009735107422,
+            "landingLeftA": 0.4776598811149597,
+            "landingRightA": 0.568401575088501,
+            "landingLeftB": 0.4776598811149597,
+            "landingRightB": 0.568401575088501
+        },
+        {
+            "frame": 272,
+            "support": 1,
+            "name": "03-books",
+            "player": {
+                "x": 6.230832099914551,
+                "y": -7.454518795013428,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 8.221824645996094,
+                "y": -5.964488506317139,
+                "z": -7.507987976074219
+            },
+            "fov": 45.0,
+            "orthographicSize": 3.109910488128662,
+            "playerPixelsA": 162.0625457763672,
+            "playerPixelsB": 162.0625457763672,
+            "spritePixelsA": 112.9693603515625,
+            "spritePixelsB": 112.96943664550781,
+            "landingLeftA": 0.5353536605834961,
+            "landingRightA": 1.2950217723846436,
+            "landingLeftB": 0.5353536605834961,
+            "landingRightB": 1.2950217723846436
+        }
+    ]
+}

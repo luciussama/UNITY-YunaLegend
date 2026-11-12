@@ -1,0 +1,53 @@
+{
+    "scope": "Static PlayMode sprite proof; no final animation, lighting or gameplay camera decision.",
+    "sourceHash": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+    "importedHash": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+    "gameplayBefore": "d507921b1244c2a3186ba820bc54a3eae8daf9208dcde677f7eed438c9e358ed",
+    "gameplayAfter": "d507921b1244c2a3186ba820bc54a3eae8daf9208dcde677f7eed438c9e358ed",
+    "shader": "Universal Render Pipeline/2D/Sprite-Unlit-Default",
+    "sourceUnchanged": true,
+    "gameplayUnchanged": true,
+    "originalControllerParametersPreserved": true,
+    "physicalSupportRayHit": true,
+    "rearSpriteSortedBehind": false,
+    "foregroundMeshOccludes": true,
+    "characterHeight": 1.399999976158142,
+    "radius": 0.3499999940395355,
+    "skinWidth": 0.07999999821186066,
+    "pixelsPerUnit": 1049.2857666015625,
+    "soleWorldY": 0.0,
+    "supportWorldY": 0.0,
+    "contactError": 0.0,
+    "controllerCenter": {
+        "x": 0.0,
+        "y": 0.699999988079071,
+        "z": 0.0
+    },
+    "rootScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+    },
+    "pivotPixels": {
+        "x": 536.0,
+        "y": 29.0
+    },
+    "clearSample": {
+        "r": 0.07450980693101883,
+        "g": 0.09803921729326248,
+        "b": 0.16078431904315949,
+        "a": 1.0
+    },
+    "rearSample": {
+        "r": 1.0,
+        "g": 0.0,
+        "b": 1.0,
+        "a": 1.0
+    },
+    "foregroundSample": {
+        "r": 0.14901961386203767,
+        "g": 0.6509804129600525,
+        "b": 0.7490196228027344,
+        "a": 1.0
+    }
+}

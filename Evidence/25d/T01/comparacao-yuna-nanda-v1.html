@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Yuna aprovada e Nanda azul — avaliação de escala</title>
+<style>
+body{margin:0;background:#141722;color:#f7ecd9;font:17px/1.5 system-ui,sans-serif}main{max-width:1050px;margin:auto;padding:24px}h1{font-size:26px}p{max-width:800px}.stage{position:relative;height:560px;overflow:hidden;border:1px solid #626b80;border-radius:12px;background:linear-gradient(#20273a,#11141e)}.stage img{position:absolute;object-fit:contain;width:auto;max-width:47%;height:85%;bottom:5%;left:17%}.stage .nanda{height:29.75%;left:54%;bottom:52%}label{display:block;margin:16px 0}input{width:240px;vertical-align:middle}button{background:#314d75;color:white;border:1px solid #a6bfd8;border-radius:6px;padding:9px 16px;cursor:pointer}.light{background:linear-gradient(#dce2e5,#c2cbd2)}small{display:block;color:#bbc6d9}a{color:#bad7ff}@media(max-width:600px){.stage{height:430px}.stage img{left:8%;max-width:58%}.stage .nanda{left:58%;max-width:37%}}
+</style>
+<main>
+<h1>Yuna aprovada · Nanda azul em revisão</h1>
+<p>Comparação conceitual com os dois PNGs originais, sem redesenhar Yuna. A escala inicial de Nanda é uma proposta para avaliação, não uma medida confirmada do legado nem a câmera final.</p>
+<label>Altura da imagem de Nanda em relação à de Yuna: <input id="ratio" type="range" min="20" max="55" value="35" step="1"> <output id="value">35%</output></label>
+<button id="background" type="button">Alternar fundo claro/escuro</button>
+<div class="stage" id="stage" aria-label="Yuna de pé e Nanda azul voando à sua frente">
+ <img src="yuna-profile-v1.png" alt="Yuna de perfil, desenho aprovado">
+ <img class="nanda" id="nanda" src="nanda-blue-v1.png" alt="Nanda azul em pose de voo, candidata 1">
+</div>
+<small>O controle compara as caixas das imagens, incluindo margens e asas; não mede altura anatômica. A posição e o fundo são apenas uma montagem de revisão. O brilho é pintado na imagem: a luz real na Unity ainda não foi alterada.</small>
+<p><a href="nanda-blue-v1.png">Ver Nanda ampliada</a> · <a href="reviews/T01.2-v1.md">Escopo da revisão</a></p>
+</main>
+<script>
+const ratio=document.getElementById('ratio'),value=document.getElementById('value'),nanda=document.getElementById('nanda');
+ratio.addEventListener('input',()=>{value.textContent=ratio.value+'%';nanda.style.height=(85*Number(ratio.value)/100)+'%'});
+document.getElementById('background').addEventListener('click',()=>document.getElementById('stage').classList.toggle('light'));
+</script>
+</html>

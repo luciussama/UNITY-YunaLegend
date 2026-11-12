@@ -1,0 +1,202 @@
+[
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/after/01-gameplay-start.png",
+    "bytes": 508273,
+    "sha256": "6d3942bebdd088b2ec68cf5a9cee787d2d56cb6921b872dfc31bd57016d8164e"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/after/02-bear-front.png",
+    "bytes": 818504,
+    "sha256": "d7929aa7c1c35660c088b47ec95010643ff13e4ef1a7259ba3c330b6673031a9"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/after/03-bear-three-quarter.png",
+    "bytes": 870717,
+    "sha256": "b68ebd80e2780492a289b952c464a96ce7ad488ac26979f4353b8c536b42caf3"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/after/04-bear-side.png",
+    "bytes": 916547,
+    "sha256": "a75b0741de06ee13e0676d35a717e1ad04f1c0f89da7d2f8b1ee675f1dd04b34"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/after/05-gameplay-approach.png",
+    "bytes": 582866,
+    "sha256": "3be4fa64574fa73c13146e5a26acbad02bdfd57ddf6d33b289a18a439999854d"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/after/06-books-front.png",
+    "bytes": 830383,
+    "sha256": "7ee8c0431781720061dc9eb05d0c82b76d8d6cd084ed12fc75c8ab01f4d68b5d"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/after/07-books-three-quarter.png",
+    "bytes": 926728,
+    "sha256": "845f6e62ae5e7120a326f3ca21e55ab3f5aefc2b950edb0b4441230c28329a73"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/after/08-books-top.png",
+    "bytes": 924636,
+    "sha256": "a091ffa3945cf1faedcc3b525061eff369e77aecb0f8e1d932998f16b6270a04"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/after/09-gameplay-books-close.png",
+    "bytes": 597979,
+    "sha256": "78ea4b7ea8ae9b9f0ecc14c1309bdc715c2b244322a3696ffe2b5ecb42d23793"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/before/01-gameplay-start.png",
+    "bytes": 507135,
+    "sha256": "b2950883e7b1bc5423938596397d510945a1e78bce6a2683ee60029806a050c9"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/before/02-bear-front.png",
+    "bytes": 836243,
+    "sha256": "3559a8f4a792facff0a54010e35bbda7907b88e4d7dcfe6417fabd5764db386b"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/before/03-bear-three-quarter.png",
+    "bytes": 894800,
+    "sha256": "91fb79326d7614545573500ac57b1fbb323e39e6e5a762a3ba06c6979429615f"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/before/04-bear-side.png",
+    "bytes": 868288,
+    "sha256": "55fcc9a7821e432b757b582a205a16e00bba0e363f5ee77ec71f282a737f92c8"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/before/05-gameplay-approach.png",
+    "bytes": 580759,
+    "sha256": "e4380968c39dfb4b3f078bc9762ba7b9df80b512deeb1a0e01fcf88c9e1817f0"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/before/06-books-front.png",
+    "bytes": 812123,
+    "sha256": "a2ca9d3766ea76c4e11bb8ada5c0a5e7f2fe933c0698b033c587112752f672b3"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/before/07-books-three-quarter.png",
+    "bytes": 915894,
+    "sha256": "a40232e3d77125fe50357209be922403faf7d8ceec172e0792bc7a8440e6d3d1"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/before/08-books-top.png",
+    "bytes": 950098,
+    "sha256": "002ac9145407edae33a5c9a3f34005bc29405b677553171611990dd5051ecc2c"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/before/comparison-concept.png",
+    "bytes": 1610491,
+    "sha256": "fbaf48a3eb6e9c9f7819ff8a27a18a5e34f32cff3c201fc08f82adbb3305a32d"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/before/comparison-reference.png",
+    "bytes": 602213,
+    "sha256": "a5fb16ecd98f2d786cb87eb62fae876fc17dfdcf77623b55f966e88802b20f8e"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/comparison-detail.png",
+    "bytes": 1003640,
+    "sha256": "91ca0dc557475f12c5755b2bf832661512c3260968301ac49c6a9bdcf32a4f51"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/editmode-final.xml",
+    "bytes": 23831,
+    "sha256": "4b9ddba1767f91c93754834293e2359f9e1007b732bfe66a6bd69b86fdc0893a"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/editmode.xml",
+    "bytes": 23132,
+    "sha256": "017a1310329ede97346f2ef0b4e69f588d544c42de50dc6446618c304f1dbf74"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/01-gameplay-start.png",
+    "bytes": 508453,
+    "sha256": "9bc35ea4d0245df45d03d8e24bedf23183da11906c8a44d240f9ab0fb3d6bb19"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/02-bear-front.png",
+    "bytes": 846168,
+    "sha256": "42efbce39b896b1b5f6a6b3b1cd05a2a96b552fb84853cfd494062c4203a3d59"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/03-bear-three-quarter.png",
+    "bytes": 909427,
+    "sha256": "a50b38e11941397b2e3000cf2423ee55ef1fe66886a744304f31a66e43ffb810"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/04-bear-side.png",
+    "bytes": 878253,
+    "sha256": "c4e6174401c4412e1dc4cdeb66883622354f43142bc1e570902c58be495bb75f"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/05-gameplay-approach.png",
+    "bytes": 581902,
+    "sha256": "cca271bfae435d9222bebec89a59891684b15beeba84ecc1b7e5ac0ced9bdab9"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/06-books-front.png",
+    "bytes": 810511,
+    "sha256": "0278b2a8df0a8146534c5d89101ffe0def26b3d2e189384e9fca0fa0d49d0a19"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/07-books-three-quarter.png",
+    "bytes": 920702,
+    "sha256": "292863d52d8acd100e8e47cd6f9ff87b6fa2c2b494d5639c736bdbb822a0fd5e"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/08-books-top.png",
+    "bytes": 945216,
+    "sha256": "c9ad0582be5b63da305da1ed64d89818435c3a7168771332b4e0bd9eb13d5d46"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/09-gameplay-books-close.png",
+    "bytes": 592627,
+    "sha256": "7bbb1a66fd991e119f3ac6cd45dea5cba88ef081952c08ad53d2f6e9ddba8508"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/first-trial/playmode-curved-contact-failed.xml",
+    "bytes": 121009,
+    "sha256": "97426ee9dd7054c26766bd4a28145acb0d7c45f28178eb1d7aa8783597bbc8c1"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/image-prompts.json",
+    "bytes": 4447,
+    "sha256": "3a62ac6ecdcb16341d3431222cef3097137b4947ab73d4acfc8053016cbbf752"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/integration.json",
+    "bytes": 9091,
+    "sha256": "30c93695730483b33ca57577e4ea586185c8d1c9defc32be57ded20f00616232"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/make_comparison.py",
+    "bytes": 1140,
+    "sha256": "6634fa801b7c51742eb38e1bfee69b147a74ff0a673714585ca05bb9f694b007"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/playmode-final.xml",
+    "bytes": 120153,
+    "sha256": "05aff4788e3826ce1321dd9faa57e62ea579805dbe5463e22948dffd2a85256e"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/playmode.xml",
+    "bytes": 121009,
+    "sha256": "97426ee9dd7054c26766bd4a28145acb0d7c45f28178eb1d7aa8783597bbc8c1"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/README.md",
+    "bytes": 8996,
+    "sha256": "807e47345bb41f89a0b5e1c3fa26cedefd307b32094a117357cb3be72e487126"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/source-snapshot.json",
+    "bytes": 2798,
+    "sha256": "6012cc39cfbb1042dc6d5da6077b5fc7745d41b68bd8d69bcd78e7ae94a9242a"
+  },
+  {
+    "path": "Evidence/painted-platforms-2026-11-11/validation-excerpts.txt",
+    "bytes": 1530,
+    "sha256": "6af1bc19beb50d2c142fa02defd842bfbf955334685ac0a3bf798109d748f867"
+  }
+]

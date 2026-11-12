@@ -1,0 +1,148 @@
+{
+  "Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformCatalog.cs": [
+    {
+      "line": 14,
+      "text": "public struct PlatformContactSurface"
+    },
+    {
+      "line": 47,
+      "text": "public PlatformContactSurface contact;"
+    }
+  ],
+  "Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformGeometry.cs": [
+    {
+      "line": 82,
+      "text": "if (index == 0) height = ConceptTeddyHeight;"
+    },
+    {
+      "line": 99,
+      "text": "public const float ConceptTeddyHeight = 1.10f;"
+    },
+    {
+      "line": 111,
+      "text": "public static PlatformContactSurface GetContact(int index)"
+    }
+  ],
+  "Assets/Scripts/Runtime/DarkRoom/DarkRoomThreeStageCircuitGenerator.cs": [
+    {
+      "line": 11,
+      "text": "public const float LayoutPlatformHeight = 0.7f;"
+    },
+    {
+      "line": 21,
+      "text": "public static float Stage2StartX(PlatformSpec lastStage1, float firstStage2Width, float gap)"
+    },
+    {
+      "line": 30,
+      "text": "public static float Stage2StartY(PlatformSpec lastStage1, float verticalGap)"
+    },
+    {
+      "line": 63,
+      "text": "float layoutW = (i == 9) ? 4.2f : (i == 0 ? 3.0f : 2.6f);"
+    },
+    {
+      "line": 79,
+      "text": "list.Add(new PlatformSpec(i, names[i], DarkRoomPhase.Phase1Ascent, layoutX, centerY, w, d, h, tint, \"Etapa 1 - Subida Calma\"));"
+    }
+  ],
+  "Assets/Scripts/Runtime/DarkRoom/Yuna25DPlayerController.cs": [
+    {
+      "line": 134,
+      "text": "float farEdge = marker.transform.position.x + runDirection * marker.spec.width * 0.5f;"
+    },
+    {
+      "line": 459,
+      "text": "float distToCenter = runDirection * (targetMarker.transform.position.x - transform.position.x);"
+    },
+    {
+      "line": 460,
+      "text": "float targetWidth = targetMarker.spec.width;"
+    }
+  ],
+  "Assets/Scripts/Runtime/Camera/SideScroll25DCamera.cs": [
+    {
+      "line": 128,
+      "text": "float reach = target != null ? Mathf.Abs(target.transform.position.x - anchorX) + target.spec.width * 0.5f + 0.7f : 0f;"
+    }
+  ],
+  "Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformArt.cs": [
+    {
+      "line": 85,
+      "text": "float headDepth = Mathf.Min(d * 0.74f, 1.65f);"
+    },
+    {
+      "line": 272,
+      "text": "var leathers = new[] { dark, green, brown, brown, ochre };"
+    },
+    {
+      "line": 273,
+      "text": "float[] widths = { w * 0.875f, w * 0.91f, w * 0.86f, w * 0.82f, w * 0.77f };"
+    }
+  ],
+  "Assets/Scripts/Editor/DarkRoomAudioAssetBuilder.cs": [
+    {
+      "line": 55,
+      "text": "System.Random rand = new System.Random();"
+    },
+    {
+      "line": 74,
+      "text": "System.Random rand = new System.Random();"
+    },
+    {
+      "line": 93,
+      "text": "System.Random rand = new System.Random();"
+    },
+    {
+      "line": 129,
+      "text": "System.Random rand = new System.Random();"
+    },
+    {
+      "line": 151,
+      "text": "System.Random rand = new System.Random();"
+    }
+  ],
+  "Assets/Scripts/Editor/DarkRoomScenePopulator.cs": [
+    {
+      "line": 20,
+      "text": "DarkRoomArtAssetBuilder.GenerateAllArtAssets();"
+    },
+    {
+      "line": 21,
+      "text": "DarkRoomAudioAssetBuilder.GenerateAllSfx();"
+    },
+    {
+      "line": 22,
+      "text": "DarkRoomVfxBuilder.GenerateAllVfx();"
+    }
+  ],
+  "Assets/Scripts/Tests/DarkRoomPlatformGeometryTests.cs": [
+    {
+      "line": 122,
+      "text": "Vector3 topFace = collider.transform.position +"
+    },
+    {
+      "line": 197,
+      "text": "Assert.AreEqual(collider.bounds.max.y, headRenderer.bounds.max.y, 0.03f,"
+    }
+  ],
+  "Assets/Scripts/Tests/DarkRoomIntegrityTests.cs": [
+    {
+      "line": 194,
+      "text": "float deltaY = s1[i + 1].y - s1[i].y;"
+    },
+    {
+      "line": 195,
+      "text": "float gap = (s1[i + 1].x - s1[i + 1].width * 0.5f) - (s1[i].x + s1[i].width * 0.5f);"
+    }
+  ],
+  "Assets/Scripts/Tests/PlayMode/DarkRoomMandatoryRouteTests.cs": [
+    {
+      "line": 181,
+      "text": "for (float inset = 0.05f; inset <= Marker(source).spec.width; inset += 0.1f)"
+    },
+    {
+      "line": 184,
+      "text": "top.x += direction * (Marker(source).spec.width * 0.5f - inset);"
+    }
+  ]
+}

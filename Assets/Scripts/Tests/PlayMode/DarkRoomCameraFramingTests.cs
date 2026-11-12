@@ -39,6 +39,33 @@ namespace YunaLegend.RoutePhysics.Tests
         }
 
         [UnityTest]
+        public IEnumerator IllustratedPilotKeepsScaleAndDoesNotTrackJumpHeight()
+        {
+            yield return Load();
+            var player = Object.FindFirstObjectByType<Yuna25DPlayerController>();
+            player.enabled = false; player.GetComponent<CharacterController>().enabled = false;
+            player.AutoRunActive = false;
+            player.transform.position = DarkRoomStartLayout.Position;
+            var camera = Camera.main; camera.aspect = 16f / 9f;
+            var side = camera.GetComponent<SideScroll25DCamera>();
+            Assert.IsFalse(side.IllustratedPilotFraming, "Saved Gameplay must keep its existing camera by default.");
+            side.SetTarget(player.transform);
+            side.ConfigureIllustratedPilot(true, 7.5f);
+            var reference = camera.transform.position;
+            player.transform.position += Vector3.up * 2f;
+            yield return null;
+            Assert.AreEqual(reference.y, camera.transform.position.y, .001f, "A jump must not drag the camera up.");
+            Assert.AreEqual(reference.z, camera.transform.position.z, .001f);
+            camera.aspect = 19.5f / 9f;
+            yield return null;
+            float pixels = Mathf.Abs(camera.WorldToViewportPoint(player.transform.position + Vector3.up * 1.4f).y - camera.WorldToViewportPoint(player.transform.position).y) * 720f;
+            Assert.AreEqual(134.4f, pixels, .01f);
+            Assert.AreEqual(reference.z, camera.transform.position.z, .001f, "Landscape aspect changes should reveal more width without zooming.");
+            Assert.AreEqual(45f, camera.fieldOfView);
+            Assert.Less(Quaternion.Angle(camera.transform.rotation, Quaternion.identity), .01f);
+        }
+
+        [UnityTest]
         public IEnumerator CastleOverviewRevealsRouteThenReturnsToCloseFrame()
         {
             yield return Load();

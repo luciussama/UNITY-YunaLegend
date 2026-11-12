@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="27" result="Passed" total="27" passed="27" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:55:00Z" duration="0,9855068">
+  <test-suite type="TestSuite" id="1000" name="Yuna Legend - O Quarto dos Brinquedos" fullname="Yuna Legend - O Quarto dos Brinquedos" runstate="Runnable" testcasecount="27" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:55:00Z" duration="0.985507" total="27" passed="27" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1037" name="YunaLegend.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Build/CameraFramingValidation/Library/ScriptAssemblies/YunaLegend.Tests.dll" runstate="Runnable" testcasecount="27" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:55:00Z" duration="0.979468" total="27" passed="27" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="46260" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1038" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="27" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:55:00Z" duration="0.979136" total="27" passed="27" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1039" name="Tests" fullname="YunaLegend.Tests" runstate="Runnable" testcasecount="27" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:55:00Z" duration="0.978979" total="27" passed="27" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1008" name="DarkRoomIntegrityTests" fullname="YunaLegend.Tests.DarkRoomIntegrityTests" classname="YunaLegend.Tests.DarkRoomIntegrityTests" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.549505" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1015" name="Test_AssetsPresence_FontsAndSoundsExistOnDisk" fullname="YunaLegend.Tests.DarkRoomIntegrityTests.Test_AssetsPresence_FontsAndSoundsExistOnDisk" methodname="Test_AssetsPresence_FontsAndSoundsExistOnDisk" classname="YunaLegend.Tests.DarkRoomIntegrityTests" runstate="Runnable" seed="1611339605" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.009856" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1023" name="Test_CameraSectionFallbackKeepsLensAndRotationStable" fullname="YunaLegend.Tests.DarkRoomIntegrityTests.Test_CameraSectionFallbackKeepsLensAndRotationStable" methodname="Test_CameraSectionFallbackKeepsLensAndRotationStable" classname="YunaLegend.Tests.DarkRoomIntegrityTests" runstate="Runnable" seed="1177733687" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.008995" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1011" name="Test_CameraSnapUsesSignedOffsetOnRetry" fullname="YunaLegend.Tests.DarkRoomIntegrityTests.Test_CameraSnapUsesSignedOffsetOnRetry" methodname="Test_CameraSnapUsesSignedOffsetOnRetry" classname="YunaLegend.Tests.DarkRoomIntegrityTests" runstate="Runnable" seed="1266442874" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.000808" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1020" name="Test_CastleCutscene_RequiresInteractiveInputProgression" fullname="YunaLegend.Tests.DarkRoomIntegrityTests.Test_CastleCutscene_RequiresInteractiveInputProgression" methodname="Test_CastleCutscene_RequiresInteractiveInputProgression" classname="YunaLegend.Tests.DarkRoomIntegrityTests" runstate="Runnable" seed="2077642310" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.006460" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DarkRoomProgression] Cutscene do Castelo iniciada. Aguardando input do jogador...
+[DarkRoomProgression] Etapa 2 iniciada: A Fuga Acelerada!
+]]></output>
+            </test-case>
+            <test-case id="1013" name="Test_CatalogPhaseContinuity_IndexesAreSequential" fullname="YunaLegend.Tests.DarkRoomIntegrityTests.Test_CatalogPhaseContinuity_IndexesAreSequential" methodname="Test_CatalogPhaseContinuity_IndexesAreSequential" classname="YunaLegend.Tests.DarkRoomIntegrityTests" runstate="Runnable" seed="317193863" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.001504" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1012" name="Test_CatalogPlatformCounts_MatchesRoteiroExactly" fullname="YunaLegend.Tests.DarkRoomIntegrityTests.Test_CatalogPlatformCounts_MatchesRoteiroExactly" methodname="Test_CatalogPlatformCounts_MatchesRoteiroExactly" classname="YunaLegend.Tests.DarkRoomIntegrityTests" runstate="Runnable" seed="1233721731" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.000232" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1022" name="Test_CheckpointsAndRetry" fullname="YunaLegend.Tests.DarkRoomIntegrityTests.Test_CheckpointsAndRetry" methodname="Test_CheckpointsAndRetry" classname="YunaLegend.Tests.DarkRoomIntegrityTests" runstate="Runnable" seed="386982538" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.008973" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[GameOver]: Queda teste
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomProgression] Etapa 2 iniciada: A Fuga Acelerada!
+[GameOver]: Queda teste fase 2
+[DarkRoomProgression] Game Over acionado na fase Phase2Escape. Checkpoint atual: Phase2Escape
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase2Escape
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: Queda teste fase 3
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+]]></output>
+            </test-case>
+            <test-case id="1021" name="Test_FalseDoorPoster_TriggersCinematicFallAndDialogue" fullname="YunaLegend.Tests.DarkRoomIntegrityTests.Test_FalseDoorPoster_TriggersCinematicFallAndDialogue" methodname="Test_FalseDoorPoster_TriggersCinematicFallAndDialogue" classname="YunaLegend.Tests.DarkRoomIntegrityTests" runstate="Runnable" seed="417169873" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.002746" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DarkRoomProgression] Etapa 2 iniciada: A Fuga Acelerada!
+[DarkRoomProgression] Yuna alcancou o Poster da Porta Falsa na parede! Iniciando queda cinematica real...
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+]]></output>
+            </test-case>
+            <test-case id="1014" name="Test_OpeningDialogueScript_MatchesScriptTexts" fullname="YunaLegend.Tests.DarkRoomIntegrityTests.Test_OpeningDialogueScript_MatchesScriptTexts" methodname="Test_OpeningDialogueScript_MatchesScriptTexts" classname="YunaLegend.Tests.DarkRoomIntegrityTests" runstate="Runnable" seed="852590789" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.000295" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1009" name="Test_PersistedPostProcessingChainIncludesCameraVolumeAndRendererResources" fullname="YunaLegend.Tests.DarkRoomIntegrityTests.Test_PersistedPostProcessingChainIncludesCameraVolumeAndRendererResources" methodname="Test_PersistedPostProcessingChainIncludesCameraVolumeAndRendererResources" classname="YunaLegend.Tests.DarkRoomIntegrityTests" runstate="Runnable" seed="564662612" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.237475" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1010" name="Test_PersistedSceneStartsOnFloorWithOnlyStage1Visible" fullname="YunaLegend.Tests.DarkRoomIntegrityTests.Test_PersistedSceneStartsOnFloorWithOnlyStage1Visible" methodname="Test_PersistedSceneStartsOnFloorWithOnlyStage1Visible" classname="YunaLegend.Tests.DarkRoomIntegrityTests" runstate="Runnable" seed="1950746175" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.211201" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1019" name="Test_PhysicalJumpSimulation_All38PlatformsReachable" fullname="YunaLegend.Tests.DarkRoomIntegrityTests.Test_PhysicalJumpSimulation_All38PlatformsReachable" methodname="Test_PhysicalJumpSimulation_All38PlatformsReachable" classname="YunaLegend.Tests.DarkRoomIntegrityTests" runstate="Runnable" seed="99888646" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.002789" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1016" name="Test_Progression_InitialStateIsPhase1Ascent" fullname="YunaLegend.Tests.DarkRoomIntegrityTests.Test_Progression_InitialStateIsPhase1Ascent" methodname="Test_Progression_InitialStateIsPhase1Ascent" classname="YunaLegend.Tests.DarkRoomIntegrityTests" runstate="Runnable" seed="1538751623" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.000407" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1025" name="Test_TemporalSectionVisibility_OnlyCurrentSectionVisible" fullname="YunaLegend.Tests.DarkRoomIntegrityTests.Test_TemporalSectionVisibility_OnlyCurrentSectionVisible" methodname="Test_TemporalSectionVisibility_OnlyCurrentSectionVisible" classname="YunaLegend.Tests.DarkRoomIntegrityTests" runstate="Runnable" seed="1481688356" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.043319" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DarkRoomBlockoutBuilder] Circuito CanÃ´nico em 3 Etapas gerado com sucesso! Etapa 1: 10 | Etapa 2: 12 | Etapa 3: 16 plataformas.
+]]></output>
+            </test-case>
+            <test-case id="1018" name="Test_ThreeStageCircuit_NoOverlapBetweenStages" fullname="YunaLegend.Tests.DarkRoomIntegrityTests.Test_ThreeStageCircuit_NoOverlapBetweenStages" methodname="Test_ThreeStageCircuit_NoOverlapBetweenStages" classname="YunaLegend.Tests.DarkRoomIntegrityTests" runstate="Runnable" seed="1045063654" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.000453" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1017" name="Test_ThreeStageCircuitGenerator_MatchesRoteiroSpecifications" fullname="YunaLegend.Tests.DarkRoomIntegrityTests.Test_ThreeStageCircuitGenerator_MatchesRoteiroSpecifications" methodname="Test_ThreeStageCircuitGenerator_MatchesRoteiroSpecifications" classname="YunaLegend.Tests.DarkRoomIntegrityTests" runstate="Runnable" seed="150085437" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.000317" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1024" name="Test_YunaAutoRunner_CanBeResetAndStartsRunning" fullname="YunaLegend.Tests.DarkRoomIntegrityTests.Test_YunaAutoRunner_CanBeResetAndStartsRunning" methodname="Test_YunaAutoRunner_CanBeResetAndStartsRunning" classname="YunaLegend.Tests.DarkRoomIntegrityTests" runstate="Runnable" seed="197173346" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.000484" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1026" name="DarkRoomPlatformGeometryTests" fullname="YunaLegend.Tests.DarkRoomPlatformGeometryTests" classname="YunaLegend.Tests.DarkRoomPlatformGeometryTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:55:00Z" duration="0.428447" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1031" name="Books_DeclareCustomDiagonalContactSurface" fullname="YunaLegend.Tests.DarkRoomPlatformGeometryTests.Books_DeclareCustomDiagonalContactSurface" methodname="Books_DeclareCustomDiagonalContactSurface" classname="YunaLegend.Tests.DarkRoomPlatformGeometryTests" runstate="Runnable" seed="2045457390" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.001330" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1034" name="CushionMesh_TopMatchesContactPlaneAndNormalsFaceOutward" fullname="YunaLegend.Tests.DarkRoomPlatformGeometryTests.CushionMesh_TopMatchesContactPlaneAndNormalsFaceOutward" methodname="CushionMesh_TopMatchesContactPlaneAndNormalsFaceOutward" classname="YunaLegend.Tests.DarkRoomPlatformGeometryTests" runstate="Runnable" seed="569017345" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.001792" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1027" name="EveryPlatform_HasCanonicalMetersDerivedFromDesignCatalog" fullname="YunaLegend.Tests.DarkRoomPlatformGeometryTests.EveryPlatform_HasCanonicalMetersDerivedFromDesignCatalog" methodname="EveryPlatform_HasCanonicalMetersDerivedFromDesignCatalog" classname="YunaLegend.Tests.DarkRoomPlatformGeometryTests" runstate="Runnable" seed="837352035" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.000498" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1029" name="FirstPlatform_IsTheTeddyHeadWithCanonicalProportions" fullname="YunaLegend.Tests.DarkRoomPlatformGeometryTests.FirstPlatform_IsTheTeddyHeadWithCanonicalProportions" methodname="FirstPlatform_IsTheTeddyHeadWithCanonicalProportions" classname="YunaLegend.Tests.DarkRoomPlatformGeometryTests" runstate="Runnable" seed="446715954" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:54:59Z" duration="0.000244" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1033" name="PersistedScene_BookStackColliderFollowsTheTiltedTopCover" fullname="YunaLegend.Tests.DarkRoomPlatformGeometryTests.PersistedScene_BookStackColliderFollowsTheTiltedTopCover" methodname="PersistedScene_BookStackColliderFollowsTheTiltedTopCover" classname="YunaLegend.Tests.DarkRoomPlatformGeometryTests" runstate="Runnable" seed="1456675207" result="Passed" start-time="2026-11-11 19:54:59Z" end-time="2026-11-11 19:55:00Z" duration="0.209561" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1036" name="PersistedScene_PlatformZeroHasModelAndContactSurfaceOnTop" fullname="YunaLegend.Tests.DarkRoomPlatformGeometryTests.PersistedScene_PlatformZeroHasModelAndContactSurfaceOnTop" methodname="PersistedScene_PlatformZeroHasModelAndContactSurfaceOnTop" classname="YunaLegend.Tests.DarkRoomPlatformGeometryTests" runstate="Runnable" seed="1805303462" result="Passed" start-time="2026-11-11 19:55:00Z" end-time="2026-11-11 19:55:00Z" duration="0.207742" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1028" name="Platforms_AreNotUniformInWidthHeightOrDepth" fullname="YunaLegend.Tests.DarkRoomPlatformGeometryTests.Platforms_AreNotUniformInWidthHeightOrDepth" methodname="Platforms_AreNotUniformInWidthHeightOrDepth" classname="YunaLegend.Tests.DarkRoomPlatformGeometryTests" runstate="Runnable" seed="1828837101" result="Passed" start-time="2026-11-11 19:55:00Z" end-time="2026-11-11 19:55:00Z" duration="0.001737" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1032" name="Platforms_WithoutOwnSurfaceKeepTheDefaultBoxContact" fullname="YunaLegend.Tests.DarkRoomPlatformGeometryTests.Platforms_WithoutOwnSurfaceKeepTheDefaultBoxContact" methodname="Platforms_WithoutOwnSurfaceKeepTheDefaultBoxContact" classname="YunaLegend.Tests.DarkRoomPlatformGeometryTests" runstate="Runnable" seed="814350174" result="Passed" start-time="2026-11-11 19:55:00Z" end-time="2026-11-11 19:55:00Z" duration="0.000194" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1035" name="RoundedBearTopHasTwoDimensionalTextureCoordinates" fullname="YunaLegend.Tests.DarkRoomPlatformGeometryTests.RoundedBearTopHasTwoDimensionalTextureCoordinates" methodname="RoundedBearTopHasTwoDimensionalTextureCoordinates" classname="YunaLegend.Tests.DarkRoomPlatformGeometryTests" runstate="Runnable" seed="560985591" result="Passed" start-time="2026-11-11 19:55:00Z" end-time="2026-11-11 19:55:00Z" duration="0.002339" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1030" name="Stage1_FirstPlatformRestsOnFloorWhileOthersKeepTheValidatedTops" fullname="YunaLegend.Tests.DarkRoomPlatformGeometryTests.Stage1_FirstPlatformRestsOnFloorWhileOthersKeepTheValidatedTops" methodname="Stage1_FirstPlatformRestsOnFloorWhileOthersKeepTheValidatedTops" classname="YunaLegend.Tests.DarkRoomPlatformGeometryTests" runstate="Runnable" seed="216633673" result="Passed" start-time="2026-11-11 19:55:00Z" end-time="2026-11-11 19:55:00Z" duration="0.000260" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: C:/Users/sergi/AppData/LocalLow/DeepMindStudio/Yuna Legend - O Quarto dos Brinquedos\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

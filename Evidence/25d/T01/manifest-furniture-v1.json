@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "session": "2026-11-12-codex-furniture-25d-f502",
+  "status": "em_revisao",
+  "microdelivery": "T01.5",
+  "tool": "image_gen.imagegen built-in",
+  "transparent_background_requested": true,
+  "references": [
+    {
+      "path": "Evidence/25d/T01/books-v1.png",
+      "role": "approved painting style only",
+      "sha256": "cdbf8f5b1fa6f8cc3dd92372d142d26a72325005f4e84a97d49bd14fd83b0bec"
+    },
+    {
+      "path": "Evidence/furniture02-2026-11-11/07-front-inspection.png",
+      "role": "existing structure and proportions only; straight seam excluded",
+      "sha256": "04ee6703175aaee4daa59211bd1a79ebe8ee5e356c89d9f038a234a747d11d1f"
+    }
+  ],
+  "generation_source": "C:/Users/sergi/.codex/generated_images/01a1cfe0-1ed7-7ac1-8c1d-70a394f5b3c7/exec-97ee5ad8-216f-4bc4-8ba9-5f56c4803395.png",
+  "inspection": {
+    "width": 1774,
+    "height": 887,
+    "bit_depth": 8,
+    "png_color_type": 6,
+    "main_furniture_and_localized_fracture_detail": true,
+    "runtime_contact_sag_retry_validation": "pending",
+    "alpha_edge_qa": "pending"
+  },
+  "support_contract_written_before_generation": true,
+  "files": [
+    {
+      "path": "furniture-v1.png",
+      "sha256": "2926cc4b2d9aa0abf1d8330f36cb265d541b7902f0a6f253bd49840899a70797",
+      "bytes": 2503449
+    },
+    {
+      "path": "prompt-furniture-v1.txt",
+      "sha256": "c39340b04cf40063cbe77026e91eb0997bf6133db3271ef5a984e88bb79f48c9",
+      "bytes": 3370
+    },
+    {
+      "path": "furniture-support-contract-v1.md",
+      "sha256": "64865da5a07f1f48f8359ee0c92ae73055f25c2bbcccfc8ae96a423424951af2",
+      "bytes": 2583
+    },
+    {
+      "path": "reviews/T01.5-v1.md",
+      "sha256": "39bcdc57ab902b501740633fc3bd0d554c28e02864594416f6778d5250f3ab25",
+      "bytes": 2491
+    }
+  ]
+}

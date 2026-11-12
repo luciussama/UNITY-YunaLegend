@@ -1,0 +1,1822 @@
+{
+    "method": "Controlled live Play Mode traversal at captureDeltaTime1/60. Real player/furniture/guide/camera updates; injected jump buffer at book edge and furniture exit. Progression/UI disabled. Inspection07-09 use temporary lights; live frames use scene lights only. No scene saved.",
+    "samples": [
+        {
+            "frame": 18,
+            "support": 1,
+            "cracks": 0,
+            "gameTime": -0.03333333507180214,
+            "sag": 0.0,
+            "delay": 0.0,
+            "poseAngle": 0.4352588653564453,
+            "timeScale": 1.0,
+            "player": {
+                "x": 7.012746810913086,
+                "y": -7.550050735473633,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 8.997246742248536,
+                "y": -5.425000190734863,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0018.png"
+        },
+        {
+            "frame": 21,
+            "support": 1,
+            "cracks": 0,
+            "gameTime": 0.01666666753590107,
+            "sag": 0.0,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 7.0657854080200199,
+                "y": -7.381836414337158,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 9.050285339355469,
+                "y": -5.425000190734863,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0021.png"
+        },
+        {
+            "frame": 24,
+            "support": 1,
+            "cracks": 0,
+            "gameTime": 0.06666667014360428,
+            "sag": 0.0,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 7.2249016761779789,
+                "y": -6.913860321044922,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 9.209402084350586,
+                "y": -5.425000190734863,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0024.png"
+        },
+        {
+            "frame": 27,
+            "support": 1,
+            "cracks": 0,
+            "gameTime": 0.11666666716337204,
+            "sag": 0.0,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 7.3840179443359379,
+                "y": -6.500884532928467,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 9.368517875671387,
+                "y": -5.425000190734863,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0027.png"
+        },
+        {
+            "frame": 30,
+            "support": 1,
+            "cracks": 0,
+            "gameTime": 0.1666666716337204,
+            "sag": 0.0,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 7.5431342124938969,
+                "y": -6.142908573150635,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 9.527634620666504,
+                "y": -5.425000190734863,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0030.png"
+        },
+        {
+            "frame": 33,
+            "support": 1,
+            "cracks": 0,
+            "gameTime": 0.21666666865348817,
+            "sag": 0.0,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 7.7022504806518559,
+                "y": -5.839932918548584,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 9.686750411987305,
+                "y": -5.425000190734863,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0033.png"
+        },
+        {
+            "frame": 36,
+            "support": 1,
+            "cracks": 0,
+            "gameTime": 0.2666666805744171,
+            "sag": 0.0,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 7.8613667488098148,
+                "y": -5.591956615447998,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 9.845867156982422,
+                "y": -5.425000190734863,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0036.png"
+        },
+        {
+            "frame": 39,
+            "support": 1,
+            "cracks": 0,
+            "gameTime": 0.3166666626930237,
+            "sag": 0.0,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 8.020483016967774,
+                "y": -5.398981094360352,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 10.004982948303223,
+                "y": -5.425000190734863,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0039.png"
+        },
+        {
+            "frame": 42,
+            "support": 1,
+            "cracks": 0,
+            "gameTime": 0.36666667461395266,
+            "sag": 0.0,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 8.179598808288575,
+                "y": -5.26100492477417,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 10.164098739624024,
+                "y": -5.425000190734863,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0042.png"
+        },
+        {
+            "frame": 45,
+            "support": 1,
+            "cracks": 0,
+            "gameTime": 0.4166666567325592,
+            "sag": 0.0,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 8.338715553283692,
+                "y": -5.178029537200928,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 10.32321548461914,
+                "y": -5.425000190734863,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0045.png"
+        },
+        {
+            "frame": 48,
+            "support": 1,
+            "cracks": 0,
+            "gameTime": 0.46666666865348818,
+            "sag": 0.0,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 8.497831344604493,
+                "y": -5.15005350112915,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 10.482331275939942,
+                "y": -5.425000190734863,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0048.png"
+        },
+        {
+            "frame": 51,
+            "support": 1,
+            "cracks": 0,
+            "gameTime": 0.5166666507720947,
+            "sag": 0.0,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 8.65694808959961,
+                "y": -5.177077770233154,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 10.641448020935059,
+                "y": -5.425000190734863,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0051.png"
+        },
+        {
+            "frame": 54,
+            "support": 1,
+            "cracks": 0,
+            "gameTime": 0.5666666626930237,
+            "sag": 0.0,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 8.81606388092041,
+                "y": -5.259101867675781,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 10.80056381225586,
+                "y": -5.425000190734863,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0054.png"
+        },
+        {
+            "frame": 57,
+            "support": 1,
+            "cracks": 0,
+            "gameTime": 0.6166666746139526,
+            "sag": 0.0,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 8.975180625915528,
+                "y": -5.3961262702941898,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 10.959680557250977,
+                "y": -5.425000190734863,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0057.png"
+        },
+        {
+            "frame": 60,
+            "support": 1,
+            "cracks": 0,
+            "gameTime": 0.6666666865348816,
+            "sag": 0.0,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 9.134296417236329,
+                "y": -5.588150501251221,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 11.118796348571778,
+                "y": -5.425000190734863,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0060.png"
+        },
+        {
+            "frame": 63,
+            "support": 1,
+            "cracks": 0,
+            "gameTime": 0.7166666388511658,
+            "sag": 0.0,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 9.293413162231446,
+                "y": -5.835174560546875,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 11.277913093566895,
+                "y": -5.425000190734863,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0063.png"
+        },
+        {
+            "frame": 66,
+            "support": 1,
+            "cracks": 0,
+            "gameTime": 0.7666666507720947,
+            "sag": 0.0,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 9.452528953552246,
+                "y": -6.1371989250183109,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 11.437028884887696,
+                "y": -5.425000190734863,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0066.png"
+        },
+        {
+            "frame": 69,
+            "support": 1,
+            "cracks": 0,
+            "gameTime": 0.8166666626930237,
+            "sag": 0.0,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 9.611645698547364,
+                "y": -6.494223117828369,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 11.596145629882813,
+                "y": -5.425000190734863,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0069.png"
+        },
+        {
+            "frame": 72,
+            "support": 2,
+            "cracks": 0,
+            "gameTime": 0.8666666746139526,
+            "sag": 0.0060000005178153519,
+            "delay": 0.0,
+            "poseAngle": 16.000003814697267,
+            "timeScale": 1.0,
+            "player": {
+                "x": 9.77772331237793,
+                "y": -6.720836162567139,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 11.762223243713379,
+                "y": -5.4124436378479,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0072.png"
+        },
+        {
+            "frame": 75,
+            "support": 2,
+            "cracks": 0,
+            "gameTime": 0.9166666865348816,
+            "sag": 0.015000001527369023,
+            "delay": 0.0,
+            "poseAngle": 16.000003814697267,
+            "timeScale": 1.0,
+            "player": {
+                "x": 9.957722663879395,
+                "y": -6.723860263824463,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 11.942222595214844,
+                "y": -5.362185955047607,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0075.png"
+        },
+        {
+            "frame": 78,
+            "support": 2,
+            "cracks": 0,
+            "gameTime": 0.9666666388511658,
+            "sag": 0.024000002071261407,
+            "delay": 0.0,
+            "poseAngle": 16.000003814697267,
+            "timeScale": 1.0,
+            "player": {
+                "x": 10.137722969055176,
+                "y": -6.727656841278076,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 12.122222900390625,
+                "y": -5.295963287353516,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0078.png"
+        },
+        {
+            "frame": 81,
+            "support": 2,
+            "cracks": 0,
+            "gameTime": 1.0166666507720948,
+            "sag": 0.032882921397686008,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 10.317723274230957,
+                "y": -6.7322282791137699,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 12.302223205566407,
+                "y": -5.227878093719482,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0081.png"
+        },
+        {
+            "frame": 84,
+            "support": 2,
+            "cracks": 0,
+            "gameTime": 1.0666667222976685,
+            "sag": 0.034200455993413928,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 10.497722625732422,
+                "y": -6.735217094421387,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 12.482222557067871,
+                "y": -5.165007591247559,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0084.png"
+        },
+        {
+            "frame": 87,
+            "support": 2,
+            "cracks": 0,
+            "gameTime": 1.1166666746139527,
+            "sag": 0.035444606095552447,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 10.677722930908204,
+                "y": -6.737297534942627,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 12.662222862243653,
+                "y": -5.110350131988525,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0087.png"
+        },
+        {
+            "frame": 90,
+            "support": 2,
+            "cracks": 0,
+            "gameTime": 1.1666666269302369,
+            "sag": 0.03660972788929939,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 10.857723236083985,
+                "y": -6.739445686340332,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 12.842223167419434,
+                "y": -5.064636707305908,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0090.png"
+        },
+        {
+            "frame": 93,
+            "support": 2,
+            "cracks": 0,
+            "gameTime": 1.2166666984558106,
+            "sag": 0.03769053518772125,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 11.03772258758545,
+                "y": -6.7416486740112309,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 13.022222518920899,
+                "y": -5.0274200439453129,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0093.png"
+        },
+        {
+            "frame": 96,
+            "support": 2,
+            "cracks": 0,
+            "gameTime": 1.2666666507720948,
+            "sag": 0.03868214786052704,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 11.21772289276123,
+                "y": -6.743892669677734,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 13.20222282409668,
+                "y": -4.997715950012207,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0096.png"
+        },
+        {
+            "frame": 99,
+            "support": 2,
+            "cracks": 0,
+            "gameTime": 1.3166667222976685,
+            "sag": 0.03958006203174591,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 11.397723197937012,
+                "y": -6.7461628913879398,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 13.382223129272461,
+                "y": -4.974366188049316,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0099.png"
+        },
+        {
+            "frame": 102,
+            "support": 2,
+            "cracks": 0,
+            "gameTime": 1.3666666746139527,
+            "sag": 0.04038020968437195,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 11.577722549438477,
+                "y": -6.748445510864258,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 13.562222480773926,
+                "y": -4.956232070922852,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0102.png"
+        },
+        {
+            "frame": 105,
+            "support": 2,
+            "cracks": 0,
+            "gameTime": 1.4166666269302369,
+            "sag": 0.041078973561525348,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 11.757722854614258,
+                "y": -6.7507243156433109,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 13.742222785949707,
+                "y": -4.942285537719727,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0105.png"
+        },
+        {
+            "frame": 108,
+            "support": 2,
+            "cracks": 0,
+            "gameTime": 1.4666666984558106,
+            "sag": 0.04167318344116211,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 11.937723159790039,
+                "y": -6.752983570098877,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 13.922223091125489,
+                "y": -4.93164587020874,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0108.png"
+        },
+        {
+            "frame": 111,
+            "support": 2,
+            "cracks": 0,
+            "gameTime": 1.5166666507720948,
+            "sag": 0.042160145938396457,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 12.117722511291504,
+                "y": -6.755207538604736,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 14.102222442626954,
+                "y": -4.923584461212158,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0111.png"
+        },
+        {
+            "frame": 114,
+            "support": 2,
+            "cracks": 0,
+            "gameTime": 1.5666667222976685,
+            "sag": 0.04253765940666199,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 12.297722816467286,
+                "y": -6.757381916046143,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 14.282222747802735,
+                "y": -4.917511940002441,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0114.png"
+        },
+        {
+            "frame": 117,
+            "support": 2,
+            "cracks": 0,
+            "gameTime": 1.6166666746139527,
+            "sag": 0.04280401021242142,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 12.477723121643067,
+                "y": -6.7594895362854,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 14.462223052978516,
+                "y": -4.912960529327393,
+                "z": -7.485947608947754
+            },
+            "cracked": false,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0117.png"
+        },
+        {
+            "frame": 120,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 1.6666666269302369,
+            "sag": 0.04591920226812363,
+            "delay": 0.07999999821186066,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 12.657723426818848,
+                "y": -6.761514663696289,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 14.642223358154297,
+                "y": -4.909564018249512,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": true,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0120.png"
+        },
+        {
+            "frame": 123,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 1.7166666984558106,
+            "sag": 0.05491919815540314,
+            "delay": 0.029999999329447748,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 12.657723426818848,
+                "y": -6.7705254554748539,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 14.705225944519043,
+                "y": -4.907038688659668,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": true,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0123.png"
+        },
+        {
+            "frame": 126,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 1.7666666507720948,
+            "sag": 0.06391919404268265,
+            "delay": 0.0,
+            "poseAngle": 5.785548210144043,
+            "timeScale": 1.0,
+            "player": {
+                "x": 12.72972297668457,
+                "y": -6.780328273773193,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 14.768228530883789,
+                "y": -4.905167579650879,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": true,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0126.png"
+        },
+        {
+            "frame": 129,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 1.8166667222976685,
+            "sag": 0.07291918992996216,
+            "delay": 0.0,
+            "poseAngle": 18.384777069091798,
+            "timeScale": 1.0,
+            "player": {
+                "x": 12.909723281860352,
+                "y": -6.789000511169434,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 14.8942232131958,
+                "y": -4.903785705566406,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": true,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0129.png"
+        },
+        {
+            "frame": 132,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 1.8666666746139527,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 25.348127365112306,
+            "timeScale": 1.0,
+            "player": {
+                "x": 13.089722633361817,
+                "y": -6.7907819747924809,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 15.074222564697266,
+                "y": -4.902768135070801,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": true,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0132.png"
+        },
+        {
+            "frame": 135,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 1.9166666269302369,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 24.540966033935548,
+            "timeScale": 1.0,
+            "player": {
+                "x": 13.269722938537598,
+                "y": -6.7875518798828129,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 15.254222869873047,
+                "y": -4.90201997756958,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": true,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0135.png"
+        },
+        {
+            "frame": 138,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 1.9666666984558106,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 16.210737228393556,
+            "timeScale": 1.0,
+            "player": {
+                "x": 13.449723243713379,
+                "y": -6.784322738647461,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 15.434223175048829,
+                "y": -4.9014716148376469,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": true,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0138.png"
+        },
+        {
+            "frame": 141,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.0166666507720949,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 2.9110753536224367,
+            "timeScale": 1.0,
+            "player": {
+                "x": 13.629722595214844,
+                "y": -6.781092643737793,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 15.614222526550293,
+                "y": -4.901070594787598,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": true,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0141.png"
+        },
+        {
+            "frame": 144,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.066666603088379,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 13.809722900390625,
+                "y": -6.777863025665283,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 15.794222831726075,
+                "y": -4.900777339935303,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0144.png"
+        },
+        {
+            "frame": 147,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.116666555404663,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 13.989723205566407,
+                "y": -6.774633407592773,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 15.974223136901856,
+                "y": -4.900563716888428,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0147.png"
+        },
+        {
+            "frame": 150,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.1666667461395265,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 14.169723510742188,
+                "y": -6.771403789520264,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 16.154224395751954,
+                "y": -4.900408744812012,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0150.png"
+        },
+        {
+            "frame": 153,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.2166666984558107,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 14.349722862243653,
+                "y": -6.768174171447754,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 16.3342227935791,
+                "y": -4.900295734405518,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0153.png"
+        },
+        {
+            "frame": 156,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.2666666507720949,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 14.529723167419434,
+                "y": -6.764944076538086,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 16.514223098754884,
+                "y": -4.900213718414307,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0156.png"
+        },
+        {
+            "frame": 159,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.316666603088379,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 14.709723472595215,
+                "y": -6.761714458465576,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 16.694223403930665,
+                "y": -4.9001545906066898,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0159.png"
+        },
+        {
+            "frame": 162,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.366666555404663,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 14.88972282409668,
+                "y": -6.758484840393066,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 16.874223709106447,
+                "y": -4.900111675262451,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0162.png"
+        },
+        {
+            "frame": 165,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.4166667461395265,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 15.069723129272461,
+                "y": -6.755255222320557,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 17.054224014282228,
+                "y": -4.900080680847168,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0165.png"
+        },
+        {
+            "frame": 168,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.4666666984558107,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 15.249723434448243,
+                "y": -6.752025604248047,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 17.234224319458009,
+                "y": -4.900058269500732,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0168.png"
+        },
+        {
+            "frame": 171,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.5166666507720949,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 15.429722785949707,
+                "y": -6.748795986175537,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 17.414222717285158,
+                "y": -4.9000420570373539,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0171.png"
+        },
+        {
+            "frame": 174,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.566666603088379,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 15.609723091125489,
+                "y": -6.745566368103027,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 17.594223022460939,
+                "y": -4.900030612945557,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0174.png"
+        },
+        {
+            "frame": 177,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.616666555404663,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 15.78972339630127,
+                "y": -6.742336750030518,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 17.77422332763672,
+                "y": -4.900022029876709,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0177.png"
+        },
+        {
+            "frame": 180,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.6666667461395265,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 15.969722747802735,
+                "y": -6.73910665512085,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 17.9542236328125,
+                "y": -4.900015830993652,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0180.png"
+        },
+        {
+            "frame": 183,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.7166666984558107,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 16.149723052978517,
+                "y": -6.73587703704834,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 18.13422393798828,
+                "y": -4.9000115394592289,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0183.png"
+        },
+        {
+            "frame": 186,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.7666666507720949,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 16.329723358154298,
+                "y": -6.732647895812988,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 18.314224243164064,
+                "y": -4.891383647918701,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0186.png"
+        },
+        {
+            "frame": 189,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.816666603088379,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 16.509723663330079,
+                "y": -6.72941780090332,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 18.494224548339845,
+                "y": -4.872405529022217,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0189.png"
+        },
+        {
+            "frame": 192,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.866666555404663,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 7.000001430511475,
+            "timeScale": 1.0,
+            "player": {
+                "x": 16.68972396850586,
+                "y": -6.7261881828308109,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 18.674224853515626,
+                "y": -4.850064277648926,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0192.png"
+        },
+        {
+            "frame": 195,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.9166667461395265,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 16.855806350708009,
+                "y": -6.2398786544799809,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 18.840307235717775,
+                "y": -4.828085422515869,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0195.png"
+        },
+        {
+            "frame": 198,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 2.9666666984558107,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 17.02189064025879,
+                "y": -5.808569431304932,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 19.006391525268556,
+                "y": -4.808262348175049,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0198.png"
+        },
+        {
+            "frame": 201,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 3.0166666507720949,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 17.187973022460939,
+                "y": -5.432260036468506,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 19.172473907470704,
+                "y": -4.7912797927856449,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0201.png"
+        },
+        {
+            "frame": 204,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 3.066666603088379,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 17.35405731201172,
+                "y": -5.110950946807861,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 19.338558197021486,
+                "y": -4.777217388153076,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0204.png"
+        },
+        {
+            "frame": 207,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 3.116666555404663,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 17.520139694213868,
+                "y": -4.84464168548584,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 19.504640579223634,
+                "y": -4.7658514976501469,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0207.png"
+        },
+        {
+            "frame": 210,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 3.1666667461395265,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 17.68622398376465,
+                "y": -4.6333327293396,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 19.670724868774415,
+                "y": -4.756829738616943,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0210.png"
+        },
+        {
+            "frame": 213,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 3.2166666984558107,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 17.852306365966798,
+                "y": -4.477023601531982,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 19.836807250976564,
+                "y": -4.749768257141113,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0213.png"
+        },
+        {
+            "frame": 216,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 3.2666666507720949,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 18.018390655517579,
+                "y": -4.375714302062988,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 20.002891540527345,
+                "y": -4.744303226470947,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0216.png"
+        },
+        {
+            "frame": 219,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 3.316666603088379,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 18.184473037719728,
+                "y": -4.329405307769775,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 20.168973922729493,
+                "y": -4.7401123046875,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0219.png"
+        },
+        {
+            "frame": 222,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 3.366666555404663,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 18.350557327270509,
+                "y": -4.3380961418151859,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 20.335058212280275,
+                "y": -4.736922740936279,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0222.png"
+        },
+        {
+            "frame": 225,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 3.4166667461395265,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 18.516639709472658,
+                "y": -4.401786804199219,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 20.501140594482423,
+                "y": -4.734510898590088,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0225.png"
+        },
+        {
+            "frame": 228,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 3.4666666984558107,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 18.682723999023439,
+                "y": -4.520477771759033,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 20.667224884033204,
+                "y": -4.732697486877441,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0228.png"
+        },
+        {
+            "frame": 231,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 3.5166666507720949,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 18.848806381225587,
+                "y": -4.694168567657471,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 20.83330726623535,
+                "y": -4.731340408325195,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0231.png"
+        },
+        {
+            "frame": 234,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 3.566666603088379,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 19.014890670776368,
+                "y": -4.922859191894531,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 20.999391555786134,
+                "y": -4.7303290367126469,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0234.png"
+        },
+        {
+            "frame": 237,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 3.616666555404663,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 19.180973052978517,
+                "y": -5.206550121307373,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 21.16547393798828,
+                "y": -4.729578495025635,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0237.png"
+        },
+        {
+            "frame": 240,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 3.6666667461395265,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 19.347057342529298,
+                "y": -5.545241355895996,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 21.331558227539064,
+                "y": -4.729022979736328,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0240.png"
+        },
+        {
+            "frame": 243,
+            "support": 2,
+            "cracks": 1,
+            "gameTime": 3.7166666984558107,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 5.000000476837158,
+            "timeScale": 1.0,
+            "player": {
+                "x": 19.513139724731447,
+                "y": -5.938931941986084,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 21.49764060974121,
+                "y": -4.728612899780273,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0243.png"
+        },
+        {
+            "frame": 246,
+            "support": 3,
+            "cracks": 1,
+            "gameTime": 3.7666666507720949,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 0.5465385913848877,
+            "timeScale": 1.0,
+            "player": {
+                "x": 19.568500518798829,
+                "y": -5.970000267028809,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 21.67300033569336,
+                "y": -4.68173885345459,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0246.png"
+        },
+        {
+            "frame": 249,
+            "support": 3,
+            "cracks": 1,
+            "gameTime": 3.816666603088379,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 0.5941632390022278,
+            "timeScale": 1.0,
+            "player": {
+                "x": 19.568500518798829,
+                "y": -5.970000267028809,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 21.852998733520509,
+                "y": -4.579054832458496,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0249.png"
+        },
+        {
+            "frame": 252,
+            "support": 3,
+            "cracks": 1,
+            "gameTime": 3.866666555404663,
+            "sag": 0.07500000298023224,
+            "delay": 0.0,
+            "poseAngle": 0.6374976634979248,
+            "timeScale": 1.0,
+            "player": {
+                "x": 19.568500518798829,
+                "y": -5.970000267028809,
+                "z": 0.0
+            },
+            "camera": {
+                "x": 22.032997131347658,
+                "y": -4.458265781402588,
+                "z": -7.485947608947754
+            },
+            "cracked": true,
+            "stumbling": false,
+            "file": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Build\\YunaFurnitureCaptureFrames\\frame-0252.png"
+        }
+    ]
+}

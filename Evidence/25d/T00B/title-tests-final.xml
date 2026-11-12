@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="4" result="Passed" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-12 15:30:48Z" end-time="2026-11-12 15:30:48Z" duration="0,3702627">
+  <test-suite type="TestSuite" id="1000" name="Yuna Legend - O Quarto dos Brinquedos" fullname="Yuna Legend - O Quarto dos Brinquedos" runstate="Runnable" testcasecount="48" result="Passed" start-time="2026-11-12 15:30:48Z" end-time="2026-11-12 15:30:48Z" duration="0.370263" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1063" name="YunaLegend.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Build/Publish/Project/Library/ScriptAssemblies/YunaLegend.Tests.dll" runstate="Runnable" testcasecount="48" result="Passed" start-time="2026-11-12 15:30:48Z" end-time="2026-11-12 15:30:48Z" duration="0.364705" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="32788" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1064" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="48" result="Passed" start-time="2026-11-12 15:30:48Z" end-time="2026-11-12 15:30:48Z" duration="0.364118" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1065" name="Tests" fullname="YunaLegend.Tests" runstate="Runnable" testcasecount="48" result="Passed" start-time="2026-11-12 15:30:48Z" end-time="2026-11-12 15:30:48Z" duration="0.363707" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1048" name="TitleScreenTests" fullname="YunaLegend.Tests.TitleScreenTests" classname="YunaLegend.Tests.TitleScreenTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-12 15:30:48Z" end-time="2026-11-12 15:30:48Z" duration="0.362524" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1052" name="EasyModeAndVolume_ArePersistedInPlayerPrefs" fullname="YunaLegend.Tests.TitleScreenTests.EasyModeAndVolume_ArePersistedInPlayerPrefs" methodname="EasyModeAndVolume_ArePersistedInPlayerPrefs" classname="YunaLegend.Tests.TitleScreenTests" runstate="Runnable" seed="623892283" result="Passed" start-time="2026-11-12 15:30:48Z" end-time="2026-11-12 15:30:48Z" duration="0.011530" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1051" name="PhaseSelectorInitialization_PreservesNewGameFocus_ButCloseRestoresFlag" fullname="YunaLegend.Tests.TitleScreenTests.PhaseSelectorInitialization_PreservesNewGameFocus_ButCloseRestoresFlag" methodname="PhaseSelectorInitialization_PreservesNewGameFocus_ButCloseRestoresFlag" classname="YunaLegend.Tests.TitleScreenTests" runstate="Runnable" seed="1627423682" result="Passed" start-time="2026-11-12 15:30:48Z" end-time="2026-11-12 15:30:48Z" duration="0.185103" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1049" name="TitleScene_HasCanonicalMenuAndController" fullname="YunaLegend.Tests.TitleScreenTests.TitleScene_HasCanonicalMenuAndController" methodname="TitleScene_HasCanonicalMenuAndController" classname="YunaLegend.Tests.TitleScreenTests" runstate="Runnable" seed="1580630305" result="Passed" start-time="2026-11-12 15:30:48Z" end-time="2026-11-12 15:30:48Z" duration="0.155779" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1050" name="TitleScene_IsFirstInBuildSettings" fullname="YunaLegend.Tests.TitleScreenTests.TitleScene_IsFirstInBuildSettings" methodname="TitleScene_IsFirstInBuildSettings" classname="YunaLegend.Tests.TitleScreenTests" runstate="Runnable" seed="1731353948" result="Passed" start-time="2026-11-12 15:30:48Z" end-time="2026-11-12 15:30:48Z" duration="0.000352" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: C:/Users/sergi/AppData/LocalLow/DeepMindStudio/Yuna Legend - O Quarto dos Brinquedos\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

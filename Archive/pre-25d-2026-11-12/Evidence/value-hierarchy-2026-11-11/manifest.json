@@ -1,0 +1,167 @@
+[
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/after/calibrated-01-start.png",
+    "bytes": 499951,
+    "sha256": "b6a8937869dafad9814c629ab3ed09135ff4b5ed2c5fe6b00239ff8cc9c75d66"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/after/calibrated-02-castle.png",
+    "bytes": 553323,
+    "sha256": "2a1ec517585da2d901951debb41a4abf42cd1a2ce0123f28c5839c5994e115ca"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/after/calibrated-03-false-door.png",
+    "bytes": 505871,
+    "sha256": "6a6e774e0bab3538267de584afb47554af01463497129778e3f83756ca8b39f9"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/after/calibrated-04-portal.png",
+    "bytes": 640161,
+    "sha256": "1cd643f09e6d64f1c0d1a1531d10fb8a560d255dd1e12022ed5322452ca98fc1"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/after/calibrated-05-fall-ground.png",
+    "bytes": 530899,
+    "sha256": "9ce3dd07d076696fdf1b92ac0731f50c424f854a4607218591d596afb1940ccd"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/after/calibrated-06-castle-overview.png",
+    "bytes": 580470,
+    "sha256": "e377f362e0a0bb0d79c3b4084ea8e19c81ab29167e1afe63595206c6537364b0"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/after/unity-metadata.json",
+    "bytes": 65796,
+    "sha256": "88dfa86169af3f9bad0193fb547f3a980e7eda2a30ad019ff92933a6bce4b8cc"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/analyze.py",
+    "bytes": 2515,
+    "sha256": "f2f2bf5b4465e8ffa4f7de6587db146bb9875536adc3e069b60763595840cbaa"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/before/calibrated-01-start.png",
+    "bytes": 531527,
+    "sha256": "97b000ad4a9e47a921578d2c18c314f9bd31bf76d0921153bb700e8d2f1c93f8"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/before/calibrated-02-castle.png",
+    "bytes": 638798,
+    "sha256": "97f8ac6b145cfb4a6e1ce76961d3e0c1d3b9f5fe1b785653f3d7d3dbb6356a20"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/before/calibrated-03-false-door.png",
+    "bytes": 577822,
+    "sha256": "afb08a0d421fe44d21f7bf69352e5afaef7a3babc6355fd5565da129fb043b9a"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/before/calibrated-04-portal.png",
+    "bytes": 701849,
+    "sha256": "6c01d7478cb5834e1a3387a227a72160fedd5fd5880c9b135dca9a1dad905581"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/before/calibrated-05-fall-ground.png",
+    "bytes": 619383,
+    "sha256": "e7f9ac41b4d524de4d09fccef431df342c66d7cdb8f23e3dbe418831ee743c7d"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/before/calibrated-06-castle-overview.png",
+    "bytes": 580069,
+    "sha256": "26244e21e54455acc65d3a36150b89b8c5a45571b900ba3a868509b2591def50"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/before/unity-metadata.json",
+    "bytes": 65860,
+    "sha256": "eb6e4db0a7358c5e6761ae439fe836957d9a907c330348d70eaf639fcc508260"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/capture-harness.cs.txt",
+    "bytes": 10942,
+    "sha256": "30946d8aea80fb7df31b5122a754833d221793d694f8e7956d95f2a5a39c031c"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/comparison-all.png",
+    "bytes": 1359398,
+    "sha256": "bbb43e24ade812751c2625d9a4fefdd637cbd3b75887610b84b737b11dcec65a"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/comparison-close.png",
+    "bytes": 247321,
+    "sha256": "9f8adc8cecce49a965b736a8baafc27a5ccaa0b0bfd5ded81f0f690f30358e3e"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/editmode.xml",
+    "bytes": 15741,
+    "sha256": "8b10d91ef063290b69dd9837fd6edcace3c15902a5617c9749934542b099b7e9"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/first-trial/after/calibrated-01-start.png",
+    "bytes": 498095,
+    "sha256": "02bc7297917bc674213c5552abd163f49ce836bf26961d19c0156b596c422519"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/first-trial/after/calibrated-02-castle.png",
+    "bytes": 550990,
+    "sha256": "746dd57cea9390b90344c878181a216f3e3256377064c07e1c43f73b1ff3aeea"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/first-trial/after/calibrated-03-false-door.png",
+    "bytes": 505382,
+    "sha256": "9b5501675cad648afbd9f873acf69f80419435ad0f591abb35ecda78435f8e28"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/first-trial/after/calibrated-04-portal.png",
+    "bytes": 637862,
+    "sha256": "f6a7426b2fd92745eab225fff1ecf4d546f438cd3af36d95c4830a97f2b3b57b"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/first-trial/after/calibrated-05-fall-ground.png",
+    "bytes": 520730,
+    "sha256": "282a428c2bc8f2856fdf2e1f484f80d99dbf9e4ae39352063de21271bdb86f36"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/first-trial/after/calibrated-06-castle-overview.png",
+    "bytes": 580318,
+    "sha256": "2d22965e328f7c08772414dced5fe4cd4ae1727da92d840ebfd31b0bc86db700"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/first-trial/after/unity-metadata.json",
+    "bytes": 65800,
+    "sha256": "3161f7d8f8c6aa53f1dae00916554b244aaf0488a40eed28f05d85f745f730bc"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/first-trial/playmode-failed.xml",
+    "bytes": 122782,
+    "sha256": "def279db45454649f090d0168920b8e6042b656bf403b87bc8831c550f04e0af"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/integration.json",
+    "bytes": 1430,
+    "sha256": "c046817f51f4f5a0fe32eff998ea0b2a44f26d518bb160cb1e5e465e7e8c9d94"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/metrics.json",
+    "bytes": 9800,
+    "sha256": "7109d151629f2eb77ab96c913a427c1e219b3c7e89b3c135956b28af32ae974f"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/playmode.xml",
+    "bytes": 121444,
+    "sha256": "1c4f726086468e321116aa0fbe20e883440803745949f0b798b9efb484462e2e"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/pose-check.json",
+    "bytes": 775,
+    "sha256": "3be8a4dd0c46090be036c2be81456bab69a9c8a3551cfda192a4733e6067dcdd"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/README.md",
+    "bytes": 7881,
+    "sha256": "0e8e7b3dfd3bf3509d07150d494d537c327978df30f7af5f6bb5b52a4a1348b2"
+  },
+  {
+    "path": "Evidence/value-hierarchy-2026-11-11/validation-excerpts.txt",
+    "bytes": 4097,
+    "sha256": "9a3a2f5c3476746b8564e199e962a09c8668df03b1d7b99dd7a78e44cf83fe88"
+  }
+]

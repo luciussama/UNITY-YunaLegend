@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "session": "2026-11-12-codex-nanda-25d-e913",
+  "status": "em_revisao",
+  "microdelivery": "T01.2",
+  "tool": "image_gen.imagegen built-in",
+  "transparent_background_requested": true,
+  "style_reference": "Evidence/25d/T01/yuna-profile-v1.png",
+  "style_reference_sha256": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+  "identity_reference": "Observation only at https://luciussama.github.io/legendGirl/; no legacy files extracted",
+  "user_direction": "Nanda blue appearance and blue emitted light",
+  "generation_source": "C:/Users/sergi/.codex/generated_images/01a1cfe0-1ed7-7ac1-8c1d-70a394f5b3c7/exec-b88c6305-9813-4b79-a113-5af135de6676.png",
+  "inspection": {
+    "width": 1168,
+    "height": 1346,
+    "bit_depth": 8,
+    "png_color_type": 6,
+    "fully_transparent_pixels": 864013,
+    "fully_opaque_pixels": 75,
+    "total_pixels": 1572128,
+    "alpha_max": 255
+  },
+  "runtime_blue_light_implemented": false,
+  "scale_comparison": "HTML layout using unmodified PNGs; 35% image-box height initially, adjustable; not anatomical or canonical measurement",
+  "files": [
+    {
+      "path": "nanda-blue-v1.png",
+      "sha256": "f16ba3862f7e1fe263916922fa742eef1426b98d6e4d81f794e1083e74725678",
+      "bytes": 1705656
+    },
+    {
+      "path": "prompt-nanda-blue-v1.txt",
+      "sha256": "d0634e8a0e55f266c9dac79ece92aaa525a8ae92e4495b655f81b6b6e340c0e1",
+      "bytes": 2400
+    },
+    {
+      "path": "nanda-blue-v1-alpha.json",
+      "sha256": "b3a9db9eb2c94ac7dbaf131092915dee52ab08f1ce690619964aa9108c28bd80",
+      "bytes": 203
+    },
+    {
+      "path": "comparacao-yuna-nanda-v1.html",
+      "sha256": "25c291c2b99bf742565bd36a74c30e3d37d266496d292bc45901e086cc80248f",
+      "bytes": 2615
+    },
+    {
+      "path": "reviews/T01.2-v1.md",
+      "sha256": "270cebfcc5bc3de5d7e7fe3b9fe81b40cd9240878121e30b61e60656d65489c3",
+      "bytes": 2797
+    }
+  ]
+}

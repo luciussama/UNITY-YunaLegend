@@ -1,0 +1,286 @@
+{
+  "Evidence\\yuna-model-study-2026-11-11\\01-front.png": {
+    "bytes": 174433,
+    "sha256": "2a77ebf0295bc937b860efb97038cf09b6ac50e6a58b02de278201a4cce3eab8"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\02-three-quarter.png": {
+    "bytes": 181054,
+    "sha256": "8587fd3fa41cd749f81d83904d35d9f55839e666749c9b607bb744c1a542de18"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\03-profile.png": {
+    "bytes": 152422,
+    "sha256": "2af14fbb5654e04f9bdedf4ad9302ab7970a1e994dcf21d57b23feadfc1aba92"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\04-back.png": {
+    "bytes": 163582,
+    "sha256": "7668457e96186b016b21c0f51a17175e077f97d10690b53da9487ce040dfc64a"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\05-face.png": {
+    "bytes": 427631,
+    "sha256": "2fdcb3d1e144aa6ada7f2174b6a64c627d7e3ba6ab5d94bef5781f2980ed4616"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\06-run.png": {
+    "bytes": 212026,
+    "sha256": "b57ecbef8621f97f8838fdb88beb825d1dcd479bde7d9e4b8d8c15fc0793e8c7"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\07-jump.png": {
+    "bytes": 211808,
+    "sha256": "c8e0c53859a57cb99296c7120afd2e268fdbb6894bcefdf655d423d6df6ea371"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\08-stumble.png": {
+    "bytes": 213763,
+    "sha256": "befc79956d4e4a45da149672f12e37026ab09d03af515dd61b1e232885db3195"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\09-gameplay-bear.png": {
+    "bytes": 614680,
+    "sha256": "d834e2e2e67f22eeb9ca92c162db902dbb96c1520c551fe7c9a6cf396b5e5fe6"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\10-gameplay-stumble.png": {
+    "bytes": 584112,
+    "sha256": "943a545fe281486c28a57cbd516d3e2cced07b0f4c9aed6d1032d6af44fa7614"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\editmode.xml": {
+    "bytes": 37080,
+    "sha256": "b3c97a8d030463230c5502b01d64246dab460ff1f54dbfbae50592c4a2369da1"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\integration.json": {
+    "bytes": 2393,
+    "sha256": "6b154719d73b3baffd24893af769c4cc23c83870b2904b0b199fe392d3102fab"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\model-report.json": {
+    "bytes": 690,
+    "sha256": "17f2eef5be02a1ff6d4ad393f31e1cefb7d19668709cdb9176b8eba9dd427db0"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\playmode.xml": {
+    "bytes": 133174,
+    "sha256": "b02fda3bd991d33f1e5e4b49856ff30c5dc803b16effd3e87514b34c49abe9e5"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\README.md": {
+    "bytes": 6548,
+    "sha256": "6bc236beebed5f5e769aac774dd6130314f0a8286f1345086f974cab255e6267"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\scene-before-yuna-integration.unity.gz": {
+    "bytes": 598180,
+    "sha256": "b4ebddde135db0b5126b8a26d798692a7e683d93a8109df7d4b7e53677dcd9f8"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\verify_integration.py": {
+    "bytes": 2640,
+    "sha256": "921cb08deb77fd7590b69f4e442e7c0af0b18ec3ed1275158b2dc1cbe0e3927f"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\runtime\\00-before-entry.png": {
+    "bytes": 607271,
+    "sha256": "bb49d54c4ac8fcedfae9a0d377cfd9bd6e57591bb7068beb28390c9e01a24c56"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\runtime\\01-on-furniture.png": {
+    "bytes": 594127,
+    "sha256": "1d2d14c7ab0f7fe5d7fe51f2d9ad1a8dfd46445c1f35ce5f969f5f81a60e940d"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\runtime\\02-before-crack.png": {
+    "bytes": 596231,
+    "sha256": "b7cda0caff7813f0561c935321d5fadfb3ddc2dadec85f608b429c2e796b3a98"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\runtime\\03-crack-pause.png": {
+    "bytes": 599340,
+    "sha256": "017c753e83af4335704d61b38b24343d500a4b5612eb2615d55b4faa3b384511"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\runtime\\04-stumble.png": {
+    "bytes": 599465,
+    "sha256": "391b41a83c09a674d02c0607e09057914b90e74bb038eb875ec7907449efb681"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\runtime\\05-normal-exit.png": {
+    "bytes": 652673,
+    "sha256": "abe8ab17a6dec7544726a8ec8c48c9e768dc8d3614471be84a50b2542453d799"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\runtime\\07-front-inspection.png": {
+    "bytes": 751087,
+    "sha256": "431aa993453ce12262a162926508acaff8453c46debea8500af64b139ab0dede"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\runtime\\08-three-quarter-inspection.png": {
+    "bytes": 817738,
+    "sha256": "00e2ba242a5727094fc9f05fc4539c0c4dfc96c1d4fd0f5df9f6a6b086cb2bc1"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\runtime\\09-broken-preview-inspection.png": {
+    "bytes": 816886,
+    "sha256": "9e49068c78b39016e7b980cdc0eb1f16fa0c0d34acca2c0db2da5a08f6dd8312"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\runtime\\live-traversal.json": {
+    "bytes": 60461,
+    "sha256": "9ffe87a2d83705bdcea47bb0e29140899c7f652f01405a9889c7bbfa04b5b640"
+  },
+  "Evidence\\yuna-model-study-2026-11-11\\runtime\\traversal.gif": {
+    "bytes": 9682223,
+    "sha256": "ba361add52e0074d859dc4645c3290c106a207a3046d9df5a76da6adbba3b34a"
+  },
+  "Assets\\Characters\\Yuna\\Materials.meta": {
+    "bytes": 172,
+    "sha256": "07c2051ad1b81ac8e0bc2cbdb2383f0156bc5f366b30a1d031423586674d6dba"
+  },
+  "Assets\\Characters\\Yuna\\Yuna_Study.prefab": {
+    "bytes": 29420,
+    "sha256": "cf2e5dc4e4e75b2a633de0af38c3b973269cd41fb4b74c134a455056fdc4b415"
+  },
+  "Assets\\Characters\\Yuna\\Yuna_Study.prefab.meta": {
+    "bytes": 154,
+    "sha256": "2d75d8fba3264520c96fac180bcfb392270e1349496fc3583ba61777856e44d1"
+  },
+  "Assets\\Characters\\Yuna\\Yuna_StudyMesh.asset": {
+    "bytes": 7871911,
+    "sha256": "1df0f478474e1137b4176c8e4fb15f1da40b3982a5adfc79dd77a11153ace097"
+  },
+  "Assets\\Characters\\Yuna\\Yuna_StudyMesh.asset.meta": {
+    "bytes": 188,
+    "sha256": "99f8f7d2d5dc6ed287e37bc35ffa4043850cfcf403d35b172788a58e7fd104f2"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Blush.mat": {
+    "bytes": 3865,
+    "sha256": "b1be85dce149c8a8307447569a73e97f6d4d5b1395dc351d965de3c05bd74e77"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Blush.mat.meta": {
+    "bytes": 188,
+    "sha256": "115fb3d04a3ec923bd2706ac6eb50b5671de0ba24979d45f709aef5985673ec7"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Brass.mat": {
+    "bytes": 3866,
+    "sha256": "7ec17fa438f21a3caad09a02482400071ade40f305d33dde9399db03f0afb3f2"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Brass.mat.meta": {
+    "bytes": 188,
+    "sha256": "b6ef6e357885d1418c1431ef1f44c61566b9a938ae8c985997ec8ec90fcfe4b9"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Ear.mat": {
+    "bytes": 3858,
+    "sha256": "c0359e0a1d92239c6c6d43e5ec76e191748cf0bbe5c6a19bee5bcf4444de256f"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Ear.mat.meta": {
+    "bytes": 188,
+    "sha256": "ba0f9a2239985874c523ed8c342400653217dd5758e8d7a29b01c1289ca2de69"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\EyeWhite.mat": {
+    "bytes": 3841,
+    "sha256": "dea440577c382044cbdad01f4a02d3cd939659a9a4b35e56315641a51db386a9"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\EyeWhite.mat.meta": {
+    "bytes": 188,
+    "sha256": "33a324dd4568daba4f1213b0c858aa19a8ddd171fb10df2f052150ae1379f733"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Hair.mat": {
+    "bytes": 3865,
+    "sha256": "93457754f0f1cd7516c3d7c4c93c503fc7a208778870e7ccb3401ea66a7c3936"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Hair.mat.meta": {
+    "bytes": 188,
+    "sha256": "24edb87a90e0f095130091fa8228239bca3e5fa32631cc9ccb96c741a9c6b82e"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\HairDark.mat": {
+    "bytes": 3875,
+    "sha256": "a183e7ad119c8961cf7ca543b5cbff9cd51cd4c53bd4847dcadc05a2354a15d5"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\HairDark.mat.meta": {
+    "bytes": 188,
+    "sha256": "791a3d138ce7dccbcba0895b7e6a72d7bfea639fb5a4d0909156b02d0eab5d5a"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\HairLight.mat": {
+    "bytes": 3875,
+    "sha256": "61ed5dcfc608fb8738ef1f0c84ce1291a3ad806512eb31f62932fcd4721e9f81"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\HairLight.mat.meta": {
+    "bytes": 188,
+    "sha256": "2d89e97f5cbec4fa5ae0471b09a0074f1f8d8be1daa27bdc6f21466fa90ec2ed"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Iris.mat": {
+    "bytes": 3862,
+    "sha256": "76c232b581284653d3b2d91aa87aba11aa8c10878a4db35b3264665324eaeb3d"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Iris.mat.meta": {
+    "bytes": 188,
+    "sha256": "2db2076bc1f89b3d614ef21db677b0d68e0ce01cc4a13bca9e9e3202c3ff4b7c"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Ivory.mat": {
+    "bytes": 3860,
+    "sha256": "f200c28700b3175f9ab7bb377ae5efad40e353d106c265e43b699ce2be16a54a"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Ivory.mat.meta": {
+    "bytes": 188,
+    "sha256": "77069e41203810bb707605f7c7493e80c6eb6f0dd241282e46c671c40c592060"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Lash.mat": {
+    "bytes": 3867,
+    "sha256": "acdbeb340fbcb3b950ac7f13e6bae73ce79850f379f826251f105ed33868861c"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Lash.mat.meta": {
+    "bytes": 188,
+    "sha256": "a5b93768d6cb99c814d8b52a7b69aef016fa9858321518649560f0a30d57a38e"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Lip.mat": {
+    "bytes": 3863,
+    "sha256": "d5b168a6cbace94d1d37a59847611aee7e8146d1894afc869d92e6637d2456cc"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Lip.mat.meta": {
+    "bytes": 188,
+    "sha256": "e37b55d557f86a273ec4bb18b5d0a2334b179062834a03efc7581904059c4029"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\LipSoft.mat": {
+    "bytes": 3864,
+    "sha256": "feec69f3a6c6c4dbea23451b6532125a5ca273fd58243594e610aea569754a1b"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\LipSoft.mat.meta": {
+    "bytes": 188,
+    "sha256": "1e0fe4eba6a2167b91a3ac9b08a18181ff9c75678f08e1d6ae2b46f52b94326d"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Pupil.mat": {
+    "bytes": 3874,
+    "sha256": "adcccf13f811bae443900ce31c3bd382670b11930593a7b80d5656558880e1c8"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Pupil.mat.meta": {
+    "bytes": 188,
+    "sha256": "9c29f3e4c300b60e3394aa2410f1946ea70a7d6ed2eb9e069579df815b607ec4"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Ruby.mat": {
+    "bytes": 3868,
+    "sha256": "b6d015d7c0eb5b833102833ea4e903eca169813ec4d567b204f7367843237bdf"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Ruby.mat.meta": {
+    "bytes": 188,
+    "sha256": "263c9adb5762022d18dd096e8edca106094940936473c18924df0454dde8ca5f"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Shoe.mat": {
+    "bytes": 3868,
+    "sha256": "5b5892e80c4ad41561f198dc1d44b0241918e2bb381feef8ca3666753ea5de86"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Shoe.mat.meta": {
+    "bytes": 188,
+    "sha256": "b2740d32d0c8652abc0b003e6a92631c83670a548b44b9e2b5fd4fa4fabcbf13"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Skin.mat": {
+    "bytes": 3860,
+    "sha256": "fbc9d22a24049611317a08e08093ce3115dff01a4a61428713810c8500539947"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Skin.mat.meta": {
+    "bytes": 188,
+    "sha256": "f5523fdb2a6dadefdb1f4194d56f5c84faeafe407ed1cce545bd116bf3dd5584"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Sock.mat": {
+    "bytes": 3860,
+    "sha256": "3d293d1ae463f5f6804832e61da80bf17903a5ea58148f5a2503e652c644d6aa"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Sock.mat.meta": {
+    "bytes": 188,
+    "sha256": "0ef1d0d9dfd2d776fce997582896193b18b8d907c68f9bf65e118bcc4c07cf2f"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Sole.mat": {
+    "bytes": 3871,
+    "sha256": "a7d0da2e338e3af298a04623cd3830dc62730db2f567c49e16cb6d8bd6de7412"
+  },
+  "Assets\\Characters\\Yuna\\Materials\\Sole.mat.meta": {
+    "bytes": 188,
+    "sha256": "7da3fa9330d33508005eb978e19b057807eb99666cae0aaa708d5782c8e61707"
+  },
+  "docs\\ia\\YUNA-ESTADO-MODELAGEM-2026-11-11.md": {
+    "bytes": 17663,
+    "sha256": "475de965efb93965d85f92a4ecbf8de9c69674036c3d29f74ca7fb95ee1f812d"
+  },
+  "docs\\ia\\EM-CURSO-YUNA.json": {
+    "bytes": 2766,
+    "sha256": "236fe4f742e557f4d58168dd0ef789667c85c4031aec8cfaec8bb842f22d6a13"
+  }
+}

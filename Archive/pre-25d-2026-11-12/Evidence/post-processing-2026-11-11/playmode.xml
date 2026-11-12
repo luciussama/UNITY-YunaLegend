@@ -1,0 +1,1531 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="20" result="Passed" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-11 17:07:38Z" end-time="2026-11-11 17:08:18Z" duration="40,1622439">
+  <test-suite type="TestSuite" id="1033" name="Yuna Legend - O Quarto dos Brinquedos" fullname="Yuna Legend - O Quarto dos Brinquedos" runstate="Runnable" testcasecount="20" result="Passed" start-time="2026-11-11 17:07:38Z" end-time="2026-11-11 17:08:18Z" duration="40.162244" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1028" name="YunaLegend.RoutePhysics.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Build/CameraFramingValidation/Library/ScriptAssemblies/YunaLegend.RoutePhysics.Tests.dll" runstate="Runnable" testcasecount="20" result="Passed" start-time="2026-11-11 17:07:38Z" end-time="2026-11-11 17:08:18Z" duration="40.155605" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="28132" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1029" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="20" result="Passed" start-time="2026-11-11 17:07:38Z" end-time="2026-11-11 17:08:18Z" duration="40.155204" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1031" name="RoutePhysics" fullname="YunaLegend.RoutePhysics" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-11 17:07:38Z" end-time="2026-11-11 17:07:43Z" duration="5.459788" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1032" name="Tests" fullname="YunaLegend.RoutePhysics.Tests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-11 17:07:38Z" end-time="2026-11-11 17:07:43Z" duration="5.459593" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1024" name="DarkRoomCameraFramingTests" fullname="YunaLegend.RoutePhysics.Tests.DarkRoomCameraFramingTests" classname="YunaLegend.RoutePhysics.Tests.DarkRoomCameraFramingTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-11 17:07:38Z" end-time="2026-11-11 17:07:43Z" duration="5.458531" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1025" name="CastleOverviewRevealsRouteThenReturnsToCloseFrame" fullname="YunaLegend.RoutePhysics.Tests.DarkRoomCameraFramingTests.CastleOverviewRevealsRouteThenReturnsToCloseFrame" methodname="CastleOverviewRevealsRouteThenReturnsToCloseFrame" classname="YunaLegend.RoutePhysics.Tests.DarkRoomCameraFramingTests" runstate="Runnable" seed="1221316620" result="Passed" start-time="2026-11-11 17:07:38Z" end-time="2026-11-11 17:07:41Z" duration="3.304148" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Cutscene do Castelo iniciada. Aguardando input do jogador...
+[DarkRoomProgression] Etapa 2 iniciada: A Fuga Acelerada!
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase2Escape. Checkpoint atual: Phase2Escape
+]]></output>
+              </test-case>
+              <test-case id="1026" name="CloseFrameShowsNextLandingAndHidesFloorWithoutFollowingJumpArc" fullname="YunaLegend.RoutePhysics.Tests.DarkRoomCameraFramingTests.CloseFrameShowsNextLandingAndHidesFloorWithoutFollowingJumpArc" methodname="CloseFrameShowsNextLandingAndHidesFloorWithoutFollowingJumpArc" classname="YunaLegend.RoutePhysics.Tests.DarkRoomCameraFramingTests" runstate="Runnable" seed="87186368" result="Passed" start-time="2026-11-11 17:07:41Z" end-time="2026-11-11 17:07:42Z" duration="0.480378" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+]]></output>
+              </test-case>
+              <test-case id="1027" name="ReverseFrameLooksLeftAndCinematicFallBringsFloorBack" fullname="YunaLegend.RoutePhysics.Tests.DarkRoomCameraFramingTests.ReverseFrameLooksLeftAndCinematicFallBringsFloorBack" methodname="ReverseFrameLooksLeftAndCinematicFallBringsFloorBack" classname="YunaLegend.RoutePhysics.Tests.DarkRoomCameraFramingTests" runstate="Runnable" seed="1150674534" result="Passed" start-time="2026-11-11 17:07:42Z" end-time="2026-11-11 17:07:43Z" duration="1.662559" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+        <test-suite type="TestSuite" id="1030" name="Tests" fullname="YunaLegend.Tests" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-11-11 17:07:43Z" end-time="2026-11-11 17:08:18Z" duration="34.695193" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1004" name="DarkRoomMandatoryRouteTests" fullname="YunaLegend.Tests.DarkRoomMandatoryRouteTests" classname="YunaLegend.Tests.DarkRoomMandatoryRouteTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-11-11 17:07:43Z" end-time="2026-11-11 17:07:46Z" duration="2.431253" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1012" name="AllMandatoryJumpPairsReachableWithRealCharacterController" fullname="YunaLegend.Tests.DarkRoomMandatoryRouteTests.AllMandatoryJumpPairsReachableWithRealCharacterController" methodname="AllMandatoryJumpPairsReachableWithRealCharacterController" classname="YunaLegend.Tests.DarkRoomMandatoryRouteTests" runstate="Runnable" seed="620997771" result="Passed" start-time="2026-11-11 17:07:43Z" end-time="2026-11-11 17:07:44Z" duration="1.295006" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DarkRoomBlockoutBuilder] Circuito CanÃ´nico em 3 Etapas gerado com sucesso! Etapa 1: 10 | Etapa 2: 12 | Etapa 3: 16 plataformas.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=30 pair=0->1 seconds=0,583
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=30 pair=1->2 seconds=0,583
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=30 pair=2->3 seconds=0,583
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=30 pair=3->4 seconds=0,556
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=30 pair=4->5 seconds=0,667
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=30 pair=5->6 seconds=0,667
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=30 pair=6->7 seconds=0,667
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=30 pair=7->8 seconds=0,667
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=30 pair=8->9 seconds=0,583
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+ROUTE_WINDOW fps=30 pair=9->10 seconds=0,525
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=30 pair=10->11 seconds=0,475
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=30 pair=11->12 seconds=0,502
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=30 pair=12->13 seconds=0,458
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=30 pair=13->14 seconds=0,440
+ROUTE_WINDOW fps=30 pair=14->15 seconds=0,444
+ROUTE_WINDOW fps=30 pair=15->16 seconds=0,407
+ROUTE_WINDOW fps=30 pair=16->17 seconds=0,393
+ROUTE_WINDOW fps=30 pair=17->18 seconds=0,360
+ROUTE_WINDOW fps=30 pair=18->19 seconds=0,348
+ROUTE_WINDOW fps=30 pair=19->20 seconds=0,337
+ROUTE_WINDOW fps=30 pair=20->21 seconds=0,309
+ROUTE_WINDOW fps=30 pair=22->23 seconds=0,524
+ROUTE_WINDOW fps=30 pair=23->24 seconds=0,506
+ROUTE_WINDOW fps=30 pair=24->25 seconds=0,467
+ROUTE_WINDOW fps=30 pair=25->26 seconds=0,453
+ROUTE_WINDOW fps=30 pair=26->27 seconds=0,418
+ROUTE_WINDOW fps=30 pair=27->28 seconds=0,405
+ROUTE_WINDOW fps=30 pair=28->29 seconds=0,394
+ROUTE_WINDOW fps=30 pair=29->30 seconds=0,364
+ROUTE_WINDOW fps=30 pair=30->31 seconds=0,354
+ROUTE_WINDOW fps=30 pair=31->32 seconds=0,326
+ROUTE_WINDOW fps=30 pair=32->33 seconds=0,318
+ROUTE_WINDOW fps=30 pair=33->34 seconds=0,310
+ROUTE_WINDOW fps=30 pair=34->35 seconds=0,285
+ROUTE_WINDOW fps=30 pair=35->36 seconds=0,278
+ROUTE_WINDOW fps=30 pair=36->37 seconds=0,256
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+ROUTE_WINDOW fps=60 pair=0->1 seconds=0,583
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=60 pair=1->2 seconds=0,583
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=60 pair=2->3 seconds=0,583
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=60 pair=3->4 seconds=0,528
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=60 pair=4->5 seconds=0,667
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=60 pair=5->6 seconds=0,667
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=60 pair=6->7 seconds=0,667
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=60 pair=7->8 seconds=0,667
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=60 pair=8->9 seconds=0,583
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+ROUTE_WINDOW fps=60 pair=9->10 seconds=0,525
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=60 pair=10->11 seconds=0,475
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=60 pair=11->12 seconds=0,478
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=60 pair=12->13 seconds=0,435
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=60 pair=13->14 seconds=0,440
+ROUTE_WINDOW fps=60 pair=14->15 seconds=0,444
+ROUTE_WINDOW fps=60 pair=15->16 seconds=0,407
+ROUTE_WINDOW fps=60 pair=16->17 seconds=0,393
+ROUTE_WINDOW fps=60 pair=17->18 seconds=0,360
+ROUTE_WINDOW fps=60 pair=18->19 seconds=0,348
+ROUTE_WINDOW fps=60 pair=19->20 seconds=0,337
+ROUTE_WINDOW fps=60 pair=20->21 seconds=0,309
+ROUTE_WINDOW fps=60 pair=22->23 seconds=0,524
+ROUTE_WINDOW fps=60 pair=23->24 seconds=0,506
+ROUTE_WINDOW fps=60 pair=24->25 seconds=0,467
+ROUTE_WINDOW fps=60 pair=25->26 seconds=0,453
+ROUTE_WINDOW fps=60 pair=26->27 seconds=0,418
+ROUTE_WINDOW fps=60 pair=27->28 seconds=0,405
+ROUTE_WINDOW fps=60 pair=28->29 seconds=0,394
+ROUTE_WINDOW fps=60 pair=29->30 seconds=0,364
+ROUTE_WINDOW fps=60 pair=30->31 seconds=0,354
+ROUTE_WINDOW fps=60 pair=31->32 seconds=0,326
+ROUTE_WINDOW fps=60 pair=32->33 seconds=0,318
+ROUTE_WINDOW fps=60 pair=33->34 seconds=0,310
+ROUTE_WINDOW fps=60 pair=34->35 seconds=0,285
+ROUTE_WINDOW fps=60 pair=35->36 seconds=0,278
+ROUTE_WINDOW fps=60 pair=36->37 seconds=0,256
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+ROUTE_WINDOW fps=120 pair=0->1 seconds=0,583
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=120 pair=1->2 seconds=0,583
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=120 pair=2->3 seconds=0,583
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=120 pair=3->4 seconds=0,528
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=120 pair=4->5 seconds=0,639
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=120 pair=5->6 seconds=0,639
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=120 pair=6->7 seconds=0,639
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=120 pair=7->8 seconds=0,639
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=120 pair=8->9 seconds=0,583
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[GameOver]: Yuna falhou o salto e caiu da rota.
+ROUTE_WINDOW fps=120 pair=9->10 seconds=0,500
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=120 pair=10->11 seconds=0,475
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=120 pair=11->12 seconds=0,454
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=120 pair=12->13 seconds=0,435
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=120 pair=13->14 seconds=0,440
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+ROUTE_WINDOW fps=120 pair=14->15 seconds=0,423
+ROUTE_WINDOW fps=120 pair=15->16 seconds=0,407
+ROUTE_WINDOW fps=120 pair=16->17 seconds=0,393
+ROUTE_WINDOW fps=120 pair=17->18 seconds=0,360
+ROUTE_WINDOW fps=120 pair=18->19 seconds=0,348
+ROUTE_WINDOW fps=120 pair=19->20 seconds=0,337
+ROUTE_WINDOW fps=120 pair=20->21 seconds=0,309
+ROUTE_WINDOW fps=120 pair=22->23 seconds=0,524
+ROUTE_WINDOW fps=120 pair=23->24 seconds=0,506
+ROUTE_WINDOW fps=120 pair=24->25 seconds=0,467
+ROUTE_WINDOW fps=120 pair=25->26 seconds=0,453
+ROUTE_WINDOW fps=120 pair=26->27 seconds=0,418
+ROUTE_WINDOW fps=120 pair=27->28 seconds=0,405
+ROUTE_WINDOW fps=120 pair=28->29 seconds=0,394
+ROUTE_WINDOW fps=120 pair=29->30 seconds=0,364
+ROUTE_WINDOW fps=120 pair=30->31 seconds=0,354
+ROUTE_WINDOW fps=120 pair=31->32 seconds=0,326
+ROUTE_WINDOW fps=120 pair=32->33 seconds=0,318
+ROUTE_WINDOW fps=120 pair=33->34 seconds=0,310
+ROUTE_WINDOW fps=120 pair=34->35 seconds=0,285
+ROUTE_WINDOW fps=120 pair=35->36 seconds=0,278
+ROUTE_WINDOW fps=120 pair=36->37 seconds=0,256
+]]></output>
+            </test-case>
+            <test-case id="1008" name="CastleRetryPreservesSupportAndExpectsPlatform10" fullname="YunaLegend.Tests.DarkRoomMandatoryRouteTests.CastleRetryPreservesSupportAndExpectsPlatform10" methodname="CastleRetryPreservesSupportAndExpectsPlatform10" classname="YunaLegend.Tests.DarkRoomMandatoryRouteTests" runstate="Runnable" seed="1337189681" result="Passed" start-time="2026-11-11 17:07:44Z" end-time="2026-11-11 17:07:45Z" duration="0.009285" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DarkRoomBlockoutBuilder] Circuito CanÃ´nico em 3 Etapas gerado com sucesso! Etapa 1: 10 | Etapa 2: 12 | Etapa 3: 16 plataformas.
+[DarkRoomProgression] Etapa 2 iniciada: A Fuga Acelerada!
+[GameOver]: checkpoint test
+[DarkRoomProgression] Game Over acionado na fase Phase2Escape. Checkpoint atual: Phase2Escape
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase2Escape
+]]></output>
+            </test-case>
+            <test-case id="1013" name="ContinuousEscapeRun_JumpsAllPlatformsWithoutOvershoot" fullname="YunaLegend.Tests.DarkRoomMandatoryRouteTests.ContinuousEscapeRun_JumpsAllPlatformsWithoutOvershoot" methodname="ContinuousEscapeRun_JumpsAllPlatformsWithoutOvershoot" classname="YunaLegend.Tests.DarkRoomMandatoryRouteTests" runstate="Runnable" seed="682443823" result="Passed" start-time="2026-11-11 17:07:45Z" end-time="2026-11-11 17:07:45Z" duration="0.021843" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DarkRoomBlockoutBuilder] Circuito CanÃ´nico em 3 Etapas gerado com sucesso! Etapa 1: 10 | Etapa 2: 12 | Etapa 3: 16 plataformas.
+[DarkRoomProgression] Etapa 2 iniciada: A Fuga Acelerada!
+[DarkRoomProgression] Yuna alcancou o Poster da Porta Falsa na parede! Iniciando queda cinematica real...
+]]></output>
+            </test-case>
+            <test-case id="1014" name="ContinuousReverseRun_JumpsAllPlatformsWithoutOvershoot" fullname="YunaLegend.Tests.DarkRoomMandatoryRouteTests.ContinuousReverseRun_JumpsAllPlatformsWithoutOvershoot" methodname="ContinuousReverseRun_JumpsAllPlatformsWithoutOvershoot" classname="YunaLegend.Tests.DarkRoomMandatoryRouteTests" runstate="Runnable" seed="507248010" result="Passed" start-time="2026-11-11 17:07:45Z" end-time="2026-11-11 17:07:45Z" duration="0.044629" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DarkRoomBlockoutBuilder] Circuito CanÃ´nico em 3 Etapas gerado com sucesso! Etapa 1: 10 | Etapa 2: 12 | Etapa 3: 16 plataformas.
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[DarkRoomProgression] O Verdadeiro Portal dos Sonhos foi alcancado! Fim do Quarto Escuro.
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[DarkRoomProgression] O Verdadeiro Portal dos Sonhos foi alcancado! Fim do Quarto Escuro.
+]]></output>
+            </test-case>
+            <test-case id="1005" name="FloorStart_NoJumpDies_AndRetryStartsOnFloor" fullname="YunaLegend.Tests.DarkRoomMandatoryRouteTests.FloorStart_NoJumpDies_AndRetryStartsOnFloor" methodname="FloorStart_NoJumpDies_AndRetryStartsOnFloor" classname="YunaLegend.Tests.DarkRoomMandatoryRouteTests" runstate="Runnable" seed="569483511" result="Passed" start-time="2026-11-11 17:07:45Z" end-time="2026-11-11 17:07:45Z" duration="0.014247" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DarkRoomBlockoutBuilder] Circuito CanÃ´nico em 3 Etapas gerado com sucesso! Etapa 1: 10 | Etapa 2: 12 | Etapa 3: 16 plataformas.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+]]></output>
+            </test-case>
+            <test-case id="1011" name="PosterFallIsOnlyNonlethalFall" fullname="YunaLegend.Tests.DarkRoomMandatoryRouteTests.PosterFallIsOnlyNonlethalFall" methodname="PosterFallIsOnlyNonlethalFall" classname="YunaLegend.Tests.DarkRoomMandatoryRouteTests" runstate="Runnable" seed="594014293" result="Passed" start-time="2026-11-11 17:07:45Z" end-time="2026-11-11 17:07:46Z" duration="1.001480" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DarkRoomBlockoutBuilder] Circuito CanÃ´nico em 3 Etapas gerado com sucesso! Etapa 1: 10 | Etapa 2: 12 | Etapa 3: 16 plataformas.
+[DarkRoomProgression] Etapa 2 iniciada: A Fuga Acelerada!
+[DarkRoomProgression] Yuna alcancou o Poster da Porta Falsa na parede! Iniciando queda cinematica real...
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+]]></output>
+            </test-case>
+            <test-case id="1009" name="ReturnTransitionAndRetryExpect22" fullname="YunaLegend.Tests.DarkRoomMandatoryRouteTests.ReturnTransitionAndRetryExpect22" methodname="ReturnTransitionAndRetryExpect22" classname="YunaLegend.Tests.DarkRoomMandatoryRouteTests" runstate="Runnable" seed="21770628" result="Passed" start-time="2026-11-11 17:07:46Z" end-time="2026-11-11 17:07:46Z" duration="0.014283" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DarkRoomBlockoutBuilder] Circuito CanÃ´nico em 3 Etapas gerado com sucesso! Etapa 1: 10 | Etapa 2: 12 | Etapa 3: 16 plataformas.
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: return retry
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+]]></output>
+            </test-case>
+            <test-case id="1010" name="ReturnWithoutJumpDies" fullname="YunaLegend.Tests.DarkRoomMandatoryRouteTests.ReturnWithoutJumpDies" methodname="ReturnWithoutJumpDies" classname="YunaLegend.Tests.DarkRoomMandatoryRouteTests" runstate="Runnable" seed="987100544" result="Passed" start-time="2026-11-11 17:07:46Z" end-time="2026-11-11 17:07:46Z" duration="0.010213" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DarkRoomBlockoutBuilder] Circuito CanÃ´nico em 3 Etapas gerado com sucesso! Etapa 1: 10 | Etapa 2: 12 | Etapa 3: 16 plataformas.
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+]]></output>
+            </test-case>
+            <test-case id="1007" name="SkippingPlatformIsFatal" fullname="YunaLegend.Tests.DarkRoomMandatoryRouteTests.SkippingPlatformIsFatal" methodname="SkippingPlatformIsFatal" classname="YunaLegend.Tests.DarkRoomMandatoryRouteTests" runstate="Runnable" seed="1208592780" result="Passed" start-time="2026-11-11 17:07:46Z" end-time="2026-11-11 17:07:46Z" duration="0.006251" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DarkRoomBlockoutBuilder] Circuito CanÃ´nico em 3 Etapas gerado com sucesso! Etapa 1: 10 | Etapa 2: 12 | Etapa 3: 16 plataformas.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: A plataforma obrigatória ficou para trás.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+]]></output>
+            </test-case>
+            <test-case id="1006" name="ValidFirstJumpLands_ThenMissingNextJumpDies" fullname="YunaLegend.Tests.DarkRoomMandatoryRouteTests.ValidFirstJumpLands_ThenMissingNextJumpDies" methodname="ValidFirstJumpLands_ThenMissingNextJumpDies" classname="YunaLegend.Tests.DarkRoomMandatoryRouteTests" runstate="Runnable" seed="1836955357" result="Passed" start-time="2026-11-11 17:07:46Z" end-time="2026-11-11 17:07:46Z" duration="0.011619" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DarkRoomBlockoutBuilder] Circuito CanÃ´nico em 3 Etapas gerado com sucesso! Etapa 1: 10 | Etapa 2: 12 | Etapa 3: 16 plataformas.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1015" name="DarkRoomReturnInputTests" fullname="YunaLegend.Tests.DarkRoomReturnInputTests" classname="YunaLegend.Tests.DarkRoomReturnInputTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-11 17:07:46Z" end-time="2026-11-11 17:08:00Z" duration="14.016487" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1016" name="HumanApproachRealInputAndRetry" fullname="YunaLegend.Tests.DarkRoomReturnInputTests.HumanApproachRealInputAndRetry" methodname="HumanApproachRealInputAndRetry" classname="YunaLegend.Tests.DarkRoomReturnInputTests" runstate="Runnable" seed="89153697" result="Passed" start-time="2026-11-11 17:07:46Z" end-time="2026-11-11 17:07:59Z" duration="13.244764" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=30 device=0 delay=2,75 retry=False elapsed=3,700 x=89,55 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=30 device=0 delay=2,85 retry=False elapsed=3,800 x=89,45 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=30 device=0 delay=2,95 retry=True elapsed=3,900 x=89,35 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=30 device=0 delay=3,05 retry=True elapsed=4,000 x=89,25 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=30 device=1 delay=2,75 retry=False elapsed=3,700 x=89,55 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=30 device=1 delay=2,85 retry=False elapsed=3,800 x=89,45 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=30 device=1 delay=2,95 retry=True elapsed=3,900 x=89,35 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=30 device=1 delay=3,05 retry=True elapsed=4,000 x=89,25 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=30 device=2 delay=2,75 retry=False elapsed=3,700 x=89,55 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=30 device=2 delay=2,85 retry=False elapsed=3,800 x=89,45 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=30 device=2 delay=2,95 retry=True elapsed=3,900 x=89,35 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=30 device=2 delay=3,05 retry=True elapsed=4,000 x=89,25 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=30 device=3 delay=2,75 retry=False elapsed=3,700 x=89,55 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=30 device=3 delay=2,85 retry=False elapsed=3,800 x=89,45 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=30 device=3 delay=2,95 retry=True elapsed=3,900 x=89,35 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=30 device=3 delay=3,05 retry=True elapsed=4,000 x=89,25 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=60 device=0 delay=2,75 retry=False elapsed=3,683 x=89,62 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=60 device=0 delay=2,85 retry=False elapsed=3,783 x=89,51 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=60 device=0 delay=2,95 retry=True elapsed=3,883 x=89,41 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=60 device=0 delay=3,05 retry=True elapsed=3,983 x=89,31 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=60 device=1 delay=2,75 retry=False elapsed=3,683 x=89,62 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=60 device=1 delay=2,85 retry=False elapsed=3,783 x=89,51 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=60 device=1 delay=2,95 retry=True elapsed=3,883 x=89,41 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=60 device=1 delay=3,05 retry=True elapsed=3,983 x=89,31 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=60 device=2 delay=2,75 retry=False elapsed=3,683 x=89,62 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=60 device=2 delay=2,85 retry=False elapsed=3,783 x=89,51 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=60 device=2 delay=2,95 retry=True elapsed=3,883 x=89,41 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=60 device=2 delay=3,05 retry=True elapsed=3,983 x=89,31 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=60 device=3 delay=2,75 retry=False elapsed=3,683 x=89,62 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=60 device=3 delay=2,85 retry=False elapsed=3,783 x=89,51 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=60 device=3 delay=2,95 retry=True elapsed=3,883 x=89,41 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=60 device=3 delay=3,05 retry=True elapsed=3,983 x=89,31 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=120 device=0 delay=2,75 retry=False elapsed=3,658 x=89,67 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=120 device=0 delay=2,85 retry=False elapsed=3,758 x=89,57 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=120 device=0 delay=2,95 retry=True elapsed=3,858 x=89,46 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=120 device=0 delay=3,05 retry=True elapsed=3,958 x=89,35 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=120 device=1 delay=2,75 retry=False elapsed=3,658 x=89,67 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=120 device=1 delay=2,85 retry=False elapsed=3,758 x=89,57 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=120 device=1 delay=2,95 retry=True elapsed=3,858 x=89,46 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=120 device=1 delay=3,05 retry=True elapsed=3,958 x=89,35 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=120 device=2 delay=2,75 retry=False elapsed=3,658 x=89,67 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=120 device=2 delay=2,85 retry=False elapsed=3,758 x=89,57 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=120 device=2 delay=2,95 retry=True elapsed=3,858 x=89,46 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=120 device=2 delay=3,05 retry=True elapsed=3,958 x=89,35 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=120 device=3 delay=2,75 retry=False elapsed=3,658 x=89,67 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+RETURN_INPUT fps=120 device=3 delay=2,85 retry=False elapsed=3,758 x=89,57 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=120 device=3 delay=2,95 retry=True elapsed=3,858 x=89,46 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Yuna aterrissou no chao do quarto apos a queda da porta falsa!
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: retry test
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+RETURN_INPUT fps=120 device=3 delay=3,05 retry=True elapsed=3,958 x=89,35 y=-8,32 landed=22 dead=False framed=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+]]></output>
+            </test-case>
+            <test-case id="1017" name="NoInputDefeatAndScreenCrushRemainActive" fullname="YunaLegend.Tests.DarkRoomReturnInputTests.NoInputDefeatAndScreenCrushRemainActive" methodname="NoInputDefeatAndScreenCrushRemainActive" classname="YunaLegend.Tests.DarkRoomReturnInputTests" runstate="Runnable" seed="147364452" result="Passed" start-time="2026-11-11 17:07:59Z" end-time="2026-11-11 17:08:00Z" duration="0.770328" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+RETURN_NO_INPUT fps=30 defeat=3,400
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+RETURN_NO_INPUT fps=60 defeat=3,400
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Etapa 3 iniciada: Subida Caotica Reversa para a esquerda!
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+RETURN_NO_INPUT fps=120 defeat=3,400
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase3ChaoticAscent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase3ChaoticAscent. Checkpoint atual: Phase3ChaoticAscent
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1018" name="DarkRoomStartInputTests" fullname="YunaLegend.Tests.DarkRoomStartInputTests" classname="YunaLegend.Tests.DarkRoomStartInputTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-11 17:08:00Z" end-time="2026-11-11 17:08:18Z" duration="18.246848" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1022" name="EarlyJumpDoesNotAutoJumpAgain" fullname="YunaLegend.Tests.DarkRoomStartInputTests.EarlyJumpDoesNotAutoJumpAgain" methodname="EarlyJumpDoesNotAutoJumpAgain" classname="YunaLegend.Tests.DarkRoomStartInputTests" runstate="Runnable" seed="2067039980" result="Passed" start-time="2026-11-11 17:08:00Z" end-time="2026-11-11 17:08:00Z" duration="0.219129" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna voltou ao chão sem alcançar a primeira plataforma.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+START_INPUT fps=60 device=0 delay=0,600 hold=0,100 startX=-10,00 elapsed=1,550 x=-4,42 y=-9,02 success=False
+]]></output>
+            </test-case>
+            <test-case id="1019" name="FirstTwoStepsWithBriefKeyboardPresses" fullname="YunaLegend.Tests.DarkRoomStartInputTests.FirstTwoStepsWithBriefKeyboardPresses" methodname="FirstTwoStepsWithBriefKeyboardPresses" classname="YunaLegend.Tests.DarkRoomStartInputTests" runstate="Runnable" seed="995365258" result="Passed" start-time="2026-11-11 17:08:00Z" end-time="2026-11-11 17:08:01Z" duration="0.749511" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+]]></output>
+            </test-case>
+            <test-case id="1023" name="SceneRealInputWindowAt30And60And120Fps" fullname="YunaLegend.Tests.DarkRoomStartInputTests.SceneRealInputWindowAt30And60And120Fps" methodname="SceneRealInputWindowAt30And60And120Fps" classname="YunaLegend.Tests.DarkRoomStartInputTests" runstate="Runnable" seed="1248121947" result="Passed" start-time="2026-11-11 17:08:01Z" end-time="2026-11-11 17:08:12Z" duration="11.476760" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=30 device=0 delay=2,400 hold=0,033 startX=-10,00 elapsed=3,300 x=1,88 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=30 device=0 delay=2,500 hold=0,033 startX=-10,00 elapsed=3,400 x=2,24 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=30 device=0 delay=2,600 hold=0,033 startX=-10,00 elapsed=3,500 x=2,60 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=30 device=0 delay=2,700 hold=0,033 startX=-10,00 elapsed=3,600 x=2,96 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=30 device=1 delay=2,400 hold=0,033 startX=-10,00 elapsed=3,300 x=1,88 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=30 device=1 delay=2,500 hold=0,033 startX=-10,00 elapsed=3,400 x=2,24 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=30 device=1 delay=2,600 hold=0,033 startX=-10,00 elapsed=3,500 x=2,60 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=30 device=1 delay=2,700 hold=0,033 startX=-10,00 elapsed=3,600 x=2,96 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=30 device=2 delay=2,400 hold=0,033 startX=-10,00 elapsed=3,300 x=1,88 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=30 device=2 delay=2,500 hold=0,033 startX=-10,00 elapsed=3,400 x=2,24 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=30 device=2 delay=2,600 hold=0,033 startX=-10,00 elapsed=3,500 x=2,60 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=30 device=2 delay=2,700 hold=0,033 startX=-10,00 elapsed=3,600 x=2,96 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=30 device=3 delay=2,400 hold=0,033 startX=-10,00 elapsed=3,300 x=1,88 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=30 device=3 delay=2,500 hold=0,033 startX=-10,00 elapsed=3,400 x=2,24 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=30 device=3 delay=2,600 hold=0,033 startX=-10,00 elapsed=3,500 x=2,60 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=30 device=3 delay=2,700 hold=0,033 startX=-10,00 elapsed=3,600 x=2,96 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=60 device=0 delay=2,400 hold=0,017 startX=-10,00 elapsed=3,267 x=1,76 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=60 device=0 delay=2,500 hold=0,017 startX=-10,00 elapsed=3,367 x=2,12 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=60 device=0 delay=2,600 hold=0,017 startX=-10,00 elapsed=3,467 x=2,48 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=60 device=0 delay=2,700 hold=0,017 startX=-10,00 elapsed=3,567 x=2,84 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=60 device=1 delay=2,400 hold=0,017 startX=-10,00 elapsed=3,267 x=1,76 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=60 device=1 delay=2,500 hold=0,017 startX=-10,00 elapsed=3,367 x=2,12 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=60 device=1 delay=2,600 hold=0,017 startX=-10,00 elapsed=3,467 x=2,48 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=60 device=1 delay=2,700 hold=0,017 startX=-10,00 elapsed=3,567 x=2,84 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=60 device=2 delay=2,400 hold=0,017 startX=-10,00 elapsed=3,267 x=1,76 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=60 device=2 delay=2,500 hold=0,017 startX=-10,00 elapsed=3,367 x=2,12 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=60 device=2 delay=2,600 hold=0,017 startX=-10,00 elapsed=3,467 x=2,48 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=60 device=2 delay=2,700 hold=0,017 startX=-10,00 elapsed=3,567 x=2,84 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=60 device=3 delay=2,400 hold=0,017 startX=-10,00 elapsed=3,267 x=1,76 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=60 device=3 delay=2,500 hold=0,017 startX=-10,00 elapsed=3,367 x=2,12 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=60 device=3 delay=2,600 hold=0,017 startX=-10,00 elapsed=3,467 x=2,48 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=60 device=3 delay=2,700 hold=0,017 startX=-10,00 elapsed=3,567 x=2,84 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=120 device=0 delay=2,400 hold=0,008 startX=-10,00 elapsed=3,250 x=1,70 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=120 device=0 delay=2,500 hold=0,008 startX=-10,00 elapsed=3,350 x=2,06 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=120 device=0 delay=2,600 hold=0,008 startX=-10,00 elapsed=3,450 x=2,42 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=120 device=0 delay=2,700 hold=0,008 startX=-10,00 elapsed=3,550 x=2,78 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=120 device=1 delay=2,400 hold=0,008 startX=-10,00 elapsed=3,250 x=1,70 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=120 device=1 delay=2,500 hold=0,008 startX=-10,00 elapsed=3,350 x=2,06 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=120 device=1 delay=2,600 hold=0,008 startX=-10,00 elapsed=3,450 x=2,42 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=120 device=1 delay=2,700 hold=0,008 startX=-10,00 elapsed=3,550 x=2,78 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=120 device=2 delay=2,400 hold=0,008 startX=-10,00 elapsed=3,250 x=1,70 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=120 device=2 delay=2,500 hold=0,008 startX=-10,00 elapsed=3,350 x=2,06 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=120 device=2 delay=2,600 hold=0,008 startX=-10,00 elapsed=3,450 x=2,42 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=120 device=2 delay=2,700 hold=0,008 startX=-10,00 elapsed=3,550 x=2,78 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=120 device=3 delay=2,400 hold=0,008 startX=-10,00 elapsed=3,250 x=1,70 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=120 device=3 delay=2,500 hold=0,008 startX=-10,00 elapsed=3,350 x=2,06 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=120 device=3 delay=2,600 hold=0,008 startX=-10,00 elapsed=3,450 x=2,42 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+START_INPUT fps=120 device=3 delay=2,700 hold=0,008 startX=-10,00 elapsed=3,550 x=2,78 y=-8,22 success=True
+[GameOver]: Yuna falhou o salto e caiu da rota.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+]]></output>
+            </test-case>
+            <test-case id="1020" name="SceneWithoutInputFailsAfterUsefulApproach" fullname="YunaLegend.Tests.DarkRoomStartInputTests.SceneWithoutInputFailsAfterUsefulApproach" methodname="SceneWithoutInputFailsAfterUsefulApproach" classname="YunaLegend.Tests.DarkRoomStartInputTests" runstate="Runnable" seed="454576065" result="Passed" start-time="2026-11-11 17:08:12Z" end-time="2026-11-11 17:08:12Z" duration="0.221495" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+[GameOver]: Yuna não alcançou o topo da plataforma obrigatória.
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+START_NO_INPUT deathAfter=2,800s
+]]></output>
+            </test-case>
+            <test-case id="1021" name="TapAndHoldHaveIdenticalBallisticArcOnEveryDevice" fullname="YunaLegend.Tests.DarkRoomStartInputTests.TapAndHoldHaveIdenticalBallisticArcOnEveryDevice" methodname="TapAndHoldHaveIdenticalBallisticArcOnEveryDevice" classname="YunaLegend.Tests.DarkRoomStartInputTests" runstate="Runnable" seed="1427693140" result="Passed" start-time="2026-11-11 17:08:12Z" end-time="2026-11-11 17:08:18Z" duration="5.578565" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=30 device=0 hold=0,033 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=30 device=0 hold=0,700 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=30 device=1 hold=0,033 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=30 device=1 hold=0,700 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=30 device=2 hold=0,033 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=30 device=2 hold=0,700 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=30 device=3 hold=0,033 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=30 device=3 hold=0,700 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=60 device=0 hold=0,017 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=60 device=0 hold=0,700 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=60 device=1 hold=0,017 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=60 device=1 hold=0,700 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=60 device=2 hold=0,017 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=60 device=2 hold=0,700 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=60 device=3 hold=0,017 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=60 device=3 hold=0,700 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=120 device=0 hold=0,008 height=2,399
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=120 device=0 hold=0,700 height=2,399
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=120 device=1 hold=0,008 height=2,399
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=120 device=1 hold=0,700 height=2,399
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=120 device=2 hold=0,008 height=2,399
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=120 device=2 hold=0,700 height=2,399
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=120 device=3 hold=0,008 height=2,399
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=120 device=3 hold=0,700 height=2,399
+Saving results to: C:/Users/sergi/AppData/LocalLow/DeepMindStudio/Yuna Legend - O Quarto dos Brinquedos\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

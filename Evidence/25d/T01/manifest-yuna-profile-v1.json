@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "session": "2026-11-12-codex-execute-25d-d28a",
+  "status": "em_revisao",
+  "microdelivery": "T01.1",
+  "tool": "image_gen.imagegen built-in",
+  "transparent_background_requested": true,
+  "reference": "Assets/Art/UI/Title_Background.png",
+  "reference_sha256": "d17bce62c9668414ce37b30b83f322af0416ba904e8b8d8ee85c879bdac1ab9e",
+  "generation_source": "C:/Users/sergi/.codex/generated_images/01a1cfe0-1ed7-7ac1-8c1d-70a394f5b3c7/exec-e22bf06f-cb72-405e-a30e-9d1384eac9d8.png",
+  "inspection": {
+    "width": 1024,
+    "height": 1536,
+    "mode": "RGBA8",
+    "zero_alpha_pixels": 971992,
+    "fully_opaque_pixels": 0,
+    "final_sprite_alpha_qa": "pending"
+  },
+  "files": [
+    {
+      "path": "yuna-profile-v1.png",
+      "sha256": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+      "bytes": 2158619
+    },
+    {
+      "path": "prompt-yuna-profile-v1.txt",
+      "sha256": "de154af84fbc5f15b62281bc28b818cbaef6d0b09382a409f8aa9fef67b610bd",
+      "bytes": 2309
+    },
+    {
+      "path": "reviews/T01.1-v1.md",
+      "sha256": "e2d5fc1ab5bad3fe8bef21f974d493e24e865f92936c3a4e9662184223d2b727",
+      "bytes": 2607
+    }
+  ]
+}

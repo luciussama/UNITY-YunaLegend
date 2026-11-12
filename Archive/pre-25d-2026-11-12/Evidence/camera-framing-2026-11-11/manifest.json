@@ -1,0 +1,87 @@
+[
+  {
+    "path": "Evidence/camera-framing-2026-11-11/before-castle-camera.png",
+    "bytes": 129566,
+    "sha256": "640cf7aceefc7e7b678abef6abd17dfa2dfc0e8b827acdc0b11afbf243d4ae50"
+  },
+  {
+    "path": "Evidence/camera-framing-2026-11-11/before-start-camera.png",
+    "bytes": 154329,
+    "sha256": "34e103040224638372397f66b866249a495c1517b328237659044a63bec7db53"
+  },
+  {
+    "path": "Evidence/camera-framing-2026-11-11/camera-behavior.png",
+    "bytes": 166637,
+    "sha256": "7f832191312ec051c8cfa3800dc81172e32969f33352d6e52b853ce570b2301b"
+  },
+  {
+    "path": "Evidence/camera-framing-2026-11-11/capture-harness.cs.txt",
+    "bytes": 9789,
+    "sha256": "dd724f056a6067ed434799ec406a6fd7bd23cce33c9593cc3d93610da92440a3"
+  },
+  {
+    "path": "Evidence/camera-framing-2026-11-11/capture.log",
+    "bytes": 38863,
+    "sha256": "cbe6d2df2d90a0f9184fab72dd796605bf82a84226ef15251de20191ed048c07"
+  },
+  {
+    "path": "Evidence/camera-framing-2026-11-11/editmode.xml",
+    "bytes": 15000,
+    "sha256": "f6ac13dc29c3ec13a2b2083f3aeddb04b9fd874a064dafa8c1d3ecf9a9c92f85"
+  },
+  {
+    "path": "Evidence/camera-framing-2026-11-11/framing-checks.json",
+    "bytes": 1699,
+    "sha256": "b08d502291cc060609be49112926d3a6fec21a8c548b7e1099d3c18f41434dfe"
+  },
+  {
+    "path": "Evidence/camera-framing-2026-11-11/playmode.xml",
+    "bytes": 122135,
+    "sha256": "dbc838ad597382ace28cc555a62f4f03b9123f5c08f83afeab46da6d51e2a6bf"
+  },
+  {
+    "path": "Evidence/camera-framing-2026-11-11/README.md",
+    "bytes": 3038,
+    "sha256": "0f266fb0c2c23f8d783a559a65b876b36a5a6a0e569701b521e2c5bdfd9d8613"
+  },
+  {
+    "path": "Evidence/camera-framing-2026-11-11/scene-merge.json",
+    "bytes": 170,
+    "sha256": "8ddfe9c22878477abe9d8ec2910922c0e5b5827d26d3718e36dd635b90d26f98"
+  },
+  {
+    "path": "Evidence/camera-framing-2026-11-11/unity-01-start.png",
+    "bytes": 109488,
+    "sha256": "fcc85cacba2f4ce8ee23b8813970859d3fc3b45334240213b8eb1e8159fd71f2"
+  },
+  {
+    "path": "Evidence/camera-framing-2026-11-11/unity-02-castle.png",
+    "bytes": 162455,
+    "sha256": "81f910e19d2ca84270246fc7f170d2c62a20642d2b804f0ca1c93ac586f0e9b5"
+  },
+  {
+    "path": "Evidence/camera-framing-2026-11-11/unity-03-false-door.png",
+    "bytes": 94702,
+    "sha256": "5f7feadc12ec867aabf28affe505ba621237e5bf584502d0d99766facda3b65b"
+  },
+  {
+    "path": "Evidence/camera-framing-2026-11-11/unity-04-portal.png",
+    "bytes": 203509,
+    "sha256": "aa667231298727ef031c742d5d2a7ddeaf2d195ea33681dccdd2c7f301056919"
+  },
+  {
+    "path": "Evidence/camera-framing-2026-11-11/unity-05-fall-ground.png",
+    "bytes": 145976,
+    "sha256": "c87059951e4e7aaf032a3c363020da046e3270f87ea2a52dfbac52b1ac43ad72"
+  },
+  {
+    "path": "Evidence/camera-framing-2026-11-11/unity-06-castle-overview.png",
+    "bytes": 70594,
+    "sha256": "668bb132baa302718c05fdb757f974c23fc2d6dd8b2ccc21afa5495b88d6fa02"
+  },
+  {
+    "path": "Evidence/camera-framing-2026-11-11/unity-metadata.json",
+    "bytes": 65777,
+    "sha256": "b3fd325ea94ad2ee8ef87194ed6a7521af73156bba1d1a1ff3b9d2d4a51e7be9"
+  }
+]

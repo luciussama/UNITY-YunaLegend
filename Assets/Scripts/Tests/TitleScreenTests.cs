@@ -67,6 +67,37 @@ namespace YunaLegend.Tests
         }
 
         [Test]
+        public void PhaseSelectorInitialization_PreservesNewGameFocus_ButCloseRestoresFlag()
+        {
+            UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/TitleScreen.unity");
+            try
+            {
+                var controller = UnityEngine.Object.FindFirstObjectByType<TitleScreenController>();
+                var selector = UnityEngine.Object.FindFirstObjectByType<TitlePhaseSelector>();
+                // Reproduce the startup order that previously replaced New Game with the flag.
+                const System.Reflection.BindingFlags lifecycle =
+                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+                var events = UnityEngine.Object.FindFirstObjectByType<EventSystem>();
+                typeof(EventSystem).GetMethod("OnEnable", lifecycle).Invoke(events, null);
+                typeof(TitleScreenController).GetMethod("Start", lifecycle).Invoke(controller, null);
+                Assert.AreEqual("Botao_Novojogo", EventSystem.current.currentSelectedGameObject.name);
+                typeof(TitlePhaseSelector).GetMethod("Start", lifecycle).Invoke(selector, null);
+                Assert.IsFalse(selector.IsOpen);
+                Assert.AreEqual("Botao_Novojogo", EventSystem.current.currentSelectedGameObject.name);
+                selector.Open();
+                Assert.IsTrue(selector.IsOpen);
+                selector.Close();
+                Assert.IsFalse(selector.IsOpen);
+                Assert.AreEqual("Bandeira_Fases", EventSystem.current.currentSelectedGameObject.name);
+            }
+            finally
+            {
+                UnityEditor.SceneManagement.EditorSceneManager.NewScene(
+                    UnityEditor.SceneManagement.NewSceneSetup.EmptyScene);
+            }
+        }
+
+        [Test]
         public void EasyModeAndVolume_ArePersistedInPlayerPrefs()
         {
             bool previousEasy = TitleScreenController.EasyMode;

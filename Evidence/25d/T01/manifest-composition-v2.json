@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "session": "2026-11-12-codex-composition-25d-90ba",
+  "status": "em_revisao",
+  "microdelivery": "T01.6",
+  "tool": "image_gen.imagegen built-in",
+  "transparent_background_requested": false,
+  "references": [
+    {
+      "path": "yuna-profile-v1.png",
+      "sha256": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044"
+    },
+    {
+      "path": "nanda-blue-v1.png",
+      "sha256": "f16ba3862f7e1fe263916922fa742eef1426b98d6e4d81f794e1083e74725678"
+    },
+    {
+      "path": "bear-v1.png",
+      "sha256": "708108204dda6a64294eb19c0e2567129e0d4a092926d78c47ebd0192f9ff833"
+    },
+    {
+      "path": "books-v1.png",
+      "sha256": "cdbf8f5b1fa6f8cc3dd92372d142d26a72325005f4e84a97d49bd14fd83b0bec"
+    },
+    {
+      "path": "furniture-v1.png",
+      "sha256": "2926cc4b2d9aa0abf1d8330f36cb265d541b7902f0a6f253bd49840899a70797"
+    }
+  ],
+  "generation_sources": [
+    "C:/Users/sergi/.codex/generated_images/01a1cfe0-1ed7-7ac1-8c1d-70a394f5b3c7/exec-fbe2dd8b-ec36-41ff-85d1-03d0a90bf876.png",
+    "C:/Users/sergi/.codex/generated_images/01a1cfe0-1ed7-7ac1-8c1d-70a394f5b3c7/exec-dcab04e2-2faf-4da8-92a5-a3d103f20902.png"
+  ],
+  "inspection": {
+    "width": 1671,
+    "height": 941,
+    "bit_depth": 8,
+    "png_color_type": 2,
+    "scope": "art direction atmosphere/unity only",
+    "unity_gameplay_capture": false,
+    "exact_scale_gap_contact_validation": "pending",
+    "notable_limit": "Books appear lower than bear: not an approved route change."
+  },
+  "files": [
+    {
+      "path": "composition-v1-draft.png",
+      "sha256": "005632aae51cfc3fbe41a59084b5a73992cfea8474f4e181512090d33cb74ada",
+      "bytes": 2809848
+    },
+    {
+      "path": "composition-v2.png",
+      "sha256": "dc69347b03a574a8536eeaf8ffaeac604dea9a09e49d9688131a83d6d4bc7bfc",
+      "bytes": 2480423
+    },
+    {
+      "path": "prompt-composition-v1.txt",
+      "sha256": "373cc49eb967f94ec497a628523b9e871803b5e7be58f693260cd6d1d376c209",
+      "bytes": 4045
+    },
+    {
+      "path": "prompt-composition-v2-scale.txt",
+      "sha256": "274695e46f02e063e7977620b74518742e31c10740855d26cc563e37d5071fe6",
+      "bytes": 1549
+    },
+    {
+      "path": "reviews/T01.6-v2.md",
+      "sha256": "15a2f933de4e87130eb331696c7a74b4f8f2bd8e5b48701cb82071a3ea2e420c",
+      "bytes": 3089
+    }
+  ]
+}

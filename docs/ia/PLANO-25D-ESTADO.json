@@ -2,22 +2,800 @@
   "schema_version": 1,
   "plan": "docs/ia/PLANO-25D-OBRIGATORIO.md",
   "decision": "Personagens 2D ilustrados em cenario com profundidade, Unity/C#; escolha do usuario em 12/11/2026.",
-  "execution_started": false,
-  "integration_checkout": null,
-  "integration_coordinator": null,
-  "updated_at": "2026-11-12",
+  "execution_started": true,
+  "integration_checkout": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend",
+  "integration_coordinator": {
+    "session": "2026-11-12-codex-execute-25d-d28a",
+    "agent": "Codex (GPT-6)"
+  },
+  "updated_at": "2026-11-12T17:23:04.192358+00:00",
   "tasks": [
-    {"id":"T00","title":"Baseline e inventario","depends_on":[],"resources":["integration"],"human_gate":false,"status":"pending","owner":null,"checkpoint":null},
-    {"id":"T01","title":"Biblia visual e aprovacao de direcao","depends_on":["T00"],"resources":["integration"],"human_gate":true,"status":"pending","owner":null,"checkpoint":null},
-    {"id":"T02","title":"Prova tecnica e contratos","depends_on":["T01"],"resources":["integration"],"human_gate":false,"status":"pending","owner":null,"checkpoint":null},
-    {"id":"T03","title":"Yuna ilustrada e animada","depends_on":["T02"],"resources":["art-yuna"],"human_gate":false,"status":"pending","owner":null,"checkpoint":null},
-    {"id":"T04","title":"Nanda ilustrada e animada","depends_on":["T02"],"resources":["art-nanda"],"human_gate":false,"status":"pending","owner":null,"checkpoint":null},
-    {"id":"T05","title":"Ambiente e plataformas do piloto","depends_on":["T02"],"resources":["art-environment"],"human_gate":false,"status":"pending","owner":null,"checkpoint":null},
-    {"id":"T06","title":"Integracao e movimento do piloto","depends_on":["T03","T04","T05"],"resources":["integration","art-yuna","art-nanda","art-environment"],"human_gate":false,"status":"pending","owner":null,"checkpoint":null},
-    {"id":"T07","title":"Aprovacao humana do piloto em movimento","depends_on":["T06"],"resources":["integration"],"human_gate":true,"status":"pending","owner":null,"checkpoint":null},
-    {"id":"T08","title":"Expansao do Dark Room","depends_on":["T07"],"resources":["integration","art-yuna","art-nanda","art-environment"],"human_gate":false,"status":"pending","owner":null,"checkpoint":null},
-    {"id":"T09","title":"Regressao e dispositivos reais","depends_on":["T08"],"resources":["integration"],"human_gate":false,"status":"pending","owner":null,"checkpoint":null},
-    {"id":"T10","title":"Build publicacao e verificacao","depends_on":["T09"],"resources":["integration"],"human_gate":false,"status":"pending","owner":null,"checkpoint":null}
+    {
+      "id": "T00",
+      "title": "Baseline e inventario",
+      "depends_on": [],
+      "resources": [
+        "integration"
+      ],
+      "human_gate": false,
+      "status": "accepted",
+      "owner": null,
+      "checkpoint": {
+        "done": "Inventario37arquivos completo;33fontesAssets/Packages iguais ao clone compilado;assinatura/microentregas definidas",
+        "next": "Entregar inventarioT00 para revisao tecnica;validacaojogavel pendenteT00B;depois conceitoT01.1 independente",
+        "validation": "Hashes/GUIDs baseline29c9123 e comparacao33/33 clone;observacaoIAB menu sem avanço por automacao",
+        "pending": "T00B:entrada/gravação base;nenhum aceitejogavel;nenhuma arteaprovada",
+        "files": "Evidence/25d/T00/README.md;Evidence/25d/T00/baseline-manifest.json",
+        "processes": "ServidorNode35852 porta8080;nenhumUnityEditor iniciado",
+        "updated_at": "2026-11-12T14:10:30.522177+00:00"
+      },
+      "evidence": [
+        {
+          "path": "Evidence/25d/T00/README.md",
+          "sha256": "3250b21f11620037366b64bb048ebae3d31b14da50e5a850d65002d7664a5fe4"
+        },
+        {
+          "path": "Evidence/25d/T00/baseline-manifest.json",
+          "sha256": "8269aa7a5889283227b32ec941079ae7b645b3b2d0e3d0f9d52634a4c336ee08"
+        }
+      ],
+      "validation": "37fontes com hashes e GUIDs;33/33AssetsPackages iguais clone;entrada/captura nao validadas,mantidasT00B",
+      "acceptance": {
+        "session": "2026-11-12-codex-execute-25d-d28a",
+        "reference": "Revisao tecnica do inventario e hashes nesta sessao,nao aceitehumano ou jogavel;pendenciasT00B bloqueiamT02",
+        "at": "2026-11-12T14:10:30.727926+00:00",
+        "human_required": false
+      }
+    },
+    {
+      "id": "T01",
+      "title": "Biblia visual e aprovacao de direcao",
+      "depends_on": [
+        "T00"
+      ],
+      "resources": [
+        "integration"
+      ],
+      "human_gate": true,
+      "status": "accepted",
+      "owner": null,
+      "checkpoint": {
+        "done": "T01.1-T01.6aprovadospelousuario;direcaovisualconsolidada comimagens/revisoes;aceiteconceitual somente",
+        "next": "EntregarT01e registraraceitehumanocomreferencia;proximoT00BvalidacaoentradabaseantesT02cenaUnityisoladaYuna",
+        "validation": "Hashcompositionv2confere;6registrosaprovacaohumanaexistentes;manifestes/fontesacompanhados;semruntimevalidado",
+        "pending": "T00Bmenu/gravaçãobase;T02provaUnity/camera/animacao;escala/alpha/contato/luz/vaos/performancenaovalidados",
+        "files": "Evidence/25d/T01/DIRECAO-VISUAL-APROVADA.md;Evidence/25d/T01/reviews/T01.6-v2-aprovacao.md;Evidence/25d/T01/composition-v2.png",
+        "processes": "Nenhumprocessoiniciadonestasessao",
+        "updated_at": "2026-11-12T15:18:09.622248+00:00"
+      },
+      "evidence": [
+        {
+          "path": "Evidence/25d/T01/DIRECAO-VISUAL-APROVADA.md",
+          "sha256": "36f9f7391fa49cf33d4478f32a8c21284b0e601aefb839c184510fdd24798e17"
+        },
+        {
+          "path": "Evidence/25d/T01/yuna-profile-v1.png",
+          "sha256": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044"
+        },
+        {
+          "path": "Evidence/25d/T01/nanda-blue-v1.png",
+          "sha256": "f16ba3862f7e1fe263916922fa742eef1426b98d6e4d81f794e1083e74725678"
+        },
+        {
+          "path": "Evidence/25d/T01/bear-v1.png",
+          "sha256": "708108204dda6a64294eb19c0e2567129e0d4a092926d78c47ebd0192f9ff833"
+        },
+        {
+          "path": "Evidence/25d/T01/books-v1.png",
+          "sha256": "cdbf8f5b1fa6f8cc3dd92372d142d26a72325005f4e84a97d49bd14fd83b0bec"
+        },
+        {
+          "path": "Evidence/25d/T01/furniture-v1.png",
+          "sha256": "2926cc4b2d9aa0abf1d8330f36cb265d541b7902f0a6f253bd49840899a70797"
+        },
+        {
+          "path": "Evidence/25d/T01/composition-v2.png",
+          "sha256": "dc69347b03a574a8536eeaf8ffaeac604dea9a09e49d9688131a83d6d4bc7bfc"
+        },
+        {
+          "path": "Evidence/25d/T01/reviews/T01.1-v1-aprovacao.md",
+          "sha256": "0848ee454785bdcc7ce1091df99f976233df3adbdd2d5390ac5c4e0bcdab7694"
+        },
+        {
+          "path": "Evidence/25d/T01/reviews/T01.2-v1-aprovacao.md",
+          "sha256": "1a84d6a9e688cde8af114a2d330b5e2c08c2d57df3caabb4edc2cff63a422cdb"
+        },
+        {
+          "path": "Evidence/25d/T01/reviews/T01.3-v1-aprovacao.md",
+          "sha256": "56712b08317b18e21acea59ef2ec336c2e8d525ba340aad7f27298f2ba7d24a1"
+        },
+        {
+          "path": "Evidence/25d/T01/reviews/T01.4-v1-aprovacao.md",
+          "sha256": "47f4d75e8370baf282e7742f403814ae3c74e1c3d8b8badbc545e0f5fd2e561c"
+        },
+        {
+          "path": "Evidence/25d/T01/reviews/T01.5-v1-aprovacao.md",
+          "sha256": "71fadee5db68b35cf3628682ef7ada97b5bdba960198c4ff2a09142985f392dc"
+        },
+        {
+          "path": "Evidence/25d/T01/reviews/T01.6-v2-aprovacao.md",
+          "sha256": "7c5e0f15714aa3c9bb2b6011b3a17eeddb099208f3d06c936498b9e9fc7e9fc9"
+        }
+      ],
+      "validation": "Revisoesindividuais e direcaocompostaaprovadas;hashespreservados;escopos/l imitestecnicos explicitos;naoaprovaT00B/T02/T07",
+      "acceptance": {
+        "session": "2026-11-12-codex-direction-approved-6af3",
+        "reference": "Usuario nesta conversa12/11/2026:Gostei bastante da arte conceitual.Podeirporessecaminho.Qualeoproximopasso? Apos revisoesT01.1-T01.5;aceite somente direcaovisualT01,registros/versoesanexados",
+        "at": "2026-11-12T15:18:09.815088+00:00",
+        "human_required": true
+      }
+    },
+    {
+      "id": "T02",
+      "title": "Prova tecnica e contratos",
+      "depends_on": [
+        "T01",
+        "T00B"
+      ],
+      "resources": [
+        "integration"
+      ],
+      "human_gate": false,
+      "status": "active",
+      "owner": {
+        "session": "2026-11-12-codex-archive-previous-25d-9e5b",
+        "agent": "Codex (GPT-6)"
+      },
+      "checkpoint": {
+        "done": "T02.2b cameraA45 estável implementada eprontaparaavaliacao:134.4pxconstantes,4/4PlayModeCameraTests. Material anterior arquivado:366arquivos/123.23MiB,8docs+17gruposEvidence+4logstracked;README/ESTADO-ATUAL-25D ativos.",
+        "next": "Apresentar stable-camera.gif e registrar avaliacao humanaT02.2b;ajustes sepedidos. Depois T02.3 prova deanimacao eorcamento,sem pularaceitecamera. Ao retomar lerESTADO-ATUAL-25D,diario50,plan/status;historico apenas sob demanda viaarchive_history.py.",
+        "validation": "CameraInputs urso/livros eescala134.3999-134.4001px;4testesPassed. Arquivo366/366SHAOK;364arquivosanteriormentetracked comdestinoverificado;3refshistoricasT01resolvidas;linksativossemquebra;nenhumarquivoarchiveignorado;plan/diary/diffcheckOK.",
+        "pending": "Avaliacao humanaT02.2b;T02.3animacao/custo;contatovisualpes~skin.08m;ambiente/Nandaantigos;retratos/dispositivos/fasecompleta/publicacao2D pendentes. SemaceiteT02agregado ouexpansao.",
+        "files": "README.md;docs/ia/ESTADO-ATUAL-25D.md;Evidence/25d/T02.2b/README.md;Evidence/25d/T02.2b/stable-camera.gif;Archive/pre-25d-2026-11-12/README.md;Archive/pre-25d-2026-11-12/manifest.json;tools/archive_history.py;AGENTS.md",
+        "processes": "Capturas/testesbatch encerrados;Editor principal preservado;nenhum processo novo de arquivamento ativo",
+        "updated_at": "2026-11-12T17:23:04.192358+00:00"
+      }
+    },
+    {
+      "id": "T03",
+      "title": "Yuna ilustrada e animada",
+      "depends_on": [
+        "T02"
+      ],
+      "resources": [
+        "art-yuna"
+      ],
+      "human_gate": false,
+      "status": "pending",
+      "owner": null,
+      "checkpoint": null
+    },
+    {
+      "id": "T04",
+      "title": "Nanda ilustrada e animada",
+      "depends_on": [
+        "T02"
+      ],
+      "resources": [
+        "art-nanda"
+      ],
+      "human_gate": false,
+      "status": "pending",
+      "owner": null,
+      "checkpoint": null
+    },
+    {
+      "id": "T05",
+      "title": "Ambiente e plataformas do piloto",
+      "depends_on": [
+        "T02"
+      ],
+      "resources": [
+        "art-environment"
+      ],
+      "human_gate": false,
+      "status": "pending",
+      "owner": null,
+      "checkpoint": null
+    },
+    {
+      "id": "T06",
+      "title": "Integracao e movimento do piloto",
+      "depends_on": [
+        "T03",
+        "T04",
+        "T05"
+      ],
+      "resources": [
+        "integration",
+        "art-yuna",
+        "art-nanda",
+        "art-environment"
+      ],
+      "human_gate": false,
+      "status": "pending",
+      "owner": null,
+      "checkpoint": null
+    },
+    {
+      "id": "T07",
+      "title": "Aprovacao humana do piloto em movimento",
+      "depends_on": [
+        "T06"
+      ],
+      "resources": [
+        "integration"
+      ],
+      "human_gate": true,
+      "status": "pending",
+      "owner": null,
+      "checkpoint": null
+    },
+    {
+      "id": "T08",
+      "title": "Expansao do Dark Room",
+      "depends_on": [
+        "T07"
+      ],
+      "resources": [
+        "integration",
+        "art-yuna",
+        "art-nanda",
+        "art-environment"
+      ],
+      "human_gate": false,
+      "status": "pending",
+      "owner": null,
+      "checkpoint": null
+    },
+    {
+      "id": "T09",
+      "title": "Regressao e dispositivos reais",
+      "depends_on": [
+        "T08"
+      ],
+      "resources": [
+        "integration"
+      ],
+      "human_gate": false,
+      "status": "pending",
+      "owner": null,
+      "checkpoint": null
+    },
+    {
+      "id": "T10",
+      "title": "Build publicacao e verificacao",
+      "depends_on": [
+        "T09"
+      ],
+      "resources": [
+        "integration"
+      ],
+      "human_gate": false,
+      "status": "pending",
+      "owner": null,
+      "checkpoint": null
+    },
+    {
+      "id": "T00B",
+      "title": "Validacao jogavel da base: entrada e gravacao",
+      "depends_on": [
+        "T00"
+      ],
+      "resources": [
+        "baseline-runtime"
+      ],
+      "human_gate": false,
+      "status": "accepted",
+      "owner": null,
+      "checkpoint": {
+        "done": "Entrada menu fase urso livros morte retry viaInputSystem;foco corrigido;WebGL local compilada",
+        "next": "Submit/revisao tecnica T00B;claimT02 e prova estatica isolada",
+        "validation": "4/4TitleTests;markerWebGL;GIF60frames;JSONestados;236sourcesmanifest com2excecoes explicitas",
+        "pending": "Sem navegador/aparelho/abertura narrativa completa;camera semIMGUI;nao houvepublicacao",
+        "files": "Evidence/25d/T00B/README.md;Evidence/25d/T00B/source-build-manifest.json",
+        "processes": "Unity build finalizada;nenhumEditorprincipal",
+        "updated_at": "2026-11-12T15:34:45.947972+00:00"
+      },
+      "evidence": [
+        {
+          "path": "Evidence/25d/T00B/README.md",
+          "sha256": "ce5e355285267bda9d443e68cf9e0fa796b4b15d444ed88957508d8a21046eda"
+        },
+        {
+          "path": "Evidence/25d/T00B/source-build-manifest.json",
+          "sha256": "6cecd5900281ac343996b909815f47e5bbf1506e45bbee6880182bb95e1159d5"
+        },
+        {
+          "path": "Evidence/25d/T00B/keyboard-entry/input-and-traversal.json",
+          "sha256": "c91dfaebea8c0e1a3f018c4e072f16f9970751af7f998f88aa734b11b5da624f"
+        },
+        {
+          "path": "Evidence/25d/T00B/baseline-camera.gif",
+          "sha256": "1f3803a2ef78245cae864e2d1139fb556ec5f31fc531211b6eb167f77d07b4b8"
+        },
+        {
+          "path": "Evidence/25d/T00B/title-tests-final.xml",
+          "sha256": "93862adb5d068e93a015456ee38c537848d62388475271b025841e291e3c93fb"
+        }
+      ],
+      "validation": "InputSystem menu fase urso livros morte retry;4TitleTests;WebGLsuccess;quickopening/camera semIMGUI/2serializationexceptions documentadas",
+      "acceptance": {
+        "session": "2026-11-12-codex-unity-proof-25d-a73e",
+        "reference": "Revisao tecnica:JSON input real,4testes,WebGLhashes,GIF;limites README explicitos. Nenhum aceite humano do piloto ou cobertura dispositivos.",
+        "at": "2026-11-12T15:35:05.192536+00:00",
+        "human_required": false
+      }
+    }
   ],
-  "history": []
+  "history": [
+    {
+      "command": "claim",
+      "task": "T00",
+      "session": "2026-11-12-codex-start-25d-4f6a",
+      "agent": "Codex (GPT-6)",
+      "at": "2026-11-12T13:45:36.817090+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T00",
+      "session": "2026-11-12-codex-start-25d-4f6a",
+      "done": "T00.1:37fontes/configuracoes inventariadas,hashes/GUIDs e referencias visuais inspecionadas;contrato de assinatura e microentregas registrado",
+      "next": "T00.2:ler Evidence/25d/T00/README.md;reproduzir menu->fase e capturar percurso base;verificar correspondencia build/fontes antes de reservarT01.1",
+      "validation": "37/37blobsGit coincidem com HEAD29c9123 apos normalizacao;SHA256exato preservado;nenhum gameplay alterado",
+      "pending": "T00naoconcluida:reproducao de entrada,captura/video atuais e correspondencia build pendentes;nenhuma arte nova aprovada",
+      "files": "Evidence/25d/T00/README.md;Evidence/25d/T00/baseline-manifest.json;docs/ia/25D-ASSINATURA-E-MICROENTREGAS.md;AGENTS.md;docs/ia/PLANO-25D-OBRIGATORIO.md",
+      "processes": "Nenhum processo iniciado nesta sessao;reinspecionar porta8080 e editor ao retomar;build/log anterior em Build/Publish",
+      "at": "2026-11-12T13:48:52.233283+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T00",
+      "session": "2026-11-12-codex-execute-25d-d28a",
+      "agent": "Codex (GPT-6)",
+      "reason": "Retomada nesta conversa autorizada pelo usuario;checkpoint e Git conferidos;sem UnityEditor ativo;nenhum agente anterior rodando",
+      "from_session": "2026-11-12-codex-start-25d-4f6a",
+      "at": "2026-11-12T14:07:47.669670+00:00"
+    },
+    {
+      "command": "amend_dependencies",
+      "session": "2026-11-12-codex-execute-25d-d28a",
+      "reason": "T00 inventario;T00B preserva validacao jogavel e bloqueia T02;T01 conceitual independente",
+      "at": "2026-11-12"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T00",
+      "session": "2026-11-12-codex-execute-25d-d28a",
+      "done": "Inventario37arquivos completo;33fontesAssets/Packages iguais ao clone compilado;assinatura/microentregas definidas",
+      "next": "Entregar inventarioT00 para revisao tecnica;validacaojogavel pendenteT00B;depois conceitoT01.1 independente",
+      "validation": "Hashes/GUIDs baseline29c9123 e comparacao33/33 clone;observacaoIAB menu sem avanço por automacao",
+      "pending": "T00B:entrada/gravação base;nenhum aceitejogavel;nenhuma arteaprovada",
+      "files": "Evidence/25d/T00/README.md;Evidence/25d/T00/baseline-manifest.json",
+      "processes": "ServidorNode35852 porta8080;nenhumUnityEditor iniciado",
+      "at": "2026-11-12T14:10:30.522177+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T00",
+      "session": "2026-11-12-codex-execute-25d-d28a",
+      "evidence": [
+        "Evidence/25d/T00/README.md",
+        "Evidence/25d/T00/baseline-manifest.json"
+      ],
+      "validation": "37fontes com hashes e GUIDs;33/33AssetsPackages iguais clone;entrada/captura nao validadas,mantidasT00B",
+      "at": "2026-11-12T14:10:30.623635+00:00"
+    },
+    {
+      "command": "accept",
+      "task": "T00",
+      "session": "2026-11-12-codex-execute-25d-d28a",
+      "reference": "Revisao tecnica do inventario e hashes nesta sessao,nao aceitehumano ou jogavel;pendenciasT00B bloqueiamT02",
+      "human_approval": false,
+      "at": "2026-11-12T14:10:30.727926+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T01",
+      "session": "2026-11-12-codex-execute-25d-d28a",
+      "agent": "Codex (GPT-6)",
+      "at": "2026-11-12T14:10:30.823804+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T01",
+      "session": "2026-11-12-codex-execute-25d-d28a",
+      "done": "Referencia principalTitle_Background inspecionada;escopoT01.1 unico perfil neutro;nenhuma arte aprovada",
+      "next": "Gerar uma candidata via imagegen builtin usando menu como referencia;salvar Evidence/25d/T01/yuna-profile-v1.png e prompt/hashes;entregar para revisao",
+      "validation": "T00inventario aceito;T00Bentrada/gravação pendente bloqueiaT02;9testescoordenadorpassed",
+      "pending": "T01.1 precisa aprovacao humana;nao avancarNanda/ciclos antes da avaliacao;nao integrar sprite no jogo",
+      "files": "Evidence/25d/T01;Assets/Art/UI/Title_Background.png",
+      "processes": "ServidorNode35852 porta8080;geracaoimagem a iniciar",
+      "at": "2026-11-12T14:11:23.246305+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T01",
+      "session": "2026-11-12-codex-execute-25d-d28a",
+      "done": "T01.1:uma candidataYuna2D lateral neutra gerada e salva;prompt integral,manifest e revisao em_revisao persistidos;nenhuma aprovacao humana",
+      "next": "Apresentar Evidence/25d/T01/yuna-profile-v1.png ao usuario;registrar resposta em reviews/T01.1-v1.md;se ajustes,criarv2;nao avancarNanda/animacao antes do aceite desta identidade",
+      "validation": "PNG1024x1536 RGBA8,971992pixelsalpha0;prompt/referencia/hashes persistidos;9testes coordenadorpassed;T00Bpendente bloqueiaT02",
+      "pending": "Aprovacao humanaT01.1;QAalpha/halo/opacidade e escala gameplay futuros;T01.2-T01.6 nao produzidas;T00Bentrada/gravação pendente",
+      "files": "Evidence/25d/T01/yuna-profile-v1.png;Evidence/25d/T01/prompt-yuna-profile-v1.txt;Evidence/25d/T01/manifest-yuna-profile-v1.json;Evidence/25d/T01/reviews/T01.1-v1.md",
+      "processes": "ServidorNode35852 porta8080;imagegenconcluido;nenhumUnityEditor iniciado",
+      "at": "2026-11-12T14:13:59.713125+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T01",
+      "session": "2026-11-12-codex-nanda-25d-e913",
+      "agent": "Codex (GPT-6)",
+      "reason": "Retomada autorizada nesta conversa apos aprovacao explicitaYunav1;checkpoint/Git consultados;nenhum agente anterior ativo",
+      "from_session": "2026-11-12-codex-execute-25d-d28a",
+      "at": "2026-11-12T14:17:02.704690+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T01",
+      "session": "2026-11-12-codex-nanda-25d-e913",
+      "done": "T01.1Yunav1aprovada por usuario e registro salvo;Nandaobservadalegado;usuarioalteroupaletaNanda/luzparaazul antesdag eracao",
+      "next": "Gerar Nanda azul uma poseviaImageGen;salvar imagem,prompt,hashes e comparacaoescala;entregarT01.2paraavaliacao",
+      "validation": "Yunahashconfere;referenciaNandasomenteobservacaoURLcanonica;diretrizazulregistradaAGENTS/contrato",
+      "pending": "T01.2precisaaprovacao;emissaoazulruntimeaindanaoimplementada;T00Bpendente bloqueiaT02",
+      "files": "Evidence/25d/T01/prompt-nanda-blue-v1.txt;Evidence/25d/T01/reviews/T01.1-v1-aprovacao.md;AGENTS.md;docs/ia/25D-ASSINATURA-E-MICROENTREGAS.md",
+      "processes": "NenhumUnityEditor/servidor iniciado nesta sessao;ImageGena iniciar",
+      "at": "2026-11-12T14:19:38.215243+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T01",
+      "session": "2026-11-12-codex-nanda-25d-e913",
+      "done": "T01.1Yunav1aprovada pelo usuario;T01.2Nandaazulv1gerada e salva,prompt/hash/review e comparacaoHTML escala35%imagem;diretrizazul incluindo luz registrada",
+      "next": "Apresentar Nandaazulv1 e comparacaoescala;registrar resposta usuario em reviewT01.2;se ajustes criarv2;nao avancarurso/objetos antes desta avaliacao",
+      "validation": "Yunapnginalterada;NandaPNG1168x1346RGBA8,864013pixelsalpha0;manifest/hashes/links comparacao conferidos estruturalmente;semQA navegador da comparacao",
+      "pending": "Aprovacao humanaT01.2;QArecorte/halo/escala e luzrealUnityfuturos;T01.3-T01.6naoproduzidas;T00Bentrada/gravação bloqueiaT02",
+      "files": "Evidence/25d/T01/nanda-blue-v1.png;Evidence/25d/T01/prompt-nanda-blue-v1.txt;Evidence/25d/T01/manifest-nanda-blue-v1.json;Evidence/25d/T01/reviews/T01.2-v1.md;Evidence/25d/T01/comparacao-yuna-nanda-v1.html;Evidence/25d/T01/reviews/T01.1-v1-aprovacao.md",
+      "processes": "Nenhum processoUnity/servidor iniciado nesta sessao;imagegenconcluido",
+      "at": "2026-11-12T14:22:58.241528+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T01",
+      "session": "2026-11-12-codex-bear-25d-71ac",
+      "agent": "Codex (GPT-6)",
+      "reason": "Retomada autorizada apos aprovacaoNandav1;estado/instrucoes/diario consultados;nenhum agente anterior ativo",
+      "from_session": "2026-11-12-codex-nanda-25d-e913",
+      "at": "2026-11-12T14:24:55.197724+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T01",
+      "session": "2026-11-12-codex-bear-25d-71ac",
+      "done": "YunaT01.1 e NandaazulT01.2aprovadasaparencia;ursoT01.3contratoapoio definido e entrada305lida;promptpronto",
+      "next": "GerarursoImageGen comYunarefestilo e renderursoformas;salvarPNG/prompt/hash;criaresquemaapoio separado;revisaoT01.3",
+      "validation": "HashNandaconfere;contratodefinecoroaconvexa/orelhasindividuais/banquetareal;nao achatamento",
+      "pending": "UrsoT01.3naoproduzido/aprovado;coincidenciaarte/colliderfutura;T00Bpendente bloqueiaT02;livrosnaoiniciados",
+      "files": "Evidence/25d/T01/prompt-bear-v1.txt;Evidence/25d/T01/urso-contrato-apoio-v1.md;Evidence/25d/T01/reviews/T01.2-v1-aprovacao.md",
+      "processes": "NenhumUnityEditor/servidor iniciado nesta sessao;ImageGena iniciar",
+      "at": "2026-11-12T14:25:30.137470+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T01",
+      "session": "2026-11-12-codex-bear-25d-71ac",
+      "done": "YunaT01.1eNandaazulT01.2aprovadasaparencia;T01.3ursov1gerado,salvo,prompt/hash/review e contratoapoioanteriora arte;esquemaSVGseparado",
+      "next": "Apresentarurso e esquemaapoio ao usuario;registrar respostaT01.3;ajustesemv2 se pedidos;nao gerar livros antes do aceiteurso",
+      "validation": "PNG1619x971RGBA8 inspecionado;topoarredondado;SVGXMLvalido;hashesYuna/Nandainalterados;semvalidacaofisica",
+      "pending": "Aprovacao humanaursoT01.3;contato/collider/escala/alphaQA futuros;T01.4livrosnaoiniciado;T00Bentrada/gravação bloqueiaT02",
+      "files": "Evidence/25d/T01/bear-v1.png;Evidence/25d/T01/prompt-bear-v1.txt;Evidence/25d/T01/manifest-bear-v1.json;Evidence/25d/T01/urso-contrato-apoio-v1.md;Evidence/25d/T01/urso-apoios-esquema-v1.svg;Evidence/25d/T01/reviews/T01.3-v1.md;Evidence/25d/T01/reviews/T01.2-v1-aprovacao.md",
+      "processes": "NenhumUnityEditor/servidor iniciado nesta sessao;ImageGenconcluido",
+      "at": "2026-11-12T14:28:13.826962+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T01",
+      "session": "2026-11-12-codex-books-25d-c804",
+      "agent": "Codex (GPT-6)",
+      "reason": "Retomada apos usuario aprovarUrso comgostei;checkpoint/instrucoesGitconferidos;nenhumagenteanteriorativo",
+      "from_session": "2026-11-12-codex-bear-25d-71ac",
+      "at": "2026-11-12T14:32:08.228711+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T01",
+      "session": "2026-11-12-codex-books-25d-c804",
+      "done": "Yuna/Nanda/ursoaprovadosaparencia;contratolivrosT01.4escritoantesarte;referenciasinspecionadas;promptpronto",
+      "next": "Gerar5livrosinclinadosviaImageGen;salvar candidata/prompt/hash/reviewT01.4;aguardarusuari oantesmovelT01.5",
+      "validation": "Hashursoconfere;GetContact1 e BuildBookStack consultados;entrada305lida;apoio pertencecapasuperiorinclinada",
+      "pending": "LivrosT01.4ainda semarte/aceite;fisicaescalaQA futuras;T00Bpendente bloqueiaT02;movelnaoiniciado",
+      "files": "Evidence/25d/T01/prompt-books-v1.txt;Evidence/25d/T01/books-support-contract-v1.md;Evidence/25d/T01/reviews/T01.3-v1-aprovacao.md",
+      "processes": "NenhumUnityEditor/servidor iniciado nesta sessao;ImageGena iniciar",
+      "at": "2026-11-12T14:33:21.569874+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T01",
+      "session": "2026-11-12-codex-books-25d-c804",
+      "done": "Yuna/Nanda/ursoaprovadosaparencia;T01.4livrosv1gerados/salvoscomcontratoprevio,promptliteral,manifesthash ereviewem_revisao",
+      "next": "Apresentarlivrosv1aousuario;registrarrespostaT01.4;ajustesv2sepedidos;naoiniciarmovelT01.5antesavaliacao",
+      "validation": "PNGinspecionado5livros/capasuperiorinclinada;hashesYuna/Nanda/ursoinalterados;angulonumerico/collidernaovalidados",
+      "pending": "AprovacaohumanaT01.4;escala/camera/collider/alphaQAfuturos;T01.5movelnaoiniciado;T00Bentrada/gravação bloqueiaT02",
+      "files": "Evidence/25d/T01/books-v1.png;Evidence/25d/T01/prompt-books-v1.txt;Evidence/25d/T01/books-support-contract-v1.md;Evidence/25d/T01/manifest-books-v1.json;Evidence/25d/T01/reviews/T01.4-v1.md;Evidence/25d/T01/reviews/T01.3-v1-aprovacao.md",
+      "processes": "NenhumUnityEditor/servidor iniciado nesta sessao;ImageGenconcluido",
+      "at": "2026-11-12T14:38:21.680608+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T01",
+      "session": "2026-11-12-codex-furniture-25d-f502",
+      "agent": "Codex (GPT-6)",
+      "reason": "Retomada autorizada apos aprovacaoexplicitalivrosv1;checkpointGit/diario consultados;nenhum agenteanteriorativo",
+      "from_session": "2026-11-12-codex-books-25d-c804",
+      "at": "2026-11-12T14:43:00.387281+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T01",
+      "session": "2026-11-12-codex-furniture-25d-f502",
+      "done": "Yuna/Nanda/urso/livrosaprovadosaparencia;contratomovelT01.5escritoantesarte;pedidofraturairregular349consultado;promptpronto",
+      "next": "GerarpranchaMove lintegro+detalheruptura;salvarPNG/prompt/hash/reviewT01.5;aguardarusuarioantesT01.6quadrocomposto",
+      "validation": "Hashlivrosconfere;regra305e349,fontesmovel/evidenciasconsultados;apoio2regioestamporeal,semcorteretoperfeito",
+      "pending": "T01.5aindas emarte/aceite;fisica/camada/animacaoQAfuturas;T00Bpendente bloqueiaT02;quadrocompostonaoiniciado",
+      "files": "Evidence/25d/T01/prompt-furniture-v1.txt;Evidence/25d/T01/furniture-support-contract-v1.md;Evidence/25d/T01/reviews/T01.4-v1-aprovacao.md",
+      "processes": "NenhumUnityEditor/servidoriniciadonestasessao;ImageGena iniciar",
+      "at": "2026-11-12T14:44:13.018806+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T01",
+      "session": "2026-11-12-codex-furniture-25d-f502",
+      "done": "Yuna/Nanda/urso/livrosaprovadosaparencia;T01.5movelv1comdetalherupturagerado/salvo,contratoprevio,prompt/manifesthash/reviewem_revisao",
+      "next": "Apresentarmovelv1/detalheruptura;registrarrespostaT01.5;ajustesv2sepedidos;naoproduzirquadroT01.6antesavaliacao",
+      "validation": "Pranchainspecionada6gavetas/prateleiras/madeiradesgaste/fraturairregular;PNGaprovados4inalterados;semfisica/cedimento/retryvalidados",
+      "pending": "AprovacaohumanaT01.5;separacaocamadas/escala/collider/alphaQA/animacaofuturas;T01.6naoiniciado;T00Bpendente bloqueiaT02",
+      "files": "Evidence/25d/T01/furniture-v1.png;Evidence/25d/T01/prompt-furniture-v1.txt;Evidence/25d/T01/furniture-support-contract-v1.md;Evidence/25d/T01/manifest-furniture-v1.json;Evidence/25d/T01/reviews/T01.5-v1.md;Evidence/25d/T01/reviews/T01.4-v1-aprovacao.md",
+      "processes": "NenhumUnityEditor/servidoriniciadonestasessao;ImageGenconcluido",
+      "at": "2026-11-12T14:46:21.402175+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T01",
+      "session": "2026-11-12-codex-composition-25d-90ba",
+      "agent": "Codex (GPT-6)",
+      "reason": "Retomada autorizada apos aceiteMovel/compromissoquebra,tropeco,retry;checkpoint/diario/Gitconferidos;nenhumagenteanteriorativo",
+      "from_session": "2026-11-12-codex-furniture-25d-f502",
+      "at": "2026-11-12T14:49:44.616816+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T01",
+      "session": "2026-11-12-codex-composition-25d-90ba",
+      "done": "T01.1-T01.5aprovadosaparencia;compromissoquebra/tropeco/retryconfirmado econtratoobrigatoriosalvo;promptT01.6pronto",
+      "next": "Gerar quadroT01.6noturno com5referenciasaprovadas;salvarimagem/prompt/hash/review;avaliacaohumanaatmosfera/unidade,semaceitarT01antecipadamente",
+      "validation": "Hashmovelconfere;nenhumaimagemaprovadaalterada;contratoseparaaparencia/mecanicafutura",
+      "pending": "T01.6aindanao produzido/aprovado;escala/camera/vaosnaocertificados;T00Bpendente bloqueiaT02;nenhumruntime2Dintegrado",
+      "files": "Evidence/25d/T01/prompt-composition-v1.txt;Evidence/25d/T01/reviews/T01.5-v1-aprovacao.md;docs/ia/25D-MOVEL-QUEBRA-E-DESEQUILIBRIO.md",
+      "processes": "NenhumUnityEditor/servidor iniciado nesta sessao;ImageGena iniciar",
+      "at": "2026-11-12T14:50:44.425720+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T01",
+      "session": "2026-11-12-codex-composition-25d-90ba",
+      "done": "T01.1-T01.5aprovadosaparencia;contratoquebra/tropeco/retryregistrado;T01.6quadro v2noturno gerado/escala personagens reduzida,prompt/hashes/review salvos",
+      "next": "Apresentarcomposition-v2.png;avaliacao humanaunidade/atmosferaT01.6;registrarresposta antesaceiteagregadoT01;T00BdeveconcluirantesT02",
+      "validation": "Quadroinspecionado;5PNGaprovadosinalterados;manifest/linksconferidos;semUnity/gameplay;livrosmaisbaixosnoquadro naoalteramrota",
+      "pending": "AprovacaoT01.6/T01agregada;camera/escala/vaos/contatos/projecao tecnica;T00Bentrada/gravação bloqueiaT02;quebra/tropeco2Daindanaointegrados",
+      "files": "Evidence/25d/T01/composition-v2.png;Evidence/25d/T01/prompt-composition-v1.txt;Evidence/25d/T01/prompt-composition-v2-scale.txt;Evidence/25d/T01/manifest-composition-v2.json;Evidence/25d/T01/reviews/T01.6-v2.md;docs/ia/25D-MOVEL-QUEBRA-E-DESEQUILIBRIO.md",
+      "processes": "NenhumUnityEditor/servidor iniciado nesta sessao;2chamadasImageGenconcluidas",
+      "at": "2026-11-12T14:54:26.445736+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T01",
+      "session": "2026-11-12-codex-direction-approved-6af3",
+      "agent": "Codex (GPT-6)",
+      "reason": "Retomada para registrar aprovacaoexplicita da direcao pelo usuario;checkpoint/diario/Gitconferidos;sem agente anterior ativo",
+      "from_session": "2026-11-12-codex-composition-25d-90ba",
+      "at": "2026-11-12T15:18:09.117617+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T01",
+      "session": "2026-11-12-codex-direction-approved-6af3",
+      "done": "T01.1-T01.6aprovadospelousuario;direcaovisualconsolidada comimagens/revisoes;aceiteconceitual somente",
+      "next": "EntregarT01e registraraceitehumanocomreferencia;proximoT00BvalidacaoentradabaseantesT02cenaUnityisoladaYuna",
+      "validation": "Hashcompositionv2confere;6registrosaprovacaohumanaexistentes;manifestes/fontesacompanhados;semruntimevalidado",
+      "pending": "T00Bmenu/gravaçãobase;T02provaUnity/camera/animacao;escala/alpha/contato/luz/vaos/performancenaovalidados",
+      "files": "Evidence/25d/T01/DIRECAO-VISUAL-APROVADA.md;Evidence/25d/T01/reviews/T01.6-v2-aprovacao.md;Evidence/25d/T01/composition-v2.png",
+      "processes": "Nenhumprocessoiniciadonestasessao",
+      "at": "2026-11-12T15:18:09.622248+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T01",
+      "session": "2026-11-12-codex-direction-approved-6af3",
+      "evidence": [
+        "Evidence/25d/T01/DIRECAO-VISUAL-APROVADA.md",
+        "Evidence/25d/T01/yuna-profile-v1.png",
+        "Evidence/25d/T01/nanda-blue-v1.png",
+        "Evidence/25d/T01/bear-v1.png",
+        "Evidence/25d/T01/books-v1.png",
+        "Evidence/25d/T01/furniture-v1.png",
+        "Evidence/25d/T01/composition-v2.png",
+        "Evidence/25d/T01/reviews/T01.1-v1-aprovacao.md",
+        "Evidence/25d/T01/reviews/T01.2-v1-aprovacao.md",
+        "Evidence/25d/T01/reviews/T01.3-v1-aprovacao.md",
+        "Evidence/25d/T01/reviews/T01.4-v1-aprovacao.md",
+        "Evidence/25d/T01/reviews/T01.5-v1-aprovacao.md",
+        "Evidence/25d/T01/reviews/T01.6-v2-aprovacao.md"
+      ],
+      "validation": "Revisoesindividuais e direcaocompostaaprovadas;hashespreservados;escopos/l imitestecnicos explicitos;naoaprovaT00B/T02/T07",
+      "at": "2026-11-12T15:18:09.710944+00:00"
+    },
+    {
+      "command": "accept",
+      "task": "T01",
+      "session": "2026-11-12-codex-direction-approved-6af3",
+      "reference": "Usuario nesta conversa12/11/2026:Gostei bastante da arte conceitual.Podeirporessecaminho.Qualeoproximopasso? Apos revisoesT01.1-T01.5;aceite somente direcaovisualT01,registros/versoesanexados",
+      "human_approval": true,
+      "at": "2026-11-12T15:18:09.815088+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T00B",
+      "session": "2026-11-12-codex-unity-proof-25d-a73e",
+      "agent": "Codex (GPT-6)",
+      "at": "2026-11-12T15:20:21.005889+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T00B",
+      "session": "2026-11-12-codex-unity-proof-25d-a73e",
+      "done": "Entrada menu fase urso livros morte retry viaInputSystem;foco corrigido;WebGL local compilada",
+      "next": "Submit/revisao tecnica T00B;claimT02 e prova estatica isolada",
+      "validation": "4/4TitleTests;markerWebGL;GIF60frames;JSONestados;236sourcesmanifest com2excecoes explicitas",
+      "pending": "Sem navegador/aparelho/abertura narrativa completa;camera semIMGUI;nao houvepublicacao",
+      "files": "Evidence/25d/T00B/README.md;Evidence/25d/T00B/source-build-manifest.json",
+      "processes": "Unity build finalizada;nenhumEditorprincipal",
+      "at": "2026-11-12T15:34:45.947972+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T00B",
+      "session": "2026-11-12-codex-unity-proof-25d-a73e",
+      "evidence": [
+        "Evidence/25d/T00B/README.md",
+        "Evidence/25d/T00B/source-build-manifest.json",
+        "Evidence/25d/T00B/keyboard-entry/input-and-traversal.json",
+        "Evidence/25d/T00B/baseline-camera.gif",
+        "Evidence/25d/T00B/title-tests-final.xml"
+      ],
+      "validation": "InputSystem menu fase urso livros morte retry;4TitleTests;WebGLsuccess;quickopening/camera semIMGUI/2serializationexceptions documentadas",
+      "at": "2026-11-12T15:35:04.782705+00:00"
+    },
+    {
+      "command": "accept",
+      "task": "T00B",
+      "session": "2026-11-12-codex-unity-proof-25d-a73e",
+      "reference": "Revisao tecnica:JSON input real,4testes,WebGLhashes,GIF;limites README explicitos. Nenhum aceite humano do piloto ou cobertura dispositivos.",
+      "human_approval": false,
+      "at": "2026-11-12T15:35:05.192536+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T02",
+      "session": "2026-11-12-codex-unity-proof-25d-a73e",
+      "agent": "Codex (GPT-6)",
+      "at": "2026-11-12T15:35:05.604122+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T02",
+      "session": "2026-11-12-codex-unity-proof-25d-a73e",
+      "done": "T02.1 cena isolada Yuna estatica salva;PNG original identico;contato nominal0;sorting/oclusao PlayModeOK;assets/meta copiados iguais ao clone",
+      "next": "Apresentar01-yuna-unity-dark.png para avaliacao humana;registrar respostaT02.1;depoisT02.2duascameras mudando somente camera",
+      "validation": "unity-proof.json todos contratos true;GameplaySHAinalterado;manifest26assets;9testescoordenador;4TitleTests;diffcheckOK",
+      "pending": "Avaliacao humanaT02.1;T02.2camera;T02.3animacao eorcamento;nenhumrun/jump/land2D,nenhumaceiteT02/T03;sempublicacao/aparelhos",
+      "files": "Evidence/25d/T02.1/README.md;Evidence/25d/T02.1/unity-proof.json;Evidence/25d/T02.1/assets-manifest.json;Assets/Scenes/Validation/IllustratedYunaProof.unity;Assets/Scripts/Editor/IllustratedYunaProof.cs",
+      "processes": "Unity proof encerrada;nenhumEditor/servidor iniciado permanece ativo nesta sessao",
+      "at": "2026-11-12T15:40:38.239735+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T02",
+      "session": "2026-11-12-codex-unity-proof-25d-a73e",
+      "done": "T02.1 cena isolada Yuna estatica salva;PNG original identico;contato nominal0;sorting/oclusao PlayModeOK;assets/meta copiados iguais ao clone",
+      "next": "Revisao humana01-yuna-unity-dark.png;registrar respostaT02.1;depoisT02.2duascameras mudando somente camera",
+      "validation": "unity-proof.json todos contratos true;GameplaySHAinalterado;manifest19arquivos;9testescoordenador;4TitleTests;diffcheckOK",
+      "pending": "Avaliacao humanaT02.1;T02.2camera;T02.3animacao eorcamento;semrun/jump/land2D;semaceiteT02;sempublicacao/aparelhos",
+      "files": "Evidence/25d/T02.1/README.md;Evidence/25d/T02.1/unity-proof.json;Evidence/25d/T02.1/assets-manifest.json;Assets/Scenes/Validation/IllustratedYunaProof.unity;Assets/Scripts/Editor/IllustratedYunaProof.cs",
+      "processes": "Unity encerrada;nenhum processo iniciado nesta sessao permanece ativo",
+      "at": "2026-11-12T15:40:59.799134+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T02",
+      "session": "2026-11-12-codex-camera-25d-b91f",
+      "agent": "Codex (GPT-6)",
+      "reason": "Usuario aprovou explicitamenteT02.1;retomada deT02.2. Checkpoint/diario/fontes lidos;nenhumEditor principal ativo.",
+      "from_session": "2026-11-12-codex-unity-proof-25d-a73e",
+      "at": "2026-11-12T15:42:29.871163+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T02",
+      "session": "2026-11-12-codex-camera-25d-b91f",
+      "done": "T02.1aprovada pelo usuario;T02.2a comparacao A perspectiva45/B ortografica salva emcena isolada;46paresframes+12PNG+GIF;orientacaoSpritecorrigidasemalterarroot",
+      "next": "Apresentar cameras-side-by-side.gif;registrar escolha humanaT02.2a;depoisT02.2b estabilizarzoom/antecipacao na projecao escolhida antesT02.3",
+      "validation": "InputSystem chegou urso/livros;projecoes mesmaalturaYuna/transforms;2/2FacingTests direita/esquerda;Gameplay/arteSHAinalterados;8novosarquivosAssets iguaisclone;plancheck/diaryintegrity/diffcheckOK",
+      "pending": "Escolha humanaT02.2a;zoom64para162px;leituracontato/pivo/skin livros eantecipacao movel;ambiente/Nandaantigos;animacao/custoT02.3;semaceiteT02 oupublicacao",
+      "files": "Evidence/25d/T02.1/reviews/T02.1-v1-aprovacao.md;Evidence/25d/T02.2/README.md;Evidence/25d/T02.2/camera-comparison.json;Evidence/25d/T02.2/cameras-side-by-side.gif;Evidence/25d/T02.2/reviews/T02.2a-v1.md;Assets/Scenes/Validation/IllustratedCameraComparison.unity;Assets/Scripts/Editor/IllustratedCameraComparison.cs;Assets/Scripts/Runtime/DarkRoom/IllustratedCharacterFacing.cs",
+      "processes": "Captura Unity29268/37788 e testes808 encerrados;nenhumEditor principal iniciado",
+      "at": "2026-11-12T15:50:54.674014+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T02",
+      "session": "2026-11-12-codex-consolidate-diary-482c",
+      "agent": "Codex (GPT-6)",
+      "reason": "Pedido explícito de consolidar diário e próximos passos após escolha humana da câmera A; checkpoint e histórico conferidos. Esta sessão somente documenta.",
+      "from_session": "2026-11-12-codex-camera-25d-b91f",
+      "at": "2026-11-12T16:10:21.134539+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T02",
+      "session": "2026-11-12-codex-consolidate-diary-482c",
+      "done": "T00/T00B/T01 aceitas conforme evidencias;T02.1Yuna estatica aprovada;T02.2a usuario escolheuA perspectiva45. Historico e limites consolidados no diario507-511;esclarecido que pose no salto ainda e imagem estatica.",
+      "next": "T02.2b: estabilizar zoom/escala e acompanhamento emA;revisar antecipacao/contatos e entregar captura para humano. DepoisT02.3 metodo/ciclo/salto provisórios e orçamento antes de fecharT02.",
+      "validation": "Referencias a validacoes anteriores:4TitleTests,2FacingTests,InputSystemurso/livros,morte/retrybaseline,paresframes com escalaA=B. Nesta sessao apenas leitura/hashes/documentacao;nenhumtesteUnitynovo.",
+      "pending": "Zoom64→162px;apoio sola/capa nos livros;pivo/skin/superficies eantecipacao movel;T02.2bhumano;T02.3animacao/custo;T03-T10pendentes;ambiente/Nanda antigos nas capturas;semaceiteT02agregado/publicacao2D.",
+      "files": "docs/ia/diario.sqlite3;Evidence/25d/T02.2/reviews/T02.2a-v1-aprovacao.md;Evidence/25d/T02.2/README.md;Evidence/25d/T02.2/camera-comparison.json;docs/ia/PLANO-25D-ESTADO.json",
+      "processes": "Nenhum processo Unity/build/servidor iniciado nesta sessao de documentacao",
+      "at": "2026-11-12T16:11:43.252981+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T02",
+      "session": "2026-11-12-codex-camera-stable-74ac",
+      "agent": "Codex (GPT-6)",
+      "reason": "Usuario autorizou proximo passoT02.2b;diario/checkpoint e planos lidos. Preservar trabalho aberto e usar copia isolada para batch.",
+      "from_session": "2026-11-12-codex-consolidate-diary-482c",
+      "at": "2026-11-12T16:13:05.574402+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T02",
+      "session": "2026-11-12-codex-camera-stable-74ac",
+      "done": "T02.2b implementada opt-in na cenaIllustratedStableCamera:perspectivaA45,escala134.4pxconstante,antecipacao/amortecimento;InputSystemurso/livros;GIF46frames. T02.1/T02.2a aprovadas.",
+      "next": "ApresentarT02.2b stable-camera.gif para avaliacao humana antesT02.3. Antes de encerrar esta sessao,arquivar documentacao/referencias antigas conforme novo pedido do usuario.",
+      "validation": "4/4CameraFramingPlayModePassed;altura134.3999-134.4001px,depth9.0533constante;Gameplay/controladorSHAinalterados;contato measured~skin.08m;plancheck/diffcheckOK",
+      "pending": "Aceite humanoT02.2b;T02.3animacao/custo;apoio visualpes emmovimento;ambiente/Nanda antigos;portrait/fasecompleta/dispositivos ainda pendentes. Arquivamento autorizado a realizar nesta sessao.",
+      "files": "Evidence/25d/T02.2b/README.md;Evidence/25d/T02.2b/stable-camera.gif;Evidence/25d/T02.2b/stable-camera.json;Evidence/25d/T02.2b/camera-tests.xml;Assets/Scenes/Validation/IllustratedStableCamera.unity;Assets/Scripts/Runtime/Camera/SideScroll25DCamera.cs",
+      "processes": "Unitybatchcaptura/testes encerrados;Editor principal30392 preservado",
+      "at": "2026-11-12T17:14:34.944205+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T02",
+      "session": "2026-11-12-codex-archive-previous-25d-9e5b",
+      "agent": "Codex (GPT-6)",
+      "reason": "CameraT02.2b entregue emrevisao;usuario pediu arquivamentoaposetapa. Esta sessao apenasorganiza historico echeckpointsemavancarT02.",
+      "from_session": "2026-11-12-codex-camera-stable-74ac",
+      "at": "2026-11-12T17:16:39.771537+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T02",
+      "session": "2026-11-12-codex-archive-previous-25d-9e5b",
+      "done": "T02.2b cameraA45 estável implementada eprontaparaavaliacao:134.4pxconstantes,4/4PlayModeCameraTests. Material anterior arquivado:366arquivos/123.23MiB,8docs+17gruposEvidence+4logstracked;README/ESTADO-ATUAL-25D ativos.",
+      "next": "Apresentar stable-camera.gif e registrar avaliacao humanaT02.2b;ajustes sepedidos. Depois T02.3 prova deanimacao eorcamento,sem pularaceitecamera. Ao retomar lerESTADO-ATUAL-25D,diario50,plan/status;historico apenas sob demanda viaarchive_history.py.",
+      "validation": "CameraInputs urso/livros eescala134.3999-134.4001px;4testesPassed. Arquivo366/366SHAOK;364arquivosanteriormentetracked comdestinoverificado;3refshistoricasT01resolvidas;linksativossemquebra;nenhumarquivoarchiveignorado;plan/diary/diffcheckOK.",
+      "pending": "Avaliacao humanaT02.2b;T02.3animacao/custo;contatovisualpes~skin.08m;ambiente/Nandaantigos;retratos/dispositivos/fasecompleta/publicacao2D pendentes. SemaceiteT02agregado ouexpansao.",
+      "files": "README.md;docs/ia/ESTADO-ATUAL-25D.md;Evidence/25d/T02.2b/README.md;Evidence/25d/T02.2b/stable-camera.gif;Archive/pre-25d-2026-11-12/README.md;Archive/pre-25d-2026-11-12/manifest.json;tools/archive_history.py;AGENTS.md",
+      "processes": "Capturas/testesbatch encerrados;Editor principal preservado;nenhum processo novo de arquivamento ativo",
+      "at": "2026-11-12T17:23:04.192358+00:00"
+    }
+  ]
 }

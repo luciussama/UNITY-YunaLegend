@@ -1,0 +1,2 @@
+System.InvalidOperationException: Static proof contract failed; see unity-proof.json.
+  at YunaLegend.EditorScripts.IllustratedYunaProof.CaptureTick () [0x00439] in C:\Users\sergi\repos\UNITY-YunaLegend\Build\Publish\Project\Assets\Scripts\Editor\IllustratedYunaProof.cs:243 

@@ -1,0 +1,440 @@
+{
+  "method": "Descriptive display-encoded luma Y'=0.2126R+0.7152G+0.0722B, range0..255. Bounds are projected renderer AABBs, not segmentation masks. Border median uses12px surrounding ring. Below8/above250 are diagnostic bins, not game accessibility pass/fail thresholds. No exposure adjustment. Cross-renderer measurements are not calibrated or pixel-registered.",
+  "unity": [
+    {
+      "frame": "01-start",
+      "subject": "FRAME",
+      "mean_luma8": 6.678,
+      "median_luma8": 4.646,
+      "p90_luma8": 8.147,
+      "p99_luma8": 30.828,
+      "percent_luma_below_8": 89.724,
+      "percent_any_channel_at_least_250": 0.358,
+      "percent_all_channels_at_least_250": 0.022
+    },
+    {
+      "frame": "01-start",
+      "subject": "Yuna",
+      "bbox": [
+        429,
+        525,
+        470,
+        610
+      ],
+      "nearby_border_median_luma8": 8.147,
+      "p90_minus_nearby_border": 17.612,
+      "mean_luma8": 17.496,
+      "median_luma8": 18.433,
+      "p90_luma8": 25.759,
+      "p99_luma8": 47.067,
+      "percent_luma_below_8": 7.805,
+      "percent_any_channel_at_least_250": 0.0,
+      "percent_all_channels_at_least_250": 0.0
+    },
+    {
+      "frame": "01-start",
+      "subject": "Nanda",
+      "bbox": [
+        1090,
+        496,
+        1114,
+        515
+      ],
+      "nearby_border_median_luma8": 9.36,
+      "p90_minus_nearby_border": 245.64,
+      "mean_luma8": 120.32,
+      "median_luma8": 15.29,
+      "p90_luma8": 255.0,
+      "p99_luma8": 255.0,
+      "percent_luma_below_8": 1.535,
+      "percent_any_channel_at_least_250": 44.737,
+      "percent_all_channels_at_least_250": 44.518
+    },
+    {
+      "frame": "01-start",
+      "subject": "NextPlatform_0",
+      "bbox": [
+        994,
+        552,
+        1216,
+        620
+      ],
+      "nearby_border_median_luma8": 7.003,
+      "p90_minus_nearby_border": 238.828,
+      "mean_luma8": 71.068,
+      "median_luma8": 15.854,
+      "p90_luma8": 245.831,
+      "p99_luma8": 251.246,
+      "percent_luma_below_8": 10.897,
+      "percent_any_channel_at_least_250": 20.502,
+      "percent_all_channels_at_least_250": 0.0
+    },
+    {
+      "frame": "02-castle",
+      "subject": "FRAME",
+      "mean_luma8": 7.331,
+      "median_luma8": 6.718,
+      "p90_luma8": 11.301,
+      "p99_luma8": 44.024,
+      "percent_luma_below_8": 84.055,
+      "percent_any_channel_at_least_250": 0.055,
+      "percent_all_channels_at_least_250": 0.019
+    },
+    {
+      "frame": "02-castle",
+      "subject": "Yuna",
+      "bbox": [
+        429,
+        359,
+        470,
+        437
+      ],
+      "nearby_border_median_luma8": 14.369,
+      "p90_minus_nearby_border": 36.968,
+      "mean_luma8": 26.314,
+      "median_luma8": 19.718,
+      "p90_luma8": 51.337,
+      "p99_luma8": 91.084,
+      "percent_luma_below_8": 17.323,
+      "percent_any_channel_at_least_250": 0.0,
+      "percent_all_channels_at_least_250": 0.0
+    },
+    {
+      "frame": "02-castle",
+      "subject": "Nanda",
+      "bbox": [
+        741,
+        365,
+        759,
+        381
+      ],
+      "nearby_border_median_luma8": 7.718,
+      "p90_minus_nearby_border": 247.282,
+      "mean_luma8": 160.552,
+      "median_luma8": 255.0,
+      "p90_luma8": 255.0,
+      "p99_luma8": 255.0,
+      "percent_luma_below_8": 38.194,
+      "percent_any_channel_at_least_250": 61.806,
+      "percent_all_channels_at_least_250": 61.806
+    },
+    {
+      "frame": "02-castle",
+      "subject": "NextPlatform_10",
+      "bbox": [
+        687,
+        435,
+        820,
+        483
+      ],
+      "nearby_border_median_luma8": 4.646,
+      "p90_minus_nearby_border": 127.947,
+      "mean_luma8": 37.895,
+      "median_luma8": 10.497,
+      "p90_luma8": 132.593,
+      "p99_luma8": 243.231,
+      "percent_luma_below_8": 6.14,
+      "percent_any_channel_at_least_250": 5.107,
+      "percent_all_channels_at_least_250": 0.0
+    },
+    {
+      "frame": "02-castle",
+      "subject": "StandingPlatform_9",
+      "bbox": [
+        317,
+        418,
+        577,
+        523
+      ],
+      "nearby_border_median_luma8": 6.718,
+      "p90_minus_nearby_border": 38.66,
+      "mean_luma8": 21.339,
+      "median_luma8": 16.156,
+      "p90_luma8": 45.378,
+      "p99_luma8": 69.61,
+      "percent_luma_below_8": 11.905,
+      "percent_any_channel_at_least_250": 0.0,
+      "percent_all_channels_at_least_250": 0.0
+    },
+    {
+      "frame": "03-false-door",
+      "subject": "FRAME",
+      "mean_luma8": 6.051,
+      "median_luma8": 6.718,
+      "p90_luma8": 8.147,
+      "p99_luma8": 24.719,
+      "percent_luma_below_8": 89.53,
+      "percent_any_channel_at_least_250": 0.021,
+      "percent_all_channels_at_least_250": 0.021
+    },
+    {
+      "frame": "03-false-door",
+      "subject": "Yuna",
+      "bbox": [
+        429,
+        149,
+        470,
+        232
+      ],
+      "nearby_border_median_luma8": 6.71,
+      "p90_minus_nearby_border": 24.715,
+      "mean_luma8": 17.885,
+      "median_luma8": 17.706,
+      "p90_luma8": 31.425,
+      "p99_luma8": 52.968,
+      "percent_luma_below_8": 29.445,
+      "percent_any_channel_at_least_250": 0.0,
+      "percent_all_channels_at_least_250": 0.0
+    },
+    {
+      "frame": "03-false-door",
+      "subject": "Nanda",
+      "bbox": [
+        839,
+        106,
+        859,
+        127
+      ],
+      "nearby_border_median_luma8": 4.646,
+      "p90_minus_nearby_border": 250.354,
+      "mean_luma8": 119.093,
+      "median_luma8": 4.646,
+      "p90_luma8": 255.0,
+      "p99_luma8": 255.0,
+      "percent_luma_below_8": 54.286,
+      "percent_any_channel_at_least_250": 45.714,
+      "percent_all_channels_at_least_250": 45.714
+    },
+    {
+      "frame": "03-false-door",
+      "subject": "NextPlatform_21",
+      "bbox": [
+        734,
+        174,
+        971,
+        267
+      ],
+      "nearby_border_median_luma8": 4.646,
+      "p90_minus_nearby_border": 26.14,
+      "mean_luma8": 16.658,
+      "median_luma8": 13.369,
+      "p90_luma8": 30.786,
+      "p99_luma8": 45.574,
+      "percent_luma_below_8": 4.464,
+      "percent_any_channel_at_least_250": 0.0,
+      "percent_all_channels_at_least_250": 0.0
+    },
+    {
+      "frame": "03-false-door",
+      "subject": "StandingPlatform_20",
+      "bbox": [
+        385,
+        223,
+        508,
+        272
+      ],
+      "nearby_border_median_luma8": 3.718,
+      "p90_minus_nearby_border": 19.201,
+      "mean_luma8": 9.999,
+      "median_luma8": 6.71,
+      "p90_luma8": 22.919,
+      "p99_luma8": 34.484,
+      "percent_luma_below_8": 70.35,
+      "percent_any_channel_at_least_250": 0.0,
+      "percent_all_channels_at_least_250": 0.0
+    },
+    {
+      "frame": "04-portal",
+      "subject": "FRAME",
+      "mean_luma8": 9.885,
+      "median_luma8": 4.646,
+      "p90_luma8": 10.576,
+      "p99_luma8": 195.624,
+      "percent_luma_below_8": 85.488,
+      "percent_any_channel_at_least_250": 0.666,
+      "percent_all_channels_at_least_250": 0.02
+    },
+    {
+      "frame": "04-portal",
+      "subject": "Yuna",
+      "bbox": [
+        810,
+        239,
+        851,
+        319
+      ],
+      "nearby_border_median_luma8": 6.718,
+      "p90_minus_nearby_border": 19.873,
+      "mean_luma8": 17.688,
+      "median_luma8": 19.718,
+      "p90_luma8": 26.591,
+      "p99_luma8": 43.454,
+      "percent_luma_below_8": 24.238,
+      "percent_any_channel_at_least_250": 0.0,
+      "percent_all_channels_at_least_250": 0.0
+    },
+    {
+      "frame": "04-portal",
+      "subject": "Nanda",
+      "bbox": [
+        411,
+        216,
+        431,
+        235
+      ],
+      "nearby_border_median_luma8": 7.718,
+      "p90_minus_nearby_border": 247.282,
+      "mean_luma8": 128.756,
+      "median_luma8": 7.718,
+      "p90_luma8": 255.0,
+      "p99_luma8": 255.0,
+      "percent_luma_below_8": 51.053,
+      "percent_any_channel_at_least_250": 48.947,
+      "percent_all_channels_at_least_250": 48.947
+    },
+    {
+      "frame": "04-portal",
+      "subject": "NextPlatform_37",
+      "bbox": [
+        278,
+        173,
+        549,
+        372
+      ],
+      "nearby_border_median_luma8": 6.718,
+      "p90_minus_nearby_border": 220.646,
+      "mean_luma8": 69.163,
+      "median_luma8": 7.718,
+      "p90_luma8": 227.364,
+      "p99_luma8": 242.654,
+      "percent_luma_below_8": 56.426,
+      "percent_any_channel_at_least_250": 11.372,
+      "percent_all_channels_at_least_250": 0.345
+    },
+    {
+      "frame": "04-portal",
+      "subject": "StandingPlatform_36",
+      "bbox": [
+        777,
+        317,
+        889,
+        353
+      ],
+      "nearby_border_median_luma8": 6.718,
+      "p90_minus_nearby_border": 30.877,
+      "mean_luma8": 19.953,
+      "median_luma8": 15.156,
+      "p90_luma8": 37.595,
+      "p99_luma8": 49.386,
+      "percent_luma_below_8": 4.563,
+      "percent_any_channel_at_least_250": 0.0,
+      "percent_all_channels_at_least_250": 0.0
+    }
+  ],
+  "web_approximate_rois": [
+    {
+      "file": "web-01-start.jpg",
+      "subject": "Yuna",
+      "bbox": [
+        193,
+        582,
+        221,
+        636
+      ],
+      "mean_luma8": 48.484,
+      "median_luma8": 33.583,
+      "p90_luma8": 102.767,
+      "p99_luma8": 137.129,
+      "percent_luma_below_8": 0.0,
+      "percent_any_channel_at_least_250": 0.0,
+      "percent_all_channels_at_least_250": 0.0
+    },
+    {
+      "file": "web-01-start.jpg",
+      "subject": "Nanda",
+      "bbox": [
+        239,
+        517,
+        273,
+        555
+      ],
+      "mean_luma8": 90.529,
+      "median_luma8": 65.077,
+      "p90_luma8": 182.23,
+      "p99_luma8": 204.102,
+      "percent_luma_below_8": 0.0,
+      "percent_any_channel_at_least_250": 0.155,
+      "percent_all_channels_at_least_250": 0.0
+    },
+    {
+      "file": "web-01-start.jpg",
+      "subject": "Bear",
+      "bbox": [
+        310,
+        564,
+        532,
+        634
+      ],
+      "mean_luma8": 19.535,
+      "median_luma8": 14.982,
+      "p90_luma8": 40.47,
+      "p99_luma8": 66.659,
+      "percent_luma_below_8": 27.484,
+      "percent_any_channel_at_least_250": 0.0,
+      "percent_all_channels_at_least_250": 0.0
+    },
+    {
+      "file": "web-02-escape-start.jpg",
+      "subject": "Yuna",
+      "bbox": [
+        311,
+        333,
+        339,
+        383
+      ],
+      "mean_luma8": 40.839,
+      "median_luma8": 24.898,
+      "p90_luma8": 94.276,
+      "p99_luma8": 126.463,
+      "percent_luma_below_8": 0.0,
+      "percent_any_channel_at_least_250": 0.0,
+      "percent_all_channels_at_least_250": 0.0
+    },
+    {
+      "file": "web-02-escape-start.jpg",
+      "subject": "Nanda",
+      "bbox": [
+        591,
+        334,
+        635,
+        374
+      ],
+      "mean_luma8": 97.376,
+      "median_luma8": 76.551,
+      "p90_luma8": 189.836,
+      "p99_luma8": 222.44,
+      "percent_luma_below_8": 0.0,
+      "percent_any_channel_at_least_250": 1.364,
+      "percent_all_channels_at_least_250": 0.0
+    },
+    {
+      "file": "web-02-escape-start.jpg",
+      "subject": "Train",
+      "bbox": [
+        552,
+        335,
+        682,
+        431
+      ],
+      "mean_luma8": 55.503,
+      "median_luma8": 44.824,
+      "p90_luma8": 97.751,
+      "p99_luma8": 203.056,
+      "percent_luma_below_8": 0.032,
+      "percent_any_channel_at_least_250": 0.192,
+      "percent_all_channels_at_least_250": 0.0
+    }
+  ],
+  "initial_fairy_player_distance": 12.137,
+  "web_advanced_comparison": "Missing: false door and dream portal not reached via UI; do not infer canonical appearance from Unity captures."
+}

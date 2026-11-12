@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Passed" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-12 15:48:54Z" end-time="2026-11-12 15:48:54Z" duration="0,0334411">
+  <test-suite type="TestSuite" id="1000" name="Yuna Legend - O Quarto dos Brinquedos" fullname="Yuna Legend - O Quarto dos Brinquedos" runstate="Runnable" testcasecount="50" result="Passed" start-time="2026-11-12 15:48:54Z" end-time="2026-11-12 15:48:54Z" duration="0.033441" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1067" name="YunaLegend.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Build/Publish/Project/Library/ScriptAssemblies/YunaLegend.Tests.dll" runstate="Runnable" testcasecount="50" result="Passed" start-time="2026-11-12 15:48:54Z" end-time="2026-11-12 15:48:54Z" duration="0.028245" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="808" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1068" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="50" result="Passed" start-time="2026-11-12 15:48:54Z" end-time="2026-11-12 15:48:54Z" duration="0.027788" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1069" name="Tests" fullname="YunaLegend.Tests" runstate="Runnable" testcasecount="50" result="Passed" start-time="2026-11-12 15:48:54Z" end-time="2026-11-12 15:48:54Z" duration="0.027423" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1038" name="IllustratedCharacterFacingTests" fullname="YunaLegend.Tests.IllustratedCharacterFacingTests" classname="YunaLegend.Tests.IllustratedCharacterFacingTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-12 15:48:54Z" end-time="2026-11-12 15:48:54Z" duration="0.026446" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1041" name="PhysicalYawDoesNotTurnPaintingEdgeOn" fullname="YunaLegend.Tests.IllustratedCharacterFacingTests.PhysicalYawDoesNotTurnPaintingEdgeOn" classname="YunaLegend.Tests.IllustratedCharacterFacingTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-12 15:48:54Z" end-time="2026-11-12 15:48:54Z" duration="0.023887" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1039" name="PhysicalYawDoesNotTurnPaintingEdgeOn(1.0f,90.0f,False)" fullname="YunaLegend.Tests.IllustratedCharacterFacingTests.PhysicalYawDoesNotTurnPaintingEdgeOn(1.0f,90.0f,False)" methodname="PhysicalYawDoesNotTurnPaintingEdgeOn" classname="YunaLegend.Tests.IllustratedCharacterFacingTests" runstate="Runnable" seed="1160320867" result="Passed" start-time="2026-11-12 15:48:54Z" end-time="2026-11-12 15:48:54Z" duration="0.016939" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1040" name="PhysicalYawDoesNotTurnPaintingEdgeOn(-1.0f,-90.0f,True)" fullname="YunaLegend.Tests.IllustratedCharacterFacingTests.PhysicalYawDoesNotTurnPaintingEdgeOn(-1.0f,-90.0f,True)" methodname="PhysicalYawDoesNotTurnPaintingEdgeOn" classname="YunaLegend.Tests.IllustratedCharacterFacingTests" runstate="Runnable" seed="1007015013" result="Passed" start-time="2026-11-12 15:48:54Z" end-time="2026-11-12 15:48:54Z" duration="0.000261" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: C:/Users/sergi/AppData/LocalLow/DeepMindStudio/Yuna Legend - O Quarto dos Brinquedos\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

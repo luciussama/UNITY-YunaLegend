@@ -1,0 +1,941 @@
+{
+  "method": "Descriptive sRGB display-pixel luma Y'=0.2126R+0.7152G+0.0722B. Projected AABBs include background; not segmented actors. 8/250 are diagnostic bins, not accessibility thresholds. All variants share actor/camera poses; HDR before tone mapping. No exposure adjustment in these comparison boards.",
+  "rows": [
+    {
+      "frame": "01-start",
+      "variant": "off",
+      "mean_luma8": 5.462,
+      "median_luma8": 3.646,
+      "dark_below8_percent": 89.919,
+      "subjects": [
+        {
+          "name": "Yuna",
+          "bbox": [
+            384,
+            391,
+            434,
+            485
+          ],
+          "mean_luma8": 17.81,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "Nanda",
+          "bbox": [
+            1163,
+            356,
+            1193,
+            375
+          ],
+          "mean_luma8": 134.312,
+          "white_pixels_percent": 50.877,
+          "any_channel_250_percent": 51.404
+        },
+        {
+          "name": "NextPlatform_0",
+          "bbox": [
+            1047,
+            429,
+            1280,
+            491
+          ],
+          "mean_luma8": 46.206,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 11.18
+        }
+      ],
+      "mean_absolute_display_difference_from_off": 0.0
+    },
+    {
+      "frame": "01-start",
+      "variant": "legacy-enabled",
+      "mean_luma8": 1.552,
+      "median_luma8": 0.0,
+      "dark_below8_percent": 96.787,
+      "subjects": [
+        {
+          "name": "Yuna",
+          "bbox": [
+            384,
+            391,
+            434,
+            485
+          ],
+          "mean_luma8": 7.423,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "Nanda",
+          "bbox": [
+            1163,
+            356,
+            1193,
+            375
+          ],
+          "mean_luma8": 180.823,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 51.404
+        },
+        {
+          "name": "NextPlatform_0",
+          "bbox": [
+            1047,
+            429,
+            1280,
+            491
+          ],
+          "mean_luma8": 51.169,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 11.699
+        }
+      ],
+      "mean_absolute_display_difference_from_off": 5.874
+    },
+    {
+      "frame": "01-start",
+      "variant": "calibrated",
+      "mean_luma8": 4.918,
+      "median_luma8": 3.574,
+      "dark_below8_percent": 91.544,
+      "subjects": [
+        {
+          "name": "Yuna",
+          "bbox": [
+            384,
+            391,
+            434,
+            485
+          ],
+          "mean_luma8": 16.952,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "Nanda",
+          "bbox": [
+            1163,
+            356,
+            1193,
+            375
+          ],
+          "mean_luma8": 150.477,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 46.667
+        },
+        {
+          "name": "NextPlatform_0",
+          "bbox": [
+            1047,
+            429,
+            1280,
+            491
+          ],
+          "mean_luma8": 44.619,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 5.545
+        }
+      ],
+      "mean_absolute_display_difference_from_off": 1.037
+    },
+    {
+      "frame": "02-castle",
+      "variant": "off",
+      "mean_luma8": 11.405,
+      "median_luma8": 5.931,
+      "dark_below8_percent": 78.978,
+      "subjects": [
+        {
+          "name": "Yuna",
+          "bbox": [
+            362,
+            417,
+            453,
+            596
+          ],
+          "mean_luma8": 33.184,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "Nanda",
+          "bbox": [
+            1041,
+            431,
+            1092,
+            468
+          ],
+          "mean_luma8": 137.205,
+          "white_pixels_percent": 49.55,
+          "any_channel_250_percent": 50.821
+        },
+        {
+          "name": "NextPlatform_10",
+          "bbox": [
+            902,
+            570,
+            1275,
+            718
+          ],
+          "mean_luma8": 51.23,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 7.114
+        },
+        {
+          "name": "StandingPlatform_9",
+          "bbox": [
+            92,
+            528,
+            672,
+            720
+          ],
+          "mean_luma8": 25.498,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        }
+      ],
+      "mean_absolute_display_difference_from_off": 0.0
+    },
+    {
+      "frame": "02-castle",
+      "variant": "legacy-enabled",
+      "mean_luma8": 5.94,
+      "median_luma8": 0.0,
+      "dark_below8_percent": 87.952,
+      "subjects": [
+        {
+          "name": "Yuna",
+          "bbox": [
+            362,
+            417,
+            453,
+            596
+          ],
+          "mean_luma8": 22.941,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "Nanda",
+          "bbox": [
+            1041,
+            431,
+            1092,
+            468
+          ],
+          "mean_luma8": 191.148,
+          "white_pixels_percent": 1.007,
+          "any_channel_250_percent": 51.245
+        },
+        {
+          "name": "NextPlatform_10",
+          "bbox": [
+            902,
+            570,
+            1275,
+            718
+          ],
+          "mean_luma8": 45.453,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 7.813
+        },
+        {
+          "name": "StandingPlatform_9",
+          "bbox": [
+            92,
+            528,
+            672,
+            720
+          ],
+          "mean_luma8": 12.204,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        }
+      ],
+      "mean_absolute_display_difference_from_off": 8.33
+    },
+    {
+      "frame": "02-castle",
+      "variant": "calibrated",
+      "mean_luma8": 10.541,
+      "median_luma8": 5.289,
+      "dark_below8_percent": 80.324,
+      "subjects": [
+        {
+          "name": "Yuna",
+          "bbox": [
+            362,
+            417,
+            453,
+            596
+          ],
+          "mean_luma8": 32.462,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "Nanda",
+          "bbox": [
+            1041,
+            431,
+            1092,
+            468
+          ],
+          "mean_luma8": 153.388,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 47.96
+        },
+        {
+          "name": "NextPlatform_10",
+          "bbox": [
+            902,
+            570,
+            1275,
+            718
+          ],
+          "mean_luma8": 47.214,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 1.732
+        },
+        {
+          "name": "StandingPlatform_9",
+          "bbox": [
+            92,
+            528,
+            672,
+            720
+          ],
+          "mean_luma8": 23.977,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        }
+      ],
+      "mean_absolute_display_difference_from_off": 1.506
+    },
+    {
+      "frame": "03-false-door",
+      "variant": "off",
+      "mean_luma8": 7.692,
+      "median_luma8": 6.646,
+      "dark_below8_percent": 89.452,
+      "subjects": [
+        {
+          "name": "Yuna",
+          "bbox": [
+            375,
+            402,
+            442,
+            532
+          ],
+          "mean_luma8": 20.111,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "Nanda",
+          "bbox": [
+            1034,
+            330,
+            1071,
+            356
+          ],
+          "mean_luma8": 140.493,
+          "white_pixels_percent": 53.119,
+          "any_channel_250_percent": 53.846
+        },
+        {
+          "name": "NextPlatform_21",
+          "bbox": [
+            856,
+            441,
+            1277,
+            600
+          ],
+          "mean_luma8": 29.534,
+          "white_pixels_percent": 0.009,
+          "any_channel_250_percent": 2.492
+        },
+        {
+          "name": "StandingPlatform_20",
+          "bbox": [
+            298,
+            514,
+            503,
+            609
+          ],
+          "mean_luma8": 11.817,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        }
+      ],
+      "mean_absolute_display_difference_from_off": 0.0
+    },
+    {
+      "frame": "03-false-door",
+      "variant": "legacy-enabled",
+      "mean_luma8": 2.6,
+      "median_luma8": 0.0,
+      "dark_below8_percent": 94.551,
+      "subjects": [
+        {
+          "name": "Yuna",
+          "bbox": [
+            375,
+            402,
+            442,
+            532
+          ],
+          "mean_luma8": 10.39,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "Nanda",
+          "bbox": [
+            1034,
+            330,
+            1071,
+            356
+          ],
+          "mean_luma8": 194.341,
+          "white_pixels_percent": 0.728,
+          "any_channel_250_percent": 53.95
+        },
+        {
+          "name": "NextPlatform_21",
+          "bbox": [
+            856,
+            441,
+            1277,
+            600
+          ],
+          "mean_luma8": 21.815,
+          "white_pixels_percent": 0.191,
+          "any_channel_250_percent": 2.838
+        },
+        {
+          "name": "StandingPlatform_20",
+          "bbox": [
+            298,
+            514,
+            503,
+            609
+          ],
+          "mean_luma8": 2.938,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        }
+      ],
+      "mean_absolute_display_difference_from_off": 7.471
+    },
+    {
+      "frame": "03-false-door",
+      "variant": "calibrated",
+      "mean_luma8": 6.833,
+      "median_luma8": 4.574,
+      "dark_below8_percent": 89.075,
+      "subjects": [
+        {
+          "name": "Yuna",
+          "bbox": [
+            375,
+            402,
+            442,
+            532
+          ],
+          "mean_luma8": 19.332,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "Nanda",
+          "bbox": [
+            1034,
+            330,
+            1071,
+            356
+          ],
+          "mean_luma8": 158.093,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 50.208
+        },
+        {
+          "name": "NextPlatform_21",
+          "bbox": [
+            856,
+            441,
+            1277,
+            600
+          ],
+          "mean_luma8": 26.972,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "StandingPlatform_20",
+          "bbox": [
+            298,
+            514,
+            503,
+            609
+          ],
+          "mean_luma8": 10.653,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        }
+      ],
+      "mean_absolute_display_difference_from_off": 1.405
+    },
+    {
+      "frame": "04-portal",
+      "variant": "off",
+      "mean_luma8": 17.627,
+      "median_luma8": 6.646,
+      "dark_below8_percent": 86.834,
+      "subjects": [
+        {
+          "name": "Yuna",
+          "bbox": [
+            839,
+            400,
+            903,
+            523
+          ],
+          "mean_luma8": 23.641,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "Nanda",
+          "bbox": [
+            227,
+            362,
+            262,
+            387
+          ],
+          "mean_luma8": 135.112,
+          "white_pixels_percent": 52.229,
+          "any_channel_250_percent": 52.229
+        },
+        {
+          "name": "NextPlatform_37",
+          "bbox": [
+            3,
+            314,
+            449,
+            622
+          ],
+          "mean_luma8": 80.336,
+          "white_pixels_percent": 1.337,
+          "any_channel_250_percent": 14.894
+        },
+        {
+          "name": "StandingPlatform_36",
+          "bbox": [
+            789,
+            507,
+            967,
+            590
+          ],
+          "mean_luma8": 29.345,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        }
+      ],
+      "mean_absolute_display_difference_from_off": 0.0
+    },
+    {
+      "frame": "04-portal",
+      "variant": "legacy-enabled",
+      "mean_luma8": 16.539,
+      "median_luma8": 0.0,
+      "dark_below8_percent": 80.202,
+      "subjects": [
+        {
+          "name": "Yuna",
+          "bbox": [
+            839,
+            400,
+            903,
+            523
+          ],
+          "mean_luma8": 13.884,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "Nanda",
+          "bbox": [
+            227,
+            362,
+            262,
+            387
+          ],
+          "mean_luma8": 194.325,
+          "white_pixels_percent": 0.686,
+          "any_channel_250_percent": 52.457
+        },
+        {
+          "name": "NextPlatform_37",
+          "bbox": [
+            3,
+            314,
+            449,
+            622
+          ],
+          "mean_luma8": 100.672,
+          "white_pixels_percent": 1.16,
+          "any_channel_250_percent": 18.772
+        },
+        {
+          "name": "StandingPlatform_36",
+          "bbox": [
+            789,
+            507,
+            967,
+            590
+          ],
+          "mean_luma8": 18.264,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        }
+      ],
+      "mean_absolute_display_difference_from_off": 9.192
+    },
+    {
+      "frame": "04-portal",
+      "variant": "calibrated",
+      "mean_luma8": 16.123,
+      "median_luma8": 5.289,
+      "dark_below8_percent": 84.907,
+      "subjects": [
+        {
+          "name": "Yuna",
+          "bbox": [
+            839,
+            400,
+            903,
+            523
+          ],
+          "mean_luma8": 22.912,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "Nanda",
+          "bbox": [
+            227,
+            362,
+            262,
+            387
+          ],
+          "mean_luma8": 154.08,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 47.657
+        },
+        {
+          "name": "NextPlatform_37",
+          "bbox": [
+            3,
+            314,
+            449,
+            622
+          ],
+          "mean_luma8": 74.792,
+          "white_pixels_percent": 0.009,
+          "any_channel_250_percent": 2.504
+        },
+        {
+          "name": "StandingPlatform_36",
+          "bbox": [
+            789,
+            507,
+            967,
+            590
+          ],
+          "mean_luma8": 28.315,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        }
+      ],
+      "mean_absolute_display_difference_from_off": 2.259
+    },
+    {
+      "frame": "05-fall-ground",
+      "variant": "off",
+      "mean_luma8": 5.901,
+      "median_luma8": 3.706,
+      "dark_below8_percent": 89.539,
+      "subjects": [
+        {
+          "name": "Yuna",
+          "bbox": [
+            375,
+            402,
+            442,
+            532
+          ],
+          "mean_luma8": 54.509,
+          "white_pixels_percent": 5.901,
+          "any_channel_250_percent": 12.962
+        },
+        {
+          "name": "Nanda",
+          "bbox": [
+            468,
+            381,
+            497,
+            407
+          ],
+          "mean_luma8": 157.488,
+          "white_pixels_percent": 61.008,
+          "any_channel_250_percent": 61.008
+        }
+      ],
+      "mean_absolute_display_difference_from_off": 0.0
+    },
+    {
+      "frame": "05-fall-ground",
+      "variant": "legacy-enabled",
+      "mean_luma8": 2.56,
+      "median_luma8": 0.0,
+      "dark_below8_percent": 94.154,
+      "subjects": [
+        {
+          "name": "Yuna",
+          "bbox": [
+            375,
+            402,
+            442,
+            532
+          ],
+          "mean_luma8": 85.435,
+          "white_pixels_percent": 1.607,
+          "any_channel_250_percent": 15.706
+        },
+        {
+          "name": "Nanda",
+          "bbox": [
+            468,
+            381,
+            497,
+            407
+          ],
+          "mean_luma8": 216.053,
+          "white_pixels_percent": 15.385,
+          "any_channel_250_percent": 62.997
+        }
+      ],
+      "mean_absolute_display_difference_from_off": 6.293
+    },
+    {
+      "frame": "05-fall-ground",
+      "variant": "calibrated",
+      "mean_luma8": 5.443,
+      "median_luma8": 3.574,
+      "dark_below8_percent": 91.28,
+      "subjects": [
+        {
+          "name": "Yuna",
+          "bbox": [
+            375,
+            402,
+            442,
+            532
+          ],
+          "mean_luma8": 58.988,
+          "white_pixels_percent": 2.974,
+          "any_channel_250_percent": 9.242
+        },
+        {
+          "name": "Nanda",
+          "bbox": [
+            468,
+            381,
+            497,
+            407
+          ],
+          "mean_luma8": 175.577,
+          "white_pixels_percent": 2.122,
+          "any_channel_250_percent": 56.764
+        }
+      ],
+      "mean_absolute_display_difference_from_off": 1.142
+    },
+    {
+      "frame": "06-castle-overview",
+      "variant": "off",
+      "mean_luma8": 9.831,
+      "median_luma8": 9.364,
+      "dark_below8_percent": 32.699,
+      "subjects": [
+        {
+          "name": "Yuna",
+          "bbox": [
+            54,
+            392,
+            73,
+            419
+          ],
+          "mean_luma8": 16.647,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "Nanda",
+          "bbox": [
+            1223,
+            311,
+            1233,
+            317
+          ],
+          "mean_luma8": 95.682,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 35.0
+        },
+        {
+          "name": "NextPlatform_21",
+          "bbox": [
+            1181,
+            335,
+            1273,
+            362
+          ],
+          "mean_luma8": 14.516,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "StandingPlatform_9",
+          "bbox": [
+            15,
+            412,
+            118,
+            445
+          ],
+          "mean_luma8": 16.086,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        }
+      ],
+      "mean_absolute_display_difference_from_off": 0.0
+    },
+    {
+      "frame": "06-castle-overview",
+      "variant": "legacy-enabled",
+      "mean_luma8": 0.601,
+      "median_luma8": 0.433,
+      "dark_below8_percent": 99.528,
+      "subjects": [
+        {
+          "name": "Yuna",
+          "bbox": [
+            54,
+            392,
+            73,
+            419
+          ],
+          "mean_luma8": 3.941,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "Nanda",
+          "bbox": [
+            1223,
+            311,
+            1233,
+            317
+          ],
+          "mean_luma8": 106.219,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 35.0
+        },
+        {
+          "name": "NextPlatform_21",
+          "bbox": [
+            1181,
+            335,
+            1273,
+            362
+          ],
+          "mean_luma8": 1.732,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "StandingPlatform_9",
+          "bbox": [
+            15,
+            412,
+            118,
+            445
+          ],
+          "mean_luma8": 2.784,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        }
+      ],
+      "mean_absolute_display_difference_from_off": 10.837
+    },
+    {
+      "frame": "06-castle-overview",
+      "variant": "calibrated",
+      "mean_luma8": 8.372,
+      "median_luma8": 8.079,
+      "dark_below8_percent": 47.287,
+      "subjects": [
+        {
+          "name": "Yuna",
+          "bbox": [
+            54,
+            392,
+            73,
+            419
+          ],
+          "mean_luma8": 14.734,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "Nanda",
+          "bbox": [
+            1223,
+            311,
+            1233,
+            317
+          ],
+          "mean_luma8": 89.443,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 20.0
+        },
+        {
+          "name": "NextPlatform_21",
+          "bbox": [
+            1181,
+            335,
+            1273,
+            362
+          ],
+          "mean_luma8": 12.374,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        },
+        {
+          "name": "StandingPlatform_9",
+          "bbox": [
+            15,
+            412,
+            118,
+            445
+          ],
+          "mean_luma8": 14.129,
+          "white_pixels_percent": 0.0,
+          "any_channel_250_percent": 0.0
+        }
+      ],
+      "mean_absolute_display_difference_from_off": 1.582
+    }
+  ]
+}

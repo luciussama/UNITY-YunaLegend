@@ -1,0 +1,20 @@
+{
+    "vertices": 45789,
+    "triangles": 83024,
+    "bones": 26,
+    "materials": 18,
+    "restBounds": {
+        "m_Center": {
+            "x": 0.0,
+            "y": 0.7000000476837158,
+            "z": -0.1026059165596962
+        },
+        "m_Extent": {
+            "x": 0.2322808802127838,
+            "y": 0.7000000476837158,
+            "z": 0.27632424235343935
+        }
+    },
+    "source": "Assets/Characters/Yuna/Yuna_Study.prefab",
+    "method": "Actual Unity geometry renders. Current SkinnedMeshRenderer bone poses sampled via BakeMesh for synchronous EditMode captures. Neutral inspection lights01-08; scene lights09-10. Not ImageGen. First study, no final likeness claim."
+}

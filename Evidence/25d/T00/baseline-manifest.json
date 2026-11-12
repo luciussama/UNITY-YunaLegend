@@ -1,0 +1,342 @@
+{
+  "schema_version": 1,
+  "session": "2026-11-12-codex-start-25d-4f6a",
+  "baseline_commit": "29c91233daab178421d7f5ba631e968c0daa5477",
+  "branch": "codex/dark-room-2d",
+  "scope": "Current local source inventory; no new runtime validation or artistic approval",
+  "files": [
+    {
+      "path": "Assets/Art/UI/Title_Background.png",
+      "bytes": 2291258,
+      "sha256": "d17bce62c9668414ce37b30b83f322af0416ba904e8b8d8ee85c879bdac1ab9e",
+      "guid": "95076e2d5936da841bfd4cae98a4606e",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "2fb79372691c248b9348adb734a530b062fbcc07",
+      "git_blob_baseline": "2fb79372691c248b9348adb734a530b062fbcc07"
+    },
+    {
+      "path": "Assets/Characters/Yuna/Yuna_Study.prefab",
+      "bytes": 30403,
+      "sha256": "3a9b46871e33cfd0a1f8ac7a1410e51536e04062764cd1de7e5bb7eaf396eaad",
+      "guid": "19c79217112100449875d8ec74d6b659",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "76e1259377c6506ebb78cee6e650cd617fc54807",
+      "git_blob_baseline": "76e1259377c6506ebb78cee6e650cd617fc54807"
+    },
+    {
+      "path": "Assets/Characters/Yuna/Yuna_StudyMesh.asset",
+      "bytes": 7872814,
+      "sha256": "523e78e4bd93fd0c3a2fccf63f69a05a8a454316f44b7f05c505019ec67ab483",
+      "guid": "1b95fae054146e640995a6002aa9a4c9",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "2f0c0e174e4d7dff2a8f81f914bb5786565b779f",
+      "git_blob_baseline": "2f0c0e174e4d7dff2a8f81f914bb5786565b779f"
+    },
+    {
+      "path": "Assets/Scenes/DarkRoom_Gameplay.unity",
+      "bytes": 4703145,
+      "sha256": "d507921b1244c2a3186ba820bc54a3eae8daf9208dcde677f7eed438c9e358ed",
+      "guid": "a9465ee75c37b874e94c21c0fcf9b22b",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "a5aab736ff1bef11c4747027e70441e89606f002",
+      "git_blob_baseline": "a5aab736ff1bef11c4747027e70441e89606f002"
+    },
+    {
+      "path": "Assets/Scenes/TitleScreen.unity",
+      "bytes": 92616,
+      "sha256": "a0667a1887f925975e2d70eec6ecb73fa1e0f8962d14872d841417bc069b13e5",
+      "guid": "63165d40c322cd949af4abc1912fda67",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "8858216a4050bce43ba66dbeed8238290b164ea2",
+      "git_blob_baseline": "8858216a4050bce43ba66dbeed8238290b164ea2"
+    },
+    {
+      "path": "Assets/Scripts/Editor/DarkRoomFurnitureCapture.cs",
+      "bytes": 9342,
+      "sha256": "73344d1dc9859825211d9f9bb1f9481b2b175de51552dd8f249d83eccb0e9fd7",
+      "guid": "97c7522588743b44a9f85ba875c97fc5",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "fbffe7be3febbc9c9383dc2085fb8ae01e195c2e",
+      "git_blob_baseline": "fbffe7be3febbc9c9383dc2085fb8ae01e195c2e"
+    },
+    {
+      "path": "Assets/Scripts/Editor/WebCiBuild.cs",
+      "bytes": 7168,
+      "sha256": "6185dcd31d0ae13ad244243878a357af7b81fc5ef51b6dec192e22e639eae28f",
+      "guid": "1f1a982b07eb483baf988e7693ca99da",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "ab4db6626ad88860ab9d3c150d5df2e2e66ada50",
+      "git_blob_baseline": "ab4db6626ad88860ab9d3c150d5df2e2e66ada50"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/Camera/SideScroll25DCamera.cs",
+      "bytes": 13689,
+      "sha256": "6aeee35cb08b6814d0f6eaac5d6f3b203ed65fcddab67093d2b8170b7857c916",
+      "guid": "f0a0a114cbeb8b343917c3356c5647a8",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "544bd1666f7575c873d955bcc8b4369a0f7df4b9",
+      "git_blob_baseline": "544bd1666f7575c873d955bcc8b4369a0f7df4b9"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomBlockoutBuilder.cs",
+      "bytes": 50599,
+      "sha256": "e54b12a8d9f1a1c809687adececb04cda197cf453426692594ce65b92c994ad8",
+      "guid": "a3fe2fbddd5b07a4ca94d9f2ce443f17",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "699e04f480740d0fd3a68f822d7c6b549d796a5a",
+      "git_blob_baseline": "699e04f480740d0fd3a68f822d7c6b549d796a5a"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomOpeningSequence.cs",
+      "bytes": 5489,
+      "sha256": "eef38bac9ba1dbffd3b19ac5fe89736d4362e259c9b5be4a553debe309ceb171",
+      "guid": "4ff16acf712edd744b1acdb0d6e225a3",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "2f92da6e25211c7130b8fb19d380c13cbc2825ae",
+      "git_blob_baseline": "2f92da6e25211c7130b8fb19d380c13cbc2825ae"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformArt.cs",
+      "bytes": 42220,
+      "sha256": "7fc5507b63562bb980e9eb5ea1654703b6ed1733dccb8974fcd90743224d9cfd",
+      "guid": "7f1b4020066f78e4e83aed18ad8a9a07",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "c6fa136137bafaa5ac396ddeff35160fbd3d1745",
+      "git_blob_baseline": "c6fa136137bafaa5ac396ddeff35160fbd3d1745"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformCatalog.cs",
+      "bytes": 10603,
+      "sha256": "3cff736847704893443e0c491a2f0ab64a9a16ef33dc771d43f8e04772103f4c",
+      "guid": "9c712c7d28155e844950533b03955a5a",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "8c663caeb21fd2c38e06de0b9d8833a6c0241920",
+      "git_blob_baseline": "8c663caeb21fd2c38e06de0b9d8833a6c0241920"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformGeometry.cs",
+      "bytes": 9482,
+      "sha256": "cea372c1b5a9feedbc9000ace2f4242c444fa883568da468a5110e102b95ee7c",
+      "guid": "461d319347bfa864babfee709297fbec",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "22352945e36fa1d070c8215b8574b79d54d43f2a",
+      "git_blob_baseline": "22352945e36fa1d070c8215b8574b79d54d43f2a"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformMarker.cs",
+      "bytes": 3855,
+      "sha256": "cb06ddef4300e4d8d88b061a7917e4eedafee313786865aa5a5e2edb39b37757",
+      "guid": "2b1fc79720d230545b70dade1bd4d96a",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "cd019920d3093f68a393b83924365c09c49b03dc",
+      "git_blob_baseline": "cd019920d3093f68a393b83924365c09c49b03dc"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomProgressionManager.cs",
+      "bytes": 39152,
+      "sha256": "92009ad7237ef93eabc195b15c9547506ee25c7dd48e47e30dd7cf74cae8222a",
+      "guid": "74fd90c4d4b556a46b2eca3f4e7e3453",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "ea19c64c162fc6988d59f21dbea1f9ef1fe9e8ff",
+      "git_blob_baseline": "ea19c64c162fc6988d59f21dbea1f9ef1fe9e8ff"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomRampPlatformGenerator.cs",
+      "bytes": 5300,
+      "sha256": "1d986d77b6060364a7e791dad8a20ca2dd6a2ca79d0f7b5c55abcac8d67f24a2",
+      "guid": "c0fdb6481c5566e4fa03c2301782159c",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "4e7c56b16b399c1bd3f9298d15f0756d73bc83fd",
+      "git_blob_baseline": "4e7c56b16b399c1bd3f9298d15f0756d73bc83fd"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomReturnLayout.cs",
+      "bytes": 930,
+      "sha256": "71a935da08c42c8b4a684f16a38a3df1e0f5bca59087e14c0c71fcdef1188af1",
+      "guid": "38f64d27f4352404f8be4ec52f473e29",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "c602532f71153c1d5425582964ab8d7a1a936f8b",
+      "git_blob_baseline": "c602532f71153c1d5425582964ab8d7a1a936f8b"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomStartLayout.cs",
+      "bytes": 745,
+      "sha256": "e97cad90e4f7306c6229da5578c0eb80859aa407cf278b985cac921a35323619",
+      "guid": "c2d45097d9cc307468a2d748df713cdf",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "2a1c76bf5ddd9c6726f0f240d8b1115a957f7bcc",
+      "git_blob_baseline": "2a1c76bf5ddd9c6726f0f240d8b1115a957f7bcc"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomThreeStageCircuitGenerator.cs",
+      "bytes": 9923,
+      "sha256": "bf7a652e7dc8191529b7a0f8fdc1d22f291a2404d44cb895b0e3492ede296ee3",
+      "guid": "81d9f481c5566e4fa03c2301782159ef",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "18c1d15dc3cd500b74da27401eea08b5eb30c348",
+      "git_blob_baseline": "18c1d15dc3cd500b74da27401eea08b5eb30c348"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomWallDecorations.cs",
+      "bytes": 8647,
+      "sha256": "d79bf522918e4b5bef405c37d96d4c9a18fb6e330efbf47b91ae0c2d581fd16e",
+      "guid": "f55072fafe30c2e4b9ad482566173dad",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "85b652c92f5a670aaec71c9cabde13b366ba46ac",
+      "git_blob_baseline": "85b652c92f5a670aaec71c9cabde13b366ba46ac"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomYieldingFurnitureArt.cs",
+      "bytes": 5723,
+      "sha256": "f27be0addc5e47739fd3de879e9d633b2f6da23b48d9e99e8edb8ac5fe92f2c0",
+      "guid": "61a83ebe8e0cd404f963514b25d9d46b",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "7506d0f882bb24cb42085006a715474584a77dee",
+      "git_blob_baseline": "7506d0f882bb24cb42085006a715474584a77dee"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/NandaFairyGuide.cs",
+      "bytes": 9026,
+      "sha256": "5e594e55cb6cc54eb41b07d6cc37fd39540bfd2020e995a7afc0fd69fa71acde",
+      "guid": "4179a2e78d19f5e48ab47a8bd8c69fdd",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "2e287a0a479b0e6a3814bf7fb6fe1134f45e7866",
+      "git_blob_baseline": "2e287a0a479b0e6a3814bf7fb6fe1134f45e7866"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/PlatformCollisionDetector.cs",
+      "bytes": 1156,
+      "sha256": "84c7d45662a461f43d84023fe775c215ebb85e7d160b3cef8101e46240dc6254",
+      "guid": "e4ef969789806d0469f1106977f63fff",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "fa166f4236b6e43cb685debab87dc070babd7b00",
+      "git_blob_baseline": "fa166f4236b6e43cb685debab87dc070babd7b00"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/PlatformSupportProfile.cs",
+      "bytes": 10285,
+      "sha256": "b7bc9a1d24b0adac03559d8c76252c882844369573f114fb73c85ffef3c531bb",
+      "guid": "1049bd4109078c84eba2fc1966537aba",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "d588ac50f1d337b9aeb484c4b4c52e7603f21c76",
+      "git_blob_baseline": "d588ac50f1d337b9aeb484c4b4c52e7603f21c76"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/YieldingWoodFurniture.cs",
+      "bytes": 5273,
+      "sha256": "c3f390ddb71f7a52944d61e6e65508cc7083f16ca8b99faca54f22a6ec01682f",
+      "guid": "a95ee7763fc1afc428111fc72feee47a",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "9f81d65092066914806e91e029e78f7928299dda",
+      "git_blob_baseline": "9f81d65092066914806e91e029e78f7928299dda"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/Yuna25DPlayerController.cs",
+      "bytes": 26827,
+      "sha256": "d47aea951b8190c4a0557bb1521eaf4b37ccf57282b15e5daef07d94c0430d10",
+      "guid": "eddc43f2ed072954d8177c0460734aa2",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "d2dddc160613746bd3e14a6d207126c3d538d62b",
+      "git_blob_baseline": "d2dddc160613746bd3e14a6d207126c3d538d62b"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/YunaCharacterView.cs",
+      "bytes": 8559,
+      "sha256": "6e5921713aa6b8d2e4df74ad269efe79911f2e20a4ad387b663cf9876021442e",
+      "guid": "d6da374cee8546878d74429680daa9e3",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "30e9bb8b56cf75e66efeedd57c545f00a735c18e",
+      "git_blob_baseline": "30e9bb8b56cf75e66efeedd57c545f00a735c18e"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/Dialogue/DarkRoomDialogueScript.cs",
+      "bytes": 3038,
+      "sha256": "4d0cb7576e7a0c29ec677227c0696bf61193df905e831bf89dc7aa9956dbacc3",
+      "guid": "ecebb98ab5b63c8479a7b44158d52579",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "89a2d90d1edab8b1c390de838aef8703419ba4d3",
+      "git_blob_baseline": "89a2d90d1edab8b1c390de838aef8703419ba4d3"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/UI/TitleLegSwing.cs",
+      "bytes": 1688,
+      "sha256": "c03cf927bdcec10ebeb4f92c83fcac07b30a4b6b48ecfa718cde7778e7c69904",
+      "guid": "ca49061d4a305d84bb28ccdefdec40b9",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "4ab58e786f716c4eb38a99c655c20fd8b22679df",
+      "git_blob_baseline": "4ab58e786f716c4eb38a99c655c20fd8b22679df"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/UI/TitlePhaseSelector.cs",
+      "bytes": 4820,
+      "sha256": "e5e54047e2a1955cf10d36599180cdfb49dfb95246b78ada3d744db53117e29f",
+      "guid": "885e9529afc45f441a1bbdc628d15e73",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "487e81bd8efb7958bc0b65ecd7123d2758e11216",
+      "git_blob_baseline": "487e81bd8efb7958bc0b65ecd7123d2758e11216"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/UI/TitleScreenController.cs",
+      "bytes": 9639,
+      "sha256": "ab1588022dd008c064620ff76cfd1a1dac5ac76e8b9f04949711ab489497bb41",
+      "guid": "41793063027adec489189c0f523355dd",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "0cf67102ac261a2627a8e785b59b0309e502ca57",
+      "git_blob_baseline": "0cf67102ac261a2627a8e785b59b0309e502ca57"
+    },
+    {
+      "path": "Evidence/yuna-concept-2026-11-11/yuna-3d-concept-v1.png",
+      "bytes": 1974405,
+      "sha256": "36cfdec860cbb1a2f98c81458db43557a5aa28f41992a70c8eec68e4aab42a6b",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "7137f5354e2aade55467d55400f1de944a204d5b",
+      "git_blob_baseline": "7137f5354e2aade55467d55400f1de944a204d5b"
+    },
+    {
+      "path": "Packages/manifest.json",
+      "bytes": 624,
+      "sha256": "5b6d3645e98eeaf4250dd0204bed3e567641d2dba70b0404a6af89ecd63c352c",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "7b32e8142eccf62966be0bbb7be6388468ec26e5",
+      "git_blob_baseline": "7b32e8142eccf62966be0bbb7be6388468ec26e5"
+    },
+    {
+      "path": "Packages/packages-lock.json",
+      "bytes": 8112,
+      "sha256": "a95d1a0a9685f70a64effa9402dc039dc36441034677db7ce11b63c47a08c4ab",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "f61b9c9a3a08581c75ed1176c2ffad4fb267ac5c",
+      "git_blob_baseline": "f61b9c9a3a08581c75ed1176c2ffad4fb267ac5c"
+    },
+    {
+      "path": "ProjectSettings/EditorBuildSettings.asset",
+      "bytes": 408,
+      "sha256": "06621451384a66ec13a01206ac2728b7e10fc2cd4fabd2009a5dfd74b46ea026",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "fa20ed787747ed86dda993fe31b3ec327605a8cc",
+      "git_blob_baseline": "fa20ed787747ed86dda993fe31b3ec327605a8cc"
+    },
+    {
+      "path": "ProjectSettings/ProjectSettings.asset",
+      "bytes": 22462,
+      "sha256": "eb87ef396ffa6b43516cf6ed96e8f97e4528348179065c4abe84bded9a354cee",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "191cd9178aa938de5694176ca2874ef3002339de",
+      "git_blob_baseline": "191cd9178aa938de5694176ca2874ef3002339de"
+    },
+    {
+      "path": "ProjectSettings/ProjectVersion.txt",
+      "bytes": 85,
+      "sha256": "91b35566b263574c8a513eff3bba6d5d313482d752d961077b47ab5b3ff14981",
+      "matches_baseline_commit": true,
+      "git_blob_worktree_filtered": "2f221d9b34681fb9fa6da4b8c4c51eae6414bac8",
+      "git_blob_baseline": "2f221d9b34681fb9fa6da4b8c4c51eae6414bac8"
+    }
+  ],
+  "pending": [
+    "T00.2 menu input reproduction",
+    "Current baseline gameplay capture/video",
+    "Build/source correspondence verification"
+  ],
+  "hash_note": "sha256 hashes exact disk bytes; git blobs apply repository filters/line-ending normalization. Compare filtered blobs to detect source drift."
+}

@@ -23,6 +23,14 @@ class CoordinatorTests(unittest.TestCase):
         self.path = self.root / 'docs/ia/PLANO-25D-ESTADO.json'
         self.path.parent.mkdir(parents=True)
         self.initial = json.loads((ROOT / 'docs/ia/PLANO-25D-ESTADO.json').read_text(encoding='utf-8'))
+        self.initial['history'] = []
+        self.initial['execution_started'] = False
+        self.initial['integration_checkout'] = None
+        self.initial['integration_coordinator'] = None
+        for task in self.initial['tasks']:
+            task.update(status='pending', owner=None, checkpoint=None)
+            for field in ['evidence', 'acceptance', 'validation']:
+                task.pop(field, None)
         self.path.write_text(json.dumps(self.initial), encoding='utf-8')
         self.artifact = self.root / 'Evidence/report.md'
         self.artifact.parent.mkdir()
@@ -50,10 +58,20 @@ class CoordinatorTests(unittest.TestCase):
 
     def seed_accepted_through(self, target):
         state = json.loads(self.path.read_text())
+        by_id = {task['id']: task for task in state['tasks']}
+        required = set()
+        def include(identifier):
+            if identifier in required:
+                return
+            required.add(identifier)
+            for dependency in by_id[identifier]['depends_on']:
+                include(dependency)
         for task in state['tasks']:
-            if task['id'] > target:
-                break
-            task.update(status='accepted', evidence=[{'path':'Evidence/report.md', 'sha256':hashlib.sha256(self.artifact.read_bytes()).hexdigest()}], acceptance={'reference':'fixture'})
+            if task['id'] in ['T00', 'T01', 'T02'] and task['id'] <= target:
+                include(task['id'])
+        for task in state['tasks']:
+            if task['id'] in required:
+                task.update(status='accepted', evidence=[{'path':'Evidence/report.md', 'sha256':hashlib.sha256(self.artifact.read_bytes()).hexdigest()}], acceptance={'reference':'fixture'})
         self.path.write_text(json.dumps(state))
 
     def test_dependency_and_duplicate_claim_rejected(self):

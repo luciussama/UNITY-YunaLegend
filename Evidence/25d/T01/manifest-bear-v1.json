@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "session": "2026-11-12-codex-bear-25d-71ac",
+  "status": "em_revisao",
+  "microdelivery": "T01.3",
+  "tool": "image_gen.imagegen built-in",
+  "transparent_background_requested": true,
+  "references": [
+    {
+      "path": "Evidence/25d/T01/yuna-profile-v1.png",
+      "role": "approved painting style only",
+      "sha256": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044"
+    },
+    {
+      "path": "Evidence/supports-camera-2026-11-11/02-bear-front.png",
+      "role": "existing object parts and arrangement only",
+      "sha256": "d7929aa7c1c35660c088b47ec95010643ff13e4ef1a7259ba3c330b6673031a9"
+    }
+  ],
+  "generation_source": "C:/Users/sergi/.codex/generated_images/01a1cfe0-1ed7-7ac1-8c1d-70a394f5b3c7/exec-a01c2eb1-75c7-43b4-8cd7-d16633d40498.png",
+  "inspection": {
+    "width": 1619,
+    "height": 971,
+    "bit_depth": 8,
+    "png_color_type": 6,
+    "rounded_crown_visual_inspection": true,
+    "runtime_contact_validation": "pending",
+    "alpha_edge_qa": "pending"
+  },
+  "support_contract_written_before_generation": true,
+  "support_diagram": "separate schematic, not measured collider overlay",
+  "files": [
+    {
+      "path": "bear-v1.png",
+      "sha256": "708108204dda6a64294eb19c0e2567129e0d4a092926d78c47ebd0192f9ff833",
+      "bytes": 2605855
+    },
+    {
+      "path": "prompt-bear-v1.txt",
+      "sha256": "5f2be35f04ab55dc69c529c4fce46079eeba0cbcb206ae87c000c3b41f35a93c",
+      "bytes": 2919
+    },
+    {
+      "path": "urso-contrato-apoio-v1.md",
+      "sha256": "82bd02cf1d787d24ec5a463730b18f66dc133eede89c905d2425ead3f118873d",
+      "bytes": 2721
+    },
+    {
+      "path": "urso-apoios-esquema-v1.svg",
+      "sha256": "d44e789228eee0a04c6447689c5b1bbb73a615334f534be93fdbdf8ad1dd944b",
+      "bytes": 3075
+    },
+    {
+      "path": "reviews/T01.3-v1.md",
+      "sha256": "4120f6f5e3a879759d584aa41e44edbb1552eff670c7992ab83afdc00c8c01e0",
+      "bytes": 2226
+    }
+  ]
+}

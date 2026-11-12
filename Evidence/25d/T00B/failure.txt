@@ -1,0 +1,2 @@
+System.InvalidOperationException: Menu did not respond to queued Enter. Selected=Bandeira_Fases, module=InputSystemUIInputModule
+  at YunaLegend.EditorScripts.IllustratedBaselineCapture.Tick () [0x00151] in C:\Users\sergi\repos\UNITY-YunaLegend\Build\Publish\Project\Assets\Scripts\Editor\IllustratedBaselineCapture.cs:106 

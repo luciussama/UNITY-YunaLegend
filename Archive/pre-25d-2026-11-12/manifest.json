@@ -1,0 +1,2569 @@
+{
+  "schema_version": 1,
+  "session": "2026-11-12-codex-archive-previous-25d-9e5b",
+  "note": "Historical contents preserved byte for byte. Old paths in immutable diary/approved manifests resolve through this mapping. No history discarded.",
+  "files": [
+    {
+      "original_path": "docs/ia/AVALIACAO-INICIO-MODELAGEM.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/docs/ia/AVALIACAO-INICIO-MODELAGEM.md",
+      "sha256": "fa6507ef7122ad0a78ec7c904d73c54d433730b930f52c38a25d5369b9f1849a",
+      "bytes": 9178,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "docs/ia/DIAGNOSTICO-ARTISTICO-DARK-ROOM-2026-11-12.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/docs/ia/DIAGNOSTICO-ARTISTICO-DARK-ROOM-2026-11-12.md",
+      "sha256": "3488b7da5099e1288dc70b5809879f8243a8894f93ca8b9e64cbd83d1ae650a9",
+      "bytes": 8336,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "docs/ia/EM-CURSO-MOVEL02.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/docs/ia/EM-CURSO-MOVEL02.json",
+      "sha256": "e9490807755ef8cc7259c1a29c6168aedaff9ca6d74a1a683938bdd98bec59c6",
+      "bytes": 7191,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "docs/ia/EM-CURSO-YUNA.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/docs/ia/EM-CURSO-YUNA.json",
+      "sha256": "80c204e0b49640cc3ca14b499a635a2323d628ef1bd7a4c0ee123d5fd7fce338",
+      "bytes": 3082,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "docs/ia/GUIA-PREPARACAO-QUARTO-ESCURO.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/docs/ia/GUIA-PREPARACAO-QUARTO-ESCURO.md",
+      "sha256": "1f498d6217809357ca6599e64faa542964a255bfc4d536bb06ec38c4da0d84a9",
+      "bytes": 11293,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "docs/ia/HANDOFF-2026-11-11.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/docs/ia/HANDOFF-2026-11-11.md",
+      "sha256": "49885d45cb9b7791b53a71b71abb1868d24075051a340358cbb9f0b415bc322e",
+      "bytes": 8085,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "docs/ia/INVESTIGACAO-HANDOFF-2026-11-11.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/docs/ia/INVESTIGACAO-HANDOFF-2026-11-11.md",
+      "sha256": "0605cdb7ec433a8d46044ab52e8ef465610c3d212602923d0cd47d9d1c01dab8",
+      "bytes": 16735,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "docs/ia/YUNA-ESTADO-MODELAGEM-2026-11-11.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/docs/ia/YUNA-ESTADO-MODELAGEM-2026-11-11.md",
+      "sha256": "4d8e926dea44b663424097b78314c9c221436e0b45e9cc36dcfe90268ff63fba",
+      "bytes": 18225,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/capture.log",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/capture.log",
+      "sha256": "c82dd73706d7f4ab809faa15700babaea69725fbc19fea9610af4b1834b584b1",
+      "bytes": 38607,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/comparison-start-castle.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/comparison-start-castle.png",
+      "sha256": "01d77596789102e5c25bb42d108ce7503afe3c1a300211195666fbdcb1b4ced8",
+      "bytes": 315351,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/DIAGNOSTICO.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/DIAGNOSTICO.md",
+      "sha256": "5367ae2e594ce921a5be609208c9be9772b9b50749f236afbe176e3f2e946303",
+      "bytes": 19539,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/luma-measurements.csv",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/luma-measurements.csv",
+      "sha256": "227145ef9f4d727c9351ab00d4c04fbe68d42a9f8cb4a9f52d16b994e9d7be6e",
+      "bytes": 2020,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/manifest.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/manifest.json",
+      "sha256": "f875ae186cc4c639b5c6725e5ac7a7db906721f58e7ecf72f55afdd7363206a2",
+      "bytes": 16081,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/measurements.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/measurements.json",
+      "sha256": "c8e4f66cc652e7857327281001e61c935bf645c2d6da00168b4554510651aba5",
+      "bytes": 11847,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/capture.log",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/capture.log",
+      "sha256": "a5265d1e235a031ced8501ce2a96437974fe68c67c50ddece1bfb10e00633242",
+      "bytes": 36875,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/comparison-start-castle.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/comparison-start-castle.png",
+      "sha256": "22f59bfaad531549e3f825d03950161a0d34bd266bdd61174124059c7762bc3b",
+      "bytes": 315263,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/DIAGNOSTICO.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/DIAGNOSTICO.md",
+      "sha256": "e346be8614c08c5144ac9d699022868a7fe6c071d1146c75260a84ea08b8d208",
+      "bytes": 18956,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/luma-measurements.csv",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/luma-measurements.csv",
+      "sha256": "a56352f21db55ed5c5d1a8c9f7f892545d904125384f686d9c0d267c9d054e0a",
+      "bytes": 2015,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/manifest.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/manifest.json",
+      "sha256": "717c77bbbeb9d55c2ec53639c097b5495cdadbca4ef559bddd3a19e398be1cf0",
+      "bytes": 7893,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/measurements.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/measurements.json",
+      "sha256": "62f687464500e21b25fbe9e626e88db39e98ede857e5af9a9801b9b0b721d3ff",
+      "bytes": 11842,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/source-snapshot.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/source-snapshot.json",
+      "sha256": "ea02d73fd5adc0f67cbc8370c3dfdfe665cb8d88c56911980ec8b027e6b9edab",
+      "bytes": 4253,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-01-start-gray.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-01-start-gray.png",
+      "sha256": "3f1cc4f10f846b8e389d8b95541d57e6b5ec4f5f956d072a609fbdf39b1599bd",
+      "bytes": 53651,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-01-start-roi.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-01-start-roi.png",
+      "sha256": "aa107c45cd73ec8584a190b7dff723bcdae85e573974688b2fd851be45d65c12",
+      "bytes": 114881,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-01-start-squint.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-01-start-squint.png",
+      "sha256": "6f920e329ed136c63b3e2e808d14c197867fd96ea8cf939f0dc029b28dce5910",
+      "bytes": 6814,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-01-start.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-01-start.png",
+      "sha256": "2575adda9ae138f4ad7aa11522d686a0c81b6b25668b40781db7239093c14438",
+      "bytes": 154508,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-02-castle-gray.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-02-castle-gray.png",
+      "sha256": "e2153c1a324508d3539aff663577c84c688fa0ddd02f4fa8827476517cf5548c",
+      "bytes": 61645,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-02-castle-roi.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-02-castle-roi.png",
+      "sha256": "1abd32bd131f82d802f06fa2538f6fa42fbbe8d1ed99951c2eb533fb5585db79",
+      "bytes": 128564,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-02-castle-squint.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-02-castle-squint.png",
+      "sha256": "ab49257d590a6ce5ed4a43404fecc012476517d683c7ee430c82f8e89ce53497",
+      "bytes": 8137,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-02-castle.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-02-castle.png",
+      "sha256": "1db0189c09e4338e622e54524662f3cc7c4c91c683edec1c79ad14326733882e",
+      "bytes": 157340,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-03-false-door-gray.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-03-false-door-gray.png",
+      "sha256": "af1b340db7622f6086b54aa9e375466c3d3e116548b5090190cf2fbc95d5b184",
+      "bytes": 36936,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-03-false-door-roi.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-03-false-door-roi.png",
+      "sha256": "f2e5d920c99f8ea94a4de1f1f7435698347a87d8075fa1d6d524ffbfa68dd286",
+      "bytes": 83178,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-03-false-door-squint.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-03-false-door-squint.png",
+      "sha256": "0f3731a911bb20285e2dfab4ef18741d6a45fdb14fffedad185ff3b21fa388ff",
+      "bytes": 5228,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-03-false-door.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-03-false-door.png",
+      "sha256": "4e15932d71039564bba4c22adb1a39dfa10be6cbb1d27af2fe8b0528f681827a",
+      "bytes": 101545,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-04-portal-gray.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-04-portal-gray.png",
+      "sha256": "b5ec73c1ef15b3a74d86151bbfcb784596402da6d623a99baeef59eaf8905d1a",
+      "bytes": 82822,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-04-portal-roi.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-04-portal-roi.png",
+      "sha256": "d949c4a7128b9e3bc0cd88dbeb7a948b587a46d5e56c9201cbc9973f59c51585",
+      "bytes": 145865,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-04-portal-squint.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-04-portal-squint.png",
+      "sha256": "3d88ca3966360f28ac91634063c6e18990fe46ba943c984a2876f0f3c4cb9533",
+      "bytes": 9903,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-04-portal.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-04-portal.png",
+      "sha256": "148b0c80709e1ed3697a1e13e22459a60cdeaddae148e54e9c8adbae94dbdc66",
+      "bytes": 180952,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-four-points-color.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-four-points-color.png",
+      "sha256": "ef2ce293641315239ac609cb46c05d9aabcf08e37999215034e53b4287a855bf",
+      "bytes": 207518,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-four-points-gray.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-four-points-gray.png",
+      "sha256": "054c9f49c58688f0adfa88d22f174e5e48287f93e845adfdb0147b20be0c915b",
+      "bytes": 120153,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/unity-metadata.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/unity-metadata.json",
+      "sha256": "45a29b8e9d952c4dd328695166f9b30f4c5412d75247d4ad9b2281a24aeb7501",
+      "bytes": 44838,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/web-01-blocks.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/web-01-blocks.jpg",
+      "sha256": "429a0a316d89d499ec26ba2902f62fbb0d2a28845c491084950fd1f858b94fa3",
+      "bytes": 29330,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/web-01-drum.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/web-01-drum.jpg",
+      "sha256": "7b02014d1238fa250174a1be5e24f34ddc50124437ef070ff7b7d8d157214fba",
+      "bytes": 29687,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/web-01-jump.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/web-01-jump.jpg",
+      "sha256": "74e3c638d377c1af9f77d891bcf667d9daa157410076c1e9548022c8632c8d4f",
+      "bytes": 24521,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/web-01-opening.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/web-01-opening.jpg",
+      "sha256": "c17b973d5fb7737ae7b6bcab6044121c9b193d6436d7a58d5178db179276146a",
+      "bytes": 22431,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/web-01-start-game-gray.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/web-01-start-game-gray.png",
+      "sha256": "737ced490f8561d45ed367d22f66d8121377c601e45749421dc89602327244b4",
+      "bytes": 105998,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/web-01-start.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/web-01-start.jpg",
+      "sha256": "0afe66ed18889e9f070970113aa1d8e18650d25f4788e6571715aab00dfafe17",
+      "bytes": 26685,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/web-01-vanity.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/web-01-vanity.jpg",
+      "sha256": "fa0497e216b1835da189353bf2559dbdfce5d1dee6248c3f3e7c7fa643522f33",
+      "bytes": 27086,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/web-02-castle-dialogue.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/web-02-castle-dialogue.jpg",
+      "sha256": "f437ae0b745d71a73a692c252d5fbc1f93b072b3dac0adf4b6ddad37f24c7740",
+      "bytes": 42464,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/web-02-castle-game-gray.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/web-02-castle-game-gray.png",
+      "sha256": "e647d76b2e1eac58f55512cae8464430256a18b6da6ca546490b9bb8fa6d7271",
+      "bytes": 120544,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/web-02-castle.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/web-02-castle.jpg",
+      "sha256": "1e476d1901f64e61b4e31041a9e6f588ef316619d0cd5625dbeef2f2e15ce916",
+      "bytes": 36858,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/web-02-clock-shelf.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/web-02-clock-shelf.jpg",
+      "sha256": "8610ca164dfcbc93cac2929e7c4e0bb2082970b130a67592d2fcb77707b0d84a",
+      "bytes": 29867,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/web-02-escape-start.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/web-02-escape-start.jpg",
+      "sha256": "5bb0c588fc3d87db32a29bd5160af14fff927049e5378700c44553e784b5f63f",
+      "bytes": 30957,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/web-02-globe-approach.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/web-02-globe-approach.jpg",
+      "sha256": "07265decac5a17ade77193b1747c1e57d4274572fd47341a6dca1f3e4af22abd",
+      "bytes": 27576,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/web-attempt-01-gameover.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/web-attempt-01-gameover.jpg",
+      "sha256": "26583cef549d9429a3fce70cc962d7eb0e0524328d2daaba7b92d49dc0b4c864",
+      "bytes": 24262,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/web-attempt-02-gameover.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/web-attempt-02-gameover.jpg",
+      "sha256": "fed5c6c3923862cd5958e8c389399a4a63986407290ae26a2ea470a8bfb18353",
+      "bytes": 24331,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/primeira-coleta/web-attempt-03-fall.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/primeira-coleta/web-attempt-03-fall.jpg",
+      "sha256": "73dec95dc1749a6bfb499ea11cbf11247beb8413f7743face19def4d45a25516",
+      "bytes": 26746,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/source-snapshot.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/source-snapshot.json",
+      "sha256": "e8d47293f5bd4df9c128e2e96e469475925527d158913948969c6024b58b944c",
+      "bytes": 4908,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/tools/analyze_captures.py",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/tools/analyze_captures.py",
+      "sha256": "79a950c7be688ccbbec8473b2569f6251507f1a291f7855ebd6d0ea3f6a1a480",
+      "bytes": 7267,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/tools/requirements.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/tools/requirements.txt",
+      "sha256": "c2fa9f6e14dfbb37f591deab48f5a35fd6f1c7116b7905f8f38cf85cfb3314ab",
+      "bytes": 30,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/tools/VisualAuditCapture.cs.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/tools/VisualAuditCapture.cs.txt",
+      "sha256": "e1102c99225d3b53bf7f742dfd2208a26cb350bd87982640b6a451b3b62a81f8",
+      "bytes": 8842,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-01-start-gray.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-01-start-gray.png",
+      "sha256": "c0426750c3c0c091f0830b6a56dcfc81b3efe2b4e94f494d928990aff4d35c0a",
+      "bytes": 53667,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-01-start-roi.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-01-start-roi.png",
+      "sha256": "cd49526ff8fa6d19488ea60bff0d8cd462cdf3966d551060148fcc5216cdfbea",
+      "bytes": 114882,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-01-start-squint.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-01-start-squint.png",
+      "sha256": "702563f1bb15d31c6bfa3ba3842a9fc7931e8a96965692b759080e3d2ebfb6a3",
+      "bytes": 6815,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-01-start.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-01-start.png",
+      "sha256": "90ad379b3845eb331b76731d894f2edd18ee63399540c3513c33c2260885ef23",
+      "bytes": 154510,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-02-castle-gray.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-02-castle-gray.png",
+      "sha256": "5b41d5ed91ef5861d57e5b8925c9a17a54f13b7dea46bc9dbddd5b496c4deb2c",
+      "bytes": 61746,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-02-castle-roi.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-02-castle-roi.png",
+      "sha256": "ed91b6ae1a92db3470e17273eb21f1eb2e31c19617fafb654d14381da3a1b88d",
+      "bytes": 128690,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-02-castle-squint.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-02-castle-squint.png",
+      "sha256": "b593b84c14755c91efa51b6f48bfeadd4148c9f8db5d4dca12cf802359c86e41",
+      "bytes": 8180,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-02-castle.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-02-castle.png",
+      "sha256": "bcdbfe3b9ebe6dd1df6a6e74d7c40d535d6a46f71dbfbd834964aab6ad99c21d",
+      "bytes": 157588,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-03-false-door-gray.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-03-false-door-gray.png",
+      "sha256": "829762701e7d718077fd7e4149875d4022df52fda085c1f4921aeba2d6d889b3",
+      "bytes": 36992,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-03-false-door-roi.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-03-false-door-roi.png",
+      "sha256": "8f6a3787035c6ec87d7944cece7e0baa52191cc4bcfce35f19c872c35281f165",
+      "bytes": 83152,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-03-false-door-squint.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-03-false-door-squint.png",
+      "sha256": "a867d3ea4a93f9636834913b2b6f821df030533751ee0c774ee2c4861a0d93f0",
+      "bytes": 5225,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-03-false-door.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-03-false-door.png",
+      "sha256": "02fc67e32b5f16db8a23160780526bb5dab7ee90a7a657a7413bd39cc24970c3",
+      "bytes": 101599,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-04-portal-gray.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-04-portal-gray.png",
+      "sha256": "0acb9499565deaf4f2307f362816783aab86cfd9a66342cfbabc76af6f3b088f",
+      "bytes": 88689,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-04-portal-roi.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-04-portal-roi.png",
+      "sha256": "a25f7d8b203be7eb16d1b345654497dd348bf34547db7edd2eddca9095d0f3f9",
+      "bytes": 162562,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-04-portal-squint.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-04-portal-squint.png",
+      "sha256": "025c1bf88f7762b5f41f2f066162c3bc3a51e95c24cbc63a06da412d62cf3c9a",
+      "bytes": 10487,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-04-portal.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-04-portal.png",
+      "sha256": "897638c6a7ed9bfb6a69b2c4b0ffbfcc707b12bfba00c9f55e33918cff1850bc",
+      "bytes": 200716,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-four-points-color.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-four-points-color.png",
+      "sha256": "f7672674d001af9d856fcdef2d13a22555d2bb61efac62a50601974d558d2b75",
+      "bytes": 215009,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-four-points-gray.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-four-points-gray.png",
+      "sha256": "41cd9659e396cb222a1f47153c09065cab0f403502fbb4442581c58ee710b4b2",
+      "bytes": 123016,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/unity-metadata.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/unity-metadata.json",
+      "sha256": "48201831a88b1270d70c44c3b10731fd4208b3f889a99c4cca4e4bc75ec7fc4a",
+      "bytes": 44825,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/web-01-blocks.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/web-01-blocks.jpg",
+      "sha256": "429a0a316d89d499ec26ba2902f62fbb0d2a28845c491084950fd1f858b94fa3",
+      "bytes": 29330,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/web-01-drum.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/web-01-drum.jpg",
+      "sha256": "7b02014d1238fa250174a1be5e24f34ddc50124437ef070ff7b7d8d157214fba",
+      "bytes": 29687,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/web-01-jump.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/web-01-jump.jpg",
+      "sha256": "74e3c638d377c1af9f77d891bcf667d9daa157410076c1e9548022c8632c8d4f",
+      "bytes": 24521,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/web-01-opening.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/web-01-opening.jpg",
+      "sha256": "c17b973d5fb7737ae7b6bcab6044121c9b193d6436d7a58d5178db179276146a",
+      "bytes": 22431,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/web-01-start-game-gray.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/web-01-start-game-gray.png",
+      "sha256": "737ced490f8561d45ed367d22f66d8121377c601e45749421dc89602327244b4",
+      "bytes": 105998,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/web-01-start.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/web-01-start.jpg",
+      "sha256": "0afe66ed18889e9f070970113aa1d8e18650d25f4788e6571715aab00dfafe17",
+      "bytes": 26685,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/web-01-vanity.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/web-01-vanity.jpg",
+      "sha256": "fa0497e216b1835da189353bf2559dbdfce5d1dee6248c3f3e7c7fa643522f33",
+      "bytes": 27086,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/web-02-castle-dialogue.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/web-02-castle-dialogue.jpg",
+      "sha256": "f437ae0b745d71a73a692c252d5fbc1f93b072b3dac0adf4b6ddad37f24c7740",
+      "bytes": 42464,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/web-02-castle-game-gray.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/web-02-castle-game-gray.png",
+      "sha256": "e647d76b2e1eac58f55512cae8464430256a18b6da6ca546490b9bb8fa6d7271",
+      "bytes": 120544,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/web-02-castle.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/web-02-castle.jpg",
+      "sha256": "1e476d1901f64e61b4e31041a9e6f588ef316619d0cd5625dbeef2f2e15ce916",
+      "bytes": 36858,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/web-02-clock-shelf.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/web-02-clock-shelf.jpg",
+      "sha256": "8610ca164dfcbc93cac2929e7c4e0bb2082970b130a67592d2fcb77707b0d84a",
+      "bytes": 29867,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/web-02-escape-start.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/web-02-escape-start.jpg",
+      "sha256": "5bb0c588fc3d87db32a29bd5160af14fff927049e5378700c44553e784b5f63f",
+      "bytes": 30957,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/web-02-globe-approach.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/web-02-globe-approach.jpg",
+      "sha256": "07265decac5a17ade77193b1747c1e57d4274572fd47341a6dca1f3e4af22abd",
+      "bytes": 27576,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/web-attempt-01-gameover.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/web-attempt-01-gameover.jpg",
+      "sha256": "26583cef549d9429a3fce70cc962d7eb0e0524328d2daaba7b92d49dc0b4c864",
+      "bytes": 24262,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/web-attempt-02-gameover.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/web-attempt-02-gameover.jpg",
+      "sha256": "fed5c6c3923862cd5958e8c389399a4a63986407290ae26a2ea470a8bfb18353",
+      "bytes": 24331,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/audit-2026-11-11/web-attempt-03-fall.jpg",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/audit-2026-11-11/web-attempt-03-fall.jpg",
+      "sha256": "73dec95dc1749a6bfb499ea11cbf11247beb8413f7743face19def4d45a25516",
+      "bytes": 26746,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/camera-framing-2026-11-11/before-castle-camera.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/camera-framing-2026-11-11/before-castle-camera.png",
+      "sha256": "640cf7aceefc7e7b678abef6abd17dfa2dfc0e8b827acdc0b11afbf243d4ae50",
+      "bytes": 129566,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/camera-framing-2026-11-11/before-start-camera.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/camera-framing-2026-11-11/before-start-camera.png",
+      "sha256": "34e103040224638372397f66b866249a495c1517b328237659044a63bec7db53",
+      "bytes": 154329,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/camera-framing-2026-11-11/camera-behavior.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/camera-framing-2026-11-11/camera-behavior.png",
+      "sha256": "7f832191312ec051c8cfa3800dc81172e32969f33352d6e52b853ce570b2301b",
+      "bytes": 166637,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/camera-framing-2026-11-11/capture-harness.cs.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/camera-framing-2026-11-11/capture-harness.cs.txt",
+      "sha256": "dd724f056a6067ed434799ec406a6fd7bd23cce33c9593cc3d93610da92440a3",
+      "bytes": 9789,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/camera-framing-2026-11-11/capture.log",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/camera-framing-2026-11-11/capture.log",
+      "sha256": "cbe6d2df2d90a0f9184fab72dd796605bf82a84226ef15251de20191ed048c07",
+      "bytes": 38863,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/camera-framing-2026-11-11/editmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/camera-framing-2026-11-11/editmode.xml",
+      "sha256": "f6ac13dc29c3ec13a2b2083f3aeddb04b9fd874a064dafa8c1d3ecf9a9c92f85",
+      "bytes": 15000,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/camera-framing-2026-11-11/framing-checks.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/camera-framing-2026-11-11/framing-checks.json",
+      "sha256": "b08d502291cc060609be49112926d3a6fec21a8c548b7e1099d3c18f41434dfe",
+      "bytes": 1699,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/camera-framing-2026-11-11/manifest.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/camera-framing-2026-11-11/manifest.json",
+      "sha256": "64595bf24805c30249144c785f925fdfef6719bba73071835da8529e0ec79053",
+      "bytes": 3145,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/camera-framing-2026-11-11/playmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/camera-framing-2026-11-11/playmode.xml",
+      "sha256": "dbc838ad597382ace28cc555a62f4f03b9123f5c08f83afeab46da6d51e2a6bf",
+      "bytes": 122135,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/camera-framing-2026-11-11/README.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/camera-framing-2026-11-11/README.md",
+      "sha256": "06565e6791314f3b60c949659f4267bee220363d28d76d6e364bb5993afd8670",
+      "bytes": 3064,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/camera-framing-2026-11-11/scene-merge.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/camera-framing-2026-11-11/scene-merge.json",
+      "sha256": "8ddfe9c22878477abe9d8ec2910922c0e5b5827d26d3718e36dd635b90d26f98",
+      "bytes": 170,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/camera-framing-2026-11-11/unity-01-start.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/camera-framing-2026-11-11/unity-01-start.png",
+      "sha256": "fcc85cacba2f4ce8ee23b8813970859d3fc3b45334240213b8eb1e8159fd71f2",
+      "bytes": 109488,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/camera-framing-2026-11-11/unity-02-castle.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/camera-framing-2026-11-11/unity-02-castle.png",
+      "sha256": "81f910e19d2ca84270246fc7f170d2c62a20642d2b804f0ca1c93ac586f0e9b5",
+      "bytes": 162455,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/camera-framing-2026-11-11/unity-03-false-door.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/camera-framing-2026-11-11/unity-03-false-door.png",
+      "sha256": "5f7feadc12ec867aabf28affe505ba621237e5bf584502d0d99766facda3b65b",
+      "bytes": 94702,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/camera-framing-2026-11-11/unity-04-portal.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/camera-framing-2026-11-11/unity-04-portal.png",
+      "sha256": "aa667231298727ef031c742d5d2a7ddeaf2d195ea33681dccdd2c7f301056919",
+      "bytes": 203509,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/camera-framing-2026-11-11/unity-05-fall-ground.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/camera-framing-2026-11-11/unity-05-fall-ground.png",
+      "sha256": "c87059951e4e7aaf032a3c363020da046e3270f87ea2a52dfbac52b1ac43ad72",
+      "bytes": 145976,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/camera-framing-2026-11-11/unity-06-castle-overview.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/camera-framing-2026-11-11/unity-06-castle-overview.png",
+      "sha256": "668bb132baa302718c05fdb757f974c23fc2d6dd8b2ccc21afa5495b88d6fa02",
+      "bytes": 70594,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/camera-framing-2026-11-11/unity-metadata.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/camera-framing-2026-11-11/unity-metadata.json",
+      "sha256": "ad1d690fd896e2e8e7c0a76e1ed2e31ffeea03643434b6301ba1dd0c38e3a26b",
+      "bytes": 67395,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/castle-camera.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/castle-camera.png",
+      "sha256": "a4e0b812af8560d414a1fdaa5937c1d2ebbfbf6734b56d46d132b6441d9b1c0e",
+      "bytes": 566535,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/00-before-entry.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/00-before-entry.png",
+      "sha256": "4ad9476be4b92f0795bb4f2940f5a9e8a974ee43dcf32c7df39cc02b17a3a501",
+      "bytes": 598316,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/01-on-furniture.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/01-on-furniture.png",
+      "sha256": "4956f3a9ba2d08fd23eba697e0853fa1a0a8e0f0aec8c26d63d649b42cb1b499",
+      "bytes": 582017,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/02-before-crack.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/02-before-crack.png",
+      "sha256": "325769650bbe693e903c2021589aa81225ea337b68fa9fde004a4f36366c8e48",
+      "bytes": 601858,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/03-crack-pause.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/03-crack-pause.png",
+      "sha256": "ac37bb59659eb5b788889ef60bc854f6066f867a0c9ea49b532751e98cda1238",
+      "bytes": 601185,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/04-stumble.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/04-stumble.png",
+      "sha256": "24d02214b8870501536362e92d4bc7bcf302391af08a57f7e68db018a3e6fcc6",
+      "bytes": 603221,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/05-normal-exit.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/05-normal-exit.png",
+      "sha256": "ac6ea5cb6ca0fdeb356fa4973a019784e8c1832c465d7566f091184d3505a099",
+      "bytes": 651833,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/07-front-inspection.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/07-front-inspection.png",
+      "sha256": "04ee6703175aaee4daa59211bd1a79ebe8ee5e356c89d9f038a234a747d11d1f",
+      "bytes": 751253,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/08-three-quarter-inspection.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/08-three-quarter-inspection.png",
+      "sha256": "51a226e39ec297c32c92cd463eceae80a42d70fd0b245e44296fe7eeb9d6d4cf",
+      "bytes": 817739,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/09-broken-preview-inspection.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/09-broken-preview-inspection.png",
+      "sha256": "80df04381ec6dc384df4d4d278afa91a3cc00eb3fb410a8ad54ad41cf54ad692",
+      "bytes": 816914,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/base-source/DarkRoomPlatformArt.cs.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/base-source/DarkRoomPlatformArt.cs.txt",
+      "sha256": "887ee969c27e2a07ca4721cea946ce5ba701098d4dd586a55af159f0f8477f83",
+      "bytes": 41253,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/base-source/DarkRoomPlatformGeometry.cs.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/base-source/DarkRoomPlatformGeometry.cs.txt",
+      "sha256": "5295e6b3620f07d19e98a54f0183cec12145a55cd0bd2d2dbc5419602dbd2025",
+      "bytes": 9225,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/base-source/DarkRoomThreeStageCircuitGenerator.cs.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/base-source/DarkRoomThreeStageCircuitGenerator.cs.txt",
+      "sha256": "22b8f0dc7449e74922bfa5f6765e7c5077e8a544e140d7bfb112192c0ee1771c",
+      "bytes": 9787,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/base-source/scene-current-before-integration.unity.gz",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/base-source/scene-current-before-integration.unity.gz",
+      "sha256": "1c2ac260ad5168aa802d651b4689ac26721740e5d5ccb4b1588ff3c6e7087b98",
+      "bytes": 596188,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/base-source/scene.unity.gz",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/base-source/scene.unity.gz",
+      "sha256": "6441ffa80619d1a7e1c4f7384eeea45327b46b8e527fda356d528a8664b877e0",
+      "bytes": 516756,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/base-source/SideScroll25DCamera.cs.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/base-source/SideScroll25DCamera.cs.txt",
+      "sha256": "6c54957b10560128bd99571f0e40def27a0f0d426abe34eed4c6b329cf17c3c7",
+      "bytes": 12282,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/base-source/Yuna25DPlayerController.cs.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/base-source/Yuna25DPlayerController.cs.txt",
+      "sha256": "c839a6fb5fd931e0f3ea28f9c4cbbf301e4d179fc030a0cfdcd97494c17a4519",
+      "bytes": 23960,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/editmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/editmode.xml",
+      "sha256": "8e032474aa599bf9049cbe42cad32579af1a5a594e863b5db7545f27ef5b4f65",
+      "bytes": 30954,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/integration.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/integration.json",
+      "sha256": "b4c7835b62dd451673346a12de08c987dbf16b43e1dc5fbbc81c0545d1a4e781",
+      "bytes": 3949,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/live-traversal.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/live-traversal.json",
+      "sha256": "a7e3fb90db951b219adca96b3bd0209cb2a6d2960fde9699a944da2abceb7adc",
+      "bytes": 60934,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/manifest.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/manifest.json",
+      "sha256": "42eda33906611a3ba2fcdfaa5b748fd340a79523ee0c831f4236daaa979fb06a",
+      "bytes": 4106,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/playmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/playmode.xml",
+      "sha256": "7d63232a3d6abb5e51a5bbf32a08f2d2857f839e18c66f7cfb447e1ee8266af7",
+      "bytes": 135265,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/README.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/README.md",
+      "sha256": "1ef41347193d3ffbddb28eca5d65e85a73a8e6d81a8d1b6c991166c57cb683a8",
+      "bytes": 5039,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/traversal.gif",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/traversal.gif",
+      "sha256": "6b8eec65b64bedbf1ec6fd21d15d566ced105f503ee662e4f125b4dd506cae9e",
+      "bytes": 17916865,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/furniture02-2026-11-11/verify_integration.py",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/furniture02-2026-11-11/verify_integration.py",
+      "sha256": "d3b763f52e0f054e3d2f7d521bff53ac0fe66b12b1fc35aff4228b28f9e8eacc",
+      "bytes": 3465,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/handoff-review-2026-11-11/audio-diff.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/handoff-review-2026-11-11/audio-diff.json",
+      "sha256": "242803618f95d7155e09d923659cc08fa3cebcdfe88beb65df01bb598616d915",
+      "bytes": 3288,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/handoff-review-2026-11-11/audio-regeneration.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/handoff-review-2026-11-11/audio-regeneration.json",
+      "sha256": "32d29e812069475fe28c7cbdac8304ec92cece8fd660b48fbe539f566bc3f5ad",
+      "bytes": 277,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/handoff-review-2026-11-11/code-references.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/handoff-review-2026-11-11/code-references.json",
+      "sha256": "705b5e5617d75e2fecb68d3e856ca51e79cd8c90396db62ff2f290486301f8c9",
+      "bytes": 4248,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/handoff-review-2026-11-11/contact-support-map.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/handoff-review-2026-11-11/contact-support-map.png",
+      "sha256": "550e6e1fa0a6452aaa069055ce1861597aafb96e7ff1b840bd8001d30d3bfe8e",
+      "bytes": 19948,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/handoff-review-2026-11-11/editmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/handoff-review-2026-11-11/editmode.xml",
+      "sha256": "e0115feb4f829495bd0ec3a7153058c716a0eb892b8f4edf8df31aa69088dbb4",
+      "bytes": 22451,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/handoff-review-2026-11-11/manifest.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/handoff-review-2026-11-11/manifest.json",
+      "sha256": "2ac1429f5ac7dbf733b028eb867a051a258d0161813249d49a9a4313ebbfb257",
+      "bytes": 3185,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/handoff-review-2026-11-11/playmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/handoff-review-2026-11-11/playmode.xml",
+      "sha256": "f0c058d6bb0762f956ef3a95ae13fc94255a9d66f87a45367cc7541ee85eb758",
+      "bytes": 121891,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/handoff-review-2026-11-11/probe.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/handoff-review-2026-11-11/probe.json",
+      "sha256": "6262692a7d7527eeb64fb6a1461dc1d180fefeddc53e11dbc315f6a631733775",
+      "bytes": 24805,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/handoff-review-2026-11-11/README.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/handoff-review-2026-11-11/README.md",
+      "sha256": "244ed775c7d715c356eae3fc5dca6e3f0c29b4245447baa7ed8faa3cf55d2b44",
+      "bytes": 2750,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/handoff-review-2026-11-11/render_support_map.py",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/handoff-review-2026-11-11/render_support_map.py",
+      "sha256": "034dd12542c089f0c1f73205ed8b4d18101cd36fe2fe6949ada70a555f378288",
+      "bytes": 1608,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/handoff-review-2026-11-11/scene-before-art.unity.gz",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/handoff-review-2026-11-11/scene-before-art.unity.gz",
+      "sha256": "10feb23d186595965acfe8506ef06078c16d3d99ce805f2008d3e662e1eda476",
+      "bytes": 261621,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/handoff-review-2026-11-11/source-snapshot.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/handoff-review-2026-11-11/source-snapshot.json",
+      "sha256": "78878edc42e91cca862ce5a53847b42f8534f047fb9ff5a0169f4cfad464438e",
+      "bytes": 7228,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/handoff-review-2026-11-11/tools/HandoffNoiseProbe.cs.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/handoff-review-2026-11-11/tools/HandoffNoiseProbe.cs.txt",
+      "sha256": "0ab608f5c825c14a6545a80264c0f52735cb897b9c91f9d4baa12c11c2ec4d4f",
+      "bytes": 1406,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/handoff-review-2026-11-11/tools/HandoffProbe.cs.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/handoff-review-2026-11-11/tools/HandoffProbe.cs.txt",
+      "sha256": "cde0758406a4b15b7201969582b556daef368a6c1211cb5aa0396135f754aa20",
+      "bytes": 6020,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/handoff-review-2026-11-11/tools/M_Bear_Fur.before.mat.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/handoff-review-2026-11-11/tools/M_Bear_Fur.before.mat.txt",
+      "sha256": "5f42c998b9a4fbb9da7090bcfe05812efa780f9243502b0c17727a61149067d4",
+      "bytes": 3209,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/handoff-review-2026-11-11/tools/M_Book_Spines.before.mat.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/handoff-review-2026-11-11/tools/M_Book_Spines.before.mat.txt",
+      "sha256": "55f50062190cd03d985a928aede0dd621d63f27701711f14517a8142b8de9186",
+      "bytes": 3137,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/handoff-review-2026-11-11/tools/Platform00Capture.original.cs.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/handoff-review-2026-11-11/tools/Platform00Capture.original.cs.txt",
+      "sha256": "c8bc2d7bcb730c0061073e51e9234eadee848c9610f2a4bae4618025f04d32fe",
+      "bytes": 4635,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/handoff-review-2026-11-11/validation-excerpts.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/handoff-review-2026-11-11/validation-excerpts.txt",
+      "sha256": "487d1b927caf9b2a6f446ede1434ad4146e1b1c9d84ed3af1a68343ded35aa94",
+      "bytes": 614,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/mobile-framing-2026-11-11/editmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/mobile-framing-2026-11-11/editmode.xml",
+      "sha256": "0477a73a5d87ff1481405730fe74c83549a729830af3ab29c807241298de4c87",
+      "bytes": 38883,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/after/01-gameplay-start.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/after/01-gameplay-start.png",
+      "sha256": "6d3942bebdd088b2ec68cf5a9cee787d2d56cb6921b872dfc31bd57016d8164e",
+      "bytes": 508273,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/after/02-bear-front.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/after/02-bear-front.png",
+      "sha256": "d7929aa7c1c35660c088b47ec95010643ff13e4ef1a7259ba3c330b6673031a9",
+      "bytes": 818504,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/after/03-bear-three-quarter.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/after/03-bear-three-quarter.png",
+      "sha256": "b68ebd80e2780492a289b952c464a96ce7ad488ac26979f4353b8c536b42caf3",
+      "bytes": 870717,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/after/04-bear-side.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/after/04-bear-side.png",
+      "sha256": "a75b0741de06ee13e0676d35a717e1ad04f1c0f89da7d2f8b1ee675f1dd04b34",
+      "bytes": 916547,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/after/05-gameplay-approach.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/after/05-gameplay-approach.png",
+      "sha256": "3be4fa64574fa73c13146e5a26acbad02bdfd57ddf6d33b289a18a439999854d",
+      "bytes": 582866,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/after/06-books-front.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/after/06-books-front.png",
+      "sha256": "7ee8c0431781720061dc9eb05d0c82b76d8d6cd084ed12fc75c8ab01f4d68b5d",
+      "bytes": 830383,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/after/07-books-three-quarter.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/after/07-books-three-quarter.png",
+      "sha256": "845f6e62ae5e7120a326f3ca21e55ab3f5aefc2b950edb0b4441230c28329a73",
+      "bytes": 926728,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/after/08-books-top.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/after/08-books-top.png",
+      "sha256": "a091ffa3945cf1faedcc3b525061eff369e77aecb0f8e1d932998f16b6270a04",
+      "bytes": 924636,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/after/09-gameplay-books-close.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/after/09-gameplay-books-close.png",
+      "sha256": "78ea4b7ea8ae9b9f0ecc14c1309bdc715c2b244322a3696ffe2b5ecb42d23793",
+      "bytes": 597979,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/before/01-gameplay-start.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/before/01-gameplay-start.png",
+      "sha256": "b2950883e7b1bc5423938596397d510945a1e78bce6a2683ee60029806a050c9",
+      "bytes": 507135,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/before/02-bear-front.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/before/02-bear-front.png",
+      "sha256": "3559a8f4a792facff0a54010e35bbda7907b88e4d7dcfe6417fabd5764db386b",
+      "bytes": 836243,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/before/03-bear-three-quarter.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/before/03-bear-three-quarter.png",
+      "sha256": "91fb79326d7614545573500ac57b1fbb323e39e6e5a762a3ba06c6979429615f",
+      "bytes": 894800,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/before/04-bear-side.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/before/04-bear-side.png",
+      "sha256": "55fcc9a7821e432b757b582a205a16e00bba0e363f5ee77ec71f282a737f92c8",
+      "bytes": 868288,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/before/05-gameplay-approach.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/before/05-gameplay-approach.png",
+      "sha256": "e4380968c39dfb4b3f078bc9762ba7b9df80b512deeb1a0e01fcf88c9e1817f0",
+      "bytes": 580759,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/before/06-books-front.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/before/06-books-front.png",
+      "sha256": "a2ca9d3766ea76c4e11bb8ada5c0a5e7f2fe933c0698b033c587112752f672b3",
+      "bytes": 812123,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/before/07-books-three-quarter.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/before/07-books-three-quarter.png",
+      "sha256": "a40232e3d77125fe50357209be922403faf7d8ceec172e0792bc7a8440e6d3d1",
+      "bytes": 915894,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/before/08-books-top.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/before/08-books-top.png",
+      "sha256": "002ac9145407edae33a5c9a3f34005bc29405b677553171611990dd5051ecc2c",
+      "bytes": 950098,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/before/comparison-concept.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/before/comparison-concept.png",
+      "sha256": "fbaf48a3eb6e9c9f7819ff8a27a18a5e34f32cff3c201fc08f82adbb3305a32d",
+      "bytes": 1610491,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/before/comparison-reference.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/before/comparison-reference.png",
+      "sha256": "a5fb16ecd98f2d786cb87eb62fae876fc17dfdcf77623b55f966e88802b20f8e",
+      "bytes": 602213,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/comparison-detail.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/comparison-detail.png",
+      "sha256": "91ca0dc557475f12c5755b2bf832661512c3260968301ac49c6a9bdcf32a4f51",
+      "bytes": 1003640,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/editmode-final.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/editmode-final.xml",
+      "sha256": "4b9ddba1767f91c93754834293e2359f9e1007b732bfe66a6bd69b86fdc0893a",
+      "bytes": 23831,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/editmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/editmode.xml",
+      "sha256": "017a1310329ede97346f2ef0b4e69f588d544c42de50dc6446618c304f1dbf74",
+      "bytes": 23132,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/01-gameplay-start.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/01-gameplay-start.png",
+      "sha256": "9bc35ea4d0245df45d03d8e24bedf23183da11906c8a44d240f9ab0fb3d6bb19",
+      "bytes": 508453,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/02-bear-front.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/02-bear-front.png",
+      "sha256": "42efbce39b896b1b5f6a6b3b1cd05a2a96b552fb84853cfd494062c4203a3d59",
+      "bytes": 846168,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/03-bear-three-quarter.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/03-bear-three-quarter.png",
+      "sha256": "a50b38e11941397b2e3000cf2423ee55ef1fe66886a744304f31a66e43ffb810",
+      "bytes": 909427,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/04-bear-side.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/04-bear-side.png",
+      "sha256": "c4e6174401c4412e1dc4cdeb66883622354f43142bc1e570902c58be495bb75f",
+      "bytes": 878253,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/05-gameplay-approach.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/05-gameplay-approach.png",
+      "sha256": "cca271bfae435d9222bebec89a59891684b15beeba84ecc1b7e5ac0ced9bdab9",
+      "bytes": 581902,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/06-books-front.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/06-books-front.png",
+      "sha256": "0278b2a8df0a8146534c5d89101ffe0def26b3d2e189384e9fca0fa0d49d0a19",
+      "bytes": 810511,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/07-books-three-quarter.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/07-books-three-quarter.png",
+      "sha256": "292863d52d8acd100e8e47cd6f9ff87b6fa2c2b494d5639c736bdbb822a0fd5e",
+      "bytes": 920702,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/08-books-top.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/08-books-top.png",
+      "sha256": "c9ad0582be5b63da305da1ed64d89818435c3a7168771332b4e0bd9eb13d5d46",
+      "bytes": 945216,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/09-gameplay-books-close.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/first-trial/geometry-only/09-gameplay-books-close.png",
+      "sha256": "7bbb1a66fd991e119f3ac6cd45dea5cba88ef081952c08ad53d2f6e9ddba8508",
+      "bytes": 592627,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/first-trial/playmode-curved-contact-failed.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/first-trial/playmode-curved-contact-failed.xml",
+      "sha256": "97426ee9dd7054c26766bd4a28145acb0d7c45f28178eb1d7aa8783597bbc8c1",
+      "bytes": 121009,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/image-prompts.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/image-prompts.json",
+      "sha256": "3a62ac6ecdcb16341d3431222cef3097137b4947ab73d4acfc8053016cbbf752",
+      "bytes": 4447,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/integration.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/integration.json",
+      "sha256": "30c93695730483b33ca57577e4ea586185c8d1c9defc32be57ded20f00616232",
+      "bytes": 9091,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/make_comparison.py",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/make_comparison.py",
+      "sha256": "37cd8c6cedf8466307eaef113be81d8aa295fe0bebf0dc2699e04f6e7da1bc1b",
+      "bytes": 1163,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/manifest.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/manifest.json",
+      "sha256": "872e5bc31d9c7bbd21f9cc6d04bd7b2e0553034035639ad38c525df226e62efc",
+      "bytes": 7969,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/playmode-final.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/playmode-final.xml",
+      "sha256": "05aff4788e3826ce1321dd9faa57e62ea579805dbe5463e22948dffd2a85256e",
+      "bytes": 120153,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/playmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/playmode.xml",
+      "sha256": "97426ee9dd7054c26766bd4a28145acb0d7c45f28178eb1d7aa8783597bbc8c1",
+      "bytes": 121009,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/README.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/README.md",
+      "sha256": "3d8c3c1bdcbb9717c3a9b0673e329e5097de9b2dedb8c48c02126661fdc53efb",
+      "bytes": 9076,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/source-snapshot.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/source-snapshot.json",
+      "sha256": "6012cc39cfbb1042dc6d5da6077b5fc7745d41b68bd8d69bcd78e7ae94a9242a",
+      "bytes": 2798,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/painted-platforms-2026-11-11/validation-excerpts.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/painted-platforms-2026-11-11/validation-excerpts.txt",
+      "sha256": "6af1bc19beb50d2c142fa02defd842bfbf955334685ac0a3bf798109d748f867",
+      "bytes": 1530,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform00-2026-11-11/01-gameplay-start.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform00-2026-11-11/01-gameplay-start.png",
+      "sha256": "b2950883e7b1bc5423938596397d510945a1e78bce6a2683ee60029806a050c9",
+      "bytes": 507135,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform00-2026-11-11/02-bear-front.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform00-2026-11-11/02-bear-front.png",
+      "sha256": "3559a8f4a792facff0a54010e35bbda7907b88e4d7dcfe6417fabd5764db386b",
+      "bytes": 836243,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform00-2026-11-11/03-bear-three-quarter.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform00-2026-11-11/03-bear-three-quarter.png",
+      "sha256": "91fb79326d7614545573500ac57b1fbb323e39e6e5a762a3ba06c6979429615f",
+      "bytes": 894800,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform00-2026-11-11/04-bear-side.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform00-2026-11-11/04-bear-side.png",
+      "sha256": "55fcc9a7821e432b757b582a205a16e00bba0e363f5ee77ec71f282a737f92c8",
+      "bytes": 868288,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform00-2026-11-11/05-gameplay-approach.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform00-2026-11-11/05-gameplay-approach.png",
+      "sha256": "e4380968c39dfb4b3f078bc9762ba7b9df80b512deeb1a0e01fcf88c9e1817f0",
+      "bytes": 580759,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform00-2026-11-11/06-books-front.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform00-2026-11-11/06-books-front.png",
+      "sha256": "a2ca9d3766ea76c4e11bb8ada5c0a5e7f2fe933c0698b033c587112752f672b3",
+      "bytes": 812123,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform00-2026-11-11/07-books-three-quarter.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform00-2026-11-11/07-books-three-quarter.png",
+      "sha256": "a40232e3d77125fe50357209be922403faf7d8ceec172e0792bc7a8440e6d3d1",
+      "bytes": 915894,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform00-2026-11-11/08-books-top.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform00-2026-11-11/08-books-top.png",
+      "sha256": "002ac9145407edae33a5c9a3f34005bc29405b677553171611990dd5051ecc2c",
+      "bytes": 950098,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform00-2026-11-11/comparison-concept.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform00-2026-11-11/comparison-concept.png",
+      "sha256": "fbaf48a3eb6e9c9f7819ff8a27a18a5e34f32cff3c201fc08f82adbb3305a32d",
+      "bytes": 1610491,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform00-2026-11-11/comparison-reference.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform00-2026-11-11/comparison-reference.png",
+      "sha256": "a5fb16ecd98f2d786cb87eb62fae876fc17dfdcf77623b55f966e88802b20f8e",
+      "bytes": 602213,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform00-2026-11-11/editmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform00-2026-11-11/editmode.xml",
+      "sha256": "fac63cb29351ba6b5ee079f70eca64e907c8d6e574d006c2b168a244823d8af1",
+      "bytes": 20399,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform00-2026-11-11/playmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform00-2026-11-11/playmode.xml",
+      "sha256": "d37ffae829f2b0010d9ebbf3710c00a7c57eee7dd9e3bf5fe9ce2f0f6b3c0c3f",
+      "bytes": 120223,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform00-2026-11-11/README.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform00-2026-11-11/README.md",
+      "sha256": "d213441771c8eeb3067565eb73f08af0dd38f7e50ab50f3d98ae2ea9ba4f997e",
+      "bytes": 6968,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform01-livros-2026-11-11/06-books-front.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform01-livros-2026-11-11/06-books-front.png",
+      "sha256": "a2ca9d3766ea76c4e11bb8ada5c0a5e7f2fe933c0698b033c587112752f672b3",
+      "bytes": 812123,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform01-livros-2026-11-11/07-books-three-quarter.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform01-livros-2026-11-11/07-books-three-quarter.png",
+      "sha256": "a40232e3d77125fe50357209be922403faf7d8ceec172e0792bc7a8440e6d3d1",
+      "bytes": 915894,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform01-livros-2026-11-11/08-books-top.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform01-livros-2026-11-11/08-books-top.png",
+      "sha256": "002ac9145407edae33a5c9a3f34005bc29405b677553171611990dd5051ecc2c",
+      "bytes": 950098,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform01-livros-2026-11-11/editmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform01-livros-2026-11-11/editmode.xml",
+      "sha256": "322fa695eb06629a7d5dddc0ed5a8805ce3d9b7c13c92bf4cc5c0a89c3026823",
+      "bytes": 22454,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform01-livros-2026-11-11/playmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform01-livros-2026-11-11/playmode.xml",
+      "sha256": "6d8d119e4654776ef2db911ba688cacde2b080f67ff237125aafa4c754803ec8",
+      "bytes": 122054,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/platform01-livros-2026-11-11/README.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/platform01-livros-2026-11-11/README.md",
+      "sha256": "a7523d01e551a9506433d7ec7633d3a5fc3a9922df9237e7a1b779e803c01e37",
+      "bytes": 2331,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/analyze.py",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/analyze.py",
+      "sha256": "7b4e0aa99b7e09c2a4d66e90f9f986560b8f0d20423ab15b053862428b7d0662",
+      "bytes": 4612,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/calibrated-01-start.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/calibrated-01-start.png",
+      "sha256": "8ca7842f98eb92d582c2a16c594c4aad17d1efabd8d942a4e77209d7da7c4dc9",
+      "bytes": 530564,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/calibrated-02-castle.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/calibrated-02-castle.png",
+      "sha256": "20ae8429386c30ea03fd0d4b7c81faf27d73cdef1cc03e7078acd765c12a4685",
+      "bytes": 637232,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/calibrated-03-false-door.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/calibrated-03-false-door.png",
+      "sha256": "c8f002b818d0f9ee9db529e84e6f1bb11c2c426673b675d9e01d901bced5cc0e",
+      "bytes": 577298,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/calibrated-04-portal.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/calibrated-04-portal.png",
+      "sha256": "8fed1cf4f31758824ab60c0d9d5a09db15dd637ea42e968dfa2dcf7f1e6d7f17",
+      "bytes": 700635,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/calibrated-05-fall-ground.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/calibrated-05-fall-ground.png",
+      "sha256": "d88a535278be8e39bac57fae854ed6e34184ed6f3713429f70b65c2a673595bf",
+      "bytes": 619541,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/calibrated-06-castle-overview.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/calibrated-06-castle-overview.png",
+      "sha256": "5ee6ba29eef76401b188e6e51305e5628e721c68db1eaac655c0b487337223f0",
+      "bytes": 578420,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/capture-harness.cs.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/capture-harness.cs.txt",
+      "sha256": "d1a3f6758180c917833e64ecff09534465e71e4e1d14e2e4d0e67536c6fac180",
+      "bytes": 11170,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/capture-hdr.log",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/capture-hdr.log",
+      "sha256": "ec9c8909e80c8aa2632f11d3e14eafd058e22acc604190a6089a08b8a083b95c",
+      "bytes": 43482,
+      "previously_tracked": false
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/comparison-close.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/comparison-close.png",
+      "sha256": "f7fbd82b2e580b45661842509f629efb9d9fd95dd8334550ea9dcf59ba85f9bb",
+      "bytes": 194480,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/comparison-contexts.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/comparison-contexts.png",
+      "sha256": "269c0b3cf668f69766f0183292a793ef63570c2627a569d68c4a272a29d6c895",
+      "bytes": 483511,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/comparison-profiles.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/comparison-profiles.png",
+      "sha256": "4f71b56e9c7000e3bf85efb55024362ec5852436052d1fd82464eb9d885cef1a",
+      "bytes": 359977,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/editmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/editmode.xml",
+      "sha256": "aeed4b631f674327858d1a8b5068602057c79de7355dbc96f8d11944059944b4",
+      "bytes": 15740,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/integration.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/integration.json",
+      "sha256": "a656a32fe40ae18d9f243318fa0931dac0c93f862c3daec174f6782cf833c50e",
+      "bytes": 323,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/calibrated-01-start.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/calibrated-01-start.png",
+      "sha256": "62df67fa8aca6fbb713a2bb30dbfaaee490fe6dfc588ee06603f22e3a4e8422f",
+      "bytes": 244025,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/calibrated-02-castle.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/calibrated-02-castle.png",
+      "sha256": "2c4650dad8196339d58c6225deb8dbee43da09af2feb6299be76b3dabbd62cea",
+      "bytes": 314868,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/calibrated-03-false-door.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/calibrated-03-false-door.png",
+      "sha256": "a9fcb1c426160735c37959b7c2cff97a8370fe23e2193246134b965aaf5c3579",
+      "bytes": 235405,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/calibrated-04-portal.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/calibrated-04-portal.png",
+      "sha256": "f9c0cd69f12abcf6bace13faa4c2be03819c9c532b0541e7cd36745486b9894d",
+      "bytes": 343820,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/calibrated-05-fall-ground.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/calibrated-05-fall-ground.png",
+      "sha256": "309ab78e38c7d977dc71a81738fc7862719ea434b7b547b87f5609e50cc2d7e2",
+      "bytes": 290155,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/calibrated-06-castle-overview.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/calibrated-06-castle-overview.png",
+      "sha256": "1082eeb4bc705dfad6fb347b46820cc234bccd2e2584ed348362fa59e1bf206c",
+      "bytes": 230369,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/legacy-enabled-01-start.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/legacy-enabled-01-start.png",
+      "sha256": "66bb8e32e20fb81b33d4217c1d5e2921a66b5ea73ad6f6f933656081e1c8cdf1",
+      "bytes": 66801,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/legacy-enabled-02-castle.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/legacy-enabled-02-castle.png",
+      "sha256": "fad506aae99337385a9b548a19b1f6f099641509f696ebb05bbaabc5fb089375",
+      "bytes": 173795,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/legacy-enabled-03-false-door.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/legacy-enabled-03-false-door.png",
+      "sha256": "6a7d3557d00e5613f015eb73d2f474b7ebd52b7ed89976a9f234c35c8029bb86",
+      "bytes": 102611,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/legacy-enabled-04-portal.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/legacy-enabled-04-portal.png",
+      "sha256": "6d7c944fbdb9fcbd0507eaf570cbd3ae2480d62082e3b92df5541f4b001023d9",
+      "bytes": 260040,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/legacy-enabled-05-fall-ground.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/legacy-enabled-05-fall-ground.png",
+      "sha256": "5c45c08574026e0d2cf18430c5c33d5bd63b0b93aa1bee7e2bb3eae3966c403b",
+      "bytes": 84143,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/legacy-enabled-06-castle-overview.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/legacy-enabled-06-castle-overview.png",
+      "sha256": "6d19d1071149017e53af50dd366861ec6a4c0537cad48d0b2f1dc906b0f7b824",
+      "bytes": 86798,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/off-01-start.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/off-01-start.png",
+      "sha256": "4091c44e7809e9b4bd186cf3b92453341c857aa2168a93695e363a18ea59f466",
+      "bytes": 110134,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/off-02-castle.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/off-02-castle.png",
+      "sha256": "d29bcf96cf12c1c7d53c31c85efc3dff590ab1c226c9cf10c213a321f21ab088",
+      "bytes": 160770,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/off-03-false-door.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/off-03-false-door.png",
+      "sha256": "3b7a79deebb357b99fcabdbb57a491ccb48f873901f80729c9afedddfd5f3b96",
+      "bytes": 94150,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/off-04-portal.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/off-04-portal.png",
+      "sha256": "7c0388663717a251014ddce0ad437bcc648a98840ff7d140ca8ca2b5f8049a54",
+      "bytes": 205831,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/off-05-fall-ground.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/off-05-fall-ground.png",
+      "sha256": "d7e443fb3af09deeecf4da4f56c382d069288a815b24b069505b55f56e029361",
+      "bytes": 147193,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/off-06-castle-overview.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/off-06-castle-overview.png",
+      "sha256": "739c7544ef2ab2975dfc77a596ce094c73d054ede6e424c53883c19108486065",
+      "bytes": 72393,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/ldr-target-trial/unity-metadata.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/ldr-target-trial/unity-metadata.json",
+      "sha256": "747684bf1e6d24c55c4d866c48165ce854002d822614406d3a0b5f60e60e129d",
+      "bytes": 67199,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/legacy-enabled-01-start.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/legacy-enabled-01-start.png",
+      "sha256": "ee2897866b1bbc91d572bb853ca9aa6b118293a2372c6d061e9364b95de11988",
+      "bytes": 79538,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/legacy-enabled-02-castle.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/legacy-enabled-02-castle.png",
+      "sha256": "e96d7c5f8d40d6da47380b8dc39085a773f6b8cf4d8b78ff6fdcedab6354f719",
+      "bytes": 188001,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/legacy-enabled-03-false-door.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/legacy-enabled-03-false-door.png",
+      "sha256": "ef4f4891b0aba863964494b82e60d01ef5ad0eaa6f1b4d9efe665fe4fc3c1672",
+      "bytes": 113668,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/legacy-enabled-04-portal.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/legacy-enabled-04-portal.png",
+      "sha256": "830c19b72f479b4c251271bc0895059174611a5cb77ab619a22a20afd5bc218d",
+      "bytes": 278873,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/legacy-enabled-05-fall-ground.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/legacy-enabled-05-fall-ground.png",
+      "sha256": "2b9393eaf3901ebcd1b509590bd5d8abc72a4231cd30fb290474c405e069202e",
+      "bytes": 110344,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/legacy-enabled-06-castle-overview.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/legacy-enabled-06-castle-overview.png",
+      "sha256": "a8a110997e41dd01b3bc5406eb45db5930c3af8cef8438c45d67fc410812fd24",
+      "bytes": 88806,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/manifest.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/manifest.json",
+      "sha256": "8ac32ed1f3a8497567a83c47734d211807b61341d33f3cf49a6e0c9c86d260a2",
+      "bytes": 9865,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/metrics.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/metrics.json",
+      "sha256": "6809537e5bb3789c59c762f1103e3f60452ee4c10f293ac22d11b7e49f952a42",
+      "bytes": 22600,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/off-01-start.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/off-01-start.png",
+      "sha256": "4d6409568caff9fb3b47a5435ef8f3fc31eeee7978133cff61114f687694fc42",
+      "bytes": 110168,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/off-02-castle.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/off-02-castle.png",
+      "sha256": "faf47cdeb3c9f02205ee253039455d29b4592f28a6b00c8be67be2dd5b7c2ab5",
+      "bytes": 162576,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/off-03-false-door.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/off-03-false-door.png",
+      "sha256": "59e39c1357cda3f8732f7dc99fc2cdcce101e9395c3e4bdda0dd7b7ef986e2dc",
+      "bytes": 94903,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/off-04-portal.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/off-04-portal.png",
+      "sha256": "9f9ccc4da0abb685fcef3ae969cbba4d3c355a45b3bc3639a782695ac5815576",
+      "bytes": 206057,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/off-05-fall-ground.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/off-05-fall-ground.png",
+      "sha256": "0c8885a311c9f353e40652bc7f0e93f154d7e0fa266aa529a4ad4f569f0c0558",
+      "bytes": 147089,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/off-06-castle-overview.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/off-06-castle-overview.png",
+      "sha256": "c19623b659c28da24de692e91f1fe08d5211f0b6b006b0be8b0cbc987368921e",
+      "bytes": 73227,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/playmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/playmode.xml",
+      "sha256": "8f9327f5d8c4d82db966e3d5fc5058c70d2173de04e5c9f0f84bfa7c3075e63b",
+      "bytes": 124270,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/README.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/README.md",
+      "sha256": "33ca35ee2048e1f1f486f178e5e7e649151615fda818479b25dfe4296e08ecb9",
+      "bytes": 6712,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/standard-capture.log",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/standard-capture.log",
+      "sha256": "026c8fb8dd14dba0b418eea2dacad2ee627f93e9ee9e88472993e2747e7bc3dc",
+      "bytes": 28966,
+      "previously_tracked": false
+    },
+    {
+      "original_path": "Evidence/post-processing-2026-11-11/unity-metadata.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/post-processing-2026-11-11/unity-metadata.json",
+      "sha256": "277098dea54619ebdb9c19e5996eea505a551a0bd3bd6ce7ae1753098d48da2d",
+      "bytes": 67284,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/start-camera.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/start-camera.png",
+      "sha256": "b2950883e7b1bc5423938596397d510945a1e78bce6a2683ee60029806a050c9",
+      "bytes": 507135,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/01-gameplay-start.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/01-gameplay-start.png",
+      "sha256": "4d9c2708db2d561e459aac10c5ace049c7be59e785533a385d86c40ea988af3d",
+      "bytes": 504873,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/02-bear-front.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/02-bear-front.png",
+      "sha256": "d7929aa7c1c35660c088b47ec95010643ff13e4ef1a7259ba3c330b6673031a9",
+      "bytes": 818504,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/03-bear-three-quarter.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/03-bear-three-quarter.png",
+      "sha256": "b68ebd80e2780492a289b952c464a96ce7ad488ac26979f4353b8c536b42caf3",
+      "bytes": 870717,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/04-bear-side.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/04-bear-side.png",
+      "sha256": "a75b0741de06ee13e0676d35a717e1ad04f1c0f89da7d2f8b1ee675f1dd04b34",
+      "bytes": 916547,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/05-gameplay-approach.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/05-gameplay-approach.png",
+      "sha256": "2140b3fac5922209d97c11b165a8758607c7cc32aaa4265ae12086cd67e9a2fc",
+      "bytes": 582962,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/06-books-front.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/06-books-front.png",
+      "sha256": "64a5ec9edad57752248e26cf25c49008649d63dcc52f04b1c8e97c969b3869b4",
+      "bytes": 830711,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/07-books-three-quarter.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/07-books-three-quarter.png",
+      "sha256": "6db19ebd8bfcc6ab923877451963f63502145003c575ad7d5c4e1ead863d83e2",
+      "bytes": 926721,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/08-books-top.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/08-books-top.png",
+      "sha256": "c093e472bfcfba3c9c67a2a59008f913dae958d52ee85bb745ccd2ea17c6a3a6",
+      "bytes": 925033,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/09-gameplay-books-close.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/09-gameplay-books-close.png",
+      "sha256": "977c2a5025f31f42ed85884bdbb31ea21319336fd0ed9f655279a36f4331f31f",
+      "bytes": 604727,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/10-camera-distance-100.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/10-camera-distance-100.png",
+      "sha256": "c8066f011405782863ffaa2659e8ba3f81b4572d11ad02fe16d043acc1a58a2d",
+      "bytes": 595284,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/11-camera-distance-105.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/11-camera-distance-105.png",
+      "sha256": "24b9c0cf210173ef8ef7fe937d08a3164efa9c442bfd921042bab05bee08338f",
+      "bytes": 601352,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/camera-backoff.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/camera-backoff.json",
+      "sha256": "5f404f858d3d346073898c7afe7115fcf51fb27a20c4d6b38159ac2befd99753",
+      "bytes": 581,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/editmode-final.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/editmode-final.xml",
+      "sha256": "7c497f178162d442d6779068f0c3725895c5d026318c089733b9558043e8d6fc",
+      "bytes": 28395,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/editmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/editmode.xml",
+      "sha256": "af345b751a785e86cf3c3833f1a9fce6fd2dea92091c2b621cc288609838d9be",
+      "bytes": 27722,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/integration.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/integration.json",
+      "sha256": "805dd2e3fed7a90311980d1e23eab74cf9a90041900c8c662917b212e12063d9",
+      "bytes": 797,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/manifest.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/manifest.json",
+      "sha256": "8c1ec81af8e5a5e8f5e38c86f436200de24c16116f96d16590d13d72802d7a2a",
+      "bytes": 3365,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/playmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/playmode.xml",
+      "sha256": "25c5a2a588ecbf8ce7b84223f6824a6f3641ed0e2882587b502721e9ac94becb",
+      "bytes": 124189,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/README.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/README.md",
+      "sha256": "330d6fbf8cf60797dc92ee80fef527f0099fb8aa5b456770fa3ca36844e21b3a",
+      "bytes": 4428,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/supports-camera-2026-11-11/support-geometry.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/supports-camera-2026-11-11/support-geometry.json",
+      "sha256": "3e68c50a24ff13dcbb4c9d8beb2b43ec7fa31932069524c18705b30fa0dde7e0",
+      "bytes": 18754,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/title-screen-2026-11-11/01-title.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/title-screen-2026-11-11/01-title.png",
+      "sha256": "7302f2522803aace5512e7c5177fdda47d16985ad51ee0b0c83ddb5140cb60b8",
+      "bytes": 1971420,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/title-screen-2026-11-11/02-title-leg-swing.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/title-screen-2026-11-11/02-title-leg-swing.png",
+      "sha256": "287c50f09ab96d30d841a78abb41af4b071b41ac8d2e37cc3db548f6a15903cb",
+      "bytes": 1990954,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/title-screen-2026-11-11/03-leg-comparison.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/title-screen-2026-11-11/03-leg-comparison.png",
+      "sha256": "230202615527eb16c5e4428b5c3c152721b7fd9cb133a6d3ad0c7f9b41269655",
+      "bytes": 479618,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/title-screen-2026-11-11/04-title-phases.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/title-screen-2026-11-11/04-title-phases.png",
+      "sha256": "03d05ab0a4860f340fb0dbe776c170399a2c6e9f4279d7298279d0a476816ce1",
+      "bytes": 1940456,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/title-screen-2026-11-11/README.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/title-screen-2026-11-11/README.md",
+      "sha256": "2ab625efc5f9ccea95b0b55440de5e1c246f11752ff64d9f1f7f637f2182646f",
+      "bytes": 4976,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/after/calibrated-01-start.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/after/calibrated-01-start.png",
+      "sha256": "b6a8937869dafad9814c629ab3ed09135ff4b5ed2c5fe6b00239ff8cc9c75d66",
+      "bytes": 499951,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/after/calibrated-02-castle.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/after/calibrated-02-castle.png",
+      "sha256": "2a1ec517585da2d901951debb41a4abf42cd1a2ce0123f28c5839c5994e115ca",
+      "bytes": 553323,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/after/calibrated-03-false-door.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/after/calibrated-03-false-door.png",
+      "sha256": "6a6e774e0bab3538267de584afb47554af01463497129778e3f83756ca8b39f9",
+      "bytes": 505871,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/after/calibrated-04-portal.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/after/calibrated-04-portal.png",
+      "sha256": "1cd643f09e6d64f1c0d1a1531d10fb8a560d255dd1e12022ed5322452ca98fc1",
+      "bytes": 640161,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/after/calibrated-05-fall-ground.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/after/calibrated-05-fall-ground.png",
+      "sha256": "9ce3dd07d076696fdf1b92ac0731f50c424f854a4607218591d596afb1940ccd",
+      "bytes": 530899,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/after/calibrated-06-castle-overview.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/after/calibrated-06-castle-overview.png",
+      "sha256": "e377f362e0a0bb0d79c3b4084ea8e19c81ab29167e1afe63595206c6537364b0",
+      "bytes": 580470,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/after/unity-metadata.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/after/unity-metadata.json",
+      "sha256": "39513ad45e7c0009c8d2a5999a88a9c724bd135961a0669994a38980a652743b",
+      "bytes": 67414,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/analyze.py",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/analyze.py",
+      "sha256": "2872bd57e6dfea3e28cf0202235bdaf2b7b628767da22fe58a2a5e27125b3285",
+      "bytes": 2567,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/before/calibrated-01-start.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/before/calibrated-01-start.png",
+      "sha256": "97b000ad4a9e47a921578d2c18c314f9bd31bf76d0921153bb700e8d2f1c93f8",
+      "bytes": 531527,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/before/calibrated-02-castle.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/before/calibrated-02-castle.png",
+      "sha256": "97f8ac6b145cfb4a6e1ce76961d3e0c1d3b9f5fe1b785653f3d7d3dbb6356a20",
+      "bytes": 638798,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/before/calibrated-03-false-door.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/before/calibrated-03-false-door.png",
+      "sha256": "afb08a0d421fe44d21f7bf69352e5afaef7a3babc6355fd5565da129fb043b9a",
+      "bytes": 577822,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/before/calibrated-04-portal.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/before/calibrated-04-portal.png",
+      "sha256": "6c01d7478cb5834e1a3387a227a72160fedd5fd5880c9b135dca9a1dad905581",
+      "bytes": 701849,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/before/calibrated-05-fall-ground.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/before/calibrated-05-fall-ground.png",
+      "sha256": "e7f9ac41b4d524de4d09fccef431df342c66d7cdb8f23e3dbe418831ee743c7d",
+      "bytes": 619383,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/before/calibrated-06-castle-overview.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/before/calibrated-06-castle-overview.png",
+      "sha256": "26244e21e54455acc65d3a36150b89b8c5a45571b900ba3a868509b2591def50",
+      "bytes": 580069,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/before/unity-metadata.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/before/unity-metadata.json",
+      "sha256": "3b81bf3a4e30c674c1c03dc577bb903a4818eb4f145c21dcabe72a7649739a60",
+      "bytes": 67478,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/capture-harness.cs.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/capture-harness.cs.txt",
+      "sha256": "30946d8aea80fb7df31b5122a754833d221793d694f8e7956d95f2a5a39c031c",
+      "bytes": 10942,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/comparison-all.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/comparison-all.png",
+      "sha256": "bbb43e24ade812751c2625d9a4fefdd637cbd3b75887610b84b737b11dcec65a",
+      "bytes": 1359398,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/comparison-close.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/comparison-close.png",
+      "sha256": "9f8adc8cecce49a965b736a8baafc27a5ccaa0b0bfd5ded81f0f690f30358e3e",
+      "bytes": 247321,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/editmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/editmode.xml",
+      "sha256": "8b10d91ef063290b69dd9837fd6edcace3c15902a5617c9749934542b099b7e9",
+      "bytes": 15741,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/first-trial/after/calibrated-01-start.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/first-trial/after/calibrated-01-start.png",
+      "sha256": "02bc7297917bc674213c5552abd163f49ce836bf26961d19c0156b596c422519",
+      "bytes": 498095,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/first-trial/after/calibrated-02-castle.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/first-trial/after/calibrated-02-castle.png",
+      "sha256": "746dd57cea9390b90344c878181a216f3e3256377064c07e1c43f73b1ff3aeea",
+      "bytes": 550990,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/first-trial/after/calibrated-03-false-door.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/first-trial/after/calibrated-03-false-door.png",
+      "sha256": "9b5501675cad648afbd9f873acf69f80419435ad0f591abb35ecda78435f8e28",
+      "bytes": 505382,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/first-trial/after/calibrated-04-portal.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/first-trial/after/calibrated-04-portal.png",
+      "sha256": "f6a7426b2fd92745eab225fff1ecf4d546f438cd3af36d95c4830a97f2b3b57b",
+      "bytes": 637862,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/first-trial/after/calibrated-05-fall-ground.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/first-trial/after/calibrated-05-fall-ground.png",
+      "sha256": "282a428c2bc8f2856fdf2e1f484f80d99dbf9e4ae39352063de21271bdb86f36",
+      "bytes": 520730,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/first-trial/after/calibrated-06-castle-overview.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/first-trial/after/calibrated-06-castle-overview.png",
+      "sha256": "2d22965e328f7c08772414dced5fe4cd4ae1727da92d840ebfd31b0bc86db700",
+      "bytes": 580318,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/first-trial/after/unity-metadata.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/first-trial/after/unity-metadata.json",
+      "sha256": "6c50d00d34a59c4adb9a7e079e8a59420a77f3fe42a0a767fdad393d8113de4e",
+      "bytes": 67418,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/first-trial/playmode-failed.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/first-trial/playmode-failed.xml",
+      "sha256": "def279db45454649f090d0168920b8e6042b656bf403b87bc8831c550f04e0af",
+      "bytes": 122782,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/integration.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/integration.json",
+      "sha256": "c046817f51f4f5a0fe32eff998ea0b2a44f26d518bb160cb1e5e465e7e8c9d94",
+      "bytes": 1430,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/manifest.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/manifest.json",
+      "sha256": "64b8d36f057567cad942f5ac056119c1de8de94584857b0c2482dfa7574d7aef",
+      "bytes": 6487,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/metrics.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/metrics.json",
+      "sha256": "7109d151629f2eb77ab96c913a427c1e219b3c7e89b3c135956b28af32ae974f",
+      "bytes": 9800,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/playmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/playmode.xml",
+      "sha256": "1c4f726086468e321116aa0fbe20e883440803745949f0b798b9efb484462e2e",
+      "bytes": 121444,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/pose-check.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/pose-check.json",
+      "sha256": "3be8a4dd0c46090be036c2be81456bab69a9c8a3551cfda192a4733e6067dcdd",
+      "bytes": 775,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/README.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/README.md",
+      "sha256": "0e8e7b3dfd3bf3509d07150d494d537c327978df30f7af5f6bb5b52a4a1348b2",
+      "bytes": 7881,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/value-hierarchy-2026-11-11/validation-excerpts.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/value-hierarchy-2026-11-11/validation-excerpts.txt",
+      "sha256": "9a3a2f5c3476746b8564e199e962a09c8668df03b1d7b99dd7a78e44cf83fe88",
+      "bytes": 4097,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/wall-decor-gallery.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/wall-decor-gallery.png",
+      "sha256": "f3cd81cbcae24a8a0e261a83ce829c8e5bfdf737c8f208526004e9959be2fdbe",
+      "bytes": 99209,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-concept-2026-11-11/APROVADO.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-concept-2026-11-11/APROVADO.md",
+      "sha256": "a8c831a8e5971a60dc6c7a2215040bc907412d71d63671201dbbcd78c6fea94a",
+      "bytes": 989,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-concept-2026-11-11/manifest.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-concept-2026-11-11/manifest.json",
+      "sha256": "edf902f04383d04134b63c3425e12ac4d491e68b38fad1076d28f6e3f055998e",
+      "bytes": 400,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-concept-2026-11-11/prompt.txt",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-concept-2026-11-11/prompt.txt",
+      "sha256": "38e8eb3de74bdebad59f99954f2db7bb5741f320082629d6c690aa2f89822e91",
+      "bytes": 3496,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-concept-2026-11-11/README.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-concept-2026-11-11/README.md",
+      "sha256": "86797ea6ac86b162049073746a0ee256992698694c60eb9ef242bad45968bb71",
+      "bytes": 2010,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-concept-2026-11-11/yuna-3d-concept-v1.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-concept-2026-11-11/yuna-3d-concept-v1.png",
+      "sha256": "36cfdec860cbb1a2f98c81458db43557a5aa28f41992a70c8eec68e4aab42a6b",
+      "bytes": 1974405,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/01-front.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/01-front.png",
+      "sha256": "2a77ebf0295bc937b860efb97038cf09b6ac50e6a58b02de278201a4cce3eab8",
+      "bytes": 174433,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/02-three-quarter.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/02-three-quarter.png",
+      "sha256": "8587fd3fa41cd749f81d83904d35d9f55839e666749c9b607bb744c1a542de18",
+      "bytes": 181054,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/03-profile.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/03-profile.png",
+      "sha256": "2af14fbb5654e04f9bdedf4ad9302ab7970a1e994dcf21d57b23feadfc1aba92",
+      "bytes": 152422,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/04-back.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/04-back.png",
+      "sha256": "7668457e96186b016b21c0f51a17175e077f97d10690b53da9487ce040dfc64a",
+      "bytes": 163582,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/05-face.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/05-face.png",
+      "sha256": "2fdcb3d1e144aa6ada7f2174b6a64c627d7e3ba6ab5d94bef5781f2980ed4616",
+      "bytes": 427631,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/06-run.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/06-run.png",
+      "sha256": "b57ecbef8621f97f8838fdb88beb825d1dcd479bde7d9e4b8d8c15fc0793e8c7",
+      "bytes": 212026,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/07-jump.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/07-jump.png",
+      "sha256": "c8e0c53859a57cb99296c7120afd2e268fdbb6894bcefdf655d423d6df6ea371",
+      "bytes": 211808,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/08-stumble.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/08-stumble.png",
+      "sha256": "befc79956d4e4a45da149672f12e37026ab09d03af515dd61b1e232885db3195",
+      "bytes": 213763,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/09-gameplay-bear.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/09-gameplay-bear.png",
+      "sha256": "d834e2e2e67f22eeb9ca92c162db902dbb96c1520c551fe7c9a6cf396b5e5fe6",
+      "bytes": 614680,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/10-gameplay-stumble.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/10-gameplay-stumble.png",
+      "sha256": "943a545fe281486c28a57cbd516d3e2cced07b0f4c9aed6d1032d6af44fa7614",
+      "bytes": 584112,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/editmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/editmode.xml",
+      "sha256": "b3c97a8d030463230c5502b01d64246dab460ff1f54dbfbae50592c4a2369da1",
+      "bytes": 37080,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/integration.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/integration.json",
+      "sha256": "6b154719d73b3baffd24893af769c4cc23c83870b2904b0b199fe392d3102fab",
+      "bytes": 2393,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/manifest.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/manifest.json",
+      "sha256": "46acce9d9a2dadadc4ef4e7160a37f24fe06711358b56396deb550d91c5348ba",
+      "bytes": 12076,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/model-report.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/model-report.json",
+      "sha256": "a348bcd506c20115d417f33dee42cbe4de7080bbfd72c4e5661fad3bb171fb54",
+      "bytes": 709,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/playmode.xml",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/playmode.xml",
+      "sha256": "b02fda3bd991d33f1e5e4b49856ff30c5dc803b16effd3e87514b34c49abe9e5",
+      "bytes": 133174,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/README.md",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/README.md",
+      "sha256": "df645dc32c0cf640d7b8e5bd38b3e2e68efd3c197a4cbe48e517864d86a3d1a7",
+      "bytes": 6588,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/runtime/00-before-entry.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/runtime/00-before-entry.png",
+      "sha256": "bb49d54c4ac8fcedfae9a0d377cfd9bd6e57591bb7068beb28390c9e01a24c56",
+      "bytes": 607271,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/runtime/01-on-furniture.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/runtime/01-on-furniture.png",
+      "sha256": "1d2d14c7ab0f7fe5d7fe51f2d9ad1a8dfd46445c1f35ce5f969f5f81a60e940d",
+      "bytes": 594127,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/runtime/02-before-crack.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/runtime/02-before-crack.png",
+      "sha256": "b7cda0caff7813f0561c935321d5fadfb3ddc2dadec85f608b429c2e796b3a98",
+      "bytes": 596231,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/runtime/03-crack-pause.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/runtime/03-crack-pause.png",
+      "sha256": "017c753e83af4335704d61b38b24343d500a4b5612eb2615d55b4faa3b384511",
+      "bytes": 599340,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/runtime/04-stumble.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/runtime/04-stumble.png",
+      "sha256": "391b41a83c09a674d02c0607e09057914b90e74bb038eb875ec7907449efb681",
+      "bytes": 599465,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/runtime/05-normal-exit.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/runtime/05-normal-exit.png",
+      "sha256": "abe8ab17a6dec7544726a8ec8c48c9e768dc8d3614471be84a50b2542453d799",
+      "bytes": 652673,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/runtime/07-front-inspection.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/runtime/07-front-inspection.png",
+      "sha256": "431aa993453ce12262a162926508acaff8453c46debea8500af64b139ab0dede",
+      "bytes": 751087,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/runtime/08-three-quarter-inspection.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/runtime/08-three-quarter-inspection.png",
+      "sha256": "00e2ba242a5727094fc9f05fc4539c0c4dfc96c1d4fd0f5df9f6a6b086cb2bc1",
+      "bytes": 817738,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/runtime/09-broken-preview-inspection.png",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/runtime/09-broken-preview-inspection.png",
+      "sha256": "9e49068c78b39016e7b980cdc0eb1f16fa0c0d34acca2c0db2da5a08f6dd8312",
+      "bytes": 816886,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/runtime/live-traversal.json",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/runtime/live-traversal.json",
+      "sha256": "dc4c707273f36a5d76cf3ca4adee15775ca1b19bf99a3c78e1c7f12611fd3ec1",
+      "bytes": 62282,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/runtime/traversal.gif",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/runtime/traversal.gif",
+      "sha256": "ba361add52e0074d859dc4645c3290c106a207a3046d9df5a76da6adbba3b34a",
+      "bytes": 9682223,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/scene-before-yuna-integration.unity.gz",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/scene-before-yuna-integration.unity.gz",
+      "sha256": "b4ebddde135db0b5126b8a26d798692a7e683d93a8109df7d4b7e53677dcd9f8",
+      "bytes": 598180,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "Evidence/yuna-model-study-2026-11-11/verify_integration.py",
+      "archived_path": "Archive/pre-25d-2026-11-12/Evidence/yuna-model-study-2026-11-11/verify_integration.py",
+      "sha256": "9cf8a8c392d8904b44838233bdc7c36fb36bc6075e4b9f9ea7532b61ccc77e86",
+      "bytes": 2688,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "compile_check.log",
+      "archived_path": "Archive/pre-25d-2026-11-12/root-logs/compile_check.log",
+      "sha256": "9efc100095849c44eb49178028ce23a7f9f9a3da750628e81dce430934d30b5a",
+      "bytes": 55851,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "compile_real.log",
+      "archived_path": "Archive/pre-25d-2026-11-12/root-logs/compile_real.log",
+      "sha256": "8ac7d10cac76c775fe0c89bc405d595ee3a3564b6b9a5973be35d798269eab6d",
+      "bytes": 23375,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "populate_scene.log",
+      "archived_path": "Archive/pre-25d-2026-11-12/root-logs/populate_scene.log",
+      "sha256": "9d93f8e6cdd5243b7bdc4f719ca7b88265f526dc13d233182b5689dc12c0b18f",
+      "bytes": 3205,
+      "previously_tracked": true
+    },
+    {
+      "original_path": "unity_build.log",
+      "archived_path": "Archive/pre-25d-2026-11-12/root-logs/unity_build.log",
+      "sha256": "306b6727b4ae68b58a035aeb7b028365befe4e135a6edd7b816524f6d02b762f",
+      "bytes": 776164,
+      "previously_tracked": true
+    }
+  ]
+}

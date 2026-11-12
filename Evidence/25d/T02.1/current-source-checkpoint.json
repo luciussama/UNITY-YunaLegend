@@ -1,0 +1,8 @@
+{
+  "session": "2026-11-12-codex-checkpoint-git-513d",
+  "path": "Assets/Scenes/Validation/IllustratedYunaProof.unity",
+  "original_capture_sha256": "317d4bb8c5cbd99592089337ca7fd5d18d78a42182a7dcd41dfdde870230fc42",
+  "current_sha256": "6d8605c895de79073f1b2b12e03ab8ac34d69a1f33abc4c374a2690019c7bf83",
+  "verification": "Current scene and captured clone are semantically identical after canonicalizing Unity local object IDs and document ordering. Current scene preserved; historical capture manifest unchanged.",
+  "approved_image_unchanged": true
+}

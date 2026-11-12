@@ -39,3 +39,6 @@ __pycache__/
 # Coordinator transient lock (state JSON remains versioned)
 docs/ia/.plano25d.lock
 docs/ia/.plano25d-*.tmp
+
+# Preserve historical evidence logs relocated with their manifests.
+!Archive/pre-25d-2026-11-12/**/*.log

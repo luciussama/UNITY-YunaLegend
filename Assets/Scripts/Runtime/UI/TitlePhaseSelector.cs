@@ -39,7 +39,9 @@ namespace YunaLegend.UI
 
         private void Start()
         {
-            Close();
+            // Initial hiding must not steal the main menu's New Game selection.
+            // Close() restores focus only after an actual dropdown interaction.
+            if (dropdownRoot != null) dropdownRoot.SetActive(false);
             if (itemButtons != null)
             {
                 for (int i = 0; i < itemButtons.Length; i++)

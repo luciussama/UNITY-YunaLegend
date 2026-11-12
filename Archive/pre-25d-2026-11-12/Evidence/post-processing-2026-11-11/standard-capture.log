@@ -1,0 +1,406 @@
+VBCSCompilerServerWatchdog: watching VBCSCompiler (PID 41040)
+[Licensing::Module] Trying to connect to existing licensing client channel...
+Built from '6000.3/respin/6000.3.28f1-21f78c3e21d1' branch; Version is '6000.3.28f1 (8f082d2fe476) revision 9373741'; Using compiler version '194234433'; Build Type 'Release'
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-sergi" at "2026-11-11T17:16:28.9933693Z"
+OS: 'Windows 11  (10.0.26320) Professional' Language: 'pt' Physical Memory: 24292 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-11-11T17:16:28Z
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\6000.3.28f1\Editor\Unity.exe
+-batchmode
+-projectPath
+C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation
+-executeMethod
+YunaLegend.EditorScripts.DarkRoomStartCapture.Capture
+-quit
+-logFile
+C:\Users\sergi\repos\UNITY-YunaLegend\Build\post-processing-standard-capture.log
+Successfully changed project path to: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation
+C:/Users/sergi/repos/UNITY-YunaLegend/Build/CameraFramingValidation
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-remapper-allocator-initial-capacity=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+Player connection [41252]  Target information:
+
+Player connection [41252]  * "[IP] 192.168.68.103 [Port] 55505 [Flags] 2 [Guid] 1311568193 [EditorId] 1311568193 [Version] 1048832 [Id] WindowsEditor(7,WinGame) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [41252]  * "[IP] 100.93.98.19 [Port] 55505 [Flags] 2 [Guid] 1311568193 [EditorId] 1311568193 [Version] 1048832 [Id] WindowsEditor(7,WinGame) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [41252] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [41252] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 8328, path: "C:/Program Files/Unity Hub/UnityLicensingClient_V1/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Error: HandshakeResponse reported an error:
+	ResponseCode: 505
+	ResponseStatus: Unsupported protocol version '1.19.0'.
+[Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-sergi"
+[Licensing::IpcConnector] LicenseClient-sergi channel disconnected successfully.
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-sergi-1.19.0" at "2026-11-11T17:16:29.044203Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 13612, path: "C:/Program Files/Unity/Hub/Editor/6000.3.28f1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.19.0+4cc3dda
+  Session Id:              bbec64dbff6441c6b6c7882a999cb5bd
+  Correlation Id:          5486894ce075714fd13a0e79823d8406
+  External correlation Id: 60799751484000205
+  Machine Id:              2OqD5cYTrUamvjAl+tM0bOflbEw=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-sergi-1.19.0" (connect: 0.00s, validation: 0.00s, handshake: 0.03s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-sergi-1.19.0-notifications" at "2026-11-11T17:16:29.0730623Z"
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 4674284276976-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.00
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Licensing Background thread has ended after 0.09s
+[Package Manager] Connected to IPC stream "Upm-41912" after 0.3 seconds.
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Refreshing native plugins compatible for Editor in 0.15 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 6000.3.28f1 (8f082d2fe476)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.3.28f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/sergi/repos/UNITY-YunaLegend/Build/CameraFramingValidation/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+d3d12: failed to query info queue interface (0x80004002).
+Direct3D:
+    Version:         Direct3D 12 [level 12.2]
+    Renderer:        NVIDIA GeForce RTX 5070 (ID=0x2f04)
+    Vendor:          NVIDIA
+    VRAM:            11943 MB
+    App VRAM Budget: 11175 MB
+    Driver:          32.0.16.2101
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.3.28f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.3.28f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.3.28f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56912
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.3.28f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.3.28f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+[Licensing::Client] Successfully resolved entitlement details
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.3.28f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Registered in 0.007706 seconds.
+- Loaded All Assemblies, in  0.412 seconds
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Package Manager log level set to [2]
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:False
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.377 seconds
+Domain Reload Profiling: 785ms
+	BeginReloadAssembly (131ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (4ms)
+	RebuildCommonClasses (31ms)
+	RebuildNativeTypeToScriptingClass (11ms)
+	initialDomainReloadingComplete (55ms)
+	LoadAllAssembliesAndSetupDomain (179ms)
+		LoadAssemblies (125ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (174ms)
+			TypeCache.Refresh (173ms)
+				TypeCache.ScanAssembly (160ms)
+			BuildScriptInfoCaches (0ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (377ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (345ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (55ms)
+			SetLoadedEditorAssemblies (3ms)
+			BeforeProcessingInitializeOnLoad (68ms)
+			ProcessInitializeOnLoadAttributes (118ms)
+			ProcessInitializeOnLoadMethodAttributes (101ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 37 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.inputsystem@1.13.1 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.inputsystem@e2c83221d2dc)
+    com.unity.timeline@1.8.7 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.timeline@c58b4ee65782)
+    com.unity.ide.visualstudio@2.0.29 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.ide.visualstudio@42af3a235209)
+    com.unity.ide.rider@3.1.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.ide.rider@570989d4a882)
+    com.unity.editorcoroutines@1.1.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.editorcoroutines@87a15ed012c2)
+    com.unity.performance.profile-analyzer@1.4.2 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.performance.profile-analyzer@5491650411cd)
+    com.unity.testtools.codecoverage@1.3.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.testtools.codecoverage@19a841221620)
+    com.unity.searcher@4.9.5 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.searcher@a463122f2c00)
+    com.unity.burst@1.8.31 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.burst@bfa84123c21a)
+    com.unity.mathematics@1.3.3 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.mathematics@19a9377c4ffa)
+    com.unity.collections@2.7.1 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.collections@88d5bf65ce66)
+    com.unity.settings-manager@2.1.1 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.settings-manager@0b8638c5ce86)
+    com.unity.nuget.mono-cecil@1.11.6 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.nuget.mono-cecil@ecb9724e46ff)
+    com.unity.test-framework.performance@3.5.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.test-framework.performance@8b56083ec0f0)
+  Built-in packages:
+    com.unity.feature.development@1.0.2 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.feature.development@767aadbc6eb7)
+    com.unity.render-pipelines.universal@17.3.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.render-pipelines.universal@029be7ffa662)
+    com.unity.textmeshpro@5.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.textmeshpro@53f43edfd2e0)
+    com.unity.ugui@2.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.ugui@44a561608371)
+    com.unity.modules.ai@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.modules.ai)
+    com.unity.modules.androidjni@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.modules.androidjni)
+    com.unity.modules.animation@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.modules.animation)
+    com.unity.modules.assetbundle@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.modules.assetbundle)
+    com.unity.modules.audio@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.modules.audio)
+    com.unity.modules.physics@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.modules.physics)
+    com.unity.modules.ui@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.modules.ui)
+    com.unity.modules.uielements@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.modules.uielements)
+    com.unity.modules.imgui@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.modules.imgui)
+    com.unity.modules.jsonserialize@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.modules.jsonserialize)
+    com.unity.modules.hierarchycore@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.modules.hierarchycore)
+    com.unity.modules.director@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.modules.director)
+    com.unity.modules.particlesystem@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.modules.particlesystem)
+    com.unity.render-pipelines.core@17.3.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.render-pipelines.core@3424017a4ec3)
+    com.unity.shadergraph@17.3.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.shadergraph@d526115bb944)
+    com.unity.render-pipelines.universal-config@17.0.3 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.render-pipelines.universal-config@8dc1aab4af1d)
+    com.unity.test-framework@1.6.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.test-framework@bd7f943e9647)
+    com.unity.modules.terrain@1.0.0 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.modules.terrain)
+    com.unity.ext.nunit@2.0.5 (location: C:\Users\sergi\repos\UNITY-YunaLegend\Build\CameraFramingValidation\Library\PackageCache\com.unity.ext.nunit@d8c07649098d)
+[Package Manager] com.unity.textmeshpro is deprecated: This package is no longer supported. TextMeshPro functionalities are now included in the com.unity.ugui package. To continue using them, consider adding it to your project dependencies.
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.01 seconds
+Starting: C:\Program Files\Unity\Hub\Editor\6000.3.28f1\Editor\Data\Tools\BuildPipeline\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: C:/Users/sergi/repos/UNITY-YunaLegend/Build/CameraFramingValidation
+DisplayProgressbar: Compiling Scripts
+ExitCode: 0 Duration: 0s335ms
+[580/731    0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+*** Tundra build success (0.29 seconds), 1 items updated, 731 evaluated
+AssetDatabase: script compilation time: 0.761633s
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.801 seconds
+Refreshing native plugins compatible for Editor in 0.55 ms, found 0 plugins.
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.524 seconds
+Domain Reload Profiling: 3318ms
+	BeginReloadAssembly (303ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (24ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (147ms)
+	RebuildCommonClasses (30ms)
+	RebuildNativeTypeToScriptingClass (11ms)
+	initialDomainReloadingComplete (27ms)
+	LoadAllAssembliesAndSetupDomain (424ms)
+		LoadAssemblies (367ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (158ms)
+			TypeCache.Refresh (117ms)
+				TypeCache.ScanAssembly (107ms)
+			BuildScriptInfoCaches (31ms)
+			ResolveRequiredComponents (7ms)
+	FinalizeReload (2524ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (2205ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (31ms)
+			SetLoadedEditorAssemblies (4ms)
+			BeforeProcessingInitializeOnLoad (134ms)
+			ProcessInitializeOnLoadAttributes (1972ms)
+			ProcessInitializeOnLoadMethodAttributes (56ms)
+			AfterProcessingInitializeOnLoad (7ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (29ms)
+Start importing Packages/com.unity.render-pipelines.core/Tests/Editor/UnifiedRayTracing/TraceRays.urtshader using Guid(1142bbad8b9e8c44c83a9775ff120d37) (ScriptedImporter)Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+
+Compiling Ray Tracing Shader "TraceRays.urtshader", keywords = <no keywords>
+    finished in 0.01 seconds. Local cache hits 1, remote cache hits 0, compiled 0 platform variants
+ -> (artifact id: '574b2a3440ed9f63948b03c02137d9eb') in 0.1893269 seconds
+Start importing Packages/com.unity.render-pipelines.universal/Runtime/RendererFeatures/SurfaceCacheGI/SurfaceCacheCore/RisEstimation.urtshader using Guid(713f6141bd66a134383b787f2eaa7c11) (ScriptedImporter)
+Compiling Ray Tracing Shader "RisEstimation.urtshader", keywords = <no keywords>
+    finished in 0.00 seconds. Local cache hits 1, remote cache hits 0, compiled 0 platform variants
+ -> (artifact id: '41301da8d799f9d15cd4d7982ecfa419') in 0.0270146 seconds
+Start importing Packages/com.unity.render-pipelines.core/Editor/Lighting/ProbeVolume/RenderingLayerMask/TraceRenderingLayerMask.urtshader using Guid(94a070d33e408384bafc1dea4a565df9) (ScriptedImporter)
+Compiling Ray Tracing Shader "TraceRenderingLayerMask.urtshader", keywords = <no keywords>
+    finished in 0.00 seconds. Local cache hits 1, remote cache hits 0, compiled 0 platform variants
+ -> (artifact id: '95e71b291808c454af558d919028df5f') in 0.0366786 seconds
+Start importing Packages/com.unity.render-pipelines.universal/Runtime/RendererFeatures/SurfaceCacheGI/SurfaceCacheCore/UniformEstimation.urtshader using Guid(94a39d12848d8d64ca962a72b74e7c50) (ScriptedImporter)
+Compiling Ray Tracing Shader "UniformEstimation.urtshader", keywords = <no keywords>
+    finished in 0.00 seconds. Local cache hits 1, remote cache hits 0, compiled 0 platform variants
+ -> (artifact id: 'f25c34e689eff31476de7f073f35911d') in 0.0156713 seconds
+Start importing Packages/com.unity.render-pipelines.core/Tests/Editor/UnifiedRayTracing/TraceTransparentRays.urtshader using Guid(6513c3b892e933c4f8d00c19d5c47532) (ScriptedImporter)
+Compiling Ray Tracing Shader "TraceTransparentRays.urtshader", keywords = <no keywords>
+    finished in 0.00 seconds. Local cache hits 1, remote cache hits 0, compiled 0 platform variants
+ -> (artifact id: '1cb4857666a285198e0eaadd3c708668') in 0.0071221 seconds
+Start importing Packages/com.unity.render-pipelines.core/Editor/Lighting/ProbeVolume/DynamicGI/DynamicGISkyOcclusion.urtshader using Guid(5a2a534753fbdb44e96c3c78b5a6999d) (ScriptedImporter)
+Compiling Ray Tracing Shader "DynamicGISkyOcclusion.urtshader", keywords = <no keywords>
+    finished in 0.00 seconds. Local cache hits 1, remote cache hits 0, compiled 0 platform variants
+ -> (artifact id: 'f238f754aecf42a3c750d49720a67c23') in 0.0155175 seconds
+Start importing Packages/com.unity.render-pipelines.core/Tests/Editor/UnifiedRayTracing/TraceRaysAndFetchAttributes.urtshader using Guid(fbc59f55df2416344b008dc23753cae2) (ScriptedImporter)
+Compiling Ray Tracing Shader "TraceRaysAndFetchAttributes.urtshader", keywords = <no keywords>
+    finished in 0.00 seconds. Local cache hits 1, remote cache hits 0, compiled 0 platform variants
+ -> (artifact id: 'a17c1ef9137528ddb34edb686d7f17ec') in 0.0125978 seconds
+Start importing Packages/com.unity.render-pipelines.universal/Runtime/RendererFeatures/SurfaceCacheGI/SurfaceCacheCore/RestirCandidateTemporal.urtshader using Guid(ad3a9f9982f8c4f4a839a78955e78458) (ScriptedImporter)
+Compiling Ray Tracing Shader "RestirCandidateTemporal.urtshader", keywords = <no keywords>
+    finished in 0.00 seconds. Local cache hits 1, remote cache hits 0, compiled 0 platform variants
+ -> (artifact id: '47abcdf6edbe2fa0c2165d18ac1e9213') in 0.0123232 seconds
+Start importing Packages/com.unity.render-pipelines.core/Editor/Lighting/ProbeVolume/VirtualOffset/TraceVirtualOffset.urtshader using Guid(ff2cbab5da58bf04d82c5f34037ed123) (ScriptedImporter)
+Compiling Ray Tracing Shader "TraceVirtualOffset.urtshader", keywords = <no keywords>
+    finished in 0.00 seconds. Local cache hits 1, remote cache hits 0, compiled 0 platform variants
+ -> (artifact id: 'b5c9585353baab7efc6cf14687911b76') in 0.014992 seconds
+Refreshing native plugins compatible for Editor in 0.36 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Asset Pipeline Refresh (id=7752533c166b2b9448b42efe58352fae): Total: 5.326 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	Summary:
+		Imports: total=9 (actual=9, local cache=0, cache server=0)
+		Asset DB Process Time: managed=4 ms, native=3363 ms
+		Asset DB Callback time: managed=184 ms, native=167 ms
+		Scripting: domain reloads=1, domain reload time=801 ms, compile time=763 ms, other=39 ms
+		Project Asset Count: scripts=920, non-scripts=1919
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokeCustomDependenciesCallbacks: 0.001ms
+	InvokePackagesCallback: 12.323ms
+	ApplyChangesToAssetFolders: 0.579ms
+	Scan: 193.980ms
+	OnSourceAssetsModified: 0.002ms
+	CategorizeAssetsWithTransientArtifact: 27.273ms
+	ProcessAssetsWithTransientArtifactChanges: 40.088ms
+	CategorizeAssets: 77.474ms
+	ImportOutOfDateAssets: 2872.185ms (1763.800ms without children)
+		ImportManagerImport: 340.760ms (4.105ms without children)
+			ImportInProcess: 336.280ms
+			UpdateCategorizedAssets: 0.375ms
+		CompileScripts: 763.158ms
+		ReloadNativeAssets: 0.029ms
+		UnloadImportedAssets: 1.489ms
+		ReloadImportedAssets: 1.889ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.385ms
+		InitializingProgressBar: 0.006ms
+		PostProcessAllAssetNotificationsAddChangedAssets: 0.001ms
+		OnDemandSchedulerStart: 0.669ms
+	PostProcessAllAssets: 339.883ms
+	Hotreload: 1.976ms
+	GatherAllCurrentPrimaryArtifactRevisions: 0.002ms
+	UnloadStreamsBegin: 2.074ms
+	PersistCurrentRevisions: 0.175ms
+	UnloadStreamsEnd: 0.001ms
+	GenerateScriptTypeHashes: 2.152ms
+	Untracked: 1757.570ms
+
+Application.AssetDatabase Initial Refresh End
+Scanning for USB devices : 2.939ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-Yuna Legend - O Quarto dos Brinquedos
+Unloading 25 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 4194 unused Assets / (4.6 MB). Loaded Objects now: 5047.
+Memory consumption went from 188.2 MB to 183.6 MB.
+Total: 9.596900 ms (FindLiveObjects: 0.554600 ms CreateObjectMapping: 0.297400 ms MarkObjects: 6.672300 ms  DeleteObjects: 2.071200 ms)
+
+Opening scene 'Assets/Scenes/DarkRoom_Gameplay.unity'
+Unloading 62 Unused Serialized files (Serialized files now loaded: 0)
+Loaded scene 'Assets/Scenes/DarkRoom_Gameplay.unity'
+	Deserialize:            55.851 ms
+	Integration:            151.517 ms
+	Integration of assets:  1.982 ms
+	Thread Wait Time:       0.010 ms
+	Total Operation Time:   209.360 ms
+Unloading 4 unused Assets / (43.7 KB). Loaded Objects now: 6760.
+Memory consumption went from 172.0 MB to 171.9 MB.
+Total: 5.429700 ms (FindLiveObjects: 0.321500 ms CreateObjectMapping: 0.146200 ms MarkObjects: 4.890300 ms  DeleteObjects: 0.070800 ms)
+
+START_CAMERA Evidence/start-camera.png (camera render only, OnGUI overlay excluded)
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+YunaLegend.EditorScripts.DarkRoomStartCapture:Capture () (at Assets/Scripts/Editor/DarkRoomStartCapture.cs:119)
+
+(Filename: Assets/Scripts/Editor/DarkRoomStartCapture.cs Line: 119)
+
+CASTLE_CAMERA Evidence/castle-camera.png (capture of Stage 2 takeoff at castle and escape)
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+YunaLegend.EditorScripts.DarkRoomStartCapture:Capture () (at Assets/Scripts/Editor/DarkRoomStartCapture.cs:138)
+
+(Filename: Assets/Scripts/Editor/DarkRoomStartCapture.cs Line: 138)
+
+Batchmode quit successfully invoked - shutting down!
+Killing ADB server in 2,0908505 seconds.
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.
+[Licensing::IpcConnector] LicenseClient-sergi-1.19.0-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-sergi-1.19.0 channel disconnected successfully.
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup mono
+Exiting batchmode successfully now!
+Exiting without the bug reporter. Application will terminate with return code 0

@@ -2,9 +2,19 @@
 
 Versão 1, decisão do usuário em 12/11/2026. Sessão de planejamento: `2026-11-12-codex-plan-25d-c92a`, Codex (GPT-6). Esta sessão documenta o trabalho; não inicia a produção artística.
 
+**Situação atual em 12/11/2026:** T00/T00B/T01 aceitas com os limites das evidências; T02.1 estática aprovada; projeção A escolhida em T02.2a; câmera estável T02.2b implementada e em revisão. Os parágrafos de criação abaixo explicam a origem das dependências, não pendências já resolvidas. Veja o [estado atual](ESTADO-ATUAL-25D.md), o estado estruturado e o diário. Material anterior foi [arquivado](../../Archive/pre-25d-2026-11-12/README.md); não carregá-lo como fila ativa.
+
+**Atualização de execução, 12/11/2026:** o usuário autorizou iniciar, com a mesma assinatura visual e passos pequenos para avaliação humana meticulosa. O [contrato de assinatura e microentregas](25D-ASSINATURA-E-MICROENTREGAS.md) complementa este plano e torna obrigatórias as revisões individuais de cada entrega visual. A T00 foi reservada; o estado e seu checkpoint indicam o avanço real.
+
+**Ajuste de dependências, sessão `2026-11-12-codex-execute-25d-d28a`:** separar inventário T00 de validação jogável T00B. A entrada no navegador continua inconclusiva e não impede ilustração conceitual independente. T00B conserva reprodução de menu, build e gravação pendentes e bloqueia T02 e toda integração posterior. Essa separação não declara nenhum critério jogável cumprido.
+
 ## 1. Decisão vinculante e fontes de verdade
 
 Construir **Yuna e Nanda como personagens 2D ilustradas animadas, em cenário com profundidade**, na Unity/C#. Recuperar suavidade, acolhimento e unidade de livro infantil. Não continuar a produção de personagens 3D finais como direção padrão. Modelos atuais podem orientar escala/poses e servir a testes, sem serem confundidos com arte aprovada.
+
+**Nanda azul — instrução posterior do usuário em 12/11/2026:** aparência azulada e emissão de luz da mesma cor, porque a menina prefere azul. Substitui o âmbar/dourado antigo de Nanda em documentos históricos. Preservar assinatura pintada e identidade; luz conceitual precisa de implementação real e validação na integração, sem recolorir Yuna.
+
+**Mecânica confirmada posteriormente:** manter móvel quebrando/cedendo e Yuna se desequilibrando, com estralo, pausa local80ms e retry. O [contrato específico](25D-MOVEL-QUEBRA-E-DESEQUILIBRIO.md) rege a separação de camadas, contato real e revisões em movimento; não confundir o aceite visual do móvel com implementação concluída.
 
 Ordem de autoridade: instrução atual do usuário; AGENTS.md e este plano para o escopo vigente; estado estruturado para tarefa/reserva/checkpoint; diário para histórico e evidência. Havendo divergência, verificar disco/Git e registrar correção antes de editar. Evidência real prevalece sobre uma alegação de conclusão. Não apagar histórico nem reclassificar ações de outra IA como próprias.
 
@@ -14,8 +24,8 @@ Arquivos canônicos:
 - `docs/ia/PLANO-25D-ESTADO.json`: fila, dependências, reservas, checkpoints e histórico de transições.
 - `tools/plan_25d.py`: coordenação com exclusão mútua e gravação atômica.
 - `docs/ia/diario.sqlite3`: registro obrigatório de cada passo operacional.
-- `docs/ia/DIAGNOSTICO-ARTISTICO-DARK-ROOM-2026-11-12.md`: observações e hipóteses iniciais, incluindo suas limitações.
-- `Evidence/25d/<ID-da-tarefa>/`: destino de futuras evidências; não existe entrega artística aprovada neste planejamento.
+- `docs/ia/ESTADO-ATUAL-25D.md`: índice curto da execução atual e próxima microentrega.
+- `Evidence/25d/<ID-da-tarefa>/`: evidências da nova direção, com aprovações e limitações explícitas. O diagnóstico inicial está no arquivo histórico, como contexto da decisão.
 
 Regras escritas vinculam agentes que as seguem. A ferramenta bloqueia transições inválidas efetuadas por ela; não intercepta edições diretas no sistema de arquivos. Aprovação humana não é autenticada pelo CLI. Proteção efetiva contra bypass exige permissões e integração protegida no serviço Git; não alegar que elas foram configuradas. Nunca tratar aprovação técnica como aprovação estética.
 
@@ -40,13 +50,14 @@ Legado: somente observação pela URL `https://luciussama.github.io/legendGirl/`
 
 ## 4. Sequência e critérios de saída
 
-Todas as tarefas começam `pending`. `accepted` significa critério cumprido e revisão registrada; não é sinônimo de arquivo criado. A ferramenta exige dependências aceitas antes de reservar a próxima tarefa. Aprovações humanas são necessárias apenas nos marcos T01 e T07, além das instruções do usuário que possam sobrevir.
+Todas as tarefas começam `pending`. `accepted` significa critério cumprido e revisão registrada; não é sinônimo de arquivo criado. A ferramenta exige dependências aceitas antes de reservar a próxima tarefa. T01 e T07 são marcos humanos agregados; a instrução posterior do usuário exige também as revisões visuais individuais do contrato de microentregas. O CLI verifica o estado agregado, não autentica nem substitui essas revisões.
 
 | ID | Dependências | Entrega e critério de saída |
 | --- | --- | --- |
-| T00 | — | Baseline reproduzível: branch/HEAD/status, cena e GUIDs, inventário de sistemas/arte, logs/testes existentes diferenciados de novos, build atual e reprodução do problema de entrada do menu. Capturas e gravação do percurso inicial. Separar limitação de automação de defeito confirmado. Não bloquear inventário por indisponibilidade do legado; documentar. |
+| T00 | — | Inventário verificável: branch/HEAD/status, cenas/GUIDs, sistemas/arte, hashes, logs/testes históricos diferenciados de novos, correspondência dos fontes com o clone compilado e limitações. Não certifica entrada ou gameplay. |
+| T00B | T00 | Validação jogável: confirmar build/fontes, reproduzir menu → fase e registrar abertura, percurso inicial e falha/retry com captura/gravação. Distinguir automação de defeito confirmado. Pendente até evidência real; bloqueia T02. |
 | T01 | T00 | Bíblia visual curta e prancha original com Yuna, Nanda, urso/livros/móvel e quadro na escala de gameplay; paleta, acabamento, luz, expressão e relação menu/fase. **Aprovação explícita do usuário da direção visual**, com referência à mensagem e arquivos exatos. Ajustar até aprovar; não produzir fase inteira. |
-| T02 | T01 | Prova técnica descartável em cena isolada: render/ordenação, pivô/escala, sprite sobre root físico, um ciclo e um salto provisórios, oclusão/parallax e câmera em formatos equivalentes. Comparar soluções de animação e câmera, registrar decisão e custo. Sem alterar física para disfarçar arte. Contratos de integração definidos e revisados tecnicamente. |
+| T02 | T01,T00B | Prova técnica descartável em cena isolada: render/ordenação, pivô/escala, sprite sobre root físico, um ciclo e um salto provisórios, oclusão/parallax e câmera em formatos equivalentes. Comparar soluções de animação e câmera, registrar decisão e custo. Sem alterar física para disfarçar arte. Contratos de integração definidos e revisados tecnicamente. |
 | T03 | T02 | Yuna ilustrada do piloto: repouso/respiração, corrida, subida, queda, pouso e tropeço; reação e transição necessárias ao trecho; despertar completo fica para T08. Mesma identidade da prancha, pés estáveis e virada sem iluminação incoerente. Assets, fontes editáveis quando disponíveis, atlas/pivôs e prova em movimento. |
 | T04 | T02 | Nanda ilustrada: voo, asas, repouso no ar, orientação, expressão e acompanhamento; luz/trilha subordinadas à personagem. Eventos continuam no guia existente. Entregar teste de leitura em tamanho real de gameplay e dois sentidos. |
 | T05 | T02 | Piloto ambiental: urso, livros inclinados e móvel, fundo/camadas/luz coerentes. Contorno visível e superfícies físicas coincidem; múltiplas regiões não viram apoio contínuo. Móvel conserva cedimento/retry. Ruptura irregular localizada e envelhecimento integram o polimento, evitando corte reto perfeito. |

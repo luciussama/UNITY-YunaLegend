@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="4" result="Passed" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-12 17:13:31Z" end-time="2026-11-12 17:13:37Z" duration="6,5018305">
+  <test-suite type="TestSuite" id="1044" name="Yuna Legend - O Quarto dos Brinquedos" fullname="Yuna Legend - O Quarto dos Brinquedos" runstate="Runnable" testcasecount="28" result="Passed" start-time="2026-11-12 17:13:31Z" end-time="2026-11-12 17:13:37Z" duration="6.501831" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1039" name="YunaLegend.RoutePhysics.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Build/Publish/Project/Library/ScriptAssemblies/YunaLegend.RoutePhysics.Tests.dll" runstate="Runnable" testcasecount="28" result="Passed" start-time="2026-11-12 17:13:31Z" end-time="2026-11-12 17:13:37Z" duration="6.494599" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="32816" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1040" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="28" result="Passed" start-time="2026-11-12 17:13:31Z" end-time="2026-11-12 17:13:37Z" duration="6.493978" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1042" name="RoutePhysics" fullname="YunaLegend.RoutePhysics" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-11-12 17:13:31Z" end-time="2026-11-12 17:13:37Z" duration="6.493431" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1043" name="Tests" fullname="YunaLegend.RoutePhysics.Tests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-11-12 17:13:31Z" end-time="2026-11-12 17:13:37Z" duration="6.493069" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1024" name="DarkRoomCameraFramingTests" fullname="YunaLegend.RoutePhysics.Tests.DarkRoomCameraFramingTests" classname="YunaLegend.RoutePhysics.Tests.DarkRoomCameraFramingTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-12 17:13:31Z" end-time="2026-11-12 17:13:37Z" duration="6.491610" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1026" name="CastleOverviewRevealsRouteThenReturnsToCloseFrame" fullname="YunaLegend.RoutePhysics.Tests.DarkRoomCameraFramingTests.CastleOverviewRevealsRouteThenReturnsToCloseFrame" methodname="CastleOverviewRevealsRouteThenReturnsToCloseFrame" classname="YunaLegend.RoutePhysics.Tests.DarkRoomCameraFramingTests" runstate="Runnable" seed="1608380760" result="Passed" start-time="2026-11-12 17:13:31Z" end-time="2026-11-12 17:13:35Z" duration="4.099470" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Cutscene do Castelo iniciada. Aguardando input do jogador...
+[DarkRoomProgression] Etapa 2 iniciada: A Fuga Acelerada!
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase2Escape. Checkpoint atual: Phase2Escape
+]]></output>
+              </test-case>
+              <test-case id="1027" name="CloseFrameShowsNextLandingAndHidesFloorWithoutFollowingJumpArc" fullname="YunaLegend.RoutePhysics.Tests.DarkRoomCameraFramingTests.CloseFrameShowsNextLandingAndHidesFloorWithoutFollowingJumpArc" methodname="CloseFrameShowsNextLandingAndHidesFloorWithoutFollowingJumpArc" classname="YunaLegend.RoutePhysics.Tests.DarkRoomCameraFramingTests" runstate="Runnable" seed="2045580982" result="Passed" start-time="2026-11-12 17:13:35Z" end-time="2026-11-12 17:13:35Z" duration="0.496989" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+]]></output>
+              </test-case>
+              <test-case id="1025" name="IllustratedPilotKeepsScaleAndDoesNotTrackJumpHeight" fullname="YunaLegend.RoutePhysics.Tests.DarkRoomCameraFramingTests.IllustratedPilotKeepsScaleAndDoesNotTrackJumpHeight" methodname="IllustratedPilotKeepsScaleAndDoesNotTrackJumpHeight" classname="YunaLegend.RoutePhysics.Tests.DarkRoomCameraFramingTests" runstate="Runnable" seed="2090196192" result="Passed" start-time="2026-11-12 17:13:35Z" end-time="2026-11-12 17:13:35Z" duration="0.195461" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+]]></output>
+              </test-case>
+              <test-case id="1028" name="ReverseFrameLooksLeftAndCinematicFallBringsFloorBack" fullname="YunaLegend.RoutePhysics.Tests.DarkRoomCameraFramingTests.ReverseFrameLooksLeftAndCinematicFallBringsFloorBack" methodname="ReverseFrameLooksLeftAndCinematicFallBringsFloorBack" classname="YunaLegend.RoutePhysics.Tests.DarkRoomCameraFramingTests" runstate="Runnable" seed="598709772" result="Passed" start-time="2026-11-12 17:13:35Z" end-time="2026-11-12 17:13:37Z" duration="1.685988" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+Saving results to: C:/Users/sergi/AppData/LocalLow/DeepMindStudio/Yuna Legend - O Quarto dos Brinquedos\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

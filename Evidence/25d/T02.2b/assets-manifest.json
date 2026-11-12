@@ -1,0 +1,89 @@
+{
+  "session": "2026-11-12-codex-camera-stable-74ac",
+  "files": [
+    {
+      "path": "Assets/Scenes/Validation/IllustratedStableCamera.unity",
+      "sha256": "8c4dd459fd6c433ff45a36f4c7eefb996d06554f18116079f000947c9565eb1a"
+    },
+    {
+      "path": "Assets/Scenes/Validation/IllustratedStableCamera.unity.meta",
+      "sha256": "40a3b7487116850c1e1ac1795f93e5b19b31c80d5f6e186c7a4a3b8c6c88f6a2"
+    },
+    {
+      "path": "Assets/Scripts/Editor/IllustratedStableCameraCapture.cs",
+      "sha256": "54891497fc0e99a5712ea56510cfb8e14761da6a22559364176984c33e604865"
+    },
+    {
+      "path": "Assets/Scripts/Editor/IllustratedStableCameraCapture.cs.meta",
+      "sha256": "b696435ef9f5e0c996c4d63c2eeb44af6eac8480e6353a1ce661e5824ecee287"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/Camera/SideScroll25DCamera.cs",
+      "sha256": "163657cfbd1c35bde9f45ec0e9dfbef837f9a2d0c3b7bb712b07f482c94fb7c4"
+    },
+    {
+      "path": "Assets/Scripts/Tests/PlayMode/DarkRoomCameraFramingTests.cs",
+      "sha256": "86b2f5bd7a49b5536fa25e8ec25a959c140928fa606b74a444c76a4233c4d4ad"
+    },
+    {
+      "path": "Evidence/25d/T02.2b/01-entry-wide.png",
+      "sha256": "ca6306503617503e975410b6d74f4635e01fa4a5d8492c059514dcb1ec4630e0"
+    },
+    {
+      "path": "Evidence/25d/T02.2b/01-entry.png",
+      "sha256": "4ad103f6f48b0044cfc4c43f32a5005e8f495ab3ff409a3eaa931f1f09ce089f"
+    },
+    {
+      "path": "Evidence/25d/T02.2b/02-first-takeoff-wide.png",
+      "sha256": "cacddff661e682fcb7edd65d962df6b52a8a99789e490a309b9359d8974ce1cd"
+    },
+    {
+      "path": "Evidence/25d/T02.2b/02-first-takeoff.png",
+      "sha256": "dd3c9a901fadfc7fab1ddc6f3b4e9b5a09cd7bfe37ab6f824a16e4cf7cb3313b"
+    },
+    {
+      "path": "Evidence/25d/T02.2b/03-bear-wide.png",
+      "sha256": "af00d38a2949b8141e6bbc7471ed470a2fba98eee86118d4bbab2770e893e2fc"
+    },
+    {
+      "path": "Evidence/25d/T02.2b/03-bear.png",
+      "sha256": "062575c80bb446a1657fb6782333fd650b61a0776cbf90a40e7d58f3d1928d93"
+    },
+    {
+      "path": "Evidence/25d/T02.2b/04-books-wide.png",
+      "sha256": "2a6a46ec7108c732fa3be84d001f29d74df7bd1c6038e7b2a427961292d19e83"
+    },
+    {
+      "path": "Evidence/25d/T02.2b/04-books.png",
+      "sha256": "00775f71094d45f3e6e02d9098e2dfdf65ef6a15aeb47718e430633193511e53"
+    },
+    {
+      "path": "Evidence/25d/T02.2b/05-furniture-approach-wide.png",
+      "sha256": "8ca28fb82eab92293f9e14774b143e5267ede1562a53e062c087b15ba48d4e40"
+    },
+    {
+      "path": "Evidence/25d/T02.2b/05-furniture-approach.png",
+      "sha256": "a942904571b4417c0d0c808806a34e7dc633980920375fa412f8ff238af5bc09"
+    },
+    {
+      "path": "Evidence/25d/T02.2b/README.md",
+      "sha256": "90ef11feae3ab583b175974b1484577b9118cef16f8b2444f3bfdda0165149ea"
+    },
+    {
+      "path": "Evidence/25d/T02.2b/camera-tests.xml",
+      "sha256": "75b6aec3855cd66d2f3f28bdbbf3d4a572450acbac843f99c75cceb4a1ac8fb3"
+    },
+    {
+      "path": "Evidence/25d/T02.2b/review-v1.md",
+      "sha256": "813b4145798a4e470aff231ec289d317bb5e4fa8277d5e0798e8517395759c99"
+    },
+    {
+      "path": "Evidence/25d/T02.2b/stable-camera.gif",
+      "sha256": "77d719eab3eb8a1c513ed4616c1351c78ad6a13a468c490c80a568d523d073d6"
+    },
+    {
+      "path": "Evidence/25d/T02.2b/stable-camera.json",
+      "sha256": "86a19a003ed7487a2d0eb5bc747979552cae35bb9dc830b20e86faabb6c43bc5"
+    }
+  ]
+}

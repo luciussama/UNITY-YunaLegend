@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="650" viewBox="0 0 1000 650" role="img" aria-labelledby="title desc">
+<title id="title">Urso: intenção dos apoios, esquema conceitual separado</title>
+<desc id="desc">Coroa curva da cabeça como apoio principal, orelhas com regiões próprias e bordas inferiores da banqueta somente onde expostas. Este desenho não mede a imagem nem valida colliders.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L8 3L0 6" fill="none" stroke="#e3e8ef" stroke-width="1.4"/></marker></defs>
+<rect width="1000" height="650" rx="15" fill="#171d29"/>
+<g font-family="Arial,sans-serif" fill="#f3eadc">
+<text x="36" y="42" font-size="25" font-weight="bold">Onde os pés de Yuna podem pousar</text>
+<text x="36" y="72" font-size="17" fill="#bdc8db">Esquema conceitual • não é sobreposição medida nem collider validado</text>
+<path d="M120 430 C120 390 880 390 880 430 L880 482 C880 525 120 525 120 482 Z" fill="#73502f" stroke="#a08051" stroke-width="3"/>
+<ellipse cx="500" cy="430" rx="380" ry="43" fill="#a57b47" stroke="#c59c64" stroke-width="3"/>
+<circle cx="240" cy="270" r="72" fill="#a76b3b" stroke="#cc945c" stroke-width="3"/>
+<circle cx="760" cy="270" r="72" fill="#a76b3b" stroke="#cc945c" stroke-width="3"/>
+<ellipse cx="500" cy="360" rx="300" ry="140" fill="#b57c48" stroke="#dba66b" stroke-width="3"/>
+<circle cx="398" cy="350" r="18" fill="#342b25"/><circle cx="602" cy="350" r="18" fill="#342b25"/>
+<ellipse cx="500" cy="395" rx="87" ry="55" fill="#e8cd9f"/>
+<ellipse cx="500" cy="374" rx="23" ry="14" fill="#342b25"/>
+<path d="M500 388V410 M500 410Q475 430 458 411 M500 410Q525 430 542 411" fill="none" stroke="#60462e" stroke-width="4"/>
+<path d="M370 234 Q500 205 630 234" fill="none" stroke="#7ee2bc" stroke-width="9" stroke-linecap="round"/>
+<path d="M191 217 Q240 178 289 217 M711 217 Q760 178 809 217" fill="none" stroke="#ffd071" stroke-width="8" stroke-linecap="round"/>
+<path d="M126 422 Q147 407 181 403 M819 403 Q853 407 874 422" fill="none" stroke="#94b9ff" stroke-width="8" stroke-linecap="round"/>
+<text x="370" y="128" font-size="20" fill="#7ee2bc">Coroa curva: apoio principal</text>
+<path d="M500 143V205" stroke="#e3e8ef" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="40" y="158" font-size="18" fill="#ffd071">Orelha: região própria</text>
+<path d="M160 167L215 199" stroke="#e3e8ef" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="682" y="158" font-size="18" fill="#ffd071">Orelha: região própria</text>
+<path d="M823 168L786 199" stroke="#e3e8ef" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="36" y="558" font-size="18" fill="#94b9ff">Banqueta: apenas bordas realmente expostas no plano de corrida.</text>
+<text x="36" y="589" font-size="18">Não unir topos por uma linha reta; não achatar a cabeça para caber num colisor.</text>
+<text x="36" y="620" font-size="16" fill="#bdc8db">Integração futura: medir contorno/apoio real, inclinação e regiões; testar pés em câmera final.</text>
+</g>
+</svg>

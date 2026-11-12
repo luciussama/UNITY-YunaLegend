@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "session": "2026-11-12-codex-books-25d-c804",
+  "status": "em_revisao",
+  "microdelivery": "T01.4",
+  "tool": "image_gen.imagegen built-in",
+  "transparent_background_requested": true,
+  "references": [
+    {
+      "path": "Evidence/25d/T01/bear-v1.png",
+      "role": "approved painted art style only",
+      "sha256": "708108204dda6a64294eb19c0e2567129e0d4a092926d78c47ebd0192f9ff833"
+    },
+    {
+      "path": "Evidence/supports-camera-2026-11-11/07-books-three-quarter.png",
+      "role": "existing stack arrangement/parts only",
+      "sha256": "6db19ebd8bfcc6ab923877451963f63502145003c575ad7d5c4e1ead863d83e2"
+    }
+  ],
+  "generation_source": "C:/Users/sergi/.codex/generated_images/01a1cfe0-1ed7-7ac1-8c1d-70a394f5b3c7/exec-71eba88f-8db6-4111-9c64-8bed312f4246.png",
+  "inspection": {
+    "width": 1620,
+    "height": 971,
+    "bit_depth": 8,
+    "png_color_type": 6,
+    "visible_books": 5,
+    "top_cover_apparent_tilt": true,
+    "exact_angle_and_contact_validation": "pending",
+    "alpha_edge_qa": "pending"
+  },
+  "support_contract_written_before_generation": true,
+  "files": [
+    {
+      "path": "books-v1.png",
+      "sha256": "cdbf8f5b1fa6f8cc3dd92372d142d26a72325005f4e84a97d49bd14fd83b0bec",
+      "bytes": 2501359
+    },
+    {
+      "path": "prompt-books-v1.txt",
+      "sha256": "2843d1bfd0ada713fbbafb31d60a6df8ad6e388f5c84d3e830ec909bed9846b8",
+      "bytes": 3122
+    },
+    {
+      "path": "books-support-contract-v1.md",
+      "sha256": "f640bb01453315101d6d2e4f6ddf49ee9fe693240ecbc2fa76330a40bc662398",
+      "bytes": 1974
+    },
+    {
+      "path": "reviews/T01.4-v1.md",
+      "sha256": "102dac4447c7804659c554e8309554eafab886f0066038f6d94e1ffb0c45a8b2",
+      "bytes": 2103
+    }
+  ]
+}

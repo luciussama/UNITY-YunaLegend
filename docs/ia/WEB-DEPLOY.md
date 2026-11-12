@@ -1,5 +1,7 @@
 # Publicar a build Web no GitHub Pages (e avaliar no celular)
 
+**Atualização 12/11/2026:** a exportação antiga não rastreada de `WebGL/` foi guardada em `Build/Archive/WebGL-before-25d-2026-11-12`. Estas instruções de infraestrutura continuam válidas; gerar uma build nova no destino `WebGL/` antes de publicar. As provas 2,5D atuais são cenas de avaliação e não uma versão final publicada. Compilar ou renderizar não comprova funcionamento em aparelho.
+
 **Resposta curta:** sim. O Unity tem WebGL Build Support instalado nesta máquina, a build já pode sair preparada para o GitHub Pages e um workflow publica a página. A versão mobile roda, mas com limites reais (desempenho e navegador), explicados no fim.
 
 ## Dois caminhos

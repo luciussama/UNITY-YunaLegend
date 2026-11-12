@@ -1,0 +1,113 @@
+{
+  "session": "2026-11-12-codex-camera-25d-b91f",
+  "files": [
+    {
+      "path": "Assets/Scenes/Validation/IllustratedCameraComparison.unity",
+      "sha256": "12ae3a9375a5a7e07a94c3307759fc77026943894f6fdc7aaffb08495d2a6921"
+    },
+    {
+      "path": "Assets/Scenes/Validation/IllustratedCameraComparison.unity.meta",
+      "sha256": "f02e4bb8482a488fc6e222f964ea84beec9b18332b849014cad2e3c8a6bd77af"
+    },
+    {
+      "path": "Assets/Scripts/Editor/IllustratedCameraComparison.cs",
+      "sha256": "91d45b78875395d435e022141017d6707f04a55c832844fa418a5d70caa4127e"
+    },
+    {
+      "path": "Assets/Scripts/Editor/IllustratedCameraComparison.cs.meta",
+      "sha256": "58bd3d26ba616d4e1412eaed1c854ca2e606dcae53c9b0c50dd80b4295515bfa"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/IllustratedCharacterFacing.cs",
+      "sha256": "87a9976f2c9ff5726d08b8a217ed41072f0f9a819eab0edacff36a4f5f0cd212"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/IllustratedCharacterFacing.cs.meta",
+      "sha256": "3e5fb086c17ecb2e6cc7af52e786422fd9c80ac68414788e36f7b818a3d4913e"
+    },
+    {
+      "path": "Assets/Scripts/Tests/IllustratedCharacterFacingTests.cs",
+      "sha256": "06a5e687d793e6752a4407c6ed815453eb1892dbf3d210189c37b00ac80da20d"
+    },
+    {
+      "path": "Assets/Scripts/Tests/IllustratedCharacterFacingTests.cs.meta",
+      "sha256": "f263a15778d9d1d32527e902c19526ccc9edf337fc06d9aa8e03b9a4180b9542"
+    },
+    {
+      "path": "Evidence/25d/T02.2/01-entry-A-perspective-wide.png",
+      "sha256": "a417deb35fd14cb394c3f6a08fc1b6a7dd5e49e894752149292b8420d2296790"
+    },
+    {
+      "path": "Evidence/25d/T02.2/01-entry-A-perspective.png",
+      "sha256": "e9f387d422ff881973679fb6ac02dd6af1d900d29f6ef62038a24e1e70e66ffa"
+    },
+    {
+      "path": "Evidence/25d/T02.2/01-entry-B-orthographic-wide.png",
+      "sha256": "5c01194d62ccc7cad65e897cb32daef17e7bd82fddb2f083c938ede6efc4c10f"
+    },
+    {
+      "path": "Evidence/25d/T02.2/01-entry-B-orthographic.png",
+      "sha256": "d81b6843a95277e759f53fec1fa398953f17a1a3d77ba58ad3d668a5aede998b"
+    },
+    {
+      "path": "Evidence/25d/T02.2/02-bear-A-perspective-wide.png",
+      "sha256": "bec3d1ddfd4fa61d8fed2d69c134f539af1505e8ec95abf828e3135320969a72"
+    },
+    {
+      "path": "Evidence/25d/T02.2/02-bear-A-perspective.png",
+      "sha256": "ddbc31d428e744d653b091486477b5917f9de4e817e06b9c75f005614df927f6"
+    },
+    {
+      "path": "Evidence/25d/T02.2/02-bear-B-orthographic-wide.png",
+      "sha256": "5a1c84726d65e0dbbf19be9f2137991530e9dd4a60a2a7c0186988b0c68b3ae5"
+    },
+    {
+      "path": "Evidence/25d/T02.2/02-bear-B-orthographic.png",
+      "sha256": "b286a45d55939865dd5ff66d4d20e293b30a8bf44f5f795ca7af935feece121b"
+    },
+    {
+      "path": "Evidence/25d/T02.2/02-bear-comparison.png",
+      "sha256": "2f1935a9e7fc2376ec9104124df55c054c6709414fa90256785d728032a3fc7a"
+    },
+    {
+      "path": "Evidence/25d/T02.2/03-books-A-perspective-wide.png",
+      "sha256": "38794e77ccc4f65e1841f3ef7315f9fdde11421aa99fbc87f2ca7128a061b120"
+    },
+    {
+      "path": "Evidence/25d/T02.2/03-books-A-perspective.png",
+      "sha256": "c6b94caa0699d92b6e3a6fda9df49000b609b672252b4560e1c65a414fb39c62"
+    },
+    {
+      "path": "Evidence/25d/T02.2/03-books-B-orthographic-wide.png",
+      "sha256": "43e5795bd103cae2b8d3162acbaf271342f501fe9343e915b6c25c7d47124115"
+    },
+    {
+      "path": "Evidence/25d/T02.2/03-books-B-orthographic.png",
+      "sha256": "04f05c15e9d1059c6dcea359c2445f651035be174733bbcf29b8528807023e5c"
+    },
+    {
+      "path": "Evidence/25d/T02.2/03-books-comparison.png",
+      "sha256": "0172f0dda99112545781d22f3a354cdf71535eac6a98429909564a010b7a3771"
+    },
+    {
+      "path": "Evidence/25d/T02.2/camera-comparison.json",
+      "sha256": "a363226443b6ce15de1649364c1d6728d5b406d3280d1d27c9677003559645ff"
+    },
+    {
+      "path": "Evidence/25d/T02.2/cameras-side-by-side.gif",
+      "sha256": "19d02ef72bff8f6823faa64a266fa2a3368df4b7ac6c1b17b7e749d1f96cec40"
+    },
+    {
+      "path": "Evidence/25d/T02.2/facing-tests.xml",
+      "sha256": "ce5eb360b947dc7c61bae32b3431ea65729acd11df1d4365601eaf34e60ce483"
+    },
+    {
+      "path": "Evidence/25d/T02.2/README.md",
+      "sha256": "0ab112462d498fae6c2758cb8824328de7b1353ebc4ac67fb50715d448335679"
+    },
+    {
+      "path": "Evidence/25d/T02.2/reviews/T02.2a-v1.md",
+      "sha256": "78e10a8ceea30884ed6959a974c20a9c6c15a5b6aa61f6b466e6eeeb42e5bd5e"
+    }
+  ]
+}
