@@ -1,0 +1,79 @@
+{
+    "method": "Edit-mode renders of the isolated validation scene with a dedicated detail camera (45 deg, 1.8 m visible height, about 2.2x the character height). Parameters are the ones the proof driver applies, not tuned for this image.",
+    "scene": "Assets/Scenes/Validation/IllustratedAnimationProof.unity",
+    "painting": "Assets/Art/Illustrated25D/Yuna/Yuna_Profile_v1.png",
+    "pixelsPerUnit": 1049.2857666015625,
+    "heightMetres": 1.463852882385254,
+    "panels": [
+        {
+            "name": "01-bind",
+            "note": "Sem pose: a pintura aprovada, sem deformacao.",
+            "lean": 0.0,
+            "sideBandSwing": 0.0,
+            "headTilt": 0.0,
+            "squashX": 1.0,
+            "squashY": 1.0,
+            "breathe": 0.0,
+            "bodyCompression": 0.0,
+            "minSoleLocalY": 0.013024740852415562,
+            "maxLocalY": 1.4362150430679322,
+            "maxAbsLocalX": 0.510823667049408
+        },
+        {
+            "name": "02-run-contact",
+            "note": "Corrida, contato: inclinacao 8,2 graus para frente, compressao 5,5 por cento.",
+            "lean": 8.199999809265137,
+            "sideBandSwing": 12.0,
+            "headTilt": -2.869999885559082,
+            "squashX": 1.0,
+            "squashY": 1.0,
+            "breathe": 0.004000000189989805,
+            "bodyCompression": 0.054999999701976779,
+            "minSoleLocalY": 0.01302406843751669,
+            "maxLocalY": 1.3994876146316529,
+            "maxAbsLocalX": 0.5784661769866943
+        },
+        {
+            "name": "03-run-passing",
+            "note": "Corrida, passagem: inclinacao 5,8 graus, compressao 1,5 por cento, faixa lateral invertida.",
+            "lean": 5.800000190734863,
+            "sideBandSwing": -12.0,
+            "headTilt": -2.0299999713897707,
+            "squashX": 1.0,
+            "squashY": 1.0,
+            "breathe": -0.004000000189989805,
+            "bodyCompression": 0.014999999664723874,
+            "minSoleLocalY": 0.013024557381868363,
+            "maxLocalY": 1.446410894393921,
+            "maxAbsLocalX": 0.5358592867851257
+        },
+        {
+            "name": "04-land",
+            "note": "Pouso: achatamento 7,5 por cento e alargamento 5 por cento.",
+            "lean": 6.0,
+            "sideBandSwing": -6.0,
+            "headTilt": -2.0,
+            "squashX": 1.0499999523162842,
+            "squashY": 0.925000011920929,
+            "breathe": 0.0,
+            "bodyCompression": 0.0,
+            "minSoleLocalY": 0.012047884985804558,
+            "maxLocalY": 1.3599883317947388,
+            "maxAbsLocalX": 0.565544843673706
+        },
+        {
+            "name": "05-limit",
+            "note": "Limite da tecnica (nao e candidata): inclinacao 25 graus, faixa 25, compressao 12 por cento.",
+            "lean": 25.0,
+            "sideBandSwing": 25.0,
+            "headTilt": -8.75,
+            "squashX": 1.059999942779541,
+            "squashY": 0.8999999761581421,
+            "breathe": 0.0,
+            "bodyCompression": 0.11999999731779099,
+            "minSoleLocalY": 0.011720946058630944,
+            "maxLocalY": 1.2307578325271607,
+            "maxAbsLocalX": 0.7979438304901123
+        }
+    ]
+}

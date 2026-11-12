@@ -1,0 +1,1254 @@
+{
+    "method": "Editor PlayMode normal KeyboardState events, unchanged physics and controller. One approved painting deformed as a proportional skin; camera is the approved stable A framing. Deformation only rewrites mesh vertices: root, collider and pivot are never moved. Legs do not articulate; drawn key poses remain a T03 decision input.",
+    "paintingHash": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+    "gameplayBefore": "d507921b1244c2a3186ba820bc54a3eae8daf9208dcde677f7eed438c9e358ed",
+    "gameplayAfter": "d507921b1244c2a3186ba820bc54a3eae8daf9208dcde677f7eed438c9e358ed",
+    "controllerBefore": "d47aea951b8190c4a0557bb1521eaf4b37ccf57282b15e5daef07d94c0430d10",
+    "controllerAfter": "d47aea951b8190c4a0557bb1521eaf4b37ccf57282b15e5daef07d94c0430d10",
+    "sourceGameplayUnchanged": true,
+    "gameplayHadNoSkin": true,
+    "reachedBear": true,
+    "reachedBooks": true,
+    "visualAndColliderUnchanged": true,
+    "soleNeverCrossedFloor": true,
+    "travelDistance": 17.457712173461915,
+    "pixelsPerUnit": 1049.2857666015625,
+    "textureMegabytes": 12.000907897949219,
+    "minSoleLocalY": 0.01328523550182581,
+    "maxAbsLocalX": 0.5296706557273865,
+    "maxLocalY": 1.5076220035552979,
+    "textureWidth": 1024,
+    "textureHeight": 1536,
+    "meshColumns": 12,
+    "meshRows": 36,
+    "meshVertices": 481,
+    "meshTriangles": 864,
+    "skinUpdates": 304,
+    "frameCount": 71,
+    "skinAverageMilliseconds": 0.16430427134037019,
+    "skinMaxMilliseconds": 0.2337000072002411,
+    "estimateNote": "Frame-swap budget below is an estimate, not a measured render: one imported painting frame is 1024x1536 RGBA32.",
+    "runFramesEstimate": 12,
+    "runAtlasRawMegabytes": 72.0,
+    "singleFrameRawMegabytes": 6.0,
+    "samples": [
+        {
+            "frame": 20,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.9166666865348816,
+            "lean": 5.9607696533203129,
+            "squashY": 1.0,
+            "bodyCompression": 0.04500000923871994,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024190440773964,
+            "player": {
+                "x": -8.920000076293946,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 24,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.029761910438537599,
+            "lean": 7.438409328460693,
+            "squashY": 1.0,
+            "bodyCompression": 0.05361747369170189,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024085201323033,
+            "player": {
+                "x": -8.680000305175782,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 28,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.148809552192688,
+            "lean": 8.146687507629395,
+            "squashY": 1.0,
+            "bodyCompression": 0.029104888439178468,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024385087192059,
+            "player": {
+                "x": -8.4399995803833,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 32,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.2678571939468384,
+            "lean": 6.732974052429199,
+            "squashY": 1.0,
+            "bodyCompression": 0.015501445159316063,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.01302455086261034,
+            "player": {
+                "x": -8.199999809265137,
+                "y": -9.019999504089356,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 36,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.3869047164916992,
+            "lean": 5.8134026527404789,
+            "squashY": 1.0,
+            "bodyCompression": 0.037980835884809497,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024276122450829,
+            "player": {
+                "x": -7.960000038146973,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 40,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.5,
+            "lean": 7.0,
+            "squashY": 1.0,
+            "bodyCompression": 0.054999999701976779,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.01302406843751669,
+            "player": {
+                "x": -7.71999979019165,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 44,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.6190476417541504,
+            "lean": 8.19664478302002,
+            "squashY": 1.0,
+            "bodyCompression": 0.03649459034204483,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.01302429474890232,
+            "player": {
+                "x": -7.480000019073486,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 48,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.7380952835083008,
+            "lean": 7.178850173950195,
+            "squashY": 1.0,
+            "bodyCompression": 0.015223382040858269,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024554587900639,
+            "player": {
+                "x": -7.239999771118164,
+                "y": -9.019999504089356,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 52,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.8571428060531616,
+            "lean": 5.830086708068848,
+            "squashY": 1.0,
+            "bodyCompression": 0.03054957464337349,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024367392063141,
+            "player": {
+                "x": -7.0,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 56,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.976190447807312,
+            "lean": 6.6462931632995609,
+            "squashY": 1.0,
+            "bodyCompression": 0.054111454635858539,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024079613387585,
+            "player": {
+                "x": -6.759999752044678,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 60,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.08928585052490235,
+            "lean": 8.08116340637207,
+            "squashY": 1.0,
+            "bodyCompression": 0.043677642941474918,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024207204580307,
+            "player": {
+                "x": -6.519999980926514,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 64,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.20833325386047364,
+            "lean": 7.600001335144043,
+            "squashY": 1.0,
+            "bodyCompression": 0.017679503187537195,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024524785578251,
+            "player": {
+                "x": -6.279999732971191,
+                "y": -9.019999504089356,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 68,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.327380895614624,
+            "lean": 6.008513927459717,
+            "squashY": 1.0,
+            "bodyCompression": 0.02373358979821205,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024450279772282,
+            "player": {
+                "x": -6.039999961853027,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 72,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.4464285373687744,
+            "lean": 6.251811981201172,
+            "squashY": 1.0,
+            "bodyCompression": 0.05063663050532341,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024121522903443,
+            "player": {
+                "x": -5.799999713897705,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 76,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.5595238208770752,
+            "lean": 7.816207408905029,
+            "squashY": 1.0,
+            "bodyCompression": 0.04966103658080101,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024133630096913,
+            "player": {
+                "x": -5.559999942779541,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 80,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.6785714626312256,
+            "lean": 7.938197135925293,
+            "squashY": 1.0,
+            "bodyCompression": 0.022530194371938707,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024465180933476,
+            "player": {
+                "x": -5.319999694824219,
+                "y": -9.019999504089356,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 84,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.797619104385376,
+            "lean": 6.324015140533447,
+            "squashY": 1.0,
+            "bodyCompression": 0.018475230783224107,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.01302451454102993,
+            "player": {
+                "x": -5.079999923706055,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 88,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.9166667461395264,
+            "lean": 5.960770130157471,
+            "squashY": 1.0,
+            "bodyCompression": 0.04500002786517143,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024190440773964,
+            "player": {
+                "x": -4.839999675750732,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 92,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.02976202964782715,
+            "lean": 7.438411235809326,
+            "squashY": 1.0,
+            "bodyCompression": 0.053617462515830997,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024085201323033,
+            "player": {
+                "x": -4.599999904632568,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 96,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.14880943298339845,
+            "lean": 8.146687507629395,
+            "squashY": 1.0,
+            "bodyCompression": 0.029104918241500856,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024385087192059,
+            "player": {
+                "x": -4.359999656677246,
+                "y": -9.019999504089356,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 100,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.26785707473754885,
+            "lean": 6.732975959777832,
+            "squashY": 1.0,
+            "bodyCompression": 0.01550143864005804,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.01302455086261034,
+            "player": {
+                "x": -4.119999885559082,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 104,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.3869047164916992,
+            "lean": 5.8134026527404789,
+            "squashY": 1.0,
+            "bodyCompression": 0.037980835884809497,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024276122450829,
+            "player": {
+                "x": -3.8799996376037599,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 108,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.5,
+            "lean": 7.0,
+            "squashY": 1.0,
+            "bodyCompression": 0.054999999701976779,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.01302406843751669,
+            "player": {
+                "x": -3.6399998664855959,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 112,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.6190476417541504,
+            "lean": 8.19664478302002,
+            "squashY": 1.0,
+            "bodyCompression": 0.03649459034204483,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.01302429474890232,
+            "player": {
+                "x": -3.3999996185302736,
+                "y": -9.019999504089356,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 116,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.7380952835083008,
+            "lean": 7.178850173950195,
+            "squashY": 1.0,
+            "bodyCompression": 0.015223382040858269,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024554587900639,
+            "player": {
+                "x": -3.1599998474121095,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 120,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.8571429252624512,
+            "lean": 5.8300862312316898,
+            "squashY": 1.0,
+            "bodyCompression": 0.030549611896276475,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024367392063141,
+            "player": {
+                "x": -2.919999599456787,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 124,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.9761905670166016,
+            "lean": 6.646295547485352,
+            "squashY": 1.0,
+            "bodyCompression": 0.05411146581172943,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024079613387585,
+            "player": {
+                "x": -2.679999828338623,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 128,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.08928585052490235,
+            "lean": 8.08116340637207,
+            "squashY": 1.0,
+            "bodyCompression": 0.043677642941474918,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024207204580307,
+            "player": {
+                "x": -2.439999580383301,
+                "y": -9.019999504089356,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 132,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.20833349227905274,
+            "lean": 7.5999979972839359,
+            "squashY": 1.0,
+            "bodyCompression": 0.017679471522569658,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024524785578251,
+            "player": {
+                "x": -2.1999998092651369,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 136,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.3273811340332031,
+            "lean": 6.008512020111084,
+            "squashY": 1.0,
+            "bodyCompression": 0.02373363822698593,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024450279772282,
+            "player": {
+                "x": -1.959999680519104,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 140,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.4464287757873535,
+            "lean": 6.251814842224121,
+            "squashY": 1.0,
+            "bodyCompression": 0.050636664032936099,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024121522903443,
+            "player": {
+                "x": -1.7199996709823609,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 144,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.5595240592956543,
+            "lean": 7.8162102699279789,
+            "squashY": 1.0,
+            "bodyCompression": 0.04966099187731743,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024133630096913,
+            "player": {
+                "x": -1.4799996614456177,
+                "y": -9.019999504089356,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 148,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.6785712242126465,
+            "lean": 7.938199520111084,
+            "squashY": 1.0,
+            "bodyCompression": 0.022530239075422288,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024465180933476,
+            "player": {
+                "x": -1.2399996519088746,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 152,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.7976188659667969,
+            "lean": 6.3240180015563969,
+            "squashY": 1.0,
+            "bodyCompression": 0.01847519911825657,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.01302451454102993,
+            "player": {
+                "x": -0.9999996423721314,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 156,
+            "support": -1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.9166665077209473,
+            "lean": 5.960768699645996,
+            "squashY": 1.0,
+            "bodyCompression": 0.044999975711107257,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024190440773964,
+            "player": {
+                "x": -0.7599996328353882,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 160,
+            "support": -1,
+            "pose": "Jump",
+            "grounded": false,
+            "phase": 0.9761905670166016,
+            "lean": 6.0,
+            "squashY": 1.0449999570846558,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028881540521979333,
+            "minSoleLocalY": 0.01361085381358862,
+            "player": {
+                "x": -0.519999623298645,
+                "y": -8.68968391418457,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 164,
+            "support": -1,
+            "pose": "Jump",
+            "grounded": false,
+            "phase": 0.9761905670166016,
+            "lean": 6.0,
+            "squashY": 1.0449999570846558,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028881540521979333,
+            "minSoleLocalY": 0.01361085381358862,
+            "player": {
+                "x": -0.27999961376190188,
+                "y": -8.10238265991211,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 168,
+            "support": -1,
+            "pose": "Jump",
+            "grounded": false,
+            "phase": 0.9761905670166016,
+            "lean": 6.0,
+            "squashY": 1.0449999570846558,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028881540521979333,
+            "minSoleLocalY": 0.01361085381358862,
+            "player": {
+                "x": -0.03999960422515869,
+                "y": -7.612858772277832,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 172,
+            "support": -1,
+            "pose": "Jump",
+            "grounded": false,
+            "phase": 0.9761905670166016,
+            "lean": 6.0,
+            "squashY": 1.0449999570846558,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028881540521979333,
+            "minSoleLocalY": 0.01361085381358862,
+            "player": {
+                "x": 0.20000040531158448,
+                "y": -7.221113204956055,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 176,
+            "support": -1,
+            "pose": "Jump",
+            "grounded": false,
+            "phase": 0.9761905670166016,
+            "lean": 6.0,
+            "squashY": 1.0449999570846558,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028881540521979333,
+            "minSoleLocalY": 0.01361085381358862,
+            "player": {
+                "x": 0.44000041484832766,
+                "y": -6.927145004272461,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 180,
+            "support": -1,
+            "pose": "Jump",
+            "grounded": false,
+            "phase": 0.9761905670166016,
+            "lean": 6.0,
+            "squashY": 1.0449999570846558,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028881540521979333,
+            "minSoleLocalY": 0.01361085381358862,
+            "player": {
+                "x": 0.6800004243850708,
+                "y": -6.730955123901367,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 184,
+            "support": -1,
+            "pose": "Jump",
+            "grounded": false,
+            "phase": 0.9761905670166016,
+            "lean": 6.0,
+            "squashY": 1.0449999570846558,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028881540521979333,
+            "minSoleLocalY": 0.01361085381358862,
+            "player": {
+                "x": 0.920000433921814,
+                "y": -6.632543087005615,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 188,
+            "support": -1,
+            "pose": "Fall",
+            "grounded": false,
+            "phase": 0.9761905670166016,
+            "lean": 3.0,
+            "squashY": 1.0199999809265137,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028190596029162408,
+            "minSoleLocalY": 0.01328523550182581,
+            "player": {
+                "x": 1.1600004434585572,
+                "y": -6.631908416748047,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 192,
+            "support": -1,
+            "pose": "Fall",
+            "grounded": false,
+            "phase": 0.9761905670166016,
+            "lean": 3.0,
+            "squashY": 1.0199999809265137,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028190596029162408,
+            "minSoleLocalY": 0.01328523550182581,
+            "player": {
+                "x": 1.4000004529953004,
+                "y": -6.72905158996582,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 196,
+            "support": -1,
+            "pose": "Fall",
+            "grounded": false,
+            "phase": 0.9761905670166016,
+            "lean": 3.0,
+            "squashY": 1.0199999809265137,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028190596029162408,
+            "minSoleLocalY": 0.01328523550182581,
+            "player": {
+                "x": 1.6400004625320435,
+                "y": -6.923973083496094,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 200,
+            "support": -1,
+            "pose": "Fall",
+            "grounded": false,
+            "phase": 0.9761905670166016,
+            "lean": 3.0,
+            "squashY": 1.0199999809265137,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028190596029162408,
+            "minSoleLocalY": 0.01328523550182581,
+            "player": {
+                "x": 1.8800004720687867,
+                "y": -7.216671943664551,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 204,
+            "support": -1,
+            "pose": "Fall",
+            "grounded": false,
+            "phase": 0.9761905670166016,
+            "lean": 3.0,
+            "squashY": 1.0199999809265137,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028190596029162408,
+            "minSoleLocalY": 0.01328523550182581,
+            "player": {
+                "x": 2.1200003623962404,
+                "y": -7.60714864730835,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 208,
+            "support": 0,
+            "pose": "Land",
+            "grounded": true,
+            "phase": 0.029761791229248048,
+            "lean": 6.0,
+            "squashY": 0.940625011920929,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.025996843352913858,
+            "minSoleLocalY": 0.012251396663486958,
+            "player": {
+                "x": 2.3600006103515627,
+                "y": -7.920000076293945,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 212,
+            "support": 0,
+            "pose": "Land",
+            "grounded": true,
+            "phase": 0.14880943298339845,
+            "lean": 6.0,
+            "squashY": 0.971875011920929,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.026860525831580163,
+            "minSoleLocalY": 0.012658420018851757,
+            "player": {
+                "x": 2.6000003814697267,
+                "y": -7.920342445373535,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 216,
+            "support": 0,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.26785707473754885,
+            "lean": 6.732975959777832,
+            "squashY": 1.0,
+            "bodyCompression": 0.01550143864005804,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.01302455086261034,
+            "player": {
+                "x": 2.840000629425049,
+                "y": -7.790891647338867,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 220,
+            "support": 0,
+            "pose": "Jump",
+            "grounded": false,
+            "phase": 0.2976188659667969,
+            "lean": 6.0,
+            "squashY": 1.0449999570846558,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028881540521979333,
+            "minSoleLocalY": 0.01361085381358862,
+            "player": {
+                "x": 3.0816822052001955,
+                "y": -7.2858076095581059,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 224,
+            "support": 0,
+            "pose": "Jump",
+            "grounded": false,
+            "phase": 0.2976188659667969,
+            "lean": 6.0,
+            "squashY": 1.0449999570846558,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028881540521979333,
+            "minSoleLocalY": 0.01361085381358862,
+            "player": {
+                "x": 3.3239245414733888,
+                "y": -6.7229509353637699,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 228,
+            "support": 0,
+            "pose": "Jump",
+            "grounded": false,
+            "phase": 0.2976188659667969,
+            "lean": 6.0,
+            "squashY": 1.0449999570846558,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028881540521979333,
+            "minSoleLocalY": 0.01361085381358862,
+            "player": {
+                "x": 3.566166877746582,
+                "y": -6.257871627807617,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 232,
+            "support": 0,
+            "pose": "Jump",
+            "grounded": false,
+            "phase": 0.2976188659667969,
+            "lean": 6.0,
+            "squashY": 1.0449999570846558,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028881540521979333,
+            "minSoleLocalY": 0.01361085381358862,
+            "player": {
+                "x": 3.8084092140197756,
+                "y": -5.890570640563965,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 236,
+            "support": 0,
+            "pose": "Jump",
+            "grounded": false,
+            "phase": 0.2976188659667969,
+            "lean": 6.0,
+            "squashY": 1.0449999570846558,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028881540521979333,
+            "minSoleLocalY": 0.01361085381358862,
+            "player": {
+                "x": 4.050651550292969,
+                "y": -5.621047019958496,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 240,
+            "support": 0,
+            "pose": "Jump",
+            "grounded": false,
+            "phase": 0.2976188659667969,
+            "lean": 6.0,
+            "squashY": 1.0449999570846558,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028881540521979333,
+            "minSoleLocalY": 0.01361085381358862,
+            "player": {
+                "x": 4.292893886566162,
+                "y": -5.449301719665527,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 244,
+            "support": 0,
+            "pose": "Jump",
+            "grounded": false,
+            "phase": 0.2976188659667969,
+            "lean": 6.0,
+            "squashY": 1.0449999570846558,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028881540521979333,
+            "minSoleLocalY": 0.01361085381358862,
+            "player": {
+                "x": 4.5351362228393559,
+                "y": -5.375333786010742,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 248,
+            "support": 0,
+            "pose": "Fall",
+            "grounded": false,
+            "phase": 0.2976188659667969,
+            "lean": 3.0,
+            "squashY": 1.0199999809265137,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028190596029162408,
+            "minSoleLocalY": 0.01328523550182581,
+            "player": {
+                "x": 4.777378559112549,
+                "y": -5.399143695831299,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 252,
+            "support": 0,
+            "pose": "Fall",
+            "grounded": false,
+            "phase": 0.2976188659667969,
+            "lean": 3.0,
+            "squashY": 1.0199999809265137,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028190596029162408,
+            "minSoleLocalY": 0.01328523550182581,
+            "player": {
+                "x": 5.019620895385742,
+                "y": -5.520731449127197,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 256,
+            "support": 0,
+            "pose": "Fall",
+            "grounded": false,
+            "phase": 0.2976188659667969,
+            "lean": 3.0,
+            "squashY": 1.0199999809265137,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028190596029162408,
+            "minSoleLocalY": 0.01328523550182581,
+            "player": {
+                "x": 5.2618632316589359,
+                "y": -5.7400970458984379,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 260,
+            "support": 0,
+            "pose": "Fall",
+            "grounded": false,
+            "phase": 0.2976188659667969,
+            "lean": 3.0,
+            "squashY": 1.0199999809265137,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028190596029162408,
+            "minSoleLocalY": 0.01328523550182581,
+            "player": {
+                "x": 5.504105091094971,
+                "y": -6.0572404861450199,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 264,
+            "support": 0,
+            "pose": "Fall",
+            "grounded": false,
+            "phase": 0.2976188659667969,
+            "lean": 3.0,
+            "squashY": 1.0199999809265137,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028190596029162408,
+            "minSoleLocalY": 0.01328523550182581,
+            "player": {
+                "x": 5.746347427368164,
+                "y": -6.472161769866943,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 268,
+            "support": 0,
+            "pose": "Fall",
+            "grounded": false,
+            "phase": 0.2976188659667969,
+            "lean": 3.0,
+            "squashY": 1.0199999809265137,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028190596029162408,
+            "minSoleLocalY": 0.01328523550182581,
+            "player": {
+                "x": 5.988589763641357,
+                "y": -6.984860897064209,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 272,
+            "support": 1,
+            "pose": "Land",
+            "grounded": true,
+            "phase": 0.3273811340332031,
+            "lean": 6.0,
+            "squashY": 0.932812511920929,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.025780921801924707,
+            "minSoleLocalY": 0.012149641290307045,
+            "player": {
+                "x": 6.230832099914551,
+                "y": -7.454518795013428,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 276,
+            "support": 1,
+            "pose": "Land",
+            "grounded": true,
+            "phase": 0.4464287757873535,
+            "lean": 6.0,
+            "squashY": 0.964062511920929,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.02664460428059101,
+            "minSoleLocalY": 0.012556664645671845,
+            "player": {
+                "x": 6.470832347869873,
+                "y": -7.471301078796387,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 280,
+            "support": 1,
+            "pose": "Land",
+            "grounded": true,
+            "phase": 0.5595240592956543,
+            "lean": 6.0,
+            "squashY": 0.995312511920929,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.027508286759257318,
+            "minSoleLocalY": 0.01296368706971407,
+            "player": {
+                "x": 6.710832118988037,
+                "y": -7.488083839416504,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 284,
+            "support": 1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.6785712242126465,
+            "lean": 7.938199520111084,
+            "squashY": 1.0,
+            "bodyCompression": 0.022530239075422288,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024465180933476,
+            "player": {
+                "x": 6.950832366943359,
+                "y": -7.504866123199463,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 288,
+            "support": 1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.7976188659667969,
+            "lean": 6.3240180015563969,
+            "squashY": 1.0,
+            "bodyCompression": 0.01847519911825657,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.01302451454102993,
+            "player": {
+                "x": 7.190832138061523,
+                "y": -7.521648406982422,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 292,
+            "support": 1,
+            "pose": "Run",
+            "grounded": true,
+            "phase": 0.9166665077209473,
+            "lean": 5.960768699645996,
+            "squashY": 1.0,
+            "bodyCompression": 0.044999975711107257,
+            "minLocalY": -0.027637839317321779,
+            "minSoleLocalY": 0.013024190440773964,
+            "player": {
+                "x": 7.430832386016846,
+                "y": -7.541210651397705,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 296,
+            "support": 1,
+            "pose": "Fall",
+            "grounded": false,
+            "phase": 0.9761905670166016,
+            "lean": 3.0,
+            "squashY": 1.0199999809265137,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028190596029162408,
+            "minSoleLocalY": 0.01328523550182581,
+            "player": {
+                "x": 7.67083215713501,
+                "y": -7.668246269226074,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 300,
+            "support": 1,
+            "pose": "Fall",
+            "grounded": false,
+            "phase": 0.9761905670166016,
+            "lean": 3.0,
+            "squashY": 1.0199999809265137,
+            "bodyCompression": 0.0,
+            "minLocalY": -0.028190596029162408,
+            "minSoleLocalY": 0.01328523550182581,
+            "player": {
+                "x": 7.910832405090332,
+                "y": -7.899357318878174,
+                "z": 0.0
+            }
+        }
+    ],
+    "shots": [
+        "01-entry",
+        "02-run-contact",
+        "03-run-passing",
+        "04-takeoff",
+        "05-rise",
+        "06-fall",
+        "07-land",
+        "08-recovered",
+        "09-books"
+    ]
+}

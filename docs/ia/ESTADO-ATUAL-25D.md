@@ -1,6 +1,6 @@
 # Estado atual — sala escura ilustrada
 
-Atualização em 12/11/2026, sessões `2026-11-12-codex-camera-stable-74ac` e `2026-11-12-codex-archive-previous-25d-9e5b`. Este é um índice curto; reservas e resultados verificáveis permanecem no estado estruturado e no diário.
+Atualização em 12/11/2026, sessões `2026-11-12-dsh-resume-25d-7c41`. Este é um índice curto; reservas e resultados verificáveis permanecem no estado estruturado e no diário.
 
 ## Feito e aprovado
 
@@ -8,20 +8,18 @@ Atualização em 12/11/2026, sessões `2026-11-12-codex-camera-stable-74ac` e `2
 - Direção T01 aprovada: Yuna, Nanda azul, urso arredondado, livros inclinados, móvel e composição noturna. [Bíblia aprovada](../../Evidence/25d/T01/DIRECAO-VISUAL-APROVADA.md).
 - Yuna estática na Unity aprovada em T02.1: pintura integral, transparência, pivô/escala, ordenação e oclusão em cena isolada.
 - Projeção A, perspectiva suave 45°, escolhida em T02.2a. [Aceite literal](../../Evidence/25d/T02.2/reviews/T02.2a-v1-aprovacao.md).
+- Câmera A estável aprovada em T02.2b: Yuna em 134,4 px constantes, acompanhamento suave e antecipação do pouso. [Registro da resposta humana](../../Evidence/25d/T02.2b/review-v1.md).
 
 ## Entrega atual para revisão
 
-[T02.2b — câmera A estável](../../Evidence/25d/T02.2b/README.md): tamanho de Yuna praticamente constante em 134,4 px a 720 px de altura; acompanhamento suave e antecipação do próximo pouso. Captura real com entradas de teclado e 4/4 testes PlayMode de câmera aprovados. Modo opt-in apenas em `Assets/Scenes/Validation/IllustratedStableCamera.unity`; Gameplay e controlador físico preservados.
-
-**Aguardando revisão humana de conforto desta câmera.** T02 continua ativa. A Yuna ainda usa uma única pose estática durante o deslocamento dos saltos; não há animação corporal 2D final. Ambiente e esfera de Nanda nas provas ainda são a base técnica antiga.
+[T02.3 — prova do método de animação e orçamento](../../Evidence/25d/T02.3/README.md): a pintura aprovada deformada por uma malha proporcional (481 vértices), conduzida pelo estado real do controlador, em cena isolada com a câmera aprovada. Medido: camada de 0,167 ms por quadro, sola nunca abaixo do apoio, root/colisor/pivô intactos, Gameplay e controlador com SHA inalterado. **As pernas não articulam** e a camada resultou quase imperceptível (≈2 px de oscilação no ciclo, inclinação de sinal invertido): a prova mostra o limite de deformar uma pintura única e sustenta a decisão de quadros desenhados em T03.
 
 ## Próximos passos pequenos
 
-1. Registrar a avaliação da câmera T02.2b e ajustar se necessário.
-2. T02.3: prova do método de animação, ciclo/salto provisórios e custo medido; revisão antes de fechar T02.
-3. T03: repouso, corrida, salto/pouso e tropeço de Yuna, um comportamento por revisão.
-4. T04/T05: Nanda reconhecível com luz azul e ambiente ilustrado, um objeto por revisão, mantendo apoios reais e móvel cedendo/retry.
-5. Integrar somente o piloto urso → livros → móvel; aprovação em movimento antes de expandir a fase.
+1. Registrar a avaliação da prova T02.3 e ajustar se necessário; só então fechar T02.
+2. T03: repouso, corrida, salto/pouso e tropeço de Yuna com poses desenhadas, um comportamento por revisão.
+3. T04/T05: Nanda reconhecível com luz azul e ambiente ilustrado, um objeto por revisão, mantendo apoios reais e móvel cedendo/retry.
+4. Integrar somente o piloto urso → livros → móvel; aprovação em movimento antes de expandir a fase.
 
 Pendências de integração: calibração visual dos pés sobre superfícies reais (root está cerca de 0,08 m acima delas, próximo da skin do CharacterController), composição retrato, narrativa completa e dispositivos reais. Não mudar root/física ou achatar objetos para esconder diferenças. Não houve publicação da nova apresentação.
 

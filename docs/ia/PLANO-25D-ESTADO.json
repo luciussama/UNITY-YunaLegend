@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-12T17:23:04.192358+00:00",
+  "updated_at": "2026-11-12T18:41:47.262001+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -143,17 +143,17 @@
       "human_gate": false,
       "status": "active",
       "owner": {
-        "session": "2026-11-12-codex-archive-previous-25d-9e5b",
-        "agent": "Codex (GPT-6)"
+        "session": "2026-11-12-dsh-resume-25d-7c41",
+        "agent": "DeepSeek Harness (deepseek-flash)"
       },
       "checkpoint": {
-        "done": "T02.2b cameraA45 estável implementada eprontaparaavaliacao:134.4pxconstantes,4/4PlayModeCameraTests. Material anterior arquivado:366arquivos/123.23MiB,8docs+17gruposEvidence+4logstracked;README/ESTADO-ATUAL-25D ativos.",
-        "next": "Apresentar stable-camera.gif e registrar avaliacao humanaT02.2b;ajustes sepedidos. Depois T02.3 prova deanimacao eorcamento,sem pularaceitecamera. Ao retomar lerESTADO-ATUAL-25D,diario50,plan/status;historico apenas sob demanda viaarchive_history.py.",
-        "validation": "CameraInputs urso/livros eescala134.3999-134.4001px;4testesPassed. Arquivo366/366SHAOK;364arquivosanteriormentetracked comdestinoverificado;3refshistoricasT01resolvidas;linksativossemquebra;nenhumarquivoarchiveignorado;plan/diary/diffcheckOK.",
-        "pending": "Avaliacao humanaT02.2b;T02.3animacao/custo;contatovisualpes~skin.08m;ambiente/Nandaantigos;retratos/dispositivos/fasecompleta/publicacao2D pendentes. SemaceiteT02agregado ouexpansao.",
-        "files": "README.md;docs/ia/ESTADO-ATUAL-25D.md;Evidence/25d/T02.2b/README.md;Evidence/25d/T02.2b/stable-camera.gif;Archive/pre-25d-2026-11-12/README.md;Archive/pre-25d-2026-11-12/manifest.json;tools/archive_history.py;AGENTS.md",
-        "processes": "Capturas/testesbatch encerrados;Editor principal preservado;nenhum processo novo de arquivamento ativo",
-        "updated_at": "2026-11-12T17:23:04.192358+00:00"
+        "done": "T02.1/T02.2a/T02.2b aprovadas; T02.3 v2: sinal da inclinacao corrigido, campos renomeados, captura e GIFs refeitos, comparacao controlada em 2,2x com mapa de deslocamento; 32/32 PlayMode",
+        "next": "Registrar avaliacao humana da T02.3 v2 (reviews/T02.3-v2.md). Se a camada for aceita como vida secundaria, submeter/aceitar T02 e iniciar T03.1 com poses desenhadas; se rejeitada, registrar motivo e decidir T03 sem esta camada.",
+        "validation": "proof success=True; skin 0.164ms media; soleMin +0.0133m; root/colisor/pivo inalterados; Gameplay/controlador SHA iguais; playmode 32/32; detail panels=5; folha 1908x920",
+        "pending": "Aceite humano T02.3 v2; pernas nao articulam; amplitude no tamanho de jogo ~2px; orcamento de atlas e estimativa; contato visual pes ~0.08m; ambiente/Nanda antigos; retrato/dispositivos/publicacao; alteracoes nao commitadas",
+        "files": "Evidence/25d/T02.3;Evidence/25d/T02.3/deformation;Evidence/25d/T02.3/deformation-comparison.png;Assets/Scripts/Runtime/Illustrated25D;Assets/Scripts/Editor/IllustratedDeformationDetail.cs;tools/make_deformation_sheet.py",
+        "processes": "Unity batch encerrado (exit 0); nenhum Editor aberto; projeto principal ainda com lockfile estagnado",
+        "updated_at": "2026-11-12T18:41:47.262001+00:00"
       }
     },
     {
@@ -796,6 +796,39 @@
       "files": "README.md;docs/ia/ESTADO-ATUAL-25D.md;Evidence/25d/T02.2b/README.md;Evidence/25d/T02.2b/stable-camera.gif;Archive/pre-25d-2026-11-12/README.md;Archive/pre-25d-2026-11-12/manifest.json;tools/archive_history.py;AGENTS.md",
       "processes": "Capturas/testesbatch encerrados;Editor principal preservado;nenhum processo novo de arquivamento ativo",
       "at": "2026-11-12T17:23:04.192358+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T02",
+      "session": "2026-11-12-dsh-resume-25d-7c41",
+      "agent": "DeepSeek Harness (deepseek-flash)",
+      "reason": "Retomada autorizada apos aceite humano da camera T02.2b. Dono anterior inativo (arquivamento concluido), nenhum Unity Editor/PID do projeto ativo, Git limpo em df0ba6b, checkpoint e evidencias T02.2b conferidos. Transferencia para registrar aceite e iniciar T02.3.",
+      "from_session": "2026-11-12-codex-archive-previous-25d-9e5b",
+      "at": "2026-11-12T17:52:43.800476+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T02",
+      "session": "2026-11-12-dsh-resume-25d-7c41",
+      "done": "T02.1/T02.2a/T02.2b aprovadas; T02.3 implementada: pintura deformada por malha proporcional em cena isolada, camera A, travessia real por InputSystem ate urso e livros; 32/32 PlayMode com 4 contratos novos",
+      "next": "Apresentar animation-run.gif, animation-jump.gif e animation-closeup-jump.gif e registrar avaliacao humana T02.3 em reviews/T02.3-v1.md. Se aprovada, submeter/aceitar T02 e iniciar T03.1 (repouso desenhado). Sem pular a revisao humana.",
+      "validation": "ILLUSTRATED_ANIMATION_PROOF_DONE success=True; soleMin +0.0133m; root/colisor/pivo inalterados; Gameplay d507921b e controlador d47aea95 iguais; pintura 0b9315b4 preservada; camada 0.167ms media; 481 verts; playmode 32/32; plan check OK",
+      "pending": "Aceite humano T02.3; pernas nao articulam nesta prova; orcamento de atlas e estimativa; contato visual pes ~0.08m; ambiente/Nanda antigos; retrato/dispositivos/fase completa/publicacao; alteracoes ainda nao commitadas",
+      "files": "Evidence/25d/T02.3;Assets/Scenes/Validation/IllustratedAnimationProof.unity;Assets/Scripts/Runtime/Illustrated25D;Assets/Scripts/Editor/IllustratedAnimationProof.cs;Assets/Scripts/Tests/PlayMode/IllustratedAnimationProofTests.cs;Assets/Art/Illustrated25D/Yuna/Painting_Mesh_Unlit.mat;tools/make_animation_gif.py;docs/ia/ESTADO-ATUAL-25D.md",
+      "processes": "Unity batch e testes encerrados (exit 0); nenhum Editor principal aberto; projeto principal tem lockfile estagnado de 13:11 e nao abre em batch, por isso a prova rodou em Build/Publish/Project",
+      "at": "2026-11-12T18:21:28.749709+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T02",
+      "session": "2026-11-12-dsh-resume-25d-7c41",
+      "done": "T02.1/T02.2a/T02.2b aprovadas; T02.3 v2: sinal da inclinacao corrigido, campos renomeados, captura e GIFs refeitos, comparacao controlada em 2,2x com mapa de deslocamento; 32/32 PlayMode",
+      "next": "Registrar avaliacao humana da T02.3 v2 (reviews/T02.3-v2.md). Se a camada for aceita como vida secundaria, submeter/aceitar T02 e iniciar T03.1 com poses desenhadas; se rejeitada, registrar motivo e decidir T03 sem esta camada.",
+      "validation": "proof success=True; skin 0.164ms media; soleMin +0.0133m; root/colisor/pivo inalterados; Gameplay/controlador SHA iguais; playmode 32/32; detail panels=5; folha 1908x920",
+      "pending": "Aceite humano T02.3 v2; pernas nao articulam; amplitude no tamanho de jogo ~2px; orcamento de atlas e estimativa; contato visual pes ~0.08m; ambiente/Nanda antigos; retrato/dispositivos/publicacao; alteracoes nao commitadas",
+      "files": "Evidence/25d/T02.3;Evidence/25d/T02.3/deformation;Evidence/25d/T02.3/deformation-comparison.png;Assets/Scripts/Runtime/Illustrated25D;Assets/Scripts/Editor/IllustratedDeformationDetail.cs;tools/make_deformation_sheet.py",
+      "processes": "Unity batch encerrado (exit 0); nenhum Editor aberto; projeto principal ainda com lockfile estagnado",
+      "at": "2026-11-12T18:41:47.262001+00:00"
     }
   ]
 }
