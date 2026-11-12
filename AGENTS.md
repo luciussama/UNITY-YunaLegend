@@ -2,6 +2,16 @@
 
 Este projeto utiliza Unity (motor de jogos; scripts normalmente em C#). O diário de desenvolvimento é obrigatório para qualquer IA que trabalhe neste repositório.
 
+## DIREÇÃO VIGENTE OBRIGATÓRIA — 2,5D ilustrado (12/11/2026)
+
+O usuário escolheu **personagens 2D ilustrados em cenário com profundidade**, implementados nativamente na Unity. Leia integralmente [o plano obrigatório](docs/ia/PLANO-25D-OBRIGATORIO.md) e execute `python tools\plan_25d.py status` antes de atuar nesta migração. O estado está em [PLANO-25D-ESTADO.json](docs/ia/PLANO-25D-ESTADO.json). Esta direção substitui as recomendações antigas de refinar Yuna/Nanda como modelos 3D finais. Preserve os estudos e as evidências anteriores como histórico e referência.
+
+- Não converter toda a fase antes de aprovar o piloto **urso → livros → móvel**, com Yuna e Nanda ilustradas em movimento.
+- Escolher 2,5D não aprova automaticamente novos desenhos, animações ou o piloto. Produza a entrega revisável antes de solicitar avaliação nos pontos definidos pelo plano.
+- Reserve a tarefa pelo coordenador antes de alterar arquivos; respeite dependências e recursos exclusivos. Não assuma reservas de outro agente por tempo decorrido.
+- Checkpoints não substituem o diário obrigatório. Resumos de chat e instruções antigas não substituem o estado canônico verificado em disco.
+- A sessão que estabeleceu este plano autorizou documentação e planejamento; a fila não representa implementação já executada.
+
 - Antes de trabalhar, leia o histórico recente com `python tools\ai_diary.py list --limit 50` e consulte os planos ainda sem resultado. Não atribua a si ações de outra IA.
 - Use um identificador de sessão único por tarefa e identifique o agente/modelo quando conhecido.
 - Antes de cada passo operacional, registre `planned`; após executá-lo, acrescente `completed`, `failed` ou `blocked` com `--plan-id` apontando para o plano. Inclua o que foi feito, arquivos afetados, comandos, resultados e validações reais. Registre também decisões e limitações como `info`.

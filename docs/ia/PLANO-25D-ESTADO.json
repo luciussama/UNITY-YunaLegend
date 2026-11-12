@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "plan": "docs/ia/PLANO-25D-OBRIGATORIO.md",
+  "decision": "Personagens 2D ilustrados em cenario com profundidade, Unity/C#; escolha do usuario em 12/11/2026.",
+  "execution_started": false,
+  "integration_checkout": null,
+  "integration_coordinator": null,
+  "updated_at": "2026-11-12",
+  "tasks": [
+    {"id":"T00","title":"Baseline e inventario","depends_on":[],"resources":["integration"],"human_gate":false,"status":"pending","owner":null,"checkpoint":null},
+    {"id":"T01","title":"Biblia visual e aprovacao de direcao","depends_on":["T00"],"resources":["integration"],"human_gate":true,"status":"pending","owner":null,"checkpoint":null},
+    {"id":"T02","title":"Prova tecnica e contratos","depends_on":["T01"],"resources":["integration"],"human_gate":false,"status":"pending","owner":null,"checkpoint":null},
+    {"id":"T03","title":"Yuna ilustrada e animada","depends_on":["T02"],"resources":["art-yuna"],"human_gate":false,"status":"pending","owner":null,"checkpoint":null},
+    {"id":"T04","title":"Nanda ilustrada e animada","depends_on":["T02"],"resources":["art-nanda"],"human_gate":false,"status":"pending","owner":null,"checkpoint":null},
+    {"id":"T05","title":"Ambiente e plataformas do piloto","depends_on":["T02"],"resources":["art-environment"],"human_gate":false,"status":"pending","owner":null,"checkpoint":null},
+    {"id":"T06","title":"Integracao e movimento do piloto","depends_on":["T03","T04","T05"],"resources":["integration","art-yuna","art-nanda","art-environment"],"human_gate":false,"status":"pending","owner":null,"checkpoint":null},
+    {"id":"T07","title":"Aprovacao humana do piloto em movimento","depends_on":["T06"],"resources":["integration"],"human_gate":true,"status":"pending","owner":null,"checkpoint":null},
+    {"id":"T08","title":"Expansao do Dark Room","depends_on":["T07"],"resources":["integration","art-yuna","art-nanda","art-environment"],"human_gate":false,"status":"pending","owner":null,"checkpoint":null},
+    {"id":"T09","title":"Regressao e dispositivos reais","depends_on":["T08"],"resources":["integration"],"human_gate":false,"status":"pending","owner":null,"checkpoint":null},
+    {"id":"T10","title":"Build publicacao e verificacao","depends_on":["T09"],"resources":["integration"],"human_gate":false,"status":"pending","owner":null,"checkpoint":null}
+  ],
+  "history": []
+}

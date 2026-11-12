@@ -1,5 +1,7 @@
 # Yuna: estado detalhado da construção em 11/11/2026
 
+> **Atualização de direção em 12/11/2026:** este documento é histórico do estudo 3D. O usuário escolheu personagens 2D ilustrados em cenário com profundidade. Recomendações de continuidade 3D abaixo foram substituídas pelo [plano obrigatório 2,5D](PLANO-25D-OBRIGATORIO.md); não retomar a modelagem 3D final a partir deste checkpoint antigo. Preserve os assets e as evidências.
+
 **EM CURSO.** Sessão `2026-11-11-codex-yuna-modelo-92e3`, plano373. Este documento atende ao pedido do usuário de registrar o estado antes de continuar. A distinção principal é: **o modelo foi produzido e testado no projeto Unity isolado; ainda não foi instalado no projeto principal**. Por isso a cena principal ainda mostra a cápsula.
 
 ## 1. Referência e compromisso visual

@@ -35,3 +35,7 @@ desktop.ini
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Coordinator transient lock (state JSON remains versioned)
+docs/ia/.plano25d.lock
+docs/ia/.plano25d-*.tmp
