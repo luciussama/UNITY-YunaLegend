@@ -99,3 +99,7 @@ Marcador: `ILLUSTRATED_DEFORMATION_DETAIL_DONE panels=5`. Folha montada por `pyt
 - `tools/make_deformation_sheet.py` — folha de comparação e mapa de deslocamento.
 
 O componente de prova fica **apenas** na cena de validação; um teste falha se ele aparecer na cena Gameplay.
+
+## Atualização de aprovação — 12/11/2026
+
+A prova v2 foi aprovada pelo usuário na conversa de retomada. Ver [resposta literal, escopo e hashes](reviews/T02.3-v2-aprovacao.md). Este registro posterior substitui o estado de revisão indicado na abertura, preservando o relato original. T02 segue ativa para conferência dos contratos técnicos da seção 8 do plano; o aceite não aprova animação final nem converte estimativa de atlas em medição.

@@ -1,0 +1,19 @@
+{
+    "method": "Unity PlayMode, stationary isolated scene; 120 deterministic samples at 30 Hz using the runtime evaluator. Physical controller disabled only in this review fixture. No traversal, contact solver or device-performance coverage.",
+    "gameplayBefore": "d507921b1244c2a3186ba820bc54a3eae8daf9208dcde677f7eed438c9e358ed",
+    "gameplayAfter": "d507921b1244c2a3186ba820bc54a3eae8daf9208dcde677f7eed438c9e358ed",
+    "paintingHash": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+    "blinkHash": "ffe8aa88957a7d83d5c9335e24248aa7f6090c1512a53e368ee9a3680a97ec69",
+    "rootUnchanged": true,
+    "colliderUnchanged": true,
+    "periodicLoop": true,
+    "success": true,
+    "frames": 120,
+    "fullBlinkFrames": 2,
+    "blinkTextureWidth": 1024,
+    "blinkTextureHeight": 1536,
+    "minMeshSoleLocalY": 0.013024740852415562,
+    "textureMemoryMiB": 24.009628295898439,
+    "cameraHeightPixels": 134.39999389648438,
+    "note": "The closed-eye generated image is sampled only inside a feathered eye rectangle. All other pixels and alpha come from the approved original. CPU/GPU timings not measured by this capture."
+}

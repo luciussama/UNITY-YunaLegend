@@ -1,0 +1,31 @@
+{
+  "method": "Raw Unity renders, no crop, scaling or retouch; GIF palette quantization only. Fixed palette per clip, 30/40 ms cadence for exactly four seconds.",
+  "game": {
+    "source_frames": 120,
+    "gif_frames": 120,
+    "duration_ms": 4000,
+    "size": [
+      1280,
+      720
+    ]
+  },
+  "detail": {
+    "source_frames": 120,
+    "gif_frames": 120,
+    "duration_ms": 4000,
+    "size": [
+      640,
+      640
+    ]
+  },
+  "stationary_foot_region": {
+    "rectangle_xywh": [
+      260,
+      540,
+      125,
+      60
+    ],
+    "max_changed_pixels_from_first_frame": 0,
+    "scope": "Pixel stability in stationary fixture; not contact correctness on real platforms."
+  }
+}

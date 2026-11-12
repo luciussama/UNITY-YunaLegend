@@ -1,0 +1,14 @@
+Use case: illustration-story, production Unity sprite animation atlas. Reference image 1 is the approved character identity/style, not a pose to copy rigidly. Create ONE 8-frame seamless RUN CYCLE of this exact little girl Yuna facing RIGHT. True changing articulated leg and arm poses, not a tilt of a static girl.
+OUTPUT LAYOUT MUST BE EXACT: a 2048x1536 transparent PNG canvas, regular 4 columns x 2 rows, each cell 512x768. Read sequence left to right on top row then left to right on bottom row. No lines, dividers, numbers, labels or text. Exactly one full-body girl per cell, every part contained inside its cell with at least 20 pixels of transparent padding. All eight have the same character size, body proportions, viewpoint, light direction, and common ground baseline 736 pixels below each cell's top. All hip centers have the same local cell X around 268. Consistent head size and face. Allow physically correct small vertical run bob, do not normalize body heights separately.
+IDENTITY/STYLE: faithfully match reference: little child's rounded brown-eyed face, chestnut bangs and voluminous high ponytail with pink-carmine scrunchie, cream puff-sleeved knee-length dress with carmine bow, floral border, ruffles, cream socks, carmine Mary Jane strap shoes. Same detailed tactile warm painted storybook brushwork, soft volumes, same recognizable face. Keep dress length/ornaments and body age; no redesign, anime, vector, 3D look or new costume.
+MOVEMENT: a gentle energetic child's run, torso pitched forward about 5 degrees, elbows bending and alternating opposite the legs, ponytail following the motion, skirt swings subtly. Legs MUST visibly bend at hips and knees; two distinct shoes in every frame, believable anatomy, knees remain anatomically correct, not two straight immobile legs. No motion blur or smear. Children's run not military march, not exaggerated huge split.
+Eight consecutive evenly spaced phases:
+1 near leg forward heel contact on ground, far leg extended back preparing toe off;
+2 near leg compresses under weight, far heel folds up toward bottom;
+3 near supporting foot under hip, far knee swings forward bent;
+4 flight: far leg reaches forward, near heel tucked behind, BOTH feet slightly above baseline;
+5 far leg forward contact, near leg back toe off (opposite of frame1);
+6 far leg supports and compresses, near heel folds up;
+7 far foot under hip, near knee forward bent;
+8 flight: near leg reaches forward, far heel tucked behind, matching frame1's next contact.
+Frames 1-3 and 5-7 have ONE planted foot at the shared baseline; 4 and 8 are flight. Complete body from ponytail to soles, shoes never cut off. Identical lighting across frames. Pure actual transparency outside the painted silhouettes: no background, glow, floor, shadows, text or decorative elements. This is a single technical atlas for an animation loop, not a poster or comic.

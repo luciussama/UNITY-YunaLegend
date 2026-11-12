@@ -2,6 +2,10 @@
 
 Este projeto utiliza Unity (motor de jogos; scripts normalmente em C#). O diário de desenvolvimento é obrigatório para qualquer IA que trabalhe neste repositório.
 
+## Skills do projeto — consulta obrigatória
+
+Leia [SKILLS.md](SKILLS.md) e a skill [yuna-project](skills/yuna-project/SKILL.md) antes de atuar. O guia aponta as skills de arte, validação visual e WebGL, com instruções e recursos compartilháveis em `skills/`. Carregue somente as pertinentes ao pedido atual. IAs sem suporte nativo a skills devem ler os arquivos como Markdown. Skills orientam o procedimento; autorização, reservas, revisões humanas e estado continuam regidos por este protocolo e pelos arquivos canônicos.
+
 ## DIREÇÃO VIGENTE OBRIGATÓRIA — 2,5D ilustrado (12/11/2026)
 
 O usuário escolheu **personagens 2D ilustrados em cenário com profundidade**, implementados nativamente na Unity. Leia integralmente [o plano obrigatório](docs/ia/PLANO-25D-OBRIGATORIO.md) e execute `python tools\plan_25d.py status` antes de atuar nesta migração. O estado está em [PLANO-25D-ESTADO.json](docs/ia/PLANO-25D-ESTADO.json). Esta direção substitui as recomendações antigas de refinar Yuna/Nanda como modelos 3D finais. Preserve os estudos e as evidências anteriores como histórico e referência.
@@ -12,9 +16,8 @@ Comece pelo [estado atual resumido](docs/ia/ESTADO-ATUAL-25D.md). A documentaç�
 - Escolher 2,5D não aprova automaticamente novos desenhos, animações ou o piloto. Produza a entrega revisável antes de solicitar avaliação nos pontos definidos pelo plano.
 - Reserve a tarefa pelo coordenador antes de alterar arquivos; respeite dependências e recursos exclusivos. Não assuma reservas de outro agente por tempo decorrido.
 - Checkpoints não substituem o diário obrigatório. Resumos de chat e instruções antigas não substituem o estado canônico verificado em disco.
-- A sessão que estabeleceu este plano autorizou documentação e planejamento; a fila não representa implementação já executada.
-- Em 12/11/2026, o usuário autorizou iniciar e exigiu **a mesma assinatura visual e passos pequenos para avaliação humana meticulosa**. Consulte [assinatura e microentregas](docs/ia/25D-ASSINATURA-E-MICROENTREGAS.md). Cada entrega visual deve ser revisada individualmente antes da próxima que dependa dela; o aceite agregado T01/T07 não dispensa essas revisões. Início registrado na T00; não presumir baseline ou arte já concluídos.
-- **Nanda azul (diretriz posterior de 12/11/2026):** a menina prefere azul; sua aparência e a luz que emana devem ser azuladas. Esta instrução substitui o âmbar/dourado antigo de Nanda. Preservar a assinatura ilustrada e a identidade; não recolorir Yuna. Arte conceitual azul aprovada em T01; personagem animada e luz real ainda precisam de implementação/validação.
+- Preserve **a mesma assinatura visual e passos pequenos para avaliação humana meticulosa**. Consulte [assinatura e microentregas](docs/ia/25D-ASSINATURA-E-MICROENTREGAS.md). Cada entrega visual deve ser revisada individualmente antes da próxima que dependa dela; o aceite agregado T01/T07 não dispensa essas revisões. Fila planejada não comprova execução ou aprovação.
+- **Nanda azul:** sua aparência e a luz que emana devem ser azuladas, substituindo o âmbar/dourado antigo. Preservar a assinatura ilustrada e a identidade; não recolorir Yuna.
 - **Móvel e desequilíbrio confirmados em 12/11/2026:** manter quebra/cedimento, estralo, pausa local80ms, tropeço2D/recuperação de Yuna e reset no retry. Leia [o compromisso e critérios de validação](docs/ia/25D-MOVEL-QUEBRA-E-DESEQUILIBRIO.md). Aprovação da aparência não significa animação/física já implementadas; validar a sequência real antes de declarar concluída.
 
 - Antes de trabalhar, leia o histórico recente com `python tools\ai_diary.py list --limit 50` e consulte os planos ainda sem resultado. Não atribua a si ações de outra IA.
@@ -33,14 +36,10 @@ Comece pelo [estado atual resumido](docs/ia/ESTADO-ATUAL-25D.md). A documentaç�
 - As plataformas **não são caixas uniformes**. Cada objeto tem silhueta, tamanho e apoio próprios (urso de pelúcia, pilha diagonal de livros, tambor cilíndrico, castelinho…). É proibido achatá-las ou redimensioná-las para caber num colisor padrão.
 - A **superfície de contato pertence ao objeto**: pode ser deslocada do centro, mais estreita que o volume, inclinada (pilha diagonal), escalonada ou múltipla.
 - Colisor, cálculo de vão/pulo, enquadramento de câmera e testes **devem se adaptar ao formato real da superfície**; nunca adaptar o objeto ao colisor.
-- Implementação vigente: `PlatformSupportProfile` descreve segmentos e regiões expostas no plano de corrida, extraídos de caixas inclinadas e triângulos das malhas reais. `DarkRoomPlatformArt.GetSupportShapes` compartilha as formas entre visual, física e autoria do circuito; os marcadores consultam os colliders reais, com cache invalidado por movimento/inclinação. Movimento, bordas, câmera e testes consomem essa API. `PlatformSpec.contact` permanece como descrição de autoria de um tampo simples (como a capa dos livros), não como limite do contrato de apoio.
-- Ao modelar: defina **primeiro** onde os pés da criança pousam, modele a malha para o topo visível coincidir com essa superfície e valide por teste que o topo do colisor é igual ao topo visível.
+- Preserve o controlador físico 3D e o contrato `PlatformSupportProfile`; a apresentação ilustrada não autoriza migração para Physics2D nem apoio artificial sobre lacunas.
+- Antes de criar a arte, defina **primeiro** onde os pés pousam. Valide por testes e evidência na câmera final a correspondência entre superfície visível e apoio físico, inclusive inclinação e cedimento. A arte não precisa ser uma malha 3D visível.
 
-### Base física preservada e apresentação atual
-
-A plataforma 00 mantém cinco MeshColliders reais da cabeça, orelhas e banqueta; a 01 mantém a capa inclinada, com regiões múltiplas/curvas e sem pontes entre lacunas. A plataforma 02 tem 8,4 m e duas regiões de tampo compartilhadas entre visual e física por `YieldingWoodFurniture`, com pausa local 80 ms/tropeço/retry. As evidências históricas estão no [arquivo](Archive/pre-25d-2026-11-12/README.md); os contratos atuais de arte e apoio estão em `Evidence/25d/T01`.
-
-Yuna ilustrada estática e câmera A perspectiva 45° foram aprovadas; a câmera de escala estável T02.2b está em revisão. Não há animação corporal 2D final. Modelos/scripts antigos ainda usados pela cena base permanecem em Assets como dependências técnicas, não como direção artística. Não removê-los por parecerem antigos sem conferir cenas/prefabs/GUIDs.
+Modelos/scripts antigos ainda usados pela cena base são dependências técnicas, não direção artística. Não removê-los sem conferir cenas/prefabs/GUIDs. Detalhes históricos de malhas/colisores e retratos antigos de progresso estão nas [regras legadas](docs/ia/REGRAS-LEGADAS-3D.md), de consulta opcional; não carregá-los como instruções vigentes. Aprovações e pendências devem ser consultadas no estado canônico, não presumidas deste protocolo.
 
 ## Referência jogável e comparação
 

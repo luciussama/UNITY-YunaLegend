@@ -1,0 +1,190 @@
+using UnityEngine;
+using YunaLegend.DarkRoom;
+
+namespace YunaLegend.YunaIllustration
+{
+    /// <summary>T03.2 candidate: drawn legs, with the existing physical controller as the clock.</summary>
+    [DefaultExecutionOrder(210)]
+    public sealed class YunaRunIllustration : MonoBehaviour
+    {
+        public SpriteRenderer painting;
+        public Sprite[] frames;
+        public Collider reviewSupport;
+        public Yuna25DPlayerController player;
+        public bool reviewFixtureAutoRun;
+        public bool footPlant = true;
+        public int CurrentFrame { get; private set; }
+        public float VisualDrop { get; private set; }
+        public float Phase { get; private set; }
+        public float FootWorldX { get; private set; }
+        public float FootWorldY { get; private set; }
+        public float BodyShift => bodyShift;
+        public float LegShift { get; private set; }
+        public float AnchorCellWeight { get; private set; }
+        public double AverageMeshMilliseconds => meshUpdates == 0 ? 0 : totalMeshMilliseconds / meshUpdates;
+        public double MaxMeshMilliseconds { get; private set; }
+        public void ResetMeshTiming() { totalMeshMilliseconds = 0; meshUpdates = 0; MaxMeshMilliseconds = 0; }
+        public bool ContactPose => CurrentFrame % 4 != 3;
+        // Pixel authoring in each 362x543 cell, top-left origin. No per-pose rescaling.
+        public static readonly float[] FloorY = { 493, 496, 495, 495, 495, 496, 496, 495 };
+        public static readonly float[] FootX = { 276.07f, 197.64f, 158.91f, 74.59f, 278.82f, 193.13f, 152.03f, 73.33f };
+        public static readonly float[] BottomY = { 493, 496, 495, 438, 495, 496, 496, 435 };
+        const int Columns = 31, Rows = 14; // 480 vertices, below the T02 481-vertex ceiling.
+        Mesh mesh;
+        Material meshMaterial;
+        GameObject meshObject;
+        Vector3[] vertices;
+        Vector2[] uvs;
+        float anchorX, bodyShift, bodyShiftVelocity;
+        bool anchored;
+        int stance = -1, lastSimFrame = -1, meshUpdates;
+        double totalMeshMilliseconds;
+
+        void Awake()
+        {
+            if (reviewFixtureAutoRun && player != null)
+            {
+                player.SetFloorDeathActive(false);
+                player.AutoRunActive = true;
+            }
+        }
+        void LateUpdate() { Refresh(); }
+
+        void BuildMesh()
+        {
+            meshObject = new GameObject("PaintedRunContactMesh");
+            meshObject.transform.SetParent(transform, false);
+            var filter = meshObject.AddComponent<MeshFilter>();
+            var renderer = meshObject.AddComponent<MeshRenderer>();
+            meshMaterial = new Material(painting.sharedMaterial);
+            meshMaterial.SetTexture("_MainTex", frames[0].texture);
+            renderer.sharedMaterial = meshMaterial;
+            renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            renderer.receiveShadows = false;
+            renderer.sortingOrder = painting.sortingOrder;
+            renderer.sortingLayerID = painting.sortingLayerID;
+            vertices = new Vector3[(Columns + 1) * (Rows + 1)];
+            uvs = new Vector2[vertices.Length];
+            var colours = new Color32[vertices.Length];
+            for (int i = 0; i < colours.Length; i++) colours[i] = new Color32(255, 255, 255, 255);
+            var triangles = new int[Columns * Rows * 6];
+            int index = 0;
+            for (int y = 0; y < Rows; y++) for (int x = 0; x < Columns; x++)
+            {
+                int a = y * (Columns + 1) + x, b = a + 1, c = a + Columns + 1, d = c + 1;
+                triangles[index++] = a; triangles[index++] = b; triangles[index++] = c;
+                triangles[index++] = b; triangles[index++] = d; triangles[index++] = c;
+            }
+            mesh = new Mesh { name = "PaintedRunContact_480", hideFlags = HideFlags.DontSave };
+            mesh.MarkDynamic(); mesh.vertices = vertices; mesh.uv = uvs; mesh.colors32 = colours; mesh.triangles = triangles;
+            filter.sharedMesh = mesh;
+            painting.enabled = false;
+        }
+
+        float LegWeight(float x, float y)
+        {
+            if (!ContactPose) return 0f;
+            float t = Mathf.Clamp01((y - 340f) / (FloorY[CurrentFrame] - 340f));
+            float centre = Mathf.Lerp(212f, FootX[CurrentFrame], t);
+            float footWidth = CurrentFrame % 4 == 0 ? 80f : CurrentFrame % 4 == 1 ? 60f : 55f;
+            float shinWidth = CurrentFrame % 4 == 0 ? 45f : CurrentFrame % 4 == 1 ? 30f : 25f;
+            float width = Mathf.Lerp(shinWidth, footWidth, Mathf.SmoothStep(0, 1, Mathf.InverseLerp(435, 470, y)));
+            float horizontal = 1f - Mathf.SmoothStep(0, 1, Mathf.InverseLerp(width, width + 10f, Mathf.Abs(x - centre)));
+            float freeFootExclusion = CurrentFrame % 4 == 2 && y < 465f
+                ? 1f - Mathf.SmoothStep(0, 1, Mathf.InverseLerp(164f + .5f * (y - 382f), 167f + .5f * (y - 382f), x)) : 1f;
+            return horizontal * freeFootExclusion * Mathf.SmoothStep(0, 1, Mathf.InverseLerp(345, 445, y));
+        }
+
+        static float SourceY(float gridY, float height)
+        {
+            return gridY <= 2 ? gridY * 170f : 340f + (gridY - 2f) / (Rows - 2f) * (height - 340f);
+        }
+        static float GridY(float sourceY, float height)
+        {
+            return sourceY <= 340f ? sourceY / 170f : 2f + (sourceY - 340f) / (height - 340f) * (Rows - 2f);
+        }
+
+        void UpdateMesh(float sign)
+        {
+            long begin = System.Diagnostics.Stopwatch.GetTimestamp();
+            if (mesh == null) BuildMesh();
+            var sprite = painting.sprite;
+            var rect = sprite.rect;
+            float ppu = sprite.pixelsPerUnit;
+            for (int y = 0; y <= Rows; y++) for (int x = 0; x <= Columns; x++)
+            {
+                int i = y * (Columns + 1) + x;
+                float px = rect.width * x / Columns, py = SourceY(y, rect.height);
+                vertices[i] = new Vector3(sign * (px - sprite.pivot.x) / ppu + LegShift * LegWeight(px, py),
+                    (FloorY[CurrentFrame] - py) / ppu, 0f);
+                uvs[i] = new Vector2((rect.x + px) / sprite.texture.width, (rect.yMax - py) / sprite.texture.height);
+            }
+            mesh.vertices = vertices; mesh.uv = uvs; mesh.RecalculateBounds();
+            // Measure the actual deformed mesh cell containing the painted sole marker.
+            float gx = FootX[CurrentFrame] / rect.width * Columns, gy = GridY(BottomY[CurrentFrame], rect.height);
+            int ix = Mathf.Clamp(Mathf.FloorToInt(gx), 0, Columns - 1), iy = Mathf.Clamp(Mathf.FloorToInt(gy), 0, Rows - 1);
+            int a = iy * (Columns + 1) + ix;
+            var top = Vector3.Lerp(vertices[a], vertices[a + 1], gx - ix);
+            var bottom = Vector3.Lerp(vertices[a + Columns + 1], vertices[a + Columns + 2], gx - ix);
+            var world = transform.TransformPoint(Vector3.Lerp(top, bottom, gy - iy));
+            FootWorldX = world.x; FootWorldY = world.y;
+            AnchorCellWeight = 1f;
+            for (int j = 0; j < 2; j++) for (int k = 0; k < 2; k++)
+                AnchorCellWeight = Mathf.Min(AnchorCellWeight, LegWeight((ix + k) * rect.width / Columns, SourceY(iy + j, rect.height)));
+            double ms = (System.Diagnostics.Stopwatch.GetTimestamp() - begin) * 1000.0 / System.Diagnostics.Stopwatch.Frequency;
+            totalMeshMilliseconds += ms; meshUpdates++; MaxMeshMilliseconds = System.Math.Max(MaxMeshMilliseconds, ms);
+        }
+
+        void OnDestroy()
+        {
+            if (mesh != null) Destroy(mesh);
+            if (meshMaterial != null) Destroy(meshMaterial);
+        }
+
+        public void Refresh()
+        {
+            if (player == null || painting == null || frames == null || frames.Length != 8) return;
+            Phase = player.GaitPhase;
+            CurrentFrame = Mathf.Min(7, Mathf.FloorToInt(Phase * 8f));
+            painting.sprite = frames[CurrentFrame];
+            painting.flipX = player.RunDirection < 0f;
+            // The isolated flat support is a real collider. Never move the physical root.
+            VisualDrop = 0f;
+            if (player.IsGrounded && reviewSupport != null)
+            {
+                RaycastHit hit;
+                var ray = new Ray(player.transform.position + Vector3.up * .4f, Vector3.down);
+                if (reviewSupport.Raycast(ray, out hit, .6f))
+                {
+                    float gap = player.transform.position.y - hit.point.y;
+                    if (gap >= 0f && gap <= .1f) VisualDrop = gap;
+                }
+            }
+            transform.localPosition = Vector3.down * VisualDrop;
+            transform.localRotation = Quaternion.AngleAxis(-player.transform.eulerAngles.y, Vector3.up);
+            float sign = painting.flipX ? -1f : 1f;
+            float ppu = painting.sprite.pixelsPerUnit;
+            var point = new Vector3(sign * (FootX[CurrentFrame] - painting.sprite.pivot.x) / ppu,
+                (FloorY[CurrentFrame] - BottomY[CurrentFrame]) / ppu, 0f);
+            var world = transform.TransformPoint(point);
+            float correction = 0f;
+            if (footPlant && player.IsGrounded && ContactPose)
+            {
+                if (!anchored || stance != CurrentFrame / 4)
+                {
+                    anchorX = world.x; anchored = true; stance = CurrentFrame / 4;
+                }
+                correction = Mathf.Clamp(anchorX - world.x, -.35f, .35f);
+            }
+            else anchored = false;
+            if (lastSimFrame != Time.frameCount)
+            {
+                bodyShift = Mathf.SmoothDamp(bodyShift, correction * .33f, ref bodyShiftVelocity, .04f, Mathf.Infinity, Time.deltaTime);
+                lastSimFrame = Time.frameCount;
+            }
+            transform.localPosition += player.transform.InverseTransformVector(Vector3.right * bodyShift);
+            LegShift = footPlant && ContactPose ? correction - bodyShift : 0f;
+            UpdateMesh(sign);
+        }
+    }
+}
