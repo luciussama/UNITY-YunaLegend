@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-12T22:03:14.390539+00:00",
+  "updated_at": "2026-11-12T22:17:31.415686+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -194,13 +194,13 @@
         "agent": "Codex (GPT-6)"
       },
       "checkpoint": {
-        "done": "Atlas8poses/driver/cenaJump prontos;3ensaios14/14checks,checagemfinalcapturouRunSceneclone divergente",
-        "next": "AguardarPID41756 validacao30HzaposRunScenesincronizada;depois60/120serialemvalidated-* e montarreview-v1-verified",
-        "validation": "MainRunSHAea18e0...igualcloneaposcopy;nenhummudancaRuncheckout;naousarensaiosanteriorescomoprovaequivalenteantesrevalidar",
-        "pending": "Plano639emcurso;finalizarprovenienciaantesapresentacao;revisaohumanaT03.3pendente;T03.4naoiniciada",
+        "done": "T03.1/T03.2/T03.3aprovadas;respostaliteralT03.3registrada;manifestconferido",
+        "next": "T03.4:posespintadasdetropeço/recuperacao;reagirBeginStumble80ms/280ms,validar30/60/120Hz e reset antesavaliacao",
+        "validation": "T03.3manifestsemdivergencias;3Hz14checks;aprovacaohumanaexplicita",
+        "pending": "T03.4naoaprovada;integracaomovel/piloto/atlas/dispositivospendentes",
         "files": "Assets/Art/Illustrated25D/Yuna/Jump;Evidence/25d/T03.3;docs/ia/ESTADO-ATUAL-25D.md",
-        "processes": "Unity41756cloneBuild/Publish/Project;logBuild/25d-t033-validated-30.log;principaispreservados",
-        "updated_at": "2026-11-12T22:03:14.390539+00:00"
+        "processes": "Nenhumprocessonovoiniciado",
+        "updated_at": "2026-11-12T22:17:31.415686+00:00"
       }
     },
     {
@@ -1114,6 +1114,30 @@
       "files": "Assets/Art/Illustrated25D/Yuna/Jump;Evidence/25d/T03.3;docs/ia/ESTADO-ATUAL-25D.md",
       "processes": "Unity41756cloneBuild/Publish/Project;logBuild/25d-t033-validated-30.log;principaispreservados",
       "at": "2026-11-12T22:03:14.390539+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T03",
+      "session": "2026-11-12-codex-jump-t033-c91e",
+      "done": "T03.3v1prontapararevisao:8posespintadas,imagegen,arcoreal3Hz;review-v1-verifiedGIFs/prova120Hz;manifest37fontes/dependenciasiguaisclone",
+      "next": "Apresentar Evidence/25d/T03.3/review-v1-verified/jump-gameplay.gif e jump-detail-slow.gif;registrarrespostaliteralemnovarevisao. AjustarsomenteT03.3senecessario;T03.4aguardarevisao",
+      "validation": "30/60/120successTrue14checks;altura2.598-2.600m;driftpouso<1e-6m,Y0;35hashesRunpreservados;GUIDsunicos;132rawhashes",
+      "pending": "AprovacaohumanaT03.3;impactocurto67ms/recuovisual32mmavaliar;atlasconjunto/mobile/plataformas/retry/T03.4pendentes",
+      "files": "Assets/Art/Illustrated25D/Yuna/Jump;Evidence/25d/T03.3;docs/ia/ESTADO-ATUAL-25D.md",
+      "processes": "Capturasbatchencerradas;logsBuild/25d-t033-validated-30,-60,-120.log;nenhumprocessonovorestante;Editorprincipalpreservado",
+      "at": "2026-11-12T22:15:55.029468+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T03",
+      "session": "2026-11-12-codex-jump-t033-c91e",
+      "done": "T03.1/T03.2/T03.3aprovadas;respostaliteralT03.3registrada;manifestconferido",
+      "next": "T03.4:posespintadasdetropeço/recuperacao;reagirBeginStumble80ms/280ms,validar30/60/120Hz e reset antesavaliacao",
+      "validation": "T03.3manifestsemdivergencias;3Hz14checks;aprovacaohumanaexplicita",
+      "pending": "T03.4naoaprovada;integracaomovel/piloto/atlas/dispositivospendentes",
+      "files": "Assets/Art/Illustrated25D/Yuna/Jump;Evidence/25d/T03.3;docs/ia/ESTADO-ATUAL-25D.md",
+      "processes": "Nenhumprocessonovoiniciado",
+      "at": "2026-11-12T22:17:31.415686+00:00"
     }
   ]
 }

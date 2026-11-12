@@ -22,13 +22,13 @@ Atualização em 12/11/2026, sessão `2026-11-12-codex-jump-t033-c91e`, preserva
 
 Detalhe da v1 (histórico): [corrida com oito poses pintadas](../../Evidence/25d/T03.2/README.md), pernas/joelhos/sapatos alternando, em chão técnico com controlador real a 5,2 m/s. Verificada a 30/60/120 Hz na v1; âncora de sola com deslizamento máximo <0,000001 m; colisor/physics/Gameplay preservados. **Tranco da v1 confirmado:** na última passada completa (3,833→3,867 s), a compensação do corpo passava de −0,22082 m para zero de uma vez (~21 px a 720p). A v1 não foi aprovada nem rejeitada; fica em **ajustar** e é preservada como histórico.
 
-**T03.3 v1 em revisão:** [salto completo ilustrado](../../Evidence/25d/T03.3/README.md), oito poses pintadas com imagegen, subida/ápice/queda/pouso e retorno à corrida na fixture. Três capturas novas a 30/60/120 Hz, 66 quadros por câmera a 30 fps; uma decolagem/um pouso, altura 2,598–2,600 m, deriva do ponto de apoio <0,000001 m e separação vertical zero. Física/cena Gameplay/controlador/corrida preservados. GIFs principais e prova são da mesma execução de **120 Hz**. Impacto curto (~67 ms), articulação e transição pedem avaliação humana; não aprovada, não integrada ao piloto. [Revisão individual](../../Evidence/25d/T03.3/reviews/T03.3-v1.md).
+**T03.3 v1 aprovada:** [salto completo ilustrado](../../Evidence/25d/T03.3/README.md), oito poses pintadas com imagegen, subida/ápice/queda/pouso e retorno à corrida na fixture. Três capturas novas a 30/60/120 Hz, 66 quadros por câmera a 30 fps; uma decolagem/um pouso, altura 2,598–2,600 m, deriva do ponto de apoio <0,000001 m e separação vertical zero. Física/cena Gameplay/controlador/corrida preservados. GIFs principais e prova são da mesma execução de **120 Hz**. Impacto curto (~67 ms), articulação e transição aprovados pelo usuário; não integrada ao piloto. Aprovação em Evidence/25d/T03.3/reviews/T03.3-v1-aprovacao.md. [Revisão individual](../../Evidence/25d/T03.3/reviews/T03.3-v1.md).
 
 ## Próximos passos pequenos
 
 **Histórico do ajuste 595:** fechamento do clipe tratado na T03.2 v2; aprovação e reconciliação posterior registradas em 607/625. O passo corporal continua como limite aceito, sem nova correção da corrida nesta T03.3.
 
-1. Avaliar T03.3 v1: ritmo do salto, recolhimento das pernas, impacto e retorno à corrida nos GIFs normal/lento. Registrar resposta literal; se ajustar, iterar somente T03.3. Não pedir novamente aprovação da corrida já registrada.
+1. T03.3 aprovada. Próxima entrega autorizada: T03.4, tropeço e recuperação, preservando pausa local de 80 ms e recuperação de 280 ms.
 2. Depois: T03.4 tropeço e recuperação; transições e orçamento conjunto ainda pendentes.
 3. T04/T05: Nanda reconhecível com luz azul e ambiente ilustrado, um objeto por revisão, mantendo apoios reais e móvel cedendo/retry.
 4. Integrar somente o piloto urso → livros → móvel; aprovação em movimento antes de expandir a fase.

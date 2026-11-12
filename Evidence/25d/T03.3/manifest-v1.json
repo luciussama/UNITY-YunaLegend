@@ -1,0 +1,628 @@
+{
+  "version": "T03.3-v1",
+  "state": "em_revisao",
+  "session": "2026-11-12-codex-jump-t033-c91e",
+  "agent": "Codex (GPT-6)",
+  "base_commit": "aceefce0f4ec80b1a147c93b8dd26b860ea472d9",
+  "unity": "6000.3.28f1",
+  "primary_simulation_hz": 120,
+  "capture_fps": 30,
+  "source": {
+    "Assets/Art/Illustrated25D/Yuna/Jump/Editor/YunaJumpReviewCapture.cs": {
+      "sha256": "a66cd6025458d4bf06f27e6190f03b867d3d5cbe1aa5456101865017c66513f9",
+      "bytes": 12807
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Editor/YunaJumpReviewCapture.cs.meta": {
+      "sha256": "79b7431d44599032e32752db8cd3804a561cb463e5cba6fb79126d658914eed6",
+      "bytes": 62
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Editor.meta": {
+      "sha256": "1e8a3b1f2de38cb0aea33ca2cb5c2bdedb53b59da9cc936c2dabe208cd77081e",
+      "bytes": 180
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump0.asset": {
+      "sha256": "ccbf7444eb08626266a1267e301f12ff955988ff142cb14b2a4088bc71bb63cd",
+      "bytes": 4902
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump0.asset.meta": {
+      "sha256": "5d83ba576b1c444e3c8b4da47d95c46e7a6fbadb21b4555e5fc97a2d8d8cf880",
+      "bytes": 189
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump1.asset": {
+      "sha256": "d0bf424ac950558d7e18e3b647c8ad644d45bb687e22ea038c6fb8106f8a0c3b",
+      "bytes": 4906
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump1.asset.meta": {
+      "sha256": "b000203947387bdd4f93c0e122dcdea24d1676a46a45ecd33a59d43180a0ee21",
+      "bytes": 189
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump2.asset": {
+      "sha256": "464d2ecf9f237a9228e5941d329d9e9bb7856646973be41f0c4c5ae0c185bc88",
+      "bytes": 4906
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump2.asset.meta": {
+      "sha256": "d788298b045d14f38b0b532a532320cadf1d8c7d5beb7684e002e0b700f92d59",
+      "bytes": 189
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump3.asset": {
+      "sha256": "287e22d636787b60446d66f6408ff712af137655386f153a3150d50ba568fd2b",
+      "bytes": 4911
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump3.asset.meta": {
+      "sha256": "7b87be6fbee99db33d21cd0e3b95dcad2758e3e9314550bdfb9d1cbf5315bbb5",
+      "bytes": 189
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump4.asset": {
+      "sha256": "d16ec45e20bdf906e27f9b56dba01d8b6509aa79501bca36b4d308b1d0ed6a3b",
+      "bytes": 4894
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump4.asset.meta": {
+      "sha256": "936753b7073d440361c6c028cd9cfdb602efbf14915cf4934bb9eccff25e55cc",
+      "bytes": 189
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump5.asset": {
+      "sha256": "52cedd79907aaf841a51d4e6549bce72a427a8480cc4eaee517b155bf9f35e22",
+      "bytes": 4898
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump5.asset.meta": {
+      "sha256": "ec98129669ac6d63f195aad0f84c0f5fb45058cd62a2c2b2a04c019cdb9883c1",
+      "bytes": 189
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump6.asset": {
+      "sha256": "b3649b0d1d7e548c48071f423ac2027aa31e163b26d966bb926930b21c262317",
+      "bytes": 4898
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump6.asset.meta": {
+      "sha256": "54c550d473f06a544012f8411f1513bd203a9aca5b104ae9a82cd81ce8fb235e",
+      "bytes": 189
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump7.asset": {
+      "sha256": "39371e438faa4749000cbd600793fac02c18d2c5c325cfd8186f73eab78bbe6b",
+      "bytes": 4903
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump7.asset.meta": {
+      "sha256": "2a100a0c1923407a656f9e6b8825cbfee48cc83dd7caebf42109aaae24b0cdd8",
+      "bytes": 189
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames.meta": {
+      "sha256": "a0ebdc6887584f7dc570b5bf5c3610599eacac84b698ec88be463499e32d7629",
+      "bytes": 172
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Yuna_Jump_Atlas_v1.png": {
+      "sha256": "8aa6be63aab1bc8612b057afcc0601e75b8cd2f41234c41155d75d5fd899e357",
+      "bytes": 1868029
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/Yuna_Jump_Atlas_v1.png.meta": {
+      "sha256": "e19e8d2223e5a780205a98ad5dd86470bdde4f8950b545ae85a2c2593ada03ec",
+      "bytes": 3364
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/YunaJumpIllustration.cs": {
+      "sha256": "848bef8749b26916d8a1d646ffec2768b598b85205592ba590c140b7688f9fd9",
+      "bytes": 5787
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/YunaJumpIllustration.cs.meta": {
+      "sha256": "3d7bb67cb1a4f5189b9ba0206e7be59d9ff1796b1c1c61b07a9e77157df1580c",
+      "bytes": 62
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/YunaJumpReview.unity": {
+      "sha256": "89d8057aad4bba9038a48dcbff0cc9feeb0d70a97a1f7be087069a2e61d6f07f",
+      "bytes": 199801
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump/YunaJumpReview.unity.meta": {
+      "sha256": "07fc08689cdbe01000623fb7562cab3b02731f77c2c18bfbbc543c7433b2f5aa",
+      "bytes": 155
+    },
+    "Assets/Art/Illustrated25D/Yuna/Jump.meta": {
+      "sha256": "4855525b2c1048b222405335e24d7805520f25e9c71c0f519cf006e7a1262eba",
+      "bytes": 180
+    }
+  },
+  "dependencies": {
+    "Assets/Art/Illustrated25D/Yuna/Run/Run_Painted.mat": {
+      "sha256": "d66f07122111724deeb4b3c292cfe7824e6c586bf202445451150f3367f92efd",
+      "bytes": 1116
+    },
+    "Assets/Art/Illustrated25D/Yuna/Run/Yuna_Run_Atlas_v1.png": {
+      "sha256": "921aa127071c245072074c63e5be61ed091f00f8a9829d937769286df3966eff",
+      "bytes": 2280628
+    },
+    "Assets/Art/Illustrated25D/Yuna/Run/YunaRunIllustration.cs": {
+      "sha256": "6b273c17243888aae27a18740fa34ae0b3462e2ff8799320f5946e16c43d7aec",
+      "bytes": 4223
+    },
+    "Assets/Art/Illustrated25D/Yuna/Run/YunaRunReview.unity": {
+      "sha256": "ea18e0ccc45264c9a34743275be10680983cfe27ff76c6f9af98b5c64fbd8f49",
+      "bytes": 196111
+    },
+    "Assets/Art/Illustrated25D/Yuna/Yuna_Profile_v1.png": {
+      "sha256": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+      "bytes": 2158619
+    },
+    "Assets/Scenes/DarkRoom_Gameplay.unity": {
+      "sha256": "d507921b1244c2a3186ba820bc54a3eae8daf9208dcde677f7eed438c9e358ed",
+      "bytes": 4703145
+    },
+    "Assets/Scripts/Runtime/DarkRoom/Yuna25DPlayerController.cs": {
+      "sha256": "d47aea951b8190c4a0557bb1521eaf4b37ccf57282b15e5daef07d94c0430d10",
+      "bytes": 26827
+    },
+    "Packages/manifest.json": {
+      "sha256": "5b6d3645e98eeaf4250dd0204bed3e567641d2dba70b0404a6af89ecd63c352c",
+      "bytes": 624
+    },
+    "Packages/packages-lock.json": {
+      "sha256": "a95d1a0a9685f70a64effa9402dc039dc36441034677db7ce11b63c47a08c4ab",
+      "bytes": 8112
+    },
+    "ProjectSettings/ProjectVersion.txt": {
+      "sha256": "91b35566b263574c8a513eff3bba6d5d313482d752d961077b47ab5b3ff14981",
+      "bytes": 85
+    }
+  },
+  "evidence": {
+    "Evidence/25d/T03.3/attempt01-60/jump-proof.json": {
+      "sha256": "209db20b94487aaaab9746b37d38618719c5e3282d5b29cbf971b02d0635f4f1",
+      "bytes": 27945
+    },
+    "Evidence/25d/T03.3/attempt01-60/pose-0.png": {
+      "sha256": "d83f2b946e9d553b4295db64bdea3997a1173d560bba387b8230544e7f890d2a",
+      "bytes": 158395
+    },
+    "Evidence/25d/T03.3/attempt01-60/pose-1.png": {
+      "sha256": "0c600a4fa1c2ab3ad4f864ec34b140b3720c6fb4e849ae890e9e5a3d6de7b1dc",
+      "bytes": 153689
+    },
+    "Evidence/25d/T03.3/attempt01-60/pose-2.png": {
+      "sha256": "ffa0f0d8aeb1a9a53f5c405c0f0de343a253577b246d59f7e635b7d13cf89152",
+      "bytes": 137986
+    },
+    "Evidence/25d/T03.3/attempt01-60/pose-3.png": {
+      "sha256": "959538619a03e274761ab14be6be0690b3f53be763e66d13d9ff87de687558ab",
+      "bytes": 133969
+    },
+    "Evidence/25d/T03.3/attempt01-60/pose-4.png": {
+      "sha256": "f863a73f94e3918d999a6acd73888edd6dd5198b7c48798dd930050b1944d0d1",
+      "bytes": 150119
+    },
+    "Evidence/25d/T03.3/attempt01-60/pose-5.png": {
+      "sha256": "0d4d5a774360c7623dc00db4d361f026d342d297ec29aa41fa1eb236c1bde656",
+      "bytes": 170021
+    },
+    "Evidence/25d/T03.3/attempt01-60/pose-6.png": {
+      "sha256": "bf247ac5427e887a76983de832986f2b53dfe2a1bd6210159303ea052775dd39",
+      "bytes": 166791
+    },
+    "Evidence/25d/T03.3/attempt01-60/pose-7.png": {
+      "sha256": "bd48884b0266d2c8d710eb835ecf5a062d1be7b41f6ee8462af2c6b8c7a399ae",
+      "bytes": 158138
+    },
+    "Evidence/25d/T03.3/CONTRATO.md": {
+      "sha256": "d9750a4e14f11108818bf4ff165b6393a0755d9c196f691a385a920cc8e10405",
+      "bytes": 3137
+    },
+    "Evidence/25d/T03.3/final-120/jump-proof.json": {
+      "sha256": "90d596b007c9395c1d9b21b6f8615ab720303258a335b97b204d5a5d6533f26d",
+      "bytes": 135842
+    },
+    "Evidence/25d/T03.3/final-120/pose-0.png": {
+      "sha256": "2b62da551e645bc6c714eaceac8c4a01406576398524e66e71714fd8095bcaae",
+      "bytes": 158469
+    },
+    "Evidence/25d/T03.3/final-120/pose-1.png": {
+      "sha256": "0c600a4fa1c2ab3ad4f864ec34b140b3720c6fb4e849ae890e9e5a3d6de7b1dc",
+      "bytes": 153689
+    },
+    "Evidence/25d/T03.3/final-120/pose-2.png": {
+      "sha256": "ffa0f0d8aeb1a9a53f5c405c0f0de343a253577b246d59f7e635b7d13cf89152",
+      "bytes": 137986
+    },
+    "Evidence/25d/T03.3/final-120/pose-3.png": {
+      "sha256": "959538619a03e274761ab14be6be0690b3f53be763e66d13d9ff87de687558ab",
+      "bytes": 133969
+    },
+    "Evidence/25d/T03.3/final-120/pose-4.png": {
+      "sha256": "f863a73f94e3918d999a6acd73888edd6dd5198b7c48798dd930050b1944d0d1",
+      "bytes": 150119
+    },
+    "Evidence/25d/T03.3/final-120/pose-5.png": {
+      "sha256": "0f462228252aebe6b59eaf4ee0ab6f565f166e365423681f6b3f53c824064d01",
+      "bytes": 170018
+    },
+    "Evidence/25d/T03.3/final-120/pose-6.png": {
+      "sha256": "a789dd93fa24104b45eed7bc313af4635701051394896b73053ddf4336ce8d3d",
+      "bytes": 166735
+    },
+    "Evidence/25d/T03.3/final-120/pose-7.png": {
+      "sha256": "17f18101c392ace6df6a6e731618b3521fa2483c7acda2e26318a96fbc684ebe",
+      "bytes": 157968
+    },
+    "Evidence/25d/T03.3/final-120/verification.json": {
+      "sha256": "fb22dd3e234dd6c56f0db66a6edb3237de069f37f7244c9e50de35dbea98536b",
+      "bytes": 14094
+    },
+    "Evidence/25d/T03.3/final-30/jump-proof.json": {
+      "sha256": "be427f90622b1dd01773b9cf14dd86e6f3ee73ca0e681ddbd4b9da517ee931ba",
+      "bytes": 54997
+    },
+    "Evidence/25d/T03.3/final-30/pose-0.png": {
+      "sha256": "0c7f1c44aea5ae7970b4b423a4b05ab29a880b97c5a0d463f277a1622d8c1e61",
+      "bytes": 158411
+    },
+    "Evidence/25d/T03.3/final-30/pose-1.png": {
+      "sha256": "0c600a4fa1c2ab3ad4f864ec34b140b3720c6fb4e849ae890e9e5a3d6de7b1dc",
+      "bytes": 153689
+    },
+    "Evidence/25d/T03.3/final-30/pose-2.png": {
+      "sha256": "ffa0f0d8aeb1a9a53f5c405c0f0de343a253577b246d59f7e635b7d13cf89152",
+      "bytes": 137986
+    },
+    "Evidence/25d/T03.3/final-30/pose-3.png": {
+      "sha256": "959538619a03e274761ab14be6be0690b3f53be763e66d13d9ff87de687558ab",
+      "bytes": 133969
+    },
+    "Evidence/25d/T03.3/final-30/pose-4.png": {
+      "sha256": "f863a73f94e3918d999a6acd73888edd6dd5198b7c48798dd930050b1944d0d1",
+      "bytes": 150119
+    },
+    "Evidence/25d/T03.3/final-30/pose-5.png": {
+      "sha256": "f90bc5a535fa6fe564a65808b473e3fea5dcd40844ea7e8914b94e3fcf8606b0",
+      "bytes": 170002
+    },
+    "Evidence/25d/T03.3/final-30/pose-6.png": {
+      "sha256": "4e975ae4a6d79d6780bd1c4d21aae6e5929b2cfd25810a409c5981050fe809fe",
+      "bytes": 167430
+    },
+    "Evidence/25d/T03.3/final-30/pose-7.png": {
+      "sha256": "24f096d9a2050dd333ec6155118390bc508ba6727aaaa8b5dcc1559a3d7959d2",
+      "bytes": 158491
+    },
+    "Evidence/25d/T03.3/final-30/verification.json": {
+      "sha256": "c524cb1f62f9f6407748a6d1a1e6b9d572219efaa789de47b507af7b168fb3d9",
+      "bytes": 14049
+    },
+    "Evidence/25d/T03.3/final-60/jump-detail-slow.gif": {
+      "sha256": "9d401b174567e25a3cbb1d2672fa122128074cfd182f6230595be709c08445e3",
+      "bytes": 2941034
+    },
+    "Evidence/25d/T03.3/final-60/jump-detail.gif": {
+      "sha256": "9f5c8e62352a8cb50028a8ce755b69b9f570b79cb9ae468c73926832cb525677",
+      "bytes": 2941034
+    },
+    "Evidence/25d/T03.3/final-60/jump-gameplay.gif": {
+      "sha256": "2425622a21cf3add90a68451d0eec8f2002e900886a7061ffa67e09f889c2710",
+      "bytes": 670793
+    },
+    "Evidence/25d/T03.3/final-60/jump-proof.json": {
+      "sha256": "d80d57097ca3fd203914c6f7532f9a57ab5188de30071b77fe7478c87c9f6341",
+      "bytes": 81910
+    },
+    "Evidence/25d/T03.3/final-60/pose-0.png": {
+      "sha256": "d83f2b946e9d553b4295db64bdea3997a1173d560bba387b8230544e7f890d2a",
+      "bytes": 158395
+    },
+    "Evidence/25d/T03.3/final-60/pose-1.png": {
+      "sha256": "0c600a4fa1c2ab3ad4f864ec34b140b3720c6fb4e849ae890e9e5a3d6de7b1dc",
+      "bytes": 153689
+    },
+    "Evidence/25d/T03.3/final-60/pose-2.png": {
+      "sha256": "ffa0f0d8aeb1a9a53f5c405c0f0de343a253577b246d59f7e635b7d13cf89152",
+      "bytes": 137986
+    },
+    "Evidence/25d/T03.3/final-60/pose-3.png": {
+      "sha256": "959538619a03e274761ab14be6be0690b3f53be763e66d13d9ff87de687558ab",
+      "bytes": 133969
+    },
+    "Evidence/25d/T03.3/final-60/pose-4.png": {
+      "sha256": "f863a73f94e3918d999a6acd73888edd6dd5198b7c48798dd930050b1944d0d1",
+      "bytes": 150119
+    },
+    "Evidence/25d/T03.3/final-60/pose-5.png": {
+      "sha256": "0d4d5a774360c7623dc00db4d361f026d342d297ec29aa41fa1eb236c1bde656",
+      "bytes": 170021
+    },
+    "Evidence/25d/T03.3/final-60/pose-6.png": {
+      "sha256": "bf247ac5427e887a76983de832986f2b53dfe2a1bd6210159303ea052775dd39",
+      "bytes": 166791
+    },
+    "Evidence/25d/T03.3/final-60/pose-7.png": {
+      "sha256": "bd48884b0266d2c8d710eb835ecf5a062d1be7b41f6ee8462af2c6b8c7a399ae",
+      "bytes": 158138
+    },
+    "Evidence/25d/T03.3/final-60/stages.png": {
+      "sha256": "c62bc2d7793317c39001951f94c3f66d8a7654a02d6d8c47b67daf671c1c876e",
+      "bytes": 281362
+    },
+    "Evidence/25d/T03.3/final-60/verification.json": {
+      "sha256": "74815c8a90c09fe0506b65534cb9b1ee127a5baac71c6719c1a6093ef6c1d8ae",
+      "bytes": 14622
+    },
+    "Evidence/25d/T03.3/make_manifest.py": {
+      "sha256": "ff474426253c8e658e0fc3d20cd0e87fdfcbb1e24aaf65208753ad261a1783ef",
+      "bytes": 4436
+    },
+    "Evidence/25d/T03.3/make_review.py": {
+      "sha256": "3efbc7575e22389982e478bfa9c56c341201ec9e28c02b1b00dce19089f104ad",
+      "bytes": 6614
+    },
+    "Evidence/25d/T03.3/prompt-jump-v1.txt": {
+      "sha256": "4e8ad737010ca7adf8eb9858e63e153008fdd189b5f7aead722c8fbfc070f191",
+      "bytes": 3073
+    },
+    "Evidence/25d/T03.3/README.md": {
+      "sha256": "657112659b8a5ef789ced739c2df83c081a88deba1180889ffa27d7405242a79",
+      "bytes": 8785
+    },
+    "Evidence/25d/T03.3/review-v1/jump-detail-slow.gif": {
+      "sha256": "0145f4e6204f26ba52480eb7fbc5836050d4347efcdb12f7c363e1e0af4ddb19",
+      "bytes": 2892719
+    },
+    "Evidence/25d/T03.3/review-v1/jump-detail.gif": {
+      "sha256": "28fb555c7e11d4353da212752c80bc600776c9905f8649953c36f8fd9470c75d",
+      "bytes": 2892719
+    },
+    "Evidence/25d/T03.3/review-v1/jump-gameplay.gif": {
+      "sha256": "9403d218fd9e881661bca5ba3854190df31b2f9a7707a570f278b8c50b2a47c2",
+      "bytes": 664064
+    },
+    "Evidence/25d/T03.3/review-v1/jump-proof.json": {
+      "sha256": "90d596b007c9395c1d9b21b6f8615ab720303258a335b97b204d5a5d6533f26d",
+      "bytes": 135842
+    },
+    "Evidence/25d/T03.3/review-v1/pose-0.png": {
+      "sha256": "2b62da551e645bc6c714eaceac8c4a01406576398524e66e71714fd8095bcaae",
+      "bytes": 158469
+    },
+    "Evidence/25d/T03.3/review-v1/pose-1.png": {
+      "sha256": "0c600a4fa1c2ab3ad4f864ec34b140b3720c6fb4e849ae890e9e5a3d6de7b1dc",
+      "bytes": 153689
+    },
+    "Evidence/25d/T03.3/review-v1/pose-2.png": {
+      "sha256": "ffa0f0d8aeb1a9a53f5c405c0f0de343a253577b246d59f7e635b7d13cf89152",
+      "bytes": 137986
+    },
+    "Evidence/25d/T03.3/review-v1/pose-3.png": {
+      "sha256": "959538619a03e274761ab14be6be0690b3f53be763e66d13d9ff87de687558ab",
+      "bytes": 133969
+    },
+    "Evidence/25d/T03.3/review-v1/pose-4.png": {
+      "sha256": "f863a73f94e3918d999a6acd73888edd6dd5198b7c48798dd930050b1944d0d1",
+      "bytes": 150119
+    },
+    "Evidence/25d/T03.3/review-v1/pose-5.png": {
+      "sha256": "0f462228252aebe6b59eaf4ee0ab6f565f166e365423681f6b3f53c824064d01",
+      "bytes": 170018
+    },
+    "Evidence/25d/T03.3/review-v1/pose-6.png": {
+      "sha256": "a789dd93fa24104b45eed7bc313af4635701051394896b73053ddf4336ce8d3d",
+      "bytes": 166735
+    },
+    "Evidence/25d/T03.3/review-v1/pose-7.png": {
+      "sha256": "17f18101c392ace6df6a6e731618b3521fa2483c7acda2e26318a96fbc684ebe",
+      "bytes": 157968
+    },
+    "Evidence/25d/T03.3/review-v1/verification.json": {
+      "sha256": "c84bc301e3ccc66c232192af736b599288ea362b24ec56b83db48c931fd7b5c7",
+      "bytes": 14620
+    },
+    "Evidence/25d/T03.3/review-v1-verified/jump-detail-slow.gif": {
+      "sha256": "0145f4e6204f26ba52480eb7fbc5836050d4347efcdb12f7c363e1e0af4ddb19",
+      "bytes": 2892719
+    },
+    "Evidence/25d/T03.3/review-v1-verified/jump-detail.gif": {
+      "sha256": "28fb555c7e11d4353da212752c80bc600776c9905f8649953c36f8fd9470c75d",
+      "bytes": 2892719
+    },
+    "Evidence/25d/T03.3/review-v1-verified/jump-gameplay.gif": {
+      "sha256": "9403d218fd9e881661bca5ba3854190df31b2f9a7707a570f278b8c50b2a47c2",
+      "bytes": 664064
+    },
+    "Evidence/25d/T03.3/review-v1-verified/jump-proof.json": {
+      "sha256": "90d596b007c9395c1d9b21b6f8615ab720303258a335b97b204d5a5d6533f26d",
+      "bytes": 135842
+    },
+    "Evidence/25d/T03.3/review-v1-verified/pose-0.png": {
+      "sha256": "2b62da551e645bc6c714eaceac8c4a01406576398524e66e71714fd8095bcaae",
+      "bytes": 158469
+    },
+    "Evidence/25d/T03.3/review-v1-verified/pose-1.png": {
+      "sha256": "0c600a4fa1c2ab3ad4f864ec34b140b3720c6fb4e849ae890e9e5a3d6de7b1dc",
+      "bytes": 153689
+    },
+    "Evidence/25d/T03.3/review-v1-verified/pose-2.png": {
+      "sha256": "ffa0f0d8aeb1a9a53f5c405c0f0de343a253577b246d59f7e635b7d13cf89152",
+      "bytes": 137986
+    },
+    "Evidence/25d/T03.3/review-v1-verified/pose-3.png": {
+      "sha256": "959538619a03e274761ab14be6be0690b3f53be763e66d13d9ff87de687558ab",
+      "bytes": 133969
+    },
+    "Evidence/25d/T03.3/review-v1-verified/pose-4.png": {
+      "sha256": "f863a73f94e3918d999a6acd73888edd6dd5198b7c48798dd930050b1944d0d1",
+      "bytes": 150119
+    },
+    "Evidence/25d/T03.3/review-v1-verified/pose-5.png": {
+      "sha256": "0f462228252aebe6b59eaf4ee0ab6f565f166e365423681f6b3f53c824064d01",
+      "bytes": 170018
+    },
+    "Evidence/25d/T03.3/review-v1-verified/pose-6.png": {
+      "sha256": "a789dd93fa24104b45eed7bc313af4635701051394896b73053ddf4336ce8d3d",
+      "bytes": 166735
+    },
+    "Evidence/25d/T03.3/review-v1-verified/pose-7.png": {
+      "sha256": "17f18101c392ace6df6a6e731618b3521fa2483c7acda2e26318a96fbc684ebe",
+      "bytes": 157968
+    },
+    "Evidence/25d/T03.3/review-v1-verified/verification.json": {
+      "sha256": "c84bc301e3ccc66c232192af736b599288ea362b24ec56b83db48c931fd7b5c7",
+      "bytes": 14620
+    },
+    "Evidence/25d/T03.3/reviews/T03.3-v1.md": {
+      "sha256": "056fa88531a7b5ca5355ae9e87a80f2660c132e79a4fc221936dbd180d5f8187",
+      "bytes": 1339
+    },
+    "Evidence/25d/T03.3/validated-120/jump-proof.json": {
+      "sha256": "90d596b007c9395c1d9b21b6f8615ab720303258a335b97b204d5a5d6533f26d",
+      "bytes": 135842
+    },
+    "Evidence/25d/T03.3/validated-120/pose-0.png": {
+      "sha256": "2b62da551e645bc6c714eaceac8c4a01406576398524e66e71714fd8095bcaae",
+      "bytes": 158469
+    },
+    "Evidence/25d/T03.3/validated-120/pose-1.png": {
+      "sha256": "0c600a4fa1c2ab3ad4f864ec34b140b3720c6fb4e849ae890e9e5a3d6de7b1dc",
+      "bytes": 153689
+    },
+    "Evidence/25d/T03.3/validated-120/pose-2.png": {
+      "sha256": "ffa0f0d8aeb1a9a53f5c405c0f0de343a253577b246d59f7e635b7d13cf89152",
+      "bytes": 137986
+    },
+    "Evidence/25d/T03.3/validated-120/pose-3.png": {
+      "sha256": "959538619a03e274761ab14be6be0690b3f53be763e66d13d9ff87de687558ab",
+      "bytes": 133969
+    },
+    "Evidence/25d/T03.3/validated-120/pose-4.png": {
+      "sha256": "f863a73f94e3918d999a6acd73888edd6dd5198b7c48798dd930050b1944d0d1",
+      "bytes": 150119
+    },
+    "Evidence/25d/T03.3/validated-120/pose-5.png": {
+      "sha256": "0f462228252aebe6b59eaf4ee0ab6f565f166e365423681f6b3f53c824064d01",
+      "bytes": 170018
+    },
+    "Evidence/25d/T03.3/validated-120/pose-6.png": {
+      "sha256": "a789dd93fa24104b45eed7bc313af4635701051394896b73053ddf4336ce8d3d",
+      "bytes": 166735
+    },
+    "Evidence/25d/T03.3/validated-120/pose-7.png": {
+      "sha256": "17f18101c392ace6df6a6e731618b3521fa2483c7acda2e26318a96fbc684ebe",
+      "bytes": 157968
+    },
+    "Evidence/25d/T03.3/validated-30/jump-proof.json": {
+      "sha256": "ee5e4caa7e88243ddfc0354a9f029d4833c4f1902dab62a089026310089de5e0",
+      "bytes": 54997
+    },
+    "Evidence/25d/T03.3/validated-30/pose-0.png": {
+      "sha256": "0c7f1c44aea5ae7970b4b423a4b05ab29a880b97c5a0d463f277a1622d8c1e61",
+      "bytes": 158411
+    },
+    "Evidence/25d/T03.3/validated-30/pose-1.png": {
+      "sha256": "0c600a4fa1c2ab3ad4f864ec34b140b3720c6fb4e849ae890e9e5a3d6de7b1dc",
+      "bytes": 153689
+    },
+    "Evidence/25d/T03.3/validated-30/pose-2.png": {
+      "sha256": "ffa0f0d8aeb1a9a53f5c405c0f0de343a253577b246d59f7e635b7d13cf89152",
+      "bytes": 137986
+    },
+    "Evidence/25d/T03.3/validated-30/pose-3.png": {
+      "sha256": "959538619a03e274761ab14be6be0690b3f53be763e66d13d9ff87de687558ab",
+      "bytes": 133969
+    },
+    "Evidence/25d/T03.3/validated-30/pose-4.png": {
+      "sha256": "f863a73f94e3918d999a6acd73888edd6dd5198b7c48798dd930050b1944d0d1",
+      "bytes": 150119
+    },
+    "Evidence/25d/T03.3/validated-30/pose-5.png": {
+      "sha256": "f90bc5a535fa6fe564a65808b473e3fea5dcd40844ea7e8914b94e3fcf8606b0",
+      "bytes": 170002
+    },
+    "Evidence/25d/T03.3/validated-30/pose-6.png": {
+      "sha256": "4e975ae4a6d79d6780bd1c4d21aae6e5929b2cfd25810a409c5981050fe809fe",
+      "bytes": 167430
+    },
+    "Evidence/25d/T03.3/validated-30/pose-7.png": {
+      "sha256": "24f096d9a2050dd333ec6155118390bc508ba6727aaaa8b5dcc1559a3d7959d2",
+      "bytes": 158491
+    },
+    "Evidence/25d/T03.3/validated-30/verification.json": {
+      "sha256": "7f0bc27485279e8dd564d4f183b1a303419b879a1f41277910f04a176c079ac8",
+      "bytes": 14049
+    },
+    "Evidence/25d/T03.3/validated-60/jump-proof.json": {
+      "sha256": "d80d57097ca3fd203914c6f7532f9a57ab5188de30071b77fe7478c87c9f6341",
+      "bytes": 81910
+    },
+    "Evidence/25d/T03.3/validated-60/pose-0.png": {
+      "sha256": "d83f2b946e9d553b4295db64bdea3997a1173d560bba387b8230544e7f890d2a",
+      "bytes": 158395
+    },
+    "Evidence/25d/T03.3/validated-60/pose-1.png": {
+      "sha256": "0c600a4fa1c2ab3ad4f864ec34b140b3720c6fb4e849ae890e9e5a3d6de7b1dc",
+      "bytes": 153689
+    },
+    "Evidence/25d/T03.3/validated-60/pose-2.png": {
+      "sha256": "ffa0f0d8aeb1a9a53f5c405c0f0de343a253577b246d59f7e635b7d13cf89152",
+      "bytes": 137986
+    },
+    "Evidence/25d/T03.3/validated-60/pose-3.png": {
+      "sha256": "959538619a03e274761ab14be6be0690b3f53be763e66d13d9ff87de687558ab",
+      "bytes": 133969
+    },
+    "Evidence/25d/T03.3/validated-60/pose-4.png": {
+      "sha256": "f863a73f94e3918d999a6acd73888edd6dd5198b7c48798dd930050b1944d0d1",
+      "bytes": 150119
+    },
+    "Evidence/25d/T03.3/validated-60/pose-5.png": {
+      "sha256": "0d4d5a774360c7623dc00db4d361f026d342d297ec29aa41fa1eb236c1bde656",
+      "bytes": 170021
+    },
+    "Evidence/25d/T03.3/validated-60/pose-6.png": {
+      "sha256": "bf247ac5427e887a76983de832986f2b53dfe2a1bd6210159303ea052775dd39",
+      "bytes": 166791
+    },
+    "Evidence/25d/T03.3/validated-60/pose-7.png": {
+      "sha256": "bd48884b0266d2c8d710eb835ecf5a062d1be7b41f6ee8462af2c6b8c7a399ae",
+      "bytes": 158138
+    },
+    "Evidence/25d/T03.3/validated-60/verification.json": {
+      "sha256": "3dec04bf47cffb5885d0d69d5f53516bba6ec33d97dcb48c5148c00c87b0b926",
+      "bytes": 14096
+    },
+    "Evidence/25d/T03.3/yuna-jump-generated-v1.png": {
+      "sha256": "8aa6be63aab1bc8612b057afcc0601e75b8cd2f41234c41155d75d5fd899e357",
+      "bytes": 1868029
+    }
+  },
+  "executed_clone_equal_current": {
+    "Assets/Art/Illustrated25D/Yuna/Jump/Editor.meta": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames.meta": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/YunaJumpIllustration.cs": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/YunaJumpIllustration.cs.meta": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/YunaJumpReview.unity": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/YunaJumpReview.unity.meta": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Yuna_Jump_Atlas_v1.png": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Yuna_Jump_Atlas_v1.png.meta": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Editor/YunaJumpReviewCapture.cs": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Editor/YunaJumpReviewCapture.cs.meta": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump0.asset": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump0.asset.meta": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump1.asset": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump1.asset.meta": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump2.asset": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump2.asset.meta": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump3.asset": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump3.asset.meta": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump4.asset": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump4.asset.meta": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump5.asset": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump5.asset.meta": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump6.asset": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump6.asset.meta": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump7.asset": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump/Frames/Jump7.asset.meta": true,
+    "Assets/Art/Illustrated25D/Yuna/Jump.meta": true,
+    "Assets/Scenes/DarkRoom_Gameplay.unity": true,
+    "Assets/Scripts/Runtime/DarkRoom/Yuna25DPlayerController.cs": true,
+    "Assets/Art/Illustrated25D/Yuna/Yuna_Profile_v1.png": true,
+    "Assets/Art/Illustrated25D/Yuna/Run/YunaRunIllustration.cs": true,
+    "Assets/Art/Illustrated25D/Yuna/Run/YunaRunReview.unity": true,
+    "Assets/Art/Illustrated25D/Yuna/Run/Yuna_Run_Atlas_v1.png": true,
+    "Assets/Art/Illustrated25D/Yuna/Run/Run_Painted.mat": true,
+    "ProjectSettings/ProjectVersion.txt": true,
+    "Packages/manifest.json": true,
+    "Packages/packages-lock.json": true
+  },
+  "approved_run_manifest_unchanged": 35,
+  "duplicate_asset_guids": {},
+  "outside_build_settings": true,
+  "raw_frame_count_matched": 132,
+  "limits": "Flat fixture candidate awaiting human review. No device/audio/pilot certification. Historical attempt01 has no complete previous-source snapshot. Diary/state remain append-only/mutable and outside this manifest."
+}
