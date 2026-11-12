@@ -23,6 +23,10 @@ namespace YunaLegend.EditorScripts
         private const string ArtFolder = "Assets/Art/UI";
         private const string EvidenceFolder = "Evidence/title-screen-2026-11-11";
 
+        // Fases disponiveis no dropdown da bandeirinha. Novas fases entram aqui.
+        private static readonly string[] PhaseLabels = { "O Quarto Escuro" };
+        private static readonly string[] PhaseScenes = { "DarkRoom_Gameplay" };
+
         private static readonly Color Cream = new Color(0.95f, 0.90f, 0.78f);
         private static readonly Color Gold = new Color(1f, 0.84f, 0.55f);
         private static readonly Color Disabled = new Color(0.52f, 0.48f, 0.42f);
@@ -123,6 +127,14 @@ namespace YunaLegend.EditorScripts
                 newGame, loadGame, easyMode, easyTag, footer, focusMarker,
                 settingsButton, panel, volumeSlider, closeButton, "DarkRoom_Gameplay");
 
+            // Bandeirinha no topo: dropdown para escolher a fase.
+            var flagSprite = LoadSprite($"{ArtFolder}/Title_Flag.png", 256);
+            BuildPhaseSelector(root, flagSprite, out var flagButton, out var phasesRoot,
+                out var phasesBackdrop, out var phaseButtons, out var phaseLabels);
+            var selector = new GameObject("Seletor_Fase").AddComponent<TitlePhaseSelector>();
+            selector.Configure(controller, flagButton, phasesRoot, phasesBackdrop, phaseButtons, phaseLabels, PhaseScenes);
+            phasesRoot.SetActive(false);
+
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene, ScenePath);
             RegisterBuildScenes();
@@ -157,6 +169,13 @@ namespace YunaLegend.EditorScripts
             if (swing == null || swing.AmplitudeDegrees <= 0f)
                 throw new System.InvalidOperationException("Perna animada ausente na tela de entrada.");
 
+            var selector = Object.FindFirstObjectByType<TitlePhaseSelector>();
+            if (selector == null) throw new System.InvalidOperationException("Seletor de fases ausente.");
+            if (selector.ItemCount < 1) throw new System.InvalidOperationException("Dropdown de fases sem itens.");
+            if (Object.FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None)
+                    .All(b => b.name != "Bandeira_Fases"))
+                throw new System.InvalidOperationException("Bandeirinha de fases ausente.");
+
             var scenes = EditorBuildSettings.scenes;
             if (scenes.Length < 1 || scenes[0].path != ScenePath)
                 throw new System.InvalidOperationException("Build Settings nao comeca pela tela de entrada.");
@@ -188,9 +207,99 @@ namespace YunaLegend.EditorScripts
                 swing.SetAngle(0f);
             }
 
+            // Terceiro quadro com o dropdown de fases aberto.
+            var selector = Object.FindFirstObjectByType<TitlePhaseSelector>();
+            if (selector != null)
+            {
+                selector.Open();
+                var phases = DarkRoomStartCapture.RenderDisplayImage(camera, 1920, 1080);
+                System.IO.File.WriteAllBytes($"{EvidenceFolder}/04-title-phases.png", phases.EncodeToPNG());
+                Object.DestroyImmediate(phases);
+                selector.Close();
+            }
+
             Debug.Log("TITLE_SCREEN_CAPTURE " + EvidenceFolder + "/01-title.png");
             EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             _ = scene;
+        }
+
+        private static void BuildPhaseSelector(Transform root, Sprite flag, out Button flagButton,
+            out GameObject dropdownRoot, out Button backdrop, out Button[] itemButtons, out Text[] itemLabels)
+        {
+            flagButton = AddIconButton("Bandeira_Fases", root, flag);
+            var flagRect = flagButton.GetComponent<RectTransform>();
+            flagRect.anchorMin = new Vector2(0.5f, 1f);
+            flagRect.anchorMax = new Vector2(0.5f, 1f);
+            flagRect.pivot = new Vector2(0.5f, 1f);
+            flagRect.anchoredPosition = new Vector2(0f, -26f);
+            flagRect.sizeDelta = new Vector2(72f, 90f);
+
+            dropdownRoot = new GameObject("Fases_Dropdown", typeof(RectTransform));
+            dropdownRoot.transform.SetParent(root, false);
+            Stretch(dropdownRoot.GetComponent<RectTransform>());
+
+            var backGo = new GameObject("Fundo_Clique", typeof(RectTransform), typeof(Image));
+            backGo.transform.SetParent(dropdownRoot.transform, false);
+            Stretch(backGo.GetComponent<RectTransform>());
+            var backImage = backGo.GetComponent<Image>();
+            // Alfa minimo: continua recebendo clique para fechar o dropdown.
+            backImage.color = new Color(0f, 0f, 0f, 0.003f);
+            backImage.raycastTarget = true;
+            backdrop = backGo.AddComponent<Button>();
+            backdrop.transition = Selectable.Transition.None;
+
+            var panelGo = new GameObject("Painel_Fases", typeof(RectTransform), typeof(Image));
+            panelGo.transform.SetParent(dropdownRoot.transform, false);
+            var panelRect = panelGo.GetComponent<RectTransform>();
+            panelRect.anchorMin = new Vector2(0.5f, 1f);
+            panelRect.anchorMax = new Vector2(0.5f, 1f);
+            panelRect.pivot = new Vector2(0.5f, 1f);
+            panelRect.anchoredPosition = new Vector2(0f, -124f);
+            panelRect.sizeDelta = new Vector2(420f, 104f);
+            panelGo.GetComponent<Image>().color = new Color(0.05f, 0.038f, 0.028f, 0.97f);
+            var border = panelGo.AddComponent<Outline>();
+            border.effectColor = new Color(0.85f, 0.70f, 0.42f, 0.55f);
+            border.effectDistance = new Vector2(1.5f, -1.5f);
+
+            var header = AddText("Titulo_Fases", panelGo.transform, "Escolha a fase", 18,
+                new Color(0.72f, 0.66f, 0.55f), TextAnchor.UpperCenter);
+            var headerRect = header.rectTransform;
+            headerRect.anchorMin = new Vector2(0f, 1f);
+            headerRect.anchorMax = new Vector2(1f, 1f);
+            headerRect.pivot = new Vector2(0.5f, 1f);
+            headerRect.anchoredPosition = new Vector2(0f, -12f);
+            headerRect.sizeDelta = new Vector2(-24f, 26f);
+
+            itemButtons = new Button[PhaseScenes.Length];
+            itemLabels = new Text[PhaseScenes.Length];
+
+            for (int i = 0; i < PhaseScenes.Length; i++)
+            {
+                var itemGo = new GameObject($"Fase_{i:D2}", typeof(RectTransform));
+                itemGo.transform.SetParent(panelGo.transform, false);
+                var itemRect = itemGo.GetComponent<RectTransform>();
+                itemRect.anchorMin = new Vector2(0f, 1f);
+                itemRect.anchorMax = new Vector2(1f, 1f);
+                itemRect.pivot = new Vector2(0.5f, 1f);
+                itemRect.anchoredPosition = new Vector2(0f, -(44f + i * 50f));
+                itemRect.sizeDelta = new Vector2(-28f, 44f);
+
+                var label = AddText("Rotulo", itemGo.transform, PhaseLabels[i], 28, Cream, TextAnchor.MiddleCenter);
+                Stretch(label.rectTransform);
+
+                var button = itemGo.AddComponent<Button>();
+                button.targetGraphic = label;
+                var colors = button.colors;
+                colors.normalColor = Cream;
+                colors.highlightedColor = Gold;
+                colors.selectedColor = Gold;
+                colors.pressedColor = new Color(0.80f, 0.64f, 0.40f);
+                colors.fadeDuration = 0.08f;
+                button.colors = colors;
+
+                itemButtons[i] = button;
+                itemLabels[i] = label;
+            }
         }
 
         private static GameObject BuildSettingsPanel(Transform root, out Slider slider, out Button closeButton)

@@ -18,6 +18,7 @@ namespace YunaLegend.UI
 
         [Header("Cena de destino")]
         [SerializeField] private string gameplaySceneName = "DarkRoom_Gameplay";
+        [SerializeField] private string selectedPhaseScene;
 
         [Header("Menu")]
         [SerializeField] private Button newGameButton;
@@ -87,6 +88,7 @@ namespace YunaLegend.UI
                 volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
             }
 
+            if (string.IsNullOrEmpty(selectedPhaseScene)) selectedPhaseScene = gameplaySceneName;
             AudioListener.volume = MasterVolume;
             RefreshState();
         }
@@ -154,13 +156,30 @@ namespace YunaLegend.UI
 
         private void LoadGameplay()
         {
-            if (string.IsNullOrEmpty(gameplaySceneName))
+            string phase = SelectedPhaseScene;
+            if (string.IsNullOrEmpty(phase))
             {
                 Debug.LogError("[TitleScreen] Cena de destino nao configurada.");
                 return;
             }
 
-            SceneManager.LoadScene(gameplaySceneName);
+            SceneManager.LoadScene(phase);
+        }
+
+        /// <summary>Fase escolhida no seletor (bandeirinha); cai na cena padrao quando vazia.</summary>
+        public string SelectedPhaseScene =>
+            string.IsNullOrEmpty(selectedPhaseScene) ? gameplaySceneName : selectedPhaseScene;
+
+        public void SetPhase(string sceneName)
+        {
+            if (!string.IsNullOrEmpty(sceneName)) selectedPhaseScene = sceneName;
+        }
+
+        /// <summary>Escolhe e inicia uma fase (usado pelo dropdown da bandeirinha).</summary>
+        public void StartPhase(string sceneName)
+        {
+            SetPhase(sceneName);
+            LoadGameplay();
         }
 
         public void ToggleEasyMode()
@@ -236,6 +255,6 @@ namespace YunaLegend.UI
             gameplaySceneName = sceneName;
         }
 
-        public string GameplaySceneName => gameplaySceneName;
+        public string GameplaySceneName => SelectedPhaseScene;
     }
 }

@@ -31,6 +31,15 @@ Boas-vindas construída a partir do **material canônico fornecido** (Yuna lendo
 - `ProjectSettings/EditorBuildSettings.asset` (entrada índice 0, gameplay índice 1)
 - `Assets/Scripts/Tests/TitleScreenTests.cs`
 
+## Bandeirinha e seletor de fase
+
+No topo da tela de entrada há uma bandeirinha (`Title_Flag.png`). Ao clicar, abre um dropdown com o título “Escolha a fase” e a lista de fases — hoje apenas **O Quarto Escuro**. Escolher uma fase inicia a cena correspondente; `Novo jogo` usa a fase selecionada.
+
+- Lista serializada em `TitleScreenBuilder.PhaseLabels` / `PhaseScenes`; novas fases entram só acrescentando uma linha (rótulo + cena).
+- `TitlePhaseSelector` controla abrir/fechar (clique na bandeira, clique fora, Esc), destaca a fase atual com “•” e chama `TitleScreenController.StartPhase`.
+- O dropdown tem fundo de clique transparente (fecha ao tocar fora) e um painel escuro com filete dourado, coerente com o resto da tela.
+- `04-title-phases.png` mostra o dropdown aberto.
+
 ## Perna balançando (pedido do usuário)
 
 Na arte canônica a menina balança a perna enquanto lê. Para animar sem repintar, a perna direita (meia + sapato) foi **recortada da própria arte** (`Title_Leg.png`, 240×260) e virou uma camada sobreposta sobre o fundo **intacto**:

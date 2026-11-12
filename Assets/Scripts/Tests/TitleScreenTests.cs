@@ -44,6 +44,11 @@ namespace YunaLegend.Tests
                 var legImage = swing.GetComponent<Image>();
                 Assert.IsNotNull(legImage);
                 Assert.IsNotNull(legImage.sprite, "Sprite da perna ausente");
+
+                var selector = UnityEngine.Object.FindFirstObjectByType<TitlePhaseSelector>();
+                Assert.IsNotNull(selector, "Bandeirinha de fases ausente");
+                Assert.GreaterOrEqual(selector.ItemCount, 1, "Dropdown precisa listar ao menos uma fase");
+                Assert.AreEqual("DarkRoom_Gameplay", selector.CurrentPhaseScene);
             }
             finally
             {

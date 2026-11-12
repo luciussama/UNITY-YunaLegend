@@ -1,0 +1,49 @@
+name: Publicar build WebGL no GitHub Pages
+
+# Publica a pasta WebGL/ (gerada localmente com
+# YunaLegend > Build Web para GitHub Pages) como site estatico.
+#
+# Configuracao unica no GitHub: Settings > Pages > Source = GitHub Actions.
+# Nao precisa de segredo nem de Unity no runner: a build e feita na sua maquina.
+
+on:
+  push:
+    branches: [main, master, feature/dark-room]
+    paths:
+      - 'WebGL/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Conferir build WebGL
+        run: |
+          if [ ! -f WebGL/index.html ]; then
+            echo "::error file=.github/workflows/pages.yml::WebGL/index.html ausente. Gere a build (Unity: YunaLegend > Build Web para GitHub Pages) e commite a pasta WebGL/."
+            exit 1
+          fi
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: WebGL
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
