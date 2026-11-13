@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-13T16:33:37.905495+00:00",
+  "updated_at": "2026-11-13T16:49:12.168714+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -286,11 +286,8 @@
         "art-environment"
       ],
       "human_gate": false,
-      "status": "active",
-      "owner": {
-        "session": "2026-11-13-copilot-t053-b29a5ec7",
-        "agent": "Copilot SDK subagent Movel"
-      },
+      "status": "pending",
+      "owner": null,
       "checkpoint": {
         "done": "T05.3 aprovada. T05.4 ajustada apos feedback: escala0,70 (janela4,64m, rodape2,77m, livros37% da janela) e seis sombras de contato procedurais (ordens-160/-150). Recaptura OK a1280x720, quarto19,91m, primeiro plano preso a tela13,33m",
         "next": "Revisao humana das quatro capturas ajustadas; aprovada a T05.4, submeter T05 agregada e liberar T06.1",
@@ -1571,6 +1568,13 @@
       "files": "Assets/Art/Illustrated25D/Environment/Room;Evidence/25d/T05.4",
       "processes": "Nenhum Unity Editor ativo",
       "at": "2026-11-13T16:33:37.905495+00:00"
+    },
+    {
+      "command": "release",
+      "task": "T05",
+      "session": "2026-11-13-copilot-t053-b29a5ec7",
+      "reason": "T05.4 sem aceite. Ajustes de escala e acabamento dependem de geracao de imagem, que nao existe neste ambiente. Handoff documentado em Evidence/25d/T05.4/HANDOFF.md; proxima IA deve gerar tres paineis conforme PROMPTS-CAMADAS-V2.md, importar com PPU144, recapturar e submeter a revisao.",
+      "at": "2026-11-13T16:49:12.168714+00:00"
     }
   ]
 }
