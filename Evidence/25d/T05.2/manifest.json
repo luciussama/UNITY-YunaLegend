@@ -2,12 +2,12 @@
   "schema": 1,
   "task": "T05.2",
   "scope": "livros: perfil de apoio medido, integracao ilustrada, camera final e revisao",
-  "status": "T05.2 candidata aguardando revisao humana; T05 agregada pendente",
+  "status": "T05.2 aprovada pelo usuario em 2026-11-13; T05.3 movel e T05 agregada pendentes",
   "approval": {
     "scope": "T05.2 livros",
-    "status": "pending",
-    "literal_response": null,
-    "date": null,
+    "status": "accepted",
+    "literal_response": "aprovado.",
+    "date": "2026-11-13",
     "reference": "Evidence/25d/T05.2/reviews/T05.2-livros-proposta.md"
   },
   "review_questions": [
@@ -80,18 +80,18 @@
     },
     {
       "path": "Evidence/25d/T05.2/CONTRATO.md",
-      "bytes": 3672,
-      "sha256": "38b13990d85404b15f718013244d17266a8968d9fafb5614dd273d68602abf57"
+      "bytes": 3702,
+      "sha256": "546f17a23b05b3f33f10ac65e86e4b1f3c6d5eea0f690e3c0c9982a55fcc0b6e"
     },
     {
       "path": "Evidence/25d/T05.2/README.md",
-      "bytes": 6286,
-      "sha256": "9be4713ea2d59bff263366c5333c30f37c55741e8c32de2b6db5c7b54b070ddb"
+      "bytes": 6473,
+      "sha256": "d3ec87b48e07b6d9d35598d62098fa91073c84ebc30bff7134b7544b74f97a61"
     },
     {
       "path": "Evidence/25d/T05.2/reviews/T05.2-livros-proposta.md",
-      "bytes": 2473,
-      "sha256": "bfc56e5c117b86e225ace42f7444449c2d4ff81654e3463c0771a9c48035ec61"
+      "bytes": 2631,
+      "sha256": "d6f83b9013df616f7b0c9b390110abf434244f1a29c26101fda79ffac14791fb"
     },
     {
       "path": "Evidence/25d/T05.2/validation/books-review.log",

@@ -51,12 +51,12 @@ manifest = {
     "schema": 1,
     "task": "T05.2",
     "scope": "livros: perfil de apoio medido, integracao ilustrada, camera final e revisao",
-    "status": "T05.2 candidata aguardando revisao humana; T05 agregada pendente",
+    "status": "T05.2 aprovada pelo usuario em 2026-11-13; T05.3 movel e T05 agregada pendentes",
     "approval": {
         "scope": "T05.2 livros",
-        "status": "pending",
-        "literal_response": None,
-        "date": None,
+        "status": "accepted",
+        "literal_response": "aprovado.",
+        "date": "2026-11-13",
         "reference": "Evidence/25d/T05.2/reviews/T05.2-livros-proposta.md",
     },
     "review_questions": [

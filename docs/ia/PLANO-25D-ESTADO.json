@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-13T11:38:23.412054+00:00",
+  "updated_at": "2026-11-13T11:42:19.428812+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -282,13 +282,13 @@
         "agent": "Codex (GPT-6.1)"
       },
       "checkpoint": {
-        "done": "T05.1 urso aceita; T05.2 livros candidata apos corrigir as capturas: prancha T01 byte-identica, capa medida1,184211m/-8,739244graus/offset0,134786m/profundidade1,15m, MeshCollider nao convexo continuo, visual ilustrado e legado inativo. Capturas agora usam o sprite ilustrado oficial da Yuna (hash T01) com Body_Visual3D inativo; cena nao salva; feetError0. Setup/harness exit0, apoio0, depthMisses0, vaos2,451482/1,25 dentro do alcance, EditMode52/52.",
-        "next": "Aguardar resposta humana as quatro perguntas da revisao T05.2. Nao iniciar movel T05.3 nem aceitar T05 agregada antes do aceite literal dos livros. Integracao permanente T03/T06 segue pendente.",
-        "validation": "Unity harness exit0 com T05_BOOKS_REVIEW_COMPLETE yunaSprite=Yuna_Profile_Runtime_v1 legacy3D=False feetError0; manifesto20 fontes/10 evidencias com hashes OK; EditMode52/52; plan/diary checks OK",
-        "pending": "Revisao humana T05.2; T05.3 movel; movimento/pouso; integracao permanente T03 na T06; T05 agregada; sem push",
-        "files": "Evidence/25d/T05.1;Evidence/25d/T05.2;Assets/Art/Illustrated25D/Environment/Books;Assets/Scripts/Runtime/Illustrated25D/Environment/Books;Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformGeometry.cs;Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformArt.cs;Assets/Scripts/Runtime/DarkRoom/DarkRoomThreeStageCircuitGenerator.cs;Assets/Scenes/DarkRoom_Gameplay.unity;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/diario.sqlite3",
+        "done": "T05.1 urso e T05.2 livros aceitas pelo usuario (respostas literais 'aprovado.'), com capturas T05.2 usando o sprite ilustrado oficial e Body_Visual3D inativo apenas no harness. Pente fino: nenhuma tarefa com status blocked no plano; T04.2, T05.3, T05 agregada e T06 permanecem pendentes; T07 e gate humano; entradas planned 534/628/689 sao planos superados, nao trabalho aberto.",
+        "next": "Aguardar comando do usuario para iniciar T05.3 movel. Depois fechar T05 agregada e so entao liberar T06, que tambem depende de T04/T04.2.",
+        "validation": "Aceite T05.2 literal registrado em README/CONTRATO/proposta/manifesto; manifesto20 fontes/10 evidencias com hashes; plan/diary checks OK; docs T03/T04.1/T05 atualizados; nenhum Unity Editor ativo",
+        "pending": "T05.3 movel; T05 agregada; T04.2; T06; T07-T10; devices/WebGL; arquivos nao relacionados (AGENTS.md, slnx, IllustratedYunaProof.unity) fora do escopo",
+        "files": "Evidence/25d/T05.1;Evidence/25d/T05.2;tools/make_t05_books_manifest.py;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
         "processes": "Nenhum Unity Editor ativo; apenas Unity Hub serve",
-        "updated_at": "2026-11-13T11:38:23.412054+00:00"
+        "updated_at": "2026-11-13T11:42:19.428812+00:00"
       }
     },
     {
@@ -1441,6 +1441,18 @@
       "files": "Evidence/25d/T05.1;Evidence/25d/T05.2;Assets/Art/Illustrated25D/Environment/Books;Assets/Scripts/Runtime/Illustrated25D/Environment/Books;Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformGeometry.cs;Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformArt.cs;Assets/Scripts/Runtime/DarkRoom/DarkRoomThreeStageCircuitGenerator.cs;Assets/Scenes/DarkRoom_Gameplay.unity;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/diario.sqlite3",
       "processes": "Nenhum Unity Editor ativo; apenas Unity Hub serve",
       "at": "2026-11-13T11:38:23.412054+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T05",
+      "session": "2026-11-13-codex-t052-books-b7c4",
+      "done": "T05.1 urso e T05.2 livros aceitas pelo usuario (respostas literais 'aprovado.'), com capturas T05.2 usando o sprite ilustrado oficial e Body_Visual3D inativo apenas no harness. Pente fino: nenhuma tarefa com status blocked no plano; T04.2, T05.3, T05 agregada e T06 permanecem pendentes; T07 e gate humano; entradas planned 534/628/689 sao planos superados, nao trabalho aberto.",
+      "next": "Aguardar comando do usuario para iniciar T05.3 movel. Depois fechar T05 agregada e so entao liberar T06, que tambem depende de T04/T04.2.",
+      "validation": "Aceite T05.2 literal registrado em README/CONTRATO/proposta/manifesto; manifesto20 fontes/10 evidencias com hashes; plan/diary checks OK; docs T03/T04.1/T05 atualizados; nenhum Unity Editor ativo",
+      "pending": "T05.3 movel; T05 agregada; T04.2; T06; T07-T10; devices/WebGL; arquivos nao relacionados (AGENTS.md, slnx, IllustratedYunaProof.unity) fora do escopo",
+      "files": "Evidence/25d/T05.1;Evidence/25d/T05.2;tools/make_t05_books_manifest.py;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
+      "processes": "Nenhum Unity Editor ativo; apenas Unity Hub serve",
+      "at": "2026-11-13T11:42:19.428812+00:00"
     }
   ]
 }

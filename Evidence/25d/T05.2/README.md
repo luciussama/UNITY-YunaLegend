@@ -1,7 +1,8 @@
 # T05.2 - livros: apoio real e camera final
 
-Estado: **T05.2 candidata, aguardando revisao humana**. A T05 agregada continua
-ativa: movel, movimento e T06 permanecem pendentes.
+Estado: **T05.2 aprovada pelo usuario em 13/11/2026** (resposta literal
+`"aprovado."`). A T05 agregada continua ativa: T05.3 movel, movimento e T06
+permanecem pendentes.
 
 Data: 13/11/2026. Sessao `2026-11-13-codex-t052-books-b7c4`, Codex (GPT-6.1).
 Escopo: segundo objeto do percurso obrigatorio **urso -> livros -> movel**.
@@ -33,6 +34,9 @@ A cena persistida ainda contem o corpo 3D ate a integracao permanente da T06.
 O detalhe preserva os cinco volumes, capas, lombadas, paginas, ornamentos e a
 fita lateral. Nao foi introduzido tampo reto, caixa envolvendo a pilha ou apoio
 invisivel alem da profundidade fisica de `1,15 m`.
+
+O aceite cobre exclusivamente a microentrega T05.2 dos livros. Ele nao aprova a
+T05 agregada, o movel/T05.3, movimento, pouso, T04.2, T06 ou WebGL.
 
 ## Contrato de apoio
 

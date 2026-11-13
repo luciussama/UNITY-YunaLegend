@@ -1,8 +1,8 @@
 # T05.2 - livros: contrato de apoio medido
 
 Data: 13/11/2026. Sessao `2026-11-13-codex-t052-books-b7c4`, Codex (GPT-6.1).
-Status: contrato aplicado na cena persistida; **T05.2 aguarda revisao humana** e
-a T05 agregada continua pendente.
+Status: contrato aplicado na cena persistida; **T05.2 aprovada pelo usuario em
+13/11/2026**. A T05 agregada e a T05.3 movel continuam pendentes.
 
 ## Fonte e escala
 
