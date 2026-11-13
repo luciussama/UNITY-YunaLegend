@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-13T16:49:12.168714+00:00",
+  "updated_at": "2026-11-13T16:49:27.699763+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -289,13 +289,13 @@
       "status": "pending",
       "owner": null,
       "checkpoint": {
-        "done": "T05.3 aprovada. T05.4 ajustada apos feedback: escala0,70 (janela4,64m, rodape2,77m, livros37% da janela) e seis sombras de contato procedurais (ordens-160/-150). Recaptura OK a1280x720, quarto19,91m, primeiro plano preso a tela13,33m",
-        "next": "Revisao humana das quatro capturas ajustadas; aprovada a T05.4, submeter T05 agregada e liberar T06.1",
-        "validation": "T054_ROOM_CAPTURE_OK; room-audit.json com roomScale0,70, nearScale0,4687, contactShadows6; quatro PNGs novos; folha comparativa refeita",
-        "pending": "Julgamento estetico da escala e das sombras; oclusao entre plataformas e sombra projetada nao implementadas; runtime do movel segue T06.2/3",
-        "files": "Assets/Art/Illustrated25D/Environment/Room;Evidence/25d/T05.4",
+        "done": "T05.1 urso, T05.2 livros e T05.3 movel aprovados. T05.4 implementada e capturada em duas escalas (1,00 e 0,70) com sombras de contato procedurais, mas SEM aceite humano",
+        "next": "Proxima IA: gerar os tres paineis da v2 (Evidence/25d/T05.4/PROMPTS-CAMADAS-V2.md), importar com PPU144 e nPOTScale0, usar InstallPanels, recapturar e submeter a revisao. Depois fechar T05 agregada e liberar T06.1",
+        "validation": "T054_ROOM_CAPTURE_OK em duas rodadas; room-audit.json com roomScale e contactShadows; compilacao limpa em -nographics -quit; plan/diary checks",
+        "pending": "T05.4 sem aprovacao; escala do quarto ainda grande; sem oclusao entre plataformas nem sombra projetada; runtime do movel para T06.2/3",
+        "files": "Evidence/25d/T05.4/HANDOFF.md;Assets/Art/Illustrated25D/Environment/Room",
         "processes": "Nenhum Unity Editor ativo",
-        "updated_at": "2026-11-13T16:33:37.905495+00:00"
+        "updated_at": "2026-11-13T16:49:27.597321+00:00"
       }
     },
     {
@@ -1575,6 +1575,32 @@
       "session": "2026-11-13-copilot-t053-b29a5ec7",
       "reason": "T05.4 sem aceite. Ajustes de escala e acabamento dependem de geracao de imagem, que nao existe neste ambiente. Handoff documentado em Evidence/25d/T05.4/HANDOFF.md; proxima IA deve gerar tres paineis conforme PROMPTS-CAMADAS-V2.md, importar com PPU144, recapturar e submeter a revisao.",
       "at": "2026-11-13T16:49:12.168714+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T05",
+      "session": "2026-11-13-copilot-t053-b29a5ec7",
+      "agent": "Copilot SDK",
+      "at": "2026-11-13T16:49:27.493513+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T05",
+      "session": "2026-11-13-copilot-t053-b29a5ec7",
+      "done": "T05.1 urso, T05.2 livros e T05.3 movel aprovados. T05.4 implementada e capturada em duas escalas (1,00 e 0,70) com sombras de contato procedurais, mas SEM aceite humano",
+      "next": "Proxima IA: gerar os tres paineis da v2 (Evidence/25d/T05.4/PROMPTS-CAMADAS-V2.md), importar com PPU144 e nPOTScale0, usar InstallPanels, recapturar e submeter a revisao. Depois fechar T05 agregada e liberar T06.1",
+      "validation": "T054_ROOM_CAPTURE_OK em duas rodadas; room-audit.json com roomScale e contactShadows; compilacao limpa em -nographics -quit; plan/diary checks",
+      "pending": "T05.4 sem aprovacao; escala do quarto ainda grande; sem oclusao entre plataformas nem sombra projetada; runtime do movel para T06.2/3",
+      "files": "Evidence/25d/T05.4/HANDOFF.md;Assets/Art/Illustrated25D/Environment/Room",
+      "processes": "Nenhum Unity Editor ativo",
+      "at": "2026-11-13T16:49:27.597321+00:00"
+    },
+    {
+      "command": "release",
+      "task": "T05",
+      "session": "2026-11-13-copilot-t053-b29a5ec7",
+      "reason": "Handoff documentado em Evidence/25d/T05.4/HANDOFF.md. T05.4 sem aceite; proxima IA gera os tres paineis da v2, importa com PPU144 e recaptura.",
+      "at": "2026-11-13T16:49:27.699763+00:00"
     }
   ]
 }
