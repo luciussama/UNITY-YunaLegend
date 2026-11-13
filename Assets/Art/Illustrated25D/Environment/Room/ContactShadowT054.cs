@@ -24,12 +24,12 @@ namespace YunaLegend.Illustrated25D.Environment
 
             var soft = Build(parent, texture, "Sombra_Suave", floorY,
                 new Vector3(centreX + offsetX * .5f, 0f, depth * .45f),
-                width * 1.15f, depth * 1.25f, new Color(.05f, .045f, .09f, .55f), SoftOrder);
+                width * 1.15f, depth * 1.25f, new Color(.05f, .045f, .09f, .24f), SoftOrder);
             soft.transform.localScale = new Vector3(width * 1.15f / spriteWidth, depth * 1.25f / spriteHeight, 1f);
 
             var core = Build(parent, texture, "Sombra_Nucleo", floorY,
                 new Vector3(centreX + offsetX, 0f, depth * .30f),
-                width * .82f, depth * .72f, new Color(.03f, .028f, .06f, .8f), CoreOrder);
+                width * .82f, depth * .72f, new Color(.03f, .028f, .06f, .36f), CoreOrder);
             core.transform.localScale = new Vector3(width * .82f / spriteWidth, depth * .72f / spriteHeight, 1f);
         }
 
@@ -44,6 +44,7 @@ namespace YunaLegend.Illustrated25D.Environment
             renderer.color = color;
             renderer.sortingOrder = order;
             go.transform.position = new Vector3(position.x, floorY + .02f, position.z);
+            go.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
             return renderer;
         }
 

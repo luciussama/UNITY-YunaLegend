@@ -1,5 +1,29 @@
 # Estado atual — sala escura ilustrada
 
+## Atualização de retomada — contato T05.4, 13/11/2026
+
+Sessão `2026-11-13-gpt-t054-contact-91d2` (Codex GPT), reserva T05 ativa.
+O índice abaixo desta atualização contém checkpoints anteriores: T05.3 foi
+aprovada posteriormente (diário 803); T05.4 continua sem aceite.
+Após diagnóstico e autorização humana, candidata isolada em
+`Evidence/25d/T05.4/contact-v2/README.md`: livros com base adicional reutilizando
+pintura sem esticar, topo/collider preservados, camada da poltrona omitida,
+sombras orientadas no piso e suavizadas. Quatro capturas reais Unity; base/piso
+−8,855561 m, erro 0, deslocamento do topo 0. Cena não salva.
+Contato e sobreposição da candidata aprovados pelo usuário em 13/11/2026:
+“agora sim! :) Sabia que você ia conseguir.” Registro em contact-v2/README.md.
+Escala v3 produzida em `Evidence/25d/T05.4/scale-v3/README.md`: novo panorama
+imagegen 2172×724, 32 m, rodapé aproximadamente 1,134 m, janela baixa/larga,
+parallax 0,35, sem camadas mid/near antigas. Quatro capturas Unity reais;
+contato e topo dos livros preservados. V3 recebeu pedido de ajuste: janela baixa.
+Candidata `Evidence/25d/T05.4/window-v4/README.md` sobe a janela e a posiciona
+acima do móvel; altura/posição aprovadas pelo usuário em13/11/2026 com resposta
+literal “legal, aprovado.” Registro em window-v4/README.md. Direção confirmada pelo
+usuário: sala em penumbra iluminada apenas pela janela e Nanda azul.
+Depois: implementar acabamento de iluminação conforme essa direção.
+T05.4 agregada sem aceite;
+nenhuma validação runtime nestas candidatas.
+
 Atualização em 13/11/2026; última sessão `2026-11-13-codex-t052-books-b7c4`, preservando as entregas das sessões anteriores. Este é um índice curto; reservas e resultados verificáveis permanecem no estado estruturado e no diário.
 
 ## Feito e aprovado

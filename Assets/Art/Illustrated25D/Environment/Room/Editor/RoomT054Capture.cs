@@ -26,6 +26,8 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
         private const float RoomScale = .70f;
         /// <summary>13,3333 m de largura visivel a 1280x720 e 96 px/m.</summary>
         private const float ViewWidth = 13.3333f;
+        private static bool HighWindow => System.Array.IndexOf(System.Environment.GetCommandLineArgs(), "-t054HighWindow") >= 0;
+        private static bool Panorama => HighWindow || System.Array.IndexOf(System.Environment.GetCommandLineArgs(), "-t054Panorama") >= 0;
 
         private static string Output
         {
@@ -33,7 +35,7 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
             {
                 var args = System.Environment.GetCommandLineArgs();
                 int index = System.Array.IndexOf(args, "-t054Output");
-                return index >= 0 && index + 1 < args.Length ? args[index + 1] : "Evidence/25d/T05.4/capture";
+                return index >= 0 && index + 1 < args.Length ? args[index + 1] : "Evidence/25d/T05.4/contact-v2";
             }
         }
 
@@ -62,6 +64,10 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
                 var booksBounds = Bounds(books);
                 var furnitureBounds = Bounds(furniture);
                 float floorY = Mathf.Min(bearBounds.min.y, booksBounds.min.y);
+                float bookBaseBefore = books.transform.TransformPoint(new Vector3(0f,
+                    IllustratedBookStackPlatformProfile.Document.mapping.quadBoundsLocal.bottom, 0f)).y;
+                float bookSupportBefore = books.GetTopCenterWorld().y;
+                ExtendBookBase(books, floorY, bookBaseBefore);
                 float minX = Mathf.Min(bearBounds.min.x, Mathf.Min(booksBounds.min.x, furnitureBounds.min.x));
                 float maxX = Mathf.Max(bearBounds.max.x, Mathf.Max(booksBounds.max.x, furnitureBounds.max.x));
                 float centreX = (minX + maxX) * .5f;
@@ -72,8 +78,15 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
                 var midTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(RoomFolder + "layer1-mid.png");
                 var nearTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(RoomFolder + "layer2-near.png");
                 float nearScale = ViewWidth / (nearTexture.width / RoomBackgroundT054.PixelsPerUnit);
-                room.Install(farTexture, midTexture, nearTexture, floorY, centreX,
-                    PaintedMaterial(), RoomScale, nearScale);
+                if (Panorama)
+                {
+                    var panorama = LoadPanorama();
+                    room.InstallPanels(new[] { panorama }, panorama.width / 32f, null, null,
+                        floorY, centreX, PaintedMaterial(), 1f, 1f, 82f / 724f, .35f);
+                }
+                else
+                    room.Install(farTexture, midTexture, null, floorY, centreX,
+                        PaintedMaterial(), RoomScale, nearScale);
 
                 var shadows = new GameObject(ContactShadowT054.RootName);
                 foreach (var platform in new[] { bear, books, furniture })
@@ -96,17 +109,22 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
                     spanMaxX = maxX,
                     spanMetres = maxX - minX,
                     cameraDistance = Mathf.Abs(camera.transform.position.z),
-                    floorErrorMetres = 0f,
+                    floorErrorMetres = Mathf.Abs(BookBase(books) - floorY),
+                    bookBaseBefore = bookBaseBefore,
+                    bookBaseAfter = BookBase(books),
+                    bookSupportDelta = books.GetTopCenterWorld().y - bookSupportBefore,
+                    foregroundEnabled = false,
+                    backgroundVersion = HighWindow ? "window-v4" : Panorama ? "scale-v3" : "contact-v2",
                     hiddenLegacyRenderers = hiddenLegacyRenderers,
-                    roomScale = RoomScale,
+                    roomScale = Panorama ? 1f : RoomScale,
                     nearScale = nearScale,
                     contactShadows = 6,
                     paintedFloorInsetMetres = room.Far != null
-                        ? room.Far.bounds.size.y * RoomBackgroundT054.FloorInsetFraction : 0f
+                        ? room.Far.bounds.size.y * (Panorama ? 82f / 724f : RoomBackgroundT054.FloorInsetFraction) : 0f
                 };
                 audit.layers = new[]
                 {
-                    Layer(room.Far, "fundo", RoomBackgroundT054.FarTravel, RoomBackgroundT054.FarOrder),
+                    Layer(room.Far, "fundo", room.FarTravelFraction, RoomBackgroundT054.FarOrder),
                     Layer(room.Mid, "meio", RoomBackgroundT054.MidTravel, RoomBackgroundT054.MidOrder),
                     Layer(room.Near, "primeiro-plano", RoomBackgroundT054.NearTravel, RoomBackgroundT054.NearOrder)
                 };
@@ -118,6 +136,8 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
                 Capture(camera, room, furnitureBounds.center.x, floorY, "04-quarto-movel", shots);
 
                 audit.shots = shots.ToArray();
+                if (audit.floorErrorMetres > .001f || Mathf.Abs(audit.bookSupportDelta) > .00001f)
+                    throw new InvalidOperationException("Books base or support changed outside contact tolerance.");
                 File.WriteAllText(Path.Combine(Output, "room-audit.json"),
                     JsonUtility.ToJson(audit, true));
                 Debug.Log("T054_ROOM_CAPTURE_OK floor=" + floorY.ToString("F3") +
@@ -129,6 +149,29 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
                 Debug.LogError("T054_ROOM_CAPTURE_FAIL " + error);
                 EditorApplication.Exit(1);
             }
+        }
+
+        // Reuse the approved painting at its original scale behind the stack. Only the
+        // lower books remain exposed; the playable cover and its collider stay untouched.
+        private static void ExtendBookBase(DarkRoomPlatformMarker marker, float floorY, float baseY)
+        {
+            float gap = baseY - floorY;
+            if (gap <= .001f) return;
+            var source = marker.transform.Find("Visual_Ilustrado_Livros");
+            if (source == null) throw new InvalidOperationException("Missing illustrated book stack.");
+            var lower = UnityEngine.Object.Instantiate(source.gameObject, marker.transform);
+            lower.name = "Livros_Base_T054";
+            lower.transform.position = source.position + Vector3.down * gap;
+            var renderer = lower.GetComponent<Renderer>();
+            renderer.sortingOrder = source.GetComponent<Renderer>().sortingOrder - 1;
+        }
+
+        private static float BookBase(DarkRoomPlatformMarker marker)
+        {
+            var lower = marker.transform.Find("Livros_Base_T054");
+            var visual = lower != null ? lower : marker.transform.Find("Visual_Ilustrado_Livros");
+            return visual.TransformPoint(new Vector3(0f,
+                IllustratedBookStackPlatformProfile.Document.mapping.quadBoundsLocal.bottom, 0f)).y;
         }
 
         /// <summary>
@@ -232,6 +275,21 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
             return new Material(shader) { name = "Room_Painted_T054" };
         }
 
+        private static Texture2D LoadPanorama()
+        {
+            string path = RoomFolder + (HighWindow ? "room-panorama-v4.png" : "room-panorama-v3.png");
+            AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceSynchronousImport);
+            var importer = (TextureImporter)AssetImporter.GetAtPath(path);
+            importer.textureType = TextureImporterType.Default;
+            importer.npotScale = TextureImporterNPOTScale.None;
+            importer.maxTextureSize = 4096;
+            importer.textureCompression = TextureImporterCompression.Uncompressed;
+            importer.mipmapEnabled = true;
+            importer.wrapMode = TextureWrapMode.Clamp;
+            importer.SaveAndReimport();
+            return AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+        }
+
         private static void Import(string name) =>
             AssetDatabase.ImportAsset(RoomFolder + name, ImportAssetOptions.ForceSynchronousImport);
 
@@ -241,7 +299,10 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
         [Serializable]
         private sealed class Audit
         {
-            public string method = "camadas pintadas + movel T05.3 em memoria; 1280x720 a 96 px/m; cena nao salva";
+            public string method = "contato v2: livros com base adicional, sem primeiro plano; Unity estatica, cena nao salva";
+            public float bookBaseBefore, bookBaseAfter, bookSupportDelta;
+            public bool foregroundEnabled;
+            public string backgroundVersion;
             public float floorY, centreX, spanMinX, spanMaxX, spanMetres, cameraDistance, floorErrorMetres, paintedFloorInsetMetres, roomScale, nearScale;
             public int hiddenLegacyRenderers, contactShadows;
             public LayerInfo[] layers;

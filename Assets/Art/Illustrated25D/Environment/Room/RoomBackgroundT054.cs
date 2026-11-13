@@ -41,6 +41,9 @@ namespace YunaLegend.Illustrated25D.Environment
         [SerializeField] private float centreWorldX;
         [SerializeField] private float roomScale = 1f;
         [SerializeField] private float nearScale = 1f;
+        [SerializeField] private float floorInset = FloorInsetFraction;
+        [SerializeField] private float farTravelFraction = FarTravel;
+        public float FarTravelFraction => farTravelFraction;
 
         public SpriteRenderer Far => far.Count > 0 ? far[0] : null;
         public IReadOnlyList<SpriteRenderer> FarPanels => far;
@@ -65,9 +68,12 @@ namespace YunaLegend.Illustrated25D.Environment
         /// </summary>
         public void InstallPanels(Texture2D[] panels, float panelPixelsPerUnit, Texture2D midTexture,
             Texture2D nearTexture, float floorY, float centreX, Material material = null,
-            float worldScale = 1f, float nearWorldScale = 1f)
+            float worldScale = 1f, float nearWorldScale = 1f,
+            float floorInsetFraction = FloorInsetFraction, float travelFraction = FarTravel)
         {
             floorWorldY = floorY;
+            floorInset = floorInsetFraction;
+            farTravelFraction = travelFraction;
             centreWorldX = centreX;
             roomScale = Mathf.Max(.05f, worldScale);
             nearScale = Mathf.Max(.05f, nearWorldScale);
@@ -96,7 +102,7 @@ namespace YunaLegend.Illustrated25D.Environment
         /// <summary>Reposiciona as camadas conforme a camera. Chamar depois de mover a camera.</summary>
         public void Follow(Vector3 cameraPosition)
         {
-            float shift = (cameraPosition.x - centreWorldX) * FarTravel;
+            float shift = (cameraPosition.x - centreWorldX) * farTravelFraction;
             for (int i = 0; i < far.Count; i++)
                 PlaceAt(far[i], centreWorldX + farOffsets[i] + shift);
             PlaceAt(mid, centreWorldX + (cameraPosition.x - centreWorldX) * MidTravel);
@@ -125,7 +131,7 @@ namespace YunaLegend.Illustrated25D.Environment
             float height = texture.height / pixelsPerUnit * scale;
             go.transform.localScale = Vector3.one * scale;
             go.transform.position = new Vector3(centreWorldX,
-                floorWorldY + height * (.5f - FloorInsetFraction), 0f);
+                floorWorldY + height * (.5f - floorInset), 0f);
             return renderer;
         }
     }

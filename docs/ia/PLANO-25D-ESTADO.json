@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-13T16:49:27.699763+00:00",
+  "updated_at": "2026-11-13T17:36:50.422828+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -286,16 +286,19 @@
         "art-environment"
       ],
       "human_gate": false,
-      "status": "pending",
-      "owner": null,
+      "status": "active",
+      "owner": {
+        "session": "2026-11-13-gpt-t054-contact-91d2",
+        "agent": "Codex GPT"
+      },
       "checkpoint": {
-        "done": "T05.1 urso, T05.2 livros e T05.3 movel aprovados. T05.4 implementada e capturada em duas escalas (1,00 e 0,70) com sombras de contato procedurais, mas SEM aceite humano",
-        "next": "Proxima IA: gerar os tres paineis da v2 (Evidence/25d/T05.4/PROMPTS-CAMADAS-V2.md), importar com PPU144 e nPOTScale0, usar InstallPanels, recapturar e submeter a revisao. Depois fechar T05 agregada e liberar T06.1",
-        "validation": "T054_ROOM_CAPTURE_OK em duas rodadas; room-audit.json com roomScale e contactShadows; compilacao limpa em -nographics -quit; plan/diary checks",
-        "pending": "T05.4 sem aprovacao; escala do quarto ainda grande; sem oclusao entre plataformas nem sombra projetada; runtime do movel para T06.2/3",
-        "files": "Evidence/25d/T05.4/HANDOFF.md;Assets/Art/Illustrated25D/Environment/Room",
-        "processes": "Nenhum Unity Editor ativo",
-        "updated_at": "2026-11-13T16:49:27.597321+00:00"
+        "done": "Contato-v2 e altura/posicao janela-v4 aprovados individualmente; fontes e capturas preservadas",
+        "next": "Implementar candidata de penumbra iluminada apenas pelo luar da janela alta e Nanda azul",
+        "validation": "Aceite literal legal, aprovado. em window-v4/README.md; T054_ROOM_CAPTURE_OK; contato e topo preservados",
+        "pending": "Iluminacao final sem implementacao/aceite; T05.4 agregada; sequencia runtime e piloto T06",
+        "files": "Evidence/25d/T05.4/window-v4/README.md;docs/ia/ESTADO-ATUAL-25D.md",
+        "processes": "Nenhum processo iniciado",
+        "updated_at": "2026-11-13T17:36:50.422828+00:00"
       }
     },
     {
@@ -1601,6 +1604,73 @@
       "session": "2026-11-13-copilot-t053-b29a5ec7",
       "reason": "Handoff documentado em Evidence/25d/T05.4/HANDOFF.md. T05.4 sem aceite; proxima IA gera os tres paineis da v2, importa com PPU144 e recaptura.",
       "at": "2026-11-13T16:49:27.699763+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T05",
+      "session": "2026-11-13-gpt-t054-contact-91d2",
+      "agent": "Codex GPT",
+      "at": "2026-11-13T17:07:56.271251+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T05",
+      "session": "2026-11-13-gpt-t054-contact-91d2",
+      "done": "Candidata contato-v2: base extra livros sem deformacao/topo preservado; sem poltrona near; sombras XZ suaves; quatro PNGs Unity",
+      "next": "Revisao humana individual de contact-v2; depois escala e iluminacao T05.4",
+      "validation": "T054_ROOM_CAPTURE_OK; erro base0m; delta topo0m; inspecao visual02/04; cena nao salva",
+      "pending": "Candidata sem aceite; escala fundo; iluminacao; runtime movel e piloto T06",
+      "files": "Evidence/25d/T05.4/contact-v2;Assets/Art/Illustrated25D/Environment/Room;docs/ia/ESTADO-ATUAL-25D.md",
+      "processes": "Nenhum Unity aberto apos batch",
+      "at": "2026-11-13T17:09:56.925477+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T05",
+      "session": "2026-11-13-gpt-t054-contact-91d2",
+      "done": "Contato-v2 aprovado pelo usuario: base dos livros e remocao da sobreposicao da poltrona; topo preservado",
+      "next": "Ajustar escala do quarto e acabamento de iluminacao em nova candidata individual T05.4",
+      "validation": "Quatro PNGs Unity; T054_ROOM_CAPTURE_OK; erro base0m; delta topo0m; aceite literal em contact-v2/README.md",
+      "pending": "Escala e iluminacao T05.4 sem aceite; T05 agregada aberta; runtime movel e piloto T06 pendentes",
+      "files": "Evidence/25d/T05.4/contact-v2/README.md;docs/ia/ESTADO-ATUAL-25D.md",
+      "processes": "Nenhum processo iniciado",
+      "at": "2026-11-13T17:11:11.179599+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T05",
+      "session": "2026-11-13-gpt-t054-contact-91d2",
+      "done": "Contato-v2 aprovado; escala-v3 candidata com panorama imagegen32m e rodape1,134m, quatro capturas Unity",
+      "next": "Revisao humana da escala-v3, depois acabamento iluminacao T05.4",
+      "validation": "T054_ROOM_CAPTURE_OK; PNG02/04 inspecionados; base erro0 e topo delta0; NPOTNone; hashes e prompts persistidos",
+      "pending": "Escala-v3 sem aceite; iluminacao final; T05 agregada; sequencia runtime T06",
+      "files": "Evidence/25d/T05.4/scale-v3;Evidence/25d/T05.4/source/scale-v3;Assets/Art/Illustrated25D/Environment/Room;docs/ia/ESTADO-ATUAL-25D.md",
+      "processes": "Unity batch encerrado",
+      "at": "2026-11-13T17:19:19.792176+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T05",
+      "session": "2026-11-13-gpt-t054-contact-91d2",
+      "done": "Contato-v2 aprovado; janela-v4 candidata acima do movel e inteira na camera; quatro PNGs Unity",
+      "next": "Revisao humana da posicao janela-v4; depois penumbra iluminada apenas pela janela e Nanda azul",
+      "validation": "T054_ROOM_CAPTURE_OK final; PNG04 inspecionado; folga visual peitoril/tampo cerca174px; erro base0; delta topo livros0; prompts e hashes",
+      "pending": "Janela-v4 sem aceite; iluminacao real ainda pendente; T05 agregada e runtime T06 abertos",
+      "files": "Evidence/25d/T05.4/window-v4;Evidence/25d/T05.4/source/window-v4;Assets/Art/Illustrated25D/Environment/Room/room-panorama-v4.png;docs/ia/ESTADO-ATUAL-25D.md",
+      "processes": "Unity batch encerrado",
+      "at": "2026-11-13T17:36:04.285021+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T05",
+      "session": "2026-11-13-gpt-t054-contact-91d2",
+      "done": "Contato-v2 e altura/posicao janela-v4 aprovados individualmente; fontes e capturas preservadas",
+      "next": "Implementar candidata de penumbra iluminada apenas pelo luar da janela alta e Nanda azul",
+      "validation": "Aceite literal legal, aprovado. em window-v4/README.md; T054_ROOM_CAPTURE_OK; contato e topo preservados",
+      "pending": "Iluminacao final sem implementacao/aceite; T05.4 agregada; sequencia runtime e piloto T06",
+      "files": "Evidence/25d/T05.4/window-v4/README.md;docs/ia/ESTADO-ATUAL-25D.md",
+      "processes": "Nenhum processo iniciado",
+      "at": "2026-11-13T17:36:50.422828+00:00"
     }
   ]
 }

@@ -1,0 +1,72 @@
+{
+    "method": "contato v2: livros com base adicional, sem primeiro plano; Unity estatica, cena nao salva",
+    "bookBaseBefore": -8.46876335144043,
+    "bookBaseAfter": -8.855561256408692,
+    "bookSupportDelta": 0.0,
+    "foregroundEnabled": false,
+    "floorY": -8.855561256408692,
+    "centreX": 8.667472839355469,
+    "spanMinX": 1.022840976715088,
+    "spanMaxX": 16.312105178833009,
+    "spanMetres": 15.289264678955079,
+    "cameraDistance": 9.052599906921387,
+    "floorErrorMetres": 0.0,
+    "paintedFloorInsetMetres": 0.9333333969116211,
+    "roomScale": 0.699999988079071,
+    "nearScale": 0.4687488079071045,
+    "hiddenLegacyRenderers": 272,
+    "contactShadows": 6,
+    "layers": [
+        {
+            "role": "fundo",
+            "travelFraction": 0.6000000238418579,
+            "worldWidth": 19.91111183166504,
+            "worldHeight": 9.95555591583252,
+            "sortingOrder": -300
+        },
+        {
+            "role": "meio",
+            "travelFraction": 0.699999988079071,
+            "worldWidth": 19.91111183166504,
+            "worldHeight": 9.95555591583252,
+            "sortingOrder": -290
+        },
+        {
+            "role": "primeiro-plano",
+            "travelFraction": 1.0,
+            "worldWidth": 0.0,
+            "worldHeight": 0.0,
+            "sortingOrder": 40
+        }
+    ],
+    "shots": [
+        {
+            "name": "01-quarto-inicio",
+            "cameraX": 2.0302391052246095,
+            "farX": 4.6851325035095219,
+            "midX": 4.021409511566162,
+            "nearX": 0.0
+        },
+        {
+            "name": "02-quarto-livros",
+            "cameraX": 6.070000171661377,
+            "farX": 7.108989238739014,
+            "midX": 6.849242210388184,
+            "nearX": 0.0
+        },
+        {
+            "name": "03-quarto-vao",
+            "cameraX": 7.287105560302734,
+            "farX": 7.839252471923828,
+            "midX": 7.701215744018555,
+            "nearX": 0.0
+        },
+        {
+            "name": "04-quarto-movel",
+            "cameraX": 12.112105369567871,
+            "farX": 10.7342529296875,
+            "midX": 11.078715324401856,
+            "nearX": 0.0
+        }
+    ]
+}
