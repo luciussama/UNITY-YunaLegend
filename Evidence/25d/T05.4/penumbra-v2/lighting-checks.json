@@ -1,0 +1,77 @@
+{
+  "method": "Mean display luminance 0..255 in fixed image regions. All source switches use same camera and geometry. Wood region excludes fairy sprite. Static fixture, not animation/runtime occlusion.",
+  "regions_xyxy": {
+    "Yuna": [
+      440,
+      265,
+      520,
+      395
+    ],
+    "wood_under_Nanda": [
+      540,
+      402,
+      740,
+      455
+    ],
+    "platform_far": [
+      190,
+      450,
+      350,
+      600
+    ],
+    "window": [
+      520,
+      80,
+      700,
+      180
+    ]
+  },
+  "mean_display_luminance": {
+    "full": {
+      "Yuna": 38.2153,
+      "wood_under_Nanda": 46.2129,
+      "platform_far": 7.326,
+      "window": 74.7839
+    },
+    "no_nanda": {
+      "Yuna": 13.4507,
+      "wood_under_Nanda": 24.7459,
+      "platform_far": 6.5634,
+      "window": 74.7839
+    },
+    "nanda_moved": {
+      "Yuna": 13.477,
+      "wood_under_Nanda": 25.4124,
+      "platform_far": 6.5634,
+      "window": 74.7839
+    },
+    "no_moon": {
+      "Yuna": 24.7186,
+      "wood_under_Nanda": 24.4745,
+      "platform_far": 3.9786,
+      "window": 0.0
+    },
+    "phosphor_only": {
+      "Yuna": 0.0506,
+      "wood_under_Nanda": 2.8155,
+      "platform_far": 3.2702,
+      "window": 0.0
+    },
+    "all_off": {
+      "Yuna": 0.0,
+      "wood_under_Nanda": 0.0,
+      "platform_far": 0.0,
+      "window": 0.0
+    }
+  },
+  "checks": {
+    "nanda_lights_wood": true,
+    "nanda_lights_yuna": true,
+    "moving_nanda_moves_light": true,
+    "moon_illuminates_window": true,
+    "phosphor_visible_but_faint": true,
+    "no_unrelated_light_on_platform": true,
+    "phosphor_far_below_local_light": true
+  },
+  "passed": true
+}

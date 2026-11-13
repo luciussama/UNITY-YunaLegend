@@ -1582,7 +1582,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f6a93aee4a5f114a9571b0ddf717211, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.Illustrated25D.Environment.IllustratedBookStackPlatform
   paintedTexture: {fileID: 2800000, guid: 86df75af588cc2543b6ffd06b1347074, type: 3}
   contactMesh: {fileID: 4300000, guid: 9f9d85141135d1748b21a894638441e7, type: 2}
@@ -8667,7 +8667,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2338dce9c84614448a2b054745a5819, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.Illustrated25D.Environment.IllustratedBearPlatform
   paintedTexture: {fileID: 2800000, guid: 2f36a416bb9eed745be932bc3efb286c, type: 3}
   contactMesh: {fileID: 4300000, guid: 3e8530821201c204bb0a76aeeb9794a4, type: 2}
@@ -14825,6 +14825,7 @@ GameObject:
   - component: {fileID: 724408022}
   - component: {fileID: 724408021}
   - component: {fileID: 724408020}
+  - component: {fileID: 724408024}
   m_Layer: 0
   m_Name: Yuna_Player
   m_TagString: Untagged
@@ -15002,6 +15003,51 @@ Transform:
   - {fileID: 2097091375}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &724408024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724408019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 487ddece35a000e4793746b283cea714, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::YunaLegend.YunaIllustration.YunaIllustrationInstaller
+  profile: {fileID: 21300000, guid: 0a6032285cedd9898d79df19d0920353, type: 3}
+  blink: {fileID: 2800000, guid: 71d2b6bc7ad66cdf72801e7c4cd91722, type: 3}
+  idleMaterial: {fileID: 2100000, guid: 8e5cbcbb1bd153948ba25ae8713f48a4, type: 2}
+  runMaterial: {fileID: 2100000, guid: 533952449708212439d55e4c0a1bd3f7, type: 2}
+  stumbleMaterial: {fileID: 2100000, guid: c2c0dabc7db72204289fd76eed4f3d6b, type: 2}
+  runFrames:
+  - {fileID: 21300000, guid: bd108c2a12c9fc0489a30fc435a8776d, type: 2}
+  - {fileID: 21300000, guid: 66ae3b22d8929f64a852afabc906d019, type: 2}
+  - {fileID: 21300000, guid: e00a6b2c0fcf07b48a46ca6d121ef663, type: 2}
+  - {fileID: 21300000, guid: 58bd197cce693c8468ddcb77833396a2, type: 2}
+  - {fileID: 21300000, guid: 53d5fc288c96a9442a844e1e06beceae, type: 2}
+  - {fileID: 21300000, guid: 55fdcecc15abdd04f822e7d03e0644d5, type: 2}
+  - {fileID: 21300000, guid: cef70f42b786ad54986915c551d61565, type: 2}
+  - {fileID: 21300000, guid: ef6afe110d09e2a4eacd89835aa9572b, type: 2}
+  jumpFrames:
+  - {fileID: 21300000, guid: 435ea8633e6712a44929bf44bf906d8d, type: 2}
+  - {fileID: 21300000, guid: b88206d7c5a4515429d64dbd4b9f9721, type: 2}
+  - {fileID: 21300000, guid: 0798a7e980d10394abb162a5e35cdcaa, type: 2}
+  - {fileID: 21300000, guid: 3a8390f710617fc42864f1c477b314db, type: 2}
+  - {fileID: 21300000, guid: 20eadbd865b2ab4478362fa6c9afb4c3, type: 2}
+  - {fileID: 21300000, guid: ecc3d1ab9945bd142b664e39de8f6327, type: 2}
+  - {fileID: 21300000, guid: 75ec0a0195ebf46408b4c753bb22881f, type: 2}
+  - {fileID: 21300000, guid: 49079cebfad4b9147ab2c93658f316cb, type: 2}
+  stumbleFrames:
+  - {fileID: 21300000, guid: 8674d4817fc620a478a8bb0510122b16, type: 2}
+  - {fileID: 21300000, guid: 92a3888be247ac14daf62ee876bb1624, type: 2}
+  - {fileID: 21300000, guid: f8db889e3deee9a48b0a1d1fafc2472f, type: 2}
+  - {fileID: 21300000, guid: 3069d35c8bdd8924b9d4caa8c274adea, type: 2}
+  - {fileID: 21300000, guid: c8f15c08a45a5da4fba59b2bf743307b, type: 2}
+  - {fileID: 21300000, guid: 5beb5ffb5ac80cc4cbaa3784ae874f2e, type: 2}
+  - {fileID: 21300000, guid: 162638e0a1db9374a8c438cb795f494a, type: 2}
+  - {fileID: 21300000, guid: 1a7d922785a585045a98f9659c80608b, type: 2}
+  hide3D: 1
 --- !u!1 &726293703
 GameObject:
   m_ObjectHideFlags: 0

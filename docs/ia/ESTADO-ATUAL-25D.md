@@ -1,5 +1,64 @@
 # Estado atual — sala escura ilustrada
 
+## T05 consolidada — 13/11/2026
+
+Sessão `2026-11-13-dsh-pilot-7b3e` (DeepSeek). **T05 aceita** após conferir as
+seis revisões individuais: T05.1 urso (`aprovado.`), T05.2 livros (`aprovado.`),
+T05.3 móvel (`aprovado`), T05.4 contato (`agora sim! :) Sabia que você ia
+conseguir.`), janela (`legal, aprovado.`) e penumbra (`Aprovado.`). Consolidação
+em [Evidence/25d/T05/README.md](../../Evidence/25d/T05/README.md). O aceite cobre
+ambiente estático e contratos de apoio; travessia, salto, pouso, quebra do móvel
+em runtime (pausa de 80 ms, estralo, tropeço, retry), sombras dinâmicas,
+aparelhos e WebGL continuam pendentes. Próximo: **T06.1 — travessia urso → livros
+em movimento**, com câmera final e física preservada.
+
+## T06.1 candidata — travessia urso → livros (13/11/2026)
+
+Sessão `2026-11-13-dsh-pilot-7b3e` (DeepSeek). T05 aceita liberou a T06, que está
+reservada por esta sessão. Primeira microentrega em revisão:
+[Evidence/25d/T06.1](../../Evidence/25d/T06.1/README.md), com
+[proposta de revisão](../../Evidence/25d/T06.1/reviews/T06.1-proposta.md).
+O harness `YunaT061TraversalCapture` instala Idle/Run/Jump/Stumble aprovados e o
+resolvedor sobre o controlador real na `DarkRoom_Gameplay`, oculta o corpo 3D e
+dirige chão → urso → livros por `InputSystem` na câmera final, sem salvar a cena.
+60 Hz e 120 Hz concluem (2 saltos, 1 fonte visível, 0 conflitos, SHA da cena e do
+controlador intactos); **30 Hz falha** porque o salto parte em `x=2,96` e passa
+por cima da pilha. A composição da T05.4 e o voo da T04.1 ainda não entram nesta
+captura, e T06.2/T06.3 dependem da revisão humana desta candidata.
+
+**Build de validação (13/11/2026):** o visual ilustrado foi integrado na cena salva
+pelo `YunaIllustrationInstaller` (runtime, esconde apenas os renderers do corpo 3D)
+e a build Windows x64 foi gerada em `Build/Windows/YunaLegend-Pilot/YunaLegend.exe`
+(183 MB, 0 erros). Instruções e limites em
+[BUILD-VALIDACAO.md](../../Evidence/25d/T06.1/BUILD-VALIDACAO.md). O harness T06.1
+passa a reaproveitar o instalador persistido; `capture-60-integrated` repete a
+travessia com 2 saltos, 1 fonte visível e 0 conflitos.
+
+**Handoff (13/11/2026):** T06 foi **liberada** no coordenador. A próxima IA começa
+por [Evidence/25d/T06.1/HANDOFF.md](../../Evidence/25d/T06.1/HANDOFF.md), que traz
+estado, pendências em ordem, comandos de retomada e as armadilhas encontradas
+(rótulo de integridade da pasta `Build/`, churn do URP na compilação e a relação
+harness × instalador). T06.1 continua em revisão; nada foi aprovado.
+
+## Retomada — penumbra T05.4, 13/11/2026
+
+Sessão `2026-11-13-codex-penumbra-e92d`, reserva T05 transferida formalmente.
+Limpeza de caches encerrada por decisão humana, mantendo os arquivos; referências
+documentais corrigidas e regressão anterior salva nos commits301e0a3/34100ad.
+Nenhum passo operacional anterior sem resultado. Nova candidata:
+[penumbra-v2](../../Evidence/25d/T05.4/penumbra-v2/README.md), aprovada individualmente
+pelo usuário em13/11/2026: “Aprovado.” [Escopo do aceite](../../Evidence/25d/T05.4/penumbra-v2/reviews/penumbra-v2-aprovacao.md).
+Luar da janela alta, luz azul localizada de Nanda e fosforescência muito tênue nas
+plataformas. Shader projetado2,5D em coordenadas3D, sem mudar pintura/apoio/pipeline.
+Quatro capturasUnity e cinco provas A/B;7checagens de fontes passaram;52/52EditMode;
+regressão sem flag idêntica pixel a pixel às quatro capturas aprovadas da janela-v4.
+Erro de piso e delta do apoio dos livros0. Tentativa-v1 superada preservada.
+**Sem sombras dinâmicas de oclusão, sem validação em movimento nesta candidata e
+sem salvar Gameplay.** Penumbra estática aprovada; T05.4/T05 agregadas e
+integração/piloto T06/T07 continuam pendentes. A direção adicional humana de brilho
+fosforescente discreto das plataformas está incorporada, sem aceitar a etapa por ele.
+
+
 ## Atualização de retomada — contato T05.4, 13/11/2026
 
 Sessão `2026-11-13-gpt-t054-contact-91d2` (Codex GPT), reserva T05 ativa.
@@ -76,7 +135,7 @@ Atualização da sessão `2026-11-13-codex-t052-books-b7c4` (Codex GPT-6.1), que
 **Histórico do ajuste 595:** fechamento do clipe tratado na T03.2 v2; aprovação e reconciliação posterior registradas em 607/625. O passo corporal continua como limite aceito, sem nova correção da corrida nesta T03.3.
 
 1. T03.3 aprovada. T03.4 v2 aprovada individualmente pelo usuário; pausa local de 80 ms e recuperação de 280 ms verificadas na fixture.
-2. **T03, T04, T05.1 e T05.2 aceitas.** Próximo: revisão humana da candidata T05.3 (móvel estático), depois T05.4 (fundo/camadas/iluminação) e então a T05 agregada; a T06 só libera com T04 **e** T05 aceitas. Podem ocorrer em paralelo apenas em escopos disjuntos; cada microentrega visual exige revisão humana antes da dependente.
+2. **T03, T04 e T05 aceitas.** Próximo: T06.1 — travessia urso → livros em movimento, com câmera final, física preservada e prova em 30/60/120 Hz; depois T06.2 (travessia do móvel com cedimento/tropeço) e T06.3 (falhar e tentar de novo). Podem ocorrer em paralelo apenas em escopos disjuntos; cada microentrega visual exige revisão humana antes da dependente.
 3. T06 só após T03+T04+T05: integrar exclusivamente o piloto urso → livros → móvel, com câmera final, run/jump/land/stumble/retry e UI, preservando física.
 4. T07 exige build/vídeo e aprovação explícita do piloto em movimento antes de expandir a fase.
 

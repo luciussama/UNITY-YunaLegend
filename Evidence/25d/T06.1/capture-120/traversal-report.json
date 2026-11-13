@@ -1,0 +1,6111 @@
+{
+    "hz": 120,
+    "captureFps": 120,
+    "hidden3DRenderers": 1,
+    "frames": 289,
+    "success": true,
+    "reachedBear": true,
+    "reachedBooks": true,
+    "died": false,
+    "jumpTakeoffs": 2,
+    "jumpLandings": 2,
+    "maxVisibleSources": 1,
+    "visibilityConflicts": 0,
+    "emptyComponentFrames": 0,
+    "resolverActive": true,
+    "singleSourceVisible": true,
+    "colliderUnchanged": true,
+    "rootScaleUnchanged": true,
+    "gameplayUnchanged": true,
+    "controllerUnchanged": true,
+    "minBearGap": 0.08212661743164063,
+    "maxBearGap": 0.16800212860107423,
+    "minBooksGap": 0.08411121368408203,
+    "maxBooksGap": 0.08411121368408203,
+    "gameplayBefore": "a824af77826f8adfa647af81c65c617068548f69041649914e1d9926f4dcb553",
+    "gameplayAfter": "a824af77826f8adfa647af81c65c617068548f69041649914e1d9926f4dcb553",
+    "controllerBefore": "d47aea951b8190c4a0557bb1521eaf4b37ccf57282b15e5daef07d94c0430d10",
+    "controllerAfter": "d47aea951b8190c4a0557bb1521eaf4b37ccf57282b15e5daef07d94c0430d10",
+    "samples": [
+        {
+            "frame": 2,
+            "support": -1,
+            "source": "Run",
+            "grounded": false,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.5,
+            "position": {
+                "x": -10.0,
+                "y": -9.0,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 4,
+            "support": -1,
+            "source": "Run",
+            "grounded": false,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.5,
+            "position": {
+                "x": -9.9399995803833,
+                "y": -9.003055572509766,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -0.36666667461395266,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 6,
+            "support": -1,
+            "source": "Run",
+            "grounded": false,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.5,
+            "position": {
+                "x": -9.880000114440918,
+                "y": -9.012222290039063,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -0.7333333492279053,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 8,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.5,
+            "position": {
+                "x": -9.819999694824219,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -1.100000023841858,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 10,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.5148809552192688,
+            "position": {
+                "x": -9.760000228881836,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 12,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.5446428060531616,
+            "position": {
+                "x": -9.699999809265137,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 14,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.5744047164916992,
+            "position": {
+                "x": -9.640000343322754,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 16,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.6041666865348816,
+            "position": {
+                "x": -9.579999923706055,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 18,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.6339285969734192,
+            "position": {
+                "x": -9.520000457763672,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 20,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.6636905074119568,
+            "position": {
+                "x": -9.460000038146973,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 22,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.6934524774551392,
+            "position": {
+                "x": -9.399999618530274,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 24,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.7232143878936768,
+            "position": {
+                "x": -9.34000015258789,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 26,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.7529762983322144,
+            "position": {
+                "x": -9.279999732971192,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 28,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.782738208770752,
+            "position": {
+                "x": -9.220000267028809,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 30,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.8125001192092896,
+            "position": {
+                "x": -9.15999984741211,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 32,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.8422620296478272,
+            "position": {
+                "x": -9.100000381469727,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 34,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.8720239400863648,
+            "position": {
+                "x": -9.039999961853028,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 36,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9017858505249023,
+            "position": {
+                "x": -8.979999542236329,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 38,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9315477609634399,
+            "position": {
+                "x": -8.920000076293946,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 40,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9613096714019775,
+            "position": {
+                "x": -8.859999656677246,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 42,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9910715818405151,
+            "position": {
+                "x": -8.800000190734864,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 44,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": -1,
+            "phase": 0.014880895614624024,
+            "position": {
+                "x": -8.739999771118164,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 46,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": -1,
+            "phase": 0.04464280605316162,
+            "position": {
+                "x": -8.680000305175782,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 48,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": -1,
+            "phase": 0.07440471649169922,
+            "position": {
+                "x": -8.619999885559082,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 50,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": -1,
+            "phase": 0.10416662693023682,
+            "position": {
+                "x": -8.559999465942383,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 52,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.13392865657806397,
+            "position": {
+                "x": -8.5,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 54,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.16369056701660157,
+            "position": {
+                "x": -8.4399995803833,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 56,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.19345247745513917,
+            "position": {
+                "x": -8.380000114440918,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 58,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.22321438789367677,
+            "position": {
+                "x": -8.319999694824219,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 60,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.25297629833221438,
+            "position": {
+                "x": -8.260000228881836,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 62,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.28273820877075198,
+            "position": {
+                "x": -8.199999809265137,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 64,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.31250011920928957,
+            "position": {
+                "x": -8.140000343322754,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 66,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.34226202964782717,
+            "position": {
+                "x": -8.079999923706055,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 68,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.37202394008636477,
+            "position": {
+                "x": -8.019999504089356,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 70,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 3,
+            "jumpPose": -1,
+            "phase": 0.40178585052490237,
+            "position": {
+                "x": -7.960000038146973,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 72,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 3,
+            "jumpPose": -1,
+            "phase": 0.43154776096343996,
+            "position": {
+                "x": -7.900000095367432,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 74,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 3,
+            "jumpPose": -1,
+            "phase": 0.46130967140197756,
+            "position": {
+                "x": -7.840000152587891,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 76,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 3,
+            "jumpPose": -1,
+            "phase": 0.49107158184051516,
+            "position": {
+                "x": -7.779999732971191,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 78,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.514880895614624,
+            "position": {
+                "x": -7.71999979019165,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 80,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.5446428060531616,
+            "position": {
+                "x": -7.659999847412109,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 82,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.5744047164916992,
+            "position": {
+                "x": -7.599999904632568,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 84,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.6041666269302368,
+            "position": {
+                "x": -7.539999961853027,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 86,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.633928656578064,
+            "position": {
+                "x": -7.480000019073486,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 88,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.6636905670166016,
+            "position": {
+                "x": -7.420000076293945,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 90,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.6934524774551392,
+            "position": {
+                "x": -7.359999656677246,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 92,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.7232143878936768,
+            "position": {
+                "x": -7.299999713897705,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 94,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.7529762983322144,
+            "position": {
+                "x": -7.239999771118164,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 96,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.782738208770752,
+            "position": {
+                "x": -7.179999828338623,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 98,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.8125001192092896,
+            "position": {
+                "x": -7.119999885559082,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 100,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.8422620296478272,
+            "position": {
+                "x": -7.059999942779541,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 102,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.8720239400863648,
+            "position": {
+                "x": -7.0,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 104,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9017858505249023,
+            "position": {
+                "x": -6.940000057220459,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 106,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9315477609634399,
+            "position": {
+                "x": -6.880000114440918,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 108,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9613096714019775,
+            "position": {
+                "x": -6.819999694824219,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 110,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9910715818405151,
+            "position": {
+                "x": -6.759999752044678,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 112,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": -1,
+            "phase": 0.014880895614624024,
+            "position": {
+                "x": -6.699999809265137,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 114,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": -1,
+            "phase": 0.04464292526245117,
+            "position": {
+                "x": -6.639999866485596,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 116,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": -1,
+            "phase": 0.07440471649169922,
+            "position": {
+                "x": -6.579999923706055,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 118,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": -1,
+            "phase": 0.10416674613952637,
+            "position": {
+                "x": -6.519999980926514,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 120,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.13392853736877442,
+            "position": {
+                "x": -6.460000038146973,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 122,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.16369056701660157,
+            "position": {
+                "x": -6.399999618530273,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 124,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.1934523582458496,
+            "position": {
+                "x": -6.339999675750732,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 126,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.22321438789367677,
+            "position": {
+                "x": -6.279999732971191,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 128,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2529764175415039,
+            "position": {
+                "x": -6.21999979019165,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 130,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.28273820877075198,
+            "position": {
+                "x": -6.159999847412109,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 132,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.3125002384185791,
+            "position": {
+                "x": -6.099999904632568,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 134,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.34226202964782717,
+            "position": {
+                "x": -6.039999961853027,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 136,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.3720240592956543,
+            "position": {
+                "x": -5.980000019073486,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 138,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 3,
+            "jumpPose": -1,
+            "phase": 0.40178585052490237,
+            "position": {
+                "x": -5.920000076293945,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 140,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 3,
+            "jumpPose": -1,
+            "phase": 0.4315476417541504,
+            "position": {
+                "x": -5.859999656677246,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 142,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 3,
+            "jumpPose": -1,
+            "phase": 0.46130967140197756,
+            "position": {
+                "x": -5.799999713897705,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 144,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 3,
+            "jumpPose": -1,
+            "phase": 0.4910714626312256,
+            "position": {
+                "x": -5.739999771118164,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 146,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.514880895614624,
+            "position": {
+                "x": -5.679999828338623,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 148,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.5446429252624512,
+            "position": {
+                "x": -5.619999885559082,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 150,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.5744047164916992,
+            "position": {
+                "x": -5.559999942779541,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 152,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.6041667461395264,
+            "position": {
+                "x": -5.5,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 154,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.6339285373687744,
+            "position": {
+                "x": -5.439999580383301,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 156,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.6636905670166016,
+            "position": {
+                "x": -5.37999963760376,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 158,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.6934523582458496,
+            "position": {
+                "x": -5.319999694824219,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 160,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.7232143878936768,
+            "position": {
+                "x": -5.259999752044678,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 162,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.7529764175415039,
+            "position": {
+                "x": -5.199999809265137,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 164,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.782738208770752,
+            "position": {
+                "x": -5.139999866485596,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 166,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.8125002384185791,
+            "position": {
+                "x": -5.079999923706055,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 168,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.8422620296478272,
+            "position": {
+                "x": -5.019999980926514,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 170,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.8720240592956543,
+            "position": {
+                "x": -4.960000038146973,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 172,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9017858505249023,
+            "position": {
+                "x": -4.899999618530273,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 174,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9315476417541504,
+            "position": {
+                "x": -4.839999675750732,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 176,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9613096714019775,
+            "position": {
+                "x": -4.779999732971191,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 178,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9910714626312256,
+            "position": {
+                "x": -4.71999979019165,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 180,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": -1,
+            "phase": 0.014880895614624024,
+            "position": {
+                "x": -4.659999847412109,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 182,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": -1,
+            "phase": 0.04464292526245117,
+            "position": {
+                "x": -4.599999904632568,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 184,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": -1,
+            "phase": 0.07440471649169922,
+            "position": {
+                "x": -4.539999961853027,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 186,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": -1,
+            "phase": 0.10416674613952637,
+            "position": {
+                "x": -4.479999542236328,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 188,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.13392853736877442,
+            "position": {
+                "x": -4.419999599456787,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 190,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.16369056701660157,
+            "position": {
+                "x": -4.359999656677246,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 192,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.1934523582458496,
+            "position": {
+                "x": -4.299999713897705,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 194,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.22321438789367677,
+            "position": {
+                "x": -4.239999771118164,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 196,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2529764175415039,
+            "position": {
+                "x": -4.179999828338623,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 198,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.28273820877075198,
+            "position": {
+                "x": -4.119999885559082,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 200,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.3125002384185791,
+            "position": {
+                "x": -4.059999942779541,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 202,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.34226202964782717,
+            "position": {
+                "x": -3.999999761581421,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 204,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.3720240592956543,
+            "position": {
+                "x": -3.93999981880188,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 206,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 3,
+            "jumpPose": -1,
+            "phase": 0.40178585052490237,
+            "position": {
+                "x": -3.8799996376037599,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 208,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 3,
+            "jumpPose": -1,
+            "phase": 0.4315476417541504,
+            "position": {
+                "x": -3.8199996948242189,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 210,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 3,
+            "jumpPose": -1,
+            "phase": 0.46130967140197756,
+            "position": {
+                "x": -3.7599997520446779,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 212,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 3,
+            "jumpPose": -1,
+            "phase": 0.4910714626312256,
+            "position": {
+                "x": -3.6999998092651369,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 214,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.514880895614624,
+            "position": {
+                "x": -3.6399998664855959,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 216,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.5446429252624512,
+            "position": {
+                "x": -3.5799996852874758,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 218,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.5744047164916992,
+            "position": {
+                "x": -3.5199997425079347,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 220,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.6041667461395264,
+            "position": {
+                "x": -3.4599997997283937,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 222,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.6339285373687744,
+            "position": {
+                "x": -3.3999996185302736,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 224,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.6636905670166016,
+            "position": {
+                "x": -3.3399996757507326,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 226,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.6934523582458496,
+            "position": {
+                "x": -3.2799997329711916,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 228,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.7232143878936768,
+            "position": {
+                "x": -3.2199997901916506,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 230,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.7529764175415039,
+            "position": {
+                "x": -3.1599998474121095,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 232,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.782738208770752,
+            "position": {
+                "x": -3.0999996662139894,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 234,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.8125002384185791,
+            "position": {
+                "x": -3.0399997234344484,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 236,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.8422620296478272,
+            "position": {
+                "x": -2.9799997806549074,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 238,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.8720240592956543,
+            "position": {
+                "x": -2.919999599456787,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 240,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9017858505249023,
+            "position": {
+                "x": -2.859999656677246,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 242,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9315476417541504,
+            "position": {
+                "x": -2.799999713897705,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 244,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9613096714019775,
+            "position": {
+                "x": -2.739999771118164,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 246,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9910714626312256,
+            "position": {
+                "x": -2.679999828338623,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 248,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": -1,
+            "phase": 0.014881134033203125,
+            "position": {
+                "x": -2.619999647140503,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 250,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": -1,
+            "phase": 0.04464292526245117,
+            "position": {
+                "x": -2.559999704360962,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 252,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": -1,
+            "phase": 0.07440471649169922,
+            "position": {
+                "x": -2.499999761581421,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 254,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": -1,
+            "phase": 0.10416650772094727,
+            "position": {
+                "x": -2.439999580383301,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 256,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.13392877578735352,
+            "position": {
+                "x": -2.3799996376037599,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 258,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.16369056701660157,
+            "position": {
+                "x": -2.3199996948242189,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 260,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.1934523582458496,
+            "position": {
+                "x": -2.2599997520446779,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 262,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.22321462631225587,
+            "position": {
+                "x": -2.1999998092651369,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 264,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2529764175415039,
+            "position": {
+                "x": -2.1399996280670168,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 266,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.28273820877075198,
+            "position": {
+                "x": -2.0799996852874758,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 268,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.3125,
+            "position": {
+                "x": -2.0199997425079347,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 270,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.34226226806640627,
+            "position": {
+                "x": -1.959999680519104,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 272,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.3720240592956543,
+            "position": {
+                "x": -1.8999996185302735,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 274,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 3,
+            "jumpPose": -1,
+            "phase": 0.40178585052490237,
+            "position": {
+                "x": -1.8399996757507325,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 276,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 3,
+            "jumpPose": -1,
+            "phase": 0.4315476417541504,
+            "position": {
+                "x": -1.7799997329711915,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 278,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 3,
+            "jumpPose": -1,
+            "phase": 0.46130943298339846,
+            "position": {
+                "x": -1.7199996709823609,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 280,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 3,
+            "jumpPose": -1,
+            "phase": 0.4910717010498047,
+            "position": {
+                "x": -1.6599996089935303,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 282,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.5148811340332031,
+            "position": {
+                "x": -1.5999996662139893,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 284,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.5446429252624512,
+            "position": {
+                "x": -1.5399997234344483,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 286,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.5744047164916992,
+            "position": {
+                "x": -1.4799996614456177,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 288,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 4,
+            "jumpPose": -1,
+            "phase": 0.6041665077209473,
+            "position": {
+                "x": -1.419999599456787,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 290,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.6339287757873535,
+            "position": {
+                "x": -1.359999656677246,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 292,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.6636905670166016,
+            "position": {
+                "x": -1.299999713897705,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 294,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.6934523582458496,
+            "position": {
+                "x": -1.2399996519088746,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 296,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 5,
+            "jumpPose": -1,
+            "phase": 0.7232146263122559,
+            "position": {
+                "x": -1.179999589920044,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 298,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.7529764175415039,
+            "position": {
+                "x": -1.119999647140503,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 300,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.782738208770752,
+            "position": {
+                "x": -1.059999704360962,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 302,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.8125,
+            "position": {
+                "x": -0.9999996423721314,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 304,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.8422622680664063,
+            "position": {
+                "x": -0.9399996399879456,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 306,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 6,
+            "jumpPose": -1,
+            "phase": 0.8720240592956543,
+            "position": {
+                "x": -0.8799996376037598,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 308,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9017858505249023,
+            "position": {
+                "x": -0.819999635219574,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 310,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9315476417541504,
+            "position": {
+                "x": -0.7599996328353882,
+                "y": -9.019999504089356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0800008773803711,
+            "visibleSources": 1
+        },
+        {
+            "frame": 312,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9613094329833984,
+            "position": {
+                "x": -0.6999996304512024,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 314,
+            "support": -1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 7,
+            "jumpPose": -1,
+            "phase": 0.9910717010498047,
+            "position": {
+                "x": -0.6399996280670166,
+                "y": -9.020000457763672,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.07999992370605469,
+            "visibleSources": 1
+        },
+        {
+            "frame": 316,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 0,
+            "phase": 0.0,
+            "position": {
+                "x": -0.5799996256828308,
+                "y": -8.851786613464356,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 9.90951919555664,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 318,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 0,
+            "phase": 0.0,
+            "position": {
+                "x": -0.519999623298645,
+                "y": -8.68968391418457,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 9.542852401733399,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 320,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 0,
+            "phase": 0.0,
+            "position": {
+                "x": -0.45999962091445925,
+                "y": -8.53369140625,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 9.176185607910157,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 322,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 0,
+            "phase": 0.0,
+            "position": {
+                "x": -0.39999961853027346,
+                "y": -8.383810043334961,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 8.809518814086914,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 324,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 1,
+            "phase": 0.0,
+            "position": {
+                "x": -0.33999961614608767,
+                "y": -8.24004077911377,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 8.442852020263672,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 326,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 1,
+            "phase": 0.0,
+            "position": {
+                "x": -0.27999961376190188,
+                "y": -8.10238265991211,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 8.07618522644043,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 328,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 1,
+            "phase": 0.0,
+            "position": {
+                "x": -0.21999961137771607,
+                "y": -7.970834255218506,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 7.7095184326171879,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 330,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 1,
+            "phase": 0.0,
+            "position": {
+                "x": -0.15999960899353028,
+                "y": -7.84539794921875,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 7.342851638793945,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 332,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 2,
+            "phase": 0.0,
+            "position": {
+                "x": -0.09999960660934448,
+                "y": -7.726072788238525,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 6.976184844970703,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 334,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 2,
+            "phase": 0.0,
+            "position": {
+                "x": -0.03999960422515869,
+                "y": -7.612858295440674,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 6.609518051147461,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 336,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 2,
+            "phase": 0.0,
+            "position": {
+                "x": 0.0200003981590271,
+                "y": -7.505755424499512,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 6.242851257324219,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 338,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 2,
+            "phase": 0.0,
+            "position": {
+                "x": 0.08000040054321289,
+                "y": -7.404763698577881,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 5.876184463500977,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 340,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 2,
+            "phase": 0.0,
+            "position": {
+                "x": 0.14000040292739869,
+                "y": -7.309882640838623,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 5.509517669677734,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 342,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 2,
+            "phase": 0.0,
+            "position": {
+                "x": 0.20000040531158448,
+                "y": -7.2211127281188969,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 5.142850875854492,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 344,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 2,
+            "phase": 0.0,
+            "position": {
+                "x": 0.26000040769577029,
+                "y": -7.138454437255859,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 4.77618408203125,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 346,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 2,
+            "phase": 0.0,
+            "position": {
+                "x": 0.32000041007995608,
+                "y": -7.061906814575195,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 4.409517288208008,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 348,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 2,
+            "phase": 0.0,
+            "position": {
+                "x": 0.38000041246414187,
+                "y": -6.9914703369140629,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 4.042850494384766,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 350,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 2,
+            "phase": 0.0,
+            "position": {
+                "x": 0.44000041484832766,
+                "y": -6.927145004272461,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 3.6761837005615236,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 352,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 2,
+            "phase": 0.0,
+            "position": {
+                "x": 0.5000004172325134,
+                "y": -6.868930816650391,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 3.3095169067382814,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 354,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 2,
+            "phase": 0.0,
+            "position": {
+                "x": 0.5600004196166992,
+                "y": -6.816827774047852,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 2.942850112915039,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 356,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 2,
+            "phase": 0.0,
+            "position": {
+                "x": 0.620000422000885,
+                "y": -6.770835876464844,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 2.576183319091797,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 358,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 2,
+            "phase": 0.0,
+            "position": {
+                "x": 0.6800004243850708,
+                "y": -6.730955123901367,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 2.2095165252685549,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 360,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 2,
+            "phase": 0.0,
+            "position": {
+                "x": 0.7400004267692566,
+                "y": -6.697185516357422,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 1.8428497314453126,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 362,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 3,
+            "phase": 0.0,
+            "position": {
+                "x": 0.8000004291534424,
+                "y": -6.66952657699585,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 1.4761829376220704,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 364,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 3,
+            "phase": 0.0,
+            "position": {
+                "x": 0.8600004315376282,
+                "y": -6.647979259490967,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 1.1095161437988282,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 366,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 3,
+            "phase": 0.0,
+            "position": {
+                "x": 0.920000433921814,
+                "y": -6.632542610168457,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 0.7428494691848755,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 368,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 3,
+            "phase": 0.0,
+            "position": {
+                "x": 0.9800004363059998,
+                "y": -6.623217582702637,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 0.37618279457092287,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 370,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 3,
+            "phase": 0.0,
+            "position": {
+                "x": 1.0400004386901856,
+                "y": -6.620846748352051,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": 0.009516114369034768,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 372,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 3,
+            "phase": 0.0,
+            "position": {
+                "x": 1.1000003814697266,
+                "y": -6.623743534088135,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -0.3571505844593048,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 374,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 3,
+            "phase": 0.0,
+            "position": {
+                "x": 1.1600004434585572,
+                "y": -6.63275146484375,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -0.7238172888755798,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 376,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 3,
+            "phase": 0.0,
+            "position": {
+                "x": 1.2200005054473878,
+                "y": -6.647871017456055,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -1.0904840230941773,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 378,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 3,
+            "phase": 0.0,
+            "position": {
+                "x": 1.2800004482269288,
+                "y": -6.669101238250732,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -1.4571508169174195,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 380,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 4,
+            "phase": 0.0,
+            "position": {
+                "x": 1.3400003910064698,
+                "y": -6.696442604064941,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -1.8238176107406617,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 382,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 4,
+            "phase": 0.0,
+            "position": {
+                "x": 1.4000004529953004,
+                "y": -6.729895114898682,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.1904842853546144,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 384,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 4,
+            "phase": 0.0,
+            "position": {
+                "x": 1.4600005149841309,
+                "y": -6.769458770751953,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.5571510791778566,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 386,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 4,
+            "phase": 0.0,
+            "position": {
+                "x": 1.5200004577636719,
+                "y": -6.815133571624756,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.9238178730010988,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 388,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 4,
+            "phase": 0.0,
+            "position": {
+                "x": 1.580000400543213,
+                "y": -6.866919040679932,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -3.290484666824341,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 390,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 4,
+            "phase": 0.0,
+            "position": {
+                "x": 1.6400004625320435,
+                "y": -6.924816131591797,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -3.657151460647583,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 392,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 4,
+            "phase": 0.0,
+            "position": {
+                "x": 1.700000524520874,
+                "y": -6.988824367523193,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -4.023818016052246,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 394,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 4,
+            "phase": 0.0,
+            "position": {
+                "x": 1.760000467300415,
+                "y": -7.058943271636963,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -4.390484809875488,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 396,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 4,
+            "phase": 0.0,
+            "position": {
+                "x": 1.820000410079956,
+                "y": -7.135173797607422,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -4.7571516036987309,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 398,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 4,
+            "phase": 0.0,
+            "position": {
+                "x": 1.8800004720687867,
+                "y": -7.217514991760254,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -5.123818397521973,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 400,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 4,
+            "phase": 0.0,
+            "position": {
+                "x": 1.9400005340576172,
+                "y": -7.305967807769775,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -5.490485191345215,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 402,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 4,
+            "phase": 0.0,
+            "position": {
+                "x": 2.000000476837158,
+                "y": -7.40053129196167,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -5.857151985168457,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 404,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 4,
+            "phase": 0.0,
+            "position": {
+                "x": 2.060000419616699,
+                "y": -7.501205921173096,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -6.223818778991699,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 406,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 4,
+            "phase": 0.0,
+            "position": {
+                "x": 2.1200003623962404,
+                "y": -7.607992172241211,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -6.590485572814941,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 408,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 4,
+            "phase": 0.0,
+            "position": {
+                "x": 2.1800005435943605,
+                "y": -7.720889091491699,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -6.957152366638184,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 410,
+            "support": -1,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 0,
+            "jumpPose": 4,
+            "phase": 0.0,
+            "position": {
+                "x": 2.2400004863739015,
+                "y": -7.839897155761719,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -7.323819160461426,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 412,
+            "support": 0,
+            "source": "Jump",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": 6,
+            "phase": 0.0,
+            "position": {
+                "x": 2.3000004291534426,
+                "y": -7.94520378112793,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -7.690485954284668,
+                "z": 0.0
+            },
+            "supportGap": 0.0878610610961914,
+            "visibleSources": 1
+        },
+        {
+            "frame": 414,
+            "support": 0,
+            "source": "Jump",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": 6,
+            "phase": 0.029761791229248048,
+            "position": {
+                "x": 2.3600006103515627,
+                "y": -7.957330226898193,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.09213781356811524,
+            "visibleSources": 1
+        },
+        {
+            "frame": 416,
+            "support": 0,
+            "source": "Jump",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": 7,
+            "phase": 0.059523582458496097,
+            "position": {
+                "x": 2.4200005531311037,
+                "y": -7.961973190307617,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.10943794250488281,
+            "visibleSources": 1
+        },
+        {
+            "frame": 418,
+            "support": 0,
+            "source": "Jump",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": 7,
+            "phase": 0.08928585052490235,
+            "position": {
+                "x": 2.4800004959106447,
+                "y": -7.929200172424316,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.16800212860107423,
+            "visibleSources": 1
+        },
+        {
+            "frame": 420,
+            "support": 0,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 0,
+            "jumpPose": -1,
+            "phase": 0.11904764175415039,
+            "position": {
+                "x": 2.5400004386901857,
+                "y": -7.901851177215576,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.13698530197143556,
+            "visibleSources": 1
+        },
+        {
+            "frame": 422,
+            "support": 0,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.14880943298339845,
+            "position": {
+                "x": 2.6000003814697267,
+                "y": -7.883979797363281,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.1075429916381836,
+            "visibleSources": 1
+        },
+        {
+            "frame": 424,
+            "support": 0,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.1785717010498047,
+            "position": {
+                "x": 2.6600005626678469,
+                "y": -7.872142314910889,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.08797693252563477,
+            "visibleSources": 1
+        },
+        {
+            "frame": 426,
+            "support": 0,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.20833349227905274,
+            "position": {
+                "x": 2.7200005054473879,
+                "y": -7.865395545959473,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.08212661743164063,
+            "visibleSources": 1
+        },
+        {
+            "frame": 428,
+            "support": 0,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 1,
+            "jumpPose": -1,
+            "phase": 0.23809528350830079,
+            "position": {
+                "x": 2.7800004482269289,
+                "y": -7.866035461425781,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.0821833610534668,
+            "visibleSources": 1
+        },
+        {
+            "frame": 430,
+            "support": 0,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.26785707473754885,
+            "position": {
+                "x": 2.840000629425049,
+                "y": -7.872979640960693,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.5999999046325685,
+                "y": -2.183333396911621,
+                "z": 0.0
+            },
+            "supportGap": 0.09023857116699219,
+            "visibleSources": 1
+        },
+        {
+            "frame": 432,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 0,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 2.8987653255462648,
+                "y": -7.7937211990356449,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 10.092852592468262,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 434,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 0,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 2.9562950134277345,
+                "y": -7.6285624504089359,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 9.72618579864502,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 436,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 0,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 3.013824939727783,
+                "y": -7.469515323638916,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 9.359519004821778,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 438,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 0,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 3.071354627609253,
+                "y": -7.3165788650512699,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 8.992852210998536,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 440,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 0,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 3.1288843154907228,
+                "y": -7.169753551483154,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 8.626185417175293,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 442,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 3.1864140033721926,
+                "y": -7.02903938293457,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 8.25951862335205,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 444,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 3.243943929672241,
+                "y": -6.894435882568359,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 7.892851829528809,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 446,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 3.301473617553711,
+                "y": -6.765944004058838,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 7.526185035705566,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 448,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 3.3590033054351808,
+                "y": -6.643563270568848,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 7.159518241882324,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 450,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 2,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 3.4165329933166506,
+                "y": -6.527293682098389,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 6.792851448059082,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 452,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 2,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 3.474062919616699,
+                "y": -6.417134761810303,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 6.42618465423584,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 454,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 2,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 3.531592607498169,
+                "y": -6.313087463378906,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 6.059517860412598,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 456,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 2,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 3.5891222953796388,
+                "y": -6.215150833129883,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 5.6928510665893559,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 458,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 2,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 3.6466519832611086,
+                "y": -6.123325824737549,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 5.326184272766113,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 460,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 2,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 3.7041819095611574,
+                "y": -6.037611484527588,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 4.959517478942871,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 462,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 2,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 3.761711597442627,
+                "y": -5.958008289337158,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 4.592850685119629,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 464,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 2,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 3.8192412853240969,
+                "y": -5.88451623916626,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 4.226183891296387,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 466,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 2,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 3.8767709732055666,
+                "y": -5.817135334014893,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 3.8595170974731447,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 468,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 2,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 3.934300661087036,
+                "y": -5.755866050720215,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 3.4928503036499025,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 470,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 2,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 3.991830587387085,
+                "y": -5.70070743560791,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 3.12618350982666,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 472,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 2,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 4.049360275268555,
+                "y": -5.6516594886779789,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 2.759516716003418,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 474,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 2,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 4.1068902015686039,
+                "y": -5.608723163604736,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 2.392849922180176,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 476,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 2,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 4.164419651031494,
+                "y": -5.571897983551025,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 2.0261831283569338,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 478,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 2,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 4.221949577331543,
+                "y": -5.541183948516846,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 1.6595163345336915,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 480,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 3,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 4.279479026794434,
+                "y": -5.516581058502197,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 1.2928495407104493,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 482,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 3,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 4.337008953094482,
+                "y": -5.498088836669922,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 0.9261828064918518,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 484,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 3,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 4.394538879394531,
+                "y": -5.485708236694336,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 0.5595161318778992,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 486,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 3,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 4.452068328857422,
+                "y": -5.479438304901123,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": 0.19284945726394654,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 488,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 3,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 4.509598255157471,
+                "y": -5.480123043060303,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -0.1738172322511673,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 490,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 3,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 4.5671281814575199,
+                "y": -5.486075401306152,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -0.5404839515686035,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 492,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 3,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 4.62465763092041,
+                "y": -5.498138904571533,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -0.9071506261825562,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 494,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 3,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 4.682187557220459,
+                "y": -5.5163140296936039,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -1.2738174200057984,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 496,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 4.73971700668335,
+                "y": -5.540599822998047,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -1.6404842138290406,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 498,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 4.797246932983398,
+                "y": -5.5709967613220219,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -2.007150888442993,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 500,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 4.854776859283447,
+                "y": -5.607504844665527,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -2.3738176822662355,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 502,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 4.912306308746338,
+                "y": -5.6501240730285648,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -2.7404844760894777,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 504,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 4.969836235046387,
+                "y": -5.698853969573975,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -3.1071512699127199,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 506,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.027365684509277,
+                "y": -5.753695487976074,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -3.473818063735962,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 508,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.084895610809326,
+                "y": -5.814648151397705,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -3.840484857559204,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 510,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.142425537109375,
+                "y": -5.881711959838867,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -4.207151412963867,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 512,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.199954986572266,
+                "y": -5.954886436462402,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -4.573818206787109,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 514,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.2574849128723148,
+                "y": -6.034172534942627,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -4.940485000610352,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 516,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.315014839172363,
+                "y": -6.119569301605225,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -5.307151794433594,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 518,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.372544288635254,
+                "y": -6.2110772132873539,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -5.673818588256836,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 520,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.430074214935303,
+                "y": -6.308696746826172,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -6.040485382080078,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 522,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.487603664398193,
+                "y": -6.412426948547363,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -6.40715217590332,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 524,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.545133590698242,
+                "y": -6.522268295288086,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -6.7738189697265629,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 526,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.602663516998291,
+                "y": -6.63822078704834,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -7.140485763549805,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 528,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.660192966461182,
+                "y": -6.760284423828125,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -7.507152557373047,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 530,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.7177228927612309,
+                "y": -6.888459205627441,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -7.873819351196289,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 532,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.775252342224121,
+                "y": -7.022745132446289,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -8.240486145019532,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 534,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.83278226852417,
+                "y": -7.163142204284668,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -8.607152938842774,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 536,
+            "support": 0,
+            "source": "Jump",
+            "grounded": false,
+            "runFrame": 2,
+            "jumpPose": 4,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.890312194824219,
+                "y": -7.309650421142578,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -8.973819732666016,
+                "z": 0.0
+            },
+            "supportGap": 0.0,
+            "visibleSources": 1
+        },
+        {
+            "frame": 538,
+            "support": 1,
+            "source": "Jump",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": 6,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 540,
+            "support": 1,
+            "source": "Jump",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": 6,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 542,
+            "support": 1,
+            "source": "Jump",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": 7,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 544,
+            "support": 1,
+            "source": "Jump",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": 7,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 546,
+            "support": 1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 548,
+            "support": 1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 550,
+            "support": 1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 552,
+            "support": 1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 554,
+            "support": 1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 556,
+            "support": 1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 558,
+            "support": 1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 560,
+            "support": 1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 562,
+            "support": 1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 564,
+            "support": 1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 566,
+            "support": 1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 568,
+            "support": 1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 570,
+            "support": 1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 572,
+            "support": 1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 574,
+            "support": 1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 576,
+            "support": 1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        },
+        {
+            "frame": 578,
+            "support": 1,
+            "source": "Run",
+            "grounded": true,
+            "runFrame": 2,
+            "jumpPose": -1,
+            "phase": 0.2976193428039551,
+            "position": {
+                "x": 5.947841644287109,
+                "y": -7.447110176086426,
+                "z": 0.0
+            },
+            "velocity": {
+                "x": 3.451784372329712,
+                "y": -9.340486526489258,
+                "z": 0.0
+            },
+            "supportGap": 0.08411121368408203,
+            "visibleSources": 1
+        }
+    ],
+    "shots": [
+        "01-start",
+        "02-bear-contact",
+        "03-bear-takeoff",
+        "04-rise",
+        "05-fall",
+        "06-books-land",
+        "07-books-contact",
+        "09-books-stop",
+        "08-books-run"
+    ]
+}

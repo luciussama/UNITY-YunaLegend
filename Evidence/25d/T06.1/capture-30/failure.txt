@@ -1,0 +1,2 @@
+System.InvalidOperationException: T06.1 traversal failed: frame=158 x=5,967615 support=1
+  at YunaLegend.YunaIllustration.Editor.YunaT061TraversalCapture.Tick () [0x002e1] in C:\Users\sergi\repos\UNITY-YunaLegend\Assets\Art\Illustrated25D\Yuna\Joint\Editor\YunaT061TraversalCapture.cs:346 

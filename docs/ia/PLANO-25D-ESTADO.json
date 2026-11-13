@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-13T17:36:50.422828+00:00",
+  "updated_at": "2026-11-13T18:58:24.634232+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -286,19 +286,29 @@
         "art-environment"
       ],
       "human_gate": false,
-      "status": "active",
-      "owner": {
-        "session": "2026-11-13-gpt-t054-contact-91d2",
-        "agent": "Codex GPT"
-      },
+      "status": "accepted",
+      "owner": null,
       "checkpoint": {
-        "done": "Contato-v2 e altura/posicao janela-v4 aprovados individualmente; fontes e capturas preservadas",
-        "next": "Implementar candidata de penumbra iluminada apenas pelo luar da janela alta e Nanda azul",
-        "validation": "Aceite literal legal, aprovado. em window-v4/README.md; T054_ROOM_CAPTURE_OK; contato e topo preservados",
-        "pending": "Iluminacao final sem implementacao/aceite; T05.4 agregada; sequencia runtime e piloto T06",
-        "files": "Evidence/25d/T05.4/window-v4/README.md;docs/ia/ESTADO-ATUAL-25D.md",
-        "processes": "Nenhum processo iniciado",
-        "updated_at": "2026-11-13T17:36:50.422828+00:00"
+        "done": "T05.1 urso, T05.2 livros, T05.3 movel e T05.4 (contato, janela e penumbra) aprovadas individualmente; consolidacao agregada em Evidence/25d/T05/README.md com contratos de apoio, provas e limites",
+        "next": "T06.1 travessia urso -> livros em movimento, camera final, fisica preservada e provas 30/60/120 Hz",
+        "validation": "Seis revisoes individuais conferidas; EditMode51/51 e52/52; harness de camera final exit0 com apoio0/0,000001m; penumbra com7checagens e regressao identica; nenhum teste novo nesta sessao",
+        "pending": "Movimento, salto e pouso; quebra do movel 80ms/estralo/tropeco/retry em runtime; sombras dinamicas de oclusao; aparelhos/WebGL; T06/T07",
+        "files": "Evidence/25d/T05/README.md;docs/ia/ESTADO-ATUAL-25D.md;Evidence/25d/T05.1;Evidence/25d/T05.2;Evidence/25d/T05.3;Evidence/25d/T05.4",
+        "processes": "Nenhum processo Unity; Editor fechado",
+        "updated_at": "2026-11-13T18:10:29.215285+00:00"
+      },
+      "evidence": [
+        {
+          "path": "Evidence/25d/T05/README.md",
+          "sha256": "9d5d18d44c891fcbcc59371643198d2b04c0aa36eadd0d0dfaceda7e460d30fd"
+        }
+      ],
+      "validation": "Quatro microentregas e as tres candidatas da T05.4 com aceite humano literal registrado; contratos de apoio medidos e limites declarados; soma estatica apenas, sem movimento/T06",
+      "acceptance": {
+        "session": "2026-11-13-dsh-pilot-7b3e",
+        "reference": "Usuario determinou nesta conversa consolidar a T05; seis respostas humanas literais conferidas (aprovado., aprovado., aprovado, agora sim! :), legal aprovado., Aprovado.) em T05.1/T05.2/T05.3/T05.4-contact-v2/window-v4/penumbra-v2; aceite agregado tecnico, sem aprovacao de movimento",
+        "at": "2026-11-13T18:10:29.387187+00:00",
+        "human_required": false
       }
     },
     {
@@ -318,7 +328,15 @@
       "human_gate": false,
       "status": "pending",
       "owner": null,
-      "checkpoint": null
+      "checkpoint": {
+        "done": "T06.1 implementada, capturada e empacotada: harness YunaT061TraversalCapture (30/60/120Hz) + instalador runtime YunaIllustrationInstaller salvo na DarkRoom_Gameplay + build Windows x64 de validacao (183MB,0 erros, input validado apos corrigir rotulo de integridade). 60Hz e120Hz concluem;30Hz falha medida",
+        "next": "Revisao humana da T06.1 (Evidence/25d/T06.1/reviews/T06.1-proposta.md); depois instalar T05.4+T04.1 na captura/build, decidir 30Hz e seguir T06.2 (movel) e T06.3 (retry). Handoff em Evidence/25d/T06.1/HANDOFF.md",
+        "validation": "3 runs de harness exit0/0/1 + integrated60 success=True; PILOT_BUILD_RESULT Succeeded size=183255829 errors=0; smoke-test do player com input inicializado; plan/diary/check OK",
+        "pending": "Aceite humano T06.1; composicao T05.4 e voo T04.1 na captura/build; 30Hz; movel/T06.2; retry/T06.3; UI; aparelhos/WebGL; T07",
+        "files": "Assets/Art/Illustrated25D/Yuna/Joint/Editor/YunaT061TraversalCapture.cs;Assets/Art/Illustrated25D/Yuna/Joint/Runtime/YunaIllustrationInstaller.cs;Assets/Art/Illustrated25D/Yuna/Joint/Editor/YunaIllustrationInstallerSetup.cs;Assets/Scripts/Editor/WindowsPilotBuild.cs;Assets/Scenes/DarkRoom_Gameplay.unity;Evidence/25d/T06.1;tools/make_t061_review.py",
+        "processes": "Nenhum processo Unity; player de teste encerrado; nenhum Editor aberto",
+        "updated_at": "2026-11-13T18:58:24.545647+00:00"
+      }
     },
     {
       "id": "T07",
@@ -1671,6 +1689,116 @@
       "files": "Evidence/25d/T05.4/window-v4/README.md;docs/ia/ESTADO-ATUAL-25D.md",
       "processes": "Nenhum processo iniciado",
       "at": "2026-11-13T17:36:50.422828+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T05",
+      "session": "2026-11-13-codex-penumbra-e92d",
+      "agent": "Codex GPT-6",
+      "reason": "Usuario autorizou continuar proxima tarefa apos encerrar limpeza; checkpoint anterior determina penumbra. Transferencia explicita, nao por tempo.",
+      "from_session": "2026-11-13-gpt-t054-contact-91d2",
+      "at": "2026-11-13T17:49:09.976073+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T05",
+      "session": "2026-11-13-codex-penumbra-e92d",
+      "done": "Limpeza encerrada por decisao humana. Penumbra-v2 candidata: luar, Nanda azul com luz localizada e plataformas fosforescentes tenues; quatro rendersUnity e cinco provas A/B; contato/janela aprovados preservados",
+      "next": "Revisao humana individual da penumbra-v2; apos aceite concluir revisao T05.4/T05 agregada antes de T06",
+      "validation": "7checagens A/B aprovadas;52/52EditMode; quatro capturas sem flag identicas pixel-a-pixel a janela-v4; piso0/apoio0; shader compilado e PNG02/04 inspecionados",
+      "pending": "Penumbra-v2 sem aceite; T05.4/T05 agregadas; luz projetada sem sombras dinamicas de oclusao; runtime/piloto T06/T07",
+      "files": "Assets/Art/Illustrated25D/Environment/Room;Evidence/25d/T05.4/penumbra-v2;docs/ia/ESTADO-ATUAL-25D.md",
+      "processes": "Nenhum Unity aberto; logs locais Build/25d/t054-penumbra-*.log",
+      "at": "2026-11-13T17:58:03.780916+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T05",
+      "session": "2026-11-13-codex-penumbra-e92d",
+      "done": "Penumbra-v2 aprovada individualmente pelo usuario: Aprovado. Luar, luz azul localizada de Nanda e fosforescencia tenue; contato/janela aprovados preservados",
+      "next": "Consolidar revisao T05.4/T05 agregada antes da integracao exclusiva do piloto T06.1 urso-livros",
+      "validation": "Aceite literal em penumbra-v2/reviews/penumbra-v2-aprovacao.md; provas anteriores7/7A-B,52/52EditMode e apoio/piso0; nenhum novo teste neste registro documental",
+      "pending": "Aceite agregado T05.4/T05; validacao em movimento T06/T07; luz projetada sem sombras dinamicas de oclusao",
+      "files": "Evidence/25d/T05.4/penumbra-v2;Evidence/25d/T05.4/README.md;docs/ia/ESTADO-ATUAL-25D.md",
+      "processes": "Nenhum processo iniciado para registro documental",
+      "at": "2026-11-13T17:59:52.819494+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T05",
+      "session": "2026-11-13-dsh-pilot-7b3e",
+      "agent": "DeepSeek (deepseek-flash)",
+      "reason": "Usuario determinou nesta conversa o proximo passo: consolidar a T05 e avancar para o piloto em movimento (T06.1 urso->livros). Sessao anterior concluiu a aprovacao individual da penumbra-v2 e parou as 14:59 (diario882), checkpoint cita exatamente a consolidacao como proximo passo; nenhum processo Unity ativo e alteracoes nao commitadas do Codex preservadas integralmente (PenumbraLightingT054, PenumbraT054.shader, RoomT054Capture.cs, T05.4/README.md). Transferencia sem reabrir entrega.",
+      "from_session": "2026-11-13-codex-penumbra-e92d",
+      "at": "2026-11-13T18:09:55.106320+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T05",
+      "session": "2026-11-13-dsh-pilot-7b3e",
+      "done": "T05.1 urso, T05.2 livros, T05.3 movel e T05.4 (contato, janela e penumbra) aprovadas individualmente; consolidacao agregada em Evidence/25d/T05/README.md com contratos de apoio, provas e limites",
+      "next": "T06.1 travessia urso -> livros em movimento, camera final, fisica preservada e provas 30/60/120 Hz",
+      "validation": "Seis revisoes individuais conferidas; EditMode51/51 e52/52; harness de camera final exit0 com apoio0/0,000001m; penumbra com7checagens e regressao identica; nenhum teste novo nesta sessao",
+      "pending": "Movimento, salto e pouso; quebra do movel 80ms/estralo/tropeco/retry em runtime; sombras dinamicas de oclusao; aparelhos/WebGL; T06/T07",
+      "files": "Evidence/25d/T05/README.md;docs/ia/ESTADO-ATUAL-25D.md;Evidence/25d/T05.1;Evidence/25d/T05.2;Evidence/25d/T05.3;Evidence/25d/T05.4",
+      "processes": "Nenhum processo Unity; Editor fechado",
+      "at": "2026-11-13T18:10:29.215285+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T05",
+      "session": "2026-11-13-dsh-pilot-7b3e",
+      "evidence": [
+        "Evidence/25d/T05/README.md"
+      ],
+      "validation": "Quatro microentregas e as tres candidatas da T05.4 com aceite humano literal registrado; contratos de apoio medidos e limites declarados; soma estatica apenas, sem movimento/T06",
+      "at": "2026-11-13T18:10:29.302545+00:00"
+    },
+    {
+      "command": "accept",
+      "task": "T05",
+      "session": "2026-11-13-dsh-pilot-7b3e",
+      "reference": "Usuario determinou nesta conversa consolidar a T05; seis respostas humanas literais conferidas (aprovado., aprovado., aprovado, agora sim! :), legal aprovado., Aprovado.) em T05.1/T05.2/T05.3/T05.4-contact-v2/window-v4/penumbra-v2; aceite agregado tecnico, sem aprovacao de movimento",
+      "human_approval": false,
+      "at": "2026-11-13T18:10:29.387187+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T06",
+      "session": "2026-11-13-dsh-pilot-7b3e",
+      "agent": "DeepSeek (deepseek-flash)",
+      "at": "2026-11-13T18:10:39.269627+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T06",
+      "session": "2026-11-13-dsh-pilot-7b3e",
+      "done": "T06.1 implementada e capturada: harness YunaT061TraversalCapture instala Idle/Run/Jump/Stumble aprovados + resolvedor sobre o controlador real na DarkRoom_Gameplay, oculta renderers do corpo3D e dirige a travessia urso->livros por InputSystem na camera final; 60Hz e120Hz passaram com2 saltos,1 fonte visivel,0 conflitos e SHA da cena/controlador intactos; 30Hz falha medida (salto parte em x=2,96 e passa por cima da pilha)",
+      "next": "Revisao humana da T06.1 (Evidence/25d/T06.1/reviews/T06.1-proposta.md); depois instalar a composicao T05.4 e o voo T04.1 na captura e corrigir a temporizacao do salto a30Hz antes da T06.2 (movel)",
+      "validation": "Unity6000.3.28f1: 3 execucoes batchmode (30/60/120Hz); sentinela YUNA_T061_DONE; traversal-report.json por taxa; GIFs e summary em Evidence/25d/T06.1/review; cena nao salva",
+      "pending": "Composicao T05.4 e Nanda T04.1 na captura; 30Hz; movel/T06.2; retry/T06.3; UI; aparelhos/WebGL; aceite humano T06.1 e T07",
+      "files": "Assets/Art/Illustrated25D/Yuna/Joint/Editor/YunaT061TraversalCapture.cs;Evidence/25d/T06.1;tools/make_t061_review.py;docs/ia/ESTADO-ATUAL-25D.md",
+      "processes": "Unity batch encerrado (3 runs, exit0/0/1 conforme a taxa); nenhum Editor aberto",
+      "at": "2026-11-13T18:19:59.154806+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T06",
+      "session": "2026-11-13-dsh-pilot-7b3e",
+      "done": "T06.1 implementada, capturada e empacotada: harness YunaT061TraversalCapture (30/60/120Hz) + instalador runtime YunaIllustrationInstaller salvo na DarkRoom_Gameplay + build Windows x64 de validacao (183MB,0 erros, input validado apos corrigir rotulo de integridade). 60Hz e120Hz concluem;30Hz falha medida",
+      "next": "Revisao humana da T06.1 (Evidence/25d/T06.1/reviews/T06.1-proposta.md); depois instalar T05.4+T04.1 na captura/build, decidir 30Hz e seguir T06.2 (movel) e T06.3 (retry). Handoff em Evidence/25d/T06.1/HANDOFF.md",
+      "validation": "3 runs de harness exit0/0/1 + integrated60 success=True; PILOT_BUILD_RESULT Succeeded size=183255829 errors=0; smoke-test do player com input inicializado; plan/diary/check OK",
+      "pending": "Aceite humano T06.1; composicao T05.4 e voo T04.1 na captura/build; 30Hz; movel/T06.2; retry/T06.3; UI; aparelhos/WebGL; T07",
+      "files": "Assets/Art/Illustrated25D/Yuna/Joint/Editor/YunaT061TraversalCapture.cs;Assets/Art/Illustrated25D/Yuna/Joint/Runtime/YunaIllustrationInstaller.cs;Assets/Art/Illustrated25D/Yuna/Joint/Editor/YunaIllustrationInstallerSetup.cs;Assets/Scripts/Editor/WindowsPilotBuild.cs;Assets/Scenes/DarkRoom_Gameplay.unity;Evidence/25d/T06.1;tools/make_t061_review.py",
+      "processes": "Nenhum processo Unity; player de teste encerrado; nenhum Editor aberto",
+      "at": "2026-11-13T18:58:24.545647+00:00"
+    },
+    {
+      "command": "release",
+      "task": "T06",
+      "session": "2026-11-13-dsh-pilot-7b3e",
+      "reason": "Usuario pediu salvar tudo e liberar o pendente para outra IA. Estado salvo: T05 aceita (Evidence/25d/T05/README.md), T06.1 em revisao humana com build de validacao funcional, composicao T05.4/T04.1 e correcao de 30Hz pendentes, T06.2/T06.3 nao iniciadas. Handoff completo em Evidence/25d/T06.1/HANDOFF.md, incluindo comandos, armadilhas de integridade/URP e diario 883-892.",
+      "at": "2026-11-13T18:58:24.634232+00:00"
     }
   ]
 }

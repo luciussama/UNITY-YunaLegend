@@ -1,3 +1,13 @@
+## Estado vigente — 13/11/2026
+
+A [penumbra-v2](penumbra-v2/README.md) recebeu aprovação individual do usuário:
+“Aprovado.” [Registro e escopo](penumbra-v2/reviews/penumbra-v2-aprovacao.md).
+Contato-v2 e posição/altura da janela-v4 já tinham aceites individuais.
+A aprovação atual cobre a atmosfera estática com luar, Nanda azul e plataformas
+fosforescentes muito tênues. A T05 agregada e a validação em movimento T06/T07
+continuam pendentes. O texto abaixo registra as primeiras camadas e tentativas,
+superadas pelas candidatas posteriores; não é o estado corrente.
+
 # T05.4 — camadas recebidas: avaliação técnica
 
 Sessão `2026-11-13-copilot-t053-b29a5ec7`. Arquivos gerados externamente pelo usuário a partir de [PROMPTS-CAMADAS.md](PROMPTS-CAMADAS.md) e salvos em `source/`. **Recebidos e medidos; não importados na Unity e não aprovados.**

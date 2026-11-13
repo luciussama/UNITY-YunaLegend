@@ -26,8 +26,12 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
         private const float RoomScale = .70f;
         /// <summary>13,3333 m de largura visivel a 1280x720 e 96 px/m.</summary>
         private const float ViewWidth = 13.3333f;
-        private static bool HighWindow => System.Array.IndexOf(System.Environment.GetCommandLineArgs(), "-t054HighWindow") >= 0;
+        private static bool Penumbra => System.Array.IndexOf(System.Environment.GetCommandLineArgs(), "-t054Penumbra") >= 0;
+        private static bool HighWindow => Penumbra || System.Array.IndexOf(System.Environment.GetCommandLineArgs(), "-t054HighWindow") >= 0;
         private static bool Panorama => HighWindow || System.Array.IndexOf(System.Environment.GetCommandLineArgs(), "-t054Panorama") >= 0;
+        private static PenumbraLightingT054 lighting;
+        private static SpriteRenderer reviewYuna, reviewNanda;
+        private static DarkRoomPlatformMarker[] reviewPlatforms;
 
         private static string Output
         {
@@ -99,6 +103,8 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
                 int hiddenLegacyRenderers = HideLegacyRoom(markers, roomGo, shadows);
 
                 var camera = BuildCamera();
+                if (Penumbra) InstallPenumbra(room, new[] { bear, books, furniture }, markers);
+                if (Penumbra) camera.backgroundColor = new Color(.007f, .009f, .018f);
                 camera.transform.position = new Vector3(centreX, floorY + 3.2f, -9.0526f);
                 camera.transform.LookAt(new Vector3(centreX, floorY + 2.4f, 0f));
                 var audit = new Audit
@@ -115,6 +121,9 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
                     bookSupportDelta = books.GetTopCenterWorld().y - bookSupportBefore,
                     foregroundEnabled = false,
                     backgroundVersion = HighWindow ? "window-v4" : Panorama ? "scale-v3" : "contact-v2",
+                    penumbraEnabled = Penumbra,
+                    lightingMethod = Penumbra ? "projected per-fragment 2.5D moon/Nanda; no dynamic shadow occlusion" : "inspection unlit",
+                    phosphor = Penumbra ? lighting.phosphor : 0f,
                     hiddenLegacyRenderers = hiddenLegacyRenderers,
                     roomScale = Panorama ? 1f : RoomScale,
                     nearScale = nearScale,
@@ -134,6 +143,13 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
                 Capture(camera, room, booksBounds.center.x, floorY, "02-quarto-livros", shots);
                 Capture(camera, room, (booksBounds.max.x + furnitureBounds.min.x) * .5f, floorY, "03-quarto-vao", shots);
                 Capture(camera, room, furnitureBounds.center.x, floorY, "04-quarto-movel", shots);
+                if (Penumbra)
+                {
+                    CaptureLightingProof(camera);
+                    audit.litRenderers = lighting.BoundRenderers;
+                    audit.moonPosition = lighting.MoonPosition;
+                    audit.nandaPosition = reviewNanda.transform.position;
+                }
 
                 audit.shots = shots.ToArray();
                 if (audit.floorErrorMetres > .001f || Mathf.Abs(audit.bookSupportDelta) > .00001f)
@@ -149,6 +165,71 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
                 Debug.LogError("T054_ROOM_CAPTURE_FAIL " + error);
                 EditorApplication.Exit(1);
             }
+        }
+
+        private static void InstallPenumbra(RoomBackgroundT054 room,
+            DarkRoomPlatformMarker[] pilot, DarkRoomPlatformMarker[] all)
+        {
+            reviewPlatforms = pilot;
+            // Hide unrelated legacy characters and sources only inside this unsaved fixture.
+            foreach (var light in UnityEngine.Object.FindObjectsByType<Light>(FindObjectsSortMode.None)) light.enabled = false;
+            var player = UnityEngine.Object.FindFirstObjectByType<Yuna25DPlayerController>();
+            if (player != null)
+                foreach (var r in player.GetComponentsInChildren<Renderer>(true)) r.enabled = false;
+            var guide = UnityEngine.Object.FindFirstObjectByType<NandaFairyGuide>();
+            if (guide != null)
+                foreach (var r in guide.GetComponentsInChildren<Renderer>(true)) r.enabled = false;
+            foreach (var marker in all)
+                if (!pilot.Contains(marker))
+                    foreach (var r in marker.GetComponentsInChildren<Renderer>(true)) r.enabled = false;
+            lighting = room.gameObject.AddComponent<PenumbraLightingT054>();
+            lighting.room = room;
+            foreach (var r in room.FarPanels) lighting.Bind(r, 0);
+            foreach (var marker in pilot)
+                foreach (var r in marker.GetComponentsInChildren<Renderer>())
+                    if (r.enabled) lighting.Bind(r, 1);
+            reviewYuna = new GameObject("T054_ApprovedYuna_StaticLightingProbe").AddComponent<SpriteRenderer>();
+            reviewYuna.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Art/Illustrated25D/Yuna/Yuna_Profile_v1.png");
+            reviewYuna.sortingOrder = 100;
+            reviewNanda = new GameObject("T054_ApprovedNanda_StaticLightingProbe").AddComponent<SpriteRenderer>();
+            reviewNanda.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Art/Illustrated25D/Nanda/Flight/Runtime/Frames/NandaFlight0.asset");
+            reviewNanda.sortingOrder = 110;
+            if (reviewYuna.sprite == null || reviewNanda.sprite == null)
+                throw new InvalidOperationException("Approved character sprites missing");
+            lighting.nanda = reviewNanda.transform;
+            lighting.Bind(reviewYuna, 2);
+            lighting.Bind(reviewNanda, 3);
+        }
+
+        private static void CaptureLightingProof(Camera camera)
+        {
+            string proof = Path.Combine(Output, "proof");
+            Directory.CreateDirectory(proof);
+            Action<string> save = name =>
+            {
+                lighting.Apply();
+                var image = DarkRoomStartCapture.RenderDisplayImage(camera, 1280, 720);
+                File.WriteAllBytes(Path.Combine(proof, name + ".png"), image.EncodeToPNG());
+                UnityEngine.Object.DestroyImmediate(image);
+            };
+            var position = reviewNanda.transform.position;
+            lighting.nandaStrength = 0f; reviewNanda.enabled = false;
+            save("01-no-nanda");
+            lighting.nandaStrength = 1f; reviewNanda.enabled = true;
+            reviewNanda.transform.position = position + Vector3.right * 4f;
+            save("02-nanda-moved");
+            reviewNanda.transform.position = position;
+            lighting.moonStrength = 0f;
+            save("03-no-moon");
+            lighting.nandaStrength = 0f; reviewNanda.enabled = false;
+            save("04-phosphor-only");
+            lighting.phosphor = 0f;
+            save("05-all-sources-off");
+            lighting.phosphor = .035f; lighting.moonStrength = 1f;
+            lighting.nandaStrength = 1f; reviewNanda.enabled = true;
+            lighting.Apply();
+            var shader = Shader.Find("YunaLegend/RoomPenumbraT054");
+            if (ShaderUtil.ShaderHasError(shader)) throw new InvalidOperationException("Penumbra shader compile error");
         }
 
         // Reuse the approved painting at its original scale behind the stack. Only the
@@ -232,6 +313,15 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
             camera.transform.position = new Vector3(x, floorY + 3.2f, -9.0526f);
             camera.transform.LookAt(new Vector3(x, floorY + 2.4f, 0f));
             room.Follow(camera.transform.position);
+            if (Penumbra)
+            {
+                int index = name.StartsWith("01") ? 0 : name.StartsWith("04") ? 2 : 1;
+                var top = reviewPlatforms[index].GetTopCenterWorld();
+                reviewYuna.transform.position = new Vector3(top.x - (index == 2 ? 1.5f : 0f),
+                    top.y - reviewYuna.sprite.bounds.min.y, -.65f);
+                reviewNanda.transform.position = reviewYuna.transform.position + new Vector3(1.5f, 1.4f, -.1f);
+                lighting.Apply();
+            }
             Physics.SyncTransforms();
             var image = DarkRoomStartCapture.RenderDisplayImage(camera, 1280, 720);
             File.WriteAllBytes(Path.Combine(Output, name + ".png"), image.EncodeToPNG());
@@ -302,6 +392,11 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
             public string method = "contato v2: livros com base adicional, sem primeiro plano; Unity estatica, cena nao salva";
             public float bookBaseBefore, bookBaseAfter, bookSupportDelta;
             public bool foregroundEnabled;
+            public bool penumbraEnabled;
+            public string lightingMethod;
+            public float phosphor;
+            public int litRenderers;
+            public Vector3 moonPosition, nandaPosition;
             public string backgroundVersion;
             public float floorY, centreX, spanMinX, spanMaxX, spanMetres, cameraDistance, floorErrorMetres, paintedFloorInsetMetres, roomScale, nearScale;
             public int hiddenLegacyRenderers, contactShadows;
