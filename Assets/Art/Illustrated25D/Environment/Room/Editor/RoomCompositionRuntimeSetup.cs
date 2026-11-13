@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -12,6 +12,8 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
     {
         const string Gameplay = "Assets/Scenes/DarkRoom_Gameplay.unity";
         const string Room = "Assets/Art/Illustrated25D/Environment/Room/";
+        const string Furniture = "Assets/Art/Illustrated25D/Environment/Furniture/";
+        const string NandaFrames = "Assets/Art/Illustrated25D/Nanda/Flight/Runtime/Frames/";
         const string RootName = "T054_Composicao_Runtime";
 
         public static void Run()
@@ -24,9 +26,13 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
 
             installer.panorama = Load<Texture2D>(Room + "room-panorama-v4.png");
             installer.penumbraShader = Load<Shader>(Room + "PenumbraT054.shader");
+            installer.furnitureBody = Load<Texture2D>(Furniture + "furniture-body-v1.png");
+            installer.furnitureWood = Load<Texture2D>(Furniture + "furniture-top-wood-v1.png");
+            installer.nandaFrames = new Sprite[8];
+            for (int i = 0; i < 8; i++) installer.nandaFrames[i] = Load<Sprite>(NandaFrames + "NandaFlight" + i + ".asset");
             installer.floorInsetFraction = 82f / 724f;
             installer.farTravel = .35f;
-            installer.installPenumbra = false; // pending: runtime penumbra tints the approved Yuna; keep identity first
+            installer.installPenumbra = true;
             EditorUtility.SetDirty(installer);
             EditorSceneManager.SaveScene(root.scene);
             AssetDatabase.SaveAssets();
@@ -41,4 +47,3 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
         }
     }
 }
-
