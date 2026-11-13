@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using YunaLegend.DarkRoom;
 using YunaLegend.Illustrated25D.Furniture;
@@ -28,6 +28,19 @@ namespace YunaLegend.Illustrated25D.Environment
         PenumbraLightingT054 lighting;
         SpriteRenderer nandaSprite;
         readonly List<Renderer> hidden = new List<Renderer>();
+
+        void Awake()
+        {
+            // The accompaniment preview (YunaLegend/Abrir cena de acompanhamento) owns the
+            // composition in its own scene. Running both installers installs the furniture
+            // twice and the second one aborts with "T053 already installed", which hides the
+            // whole scene and stops the auto-run. Step aside instead.
+            if (FindFirstObjectByType<YunaLegend.Illustrated25D.Preview.IllustratedPreview>() != null)
+            {
+                enabled = false;
+                Debug.Log("T054_ROOM_RUNTIME_SKIPPED accompaniment-preview-present");
+            }
+        }
 
         void Start()
         {
@@ -128,8 +141,18 @@ namespace YunaLegend.Illustrated25D.Environment
             {
                 if (marker.spec.index != 2) continue;
                 if (marker.transform.Find(FurnitureIllustrationCandidate.RootName) != null) return;
-                var candidate = marker.gameObject.AddComponent<FurnitureIllustrationCandidate>();
-                candidate.Install(furnitureBody, furnitureWood);
+                if (marker.GetComponent<FurnitureIllustrationCandidate>() != null) return;
+                try
+                {
+                    var candidate = marker.gameObject.AddComponent<FurnitureIllustrationCandidate>();
+                    candidate.Install(furnitureBody, furnitureWood);
+                }
+                catch (System.Exception error)
+                {
+                    // Another installer may have won the race; never abort the whole composition.
+                    Debug.LogWarning("T054_ROOM_RUNTIME_FURNITURE_SKIPPED " + error.Message);
+                    return;
+                }
                 var root = marker.transform.Find(FurnitureIllustrationCandidate.RootName);
                 foreach (var renderer in marker.GetComponentsInChildren<Renderer>(true))
                     if (root == null || !renderer.transform.IsChildOf(root)) renderer.enabled = false;
