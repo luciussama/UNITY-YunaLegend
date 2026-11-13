@@ -1,0 +1,1124 @@
+{
+    "method": "Unity Editor Play Mode: queued KeyboardState events through normal InputSystem/UI. No StartNewGame, SceneManager.LoadScene or retry callback invoked by harness. Saved opening quick-test setting preserved. Camera frames exclude IMGUI; screen captures are requested separately. Not manual browser/device coverage.",
+    "menuEnteredGameplay": true,
+    "reachedBear": true,
+    "reachedBooks": true,
+    "gameOverObserved": true,
+    "retryObserved": true,
+    "titleSelection": "Botao_Novojogo",
+    "uiModule": "InputSystemUIInputModule",
+    "screenshotWidth": 640,
+    "screenshotHeight": 480,
+    "samples": [
+        {
+            "frame": 18,
+            "support": -1,
+            "time": 0.30000001192092898,
+            "timeScale": 1.0,
+            "scene": "TitleScreen",
+            "input": "capture 00-title",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 24,
+            "support": -1,
+            "time": 0.4000000059604645,
+            "timeScale": 1.0,
+            "scene": "TitleScreen",
+            "input": "press Enter",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 26,
+            "support": -1,
+            "time": 0.4333333373069763,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "capture 01-gameplay-entry",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -10.0,
+                "y": -9.0,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 27,
+            "support": -1,
+            "time": 0.44999998807907107,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "release",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -10.0,
+                "y": -9.0,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 30,
+            "support": -1,
+            "time": 0.5,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -9.819999694824219,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 36,
+            "support": -1,
+            "time": 0.6000000238418579,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -9.460000038146973,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 38,
+            "support": -1,
+            "time": 0.6333333253860474,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "capture 02-start",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -9.34000015258789,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 42,
+            "support": -1,
+            "time": 0.699999988079071,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -9.100000381469727,
+                "y": -9.019999504089356,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 48,
+            "support": -1,
+            "time": 0.800000011920929,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -8.739999771118164,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 54,
+            "support": -1,
+            "time": 0.8999999761581421,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -8.380000114440918,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 60,
+            "support": -1,
+            "time": 1.0,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -8.019999504089356,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 66,
+            "support": -1,
+            "time": 1.100000023841858,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -7.659999847412109,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 72,
+            "support": -1,
+            "time": 1.2000000476837159,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -7.299999713897705,
+                "y": -9.019999504089356,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 78,
+            "support": -1,
+            "time": 1.2999999523162842,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -6.940000057220459,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 84,
+            "support": -1,
+            "time": 1.399999976158142,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -6.579999923706055,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 90,
+            "support": -1,
+            "time": 1.5,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -6.21999979019165,
+                "y": -9.019999504089356,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 96,
+            "support": -1,
+            "time": 1.600000023841858,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -5.859999656677246,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 102,
+            "support": -1,
+            "time": 1.7000000476837159,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -5.5,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 108,
+            "support": -1,
+            "time": 1.7999999523162842,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -5.139999866485596,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 114,
+            "support": -1,
+            "time": 1.899999976158142,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -4.779999732971191,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 120,
+            "support": -1,
+            "time": 2.0,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -4.419999599456787,
+                "y": -9.019999504089356,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 126,
+            "support": -1,
+            "time": 2.0999999046325685,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -4.059999942779541,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 132,
+            "support": -1,
+            "time": 2.200000047683716,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -3.6999998092651369,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 138,
+            "support": -1,
+            "time": 2.299999952316284,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -3.3399996757507326,
+                "y": -9.019999504089356,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 144,
+            "support": -1,
+            "time": 2.4000000953674318,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -2.9799997806549074,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 150,
+            "support": -1,
+            "time": 2.5,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -2.619999647140503,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 156,
+            "support": -1,
+            "time": 2.5999999046325685,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -2.2599997520446779,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 162,
+            "support": -1,
+            "time": 2.700000047683716,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -1.8999996185302735,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 168,
+            "support": -1,
+            "time": 2.799999952316284,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -1.5399997234344483,
+                "y": -9.019999504089356,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 174,
+            "support": -1,
+            "time": 2.9000000953674318,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -1.179999589920044,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 180,
+            "support": -1,
+            "time": 3.0,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -0.819999635219574,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 183,
+            "support": -1,
+            "time": 3.049999952316284,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "press Space",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -0.6399996280670166,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 183,
+            "support": -1,
+            "time": 3.049999952316284,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "capture 03-first-jump",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -0.6399996280670166,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 186,
+            "support": -1,
+            "time": 3.0999999046325685,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -0.45999962091445925,
+                "y": -8.53369140625,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 192,
+            "support": -1,
+            "time": 3.200000047683716,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "release",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -0.09999960660934448,
+                "y": -7.726072788238525,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 192,
+            "support": -1,
+            "time": 3.200000047683716,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -0.09999960660934448,
+                "y": -7.726072788238525,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 198,
+            "support": -1,
+            "time": 3.299999952316284,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 0.26000040769577029,
+                "y": -7.138454437255859,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 204,
+            "support": -1,
+            "time": 3.4000000953674318,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 0.620000422000885,
+                "y": -6.770835876464844,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 210,
+            "support": -1,
+            "time": 3.5,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 0.9800004363059998,
+                "y": -6.623217582702637,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 216,
+            "support": -1,
+            "time": 3.5999999046325685,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 1.3400003910064698,
+                "y": -6.69559907913208,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 222,
+            "support": -1,
+            "time": 3.700000047683716,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 1.700000524520874,
+                "y": -6.987980842590332,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 228,
+            "support": -1,
+            "time": 3.799999952316284,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 2.060000419616699,
+                "y": -7.500362873077393,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 232,
+            "support": 0,
+            "time": 3.866666555404663,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "capture 04-on-bear",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 2.3000004291534426,
+                "y": -7.94520378112793,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 234,
+            "support": 0,
+            "time": 3.9000000953674318,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 2.4200005531311037,
+                "y": -7.961972713470459,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 240,
+            "support": 0,
+            "time": 4.0,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 2.7800004482269289,
+                "y": -7.866035461425781,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 242,
+            "support": 0,
+            "time": 4.0333333015441898,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "press Space",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 2.90000057220459,
+                "y": -7.8869948387146,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 246,
+            "support": 0,
+            "time": 4.099999904632568,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 3.1286165714263918,
+                "y": -7.250804424285889,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 251,
+            "support": 0,
+            "time": 4.183333396911621,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "release",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 3.414386749267578,
+                "y": -6.593066692352295,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 252,
+            "support": 0,
+            "time": 4.199999809265137,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 3.471540927886963,
+                "y": -6.479852676391602,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 258,
+            "support": 0,
+            "time": 4.300000190734863,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 3.814465045928955,
+                "y": -5.928900718688965,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 264,
+            "support": 0,
+            "time": 4.400000095367432,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 4.157389163970947,
+                "y": -5.597949028015137,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 270,
+            "support": 0,
+            "time": 4.5,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 4.500313758850098,
+                "y": -5.486997604370117,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 276,
+            "support": 0,
+            "time": 4.599999904632568,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 4.84323787689209,
+                "y": -5.596045970916748,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 282,
+            "support": 0,
+            "time": 4.699999809265137,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 5.186161994934082,
+                "y": -5.925094127655029,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 288,
+            "support": 0,
+            "time": 4.800000190734863,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 5.529086112976074,
+                "y": -6.474142551422119,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 294,
+            "support": 0,
+            "time": 4.900000095367432,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 5.872010231018066,
+                "y": -7.243191242218018,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 296,
+            "support": 1,
+            "time": 4.933333396911621,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "capture 05-on-books",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 5.986318588256836,
+                "y": -7.453024387359619,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 300,
+            "support": 1,
+            "time": 5.0,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 6.226318359375,
+                "y": -7.489918231964111,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 306,
+            "support": 1,
+            "time": 5.099999904632568,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 6.586318492889404,
+                "y": -7.545258045196533,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 312,
+            "support": 1,
+            "time": 5.199999809265137,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 6.946318626403809,
+                "y": -7.680822372436523,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 318,
+            "support": 1,
+            "time": 5.300000190734863,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": 7.306318759918213,
+                "y": -8.064155578613282,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 320,
+            "support": 1,
+            "time": 5.333333492279053,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "capture 06-game-over",
+            "dead": true,
+            "gameOver": true,
+            "player": {
+                "x": 7.426318645477295,
+                "y": -8.240821838378907,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 324,
+            "support": 1,
+            "time": 5.400000095367432,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": true,
+            "gameOver": true,
+            "player": {
+                "x": 7.426318645477295,
+                "y": -8.240821838378907,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 330,
+            "support": 1,
+            "time": 5.5,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": true,
+            "gameOver": true,
+            "player": {
+                "x": 7.426318645477295,
+                "y": -8.240821838378907,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 336,
+            "support": 1,
+            "time": 5.599999904632568,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": true,
+            "gameOver": true,
+            "player": {
+                "x": 7.426318645477295,
+                "y": -8.240821838378907,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 342,
+            "support": 1,
+            "time": 5.699999809265137,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": true,
+            "gameOver": true,
+            "player": {
+                "x": 7.426318645477295,
+                "y": -8.240821838378907,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 344,
+            "support": 1,
+            "time": 5.733333110809326,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "press Enter",
+            "dead": true,
+            "gameOver": true,
+            "player": {
+                "x": 7.426318645477295,
+                "y": -8.240821838378907,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 345,
+            "support": -1,
+            "time": 5.75,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "capture 07-retry",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -10.0,
+                "y": -9.0,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 347,
+            "support": -1,
+            "time": 5.7833333015441898,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "release",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -9.880000114440918,
+                "y": -9.012222290039063,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 348,
+            "support": -1,
+            "time": 5.800000190734863,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -9.819999694824219,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 354,
+            "support": -1,
+            "time": 5.900000095367432,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -9.460000038146973,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 360,
+            "support": -1,
+            "time": 6.0,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -9.100000381469727,
+                "y": -9.019999504089356,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 366,
+            "support": -1,
+            "time": 6.099999904632568,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -8.739999771118164,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        },
+        {
+            "frame": 372,
+            "support": -1,
+            "time": 6.199999809265137,
+            "timeScale": 1.0,
+            "scene": "DarkRoom_Gameplay",
+            "input": "",
+            "dead": false,
+            "gameOver": false,
+            "player": {
+                "x": -8.380000114440918,
+                "y": -9.020000457763672,
+                "z": 0.0
+            }
+        }
+    ]
+}

@@ -1,0 +1,54 @@
+{
+  "editmode": {
+    "result": "Passed",
+    "total": "52",
+    "passed": "52",
+    "failed": "0",
+    "skipped": "0",
+    "duration": "10,4746759"
+  },
+  "playmode": {
+    "result": "Passed",
+    "total": "32",
+    "passed": "32",
+    "failed": "0",
+    "skipped": "0",
+    "duration": "45,5125335"
+  },
+  "runtime": {
+    "method": "Unity Editor Play Mode: queued KeyboardState events through normal InputSystem/UI. No StartNewGame, SceneManager.LoadScene or retry callback invoked by harness. Saved opening quick-test setting preserved. Camera frames exclude IMGUI; screen captures are requested separately. Not manual browser/device coverage.",
+    "menuEnteredGameplay": true,
+    "reachedBear": true,
+    "reachedBooks": true,
+    "gameOverObserved": true,
+    "retryObserved": true,
+    "titleSelection": "Botao_Novojogo",
+    "uiModule": "InputSystemUIInputModule",
+    "screenshotWidth": 640,
+    "screenshotHeight": 480
+  },
+  "visual": {
+    "reference": "Evidence/25d/T05.4/window-v4",
+    "shots": 4,
+    "size": [
+      1280,
+      720
+    ],
+    "mean_absolute_pixel_error": 0,
+    "audit_identical": true,
+    "floor_error_metres": 0,
+    "book_support_delta_metres": 0
+  },
+  "cleanup": {
+    "status": "blocked",
+    "reason": "Recursive deletion command rejected by automatic environment policy before execution",
+    "removed_files": 0,
+    "targets": [
+      "Library",
+      "Build/Publish/Project/Library",
+      "Build/VisualAuditTools",
+      "Build/SkillValidationDeps"
+    ]
+  },
+  "checkpoint_commit": "301e0a3"
+}
