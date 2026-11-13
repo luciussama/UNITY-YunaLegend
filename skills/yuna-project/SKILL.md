@@ -10,6 +10,11 @@ são relativos a essa raiz, mesmo se esta skill estiver instalada fora do projet
 
 ## Entrada e fonte de verdade
 
+Antes de executar qualquer pedido, seguir a seção 0 de `AGENTS.md`: consultar
+`python tools/agent_registry.py status`, adquirir o assunto e registrar execução.
+IAs atuam em paralelo em assuntos distintos; nunca duplicar assunto aberto.
+Para mudanças no registro, consultar `skills/agent-coordination/SKILL.md`.
+
 Leia `AGENTS.md`, `SKILLS.md` e `docs/ia/ESTADO-ATUAL-25D.md`. Para a migração,
 leia integralmente `docs/ia/PLANO-25D-OBRIGATORIO.md`, consulte
 `python tools/plan_25d.py status`, `python tools/ai_diary.py list --limit 50`

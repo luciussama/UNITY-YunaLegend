@@ -1,10 +1,11 @@
 """Coordinator for the illustrated 2.5D plan. Python stdlib; not a security boundary."""
 import argparse
-from contextlib import contextmanager
+from contextlib import closing, contextmanager
 from datetime import datetime, timezone
 import hashlib
 import json
 import os
+import sqlite3
 from pathlib import Path
 import tempfile
 import time
@@ -113,6 +114,26 @@ def nonempty(value):
     return value
 
 
+def check_agent_registry(root, task, session):
+    """Called under coordinator lock; no writes or acquisition of a SQLite write lock."""
+    database = root / 'docs/ia/diario.sqlite3'
+    if not database.exists():  # Isolated fixtures / pre-registry checkouts.
+        return
+    from agent_registry import jobs, key, overlaps
+    try:
+        with closing(sqlite3.connect(database.resolve().as_uri() + '?mode=ro', uri=True, timeout=5)) as db:
+            db.row_factory = sqlite3.Row
+            if not db.execute("SELECT 1 FROM sqlite_master WHERE name='agent_jobs'").fetchone():
+                return
+            requested = [key('plan:' + task['id'])] + [key(r) for r in task['resources']]
+            for job in jobs(db):
+                if job['state'] != 'finalizado' and job['session'] != session:
+                    if any(overlaps(a, b) for a in requested for b in job['resources']):
+                        raise ValueError(f"Registro de agentes ocupado: #{job['id']} dono={job['session']}")
+    except sqlite3.Error as error:
+        raise ValueError('Nao foi possivel validar registro de agentes: ' + str(error)) from error
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--state', type=Path, default=STATE)
@@ -164,6 +185,7 @@ def main(argv=None):
             task = by_id[args.task]
             now = datetime.now(timezone.utc).isoformat()
             if args.command == 'claim':
+                check_agent_registry(root, task, args.session)
                 if task['status'] != 'pending':
                     raise ValueError('Tarefa ja reservada ou aceita; nao sobrescrever dono.')
                 if any(by_id[d]['status'] != 'accepted' for d in task['depends_on']):
@@ -207,6 +229,7 @@ def main(argv=None):
                         raise ValueError('Evidencia alterada; refazer entrega.')
                 task.update(status='accepted', owner=None, acceptance={'session': args.session, 'reference': args.reference, 'at': now, 'human_required': task['human_gate']})
             elif args.command == 'handover':
+                check_agent_registry(root, task, args.session)
                 if task['status'] not in {'active', 'review'} or task['owner']['session'] != args.from_session:
                     raise ValueError('Dono esperado nao coincide; releia estado.')
                 task['owner'] = {'session': args.session, 'agent': args.agent}

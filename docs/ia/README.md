@@ -1,5 +1,10 @@
 # Diário compartilhado de IA
 
+O mesmo banco contém o [registro obrigatório de atuação por assunto](REGISTRO-AGENTES.md).
+Consultar `python tools/agent_registry.py status` e adquirir o assunto antes de
+trabalhar. O registro controla posse/estados; `entries` continua registrando cada
+passo planejado e seu resultado. Assuntos independentes podem executar em paralelo.
+
 Skills compartilháveis e entrada para qualquer IA: [SKILLS.md](../../SKILLS.md). Consulte a skill `yuna-project` e carregue os procedimentos de arte, validação ou WebGL conforme a tarefa.
 
 Entrada curta da execução: [ESTADO-ATUAL-25D.md](ESTADO-ATUAL-25D.md). Handoffs/guias e evidências anteriores foram [arquivados](../../Archive/pre-25d-2026-11-12/README.md) a pedido do usuário. O diário permanece integral e append-only; caminhos antigos podem ser resolvidos por `python tools/archive_history.py resolve CAMINHO`.

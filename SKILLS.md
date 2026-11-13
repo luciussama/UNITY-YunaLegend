@@ -16,6 +16,7 @@ quem preparou o pacote.
 
 | Skill incluída | Quando consultar | Requisitos de execução |
 | --- | --- | --- |
+| [agent-coordination](skills/agent-coordination/SKILL.md) | Engenharia do registro de agentes, reservas idempotentes e concorrência por assunto | Python 3; banco central do diário; sem dependências externas |
 | [yuna-project](skills/yuna-project/SKILL.md) | Entrada no projeto, C#/Unity, coordenação, diário, implementação e retomada | Checkout do projeto; Python 3 ou cliente SQLite; Unity quando a tarefa exigir |
 | [imagegen](skills/imagegen/SKILL.md) | Criar/editar pinturas, personagens, poses, sprites e conceitos raster | Ferramenta de geração/edição de imagens disponível no ambiente; fallback de API somente conforme a própria skill |
 | [yuna-visual-validation](skills/yuna-visual-validation/SKILL.md) | Rever animação, câmera, contato, apoios, cenas de prova e evidência em movimento | Unity e ferramentas de captura/análise adequadas; controle de UI quando necessário |
