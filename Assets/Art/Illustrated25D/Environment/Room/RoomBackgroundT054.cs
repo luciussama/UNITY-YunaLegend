@@ -22,9 +22,9 @@ namespace YunaLegend.Illustrated25D.Environment
         /// </summary>
         public const float FloorInsetFraction = .09375f;
 
-        public const float FarTravel = .35f;
-        public const float MidTravel = .45f;
-        public const float NearTravel = 0f;
+        public const float FarTravel = .60f;
+        public const float MidTravel = .70f;
+        public const float NearTravel = 1f;
 
         public const int FarOrder = -300;
         public const int MidOrder = -290;
@@ -35,25 +35,30 @@ namespace YunaLegend.Illustrated25D.Environment
         [SerializeField] private SpriteRenderer near;
         [SerializeField] private float floorWorldY;
         [SerializeField] private float centreWorldX;
+        [SerializeField] private float scale = 1f;
 
         public SpriteRenderer Far => far;
         public SpriteRenderer Mid => mid;
         public SpriteRenderer Near => near;
         public float FloorWorldY => floorWorldY;
         public float CentreWorldX => centreWorldX;
+        public float RoomScale => roomScale;
+        public float NearScale => nearScale;
 
         /// <summary>
         /// Monta as tres camadas em memoria. floorY e o y fisico onde os apoios encostam;
         /// centreX e o meio horizontal do trecho percorrido.
         /// </summary>
         public void Install(Texture2D farTexture, Texture2D midTexture, Texture2D nearTexture,
-            float floorY, float centreX, Material material = null)
+            float floorY, float centreX, Material material = null, float worldScale = 1f, float nearWorldScale = 1f)
         {
             floorWorldY = floorY;
             centreWorldX = centreX;
-            far = Build(FarName, farTexture, FarOrder, material);
-            mid = Build(MidName, midTexture, MidOrder, material);
-            near = Build(NearName, nearTexture, NearOrder, material);
+            roomScale = Mathf.Max(.05f, worldScale);
+            nearScale = Mathf.Max(.05f, nearWorldScale);
+            far = Build(FarName, farTexture, FarOrder, material, roomScale);
+            mid = Build(MidName, midTexture, MidOrder, material, roomScale);
+            near = Build(NearName, nearTexture, NearOrder, material, nearScale);
         }
 
         /// <summary>Deslocamento relativo ao centro do trecho, como fracao do avanco da camera.</summary>
@@ -72,7 +77,7 @@ namespace YunaLegend.Illustrated25D.Environment
             layer.transform.position = position;
         }
 
-        private SpriteRenderer Build(string layerName, Texture2D texture, int order, Material material)
+        private SpriteRenderer Build(string layerName, Texture2D texture, int order, Material material, float scale)
         {
             var go = new GameObject(layerName);
             go.transform.SetParent(transform, false);
@@ -82,7 +87,8 @@ namespace YunaLegend.Illustrated25D.Environment
                 0, SpriteMeshType.FullRect);
             renderer.sortingOrder = order;
             if (material != null) renderer.sharedMaterial = material;
-            float height = texture.height / PixelsPerUnit;
+            float height = texture.height / PixelsPerUnit * scale;
+            go.transform.localScale = Vector3.one * scale;
             go.transform.position = new Vector3(centreWorldX,
                 floorWorldY + height * (.5f - FloorInsetFraction), 0f);
             return renderer;

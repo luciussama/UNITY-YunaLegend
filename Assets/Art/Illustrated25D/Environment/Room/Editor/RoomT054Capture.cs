@@ -22,6 +22,10 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
         private const string RoomFolder = "Assets/Art/Illustrated25D/Environment/Room/";
         private const string FurnitureFolder = "Assets/Art/Illustrated25D/Environment/Furniture/";
         private const string ScenePath = "Assets/Scenes/DarkRoom_Gameplay.unity";
+        /// <summary>0,70 reduz o quarto para escala domestica sem deixar borda visivel.</summary>
+        private const float RoomScale = .70f;
+        /// <summary>13,3333 m de largura visivel a 1280x720 e 96 px/m.</summary>
+        private const float ViewWidth = 13.3333f;
 
         private static string Output
         {
@@ -64,13 +68,22 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
 
                 var roomGo = new GameObject("T054_Quarto_Ilustrado");
                 var room = roomGo.AddComponent<RoomBackgroundT054>();
-                room.Install(
-                    AssetDatabase.LoadAssetAtPath<Texture2D>(RoomFolder + "layer0-far.png"),
-                    AssetDatabase.LoadAssetAtPath<Texture2D>(RoomFolder + "layer1-mid.png"),
-                    AssetDatabase.LoadAssetAtPath<Texture2D>(RoomFolder + "layer2-near.png"),
-                    floorY, centreX, PaintedMaterial());
+                var farTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(RoomFolder + "layer0-far.png");
+                var midTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(RoomFolder + "layer1-mid.png");
+                var nearTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(RoomFolder + "layer2-near.png");
+                float nearScale = ViewWidth / (nearTexture.width / RoomBackgroundT054.PixelsPerUnit);
+                room.Install(farTexture, midTexture, nearTexture, floorY, centreX,
+                    PaintedMaterial(), RoomScale, nearScale);
 
-                int hiddenLegacyRenderers = HideLegacyRoom(markers, roomGo);
+                var shadows = new GameObject(ContactShadowT054.RootName);
+                foreach (var platform in new[] { bear, books, furniture })
+                {
+                    var platformBounds = Bounds(platform);
+                    ContactShadowT054.Install(shadows.transform, platformBounds.center.x, floorY,
+                        platformBounds.size.x, platformBounds.size.z, .18f);
+                }
+
+                int hiddenLegacyRenderers = HideLegacyRoom(markers, roomGo, shadows);
 
                 var camera = BuildCamera();
                 camera.transform.position = new Vector3(centreX, floorY + 3.2f, -9.0526f);
@@ -85,6 +98,9 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
                     cameraDistance = Mathf.Abs(camera.transform.position.z),
                     floorErrorMetres = 0f,
                     hiddenLegacyRenderers = hiddenLegacyRenderers,
+                    roomScale = RoomScale,
+                    nearScale = nearScale,
+                    contactShadows = 6,
                     paintedFloorInsetMetres = room.Far != null
                         ? room.Far.bounds.size.y * RoomBackgroundT054.FloorInsetFraction : 0f
                 };
@@ -119,7 +135,7 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
         /// Desativa apenas a geometria 3D legada do quarto: ela fica na frente da arte
         /// pintada e esconderia o piso. Plataformas, jogador, Nanda, movel e quarto ficam.
         /// </summary>
-        private static int HideLegacyRoom(DarkRoomPlatformMarker[] markers, GameObject room)
+        private static int HideLegacyRoom(DarkRoomPlatformMarker[] markers, GameObject room, GameObject shadows)
         {
             var keep = new List<Transform>();
             foreach (var marker in markers) keep.Add(marker.transform);
@@ -128,6 +144,7 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
             var guide = UnityEngine.Object.FindFirstObjectByType<NandaFairyGuide>();
             if (guide != null) keep.Add(guide.transform);
             keep.Add(room.transform);
+            if (shadows != null) keep.Add(shadows.transform);
 
             int disabled = 0;
             foreach (var renderer in UnityEngine.Object
@@ -225,8 +242,8 @@ namespace YunaLegend.Illustrated25D.Environment.Editor
         private sealed class Audit
         {
             public string method = "camadas pintadas + movel T05.3 em memoria; 1280x720 a 96 px/m; cena nao salva";
-            public float floorY, centreX, spanMinX, spanMaxX, spanMetres, cameraDistance, floorErrorMetres, paintedFloorInsetMetres;
-            public int hiddenLegacyRenderers;
+            public float floorY, centreX, spanMinX, spanMaxX, spanMetres, cameraDistance, floorErrorMetres, paintedFloorInsetMetres, roomScale, nearScale;
+            public int hiddenLegacyRenderers, contactShadows;
             public LayerInfo[] layers;
             public Shot[] shots;
         }
