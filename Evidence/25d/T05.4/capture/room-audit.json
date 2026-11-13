@@ -7,28 +7,31 @@
     "spanMetres": 15.289264678955079,
     "cameraDistance": 9.052599906921387,
     "floorErrorMetres": 0.0,
-    "paintedFloorInsetMetres": 1.3333333730697632,
+    "paintedFloorInsetMetres": 0.9333333969116211,
+    "roomScale": 0.699999988079071,
+    "nearScale": 0.4687488079071045,
     "hiddenLegacyRenderers": 272,
+    "contactShadows": 6,
     "layers": [
         {
             "role": "fundo",
-            "travelFraction": 0.3499999940395355,
-            "worldWidth": 28.44444465637207,
-            "worldHeight": 14.222222328186036,
+            "travelFraction": 0.6000000238418579,
+            "worldWidth": 19.91111183166504,
+            "worldHeight": 9.95555591583252,
             "sortingOrder": -300
         },
         {
             "role": "meio",
-            "travelFraction": 0.44999998807907107,
-            "worldWidth": 28.44444465637207,
-            "worldHeight": 14.222222328186036,
+            "travelFraction": 0.699999988079071,
+            "worldWidth": 19.91111183166504,
+            "worldHeight": 9.95555591583252,
             "sortingOrder": -290
         },
         {
             "role": "primeiro-plano",
-            "travelFraction": 0.0,
-            "worldWidth": 28.44444465637207,
-            "worldHeight": 14.222222328186036,
+            "travelFraction": 1.0,
+            "worldWidth": 13.33329963684082,
+            "worldHeight": 6.66664981842041,
             "sortingOrder": 40
         }
     ],
@@ -36,30 +39,30 @@
         {
             "name": "01-quarto-inicio",
             "cameraX": 2.0302391052246095,
-            "farX": 6.344440937042236,
-            "midX": 5.680717945098877,
-            "nearX": 8.667472839355469
+            "farX": 4.6851325035095219,
+            "midX": 4.021409511566162,
+            "nearX": 2.0302391052246095
         },
         {
             "name": "02-quarto-livros",
             "cameraX": 6.070000171661377,
-            "farX": 7.758357524871826,
-            "midX": 7.498610019683838,
-            "nearX": 8.667472839355469
+            "farX": 7.108989238739014,
+            "midX": 6.849242210388184,
+            "nearX": 6.070000171661377
         },
         {
             "name": "03-quarto-vao",
             "cameraX": 7.287105560302734,
-            "farX": 8.184344291687012,
-            "midX": 8.046307563781739,
-            "nearX": 8.667472839355469
+            "farX": 7.839252471923828,
+            "midX": 7.701215744018555,
+            "nearX": 7.287105560302734
         },
         {
             "name": "04-quarto-movel",
             "cameraX": 12.112105369567871,
-            "farX": 9.87309455871582,
-            "midX": 10.217557907104493,
-            "nearX": 8.667472839355469
+            "farX": 10.734251976013184,
+            "midX": 11.078715324401856,
+            "nearX": 12.112105369567871
         }
     ]
 }

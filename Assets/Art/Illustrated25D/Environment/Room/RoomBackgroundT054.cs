@@ -35,7 +35,8 @@ namespace YunaLegend.Illustrated25D.Environment
         [SerializeField] private SpriteRenderer near;
         [SerializeField] private float floorWorldY;
         [SerializeField] private float centreWorldX;
-        [SerializeField] private float scale = 1f;
+        [SerializeField] private float roomScale = 1f;
+        [SerializeField] private float nearScale = 1f;
 
         public SpriteRenderer Far => far;
         public SpriteRenderer Mid => mid;
