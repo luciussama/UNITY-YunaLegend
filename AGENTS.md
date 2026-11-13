@@ -1,48 +1,38 @@
-# Protocolo de trabalho das IAs
+# Protocolo de Trabalho das IAs — Projeto Unity (C#)
 
-Este projeto utiliza Unity (motor de jogos; scripts normalmente em C#). O diário de desenvolvimento é obrigatório para qualquer IA que trabalhe neste repositório.
+O diário de desenvolvimento (`docs/ia/diario.sqlite3`) é obrigatório para qualquer IA neste repositório.
 
-## Skills do projeto — consulta obrigatória
+## 1. Economia de Contexto e Roteamento Agnóstico de Modelos (CRÍTICO)
+- **Leitura sob demanda:** Leia apenas os arquivos estritamente necessários à tarefa atual. Nunca leia o repositório inteiro ou arquivos de histórico (`Archive/`, `REGRAS-LEGADAS-3D.md`) sem necessidade investigativa específica.
+- **Execução Visual / Arte (Quando Autorizado ou Suportado):** Se o usuário incluir `[MODO VISUAL]` no prompt ou solicitar explicitamente geração de arte/inspeção visual (no Unity Editor, build WebGL ou referência legada), utilize os recursos nativos disponíveis no ambiente atual (geração de imagem, `computer-use`, `browser`, `chrome` ou leitura de `.png`).
+- **Fallback Seguro para Modelos Somente-Texto (ex: DeepSeek):**
+  - Na ausência de pedido visual explícito, priorize geração e validação programática via scripts Python (`Pillow`, `getbbox`) ou Unity Editor Scripts em modo texto (`-batchmode`), evitando ler binários/imagens em base64 para economizar tokens.
+  - Se uma chamada visual ou de geração de imagem falhar por limitação do modelo ativo (ex: erro HTTP 400 / modelo sem suporte multimodal), **não repita a chamada**. Registre o passo como `blocked` no diário informando o asset/cena pendente e peça ao usuário: *"O modelo atual não suporta visão/geração de imagem. Alterne para um modelo multimodal no cliente atual (ex: GPT ou Antigravity) e envie `[MODO VISUAL]` para continuar."*
 
-Leia [SKILLS.md](SKILLS.md) e a skill [yuna-project](skills/yuna-project/SKILL.md) antes de atuar. O guia aponta as skills de arte, validação visual e WebGL, com instruções e recursos compartilháveis em `skills/`. Carregue somente as pertinentes ao pedido atual. IAs sem suporte nativo a skills devem ler os arquivos como Markdown. Skills orientam o procedimento; autorização, reservas, revisões humanas e estado continuam regidos por este protocolo e pelos arquivos canônicos.
+## 2. Skills e Estado Canônico (Carregamento Seletivo)
+1. Consulte primeiro [ESTADO-ATUAL-25D.md](docs/ia/ESTADO-ATUAL-25D.md) e rode `python tools\plan_25d.py status`.
+2. Consulte [SKILLS.md](SKILLS.md) e [yuna-project](skills/yuna-project/SKILL.md) carregando **apenas** a skill pertinente ao pedido (arte, validação visual ou WebGL). IAs sem suporte nativo a skills devem ler os arquivos como Markdown.
+3. Leia [PLANO-25D-OBRIGATORIO.md](docs/ia/PLANO-25D-OBRIGATORIO.md) ou [PLANO-25D-ESTADO.json](docs/ia/PLANO-25D-ESTADO.json) apenas nas seções relevantes à tarefa reservada.
+4. Caminhos antigos devem ser resolvidos com `python tools/archive_history.py resolve CAMINHO` (não reescrever registros históricos).
 
-## DIREÇÃO VIGENTE OBRIGATÓRIA — 2,5D ilustrado (12/11/2026)
+## 3. Direção Vigente Obrigatória — 2,5D Ilustrado (12/11/2026)
+- **Escopo:** Personagens 2D ilustrados em cenário com profundidade, nativos na Unity (substitui modelos 3D finais de Yuna/Nanda; preserve modelos/scripts antigos usados na cena base sem removê-los sem checar cenas/prefabs/GUIDs).
+- **Piloto obrigatório:** Não converter toda a fase antes da aprovação humana do piloto **urso → livros → móvel** com Yuna e Nanda ilustradas em movimento.
+- **Microentregas:** Siga [25D-ASSINATURA-E-MICROENTREGAS.md](docs/ia/25D-ASSINATURA-E-MICROENTREGAS.md). Produza cada entrega visual individualmente e aguarde revisão humana antes da etapa dependente (aceite agregado T01/T07 não dispensa revisões individuais; fila planejada não comprova execução ou aprovação).
+- **Nanda azul:** Aparência e luz emanada devem ser azuladas (substituindo o âmbar/dourado). Preserve assinatura ilustrada e identidade; não recolorir Yuna.
+- **Móvel e desequilíbrio (12/11/2026):** Manter quebra/cedimento, estralo, pausa local 80ms, tropeço2D/recuperação de Yuna e reset no retry ([25D-MOVEL-QUEBRA-E-DESEQUILIBRIO.md](docs/ia/25D-MOVEL-QUEBRA-E-DESEQUILIBRIO.md)). Validar sequência real em execução antes de concluir.
+- **Coordenação:** Reserve a tarefa pelo coordenador antes de editar arquivos; respeite dependências e nunca assuma reservas de outro agente por tempo decorrido.
 
-O usuário escolheu **personagens 2D ilustrados em cenário com profundidade**, implementados nativamente na Unity. Leia integralmente [o plano obrigatório](docs/ia/PLANO-25D-OBRIGATORIO.md) e execute `python tools\plan_25d.py status` antes de atuar nesta migração. O estado está em [PLANO-25D-ESTADO.json](docs/ia/PLANO-25D-ESTADO.json). Esta direção substitui as recomendações antigas de refinar Yuna/Nanda como modelos 3D finais. Preserve os estudos e as evidências anteriores como histórico e referência.
+## 4. Regra Obrigatória — Formato das Plataformas (Entrada 305)
+- **Sem caixas uniformes:** Cada objeto tem silhueta e apoio próprios (urso de pelúcia, pilha diagonal de livros, tambor cilíndrico, castelinho). Proibido achatar/redimensionar arte para caber em colisor padrão.
+- **Apoio real:** A superfície de contato pertence ao objeto (pode ser deslocada do centro, mais estreita que o volume, inclinada, escalonada ou múltipla). Colisor, cálculo de vão/pulo, enquadramento de câmera e testes devem se adaptar à superfície real.
+- **Física e ordem de criação:** Preserve o controlador físico 3D e `PlatformSupportProfile` (sem migrar para Physics2D). Defina **primeiro** onde os pés pousam antes de criar a arte e valide na câmera final a correspondência superfície/apoio, inclusive inclinação e cedimento.
 
-Comece pelo [estado atual resumido](docs/ia/ESTADO-ATUAL-25D.md). A documentação e as referências anteriores estão em [Archive](Archive/pre-25d-2026-11-12/README.md), fora do contexto ativo por pedido do usuário. Consulte-as somente para uma investigação específica, não como tarefas a retomar. Caminhos antigos no diário ou em manifestes aprovados podem ser localizados com `python tools/archive_history.py resolve CAMINHO`; não reescreva esses registros históricos.
+## 5. Protocolo do Diário (`docs/ia/diario.sqlite3`)
+- **Início:** Leia o histórico recente com `python tools\ai_diary.py list --limit 15` (aumente o limite apenas se precisar rastrear IDs antigos) e verifique planos sem resultado. Não atribua a si ações de outra IA.
+- **Ciclo:** Use identificador de sessão único por tarefa identificando o modelo/agente. Registre `planned` antes de cada passo operacional e `completed`, `failed` ou `blocked` com `--plan-id` logo após (incluindo o que foi feito, arquivos afetados, comandos, resultados e validações reais). Registre decisões/limitações como `info`.
+- **Sequência e recursão:** Nunca execute o próximo passo sem registrar o resultado do anterior (em caso de interrupção, mantenha o plano pendente e documente a recuperação na próxima sessão). Não registre chamadas feitas exclusivamente para ler/escrever o próprio diário; agrupe chamadas apenas quando compuserem um mesmo passo verificável.
+- **Imutabilidade e versionamento:** Nunca apague ou reescreva entradas anteriores; corrija criando nova entrada `info` referenciando o ID anterior. Não registre credenciais, dados pessoais ou raciocínio interno privado. Versione `diario.sqlite3` sem descartar históricos em merges. (Sem acesso a Python, use cliente SQLite conforme [docs/ia/README.md](docs/ia/README.md); se não puder gravar, informe o impedimento antes de modificar o projeto).
 
-- Não converter toda a fase antes de aprovar o piloto **urso → livros → móvel**, com Yuna e Nanda ilustradas em movimento.
-- Escolher 2,5D não aprova automaticamente novos desenhos, animações ou o piloto. Produza a entrega revisável antes de solicitar avaliação nos pontos definidos pelo plano.
-- Reserve a tarefa pelo coordenador antes de alterar arquivos; respeite dependências e recursos exclusivos. Não assuma reservas de outro agente por tempo decorrido.
-- Checkpoints não substituem o diário obrigatório. Resumos de chat e instruções antigas não substituem o estado canônico verificado em disco.
-- Preserve **a mesma assinatura visual e passos pequenos para avaliação humana meticulosa**. Consulte [assinatura e microentregas](docs/ia/25D-ASSINATURA-E-MICROENTREGAS.md). Cada entrega visual deve ser revisada individualmente antes da próxima que dependa dela; o aceite agregado T01/T07 não dispensa essas revisões. Fila planejada não comprova execução ou aprovação.
-- **Nanda azul:** sua aparência e a luz que emana devem ser azuladas, substituindo o âmbar/dourado antigo. Preservar a assinatura ilustrada e a identidade; não recolorir Yuna.
-- **Móvel e desequilíbrio confirmados em 12/11/2026:** manter quebra/cedimento, estralo, pausa local80ms, tropeço2D/recuperação de Yuna e reset no retry. Leia [o compromisso e critérios de validação](docs/ia/25D-MOVEL-QUEBRA-E-DESEQUILIBRIO.md). Aprovação da aparência não significa animação/física já implementadas; validar a sequência real antes de declarar concluída.
-
-- Antes de trabalhar, leia o histórico recente com `python tools\ai_diary.py list --limit 50` e consulte os planos ainda sem resultado. Não atribua a si ações de outra IA.
-- Use um identificador de sessão único por tarefa e identifique o agente/modelo quando conhecido.
-- Antes de cada passo operacional, registre `planned`; após executá-lo, acrescente `completed`, `failed` ou `blocked` com `--plan-id` apontando para o plano. Inclua o que foi feito, arquivos afetados, comandos, resultados e validações reais. Registre também decisões e limitações como `info`.
-- Não execute o próximo passo sem registrar o resultado do anterior. Se houver interrupção, mantenha o plano pendente e documente a recuperação na próxima sessão. Um plano pode receber novos resultados de recuperação.
-- Não registre cada chamada feita exclusivamente para ler/escrever o próprio diário: isso causaria recursão infinita. Agrupe chamadas somente quando compuserem um mesmo passo verificável.
-- Nunca apague nem reescreva entradas anteriores. Corrija informações com uma nova entrada `info` referenciando o ID anterior. Não registre credenciais, dados pessoais desnecessários ou raciocínio interno privado; registre ações, decisões técnicas objetivas e evidências.
-- O banco `docs/ia/diario.sqlite3` faz parte do projeto e deve acompanhar as alterações no controle de versão. Evite merges binários: em trabalho paralelo, coordene a integração dos históricos e nunca descarte um banco silenciosamente.
-- Caso não tenha acesso a Python, use qualquer cliente SQLite seguindo o esquema e o protocolo do [guia](docs/ia/README.md). Se não puder gravar no banco, informe o impedimento antes de modificar o projeto.
-
-## REGRA OBRIGATÓRIA — formato das plataformas
-
-**Leia antes de modelar qualquer plataforma.** Registrada no diário na entrada **305** (11/11/2026, a pedido do usuário).
-
-- As plataformas **não são caixas uniformes**. Cada objeto tem silhueta, tamanho e apoio próprios (urso de pelúcia, pilha diagonal de livros, tambor cilíndrico, castelinho…). É proibido achatá-las ou redimensioná-las para caber num colisor padrão.
-- A **superfície de contato pertence ao objeto**: pode ser deslocada do centro, mais estreita que o volume, inclinada (pilha diagonal), escalonada ou múltipla.
-- Colisor, cálculo de vão/pulo, enquadramento de câmera e testes **devem se adaptar ao formato real da superfície**; nunca adaptar o objeto ao colisor.
-- Preserve o controlador físico 3D e o contrato `PlatformSupportProfile`; a apresentação ilustrada não autoriza migração para Physics2D nem apoio artificial sobre lacunas.
-- Antes de criar a arte, defina **primeiro** onde os pés pousam. Valide por testes e evidência na câmera final a correspondência entre superfície visível e apoio físico, inclusive inclinação e cedimento. A arte não precisa ser uma malha 3D visível.
-
-Modelos/scripts antigos ainda usados pela cena base são dependências técnicas, não direção artística. Não removê-los sem conferir cenas/prefabs/GUIDs. Detalhes históricos de malhas/colisores e retratos antigos de progresso estão nas [regras legadas](docs/ia/REGRAS-LEGADAS-3D.md), de consulta opcional; não carregá-los como instruções vigentes. Aprovações e pendências devem ser consultadas no estado canônico, não presumidas deste protocolo.
-
-## Referência jogável e comparação
-
-A IA tem autonomia para acessar e jogar o legado **exclusivamente pela URL https://luciussama.github.io/legendGirl/** e comparar seu comportamento e apresentação com a fase Unity em desenvolvimento. Essa autorização é para observação e comparação: **não copiar, migrar ou importar código legado, não clonar o repositório legado nem utilizar uma cópia local dele neste projeto**. A implementação permanece nativa Unity/C#. A build Web da Unity é uma exportação deste projeto, não uma retomada da implementação HTML antiga.
-
-Instruções orientam agentes compatíveis; não interceptam automaticamente ferramentas de IAs externas. Veja o [guia do diário](docs/ia/README.md) para comandos e esquema.
+## 6. Referência Jogável (Legado)
+- Autorizada consulta/jogo exclusivamente via `https://luciussama.github.io/legendGirl/` (somente quando o modelo ativo suportar navegação/visão) para comparação visual e comportamental com a fase Unity. **Proibido** copiar, migrar, clonar ou utilizar cópia local do código HTML legado; a implementação permanece 100% nativa Unity/C#. A build Web da Unity é uma exportação deste projeto, não uma retomada da implementação HTML antiga.
