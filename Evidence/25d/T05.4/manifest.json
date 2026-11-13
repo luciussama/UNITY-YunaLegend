@@ -1,0 +1,110 @@
+{
+ "task": "T05.4",
+ "status": "received; not imported; not approved",
+ "session": "2026-11-13-copilot-t053-b29a5ec7",
+ "origin": "gerado externamente pelo usuario a partir de Evidence/25d/T05.4/PROMPTS-CAMADAS.md",
+ "files": [
+  {
+   "path": "Evidence/25d/T05.4/source/layer0-far.png",
+   "width": 1536,
+   "height": 768,
+   "mode": "RGBA",
+   "bytes": 2197776,
+   "sha256": "b78eb11c35ae309c1984a6505882bce5fb431c293cf978a9790dd6d560b6e1a0",
+   "alpha": "opaco (255..255)",
+   "floor_line_px": 696,
+   "floor_line_pct": 90.625,
+   "floor_line_spec_px": 696,
+   "floor_deviation_px": 0,
+   "window_columns_pct": [
+    25.0,
+    56.1
+   ],
+   "window_spec_pct": [
+    18,
+    39
+   ],
+   "floor_method": "primeira linha com >=10 bordas horizontais fortes (tabuas): painel escuro ate y=689, piso iluminado com juntas a partir de y=696"
+  },
+  {
+   "path": "Evidence/25d/T05.4/source/layer1-mid.png",
+   "width": 1536,
+   "height": 768,
+   "mode": "RGBA",
+   "bytes": 179629,
+   "sha256": "2093e587418bf2d1cfee82a348e7842c42cb4a793257000d52f274f4f5863fad",
+   "alpha": "real (0..255); 5,09% nao transparente",
+   "alpha_bbox": [
+    34,
+    513,
+    1516,
+    696
+   ],
+   "groups_pct": [
+    [
+     2.2,
+     15.6
+    ],
+    [
+     51.0,
+     56.5
+    ],
+    [
+     86.0,
+     98.6
+    ]
+   ],
+   "bases_px": [
+    695,
+    695,
+    695
+   ],
+   "base_spec_px": 696,
+   "mean_rgb_opaque": [
+    42,
+    39,
+    53
+   ]
+  },
+  {
+   "path": "Evidence/25d/T05.4/source/layer2-near.png",
+   "width": 1536,
+   "height": 768,
+   "mode": "RGBA",
+   "bytes": 267718,
+   "sha256": "1a60e8d855498fa8e753d5d366caa51d80d5fa876686e26303bde9064ad20065",
+   "alpha": "real (0..210); 12,91% nao transparente",
+   "alpha_bbox": [
+    0,
+    0,
+    1536,
+    768
+   ],
+   "corridor_alpha_max_14_86pct": 0,
+   "mean_rgb_opaque": [
+    25,
+    32,
+    44
+   ]
+  }
+ ],
+ "measured": {
+  "px_per_m_authoring": 72,
+  "world_coverage_m": [
+   21.3333,
+   10.6667
+  ],
+  "spec_canvas_px": [
+   2048,
+   1024
+  ],
+  "spec_px_per_m": 96,
+  "note": "Canvas entregue em 1536x768 (2:1). Mantido nativo, sem reamostragem: importar com PPU 72 cobre exatamente 21,3333x10,6667 m."
+ },
+ "deviations": [
+  "dimensao 1536x768 em vez de 2048x1024 -> compensada por PPU 72, sem reamostragem",
+  "janela em 25,0-56,1% em vez de 18-39% -> deslocada ~7-17% para a direita; composicao aceitavel, ancora ajustada no import",
+  "paleta de L0 mais violeta/magenta (flores rosadas, bandeirinhas) que os hex prescritos; coerente com quarto noturno, sem sepia",
+  "L2: elemento direito vai ate a borda inferior; altura maior que o previsto (55%)"
+ ]
+}

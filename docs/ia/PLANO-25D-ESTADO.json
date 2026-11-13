@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-13T13:43:49.228833+00:00",
+  "updated_at": "2026-11-13T14:13:43.948107+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -292,13 +292,13 @@
         "agent": "Copilot SDK subagent Movel"
       },
       "checkpoint": {
-        "done": "T05.3 aprovada pelo usuario (aprovado); T05.1/T05.2 ja aceitas. T05.4 especificada de forma deterministica: canvas2048x1024 a96px/m, linha de piso y_px928, parallax0,35/0,45/fixa, paleta e tres prompts em Evidence/25d/T05.4/PROMPTS-CAMADAS.md",
-        "next": "Aguardar o usuario fornecer layer0-far.png, layer1-mid.png e layer2-near.png; verificar dimensoes/linha de piso/alpha, importar em Assets/Art/Illustrated25D/Environment/Room, montar rig de parallax e luz, capturar e submeter a revisao humana",
-        "validation": "Plan/diary checks OK; 0 planos sem resultado; T05.3 aprovada literalmente. Nenhuma imagem recebida ainda",
-        "pending": "Camadas de fundo nao existem; iluminacao noturna e rig de parallax nao implementados; T05 agregada depende da T05.4 aprovada; pausa80ms/estralo/tropeco/retry seguem para T06.2/3",
-        "files": "Evidence/25d/T05.4/PROMPTS-CAMADAS.md;Evidence/25d/T05.3;docs/ia/diario.sqlite3",
+        "done": "T05.3 aprovada; camadas de fundo da T05.4 recebidas e medidas: L01536x768 com piso em y696 (contrato), L1 e L2 com alpha real e bases alinhadas, corredor transparente. Manifesto com hashes. Nada importado",
+        "next": "Decidir com o usuario seguir com estas camadas ou regerar so a L0; depois importar com PPU72 e ancora em y696, montar parallax e luz noturna, capturar e submeter a revisao",
+        "validation": "Medicoes proprias com Pillow (alpha, bbox, grupos, gradiente de piso); manifesto e README gravados; plan/diary checks OK",
+        "pending": "Importacao, rig de parallax, iluminacao, captura e revisao humana; T05 agregada e T06 dependem disso",
+        "files": "Evidence/25d/T05.4",
         "processes": "Nenhum Unity Editor ativo",
-        "updated_at": "2026-11-13T13:43:49.228833+00:00"
+        "updated_at": "2026-11-13T14:13:43.948107+00:00"
       }
     },
     {
@@ -1535,6 +1535,18 @@
       "files": "Evidence/25d/T05.4/PROMPTS-CAMADAS.md;Evidence/25d/T05.3;docs/ia/diario.sqlite3",
       "processes": "Nenhum Unity Editor ativo",
       "at": "2026-11-13T13:43:49.228833+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T05",
+      "session": "2026-11-13-copilot-t053-b29a5ec7",
+      "done": "T05.3 aprovada; camadas de fundo da T05.4 recebidas e medidas: L01536x768 com piso em y696 (contrato), L1 e L2 com alpha real e bases alinhadas, corredor transparente. Manifesto com hashes. Nada importado",
+      "next": "Decidir com o usuario seguir com estas camadas ou regerar so a L0; depois importar com PPU72 e ancora em y696, montar parallax e luz noturna, capturar e submeter a revisao",
+      "validation": "Medicoes proprias com Pillow (alpha, bbox, grupos, gradiente de piso); manifesto e README gravados; plan/diary checks OK",
+      "pending": "Importacao, rig de parallax, iluminacao, captura e revisao humana; T05 agregada e T06 dependem disso",
+      "files": "Evidence/25d/T05.4",
+      "processes": "Nenhum Unity Editor ativo",
+      "at": "2026-11-13T14:13:43.948107+00:00"
     }
   ]
 }
