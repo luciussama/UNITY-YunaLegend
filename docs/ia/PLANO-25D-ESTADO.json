@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-13T11:42:19.428812+00:00",
+  "updated_at": "2026-11-13T13:36:24.182181+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -251,19 +251,29 @@
         "art-nanda"
       ],
       "human_gate": false,
-      "status": "active",
-      "owner": {
-        "session": "2026-11-13-codex-t04-nanda-25c1",
-        "agent": "Codex (GPT-6.1)"
-      },
+      "status": "accepted",
+      "owner": null,
       "checkpoint": {
-        "done": "T04.1 ACEITA pelo usuario em 13/11/2026 (resposta literal 'aprovado.'): 8 poses, ciclo0,8s, hover3,5cm, flipX no material padrao; provas30/60/120 success=true,72 quadros,48 mudancas identicas,mirrorError0,4,8134MiB; Yuna estatica so escala.",
-        "next": "Aguardar pedido do usuario para iniciar T04.2 (luz/trilha/acompanhamento/expressao); T04 agregada nao aceita; T05/T06 nao iniciados nesta sessao.",
-        "validation": "manifest status=accepted/literal_response=aprovado.; review + README + estado atualizados; diarycheck/plancheck; nenhum Unity ativo.",
-        "pending": "T04.2; aceite da T04 agregada; T05/T06; devices/WebGL.",
-        "files": "Assets/Art/Illustrated25D/Nanda/Flight;Evidence/25d/T04.1;tools/make_t04_nanda_frames.py;tools/make_t04_nanda_review.py;tools/make_t04_nanda_manifest.py;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
-        "processes": "Nenhum Unity ativo",
-        "updated_at": "2026-11-13T10:36:35.721904+00:00"
+        "done": "T04.1 aprovada e T04.2 aprovada (resposta literal voo da nada aprovado. Ficou muito bom.); 30/60/120Hz com 150 quadros por camera, separacao 1,416/1,408/1,397m, mirrorError 0, fontes T04.1 byte-identicas, NandaFairyGuide intacto",
+        "next": "Fechar T04 agregada; em seguida T05.3 movel (revisao humana pendente), T05.4 e T06.1",
+        "validation": "plan_25d.py status e diary check; capturas reais 30/60/120; README/manifesto/hashes em Evidence/25d/T04.1 e T04.2",
+        "pending": "Luz sobre superficies nao demonstrada (unlit); integracao na Gameplay, camera final e dispositivos pertencem a T06/T09",
+        "files": "Evidence/25d/T04.1;Evidence/25d/T04.2;Evidence/25d/T04/README.md;Assets/Art/Illustrated25D/Nanda",
+        "processes": "Nenhum Unity Editor ativo",
+        "updated_at": "2026-11-13T13:34:54.030029+00:00"
+      },
+      "evidence": [
+        {
+          "path": "Evidence/25d/T04/README.md",
+          "sha256": "212fb3e11cdbb531f9ea5fa35f92bd33fafcea0aa62bed8c18834be4c98f42fd"
+        }
+      ],
+      "validation": "T04.1 e T04.2 aprovadas individualmente; provas 30/60/120Hz; limites de luz/integracao registrados no README",
+      "acceptance": {
+        "session": "2026-11-13-copilot-review-b29a5ec7",
+        "reference": "Revisao tecnica e humana: T04.1 e T04.2 tem aceite literal individual registrado; hashes conferidos pelo coordenador; limites de luz unlit, integracao na Gameplay, camera final e dispositivos declarados no README agregado.",
+        "at": "2026-11-13T13:34:59.022596+00:00",
+        "human_required": false
       }
     },
     {
@@ -278,17 +288,17 @@
       "human_gate": false,
       "status": "active",
       "owner": {
-        "session": "2026-11-13-codex-t052-books-b7c4",
-        "agent": "Codex (GPT-6.1)"
+        "session": "2026-11-13-copilot-t053-b29a5ec7",
+        "agent": "Copilot SDK subagent Movel"
       },
       "checkpoint": {
-        "done": "T05.1 urso e T05.2 livros aceitas pelo usuario (respostas literais 'aprovado.'), com capturas T05.2 usando o sprite ilustrado oficial e Body_Visual3D inativo apenas no harness. Pente fino: nenhuma tarefa com status blocked no plano; T04.2, T05.3, T05 agregada e T06 permanecem pendentes; T07 e gate humano; entradas planned 534/628/689 sao planos superados, nao trabalho aberto.",
-        "next": "Aguardar comando do usuario para iniciar T05.3 movel. Depois fechar T05 agregada e so entao liberar T06, que tambem depende de T04/T04.2.",
-        "validation": "Aceite T05.2 literal registrado em README/CONTRATO/proposta/manifesto; manifesto20 fontes/10 evidencias com hashes; plan/diary checks OK; docs T03/T04.1/T05 atualizados; nenhum Unity Editor ativo",
-        "pending": "T05.3 movel; T05 agregada; T04.2; T06; T07-T10; devices/WebGL; arquivos nao relacionados (AGENTS.md, slnx, IllustratedYunaProof.unity) fora do escopo",
-        "files": "Evidence/25d/T05.1;Evidence/25d/T05.2;tools/make_t05_books_manifest.py;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
-        "processes": "Nenhum Unity Editor ativo; apenas Unity Hub serve",
-        "updated_at": "2026-11-13T11:42:19.428812+00:00"
+        "done": "T05.1 urso e T05.2 livros aceitas; T05.3 movel capturado estaticamente em 6000.3.28f1 (sentinela T053_EDITMODE_INSPECTION_PASS, 1280x720, intacto/detalhe/reset/dois overlays de apoio, folha comparativa, hashes) — aguardando revisao humana",
+        "next": "Revisao humana das imagens de Evidence/25d/T05.3 (01 a 06 + review-contact-sheet); aprovada a candidata, produzir T05.4 (fundo/camadas/iluminacao), depois T05 agregada",
+        "validation": "unity-editmode-v3.log com sentinela; editmode-audit.json (1 regiao intacto, 2 abertas, pose=contato, sag 0,075 m); review-hashes.json; plan/diary checks OK",
+        "pending": "Pausa local 80ms, estralo, tropeco e retry NAO validados em runtime; integrcao/camera final pertencem a T06.2/3; T05.4 e T05 agregada pendentes",
+        "files": "Assets/Art/Illustrated25D/Environment/Furniture;Evidence/25d/T05.3;tools/t053_prepare_furniture.ps1",
+        "processes": "Nenhum Unity Editor ativo",
+        "updated_at": "2026-11-13T13:36:24.182181+00:00"
       }
     },
     {
@@ -1453,6 +1463,66 @@
       "files": "Evidence/25d/T05.1;Evidence/25d/T05.2;tools/make_t05_books_manifest.py;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
       "processes": "Nenhum Unity Editor ativo; apenas Unity Hub serve",
       "at": "2026-11-13T11:42:19.428812+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T04",
+      "session": "2026-11-13-copilot-t042-b29a5ec7",
+      "agent": "Copilot SDK subagent Nanda",
+      "reason": "Usuario autorizou rodada quatro-em-ondas; checkpoint aguarda comando; fontes e processos verificados, nenhum Unity Editor ativo; escopo exclusivo Nanda e handover explicito, sem expiracao por tempo.",
+      "from_session": "2026-11-13-codex-t04-nanda-25c1",
+      "at": "2026-11-13T12:04:59.867720+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T05",
+      "session": "2026-11-13-copilot-t053-b29a5ec7",
+      "agent": "Copilot SDK subagent Movel",
+      "reason": "Usuario autorizou rodada quatro-em-ondas; checkpoint aguarda comando; Git e processos verificados, nenhum Unity Editor ativo; escopo exclusivo movel, preservando urso/livros; handover explicito sem expiracao por tempo.",
+      "from_session": "2026-11-13-codex-t052-books-b7c4",
+      "at": "2026-11-13T12:04:59.972568+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T04",
+      "session": "2026-11-13-copilot-t042-b29a5ec7",
+      "done": "T04.1 aprovada e T04.2 aprovada (resposta literal voo da nada aprovado. Ficou muito bom.); 30/60/120Hz com 150 quadros por camera, separacao 1,416/1,408/1,397m, mirrorError 0, fontes T04.1 byte-identicas, NandaFairyGuide intacto",
+      "next": "Fechar T04 agregada; em seguida T05.3 movel (revisao humana pendente), T05.4 e T06.1",
+      "validation": "plan_25d.py status e diary check; capturas reais 30/60/120; README/manifesto/hashes em Evidence/25d/T04.1 e T04.2",
+      "pending": "Luz sobre superficies nao demonstrada (unlit); integracao na Gameplay, camera final e dispositivos pertencem a T06/T09",
+      "files": "Evidence/25d/T04.1;Evidence/25d/T04.2;Evidence/25d/T04/README.md;Assets/Art/Illustrated25D/Nanda",
+      "processes": "Nenhum Unity Editor ativo",
+      "at": "2026-11-13T13:34:54.030029+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T04",
+      "session": "2026-11-13-copilot-t042-b29a5ec7",
+      "evidence": [
+        "Evidence/25d/T04/README.md"
+      ],
+      "validation": "T04.1 e T04.2 aprovadas individualmente; provas 30/60/120Hz; limites de luz/integracao registrados no README",
+      "at": "2026-11-13T13:34:54.137118+00:00"
+    },
+    {
+      "command": "accept",
+      "task": "T04",
+      "session": "2026-11-13-copilot-review-b29a5ec7",
+      "reference": "Revisao tecnica e humana: T04.1 e T04.2 tem aceite literal individual registrado; hashes conferidos pelo coordenador; limites de luz unlit, integracao na Gameplay, camera final e dispositivos declarados no README agregado.",
+      "human_approval": false,
+      "at": "2026-11-13T13:34:59.022596+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T05",
+      "session": "2026-11-13-copilot-t053-b29a5ec7",
+      "done": "T05.1 urso e T05.2 livros aceitas; T05.3 movel capturado estaticamente em 6000.3.28f1 (sentinela T053_EDITMODE_INSPECTION_PASS, 1280x720, intacto/detalhe/reset/dois overlays de apoio, folha comparativa, hashes) — aguardando revisao humana",
+      "next": "Revisao humana das imagens de Evidence/25d/T05.3 (01 a 06 + review-contact-sheet); aprovada a candidata, produzir T05.4 (fundo/camadas/iluminacao), depois T05 agregada",
+      "validation": "unity-editmode-v3.log com sentinela; editmode-audit.json (1 regiao intacto, 2 abertas, pose=contato, sag 0,075 m); review-hashes.json; plan/diary checks OK",
+      "pending": "Pausa local 80ms, estralo, tropeco e retry NAO validados em runtime; integrcao/camera final pertencem a T06.2/3; T05.4 e T05 agregada pendentes",
+      "files": "Assets/Art/Illustrated25D/Environment/Furniture;Evidence/25d/T05.3;tools/t053_prepare_furniture.ps1",
+      "processes": "Nenhum Unity Editor ativo",
+      "at": "2026-11-13T13:36:24.182181+00:00"
     }
   ]
 }

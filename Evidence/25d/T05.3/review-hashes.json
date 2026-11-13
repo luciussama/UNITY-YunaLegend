@@ -1,0 +1,81 @@
+﻿{
+    "status":  "em_revisao",
+    "microdelivery":  "T05.3",
+    "staticUnityInspection":  true,
+    "runtimeValidated":  false,
+    "humanApproval":  false,
+    "files":  [
+                  {
+                      "path":  "Assets\\Art\\Illustrated25D\\Environment\\Furniture\\Editor.meta",
+                      "sha256":  "483733d02d65dc06dd7246e39d1b0117fcc67d8d5be459dfdead40306d20f128"
+                  },
+                  {
+                      "path":  "Assets\\Art\\Illustrated25D\\Environment\\Furniture\\furniture-body-v1.png",
+                      "sha256":  "ee88ffcc88d70107103b33abf0742e12aefd05ddd304cc3dcda797ab9f00fd7f"
+                  },
+                  {
+                      "path":  "Assets\\Art\\Illustrated25D\\Environment\\Furniture\\furniture-body-v1.png.meta",
+                      "sha256":  "58e603d9e6ac4b4d12d36d3f6c2d82ba03301cd2dcad1ca96654f967f3f4a268"
+                  },
+                  {
+                      "path":  "Assets\\Art\\Illustrated25D\\Environment\\Furniture\\furniture-top-wood-v1.png",
+                      "sha256":  "ca7c9a08f52740c936fb17ad3417ceae7bb204dcfaa9562acc73603964615941"
+                  },
+                  {
+                      "path":  "Assets\\Art\\Illustrated25D\\Environment\\Furniture\\furniture-top-wood-v1.png.meta",
+                      "sha256":  "5be6f4abfc47f08315ce7f508055808f7a3bd302eb907192f2bb1dcd945afc94"
+                  },
+                  {
+                      "path":  "Assets\\Art\\Illustrated25D\\Environment\\Furniture\\FurnitureIllustrationCandidate.cs",
+                      "sha256":  "5c541ed70da195f672b32493cac74716db60a6583e8f7ee20572ab016a5cdc3c"
+                  },
+                  {
+                      "path":  "Assets\\Art\\Illustrated25D\\Environment\\Furniture\\FurnitureIllustrationCandidate.cs.meta",
+                      "sha256":  "3d51957531b7944752c630dc0c9a1ab02c1c160b1e9764b678c6af7255548a1d"
+                  },
+                  {
+                      "path":  "Assets\\Art\\Illustrated25D\\Environment\\Furniture\\Editor\\FurnitureT053ReviewBatch.cs",
+                      "sha256":  "d0a698bbf18088d132395287320c502e125668d5b19025c8eb6cad7039774106"
+                  },
+                  {
+                      "path":  "Assets\\Art\\Illustrated25D\\Environment\\Furniture\\Editor\\FurnitureT053ReviewBatch.cs.meta",
+                      "sha256":  "bbda184f807d993d43d876c801ef72acc5132b7ff925007e798272ebeb4c6ef6"
+                  },
+                  {
+                      "path":  "Evidence\\25d\\T05.3\\01-intact-gameplay-scale.png",
+                      "sha256":  "4368c903b728185a55832e7c50fa0f1b8245f40e3a0333e5229f3b89a24772a7"
+                  },
+                  {
+                      "path":  "Evidence\\25d\\T05.3\\02-broken-gameplay-scale.png",
+                      "sha256":  "62417631f5701757d5c742858dd754f84f132fa9073e9abaaf96c4108715000a"
+                  },
+                  {
+                      "path":  "Evidence\\25d\\T05.3\\03-broken-detail.png",
+                      "sha256":  "07873a340e9c14c15e8627d018b8ee11abc635a087c20ba05f87bc38ed6d3356"
+                  },
+                  {
+                      "path":  "Evidence\\25d\\T05.3\\04-reset-detail.png",
+                      "sha256":  "4635944926bbb165e48d3e6f5b73182011d6d97359658c9c8ab7768b953fda74"
+                  },
+                  {
+                      "path":  "Evidence\\25d\\T05.3\\05-intact-support-overlay.png",
+                      "sha256":  "da0090ac524fd77b39c645103ba32e7369b681bbffe0010a9677d1ef17ab48c6"
+                  },
+                  {
+                      "path":  "Evidence\\25d\\T05.3\\06-broken-support-overlay.png",
+                      "sha256":  "707f7902f39b3814a2da1d3025408fa169ec2e442a68298214999638022b080a"
+                  },
+                  {
+                      "path":  "Evidence\\25d\\T05.3\\editmode-audit.json",
+                      "sha256":  "1a813bfba29f336d3f7f78c60817ff824214802734eb16555c2b677a7bfa2f7b"
+                  },
+                  {
+                      "path":  "Evidence\\25d\\T05.3\\review-contact-sheet.png",
+                      "sha256":  "dc7bb25c71af717f529d27d71c665350f1b92e78d358350e28e0c5a94724610a"
+                  },
+                  {
+                      "path":  "Evidence\\25d\\T05.3\\source-preview.png",
+                      "sha256":  "2ce999a4d7ca702dfe8a3146a8c9897878c78640c7ee7796fb3dd98929e7e61c"
+                  }
+              ]
+}

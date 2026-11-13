@@ -120,6 +120,7 @@ namespace YunaLegend.NandaIllustration.Editor
         {
             EditorApplication.playModeStateChanged += change =>
             {
+                if (!SessionState.GetBool(Key, false)) return;
                 if (change == PlayModeStateChange.EnteredPlayMode)
                 {
                     report = new Report

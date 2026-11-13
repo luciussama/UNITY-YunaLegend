@@ -1,0 +1,26 @@
+﻿{
+    "session":  "2026-11-13-copilot-t053-b29a5ec7",
+    "source":  "Evidence/25d/T01/furniture-v1.png",
+    "sourceSHA256":  "2926cc4b2d9aa0abf1d8330f36cb265d541b7902f0a6f253bd49840899a70797",
+    "method":  "System.Drawing crop; RGB unchanged, interior wood alpha251-255 normalized to255, rejecting alpha\u003c240; body original alpha; no generation or resizing",
+    "runtimeValidated":  false,
+    "humanReview":  "pending",
+    "files":  [
+                  {
+                      "path":  "Assets\\Art\\Illustrated25D\\Environment\\Furniture\\furniture-body-v1.png",
+                      "width":  1774,
+                      "height":  390,
+                      "minAlpha":  0,
+                      "visiblePixels":  611412,
+                      "sha256":  "ee88ffcc88d70107103b33abf0742e12aefd05ddd304cc3dcda797ab9f00fd7f"
+                  },
+                  {
+                      "path":  "Assets\\Art\\Illustrated25D\\Environment\\Furniture\\furniture-top-wood-v1.png",
+                      "width":  1510,
+                      "height":  45,
+                      "minAlpha":  255,
+                      "visiblePixels":  67950,
+                      "sha256":  "ca7c9a08f52740c936fb17ad3417ceae7bb204dcfaa9562acc73603964615941"
+                  }
+              ]
+}

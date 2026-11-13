@@ -2,12 +2,10 @@
 
 O diário de desenvolvimento (`docs/ia/diario.sqlite3`) é obrigatório para qualquer IA neste repositório.
 
-## 1. Economia de Contexto e Roteamento Agnóstico de Modelos (CRÍTICO)
-- **Leitura sob demanda:** Leia apenas os arquivos estritamente necessários à tarefa atual. Nunca leia o repositório inteiro ou arquivos de histórico (`Archive/`, `REGRAS-LEGADAS-3D.md`) sem necessidade investigativa específica.
-- **Execução Visual / Arte (Quando Autorizado ou Suportado):** Se o usuário incluir `[MODO VISUAL]` no prompt ou solicitar explicitamente geração de arte/inspeção visual (no Unity Editor, build WebGL ou referência legada), utilize os recursos nativos disponíveis no ambiente atual (geração de imagem, `computer-use`, `browser`, `chrome` ou leitura de `.png`).
-- **Fallback Seguro para Modelos Somente-Texto (ex: DeepSeek):**
-  - Na ausência de pedido visual explícito, priorize geração e validação programática via scripts Python (`Pillow`, `getbbox`) ou Unity Editor Scripts em modo texto (`-batchmode`), evitando ler binários/imagens em base64 para economizar tokens.
-  - Se uma chamada visual ou de geração de imagem falhar por limitação do modelo ativo (ex: erro HTTP 400 / modelo sem suporte multimodal), **não repita a chamada**. Registre o passo como `blocked` no diário informando o asset/cena pendente e peça ao usuário: *"O modelo atual não suporta visão/geração de imagem. Alterne para um modelo multimodal no cliente atual (ex: GPT ou Antigravity) e envie `[MODO VISUAL]` para continuar."*
+## 1. Economia de Contexto e Roteamento de Ferramentas
+- **Leitura sob demanda:** Leia apenas os arquivos estritamente necess?rios ? tarefa atual. Nunca leia o reposit?rio inteiro ou arquivos de hist?rico (`Archive/`, `REGRAS-LEGADAS-3D.md`) sem necessidade investigativa espec?fica.
+- **Execu??o direta:** Utilize livremente qualquer ferramenta dispon?vel no ambiente atual (gera??o de imagem, `computer-use`, `browser`, `chrome`, leitura de `.png` ou navega??o na URL legada) sempre que a tarefa exigir. Nunca pe?a ao usu?rio para trocar de modelo preventivamente.
+- **Otimiza??o program?tica:** Para fatiar, alinhar spritesheets ou checar dimens?es/alpha (`getbbox`), prefira scripts Python (`Pillow`) ou Unity Editor Scripts em modo texto (`-batchmode`) para economizar tokens.
 
 ## 2. Skills e Estado Canônico (Carregamento Seletivo)
 1. Consulte primeiro [ESTADO-ATUAL-25D.md](docs/ia/ESTADO-ATUAL-25D.md) e rode `python tools\plan_25d.py status`.

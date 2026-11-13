@@ -42,3 +42,8 @@ docs/ia/.plano25d-*.tmp
 
 # Preserve historical evidence logs relocated with their manifests.
 !Archive/pre-25d-2026-11-12/**/*.log
+
+# Capturas brutas por quadro da T04.2 (regeneraveis pelos comandos do README)
+Evidence/25d/T04.2/capture-*/
+Evidence/25d/T04.2/attempt-01-lag/
+Evidence/25d/T04.2/attempt-02-*/

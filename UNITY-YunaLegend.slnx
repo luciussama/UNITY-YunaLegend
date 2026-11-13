@@ -2,7 +2,7 @@
   <Project Path="YunaLegend.Runtime.csproj" />
   <Project Path="YunaLegend.Editor.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="YunaLegend.Tests.csproj" />
   <Project Path="YunaLegend.RoutePhysics.Tests.csproj" />
-  <Project Path="Assembly-CSharp-Editor.csproj" />
 </Solution>

@@ -30,6 +30,13 @@ Detalhe da v1 (histórico): [corrida com oito poses pintadas](../../Evidence/25d
 
 **T04.1 — aprovada em 13/11/2026:** [Nanda ilustrada em voo](../../Evidence/25d/T04.1/README.md), [contrato](../../Evidence/25d/T04.1/CONTRATO.md) e [manifesto](../../Evidence/25d/T04.1/manifest.json). Oito poses de asas (`512×592`, atlas `2048×1184`, PPU 880, pivô `0,42061`) derivadas da prancha aprovada da T01 por warp vertical mascarado; a neutra altera 0 pixels visíveis. `NandaFlightIllustration` anima só o visual (ciclo 0,8 s, hover 3,5 cm/2,4 s, `flipX` por direção, material padrão de sprite); navegação, luz e trilha continuam com o guia. Provas 30/60/120 Hz com 72 quadros por câmera, oito poses, 48 mudanças idênticas, `mirrorError=0` e 0 violações de orientação; a Yuna da fixture é apenas escala estática. Atlas residente 4,8134 MiB CompressedHQ (limite 16). Gameplay, `NandaFairyGuide.cs` e PNG aprovado inalterados. **T04.1 aceita pelo usuário em 13/11/2026** (resposta literal "aprovado.", registrada em `Evidence/25d/T04.1/reviews/T04.1-revisao.md`); T04.2, T05.3 e T06 continuam pendentes.
 
+## Bloco de aprovações — 13/11/2026 (sessão `2026-11-13-copilot-visual-parallel-b29a5ec7`)
+
+- **T04.2 aprovada e T04 agregada aceita.** Resposta literal `voo da nada aprovado. Ficou muito bom.` em [revisão da T04.2](../../Evidence/25d/T04.2/reviews/T04.2-revisao.md); agregado em [T04](../../Evidence/25d/T04/README.md). Provas 30/60/120 Hz, 150 quadros/câmera, separação 1,416/1,408/1,397 m, `mirrorError=0`. Limite aberto: luz azul sobre superfícies não demonstrada (sprite unlit) e integração na fase pertence à T06.
+- **T05.3 móvel: captura estática concluída, revisão humana pendente.** Seis PNGs 1280×720 (intacto, quebrado, detalhe, reset, dois overlays de apoio) e folha comparativa em [T05.3](../../Evidence/25d/T05.3/README.md); sentinela `T053_EDITMODE_INSPECTION_PASS`, `sag` 0,075 m. **Pausa local de 80 ms, estralo, tropeço e retry não foram validados em runtime.**
+- **Planos antigos encerrados:** 72, 92, 97, 152, 164, 168, 178, 185, 534, 628, 689 e 787 receberam resultado na sessão de origem; nenhum plano `planned` sem resultado permanece.
+- **`AGENTS.md` reparado:** o arquivo em disco estava truncado no meio da seção 5 e havia perdido a seção 6; reconstruído a partir do HEAD preservando apenas a edição da seção 1. Nenhuma regra de diário/legado foi descartada.
+
 ## Retomada T05 — 13/11/2026
 
 Atualização da sessão `2026-11-13-codex-t052-books-b7c4` (Codex GPT-6.1), que assumiu o hand-off persistido pelo Copilot na entrada 728. A transferência formal da reserva T05 está registrada na entrada 730; o histórico das tentativas 717–727 permanece preservado no diário.
@@ -45,7 +52,7 @@ Atualização da sessão `2026-11-13-codex-t052-books-b7c4` (Codex GPT-6.1), que
 **Histórico do ajuste 595:** fechamento do clipe tratado na T03.2 v2; aprovação e reconciliação posterior registradas em 607/625. O passo corporal continua como limite aceito, sem nova correção da corrida nesta T03.3.
 
 1. T03.3 aprovada. T03.4 v2 aprovada individualmente pelo usuário; pausa local de 80 ms e recuperação de 280 ms verificadas na fixture.
-2. **T03, T04.1, T05.1 e T05.2 aceitas.** Próximo: T04.2 (luz/trilha subordinadas à personagem, acompanhamento e expressão), T05.3 (móvel) e depois a T05 agregada; a T04 agregada só é aceita depois da T04.2 e a T05 agregada depois do móvel. Podem ocorrer em paralelo apenas em escopos disjuntos; cada microentrega visual exige revisão humana antes da dependente.
+2. **T03, T04, T05.1 e T05.2 aceitas.** Próximo: revisão humana da candidata T05.3 (móvel estático), depois T05.4 (fundo/camadas/iluminação) e então a T05 agregada; a T06 só libera com T04 **e** T05 aceitas. Podem ocorrer em paralelo apenas em escopos disjuntos; cada microentrega visual exige revisão humana antes da dependente.
 3. T06 só após T03+T04+T05: integrar exclusivamente o piloto urso → livros → móvel, com câmera final, run/jump/land/stumble/retry e UI, preservando física.
 4. T07 exige build/vídeo e aprovação explícita do piloto em movimento antes de expandir a fase.
 
