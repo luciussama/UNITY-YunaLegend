@@ -41,3 +41,8 @@ Nada aqui está importado. Antes de montar o rig, é preciso escolher:
 - `source/layer1-mid.png` — SHA-256 `2093e587…3fad`
 - `source/layer2-near.png` — SHA-256 `1a60e8d8…2065`
 - `manifest.json` — medidas, hashes, desvios e método de detecção da linha de piso
+
+
+## Versao 2 em preparacao (13/11/2026)
+
+O veredito humano pediu arte mais larga em escala domestica. Especificacao em [PROMPTS-CAMADAS-V2.md](PROMPTS-CAMADAS-V2.md): tres paineis 1920x1080 a 144 px/m formando 40 m, rodape 1,10 m, janela 2,40 x 1,40 m. `RoomBackgroundT054.InstallPanels` ja suporta os tres paineis.

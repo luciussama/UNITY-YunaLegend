@@ -52,6 +52,10 @@ Nenhum enquadramento expõe borda da arte.
 3. **Vidro/moldura lisos** na pintura, como já registrado na avaliação das camadas.
 4. **Pausa local de 80 ms, estralo, tropeço e retry** continuam sem prova de runtime — pertencem à T06.2/3.
 
+## Proximo passo decidido em 13/11/2026
+
+O usuario pediu **arte mais larga em escala domestica**. A especificacao dos tres paineis (1920x1080 a 144 px/m, rodape 1,10 m, janela 2,40 x 1,40 m) esta em [PROMPTS-CAMADAS-V2.md](PROMPTS-CAMADAS-V2.md). O componente ja aceita `InstallPanels` com varios paineis continuos, entao a integracao nao exige reescrita.
+
 ## Como reproduzir
 
 ```powershell
