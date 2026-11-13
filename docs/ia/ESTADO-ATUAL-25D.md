@@ -87,6 +87,11 @@ na sequência, o `RoomCompositionRuntimeInstaller`/setup e o objeto
 `T054_Composicao_Runtime` nas duas cenas (script `RetireLegacyComposition`).
 `YunaIllustrationInstaller` permanece: o acompanhamento depende do resolvedor que
 ele cria. As capturas T06.1 v1–v3 ficam como histórico, não como caminho vigente.
+**Encerramento (13/11/2026):** o usuário aprovou o encerramento deste trabalho
+(“pode aprovar o que vc fez e marcar no diário como concluído”). A **T06 foi
+liberada** no coordenador (sem dono). Continua pendente regravar a build oficial do
+acompanhamento — exige Unity fechado — e a revisão visual da T06.1 v3, que
+condiciona T06.2/T06.3 e a T07.
 
 **T06.1 v3 (13/11/2026, sessão `2026-11-13-dsh-pilot-t061v2-8a1f`):**
 `RoomCompositionRuntimeInstaller` instala em runtime a composição aprovada completa

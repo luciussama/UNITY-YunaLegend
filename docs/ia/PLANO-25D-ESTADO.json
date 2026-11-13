@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-13T19:50:34.246478+00:00",
+  "updated_at": "2026-11-13T20:33:48.876792+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -326,19 +326,16 @@
         "art-environment"
       ],
       "human_gate": false,
-      "status": "active",
-      "owner": {
-        "session": "2026-11-13-dsh-pilot-t061v2-8a1f",
-        "agent": "DeepSeek (deepseek-flash)"
-      },
+      "status": "pending",
+      "owner": null,
       "checkpoint": {
-        "done": "Build v6 ilustrada aprovada pelo usuario: perfeito. Aprovado.; menu19para3; provas30/60/120 v6;saida posterior regenerada passou smoke60;diario/evidencias/fontes preparados paraGit",
-        "next": "T06.3: nova build+video continuo de falha/retry durante evento movel e segunda travessia; roteiro em docs/ia/PROXIMO-ENTREGAVEL.md; implementacao ainda nao iniciada",
-        "validation": "v6 3taxas success/errors0;smoke atual60 success/errors0;compile menu exit0 e UI3itens;18diffsEditor+IDs locais cena equivalentes;manifesto aprovado preservado",
-        "pending": "Prova retry durante pausa/tropeco e segunda tentativa/video;encerramento T06/T07;toque/aparelhos;audio por escuta;sem expansao",
-        "files": "docs/ia/PROXIMO-ENTREGAVEL.md;docs/ia/ESTADO-ATUAL-25D.md;Evidence/25d/T06-acompanhamento;Evidence/25d/menu-cleanup;docs/ia/diario.sqlite3",
-        "processes": "Editor do usuario preservado;nenhum Unity iniciado nesta consolidacao;player de smoke encerrado automaticamente;Build/ e clone tecnico locais",
-        "updated_at": "2026-11-13T19:45:32.905943+00:00"
+        "done": "Migracao para o acompanhamento oficial do Codex concluida e aprovada pelo usuario: composicao duplicada removida (RoomCompositionRuntimeInstaller/Setup e objeto T054_Composicao_Runtime nas duas cenas), ferramentas proprias retiradas (WindowsPilotBuild, YunaT061TraversalCapture, make_t061_review) e build propria apagada; YunaIllustrationInstaller mantido por ser dependencia do acompanhamento; colisao T053 corrigida antes da retirada",
+        "next": "Regravar a build oficial do acompanhamento (menu YunaLegend > Gerar build Windows de acompanhamento ou batch com Unity fechado) e seguir T06.2 (movel com quebra/80ms/tropeco) e T06.3 (retry); revisao visual da T06.1 v3 continua pendente",
+        "validation": "agent_registry assunto t06.1/migracao-acompanhamento finalizado/concluido; cenas sem o objeto e sem referencias fileID pendentes, header YAML e SceneRoots intactos; commits dbf00cb, d987e14 publicados; nenhum teste Unity novo (Editor aberto, lock)",
+        "pending": "Regravar build oficial; revisao humana da T06.1 v3; T06.2/T06.3; T07",
+        "files": "Assets/Scenes/DarkRoom_Gameplay.unity;Assets/Scenes/DarkRoom_IllustratedPreview.unity;Assets/Art/Illustrated25D/Environment/Room;Evidence/25d/T06.1;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/diario.sqlite3",
+        "processes": "Unity Editor do usuario aberto desde 17:26 (lock); nenhum batch iniciado",
+        "updated_at": "2026-11-13T20:33:48.782554+00:00"
       }
     },
     {
@@ -1861,6 +1858,25 @@
       "session": "2026-11-13-dsh-pilot-t061v2-8a1f",
       "agent": "DeepSeek (deepseek-flash)",
       "at": "2026-11-13T19:50:34.246478+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T06",
+      "session": "2026-11-13-dsh-pilot-t061v2-8a1f",
+      "done": "Migracao para o acompanhamento oficial do Codex concluida e aprovada pelo usuario: composicao duplicada removida (RoomCompositionRuntimeInstaller/Setup e objeto T054_Composicao_Runtime nas duas cenas), ferramentas proprias retiradas (WindowsPilotBuild, YunaT061TraversalCapture, make_t061_review) e build propria apagada; YunaIllustrationInstaller mantido por ser dependencia do acompanhamento; colisao T053 corrigida antes da retirada",
+      "next": "Regravar a build oficial do acompanhamento (menu YunaLegend > Gerar build Windows de acompanhamento ou batch com Unity fechado) e seguir T06.2 (movel com quebra/80ms/tropeco) e T06.3 (retry); revisao visual da T06.1 v3 continua pendente",
+      "validation": "agent_registry assunto t06.1/migracao-acompanhamento finalizado/concluido; cenas sem o objeto e sem referencias fileID pendentes, header YAML e SceneRoots intactos; commits dbf00cb, d987e14 publicados; nenhum teste Unity novo (Editor aberto, lock)",
+      "pending": "Regravar build oficial; revisao humana da T06.1 v3; T06.2/T06.3; T07",
+      "files": "Assets/Scenes/DarkRoom_Gameplay.unity;Assets/Scenes/DarkRoom_IllustratedPreview.unity;Assets/Art/Illustrated25D/Environment/Room;Evidence/25d/T06.1;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/diario.sqlite3",
+      "processes": "Unity Editor do usuario aberto desde 17:26 (lock); nenhum batch iniciado",
+      "at": "2026-11-13T20:33:48.782554+00:00"
+    },
+    {
+      "command": "release",
+      "task": "T06",
+      "session": "2026-11-13-dsh-pilot-t061v2-8a1f",
+      "reason": "Trabalho encerrado por decisao do usuario ('pode aprovar o que vc fez e marcar no diario como concluido'): migracao para o acompanhamento oficial concluida e registrada. T06.1 v3 segue em revisao humana; T06.2/T06.3 dependem dessa revisao e de rebuild da build oficial, que exige Unity fechado.",
+      "at": "2026-11-13T20:33:48.876792+00:00"
     }
   ]
 }
