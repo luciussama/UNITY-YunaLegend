@@ -1,4 +1,5 @@
 using UnityEngine;
+using YunaLegend.DarkRoom;
 using YunaLegend.Illustrated25D;
 
 namespace YunaLegend.YunaIllustration
@@ -7,11 +8,17 @@ namespace YunaLegend.YunaIllustration
     public sealed class YunaIdleIllustration : MonoBehaviour
     {
         public PaintedMeshDeformer skin;
+        public Yuna25DPlayerController player;
         public float period = 4f;
         public bool previewClock = true;
         public float Blink { get; private set; }
         float clock;
         MaterialPropertyBlock block;
+
+        void Awake()
+        {
+            if (player == null) player = GetComponentInParent<Yuna25DPlayerController>();
+        }
 
         void LateUpdate()
         {
@@ -30,6 +37,11 @@ namespace YunaLegend.YunaIllustration
             skin.breathe = (1f - Mathf.Cos(phase)) * .009f;
             skin.bodyCompression = skin.sideBandSwing = 0f;
             skin.squashX = skin.squashY = 1f;
+            if (player != null)
+            {
+                skin.flipX = player.RunDirection < 0f;
+                skin.transform.localRotation = Quaternion.AngleAxis(-player.transform.eulerAngles.y, Vector3.up);
+            }
             skin.Refresh();
             // 40 ms close, 80 ms closed, 60 ms open. Four-second seamless cycle.
             Blink = t < 2.24f || t >= 2.42f ? 0f

@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-13T00:33:13.627618+00:00",
+  "updated_at": "2026-11-13T10:36:35.721904+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -188,19 +188,57 @@
         "art-yuna"
       ],
       "human_gate": false,
-      "status": "active",
-      "owner": {
-        "session": "2026-11-12-codex-stumble-t034-a71c",
-        "agent": "Codex (GPT-6)"
-      },
+      "status": "accepted",
+      "owner": null,
       "checkpoint": {
-        "done": "T03.1/T03.2/T03.3/T03.4 v2 aprovadas individualmente; usuario: Gostei. pode aprovar. Registro em Evidence/25d/T03.4/reviews/T03.4-v2-aprovacao.md; assets/clipes/provas preservados",
-        "next": "Revisar conjunto/transicoes e otimizar/verificar orcamento residente de Yuna antes de fechar T03; nao integrar movel/piloto antecipadamente",
-        "validation": "Manifesto v2 integralmente conferido antes de mudancas documentais; hashes dos clipes/fontes intactos; provas existentes30/60/120Hz80ms/280ms/reset preservadas; nenhum Unity novo",
-        "pending": "T03 agregado continua ativo: conjunto/transicoes/orcamento32MiB pendentes; integracao movel/piloto/retryGameplay e dispositivos posteriores; semcommit/push",
-        "files": "Evidence/25d/T03.4/reviews/T03.4-v2-aprovacao.md;Evidence/25d/T03.4/reviews/T03.4-v2.md;Evidence/25d/T03.4/README.md;Evidence/25d/T03.4/CONTRATO.md;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
-        "processes": "Nenhum processo iniciado neste registro documental",
-        "updated_at": "2026-11-13T00:33:13.627618+00:00"
+        "done": "Terceira candidata T03 aprovada pelo usuario com resposta literal 'aprovado. Qual e o proximo passo?'. Shader Stumble consome UnityFlipSprite/unity_SpriteProps; harness prova espelhamento renderizado e orientacao nos dois tropecos; rotulos6,20s/11,23s; provas30/60/120 success=true,420 quadros,0 conflitos; baseline falha apenas orcamento; PSNR58,3305/43,5257; attempt-04 preservada.",
+        "next": "Aceitar T03 no coordenador e iniciar T04/T05 em escopos disjuntos; cada microentrega visual aguarda revisao humana. T06 somente depois de T03+T04+T05.",
+        "validation": "Unity30/60/120 exit0 success=true; baseline30 exit1 apenas budget; stumbleFlipHonored=true left/right=true; manifesto99 hashes; plan/diary checks OK; Idle_Painted.mat intacto",
+        "pending": "T04 Nanda; T05 ambiente/plataformas; T06 integracao do piloto; T07 aprovacao humana em movimento; sem commit/push",
+        "files": "Evidence/25d/T03/README.md;Evidence/25d/T03/CONTRATO.md;Evidence/25d/T03/manifest.json;Evidence/25d/T03/reviews/T03-conjunto.md;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
+        "processes": "Nenhum Unity ativo",
+        "updated_at": "2026-11-13T09:43:15.945245+00:00"
+      },
+      "evidence": [
+        {
+          "path": "Evidence/25d/T03/README.md",
+          "sha256": "020f1a30b315ed6ba086a70a1ee7c00e09e3c73b3df0a102cf5bee402ada5b3f"
+        },
+        {
+          "path": "Evidence/25d/T03/CONTRATO.md",
+          "sha256": "d269ac5c2184ff8fe6379484c7954a5382b42fe4772a5c90ef38121d1ecd8c00"
+        },
+        {
+          "path": "Evidence/25d/T03/manifest.json",
+          "sha256": "f6aeae50c01ff6e67cd271335b7a6d20ad32355a43f2a561636d2d97ec758cc1"
+        },
+        {
+          "path": "Evidence/25d/T03/reviews/T03-conjunto.md",
+          "sha256": "4dcefdc0a16897737578a8a7343f90c0dc5cede41a7fca92badc1435b861ab99"
+        },
+        {
+          "path": "Evidence/25d/T03/final-30/joint-proof.json",
+          "sha256": "309c9df09eaa396709fd04d5efd47c315a02236fa41a3904005d731c1d502586"
+        },
+        {
+          "path": "Evidence/25d/T03/final-60/joint-proof.json",
+          "sha256": "b82bd6dc04fe652048152029a3256df617e07fec52f23e1d3d84f8c9e6c6932c"
+        },
+        {
+          "path": "Evidence/25d/T03/final-120/joint-proof.json",
+          "sha256": "dfe8ced056de45e1c8c10347ea6fefd067fde0de331e6f2fb1cf92cb663e2469"
+        },
+        {
+          "path": "Evidence/25d/T03/baseline-30/joint-proof.json",
+          "sha256": "b0d4fa366f3a02bd1634238c1c53a9d28b806a3c8d4a917ea93ce975275b0493"
+        }
+      ],
+      "validation": "30/60/120 success=true,420 quadros,0 conflitos,fonte1; baseline success=false apenas budget61,0407 vs16,6389MiB; stumbleFlipHonored=true e sawStumbleFacingRight/Left=true; PSNR58,3305/43,5257dB; aceite literal do usuario registrado na revisao",
+      "acceptance": {
+        "session": "2026-11-13-codex-stumble-flipfix-9f4a",
+        "reference": "Resposta literal do usuario: 'aprovado. Qual e o proximo passo?' em Evidence/25d/T03/reviews/T03-conjunto.md",
+        "at": "2026-11-13T09:43:22.292526+00:00",
+        "human_required": false
       }
     },
     {
@@ -213,9 +251,20 @@
         "art-nanda"
       ],
       "human_gate": false,
-      "status": "pending",
-      "owner": null,
-      "checkpoint": null
+      "status": "active",
+      "owner": {
+        "session": "2026-11-13-codex-t04-nanda-25c1",
+        "agent": "Codex (GPT-6.1)"
+      },
+      "checkpoint": {
+        "done": "T04.1 ACEITA pelo usuario em 13/11/2026 (resposta literal 'aprovado.'): 8 poses, ciclo0,8s, hover3,5cm, flipX no material padrao; provas30/60/120 success=true,72 quadros,48 mudancas identicas,mirrorError0,4,8134MiB; Yuna estatica so escala.",
+        "next": "Aguardar pedido do usuario para iniciar T04.2 (luz/trilha/acompanhamento/expressao); T04 agregada nao aceita; T05/T06 nao iniciados nesta sessao.",
+        "validation": "manifest status=accepted/literal_response=aprovado.; review + README + estado atualizados; diarycheck/plancheck; nenhum Unity ativo.",
+        "pending": "T04.2; aceite da T04 agregada; T05/T06; devices/WebGL.",
+        "files": "Assets/Art/Illustrated25D/Nanda/Flight;Evidence/25d/T04.1;tools/make_t04_nanda_frames.py;tools/make_t04_nanda_review.py;tools/make_t04_nanda_manifest.py;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
+        "processes": "Nenhum Unity ativo",
+        "updated_at": "2026-11-13T10:36:35.721904+00:00"
+      }
     },
     {
       "id": "T05",
@@ -227,9 +276,20 @@
         "art-environment"
       ],
       "human_gate": false,
-      "status": "pending",
-      "owner": null,
-      "checkpoint": null
+      "status": "active",
+      "owner": {
+        "session": "2026-11-13-codex-t05-urso-6d2e",
+        "agent": "Codex (GPT-6.1)"
+      },
+      "checkpoint": {
+        "done": "T05.1 do urso aprovada pelo usuario com resposta literal 'aprovado.'. Revisao, README e manifesto marcam aceite exclusivo da microentrega; manifesto com8 evidencias/15 fontes e hashes conferidos. Apoio curvo, camera final e detalhe validados anteriormente.",
+        "next": "Aguardar o proximo comando para iniciar T05.2 livros: definir a superficie real de apoio da pilha inclinada antes de gerar/integrar a arte, validar contato na camera final e parar para revisao humana. Nao iniciar movel antes do aceite dos livros.",
+        "validation": "Aceite humano literal 'aprovado.' registrado em Evidence/25d/T05.1/reviews/T05.1-urso-proposta.md; manifestoHASHES_OK8/15;T05 agregada permanece pendente",
+        "pending": "T05.2 livros; T05.3 movel; movimento/pouso; T05 agregada e T06; sem commit/push",
+        "files": "Evidence/25d/T05.1/README.md;Evidence/25d/T05.1/reviews/T05.1-urso-proposta.md;Evidence/25d/T05.1/manifest.json;docs/ia/diario.sqlite3",
+        "processes": "Nenhum Unity ativo",
+        "updated_at": "2026-11-13T10:35:50.803537+00:00"
+      }
     },
     {
       "id": "T06",
@@ -1183,6 +1243,171 @@
       "files": "Evidence/25d/T03.4/reviews/T03.4-v2-aprovacao.md;Evidence/25d/T03.4/reviews/T03.4-v2.md;Evidence/25d/T03.4/README.md;Evidence/25d/T03.4/CONTRATO.md;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
       "processes": "Nenhum processo iniciado neste registro documental",
       "at": "2026-11-13T00:33:13.627618+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T03",
+      "session": "2026-11-12-codex-t03-joint-b1f7",
+      "agent": "Codex (GPT-6)",
+      "reason": "Usuario solicitou executar os proximos passos do T03 nesta sessao. T03.4 v2 aprovada e commitada; HEAD 7988a0a, sem Editor Unity ativo observado, AGENTS.md e slnx permanecem alteracoes locais nao relacionadas. Transferencia para criar revisao conjunta e medir/otimizar orcamento, sem integrar movel/piloto.",
+      "from_session": "2026-11-12-codex-stumble-t034-a71c",
+      "at": "2026-11-13T01:34:15.889368+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T03",
+      "session": "2026-11-12-codex-t03-joint-b1f7",
+      "done": "T03 conjunta candidata: resolvedor prioridade Stumble>Jump>Run>Idle, 0 conflitos pos-resolve em30/60/120Hz; orcamento HQ15.3264MiB vs baseline61.2282MiB; comparacao840 renders PSNR min58.2532/43.5136dB alpha0; cena/sprites/metas/docs/manifest sincronizados",
+      "next": "Revisao humana conjunta de Evidence/25d/T03/review e README; registrar resposta literal em reviews/T03-conjunto.md; se aprovado, aceitar T03 e so entao liberar T04/T05; nao integrar movel/piloto",
+      "validation": "3 runs finais success=true 420 quadros; baseline success=false apenas por orcamento; samples149-151/299-301 fonte unica; manifesto79 hashes; padding/alpha e copias runtime verificados; projeto principal compila exit0; semalterar fisica/controlador/Gameplay/PNGs",
+      "pending": "Aceite humano T03; integracao movel/piloto/retryGameplay; cenario/plataformas T05; dispositivos/GPU/WebGL; semcommit/push",
+      "files": "Evidence/25d/T03/README.md;Evidence/25d/T03/CONTRATO.md;Evidence/25d/T03/manifest.json;Evidence/25d/T03/reviews/T03-conjunto.md;Assets/Art/Illustrated25D/Yuna/Joint;docs/ia/ESTADO-ATUAL-25D.md",
+      "processes": "Unity batches finais30/60/120 e baseline30 encerrados; verificacao principal exit0; nenhum Editor ativo",
+      "at": "2026-11-13T01:57:58.223514+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T03",
+      "session": "2026-11-12-codex-t03-joint-b1f7",
+      "done": "Revisao humana encontrou Idle final invisivel; causa era rotacao Y do root nao compensada no mesh Idle; corrigido com orientacao/flip e prova sawIdleFacingCamera; provas finais30/60/120 refeitas; orcamento16,6389MiB vs61,0407; PSNR58,2913/43,5257; candidata anterior preservada",
+      "next": "Apresentar segunda candidata T03 e registrar resposta literal em Evidence/25d/T03/reviews/T03-conjunto.md; se aprovada aceitar T03 e so entao liberar T04/T05; nao integrar movel/piloto",
+      "validation": "3 provas success=true 420 quadros; sawIdleFacingCamera=true;0 conflitos; fonte maxima1; quadro405/13.5s visivel; baseline falha apenas orcamento; manifesto89 hashes; plan/diary checks OK; semcommit/push",
+      "pending": "Aceite humano T03; integracao movel/piloto/retryGameplay; cenario/plataformas T05; dispositivos/GPU/WebGL",
+      "files": "Assets/Art/Illustrated25D/Yuna/Idle/YunaIdleIllustration.cs;Assets/Art/Illustrated25D/Yuna/Joint/Editor/YunaT03JointReviewCapture.cs;Evidence/25d/T03;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/diario.sqlite3",
+      "processes": "Unity batches60/120/baseline30 encerrados exit0/1 esperado; diagnostico30 encerrado; nenhum Editor ativo",
+      "at": "2026-11-13T02:28:12.824915+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T03",
+      "session": "2026-11-13-codex-stumble-flipfix-9f4a",
+      "agent": "Codex (GPT-6.1)",
+      "reason": "Usuario pediu corrigir o defeito de orientacao do tropeco esquerdo apontado na revisao: shader custom ignora flipX. Transferencia para corrigir shader/harness/rotulos e refazer as provas da T03, sem aceitar T03.",
+      "from_session": "2026-11-12-codex-t03-joint-b1f7",
+      "at": "2026-11-13T09:21:37.860020+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T03",
+      "session": "2026-11-13-codex-stumble-flipfix-9f4a",
+      "done": "Terceira candidata T03: shader Stumble passou a consumir UnityFlipSprite/unity_SpriteProps; harness exige stumbleFlipHonored e orientacao dos dois tropecos; rotulos corrigidos para6,20s/11,23s. Provas30/60/120 success=true,420 quadros,0 conflitos,fonte maxima1; baseline falha apenas orcamento61,0407MiB vs16,6389MiB; PSNR58,3305/43,5257dB; attempt-04 preservada com quadro antigo.",
+      "next": "Apresentar a terceira candidata T03 para revisao humana; registrar resposta literal em Evidence/25d/T03/reviews/T03-conjunto.md; nao aceitar T03 sem resposta; nao iniciar T04/T05.",
+      "validation": "Unity30/60/120 exit0 success=true; baseline30 exit1 apenas budget; stumbleFlipHonored=true mirrorError25/asymmetry8052802; sawStumbleFacingRight/Left=true; manifesto97 hashes; plan/diary checks pendentes nesta entrada",
+      "pending": "Aceite humano da T03; integracao do piloto/retry; cenario/plataformas T05; dispositivos/GPU/WebGL; sem commit/push",
+      "files": "Assets/Art/Illustrated25D/Yuna/Stumble/StumblePainted.shader;Assets/Art/Illustrated25D/Yuna/Joint/Editor/YunaT03JointReviewCapture.cs;tools/compare_t03_compression.py;tools/make_t03_joint_manifest.py;tools/make_t03_joint_review.py;Evidence/25d/T03;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
+      "processes": "Batches30/60/120 e baseline30 encerrados; nenhum Unity ativo",
+      "at": "2026-11-13T09:32:43.253572+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T03",
+      "session": "2026-11-13-codex-stumble-flipfix-9f4a",
+      "done": "Terceira candidata T03 pronta: StumblePainted.shader consome UnityFlipSprite/unity_SpriteProps; harness prova espelhamento renderizado (mirrorError25/asymmetry8052802) e orientacao nos dois tropecos; rotulos6,20s/11,23s; Idle usa copia runtime do material sem alterar Idle_Painted.mat; provas30/60/120 success=true,420 quadros,0 conflitos; baseline falha apenas orcamento; PSNR58,3305/43,5257; attempt-04 preservada.",
+      "next": "Apresentar a terceira candidata T03 para revisao humana; registrar resposta literal em Evidence/25d/T03/reviews/T03-conjunto.md; nao aceitar T03 sem resposta; nao iniciar T04/T05.",
+      "validation": "Unity30/60/120 exit0 success=true; baseline30 exit1 apenas budget; stumbleFlipHonored=true left/right=true; manifesto99 hashes; plancheckOK; diarycheckOK/FK0; gitdiffcheckOK; Idle_Painted.mat restaurado ao HEAD",
+      "pending": "Aceite humano da T03; integracao do piloto/retry; cenario/plataformas T05; dispositivos/GPU/WebGL; sem commit/push",
+      "files": "Assets/Art/Illustrated25D/Yuna/Stumble/StumblePainted.shader;Assets/Art/Illustrated25D/Yuna/Joint/Editor/YunaT03JointReviewCapture.cs;tools/compare_t03_compression.py;tools/make_t03_joint_manifest.py;tools/make_t03_joint_review.py;Evidence/25d/T03;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
+      "processes": "Batches30/60/120 e baseline30 encerrados; nenhum Unity ativo",
+      "at": "2026-11-13T09:37:27.639223+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T03",
+      "session": "2026-11-13-codex-stumble-flipfix-9f4a",
+      "done": "Terceira candidata T03 aprovada pelo usuario com resposta literal 'aprovado. Qual e o proximo passo?'. Shader Stumble consome UnityFlipSprite/unity_SpriteProps; harness prova espelhamento renderizado e orientacao nos dois tropecos; rotulos6,20s/11,23s; provas30/60/120 success=true,420 quadros,0 conflitos; baseline falha apenas orcamento; PSNR58,3305/43,5257; attempt-04 preservada.",
+      "next": "Aceitar T03 no coordenador e iniciar T04/T05 em escopos disjuntos; cada microentrega visual aguarda revisao humana. T06 somente depois de T03+T04+T05.",
+      "validation": "Unity30/60/120 exit0 success=true; baseline30 exit1 apenas budget; stumbleFlipHonored=true left/right=true; manifesto99 hashes; plan/diary checks OK; Idle_Painted.mat intacto",
+      "pending": "T04 Nanda; T05 ambiente/plataformas; T06 integracao do piloto; T07 aprovacao humana em movimento; sem commit/push",
+      "files": "Evidence/25d/T03/README.md;Evidence/25d/T03/CONTRATO.md;Evidence/25d/T03/manifest.json;Evidence/25d/T03/reviews/T03-conjunto.md;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
+      "processes": "Nenhum Unity ativo",
+      "at": "2026-11-13T09:43:15.945245+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T03",
+      "session": "2026-11-13-codex-stumble-flipfix-9f4a",
+      "evidence": [
+        "Evidence/25d/T03/README.md",
+        "Evidence/25d/T03/CONTRATO.md",
+        "Evidence/25d/T03/manifest.json",
+        "Evidence/25d/T03/reviews/T03-conjunto.md",
+        "Evidence/25d/T03/final-30/joint-proof.json",
+        "Evidence/25d/T03/final-60/joint-proof.json",
+        "Evidence/25d/T03/final-120/joint-proof.json",
+        "Evidence/25d/T03/baseline-30/joint-proof.json"
+      ],
+      "validation": "30/60/120 success=true,420 quadros,0 conflitos,fonte1; baseline success=false apenas budget61,0407 vs16,6389MiB; stumbleFlipHonored=true e sawStumbleFacingRight/Left=true; PSNR58,3305/43,5257dB; aceite literal do usuario registrado na revisao",
+      "at": "2026-11-13T09:43:19.437095+00:00"
+    },
+    {
+      "command": "accept",
+      "task": "T03",
+      "session": "2026-11-13-codex-stumble-flipfix-9f4a",
+      "reference": "Resposta literal do usuario: 'aprovado. Qual e o proximo passo?' em Evidence/25d/T03/reviews/T03-conjunto.md",
+      "human_approval": true,
+      "at": "2026-11-13T09:43:22.292526+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T04",
+      "session": "2026-11-13-codex-t04-nanda-25c1",
+      "agent": "Codex (GPT-6.1)",
+      "at": "2026-11-13T09:45:53.998515+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T05",
+      "session": "2026-11-13-codex-t05-urso-6d2e",
+      "agent": "Codex (GPT-6.1)",
+      "at": "2026-11-13T09:51:19.197810+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T05",
+      "session": "2026-11-13-codex-t05-urso-6d2e",
+      "done": "T05.1 do urso em proposta: prancha aprovada integrada sem nova arte; coroa curva medida antes da arte fisica, perfil de 360 amostras, um MeshCollider nao convexo com2872 vertices, malha visual em z=0 e legado 3D preservado inativo. Camera final mostra Yuna sobre a coroa; detalhe preserva pintura/silueta. README, revisao proposta e manifesto8 evidencias/15 fontes gerados.",
+      "next": "Aguardar revisao humana de Evidence/25d/T05.1/reviews/T05.1-urso-proposta.md e das duas capturas. Nao aceitar T05.1 nem iniciar livros ate resposta; a proxima microentrega do percurso depende do aceite do urso.",
+      "validation": "Unity setup exit0; EditMode51/51; harness exit0; apoio maximo0,000001m; coroa raycast0; zero apoios fora da profundidade1,2m; vao2,490840<alcance2,491969m; manifesto e hashes conferidos; links locais OK",
+      "pending": "Revisao humana do apoio/camera/detalhe; movimento e pouso nao validados; livros e movel nao iniciados; T05 agregada e T06 pendentes; sem commit/push",
+      "files": "Evidence/25d/T05.1/README.md;Evidence/25d/T05.1/reviews/T05.1-urso-proposta.md;Evidence/25d/T05.1/manifest.json;Evidence/25d/T05.1/01-gameplay-bear-contact.png;Evidence/25d/T05.1/02-bear-detail.png;Assets/Art/Illustrated25D/Environment/Bear;Assets/Scripts/Runtime/Illustrated25D/Environment/Bear;docs/ia/diario.sqlite3",
+      "processes": "Batches Unity encerrados; nenhum Unity ativo",
+      "at": "2026-11-13T10:13:38.057734+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T04",
+      "session": "2026-11-13-codex-t04-nanda-25c1",
+      "done": "T04.1 candidata em revisao: 8 poses de asas, ciclo0,8s, hover3,5cm, flipX no material padrao; atlas2048x1184/8x512x592,PPU880,pivo0,42061,CompressedHQ; provas30/60/120 success=true,72 quadros,48 mudancas identicas,mirrorError0,0 violacoes,4,8134MiB; Yuna estatica so escala.",
+      "next": "Aguardar resposta literal da revisao humana da T04.1; nao iniciar T04.2/T05/T06 nesta sessao; T04 nao aceita.",
+      "validation": "Unity30/60/120 exit0 success=true; fonteT01/atlas/Gameplay/NandaFairyGuide.cs unchanged; plan/diary checks; nenhum Unity ativo.",
+      "pending": "Aceite humano T04.1; T04.2 luz/trilha/acompanhamento; integracao T06; devices/WebGL.",
+      "files": "Assets/Art/Illustrated25D/Nanda/Flight;Evidence/25d/T04.1;tools/make_t04_nanda_frames.py;tools/make_t04_nanda_review.py;tools/make_t04_nanda_manifest.py;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
+      "processes": "Nenhum Unity ativo",
+      "at": "2026-11-13T10:16:51.368832+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T05",
+      "session": "2026-11-13-codex-t05-urso-6d2e",
+      "done": "T05.1 do urso aprovada pelo usuario com resposta literal 'aprovado.'. Revisao, README e manifesto marcam aceite exclusivo da microentrega; manifesto com8 evidencias/15 fontes e hashes conferidos. Apoio curvo, camera final e detalhe validados anteriormente.",
+      "next": "Aguardar o proximo comando para iniciar T05.2 livros: definir a superficie real de apoio da pilha inclinada antes de gerar/integrar a arte, validar contato na camera final e parar para revisao humana. Nao iniciar movel antes do aceite dos livros.",
+      "validation": "Aceite humano literal 'aprovado.' registrado em Evidence/25d/T05.1/reviews/T05.1-urso-proposta.md; manifestoHASHES_OK8/15;T05 agregada permanece pendente",
+      "pending": "T05.2 livros; T05.3 movel; movimento/pouso; T05 agregada e T06; sem commit/push",
+      "files": "Evidence/25d/T05.1/README.md;Evidence/25d/T05.1/reviews/T05.1-urso-proposta.md;Evidence/25d/T05.1/manifest.json;docs/ia/diario.sqlite3",
+      "processes": "Nenhum Unity ativo",
+      "at": "2026-11-13T10:35:50.803537+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T04",
+      "session": "2026-11-13-codex-t04-nanda-25c1",
+      "done": "T04.1 ACEITA pelo usuario em 13/11/2026 (resposta literal 'aprovado.'): 8 poses, ciclo0,8s, hover3,5cm, flipX no material padrao; provas30/60/120 success=true,72 quadros,48 mudancas identicas,mirrorError0,4,8134MiB; Yuna estatica so escala.",
+      "next": "Aguardar pedido do usuario para iniciar T04.2 (luz/trilha/acompanhamento/expressao); T04 agregada nao aceita; T05/T06 nao iniciados nesta sessao.",
+      "validation": "manifest status=accepted/literal_response=aprovado.; review + README + estado atualizados; diarycheck/plancheck; nenhum Unity ativo.",
+      "pending": "T04.2; aceite da T04 agregada; T05/T06; devices/WebGL.",
+      "files": "Assets/Art/Illustrated25D/Nanda/Flight;Evidence/25d/T04.1;tools/make_t04_nanda_frames.py;tools/make_t04_nanda_review.py;tools/make_t04_nanda_manifest.py;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
+      "processes": "Nenhum Unity ativo",
+      "at": "2026-11-13T10:36:35.721904+00:00"
     }
   ]
 }

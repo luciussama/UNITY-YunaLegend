@@ -1,6 +1,6 @@
 # Estado atual — sala escura ilustrada
 
-Atualização em 12/11/2026, sessão `2026-11-12-codex-stumble-t034-a71c`, preservando as entregas das sessões anteriores. Este é um índice curto; reservas e resultados verificáveis permanecem no estado estruturado e no diário.
+Atualização em 13/11/2026, sessão `2026-11-13-codex-stumble-flipfix-9f4a`, preservando as entregas das sessões anteriores. Este é um índice curto; reservas e resultados verificáveis permanecem no estado estruturado e no diário.
 
 ## Feito e aprovado
 
@@ -26,14 +26,18 @@ Detalhe da v1 (histórico): [corrida com oito poses pintadas](../../Evidence/25d
 
 **T03.4 v2 aprovada:** [tropeço e retomada](../../Evidence/25d/T03.4/README.md), oito poses originais via imagegen, pausa local80ms/recuperação280ms preservadas. Provas isoladas30/60/120Hz,reset durante evento e repetição,physics/corrida/salto intactos. [Aprovação humana registrada](../../Evidence/25d/T03.4/reviews/T03.4-v2-aprovacao.md). Não integrada ao móvel/piloto; orçamento e revisão conjunta T03 pendentes.
 
+**T03 conjunta — aceita em 13/11/2026:** [revisão conjunta](../../Evidence/25d/T03/README.md), [contrato](../../Evidence/25d/T03/CONTRATO.md), [manifesto](../../Evidence/25d/T03/manifest.json) e [aceite literal](../../Evidence/25d/T03/reviews/T03-conjunto.md). Sequência de14s em30/60/120Hz,420 quadros por câmera, dois saltos/pousos e dois tropeços. A primeira revisão humana encontrou o Idle final vazio em t=13,5s: o root gira para Y=±90° durante a corrida, Run/Stumble compensam a rotação, mas o Idle não compensava e ficava de perfil para a câmera (`boundsSize.x=0`). `YunaIdleIllustration` foi corrigido para compensar a rotação do root e espelhar o perfil por `RunDirection`; o harness exige `sawIdleFacingCamera=true` após a parada. A segunda revisão encontrou o tropeço esquerdo desenhado para a direita: `StumblePainted.shader` não consumia o flip do `SpriteRenderer`. O shader agora aplica `UnityFlipSprite` com `unity_SpriteProps.xy`; o harness exige `stumbleFlipHonored=true` na prova renderizada espelhada e `sawStumbleFacingRight/Left=true` nos dois eventos. Diagnóstico: `pose=2 asymmetry=8052802 mirrorError=25 tolerance=1006600`; as oito amostras de cada tropeço confirmam `direction=1/flipX=false` e `direction=-1/flipX=true`. As três provas passam com420 quadros,0 conflitos, fonte máxima1 e Idle final visível. O resolvedor (ordem240, Stumble>Jump>Run>Idle) mantém179/358/716 sobreposições pré-resolvedor e0 conflitos finais. Orçamento: **61,0407 MiB sem compressão → 16,6389 MiB CompressedHQ** (limite32), todas emRGBA_DXT5; perfil/blink são cópias runtime byte-idênticas e atlas têm padding transparente. Comparação de840 renders: PSNR mínimo58,3305dB gameplay/43,5257dB detalhe; alpha inalterado. [GIFs e folhas](../../Evidence/25d/T03/review). Rótulos corrigidos para tropeço direito em6,20s e esquerdo em11,23s. T03.1–T03.4 preservadas; **T03 agregada aceita**; tentativas preservadas em `Evidence/25d/T03/attempt-03-idle-edge-on` e `attempt-04-stumble-unflipped`.
+
+**T04.1 — candidata em revisão (13/11/2026):** [Nanda ilustrada em voo](../../Evidence/25d/T04.1/README.md), [contrato](../../Evidence/25d/T04.1/CONTRATO.md) e [manifesto](../../Evidence/25d/T04.1/manifest.json). Oito poses de asas (`512×592`, atlas `2048×1184`, PPU 880, pivô `0,42061`) derivadas da prancha aprovada da T01 por warp vertical mascarado; a neutra altera 0 pixels visíveis. `NandaFlightIllustration` anima só o visual (ciclo 0,8 s, hover 3,5 cm/2,4 s, `flipX` por direção, material padrão de sprite); navegação, luz e trilha continuam com o guia. Provas 30/60/120 Hz com 72 quadros por câmera, oito poses, 48 mudanças idênticas, `mirrorError=0` e 0 violações de orientação; a Yuna da fixture é apenas escala estática. Atlas residente 4,8134 MiB CompressedHQ (limite 16). Gameplay, `NandaFairyGuide.cs` e PNG aprovado inalterados. **T04.1 aceita pelo usuário em 13/11/2026** (resposta literal "aprovado.", registrada em `Evidence/25d/T04.1/reviews/T04.1-revisao.md`); T04.2/T05/T06 não iniciados.
+
 ## Próximos passos pequenos
 
 **Histórico do ajuste 595:** fechamento do clipe tratado na T03.2 v2; aprovação e reconciliação posterior registradas em 607/625. O passo corporal continua como limite aceito, sem nova correção da corrida nesta T03.3.
 
 1. T03.3 aprovada. T03.4 v2 aprovada individualmente pelo usuário; pausa local de 80 ms e recuperação de 280 ms verificadas na fixture.
-2. Revisar transições/conjunto e orçamento residente antes de fechar T03.
-3. T04/T05: Nanda reconhecível com luz azul e ambiente ilustrado, um objeto por revisão, mantendo apoios reais e móvel cedendo/retry.
-4. Integrar somente o piloto urso → livros → móvel; aprovação em movimento antes de expandir a fase.
+2. **T03 e T04.1 aceitas.** Próximo: T04.2 (luz/trilha subordinadas à personagem, acompanhamento e expressão) e T05 (piloto ambiental: urso, livros inclinados e móvel, com apoios reais); a T04 agregada só é aceita depois da T04.2. Podem ocorrer em paralelo apenas em escopos disjuntos; cada microentrega visual exige revisão humana antes da dependente.
+3. T06 só após T03+T04+T05: integrar exclusivamente o piloto urso → livros → móvel, com câmera final, run/jump/land/stumble/retry e UI, preservando física.
+4. T07 exige build/vídeo e aprovação explícita do piloto em movimento antes de expandir a fase.
 
 Pendências de integração: calibração visual dos pés sobre superfícies reais (amostras de root/apoio vão de 0,0800 a 0,1475 m, próximo da skin do CharacterController), composição retrato, narrativa completa e dispositivos reais. Não mudar root/física ou achatar objetos para esconder diferenças. Não houve publicação da nova apresentação.
 

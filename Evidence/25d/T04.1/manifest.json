@@ -1,0 +1,481 @@
+{
+  "task": "T04.1",
+  "title": "Nanda ilustrada em voo: asas, ciclo e orientacao",
+  "status": "accepted",
+  "session": "2026-11-13-codex-t04-nanda-25c1",
+  "agent": "Codex (GPT-6.1)",
+  "date": "2026-11-13",
+  "unity": "6000.3.28f1",
+  "head": "7988a0a",
+  "worktree": "T04.1 not committed",
+  "source": {
+    "path": "Evidence/25d/T01/nanda-blue-v1.png",
+    "sha256": "f16ba3862f7e1fe263916922fa742eef1426b98d6e4d81f794e1083e74725678",
+    "size": [
+      1168,
+      1346
+    ],
+    "unchanged": true
+  },
+  "atlas": {
+    "path": "Assets/Art/Illustrated25D/Nanda/Flight/Nanda_Flight_Atlas_v1.png",
+    "sha256": "3752ca206bbdfa85d09c8aee9313abcd8fdd77abf00315c2caca80c15b06af3a",
+    "size": [
+      2048,
+      1184
+    ],
+    "cell_size": [
+      512,
+      592
+    ],
+    "frames": 8,
+    "pivot": [
+      0.5,
+      0.42061
+    ],
+    "pixels_per_unit": 880.0
+  },
+  "frames": [
+    {
+      "path": "Evidence/25d/T04.1/frames/nanda-hover-00.png",
+      "sha256": "8e27ef9c210152b33d230c4d56f48f868722f16f58e9dcc12e9a8e99650f7688",
+      "bytes": 1668609
+    },
+    {
+      "path": "Evidence/25d/T04.1/frames/nanda-hover-01.png",
+      "sha256": "75a74663b78cb5516279c243af2a4d95ba00c52057eb6b8c25d3055ea18ea9c5",
+      "bytes": 1662754
+    },
+    {
+      "path": "Evidence/25d/T04.1/frames/nanda-hover-02.png",
+      "sha256": "07477fdee149441308de8f839a8378ef446a48a00d27d8ed31c9d4f6b7c43172",
+      "bytes": 1667949
+    },
+    {
+      "path": "Evidence/25d/T04.1/frames/nanda-hover-03.png",
+      "sha256": "f469f0586fed58ac57773e96de64b9f5a45d4c6a763f6376fbec62dddd6be3b8",
+      "bytes": 1670919
+    },
+    {
+      "path": "Evidence/25d/T04.1/frames/nanda-hover-04.png",
+      "sha256": "8c83f2c68db3a92c6634957b89104e5701c6512c6264ff17f23594fe2bfb5ec9",
+      "bytes": 1670205
+    },
+    {
+      "path": "Evidence/25d/T04.1/frames/nanda-hover-05.png",
+      "sha256": "8a9e260c60d4e7fed547d94f05fe7bba96a50b428b2ca3caea63119f80e62583",
+      "bytes": 1653843
+    },
+    {
+      "path": "Evidence/25d/T04.1/frames/nanda-hover-06.png",
+      "sha256": "848d26155734327e3eb4e035040fcc9477d30bc77eccfeda1050d49f8f7765f5",
+      "bytes": 1630709
+    },
+    {
+      "path": "Evidence/25d/T04.1/frames/nanda-hover-07.png",
+      "sha256": "95cb79e05c9ffc40770e04aa97e60999d1a9f36683fa2f902d5198e8b92d4e85",
+      "bytes": 1662075
+    }
+  ],
+  "sprite_assets": [
+    {
+      "path": "Assets/Art/Illustrated25D/Nanda/Flight/Runtime/Frames/NandaFlight0.asset",
+      "sha256": "c21181c259ae702c66670dd0c16d6686c253487a63b31856ff417b4d5110717f",
+      "bytes": 4877
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Nanda/Flight/Runtime/Frames/NandaFlight1.asset",
+      "sha256": "80201ee3bc5d35bdf5b20acfc0da1852d4e639615fd5a4d9cc482f4a711cff75",
+      "bytes": 4883
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Nanda/Flight/Runtime/Frames/NandaFlight2.asset",
+      "sha256": "79a4966348f0714449f7d4e1bf13398e8ba7595070310d26944e361e8780c179",
+      "bytes": 4888
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Nanda/Flight/Runtime/Frames/NandaFlight3.asset",
+      "sha256": "0f04df3ae5927db1704929f46bc4de4b3d836d6f13595ffba360b4244cfa6f90",
+      "bytes": 4888
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Nanda/Flight/Runtime/Frames/NandaFlight4.asset",
+      "sha256": "04cc9ffc240776556d9ffa2079a62205180dd84129bb89114781574742e8d50d",
+      "bytes": 4874
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Nanda/Flight/Runtime/Frames/NandaFlight5.asset",
+      "sha256": "1dbe56d590e5c20c2756116d63af018f293412a5dda1ae9b328d512f3f81d5d6",
+      "bytes": 4880
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Nanda/Flight/Runtime/Frames/NandaFlight6.asset",
+      "sha256": "7799adb28dcb85719ef04488fb0c40bd0f985083bd62ff8ffdcdae47d8e96548",
+      "bytes": 4885
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Nanda/Flight/Runtime/Frames/NandaFlight7.asset",
+      "sha256": "476b89ca2fa2e0466ce21af5c230f5d0bbd5a218c8ff34e9b232a9e6dea979a3",
+      "bytes": 4885
+    }
+  ],
+  "code": [
+    {
+      "path": "Assets/Art/Illustrated25D/Nanda/Flight/NandaFlightIllustration.cs",
+      "sha256": "fb78b73221f5045ea093e1cc44ba446ae78721d23b19fa6ac48b5efe95cc0179",
+      "bytes": 2888
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Nanda/Flight/Editor/NandaFlightReviewCapture.cs",
+      "sha256": "4512deabf5c1ccbcd49238925b0ea42a155868edb1faf8fdac8f919b3663798f",
+      "bytes": 26624
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Nanda/Flight/NandaFlightReview.unity",
+      "sha256": "10791169aa6f6fe3734ab98e3be3ec2726313a03a051059837c816101d9fdecb",
+      "bytes": 212508
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Nanda/Flight/NandaFlightReview.unity.meta",
+      "sha256": "44a147ea8180480ba06af69c16c0afc816d3c75bf148b82a50637bb38eb50463",
+      "bytes": 155
+    },
+    {
+      "path": "tools/make_t04_nanda_frames.py",
+      "sha256": "deb37a4df96d2d75abf18d311262b78b46291c685b24c0f5a376a0689523bae1",
+      "bytes": 12322
+    },
+    {
+      "path": "tools/make_t04_nanda_review.py",
+      "sha256": "0ceab08cffe51183fcadedbee9dc6e253d558721f1ffdb10f3529b1ffad24259",
+      "bytes": 6156
+    }
+  ],
+  "proofs": [
+    {
+      "success": true,
+      "simulationHz": 30,
+      "captureFps": 15,
+      "framesRun": 72,
+      "duration": 4.800000190734863,
+      "cycleSeconds": 0.800000011920929,
+      "allPosesSeen": true,
+      "sawRight": true,
+      "sawLeft": true,
+      "flipHonored": true,
+      "flipViolations": 0,
+      "poseCadenceExact": true,
+      "poseMismatches": 0,
+      "poseChangesRecorded": 48,
+      "cyclesObserved": 5,
+      "residentMiB": 4.813407897949219,
+      "budgetMiB": 16.0,
+      "budgetPassed": true,
+      "sourcePngsUnchanged": true,
+      "sceneUntouched": true,
+      "guideUntouched": true,
+      "compressionMode": "hq",
+      "flipDiagnostic": "pose=3 asymmetry=6912790 mirrorError=0 tolerance=864098",
+      "texture": {
+        "name": "nanda flight atlas",
+        "path": "Assets/Art/Illustrated25D/Nanda/Flight/Nanda_Flight_Atlas_v1.png",
+        "sourceHash": "3752ca206bbdfa85d09c8aee9313abcd8fdd77abf00315c2caca80c15b06af3a",
+        "graphicsFormat": "RGBA_DXT5_UNorm",
+        "importSettings": "CompressedHQ mipmaps=False readable=False max=2048",
+        "width": 2048,
+        "height": 1184,
+        "runtimeMiB": 4.813407897949219
+      },
+      "path": "Evidence/25d/T04.1/final-30/flight-proof.json",
+      "sha256": "19898794b7b0b01561826a9ea62d5e87f2d3bfb2d7aee1574a015a69fbdaa5b8",
+      "posesSeen": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "success": true,
+      "simulationHz": 60,
+      "captureFps": 15,
+      "framesRun": 72,
+      "duration": 4.800000190734863,
+      "cycleSeconds": 0.800000011920929,
+      "allPosesSeen": true,
+      "sawRight": true,
+      "sawLeft": true,
+      "flipHonored": true,
+      "flipViolations": 0,
+      "poseCadenceExact": true,
+      "poseMismatches": 0,
+      "poseChangesRecorded": 48,
+      "cyclesObserved": 5,
+      "residentMiB": 4.813407897949219,
+      "budgetMiB": 16.0,
+      "budgetPassed": true,
+      "sourcePngsUnchanged": true,
+      "sceneUntouched": true,
+      "guideUntouched": true,
+      "compressionMode": "hq",
+      "flipDiagnostic": "pose=3 asymmetry=6912790 mirrorError=0 tolerance=864098",
+      "texture": {
+        "name": "nanda flight atlas",
+        "path": "Assets/Art/Illustrated25D/Nanda/Flight/Nanda_Flight_Atlas_v1.png",
+        "sourceHash": "3752ca206bbdfa85d09c8aee9313abcd8fdd77abf00315c2caca80c15b06af3a",
+        "graphicsFormat": "RGBA_DXT5_UNorm",
+        "importSettings": "CompressedHQ mipmaps=False readable=False max=2048",
+        "width": 2048,
+        "height": 1184,
+        "runtimeMiB": 4.813407897949219
+      },
+      "path": "Evidence/25d/T04.1/final-60/flight-proof.json",
+      "sha256": "ab1c0574d6cad12ff3a5f6537d534c4146a037846ca9bbdcf4c12acc23091c10",
+      "posesSeen": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "success": true,
+      "simulationHz": 120,
+      "captureFps": 15,
+      "framesRun": 72,
+      "duration": 4.800000190734863,
+      "cycleSeconds": 0.800000011920929,
+      "allPosesSeen": true,
+      "sawRight": true,
+      "sawLeft": true,
+      "flipHonored": true,
+      "flipViolations": 0,
+      "poseCadenceExact": true,
+      "poseMismatches": 0,
+      "poseChangesRecorded": 48,
+      "cyclesObserved": 5,
+      "residentMiB": 4.813407897949219,
+      "budgetMiB": 16.0,
+      "budgetPassed": true,
+      "sourcePngsUnchanged": true,
+      "sceneUntouched": true,
+      "guideUntouched": true,
+      "compressionMode": "hq",
+      "flipDiagnostic": "pose=3 asymmetry=6912790 mirrorError=0 tolerance=864098",
+      "texture": {
+        "name": "nanda flight atlas",
+        "path": "Assets/Art/Illustrated25D/Nanda/Flight/Nanda_Flight_Atlas_v1.png",
+        "sourceHash": "3752ca206bbdfa85d09c8aee9313abcd8fdd77abf00315c2caca80c15b06af3a",
+        "graphicsFormat": "RGBA_DXT5_UNorm",
+        "importSettings": "CompressedHQ mipmaps=False readable=False max=2048",
+        "width": 2048,
+        "height": 1184,
+        "runtimeMiB": 4.813407897949219
+      },
+      "path": "Evidence/25d/T04.1/final-120/flight-proof.json",
+      "sha256": "f89fa809890d6b965f0407c5709b9680f316f59ba56daad4da03f72a36434aa1",
+      "posesSeen": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  ],
+  "cadence": {
+    "pose_changes_per_run": 48,
+    "identical_at_30_60_120": true,
+    "first": [
+      0.1,
+      1,
+      1.0,
+      false
+    ],
+    "last": [
+      4.8,
+      0,
+      -1.0,
+      true
+    ],
+    "cycle_seconds": 0.8,
+    "frames_per_cycle": 8
+  },
+  "orientation": {
+    "method": "rendered mirror probe on the default SpriteRenderer material plus per-sample flipX checks",
+    "right_flipX": false,
+    "left_flipX": true,
+    "mirror": "pose=3 asymmetry=6912790 mirrorError=0 tolerance=864098",
+    "flip_violations": 0
+  },
+  "budget": {
+    "limit_mib": 16.0,
+    "observed_mib": 4.8134,
+    "passed": true,
+    "metric": "Profiler.GetRuntimeMemorySizeLong in the Windows Editor, one resident atlas",
+    "observed_format": "RGBA_DXT5_UNorm",
+    "import": "CompressedHQ mipmaps=False readable=False max=2048"
+  },
+  "scale": {
+    "game_camera_vertical_span_metres": 7.5,
+    "game_capture": [
+      1280,
+      720
+    ],
+    "pixels_per_metre": 96.0,
+    "nanda_canvas_height_metres": 0.6727,
+    "nanda_on_screen_pixels": 64.6,
+    "yuna_idle_height_metres": 1.46,
+    "yuna_on_screen_pixels": 140.2,
+    "detail_camera_distance_metres": 1.2
+  },
+  "documents": [
+    {
+      "path": "Evidence/25d/T04.1/README.md",
+      "sha256": "8fdd84ee0733772b07e4df8c3fd2e7057aafa6a9d074f5e0252c698e1ec67a20",
+      "bytes": 5754
+    },
+    {
+      "path": "Evidence/25d/T04.1/CONTRATO.md",
+      "sha256": "135ff9c52e06baf067eb80c6f303e923433b132c2fde89f202e2f5036d4babab",
+      "bytes": 3426
+    },
+    {
+      "path": "Evidence/25d/T04.1/reviews/T04.1-revisao.md",
+      "sha256": "7a5fb7bb0592bb8ce31900dffe1b8fb68211a9f9787698829f77e69f4f5bee03",
+      "bytes": 1213
+    }
+  ],
+  "review": [
+    {
+      "path": "Evidence/25d/T04.1/review/game-normal.gif",
+      "sha256": "ed1f8f016cd9141967375714044748d84944ccc282736ee571a4aeee311d1bde",
+      "bytes": 670483
+    },
+    {
+      "path": "Evidence/25d/T04.1/review/game-slow.gif",
+      "sha256": "84ed983aeeeb67268757922668a74b55409d3ea6690ba7700cbcff9b9dfbb86d",
+      "bytes": 670483
+    },
+    {
+      "path": "Evidence/25d/T04.1/review/detail-normal.gif",
+      "sha256": "e3db4fd46530470e8229c5e80ebbf3b02758e8568f3172e2291891f1723bb112",
+      "bytes": 3864802
+    },
+    {
+      "path": "Evidence/25d/T04.1/review/detail-slow.gif",
+      "sha256": "cc5e8d430162e5da3379f479c5e3164bfb9895b25cc4c37ed97cb61d599c5e69",
+      "bytes": 3864802
+    },
+    {
+      "path": "Evidence/25d/T04.1/review/game-review-sheet.png",
+      "sha256": "b5c3a037b57f0762a4ef2a59cbc65ed483781fe9a4abaf42e9778179fccbc975",
+      "bytes": 51755
+    },
+    {
+      "path": "Evidence/25d/T04.1/review/detail-review-sheet.png",
+      "sha256": "2ce9d1ad29879901b325b195fb84f4bd535a2906075129151562b8341254571f",
+      "bytes": 409275
+    },
+    {
+      "path": "Evidence/25d/T04.1/review/pose-strip.png",
+      "sha256": "bd85451317e6f0178f39ae25f83ab86a1d425116a61b8cc5b2434c361dcb5f26",
+      "bytes": 254972
+    },
+    {
+      "path": "Evidence/25d/T04.1/review/flip-compare.png",
+      "sha256": "35ed80c6d9326ef484a5a80cf3b40f98faa10e698d33d252f9518127c3868353",
+      "bytes": 116955
+    }
+  ],
+  "inspection": [
+    {
+      "path": "Evidence/25d/T04.1/inspection/atlas-contact.png",
+      "sha256": "cc558a1b80e491eb8f1b7719c89e2648b11fa07d917a48f8653bbc3819cf3422",
+      "bytes": 1073654
+    },
+    {
+      "path": "Evidence/25d/T04.1/inspection/frame00-light.png",
+      "sha256": "fc238ea17071ee22a693894518d7ea91e9800e4e06eafb354b149fadfc2f1c65",
+      "bytes": 650542
+    },
+    {
+      "path": "Evidence/25d/T04.1/inspection/frame00-vs-02-light.png",
+      "sha256": "918b44d1a8986caa7ea4cbb4d00b5b6f7f95832c46723401d3d128632a88e478",
+      "bytes": 575430
+    },
+    {
+      "path": "Evidence/25d/T04.1/inspection/frame02-light.png",
+      "sha256": "602b744be1276fbe9d2629801c99e885af6c2869ab9d7a419cefe7fd2d4a14ea",
+      "bytes": 672244
+    },
+    {
+      "path": "Evidence/25d/T04.1/inspection/frame02-vs-06-dark.png",
+      "sha256": "165f7601c5385062a5da33ce4581f8444030d2d27a94f2a880c4be8e876866d1",
+      "bytes": 613854
+    },
+    {
+      "path": "Evidence/25d/T04.1/inspection/masks.png",
+      "sha256": "ea236bfb90bdbcd4cb2102ab66d56f1d74f215ee4c8931c325dfd65fea19e8d5",
+      "bytes": 1241606
+    },
+    {
+      "path": "Evidence/25d/T04.1/inspection/nanda-grid.png",
+      "sha256": "cb6acb9186c3cfe51b6e14ce62449ee3cb5842c3d00b8aed01ab3dcc503934f9",
+      "bytes": 1272739
+    },
+    {
+      "path": "Evidence/25d/T04.1/inspection/orientation-heads.png",
+      "sha256": "dbdfc6eb1065951c4756798f7348515bea1b9ef2baae72d6485a125e4e217df6",
+      "bytes": 615186
+    },
+    {
+      "path": "Evidence/25d/T04.1/inspection/runtime-contact.png",
+      "sha256": "5be7f42175173a570b914426e0ca2d2f40a3a56a8c1643a27f78aff9af7fb71c",
+      "bytes": 371236
+    },
+    {
+      "path": "Evidence/25d/T04.1/inspection/source-dark-crop.png",
+      "sha256": "204561705cd96744466c1ed26fb410ce6e4a1dd1c8b8264918e1789f93ee3cb9",
+      "bytes": 605987
+    }
+  ],
+  "human_review": {
+    "required": true,
+    "status": "accepted",
+    "accepted_at": "2026-11-13",
+    "literal_response": "aprovado.",
+    "record": "Evidence/25d/T04.1/reviews/T04.1-revisao.md",
+    "scope": "T04.1 only; T04.2 and aggregate T04 remain open",
+    "question": "A Nanda le como companheira viva e o ritmo das asas/hover convence? A orientacao direita/esquerda esta correta?"
+  },
+  "verification": {
+    "final_runs": [
+      30,
+      60,
+      120
+    ],
+    "frames_per_camera": 72,
+    "all_eight_poses_rendered": true,
+    "both_directions_observed": true,
+    "flip_honored_by_standard_sprite_path": true,
+    "pose_cadence_identical_across_rates": true,
+    "source_pngs_unchanged": true,
+    "gameplay_scene_unchanged": true,
+    "guide_script_unchanged": true,
+    "static_yuna_is_scale_only": true,
+    "component_owns_visual_only": true
+  },
+  "next": "T04.1 aceita; iniciar T04.2 somente por pedido do usuario. T04 agregada nao aceita."
+}

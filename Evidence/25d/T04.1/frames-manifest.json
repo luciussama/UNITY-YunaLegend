@@ -1,0 +1,493 @@
+{
+  "schema_version": 1,
+  "microdelivery": "T04.1",
+  "tool": "deterministic feathered vertical warp over the approved T01 painting",
+  "source": {
+    "path": "Evidence/25d/T01/nanda-blue-v1.png",
+    "sha256": "f16ba3862f7e1fe263916922fa742eef1426b98d6e4d81f794e1083e74725678",
+    "size": [
+      1168,
+      1346
+    ]
+  },
+  "neutral_warp_diff_pixels": 0,
+  "frame_count": 8,
+  "evidence_frame_size": [
+    1168,
+    1346
+  ],
+  "atlas_cell_size": [
+    512,
+    592
+  ],
+  "atlas": {
+    "path": "Assets/Art/Illustrated25D/Nanda/Flight/Nanda_Flight_Atlas_v1.png",
+    "size": [
+      2048,
+      1184
+    ],
+    "sha256": "3752ca206bbdfa85d09c8aee9313abcd8fdd77abf00315c2caca80c15b06af3a"
+  },
+  "sprite": {
+    "pivot": [
+      0.5,
+      0.42061
+    ],
+    "pixels_per_unit": 880.0,
+    "body_height_metres": 0.6202,
+    "canvas_height_metres": 0.6727
+  },
+  "warp": {
+    "amplitude_pixels": 80.0,
+    "core_expand_pixels": 50,
+    "margin_expand_pixels": 100,
+    "right_root": [
+      672,
+      525
+    ],
+    "left_root": [
+      322,
+      545
+    ],
+    "right_polygons": [
+      [
+        [
+          640,
+          555
+        ],
+        [
+          650,
+          470
+        ],
+        [
+          700,
+          380
+        ],
+        [
+          780,
+          295
+        ],
+        [
+          870,
+          230
+        ],
+        [
+          975,
+          195
+        ],
+        [
+          1045,
+          205
+        ],
+        [
+          1040,
+          255
+        ],
+        [
+          990,
+          315
+        ],
+        [
+          915,
+          385
+        ],
+        [
+          840,
+          450
+        ],
+        [
+          770,
+          505
+        ],
+        [
+          705,
+          550
+        ]
+      ],
+      [
+        [
+          655,
+          550
+        ],
+        [
+          710,
+          520
+        ],
+        [
+          790,
+          515
+        ],
+        [
+          880,
+          540
+        ],
+        [
+          960,
+          590
+        ],
+        [
+          965,
+          620
+        ],
+        [
+          910,
+          650
+        ],
+        [
+          830,
+          655
+        ],
+        [
+          750,
+          635
+        ],
+        [
+          690,
+          600
+        ]
+      ]
+    ],
+    "left_polygons": [
+      [
+        [
+          335,
+          555
+        ],
+        [
+          310,
+          500
+        ],
+        [
+          260,
+          450
+        ],
+        [
+          200,
+          395
+        ],
+        [
+          140,
+          355
+        ],
+        [
+          100,
+          345
+        ],
+        [
+          95,
+          390
+        ],
+        [
+          120,
+          450
+        ],
+        [
+          170,
+          505
+        ],
+        [
+          230,
+          545
+        ],
+        [
+          290,
+          565
+        ]
+      ],
+      [
+        [
+          330,
+          575
+        ],
+        [
+          300,
+          560
+        ],
+        [
+          255,
+          565
+        ],
+        [
+          230,
+          590
+        ],
+        [
+          245,
+          615
+        ],
+        [
+          290,
+          625
+        ],
+        [
+          330,
+          620
+        ]
+      ]
+    ],
+    "body_protection": [
+      [
+        [
+          320,
+          540
+        ],
+        [
+          360,
+          560
+        ],
+        [
+          340,
+          610
+        ],
+        [
+          300,
+          650
+        ],
+        [
+          250,
+          680
+        ],
+        [
+          190,
+          700
+        ],
+        [
+          160,
+          680
+        ],
+        [
+          175,
+          640
+        ],
+        [
+          220,
+          610
+        ],
+        [
+          270,
+          580
+        ]
+      ],
+      [
+        [
+          700,
+          600
+        ],
+        [
+          780,
+          650
+        ],
+        [
+          880,
+          700
+        ],
+        [
+          900,
+          730
+        ],
+        [
+          860,
+          750
+        ],
+        [
+          800,
+          720
+        ],
+        [
+          730,
+          670
+        ],
+        [
+          690,
+          630
+        ]
+      ],
+      [
+        [
+          280,
+          350
+        ],
+        [
+          360,
+          360
+        ],
+        [
+          380,
+          430
+        ],
+        [
+          350,
+          500
+        ],
+        [
+          300,
+          480
+        ],
+        [
+          270,
+          420
+        ]
+      ],
+      [
+        [
+          620,
+          470
+        ],
+        [
+          685,
+          480
+        ],
+        [
+          705,
+          540
+        ],
+        [
+          685,
+          590
+        ],
+        [
+          640,
+          600
+        ],
+        [
+          610,
+          530
+        ]
+      ],
+      [
+        [
+          305,
+          480
+        ],
+        [
+          365,
+          490
+        ],
+        [
+          385,
+          545
+        ],
+        [
+          365,
+          595
+        ],
+        [
+          320,
+          610
+        ],
+        [
+          285,
+          540
+        ]
+      ]
+    ]
+  },
+  "signals": [
+    0.594815466721054,
+    1.136011566867251,
+    0.7117474981553225,
+    0.17055139800912558,
+    -0.17055139800912547,
+    -0.711747498155322,
+    -1.136011566867251,
+    -0.5948154667210549
+  ],
+  "frames": [
+    {
+      "index": 0,
+      "path": "Evidence/25d/T04.1/frames/nanda-hover-00.png",
+      "sha256": "8e27ef9c210152b33d230c4d56f48f868722f16f58e9dcc12e9a8e99650f7688",
+      "bbox": [
+        0,
+        0,
+        1154,
+        1346
+      ],
+      "sampled_changed_pixels_to_next": 24456
+    },
+    {
+      "index": 1,
+      "path": "Evidence/25d/T04.1/frames/nanda-hover-01.png",
+      "sha256": "75a74663b78cb5516279c243af2a4d95ba00c52057eb6b8c25d3055ea18ea9c5",
+      "bbox": [
+        0,
+        0,
+        1154,
+        1346
+      ],
+      "sampled_changed_pixels_to_next": 24335
+    },
+    {
+      "index": 2,
+      "path": "Evidence/25d/T04.1/frames/nanda-hover-02.png",
+      "sha256": "07477fdee149441308de8f839a8378ef446a48a00d27d8ed31c9d4f6b7c43172",
+      "bbox": [
+        0,
+        0,
+        1154,
+        1346
+      ],
+      "sampled_changed_pixels_to_next": 24360
+    },
+    {
+      "index": 3,
+      "path": "Evidence/25d/T04.1/frames/nanda-hover-03.png",
+      "sha256": "f469f0586fed58ac57773e96de64b9f5a45d4c6a763f6376fbec62dddd6be3b8",
+      "bbox": [
+        0,
+        0,
+        1154,
+        1346
+      ],
+      "sampled_changed_pixels_to_next": 23988
+    },
+    {
+      "index": 4,
+      "path": "Evidence/25d/T04.1/frames/nanda-hover-04.png",
+      "sha256": "8c83f2c68db3a92c6634957b89104e5701c6512c6264ff17f23594fe2bfb5ec9",
+      "bbox": [
+        0,
+        0,
+        1154,
+        1346
+      ],
+      "sampled_changed_pixels_to_next": 24315
+    },
+    {
+      "index": 5,
+      "path": "Evidence/25d/T04.1/frames/nanda-hover-05.png",
+      "sha256": "8a9e260c60d4e7fed547d94f05fe7bba96a50b428b2ca3caea63119f80e62583",
+      "bbox": [
+        0,
+        0,
+        1154,
+        1346
+      ],
+      "sampled_changed_pixels_to_next": 23824
+    },
+    {
+      "index": 6,
+      "path": "Evidence/25d/T04.1/frames/nanda-hover-06.png",
+      "sha256": "848d26155734327e3eb4e035040fcc9477d30bc77eccfeda1050d49f8f7765f5",
+      "bbox": [
+        0,
+        0,
+        1154,
+        1346
+      ],
+      "sampled_changed_pixels_to_next": 24259
+    },
+    {
+      "index": 7,
+      "path": "Evidence/25d/T04.1/frames/nanda-hover-07.png",
+      "sha256": "95cb79e05c9ffc40770e04aa97e60999d1a9f36683fa2f902d5198e8b92d4e85",
+      "bbox": [
+        0,
+        0,
+        1154,
+        1346
+      ],
+      "sampled_changed_pixels_to_next": 24653
+    }
+  ]
+}

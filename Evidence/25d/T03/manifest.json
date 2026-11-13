@@ -1,0 +1,1297 @@
+{
+  "task": "T03",
+  "title": "Revisao conjunta da Yuna ilustrada e orcamento residente",
+  "status": "accepted",
+  "session": "2026-11-13-codex-stumble-flipfix-9f4a",
+  "agent": "Codex (GPT-6.1)",
+  "date": "2026-11-13",
+  "unity": "6000.3.28f1",
+  "head": "7988a0a",
+  "worktree": "T03 joint review not committed",
+  "budget": {
+    "limit_mib": 32.0,
+    "uncompressed_mib": 61.040672302246094,
+    "hq_mib": 16.638938903808594,
+    "passed": true,
+    "metric": "Unity Profiler.GetRuntimeMemorySizeLong in the Windows Editor, five resident textures",
+    "observed_format": "RGBA_DXT5_UNorm for all five textures in HQ"
+  },
+  "quality": {
+    "game": {
+      "frames": 420,
+      "psnr_min": 58.330513309186216,
+      "psnr_mean": 60.285836993837236,
+      "max_channel_diff": 62,
+      "max_changed_fraction": 0.006248914930555556,
+      "max_alpha_changed_fraction": 0.0
+    },
+    "detail": {
+      "frames": 420,
+      "psnr_min": 43.525690168908575,
+      "psnr_mean": 45.34880750164718,
+      "max_channel_diff": 69,
+      "max_changed_fraction": 0.192314453125,
+      "max_alpha_changed_fraction": 0.0
+    }
+  },
+  "proofs": [
+    {
+      "success": false,
+      "budgetPassed": false,
+      "totalResidentMiB": 61.040672302246094,
+      "budgetMiB": 32.0,
+      "frames": 420,
+      "simulationHz": 30,
+      "captureFps": 30,
+      "compressionMode": "uncompressed",
+      "visibilityConflicts": 0,
+      "singleSourceVisible": true,
+      "maxVisibleSources": 1,
+      "componentOverlapFrames": 179,
+      "emptyComponentFrames": 0,
+      "resolverActive": true,
+      "jumpTakeoffs": 2,
+      "jumpLandings": 2,
+      "stumbleEvents": 2,
+      "idleToRunTransitions": 1,
+      "runToIdleTransitions": 1,
+      "sourcePngsUnchanged": true,
+      "colliderUnchanged": true,
+      "rootScaleUnchanged": true,
+      "sawIdle": true,
+      "sawIdleFacingCamera": true,
+      "sawStumbleFacingRight": true,
+      "sawStumbleFacingLeft": true,
+      "stumbleFlipHonored": true,
+      "stumbleFlipDiagnostic": "pose=2 asymmetry=8045412 mirrorError=26 tolerance=1005676",
+      "path": "Evidence/25d/T03/baseline-30/joint-proof.json",
+      "sha256": "b0d4fa366f3a02bd1634238c1c53a9d28b806a3c8d4a917ea93ce975275b0493",
+      "textures": [
+        {
+          "name": "idle profile",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Profile_Runtime_v1.png",
+          "sourceHash": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+          "graphicsFormat": "R8G8B8A8_UNorm",
+          "width": 1024,
+          "height": 1536,
+          "runtimeMiB": 12.001396179199219
+        },
+        {
+          "name": "idle blink",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Blink_Runtime_v1.png",
+          "sourceHash": "ffe8aa88957a7d83d5c9335e24248aa7f6090c1512a53e368ee9a3680a97ec69",
+          "graphicsFormat": "R8G8B8A8_UNorm",
+          "width": 1024,
+          "height": 1536,
+          "runtimeMiB": 12.000907897949219
+        },
+        {
+          "name": "run atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Run_Atlas_Runtime_v1.png",
+          "sourceHash": "8cf1f6b8e7309bbb87a6d429906b0f941b73ff9b00e73b2bf92af3f810dd9c1e",
+          "graphicsFormat": "R8G8B8A8_UNorm",
+          "width": 1448,
+          "height": 1088,
+          "runtimeMiB": 12.448173522949219
+        },
+        {
+          "name": "jump atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Jump_Atlas_Runtime_v1.png",
+          "sourceHash": "36cac9d6f53ea1e38776e1d065a4c1ac139030df16d76d955f7b1d45a4ff159b",
+          "graphicsFormat": "R8G8B8A8_UNorm",
+          "width": 1448,
+          "height": 1088,
+          "runtimeMiB": 12.448173522949219
+        },
+        {
+          "name": "stumble atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Stumble_Atlas_Runtime_v1.png",
+          "sourceHash": "fe493dfe0bb25295e5b29b7cc3a33c586b0cd185d9976a64cc2c494f25d3e4da",
+          "graphicsFormat": "R8G8B8A8_UNorm",
+          "width": 1776,
+          "height": 888,
+          "runtimeMiB": 12.142021179199219
+        }
+      ]
+    },
+    {
+      "success": true,
+      "budgetPassed": true,
+      "totalResidentMiB": 16.638938903808594,
+      "budgetMiB": 32.0,
+      "frames": 420,
+      "simulationHz": 30,
+      "captureFps": 30,
+      "compressionMode": "hq",
+      "visibilityConflicts": 0,
+      "singleSourceVisible": true,
+      "maxVisibleSources": 1,
+      "componentOverlapFrames": 179,
+      "emptyComponentFrames": 0,
+      "resolverActive": true,
+      "jumpTakeoffs": 2,
+      "jumpLandings": 2,
+      "stumbleEvents": 2,
+      "idleToRunTransitions": 1,
+      "runToIdleTransitions": 1,
+      "sourcePngsUnchanged": true,
+      "colliderUnchanged": true,
+      "rootScaleUnchanged": true,
+      "sawIdle": true,
+      "sawIdleFacingCamera": true,
+      "sawStumbleFacingRight": true,
+      "sawStumbleFacingLeft": true,
+      "stumbleFlipHonored": true,
+      "stumbleFlipDiagnostic": "pose=2 asymmetry=8052802 mirrorError=25 tolerance=1006600",
+      "path": "Evidence/25d/T03/final-30/joint-proof.json",
+      "sha256": "309c9df09eaa396709fd04d5efd47c315a02236fa41a3904005d731c1d502586",
+      "textures": [
+        {
+          "name": "idle profile",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Profile_Runtime_v1.png",
+          "sourceHash": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1024,
+          "height": 1536,
+          "runtimeMiB": 3.0013961791992188
+        },
+        {
+          "name": "idle blink",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Blink_Runtime_v1.png",
+          "sourceHash": "ffe8aa88957a7d83d5c9335e24248aa7f6090c1512a53e368ee9a3680a97ec69",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1024,
+          "height": 1536,
+          "runtimeMiB": 3.0009078979492188
+        },
+        {
+          "name": "run atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Run_Atlas_Runtime_v1.png",
+          "sourceHash": "8cf1f6b8e7309bbb87a6d429906b0f941b73ff9b00e73b2bf92af3f810dd9c1e",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1448,
+          "height": 1088,
+          "runtimeMiB": 3.6908493041992188
+        },
+        {
+          "name": "jump atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Jump_Atlas_Runtime_v1.png",
+          "sourceHash": "36cac9d6f53ea1e38776e1d065a4c1ac139030df16d76d955f7b1d45a4ff159b",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1448,
+          "height": 1088,
+          "runtimeMiB": 3.6908493041992188
+        },
+        {
+          "name": "stumble atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Stumble_Atlas_Runtime_v1.png",
+          "sourceHash": "fe493dfe0bb25295e5b29b7cc3a33c586b0cd185d9976a64cc2c494f25d3e4da",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1776,
+          "height": 888,
+          "runtimeMiB": 3.2549362182617188
+        }
+      ]
+    },
+    {
+      "success": true,
+      "budgetPassed": true,
+      "totalResidentMiB": 16.638938903808594,
+      "budgetMiB": 32.0,
+      "frames": 420,
+      "simulationHz": 60,
+      "captureFps": 30,
+      "compressionMode": "hq",
+      "visibilityConflicts": 0,
+      "singleSourceVisible": true,
+      "maxVisibleSources": 1,
+      "componentOverlapFrames": 358,
+      "emptyComponentFrames": 0,
+      "resolverActive": true,
+      "jumpTakeoffs": 2,
+      "jumpLandings": 2,
+      "stumbleEvents": 2,
+      "idleToRunTransitions": 1,
+      "runToIdleTransitions": 1,
+      "sourcePngsUnchanged": true,
+      "colliderUnchanged": true,
+      "rootScaleUnchanged": true,
+      "sawIdle": true,
+      "sawIdleFacingCamera": true,
+      "sawStumbleFacingRight": true,
+      "sawStumbleFacingLeft": true,
+      "stumbleFlipHonored": true,
+      "stumbleFlipDiagnostic": "pose=2 asymmetry=8052802 mirrorError=25 tolerance=1006600",
+      "path": "Evidence/25d/T03/final-60/joint-proof.json",
+      "sha256": "b82bd6dc04fe652048152029a3256df617e07fec52f23e1d3d84f8c9e6c6932c",
+      "textures": [
+        {
+          "name": "idle profile",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Profile_Runtime_v1.png",
+          "sourceHash": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1024,
+          "height": 1536,
+          "runtimeMiB": 3.0013961791992188
+        },
+        {
+          "name": "idle blink",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Blink_Runtime_v1.png",
+          "sourceHash": "ffe8aa88957a7d83d5c9335e24248aa7f6090c1512a53e368ee9a3680a97ec69",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1024,
+          "height": 1536,
+          "runtimeMiB": 3.0009078979492188
+        },
+        {
+          "name": "run atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Run_Atlas_Runtime_v1.png",
+          "sourceHash": "8cf1f6b8e7309bbb87a6d429906b0f941b73ff9b00e73b2bf92af3f810dd9c1e",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1448,
+          "height": 1088,
+          "runtimeMiB": 3.6908493041992188
+        },
+        {
+          "name": "jump atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Jump_Atlas_Runtime_v1.png",
+          "sourceHash": "36cac9d6f53ea1e38776e1d065a4c1ac139030df16d76d955f7b1d45a4ff159b",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1448,
+          "height": 1088,
+          "runtimeMiB": 3.6908493041992188
+        },
+        {
+          "name": "stumble atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Stumble_Atlas_Runtime_v1.png",
+          "sourceHash": "fe493dfe0bb25295e5b29b7cc3a33c586b0cd185d9976a64cc2c494f25d3e4da",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1776,
+          "height": 888,
+          "runtimeMiB": 3.2549362182617188
+        }
+      ]
+    },
+    {
+      "success": true,
+      "budgetPassed": true,
+      "totalResidentMiB": 16.638938903808594,
+      "budgetMiB": 32.0,
+      "frames": 420,
+      "simulationHz": 120,
+      "captureFps": 30,
+      "compressionMode": "hq",
+      "visibilityConflicts": 0,
+      "singleSourceVisible": true,
+      "maxVisibleSources": 1,
+      "componentOverlapFrames": 716,
+      "emptyComponentFrames": 0,
+      "resolverActive": true,
+      "jumpTakeoffs": 2,
+      "jumpLandings": 2,
+      "stumbleEvents": 2,
+      "idleToRunTransitions": 1,
+      "runToIdleTransitions": 1,
+      "sourcePngsUnchanged": true,
+      "colliderUnchanged": true,
+      "rootScaleUnchanged": true,
+      "sawIdle": true,
+      "sawIdleFacingCamera": true,
+      "sawStumbleFacingRight": true,
+      "sawStumbleFacingLeft": true,
+      "stumbleFlipHonored": true,
+      "stumbleFlipDiagnostic": "pose=2 asymmetry=8052802 mirrorError=25 tolerance=1006600",
+      "path": "Evidence/25d/T03/final-120/joint-proof.json",
+      "sha256": "dfe8ced056de45e1c8c10347ea6fefd067fde0de331e6f2fb1cf92cb663e2469",
+      "textures": [
+        {
+          "name": "idle profile",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Profile_Runtime_v1.png",
+          "sourceHash": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1024,
+          "height": 1536,
+          "runtimeMiB": 3.0013961791992188
+        },
+        {
+          "name": "idle blink",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Blink_Runtime_v1.png",
+          "sourceHash": "ffe8aa88957a7d83d5c9335e24248aa7f6090c1512a53e368ee9a3680a97ec69",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1024,
+          "height": 1536,
+          "runtimeMiB": 3.0009078979492188
+        },
+        {
+          "name": "run atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Run_Atlas_Runtime_v1.png",
+          "sourceHash": "8cf1f6b8e7309bbb87a6d429906b0f941b73ff9b00e73b2bf92af3f810dd9c1e",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1448,
+          "height": 1088,
+          "runtimeMiB": 3.6908493041992188
+        },
+        {
+          "name": "jump atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Jump_Atlas_Runtime_v1.png",
+          "sourceHash": "36cac9d6f53ea1e38776e1d065a4c1ac139030df16d76d955f7b1d45a4ff159b",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1448,
+          "height": 1088,
+          "runtimeMiB": 3.6908493041992188
+        },
+        {
+          "name": "stumble atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Stumble_Atlas_Runtime_v1.png",
+          "sourceHash": "fe493dfe0bb25295e5b29b7cc3a33c586b0cd185d9976a64cc2c494f25d3e4da",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1776,
+          "height": 888,
+          "runtimeMiB": 3.2549362182617188
+        }
+      ]
+    },
+    {
+      "success": true,
+      "budgetPassed": true,
+      "totalResidentMiB": 15.326438903808594,
+      "budgetMiB": 32.0,
+      "frames": 420,
+      "simulationHz": 30,
+      "captureFps": 30,
+      "compressionMode": "hq",
+      "visibilityConflicts": null,
+      "singleSourceVisible": null,
+      "maxVisibleSources": null,
+      "componentOverlapFrames": null,
+      "emptyComponentFrames": null,
+      "resolverActive": null,
+      "jumpTakeoffs": 2,
+      "jumpLandings": 2,
+      "stumbleEvents": 2,
+      "idleToRunTransitions": 1,
+      "runToIdleTransitions": 1,
+      "sourcePngsUnchanged": true,
+      "colliderUnchanged": true,
+      "rootScaleUnchanged": true,
+      "sawIdle": true,
+      "sawIdleFacingCamera": null,
+      "sawStumbleFacingRight": null,
+      "sawStumbleFacingLeft": null,
+      "stumbleFlipHonored": null,
+      "stumbleFlipDiagnostic": null,
+      "path": "Evidence/25d/T03/attempt-01-overlap/joint-proof.json",
+      "sha256": "0546990bd01f1393fd5b43852c1810aeb7a67ceb3e78f64569d5cfb39b463605",
+      "textures": [
+        {
+          "name": "idle profile",
+          "path": "Assets/Art/Illustrated25D/Yuna/Yuna_Profile_v1.png",
+          "sourceHash": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1024,
+          "height": 1536,
+          "runtimeMiB": 3.0013961791992188
+        },
+        {
+          "name": "idle blink",
+          "path": "Assets/Art/Illustrated25D/Yuna/Idle/Yuna_Blink_v1.png",
+          "sourceHash": "ffe8aa88957a7d83d5c9335e24248aa7f6090c1512a53e368ee9a3680a97ec69",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1024,
+          "height": 1536,
+          "runtimeMiB": 3.0009078979492188
+        },
+        {
+          "name": "run atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Run_Atlas_Runtime_v1.png",
+          "sourceHash": "8cf1f6b8e7309bbb87a6d429906b0f941b73ff9b00e73b2bf92af3f810dd9c1e",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1448,
+          "height": 1088,
+          "runtimeMiB": 3.1283493041992188
+        },
+        {
+          "name": "jump atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Jump_Atlas_Runtime_v1.png",
+          "sourceHash": "36cac9d6f53ea1e38776e1d065a4c1ac139030df16d76d955f7b1d45a4ff159b",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1448,
+          "height": 1088,
+          "runtimeMiB": 3.1283493041992188
+        },
+        {
+          "name": "stumble atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Stumble_Atlas_Runtime_v1.png",
+          "sourceHash": "fe493dfe0bb25295e5b29b7cc3a33c586b0cd185d9976a64cc2c494f25d3e4da",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1776,
+          "height": 888,
+          "runtimeMiB": 3.0674362182617188
+        }
+      ]
+    },
+    {
+      "success": false,
+      "budgetPassed": true,
+      "totalResidentMiB": 15.326438903808594,
+      "budgetMiB": 32.0,
+      "frames": 420,
+      "simulationHz": 30,
+      "captureFps": 30,
+      "compressionMode": "hq",
+      "visibilityConflicts": 177,
+      "singleSourceVisible": false,
+      "maxVisibleSources": 2,
+      "componentOverlapFrames": 0,
+      "emptyComponentFrames": 0,
+      "resolverActive": true,
+      "jumpTakeoffs": 2,
+      "jumpLandings": 2,
+      "stumbleEvents": 2,
+      "idleToRunTransitions": 1,
+      "runToIdleTransitions": 1,
+      "sourcePngsUnchanged": true,
+      "colliderUnchanged": true,
+      "rootScaleUnchanged": true,
+      "sawIdle": true,
+      "sawIdleFacingCamera": null,
+      "sawStumbleFacingRight": null,
+      "sawStumbleFacingLeft": null,
+      "stumbleFlipHonored": null,
+      "stumbleFlipDiagnostic": null,
+      "path": "Evidence/25d/T03/attempt-02-null-run/joint-proof.json",
+      "sha256": "1247333883688244787828ac6553bb3321e994679a0f44930093f8dc5e4b4eb1",
+      "textures": [
+        {
+          "name": "idle profile",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Profile_Runtime_v1.png",
+          "sourceHash": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1024,
+          "height": 1536,
+          "runtimeMiB": 3.0009078979492188
+        },
+        {
+          "name": "idle blink",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Blink_Runtime_v1.png",
+          "sourceHash": "ffe8aa88957a7d83d5c9335e24248aa7f6090c1512a53e368ee9a3680a97ec69",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1024,
+          "height": 1536,
+          "runtimeMiB": 3.0013961791992188
+        },
+        {
+          "name": "run atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Run_Atlas_Runtime_v1.png",
+          "sourceHash": "8cf1f6b8e7309bbb87a6d429906b0f941b73ff9b00e73b2bf92af3f810dd9c1e",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1448,
+          "height": 1088,
+          "runtimeMiB": 3.1283493041992188
+        },
+        {
+          "name": "jump atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Jump_Atlas_Runtime_v1.png",
+          "sourceHash": "36cac9d6f53ea1e38776e1d065a4c1ac139030df16d76d955f7b1d45a4ff159b",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1448,
+          "height": 1088,
+          "runtimeMiB": 3.1283493041992188
+        },
+        {
+          "name": "stumble atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Stumble_Atlas_Runtime_v1.png",
+          "sourceHash": "fe493dfe0bb25295e5b29b7cc3a33c586b0cd185d9976a64cc2c494f25d3e4da",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1776,
+          "height": 888,
+          "runtimeMiB": 3.0674362182617188
+        }
+      ]
+    },
+    {
+      "success": true,
+      "budgetPassed": true,
+      "totalResidentMiB": 15.326438903808594,
+      "budgetMiB": 32.0,
+      "frames": 420,
+      "simulationHz": 120,
+      "captureFps": 30,
+      "compressionMode": "hq",
+      "visibilityConflicts": 0,
+      "singleSourceVisible": true,
+      "maxVisibleSources": 1,
+      "componentOverlapFrames": 716,
+      "emptyComponentFrames": 0,
+      "resolverActive": true,
+      "jumpTakeoffs": 2,
+      "jumpLandings": 2,
+      "stumbleEvents": 2,
+      "idleToRunTransitions": 1,
+      "runToIdleTransitions": 1,
+      "sourcePngsUnchanged": true,
+      "colliderUnchanged": true,
+      "rootScaleUnchanged": true,
+      "sawIdle": true,
+      "sawIdleFacingCamera": null,
+      "sawStumbleFacingRight": null,
+      "sawStumbleFacingLeft": null,
+      "stumbleFlipHonored": null,
+      "stumbleFlipDiagnostic": null,
+      "path": "Evidence/25d/T03/attempt-03-idle-edge-on/final-120-joint-proof.json",
+      "sha256": "a7c4af0d37ff1c036b5f5567b165a0a9f960cd42777095493ed7fe4731c89536",
+      "textures": [
+        {
+          "name": "idle profile",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Profile_Runtime_v1.png",
+          "sourceHash": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1024,
+          "height": 1536,
+          "runtimeMiB": 3.0013961791992188
+        },
+        {
+          "name": "idle blink",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Blink_Runtime_v1.png",
+          "sourceHash": "ffe8aa88957a7d83d5c9335e24248aa7f6090c1512a53e368ee9a3680a97ec69",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1024,
+          "height": 1536,
+          "runtimeMiB": 3.0009078979492188
+        },
+        {
+          "name": "run atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Run_Atlas_Runtime_v1.png",
+          "sourceHash": "8cf1f6b8e7309bbb87a6d429906b0f941b73ff9b00e73b2bf92af3f810dd9c1e",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1448,
+          "height": 1088,
+          "runtimeMiB": 3.1283493041992188
+        },
+        {
+          "name": "jump atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Jump_Atlas_Runtime_v1.png",
+          "sourceHash": "36cac9d6f53ea1e38776e1d065a4c1ac139030df16d76d955f7b1d45a4ff159b",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1448,
+          "height": 1088,
+          "runtimeMiB": 3.1283493041992188
+        },
+        {
+          "name": "stumble atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Stumble_Atlas_Runtime_v1.png",
+          "sourceHash": "fe493dfe0bb25295e5b29b7cc3a33c586b0cd185d9976a64cc2c494f25d3e4da",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1776,
+          "height": 888,
+          "runtimeMiB": 3.0674362182617188
+        }
+      ]
+    },
+    {
+      "success": true,
+      "budgetPassed": true,
+      "totalResidentMiB": 16.638938903808594,
+      "budgetMiB": 32.0,
+      "frames": 420,
+      "simulationHz": 120,
+      "captureFps": 30,
+      "compressionMode": "hq",
+      "visibilityConflicts": 0,
+      "singleSourceVisible": true,
+      "maxVisibleSources": 1,
+      "componentOverlapFrames": 716,
+      "emptyComponentFrames": 0,
+      "resolverActive": true,
+      "jumpTakeoffs": 2,
+      "jumpLandings": 2,
+      "stumbleEvents": 2,
+      "idleToRunTransitions": 1,
+      "runToIdleTransitions": 1,
+      "sourcePngsUnchanged": true,
+      "colliderUnchanged": true,
+      "rootScaleUnchanged": true,
+      "sawIdle": true,
+      "sawIdleFacingCamera": true,
+      "sawStumbleFacingRight": null,
+      "sawStumbleFacingLeft": null,
+      "stumbleFlipHonored": null,
+      "stumbleFlipDiagnostic": null,
+      "path": "Evidence/25d/T03/attempt-04-stumble-unflipped/final-120-joint-proof.json",
+      "sha256": "b78f91c6035c3c6f095bd851a10f5c0756d37a659edceb78bf1e50cafdb7d162",
+      "textures": [
+        {
+          "name": "idle profile",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Profile_Runtime_v1.png",
+          "sourceHash": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1024,
+          "height": 1536,
+          "runtimeMiB": 3.0013961791992188
+        },
+        {
+          "name": "idle blink",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Blink_Runtime_v1.png",
+          "sourceHash": "ffe8aa88957a7d83d5c9335e24248aa7f6090c1512a53e368ee9a3680a97ec69",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1024,
+          "height": 1536,
+          "runtimeMiB": 3.0009078979492188
+        },
+        {
+          "name": "run atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Run_Atlas_Runtime_v1.png",
+          "sourceHash": "8cf1f6b8e7309bbb87a6d429906b0f941b73ff9b00e73b2bf92af3f810dd9c1e",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1448,
+          "height": 1088,
+          "runtimeMiB": 3.6908493041992188
+        },
+        {
+          "name": "jump atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Jump_Atlas_Runtime_v1.png",
+          "sourceHash": "36cac9d6f53ea1e38776e1d065a4c1ac139030df16d76d955f7b1d45a4ff159b",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1448,
+          "height": 1088,
+          "runtimeMiB": 3.6908493041992188
+        },
+        {
+          "name": "stumble atlas",
+          "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Stumble_Atlas_Runtime_v1.png",
+          "sourceHash": "fe493dfe0bb25295e5b29b7cc3a33c586b0cd185d9976a64cc2c494f25d3e4da",
+          "graphicsFormat": "RGBA_DXT5_UNorm",
+          "width": 1776,
+          "height": 888,
+          "runtimeMiB": 3.2549362182617188
+        }
+      ]
+    }
+  ],
+  "assets": {
+    "runtime_copies": [
+      {
+        "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Profile_Runtime_v1.png",
+        "identical_to": "Assets/Art/Illustrated25D/Yuna/Yuna_Profile_v1.png",
+        "sha256": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+        "original_sha256": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+        "identical_bytes": true
+      },
+      {
+        "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Blink_Runtime_v1.png",
+        "identical_to": "Assets/Art/Illustrated25D/Yuna/Idle/Yuna_Blink_v1.png",
+        "sha256": "ffe8aa88957a7d83d5c9335e24248aa7f6090c1512a53e368ee9a3680a97ec69",
+        "original_sha256": "ffe8aa88957a7d83d5c9335e24248aa7f6090c1512a53e368ee9a3680a97ec69",
+        "identical_bytes": true
+      }
+    ],
+    "runtime_atlases": [
+      {
+        "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Run_Atlas_Runtime_v1.png",
+        "source": "Assets/Art/Illustrated25D/Yuna/Run/Yuna_Run_Atlas_v1.png",
+        "size": [
+          1448,
+          1088
+        ],
+        "source_size": [
+          1448,
+          1086
+        ],
+        "source_pixels_equal": true,
+        "padding_transparent": true,
+        "sha256": "8cf1f6b8e7309bbb87a6d429906b0f941b73ff9b00e73b2bf92af3f810dd9c1e",
+        "source_sha256": "921aa127071c245072074c63e5be61ed091f00f8a9829d937769286df3966eff"
+      },
+      {
+        "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Jump_Atlas_Runtime_v1.png",
+        "source": "Assets/Art/Illustrated25D/Yuna/Jump/Yuna_Jump_Atlas_v1.png",
+        "size": [
+          1448,
+          1088
+        ],
+        "source_size": [
+          1448,
+          1086
+        ],
+        "source_pixels_equal": true,
+        "padding_transparent": true,
+        "sha256": "36cac9d6f53ea1e38776e1d065a4c1ac139030df16d76d955f7b1d45a4ff159b",
+        "source_sha256": "8aa6be63aab1bc8612b057afcc0601e75b8cd2f41234c41155d75d5fd899e357"
+      },
+      {
+        "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Stumble_Atlas_Runtime_v1.png",
+        "source": "Assets/Art/Illustrated25D/Yuna/Stumble/Yuna_Stumble_Atlas_v1.png",
+        "size": [
+          1776,
+          888
+        ],
+        "source_size": [
+          1774,
+          887
+        ],
+        "source_pixels_equal": true,
+        "padding_transparent": true,
+        "sha256": "fe493dfe0bb25295e5b29b7cc3a33c586b0cd185d9976a64cc2c494f25d3e4da",
+        "source_sha256": "d86cdaef5a8348b86f50fb75e5fbc5b98bbf389798ee7cd316ddbf029c2297bb"
+      }
+    ],
+    "joint_code": [
+      {
+        "path": "Assets/Art/Illustrated25D/Yuna/Joint/Editor/YunaT03JointReviewCapture.cs",
+        "sha256": "a5b02b0ec85f475126d022ef30a8a8eeecd1d5804d250afec99857bbc982df89",
+        "bytes": 38095
+      },
+      {
+        "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/YunaIllustrationVisibilityResolver.cs",
+        "sha256": "b3d0d8082e1f345b5240ad7f5af76bd67c9e2c0e5f9a795b70722f6a2e4ee0bb",
+        "bytes": 3339
+      }
+    ],
+    "scene": [
+      {
+        "path": "Assets/Art/Illustrated25D/Yuna/Joint/YunaT03JointReview.unity",
+        "sha256": "27d1688f39b75bfa63d917f4aac7ef05e9f973a6c8a0355b6e9b739d81c1abe2",
+        "bytes": 207927
+      },
+      {
+        "path": "Assets/Art/Illustrated25D/Yuna/Joint/YunaT03JointReview.unity.meta",
+        "sha256": "2cf4c6ab486863c53c35a8ade165bb9865bf1cd8c316cee1448b67ccdd64494c",
+        "bytes": 155
+      }
+    ]
+  },
+  "hashes": [
+    {
+      "path": "Evidence/25d/T03/attempt-01-overlap/joint-proof.json",
+      "sha256": "0546990bd01f1393fd5b43852c1810aeb7a67ceb3e78f64569d5cfb39b463605",
+      "bytes": 290535
+    },
+    {
+      "path": "Evidence/25d/T03/attempt-02-null-run/joint-proof.json",
+      "sha256": "1247333883688244787828ac6553bb3321e994679a0f44930093f8dc5e4b4eb1",
+      "bytes": 320161
+    },
+    {
+      "path": "Evidence/25d/T03/attempt-03-idle-edge-on/baseline-30-joint-proof.json",
+      "sha256": "6ad4e60881db673dd6bee5f31521bf89dc2f8276c1db7c584df5d4d6c5b97fd2",
+      "bytes": 320166
+    },
+    {
+      "path": "Evidence/25d/T03/attempt-03-idle-edge-on/detail-review-sheet.png",
+      "sha256": "c8c4d0e7950e226cfc3ae5e154c317487139d6c41d8fec8be885d14aeb5c1c0b",
+      "bytes": 379167
+    },
+    {
+      "path": "Evidence/25d/T03/attempt-03-idle-edge-on/final-120-joint-proof.json",
+      "sha256": "a7c4af0d37ff1c036b5f5567b165a0a9f960cd42777095493ed7fe4731c89536",
+      "bytes": 322031
+    },
+    {
+      "path": "Evidence/25d/T03/attempt-03-idle-edge-on/final-30-joint-proof.json",
+      "sha256": "729aac38ac35f77243a377e1de385bad75fdd2c3800691cf193545a74dd88edb",
+      "bytes": 320159
+    },
+    {
+      "path": "Evidence/25d/T03/attempt-03-idle-edge-on/final-60-joint-proof.json",
+      "sha256": "cb3f334a2c2db99ded2e566ba2dc1835bbef35b08b93c55c698f20ba58c352b6",
+      "bytes": 319436
+    },
+    {
+      "path": "Evidence/25d/T03/attempt-03-idle-edge-on/game-review-sheet.png",
+      "sha256": "aa9a1b0dc91f227685251bb32df8ba898321ad1b1667632409d38fe6a9093c96",
+      "bytes": 62057
+    },
+    {
+      "path": "Evidence/25d/T03/attempt-03-idle-edge-on/README.md",
+      "sha256": "2bbb823900f56819ac83e09ceebaf4c89caab5e9533c5ad5536f5382500fbd67",
+      "bytes": 1623
+    },
+    {
+      "path": "Evidence/25d/T03/attempt-04-stumble-unflipped/baseline-30-joint-proof.json",
+      "sha256": "a56a73dfaf3f88d38f35dae1f8957a7a82c04cf3f062b7998af7bcf96ae4b860",
+      "bytes": 320705
+    },
+    {
+      "path": "Evidence/25d/T03/attempt-04-stumble-unflipped/detail-review-sheet.png",
+      "sha256": "60c3833298a99c5c81f1ac0fc4eead1e671fe5fd6d5a14d91c4f2ce876010bac",
+      "bytes": 422511
+    },
+    {
+      "path": "Evidence/25d/T03/attempt-04-stumble-unflipped/final-120-joint-proof.json",
+      "sha256": "b78f91c6035c3c6f095bd851a10f5c0756d37a659edceb78bf1e50cafdb7d162",
+      "bytes": 322570
+    },
+    {
+      "path": "Evidence/25d/T03/attempt-04-stumble-unflipped/final-30-joint-proof.json",
+      "sha256": "34c82216b21e418c9ddc724461d4dcec1fa2f9072c0884728c4ffe6b3cb1fbd7",
+      "bytes": 320698
+    },
+    {
+      "path": "Evidence/25d/T03/attempt-04-stumble-unflipped/final-60-joint-proof.json",
+      "sha256": "a6681e0e4bbad34d3b9584891036cacd8754e8d695f9eebda8264b6771357e93",
+      "bytes": 319975
+    },
+    {
+      "path": "Evidence/25d/T03/attempt-04-stumble-unflipped/game-review-sheet.png",
+      "sha256": "57bbf455a7025efa261723dfcb9dd2be759d0507763c844a267512bb32b23209",
+      "bytes": 64411
+    },
+    {
+      "path": "Evidence/25d/T03/attempt-04-stumble-unflipped/left-stumble-t11.23.png",
+      "sha256": "949eca9a1b0f236235c0ea06280f27be9d8bc5fd0ada305ba2a6c90eefe8ccca",
+      "bytes": 173997
+    },
+    {
+      "path": "Evidence/25d/T03/attempt-04-stumble-unflipped/README.md",
+      "sha256": "d91aee3061554290aae811d57067e8cc2cbf7c974097cd0eb20de8a999f5afb3",
+      "bytes": 1506
+    },
+    {
+      "path": "Evidence/25d/T03/baseline-30/joint-proof.json",
+      "sha256": "b0d4fa366f3a02bd1634238c1c53a9d28b806a3c8d4a917ea93ce975275b0493",
+      "bytes": 335664
+    },
+    {
+      "path": "Evidence/25d/T03/CONTRATO.md",
+      "sha256": "d269ac5c2184ff8fe6379484c7954a5382b42fe4772a5c90ef38121d1ecd8c00",
+      "bytes": 5223
+    },
+    {
+      "path": "Evidence/25d/T03/final-120/joint-proof.json",
+      "sha256": "dfe8ced056de45e1c8c10347ea6fefd067fde0de331e6f2fb1cf92cb663e2469",
+      "bytes": 337529
+    },
+    {
+      "path": "Evidence/25d/T03/final-30/joint-proof.json",
+      "sha256": "309c9df09eaa396709fd04d5efd47c315a02236fa41a3904005d731c1d502586",
+      "bytes": 335657
+    },
+    {
+      "path": "Evidence/25d/T03/final-60/joint-proof.json",
+      "sha256": "b82bd6dc04fe652048152029a3256df617e07fec52f23e1d3d84f8c9e6c6932c",
+      "bytes": 334934
+    },
+    {
+      "path": "Evidence/25d/T03/README.md",
+      "sha256": "020f1a30b315ed6ba086a70a1ee7c00e09e3c73b3df0a102cf5bee402ada5b3f",
+      "bytes": 10561
+    },
+    {
+      "path": "Evidence/25d/T03/review/detail-normal.gif",
+      "sha256": "89ce301167f79806b7d32ed70e33f0248ffba307c7c3d5b16dc98ef5f9ca2fd5",
+      "bytes": 12104635
+    },
+    {
+      "path": "Evidence/25d/T03/review/detail-review-sheet.png",
+      "sha256": "e19a7b2909866c987ad31c080bc7201fe6db8d2677bf8b9ea7a3d39a534d5250",
+      "bytes": 425988
+    },
+    {
+      "path": "Evidence/25d/T03/review/detail-slow.gif",
+      "sha256": "897093f670ada6fdf932334d83cfa70db4986adcc34240485f2dee492e431354",
+      "bytes": 8269612
+    },
+    {
+      "path": "Evidence/25d/T03/review/game-normal.gif",
+      "sha256": "ec84feed47d535931f095e995a491f62b3a41a7c6588f2d572c5d9c1c0dfe67b",
+      "bytes": 1876336
+    },
+    {
+      "path": "Evidence/25d/T03/review/game-review-sheet.png",
+      "sha256": "5eff4cf4c1e8a59573bbe0462a4ae162fd95b1c6ab3b1bdc83ee84126cf3a74c",
+      "bytes": 64605
+    },
+    {
+      "path": "Evidence/25d/T03/review/game-slow.gif",
+      "sha256": "e4b19159c844e3fabf64aa9e34e4bf6f63200a4b9ac76b9b90b0a306c87652f7",
+      "bytes": 1250219
+    },
+    {
+      "path": "Evidence/25d/T03/reviews/T03-conjunto.md",
+      "sha256": "4dcefdc0a16897737578a8a7343f90c0dc5cede41a7fca92badc1435b861ab99",
+      "bytes": 4325
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Editor/YunaT03JointReviewCapture.cs",
+      "sha256": "a5b02b0ec85f475126d022ef30a8a8eeecd1d5804d250afec99857bbc982df89",
+      "bytes": 38095
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Editor/YunaT03JointReviewCapture.cs.meta",
+      "sha256": "b12edd633f0faf7f5f0aef4f7e49d50447d24cab00b2cc3084b801755c7837b4",
+      "bytes": 59
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Editor.meta",
+      "sha256": "b318c5b585c14d608dda332ef187236afa9946dafb05247080706e3db05ae437",
+      "bytes": 172
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Jump0.asset",
+      "sha256": "664608996d78f8c9fc4fe4df2610cde8afb211426c9d7a6419de9bc6af91e85c",
+      "bytes": 4919
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Jump0.asset.meta",
+      "sha256": "abe02950ba6010bd8c3195437d25b9d0fb88e0bb81f9f6dc41e00540ed470c26",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Jump1.asset",
+      "sha256": "2aff90222be18ecbc2a3aa65019e761d97fd3ef56cbcf63e542b71dd6a9e7b92",
+      "bytes": 4923
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Jump1.asset.meta",
+      "sha256": "56c517fc8cb783ffaaff590dc68b65a9e24eed08ddd804e609d8c78cbe1fef59",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Jump2.asset",
+      "sha256": "cf43e8f857507ac34b4bee4026d975700f599047bebf0a659caaee29d4bb9baf",
+      "bytes": 4923
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Jump2.asset.meta",
+      "sha256": "321c4c906091c34fc77b0269d63ee89b705b35136f29ea6119dbd1c9f62e9392",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Jump3.asset",
+      "sha256": "31816f07dd0964160a3221a18bba36a9084986293b8a3341e9866f033c74a913",
+      "bytes": 4928
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Jump3.asset.meta",
+      "sha256": "8db9eb09344743df750cfc151176f6ae742594f2f6b606926ae5cc2f2ed3b93f",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Jump4.asset",
+      "sha256": "f05fcdb70f727f043cbd0795d52ed0c4da9f997e2b6c3c9359b9b2be9be3c5b7",
+      "bytes": 4911
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Jump4.asset.meta",
+      "sha256": "9b3cb2f583fbb2eb364d234dddf5ec361e2634c4ad749fe22ce289e1aa8a5cdf",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Jump5.asset",
+      "sha256": "5dea32b9d529611b5eeaec9671afdcf9c5bac408c72d21dfab1378826e5ab2b2",
+      "bytes": 4915
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Jump5.asset.meta",
+      "sha256": "28314e22766df917e70fe7f913625019b5dd56250f6ecd7ac8ae51edcaf5f4d2",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Jump6.asset",
+      "sha256": "1a0c30a7222c721368295dbea2b73223621e8961426d18ca0c35355e029807b9",
+      "bytes": 4915
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Jump6.asset.meta",
+      "sha256": "66980099add0b4c158075c22c7d85b2c7e8352405918e6225160b91b0427e128",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Jump7.asset",
+      "sha256": "e5a5750d0a2c94ad2771a8aac10adae53c9bb782c854a026a3b2c2078ead63d1",
+      "bytes": 4920
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Jump7.asset.meta",
+      "sha256": "ae960d1ca33699bd88a0ca518f3dc26aaac4ba7926a2be96c61b4b693036ca86",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Run0.asset",
+      "sha256": "dd474d2d3532d5c12527b4d83f110692d15a63223760b1eb7281077cefe637ef",
+      "bytes": 4918
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Run0.asset.meta",
+      "sha256": "92af4a973dbb93de8f322e22616990d886a79963883a0f7e5ee689f773429c1b",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Run1.asset",
+      "sha256": "1a9a31444581c342e491eecbfe282f8d51ee5c48672ec17c107db866384f7db3",
+      "bytes": 4922
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Run1.asset.meta",
+      "sha256": "0b022aca71cf465ad307fa776abcd1214df152beb5932e88efb9ae02117f217b",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Run2.asset",
+      "sha256": "0469734e0a73c18cbcd6c797039b841b5ea778caa01190f94c7c3c39084ae45d",
+      "bytes": 4922
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Run2.asset.meta",
+      "sha256": "f8f1c46651ccca9ef822d810488e733d85acdbe23ece5540794bf1c2b30c8a34",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Run3.asset",
+      "sha256": "075c528394bbbb94384318b1f50be2f37acfda30c636659cade07174b308bfda",
+      "bytes": 4927
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Run3.asset.meta",
+      "sha256": "40d56ccc95354362591158221bca479152057951cad8d85c91f992ec1749fe9a",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Run4.asset",
+      "sha256": "44c801ffd641a7b55148cd7b8862760c810e37b0e6d651d16c114bc20bfe8887",
+      "bytes": 4910
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Run4.asset.meta",
+      "sha256": "3fef6c894dc703df44930ddd3ce37cca1107a2ca148464cac3409ce141e78888",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Run5.asset",
+      "sha256": "24cab17462a978033f80db1a8b298889419189c9121656229bffb3515542e6bc",
+      "bytes": 4914
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Run5.asset.meta",
+      "sha256": "01f2132eb96a014d24fda9674de18c37265613bd2b19df69da5fffd34a424c99",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Run6.asset",
+      "sha256": "93ab581b56b523fde89749558e73047af64bd9ff05e370022b20012c3fd0f9ba",
+      "bytes": 4914
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Run6.asset.meta",
+      "sha256": "4ee67abfea409238bb56964782b06356b27abb621db4506acf51bf38b770b4b7",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Run7.asset",
+      "sha256": "9ebd09b5c32d0297c0d989072e3116ca4f022995b260a7e18edfb4060fc146c4",
+      "bytes": 4919
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Run7.asset.meta",
+      "sha256": "656e32e3db3ce162a50071948ba51ec165f71b3bdac88c29770dbf57ca8bd325",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Stumble0.asset",
+      "sha256": "60ef2c4becec2946f320535b103de90eb43242a7b15061156131619ce9a8ffd0",
+      "bytes": 4870
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Stumble0.asset.meta",
+      "sha256": "f1f248ddddb660a935ace0cd6ea81c60f7bf2dd26bd5131240d430c6769017be",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Stumble1.asset",
+      "sha256": "32262b2bc5c001a4e64f42d065ded31975bf32612b43a5d118cedc5d5c29e1e7",
+      "bytes": 4881
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Stumble1.asset.meta",
+      "sha256": "d30cf60952c4bc608966d6e0bc90b8135e212caf999f9b953ab71e3d2f11e7a1",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Stumble2.asset",
+      "sha256": "ed52b17e7a5e9a3154e19a1f24e22ccbbbc7657cd9850ba71fe84a549a2a8198",
+      "bytes": 4883
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Stumble2.asset.meta",
+      "sha256": "cce1de15bbf906250b04f704b2b63ea0f10cf7f6fef034872b6c2c41e790f489",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Stumble3.asset",
+      "sha256": "06362588ce7655c016dee1b1433a975c1798fbd3622207e046f848fc5ea2e35c",
+      "bytes": 4882
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Stumble3.asset.meta",
+      "sha256": "d9e0327321c9f06c09d7c79449b019e2b2c2879703a490c31f2cdf8685df4dfd",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Stumble4.asset",
+      "sha256": "c985937f7ee1924d59ad79d9532699f40179b17d5eacf348d88d52bb1c78b77c",
+      "bytes": 4864
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Stumble4.asset.meta",
+      "sha256": "cee999addf7ebf2f5c611844904735e591e4f25029ed719798e54eb311312b7a",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Stumble5.asset",
+      "sha256": "c74b5a89712a34538d5bfa08e08ad39b68020a427eb1b6fec286c5ae326b1b4c",
+      "bytes": 4875
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Stumble5.asset.meta",
+      "sha256": "62bb8056b2c66fe87a0029bf0e16068c9a57eff36a1aeba36fcac6f43fa43a26",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Stumble6.asset",
+      "sha256": "9e5f9db1b7e6951c80d1900c64dbb74620cf8a9db723219537e7da56369c95f1",
+      "bytes": 4877
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Stumble6.asset.meta",
+      "sha256": "055db58360be616b552e515d5d71006a9080042c2e6fd45d5c7b66281f749090",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Stumble7.asset",
+      "sha256": "5ac087af89fc70902f71c17d9a4c2df5743935913ae7b8fa72eceeb66320d1f4",
+      "bytes": 4876
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames/Stumble7.asset.meta",
+      "sha256": "b119ef13cd4723ec91bb141dc382151b503933de40ee807579791877d49451c8",
+      "bytes": 189
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Frames.meta",
+      "sha256": "c80f1c4285615542aa3050e7fa7e39e8ba4590fc13fa39064a9724aa4472dc18",
+      "bytes": 172
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Idle_Painted_Runtime.mat",
+      "sha256": "1d7d4d809378fc2a85687a9c9cf6289fbe57f04fd8f418131c5ba5bfbd99d6d4",
+      "bytes": 1102
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Idle_Painted_Runtime.mat.meta",
+      "sha256": "61c8371f3f5d8f3b65011bfb77fb8940661bef4519d0dd42ecfce301495ee396",
+      "bytes": 188
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Blink_Runtime_v1.png",
+      "sha256": "ffe8aa88957a7d83d5c9335e24248aa7f6090c1512a53e368ee9a3680a97ec69",
+      "bytes": 2077332
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Blink_Runtime_v1.png.meta",
+      "sha256": "6d4dfde2fb8fdf7c2ac9cd704b109789072216c9989fc809905849b9d60916d7",
+      "bytes": 3364
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Jump_Atlas_Runtime_v1.png",
+      "sha256": "36cac9d6f53ea1e38776e1d065a4c1ac139030df16d76d955f7b1d45a4ff159b",
+      "bytes": 1647484
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Jump_Atlas_Runtime_v1.png.meta",
+      "sha256": "3524aadb8449de6c9dfc747636adc00ad9fb4745cd4fe997aa4c0bc3fde8172f",
+      "bytes": 3364
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Profile_Runtime_v1.png",
+      "sha256": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+      "bytes": 2158619
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Profile_Runtime_v1.png.meta",
+      "sha256": "0201cdb63611f364500e4dd90b0d5ac50934cd5d0a705a87d6c29b5b2bbf77b8",
+      "bytes": 3992
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Run_Atlas_Runtime_v1.png",
+      "sha256": "8cf1f6b8e7309bbb87a6d429906b0f941b73ff9b00e73b2bf92af3f810dd9c1e",
+      "bytes": 1929064
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Run_Atlas_Runtime_v1.png.meta",
+      "sha256": "a4443f70f6cb998b0a6815f0e87375e279a24bfe051edd427d019f24eb505669",
+      "bytes": 3364
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Stumble_Atlas_Runtime_v1.png",
+      "sha256": "fe493dfe0bb25295e5b29b7cc3a33c586b0cd185d9976a64cc2c494f25d3e4da",
+      "bytes": 2388660
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/Yuna_Stumble_Atlas_Runtime_v1.png.meta",
+      "sha256": "e8a6d74c1ca1071f053eeb568df21cb79325301b78e4b0a2cdb90abaa4685d79",
+      "bytes": 3364
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/YunaIllustrationVisibilityResolver.cs",
+      "sha256": "b3d0d8082e1f345b5240ad7f5af76bd67c9e2c0e5f9a795b70722f6a2e4ee0bb",
+      "bytes": 3339
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/YunaIllustrationVisibilityResolver.cs.meta",
+      "sha256": "3d4fa0ff19beb575641cafb6f5d42954a5594d05f213249eac982694ddf4d2b3",
+      "bytes": 60
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime.meta",
+      "sha256": "c321d9ebcb582ab6f0a935c5fcd1e39f6cea1cdc01a30a3e992aace48d2e8b16",
+      "bytes": 172
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/YunaT03JointReview.unity",
+      "sha256": "27d1688f39b75bfa63d917f4aac7ef05e9f973a6c8a0355b6e9b739d81c1abe2",
+      "bytes": 207927
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/YunaT03JointReview.unity.meta",
+      "sha256": "2cf4c6ab486863c53c35a8ade165bb9865bf1cd8c316cee1448b67ccdd64494c",
+      "bytes": 155
+    }
+  ],
+  "verification": {
+    "final_runs": [
+      "30",
+      "60",
+      "120"
+    ],
+    "frames_per_camera": 420,
+    "visible_source_priority": [
+      "Stumble",
+      "Jump",
+      "Run",
+      "Idle"
+    ],
+    "post_resolve_conflicts": 0,
+    "pre_resolve_component_overlaps_detected": [
+      179,
+      358,
+      716
+    ],
+    "source_pngs_unchanged": true,
+    "collider_and_root_scale_unchanged": true,
+    "comparison_frames": 840,
+    "idle_after_stop_projected": true,
+    "idle_orientation_compensates_root": true,
+    "stumble_flip_honored_by_shader": true,
+    "stumble_orientation_checked_per_direction": true,
+    "alpha_changed_fraction_max": 0.0
+  },
+  "human_review": {
+    "required": true,
+    "status": "accepted",
+    "accepted_at": "2026-11-13",
+    "literal_response": "aprovado. Qual e o proximo passo?",
+    "record": "Evidence/25d/T03/reviews/T03-conjunto.md",
+    "scope": "T03 aggregate only; T04.1 accepted separately; T04.2/T05/T06 remain open",
+    "question": "O conjunto Yuna idle/corrida/salto/tropeco e o orcamento residente podem ser aceitos?"
+  }
+}

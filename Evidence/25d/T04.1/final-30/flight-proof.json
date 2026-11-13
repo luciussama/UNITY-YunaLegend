@@ -1,0 +1,1212 @@
+{
+    "method": "Unity PlayMode, deterministic evaluation of the painted Nanda flight loop on the accepted T03 fixture camera. The fixture supplies the 7.5 m production vertical span and a static Yuna for scale only; no gameplay, guide, light, trail or scene file is modified. Captures at 15 fps; simulation rate reported separately. Orientation is verified by a rendered mirror probe on the default sprite path and by requiring flipX to match direction on every sample.",
+    "compressionMode": "hq",
+    "gameplayBefore": "f24464d8010af2a02a67d564c3420c38f340e9bcc1bf4a8671752a4395a0e25a",
+    "gameplayAfter": "f24464d8010af2a02a67d564c3420c38f340e9bcc1bf4a8671752a4395a0e25a",
+    "guideBefore": "5e594e55cb6cc54eb41b07d6cc37fd39540bfd2020e995a7afc0fd69fa71acde",
+    "guideAfter": "5e594e55cb6cc54eb41b07d6cc37fd39540bfd2020e995a7afc0fd69fa71acde",
+    "sourceBefore": "f16ba3862f7e1fe263916922fa742eef1426b98d6e4d81f794e1083e74725678",
+    "sourceAfter": "f16ba3862f7e1fe263916922fa742eef1426b98d6e4d81f794e1083e74725678",
+    "atlasBefore": "3752ca206bbdfa85d09c8aee9313abcd8fdd77abf00315c2caca80c15b06af3a",
+    "atlasAfter": "3752ca206bbdfa85d09c8aee9313abcd8fdd77abf00315c2caca80c15b06af3a",
+    "simulationHz": 30,
+    "captureFps": 15,
+    "framesRun": 72,
+    "poseChangesRecorded": 48,
+    "duration": 4.800000190734863,
+    "cycleSeconds": 0.800000011920929,
+    "hoverAmplitude": 0.03500000014901161,
+    "hoverPeriod": 2.4000000953674318,
+    "allPosesSeen": true,
+    "sawRight": true,
+    "sawLeft": true,
+    "flipHonored": true,
+    "poseCadenceExact": true,
+    "sourcePngsUnchanged": true,
+    "sceneUntouched": true,
+    "guideUntouched": true,
+    "budgetPassed": true,
+    "poseMismatches": 0,
+    "flipViolations": 0,
+    "cyclesObserved": 5,
+    "flipDiagnostic": "pose=3 asymmetry=6912790 mirrorError=0 tolerance=864098",
+    "posesSeen": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+    ],
+    "residentMiB": 4.813407897949219,
+    "budgetMiB": 16.0,
+    "texture": {
+        "name": "nanda flight atlas",
+        "path": "Assets/Art/Illustrated25D/Nanda/Flight/Nanda_Flight_Atlas_v1.png",
+        "sourceHash": "3752ca206bbdfa85d09c8aee9313abcd8fdd77abf00315c2caca80c15b06af3a",
+        "graphicsFormat": "RGBA_DXT5_UNorm",
+        "importSettings": "CompressedHQ mipmaps=False readable=False max=2048",
+        "width": 2048,
+        "height": 1184,
+        "runtimeMiB": 4.813407897949219
+    },
+    "poseChanges": [
+        {
+            "t": 0.10000000149011612,
+            "pose": 1,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 0.20000000298023225,
+            "pose": 2,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 0.30000001192092898,
+            "pose": 3,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 0.4000000059604645,
+            "pose": 4,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 0.5,
+            "pose": 5,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 0.6000000238418579,
+            "pose": 6,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 0.699999988079071,
+            "pose": 7,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 0.800000011920929,
+            "pose": 0,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 0.8999999761581421,
+            "pose": 1,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 1.0,
+            "pose": 2,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 1.100000023841858,
+            "pose": 3,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 1.2000000476837159,
+            "pose": 4,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 1.2999999523162842,
+            "pose": 5,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 1.399999976158142,
+            "pose": 6,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 1.5,
+            "pose": 7,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 1.600000023841858,
+            "pose": 0,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 1.7000000476837159,
+            "pose": 1,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 1.7999999523162842,
+            "pose": 2,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 1.899999976158142,
+            "pose": 3,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 2.0,
+            "pose": 4,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 2.0999999046325685,
+            "pose": 5,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 2.200000047683716,
+            "pose": 6,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 2.299999952316284,
+            "pose": 7,
+            "direction": 1.0,
+            "flipX": false
+        },
+        {
+            "t": 2.4000000953674318,
+            "pose": 0,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 2.5,
+            "pose": 1,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 2.5999999046325685,
+            "pose": 2,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 2.700000047683716,
+            "pose": 3,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 2.799999952316284,
+            "pose": 4,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 2.9000000953674318,
+            "pose": 5,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 3.0,
+            "pose": 6,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 3.0999999046325685,
+            "pose": 7,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 3.200000047683716,
+            "pose": 0,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 3.299999952316284,
+            "pose": 1,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 3.4000000953674318,
+            "pose": 2,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 3.5,
+            "pose": 3,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 3.5999999046325685,
+            "pose": 4,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 3.700000047683716,
+            "pose": 5,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 3.799999952316284,
+            "pose": 6,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 3.9000000953674318,
+            "pose": 7,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 4.0,
+            "pose": 0,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 4.099999904632568,
+            "pose": 1,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 4.199999809265137,
+            "pose": 2,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 4.300000190734863,
+            "pose": 3,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 4.400000095367432,
+            "pose": 4,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 4.5,
+            "pose": 5,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 4.599999904632568,
+            "pose": 6,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 4.699999809265137,
+            "pose": 7,
+            "direction": -1.0,
+            "flipX": true
+        },
+        {
+            "t": 4.800000190734863,
+            "pose": 0,
+            "direction": -1.0,
+            "flipX": true
+        }
+    ],
+    "samples": [
+        {
+            "frame": 0,
+            "t": 0.06666667014360428,
+            "pose": 0,
+            "cyclePhase": 0.0833333358168602,
+            "hover": 0.006077686790376902,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 1,
+            "t": 0.13333334028720857,
+            "pose": 1,
+            "cyclePhase": 0.1666666716337204,
+            "hover": 0.011970705352723599,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 2,
+            "t": 0.20000000298023225,
+            "pose": 2,
+            "cyclePhase": 0.25,
+            "hover": 0.017500000074505807,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 3,
+            "t": 0.2666666805744171,
+            "pose": 2,
+            "cyclePhase": 0.3333333432674408,
+            "hover": 0.022497566416859628,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 4,
+            "t": 0.3333333432674408,
+            "pose": 3,
+            "cyclePhase": 0.4166666865348816,
+            "hover": 0.02681155502796173,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 5,
+            "t": 0.4000000059604645,
+            "pose": 4,
+            "cyclePhase": 0.5,
+            "hover": 0.030310891568660737,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 6,
+            "t": 0.46666666865348818,
+            "pose": 4,
+            "cyclePhase": 0.5833333134651184,
+            "hover": 0.032889243215322497,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 7,
+            "t": 0.5333333611488342,
+            "pose": 5,
+            "cyclePhase": 0.6666666865348816,
+            "hover": 0.03446827456355095,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 8,
+            "t": 0.6000000238418579,
+            "pose": 6,
+            "cyclePhase": 0.75,
+            "hover": 0.03500000014901161,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 9,
+            "t": 0.6666666865348816,
+            "pose": 6,
+            "cyclePhase": 0.8333333730697632,
+            "hover": 0.03446827083826065,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 10,
+            "t": 0.7333333492279053,
+            "pose": 7,
+            "cyclePhase": 0.9166666865348816,
+            "hover": 0.032889243215322497,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 11,
+            "t": 0.800000011920929,
+            "pose": 0,
+            "cyclePhase": 0.0,
+            "hover": 0.030310887843370439,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 12,
+            "t": 0.8666666746139526,
+            "pose": 0,
+            "cyclePhase": 0.08333337306976319,
+            "hover": 0.02681155502796173,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 13,
+            "t": 0.9333333373069763,
+            "pose": 1,
+            "cyclePhase": 0.16666662693023683,
+            "hover": 0.022497566416859628,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 14,
+            "t": 1.0,
+            "pose": 2,
+            "cyclePhase": 0.25,
+            "hover": 0.017500001937150956,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 15,
+            "t": 1.0666667222976685,
+            "pose": 2,
+            "cyclePhase": 0.3333333730697632,
+            "hover": 0.01197069976478815,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 16,
+            "t": 1.1333333253860474,
+            "pose": 3,
+            "cyclePhase": 0.4166666269302368,
+            "hover": 0.0060776905156672,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 17,
+            "t": 1.2000000476837159,
+            "pose": 4,
+            "cyclePhase": 0.5,
+            "hover": -3.059797082372029e-9,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 18,
+            "t": 1.2666666507720948,
+            "pose": 4,
+            "cyclePhase": 0.5833332538604736,
+            "hover": -0.006077679805457592,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 19,
+            "t": 1.3333333730697632,
+            "pose": 5,
+            "cyclePhase": 0.6666667461395264,
+            "hover": -0.011970705352723599,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 20,
+            "t": 1.399999976158142,
+            "pose": 6,
+            "cyclePhase": 0.75,
+            "hover": -0.017499998211860658,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 21,
+            "t": 1.4666666984558106,
+            "pose": 6,
+            "cyclePhase": 0.8333333730697632,
+            "hover": -0.022497564554214479,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 22,
+            "t": 1.5333333015441895,
+            "pose": 7,
+            "cyclePhase": 0.9166666269302368,
+            "hover": -0.026811549440026284,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 23,
+            "t": 1.600000023841858,
+            "pose": 0,
+            "cyclePhase": 0.0,
+            "hover": -0.030310891568660737,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 24,
+            "t": 1.6666666269302369,
+            "pose": 0,
+            "cyclePhase": 0.08333325386047363,
+            "hover": -0.032889243215322497,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 25,
+            "t": 1.7333333492279053,
+            "pose": 1,
+            "cyclePhase": 0.16666674613952638,
+            "hover": -0.03446827456355095,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 26,
+            "t": 1.7999999523162842,
+            "pose": 2,
+            "cyclePhase": 0.25,
+            "hover": -0.03500000014901161,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 27,
+            "t": 1.8666666746139527,
+            "pose": 2,
+            "cyclePhase": 0.33333325386047366,
+            "hover": -0.03446827083826065,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 28,
+            "t": 1.9333332777023316,
+            "pose": 3,
+            "cyclePhase": 0.41666650772094729,
+            "hover": -0.032889243215322497,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 29,
+            "t": 2.0,
+            "pose": 4,
+            "cyclePhase": 0.5,
+            "hover": -0.030310891568660737,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 30,
+            "t": 2.066666603088379,
+            "pose": 4,
+            "cyclePhase": 0.5833332538604736,
+            "hover": -0.02681155689060688,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 31,
+            "t": 2.133333444595337,
+            "pose": 5,
+            "cyclePhase": 0.6666667461395264,
+            "hover": -0.02249755896627903,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 32,
+            "t": 2.200000047683716,
+            "pose": 6,
+            "cyclePhase": 0.75,
+            "hover": -0.01749999262392521,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 33,
+            "t": 2.2666666507720949,
+            "pose": 6,
+            "cyclePhase": 0.8333332538604736,
+            "hover": -0.011970712803304196,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 34,
+            "t": 2.3333332538604738,
+            "pose": 7,
+            "cyclePhase": 0.9166665077209473,
+            "hover": -0.0060776956379413609,
+            "direction": 1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": false,
+            "matchesExpected": true
+        },
+        {
+            "frame": 35,
+            "t": 2.4000000953674318,
+            "pose": 0,
+            "cyclePhase": 0.0,
+            "hover": 6.119594164744058e-9,
+            "direction": -1.0,
+            "x": 1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 36,
+            "t": 2.4666666984558107,
+            "pose": 0,
+            "cyclePhase": 0.08333325386047363,
+            "hover": 0.006077690981328487,
+            "direction": -1.0,
+            "x": 1.4541765451431275,
+            "y": 1.6487356424331666,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 37,
+            "t": 2.5333333015441896,
+            "pose": 1,
+            "cyclePhase": 0.16666650772094727,
+            "hover": 0.011970693245530129,
+            "direction": -1.0,
+            "x": 0.9525464177131653,
+            "y": 1.7264668941497803,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 38,
+            "t": 2.5999999046325685,
+            "pose": 2,
+            "cyclePhase": 0.2499997615814209,
+            "hover": 0.01749998703598976,
+            "direction": -1.0,
+            "x": 0.2738703191280365,
+            "y": 1.7666575908660889,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 39,
+            "t": 2.6666667461395265,
+            "pose": 2,
+            "cyclePhase": 0.33333349227905276,
+            "hover": 0.022497566416859628,
+            "direction": -1.0,
+            "x": -0.4530939757823944,
+            "y": 1.7607576847076417,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 40,
+            "t": 2.7333333492279054,
+            "pose": 3,
+            "cyclePhase": 0.41666674613952639,
+            "hover": 0.02681155502796173,
+            "direction": -1.0,
+            "x": -1.0995804071426392,
+            "y": 1.710022211074829,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 41,
+            "t": 2.799999952316284,
+            "pose": 4,
+            "cyclePhase": 0.5,
+            "hover": 0.030310887843370439,
+            "direction": -1.0,
+            "x": -1.5368307828903199,
+            "y": 1.6252444982528687,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 42,
+            "t": 2.866666555404663,
+            "pose": 4,
+            "cyclePhase": 0.5833332538604736,
+            "hover": 0.0328892357647419,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 43,
+            "t": 2.933333396911621,
+            "pose": 5,
+            "cyclePhase": 0.6666667461395264,
+            "hover": 0.03446827083826065,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 44,
+            "t": 3.0,
+            "pose": 6,
+            "cyclePhase": 0.75,
+            "hover": 0.03500000014901161,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 45,
+            "t": 3.066666603088379,
+            "pose": 6,
+            "cyclePhase": 0.8333332538604736,
+            "hover": 0.03446827456355095,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 46,
+            "t": 3.133333444595337,
+            "pose": 7,
+            "cyclePhase": 0.9166667461395264,
+            "hover": 0.032889239490032199,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 47,
+            "t": 3.200000047683716,
+            "pose": 0,
+            "cyclePhase": 0.0,
+            "hover": 0.03031088411808014,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 48,
+            "t": 3.2666666507720949,
+            "pose": 0,
+            "cyclePhase": 0.08333301544189453,
+            "hover": 0.026811551302671434,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 49,
+            "t": 3.3333332538604738,
+            "pose": 1,
+            "cyclePhase": 0.16666650772094727,
+            "hover": 0.02249756082892418,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 50,
+            "t": 3.4000000953674318,
+            "pose": 2,
+            "cyclePhase": 0.25,
+            "hover": 0.017499996349215509,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 51,
+            "t": 3.4666666984558107,
+            "pose": 2,
+            "cyclePhase": 0.33333349227905276,
+            "hover": 0.011970702558755875,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 52,
+            "t": 3.5333333015441896,
+            "pose": 3,
+            "cyclePhase": 0.41666650772094729,
+            "hover": 0.006077683996409178,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 53,
+            "t": 3.5999999046325685,
+            "pose": 4,
+            "cyclePhase": 0.5,
+            "hover": -8.347416646792283e-10,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 54,
+            "t": 3.6666667461395265,
+            "pose": 4,
+            "cyclePhase": 0.5833334922790527,
+            "hover": -0.006077685859054327,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 55,
+            "t": 3.7333333492279054,
+            "pose": 5,
+            "cyclePhase": 0.6666665077209473,
+            "hover": -0.01197070349007845,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 56,
+            "t": 3.799999952316284,
+            "pose": 6,
+            "cyclePhase": 0.75,
+            "hover": -0.017499998211860658,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 57,
+            "t": 3.866666555404663,
+            "pose": 6,
+            "cyclePhase": 0.8333330154418945,
+            "hover": -0.02249756269156933,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 58,
+            "t": 3.933333396911621,
+            "pose": 7,
+            "cyclePhase": 0.9166665077209473,
+            "hover": -0.026811551302671434,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 59,
+            "t": 4.0,
+            "pose": 0,
+            "cyclePhase": 0.0,
+            "hover": -0.03031088598072529,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 60,
+            "t": 4.066666603088379,
+            "pose": 0,
+            "cyclePhase": 0.08333301544189453,
+            "hover": -0.032889239490032199,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 61,
+            "t": 4.133333206176758,
+            "pose": 1,
+            "cyclePhase": 0.16666650772094727,
+            "hover": -0.03446827083826065,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 62,
+            "t": 4.199999809265137,
+            "pose": 2,
+            "cyclePhase": 0.2499995231628418,
+            "hover": -0.03500000014901161,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 63,
+            "t": 4.266666889190674,
+            "pose": 2,
+            "cyclePhase": 0.33333349227905276,
+            "hover": -0.03446826711297035,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 64,
+            "t": 4.333333492279053,
+            "pose": 3,
+            "cyclePhase": 0.41666698455810549,
+            "hover": -0.0328892357647419,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 65,
+            "t": 4.400000095367432,
+            "pose": 4,
+            "cyclePhase": 0.5,
+            "hover": -0.03031088039278984,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 66,
+            "t": 4.4666666984558109,
+            "pose": 4,
+            "cyclePhase": 0.5833334922790527,
+            "hover": -0.026811566203832628,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 67,
+            "t": 4.5333333015441898,
+            "pose": 5,
+            "cyclePhase": 0.6666665077209473,
+            "hover": -0.02249757945537567,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 68,
+            "t": 4.599999904632568,
+            "pose": 6,
+            "cyclePhase": 0.75,
+            "hover": -0.017500014975667,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 69,
+            "t": 4.666666507720947,
+            "pose": 6,
+            "cyclePhase": 0.8333330154418945,
+            "hover": -0.011970722116529942,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 70,
+            "t": 4.733333110809326,
+            "pose": 7,
+            "cyclePhase": 0.9166665077209473,
+            "hover": -0.006077705882489681,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        },
+        {
+            "frame": 71,
+            "t": 4.800000190734863,
+            "pose": 0,
+            "cyclePhase": 0.0,
+            "hover": 1.2239188329488116e-8,
+            "direction": -1.0,
+            "x": -1.649999976158142,
+            "y": 1.5499999523162842,
+            "flipX": true,
+            "matchesExpected": true
+        }
+    ],
+    "success": true
+}
