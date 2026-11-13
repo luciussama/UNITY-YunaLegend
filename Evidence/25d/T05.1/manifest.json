@@ -1,0 +1,161 @@
+{
+  "schema": 1,
+  "task": "T05.1",
+  "scope": "urso: perfil de apoio, integracao ilustrada, camera final e revisao",
+  "status": "T05.1 aprovada pelo usuario em 2026-11-13; T05 agregada pendente",
+  "approval": {
+    "scope": "T05.1 urso",
+    "status": "accepted",
+    "literal_response": "aprovado.",
+    "date": "2026-11-13",
+    "reference": "Evidence/25d/T05.1/reviews/T05.1-urso-proposta.md"
+  },
+  "review_questions": [
+    "A coroa e as orelhas da prancha aprovada leem como o apoio real do urso no tamanho de gameplay?",
+    "Na camera final, os pes da Yuna parecem em contato com a coroa, sem flutuacao ou oclusao enganosa?",
+    "O detalhe preserva pintura, silhueta e proporcao sem introduzir borda reta ou tampo invisivel?"
+  ],
+  "contract": {
+    "crown_world_y": -8.0,
+    "crown_height_above_floor_m": 1.1,
+    "visible_width_m": 2.017602,
+    "physical_depth_m": 1.2,
+    "collider": "one non-convex extruded MeshCollider",
+    "visual_plane_local_z": 0.0,
+    "support_regions": 7,
+    "support_segments": 656,
+    "support_error_m": 1e-06,
+    "outside_depth_hits": 0,
+    "bear_to_books_gap_m": 2.49084,
+    "validated_jump_reach_m": 2.491969
+  },
+  "validations": {
+    "unity_setup": "exit 0; T05_BEAR_SETUP_SAVED width=2.017602 depth=1.2 crownY=-8",
+    "editmode": "51 passed, 0 failed (validation/editmode-51.xml)",
+    "review_harness": "exit 0; crown raycast error 0; support max error 0.000001 m; no support at z=±0.62"
+  },
+  "limitations": [
+    "Revisao estatica e da camera final; nao aprova movimento, pouso, aparelhos ou o conjunto T05.",
+    "Yuna no quadro e o visual ainda presente na cena principal; a integracao T03 pertence a T06.",
+    "Livros e movel nao foram integrados nem revisados nesta microentrega."
+  ],
+  "evidence": [
+    {
+      "path": "Evidence/25d/T05.1/01-gameplay-bear-contact.png",
+      "bytes": 922053,
+      "sha256": "c709dfc8d32d3a08904d68548127ab3a49173189d01570ce29d03605909f4f84"
+    },
+    {
+      "path": "Evidence/25d/T05.1/02-bear-detail.png",
+      "bytes": 738701,
+      "sha256": "126f61be17346605d026611e75e62d591f74d0905e08c587032c16bd68f7ebdd"
+    },
+    {
+      "path": "Evidence/25d/T05.1/contact-report.json",
+      "bytes": 3948,
+      "sha256": "3859695fbfa235caca65da5e526369a88944ff75efc68de5249a76d8c1525a63"
+    },
+    {
+      "path": "Evidence/25d/T05.1/README.md",
+      "bytes": 5714,
+      "sha256": "506058bcb903b07e0c69d400ed58af680a4d7d93908c57f28010d814fcfbe160"
+    },
+    {
+      "path": "Evidence/25d/T05.1/reviews/T05.1-urso-proposta.md",
+      "bytes": 1889,
+      "sha256": "93c57c5865a050af5a96bc4c32394f76acd672949125b0c4cd860cfd35ba6fad"
+    },
+    {
+      "path": "Evidence/25d/T05.1/validation/bear-review.log",
+      "bytes": 27692,
+      "sha256": "487568c242eff0531ccc002cb92d2157a386a212874b6e354bde10c8b926b5d9"
+    },
+    {
+      "path": "Evidence/25d/T05.1/validation/bear-setup.log",
+      "bytes": 28796,
+      "sha256": "4d29e7703bc72db68cd56acb87f853987d67f3737e3f605c4f4a30082bd0c957"
+    },
+    {
+      "path": "Evidence/25d/T05.1/validation/editmode-51.xml",
+      "bytes": 42781,
+      "sha256": "d90ed841e83f39fe2a46501c4b4825e3925fc6632f56f267f4d319f066e0fca6"
+    }
+  ],
+  "sources": [
+    {
+      "path": "Evidence/25d/T01/bear-v1.png",
+      "bytes": 2605855,
+      "sha256": "708108204dda6a64294eb19c0e2567129e0d4a092926d78c47ebd0192f9ff833"
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Environment/Bear/Bear_Platform_v1.png",
+      "bytes": 2605855,
+      "sha256": "708108204dda6a64294eb19c0e2567129e0d4a092926d78c47ebd0192f9ff833"
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Environment/Bear/Resources/Bear_Platform_Profile.json",
+      "bytes": 42918,
+      "sha256": "fe4d420ad9b9bcec35a633c577e723e218a97135d257cbae9be8d51abeaec26d"
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Environment/Bear/Bear_Platform_Contact.asset",
+      "bytes": 193039,
+      "sha256": "b8f779caf6dac019f553a010039794f3a26a07cd967a93e45aecd5d8faefb014"
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Environment/Bear/Bear_Platform_Visual.asset",
+      "bytes": 3749,
+      "sha256": "57fc77e749664c7bca9f297c8f8162b9aab8917e8bec33419a16c41f61143894"
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Environment/Bear/Bear_Platform_Painted.mat",
+      "bytes": 1192,
+      "sha256": "21bfdd355c1632a753cee22a1b3f15cf7ce0a9d7f260cb18b937675977250aaf"
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Environment/Bear/Editor/BearPlatformSetup.cs",
+      "bytes": 7754,
+      "sha256": "4230a6bf5cc3348475cce9633551161d64ff2bafd8c048d15b1a8d2907a8b533"
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Environment/Bear/Editor/BearPlatformReviewCapture.cs",
+      "bytes": 13772,
+      "sha256": "f63c1364b4bcb44d214ce110f60029548dcbcc22aa69945ef101a6d3dfaa2f14"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/Illustrated25D/Environment/Bear/IllustratedBearPlatform.cs",
+      "bytes": 403,
+      "sha256": "11ebd71d37781990c9fde22d49dd15b00f02e70bbf60129e5c21740d91bd182c"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/Illustrated25D/Environment/Bear/IllustratedBearPlatformProfile.cs",
+      "bytes": 7359,
+      "sha256": "13c7c2a84a50f957259ad37e25a03ef989c24672c84cd9a18353e4b480d80303"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformArt.cs",
+      "bytes": 42929,
+      "sha256": "628019a20e4c7fa589e8c14ac24ff03d725bd7ae341931c722c772b6efe4e2e5"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformGeometry.cs",
+      "bytes": 9944,
+      "sha256": "db2f59bf93b0c421a3b3a925fd82afea87acd27334c1aeb2c13ae5a8874435b9"
+    },
+    {
+      "path": "Assets/Scripts/Runtime/DarkRoom/DarkRoomThreeStageCircuitGenerator.cs",
+      "bytes": 9927,
+      "sha256": "e0bf15e1950f52b75d593440871a2acd6831622b490282f8174f727ea6f3f2c8"
+    },
+    {
+      "path": "Assets/Scripts/Tests/DarkRoomPlatformGeometryTests.cs",
+      "bytes": 15077,
+      "sha256": "6a27cceb44e613c5fd756da9aea6dfed07349a4b327770a01c12a17fac1e6366"
+    },
+    {
+      "path": "Assets/Scenes/DarkRoom_Gameplay.unity",
+      "bytes": 4649409,
+      "sha256": "f24464d8010af2a02a67d564c3420c38f340e9bcc1bf4a8671752a4395a0e25a"
+    }
+  ]
+}

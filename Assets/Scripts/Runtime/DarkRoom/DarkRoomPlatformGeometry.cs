@@ -1,4 +1,5 @@
 using UnityEngine;
+using YunaLegend.Illustrated25D.Environment;
 
 namespace YunaLegend.DarkRoom
 {
@@ -93,7 +94,18 @@ namespace YunaLegend.DarkRoom
                 // A plataforma 00 segue a arte conceitual aprovada: cabeca mais baixa e larga
                 // sobre uma pe cilindrica de madeira. A altura do catalogo (40 px) deixava o
                 // conjunto alto demais para a proporcao desenhada.
-                if (index == 0) height = ConceptTeddyHeight;
+                if (index == 0)
+                {
+                    width = IllustratedBearPlatformProfile.VisibleWidth;
+                    height = ConceptTeddyHeight;
+                    depth = IllustratedBearPlatformProfile.PhysicalDepth;
+                }
+                if (index == 1)
+                {
+                    width = IllustratedBookStackPlatformProfile.VisibleWidth;
+                    height = IllustratedBookStackPlatformProfile.VisibleHeight;
+                    depth = IllustratedBookStackPlatformProfile.PhysicalDepth;
+                }
                 if (index == 2) { width = 8.4f; height = 2.3f; depth = 2.4f; } // User-authored long traversal furniture.
 
                 geometry = new PlatformGeometry(
@@ -127,16 +139,21 @@ namespace YunaLegend.DarkRoom
         {
             switch (index)
             {
-                case 1:
-                    // Pilha diagonal de livros: o tampo e a capa do livro de cima, deslocada
-                    // para a direita e inclinada no mesmo angulo da pilha.
+                case 0:
                     return new PlatformContactSurface
                     {
-                        offsetX = 0.24f,
+                        offsetX = IllustratedBearPlatformProfile.ContactOffsetX
+                    };
+                case 1:
+                    // Pilha diagonal de livros: o tampo medido e a capa rigida do livro
+                    // de cima, deslocada para a direita e inclinada para baixo.
+                    return new PlatformContactSurface
+                    {
+                        offsetX = IllustratedBookStackPlatformProfile.ContactOffsetX,
                         offsetY = 0f,
-                        tiltDegrees = -4f,
-                        width = 1.85f,
-                        depth = 1.15f
+                        tiltDegrees = IllustratedBookStackPlatformProfile.SupportTiltDegrees,
+                        width = IllustratedBookStackPlatformProfile.SupportWidth,
+                        depth = IllustratedBookStackPlatformProfile.PhysicalDepth
                     };
                 default:
                     return default;

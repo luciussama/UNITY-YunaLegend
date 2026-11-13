@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using YunaLegend.Illustrated25D.Environment;
 
 namespace YunaLegend.DarkRoom
 {
@@ -42,6 +43,10 @@ namespace YunaLegend.DarkRoom
 
         public static PlatformSupportShape[] GetSupportShapes(PlatformSpec spec)
         {
+            if (spec.index == 0 && IllustratedBearPlatformProfile.TryGetSupportShapes(out var illustratedBear))
+                return illustratedBear;
+            if (spec.index == 1 && IllustratedBookStackPlatformProfile.TryGetSupportShapes(out var illustratedBooks))
+                return illustratedBooks;
             if (spec.index == 0)
             {
                 float w=spec.width,h=spec.height,bottom=-h*.5f;
@@ -159,13 +164,16 @@ namespace YunaLegend.DarkRoom
             root.transform.SetParent(parent, false);
             var stitches = new StitchBuilder();
 
-            var supportSpec = new PlatformSpec(0,"Bear",DarkRoomPhase.Phase1Ascent,0,0,w,d,h,Color.white,"");
-            var supportShapes = GetSupportShapes(supportSpec);
             float plinthRadiusX = w * .5f + .26f;
             float plinthRadiusZ = Mathf.Min(headDepth * .50f, .84f);
-            AddSupportVisual(root.transform,supportShapes[3],wood);
-            AddSupportVisual(root.transform,supportShapes[4],wood);
-            AddSupportVisual(root.transform,supportShapes[0],fur);
+            float plinthBodyHeight = plinthHeight * .8f;
+            float plinthRimHeight = plinthHeight - plinthBodyHeight;
+            AddPart(root.transform, "Base_Madeira", BeveledPlinthMesh(plinthRadiusX, plinthRadiusZ, plinthBodyHeight, .025f), wood,
+                new Vector3(0f, bottom + plinthBodyHeight * .5f, 0f), Quaternion.identity, Vector3.one);
+            AddPart(root.transform, "Base_Aro", BeveledPlinthMesh(plinthRadiusX + .03f, plinthRadiusZ + .03f, plinthRimHeight, .015f), wood,
+                new Vector3(0f, bottom + plinthBodyHeight + plinthRimHeight * .5f, 0f), Quaternion.identity, Vector3.one);
+            AddPart(root.transform, "Cabeca_Urso", CushionMesh(w, headHeight, headDepth, headSquareness, headTopFlatten), fur,
+                new Vector3(0f, headCenterY, 0f), Quaternion.identity, Vector3.one);
 
             // ---- Orelhas redondas nos cantos superiores ----
             float earRadius = w * 0.16f;
@@ -173,9 +181,8 @@ namespace YunaLegend.DarkRoom
             {
                 string suffix = side < 0 ? "Esq" : "Dir";
                 var earCenter = new Vector3(side * w * 0.44f, top - earRadius * 0.55f, -0.05f);
-                var earShape = supportShapes[side < 0 ? 1 : 2];
-                earCenter = earShape.position;
-                AddSupportVisual(root.transform,earShape,fur);
+                AddPart(root.transform, "Orelha_" + suffix, PrimitiveMesh(PrimitiveType.Sphere), fur,
+                    earCenter, Quaternion.identity, new Vector3(earRadius * 2f, earRadius * 2f, earRadius * .85f));
                 AddPart(root.transform, $"Orelha_Interna_{suffix}", PrimitiveMesh(PrimitiveType.Sphere), muzzle,
                     earCenter + new Vector3(0f, earRadius * 0.04f, -earRadius * 0.34f), Quaternion.identity,
                     new Vector3(earRadius * 1.05f, earRadius * 1.05f, earRadius * 0.30f));

@@ -1,0 +1,144 @@
+{
+    "method": "Persisted gameplay scene; support profile intersected at the runner plane z=0; raycasts against the persisted MeshCollider.",
+    "limitation": "Static contact and framing review only. Yuna is shown with the approved illustrated idle painting temporarily for this capture and the scene is not saved; permanent run/jump/stumble integration remains T06. This does not approve movement, jump/landing feel, mobile input, device performance, later furniture integration or the T05 aggregate.",
+    "sourceTexture": "books-v1.png",
+    "sourceSha256": "cdbf8f5b1fa6f8cc3dd92372d142d26a72325005f4e84a97d49bd14fd83b0bec",
+    "colliderType": "MeshCollider",
+    "visualTexture": "Books_Platform_v1",
+    "yunaVisualSource": "Approved illustrated idle painting, installed only for this review capture and never saved into the scene.",
+    "officialSpriteName": "Yuna_Profile_Runtime_v1",
+    "officialSpriteSha256": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+    "officialMaterialName": "Idle_Painted_Runtime",
+    "platformIndex": 1,
+    "textureWidth": 1620,
+    "textureHeight": 971,
+    "profileSamples": 4,
+    "supportRegions": 1,
+    "supportSegments": 2,
+    "colliderCount": 1,
+    "contactMeshVertices": 8,
+    "supportRaycastSamples": 13,
+    "depthOutsideHits": 0,
+    "metresPerTexturePixel": 0.0012685710098594428,
+    "visibleWidth": 1.7265260219573975,
+    "visibleHeight": 1.1100000143051148,
+    "supportWidth": 1.184211015701294,
+    "supportTilt": -8.73924446105957,
+    "contactOffsetX": 0.134785994887352,
+    "supportHeightAboveCentre": 0.3637630045413971,
+    "physicalDepth": 1.149999976158142,
+    "supportMinX": 5.4778947830200199,
+    "supportMaxX": 6.662105560302734,
+    "supportMinY": -7.641019821166992,
+    "supportMaxY": -7.458980083465576,
+    "colliderDepth": 1.149999976158142,
+    "visualLocalZ": 0.0,
+    "visualRendererWidth": 1.7265260219573975,
+    "visualRendererHeight": 1.1100000143051148,
+    "primaryRegionMinX": 5.4778947830200199,
+    "primaryRegionMaxX": 6.662105560302734,
+    "primaryRegionWidth": 1.1842107772827149,
+    "supportMeasuredTilt": -8.739258766174317,
+    "supportMeasuredWidth": 1.1842107772827149,
+    "supportMaxError": 4.76837158203125e-7,
+    "topRaycastY": -7.550000190734863,
+    "topRaycastError": 0.0,
+    "routeGapFromBear": 2.451481819152832,
+    "routeGapToNext": 1.25,
+    "routeLandingAboveTop": 0.75,
+    "integrityJumpReachFromBear": 3.759793996810913,
+    "integrityJumpReachToNext": 3.649846315383911,
+    "sceneRunSpeed": 5.199999809265137,
+    "sceneJumpHeight": 2.5999999046325685,
+    "yunaRootAboveTop": 0.03000020980834961,
+    "characterControllerBottom": -7.519999980926514,
+    "officialSpriteBottomWorldY": -7.550000190734863,
+    "officialSpriteFeetError": 0.0,
+    "officialSpriteHeight": 1.463852882385254,
+    "colliderConvex": false,
+    "legacyVisualActive": false,
+    "legacyYunaActive": false,
+    "officialYunaActive": true,
+    "officialSpriteFacingRight": true,
+    "topRaycastHit": true,
+    "markerPosition": {
+        "x": 5.935214042663574,
+        "y": -7.913763046264648,
+        "z": 0.0
+    },
+    "topWorld": {
+        "x": 6.070000171661377,
+        "y": -7.550000190734863,
+        "z": 0.0
+    },
+    "cameraPosition": {
+        "x": 8.054500579833985,
+        "y": -5.619999885559082,
+        "z": -7.485947608947754
+    },
+    "yunaRoot": {
+        "x": 6.070000171661377,
+        "y": -7.519999980926514,
+        "z": 0.0
+    },
+    "yunaViewport": {
+        "x": 0.3199999928474426,
+        "y": 0.3065003454685211,
+        "z": 7.485947608947754
+    },
+    "topViewport": {
+        "x": 0.3199999928474426,
+        "y": 0.18878799676895142,
+        "z": 7.485947608947754
+    },
+    "cameraRotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 1.0
+    },
+    "depthSamples": [
+        {
+            "z": -0.6000000238418579,
+            "hitY": NaN,
+            "insidePhysicalDepth": false,
+            "hit": false
+        },
+        {
+            "z": -0.550000011920929,
+            "hitY": -7.550000190734863,
+            "insidePhysicalDepth": true,
+            "hit": true
+        },
+        {
+            "z": -0.5,
+            "hitY": -7.550000190734863,
+            "insidePhysicalDepth": true,
+            "hit": true
+        },
+        {
+            "z": 0.0,
+            "hitY": -7.550000190734863,
+            "insidePhysicalDepth": true,
+            "hit": true
+        },
+        {
+            "z": 0.5,
+            "hitY": -7.550000190734863,
+            "insidePhysicalDepth": true,
+            "hit": true
+        },
+        {
+            "z": 0.550000011920929,
+            "hitY": -7.550000190734863,
+            "insidePhysicalDepth": true,
+            "hit": true
+        },
+        {
+            "z": 0.6000000238418579,
+            "hitY": NaN,
+            "insidePhysicalDepth": false,
+            "hit": false
+        }
+    ]
+}

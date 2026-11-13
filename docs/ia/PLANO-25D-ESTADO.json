@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-13T10:36:35.721904+00:00",
+  "updated_at": "2026-11-13T11:38:23.412054+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -278,17 +278,17 @@
       "human_gate": false,
       "status": "active",
       "owner": {
-        "session": "2026-11-13-codex-t05-urso-6d2e",
+        "session": "2026-11-13-codex-t052-books-b7c4",
         "agent": "Codex (GPT-6.1)"
       },
       "checkpoint": {
-        "done": "T05.1 do urso aprovada pelo usuario com resposta literal 'aprovado.'. Revisao, README e manifesto marcam aceite exclusivo da microentrega; manifesto com8 evidencias/15 fontes e hashes conferidos. Apoio curvo, camera final e detalhe validados anteriormente.",
-        "next": "Aguardar o proximo comando para iniciar T05.2 livros: definir a superficie real de apoio da pilha inclinada antes de gerar/integrar a arte, validar contato na camera final e parar para revisao humana. Nao iniciar movel antes do aceite dos livros.",
-        "validation": "Aceite humano literal 'aprovado.' registrado em Evidence/25d/T05.1/reviews/T05.1-urso-proposta.md; manifestoHASHES_OK8/15;T05 agregada permanece pendente",
-        "pending": "T05.2 livros; T05.3 movel; movimento/pouso; T05 agregada e T06; sem commit/push",
-        "files": "Evidence/25d/T05.1/README.md;Evidence/25d/T05.1/reviews/T05.1-urso-proposta.md;Evidence/25d/T05.1/manifest.json;docs/ia/diario.sqlite3",
-        "processes": "Nenhum Unity ativo",
-        "updated_at": "2026-11-13T10:35:50.803537+00:00"
+        "done": "T05.1 urso aceita; T05.2 livros candidata apos corrigir as capturas: prancha T01 byte-identica, capa medida1,184211m/-8,739244graus/offset0,134786m/profundidade1,15m, MeshCollider nao convexo continuo, visual ilustrado e legado inativo. Capturas agora usam o sprite ilustrado oficial da Yuna (hash T01) com Body_Visual3D inativo; cena nao salva; feetError0. Setup/harness exit0, apoio0, depthMisses0, vaos2,451482/1,25 dentro do alcance, EditMode52/52.",
+        "next": "Aguardar resposta humana as quatro perguntas da revisao T05.2. Nao iniciar movel T05.3 nem aceitar T05 agregada antes do aceite literal dos livros. Integracao permanente T03/T06 segue pendente.",
+        "validation": "Unity harness exit0 com T05_BOOKS_REVIEW_COMPLETE yunaSprite=Yuna_Profile_Runtime_v1 legacy3D=False feetError0; manifesto20 fontes/10 evidencias com hashes OK; EditMode52/52; plan/diary checks OK",
+        "pending": "Revisao humana T05.2; T05.3 movel; movimento/pouso; integracao permanente T03 na T06; T05 agregada; sem push",
+        "files": "Evidence/25d/T05.1;Evidence/25d/T05.2;Assets/Art/Illustrated25D/Environment/Books;Assets/Scripts/Runtime/Illustrated25D/Environment/Books;Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformGeometry.cs;Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformArt.cs;Assets/Scripts/Runtime/DarkRoom/DarkRoomThreeStageCircuitGenerator.cs;Assets/Scenes/DarkRoom_Gameplay.unity;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/diario.sqlite3",
+        "processes": "Nenhum Unity Editor ativo; apenas Unity Hub serve",
+        "updated_at": "2026-11-13T11:38:23.412054+00:00"
       }
     },
     {
@@ -1408,6 +1408,39 @@
       "files": "Assets/Art/Illustrated25D/Nanda/Flight;Evidence/25d/T04.1;tools/make_t04_nanda_frames.py;tools/make_t04_nanda_review.py;tools/make_t04_nanda_manifest.py;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
       "processes": "Nenhum Unity ativo",
       "at": "2026-11-13T10:36:35.721904+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T05",
+      "session": "2026-11-13-codex-t052-books-b7c4",
+      "agent": "Codex (GPT-6.1)",
+      "reason": "Usuario autorizou assumir o handoff persistido pelo Copilot na entrada728 e continuar a T05.2 livros com visao/geracao nativas; T05.1 urso permanece aceita e T05.3 movel nao iniciado.",
+      "from_session": "2026-11-13-codex-t05-urso-6d2e",
+      "at": "2026-11-13T11:03:20.553318+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T05",
+      "session": "2026-11-13-codex-t052-books-b7c4",
+      "done": "T05.1 urso aceita; T05.2 livros candidata em revisao: pranchaT01 sem nova geracao, capa superior medida1,184211m/-8,739244graus offset0,134786m profundidade1,15m, MeshCollider nao convexo continuo, visual ilustrado e legado inativo. Setup/harness exit0, apoio0, depthOutside0, vaos2,451482/1,25 dentro do alcance, EditMode52/52, 3 capturas e relatorio reais.",
+      "next": "Aguardar resposta humana as tres perguntas de Evidence/25d/T05.2/reviews/T05.2-livros-proposta.md. Nao iniciar movel T05.3 nem aceitar T05 agregada antes do aceite literal dos livros.",
+      "validation": "Unity setup exit0 com T05_BOOKS_SETUP_SAVED; harness exit0 com T05_BOOKS_REVIEW_COMPLETE supportError0 depthMisses0; EditMode52/52 via editmode-52.xml; manifesto11 evidencias/16 fontes; plan/diary checks OK; view_image das 3 capturas",
+      "pending": "Revisao humana T05.2; T05.3 movel; movimento/pouso; T05 agregada e T06; sem commit/push",
+      "files": "Evidence/25d/T05.2/README.md;Evidence/25d/T05.2/CONTRATO.md;Evidence/25d/T05.2/reviews/T05.2-livros-proposta.md;Evidence/25d/T05.2/manifest.json;Evidence/25d/T05.2/contact-report.json;Assets/Art/Illustrated25D/Environment/Books;Assets/Scripts/Runtime/Illustrated25D/Environment/Books;Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformGeometry.cs;Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformArt.cs;Assets/Scripts/Runtime/DarkRoom/DarkRoomThreeStageCircuitGenerator.cs;Assets/Scenes/DarkRoom_Gameplay.unity;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/diario.sqlite3",
+      "processes": "Nenhum Unity Editor ativo; batches de setup/review/testes encerrados",
+      "at": "2026-11-13T11:18:15.520140+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T05",
+      "session": "2026-11-13-codex-t052-books-b7c4",
+      "done": "T05.1 urso aceita; T05.2 livros candidata apos corrigir as capturas: prancha T01 byte-identica, capa medida1,184211m/-8,739244graus/offset0,134786m/profundidade1,15m, MeshCollider nao convexo continuo, visual ilustrado e legado inativo. Capturas agora usam o sprite ilustrado oficial da Yuna (hash T01) com Body_Visual3D inativo; cena nao salva; feetError0. Setup/harness exit0, apoio0, depthMisses0, vaos2,451482/1,25 dentro do alcance, EditMode52/52.",
+      "next": "Aguardar resposta humana as quatro perguntas da revisao T05.2. Nao iniciar movel T05.3 nem aceitar T05 agregada antes do aceite literal dos livros. Integracao permanente T03/T06 segue pendente.",
+      "validation": "Unity harness exit0 com T05_BOOKS_REVIEW_COMPLETE yunaSprite=Yuna_Profile_Runtime_v1 legacy3D=False feetError0; manifesto20 fontes/10 evidencias com hashes OK; EditMode52/52; plan/diary checks OK",
+      "pending": "Revisao humana T05.2; T05.3 movel; movimento/pouso; integracao permanente T03 na T06; T05 agregada; sem push",
+      "files": "Evidence/25d/T05.1;Evidence/25d/T05.2;Assets/Art/Illustrated25D/Environment/Books;Assets/Scripts/Runtime/Illustrated25D/Environment/Books;Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformGeometry.cs;Assets/Scripts/Runtime/DarkRoom/DarkRoomPlatformArt.cs;Assets/Scripts/Runtime/DarkRoom/DarkRoomThreeStageCircuitGenerator.cs;Assets/Scenes/DarkRoom_Gameplay.unity;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/diario.sqlite3",
+      "processes": "Nenhum Unity Editor ativo; apenas Unity Hub serve",
+      "at": "2026-11-13T11:38:23.412054+00:00"
     }
   ]
 }

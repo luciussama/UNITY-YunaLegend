@@ -1,0 +1,128 @@
+{
+    "method": "Unity 6000.3.28f1 EditMode; persisted DarkRoom_Gameplay scene; real final SideScroll25DCamera for gameplay capture; collider raycasts at Z=0; no scene save.",
+    "limitation": "Static contact and framing review only. This does not approve movement, jump/landing feel, mobile input, device performance, later books/furniture integration or the T05 aggregate.",
+    "sourceTexture": "Evidence/25d/T01/bear-v1.png",
+    "sourceSha256": "708108204dda6a64294eb19c0e2567129e0d4a092926d78c47ebd0192f9ff833",
+    "colliderType": "MeshCollider",
+    "visualTexture": "Bear_Platform_v1",
+    "platformIndex": 0,
+    "textureWidth": 1619,
+    "textureHeight": 971,
+    "profileSamples": 360,
+    "supportRegions": 7,
+    "supportSegments": 656,
+    "colliderCount": 1,
+    "contactMeshVertices": 2872,
+    "supportRaycastSamples": 18,
+    "depthOutsideHits": 0,
+    "metresPerTexturePixel": 0.0014030609745532275,
+    "visibleWidth": 2.01760196685791,
+    "visibleHeight": 1.1603319644927979,
+    "physicalDepth": 1.2000000476837159,
+    "crownOffsetX": -0.009820999577641487,
+    "crownHeightAboveFloor": 1.100000023841858,
+    "supportMinX": 1.0901880264282227,
+    "supportMaxX": 3.0264129638671877,
+    "supportMinY": -8.684694290161133,
+    "supportMaxY": -7.93966817855835,
+    "colliderDepth": 1.2000000476837159,
+    "visualLocalZ": 0.0,
+    "visualRendererWidth": 2.01760196685791,
+    "visualRendererHeight": 1.1603319644927979,
+    "primaryRegionMinX": 1.5616170167922974,
+    "primaryRegionMaxX": 2.4932498931884767,
+    "primaryRegionWidth": 0.9316328763961792,
+    "supportMaxError": 9.5367431640625e-7,
+    "crownRaycastY": -8.0,
+    "crownRaycastError": 0.0,
+    "routeGapToBooks": 2.490839958190918,
+    "routeLandingAboveCrown": 0.4499998092651367,
+    "integrityJumpReach": 2.491969108581543,
+    "sceneRunSpeed": 5.199999809265137,
+    "sceneJumpHeight": 2.5999999046325685,
+    "yunaRootAboveCrown": 0.03000020980834961,
+    "characterControllerBottom": -7.96999979019165,
+    "colliderConvex": false,
+    "legacyVisualActive": false,
+    "crownRaycastHit": true,
+    "markerPosition": {
+        "x": 2.0218210220336916,
+        "y": -8.550000190734864,
+        "z": 0.0
+    },
+    "crownWorld": {
+        "x": 2.01200008392334,
+        "y": -8.0,
+        "z": 0.0
+    },
+    "cameraPosition": {
+        "x": 3.996500015258789,
+        "y": -6.069999694824219,
+        "z": -7.485947608947754
+    },
+    "yunaRoot": {
+        "x": 2.01200008392334,
+        "y": -7.96999979019165,
+        "z": 0.0
+    },
+    "yunaViewport": {
+        "x": 0.320000022649765,
+        "y": 0.3065004050731659,
+        "z": 7.485947608947754
+    },
+    "crownViewport": {
+        "x": 0.320000022649765,
+        "y": 0.18878808617591859,
+        "z": 7.485947608947754
+    },
+    "cameraRotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 1.0
+    },
+    "depthSamples": [
+        {
+            "z": -0.550000011920929,
+            "hitY": -8.0,
+            "insidePhysicalDepth": true,
+            "hit": true
+        },
+        {
+            "z": -0.30000001192092898,
+            "hitY": -8.0,
+            "insidePhysicalDepth": true,
+            "hit": true
+        },
+        {
+            "z": 0.0,
+            "hitY": -8.0,
+            "insidePhysicalDepth": true,
+            "hit": true
+        },
+        {
+            "z": 0.30000001192092898,
+            "hitY": -8.0,
+            "insidePhysicalDepth": true,
+            "hit": true
+        },
+        {
+            "z": 0.550000011920929,
+            "hitY": -8.0,
+            "insidePhysicalDepth": true,
+            "hit": true
+        },
+        {
+            "z": -0.6200000047683716,
+            "hitY": NaN,
+            "insidePhysicalDepth": false,
+            "hit": false
+        },
+        {
+            "z": 0.6200000047683716,
+            "hitY": NaN,
+            "insidePhysicalDepth": false,
+            "hit": false
+        }
+    ]
+}

@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "source": "Evidence/25d/T01/books-v1.png",
+  "sourceSha256": "cdbf8f5b1fa6f8cc3dd92372d142d26a72325005f4e84a97d49bd14fd83b0bec",
+  "sourceBytes": 2501359,
+  "texture": {
+    "width": 1620,
+    "height": 971,
+    "format": "RGBA8",
+    "alphaThreshold": 32
+  },
+  "alpha": {
+    "bboxInclusive": [
+      83,
+      51,
+      1444,
+      926
+    ]
+  },
+  "topCover": {
+    "frontLeft": [
+      274,
+      208
+    ],
+    "backLeft": [
+      532,
+      52
+    ],
+    "backRight": [
+      1428,
+      192
+    ],
+    "frontRight": [
+      1245,
+      355
+    ],
+    "midDepthLeft": [
+      403.0,
+      130.0
+    ],
+    "midDepthRight": [
+      1336.5,
+      273.5
+    ]
+  },
+  "mapping": {
+    "metresPerTexturePixel": 0.001268571,
+    "stackHeight": 1.11,
+    "supportWidth": 1.184211,
+    "supportTiltDegrees": -8.739244,
+    "contactOffsetX": 0.134786,
+    "supportHeightAboveCentre": 0.363763,
+    "physicalDepth": 1.15,
+    "visibleWidth": 1.726526,
+    "visibleHeight": 1.11,
+    "quadBoundsLocal": {
+      "left": -0.863263,
+      "right": 0.863263,
+      "bottom": -0.555,
+      "top": 0.555
+    },
+    "uvBounds": {
+      "left": 0.051234568,
+      "right": 0.891975309,
+      "bottom": 0.045314109,
+      "top": 0.947476828
+    }
+  }
+}

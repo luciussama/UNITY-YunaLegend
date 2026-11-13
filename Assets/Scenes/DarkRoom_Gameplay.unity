@@ -276,6 +276,9 @@ MonoBehaviour:
   verticalFramingOffset: 1.9
   framingSmoothTime: 0.28
   routeDistanceScale: 1.05
+  illustratedPilotFraming: 0
+  illustratedVerticalSpan: 7.5
+  illustratedFollowTime: 0.45
 --- !u!81 &105
 AudioListener:
   m_ObjectHideFlags: 0
@@ -537,7 +540,7 @@ Transform:
   m_GameObject: {fileID: 3670688}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.827747, y: -4.705, z: 0}
+  m_LocalPosition: {x: 31.127106, y: -4.705, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -561,7 +564,7 @@ MonoBehaviour:
     index: 6
     name: 06_Almofadao_Veludo_Roxo
     phase: 0
-    x: 31.827747
+    x: 31.127106
     y: -4.705
     width: 2.93
     depth: 2.07
@@ -1500,6 +1503,7 @@ GameObject:
   - component: {fileID: 40775823}
   - component: {fileID: 40775825}
   - component: {fileID: 40775824}
+  - component: {fileID: 40775826}
   m_Layer: 0
   m_Name: Etapa1_Castelo_01_01_Pilha_Livros_Ilustrados
   m_TagString: Untagged
@@ -1516,12 +1520,13 @@ Transform:
   m_GameObject: {fileID: 40775822}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.2, y: -8.1050005, z: 0}
+  m_LocalPosition: {x: 5.935214, y: -7.913763, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 336199076}
   - {fileID: 645214277}
+  - {fileID: 477115557}
   m_Father: {fileID: 1754289932}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &40775824
@@ -1540,18 +1545,18 @@ MonoBehaviour:
     index: 1
     name: 01_Pilha_Livros_Ilustrados
     phase: 0
-    x: 6.2
-    y: -8.1050005
-    width: 2.8
-    depth: 1.59
+    x: 5.935214
+    y: -7.913763
+    width: 1.726526
+    depth: 1.15
     height: 1.11
     tint: {r: 0.85, g: 0.629, b: 0.425, a: 1}
     visualDescription: Etapa 1 - Subida Calma
     contact:
-      offsetX: 0.24
+      offsetX: 0.134786
       offsetY: 0
-      tiltDegrees: -4
-      width: 1.85
+      tiltDegrees: -8.739244
+      width: 1.184211
       depth: 1.15
 --- !u!114 &40775825
 MonoBehaviour:
@@ -1567,6 +1572,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
+--- !u!114 &40775826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40775822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f6a93aee4a5f114a9571b0ddf717211, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.Illustrated25D.Environment.IllustratedBookStackPlatform
+  paintedTexture: {fileID: 2800000, guid: 86df75af588cc2543b6ffd06b1347074, type: 3}
+  contactMesh: {fileID: 4300000, guid: 9f9d85141135d1748b21a894638441e7, type: 2}
+  visualMesh: {fileID: 4300000, guid: 0f52cab7401bd7244ab7a7766cdb489e, type: 2}
+  supportWidth: 1.184211
+  supportTiltDegrees: -8.739244
+  contactOffsetX: 0.134786
+  supportHeightAboveCentre: 0.363763
+  physicalDepth: 1.15
 --- !u!1 &44945486
 GameObject:
   m_ObjectHideFlags: 0
@@ -2525,7 +2550,7 @@ Transform:
   m_GameObject: {fileID: 96720671}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 47.76775, y: -4.8, z: 0}
+  m_LocalPosition: {x: 47.067112, y: -4.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2549,7 +2574,7 @@ MonoBehaviour:
     index: 32
     name: 32_Robo_Lata_Desparafusado
     phase: 2
-    x: 47.76775
+    x: 47.067112
     y: -4.8
     width: 1.8000001
     depth: 1.8
@@ -3921,7 +3946,7 @@ Transform:
   m_GameObject: {fileID: 189432465}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.85441, y: -3.053333, z: 0}
+  m_LocalPosition: {x: 24.153772, y: -3.053333, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3945,7 +3970,7 @@ MonoBehaviour:
     index: 36
     name: 36_Livro_Feiticos_No_Vacuo
     phase: 2
-    x: 24.85441
+    x: 24.153772
     y: -3.053333
     width: 1.64
     depth: 1.8
@@ -5229,60 +5254,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211138145}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &212269515
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 212269516}
-  - component: {fileID: 212269517}
-  m_Layer: 0
-  m_Name: Orelha_Esq
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &212269516
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 212269515}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0912, y: 0.33176002, z: -0.05}
-  m_LocalScale: {x: 0.79359996, y: 0.79359996, z: 0.33728}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1853024790}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &212269517
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 212269515}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &215634801
 GameObject:
   m_ObjectHideFlags: 0
@@ -5350,7 +5321,7 @@ Transform:
   m_GameObject: {fileID: 221483718}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 77.837746, y: -7.2200007, z: 0}
+  m_LocalPosition: {x: 77.13711, y: -7.2200007, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5374,7 +5345,7 @@ MonoBehaviour:
     index: 26
     name: 26_Tamborzinho_Amassado
     phase: 2
-    x: 77.837746
+    x: 77.13711
     y: -7.2200007
     width: 2.04
     depth: 1.8
@@ -5518,7 +5489,7 @@ Transform:
   m_GameObject: {fileID: 234030596}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44.627747, y: -4.225, z: 0}
+  m_LocalPosition: {x: 43.927105, y: -4.225, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5542,7 +5513,7 @@ MonoBehaviour:
     index: 9
     name: 09_Castelinho_Blocos_Descanso
     phase: 0
-    x: 44.627747
+    x: 43.927105
     y: -4.225
     width: 4.61
     depth: 2.54
@@ -6581,7 +6552,7 @@ Transform:
   m_GameObject: {fileID: 290594450}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 95.017746, y: -8.700001, z: 0}
+  m_LocalPosition: {x: 94.31711, y: -8.700001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6605,7 +6576,7 @@ MonoBehaviour:
     index: 22
     name: 22_Pilha_Blocos_Tombada
     phase: 2
-    x: 95.017746
+    x: 94.31711
     y: -8.700001
     width: 2.2
     depth: 1.8
@@ -6659,7 +6630,7 @@ Transform:
   m_GameObject: {fileID: 293379105}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 79.92684, y: -1.1618183, z: 0}
+  m_LocalPosition: {x: 79.226204, y: -1.1618183, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6683,7 +6654,7 @@ MonoBehaviour:
     index: 16
     name: 16_Livro_Gravuras_No_Ar
     phase: 1
-    x: 79.92684
+    x: 79.226204
     y: -1.1618183
     width: 1.9818182
     depth: 1.8
@@ -6917,7 +6888,7 @@ Transform:
   m_GameObject: {fileID: 309165269}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 58.364414, y: -5.6333337, z: 0}
+  m_LocalPosition: {x: 57.663776, y: -5.6333337, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6941,7 +6912,7 @@ MonoBehaviour:
     index: 30
     name: 30_Castelo_Cartas_Bamboleante
     phase: 2
-    x: 58.364414
+    x: 57.663776
     y: -5.6333337
     width: 1.88
     depth: 1.8
@@ -7102,12 +7073,12 @@ GameObject:
   m_Component:
   - component: {fileID: 336199076}
   m_Layer: 0
-  m_Name: Visual_3D
+  m_Name: Visual_3D_Referencia_Desativada
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &336199076
 Transform:
   m_ObjectHideFlags: 0
@@ -8555,7 +8526,7 @@ Transform:
   m_GameObject: {fileID: 401893398}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 59.335926, y: -2.6454546, z: 0}
+  m_LocalPosition: {x: 58.635284, y: -2.6454546, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8579,7 +8550,7 @@ MonoBehaviour:
     index: 12
     name: 12_Abajur_Cogumelo
     phase: 1
-    x: 59.335926
+    x: 58.635284
     y: -2.6454546
     width: 2.1272728
     depth: 1.8
@@ -8617,6 +8588,7 @@ GameObject:
   - component: {fileID: 411269062}
   - component: {fileID: 411269064}
   - component: {fileID: 411269063}
+  - component: {fileID: 411269065}
   m_Layer: 0
   m_Name: Etapa1_Castelo_00_00_Cabeca_Urso_Pelucia
   m_TagString: Untagged
@@ -8633,12 +8605,13 @@ Transform:
   m_GameObject: {fileID: 411269061}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: -8.55, z: 0}
+  m_LocalPosition: {x: 2.021821, y: -8.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1675562597}
   - {fileID: 1853024790}
+  - {fileID: 1338354737}
   m_Father: {fileID: 1754289932}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &411269063
@@ -8657,15 +8630,15 @@ MonoBehaviour:
     index: 0
     name: 00_Cabeca_Urso_Pelucia
     phase: 0
-    x: 2
+    x: 2.021821
     y: -8.55
-    width: 2.48
-    depth: 2.23
+    width: 2.017602
+    depth: 1.2
     height: 1.1
     tint: {r: 0.85, g: 0.425, b: 0.425, a: 1}
     visualDescription: Etapa 1 - Subida Calma
     contact:
-      offsetX: 0
+      offsetX: -0.009821
       offsetY: 0
       tiltDegrees: 0
       width: 0
@@ -8684,6 +8657,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
+--- !u!114 &411269065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411269061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2338dce9c84614448a2b054745a5819, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.Illustrated25D.Environment.IllustratedBearPlatform
+  paintedTexture: {fileID: 2800000, guid: 2f36a416bb9eed745be932bc3efb286c, type: 3}
+  contactMesh: {fileID: 4300000, guid: 3e8530821201c204bb0a76aeeb9794a4, type: 2}
+  visualMesh: {fileID: 4300000, guid: 6c838f12a1cf9c84ea32cf49f7857eb2, type: 2}
+  crownHeightAboveFloor: 1.1
+  visibleWidth: 2.017602
+  contactOffsetX: -0.009821
 --- !u!1 &412218530
 GameObject:
   m_ObjectHideFlags: 0
@@ -9105,7 +9096,7 @@ Transform:
   m_GameObject: {fileID: 446964364}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.597744, y: -3.9399998, z: 0}
+  m_LocalPosition: {x: 35.897106, y: -3.9399998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9129,7 +9120,7 @@ MonoBehaviour:
     index: 34
     name: 34_Carretel_Fita_Flutuante
     phase: 2
-    x: 36.597744
+    x: 35.897106
     y: -3.9399998
     width: 1.72
     depth: 1.8
@@ -9695,6 +9686,96 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 470925066}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &477115556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 477115557}
+  - component: {fileID: 477115559}
+  - component: {fileID: 477115558}
+  m_Layer: 0
+  m_Name: Visual_Ilustrado_Livros
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &477115557
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477115556}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 40775823}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &477115558
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477115556}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 5851773dc04546f4bb4efb648b49fbe8, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &477115559
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477115556}
+  m_Mesh: {fileID: 4300000, guid: 0f52cab7401bd7244ab7a7766cdb489e, type: 2}
 --- !u!1 &488535141
 GameObject:
   m_ObjectHideFlags: 0
@@ -9902,7 +9983,7 @@ Transform:
   m_GameObject: {fileID: 495878008}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50.147747, y: -3.3, z: 0}
+  m_LocalPosition: {x: 49.447105, y: -3.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9926,7 +10007,7 @@ MonoBehaviour:
     index: 10
     name: 10_Pista_Elevada_Trem
     phase: 1
-    x: 50.147747
+    x: 49.447105
     y: -3.3
     width: 2.2
     depth: 1.8
@@ -10560,7 +10641,7 @@ Transform:
   m_GameObject: {fileID: 530934780}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 90.937744, y: -8.340001, z: 0}
+  m_LocalPosition: {x: 90.23711, y: -8.340001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10584,7 +10665,7 @@ MonoBehaviour:
     index: 23
     name: 23_Boneca_Pano_Desconjuntada
     phase: 2
-    x: 90.937744
+    x: 90.23711
     y: -8.340001
     width: 2.16
     depth: 1.8
@@ -10908,7 +10989,7 @@ Transform:
   m_GameObject: {fileID: 553512044}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 42.254414, y: -4.3733335, z: 0}
+  m_LocalPosition: {x: 41.553776, y: -4.3733335, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10932,7 +11013,7 @@ MonoBehaviour:
     index: 33
     name: 33_Piao_Madeira_Rodopiante
     phase: 2
-    x: 42.254414
+    x: 41.553776
     y: -4.3733335
     width: 1.76
     depth: 1.8
@@ -13011,7 +13092,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 645214277}
-  - component: {fileID: 645214278}
   m_Layer: 0
   m_Name: Contacto_Fisico
   m_TagString: Untagged
@@ -13027,34 +13107,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 645214276}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.034899496, w: 0.99939084}
-  m_LocalPosition: {x: 0.2277926, y: 0.3804263, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2021992068}
   m_Father: {fileID: 40775823}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &645214278
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 645214276}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.85, y: 0.35, z: 1.15}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &646325699
 GameObject:
   m_ObjectHideFlags: 0
@@ -13082,7 +13142,7 @@ Transform:
   m_GameObject: {fileID: 646325699}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.827747, y: -4.145, z: 0}
+  m_LocalPosition: {x: 39.127106, y: -4.145, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13106,7 +13166,7 @@ MonoBehaviour:
     index: 8
     name: 08_Caixa_Musica_Bailarina
     phase: 0
-    x: 39.827747
+    x: 39.127106
     y: -4.145
     width: 3.02
     depth: 1.75
@@ -15249,60 +15309,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748070888}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &748232358
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 748232359}
-  - component: {fileID: 748232360}
-  m_Layer: 0
-  m_Name: Base_Aro
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &748232359
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 748232358}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.26200002, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1853024790}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &748232360
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 748232358}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 668474854}
 --- !u!1 &748577948
 GameObject:
   m_ObjectHideFlags: 0
@@ -15870,7 +15876,7 @@ Transform:
   m_GameObject: {fileID: 785648716}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 91.32956, y: -0.3327273, z: 0}
+  m_LocalPosition: {x: 90.62892, y: -0.3327273, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15894,7 +15900,7 @@ MonoBehaviour:
     index: 18
     name: 18_Varao_Cortina_Estrelada
     phase: 1
-    x: 91.32956
+    x: 90.62892
     y: -0.3327273
     width: 1.9090909
     depth: 1.8
@@ -16315,7 +16321,7 @@ Transform:
   m_GameObject: {fileID: 806985672}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 110.81774, y: 1.02, z: 0}
+  m_LocalPosition: {x: 110.1171, y: 1.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16339,7 +16345,7 @@ MonoBehaviour:
     index: 21
     name: 21_Poster_Porta_Falsa_Parede
     phase: 1
-    x: 110.81774
+    x: 110.1171
     y: 1.02
     width: 3.8
     depth: 1.8
@@ -17293,7 +17299,7 @@ Transform:
   m_GameObject: {fileID: 848630984}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 73.18442, y: -6.833334, z: 0}
+  m_LocalPosition: {x: 72.48378, y: -6.833334, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17317,7 +17323,7 @@ MonoBehaviour:
     index: 27
     name: 27_Urso_Pelucia_Desmoronado
     phase: 2
-    x: 73.18442
+    x: 72.48378
     y: -6.833334
     width: 2
     depth: 1.8
@@ -18622,7 +18628,7 @@ Transform:
   m_GameObject: {fileID: 895160947}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 64.20683, y: -2.2963636, z: 0}
+  m_LocalPosition: {x: 63.506195, y: -2.2963636, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18646,7 +18652,7 @@ MonoBehaviour:
     index: 13
     name: 13_Telhado_Casa_Bonecas
     phase: 1
-    x: 64.20683
+    x: 63.506195
     y: -2.2963636
     width: 2.090909
     depth: 1.8
@@ -19561,7 +19567,7 @@ Transform:
   m_GameObject: {fileID: 915756394}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 54.649563, y: -2.98, z: 0}
+  m_LocalPosition: {x: 53.94892, y: -2.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19585,7 +19591,7 @@ MonoBehaviour:
     index: 11
     name: 11_Prateleira_Brinquedos
     phase: 1
-    x: 54.649563
+    x: 53.94892
     y: -2.98
     width: 2.1636364
     depth: 1.8
@@ -19953,7 +19959,7 @@ Transform:
   m_GameObject: {fileID: 940313941}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 74.5023, y: -1.5545454, z: 0}
+  m_LocalPosition: {x: 73.80166, y: -1.5545454, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19977,7 +19983,7 @@ MonoBehaviour:
     index: 15
     name: 15_Pipa_Encantada_Bambu
     phase: 1
-    x: 74.5023
+    x: 73.80166
     y: -1.5545454
     width: 2.0181818
     depth: 1.8
@@ -23165,7 +23171,7 @@ Transform:
   m_GameObject: {fileID: 1113598184}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.317743, y: -2.9999998, z: 0}
+  m_LocalPosition: {x: 16.617105, y: -2.9999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23189,7 +23195,7 @@ MonoBehaviour:
     index: 37
     name: 37_O_Verdadeiro_Portal_Sonhos
     phase: 2
-    x: 17.317743
+    x: 16.617105
     y: -2.9999998
     width: 4.5
     depth: 1.8
@@ -23513,7 +23519,7 @@ Transform:
   m_GameObject: {fileID: 1134592966}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.827745, y: -6.7650003, z: 0}
+  m_LocalPosition: {x: 19.127106, y: -6.7650003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23537,7 +23543,7 @@ MonoBehaviour:
     index: 3
     name: 03_Comoda_Pequena_Carvalho
     phase: 0
-    x: 19.827745
+    x: 19.127106
     y: -6.7650003
     width: 2.93
     depth: 1.75
@@ -25915,60 +25921,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1209778523}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1212652996
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1212652997}
-  - component: {fileID: 1212652998}
-  m_Layer: 0
-  m_Name: Cabeca_Urso
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1212652997
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1212652996}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.16, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1853024790}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &1212652998
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1212652996}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 850130848}
 --- !u!1 &1213587817
 GameObject:
   m_ObjectHideFlags: 0
@@ -26769,7 +26721,7 @@ Transform:
   m_GameObject: {fileID: 1242907766}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 63.447746, y: -6.0400004, z: 0}
+  m_LocalPosition: {x: 62.74711, y: -6.0400004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -26793,7 +26745,7 @@ MonoBehaviour:
     index: 29
     name: 29_Locomotiva_Descarrilada
     phase: 2
-    x: 63.447746
+    x: 62.74711
     y: -6.0400004
     width: 1.9200001
     depth: 1.8
@@ -26900,7 +26852,7 @@ Transform:
   m_GameObject: {fileID: 1252250822}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35.827747, y: -4.31, z: 0}
+  m_LocalPosition: {x: 35.127106, y: -4.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -26924,7 +26876,7 @@ MonoBehaviour:
     index: 7
     name: 07_Gavetas_Abertas_Armario
     phase: 0
-    x: 35.827747
+    x: 35.127106
     y: -4.31
     width: 2.86
     depth: 1.59
@@ -27068,7 +27020,7 @@ Transform:
   m_GameObject: {fileID: 1258505852}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 82.34775, y: -7.600001, z: 0}
+  m_LocalPosition: {x: 81.64711, y: -7.600001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -27092,7 +27044,7 @@ MonoBehaviour:
     index: 25
     name: 25_Pilha_Torta_Contos
     phase: 2
-    x: 82.34775
+    x: 81.64711
     y: -7.600001
     width: 2.08
     depth: 1.8
@@ -27146,7 +27098,7 @@ Transform:
   m_GameObject: {fileID: 1259154831}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.827747, y: -5.3450003, z: 0}
+  m_LocalPosition: {x: 27.127106, y: -5.3450003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -27170,7 +27122,7 @@ MonoBehaviour:
     index: 5
     name: 05_Tamborito_Marcha
     phase: 0
-    x: 27.827747
+    x: 27.127106
     y: -5.3450003
     width: 2.7
     depth: 2.7
@@ -29450,6 +29402,96 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336021913}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1338354736
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1338354737}
+  - component: {fileID: 1338354739}
+  - component: {fileID: 1338354738}
+  m_Layer: 0
+  m_Name: Visual_Ilustrado_Urso
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1338354737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338354736}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 411269062}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1338354738
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338354736}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: f23d959538e24b84c8e39a2dd09b32f0, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1338354739
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338354736}
+  m_Mesh: {fileID: 4300000, guid: 6c838f12a1cf9c84ea32cf49f7857eb2, type: 2}
 --- !u!1 &1342974094
 GameObject:
   m_ObjectHideFlags: 0
@@ -31905,7 +31947,7 @@ Transform:
   m_GameObject: {fileID: 1469473954}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 103.47047, y: 0.5545454, z: 0}
+  m_LocalPosition: {x: 102.76983, y: 0.5545454, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -31929,7 +31971,7 @@ MonoBehaviour:
     index: 20
     name: 20_Beiral_Guarda_Roupa
     phase: 1
-    x: 103.47047
+    x: 102.76983
     y: 0.5545454
     width: 1.8363636
     depth: 1.8
@@ -33151,7 +33193,7 @@ Transform:
   m_GameObject: {fileID: 1524904878}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 97.30774, y: 0.103636324, z: 0}
+  m_LocalPosition: {x: 96.6071, y: 0.103636324, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -33175,7 +33217,7 @@ MonoBehaviour:
     index: 19
     name: 19_Relogio_Cuco_Vintage
     phase: 1
-    x: 97.30774
+    x: 96.6071
     y: 0.103636324
     width: 1.8727273
     depth: 1.8
@@ -33871,6 +33913,60 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1556081622}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1560695020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1560695021}
+  - component: {fileID: 1560695022}
+  m_Layer: 0
+  m_Name: Silhueta_Fisica_Urso
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1560695021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560695020}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1853024790}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &1560695022
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560695020}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 3e8530821201c204bb0a76aeeb9794a4, type: 2}
 --- !u!1 &1562529390
 GameObject:
   m_ObjectHideFlags: 0
@@ -34799,7 +34895,7 @@ Transform:
   m_GameObject: {fileID: 1613746535}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.797743, y: -3.4999998, z: 0}
+  m_LocalPosition: {x: 30.097105, y: -3.4999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -34823,7 +34919,7 @@ MonoBehaviour:
     index: 35
     name: 35_Mobile_Desequilibrado
     phase: 2
-    x: 30.797743
+    x: 30.097105
     y: -3.4999998
     width: 1.6800001
     depth: 1.8
@@ -36169,12 +36265,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1675562597}
   m_Layer: 0
-  m_Name: Visual_3D
+  m_Name: Visual_3D_Referencia_Desativada
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1675562597
 Transform:
   m_ObjectHideFlags: 0
@@ -36323,7 +36419,7 @@ Transform:
   m_GameObject: {fileID: 1680365505}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 53.13775, y: -5.2200003, z: 0}
+  m_LocalPosition: {x: 52.43711, y: -5.2200003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -36347,7 +36443,7 @@ MonoBehaviour:
     index: 31
     name: 31_Caixa_Musica_Desregulada
     phase: 2
-    x: 53.13775
+    x: 52.43711
     y: -5.2200003
     width: 1.84
     depth: 1.8
@@ -37180,7 +37276,7 @@ Transform:
   m_GameObject: {fileID: 1714176023}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 85.53593, y: -0.75454545, z: 0}
+  m_LocalPosition: {x: 84.83529, y: -0.75454545, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -37204,7 +37300,7 @@ MonoBehaviour:
     index: 17
     name: 17_Lustre_Cristais
     phase: 1
-    x: 85.53593
+    x: 84.83529
     y: -0.75454545
     width: 1.9454545
     depth: 1.8
@@ -42724,7 +42820,7 @@ Transform:
   m_GameObject: {fileID: 1736820520}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 86.71441, y: -7.9733343, z: 0}
+  m_LocalPosition: {x: 86.01377, y: -7.9733343, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -42748,7 +42844,7 @@ MonoBehaviour:
     index: 24
     name: 24_Caixa_Giz_Aberta
     phase: 2
-    x: 86.71441
+    x: 86.01377
     y: -7.9733343
     width: 2.1200001
     depth: 1.8
@@ -44468,60 +44564,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792800456}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1802960494
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1802960495}
-  - component: {fileID: 1802960496}
-  m_Layer: 0
-  m_Name: Orelha_Dir
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1802960495
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1802960494}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.0912, y: 0.33176002, z: -0.05}
-  m_LocalScale: {x: 0.79359996, y: 0.79359996, z: 0.33728}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1853024790}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &1802960496
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1802960494}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1804947063
 GameObject:
   m_ObjectHideFlags: 0
@@ -45215,7 +45257,7 @@ Transform:
   m_GameObject: {fileID: 1827036488}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 68.38775, y: -6.4400005, z: 0}
+  m_LocalPosition: {x: 67.68711, y: -6.4400005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -45239,7 +45281,7 @@ MonoBehaviour:
     index: 28
     name: 28_Xilofone_Colorido_Inclinado
     phase: 2
-    x: 68.38775
+    x: 67.68711
     y: -6.4400005
     width: 1.96
     depth: 1.8
@@ -45835,11 +45877,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1212652997}
-  - {fileID: 212269516}
-  - {fileID: 1802960495}
-  - {fileID: 2087131228}
-  - {fileID: 748232359}
+  - {fileID: 1560695021}
   m_Father: {fileID: 411269062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1853032695
@@ -48801,6 +48839,60 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015288027}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2021992067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2021992068}
+  - component: {fileID: 2021992069}
+  m_Layer: 0
+  m_Name: Capa_Fisica_Livros
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2021992068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021992067}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 645214277}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &2021992069
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021992067}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 9f9d85141135d1748b21a894638441e7, type: 2}
 --- !u!1 &2026732902
 GameObject:
   m_ObjectHideFlags: 0
@@ -49324,7 +49416,7 @@ Transform:
   m_GameObject: {fileID: 2045966737}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.827745, y: -5.505, z: 0}
+  m_LocalPosition: {x: 23.127106, y: -5.505, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -49348,7 +49440,7 @@ MonoBehaviour:
     index: 4
     name: 04_Blocos_ABC_Madeira
     phase: 0
-    x: 23.827745
+    x: 23.127106
     y: -5.505
     width: 2.67
     depth: 1.59
@@ -50058,60 +50150,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079264645}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &2087131227
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2087131228}
-  - component: {fileID: 2087131229}
-  m_Layer: 0
-  m_Name: Base_Madeira
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2087131228
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2087131227}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.422, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1853024790}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &2087131229
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2087131227}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 268352793}
 --- !u!1 &2088802078
 GameObject:
   m_ObjectHideFlags: 0
@@ -50139,7 +50177,7 @@ Transform:
   m_GameObject: {fileID: 2088802078}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 69.26229, y: -1.9327273, z: 0}
+  m_LocalPosition: {x: 68.56165, y: -1.9327273, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -50163,7 +50201,7 @@ MonoBehaviour:
     index: 14
     name: 14_Globo_Terrestre
     phase: 1
-    x: 69.26229
+    x: 68.56165
     y: -1.9327273
     width: 2.0545454
     depth: 1.8
@@ -50947,7 +50985,7 @@ Transform:
   m_GameObject: {fileID: 2138003524}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.812746, y: -7.9500003, z: 0}
+  m_LocalPosition: {x: 12.112105, y: -7.9500003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -51081,7 +51119,7 @@ MonoBehaviour:
     index: 2
     name: 02_Penteadeira_Encantada
     phase: 0
-    x: 12.812746
+    x: 12.112105
     y: -7.9500003
     width: 8.4
     depth: 2.4

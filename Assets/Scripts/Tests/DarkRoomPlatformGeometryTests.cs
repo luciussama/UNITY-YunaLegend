@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using YunaLegend.DarkRoom;
+using YunaLegend.Illustrated25D.Environment;
 
 namespace YunaLegend.Tests
 {
@@ -53,10 +54,11 @@ namespace YunaLegend.Tests
         {
             var geometry = DarkRoomPlatformGeometry.Get(0);
 
-            Assert.AreEqual(DarkRoomPlatformGeometry.PixelsToMeters(78f), geometry.Width, 0.001f);
+            Assert.AreEqual(IllustratedBearPlatformProfile.VisibleWidth, geometry.Width, 0.001f);
             Assert.AreEqual(DarkRoomPlatformGeometry.ConceptTeddyHeight, geometry.Height, 0.001f,
                 "A altura segue a arte conceitual (cabeca + pe de madeira), nao a estimativa antiga do catalogo");
-            Assert.AreEqual(DarkRoomPlatformGeometry.PixelsToMeters(70f), geometry.Depth, 0.001f);
+            Assert.AreEqual(IllustratedBearPlatformProfile.PhysicalDepth, geometry.Depth, 0.001f,
+                "A profundidade fisica do urso e propria, nao a profundidade planejada em pixels");
             Assert.AreEqual(PlatformSurfaceKind.SoftCushion, geometry.Surface);
             Assert.IsTrue(geometry.HasModel, "A plataforma 00 deve ter modelo dedicado nesta etapa");
         }
@@ -73,9 +75,12 @@ namespace YunaLegend.Tests
 
             // Topos das demais plataformas continuam os da rota validada.
             var second = stage1[1];
-            Assert.AreEqual(-7.55f, second.y + second.height * 0.5f, 0.001f);
+            var secondSupport = DarkRoomPlatformGeometry.GetSupportProfile(second);
+            Assert.AreEqual(-7.55f, secondSupport.PointNear(second.x + second.contact.offsetX).y, 0.001f,
+                "O topo dos livros e a capa inclinada, nao o centro do AABB");
             var last = stage1[9];
-            Assert.AreEqual(-3.27f, last.y + last.height * 0.5f, 0.001f);
+            var lastSupport = DarkRoomPlatformGeometry.GetSupportProfile(last);
+            Assert.AreEqual(-3.27f, lastSupport.PointNear(last.x + last.contact.offsetX).y, 0.001f);
         }
 
         [Test]
@@ -84,19 +89,58 @@ namespace YunaLegend.Tests
             var contact = DarkRoomPlatformGeometry.GetContact(1);
 
             Assert.IsTrue(contact.IsCustom, "A pilha de livros nao e uma caixa: o contato e proprio");
-            Assert.AreEqual(0.24f, contact.offsetX, 0.001f);
-            Assert.AreEqual(-4f, contact.tiltDegrees, 0.001f);
-            Assert.AreEqual(1.85f, contact.width, 0.001f);
+            Assert.AreEqual(IllustratedBookStackPlatformProfile.ContactOffsetX, contact.offsetX, 0.0001f);
+            Assert.AreEqual(IllustratedBookStackPlatformProfile.SupportTiltDegrees, contact.tiltDegrees, 0.0001f);
+            Assert.AreEqual(IllustratedBookStackPlatformProfile.SupportWidth, contact.width, 0.0001f);
+            Assert.AreEqual(IllustratedBookStackPlatformProfile.PhysicalDepth, contact.depth, 0.0001f);
             Assert.IsTrue(DarkRoomPlatformGeometry.Get(1).HasModel);
             Assert.AreEqual(DarkRoomPlatformGeometry.BookStackArtKey, DarkRoomPlatformGeometry.Get(1).ArtKey);
+            Assert.AreEqual(IllustratedBookStackPlatformProfile.VisibleWidth, DarkRoomPlatformGeometry.Get(1).Width, 0.0001f);
+            Assert.AreEqual(IllustratedBookStackPlatformProfile.VisibleHeight, DarkRoomPlatformGeometry.Get(1).Height, 0.0001f);
+            Assert.AreEqual(IllustratedBookStackPlatformProfile.PhysicalDepth, DarkRoomPlatformGeometry.Get(1).Depth, 0.0001f);
         }
 
         [Test]
-        public void UnmodeledPlatformsKeepDefaultPlanningContact()
+        public void BearCarriesCrownOffsetAndUnmodeledPlatformsKeepDefaultPlanningContact()
         {
             var contact = DarkRoomPlatformGeometry.GetContact(0);
-            Assert.IsFalse(contact.IsCustom, "A plataforma 00 usa o topo da propria massa");
+            Assert.IsTrue(contact.IsCustom, "A coroa pintada e ligeiramente fora do centro da prancha");
+            Assert.AreEqual(IllustratedBearPlatformProfile.ContactOffsetX, contact.offsetX, 0.0001f);
             Assert.IsFalse(DarkRoomPlatformGeometry.GetContact(3).IsCustom);
+        }
+
+        [Test]
+        public void IllustratedBearProfilePreservesTheApprovedPaintingScaleAndCrown()
+        {
+            var document = IllustratedBearPlatformProfile.Document;
+            Assert.AreEqual(1619, document.texture.width);
+            Assert.AreEqual(971, document.texture.height);
+            Assert.AreEqual(1.10f, document.mapping.crownHeightAboveFloor, 0.0001f);
+            Assert.AreEqual(2.017602f, document.mapping.visibleWidth, 0.000001f);
+            Assert.AreEqual(0.001403061f, document.mapping.metresPerTexturePixel, 0.000000001f);
+            Assert.Greater(document.topProfile.Length, 300, "O perfil fisico deve seguir a silhueta, nao uma caixa");
+            Assert.AreEqual(-0.55f, document.mapping.quadBoundsLocal.bottom, 0.0001f);
+            Assert.GreaterOrEqual(IllustratedBearPlatformProfile.ContactMesh.bounds.max.y, 0.60f,
+                "As orelhas continuam acima da coroa, sem achatar a silhueta");
+        }
+
+        [Test]
+        public void IllustratedBooksProfilePreservesTheApprovedPaintingScaleAndTopCover()
+        {
+            var document = IllustratedBookStackPlatformProfile.Document;
+            Assert.AreEqual(1620, document.texture.width);
+            Assert.AreEqual(971, document.texture.height);
+            Assert.AreEqual(1.11f, document.mapping.stackHeight, 0.0001f);
+            Assert.AreEqual(1.726526f, document.mapping.visibleWidth, 0.000001f);
+            Assert.AreEqual(1.11f, document.mapping.visibleHeight, 0.0001f);
+            Assert.AreEqual(0.001268571f, document.mapping.metresPerTexturePixel, 0.000000001f);
+            Assert.AreEqual(1.184211f, document.mapping.supportWidth, 0.000001f);
+            Assert.AreEqual(-8.739244f, document.mapping.supportTiltDegrees, 0.000001f);
+            Assert.AreEqual(0.134786f, document.mapping.contactOffsetX, 0.000001f);
+            Assert.AreEqual(0.363763f, document.mapping.supportHeightAboveCentre, 0.000001f);
+            Assert.AreEqual(1.15f, document.mapping.physicalDepth, 0.0001f);
+            Assert.AreEqual(-0.555f, document.mapping.quadBoundsLocal.bottom, 0.0001f);
+            Assert.AreEqual(0.555f, document.mapping.quadBoundsLocal.top, 0.0001f);
         }
 
         [Test]
@@ -114,28 +158,34 @@ namespace YunaLegend.Tests
 
                 var contact = marker.transform.Find("Contacto_Fisico");
                 Assert.IsNotNull(contact);
-                var collider = contact.GetComponent<BoxCollider>();
+                var colliders = contact.GetComponentsInChildren<Collider>();
+                Assert.AreEqual(1, colliders.Length, "A capa superior deve ser um unico apoio continuo");
+                var collider = colliders[0] as MeshCollider;
                 Assert.IsNotNull(collider);
-                Assert.AreEqual(-4f, Mathf.DeltaAngle(0f, collider.transform.localEulerAngles.z), 0.5f,
-                    "A laje de contato deve acompanhar a inclinacao da pilha");
+                Assert.IsFalse(collider.convex, "A capa pode manter a silhueta sem virar uma caixa convexa");
+                Assert.AreEqual(IllustratedBookStackPlatformProfile.PhysicalDepth, collider.bounds.size.z, 0.01f,
+                    "A profundidade fisica deve coincidir com a prancha aprovada");
 
-                Vector3 topFace = collider.transform.position +
-                    collider.transform.rotation * new Vector3(0f, collider.size.y * 0.5f, 0f);
-                Vector3 expected = marker.GetTopCenterWorld();
-                Assert.AreEqual(expected.x, topFace.x, 0.02f);
-                Assert.AreEqual(expected.y, topFace.y, 0.02f);
-
-                var cover = marker.transform.Find("Visual_3D/Livro_05/Capa_Superior");
-                Assert.IsNotNull(cover, "A capa do livro de cima deve existir");
-                var renderer = cover.GetComponent<MeshRenderer>();
+                var visual = marker.transform.Find("Visual_Ilustrado_Livros");
+                Assert.IsNotNull(visual, "A pintura aprovada dos livros nao foi persistida");
+                var renderer = visual.GetComponent<MeshRenderer>();
                 Assert.IsNotNull(renderer);
+                Assert.AreEqual("Books_Platform_v1", renderer.sharedMaterial.mainTexture.name,
+                    "A superficie visivel deve usar a prancha aprovada");
+                Assert.AreEqual(0f, visual.localPosition.z, 0.0001f,
+                    "A projecao visual deve coincidir com o plano de suporte");
 
-                // A face superior da capa e inclinada; comparar o centro da face, nao o AABB.
-                Vector3 coverTopCenter = cover.position +
-                    cover.rotation * new Vector3(0f, cover.localScale.y * 0.5f, 0f);
-                Assert.AreEqual(topFace.y, coverTopCenter.y, 0.02f,
-                    "O tampo visivel do livro de cima deve coincidir com o colisor");
-                Assert.AreEqual(topFace.x, coverTopCenter.x, 0.05f);
+                var legacy = marker.transform.Find("Visual_3D_Referencia_Desativada");
+                Assert.IsNotNull(legacy);
+                Assert.IsFalse(legacy.gameObject.activeSelf, "O antigo visual 3D fica apenas como referencia inativa");
+
+                Physics.SyncTransforms();
+                Vector3 expected = marker.GetTopCenterWorld();
+                Assert.IsTrue(Physics.Raycast(expected + Vector3.up * 0.2f, Vector3.down, out var topHit, 0.5f),
+                    "O tampo da capa precisa oferecer apoio fisico");
+                Assert.AreEqual(expected.y, topHit.point.y, 0.01f,
+                    "O topo do colisor deve coincidir com a superficie de pouso");
+                Assert.AreEqual(marker, topHit.collider.GetComponentInParent<DarkRoomPlatformMarker>());
             }
             finally
             {
@@ -217,28 +267,46 @@ namespace YunaLegend.Tests
                 Assert.IsNotNull(marker, "Plataforma 00 ausente na cena persistida");
                 Assert.AreEqual(DarkRoomPlatformGeometry.Get(0).Width, marker.spec.width, 0.001f,
                     "A cena deve persistir a largura canonica da plataforma 00");
+            Assert.AreEqual(IllustratedBearPlatformProfile.PhysicalDepth, marker.spec.depth, 0.001f,
+                "A cena deve persistir a profundidade fisica do urso");
 
                 var contact = marker.transform.Find("Contacto_Fisico");
                 Assert.IsNotNull(contact, "Falta o colisor de contato dedicado");
-                var collider = contact.Find("Cabeca_Urso").GetComponent<MeshCollider>();
+            var colliders = contact.GetComponentsInChildren<Collider>();
+            Assert.AreEqual(1, colliders.Length, "O perfil continuo deve usar um unico collider fisico");
+            var collider = colliders[0] as MeshCollider;
                 Assert.IsNotNull(collider);
-                Assert.AreEqual(marker.GetTopCenterWorld().y, collider.bounds.max.y, 0.01f,
-                    "O topo do colisor deve ser a superficie de pouso");
+            Assert.IsFalse(collider.convex, "A silhueta pode ser concava sem virar uma caixa convexa");
+            Assert.AreEqual(IllustratedBearPlatformProfile.PhysicalDepth, collider.bounds.size.z, 0.01f,
+                "A profundidade do collider deve ser a profundidade fisica declarada");
 
-                var head = marker.transform.Find("Visual_3D/Cabeca_Urso");
-                Assert.IsNotNull(head, "O modelo da cabeca do urso nao foi persistido");
-                var headRenderer = head.GetComponent<MeshRenderer>();
-                Assert.IsNotNull(headRenderer);
-                Assert.AreEqual(collider.bounds.max.y, headRenderer.bounds.max.y, 0.03f,
-                    "A superficie visivel deve coincidir com o topo do colisor (sem tampo invisivel)");
-                Physics.SyncTransforms();
-                foreach (float z in new[] { -1f, 1f })
-                {
-                    bool hit = Physics.Raycast(marker.GetTopCenterWorld() + new Vector3(0f, .2f, z),
-                        Vector3.down, out var rearHit, .5f);
-                    Assert.IsFalse(hit && rearHit.collider.GetComponentInParent<DarkRoomPlatformMarker>() == marker,
-                        "No invisible bear support beyond the visible head depth.");
-                }
+            Physics.SyncTransforms();
+            Vector3 crown = marker.GetTopCenterWorld();
+            Assert.IsTrue(Physics.Raycast(crown + Vector3.up * 0.2f, Vector3.down, out var crownHit, 0.5f),
+                "A coroa visivel precisa oferecer apoio fisico");
+            Assert.AreEqual(crown.y, crownHit.point.y, 0.01f,
+                "O topo do colisor deve coincidir com a coroa usada pelo salto");
+            Assert.AreEqual(marker, crownHit.collider.GetComponentInParent<DarkRoomPlatformMarker>());
+
+            var visual = marker.transform.Find("Visual_Ilustrado_Urso");
+            Assert.IsNotNull(visual, "A pintura aprovada do urso nao foi persistida");
+            var visualRenderer = visual.GetComponent<MeshRenderer>();
+            Assert.IsNotNull(visualRenderer);
+            Assert.AreEqual("Bear_Platform_v1", visualRenderer.sharedMaterial.mainTexture.name,
+                "A superficie visivel deve usar a prancha aprovada");
+            Assert.AreEqual(0f, visual.localPosition.z, 0.0001f,
+                "A projecao visual deve coincidir com o plano de suporte");
+            var legacy = marker.transform.Find("Visual_3D_Referencia_Desativada");
+            Assert.IsNotNull(legacy);
+            Assert.IsFalse(legacy.gameObject.activeSelf, "O antigo visual 3D fica apenas como referencia inativa");
+
+            foreach (float z in new[] { -1f, 1f })
+            {
+                bool hit = Physics.Raycast(marker.GetTopCenterWorld() + new Vector3(0f, .2f, z),
+                    Vector3.down, out var rearHit, .5f);
+                Assert.IsFalse(hit && rearHit.collider.GetComponentInParent<DarkRoomPlatformMarker>() == marker,
+                    "Sem apoio invisivel fora da profundidade fisica do urso");
+            }
             }
             finally
             {

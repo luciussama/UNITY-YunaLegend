@@ -8,7 +8,7 @@ namespace YunaLegend.DarkRoom
         // Authored contact anchors preserve the approved rhythm while objects keep
         // their own dimensions. Distances/clearances are measured from real support.
         public const float Stage2OpeningGap = 2.115f;
-        private static readonly float[] Stage1ContactX = {0f,4.44f};
+        private static readonly float[] Stage1ContactX = {0.012f,4.070f};
         private static readonly float[] Stage1Gaps = {0f,1.25f,1.35f,1.2f,1.315f,1.185f,1.105f,1.06f,.985f};
         private static readonly float[] Stage1ContactY = {0f,-7.55f,-6.8f,-6.05f,-4.87f,-4.55f,-4.23f,-3.91f,-3.59f,-3.27f};
 
