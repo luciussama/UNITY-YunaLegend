@@ -1,0 +1,65 @@
+{
+    "method": "camadas pintadas + movel T05.3 em memoria; 1280x720 a 96 px/m; cena nao salva",
+    "floorY": -8.855561256408692,
+    "centreX": 8.667472839355469,
+    "spanMinX": 1.022840976715088,
+    "spanMaxX": 16.312105178833009,
+    "spanMetres": 15.289264678955079,
+    "cameraDistance": 9.052599906921387,
+    "floorErrorMetres": 0.0,
+    "paintedFloorInsetMetres": 1.3333333730697632,
+    "hiddenLegacyRenderers": 272,
+    "layers": [
+        {
+            "role": "fundo",
+            "travelFraction": 0.3499999940395355,
+            "worldWidth": 28.44444465637207,
+            "worldHeight": 14.222222328186036,
+            "sortingOrder": -300
+        },
+        {
+            "role": "meio",
+            "travelFraction": 0.44999998807907107,
+            "worldWidth": 28.44444465637207,
+            "worldHeight": 14.222222328186036,
+            "sortingOrder": -290
+        },
+        {
+            "role": "primeiro-plano",
+            "travelFraction": 0.0,
+            "worldWidth": 28.44444465637207,
+            "worldHeight": 14.222222328186036,
+            "sortingOrder": 40
+        }
+    ],
+    "shots": [
+        {
+            "name": "01-quarto-inicio",
+            "cameraX": 2.0302391052246095,
+            "farX": 6.344440937042236,
+            "midX": 5.680717945098877,
+            "nearX": 8.667472839355469
+        },
+        {
+            "name": "02-quarto-livros",
+            "cameraX": 6.070000171661377,
+            "farX": 7.758357524871826,
+            "midX": 7.498610019683838,
+            "nearX": 8.667472839355469
+        },
+        {
+            "name": "03-quarto-vao",
+            "cameraX": 7.287105560302734,
+            "farX": 8.184344291687012,
+            "midX": 8.046307563781739,
+            "nearX": 8.667472839355469
+        },
+        {
+            "name": "04-quarto-movel",
+            "cameraX": 12.112105369567871,
+            "farX": 9.87309455871582,
+            "midX": 10.217557907104493,
+            "nearX": 8.667472839355469
+        }
+    ]
+}

@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-13T14:13:43.948107+00:00",
+  "updated_at": "2026-11-13T14:58:13.786377+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -292,13 +292,13 @@
         "agent": "Copilot SDK subagent Movel"
       },
       "checkpoint": {
-        "done": "T05.3 aprovada; camadas de fundo da T05.4 recebidas e medidas: L01536x768 com piso em y696 (contrato), L1 e L2 com alpha real e bases alinhadas, corredor transparente. Manifesto com hashes. Nada importado",
-        "next": "Decidir com o usuario seguir com estas camadas ou regerar so a L0; depois importar com PPU72 e ancora em y696, montar parallax e luz noturna, capturar e submeter a revisao",
-        "validation": "Medicoes proprias com Pillow (alpha, bbox, grupos, gradiente de piso); manifesto e README gravados; plan/diary checks OK",
-        "pending": "Importacao, rig de parallax, iluminacao, captura e revisao humana; T05 agregada e T06 dependem disso",
-        "files": "Evidence/25d/T05.4",
+        "done": "T05.3 aprovada. T05.4 montada e capturada: quatro enquadramentos1280x720 com camadas0,35/0,45/fixa, piso alinhado ao apoio fisico (-8,8556), ocultos272 renderers legados. Candidata pronta para revisao humana",
+        "next": "Revisao humana das quatro capturas; se a escala do quarto for aceitavel, fechar T05.4 e submeter T05 agregada para liberar T06.1",
+        "validation": "Sentinela T054_ROOM_CAPTURE_OK; room-audit.json; quatro PNGs; revisao numerica de bandas e cobertura; plan/diary checks",
+        "pending": "Escala do quarto grande (rodape3,95m) julgada na revisao; iluminacao unlit nao afeta plataformas; runtime do movel segue para T06.2/3; T05 agregada e T06 pendentes",
+        "files": "Assets/Art/Illustrated25D/Environment/Room;Evidence/25d/T05.4",
         "processes": "Nenhum Unity Editor ativo",
-        "updated_at": "2026-11-13T14:13:43.948107+00:00"
+        "updated_at": "2026-11-13T14:58:13.786377+00:00"
       }
     },
     {
@@ -1547,6 +1547,18 @@
       "files": "Evidence/25d/T05.4",
       "processes": "Nenhum Unity Editor ativo",
       "at": "2026-11-13T14:13:43.948107+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T05",
+      "session": "2026-11-13-copilot-t053-b29a5ec7",
+      "done": "T05.3 aprovada. T05.4 montada e capturada: quatro enquadramentos1280x720 com camadas0,35/0,45/fixa, piso alinhado ao apoio fisico (-8,8556), ocultos272 renderers legados. Candidata pronta para revisao humana",
+      "next": "Revisao humana das quatro capturas; se a escala do quarto for aceitavel, fechar T05.4 e submeter T05 agregada para liberar T06.1",
+      "validation": "Sentinela T054_ROOM_CAPTURE_OK; room-audit.json; quatro PNGs; revisao numerica de bandas e cobertura; plan/diary checks",
+      "pending": "Escala do quarto grande (rodape3,95m) julgada na revisao; iluminacao unlit nao afeta plataformas; runtime do movel segue para T06.2/3; T05 agregada e T06 pendentes",
+      "files": "Assets/Art/Illustrated25D/Environment/Room;Evidence/25d/T05.4",
+      "processes": "Nenhum Unity Editor ativo",
+      "at": "2026-11-13T14:58:13.786377+00:00"
     }
   ]
 }
