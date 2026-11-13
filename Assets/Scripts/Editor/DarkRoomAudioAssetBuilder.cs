@@ -10,7 +10,6 @@ namespace YunaLegend.EditorScripts
         private const string AudioFolder = "Assets/Audio/SFX";
         private const int SampleRate = 44100;
 
-        [MenuItem("YunaLegend/Gerar Efeitos Sonoros (SFX)")]
         public static void GenerateAllSfx()
         {
             if (!Directory.Exists(AudioFolder))

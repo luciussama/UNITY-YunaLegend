@@ -16,7 +16,6 @@ namespace YunaLegend.EditorScripts
         private const string ContactMeshPath = Folder + "/Bear_Platform_Contact.asset";
         private const string VisualMeshPath = Folder + "/Bear_Platform_Visual.asset";
 
-        [MenuItem("YunaLegend/T05.1/Apply illustrated bear platform")]
         public static void ApplyAndSave() => Run();
 
         public static void Run()

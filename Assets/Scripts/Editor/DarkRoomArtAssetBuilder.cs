@@ -11,7 +11,6 @@ namespace YunaLegend.EditorScripts
     {
         private const string MaterialsFolder = "Assets/Materials";
 
-        [MenuItem("YunaLegend/Gerar Texturas e Materiais Estilizados")]
         public static void GenerateAllArtAssets()
         {
             EnsureFolderExists(MaterialsFolder);

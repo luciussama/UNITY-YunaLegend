@@ -1,0 +1,912 @@
+{
+  "note": "Inventario posterior a aprovacao, sem substituir manifesto v6. Cena equivalente com IDs locais regenerados;18 alteracoes Editor de menu; fontes runtime identicos a v6. Build local regenerada, smoke60 success/errors0;30/120 referem-se ao artefato v6 historico.",
+  "approvedManifestSha256": "e074d248bf1a53c0bdca6a7add3d9500021cbcbec0bf0c12c2913062c47cef05",
+  "sourceChangesSinceApproved": [
+    "Assets/Art/Illustrated25D/Environment/Bear/Editor/BearPlatformSetup.cs",
+    "Assets/Art/Illustrated25D/Environment/Books/Editor/BooksPlatformSetup.cs",
+    "Assets/Art/Illustrated25D/Preview/Editor/IllustratedPreviewBuild.cs",
+    "Assets/Scenes/DarkRoom_IllustratedPreview.unity",
+    "Assets/Scripts/Editor/DarkRoomArtAssetBuilder.cs",
+    "Assets/Scripts/Editor/DarkRoomAudioAssetBuilder.cs",
+    "Assets/Scripts/Editor/DarkRoomFurnitureSetup.cs",
+    "Assets/Scripts/Editor/DarkRoomPaintedPlatformSetup.cs",
+    "Assets/Scripts/Editor/DarkRoomPostProcessingSetup.cs",
+    "Assets/Scripts/Editor/DarkRoomRenderPipelineSetup.cs",
+    "Assets/Scripts/Editor/DarkRoomScenePopulator.cs",
+    "Assets/Scripts/Editor/DarkRoomValueHierarchySetup.cs",
+    "Assets/Scripts/Editor/DarkRoomVfxBuilder.cs",
+    "Assets/Scripts/Editor/IllustratedYunaProof.cs",
+    "Assets/Scripts/Editor/TitleScreenBuilder.cs",
+    "Assets/Scripts/Editor/WebCiBuild.cs",
+    "Assets/Scripts/Editor/WebPreviewBuild.cs",
+    "Assets/Scripts/Editor/YunaCharacterModelBuilder.cs",
+    "Assets/Scripts/Editor/YunaCharacterModelCapture.cs"
+  ],
+  "sceneSha256": "e692dc712897e78ac5d0dc8fce269ea5aa5b9952c16df87adeace9ca22deacfa",
+  "build": [
+    {
+      "path": "D3D12/D3D12Core.dll",
+      "sha256": "625bd40005b1c3708695d5256ecf230d278e6b8edba5a88af70f3d91324f3052",
+      "bytes": 4725304
+    },
+    {
+      "path": "LEIA-ME.txt",
+      "sha256": "c9ed4a1487496ffbe6276792b87d563e9e8a771fa8455cf1a070a711b41caa26",
+      "bytes": 774
+    },
+    {
+      "path": "MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll",
+      "sha256": "19e13b8c55799f17c3873749c1ba2729cc111268889387caa5c5fd0c778114bf",
+      "bytes": 7831472
+    },
+    {
+      "path": "MonoBleedingEdge/EmbedRuntime/MonoPosixHelper.dll",
+      "sha256": "8c80860e569dc01bd660b8b705c6d4668e9595c2b4ff3313a7f261786747edab",
+      "bytes": 611248
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/Browsers/Compat.browser",
+      "sha256": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741",
+      "bytes": 1605
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx",
+      "sha256": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a",
+      "bytes": 60575
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/machine.config",
+      "sha256": "e91782a27fa39fc6c1d6ee8b08529f5d35052310d0006034b878eb04b8f2af30",
+      "bytes": 29066
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/settings.map",
+      "sha256": "49c6160f9d54af4270a3b4e997fc4a8301f79b9e2070118fa46ddbcbbc44f9a2",
+      "bytes": 2622
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/web.config",
+      "sha256": "cf2b54339e069b9e42f7d6795eecbf562c50c1011f4ca8f65f578fe52d97ff92",
+      "bytes": 11635
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/Browsers/Compat.browser",
+      "sha256": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741",
+      "bytes": 1605
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/DefaultWsdlHelpGenerator.aspx",
+      "sha256": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a",
+      "bytes": 60575
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/machine.config",
+      "sha256": "e60aec2c5115d65b3acb3c55ea21576dbd770f579166c017125571e46ae560ed",
+      "bytes": 33598
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/settings.map",
+      "sha256": "ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8",
+      "bytes": 2622
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/web.config",
+      "sha256": "e38bb8cc68fe5b4edecdfd288d094b9e8ced7629039b2a347682aba0d8bd7492",
+      "bytes": 18802
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/Browsers/Compat.browser",
+      "sha256": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741",
+      "bytes": 1605
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/DefaultWsdlHelpGenerator.aspx",
+      "sha256": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a",
+      "bytes": 60575
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/machine.config",
+      "sha256": "ee950004b576fb28dc85f4b0435ed04bf96612de2e8b53be84d07afe85a0de6c",
+      "bytes": 34056
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/settings.map",
+      "sha256": "ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8",
+      "bytes": 2622
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/web.config",
+      "sha256": "c4cbddd4fd9347b58cc5a72b36dc4ba1ad2bb699e65869d05cd3fb9865f0d824",
+      "bytes": 18811
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/browscap.ini",
+      "sha256": "4ddd50f31fb968f30bedefc253a46dc3f2890192d05cdaa9e0a64a056eee807e",
+      "bytes": 311984
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/config",
+      "sha256": "5776169973a26a387b8b3e5c0f2301a7ab9a6dd7c7d3efa22a96abc47fbf8662",
+      "bytes": 3815
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/mconfig/config.xml",
+      "sha256": "0c56e34c69124510fa8c19e7b4c2ca6c1c4ff460ae19f798dd0ca035809e396d",
+      "bytes": 25817
+    },
+    {
+      "path": "UnityCrashHandler64.exe",
+      "sha256": "4de499622a8944f9edce49dbd7159972b9c22d2cf006493130efeab29222041f",
+      "bytes": 1669544
+    },
+    {
+      "path": "UnityPlayer.dll",
+      "sha256": "e4d1887f05febf23fab9cd431dc1ba8dd502a1b72147bb406d1c8a61dc24b00f",
+      "bytes": 36809648
+    },
+    {
+      "path": "Yuna Legend - O Quarto dos Brinquedos_BurstDebugInformation_DoNotShip/Data/Plugins/x86_64/lib_burst_generated.txt",
+      "sha256": "a59ce55956a4e3e2d6a30ed4f3d05f871d3ea3e07b993f99648cb2440ff94da5",
+      "bytes": 193433
+    },
+    {
+      "path": "YunaLegend.exe",
+      "sha256": "fbd073ca59c4918edbc6704f5393cf59021173af11714c00db4212c50117492b",
+      "bytes": 667136
+    },
+    {
+      "path": "YunaLegend_Data/app.info",
+      "sha256": "98a58a112666d004111a6940a1643038b415326a50ad7f8f3bae374ffa74439f",
+      "bytes": 52
+    },
+    {
+      "path": "YunaLegend_Data/boot.config",
+      "sha256": "e1b08b835f2f03c9c95496201ddc37b1456489dfbd8ab963486830918e25c08e",
+      "bytes": 156
+    },
+    {
+      "path": "YunaLegend_Data/globalgamemanagers",
+      "sha256": "bbba5c0c6d0f9d713b332db4226e9461b6d4edf97abe51264dffc83f9292c37b",
+      "bytes": 183428
+    },
+    {
+      "path": "YunaLegend_Data/globalgamemanagers.assets",
+      "sha256": "1253cacd32d446761b324100579d7e5383d6758ad98dafb04ccbf86cfe347def",
+      "bytes": 861572
+    },
+    {
+      "path": "YunaLegend_Data/globalgamemanagers.assets.resS",
+      "sha256": "f2e891f1a2eca090fd71651b299b57c89b6f16599aee6dd338e290ba791e314b",
+      "bytes": 5716192
+    },
+    {
+      "path": "YunaLegend_Data/level0",
+      "sha256": "aecba89539ceca317824daaeb7746c4bd5ea5a4d0351161e4f77bfb450bdef6f",
+      "bytes": 1884544
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Assembly-CSharp.dll",
+      "sha256": "9a5d84df74c8eae543e2e66a8843e3c9b749fbdc7e2d67325dbde7af3291dd5e",
+      "bytes": 54784
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Mono.Security.dll",
+      "sha256": "ffb6b94c196f696fe8643800744f50ab6988ef6a8e9154ebd97987f6a8c380b8",
+      "bytes": 241152
+    },
+    {
+      "path": "YunaLegend_Data/Managed/mscorlib.dll",
+      "sha256": "37112a6105aa0540579d49745a57d2dcc2148246feecd18a72fe8adee7ab38cb",
+      "bytes": 4632064
+    },
+    {
+      "path": "YunaLegend_Data/Managed/netstandard.dll",
+      "sha256": "6ae62e082dc494a2433984177f60ca4db5fae69b1f360a8b33754172b310b8c5",
+      "bytes": 90112
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.ComponentModel.Composition.dll",
+      "sha256": "8161d85676aeea9a584b15324163f49e86d03765d143454096f30dba678a6786",
+      "bytes": 257024
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.Configuration.dll",
+      "sha256": "4d306c0188e9c56f97774776e73bb452a7361a546c542b5383dadc18242cb685",
+      "bytes": 124928
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.Core.dll",
+      "sha256": "660bf1fe0d3bf007269eb791f9a809ea6e6ea3285bdb002bbae3ea694b2b551d",
+      "bytes": 1113088
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.Data.DataSetExtensions.dll",
+      "sha256": "7b657786773e617a86815cad5d8e8afe3485530a3acd1eda10bf387ac8fc9fad",
+      "bytes": 29696
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.Data.dll",
+      "sha256": "1b3bf49e7b2cc24b086503c93c638239d5555cb7ab074d21c7b5f0a8185fe464",
+      "bytes": 2125312
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.dll",
+      "sha256": "4492e20b232e35e43646d4ad4b3d7c59974605f58bf49dc771887be050312575",
+      "bytes": 2641920
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.Drawing.dll",
+      "sha256": "c7a6cba36403ac2389214620affd260f59be91bdf05b8640c0a8e527daa69ef5",
+      "bytes": 489984
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.EnterpriseServices.dll",
+      "sha256": "4922d9e029d183f58c6eb4fd821f68ebf574242c2bdda3d14c66e45c80608cee",
+      "bytes": 44544
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.IO.Compression.dll",
+      "sha256": "8b592aaeb79718ae973da625b7b10d83cd3130e12b9a6517acdfe36368763774",
+      "bytes": 114688
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.IO.Compression.FileSystem.dll",
+      "sha256": "5d366cb015c14ad3957506655182c84da804be8ed6adaf1c163040599b1e89c3",
+      "bytes": 18432
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.Net.Http.dll",
+      "sha256": "f294d08c8180002bc7062c16978db016ced91360c67c8e61567c7002dd592bc5",
+      "bytes": 122880
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.Numerics.dll",
+      "sha256": "bf8fcdff13272b7e3532b7bd700bcbb8ed087a033248ce777c2eabaf284c8b18",
+      "bytes": 119296
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.Runtime.dll",
+      "sha256": "e0a7334b7ba419aaab6bd3bb6992d693e689341a9178172c9bf99c2aa6a085bd",
+      "bytes": 12288
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.Runtime.Serialization.dll",
+      "sha256": "39c93b51ba1b857db47ec20fa01ebdb8f7b6da35ee72bbf1d5511c2aa459cb9a",
+      "bytes": 934400
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.Security.dll",
+      "sha256": "7afe85961400ea0f4aaf26531ad3804d8b919669b9c94e3c01be9f745aed052e",
+      "bytes": 320000
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.ServiceModel.Internals.dll",
+      "sha256": "71bc4f1c26c1f871a40fe0b86426f1560833bc131b5efbbba1fe38091aac71b4",
+      "bytes": 215040
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.Transactions.dll",
+      "sha256": "b85175ec1a7c6cb5d7b2f5d2b1724d9d6b4cbf7fe2e63b04f099f6a221ff8335",
+      "bytes": 35328
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.Xml.dll",
+      "sha256": "0b9361730de6fd7209413138d0c3f4871d80c37540b6c7b841f25c3c5958d86a",
+      "bytes": 3160064
+    },
+    {
+      "path": "YunaLegend_Data/Managed/System.Xml.Linq.dll",
+      "sha256": "91515a7a8256ad90955dc175dea69e2b21ea0bb0e72a9d3e9042f906eb21ac6a",
+      "bytes": 136704
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.Burst.dll",
+      "sha256": "e3ed3ae9612365ae2bb8911f195c2416bef3e062074e57f1ff3d76f1d13b4801",
+      "bytes": 296960
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.Burst.Unsafe.dll",
+      "sha256": "9d9c1ff52411decbee5d9f0d1cd61ebeaa222077aa77a52101ea3debafae98e2",
+      "bytes": 5632
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.Collections.dll",
+      "sha256": "a0f4215ccd7a4df049117f4c682a50d12ac0ea5f8bdaa47290094fdbab0c411e",
+      "bytes": 432128
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.Collections.LowLevel.ILSupport.dll",
+      "sha256": "ff50383f807f9692e4913b97e47d86fefcb8faa33d6d48cd3e3fd6fc7ffb448d",
+      "bytes": 5120
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.InputSystem.dll",
+      "sha256": "c3fb411f3a8d89a30abfc0605bea756c36c4847a3164b2a9db2386f9de65777e",
+      "bytes": 1017856
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.InputSystem.ForUI.dll",
+      "sha256": "5546f887f9193840e02d8c0c6831b888b763688aff269c258f39ad0095fa1a0b",
+      "bytes": 15360
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.InternalAPIEngineBridge.004.dll",
+      "sha256": "83e1ebb75f42e43e775e7c81da0adb0c6c1f62a7dfe782ad15b7bfe8af448312",
+      "bytes": 4096
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.Mathematics.dll",
+      "sha256": "7cbe0534324f1d1ea898a22bf97cd9f59790006e644c0dc940b3399a85a966c6",
+      "bytes": 737280
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.RenderPipeline.Universal.ShaderLibrary.dll",
+      "sha256": "3e333aeaa582e32bc808c7cffc7d45838444db93d73601c5c0420f24f574f35e",
+      "bytes": 7680
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.RenderPipelines.Core.Runtime.dll",
+      "sha256": "ae9d8073d2aa30349cb3ca0c983a558ffc0dc25c7649054ac27fbd38961c7f06",
+      "bytes": 1131520
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.RenderPipelines.Core.Runtime.Shared.dll",
+      "sha256": "55ee94d1ff855c9f688b23957c37c13b030f30dead7ae79d863e9dae5514e5a2",
+      "bytes": 4608
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.RenderPipelines.Core.ShaderLibrary.dll",
+      "sha256": "8bd86f88845af558d667c691234a344ca984b49a3dfe35d4a4c2acb8be5fd2b6",
+      "bytes": 3584
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.RenderPipelines.GPUDriven.Runtime.dll",
+      "sha256": "610510026f8c5d278c1ccb5fac6d28996d7dc90883b115fd8d0a0863b02d36b2",
+      "bytes": 220160
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll",
+      "sha256": "5a275b3af921d50210afed11c7573c7d2180623a7ddbd0e0dc7b8cd58dd71fa2",
+      "bytes": 3584
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.RenderPipelines.Universal.2D.Runtime.dll",
+      "sha256": "66801ad164af9aeee89c3f96cbb6bb327b3204884b30598db72b11f348057120",
+      "bytes": 216576
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.RenderPipelines.Universal.Config.Runtime.dll",
+      "sha256": "e8894886d068670e82cb591984fa98592744a28b65c6f7d1773e9a5859f5f7c6",
+      "bytes": 4096
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.RenderPipelines.Universal.Runtime.dll",
+      "sha256": "e5e580c03b2d6e56976266db0dc02373ce6bde6e7a8cc46cbedc6375c7f63160",
+      "bytes": 699392
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.RenderPipelines.Universal.Shaders.dll",
+      "sha256": "b166d6df6c0ebeb933cb8dfc9d08e99bf989c106b5f7226d7b4b330e92c833e6",
+      "bytes": 3584
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.TextMeshPro.dll",
+      "sha256": "943509fbdf1cf77357a691b4b0adc4b4fe83fdf5e56095fdca13739178ce0c49",
+      "bytes": 438784
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.Timeline.dll",
+      "sha256": "be6b528591f8c4b21f4bb883cc8f4751956692d33416ecbdbb3ba78ff86209e8",
+      "bytes": 116224
+    },
+    {
+      "path": "YunaLegend_Data/Managed/Unity.UnifiedRayTracing.Runtime.dll",
+      "sha256": "1f632579ce25753218b7c0a1ef9eceb9932945c3dacbf4f9c2d68be0db1e24d6",
+      "bytes": 91136
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.AccessibilityModule.dll",
+      "sha256": "ef78921b30b24b5acc1b407fe244d9d695312d29577ba8383d8784b5c56d1704",
+      "bytes": 51112
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.AdaptivePerformanceModule.dll",
+      "sha256": "0043538459fa2d50b05564fe4e1210f05e2c9297d4a4ac0721ff83a4022a467f",
+      "bytes": 125352
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.AIModule.dll",
+      "sha256": "068a2bc69dc9e7959c646ec0df2fb8a12feb5d6791eeb865ea792def06626973",
+      "bytes": 77224
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.AMDModule.dll",
+      "sha256": "eeaa88808f1cdf14c70d58de3f9ac342981397033ffea76fd7837e21a903e4f9",
+      "bytes": 21936
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.AndroidJNIModule.dll",
+      "sha256": "bfd15be27691552194dcf49dc3107b49d2a2347c41c6f2c4e0fdb37f0c574583",
+      "bytes": 121776
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.AnimationModule.dll",
+      "sha256": "91eeb54844e18a64d7046a0fa7734d027988d00a86da2915e47a01284b52262a",
+      "bytes": 225712
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.ARModule.dll",
+      "sha256": "8dbfcc3db4bd8457d0550e41ab867c1bef7b50eeb4e12f09eebcab251715374e",
+      "bytes": 25520
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.AssetBundleModule.dll",
+      "sha256": "b1de5b80f88b5143f58a9072470ecd4372c2b1fc8f6f7c41c79065919acc1fc2",
+      "bytes": 41904
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.AudioModule.dll",
+      "sha256": "313506701626e3aae0320ccb4c00bf2f5a842d0f7b31e5310fd592dcdb39d7f1",
+      "bytes": 142760
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.ClothModule.dll",
+      "sha256": "b397fd41624ba5497e06528880e1bbf800e694d825307fbfd56378f835da1f9c",
+      "bytes": 36272
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.ClusterInputModule.dll",
+      "sha256": "929600076cd5a10c05fa10c54ff742e6116bc37e2f55246bdf8394fe5d4d0c92",
+      "bytes": 28080
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.ClusterRendererModule.dll",
+      "sha256": "a90afbba534e8c76ffd62cd6fd8432d0f3ee46ecc764d85ef04ffa497a83edd3",
+      "bytes": 26536
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.ContentLoadModule.dll",
+      "sha256": "02f378c6790afa43802d7e51b36b5c7eaee4cbe8404aa02c4c771d06a69edef6",
+      "bytes": 32680
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.CoreModule.dll",
+      "sha256": "dfc4f5d9b7c4d1977b92bf5a9ffa14aa09242976c9388e3b7917e540502d28c2",
+      "bytes": 1986472
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.CrashReportingModule.dll",
+      "sha256": "9bcb805813cf843175f7fac31215c33b26c2c7e89518d86a7b3ff7e397b27930",
+      "bytes": 26536
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.DirectorModule.dll",
+      "sha256": "7c26d427eaa24fcfef83130c774fb9943ca01f2f30bfff0fece08ec2ccc02851",
+      "bytes": 41904
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.dll",
+      "sha256": "f19c05748eca4ee0e7728ac09fb79097630a74dcf3c9a969426b5448e5323ec8",
+      "bytes": 197552
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.DSPGraphModule.dll",
+      "sha256": "97c65850cfc69f0a309f16d2710ba4b21d39064cbb226a1bfc866c0796a551cf",
+      "bytes": 31664
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.GameCenterModule.dll",
+      "sha256": "ed482fc5a680f6525bde49ba1c7b41b63c625490d8adb85df855b531c86e3d64",
+      "bytes": 45992
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.GIModule.dll",
+      "sha256": "375561240aa274708c1d0064a1d9b92bc6a2aa44adcc2565707091b5ed7bd430",
+      "bytes": 24488
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.GraphicsStateCollectionSerializerModule.dll",
+      "sha256": "55162ea195df4135bc66aca04f67cce8c29d6120d40d0d5a6e30a783810f9590",
+      "bytes": 14248
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.GridModule.dll",
+      "sha256": "3d4bd86b00bee2eb239ee7704145c58cf04bebedca2e1fe1f827b1f1cddaf774",
+      "bytes": 30632
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.HierarchyCoreModule.dll",
+      "sha256": "1078a19df575df18d9c85c7f5dcfc4fa7222b5cd26795630b30daa69bc8ac9ff",
+      "bytes": 109480
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.HierarchyModule.dll",
+      "sha256": "e44e3fe569573c56c331adc08030e69960a63d332c2e2ea3ed2d0e32c21d0088",
+      "bytes": 102320
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.HotReloadModule.dll",
+      "sha256": "4d2eef41e0eb7f65d040ce5a99efb58e56199021aa45345ebf7e28d4fefe02c2",
+      "bytes": 24496
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.IdentifiersModule.dll",
+      "sha256": "979c90b98d2ebcf3344eba3903d9da90514beed242b54e4349b29d8e899dee13",
+      "bytes": 16808
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.ImageConversionModule.dll",
+      "sha256": "48fef994e1f7ea1194760711d2bdac10bdec229aa8a1f9fede5d09c8e04fe3a4",
+      "bytes": 31152
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.IMGUIModule.dll",
+      "sha256": "298206a24be8e63b02bfc3daf73bae41e88d53b4ad34a32a8d01dbda39161bd5",
+      "bytes": 214440
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.InputForUIModule.dll",
+      "sha256": "f15b8b162cf7049705761d63d4409dd7a277b4ccc462cd70b8b9ed3a418e4271",
+      "bytes": 57776
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.InputLegacyModule.dll",
+      "sha256": "749857e029e1f9fb8a9fd494edebeb0806d2b4c1968aa043927a396fcd7565f6",
+      "bytes": 45488
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.InputModule.dll",
+      "sha256": "36d5e6281739ed66b2abd0bbaaea53267a83944805f846705c2b543a3dccedb3",
+      "bytes": 28584
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.InsightsModule.dll",
+      "sha256": "c985837740a969c8dbc05c6e8a6a93e516273c21b24ddb43da04bbb3cc9714ea",
+      "bytes": 14256
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.JSONSerializeModule.dll",
+      "sha256": "ea50db69596667287712f03c4100d6dafc226c4e9340e560c2d5178c0daa5f61",
+      "bytes": 27048
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.LocalizationModule.dll",
+      "sha256": "b8d64215c55e3fa9f43fc920dc12e30f182ab6603cf356015babb216972b8182",
+      "bytes": 27048
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.MarshallingModule.dll",
+      "sha256": "ed0c9f48b9ae34b50e67e601b26b94dccf8c2ab0ab988e1e4c85c03cdbd248ad",
+      "bytes": 83880
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.MultiplayerModule.dll",
+      "sha256": "961ffc04ed2ebd412d0ef95a99c3a6a0d0bf42159f1f161a7952db49e6fb9dd3",
+      "bytes": 17840
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.NVIDIAModule.dll",
+      "sha256": "c8c2ca47d26ad920df8f60f0253d6f434e709ab7be67db1c91e2e65182b5c0be",
+      "bytes": 40880
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.ParticleSystemModule.dll",
+      "sha256": "6b7037b69498f555e5ad0196d4feb2cc1af8cdc9c4b086224efb9bbb2a05196b",
+      "bytes": 172456
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.PerformanceReportingModule.dll",
+      "sha256": "260b8884a1bb2a05126942c6ba821f116e63ebb698fa2e292184bd518524a6ef",
+      "bytes": 25000
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.Physics2DModule.dll",
+      "sha256": "8ffde45a8b2952cbd7073544f7c72b74e6355c4c9d231d4ce4a21c2b25e55ef8",
+      "bytes": 586160
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.PhysicsBackendPhysXModule.dll",
+      "sha256": "1ee70dd6247da942eab69bff2d15366a11f2be2141e8075caedbf6ea53d9dc13",
+      "bytes": 14248
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.PhysicsModule.dll",
+      "sha256": "7d9648809e41cffd76ea9db7595b4e7c50c7f57d6e13dcfb2a4e0d2050ea9e6b",
+      "bytes": 183728
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.PropertiesModule.dll",
+      "sha256": "3ce30e2d8f2e6d63007af157eebc152d460897b8b00259a0162bae5efc788f30",
+      "bytes": 134056
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.RenderAs2DModule.dll",
+      "sha256": "5d54b36339f601d053d914feff5443718cec2d0c66004c2a0d737a3399537208",
+      "bytes": 25512
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll",
+      "sha256": "79e8bfbac1d61e04dc6b4cec07cae91b7424fdf2a4d7c3516ced914a20e2af37",
+      "bytes": 24496
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.ScreenCaptureModule.dll",
+      "sha256": "b6fdf8248661bc92a021fd205c2fcfbb2ba50ab946a1d6ca3c6e1d4018d32038",
+      "bytes": 26544
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.ShaderRuntimeModule.dll",
+      "sha256": "b0a4b45adf8698f5a082a98143a3165eb627dfa5bcfbf9747e78dc1b8c615305",
+      "bytes": 25520
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.ShaderVariantAnalyticsModule.dll",
+      "sha256": "fc5a11a33947d5b187899f58272705314aec563fb77eb79c980d340104a74932",
+      "bytes": 24496
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.SharedInternalsModule.dll",
+      "sha256": "172589daf96a0d0ae3e885253ba7e15c430715998b49d8ea3e427c762cece3db",
+      "bytes": 38312
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.SpriteMaskModule.dll",
+      "sha256": "4159b94a319d5a6c6244d9be13c11dbda3a6019140351832c22ca65eb419dd0e",
+      "bytes": 28584
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.SpriteShapeModule.dll",
+      "sha256": "73a96514ec5f4de2393c1a3e992426741e477c0112fdc43953f304f23bc5684a",
+      "bytes": 32688
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.StreamingModule.dll",
+      "sha256": "4223e83db92949248a0e5dea7f0f36a11f3a3011b7c65d7b0e6f25d06058cb19",
+      "bytes": 26032
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.SubstanceModule.dll",
+      "sha256": "418d5d24e336800ef61a6d6147b0c992dd7bee30a83feb7a0676d6b40d371e7b",
+      "bytes": 29096
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.SubsystemsModule.dll",
+      "sha256": "a75212be847b477a044f6aa0175c4aa5e5c8238370b757d89d94ed1a79f00bae",
+      "bytes": 42416
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.TerrainModule.dll",
+      "sha256": "30fe0cde1644bf6d8617059ca8e2205d66ffbbf16794673a3d507c59939abbc8",
+      "bytes": 134056
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.TerrainPhysicsModule.dll",
+      "sha256": "cd386d0bc7d60482dce0056392cd4596195c73b52e99d46acbfdfdd821b31675",
+      "bytes": 25520
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.TextCoreFontEngineModule.dll",
+      "sha256": "b41f300974ce6af39f7aacaa80153ec0d58080c7e8db024084887a105877ce01",
+      "bytes": 91560
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.TextCoreTextEngineModule.dll",
+      "sha256": "8b252655399e6911d6bfc359d48a7c20d9b552496d82cdc22e88a8cf8812719a",
+      "bytes": 334760
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.TextRenderingModule.dll",
+      "sha256": "5ad3a70eecc09492c521ff70fd47003ff81a5ecbad525ce1636658d12a3af198",
+      "bytes": 39336
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.TilemapModule.dll",
+      "sha256": "ae897c17bb8f29c85029efa90d1cac800b8bec0b368cbf7b41bef6ed80956bb6",
+      "bytes": 58800
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.TLSModule.dll",
+      "sha256": "7bee9bed1e03c1f1a8a1f14ac224e554c4e25f5b7bb247af9d5da3a3dc45e925",
+      "bytes": 32176
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.UI.dll",
+      "sha256": "3a4cd14407ed9a4bd822fcd2175850b41bad5c974c54e11165585d683c663438",
+      "bytes": 261120
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.UIElementsModule.dll",
+      "sha256": "eb43955c7c9d71947da1680efb6e209bad48345987d3c9752ef65baf64a07d7b",
+      "bytes": 2459560
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.UIModule.dll",
+      "sha256": "d4e7d4dcdf96b2f8eb5274a83766e6d12b1bd1af58063b345c8557ff9212c4ce",
+      "bytes": 50096
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.UmbraModule.dll",
+      "sha256": "49a8365beec23746945a6fb5183fe6755d5d7bd2738f6c1ca09892d820820c4a",
+      "bytes": 24496
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.dll",
+      "sha256": "3b501e656a583421eab09f530fa2a147c0fe4dd291605e5e5ad3b17996c58855",
+      "bytes": 35752
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.UnityAnalyticsModule.dll",
+      "sha256": "8062f2fc867a62d4d0e08bef5528cce2830a13e396dfe8f03f22da664c86170c",
+      "bytes": 60840
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.UnityConnectModule.dll",
+      "sha256": "6bba8ebaf30477fa161d0196f427c78555b3f08fe5deaa1e2c00fba81119f7a3",
+      "bytes": 27560
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.UnityConsentModule.dll",
+      "sha256": "ec83f7ee367f356e6dc002d3764dc5fb141ce26b511bfd7ef3444543fc9d801b",
+      "bytes": 16304
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.UnityCurlModule.dll",
+      "sha256": "b6cbf40be314ffd61c441585ec3a408f5f4105a910dfef8c7b3fea8ca82b885d",
+      "bytes": 26024
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.dll",
+      "sha256": "4a7f654f9d8aa1bd84a894c2249754600f051deef36f191daf711bb7ea1add2a",
+      "bytes": 28592
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll",
+      "sha256": "9c3741187a101fabe8453454886b1323a8f0bdf7773192c02f11d36a5fa2486a",
+      "bytes": 28584
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.UnityWebRequestModule.dll",
+      "sha256": "51892e0e607ef5513717f4521f9f455ec439e42220428e53d2872d78819b6bc8",
+      "bytes": 70064
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll",
+      "sha256": "638e4a875f0af19226652478b35ee25a5a9f6e553523147be4403ec908580f17",
+      "bytes": 27568
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll",
+      "sha256": "641881cbcc8bc294c1acecb8f4db3d42e4e8643b72cee6df8be7a39e769d803b",
+      "bytes": 36776
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.VectorGraphicsModule.dll",
+      "sha256": "c1c0772a0e09ecf8b3afb87d152d0169226676fbe7d0a5229a280e3edd11866f",
+      "bytes": 254888
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.VehiclesModule.dll",
+      "sha256": "74802725d3c2a51605ff252c140dd2e1151c4de6e6941e3a742f4e9a049840c3",
+      "bytes": 31656
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.VFXModule.dll",
+      "sha256": "6b7b0193d7079eb4af5a630148b286964d141853c1aacf8dfbeae8eceb127520",
+      "bytes": 78256
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.VideoModule.dll",
+      "sha256": "d2f520077cea6b0b8f086f11771ea8003bd75d6020888b1aa5abecbac688e258",
+      "bytes": 49064
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.VirtualTexturingModule.dll",
+      "sha256": "1dfe422711250e2f0b94c3fc2c0fe1ac1ccbd5a549be466f245908a833625917",
+      "bytes": 42928
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.VRModule.dll",
+      "sha256": "dabe3df28a44d377bb8c4ab00fdb2700e2b700be48a0ab565ab3962953d789b3",
+      "bytes": 31656
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.WindModule.dll",
+      "sha256": "f95257b5f5c81c616be529a9067cdb1daf83b8a519c4f88e6e3abb938e074396",
+      "bytes": 26544
+    },
+    {
+      "path": "YunaLegend_Data/Managed/UnityEngine.XRModule.dll",
+      "sha256": "2fa6e6571a21639ea463b000af4cace4f1fb04efdca6de340b4d373bf05265e6",
+      "bytes": 88488
+    },
+    {
+      "path": "YunaLegend_Data/Managed/YunaLegend.Runtime.dll",
+      "sha256": "76c9fbd1a3de4b4a14ab0cd60eebca99c3f18f533d1bb24c16ac04af85e39adf",
+      "bytes": 154112
+    },
+    {
+      "path": "YunaLegend_Data/Plugins/x86_64/lib_burst_generated.dll",
+      "sha256": "6e3519189ead9f055cc218edd7e32efa9c28a6a48bb9f529b7969ab4f2e5617d",
+      "bytes": 453632
+    },
+    {
+      "path": "YunaLegend_Data/Resources/unity default resources",
+      "sha256": "32b58bdb9cf090212b46a8ca7436dcdae89e4ef43e9d55a835233c21d1347734",
+      "bytes": 5883716
+    },
+    {
+      "path": "YunaLegend_Data/Resources/unity_builtin_extra",
+      "sha256": "eaeee50138f4d0fdbe59817bd4eb627378f7766b953fc770e136841dbd25c09e",
+      "bytes": 406568
+    },
+    {
+      "path": "YunaLegend_Data/resources.assets",
+      "sha256": "d80baba76011fc482e030b9b5943113c6344491d01e09d0328400cb11de782f7",
+      "bytes": 392600
+    },
+    {
+      "path": "YunaLegend_Data/resources.assets.resS",
+      "sha256": "f12f30b4c1648273e460dab9f8ec974e616980f7a3027d54ac4ca0f19ba89cd3",
+      "bytes": 7232
+    },
+    {
+      "path": "YunaLegend_Data/RuntimeInitializeOnLoads.json",
+      "sha256": "7112b72e902d4ec659c7225cabb1eeac6ef7777fe025037b7281752ef5cc7d82",
+      "bytes": 2144
+    },
+    {
+      "path": "YunaLegend_Data/ScriptingAssemblies.json",
+      "sha256": "66fe1ac2483b98b2e84efbd854b3c3bea69f5e4fcc1bf5c95402b9ab2a463101",
+      "bytes": 4075
+    },
+    {
+      "path": "YunaLegend_Data/sharedassets0.assets",
+      "sha256": "374bf5135ea3611e9214fbe97added0f3a4407449e1a7f79db145ee42f82f2b8",
+      "bytes": 4712884
+    },
+    {
+      "path": "YunaLegend_Data/sharedassets0.assets.resS",
+      "sha256": "2bbe59f45cf45d5f1840e1a6af48a07c27fc3d8e421d1253d1f7a406ae323099",
+      "bytes": 80164784
+    },
+    {
+      "path": "YunaLegend_Data/sharedassets0.resource",
+      "sha256": "24a002df473ba1fe8b40fa6af4fd96381b60f7c8a21162fb492b1617b219e1ca",
+      "bytes": 3413600
+    }
+  ],
+  "smoke60": {
+    "hz": 60,
+    "frames": 540,
+    "maxLegacy": 0,
+    "maxVisible": 1,
+    "errors": 0,
+    "success": true,
+    "bear": true,
+    "books": true,
+    "furniture": true,
+    "cracked": true,
+    "stumbled": true,
+    "finished": true,
+    "reset": true,
+    "idleCompanionNear": true,
+    "maxSag": 0.07500000298023224,
+    "maxLocalPause": 0.07999999821186066,
+    "cracks": 1,
+    "error": "",
+    "events": [
+      "01-ready x=-10",
+      "01-ready-stable x=-10",
+      "Begin",
+      "jump x=-0,6399996 y=-9,02 keyboardEnabled=True focus=False",
+      "02-bear x=2,3",
+      "jump x=2,720001 y=-7,865396 keyboardEnabled=True focus=False",
+      "03-books x=5,935549",
+      "jump x=5,995549 y=-7,454444 keyboardEnabled=True focus=False",
+      "04-furniture x=8,96603",
+      "05-cracked x=11,96603",
+      "06-finished x=14,13803",
+      "07-retry x=-10"
+    ]
+  }
+}

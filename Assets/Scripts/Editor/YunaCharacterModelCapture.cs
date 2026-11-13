@@ -61,7 +61,6 @@ namespace YunaLegend.EditorScripts
             var light = new GameObject(name).AddComponent<Light>(); light.type = LightType.Directional;
             light.intensity = intensity; light.color = color; light.transform.rotation = Quaternion.Euler(angles);
         }
-        [MenuItem("YunaLegend/Yuna/Capturar estudo 3D")]
         public static void Run()
         {
             Directory.CreateDirectory(Output);

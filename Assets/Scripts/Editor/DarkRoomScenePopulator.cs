@@ -10,7 +10,6 @@ namespace YunaLegend.EditorScripts
 {
     public static class DarkRoomScenePopulator
     {
-        [MenuItem("YunaLegend/Construir Cena Quarto Escuro")]
         public static void PopulateDarkRoomScene()
         {
             var scenePath = "Assets/Scenes/DarkRoom_Gameplay.unity";

@@ -17,7 +17,6 @@ namespace YunaLegend.EditorScripts
         private const string ContactMeshPath = Folder + "/Books_Platform_Contact.asset";
         private const string VisualMeshPath = Folder + "/Books_Platform_Visual.asset";
 
-        [MenuItem("YunaLegend/T05.2/Apply illustrated books platform")]
         public static void ApplyAndSave() => Run();
 
         public static void Run()

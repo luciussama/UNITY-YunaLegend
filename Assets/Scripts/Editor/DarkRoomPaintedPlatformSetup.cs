@@ -53,7 +53,6 @@ namespace YunaLegend.EditorScripts
             EditorUtility.SetDirty(top);
         }
 
-        [MenuItem("YunaLegend/Aplicar arte pintada no urso e livros")]
         public static void ApplyAndSave()
         {
             EditorSceneManager.OpenScene("Assets/Scenes/DarkRoom_Gameplay.unity");

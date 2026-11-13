@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-13T18:58:24.634232+00:00",
+  "updated_at": "2026-11-13T19:45:33.001858+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -329,13 +329,13 @@
       "status": "pending",
       "owner": null,
       "checkpoint": {
-        "done": "T06.1 implementada, capturada e empacotada: harness YunaT061TraversalCapture (30/60/120Hz) + instalador runtime YunaIllustrationInstaller salvo na DarkRoom_Gameplay + build Windows x64 de validacao (183MB,0 erros, input validado apos corrigir rotulo de integridade). 60Hz e120Hz concluem;30Hz falha medida",
-        "next": "Revisao humana da T06.1 (Evidence/25d/T06.1/reviews/T06.1-proposta.md); depois instalar T05.4+T04.1 na captura/build, decidir 30Hz e seguir T06.2 (movel) e T06.3 (retry). Handoff em Evidence/25d/T06.1/HANDOFF.md",
-        "validation": "3 runs de harness exit0/0/1 + integrated60 success=True; PILOT_BUILD_RESULT Succeeded size=183255829 errors=0; smoke-test do player com input inicializado; plan/diary/check OK",
-        "pending": "Aceite humano T06.1; composicao T05.4 e voo T04.1 na captura/build; 30Hz; movel/T06.2; retry/T06.3; UI; aparelhos/WebGL; T07",
-        "files": "Assets/Art/Illustrated25D/Yuna/Joint/Editor/YunaT061TraversalCapture.cs;Assets/Art/Illustrated25D/Yuna/Joint/Runtime/YunaIllustrationInstaller.cs;Assets/Art/Illustrated25D/Yuna/Joint/Editor/YunaIllustrationInstallerSetup.cs;Assets/Scripts/Editor/WindowsPilotBuild.cs;Assets/Scenes/DarkRoom_Gameplay.unity;Evidence/25d/T06.1;tools/make_t061_review.py",
-        "processes": "Nenhum processo Unity; player de teste encerrado; nenhum Editor aberto",
-        "updated_at": "2026-11-13T18:58:24.545647+00:00"
+        "done": "Build v6 ilustrada aprovada pelo usuario: perfeito. Aprovado.; menu19para3; provas30/60/120 v6;saida posterior regenerada passou smoke60;diario/evidencias/fontes preparados paraGit",
+        "next": "T06.3: nova build+video continuo de falha/retry durante evento movel e segunda travessia; roteiro em docs/ia/PROXIMO-ENTREGAVEL.md; implementacao ainda nao iniciada",
+        "validation": "v6 3taxas success/errors0;smoke atual60 success/errors0;compile menu exit0 e UI3itens;18diffsEditor+IDs locais cena equivalentes;manifesto aprovado preservado",
+        "pending": "Prova retry durante pausa/tropeco e segunda tentativa/video;encerramento T06/T07;toque/aparelhos;audio por escuta;sem expansao",
+        "files": "docs/ia/PROXIMO-ENTREGAVEL.md;docs/ia/ESTADO-ATUAL-25D.md;Evidence/25d/T06-acompanhamento;Evidence/25d/menu-cleanup;docs/ia/diario.sqlite3",
+        "processes": "Editor do usuario preservado;nenhum Unity iniciado nesta consolidacao;player de smoke encerrado automaticamente;Build/ e clone tecnico locais",
+        "updated_at": "2026-11-13T19:45:32.905943+00:00"
       }
     },
     {
@@ -1799,6 +1799,58 @@
       "session": "2026-11-13-dsh-pilot-7b3e",
       "reason": "Usuario pediu salvar tudo e liberar o pendente para outra IA. Estado salvo: T05 aceita (Evidence/25d/T05/README.md), T06.1 em revisao humana com build de validacao funcional, composicao T05.4/T04.1 e correcao de 30Hz pendentes, T06.2/T06.3 nao iniciadas. Handoff completo em Evidence/25d/T06.1/HANDOFF.md, incluindo comandos, armadilhas de integridade/URP e diario 883-892.",
       "at": "2026-11-13T18:58:24.634232+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T06",
+      "session": "2026-11-13-codex-follow-build",
+      "agent": "Codex GPT-6",
+      "at": "2026-11-13T19:07:56.434354+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T06",
+      "session": "2026-11-13-codex-follow-build",
+      "done": "Build acompanhamento v6 integra T03/T04/T05 em cena propria sem fallback visual3D; player30/60/120 passa com zero excecoes,1evento movel,0.075m,0.08s,tropeco,reset e legacy0; corrigido apoio null do tropeco; Nanda acompanha perto",
+      "next": "Usuario revisar Build/Windows/YunaLegend-Acompanhamento/YunaLegend.exe; registrar revisao individual do conjunto antes de continuar microentregas dependentes",
+      "validation": "Unity build v6 Succeeded0erros;3players success true errors0;872fontes clone/checkout identicos por SHA;camera inspecionada;Comecar/Recomecar por clique;v6 normal aberta no inicio",
+      "pending": "Revisao humana T06.1/2/3;T07;oclusao dinamica;mixagem por escuta;aparelhos/WebGL;sem expansao",
+      "files": "Assets/Art/Illustrated25D/Preview;Assets/Scenes/DarkRoom_IllustratedPreview.unity;Assets/Art/Illustrated25D/Environment/Room/PenumbraLightingT054.cs;Assets/Art/Illustrated25D/Environment/Room/PenumbraT054.shader;Assets/Art/Illustrated25D/Yuna/Stumble/YunaStumbleIllustration.cs;Evidence/25d/T06-acompanhamento;docs/ia/ESTADO-ATUAL-25D.md",
+      "processes": "Editor usuario preservado;Editor clone encerrado;player final aberto na tela inicial;clone tecnico mantido",
+      "at": "2026-11-13T19:32:50.797056+00:00"
+    },
+    {
+      "command": "release",
+      "task": "T06",
+      "session": "2026-11-13-codex-follow-build",
+      "reason": "Build acompanhamento entregue para revisao humana; checkpoint e evidencias completos. Nenhum aceite T06/T07 inferido.",
+      "at": "2026-11-13T19:32:50.895280+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T06",
+      "session": "2026-11-13-codex-publish-handoff",
+      "agent": "Codex GPT-6",
+      "at": "2026-11-13T19:42:44.122164+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T06",
+      "session": "2026-11-13-codex-publish-handoff",
+      "done": "Build v6 ilustrada aprovada pelo usuario: perfeito. Aprovado.; menu19para3; provas30/60/120 v6;saida posterior regenerada passou smoke60;diario/evidencias/fontes preparados paraGit",
+      "next": "T06.3: nova build+video continuo de falha/retry durante evento movel e segunda travessia; roteiro em docs/ia/PROXIMO-ENTREGAVEL.md; implementacao ainda nao iniciada",
+      "validation": "v6 3taxas success/errors0;smoke atual60 success/errors0;compile menu exit0 e UI3itens;18diffsEditor+IDs locais cena equivalentes;manifesto aprovado preservado",
+      "pending": "Prova retry durante pausa/tropeco e segunda tentativa/video;encerramento T06/T07;toque/aparelhos;audio por escuta;sem expansao",
+      "files": "docs/ia/PROXIMO-ENTREGAVEL.md;docs/ia/ESTADO-ATUAL-25D.md;Evidence/25d/T06-acompanhamento;Evidence/25d/menu-cleanup;docs/ia/diario.sqlite3",
+      "processes": "Editor do usuario preservado;nenhum Unity iniciado nesta consolidacao;player de smoke encerrado automaticamente;Build/ e clone tecnico locais",
+      "at": "2026-11-13T19:45:32.905943+00:00"
+    },
+    {
+      "command": "release",
+      "task": "T06",
+      "session": "2026-11-13-codex-publish-handoff",
+      "reason": "Consolidacao e proximo entregavel documentados; retomada futura deve reservar T06. Sem implementacao adicional ou aceite agregado.",
+      "at": "2026-11-13T19:45:33.001858+00:00"
     }
   ]
 }

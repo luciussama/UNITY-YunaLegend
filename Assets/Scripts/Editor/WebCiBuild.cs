@@ -17,7 +17,6 @@ namespace YunaLegend.EditorScripts
         private const string TitleScene = "Assets/Scenes/TitleScreen.unity";
         private const string GameplayScene = "Assets/Scenes/DarkRoom_Gameplay.unity";
 
-        [MenuItem("YunaLegend/Build Web para GitHub Pages")]
         public static void Build()
         {
             if (!BuildPipeline.IsBuildTargetSupported(BuildTargetGroup.WebGL, BuildTarget.WebGL))

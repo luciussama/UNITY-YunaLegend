@@ -315,7 +315,6 @@ namespace YunaLegend.EditorScripts
                 Ellipsoid("Ruby", V(side * .035f, .763f, -.083f), V(.036f, .024f, .011f), "Spine");
         }
 
-        [MenuItem("YunaLegend/Yuna/Gerar modelo articulavel de estudo")]
         public static void Build()
         {
             System.IO.Directory.CreateDirectory(Folder + "/Materials"); AssetDatabase.Refresh();
@@ -377,7 +376,6 @@ namespace YunaLegend.EditorScripts
             finally { UnityEngine.Object.DestroyImmediate(go); }
         }
 
-        [MenuItem("YunaLegend/Yuna/Aplicar modelo de estudo na cena")]
         public static void ApplyToScene()
         {
             EditorSceneManager.OpenScene("Assets/Scenes/DarkRoom_Gameplay.unity");

@@ -8,7 +8,6 @@ namespace YunaLegend.EditorScripts
 {
     public static class WebPreviewBuild
     {
-        [MenuItem("YunaLegend/Build Web de avaliacao")]
         public static void Build()
         {
             if (!BuildPipeline.IsBuildTargetSupported(BuildTargetGroup.WebGL, BuildTarget.WebGL))

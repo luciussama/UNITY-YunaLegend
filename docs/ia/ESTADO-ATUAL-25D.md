@@ -1,5 +1,49 @@
 # Estado atual — sala escura ilustrada
 
+## Checkpoint para Git e próxima entrega — 13/11/2026
+
+Build de acompanhamento aprovada e menu atual simplificado; registros, fontes,
+cena e evidências consolidados para push em `codex/dark-room-2d`.
+**Próximo entregável: T06.3 — nova build + vídeo contínuo de falha/reinício durante
+o evento do móvel e segunda travessia, sem estado residual ou evento duplicado.**
+[Escopo, critérios e retomada](PROXIMO-ENTREGAVEL.md). Preparado, não iniciado.
+A apresentação aprovada permanece como base; não repetir sua revisão estética.
+T06 e T07 não estão encerradas, e a expansão permanece para depois do piloto.
+Build binária em `Build/Windows/YunaLegend-Acompanhamento`, fora do Git.
+O inventário `publish-checkpoint.json` e smoke60 distinguem a regeneração local
+posterior da v6 originalmente aprovada. Diário registra commit/push.
+
+## Menu do Editor simplificado — 13/11/2026
+
+Por solicitação do usuário, menu **YunaLegend** reduzido aos três atalhos atuais:
+abrir cena de acompanhamento, gerar build Windows de acompanhamento e abrir pasta
+da build.19atalhos anteriores removidos do menu; métodos/fontes preservados.
+Compilação exit0 e menu conferido na janela Unity. Build interativa mantém Editor
+aberto e restaura cenas. [Registro](../../Evidence/25d/menu-cleanup/README.md).
+A build de acompanhamento v6 foi aprovada pelo usuário: “perfeito. Aprovado.”.
+
+## Build de acompanhamento ilustrado — 13/11/2026 (atualização mais recente)
+
+Sessão `2026-11-13-codex-follow-build`. Pedido explícito de reunir as entregas
+atuais sem fallback visual 3D atendido em **Build/Windows/YunaLegend-Acompanhamento/YunaLegend.exe**.
+Cena própria `DarkRoom_IllustratedPreview`, Yuna T03, Nanda T04 próxima/azul,
+urso/livros/móvel e composição T05.4 com janela-v4/penumbra-v2. Física 3D
+preservada; trecho encerra sobre o móvel, sem exibir plataformas posteriores.
+Build v6 exportada e testada no player em30/60/120Hz: success=true, zero exceções,
+um evento de móvel, pausa local0,08s, cedimento0,075m, tropeço e reset; zero
+renderers legados visíveis. Corrigida referência nula de apoio do tropeço.
+Fonte do clone técnico e checkout:872arquivos idênticos por SHA; Editor do usuário
+preservado. Nova build aberta na tela inicial para o usuário. [Entrega, provas e
+limites](../../Evidence/25d/T06-acompanhamento/README.md).
+
+**Build de acompanhamento aprovada pelo usuário:** “perfeito. Aprovado.”
+[Registro do aceite](../../Evidence/25d/T06-acompanhamento/reviews/acompanhamento-v6-aprovacao.md).
+O aceite refere-se à entrega apresentada; critérios restantes de T06/T07,
+aparelhos e expansão não são encerrados automaticamente. Menu já limpo;
+próxima entrega definida em PROXIMO-ENTREGAVEL.md. Sombras dinâmicas, áudio por escuta,
+aparelhos e WebGL não foram validados. A build anterior `YunaLegend-Pilot`
+continua como histórico incompleto; usar **YunaLegend-Acompanhamento**.
+
 ## T05 consolidada — 13/11/2026
 
 Sessão `2026-11-13-dsh-pilot-7b3e` (DeepSeek). **T05 aceita** após conferir as

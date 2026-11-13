@@ -10,6 +10,7 @@ namespace YunaLegend.Illustrated25D.Environment
     {
         public RoomBackgroundT054 room;
         public Transform nanda;
+        public Shader lightingShader;
         [Range(0,1)] public float moonStrength = 1f;
         [Range(0,1)] public float nandaStrength = 1f;
         [Range(0,.1f)] public float phosphor = .035f;
@@ -23,17 +24,21 @@ namespace YunaLegend.Illustrated25D.Environment
         }
         readonly List<Binding> bindings = new List<Binding>();
 
-        public void Bind(Renderer renderer, int role)
+        public void Bind(Renderer renderer, int role, bool includeDisabled = false, bool blink = false, bool suppressHaze = false)
         {
-            if (renderer == null || !renderer.enabled) return;
+            if (renderer == null || (!includeDisabled && !renderer.enabled)) return;
             foreach (var existing in bindings)
                 if (existing.renderer == renderer) throw new InvalidOperationException("Renderer already bound");
-            var shader = Shader.Find("YunaLegend/RoomPenumbraT054");
+            var shader = lightingShader != null ? lightingShader : Shader.Find("YunaLegend/RoomPenumbraT054");
             if (shader == null || !shader.isSupported) throw new InvalidOperationException("Penumbra shader unavailable");
             var source = renderer.sharedMaterial;
             var material = new Material(shader) { name = "T054_Penumbra_" + role };
             bool sprite = renderer is SpriteRenderer;
             if (source != null && source.mainTexture != null) material.mainTexture = source.mainTexture;
+            if (blink && source != null && source.HasProperty("_BlinkTex"))
+                material.SetTexture("_BlinkTex", source.GetTexture("_BlinkTex"));
+            material.SetFloat("_BlinkEnabled", blink ? 1f : 0f);
+            material.SetFloat("_SuppressHaze", suppressHaze ? 1f : 0f);
             material.SetFloat("_Sprite", sprite ? 1f : 0f);
             material.SetFloat("_Role", role);
             int queue = source != null ? source.renderQueue : 3000;

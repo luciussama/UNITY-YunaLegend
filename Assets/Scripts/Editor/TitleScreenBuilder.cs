@@ -34,7 +34,6 @@ namespace YunaLegend.EditorScripts
 
         private static Font uiFont;
 
-        [MenuItem("YunaLegend/Construir Tela de Entrada")]
         public static void Build()
         {
             var background = LoadSprite($"{ArtFolder}/Title_Background.png", 2048);
@@ -185,7 +184,6 @@ namespace YunaLegend.EditorScripts
             _ = scene;
         }
 
-        [MenuItem("YunaLegend/Capturar Tela de Entrada")]
         public static void Capture()
         {
             var scene = EditorSceneManager.OpenScene(ScenePath);

@@ -1,0 +1,102 @@
+{
+  "session": "2026-11-13-codex-audit-build",
+  "scene": "Assets\\Scenes\\DarkRoom_Gameplay.unity",
+  "sceneSha256": "aa61ca78d853895afb34d53c8b2f85ea9c2f013508b697851a1c37df9490029d",
+  "references": [
+    {
+      "path": "Assets/Art/Illustrated25D/Environment/Room/RoomBackgroundT054.cs",
+      "guid": "c6a5529ec0384c098ccc921e6aad0c56",
+      "directSceneReferences": 0,
+      "sha256": "8018c41a260a55e1d1b028add940f759e93e21a34dcd0f09ac02f1a25e816af7"
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Environment/Room/PenumbraLightingT054.cs",
+      "guid": "d3c1d4043ec21b24b962ee307475e920",
+      "directSceneReferences": 0,
+      "sha256": "df6125e45151e9cd435db592b947fa01c50c99c10977390fea3592220fb50a8f"
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Environment/Room/room-panorama-v4.png",
+      "guid": "7e6bab51ef45e94459c96e82a1a10ebe",
+      "directSceneReferences": 0,
+      "sha256": "afcd0676bd59753f6de1242a9894950b5f948c2837a931230a4462a8fe03f77b"
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Environment/Furniture/FurnitureIllustrationCandidate.cs",
+      "guid": "43827279cca24255b079089e650df830",
+      "directSceneReferences": 0,
+      "sha256": "5c541ed70da195f672b32493cac74716db60a6583e8f7ee20572ab016a5cdc3c"
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Nanda/Flight/NandaFlightIllustration.cs",
+      "guid": "fac335a1044f6fb45ba16f21b65ec94e",
+      "directSceneReferences": 0,
+      "sha256": "fb78b73221f5045ea093e1cc44ba446ae78721d23b19fa6ac48b5efe95cc0179"
+    },
+    {
+      "path": "Assets/Art/Illustrated25D/Yuna/Joint/Runtime/YunaIllustrationInstaller.cs",
+      "guid": "487ddece35a000e4793746b283cea714",
+      "directSceneReferences": 1,
+      "sha256": "5ed4a65fc87a836ba5542be316701aa30b0c6323963d63509b68d7fd01887c89"
+    }
+  ],
+  "previousReports": [
+    {
+      "path": "Evidence\\25d\\T06.1\\capture-120\\traversal-report.json",
+      "sha256": "10f6187a0b451d92081b943918a1abf2be987766209964a1af9bd8f01ef70b74",
+      "hz": 120,
+      "success": true,
+      "reachedBear": true,
+      "reachedBooks": true,
+      "died": false,
+      "jumpTakeoffs": 2,
+      "jumpLandings": 2,
+      "gameplayBefore": "a824af77826f8adfa647af81c65c617068548f69041649914e1d9926f4dcb553",
+      "controllerBefore": "d47aea951b8190c4a0557bb1521eaf4b37ccf57282b15e5daef07d94c0430d10"
+    },
+    {
+      "path": "Evidence\\25d\\T06.1\\capture-30\\traversal-report.json",
+      "sha256": "0b65fe76c446eec953ecfb14ccb20b51a10fe3ef45f7ecf0956d0ad592fcd2c1",
+      "hz": 30,
+      "success": false,
+      "reachedBear": true,
+      "reachedBooks": true,
+      "died": true,
+      "jumpTakeoffs": 2,
+      "jumpLandings": 2,
+      "gameplayBefore": "a824af77826f8adfa647af81c65c617068548f69041649914e1d9926f4dcb553",
+      "controllerBefore": "d47aea951b8190c4a0557bb1521eaf4b37ccf57282b15e5daef07d94c0430d10"
+    },
+    {
+      "path": "Evidence\\25d\\T06.1\\capture-60\\traversal-report.json",
+      "sha256": "d4c1bcdbabb288f70c946842fecec96f8205c01822b0d1082de20e1a210c00e2",
+      "hz": 60,
+      "success": true,
+      "reachedBear": true,
+      "reachedBooks": true,
+      "died": false,
+      "jumpTakeoffs": 2,
+      "jumpLandings": 2,
+      "gameplayBefore": "a824af77826f8adfa647af81c65c617068548f69041649914e1d9926f4dcb553",
+      "controllerBefore": "d47aea951b8190c4a0557bb1521eaf4b37ccf57282b15e5daef07d94c0430d10"
+    },
+    {
+      "path": "Evidence\\25d\\T06.1\\capture-60-integrated\\traversal-report.json",
+      "sha256": "bdb974fbee4d0753317793a50889723456730baf51d7c69055e1f0abbe4b5db4",
+      "hz": 60,
+      "success": true,
+      "reachedBear": true,
+      "reachedBooks": true,
+      "died": false,
+      "jumpTakeoffs": 2,
+      "jumpLandings": 2,
+      "gameplayBefore": "aa61ca78d853895afb34d53c8b2f85ea9c2f013508b697851a1c37df9490029d",
+      "controllerBefore": "d47aea951b8190c4a0557bb1521eaf4b37ccf57282b15e5daef07d94c0430d10"
+    }
+  ],
+  "executable": {
+    "path": "Build\\Windows\\YunaLegend-Pilot\\YunaLegend.exe",
+    "bytes": 667136,
+    "sha256": "fbd073ca59c4918edbc6704f5393cf59021173af11714c00db4212c50117492b"
+  }
+}

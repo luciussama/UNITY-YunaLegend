@@ -7,6 +7,9 @@ Shader "YunaLegend/RoomPenumbraT054"
         _Sprite ("Sprite geometry", Float) = 0
         _Role ("0 background, 1 platform, 2 Yuna, 3 Nanda", Float) = 0
         _ZWrite ("Depth write", Float) = 0
+        _BlinkTex ("Approved closed eye", 2D) = "white" {}
+        _BlinkEnabled ("Use approved eye mask", Float) = 0
+        _SuppressHaze ("Use approved stumble alpha", Float) = 0
     }
     SubShader
     {
@@ -22,6 +25,8 @@ Shader "YunaLegend/RoomPenumbraT054"
             #pragma fragment frag
             #include "Packages/com.unity.render-pipelines.universal/Shaders/2D/Include/Core2D.hlsl"
             TEXTURE2D(_MainTex); SAMPLER(sampler_MainTex);
+            TEXTURE2D(_BlinkTex); SAMPLER(sampler_BlinkTex);
+            float _Blink, _BlinkEnabled, _SuppressHaze;
             float4 _Color, _MoonPosition, _NandaPosition;
             float _Sprite, _Role, _MoonStrength, _NandaStrength, _Phosphor;
             struct A { float4 positionOS:POSITION; float2 uv:TEXCOORD0; float4 color:COLOR; };
@@ -42,6 +47,15 @@ Shader "YunaLegend/RoomPenumbraT054"
             half4 frag(V v):SV_Target
             {
                 half4 c = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, v.uv) * v.color;
+                if (_BlinkEnabled > .5)
+                {
+                    float2 pixel = float2(v.uv.x * 1024, (1-v.uv.y) * 1536);
+                    float mask = smoothstep(643,653,pixel.x) * (1-smoothstep(729,739,pixel.x))
+                        * smoothstep(351,361,pixel.y) * (1-smoothstep(458,468,pixel.y));
+                    c.rgb = lerp(c.rgb, SAMPLE_TEXTURE2D(_BlinkTex,sampler_BlinkTex,v.uv).rgb,
+                        saturate(_Blink) * mask);
+                }
+                if (_SuppressHaze > .5) c.a *= smoothstep(.075,.18,c.a);
                 if (_Role > 2.5) return half4(c.rgb * float3(.88,1.02,1.18),c.a);
                 // These are projected illustration lights, in the existing 3D world.
                 // They never move the physical support or modify the source painting.

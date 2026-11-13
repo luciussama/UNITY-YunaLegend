@@ -73,7 +73,6 @@ namespace YunaLegend.EditorScripts
             EditorUtility.SetDirty(fairy.GetComponent<Light>());
         }
 
-        [MenuItem("YunaLegend/Calibrar hierarquia luminosa")]
         public static void ConfigureAndSave()
         {
             EditorSceneManager.OpenScene("Assets/Scenes/DarkRoom_Gameplay.unity");

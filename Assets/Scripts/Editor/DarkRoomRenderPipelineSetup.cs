@@ -11,7 +11,6 @@ namespace YunaLegend.EditorScripts
         private const string PipelinePath = "Assets/Settings/DarkRoomPipeline.asset";
         private const string RendererPath = "Assets/Settings/DarkRoomRenderer.asset";
 
-        [MenuItem("YunaLegend/Configurar Renderizacao URP")]
         public static void Configure()
         {
             if (!AssetDatabase.IsValidFolder("Assets/Settings"))

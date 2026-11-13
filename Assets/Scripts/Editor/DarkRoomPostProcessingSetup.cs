@@ -90,7 +90,6 @@ namespace YunaLegend.EditorScripts
             EditorUtility.SetDirty(volume);
         }
 
-        [MenuItem("YunaLegend/Configurar Pos-processamento do Quarto Escuro")]
         public static void ConfigureAndSaveScene()
         {
             var scene = EditorSceneManager.OpenScene("Assets/Scenes/DarkRoom_Gameplay.unity");

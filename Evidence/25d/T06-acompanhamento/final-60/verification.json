@@ -1,0 +1,32 @@
+{
+    "hz": 60,
+    "frames": 490,
+    "maxLegacy": 0,
+    "maxVisible": 1,
+    "errors": 0,
+    "success": true,
+    "bear": true,
+    "books": true,
+    "furniture": true,
+    "cracked": true,
+    "stumbled": true,
+    "finished": true,
+    "reset": true,
+    "maxSag": 0.07500000298023224,
+    "maxLocalPause": 0.07999999821186066,
+    "cracks": 1,
+    "error": "",
+    "events": [
+        "01-ready x=-10",
+        "Begin",
+        "jump x=-0,6399996 y=-9,02 keyboardEnabled=True focus=False",
+        "02-bear x=2,3",
+        "jump x=2,720001 y=-7,865396 keyboardEnabled=True focus=False",
+        "03-books x=5,935549",
+        "jump x=5,995549 y=-7,454444 keyboardEnabled=True focus=False",
+        "04-furniture x=8,96603",
+        "05-cracked x=11,96603",
+        "06-finished x=14,13803",
+        "07-retry x=-10"
+    ]
+}

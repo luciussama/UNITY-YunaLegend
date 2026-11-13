@@ -36,7 +36,6 @@ namespace YunaLegend.EditorScripts
             EditorUtility.SetDirty(mat);
         }
 
-        [MenuItem("YunaLegend/Aplicar movel02 com cedimento")]
         public static void ApplyAndSave()
         {
             EditorSceneManager.OpenScene("Assets/Scenes/DarkRoom_Gameplay.unity");ConfigureMaterials();

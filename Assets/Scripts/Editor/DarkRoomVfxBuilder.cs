@@ -9,7 +9,6 @@ namespace YunaLegend.EditorScripts
     {
         private const string MaterialsFolder = "Assets/Materials";
 
-        [MenuItem("YunaLegend/Gerar Efeitos Visuais (VFX)")]
         public static void GenerateAllVfx()
         {
             if (!Directory.Exists(MaterialsFolder))

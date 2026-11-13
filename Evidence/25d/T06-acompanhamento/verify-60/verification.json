@@ -1,0 +1,22 @@
+{
+    "hz": 60,
+    "frames": 187,
+    "maxLegacy": 0,
+    "maxVisible": 1,
+    "success": false,
+    "bear": false,
+    "books": false,
+    "furniture": false,
+    "cracked": false,
+    "stumbled": false,
+    "finished": false,
+    "reset": false,
+    "maxSag": 0.0,
+    "maxLocalPause": 0.0,
+    "cracks": 0,
+    "error": "Player died at x=0,6131465 support=-1",
+    "events": [
+        "01-ready x=-10",
+        "Begin"
+    ]
+}

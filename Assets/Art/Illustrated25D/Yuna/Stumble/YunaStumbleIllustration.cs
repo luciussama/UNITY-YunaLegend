@@ -74,8 +74,13 @@ namespace YunaLegend.YunaIllustration
             painting.sprite = frames[Pose]; painting.flipX = player.RunDirection < 0;
             transform.localRotation = Quaternion.AngleAxis(-player.transform.eulerAngles.y,Vector3.up);
             float drop=0; RaycastHit hit;
-            if(player.IsGrounded && reviewSupport.Raycast(new Ray(player.transform.position+Vector3.up*.4f,Vector3.down),out hit,.6f))
-                drop=Mathf.Clamp(player.transform.position.y-hit.point.y,0,.1f);
+            if(player.IsGrounded)
+            {
+                var ray=new Ray(player.transform.position+Vector3.up*.4f,Vector3.down);
+                bool supported=reviewSupport!=null ? reviewSupport.Raycast(ray,out hit,.6f)
+                    : Physics.Raycast(ray,out hit,.6f,~0,QueryTriggerInteraction.Ignore);
+                if(supported) drop=Mathf.Clamp(player.transform.position.y-hit.point.y,0,.1f);
+            }
             transform.localPosition=Vector3.down*drop;
             float sign=painting.flipX ? -1:1;
             Vector3 point=new Vector3(sign*(SoleX[Pose]-painting.sprite.pivot.x)/painting.sprite.pixelsPerUnit,0,0);

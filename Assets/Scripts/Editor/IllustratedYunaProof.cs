@@ -61,7 +61,6 @@ namespace YunaLegend.EditorScripts
             using (var sha = SHA256.Create())
                 return BitConverter.ToString(sha.ComputeHash(File.ReadAllBytes(path))).Replace("-", "").ToLowerInvariant();
         }
-        [MenuItem("YunaLegend/25D/Build isolated static Yuna proof")]
         public static void BuildScene()
         {
             gameplayHash = Hash(Gameplay);

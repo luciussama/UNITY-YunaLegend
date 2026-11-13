@@ -43,6 +43,10 @@ docs/ia/.plano25d-*.tmp
 # Preserve historical evidence logs relocated with their manifests.
 !Archive/pre-25d-2026-11-12/**/*.log
 
+# Logs finais da build ilustrada aprovada, parte das evidencias de validacao.
+!Evidence/25d/T06-acompanhamento/v6-*/player.log
+!Evidence/25d/T06-acompanhamento/publish-smoke-60/player.log
+
 # Capturas brutas por quadro da T04.2 (regeneraveis pelos comandos do README)
 Evidence/25d/T04.2/capture-*/
 Evidence/25d/T04.2/attempt-01-lag/
