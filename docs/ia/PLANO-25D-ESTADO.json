@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-12T22:17:31.415686+00:00",
+  "updated_at": "2026-11-13T00:33:13.627618+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -190,17 +190,17 @@
       "human_gate": false,
       "status": "active",
       "owner": {
-        "session": "2026-11-12-codex-jump-t033-c91e",
+        "session": "2026-11-12-codex-stumble-t034-a71c",
         "agent": "Codex (GPT-6)"
       },
       "checkpoint": {
-        "done": "T03.1/T03.2/T03.3aprovadas;respostaliteralT03.3registrada;manifestconferido",
-        "next": "T03.4:posespintadasdetropeço/recuperacao;reagirBeginStumble80ms/280ms,validar30/60/120Hz e reset antesavaliacao",
-        "validation": "T03.3manifestsemdivergencias;3Hz14checks;aprovacaohumanaexplicita",
-        "pending": "T03.4naoaprovada;integracaomovel/piloto/atlas/dispositivospendentes",
-        "files": "Assets/Art/Illustrated25D/Yuna/Jump;Evidence/25d/T03.3;docs/ia/ESTADO-ATUAL-25D.md",
-        "processes": "Nenhumprocessonovoiniciado",
-        "updated_at": "2026-11-12T22:17:31.415686+00:00"
+        "done": "T03.1/T03.2/T03.3/T03.4 v2 aprovadas individualmente; usuario: Gostei. pode aprovar. Registro em Evidence/25d/T03.4/reviews/T03.4-v2-aprovacao.md; assets/clipes/provas preservados",
+        "next": "Revisar conjunto/transicoes e otimizar/verificar orcamento residente de Yuna antes de fechar T03; nao integrar movel/piloto antecipadamente",
+        "validation": "Manifesto v2 integralmente conferido antes de mudancas documentais; hashes dos clipes/fontes intactos; provas existentes30/60/120Hz80ms/280ms/reset preservadas; nenhum Unity novo",
+        "pending": "T03 agregado continua ativo: conjunto/transicoes/orcamento32MiB pendentes; integracao movel/piloto/retryGameplay e dispositivos posteriores; semcommit/push",
+        "files": "Evidence/25d/T03.4/reviews/T03.4-v2-aprovacao.md;Evidence/25d/T03.4/reviews/T03.4-v2.md;Evidence/25d/T03.4/README.md;Evidence/25d/T03.4/CONTRATO.md;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
+        "processes": "Nenhum processo iniciado neste registro documental",
+        "updated_at": "2026-11-13T00:33:13.627618+00:00"
       }
     },
     {
@@ -1138,6 +1138,51 @@
       "files": "Assets/Art/Illustrated25D/Yuna/Jump;Evidence/25d/T03.3;docs/ia/ESTADO-ATUAL-25D.md",
       "processes": "Nenhumprocessonovoiniciado",
       "at": "2026-11-12T22:17:31.415686+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "T03",
+      "session": "2026-11-12-codex-stumble-t034-a71c",
+      "agent": "Codex (GPT-6)",
+      "reason": "Usuario atual solicitou transferir para esta sessao e continuar; autorizacao650 confirmada. HEADfb68a26, apenas slnx/diario/contrato preexistentes; nenhum Editor/captura ativo observado; image_gen disponivel.",
+      "from_session": "2026-11-12-codex-jump-t033-c91e",
+      "at": "2026-11-12T22:27:27.383093+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T03",
+      "session": "2026-11-12-codex-stumble-t034-a71c",
+      "done": "T03.4v1 revisavel:atlas8posesimage_gen,fixtureBeginStumble80/280ms,resetinterrompido/repeticao;T03.1/2/3aprovadaspreservadas",
+      "next": "Apresentar Evidence/25d/T03.4/review-v1/stumble-game.gif e stumble-detail-slow.gif;registrar resposta literal em reviews/T03.4-v1.md;ajustarT03.4 se necessario",
+      "validation": "30/60/120Hz90quadros/3eventos/8poses;delay.08,recovery.28;TimeScale1;resetlogico/visual;drift<1e-6m,Y0;639fontespreservados+novosiguaisclone;manifest/GUIDs/foraBuildSettings",
+      "pending": "Revisao humanaT03.4;T03conjunto/transicoes/orcamento32MiB;hookretrydaGameplay/movel/piloto/plataformas/mobile/audio pendentes. Semcommit/push",
+      "files": "Assets/Art/Illustrated25D/Yuna/Stumble;Evidence/25d/T03.4;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
+      "processes": "Batches45384/45992/42392/43440/45092encerrados;logsBuild/25d-t034-final-v1-30,-60,-120.log;rawBuild/25d/StumbleFinalV1-120;Hubpreexistentepreservado",
+      "at": "2026-11-13T00:26:36.031929+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T03",
+      "session": "2026-11-12-codex-stumble-t034-a71c",
+      "done": "T03.4v2 revisavel:8posesimage_gen,materiallocalcorrigido,BeginStumble80/280ms,resetinterrompido/repeticao;T03.1/2/3preservadas",
+      "next": "Apresentar Evidence/25d/T03.4/review-v2/stumble-game.gif e stumble-detail-slow.gif;registrarrespostaliteralemreviews/T03.4-v2.md;ajustarsomenteT03.4senecessario",
+      "validation": "30/60/120Hz90quadros/3eventos/8poses;delay.08,recovery.28;TimeScale1;resetlogico/visual;drift<1e-6m,Y0;639fontespreservados;31novosiguaisclone;180hashesraw/GUIDs/foraBuildSettings;manifestv2",
+      "pending": "Avaliacao humanaT03.4v2;revisao conjunto/transicoes/orcamento32MiB antesfecharT03;hookretryGameplay/movel/piloto/plataformas/mobile/audio pendentes;semcommit/push",
+      "files": "Assets/Art/Illustrated25D/Yuna/Stumble;Evidence/25d/T03.4;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
+      "processes": "Todosbatchesencerrados;logsBuild/25d-t034-final-v2-30,-60,-120.log;rawBuild/25d/StumbleFinalV2-120;UnityHubpreexistentepreservado",
+      "at": "2026-11-13T00:30:46.108097+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T03",
+      "session": "2026-11-12-codex-stumble-t034-a71c",
+      "done": "T03.1/T03.2/T03.3/T03.4 v2 aprovadas individualmente; usuario: Gostei. pode aprovar. Registro em Evidence/25d/T03.4/reviews/T03.4-v2-aprovacao.md; assets/clipes/provas preservados",
+      "next": "Revisar conjunto/transicoes e otimizar/verificar orcamento residente de Yuna antes de fechar T03; nao integrar movel/piloto antecipadamente",
+      "validation": "Manifesto v2 integralmente conferido antes de mudancas documentais; hashes dos clipes/fontes intactos; provas existentes30/60/120Hz80ms/280ms/reset preservadas; nenhum Unity novo",
+      "pending": "T03 agregado continua ativo: conjunto/transicoes/orcamento32MiB pendentes; integracao movel/piloto/retryGameplay e dispositivos posteriores; semcommit/push",
+      "files": "Evidence/25d/T03.4/reviews/T03.4-v2-aprovacao.md;Evidence/25d/T03.4/reviews/T03.4-v2.md;Evidence/25d/T03.4/README.md;Evidence/25d/T03.4/CONTRATO.md;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
+      "processes": "Nenhum processo iniciado neste registro documental",
+      "at": "2026-11-13T00:33:13.627618+00:00"
     }
   ]
 }

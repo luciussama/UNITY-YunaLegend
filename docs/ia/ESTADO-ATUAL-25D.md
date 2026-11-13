@@ -1,6 +1,6 @@
 # Estado atual — sala escura ilustrada
 
-Atualização em 12/11/2026, sessão `2026-11-12-codex-jump-t033-c91e`, preservando as entregas das sessões anteriores. Este é um índice curto; reservas e resultados verificáveis permanecem no estado estruturado e no diário.
+Atualização em 12/11/2026, sessão `2026-11-12-codex-stumble-t034-a71c`, preservando as entregas das sessões anteriores. Este é um índice curto; reservas e resultados verificáveis permanecem no estado estruturado e no diário.
 
 ## Feito e aprovado
 
@@ -24,12 +24,14 @@ Detalhe da v1 (histórico): [corrida com oito poses pintadas](../../Evidence/25d
 
 **T03.3 v1 aprovada:** [salto completo ilustrado](../../Evidence/25d/T03.3/README.md), oito poses pintadas com imagegen, subida/ápice/queda/pouso e retorno à corrida na fixture. Três capturas novas a 30/60/120 Hz, 66 quadros por câmera a 30 fps; uma decolagem/um pouso, altura 2,598–2,600 m, deriva do ponto de apoio <0,000001 m e separação vertical zero. Física/cena Gameplay/controlador/corrida preservados. GIFs principais e prova são da mesma execução de **120 Hz**. Impacto curto (~67 ms), articulação e transição aprovados pelo usuário; não integrada ao piloto. Aprovação em Evidence/25d/T03.3/reviews/T03.3-v1-aprovacao.md. [Revisão individual](../../Evidence/25d/T03.3/reviews/T03.3-v1.md).
 
+**T03.4 v2 aprovada:** [tropeço e retomada](../../Evidence/25d/T03.4/README.md), oito poses originais via imagegen, pausa local80ms/recuperação280ms preservadas. Provas isoladas30/60/120Hz,reset durante evento e repetição,physics/corrida/salto intactos. [Aprovação humana registrada](../../Evidence/25d/T03.4/reviews/T03.4-v2-aprovacao.md). Não integrada ao móvel/piloto; orçamento e revisão conjunta T03 pendentes.
+
 ## Próximos passos pequenos
 
 **Histórico do ajuste 595:** fechamento do clipe tratado na T03.2 v2; aprovação e reconciliação posterior registradas em 607/625. O passo corporal continua como limite aceito, sem nova correção da corrida nesta T03.3.
 
-1. T03.3 aprovada. Próxima entrega autorizada: T03.4, tropeço e recuperação, preservando pausa local de 80 ms e recuperação de 280 ms.
-2. Depois: T03.4 tropeço e recuperação; transições e orçamento conjunto ainda pendentes.
+1. T03.3 aprovada. T03.4 v2 aprovada individualmente pelo usuário; pausa local de 80 ms e recuperação de 280 ms verificadas na fixture.
+2. Revisar transições/conjunto e orçamento residente antes de fechar T03.
 3. T04/T05: Nanda reconhecível com luz azul e ambiente ilustrado, um objeto por revisão, mantendo apoios reais e móvel cedendo/retry.
 4. Integrar somente o piloto urso → livros → móvel; aprovação em movimento antes de expandir a fase.
 

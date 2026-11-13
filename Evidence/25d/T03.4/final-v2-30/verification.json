@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "events": 3,
+  "delay_consumed_seconds": [
+    0.07999999821186066,
+    0.07999999821186066,
+    0.07999999821186066
+  ],
+  "complete_recovery_consumed_seconds": [
+    0.2800000011920929,
+    0.2800000011920929
+  ],
+  "trajectory_error_m": 5.722045898215455e-07,
+  "same_pose_contact_drift_m": 0,
+  "contact_vertical_error_m": 0.0,
+  "visual_step_min_m": 0.10666656494140625,
+  "visual_step_max_m": 0.19499969482421875,
+  "atlas_editor_MiB": 12.13629150390625,
+  "reset_step_count": 0,
+  "reset_step_timer": 0.0,
+  "poses": 8,
+  "capture_frames_per_camera": 90
+}
