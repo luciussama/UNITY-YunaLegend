@@ -50,3 +50,8 @@ Travessia real, estralo audível, duração LOCAL80ms, recuperação280ms, event
 Imagens reais de repouso/detalhe/reset e folha comparativa foram abertas. O móvel preserva gavetas laterais/centro aberto/puxadores da pintura fonte; tampo ocupa uma malha própria que se separa localmente no centro. A abertura é pequena na escala de gameplay (5cm de spread somado à rotação) e pede julgamento no detalhe; o patch de topo repete/perspectiva de UV e transição corpo→tampo são candidatos técnicos, não acabamento aprovado. Overlay representa superfície no plano do corredor, não toda a largura visível em profundidade. Não há Yuna nesta captura; sem prova de sola/apoio.
 
 A prova runtime adicional NÃO foi iniciada: a candidata visual e sua superfície diferente das caixas legadas ainda não receberam revisão humana. Executar o controlador sobre essa nova superfície seria uma fixture técnica, jamais aceite do piloto; a sequência real exigida continua pendente. Para futura prova isolada sem salvar cena, o ponto de partida já existente é `DarkRoomFurnitureCapture` (controlador real, jump buffer, evento YieldingWoodFurniture), mas ele mostra visual3D antigo e captura objetos do piloto; não foi reutilizado para fingir resultado desta candidata. Necessário novo harness exclusivo que instale candidata + visual T03 aprovado, observe evento único80ms local/áudio/reação/recuperação, e exerça morte/retry e segunda carga30/60/120Hz. T06.2/3 mantêm a prova integrada posterior. Nenhum sistema compartilhado foi alterado nesta sessão.
+
+
+## Aceite humano ? 13/11/2026
+
+Resposta: `aprovado`. Escopo: silhueta, ruptura localizada, apoio real, cedimento est?tico e reset. **N?o** cobre pausa local de 80 ms, estralo, trope?o, retry em runtime nem travessia/c?mera final (T06.2/3).

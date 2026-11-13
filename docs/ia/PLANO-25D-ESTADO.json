@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-13T13:36:24.182181+00:00",
+  "updated_at": "2026-11-13T13:43:49.228833+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -292,13 +292,13 @@
         "agent": "Copilot SDK subagent Movel"
       },
       "checkpoint": {
-        "done": "T05.1 urso e T05.2 livros aceitas; T05.3 movel capturado estaticamente em 6000.3.28f1 (sentinela T053_EDITMODE_INSPECTION_PASS, 1280x720, intacto/detalhe/reset/dois overlays de apoio, folha comparativa, hashes) — aguardando revisao humana",
-        "next": "Revisao humana das imagens de Evidence/25d/T05.3 (01 a 06 + review-contact-sheet); aprovada a candidata, produzir T05.4 (fundo/camadas/iluminacao), depois T05 agregada",
-        "validation": "unity-editmode-v3.log com sentinela; editmode-audit.json (1 regiao intacto, 2 abertas, pose=contato, sag 0,075 m); review-hashes.json; plan/diary checks OK",
-        "pending": "Pausa local 80ms, estralo, tropeco e retry NAO validados em runtime; integrcao/camera final pertencem a T06.2/3; T05.4 e T05 agregada pendentes",
-        "files": "Assets/Art/Illustrated25D/Environment/Furniture;Evidence/25d/T05.3;tools/t053_prepare_furniture.ps1",
+        "done": "T05.3 aprovada pelo usuario (aprovado); T05.1/T05.2 ja aceitas. T05.4 especificada de forma deterministica: canvas2048x1024 a96px/m, linha de piso y_px928, parallax0,35/0,45/fixa, paleta e tres prompts em Evidence/25d/T05.4/PROMPTS-CAMADAS.md",
+        "next": "Aguardar o usuario fornecer layer0-far.png, layer1-mid.png e layer2-near.png; verificar dimensoes/linha de piso/alpha, importar em Assets/Art/Illustrated25D/Environment/Room, montar rig de parallax e luz, capturar e submeter a revisao humana",
+        "validation": "Plan/diary checks OK; 0 planos sem resultado; T05.3 aprovada literalmente. Nenhuma imagem recebida ainda",
+        "pending": "Camadas de fundo nao existem; iluminacao noturna e rig de parallax nao implementados; T05 agregada depende da T05.4 aprovada; pausa80ms/estralo/tropeco/retry seguem para T06.2/3",
+        "files": "Evidence/25d/T05.4/PROMPTS-CAMADAS.md;Evidence/25d/T05.3;docs/ia/diario.sqlite3",
         "processes": "Nenhum Unity Editor ativo",
-        "updated_at": "2026-11-13T13:36:24.182181+00:00"
+        "updated_at": "2026-11-13T13:43:49.228833+00:00"
       }
     },
     {
@@ -1523,6 +1523,18 @@
       "files": "Assets/Art/Illustrated25D/Environment/Furniture;Evidence/25d/T05.3;tools/t053_prepare_furniture.ps1",
       "processes": "Nenhum Unity Editor ativo",
       "at": "2026-11-13T13:36:24.182181+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T05",
+      "session": "2026-11-13-copilot-t053-b29a5ec7",
+      "done": "T05.3 aprovada pelo usuario (aprovado); T05.1/T05.2 ja aceitas. T05.4 especificada de forma deterministica: canvas2048x1024 a96px/m, linha de piso y_px928, parallax0,35/0,45/fixa, paleta e tres prompts em Evidence/25d/T05.4/PROMPTS-CAMADAS.md",
+      "next": "Aguardar o usuario fornecer layer0-far.png, layer1-mid.png e layer2-near.png; verificar dimensoes/linha de piso/alpha, importar em Assets/Art/Illustrated25D/Environment/Room, montar rig de parallax e luz, capturar e submeter a revisao humana",
+      "validation": "Plan/diary checks OK; 0 planos sem resultado; T05.3 aprovada literalmente. Nenhuma imagem recebida ainda",
+      "pending": "Camadas de fundo nao existem; iluminacao noturna e rig de parallax nao implementados; T05 agregada depende da T05.4 aprovada; pausa80ms/estralo/tropeco/retry seguem para T06.2/3",
+      "files": "Evidence/25d/T05.4/PROMPTS-CAMADAS.md;Evidence/25d/T05.3;docs/ia/diario.sqlite3",
+      "processes": "Nenhum Unity Editor ativo",
+      "at": "2026-11-13T13:43:49.228833+00:00"
     }
   ]
 }
