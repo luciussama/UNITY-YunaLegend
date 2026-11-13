@@ -78,6 +78,16 @@ e a build Windows x64 foi gerada em `Build/Windows/YunaLegend-Pilot/YunaLegend.e
 passa a reaproveitar o instalador persistido; `capture-60-integrated` repete a
 travessia com 2 saltos, 1 fonte visível e 0 conflitos.
 
+**T06.1 v2 (13/11/2026, sessão `2026-11-13-dsh-pilot-t061v2-8a1f`):**
+`RoomCompositionRuntimeInstaller` leva o panorama v4 e as sombras de contato da
+T05.4 para o caminho de runtime (marcadores 0–2, 272 renderers legados ocultos);
+captura em [Evidence/25d/T06.1/capture-v2-60](../../Evidence/25d/T06.1/capture-v2-60),
+revisão em [T06.1-v2](../../Evidence/25d/T06.1/reviews/T06.1-v2.md) e build
+regravada (189,6 MB, 0 erros). A **penumbra ficou desligada**: em runtime ela
+azulava a Yuna (`R35 G41 B63` contra `R95 G78 B82` aprovado) e a regra é não
+recolorir Yuna; investigar a diferença em relação ao fixture antes de religar.
+O móvel ainda é o 3D legado (silhueta escura) e Nanda segue como orbe do guia.
+
 **Handoff (13/11/2026):** T06 foi **liberada** no coordenador. A próxima IA começa
 por [Evidence/25d/T06.1/HANDOFF.md](../../Evidence/25d/T06.1/HANDOFF.md), que traz
 estado, pendências em ordem, comandos de retomada e as armadilhas encontradas

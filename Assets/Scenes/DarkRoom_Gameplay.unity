@@ -29898,6 +29898,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1368281978}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1382868364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1382868366}
+  - component: {fileID: 1382868365}
+  m_Layer: 0
+  m_Name: T054_Composicao_Runtime
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1382868365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382868364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d94e3f10a2645746b01862180c1515c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::YunaLegend.Illustrated25D.Environment.RoomCompositionRuntimeInstaller
+  panorama: {fileID: 2800000, guid: 7e6bab51ef45e94459c96e82a1a10ebe, type: 3}
+  penumbraShader: {fileID: 4800000, guid: 924762ea7256bc54c91e2e806806729a, type: 3}
+  floorInsetFraction: 0.113259666
+  farTravel: 0.35
+  installPenumbra: 0
+  tintCharacters: 0
+--- !u!4 &1382868366
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382868364}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1387524534
 GameObject:
   m_ObjectHideFlags: 0
@@ -51520,3 +51570,4 @@ SceneRoots:
   - {fileID: 23939316}
   - {fileID: 801017246}
   - {fileID: 1806264201}
+  - {fileID: 1382868366}

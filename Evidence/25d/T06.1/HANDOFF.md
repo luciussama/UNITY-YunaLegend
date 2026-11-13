@@ -103,3 +103,16 @@ python tools\make_t061_review.py
 Diário `docs/ia/diario.sqlite3`, entradas `883`–`892`, sessão
 `2026-11-13-dsh-pilot-7b3e`. Estado resumido em
 [ESTADO-ATUAL-25D.md](../../../docs/ia/ESTADO-ATUAL-25D.md).
+
+## Atualização v2 (13/11/2026, sessão `2026-11-13-dsh-pilot-t061v2-8a1f`)
+
+- `RoomCompositionRuntimeInstaller` (Assets/Art/Illustrated25D/Environment/Room)
+  instala em runtime o panorama v4 + sombras de contato do trecho do piloto
+  (marcadores 0–2), oculta 272 renderers legados e escurece a câmera. Salvo na cena.
+- Captura [capture-v2-60](capture-v2-60) e revisão [T06.1-v2](reviews/T06.1-v2.md);
+  build regravada (189,6 MB, 0 erros) e smoke-testada.
+- **Penumbra ficou desligada** (`installPenumbra = false`): em runtime ela azulava a
+  Yuna (vestido `R35 G41 B63`) contra o aprovado (`R95 G78 B82`). Investigar a
+  diferença em relação ao fixture antes de religar.
+- O móvel continua no visual 3D legado (silhueta escura sobre o quarto pintado) e
+  a Nanda segue como orbe do guia. Ambos são os próximos alvos visuais.

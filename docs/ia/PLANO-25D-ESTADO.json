@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-13T19:45:33.001858+00:00",
+  "updated_at": "2026-11-13T19:50:34.246478+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -326,8 +326,11 @@
         "art-environment"
       ],
       "human_gate": false,
-      "status": "pending",
-      "owner": null,
+      "status": "active",
+      "owner": {
+        "session": "2026-11-13-dsh-pilot-t061v2-8a1f",
+        "agent": "DeepSeek (deepseek-flash)"
+      },
       "checkpoint": {
         "done": "Build v6 ilustrada aprovada pelo usuario: perfeito. Aprovado.; menu19para3; provas30/60/120 v6;saida posterior regenerada passou smoke60;diario/evidencias/fontes preparados paraGit",
         "next": "T06.3: nova build+video continuo de falha/retry durante evento movel e segunda travessia; roteiro em docs/ia/PROXIMO-ENTREGAVEL.md; implementacao ainda nao iniciada",
@@ -1851,6 +1854,13 @@
       "session": "2026-11-13-codex-publish-handoff",
       "reason": "Consolidacao e proximo entregavel documentados; retomada futura deve reservar T06. Sem implementacao adicional ou aceite agregado.",
       "at": "2026-11-13T19:45:33.001858+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T06",
+      "session": "2026-11-13-dsh-pilot-t061v2-8a1f",
+      "agent": "DeepSeek (deepseek-flash)",
+      "at": "2026-11-13T19:50:34.246478+00:00"
     }
   ]
 }
