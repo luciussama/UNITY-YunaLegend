@@ -1,3 +1,9 @@
+> **Retirado em 13/11/2026.** O caminho oficial passou a ser o acompanhamento do
+> Codex: `IllustratedPreview` (cena `DarkRoom_IllustratedPreview`) e
+> `IllustratedPreviewBuild` (build em `Build/Windows/YunaLegend-Acompanhamento`).
+> O harness `YunaT061TraversalCapture`, o `WindowsPilotBuild`, o
+> `make_t061_review.py` e o `RoomCompositionRuntimeInstaller` foram removidos.
+> As capturas abaixo ficam como registro histórico, não como caminho vigente.
 # T06.1 — travessia urso → livros em movimento (candidata)
 
 Data: 13/11/2026. Sessão `2026-11-13-dsh-pilot-7b3e` (DeepSeek).

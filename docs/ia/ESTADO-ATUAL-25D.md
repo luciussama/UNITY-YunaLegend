@@ -78,6 +78,16 @@ e a build Windows x64 foi gerada em `Build/Windows/YunaLegend-Pilot/YunaLegend.e
 passa a reaproveitar o instalador persistido; `capture-60-integrated` repete a
 travessia com 2 saltos, 1 fonte visível e 0 conflitos.
 
+**Migração para o sistema oficial (13/11/2026):** decisão humana — o
+**acompanhamento criado pelo Codex** (`IllustratedPreview`, cena
+`DarkRoom_IllustratedPreview`, build em `Build/Windows/YunaLegend-Acompanhamento`)
+é o caminho oficial, por já estar ajustado. Retirados do projeto: build própria
+(`WindowsPilotBuild`), harness `YunaT061TraversalCapture`, `make_t061_review.py` e,
+na sequência, o `RoomCompositionRuntimeInstaller`/setup e o objeto
+`T054_Composicao_Runtime` nas duas cenas (script `RetireLegacyComposition`).
+`YunaIllustrationInstaller` permanece: o acompanhamento depende do resolvedor que
+ele cria. As capturas T06.1 v1–v3 ficam como histórico, não como caminho vigente.
+
 **T06.1 v3 (13/11/2026, sessão `2026-11-13-dsh-pilot-t061v2-8a1f`):**
 `RoomCompositionRuntimeInstaller` instala em runtime a composição aprovada completa
 — panorama v4, sombras de contato, **móvel ilustrado** (T05.3), **Nanda ilustrada**

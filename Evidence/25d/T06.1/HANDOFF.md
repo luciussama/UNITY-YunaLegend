@@ -4,6 +4,18 @@ Sessão que encerra: `2026-11-13-dsh-pilot-7b3e` (DeepSeek).
 Tarefa liberada no coordenador para outra IA continuar. Leia este arquivo antes de
 mexer em cena, build ou evidências.
 
+## Migração para o acompanhamento do Codex (13/11/2026)
+
+Decisão humana: o sistema oficial é o **acompanhamento do Codex**
+(`IllustratedPreview` + `IllustratedPreviewBuild`, cena `DarkRoom_IllustratedPreview`,
+build em `Build/Windows/YunaLegend-Acompanhamento`). Já retirados desta entrega:
+`WindowsPilotBuild`, `YunaT061TraversalCapture`, `tools/make_t061_review.py` e a
+pasta `Build/Windows/YunaLegend-Pilot`. Ainda pendente (exige Unity fechado):
+remover o objeto `T054_Composicao_Runtime` das duas cenas e apagar
+`RoomCompositionRuntimeInstaller`/`RoomCompositionRuntimeSetup` com
+`RetireLegacyComposition.Run`. `YunaIllustrationInstaller` **permanece**, porque o
+acompanhamento depende do resolvedor que ele cria.
+
 ## Estado das tarefas
 
 | Tarefa | Estado | Observação |

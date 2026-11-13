@@ -1,3 +1,9 @@
+> **Retirado em 13/11/2026.** O caminho oficial passou a ser o acompanhamento do
+> Codex: `IllustratedPreview` (cena `DarkRoom_IllustratedPreview`) e
+> `IllustratedPreviewBuild` (build em `Build/Windows/YunaLegend-Acompanhamento`).
+> O harness `YunaT061TraversalCapture`, o `WindowsPilotBuild`, o
+> `make_t061_review.py` e o `RoomCompositionRuntimeInstaller` foram removidos.
+> As capturas abaixo ficam como registro histórico, não como caminho vigente.
 # Build de validação jogável — 13/11/2026
 
 `Build/Windows/YunaLegend-Pilot/YunaLegend.exe` (183 MB, Windows x64, Unity
