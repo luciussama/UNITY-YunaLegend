@@ -16,6 +16,9 @@ cômoda T08C ou blocos T08E. Se a próxima peça for outra, reservar o assunto e
 declarar apoio antes da arte. Aberto: sola do urso e demais defeitos (T06),
 aparelho/WebGL/áudio/desempenho, base da pilha fora do enquadramento no alto.
 
+Publicado em `46b49a5` no branch `codex/dark-room-2d`; push verificado e main
+inalterada.
+
 Os registros abaixo são históricos e não autorizam iniciar outra construção adiada.
 
 ## ABC04: arte conceitual aprovada; construção da cena adiada

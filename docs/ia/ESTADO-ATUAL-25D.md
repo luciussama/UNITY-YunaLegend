@@ -29,7 +29,8 @@ pé. Root, cápsula, física e animações não mudaram.
 Próximo passo: aguardar a definição humana da próxima microentrega (estante segue
 adiada). A base não aparece no enquadramento aprovado quando Yuna está no alto; sola do
 urso e demais defeitos continuam em T06; aparelho/WebGL/áudio/desempenho e aceite
-global T06/T07 não foram validados. Sem commit/push.
+global T06/T07 não foram validados. Publicado em `46b49a5` no branch
+`codex/dark-room-2d` (push verificado; main não alterada).
 
 ## ABC04: arte conceitual aprovada; construção da cena adiada
 
