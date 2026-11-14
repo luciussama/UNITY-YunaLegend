@@ -1,4 +1,12 @@
-# Próximo entregável — T08G aceita; avançando para 06 + 07
+# Próximo entregável — T08I Done; próximo passo: 08 + 09
+
+## T08H / T08I: 06 (Almofadão) + 07 (Gavetas) — DONE / ACEITA (14/11/2026)
+
+Aceite individual registrado em [aprovacao.md](../../Evidence/25d/T08I/aprovacao.md)
+([README](../../Evidence/25d/T08I/README.md)). Travessia de 8 saltos validada em 30/60/120 Hz.
+
+**Próximo passo:** preparar e integrar as próximas duas plataformas (`08 Caixa de Música da Bailarina`
+e `09 Castelinho de Blocos`), mantendo estante adiada e `T06`/`T07` globais pendentes.
 
 ## T08F / T08G: Tamborito de Marcha (05) — ACEITA (14/11/2026)
 

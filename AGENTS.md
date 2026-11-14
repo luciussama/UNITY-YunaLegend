@@ -20,6 +20,7 @@ Skill de engenharia: [agent-coordination](skills/agent-coordination/SKILL.md).
 - **Leitura sob demanda:** Leia apenas os arquivos estritamente necess?rios ? tarefa atual. Nunca leia o reposit?rio inteiro ou arquivos de hist?rico (`Archive/`, `REGRAS-LEGADAS-3D.md`) sem necessidade investigativa espec?fica.
 - **Execu??o direta:** Utilize livremente qualquer ferramenta dispon?vel no ambiente atual (gera??o de imagem, `computer-use`, `browser`, `chrome`, leitura de `.png` ou navega??o na URL legada) sempre que a tarefa exigir. Nunca pe?a ao usu?rio para trocar de modelo preventivamente.
 - **Otimiza??o program?tica:** Para fatiar, alinhar spritesheets ou checar dimens?es/alpha (`getbbox`), prefira scripts Python (`Pillow`) ou Unity Editor Scripts em modo texto (`-batchmode`) para economizar tokens.
+- **Tarefas e subagentes em segundo plano (limite de 5 minutos):** Qualquer tarefa, processo ou subagente em segundo plano aberto por **5 minutos ou mais** deve ser reavaliado. Se estiver parado, em loop, ou se os dados/artefatos necessários já tiverem sido coletados, é **obrigatório encerrá-lo imediatamente** para economia de tokens.
 
 ## 2. Skills e Estado Canônico (Carregamento Seletivo)
 1. Consulte primeiro [ESTADO-ATUAL-25D.md](docs/ia/ESTADO-ATUAL-25D.md) e rode `python tools\plan_25d.py status`.

@@ -20,12 +20,17 @@ namespace YunaLegend.Illustrated25D.Preview
         public bool includeNextDresser;
         public bool includeNextBlocks;
         public bool includeNextDrum;
+        public bool includeNextDrawers07;
         public Texture2D dresserPainting;
         public Texture2D blocksPainting;
         public Texture2D drumPainting;
+        public Texture2D cushionPainting;
+        public Texture2D drawersPainting;
         public DresserPlatform Dresser { get; private set; }
         public AbcStackPlatform Blocks { get; private set; }
         public Drum05Platform Drum { get; private set; }
+        public Cushion06Platform Cushion { get; private set; }
+        public Drawers07Platform Drawers { get; private set; }
         public Sprite[] nandaFrames;
         public Shader[] requiredShaders;
         public Yuna25DPlayerController Player { get; private set; }
@@ -70,7 +75,7 @@ namespace YunaLegend.Illustrated25D.Preview
             if (resolver == null || guide == null) throw new InvalidOperationException("Illustrated characters missing");
             cameraDriver = Camera.main.GetComponent<SideScroll25DCamera>();
             var markers = FindObjectsByType<DarkRoomPlatformMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-            int last = includeNextDrum ? 5 : includeNextBlocks ? 4 : includeNextDresser ? 3 : 2;
+            int last = includeNextDrawers07 ? 7 : includeNextDrum ? 5 : includeNextBlocks ? 4 : includeNextDresser ? 3 : 2;
             pilot = Enumerable.Range(0,last+1).Select(i => markers.Single(m => m.spec.index == i)).ToArray();
             foreach (var m in pilot) m.gameObject.SetActive(true);
             foreach (var m in markers.Where(m => m.spec.index > last)) m.gameObject.SetActive(false);
@@ -113,6 +118,19 @@ namespace YunaLegend.Illustrated25D.Preview
                 Drum.Install(drumPainting);
                 var drumFeet = Player.gameObject.AddComponent<DresserFootAlignment>();
                 drumFeet.player = Player; drumFeet.surface = Drum.Top; drumFeet.supportIndex = 5; drumFeet.pinVisibleSole = true;
+            }
+            if (includeNextDrawers07)
+            {
+                if (!includeNextDrum) throw new InvalidOperationException("06/07 require the Drum 05 step");
+                if (cushionPainting == null || drawersPainting == null) throw new InvalidOperationException("Approved 06/07 paintings missing");
+                Cushion = pilot[6].gameObject.AddComponent<Cushion06Platform>();
+                Cushion.Install(cushionPainting);
+                var cushionFeet = Player.gameObject.AddComponent<DresserFootAlignment>();
+                cushionFeet.player = Player; cushionFeet.surface = Cushion.Top; cushionFeet.supportIndex = 6; cushionFeet.pinVisibleSole = true;
+                Drawers = pilot[7].gameObject.AddComponent<Drawers07Platform>();
+                Drawers.Install(drawersPainting);
+                var drawersFeet = Player.gameObject.AddComponent<DresserFootAlignment>();
+                drawersFeet.player = Player; drawersFeet.surface = Drawers.Top; drawersFeet.supportIndex = 7; drawersFeet.pinVisibleSole = true;
             }
             // The contact colliders describe where feet land, not the bottom of the painting.
             float floor = bearPainting.TransformPoint(new Vector3(0,
@@ -239,8 +257,8 @@ namespace YunaLegend.Illustrated25D.Preview
             if (k != null && (k.pKey.wasPressedThisFrame || k.escapeKey.wasPressedThisFrame) && Started && !Finished)
             { paused=!paused; Time.timeScale=paused?0:1; }
             if (!Started && k != null && (k.enterKey.wasPressedThisFrame || k.spaceKey.wasPressedThisFrame)) Begin();
-            int endIndex=includeNextDrum?5:includeNextBlocks?4:includeNextDresser?3:2;
-            float finishOffset=includeNextDrum?.6f:includeNextDresser?.35f:2f;
+            int endIndex=includeNextDrawers07?7:includeNextDrum?5:includeNextBlocks?4:includeNextDresser?3:2;
+            float finishOffset=includeNextDrawers07?.4f:includeNextDrum?.6f:includeNextDresser?.35f:2f;
             if (!Finished && Player.CurrentSupportIndex==endIndex && Player.IsGrounded && Furniture.HasCracked
                 && !Player.IsStumbling && Player.transform.position.x>pilot[endIndex].transform.position.x+finishOffset)
             { Finished=true; Player.AutoRunActive=false; cameraDriver.AutoScrollActive=false; }
@@ -258,7 +276,9 @@ namespace YunaLegend.Illustrated25D.Preview
         {
             GUI.skin.label.fontSize=Mathf.Max(14,Screen.height/45);
             GUI.skin.button.fontSize=GUI.skin.label.fontSize;
-            GUI.Label(new Rect(18,12,Screen.width-36,32),includeNextDrum
+            GUI.Label(new Rect(18,12,Screen.width-36,32),includeNextDrawers07
+                ? "Yuna Legend · urso → livros → móvel → cômoda → blocos ABC → tambor → almofadão → gavetas"
+                : includeNextDrum
                 ? "Yuna Legend · urso → livros → móvel → cômoda → blocos ABC → tambor"
                 : includeNextBlocks
                 ? "Yuna Legend · urso → livros → móvel → cômoda → blocos ABC"

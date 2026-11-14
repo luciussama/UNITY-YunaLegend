@@ -1,5 +1,21 @@
 # Estado atual — sala escura ilustrada
 
+## T08H / T08I: travessia até 06 (Almofadão) e 07 (Gavetas) — DONE / ACEITA (14/11/2026)
+
+Sessões `2026-11-14-antigravity-06-07-visual` (registro 19, artes `T08H`) e
+`2026-11-14-antigravity-06-07-cena` (registro 20, integração `T08I`).
+**Aceite individual** do usuário ([registro](../../Evidence/25d/T08I/aprovacao.md)).
+[Build, cena e provas](../../Evidence/25d/T08I/README.md).
+
+Plataformas `06` (`Cushion06Platform.cs`, `TopY = -4,23 m`, `x = 33,80 m`) e `07`
+(`Drawers07Platform.cs`, `TopY = -3,91 m`, `x = 38,80 m`) integradas após o Tamborito
+(`05`) em `Drawers/Preview-Continuacao-07.unity` e `Build/Windows/YunaLegend-Continuacao-07`.
+30/60/120 Hz passaram com 2 travessias, **8 saltos**, 1 estralo, reset limpo, 0 erros,
+0 legado e `pinVisibleSole` (`gap ≈ 0,0 m`).
+
+Próximo passo: aguardar definição humana para as próximas plataformas (`08 Caixa de Música`
+e `09 Castelinho de Blocos`). Estante segue adiada; `T06`/`T07` globais permanecem pendentes.
+
 ## T08F / T08G: travessia até o Tamborito de Marcha (05) — ACEITA (14/11/2026)
 
 Sessões `2026-11-14-antigravity-tambor05` (registro 17, arte `T08F`) e
