@@ -19,10 +19,13 @@ namespace YunaLegend.Illustrated25D.Preview
         public Texture2D panorama, furnitureBody, furnitureWood;
         public bool includeNextDresser;
         public bool includeNextBlocks;
+        public bool includeNextDrum;
         public Texture2D dresserPainting;
         public Texture2D blocksPainting;
+        public Texture2D drumPainting;
         public DresserPlatform Dresser { get; private set; }
         public AbcStackPlatform Blocks { get; private set; }
+        public Drum05Platform Drum { get; private set; }
         public Sprite[] nandaFrames;
         public Shader[] requiredShaders;
         public Yuna25DPlayerController Player { get; private set; }
@@ -67,7 +70,7 @@ namespace YunaLegend.Illustrated25D.Preview
             if (resolver == null || guide == null) throw new InvalidOperationException("Illustrated characters missing");
             cameraDriver = Camera.main.GetComponent<SideScroll25DCamera>();
             var markers = FindObjectsByType<DarkRoomPlatformMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-            int last = includeNextBlocks ? 4 : includeNextDresser ? 3 : 2;
+            int last = includeNextDrum ? 5 : includeNextBlocks ? 4 : includeNextDresser ? 3 : 2;
             pilot = Enumerable.Range(0,last+1).Select(i => markers.Single(m => m.spec.index == i)).ToArray();
             foreach (var m in pilot) m.gameObject.SetActive(true);
             foreach (var m in markers.Where(m => m.spec.index > last)) m.gameObject.SetActive(false);
@@ -102,6 +105,15 @@ namespace YunaLegend.Illustrated25D.Preview
                 var abcFeet = Player.gameObject.AddComponent<DresserFootAlignment>();
                 abcFeet.player = Player; abcFeet.surface = Blocks.Top; abcFeet.supportIndex = 4; abcFeet.pinVisibleSole = true;
             }
+            if (includeNextDrum)
+            {
+                if (!includeNextBlocks) throw new InvalidOperationException("Drum 05 requires the ABC stack step");
+                if (drumPainting == null) throw new InvalidOperationException("Approved Drum 05 painting missing");
+                Drum = pilot[5].gameObject.AddComponent<Drum05Platform>();
+                Drum.Install(drumPainting);
+                var drumFeet = Player.gameObject.AddComponent<DresserFootAlignment>();
+                drumFeet.player = Player; drumFeet.surface = Drum.Top; drumFeet.supportIndex = 5; drumFeet.pinVisibleSole = true;
+            }
             // The contact colliders describe where feet land, not the bottom of the painting.
             float floor = bearPainting.TransformPoint(new Vector3(0,
                 IllustratedBearPlatformProfile.Document.mapping.quadBoundsLocal.bottom, 0)).y;
@@ -128,7 +140,8 @@ namespace YunaLegend.Illustrated25D.Preview
                 var b = Bounds(p);
                 var paintingBounds = p.spec.index == 0 ? bearPainting.GetComponent<Renderer>().bounds
                     : p.spec.index == 1 ? books.GetComponent<Renderer>().bounds
-                    : p.spec.index == 4 && Blocks != null && Blocks.Painting != null ? Blocks.Painting.bounds : b;
+                    : p.spec.index == 4 && Blocks != null && Blocks.Painting != null ? Blocks.Painting.bounds
+                    : p.spec.index == 5 && Drum != null && Drum.Painting != null ? Drum.Painting.bounds : b;
                 ContactShadowT054.Install(shadows.transform,paintingBounds.center.x,floor,
                     paintingBounds.size.x,b.size.z,.18f,true);
             }
@@ -157,7 +170,8 @@ namespace YunaLegend.Illustrated25D.Preview
             Lighting.lightingShader = requiredShaders.Single(s => s != null && s.name == "YunaLegend/RoomPenumbraT054");
             Lighting.room = Room; Lighting.nanda = painting.transform;
             Lighting.floorContacts = pilot.Select(p => {
-                var b = p.spec.index == 4 && Blocks != null && Blocks.Painting != null ? Blocks.Painting.bounds : Bounds(p);
+                var b = p.spec.index == 4 && Blocks != null && Blocks.Painting != null ? Blocks.Painting.bounds
+                    : p.spec.index == 5 && Drum != null && Drum.Painting != null ? Drum.Painting.bounds : Bounds(p);
                 return new Vector4(b.center.x, floor, b.size.x * .5f, 1f);
             }).ToArray();
             foreach (var r in Room.FarPanels) Lighting.Bind(r,0);
@@ -171,6 +185,8 @@ namespace YunaLegend.Illustrated25D.Preview
             if(includeNextDresser) DresserFloorReceiver.Install(Room,Lighting,pilot[3].transform.position.x);
             if(includeNextBlocks) DresserFloorReceiver.Install(Room,Lighting,
                 pilot[4].transform.position.x,AbcStackPlatform.FullWidth*.5f+.2f,"Reflexo_Piso_Blocos_ABC");
+            if(includeNextDrum) DresserFloorReceiver.Install(Room,Lighting,
+                pilot[5].transform.position.x,Drum05Platform.FullWidth*.5f+.2f,"Reflexo_Piso_Tambor");
             resolver.idle.previewClock = true;
             Camera.main.clearFlags = CameraClearFlags.SolidColor;
             Camera.main.backgroundColor = new Color(.007f,.009f,.018f);
@@ -223,8 +239,8 @@ namespace YunaLegend.Illustrated25D.Preview
             if (k != null && (k.pKey.wasPressedThisFrame || k.escapeKey.wasPressedThisFrame) && Started && !Finished)
             { paused=!paused; Time.timeScale=paused?0:1; }
             if (!Started && k != null && (k.enterKey.wasPressedThisFrame || k.spaceKey.wasPressedThisFrame)) Begin();
-            int endIndex=includeNextBlocks?4:includeNextDresser?3:2;
-            float finishOffset=includeNextDresser?.35f:2f;
+            int endIndex=includeNextDrum?5:includeNextBlocks?4:includeNextDresser?3:2;
+            float finishOffset=includeNextDrum?.6f:includeNextDresser?.35f:2f;
             if (!Finished && Player.CurrentSupportIndex==endIndex && Player.IsGrounded && Furniture.HasCracked
                 && !Player.IsStumbling && Player.transform.position.x>pilot[endIndex].transform.position.x+finishOffset)
             { Finished=true; Player.AutoRunActive=false; cameraDriver.AutoScrollActive=false; }
@@ -242,7 +258,9 @@ namespace YunaLegend.Illustrated25D.Preview
         {
             GUI.skin.label.fontSize=Mathf.Max(14,Screen.height/45);
             GUI.skin.button.fontSize=GUI.skin.label.fontSize;
-            GUI.Label(new Rect(18,12,Screen.width-36,32),includeNextBlocks
+            GUI.Label(new Rect(18,12,Screen.width-36,32),includeNextDrum
+                ? "Yuna Legend · urso → livros → móvel → cômoda → blocos ABC → tambor"
+                : includeNextBlocks
                 ? "Yuna Legend · urso → livros → móvel → cômoda → blocos ABC"
                 : includeNextDresser
                 ? "Yuna Legend · urso → livros → móvel → cômoda"

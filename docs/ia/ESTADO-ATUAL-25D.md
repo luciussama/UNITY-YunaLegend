@@ -1,5 +1,25 @@
 # Estado atual — sala escura ilustrada
 
+## T08F / T08G: travessia até o Tamborito de Marcha (05) — ACEITA (14/11/2026)
+
+Sessões `2026-11-14-antigravity-tambor05` (registro 17, arte `T08F`) e
+`2026-11-14-antigravity-tambor05-cena` (registro 18, integração `T08G`).
+**Aceite individual** do usuário ([registro](../../Evidence/25d/T08G/aprovacao.md)).
+[Build, cena, contrato de apoio e provas](../../Evidence/25d/T08G/README.md).
+
+O Tamborito de Marcha (05) foi integrado após os blocos ABC (`T08E`) com superfície de
+corrida/pouso sobre a pele plana superior (`y = 265` em `drum-05-v1.png`, ~95 px acima do
+aro frontal), escala uniforme `146,1538 px/m` (`TopY = -4,55 m`, altura `4,55 m` no piso
+`-9,10 m`), largura útil `4,1053 m`, vão `2,4020 m` e degrau `+0,6489 m`.
+30/60/120 Hz passaram com 2 travessias, **6 saltos**, 1 estralo, reset limpo, zero erros,
+zero legado e `pinVisibleSole` com gap `0,0000 m`. Cena nova em
+`Drum/Preview-Continuacao-05.unity` e build separada `Build/Windows/YunaLegend-Continuacao-05`.
+
+Próximo passo solicitado pelo usuário: sincronizar no GitHub e avançar preparando e
+integrando as **duas próximas plataformas** (`06 Almofadão de Veludo` e `07 Gavetas da Cômoda`)
+em conjunto. Estante segue adiada; T06/T07 globais, aparelho/WebGL/áudio/desempenho
+continuam pendentes.
+
 ## T08E: travessia até os blocos ABC — ACEITA (14/11/2026)
 
 Sessão `2026-11-13-dsh-abc04-cena`, registro 16, tarefa T08E. **Aceite individual**

@@ -1,4 +1,16 @@
-# Próximo entregável — T08E aceita; aguardando a próxima peça
+# Próximo entregável — T08G aceita; avançando para 06 + 07
+
+## T08F / T08G: Tamborito de Marcha (05) — ACEITA (14/11/2026)
+
+Aceite individual registrado em [aprovacao.md](../../Evidence/25d/T08G/aprovacao.md).
+Tambor integrado após os blocos ABC com corrida sobre a pele plana (`y = 265`), largura útil
+`4,1053 m`, vão `2,4020 m`, degrau `+0,6489 m`, `pinVisibleSole` (`gap = 0,0000 m`) e
+validação em 30/60/120 Hz ([README.md](../../Evidence/25d/T08G/README.md)).
+
+**Próximo passo:** após sincronização no GitHub, preparar e integrar as próximas duas
+plataformas em conjunto (`06 Almofadão de Veludo` e `07 Gavetas da Cômoda`), definindo os
+apoios reais antes da arte e validando o percurso em cena/build separadas. Estante segue
+adiada; `T06`/`T07` globais permanecem pendentes.
 
 ## T08E: travessia até os blocos ABC — ACEITA (14/11/2026)
 
