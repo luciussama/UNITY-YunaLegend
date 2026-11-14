@@ -29,6 +29,15 @@ Shader "YunaLegend/RoomPenumbraT054"
             float _Blink, _BlinkEnabled, _SuppressHaze;
             float4 _Color, _MoonPosition, _NandaPosition;
             float _Sprite, _Role, _MoonStrength, _NandaStrength, _Phosphor;
+            float4 _FloorContact0, _FloorContact1, _FloorContact2;
+            float FloorContact(float2 world, float4 contact)
+            {
+                float2 delta = (world - float2(contact.x, contact.y - .23))
+                    / float2(max(.1, contact.z) * 1.25, .65);
+                // Reflected light on the painted floor, never on the wall.
+                return exp(-dot(delta, delta) * 1.5)
+                    * (1-smoothstep(contact.y-.04, contact.y+.08, world.y)) * contact.w;
+            }
             struct A { float4 positionOS:POSITION; float2 uv:TEXCOORD0; float4 color:COLOR; };
             struct V { float4 positionCS:SV_POSITION; float2 uv:TEXCOORD0; float3 world:TEXCOORD1; float4 color:COLOR; };
             V vert(A v)
@@ -80,6 +89,9 @@ Shader "YunaLegend/RoomPenumbraT054"
                 // The visible window aperture remains the source, not a new lamp.
                 if (_Role < .5)
                 {
+                    float contact = max(FloorContact(v.world.xy, _FloorContact0),
+                        max(FloorContact(v.world.xy, _FloorContact1), FloorContact(v.world.xy, _FloorContact2)));
+                    light += contact * float3(.24,.29,.38) * _MoonStrength;
                     float2 window = abs((v.uv-float2(.564,.558))/float2(.038,.064));
                     float aperture = (1-smoothstep(.88,1,window.x)) * (1-smoothstep(.88,1,window.y));
                     light = lerp(light,float3(.8,.9,1.05)*_MoonStrength,aperture);

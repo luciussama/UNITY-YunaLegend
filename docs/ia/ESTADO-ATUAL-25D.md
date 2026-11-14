@@ -1,5 +1,36 @@
 # Estado atual — sala escura ilustrada
 
+## T08E: travessia até os blocos ABC — ACEITA (14/11/2026)
+
+Sessão `2026-11-13-dsh-abc04-cena`, registro 16, tarefa T08E. **Aceite individual**
+do usuário: “Aceito, pode continuar.” ([registro](../../Evidence/25d/T08E/aprovacao.md)).
+[Build, vídeo, cena e contrato de apoio](../../Evidence/25d/T08E/README.md).
+
+A pilha ABC04 foi integrada depois da cômoda com apoio medido na pintura aprovada:
+linha de pouso em y=125 (9 cm acima do lip), base em y=1177, escala uniforme
+269,6690 px/m (10% menor), topo em −5,199 m, apoio próprio de 1,5130 m (34,2% do
+conteúdo) e profundidade 1,59 m. A pilha assenta no piso (−9,10 m); vão até a cômoda
+2,1510 m e degrau 0,851 m. Constantes em
+[CONTRATO-APOIO-ABC04.md](../../Evidence/25d/T08E/CONTRATO-APOIO-ABC04.md).
+
+30/60/120 Hz: duas travessias, **5 saltos**, 1 estralo, reset limpo, zero erros e
+zero legado; pousos 22,937/22,864/22,855 dentro do apoio. Câmera aprovada preservada
+(Z/FOV/escala constantes). Cena nova em `ABC/Preview-Continuacao-04.unity` e build
+separada `Build/Windows/YunaLegend-Continuacao-04`; T08C e sua build têm hashes
+inalterados.
+
+Correções aprovadas: (1) vinheta de Idle (ordem 0) estava atrás da pintura (ordem 20);
+a pintura passou para ordem −1. (2) A perna entrava na letra A; a linha voltou para a
+borda do tampo. (3) A sola desenhada ficava 2,8 cm (Idle) e 4,9 cm (corrida) abaixo do
+topo; `pinVisibleSole` prende a sola ao topo, com gap 0,0000 m nas três taxas. (4) O pé
+ainda ficava no tampo; a linha subiu para y=125 e todo o friso ficou abaixo da linha do
+pé. Root, cápsula, física e animações não mudaram.
+
+Próximo passo: aguardar a definição humana da próxima microentrega (estante segue
+adiada). A base não aparece no enquadramento aprovado quando Yuna está no alto; sola do
+urso e demais defeitos continuam em T06; aparelho/WebGL/áudio/desempenho e aceite
+global T06/T07 não foram validados. Sem commit/push.
+
 ## ABC04: arte conceitual aprovada; construção da cena adiada
 
 O usuário aprovou `abc-stack-v1.png` e definiu expressamente: **“o entregável vai ser só a arte conceitual”**.
@@ -9,6 +40,174 @@ A pintura está salva em `Assets/Art/Illustrated25D/Environment/ABC/abc-stack-v1
 **Construção da cena ABC04: POR FAZER — ADIADA PELO USUÁRIO.**
 Não iniciar agora posicionamento, integração, apoio físico, salto ou nova build. Retomar apenas mediante novo pedido do usuário. A arte aprovada não valida contato ou dificuldade.
 Build aprovada até a cômoda T08C preservada. Estante permanece adiada, sem aceite global T06/T07. As seções abaixo registram estados anteriores e não autorizam iniciar a construção adiada.
+
+## Travessia até a cômoda03 aprovada — 13/11/2026
+
+Usuário: **“aprovado me diga qual é o próximo passo”** após build/vídeoT08C.
+[Aceite individual](../../Evidence/25d/T08C/aprovacao.md). T08C aceita e registro11
+encerrado; provas anteriores preservadas, nenhum teste novo neste registro.
+Próxima microentrega: **blocos ABC de madeira (04)** após a cômoda, definindo
+primeiro apoios reais, depois arte e integração na câmera aprovada; validar salto,
+pouso e retry. Ainda não iniciada; este pedido solicita informar o próximo passo.
+Sem aceite agregadoT06/T07 ou conclusão da fase. Checkpoints abaixo são históricos.
+
+## Continuação jogável até a cômoda03 — candidata em revisão
+
+Usuário autorizou prosseguir após câmera aprovada. PreparaçãoT08A encerrada no
+escopo de uso da candidata; registro9 liberado. Registro11/T08C implementa somente
+a próxima travessia: **urso → livros → móvel → cômoda**.
+[Build, vídeo, cena própria e provas](../../Evidence/25d/T08C/README.md).
+30/60/120Hz: duas travessias por taxa,4saltos,1estralo e reset limpo,zero erros.
+Sola opaca no novo apoio,60Hz:±1,35mm; compensação visual restrita à cômoda03.
+Câmera aprovada preservada,semzoom. Móvel anterior/arte/física não redesenhados.
+Cena nova: `Assets/Art/Illustrated25D/Environment/Dresser/Preview-Continuacao.unity`.
+Build separada: `Build/Windows/YunaLegend-Continuacao/YunaLegend.exe`.
+Próximo: revisão individual desta nova travessia, antes dos blocos ABC04.
+Não inferir aceite agregadoT06/T07 ou conclusão da fase. Pedido externo de
+retomada da estante (diário1016/1017) não foi assumido nesta microentrega.
+
+## Câmera T08B aprovada — 13/11/2026
+
+Usuário aprovou a câmera de subida sem zoom: **“aprovafo. gostei.”**
+[Aceite literal](../../Evidence/25d/T08B/aprovacao.md). T08B aceita e registro 10
+encerrado. Provas anteriores preservadas, sem novos testes ou commit/push.
+Cômoda T08A continua em revisão individual (registro 9); estante/redesenho adiados.
+A aprovação da fase permanece parcial, sem aceite agregado T06/T07.
+As seções seguintes são checkpoints anteriores à aprovação da câmera.
+
+## Câmera acompanha a subida com distância fixa — candidata entregue
+
+Pedido explícito: **“Acompanhar a subida, mantendo a distância.”**
+[T08B: vídeo, prova e reprodução](../../Evidence/25d/T08B/README.md), registro 10.
+Agora o modo ilustrado acompanha também a altura de Yuna antes do pouso;
+Z=−9,0533 m e FOV45° constantes, escala96px/m. Retry60 passou sem erros.
+Vídeo nativo604×720,37,33s,semáudio; janela desktop,sem validação de aparelho.
+Executável separado em `Build/Windows/YunaLegend-Camera/YunaLegend.exe`.
+Revisão visual pendente; T08B e a arte da cômoda T08A têm reservas independentes.
+Aceite parcial e adiamento da estante preservados. Nenhum aceite agregado T06/T07
+ou integração da cômoda foi inferido. Sem commit/push.
+
+## Continuidade: cômoda candidata e câmera sem zoom (13/11/2026)
+
+Aceite parcial e estante adiada mantidos. Cômoda 03 preparada como imagem
+individual em [T08A](../../Evidence/25d/T08A/README.md), sem integração alegada.
+Registro 9 mantém arte/docs para revisão. Usuário priorizou o acompanhamento
+vertical e confirmou **“Acompanhar a subida, mantendo a distância”**.
+Microentrega T08B/registro 10 altera somente a câmera ilustrada, em recursos
+independentes; sem zoom, redesenho da estante ou mudança de física/animação.
+T08A/T08B são preparações individuais autorizadas; T08 principal mantém sua
+dependência de T07, que não foi aceita globalmente.
+
+## Aceite parcial; estante adiada e próxima peça autorizada (13/11/2026)
+
+Usuário concedeu **aprovação parcial** e adiou o ajuste/redesenho da estante.
+Pediu continuar a evolução para ter maior visibilidade da fase.
+[Decisão literal e escopo](../../Evidence/25d/T06-contact/v4/aceite-parcial.md).
+Não retomar a estante nesta etapa. Achados dos pés continuam registrados, sem
+declarar correção ou aceite agregado T06/T07. Próxima microentrega: cômoda pequena
+de carvalho, índice 3, com apoio definido antes da pintura e revisão individual.
+Preparação visual isolada; não é conclusão ou aprovação global da expansão T08.
+
+## Auditoria da sola — afastamento confirmado nas superfícies (13/11/2026)
+
+Usuário relatou pé afastado do móvel e pediu análise das demais superfícies.
+[Diagnóstico, cobertura e capturas](../../Evidence/25d/T06-contact/foot-audit/README.md).
+Repouso no móvel: 7,91 cm; chão: ~8 cm; pouso nos livros: 6,86–7,78 cm.
+Urso também apresenta afastamento, com dependência da curva e da posição da sola.
+Causa: skinWidth0,08m e compensação visual ausente no Idle e dependente de
+reviewSupport não atribuído em Run/Jump na integração. Tropeço já compensa na
+maior parte; não aplicar deslocamento uniforme a todos os estados.
+Instrumentação opt-in somente na build diagnóstica técnica; nenhuma correção
+de animação/física aplicada. Build normal v4 e T06.3 preservadas.
+Próximo: corrigir contato visual do pé de apoio por estado/superfície, com prova
+de continuidade. Registro 8 permanece aberto; T06/T07 não encerradas.
+
+## Contato v4 — referência corrigida para baixo do friso (13/11/2026)
+
+Usuário pediu ajuste da v3: objetos acima do friso do chão. O inset anterior
+82/724 apontava a linha 642 do panorama, dentro do acabamento da parede.
+Agora a ancoragem usa 64/724, linha 660, abaixo da borda inferior do friso (~654).
+[Candidata v4, capturas, provas e limites](../../Evidence/25d/T06-contact/v4/README.md).
+Registro 8 e sessão `2026-11-13-codex-contact-penumbra` mantidos para revisão.
+Física e apoios preservados. Exportação na cópia técnica com fontes conferidos,
+pois o Editor central está em Play pausado; reiniciar Play nele para carregar
+o alinhamento atualizado. Build candidata central atualizada, T06.3 aprovada preservada.
+Próximo: revisão visual da v4 abaixo do friso; T06/T07 continuam abertas.
+As seções seguintes descrevem candidatas e checkpoints anteriores.
+
+## Contato na penumbra — candidata v3 em revisão (13/11/2026)
+
+Registro 8, sessão `2026-11-13-codex-contact-penumbra`. Corrigidos o piso calculado
+por colisor em vez da base pintada, a extensão visual dos livros e as sombras XZ
+vistas de perfil pela câmera horizontal. Reflexo frio localizado permite ler a
+sombra de contato. Física, apoios de pouso, câmera e pinturas preservados.
+[Candidata, comparação e reprodução](../../Evidence/25d/T06-contact/README.md).
+Build aprovada T06.3 preservada no backup; 170 arquivos idênticos ao manifesto.
+Próximo: revisão humana individual do contato nesta candidata. T06/T07 continuam
+abertas; oclusão dinâmica e os demais limites abaixo não foram validados.
+Os checkpoints seguintes são históricos anteriores à correção candidata.
+
+## T06 reaberta por regressão de contato — T07 bloqueada (13/11/2026)
+
+Sessão `2026-11-13-dsh-consolidacao-t06t07` (DeepSeek), registro 6
+(`t06/consolidacao-criterios-v1`) e `plan:t06`. O pedido foi consolidar os
+critérios restantes de T06/T07 antes de expandir, com limites explícitos de áudio,
+teclado/toque, aparelhos e WebGL.
+
+A consolidação avançou, mas o usuário relatou **urso e livros flutuando sem sombra**
+(diário 972). A build final foi capturada e o defeito **confirmado**: as bases tocam
+o piso, porém a sombra escura do `ContactShadowT054` não lê sobre o piso quase preto
+da penumbra. O aceite técnico de T06 foi **invalidado no mesmo dia** (`reopen`);
+T06 está reaberta e T07 segue **bloqueada**. [Diagnóstico e capturas](../../Evidence/25d/T06/README.md#regressão-de-contato-reportada-e-confirmada).
+
+- Matriz de critérios com evidência e limite por item, parâmetros de câmera/física/
+  evento e reprodução em [Evidence/25d/T06/README.md](../../Evidence/25d/T06/README.md)
+  e [parametros.json](../../Evidence/25d/T06/parametros.json).
+- **Áudio capturado** do executável (mix 48 kHz, 70,19 s) e analisado por
+  correlação com o clip aprovado: quatro eventos de estralo, nenhum na falha.
+  Descoberta registrada: a música `High-Frequency Violin` toca em loop no piloto.
+  [Análise](../../Evidence/25d/T06/audio-60/audio-analysis.json). **Não houve
+  escuta humana nem certificação de mixagem.**
+- Build final revalidada em **30/60/120 Hz** (`success=true`, zero erros), com uma
+  fonte de Yuna, zero renderers legados e um estralo por travessia. PlayMode de
+  entrada (teclado, mouse, W e toque) aprovado; **EditMode 52/52**.
+- Limite declarado: item T06-4 (A/B da assistência horizontal) não foi executado;
+  não foi maquiado como comparação concluída.
+- **Próximo passo:** nova microentrega de contato/ancoragem na penumbra, na câmera
+  final, comparada com contact-v2 e penumbra-v2 e revisada pelo usuário. Só depois
+  a T06 pode ser reaceita e a T07 submetida.
+- Limites: escuta/mixagem, aparelho físico/retrato/safe area, WebGL, sombras
+  dinâmicas de oclusão, A/B da assistência e desempenho real. A verificação de
+  120 Hz exige a janela do player em primeiro plano; em segundo plano a renderização
+  a ~28 fps altera o passo da física sob `captureDeltaTime`.
+- Nenhum commit/push nesta consolidação. A build aprovada da T06.3 foi preservada
+  em `Build/Windows/YunaLegend-Acompanhamento-T063-aprovada/`.
+
+## T06.3 aprovada — 13/11/2026
+
+Usuário aprovou a entrega apresentada com **“aprovadíssimo”**, após destacar a
+diferença do fundo com o movimento. [Aceite individual](../../Evidence/25d/T06.3/reviews/T06.3-v1-aprovacao.md).
+Provas técnicas e build anteriores preservadas; nenhum novo teste ou rebuild.
+Registro 5 concluído e reserva T06 liberada após o checkpoint deste aceite.
+Próximo: consolidar os critérios restantes de T06/T07 antes de expandir o piloto.
+Áudio por escuta, toque/aparelhos e WebGL permanecem pendentes; sem commit/push.
+Os checkpoints abaixo são históricos anteriores à aprovação.
+
+## T06.3 entregue para revisão — 13/11/2026
+
+Registro **5**, assunto `t06/retry-movel-v1`, sessão `2026-11-13-codex-t063`.
+Build oficial **regenerada após a remoção da composição duplicada** e validada.
+T06.3 passou no executável em **30/60/120 Hz**, com R na pausa local, R na recuperação,
+nova travessia completa, P/Esc, falha e nova travessia: zero exceções, um evento por
+travessia e reset validado. Física e visual aprovado preservados; nenhuma correção
+de gameplay foi necessária. Módulo builtin ScreenCapture habilitado para a captura.
+
+[Entrega, reprodução, limites e hashes](../../Evidence/25d/T06.3/README.md).
+Vídeo contínuo com UI: **37,30 s**, simulação60 Hz/captura30 fps, **sem áudio**.
+Começar/Recomeçar confirmados também por clique na build normal, deixada na tela inicial.
+**Próximo: revisão humana da sequência T06.3.** T06/T07 não encerradas, sem expansão.
+Registro5 e reserva T06 mantidos abertos aguardando revisão; não assumir por tempo decorrido.
+Os checkpoints abaixo são histórico anterior a esta entrega.
 
 
 ## Checkpoint para Git e próxima entrega — 13/11/2026

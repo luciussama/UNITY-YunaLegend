@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-14T02:47:10.528918+00:00",
+  "updated_at": "2026-11-14T15:04:24.983150+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -699,10 +699,75 @@
         "art-abc"
       ],
       "human_gate": true,
-      "status": "pending",
+      "status": "accepted",
       "owner": null,
-      "checkpoint": null,
-      "authorization": "Somente planejamento. Usuario limitou entregavel atual a arte conceitual e adiou explicitamente a construcao. Nao iniciar sem pedido de retomada."
+      "checkpoint": {
+        "done": "Pouso y=125 aprovado e validado em30/60/120:5saltos,resetlimpo,0erros/legado,pousos22.937/22.864/22.855,sola presa ao topo gap0.0;altura3.901,degrau0.851,escala10% menor.",
+        "next": "Aceitar T08E com a aprovacao literal do usuario e aguardar a proxima microentrega.",
+        "validation": "30/60/120 success=true;gaps0;manifest40evidencias;T08C unchanged;plancheck/diarycheck",
+        "pending": "Aceite formal T08E;proxima peca;T06/T07 globais;aparelho/WebGL/audio/desempenho;base fora do quadro",
+        "files": "Assets/Art/Illustrated25D/Environment/ABC;Assets/Art/Illustrated25D/Preview;Evidence/25d/T08E;docs/ia",
+        "processes": "Nenhum Unity Editor ou player ativo ao encerrar",
+        "updated_at": "2026-11-14T15:04:21.752867+00:00"
+      },
+      "authorization": "Somente planejamento. Usuario limitou entregavel atual a arte conceitual e adiou explicitamente a construcao. Nao iniciar sem pedido de retomada.",
+      "evidence": [
+        {
+          "path": "Evidence/25d/T08E/README.md",
+          "sha256": "02298a578b43bab14eb772e1febd725e799c5328de586104797394ea2b9c8901"
+        },
+        {
+          "path": "Evidence/25d/T08E/CONTRATO-APOIO-ABC04.md",
+          "sha256": "f876b983ceaac8cb612df4b1c3f3c9190e4e9bf8257d2341ad7faed180a3f703"
+        },
+        {
+          "path": "Evidence/25d/T08E/aprovacao.md",
+          "sha256": "d411c034341c2c91cc8e20cd720015ea319ac810fffa76c5e313e2224bed077b"
+        },
+        {
+          "path": "Evidence/25d/T08E/manifest.json",
+          "sha256": "ab702ffe02e1eda3d2efdf19af2b13b65810adc29254eea285dbecd388b2f189"
+        },
+        {
+          "path": "Evidence/25d/T08E/revisao-proposta.md",
+          "sha256": "0b3e9a9e93957b3b7f7b20bf177021b88dace910cdab31a3be6625e146888906"
+        },
+        {
+          "path": "Evidence/25d/T08E/asset-measurements.json",
+          "sha256": "51bfcef2d40b5ebc0a9bb8cc4c0bf01fb8d3f73dd59a630875fedb8edccb85d3"
+        },
+        {
+          "path": "Evidence/25d/T08E/final-60/verification.json",
+          "sha256": "e4100dec34d082faaa1f748b037b2d7a77c137105097303af9273858cc4e3355"
+        },
+        {
+          "path": "Evidence/25d/T08E/final-30/verification.json",
+          "sha256": "7e6d1e82a2dc6eca4270297474dbcc75675077b0d6d13fcfc2dab2662805dc7b"
+        },
+        {
+          "path": "Evidence/25d/T08E/final-120/verification.json",
+          "sha256": "9b7dbf7e4670472c00d977224d74a6604be151bd95357588b19b30f2c09f733f"
+        },
+        {
+          "path": "Evidence/25d/T08E/final-video-60/camera-ascent.mp4",
+          "sha256": "509b17db67f6e385a3c6a5fa02de4d0ee21bc3ceaf619c1963fb0cc25d71174d"
+        },
+        {
+          "path": "Evidence/25d/T08E/preview-120/verification.json",
+          "sha256": "9b7dbf7e4670472c00d977224d74a6604be151bd95357588b19b30f2c09f733f"
+        },
+        {
+          "path": "Assets/Art/Illustrated25D/Environment/ABC/Preview-Continuacao-04.unity",
+          "sha256": "93575852dd11872a1b78dc90fcda5b1e82ae754e0e532f91073e94bb701838bd"
+        }
+      ],
+      "validation": "Pouso y=125 com sola acima do friso (gap0.0000);30/60/120 success=true,5saltos,resetlimpo,0erros/legado;T08C iguais;video;aprovacao literal registrada",
+      "acceptance": {
+        "session": "2026-11-13-dsh-abc04-cena",
+        "reference": "Usuario nesta conversa apos preview120 do pouso y=125: Aceito, pode continuar. Aceite individual da microentrega T08E;nao cobre T06/T07 globais,estante,aparelhos/WebGL/audio/desempenho.",
+        "at": "2026-11-14T15:04:24.983150+00:00",
+        "human_required": true
+      }
     }
   ],
   "history": [
@@ -2578,6 +2643,231 @@
       "reference": "Usuario aprovou abc-stack-v1 e limitou entregavel a arte conceitual;construcao da cena explicitamente adiada e marcada T08E pending. Mensagem literal em Evidence/25d/T08D/aprovacao-conceitual.md.",
       "human_approval": true,
       "at": "2026-11-14T02:47:10.528918+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "agent": "DeepSeek (deepseek-flash)",
+      "at": "2026-11-14T02:58:48.106175+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "done": "Blocos ABC04 integrados em cena/build separadas com apoio medido no topo estreito (1.6643x1.59m, topo-4.87, vao2.0696, degrau1.18); correcao de ordem de desenho da Idle; 30/60/120 passaram com5saltos,resetlimpo,0erros/legado e ancora0.0.",
+      "next": "Revisao humana individual em Evidence/25d/T08E (build, video, pouso/repouso, contrato); sem iniciar outra peca nem aceite global.",
+      "validation": "final-30/60/120 success=true;manifest hashes;T08C cena/exe unchanged;video22s decodificado;plancheck/diarycheck",
+      "pending": "Aceite humano T08E;base fora do enquadramento no alto;T06/T07 globais;aparelho/WebGL/audio/desempenho;estante adiada",
+      "files": "Assets/Art/Illustrated25D/Environment/ABC;Assets/Art/Illustrated25D/Preview;Evidence/25d/T08E;docs/ia",
+      "processes": "Nenhum Unity Editor ou player ativo ao encerrar",
+      "at": "2026-11-14T03:28:25.820339+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "evidence": [
+        "Evidence/25d/T08E/README.md",
+        "Evidence/25d/T08E/CONTRATO-APOIO-ABC04.md",
+        "Evidence/25d/T08E/manifest.json",
+        "Evidence/25d/T08E/revisao-proposta.md",
+        "Evidence/25d/T08E/final-60/verification.json",
+        "Evidence/25d/T08E/final-30/verification.json",
+        "Evidence/25d/T08E/final-120/verification.json",
+        "Evidence/25d/T08E/final-video-60/camera-ascent.mp4",
+        "Assets/Art/Illustrated25D/Environment/ABC/Preview-Continuacao-04.unity"
+      ],
+      "validation": "30/60/120 success=true,5saltos,resetlimpo,0erros/legado,ancora0.0;T08C cena/exe hashes iguais;camera Z/FOV/escala constantes;video22s;revisao individual pendente,sem aceite global",
+      "at": "2026-11-14T03:28:38.673690+00:00"
+    },
+    {
+      "command": "release",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "reason": "Ajuste pedido pelo usuario: linha de pouso na borda visivel (y=185) para o pe tocar a extremidade; reentrega apos revalidar.",
+      "at": "2026-11-14T14:05:06.784426+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "agent": "DeepSeek (deepseek-flash)",
+      "at": "2026-11-14T14:05:06.874159+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "done": "Ajuste humano concluido: pouso na borda visivel y=185, altura4.05, topo-5.054, degrau1.00, apoio1.6643 inalterado;30/60/120 passaram com5saltos,resetlimpo,0erros/legado,ancora0.0;video recapturado.",
+      "next": "Revisao humana da imagem de repouso e do video; se aprovada, aceitar T08E e escolher a proxima microentrega.",
+      "validation": "final-30/60/120 success=true;pousos22.846/22.833/22.793;video22s;manifest;T08C unchanged;plancheck/diarycheck",
+      "pending": "Aceite humano T08E;base fora do enquadramento no alto;T06/T07 globais;aparelho/WebGL/audio/desempenho;estante adiada",
+      "files": "Assets/Art/Illustrated25D/Environment/ABC;Assets/Art/Illustrated25D/Preview;Evidence/25d/T08E;docs/ia",
+      "processes": "Nenhum Unity Editor ou player ativo ao encerrar",
+      "at": "2026-11-14T14:09:15.601562+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "evidence": [
+        "Evidence/25d/T08E/README.md",
+        "Evidence/25d/T08E/CONTRATO-APOIO-ABC04.md",
+        "Evidence/25d/T08E/manifest.json",
+        "Evidence/25d/T08E/revisao-proposta.md",
+        "Evidence/25d/T08E/final-60/verification.json",
+        "Evidence/25d/T08E/final-30/verification.json",
+        "Evidence/25d/T08E/final-120/verification.json",
+        "Evidence/25d/T08E/final-video-60/camera-ascent.mp4",
+        "Assets/Art/Illustrated25D/Environment/ABC/Preview-Continuacao-04.unity"
+      ],
+      "validation": "Pouso na borda visivel y=185;30/60/120 success=true,5saltos,resetlimpo,0erros/legado,ancora0.0;T08C cena/exe iguais;video22s;revisao individual pendente",
+      "at": "2026-11-14T14:09:20.171716+00:00"
+    },
+    {
+      "command": "release",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "reason": "Segundo ajuste pedido pelo usuario: perna dentro da letra; mover pouso para y=150 e reduzir 5% a plataforma; reentrega apos revalidar.",
+      "at": "2026-11-14T14:25:30.384664+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "agent": "DeepSeek (deepseek-flash)",
+      "at": "2026-11-14T14:25:30.483113+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "done": "Segundo ajuste humano: pouso na borda do tampo plano y=150, escala5% menor (257.4113), altura3.99, topo-5.110, apoio1.5850, degrau0.940;30/60/120 passaram com5saltos,resetlimpo,0erros/legado,ancora0.0;video recapturado.",
+      "next": "Revisao humana do repouso e do video; se aprovada, aceitar T08E e escolher a proxima microentrega.",
+      "validation": "final-30/60/120 success=true;pousos22.836/22.823/22.814;video22.03s;manifest;T08C unchanged;plancheck/diarycheck",
+      "pending": "Aceite humano T08E;base fora do enquadramento no alto;T06/T07 globais;aparelho/WebGL/audio/desempenho;estante adiada",
+      "files": "Assets/Art/Illustrated25D/Environment/ABC;Assets/Art/Illustrated25D/Preview;Evidence/25d/T08E;docs/ia",
+      "processes": "Nenhum Unity Editor ou player ativo ao encerrar",
+      "at": "2026-11-14T14:25:40.657698+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "evidence": [
+        "Evidence/25d/T08E/README.md",
+        "Evidence/25d/T08E/CONTRATO-APOIO-ABC04.md",
+        "Evidence/25d/T08E/manifest.json",
+        "Evidence/25d/T08E/revisao-proposta.md",
+        "Evidence/25d/T08E/final-60/verification.json",
+        "Evidence/25d/T08E/final-30/verification.json",
+        "Evidence/25d/T08E/final-120/verification.json",
+        "Evidence/25d/T08E/final-video-60/camera-ascent.mp4",
+        "Assets/Art/Illustrated25D/Environment/ABC/Preview-Continuacao-04.unity"
+      ],
+      "validation": "Pouso y=150 e plataforma5% menor;30/60/120 success=true,5saltos,resetlimpo,0erros/legado,ancora0.0;T08C iguais;video22.03s;revisao individual pendente",
+      "at": "2026-11-14T14:25:40.753554+00:00"
+    },
+    {
+      "command": "release",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "reason": "Terceiro ajuste pedido: peça ainda menor e verificacao critica do contato dos pes; reentrega apos revalidar.",
+      "at": "2026-11-14T14:43:46.719924+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "agent": "DeepSeek (deepseek-flash)",
+      "at": "2026-11-14T14:43:46.817684+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "done": "Terceiro ajuste: sola desenhada presa ao topo (gap0.0000 nas tres taxas) e peca10% menor (269.6690px/m, altura3.808, topo-5.292, apoio1.5130, degrau0.758);30/60/120 passaram com5saltos,resetlimpo,0erros/legado.",
+      "next": "Revisao humana do contato/tamanho em README, contrato e video; se aprovada, aceitar T08E.",
+      "validation": "final-30/60/120 success=true;idleGap0;landingGap0;pousos22.907/22.895/22.856;video;manifest;T08C unchanged",
+      "pending": "Aceite humano T08E;tamanho (cada-5%=~0.15m de degrau);base fora do quadro no alto;T06/T07 globais;aparelho/WebGL/audio/desempenho",
+      "files": "Assets/Art/Illustrated25D/Environment/ABC;Assets/Art/Illustrated25D/Preview;Assets/Art/Illustrated25D/Environment/Dresser;Evidence/25d/T08E;docs/ia",
+      "processes": "Nenhum Unity Editor ou player ativo ao encerrar",
+      "at": "2026-11-14T14:43:58.794403+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "evidence": [
+        "Evidence/25d/T08E/README.md",
+        "Evidence/25d/T08E/CONTRATO-APOIO-ABC04.md",
+        "Evidence/25d/T08E/manifest.json",
+        "Evidence/25d/T08E/revisao-proposta.md",
+        "Evidence/25d/T08E/asset-measurements.json",
+        "Evidence/25d/T08E/final-60/verification.json",
+        "Evidence/25d/T08E/final-30/verification.json",
+        "Evidence/25d/T08E/final-120/verification.json",
+        "Evidence/25d/T08E/final-video-60/camera-ascent.mp4",
+        "Assets/Art/Illustrated25D/Environment/ABC/Preview-Continuacao-04.unity"
+      ],
+      "validation": "Sola desenhada presa ao topo (gap0.0000);escala10% menor;30/60/120 success=true,5saltos,resetlimpo,0erros/legado;T08C iguais;video;revisao individual pendente",
+      "at": "2026-11-14T14:43:58.890682+00:00"
+    },
+    {
+      "command": "release",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "reason": "Aguardando aprovacao visual do posicionamento em120Hz antes de repetir todos os refreshs; evidencias serao refeitas.",
+      "at": "2026-11-14T14:47:49.331855+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "agent": "DeepSeek (deepseek-flash)",
+      "at": "2026-11-14T14:47:49.433052+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "done": "Pouso y=125 aprovado e validado em30/60/120:5saltos,resetlimpo,0erros/legado,pousos22.937/22.864/22.855,sola presa ao topo gap0.0;altura3.901,degrau0.851,escala10% menor.",
+      "next": "Aceitar T08E com a aprovacao literal do usuario e aguardar a proxima microentrega.",
+      "validation": "30/60/120 success=true;gaps0;manifest40evidencias;T08C unchanged;plancheck/diarycheck",
+      "pending": "Aceite formal T08E;proxima peca;T06/T07 globais;aparelho/WebGL/audio/desempenho;base fora do quadro",
+      "files": "Assets/Art/Illustrated25D/Environment/ABC;Assets/Art/Illustrated25D/Preview;Evidence/25d/T08E;docs/ia",
+      "processes": "Nenhum Unity Editor ou player ativo ao encerrar",
+      "at": "2026-11-14T15:04:21.752867+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "evidence": [
+        "Evidence/25d/T08E/README.md",
+        "Evidence/25d/T08E/CONTRATO-APOIO-ABC04.md",
+        "Evidence/25d/T08E/aprovacao.md",
+        "Evidence/25d/T08E/manifest.json",
+        "Evidence/25d/T08E/revisao-proposta.md",
+        "Evidence/25d/T08E/asset-measurements.json",
+        "Evidence/25d/T08E/final-60/verification.json",
+        "Evidence/25d/T08E/final-30/verification.json",
+        "Evidence/25d/T08E/final-120/verification.json",
+        "Evidence/25d/T08E/final-video-60/camera-ascent.mp4",
+        "Evidence/25d/T08E/preview-120/verification.json",
+        "Assets/Art/Illustrated25D/Environment/ABC/Preview-Continuacao-04.unity"
+      ],
+      "validation": "Pouso y=125 com sola acima do friso (gap0.0000);30/60/120 success=true,5saltos,resetlimpo,0erros/legado;T08C iguais;video;aprovacao literal registrada",
+      "at": "2026-11-14T15:04:21.850427+00:00"
+    },
+    {
+      "command": "accept",
+      "task": "T08E",
+      "session": "2026-11-13-dsh-abc04-cena",
+      "reference": "Usuario nesta conversa apos preview120 do pouso y=125: Aceito, pode continuar. Aceite individual da microentrega T08E;nao cobre T06/T07 globais,estante,aparelhos/WebGL/audio/desempenho.",
+      "human_approval": true,
+      "at": "2026-11-14T15:04:24.983150+00:00"
     }
   ]
 }

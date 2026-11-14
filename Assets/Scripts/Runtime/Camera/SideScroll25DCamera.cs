@@ -223,6 +223,10 @@ namespace YunaLegend.Camera25D
             var next = FindPlatform(nextIndex);
             float nextY = next != null && !next.Support.IsEmpty ? next.GetLandingPoint(direction).y : groundY;
             float desiredY = groundY + 1.8f + Mathf.Clamp((nextY - groundY) * .25f, -.5f, .5f);
+            // Track the girl's ascent before landing on the next support. This is a
+            // vertical translation only: depth, FOV and painting scale stay fixed.
+            // The route remains the lower framing bound during an ordinary jump.
+            desiredY = Mathf.Max(desiredY, playerTarget.transform.position.y + 1.8f);
             if (playerTarget.IsCinematicFalling || playerTarget.IsDead)
                 desiredY = playerTarget.transform.position.y + 1.8f;
             // Compensate the lag of a damped camera following constant-speed travel.
@@ -343,6 +347,121 @@ namespace YunaLegend.Camera25D
             autoScrollActive = active;
             scrollDirection = Mathf.Sign(dir);
             scrollSpeed = speed;
+        }
+    }
+
+    /// <summary>Opt-in evidence of vertical following and constant projection; never changes the camera.</summary>
+    [DefaultExecutionOrder(1000)]
+    public sealed class CameraAscentProof : MonoBehaviour
+    {
+        [System.Serializable] public class Sample
+        {
+            public int frame, support, screenWidth, screenHeight;
+            public bool grounded;
+            public float playerY, velocityY, cameraY, cameraZ, fov, pixelsPerMetre, footViewportY;
+        }
+        [System.Serializable] public class Report
+        {
+            public string method = "Real player traversal; opt-in read-only camera trace. Fixed Z/FOV and one-metre projection at the character plane, independent of animation pose.";
+            public int risingCameraFrames;
+            public int capturedFrames, captureWidth, captureHeight;
+            public float minZ = float.MaxValue, maxZ = float.MinValue,
+                minFov = float.MaxValue, maxFov = float.MinValue,
+                minPixelsPerMetre = float.MaxValue, maxPixelsPerMetre = float.MinValue;
+            public bool fixedDistanceAndScale;
+            public System.Collections.Generic.List<Sample> samples = new System.Collections.Generic.List<Sample>();
+        }
+        readonly Report report = new Report();
+        string output;
+        float previousY;
+        System.Diagnostics.Process encoder;
+        string encoderPath;
+        int simulationHz = 60;
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        static void Boot()
+        {
+            var args = System.Environment.GetCommandLineArgs();
+            int at = System.Array.IndexOf(args, "-cameraAscentProof");
+            if (at < 0 || at + 1 >= args.Length || FindFirstObjectByType<CameraAscentProof>() != null) return;
+            var go = new GameObject("CameraAscent_ReadOnlyProof"); DontDestroyOnLoad(go);
+            var proof = go.AddComponent<CameraAscentProof>(); proof.output = args[at + 1];
+            System.IO.Directory.CreateDirectory(proof.output);
+            int videoAt = System.Array.IndexOf(args, "-cameraAscentVideoEncoder");
+            int hzAt = System.Array.IndexOf(args, "-previewHz");
+            if (hzAt >= 0) proof.simulationHz = int.Parse(args[hzAt + 1]);
+            if (videoAt >= 0)
+            {
+                proof.encoderPath = args[videoAt + 1];
+                proof.StartCoroutine(proof.Capture());
+            }
+        }
+        void LateUpdate()
+        {
+            var camera = Camera.main;
+            if (camera == null) return;
+            var driver = camera.GetComponent<SideScroll25DCamera>();
+            var player = FindFirstObjectByType<Yuna25DPlayerController>();
+            if (driver == null || !driver.IllustratedPilotFraming || player == null) return;
+            Vector3 p = player.transform.position;
+            var s = new Sample { frame = Time.frameCount, support = player.CurrentSupportIndex,
+                screenWidth = Screen.width, screenHeight = Screen.height,
+                grounded = player.IsGrounded, playerY = p.y, velocityY = player.Velocity.y,
+                cameraY = camera.transform.position.y, cameraZ = camera.transform.position.z,
+                fov = camera.fieldOfView,
+                pixelsPerMetre = camera.WorldToScreenPoint(p + Vector3.up).y - camera.WorldToScreenPoint(p).y,
+                footViewportY = camera.WorldToViewportPoint(p).y };
+            if (report.samples.Count > 0 && s.velocityY > 1f && s.cameraY > previousY + .00001f)
+                report.risingCameraFrames++;
+            previousY = s.cameraY; report.samples.Add(s);
+            report.minZ = Mathf.Min(report.minZ, s.cameraZ); report.maxZ = Mathf.Max(report.maxZ, s.cameraZ);
+            report.minFov = Mathf.Min(report.minFov, s.fov); report.maxFov = Mathf.Max(report.maxFov, s.fov);
+            report.minPixelsPerMetre = Mathf.Min(report.minPixelsPerMetre, s.pixelsPerMetre);
+            report.maxPixelsPerMetre = Mathf.Max(report.maxPixelsPerMetre, s.pixelsPerMetre);
+            if (report.samples.Count % 60 == 0) Save();
+        }
+        void Save()
+        {
+            if (output == null) return;
+            report.fixedDistanceAndScale = report.samples.Count > 0 && report.maxZ - report.minZ < .0001f
+                && report.maxFov - report.minFov < .0001f
+                && report.maxPixelsPerMetre - report.minPixelsPerMetre < .01f;
+            System.IO.File.WriteAllText(System.IO.Path.Combine(output, "camera-ascent.json"), JsonUtility.ToJson(report, true));
+        }
+        System.Collections.IEnumerator Capture()
+        {
+            int frame = 0;
+            while (true)
+            {
+                yield return new WaitForEndOfFrame();
+                if (frame++ % Mathf.Max(1, simulationHz / 30) != 0) continue;
+                var image = ScreenCapture.CaptureScreenshotAsTexture();
+                if (encoder == null)
+                {
+                    report.captureWidth = image.width; report.captureHeight = image.height;
+                    encoder = new System.Diagnostics.Process { StartInfo = new System.Diagnostics.ProcessStartInfo {
+                        FileName = encoderPath,
+                        Arguments = "-y -loglevel error -f rawvideo -pixel_format rgba -video_size "
+                            + image.width + "x" + image.height + " -framerate 30 -i pipe:0 -vf vflip -c:v libx264 -preset fast -crf 20 -pix_fmt yuv420p -movflags +faststart \""
+                            + System.IO.Path.Combine(output, "camera-ascent.mp4") + "\"",
+                        UseShellExecute = false, CreateNoWindow = true, RedirectStandardInput = true } };
+                    encoder.Start();
+                }
+                if (image.width != report.captureWidth || image.height != report.captureHeight)
+                    throw new System.InvalidOperationException("Evidence window resized during camera capture");
+                var pixels = image.GetPixels32(); var raw = new byte[pixels.Length * 4];
+                for (int i = 0; i < pixels.Length; i++)
+                { raw[i*4] = pixels[i].r; raw[i*4+1] = pixels[i].g; raw[i*4+2] = pixels[i].b; raw[i*4+3] = 255; }
+                encoder.StandardInput.BaseStream.Write(raw, 0, raw.Length); report.capturedFrames++;
+                Destroy(image);
+            }
+        }
+        void OnApplicationQuit()
+        {
+            if (encoder != null)
+            {
+                encoder.StandardInput.Close(); encoder.WaitForExit(10000); encoder.Dispose(); encoder = null;
+            }
+            Save();
         }
     }
 }

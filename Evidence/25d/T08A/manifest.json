@@ -1,0 +1,42 @@
+{
+  "session": "2026-11-13-codex-comoda03",
+  "registryJob": 9,
+  "tool": "image_gen builtin",
+  "reference": {
+    "path": "Assets/Art/Illustrated25D/Environment/Furniture/furniture-body-v1.png",
+    "bytes": 1565118,
+    "sha256": "ee88ffcc88d70107103b33abf0742e12aefd05ddd304cc3dcda797ab9f00fd7f"
+  },
+  "asset": {
+    "path": "Assets/Art/Illustrated25D/Environment/Dresser/dresser-v1.png",
+    "bytes": 2403829,
+    "sha256": "d4c05a6d459bb2cee1300b61acab9a22e56efb8b8bb087ef034772578974e40e"
+  },
+  "evidence": [
+    {
+      "path": "Evidence/25d/T08A/CONTRATO-APOIO.md",
+      "bytes": 2235,
+      "sha256": "ae321f5ef63317353e807e62614734e575bbfe9305ced9b3a35714960a5252d4"
+    },
+    {
+      "path": "Evidence/25d/T08A/dresser-v1-source.png",
+      "bytes": 2403829,
+      "sha256": "d4c05a6d459bb2cee1300b61acab9a22e56efb8b8bb087ef034772578974e40e"
+    },
+    {
+      "path": "Evidence/25d/T08A/image-audit.json",
+      "bytes": 375,
+      "sha256": "2f60df44ccab6b264aa861e67cc0bbf7cdf8aa0f2ef6de82178aab962f7ebc64"
+    },
+    {
+      "path": "Evidence/25d/T08A/prompt-v1.txt",
+      "bytes": 2200,
+      "sha256": "1316ba1c4a1934b1f3f9496fd22c16470504a7cb6dc0550c3905a6562a3e7f16"
+    },
+    {
+      "path": "Evidence/25d/T08A/README.md",
+      "bytes": 1875,
+      "sha256": "0a345a5dd6d29134ec3e6eec1cb2d4ee4d85bd6cc4142e75d120e6acbd59484e"
+    }
+  ]
+}

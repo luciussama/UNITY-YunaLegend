@@ -1,0 +1,32 @@
+Create a NEW standalone illustrated game platform: a small tall oak chest of drawers,
+derived from the painterly craftsmanship and warm oak material of the reference.
+The reference is STYLE AND MATERIAL ONLY; preserve the original file untouched.
+This is the next platform of Yuna Legend, a hand-painted children's storybook
+2.5D side-scrolling game, in a cozy moonlit room. Not photorealistic, not vector,
+not pixel art, not glossy 3D. Soft worked edges, visible brush texture, tactile
+wood grain, muted chestnut oak with subtle cool moonlight on the upper rim.
+
+Exactly ONE complete chest of drawers, isolated on a TRUE TRANSPARENT background.
+Front-facing view, tiny visible right side and a shallow view of the top; no
+dramatic isometric rotation. No room, no floor, no backdrop, no character, no text,
+no labels, no ruler, no detached shadow or lighting halo. Entire object visible
+with comfortable transparent padding. Preserve real alpha.
+
+Overall silhouette is almost square, slightly taller than wide: width/height
+about 0.96. It is 2.93 metres wide by 3.05 metres tall in the game's child-scale
+world. It has FOUR sturdy short rounded feet planted at one common ground line,
+an oak carcass with rounded edge moulding, and FOUR stacked drawers, each with
+two small rounded turned wooden knobs. No gold ring handles. No shelves, no
+mirror, no wings or accessories. Carefully preserve child-storybook painted
+material identity from the reference, but make a clearly different smaller piece.
+
+CRITICAL PLAYABLE SURFACE: one straight horizontal flat top with a clear readable
+landing rim, broad and unobstructed across about 92 percent of the object's width;
+rounded outer corners and a modest overhang. No slanted or curved landing line.
+The top must visually connect to the body and the feet to the bottom. Natural
+proportions, never squeeze or stretch the drawing into a collider box. No human
+feet on this object, no decorative objects on the playable top.
+
+Output a polished high-resolution transparent PNG game sprite, portrait-ish square
+composition. Light the oak enough to read its shape; final night tint is applied
+inside Unity, so avoid baking near-black shadows across the drawers.

@@ -1,0 +1,179 @@
+{
+  "source": "Evidence/25d/T06/audio-60/gameplay-audio.wav",
+  "sample_rate": 48000,
+  "duration_seconds": 70.187,
+  "overall_peak": 0.646591,
+  "overall_rms": 0.064199,
+  "bgm_playing": true,
+  "audio_sources": [
+    "Etapa1_Castelo_02_02_Penteadeira_Encantada|null|playing=False|volume=0.55",
+    "DarkRoom_GameManager|High-Frequency Violin|playing=True|volume=0.50",
+    "Yuna_Player|null|playing=False|volume=1.00",
+    "Nanda_FairyGuide|null|playing=False|volume=1.00",
+    "Nanda_FairyGuide|null|playing=False|volume=1.00",
+    "Etapa1_Castelo_02_02_Penteadeira_Encantada|null|playing=False|volume=0.55",
+    "DarkRoom_GameManager|High-Frequency Violin|playing=True|volume=0.50",
+    "Yuna_Player|null|playing=False|volume=1.00",
+    "Nanda_FairyGuide|null|playing=False|volume=1.00",
+    "DarkRoom_GameManager|High-Frequency Violin|playing=True|volume=0.50",
+    "Etapa1_Castelo_02_02_Penteadeira_Encantada|null|playing=False|volume=0.55",
+    "Yuna_Player|null|playing=False|volume=1.00",
+    "Nanda_FairyGuide|null|playing=False|volume=1.00",
+    "DarkRoom_GameManager|High-Frequency Violin|playing=True|volume=0.50",
+    "Etapa1_Castelo_02_02_Penteadeira_Encantada|null|playing=False|volume=0.55",
+    "Yuna_Player|null|playing=False|volume=1.00",
+    "Etapa1_Castelo_02_02_Penteadeira_Encantada|null|playing=False|volume=0.55",
+    "Yuna_Player|null|playing=False|volume=1.00",
+    "DarkRoom_GameManager|High-Frequency Violin|playing=True|volume=0.50",
+    "Nanda_FairyGuide|null|playing=False|volume=1.00"
+  ],
+  "checks": {
+    "audio_captured": true,
+    "four_crack_events": true,
+    "crack_peak_at_event": true,
+    "crack_clip_matches_mix": true,
+    "no_crack_on_failed_attempt": true,
+    "reset_quiet": null
+  },
+  "passed": true,
+  "cracks": [
+    {
+      "label": "crack-0-1",
+      "seconds": 13.653,
+      "rms_before": 0.030741,
+      "rms_after": 0.022222,
+      "peak_after": 0.177673,
+      "ratio": 0.723,
+      "peak_at_event": true
+    },
+    {
+      "label": "crack-1-1",
+      "seconds": 27.115,
+      "rms_before": 0.024879,
+      "rms_after": 0.028636,
+      "peak_after": 0.146194,
+      "ratio": 1.151,
+      "peak_at_event": true
+    },
+    {
+      "label": "crack-2-1",
+      "seconds": 41.067,
+      "rms_before": 0.030806,
+      "rms_after": 0.055767,
+      "peak_after": 0.188934,
+      "ratio": 1.81,
+      "peak_at_event": true
+    },
+    {
+      "label": "crack-4-1",
+      "seconds": 67.051,
+      "rms_before": 0.02515,
+      "rms_after": 0.034954,
+      "peak_after": 0.154419,
+      "ratio": 1.39,
+      "peak_at_event": true
+    }
+  ],
+  "attempt_starts": [
+    {
+      "label": "attempt-0-start",
+      "seconds": 0.0,
+      "rms": 0.010447,
+      "peak": 0.042679,
+      "silent": false
+    },
+    {
+      "label": "attempt-1-start",
+      "seconds": 13.739,
+      "rms": 0.010448,
+      "peak": 0.042679,
+      "silent": false
+    },
+    {
+      "label": "attempt-2-start",
+      "seconds": 27.413,
+      "rms": 0.010442,
+      "peak": 0.042679,
+      "silent": false
+    },
+    {
+      "label": "attempt-3-start",
+      "seconds": 44.309,
+      "rms": 0.010442,
+      "peak": 0.042679,
+      "silent": false
+    },
+    {
+      "label": "attempt-4-start",
+      "seconds": 53.632,
+      "rms": 0.010447,
+      "peak": 0.042679,
+      "silent": false
+    }
+  ],
+  "correlation": {
+    "available": true,
+    "reference": "Assets/Audio/SFX/wood_furniture_crack.wav",
+    "reference_seconds": 0.24,
+    "max_ncc": 0.5894,
+    "mean_ncc": -1e-05,
+    "top": [
+      {
+        "seconds": 13.653,
+        "ncc": 0.5894
+      },
+      {
+        "seconds": 13.653,
+        "ncc": 0.5142
+      },
+      {
+        "seconds": 27.115,
+        "ncc": 0.4617
+      },
+      {
+        "seconds": 67.051,
+        "ncc": 0.432
+      },
+      {
+        "seconds": 27.115,
+        "ncc": 0.3976
+      }
+    ],
+    "at_marks": [
+      {
+        "label": "crack-0-1",
+        "mark_seconds": 13.653,
+        "best_seconds": 13.653,
+        "offset_seconds": 0.0,
+        "ncc": 0.5894,
+        "match": true
+      },
+      {
+        "label": "crack-1-1",
+        "mark_seconds": 27.115,
+        "best_seconds": 27.115,
+        "offset_seconds": -0.0,
+        "ncc": 0.4617,
+        "match": true
+      },
+      {
+        "label": "crack-2-1",
+        "mark_seconds": 41.067,
+        "best_seconds": 41.197,
+        "offset_seconds": 0.13,
+        "ncc": 0.268,
+        "match": true
+      },
+      {
+        "label": "crack-4-1",
+        "mark_seconds": 67.051,
+        "best_seconds": 67.051,
+        "offset_seconds": -0.0,
+        "ncc": 0.432,
+        "match": true
+      }
+    ],
+    "matched": true
+  },
+  "note": "Amplitude and correlation measurements only; no human listening was performed."
+}

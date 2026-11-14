@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0a0a114cbeb8b343917c3356c5647a8, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.Camera25D.SideScroll25DCamera
   playerTarget: {fileID: 724408020}
   scrollSpeed: 5.2
@@ -431,7 +431,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3fe2fbddd5b07a4ca94d9f2ce443f17, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomBlockoutBuilder
   coordinateScale: 0.02
   defaultPlatformMaterial: {fileID: 2100000, guid: 5c5443c775463364982b4326e62e2391, type: 2}
@@ -558,7 +558,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 6
@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -1068,7 +1068,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
   m_IsGlobal: 1
   priority: 0
@@ -1539,7 +1539,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 1
@@ -1568,7 +1568,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -1582,7 +1582,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f6a93aee4a5f114a9571b0ddf717211, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.Illustrated25D.Environment.IllustratedBookStackPlatform
   paintedTexture: {fileID: 2800000, guid: 86df75af588cc2543b6ffd06b1347074, type: 3}
   contactMesh: {fileID: 4300000, guid: 9f9d85141135d1748b21a894638441e7, type: 2}
@@ -2568,7 +2568,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 32
@@ -2597,7 +2597,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -3964,7 +3964,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 36
@@ -3993,7 +3993,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -5339,7 +5339,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 26
@@ -5368,7 +5368,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -5507,7 +5507,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 9
@@ -5536,7 +5536,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -6570,7 +6570,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 22
@@ -6599,7 +6599,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -6648,7 +6648,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 16
@@ -6677,7 +6677,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -6861,79 +6861,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 299568592}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &302046783
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 302046786}
-  - component: {fileID: 302046785}
-  - component: {fileID: 302046784}
-  m_Layer: 0
-  m_Name: Acompanhamento_Ilustrado
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &302046784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 302046783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4aaa11d81215cd41973e81f85800c7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::YunaLegend.Illustrated25D.Preview.PreviewVerification
---- !u!114 &302046785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 302046783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6874247fa8e1d94cbc57474c9faca52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::YunaLegend.Illustrated25D.Preview.IllustratedPreview
-  panorama: {fileID: 2800000, guid: 7e6bab51ef45e94459c96e82a1a10ebe, type: 3}
-  furnitureBody: {fileID: 2800000, guid: 652a974e1d3b4e81b57822e513396b16, type: 3}
-  furnitureWood: {fileID: 2800000, guid: e5652639cf3048388ab9afea5d9269d3, type: 3}
-  nandaFrames:
-  - {fileID: 21300000, guid: c27ceb7a1f8dacc42aad51f60f233dea, type: 2}
-  - {fileID: 21300000, guid: d8ac8ad2ef39f424683aa7e8ada6af5b, type: 2}
-  - {fileID: 21300000, guid: ee5795706cf94b3439e100cc4f7a0eb5, type: 2}
-  - {fileID: 21300000, guid: 7208abe99f48d444da8c799b0f7a64b0, type: 2}
-  - {fileID: 21300000, guid: d7cc93fe40f55e44783d3780a8641d90, type: 2}
-  - {fileID: 21300000, guid: 71ef9af0ce9ace14483aed9dd62e965e, type: 2}
-  - {fileID: 21300000, guid: b40e26af7017d884281ee53c9c192cc7, type: 2}
-  - {fileID: 21300000, guid: a4b23386c779830438dbbe67bae17b4c, type: 2}
-  requiredShaders:
-  - {fileID: 4800000, guid: 924762ea7256bc54c91e2e806806729a, type: 3}
-  - {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
---- !u!4 &302046786
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 302046783}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &309165269
 GameObject:
   m_ObjectHideFlags: 0
@@ -6979,7 +6906,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 30
@@ -7008,7 +6935,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -8617,7 +8544,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 12
@@ -8646,7 +8573,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -8697,7 +8624,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 0
@@ -8726,7 +8653,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -8740,7 +8667,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2338dce9c84614448a2b054745a5819, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.Illustrated25D.Environment.IllustratedBearPlatform
   paintedTexture: {fileID: 2800000, guid: 2f36a416bb9eed745be932bc3efb286c, type: 3}
   contactMesh: {fileID: 4300000, guid: 3e8530821201c204bb0a76aeeb9794a4, type: 2}
@@ -9187,7 +9114,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 34
@@ -9216,7 +9143,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -10074,7 +10001,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 10
@@ -10103,7 +10030,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -10732,7 +10659,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 23
@@ -10761,7 +10688,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -11080,7 +11007,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 33
@@ -11109,7 +11036,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -13233,7 +13160,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 8
@@ -13262,7 +13189,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -14916,7 +14843,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eddc43f2ed072954d8177c0460734aa2, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.Yuna25DPlayerController
   runSpeed: 5.2
   runDirection: 1
@@ -15086,7 +15013,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 487ddece35a000e4793746b283cea714, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::YunaLegend.YunaIllustration.YunaIllustrationInstaller
   profile: {fileID: 21300000, guid: 0a6032285cedd9898d79df19d0920353, type: 3}
   blink: {fileID: 2800000, guid: 71d2b6bc7ad66cdf72801e7c4cd91722, type: 3}
@@ -16013,7 +15940,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 18
@@ -16042,7 +15969,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -16458,7 +16385,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 21
@@ -16487,7 +16414,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -17436,7 +17363,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 27
@@ -17465,7 +17392,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -18765,7 +18692,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 13
@@ -18794,7 +18721,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -19704,7 +19631,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 11
@@ -19733,7 +19660,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -20096,7 +20023,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 15
@@ -20125,7 +20052,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -23308,7 +23235,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 37
@@ -23337,7 +23264,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -23656,7 +23583,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 3
@@ -23685,7 +23612,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -24168,7 +24095,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ff16acf712edd744b1acdb0d6e225a3, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomOpeningSequence
   yuna: {fileID: 724408020}
   nanda: {fileID: 2143205189}
@@ -24185,7 +24112,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74fd90c4d4b556a46b2eca3f4e7e3453, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomProgressionManager
   yuna: {fileID: 724408020}
   nanda: {fileID: 2143205189}
@@ -26858,7 +26785,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 29
@@ -26887,7 +26814,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -26989,7 +26916,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 7
@@ -27018,7 +26945,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -27157,7 +27084,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 25
@@ -27186,7 +27113,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -27235,7 +27162,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 5
@@ -27264,7 +27191,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -32084,7 +32011,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 20
@@ -32113,7 +32040,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -33330,7 +33257,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 19
@@ -33359,7 +33286,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -35032,7 +34959,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 35
@@ -35061,7 +34988,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -36556,7 +36483,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 31
@@ -36585,7 +36512,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -37413,7 +37340,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 17
@@ -37442,7 +37369,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -42957,7 +42884,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 24
@@ -42986,7 +42913,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -45026,6 +44953,92 @@ Transform:
   - {fileID: 762775683}
   m_Father: {fileID: 240954683}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1816021862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1816021866}
+  - component: {fileID: 1816021865}
+  - component: {fileID: 1816021864}
+  - component: {fileID: 1816021863}
+  m_Layer: 0
+  m_Name: Acompanhamento_Ilustrado
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1816021863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816021862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dec21ea26228c4458e48fdd4dd8e624, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::YunaLegend.Illustrated25D.Preview.PreviewRetryVerification
+--- !u!114 &1816021864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816021862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4aaa11d81215cd41973e81f85800c7d, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::YunaLegend.Illustrated25D.Preview.PreviewVerification
+--- !u!114 &1816021865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816021862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6874247fa8e1d94cbc57474c9faca52, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::YunaLegend.Illustrated25D.Preview.IllustratedPreview
+  panorama: {fileID: 2800000, guid: 7e6bab51ef45e94459c96e82a1a10ebe, type: 3}
+  furnitureBody: {fileID: 2800000, guid: 652a974e1d3b4e81b57822e513396b16, type: 3}
+  furnitureWood: {fileID: 2800000, guid: e5652639cf3048388ab9afea5d9269d3, type: 3}
+  nandaFrames:
+  - {fileID: 21300000, guid: c27ceb7a1f8dacc42aad51f60f233dea, type: 2}
+  - {fileID: 21300000, guid: d8ac8ad2ef39f424683aa7e8ada6af5b, type: 2}
+  - {fileID: 21300000, guid: ee5795706cf94b3439e100cc4f7a0eb5, type: 2}
+  - {fileID: 21300000, guid: 7208abe99f48d444da8c799b0f7a64b0, type: 2}
+  - {fileID: 21300000, guid: d7cc93fe40f55e44783d3780a8641d90, type: 2}
+  - {fileID: 21300000, guid: 71ef9af0ce9ace14483aed9dd62e965e, type: 2}
+  - {fileID: 21300000, guid: b40e26af7017d884281ee53c9c192cc7, type: 2}
+  - {fileID: 21300000, guid: a4b23386c779830438dbbe67bae17b4c, type: 2}
+  requiredShaders:
+  - {fileID: 4800000, guid: 924762ea7256bc54c91e2e806806729a, type: 3}
+  - {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!4 &1816021866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816021862}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1817448361
 GameObject:
   m_ObjectHideFlags: 0
@@ -45394,7 +45407,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 28
@@ -45423,7 +45436,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -49553,7 +49566,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 4
@@ -49582,7 +49595,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -50314,7 +50327,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 14
@@ -50343,7 +50356,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -51219,7 +51232,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a95ee7763fc1afc428111fc72feee47a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.YieldingWoodFurniture
   woodCrack: {fileID: 8300000, guid: 44466e9214924c52a4b5f10d1968c344, type: 3}
 --- !u!114 &2138003528
@@ -51232,7 +51245,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b1fc79720d230545b70dade1bd4d96a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.DarkRoomPlatformMarker
   spec:
     index: 2
@@ -51261,7 +51274,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4ef969789806d0469f1106977f63fff, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.PlatformCollisionDetector
   marker: {fileID: 0}
   progression: {fileID: 0}
@@ -51294,7 +51307,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4179a2e78d19f5e48ab47a8bd8c69fdd, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: YunaLegend.Runtime::YunaLegend.DarkRoom.NandaFairyGuide
   yunaTransform: {fileID: 724408023}
   guideLight: {fileID: 2143205190}
@@ -51593,4 +51606,4 @@ SceneRoots:
   - {fileID: 23939316}
   - {fileID: 801017246}
   - {fileID: 1806264201}
-  - {fileID: 302046786}
+  - {fileID: 1816021866}

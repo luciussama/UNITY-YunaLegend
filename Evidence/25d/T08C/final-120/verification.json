@@ -1,0 +1,36 @@
+{
+    "success": true,
+    "resetClean": true,
+    "hz": 120,
+    "errors": 0,
+    "maxLegacy": 0,
+    "dresserX": 18.912105560302736,
+    "dresserTop": -6.050000190734863,
+    "dresserWidth": 2.5,
+    "dresserGap": 1.3500003814697266,
+    "error": "",
+    "attempts": [
+        {
+            "bear": true,
+            "books": true,
+            "furniture": true,
+            "dresser": true,
+            "finished": true,
+            "jumps": 4,
+            "cracks": 1,
+            "maxDresserAnchorGap": 0.0,
+            "landingX": 18.69622039794922
+        },
+        {
+            "bear": true,
+            "books": true,
+            "furniture": true,
+            "dresser": true,
+            "finished": true,
+            "jumps": 4,
+            "cracks": 1,
+            "maxDresserAnchorGap": 0.0,
+            "landingX": 18.69622039794922
+        }
+    ]
+}

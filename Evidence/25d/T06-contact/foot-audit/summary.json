@@ -1,0 +1,291 @@
+{
+  "totalGroundedSamples": 1316,
+  "groups": [
+    {
+      "support": -1,
+      "state": "Idle",
+      "samples": 61,
+      "soleOutsideSupport": 0,
+      "soleGapMetres": {
+        "min": 0.07952308654785156,
+        "median": 0.07952308654785156,
+        "max": 0.07952308654785156
+      },
+      "screenGapPixels": {
+        "min": 7.6342010498046875,
+        "median": 7.6342315673828125,
+        "max": 7.634246826171875
+      },
+      "rootGapMetres": {
+        "min": 0.07999992370605469,
+        "median": 0.07999992370605469,
+        "max": 0.07999992370605469
+      },
+      "anchorGapMetres": {
+        "min": 0.07999992370605469,
+        "median": 0.07999992370605469,
+        "max": 0.07999992370605469
+      }
+    },
+    {
+      "support": -1,
+      "state": "Run",
+      "samples": 615,
+      "soleOutsideSupport": 0,
+      "soleGapMetres": {
+        "min": 0.07865238189697266,
+        "median": 0.08134746551513672,
+        "max": 0.08134841918945312
+      },
+      "screenGapPixels": {
+        "min": 7.5506591796875,
+        "median": 7.809356689453125,
+        "max": 7.8094329833984375
+      },
+      "rootGapMetres": {
+        "min": 0.07999992370605469,
+        "median": 0.07999992370605469,
+        "max": 0.0800008773803711
+      },
+      "anchorGapMetres": {
+        "min": 0.07999992370605469,
+        "median": 0.07999992370605469,
+        "max": 0.0800008773803711
+      }
+    },
+    {
+      "support": 0,
+      "state": "Jump/Land",
+      "samples": 8,
+      "soleOutsideSupport": 0,
+      "soleGapMetres": {
+        "min": 0.06743144989013672,
+        "median": 0.07349467277526855,
+        "max": 0.07955789566040039
+      },
+      "screenGapPixels": {
+        "min": 6.47344970703125,
+        "median": 7.055511474609375,
+        "max": 7.6375732421875
+      },
+      "rootGapMetres": {
+        "min": 0.0878610610961914,
+        "median": 0.08999943733215332,
+        "max": 0.09213781356811523
+      },
+      "anchorGapMetres": {
+        "min": 0.10253286361694336,
+        "median": 0.1085960865020752,
+        "max": 0.11465930938720703
+      }
+    },
+    {
+      "support": 0,
+      "state": "Jump/Recover",
+      "samples": 8,
+      "soleOutsideSupport": 0,
+      "soleGapMetres": {
+        "min": 0.05281257629394531,
+        "median": 0.0691990852355957,
+        "max": 0.0855855941772461
+      },
+      "screenGapPixels": {
+        "min": 5.069976806640625,
+        "median": 6.6430816650390625,
+        "max": 8.2161865234375
+      },
+      "rootGapMetres": {
+        "min": 0.10943841934204102,
+        "median": 0.13872051239013672,
+        "max": 0.16800260543823242
+      },
+      "anchorGapMetres": {
+        "min": 0.09789037704467773,
+        "median": 0.11427688598632812,
+        "max": 0.13066339492797852
+      }
+    },
+    {
+      "support": 0,
+      "state": "Run",
+      "samples": 16,
+      "soleOutsideSupport": 0,
+      "soleGapMetres": {
+        "min": 0.0924978256225586,
+        "median": 0.11811327934265137,
+        "max": 0.2131056785583496
+      },
+      "screenGapPixels": {
+        "min": 8.87982177734375,
+        "median": 11.338851928710938,
+        "max": 20.458114624023438
+      },
+      "rootGapMetres": {
+        "min": 0.08212661743164062,
+        "median": 0.09775996208190918,
+        "max": 0.13698530197143555
+      },
+      "anchorGapMetres": {
+        "min": 0.04342985153198242,
+        "median": 0.06721997261047363,
+        "max": 0.07988548278808594
+      }
+    },
+    {
+      "support": 1,
+      "state": "Jump/Land",
+      "samples": 8,
+      "soleOutsideSupport": 0,
+      "soleGapMetres": {
+        "min": 0.06857585906982422,
+        "median": 0.07318758964538574,
+        "max": 0.07779932022094727
+      },
+      "screenGapPixels": {
+        "min": 6.583251953125,
+        "median": 7.0260009765625,
+        "max": 7.46875
+      },
+      "rootGapMetres": {
+        "min": 0.08411121368408203,
+        "median": 0.08411145210266113,
+        "max": 0.08411169052124023
+      },
+      "anchorGapMetres": {
+        "min": 0.08877754211425781,
+        "median": 0.09338927268981934,
+        "max": 0.09800100326538086
+      }
+    },
+    {
+      "support": 2,
+      "state": "Idle",
+      "samples": 121,
+      "soleOutsideSupport": 0,
+      "soleGapMetres": {
+        "min": 0.07908344268798828,
+        "median": 0.07908344268798828,
+        "max": 0.07908344268798828
+      },
+      "screenGapPixels": {
+        "min": 7.59197998046875,
+        "median": 7.59197998046875,
+        "max": 7.592010498046875
+      },
+      "rootGapMetres": {
+        "min": 0.08005666732788086,
+        "median": 0.08005666732788086,
+        "max": 0.08005666732788086
+      },
+      "anchorGapMetres": {
+        "min": 0.08005666732788086,
+        "median": 0.08005666732788086,
+        "max": 0.08005666732788086
+      }
+    },
+    {
+      "support": 2,
+      "state": "Jump/Land",
+      "samples": 8,
+      "soleOutsideSupport": 0,
+      "soleGapMetres": {
+        "min": 0.08199024200439453,
+        "median": 0.08202934265136719,
+        "max": 0.08206844329833984
+      },
+      "screenGapPixels": {
+        "min": 7.87109375,
+        "median": 7.874809265136719,
+        "max": 7.8785247802734375
+      },
+      "rootGapMetres": {
+        "min": 0.08075618743896484,
+        "median": 0.08077812194824219,
+        "max": 0.08080005645751953
+      },
+      "anchorGapMetres": {
+        "min": 0.08082103729248047,
+        "median": 0.08083224296569824,
+        "max": 0.08084344863891602
+      }
+    },
+    {
+      "support": 2,
+      "state": "Jump/Recover",
+      "samples": 8,
+      "soleOutsideSupport": 0,
+      "soleGapMetres": {
+        "min": 0.08146047592163086,
+        "median": 0.08159995079040527,
+        "max": 0.08173942565917969
+      },
+      "screenGapPixels": {
+        "min": 7.8202056884765625,
+        "median": 7.833587646484375,
+        "max": 7.8469696044921875
+      },
+      "rootGapMetres": {
+        "min": 0.08084297180175781,
+        "median": 0.08086466789245605,
+        "max": 0.0808863639831543
+      },
+      "anchorGapMetres": {
+        "min": 0.08062934875488281,
+        "median": 0.0807042121887207,
+        "max": 0.0807790756225586
+      }
+    },
+    {
+      "support": 2,
+      "state": "Run",
+      "samples": 189,
+      "soleOutsideSupport": 0,
+      "soleGapMetres": {
+        "min": 0.07345294952392578,
+        "median": 0.08221149444580078,
+        "max": 0.08596229553222656
+      },
+      "screenGapPixels": {
+        "min": 7.0515289306640625,
+        "median": 7.8922576904296875,
+        "max": 8.252365112304688
+      },
+      "rootGapMetres": {
+        "min": 0.0793609619140625,
+        "median": 0.0802001953125,
+        "max": 0.08320283889770508
+      },
+      "anchorGapMetres": {
+        "min": 0.07214641571044922,
+        "median": 0.08147239685058594,
+        "max": 0.08519840240478516
+      }
+    },
+    {
+      "support": 2,
+      "state": "Stumble",
+      "samples": 38,
+      "soleOutsideSupport": 0,
+      "soleGapMetres": {
+        "min": -0.005528926849365234,
+        "median": -0.0014109611511230469,
+        "max": 0.08113813400268555
+      },
+      "screenGapPixels": {
+        "min": -0.53076171875,
+        "median": -0.135467529296875,
+        "max": 7.78924560546875
+      },
+      "rootGapMetres": {
+        "min": 0.0,
+        "median": 0.08005666732788086,
+        "max": 0.08304452896118164
+      },
+      "anchorGapMetres": {
+        "min": -0.006839752197265625,
+        "median": 0.000370025634765625,
+        "max": 0.08211708068847656
+      }
+    }
+  ]
+}

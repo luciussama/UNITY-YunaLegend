@@ -1,0 +1,19 @@
+{
+  "wav": "gameplay-audio.wav",
+  "sampleRate": 48000,
+  "channels": 2,
+  "frames": 3368960,
+  "seconds": 70.187,
+  "marks": [
+    {"label": "attempt-0-start", "frame": 0, "seconds": 0.000},
+    {"label": "crack-0-1", "frame": 655360, "seconds": 13.653},
+    {"label": "attempt-1-start", "frame": 659456, "seconds": 13.739},
+    {"label": "crack-1-1", "frame": 1301504, "seconds": 27.115},
+    {"label": "attempt-2-start", "frame": 1315840, "seconds": 27.413},
+    {"label": "crack-2-1", "frame": 1971200, "seconds": 41.067},
+    {"label": "attempt-3-start", "frame": 2126848, "seconds": 44.309},
+    {"label": "attempt-4-start", "frame": 2574336, "seconds": 53.632},
+    {"label": "crack-4-1", "frame": 3218432, "seconds": 67.051},
+    {"label": "attempt-4-end", "frame": 3368960, "seconds": 70.187}
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "files": 872,
+  "mismatches": [],
+  "staleRemoved": [
+    "Assets\\Scripts\\Editor\\WindowsPilotBuild.cs",
+    "Assets\\Scripts\\Editor\\WindowsPilotBuild.cs.meta",
+    "Assets\\Art\\Illustrated25D\\Yuna\\Joint\\Editor\\YunaT061TraversalCapture.cs",
+    "Assets\\Art\\Illustrated25D\\Yuna\\Joint\\Editor\\YunaT061TraversalCapture.cs.meta"
+  ]
+}

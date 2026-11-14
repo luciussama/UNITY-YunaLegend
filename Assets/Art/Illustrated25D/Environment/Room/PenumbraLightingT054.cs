@@ -14,6 +14,9 @@ namespace YunaLegend.Illustrated25D.Environment
         [Range(0,1)] public float moonStrength = 1f;
         [Range(0,1)] public float nandaStrength = 1f;
         [Range(0,.1f)] public float phosphor = .035f;
+        // World-locked footprints: x centre, y floor, z half-width, w enabled.
+        // Empty in historical inspection scenes. Only the accompaniment opts in.
+        public Vector4[] floorContacts = new Vector4[0];
         public Vector3 MoonPosition { get; private set; }
         public int BoundRenderers => bindings.Count;
         sealed class Binding
@@ -64,6 +67,9 @@ namespace YunaLegend.Illustrated25D.Environment
                 binding.block.SetFloat("_MoonStrength", moonStrength);
                 binding.block.SetFloat("_NandaStrength", nanda != null ? nandaStrength : 0f);
                 binding.block.SetFloat("_Phosphor", phosphor);
+                for (int i = 0; i < 3; i++)
+                    binding.block.SetVector("_FloorContact" + i,
+                        i < floorContacts.Length ? floorContacts[i] : Vector4.zero);
                 binding.renderer.SetPropertyBlock(binding.block);
             }
         }

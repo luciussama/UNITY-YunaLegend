@@ -24,6 +24,11 @@ namespace YunaLegend.Illustrated25D.Environment
         /// </summary>
         public const float FloorInsetFraction = .09375f;
 
+        // Panorama v4 is 2172x724. The lower edge of the wooden trim is at row
+        // 654 (top-origin); contact belongs on the first floorboard, row 660.
+        // The former 82/724 inset selected row 642, inside the trim.
+        public const float PanoramaFloorInsetFraction = 64f / 724f;
+
         /// <summary>Fracao do avanco da camera que a camada acompanha. 1 = tela, 0 = mundo.</summary>
         public const float FarTravel = .60f;
         public const float MidTravel = .70f;

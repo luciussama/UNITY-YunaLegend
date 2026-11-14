@@ -17,6 +17,9 @@ namespace YunaLegend.Illustrated25D.Preview
             public int hz,frames,maxLegacy,maxVisible,errors;
             public bool success,bear,books,furniture,cracked,stumbled,finished,reset,idleCompanionNear;
             public float maxSag,maxLocalPause;
+            public float bearFloorGap, booksFloorGap, shadowFacing;
+            public float bearAboveTrim, booksAboveTrim;
+            public bool paintedContact;
             public int cracks;
             public string error;
             public List<string> events=new List<string>();
@@ -52,7 +55,28 @@ namespace YunaLegend.Illustrated25D.Preview
             if(!preview.Ready)
             { if(preview.Failure!=null) End(preview.Failure);return; }
             tick++;seconds+=Time.deltaTime;proof.frames++;
-            if(tick==2)Shot(resetting?"07-retry":"01-ready");
+            if(tick==2)
+            {
+                var bear = FindFirstObjectByType<YunaLegend.Illustrated25D.Environment.IllustratedBearPlatform>();
+                var books = FindFirstObjectByType<YunaLegend.Illustrated25D.Environment.IllustratedBookStackPlatform>();
+                var bearBase = bear.transform.Find("Visual_Ilustrado_Urso");
+                var bookBase = books.transform.Find("Livros_Base_T054");
+                if (bookBase == null) bookBase = books.transform.Find("Visual_Ilustrado_Livros");
+                proof.bearFloorGap = bearBase.GetComponent<Renderer>().bounds.min.y - preview.Room.FloorWorldY;
+                proof.booksFloorGap = bookBase.GetComponent<Renderer>().bounds.min.y - preview.Room.FloorWorldY;
+                var shadow = GameObject.Find(YunaLegend.Illustrated25D.Environment.ContactShadowT054.RootName).transform.GetChild(0);
+                proof.shadowFacing = Mathf.Abs(Vector3.Dot(shadow.forward, Camera.main.transform.forward));
+                // Independent measured landmark in the source PNG: bottom of trim,
+                // row 654/724. A base at the old row 642 must fail this audit.
+                var roomBounds = preview.Room.Far.bounds;
+                float trimY = roomBounds.min.y + roomBounds.size.y * (70f / 724f);
+                proof.bearAboveTrim = bearBase.GetComponent<Renderer>().bounds.min.y - trimY;
+                proof.booksAboveTrim = bookBase.GetComponent<Renderer>().bounds.min.y - trimY;
+                proof.paintedContact = Mathf.Abs(proof.bearFloorGap) < .001f
+                    && Mathf.Abs(proof.booksFloorGap) < .001f && proof.shadowFacing > .99f
+                    && proof.bearAboveTrim < -.04f && proof.booksAboveTrim < -.04f;
+                Shot(resetting?"07-retry":"01-ready");
+            }
             if(resetting)
             {
                 if(tick<10)return;
@@ -128,7 +152,7 @@ namespace YunaLegend.Illustrated25D.Preview
             proof.error=error;
             proof.success=error==null&&proof.bear&&proof.books&&proof.furniture&&proof.cracked&&proof.stumbled
                 &&proof.finished&&proof.reset&&proof.idleCompanionNear&&proof.cracks==1
-                &&proof.maxLegacy==0&&proof.maxVisible==1&&proof.errors==0;
+                &&proof.maxLegacy==0&&proof.maxVisible==1&&proof.errors==0&&proof.paintedContact;
             File.WriteAllText(Path.Combine(output,"verification.json"),JsonUtility.ToJson(proof,true));
             Debug.Log("ILLUSTRATED_PREVIEW_VERIFY "+proof.success+" "+error);
             enabled=false; Application.Quit(proof.success?0:1);

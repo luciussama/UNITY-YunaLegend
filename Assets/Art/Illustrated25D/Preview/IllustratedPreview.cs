@@ -17,6 +17,12 @@ namespace YunaLegend.Illustrated25D.Preview
     public sealed class IllustratedPreview : MonoBehaviour
     {
         public Texture2D panorama, furnitureBody, furnitureWood;
+        public bool includeNextDresser;
+        public bool includeNextBlocks;
+        public Texture2D dresserPainting;
+        public Texture2D blocksPainting;
+        public DresserPlatform Dresser { get; private set; }
+        public AbcStackPlatform Blocks { get; private set; }
         public Sprite[] nandaFrames;
         public Shader[] requiredShaders;
         public Yuna25DPlayerController Player { get; private set; }
@@ -61,9 +67,10 @@ namespace YunaLegend.Illustrated25D.Preview
             if (resolver == null || guide == null) throw new InvalidOperationException("Illustrated characters missing");
             cameraDriver = Camera.main.GetComponent<SideScroll25DCamera>();
             var markers = FindObjectsByType<DarkRoomPlatformMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-            pilot = Enumerable.Range(0,3).Select(i => markers.Single(m => m.spec.index == i)).ToArray();
+            int last = includeNextBlocks ? 4 : includeNextDresser ? 3 : 2;
+            pilot = Enumerable.Range(0,last+1).Select(i => markers.Single(m => m.spec.index == i)).ToArray();
             foreach (var m in pilot) m.gameObject.SetActive(true);
-            foreach (var m in markers.Where(m => m.spec.index > 2)) m.gameObject.SetActive(false);
+            foreach (var m in markers.Where(m => m.spec.index > last)) m.gameObject.SetActive(false);
 
             // Snapshot the old presentation before adding the approved runtime paintings.
             var bearPainting=pilot[0].transform.Find("Visual_Ilustrado_Urso");
@@ -79,7 +86,25 @@ namespace YunaLegend.Illustrated25D.Preview
 
             Furniture = pilot[2].GetComponent<YieldingWoodFurniture>();
             pilot[2].gameObject.AddComponent<FurnitureIllustrationCandidate>().Install(furnitureBody, furnitureWood);
-            float floor = Mathf.Min(Bounds(pilot[0]).min.y, Bounds(pilot[1]).min.y);
+            if (includeNextDresser)
+            {
+                Dresser = pilot[3].gameObject.AddComponent<DresserPlatform>();
+                Dresser.Install(dresserPainting,pilot[2]);
+                var feet = Player.gameObject.AddComponent<DresserFootAlignment>();
+                feet.player=Player;feet.surface=Dresser.Top;
+            }
+            if (includeNextBlocks)
+            {
+                if (!includeNextDresser) throw new InvalidOperationException("ABC stack requires the dresser step");
+                if (blocksPainting == null) throw new InvalidOperationException("Approved ABC painting missing");
+                Blocks = pilot[4].gameObject.AddComponent<AbcStackPlatform>();
+                Blocks.Install(blocksPainting);
+                var abcFeet = Player.gameObject.AddComponent<DresserFootAlignment>();
+                abcFeet.player = Player; abcFeet.surface = Blocks.Top; abcFeet.supportIndex = 4; abcFeet.pinVisibleSole = true;
+            }
+            // The contact colliders describe where feet land, not the bottom of the painting.
+            float floor = bearPainting.TransformPoint(new Vector3(0,
+                IllustratedBearPlatformProfile.Document.mapping.quadBoundsLocal.bottom, 0)).y;
             var books = pilot[1].transform.Find("Visual_Ilustrado_Livros");
             if (books == null) throw new InvalidOperationException("Approved books missing");
             float baseY = books.TransformPoint(new Vector3(0,
@@ -91,16 +116,21 @@ namespace YunaLegend.Illustrated25D.Preview
                 lower.transform.position = books.position + Vector3.down * (baseY-floor);
                 lower.GetComponent<Renderer>().sortingOrder = books.GetComponent<Renderer>().sortingOrder-1;
             }
-            float min = pilot.Min(p => Bounds(p).min.x), max = pilot.Max(p => Bounds(p).max.x);
+            // Preserve the approved panorama's anchor while extending the playable route.
+            float min = pilot.Take(3).Min(p => Bounds(p).min.x), max = pilot.Take(3).Max(p => Bounds(p).max.x);
             Room = new GameObject("Quarto_Ilustrado_Aprovado").AddComponent<RoomBackgroundT054>();
             var spriteMaterial = new Material(Shader.Find("Sprites/Default"));
             Room.InstallPanels(new[]{panorama},panorama.width/32f,null,null,floor,(min+max)*.5f,
-                spriteMaterial,1,1,82f/724f,.35f);
+                spriteMaterial,1,1,RoomBackgroundT054.PanoramaFloorInsetFraction,.35f);
             var shadows = new GameObject(ContactShadowT054.RootName);
             foreach (var p in pilot)
             {
                 var b = Bounds(p);
-                ContactShadowT054.Install(shadows.transform,b.center.x,floor,b.size.x,b.size.z,.18f);
+                var paintingBounds = p.spec.index == 0 ? bearPainting.GetComponent<Renderer>().bounds
+                    : p.spec.index == 1 ? books.GetComponent<Renderer>().bounds
+                    : p.spec.index == 4 && Blocks != null && Blocks.Painting != null ? Blocks.Painting.bounds : b;
+                ContactShadowT054.Install(shadows.transform,paintingBounds.center.x,floor,
+                    paintingBounds.size.x,b.size.z,.18f,true);
             }
 
             var visual = new GameObject("Nanda_Ilustrada"); visual.SetActive(false);
@@ -126,6 +156,10 @@ namespace YunaLegend.Illustrated25D.Preview
             Lighting = Room.gameObject.AddComponent<PenumbraLightingT054>();
             Lighting.lightingShader = requiredShaders.Single(s => s != null && s.name == "YunaLegend/RoomPenumbraT054");
             Lighting.room = Room; Lighting.nanda = painting.transform;
+            Lighting.floorContacts = pilot.Select(p => {
+                var b = p.spec.index == 4 && Blocks != null && Blocks.Painting != null ? Blocks.Painting.bounds : Bounds(p);
+                return new Vector4(b.center.x, floor, b.size.x * .5f, 1f);
+            }).ToArray();
             foreach (var r in Room.FarPanels) Lighting.Bind(r,0);
             foreach (var p in pilot)
                 foreach (var r in p.GetComponentsInChildren<Renderer>()) if (r.enabled) Lighting.Bind(r,1);
@@ -134,6 +168,9 @@ namespace YunaLegend.Illustrated25D.Preview
             Lighting.Bind(resolver.jump.painting,2,true);
             Lighting.Bind(resolver.stumble.painting,2,true,false,true);
             Lighting.Bind(painting,3);
+            if(includeNextDresser) DresserFloorReceiver.Install(Room,Lighting,pilot[3].transform.position.x);
+            if(includeNextBlocks) DresserFloorReceiver.Install(Room,Lighting,
+                pilot[4].transform.position.x,AbcStackPlatform.FullWidth*.5f+.2f,"Reflexo_Piso_Blocos_ABC");
             resolver.idle.previewClock = true;
             Camera.main.clearFlags = CameraClearFlags.SolidColor;
             Camera.main.backgroundColor = new Color(.007f,.009f,.018f);
@@ -186,8 +223,10 @@ namespace YunaLegend.Illustrated25D.Preview
             if (k != null && (k.pKey.wasPressedThisFrame || k.escapeKey.wasPressedThisFrame) && Started && !Finished)
             { paused=!paused; Time.timeScale=paused?0:1; }
             if (!Started && k != null && (k.enterKey.wasPressedThisFrame || k.spaceKey.wasPressedThisFrame)) Begin();
-            if (!Finished && Player.CurrentSupportIndex==2 && Player.IsGrounded && Furniture.HasCracked
-                && !Player.IsStumbling && Player.transform.position.x>pilot[2].transform.position.x+2f)
+            int endIndex=includeNextBlocks?4:includeNextDresser?3:2;
+            float finishOffset=includeNextDresser?.35f:2f;
+            if (!Finished && Player.CurrentSupportIndex==endIndex && Player.IsGrounded && Furniture.HasCracked
+                && !Player.IsStumbling && Player.transform.position.x>pilot[endIndex].transform.position.x+finishOffset)
             { Finished=true; Player.AutoRunActive=false; cameraDriver.AutoScrollActive=false; }
         }
         void LateUpdate()
@@ -203,7 +242,11 @@ namespace YunaLegend.Illustrated25D.Preview
         {
             GUI.skin.label.fontSize=Mathf.Max(14,Screen.height/45);
             GUI.skin.button.fontSize=GUI.skin.label.fontSize;
-            GUI.Label(new Rect(18,12,Screen.width-36,32),"Yuna Legend · acompanhamento ilustrado · urso → livros → móvel");
+            GUI.Label(new Rect(18,12,Screen.width-36,32),includeNextBlocks
+                ? "Yuna Legend · urso → livros → móvel → cômoda → blocos ABC"
+                : includeNextDresser
+                ? "Yuna Legend · urso → livros → móvel → cômoda"
+                : "Yuna Legend · acompanhamento ilustrado · urso → livros → móvel");
             GUI.Label(new Rect(18,44,Screen.width-36,32),"Espaço / ↑ / clique: pular     P: pausa     R: recomeçar");
             string message=Failure;
             if (message==null && !Started) message="O quarto ilustrado\nUma versão para acompanhar o que já construímos.";
@@ -221,3 +264,4 @@ namespace YunaLegend.Illustrated25D.Preview
         void OnDestroy() { Time.timeScale=1; }
     }
 }
+

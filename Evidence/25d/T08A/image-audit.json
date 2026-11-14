@@ -1,0 +1,16 @@
+{
+  "width": 1254,
+  "height": 1254,
+  "alphaThreshold": 32,
+  "bboxInclusive": [
+    120,
+    62,
+    1122,
+    1183
+  ],
+  "transparentPixels": 534295,
+  "opaquePixels": 732,
+  "pixelsPerMetreForHeight3_05": 367.8688524590164,
+  "uniformVisibleWidthMetres": 2.7265151515151516,
+  "sha256": "d4c05a6d459bb2cee1300b61acab9a22e56efb8b8bb087ef034772578974e40e"
+}

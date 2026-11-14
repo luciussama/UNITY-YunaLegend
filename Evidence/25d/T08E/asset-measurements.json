@@ -1,0 +1,62 @@
+{
+  "source": "Assets/Art/Illustrated25D/Environment/ABC/abc-stack-v1.png",
+  "sha256": "75af893ca38895c3d3a0984685783064eca5e747ef68bce36b829a42390aa968",
+  "size": [
+    1278,
+    1230
+  ],
+  "alpha_bbox128": [
+    40,
+    49,
+    1233,
+    1177
+  ],
+  "used": {
+    "landing_lip_y_px": 125.0,
+    "feet_base_y_px": 1177.0,
+    "lip_left_px": 417.0,
+    "lip_right_px": 825.0,
+    "content_centre_x_px": 636.5
+  },
+  "physical": {
+    "floor_y": -9.1,
+    "top_y": -5.198921714695185,
+    "height": 3.901078285304815,
+    "base_pixels_per_metre": 245.1536643,
+    "scale": 1.1,
+    "pixels_per_metre": 269.66903073000003,
+    "full_width": 4.427649688834553,
+    "support_width": 1.512965722817837,
+    "support_offset_x": -0.057477864469795276,
+    "support_ratio_of_content": 0.3417085427135678,
+    "depth": 1.59
+  },
+  "route": {
+    "x": 23.127105712890625,
+    "support_min": 22.31314498701191,
+    "support_max": 23.82611070982975,
+    "support_gap_from_dresser": 2.1510394267091755,
+    "step_up": 0.8510782853048147,
+    "painting_content_gap_to_dresser": 0.5561349931336643
+  },
+  "dresser_basis": {
+    "content_bbox128": [
+      121,
+      62,
+      1121,
+      1182
+    ],
+    "pixels_per_metre": 345.2459016393443,
+    "content_centre_x_px": 621.5,
+    "support_max": 20.162105560302734
+  },
+  "method": "Lip de pouso = linha y=125 (9cm acima da borda do tampo, para o friso ficar todo abaixo do pe); base = ultimo pixel opaco da fileira inferior; escala uniforme10% abaixo da base e sola desenhada presa a superficie.",
+  "contact": {
+    "support_top_y": -5.198921714695185,
+    "idle_visual_min_y": -5.198921714695185,
+    "idle_gap": 0.0,
+    "landing_pose": "Jump",
+    "landing_gap": 0.0,
+    "method": "A sola desenhada e fixada pelo limite do renderer ativo (pinVisibleSole); gap medido0.0000m nas tres taxas, com a linha de pouso em y=125 (9cm acima do lip)."
+  }
+}

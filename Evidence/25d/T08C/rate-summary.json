@@ -1,0 +1,20 @@
+{
+  "30": {
+    "success": true,
+    "errors": 0,
+    "resetClean": true,
+    "maxLegacy": 0
+  },
+  "60": {
+    "success": true,
+    "errors": 0,
+    "resetClean": true,
+    "maxLegacy": 0
+  },
+  "120": {
+    "success": true,
+    "errors": 0,
+    "resetClean": true,
+    "maxLegacy": 0
+  }
+}

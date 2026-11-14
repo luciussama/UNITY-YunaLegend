@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-13 21:42:18Z" end-time="2026-11-13 21:42:25Z" duration="6,7646847">
+  <test-suite type="TestSuite" id="1049" name="Yuna Legend - O Quarto dos Brinquedos" fullname="Yuna Legend - O Quarto dos Brinquedos" runstate="Runnable" testcasecount="32" result="Passed" start-time="2026-11-13 21:42:18Z" end-time="2026-11-13 21:42:25Z" duration="6.764685" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1044" name="YunaLegend.RoutePhysics.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Library/ScriptAssemblies/YunaLegend.RoutePhysics.Tests.dll" runstate="Runnable" testcasecount="32" result="Passed" start-time="2026-11-13 21:42:18Z" end-time="2026-11-13 21:42:25Z" duration="6.757444" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="1752" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1045" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="32" result="Passed" start-time="2026-11-13 21:42:18Z" end-time="2026-11-13 21:42:25Z" duration="6.756537" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1046" name="Tests" fullname="YunaLegend.Tests" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-11-13 21:42:18Z" end-time="2026-11-13 21:42:25Z" duration="6.755988" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1018" name="DarkRoomStartInputTests" fullname="YunaLegend.Tests.DarkRoomStartInputTests" classname="YunaLegend.Tests.DarkRoomStartInputTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-13 21:42:18Z" end-time="2026-11-13 21:42:25Z" duration="6.754792" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1021" name="TapAndHoldHaveIdenticalBallisticArcOnEveryDevice" fullname="YunaLegend.Tests.DarkRoomStartInputTests.TapAndHoldHaveIdenticalBallisticArcOnEveryDevice" methodname="TapAndHoldHaveIdenticalBallisticArcOnEveryDevice" classname="YunaLegend.Tests.DarkRoomStartInputTests" runstate="Runnable" seed="1375170585" result="Passed" start-time="2026-11-13 21:42:18Z" end-time="2026-11-13 21:42:25Z" duration="6.743637" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=30 device=0 hold=0,033 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=30 device=0 hold=0,700 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=30 device=1 hold=0,033 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=30 device=1 hold=0,700 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=30 device=2 hold=0,033 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=30 device=2 hold=0,700 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=30 device=3 hold=0,033 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=30 device=3 hold=0,700 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=60 device=0 hold=0,017 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=60 device=0 hold=0,700 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=60 device=1 hold=0,017 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=60 device=1 hold=0,700 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=60 device=2 hold=0,017 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=60 device=2 hold=0,700 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=60 device=3 hold=0,017 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=60 device=3 hold=0,700 height=2,400
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=120 device=0 hold=0,008 height=2,399
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=120 device=0 hold=0,700 height=2,399
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=120 device=1 hold=0,008 height=2,399
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=120 device=1 hold=0,700 height=2,399
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=120 device=2 hold=0,008 height=2,399
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=120 device=2 hold=0,700 height=2,399
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=120 device=3 hold=0,008 height=2,399
+[GameOver]: Yuna foi engolida pela penumbra da tela!
+[DarkRoomProgression] Game Over acionado na fase Phase1Ascent. Checkpoint atual: Phase1Ascent
+YUNA_ILLUSTRATION_INSTALLED root=Yuna_Player
+[DarkRoomOpeningSequence] Abertura concluida. Jogabilidade liberada na Plataforma 0.
+[DarkRoomProgression] Retry executado! Reiniciando a partir do checkpoint Phase1Ascent
+BALLISTIC_EQUIVALENCE fps=120 device=3 hold=0,700 height=2,399
+Saving results to: C:/Users/sergi/AppData/LocalLow/DeepMindStudio/Yuna Legend - O Quarto dos Brinquedos\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

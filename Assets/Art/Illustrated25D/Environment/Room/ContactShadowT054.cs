@@ -16,7 +16,8 @@ namespace YunaLegend.Illustrated25D.Environment
         private static Texture2D s_ellipse;
 
         /// <summary>Cria duas manchas (larga e nuclear) sob o apoio. offsetX segue a luz da janela.</summary>
-        public static void Install(Transform parent, float centreX, float floorY, float width, float depth, float offsetX)
+        public static void Install(Transform parent, float centreX, float floorY, float width, float depth, float offsetX,
+            bool penumbra = false)
         {
             var texture = Ellipse();
             float spriteWidth = texture.width / 64f;
@@ -24,13 +25,27 @@ namespace YunaLegend.Illustrated25D.Environment
 
             var soft = Build(parent, texture, "Sombra_Suave", floorY,
                 new Vector3(centreX + offsetX * .5f, 0f, depth * .45f),
-                width * 1.15f, depth * 1.25f, new Color(.05f, .045f, .09f, .24f), SoftOrder);
+                width * 1.15f, depth * 1.25f,
+                penumbra ? new Color(0, 0, 0, .65f) : new Color(.05f, .045f, .09f, .24f), SoftOrder);
             soft.transform.localScale = new Vector3(width * 1.15f / spriteWidth, depth * 1.25f / spriteHeight, 1f);
 
             var core = Build(parent, texture, "Sombra_Nucleo", floorY,
                 new Vector3(centreX + offsetX, 0f, depth * .30f),
-                width * .82f, depth * .72f, new Color(.03f, .028f, .06f, .36f), CoreOrder);
+                width * .82f, depth * .72f,
+                penumbra ? new Color(0, 0, 0, .9f) : new Color(.03f, .028f, .06f, .36f), CoreOrder);
             core.transform.localScale = new Vector3(width * .82f / spriteWidth, depth * .72f / spriteHeight, 1f);
+
+            if (penumbra)
+            {
+                // The accompaniment camera has zero pitch: an XZ sprite is edge-on.
+                // Paint the floor projection behind the object, anchored to its base.
+                // This is a contact approximation, not a dynamic cast shadow.
+                soft.transform.rotation = core.transform.rotation = Quaternion.identity;
+                soft.transform.position = new Vector3(centreX + offsetX * .5f, floorY - .045f, .05f);
+                core.transform.position = new Vector3(centreX, floorY - .015f, .04f);
+                soft.transform.localScale = new Vector3(width * 1.25f / spriteWidth, .28f / spriteHeight, 1f);
+                core.transform.localScale = new Vector3(width * .95f / spriteWidth, .12f / spriteHeight, 1f);
+            }
         }
 
         private static SpriteRenderer Build(Transform parent, Texture2D texture, string name, float floorY,
