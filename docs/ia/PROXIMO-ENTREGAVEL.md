@@ -1,4 +1,15 @@
-# Próximo entregável — falha e retry no piloto ilustrado
+# Próximo entregável — arte conceitual ABC04 concluída
+
+## ABC04: arte conceitual aprovada; construção da cena adiada
+
+O usuário aprovou `abc-stack-v1.png` e definiu expressamente: **“o entregável vai ser só a arte conceitual”**.
+[Aprovação e escopo literal](../../Evidence/25d/T08D/aprovacao-conceitual.md).
+A pintura está salva em `Assets/Art/Illustrated25D/Environment/ABC/abc-stack-v1.png`. T08D concluída no escopo conceitual.
+
+**Construção da cena ABC04: POR FAZER — ADIADA PELO USUÁRIO.**
+Não iniciar agora posicionamento, integração, apoio físico, salto ou nova build. Retomar apenas mediante novo pedido do usuário. A arte aprovada não valida contato ou dificuldade.
+Build aprovada até a cômoda T08C preservada. Estante permanece adiada, sem aceite global T06/T07. As seções abaixo registram estados anteriores e não autorizam iniciar a construção adiada.
+
 
 Preparado em 13/11/2026, por solicitação do usuário. **Pronto para retomada;
 implementação não iniciada por este registro.** Reserva T06 liberada ao encerrar.

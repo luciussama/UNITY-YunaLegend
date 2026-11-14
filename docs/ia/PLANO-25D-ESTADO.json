@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-13T20:33:48.876792+00:00",
+  "updated_at": "2026-11-14T02:47:10.528918+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -329,14 +329,41 @@
       "status": "pending",
       "owner": null,
       "checkpoint": {
-        "done": "Migracao para o acompanhamento oficial do Codex concluida e aprovada pelo usuario: composicao duplicada removida (RoomCompositionRuntimeInstaller/Setup e objeto T054_Composicao_Runtime nas duas cenas), ferramentas proprias retiradas (WindowsPilotBuild, YunaT061TraversalCapture, make_t061_review) e build propria apagada; YunaIllustrationInstaller mantido por ser dependencia do acompanhamento; colisao T053 corrigida antes da retirada",
-        "next": "Regravar a build oficial do acompanhamento (menu YunaLegend > Gerar build Windows de acompanhamento ou batch com Unity fechado) e seguir T06.2 (movel com quebra/80ms/tropeco) e T06.3 (retry); revisao visual da T06.1 v3 continua pendente",
-        "validation": "agent_registry assunto t06.1/migracao-acompanhamento finalizado/concluido; cenas sem o objeto e sem referencias fileID pendentes, header YAML e SceneRoots intactos; commits dbf00cb, d987e14 publicados; nenhum teste Unity novo (Editor aberto, lock)",
-        "pending": "Regravar build oficial; revisao humana da T06.1 v3; T06.2/T06.3; T07",
-        "files": "Assets/Scenes/DarkRoom_Gameplay.unity;Assets/Scenes/DarkRoom_IllustratedPreview.unity;Assets/Art/Illustrated25D/Environment/Room;Evidence/25d/T06.1;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/diario.sqlite3",
-        "processes": "Unity Editor do usuario aberto desde 17:26 (lock); nenhum batch iniciado",
-        "updated_at": "2026-11-13T20:33:48.782554+00:00"
-      }
+        "done": "Auditoria sola concluida no piloto:1316amostras grounded,33capturas;movelIdle7.91cm,chao7.95cm,livrosLand6.86-7.78cm;urso varia comcurva;tropeco maioriaencosta comtransientepose1",
+        "next": "Corrigir camada visual por pe de apoio/estado e superficie mantendo fisica;analise pedida concluida em Evidence/25d/T06-contact/foot-audit/README.md;nao confundir verdefuncional comcontato correto",
+        "validation": "Build diagnosticoSucceeded0erros;retry60success0erros;sola vermelha alfa128 e malhaIdleinterpolada;skinWidth0.08;192arquivos Yuna/controlador iguaisT063;nenhum patch de animacao/fisica",
+        "pending": "Correcao sola e revisao humana;v4friso revisao pendente;T06/T07;limites30/120/aparelho/WebGL/audio/desempenho;curva exige envoltoria do pe;sem corrida prolongada nos livros",
+        "files": "Assets/Art/Illustrated25D/Preview/PreviewFootContactAudit.cs;Evidence/25d/T06-contact/foot-audit;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PROXIMO-ENTREGAVEL.md",
+        "processes": "Build diagnostico no clone e player de auditoria encerrados;Editor usuario e player normalv4 preservados;sem commit/push",
+        "updated_at": "2026-11-13T22:48:20.469547+00:00"
+      },
+      "evidence": [
+        {
+          "path": "Evidence/25d/T06-contact/foot-audit/README.md",
+          "sha256": "9cb78ab1a021dc25b1fee3ffb8c6fe704189630114beadaaacaa6c651e0a432b"
+        },
+        {
+          "path": "Evidence/25d/T06-contact/foot-audit/manifest.json",
+          "sha256": "f1c88b349fd127a187ec6109e96eb138a009df3cf322ed5fc811b5499aba7fb0"
+        },
+        {
+          "path": "Evidence/25d/T06-contact/foot-audit/summary.json",
+          "sha256": "15c1077714615e64b924ce943ce514626df9eb7df7d90954e03d41159af3cfc1"
+        },
+        {
+          "path": "Evidence/25d/T06-contact/foot-audit/run-60/foot-contact.json",
+          "sha256": "108e36219bce656e53baaaf13e5d6eea66d6b38e77945891c37cf2baf8ba16c9"
+        },
+        {
+          "path": "Evidence/25d/T06-contact/foot-audit/run-60/frame-1349_2_Idle_0.png",
+          "sha256": "849d509a5b7b9c10d5e27c95944e68e6fc5523b4a8416b0c96435f98a5d6f732"
+        },
+        {
+          "path": "Evidence/25d/T06-contact/foot-audit/retry-60/verification.json",
+          "sha256": "28c7463334aac827b05c7c24d9529f1fdc69bd38da8123c5fc548182fce43e2d"
+        }
+      ],
+      "validation": "Diagnostico confirma defeito de contato,nao candidata corrigida;T06/T07 nao aceitas;prova60deexecucao nao encerra problema visual"
     },
     {
       "id": "T07",
@@ -447,6 +474,235 @@
         "at": "2026-11-12T15:35:05.192536+00:00",
         "human_required": false
       }
+    },
+    {
+      "id": "T08A",
+      "title": "Preparacao visual individual da comoda03 autorizada com aceite parcial",
+      "depends_on": [
+        "T05"
+      ],
+      "resources": [
+        "art-environment"
+      ],
+      "human_gate": true,
+      "status": "accepted",
+      "owner": null,
+      "checkpoint": {
+        "done": "Comoda03 candidata1254RGBA gerada;apoio definido antesarte;escalauniforme3.05m altura/2.7265largura e apoio2.50proposto",
+        "next": "Revisao individual da peca antesintegrar;usuario agora priorizou cameraT08B semzoom",
+        "validation": "Imagem inspecionada;alpha534295transparentes;bbox[120,62,1122,1183];fonte/prompt/hashsalvos;semUnity/gameplaycertificado",
+        "pending": "Revisaoarte;tampo/fisica/camera/saltoRuntime;integracao;T06/T07globais;estanteadiada",
+        "files": "Assets/Art/Illustrated25D/Environment/Dresser/dresser-v1.png;Evidence/25d/T08A;docs/ia",
+        "processes": "SemUnity iniciado para arte;Editorusuario preservado;semcommitpush",
+        "updated_at": "2026-11-14T00:07:16.382035+00:00"
+      },
+      "authorization": "Usuario13/11/2026: deixar estante adiada e continuar evolucao para maior visibilidade. Preparacao visual individual;T08principal continua dependendoT07;nao e aceite agregado.",
+      "evidence": [
+        {
+          "path": "Evidence/25d/T08A/README.md",
+          "sha256": "0a345a5dd6d29134ec3e6eec1cb2d4ee4d85bd6cc4142e75d120e6acbd59484e"
+        },
+        {
+          "path": "Evidence/25d/T08A/CONTRATO-APOIO.md",
+          "sha256": "ae321f5ef63317353e807e62614734e575bbfe9305ced9b3a35714960a5252d4"
+        },
+        {
+          "path": "Evidence/25d/T08A/manifest.json",
+          "sha256": "460a83449b366a08986b24167aff4b72917c0a743194910989ce6d6b155a9b55"
+        },
+        {
+          "path": "Evidence/25d/T08A/dresser-v1-source.png",
+          "sha256": "d4c05a6d459bb2cee1300b61acab9a22e56efb8b8bb087ef034772578974e40e"
+        }
+      ],
+      "validation": "Candidata individual de pintura;nao e faseintegrada;revisao humana pendente",
+      "acceptance": {
+        "session": "2026-11-13-codex-comoda03",
+        "reference": "Usuario autorizou continuidade da fase e agora podeprosseguirmos,apos candidata visual apresentada. Aceita preparacao individual para uso em avaliacao Unity;nao e aceite final do gameplay/apoio ouT06/T07.",
+        "at": "2026-11-14T00:35:45.794795+00:00",
+        "human_required": true
+      }
+    },
+    {
+      "id": "T08B",
+      "title": "Camera acompanha subida com distancia fixa",
+      "depends_on": [
+        "T02"
+      ],
+      "resources": [
+        "camera"
+      ],
+      "human_gate": false,
+      "status": "accepted",
+      "owner": null,
+      "checkpoint": {
+        "done": "Camera ilustrada acompanha altura da menina antes do pouso,semzoom;amortecimento original;prova nativa comUI validada",
+        "next": "Revisao visual do acompanhamento em Evidence/25d/T08B/native-proof-60/camera-ascent.mp4;manterdistancia/campo/escala e estanteadiada",
+        "validation": "BuildSucceeded0erros;retry60success/errors0;Z-9.053300858FOV45fixos,95.999924..96.000092px/m;216framescameraacompanhasubida;video604x7201120frames37.33ssemdeformacao",
+        "pending": "Revisao visual;30/120desta camera nao repetidos;T06/T07globais;comodaT08AsemIntegracao;estanteadiada;aparelhos/WebGL/audio/desempenho",
+        "files": "Assets/Scripts/Runtime/Camera/SideScroll25DCamera.cs;Build/Windows/YunaLegend-Camera;Evidence/25d/T08B",
+        "processes": "CloneUnity encerrado,testes encerrados;abrir candidato normal para usuario;semcommitpush",
+        "updated_at": "2026-11-14T00:18:16.536979+00:00"
+      },
+      "authorization": "Usuario confirmou: Acompanhar a subida,mantendo a distancia. Ajuste isolado da camera de acompanhamento,semaceiteglobalT07.",
+      "evidence": [
+        {
+          "path": "Evidence/25d/T08B/README.md",
+          "sha256": "f04843d9b9397b4dd7a9b9613d16c75c40eab8da1171bda8c91ef2d5e3c4fded"
+        },
+        {
+          "path": "Evidence/25d/T08B/manifest.json",
+          "sha256": "b7ef6e1edcfbea1d53f37e6dc8bc66caf6b27763abc9f8818380ba544abe796a"
+        },
+        {
+          "path": "Evidence/25d/T08B/native-proof-60/camera-ascent.json",
+          "sha256": "b32fe3340d8a06aa9aae184d541813fd4415ee78fdfdf917ef401898909160af"
+        },
+        {
+          "path": "Evidence/25d/T08B/native-proof-60/camera-ascent.mp4",
+          "sha256": "4a97150352560855de62fbd9b0b5d94438d70130653c6915a08eb381e84253a8"
+        },
+        {
+          "path": "Evidence/25d/T08B/native-retry-60/verification.json",
+          "sha256": "53299993a75fbb46b799db4d9c483781b40b8869dc0140eb3e284ed8edcef6e1"
+        }
+      ],
+      "validation": "Acompanhamento vertical confirmado;semzoom porZ/FOV/escala;runtime60sucesso0erros;revisao visual pendente",
+      "acceptance": {
+        "session": "2026-11-13-codex-camera-subida",
+        "reference": "Usuario nesta conversa apos video da camera semzoom: aprovafo. gostei. Registro literal em Evidence/25d/T08B/aprovacao.md. Aceite individual da camera,nao da comoda ou globalT06/T07.",
+        "at": "2026-11-14T00:22:00.870288+00:00",
+        "human_required": false
+      }
+    },
+    {
+      "id": "T08C",
+      "title": "Candidata jogavel ate a comoda03",
+      "depends_on": [
+        "T08A",
+        "T08B"
+      ],
+      "resources": [
+        "integration",
+        "art-dresser"
+      ],
+      "human_gate": false,
+      "status": "accepted",
+      "owner": null,
+      "checkpoint": {
+        "done": "Nova travessia urso/livros/movel/comoda03 integrada em cena propria e build separada;apoio proprio2.5m,arteuniforme,pisoancorado;correcao visual apenas no3",
+        "next": "Revisao individual da travessia em Evidence/25d/T08C/final-video-60/camera-ascent.mp4 e buildContinuacao;aposaceite preparar blocosABC04",
+        "validation": "Buildv3Succeeded0erros;30/60/120duastravessiascada,4saltos,1estralo,resetCleantrue,legacy0/errors0. 133amostrasopacas3em60:gap+-1.348mm;cameraaprovadainalterada;video604x720592frames19.73s",
+        "pending": "Revisao da nova peca/travessia;T06/T07globais;demaispes/fisicaanterioresnaocorrigidos;audio/escuta/aparelhos/retrato/safearea/WebGL/desempenho/oclusao;semexpansaototal",
+        "files": "Assets/Art/Illustrated25D/Environment/Dresser;Assets/Art/Illustrated25D/Preview;Build/Windows/YunaLegend-Continuacao;Evidence/25d/T08C;docs/ia",
+        "processes": "Editorclone eplayersdeprovaencerrados;playernormalnovo sera deixadoaberto;nenhumEditorusuarioalterado;semcommitpush",
+        "updated_at": "2026-11-14T01:05:55.205293+00:00"
+      },
+      "authorization": "Usuario autorizou evoluir fase com estante adiada e agora podeprosseguirmos. Integracao isolada de uma proxima peca,semaceiteglobalT07.",
+      "evidence": [
+        {
+          "path": "Evidence/25d/T08C/README.md",
+          "sha256": "b2cf7cf05e5f12134f5f8a0ac4aec4dbc6c339e9ab361ecd1a8cf12db93bb1ed"
+        },
+        {
+          "path": "Evidence/25d/T08C/manifest.json",
+          "sha256": "8b94cca88ae2f9f287902d2b6e854d81970e646736a9359232874bcc0ef949f3"
+        },
+        {
+          "path": "Evidence/25d/T08C/revisao-proposta.md",
+          "sha256": "37894c2cf4bb38ee5d888c716ff587b3bbfde3f48972f3c2e5ee6ec54feba5a9"
+        },
+        {
+          "path": "Evidence/25d/T08C/final-30/verification.json",
+          "sha256": "c397d25c7dfb41178f6fd1d8f695d2b85c22bd6692ab1442e5254b160da4562e"
+        },
+        {
+          "path": "Evidence/25d/T08C/final-60/verification.json",
+          "sha256": "eb4d1a39a7ffbe83df92881014f0aa8eba93392ad96270eb9ed9a287ce2bc246"
+        },
+        {
+          "path": "Evidence/25d/T08C/final-120/verification.json",
+          "sha256": "b233eb54393a93d86e45210c8d9cde51da786c977f132bbd4f5927c8927d326d"
+        },
+        {
+          "path": "Evidence/25d/T08C/feet-summary.json",
+          "sha256": "e3bea21394ee0d704d4812fa65e23546201eb8432f2c1a39e9b3a3b3eeae283b"
+        },
+        {
+          "path": "Evidence/25d/T08C/final-video-60/camera-ascent.mp4",
+          "sha256": "ef819f30046fc99ed7acea644df4029976730811b5db778783e087f69fab13af"
+        }
+      ],
+      "validation": "Candidata comoda03 jogavel30/60/120 e resetduasvezes;contatopintado+-1.35mm no3;aguarda revisao individual,semaceiteglobal",
+      "acceptance": {
+        "session": "2026-11-13-codex-comoda03-runtime",
+        "reference": "Usuario apos build/video4objetos: aprovado me diga qual e o proximo passo. Aceite literal Evidence/25d/T08C/aprovacao.md;individual da travessia ate comoda,nao globalT06/T07.",
+        "at": "2026-11-14T01:46:21.153387+00:00",
+        "human_required": false
+      }
+    },
+    {
+      "id": "T08D",
+      "title": "Blocos ABC04: referencia, apoio e candidata visual individual",
+      "depends_on": [
+        "T08C"
+      ],
+      "resources": [
+        "art-abc"
+      ],
+      "human_gate": true,
+      "status": "accepted",
+      "owner": null,
+      "checkpoint": {
+        "done": "Referencia legada observada por gameplay; candidata original3-2-1 econtrato normalizado medidos;PNG/metas/prompt/manifesto salvos",
+        "next": "Revisar silhueta e largura do topo da abc-stack-v1 antes de integrar04; depois escalauniforme,apoio3D real,salto e retry",
+        "validation": "PNG1278x1230RGBA,599899transparentes,bbox1194x1129,bloco topo~37.4% e lipfrontal~31% visual;manifesto9arquivos conferido;semUnity/build",
+        "pending": "Revisao visual;colisor legado nao medido;metros/apoio/pes/piso/gap/dificuldade/runtime por validar;estanteadiada;T06/T07globais",
+        "files": "Assets/Art/Illustrated25D/Environment/ABC;Evidence/25d/T08D;docs/ia/PLANO-25D-ESTADO.json;diario.sqlite3",
+        "processes": "SemEditor iniciado;semalterar build aprovada;semcommitpush",
+        "updated_at": "2026-11-14T02:34:14.305558+00:00"
+      },
+      "evidence": [
+        {
+          "path": "Evidence/25d/T08D/README.md",
+          "sha256": "42be09c4d6f0fb93e328652b1453830d667a5479cb24ee05936e8875468668ea"
+        },
+        {
+          "path": "Evidence/25d/T08D/CONTRATO-APOIO.md",
+          "sha256": "106fa68a47b64808fe939c5fafc5d54a71a836d6dcda9ec7b5d3b435021e79cc"
+        },
+        {
+          "path": "Evidence/25d/T08D/manifest.json",
+          "sha256": "93715a0d7956608461f29d8e2c6a740fc2433b77248d1f187b0b01920433c7bf"
+        },
+        {
+          "path": "Assets/Art/Illustrated25D/Environment/ABC/abc-stack-v1.png",
+          "sha256": "75af893ca38895c3d3a0984685783064eca5e747ef68bce36b829a42390aa968"
+        }
+      ],
+      "validation": "Candidata visual individual,nao integrada;revisao da silhueta e topo pendente;largura fisica do legado nao certificada",
+      "acceptance": {
+        "session": "2026-11-13-codex-blocos04-visual",
+        "reference": "Usuario aprovou abc-stack-v1 e limitou entregavel a arte conceitual;construcao da cena explicitamente adiada e marcada T08E pending. Mensagem literal em Evidence/25d/T08D/aprovacao-conceitual.md.",
+        "at": "2026-11-14T02:47:10.528918+00:00",
+        "human_required": true
+      }
+    },
+    {
+      "id": "T08E",
+      "title": "ABC04: construcao da cena — por fazer, adiada pelo usuario",
+      "depends_on": [
+        "T08D"
+      ],
+      "resources": [
+        "integration",
+        "art-abc"
+      ],
+      "human_gate": true,
+      "status": "pending",
+      "owner": null,
+      "checkpoint": null,
+      "authorization": "Somente planejamento. Usuario limitou entregavel atual a arte conceitual e adiou explicitamente a construcao. Nao iniciar sem pedido de retomada."
     }
   ],
   "history": [
@@ -1877,6 +2133,451 @@
       "session": "2026-11-13-dsh-pilot-t061v2-8a1f",
       "reason": "Trabalho encerrado por decisao do usuario ('pode aprovar o que vc fez e marcar no diario como concluido'): migracao para o acompanhamento oficial concluida e registrada. T06.1 v3 segue em revisao humana; T06.2/T06.3 dependem dessa revisao e de rebuild da build oficial, que exige Unity fechado.",
       "at": "2026-11-13T20:33:48.876792+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T06",
+      "session": "2026-11-13-codex-t063",
+      "agent": "Codex GPT-6",
+      "at": "2026-11-13T20:48:43.864551+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T06",
+      "session": "2026-11-13-codex-t063",
+      "done": "Build oficial apos remocao duplicada; T06.3 passou player30/60/120 com R na pausa e recuperacao,travessias seguintes,P/Esc,falha/retry; video continuo37.30s com UI; botaoRecomecar por clique confirmado",
+      "next": "Revisao humana da sequencia T06.3 em Evidence/25d/T06.3/v3-visible-60/continuous.mp4; manter visual aprovado e reservas abertas; nao expandir",
+      "validation": "Build v3 Succeeded errors0;3taxas success true errors0;1evento por travessia,reset limpo;1119quadros1280x720/captura30/simulacao60;870fontes+170arquivos build SHAOK;ZIP CRCOK;SQLite integro",
+      "pending": "Aceite humano T06.3;encerramento T06/T07;audio por escuta;toque/aparelhos/WebGL;sem expansao",
+      "files": "Assets/Art/Illustrated25D/Preview;Assets/Scenes/DarkRoom_IllustratedPreview.unity;Packages/manifest.json;Packages/packages-lock.json;Evidence/25d/T06.3;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PROXIMO-ENTREGAVEL.md",
+      "processes": "BatchUnity e testes encerrados;player normal deixado aberto no inicio;nenhum EditorUnity;sem commit/push",
+      "at": "2026-11-13T21:02:45.962513+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T06",
+      "session": "2026-11-13-codex-t063",
+      "evidence": [
+        "Evidence/25d/T06.3/README.md",
+        "Evidence/25d/T06.3/manifest.json",
+        "Evidence/25d/T06.3/v3-30/verification.json",
+        "Evidence/25d/T06.3/v3-visible-60/verification.json",
+        "Evidence/25d/T06.3/v3-120/verification.json",
+        "Evidence/25d/T06.3/v3-visible-60/continuous.mp4",
+        "Evidence/25d/T06.3/reviews/T06.3-v1-proposta.md"
+      ],
+      "validation": "Candidata T06.3 tecnicamente validada30/60/120,zero excecoes,reset sem duplicacao;video continuo37.30s com UI/silencioso;aguarda revisao humana apenas da nova sequencia;T06/T07 nao aceitas",
+      "at": "2026-11-13T21:02:46.393429+00:00"
+    },
+    {
+      "command": "release",
+      "task": "T06",
+      "session": "2026-11-13-codex-t063",
+      "reason": "Microentrega T06.3 aprovada literalmente pelo usuario: aprovadíssimo. Aceite individual registrado; consolidacao agregada T06/T07 e limites pendentes no checkpoint. Encerrada espera de revisao desta entrega.",
+      "at": "2026-11-13T21:19:58.009619+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T06",
+      "session": "2026-11-13-dsh-consolidacao-t06t07",
+      "agent": "DeepSeek (deepseek-flash)",
+      "at": "2026-11-13T21:25:33.083267+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T06",
+      "session": "2026-11-13-dsh-consolidacao-t06t07",
+      "done": "T06 consolidada: matriz T06/T07 com limites, audio capturado e analisado, build final revalidada30/60/120, PlayMode de entrada e EditMode52/52, pacote T07 pronto sem aceite",
+      "next": "Resposta humana ao pacote Evidence/25d/T07; se aprovada aceitar T07 com human-approval e iniciar T08 em microentregas; se rejeitada reabrir tarefa responsavel",
+      "validation": "Build Succeeded189849481/0; 30/60/120 success=true errors=0 frames1132/2239/4456; audio4 eventos NCC.268-.589; EditMode52/52; PlayMode passed; hashes e links conferidos",
+      "pending": "Aceite humano T07; escuta/mixagem; aparelho/toque real/retrato/safe area; WebGL; sombras dinamicas; A/B assistencia horizontal; desempenho real; publicacao",
+      "files": "Evidence/25d/T06;Evidence/25d/T07;Assets/Art/Illustrated25D/Preview/PreviewRetryVerification.cs;Assets/Art/Illustrated25D/Preview/PreviewAudioCapture.cs;tools/analyze_t06_audio.py;tools/make_t06_consolidation.py;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PROXIMO-ENTREGAVEL.md",
+      "processes": "Nenhum Unity Editor ou player ativo; build aprovada T06.3 preservada em Build/Windows/YunaLegend-Acompanhamento-T063-aprovada",
+      "at": "2026-11-13T21:46:36.353399+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T06",
+      "session": "2026-11-13-dsh-consolidacao-t06t07",
+      "evidence": [
+        "Evidence/25d/T06/README.md",
+        "Evidence/25d/T06/parametros.json",
+        "Evidence/25d/T06/audio-60/verification.json",
+        "Evidence/25d/T06/audio-60/audio-analysis.json",
+        "Evidence/25d/T06/rate-30/verification.json",
+        "Evidence/25d/T06/rate-120/verification.json",
+        "Evidence/25d/T06/tests/editmode.xml",
+        "Evidence/25d/T06/tests/playmode-touch-ballistic.xml",
+        "Evidence/25d/T07/README.md",
+        "Evidence/25d/T07/reviews/T07.1-proposta.md"
+      ],
+      "validation": "30/60/120 success=true errors=0; audio capturado com4 eventos correlacionados e sem escuta humana; PlayMode teclado/mouse/toque passed; EditMode52/52; limites de aparelho/WebGL/sombras/A-B assistencia declarados; T07 nao aceita",
+      "at": "2026-11-13T21:46:39.480458+00:00"
+    },
+    {
+      "command": "accept",
+      "task": "T06",
+      "session": "2026-11-13-dsh-consolidacao-t06t07",
+      "reference": "Revisao tecnica desta sessao sobre a consolidacao T06/T07: matriz conferida, build final revalidada em30/60/120, audio capturado e correlacionado (sem escuta), PlayMode de entrada e EditMode52/52. T06-4 (A/B da assistencia horizontal) permanece limite declarado. Este aceite e tecnico: T07 continua pendente de aprovacao humana explicita e a expansao permanece bloqueada.",
+      "human_approval": false,
+      "at": "2026-11-13T21:46:44.214676+00:00"
+    },
+    {
+      "command": "reopen",
+      "task": "T06",
+      "session": "2026-11-13-dsh-consolidacao-t06t07",
+      "reason": "Regressao de contato/sombra reportada pelo usuario (diario972) e confirmada na build final: urso e livros tocam o piso mas nao tem sombra de contato visivel na penumbra; aceite tecnico anterior nao cobre essa regressao. Reabrir para corrigir e revisar; T07 permanece bloqueada.",
+      "at": "2026-11-13T21:49:32.064984+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T06",
+      "session": "2026-11-13-dsh-consolidacao-t06t07",
+      "agent": "DeepSeek (deepseek-flash)",
+      "at": "2026-11-13T21:50:39.028539+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T06",
+      "session": "2026-11-13-dsh-consolidacao-t06t07",
+      "done": "Consolidacao e diagnostico concluidos: matriz, audio capturado, 30/60/120, PlayMode/EditMode; regressao de contato reportada (diario972) confirmada na build final e T06 reaberta",
+      "next": "Corrigir contato/ancoragem na penumbra sob urso e livros na camera final (ex.: luz fria de contato em vez de sombra escura); comparar contact-v2/penumbra-v2, registrar em Evidence/25d/T06 e submeter a revisao; depois reaceitar T06 e enviar o pacote T07",
+      "validation": "previewVerify60 capturado; 02-bear/03-books inspecionados: bases tocam o piso sem sombra visivel; ContactShadowT054 escuro sobre piso escuro; demais provas30/60/120+audio+testes preservadas em Evidence/25d/T06",
+      "pending": "Correcao visual pendente e revisao humana; T07 bloqueada; escuta/mixagem; aparelho real/retrato/safe area; WebGL; sombras dinamicas; A/B assistencia; desempenho; publicacao",
+      "files": "Evidence/25d/T06/README.md;Evidence/25d/T06/contact-regression;Evidence/25d/T07;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PROXIMO-ENTREGAVEL.md;Assets/Art/Illustrated25D/Environment/Room/ContactShadowT054.cs;Assets/Art/Illustrated25D/Preview/IllustratedPreview.cs",
+      "processes": "Nenhum Unity Editor ou player ativo; build T06.3 preservada em Build/Windows/YunaLegend-Acompanhamento-T063-aprovada",
+      "at": "2026-11-13T21:50:44.644370+00:00"
+    },
+    {
+      "command": "release",
+      "task": "T06",
+      "session": "2026-11-13-dsh-consolidacao-t06t07",
+      "reason": "Diagnostico da regressao concluido e checkpoint atualizado; correcao visual nao iniciada nesta sessao para nao alterar a arte aprovada sem nova microentrega/revisao. T06 fica pending sem dono; T07 bloqueada; expansao proibida.",
+      "at": "2026-11-13T21:50:49.944578+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T06",
+      "session": "2026-11-13-codex-contact-penumbra",
+      "agent": "Codex GPT-6",
+      "at": "2026-11-13T21:53:53.516268+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T06",
+      "session": "2026-11-13-codex-contact-penumbra",
+      "done": "Candidata contato v3: piso pela base pintada do urso,livros estendidos ate mesmo piso,sombras projetadas para camera horizontal e reflexo frio localizado;build oficial e video continuo",
+      "next": "Revisao humana individual em Evidence/25d/T06-contact/before-after.png e final-60/continuous.mp4;apos aceite consolidar T06 antes T07",
+      "validation": "Build Succeeded0erros;smoke60 baseGap0/0 shadowFacing1;retry30/60/120 success true errors0;video37.30s1119quadros;backup aprovado170/170 e fontes fisica/arte105/105 intactos",
+      "pending": "Aceite desta correcao;T06/T07;escuta/mixagem;aparelho/retrato/safearea;WebGL;oclusao dinamica;A-B assistencia;desempenho;sem expansao",
+      "files": "Evidence/25d/T06-contact;Assets/Art/Illustrated25D/Environment/Room;Assets/Art/Illustrated25D/Preview/IllustratedPreview.cs;Assets/Art/Illustrated25D/Preview/PreviewVerification.cs;Assets/Scenes/DarkRoom_IllustratedPreview.unity;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PROXIMO-ENTREGAVEL.md",
+      "processes": "EditorUnity e testes encerrados;player normal candidato aberto no inicio;sem commit/push",
+      "at": "2026-11-13T22:14:20.743039+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T06",
+      "session": "2026-11-13-codex-contact-penumbra",
+      "evidence": [
+        "Evidence/25d/T06-contact/README.md",
+        "Evidence/25d/T06-contact/manifest.json",
+        "Evidence/25d/T06-contact/before-after.png",
+        "Evidence/25d/T06-contact/final-60/continuous.mp4",
+        "Evidence/25d/T06-contact/v3-60/verification.json",
+        "Evidence/25d/T06-contact/final-30/verification.json",
+        "Evidence/25d/T06-contact/final-60/verification.json",
+        "Evidence/25d/T06-contact/final-120/verification.json",
+        "Evidence/25d/T06-contact/reviews/contact-v3-proposta.md"
+      ],
+      "validation": "Correcao candidata de contato;build0erros;geometria base0/0;retry30/60/120success0erros;video37.30s;aguarda revisao humana sem aceite agregado",
+      "at": "2026-11-13T22:15:00.969089+00:00"
+    },
+    {
+      "command": "release",
+      "task": "T06",
+      "session": "2026-11-13-codex-contact-penumbra",
+      "reason": "Usuario pediu ajuste da candidata: referencia do friso incorreta;retomar mesma sessao sem aceite.",
+      "at": "2026-11-13T22:18:28.233331+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T06",
+      "session": "2026-11-13-codex-contact-penumbra",
+      "agent": "Codex GPT-6",
+      "at": "2026-11-13T22:18:28.335885+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T06",
+      "session": "2026-11-13-codex-contact-penumbra",
+      "done": "V3 ajustada a pedido humano: inset82/724 estava dentro friso;v4 usa64/724 na linha660 abaixo friso654. Fontes centrais corrigidos,build tecnica copiada para oficial;foto marcada e comparacao preservadas",
+      "next": "Revisao individual v4 em Evidence/25d/T06-contact/v4/ready-before-after.png e trim-before-after.png;Editor central em Play pausado antigo precisa reiniciarPlay para reinstalar panorama",
+      "validation": "Clone872arquivos iguais antesexport,169build copiados iguais;build0erros;smoke60+retry60 success errors0,bases0/0 e0.088398m abaixofriso;video37.30s1119quadros",
+      "pending": "Aceite v4;T06/T07;30/120 v4 nao repetidos (historicos v3);escuta/mixagem;aparelhos/retrato/safearea;WebGL;oclusao dinamica;A-Bassistencia;desempenho",
+      "files": "Evidence/25d/T06-contact/v4;Assets/Art/Illustrated25D/Environment/Room/RoomBackgroundT054.cs;Assets/Art/Illustrated25D/Preview/IllustratedPreview.cs;Assets/Art/Illustrated25D/Preview/PreviewVerification.cs;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PROXIMO-ENTREGAVEL.md",
+      "processes": "Editor usuario preservado emPlay pausado;clonebatch encerrado;testes encerrados;player normal v4 aberto;sem commit/push",
+      "at": "2026-11-13T22:25:01.053426+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T06",
+      "session": "2026-11-13-codex-contact-penumbra",
+      "evidence": [
+        "Evidence/25d/T06-contact/v4/README.md",
+        "Evidence/25d/T06-contact/v4/manifest.json",
+        "Evidence/25d/T06-contact/v4/ready-before-after.png",
+        "Evidence/25d/T06-contact/v4/trim-before-after.png",
+        "Evidence/25d/T06-contact/v4/retry-60/continuous.mp4",
+        "Evidence/25d/T06-contact/v4/smoke-60/verification.json",
+        "Evidence/25d/T06-contact/v4/retry-60/verification.json",
+        "Evidence/25d/T06-contact/v4/revisao-proposta.md"
+      ],
+      "validation": "V4 abaixo do friso conforme imagem humana;60Hz travessia/retry0erros;aguarda revisao individual sem aceiteT06/T07",
+      "at": "2026-11-13T22:25:01.224310+00:00"
+    },
+    {
+      "command": "release",
+      "task": "T06",
+      "session": "2026-11-13-codex-contact-penumbra",
+      "reason": "Usuario solicita auditoria de sola de Yuna nas superficies,apos relatar afastamento no movel;mesma investigacao de contato.",
+      "at": "2026-11-13T22:40:11.518085+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "T06",
+      "session": "2026-11-13-codex-contact-penumbra",
+      "agent": "Codex GPT-6",
+      "at": "2026-11-13T22:40:11.621393+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T06",
+      "session": "2026-11-13-codex-contact-penumbra",
+      "done": "Auditoria sola concluida no piloto:1316amostras grounded,33capturas;movelIdle7.91cm,chao7.95cm,livrosLand6.86-7.78cm;urso varia comcurva;tropeco maioriaencosta comtransientepose1",
+      "next": "Corrigir camada visual por pe de apoio/estado e superficie mantendo fisica;analise pedida concluida em Evidence/25d/T06-contact/foot-audit/README.md;nao confundir verdefuncional comcontato correto",
+      "validation": "Build diagnosticoSucceeded0erros;retry60success0erros;sola vermelha alfa128 e malhaIdleinterpolada;skinWidth0.08;192arquivos Yuna/controlador iguaisT063;nenhum patch de animacao/fisica",
+      "pending": "Correcao sola e revisao humana;v4friso revisao pendente;T06/T07;limites30/120/aparelho/WebGL/audio/desempenho;curva exige envoltoria do pe;sem corrida prolongada nos livros",
+      "files": "Assets/Art/Illustrated25D/Preview/PreviewFootContactAudit.cs;Evidence/25d/T06-contact/foot-audit;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/PROXIMO-ENTREGAVEL.md",
+      "processes": "Build diagnostico no clone e player de auditoria encerrados;Editor usuario e player normalv4 preservados;sem commit/push",
+      "at": "2026-11-13T22:48:20.469547+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T06",
+      "session": "2026-11-13-codex-contact-penumbra",
+      "evidence": [
+        "Evidence/25d/T06-contact/foot-audit/README.md",
+        "Evidence/25d/T06-contact/foot-audit/manifest.json",
+        "Evidence/25d/T06-contact/foot-audit/summary.json",
+        "Evidence/25d/T06-contact/foot-audit/run-60/foot-contact.json",
+        "Evidence/25d/T06-contact/foot-audit/run-60/frame-1349_2_Idle_0.png",
+        "Evidence/25d/T06-contact/foot-audit/retry-60/verification.json"
+      ],
+      "validation": "Diagnostico confirma defeito de contato,nao candidata corrigida;T06/T07 nao aceitas;prova60deexecucao nao encerra problema visual",
+      "at": "2026-11-13T22:48:20.577088+00:00"
+    },
+    {
+      "command": "release",
+      "task": "T06",
+      "session": "2026-11-13-codex-contact-penumbra",
+      "reason": "Usuario concedeu aceite parcial e adiou estante/redesenho;autorizou continuar evolucao. Diagnosticos preservados;sem aceite agregado T06/T07. Liberar reserva para preparacao visual da proxima peca.",
+      "at": "2026-11-13T23:58:44.720861+00:00"
+    },
+    {
+      "command": "add-microdelivery",
+      "task": "T08A",
+      "session": "2026-11-13-codex-contact-penumbra",
+      "reason": "Preparacao visual individual autorizada pela nova instrucao humana;nao alterar dependencias/aceite de T06/T07/T08",
+      "reference": "Evidence/25d/T06-contact/v4/aceite-parcial.md"
+    },
+    {
+      "command": "claim",
+      "task": "T08A",
+      "session": "2026-11-13-codex-comoda03",
+      "agent": "Codex GPT-6",
+      "at": "2026-11-13T23:58:58.731180+00:00"
+    },
+    {
+      "command": "add-microdelivery",
+      "task": "T08B",
+      "session": "2026-11-13-codex-comoda03",
+      "reference": "Usuario confirmou acompanhar subida mantendo distancia nesta conversa"
+    },
+    {
+      "command": "claim",
+      "task": "T08B",
+      "session": "2026-11-13-codex-camera-subida",
+      "agent": "Codex GPT-6",
+      "at": "2026-11-14T00:05:18.757398+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T08A",
+      "session": "2026-11-13-codex-comoda03",
+      "done": "Comoda03 candidata1254RGBA gerada;apoio definido antesarte;escalauniforme3.05m altura/2.7265largura e apoio2.50proposto",
+      "next": "Revisao individual da peca antesintegrar;usuario agora priorizou cameraT08B semzoom",
+      "validation": "Imagem inspecionada;alpha534295transparentes;bbox[120,62,1122,1183];fonte/prompt/hashsalvos;semUnity/gameplaycertificado",
+      "pending": "Revisaoarte;tampo/fisica/camera/saltoRuntime;integracao;T06/T07globais;estanteadiada",
+      "files": "Assets/Art/Illustrated25D/Environment/Dresser/dresser-v1.png;Evidence/25d/T08A;docs/ia",
+      "processes": "SemUnity iniciado para arte;Editorusuario preservado;semcommitpush",
+      "at": "2026-11-14T00:07:16.382035+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T08A",
+      "session": "2026-11-13-codex-comoda03",
+      "evidence": [
+        "Evidence/25d/T08A/README.md",
+        "Evidence/25d/T08A/CONTRATO-APOIO.md",
+        "Evidence/25d/T08A/manifest.json",
+        "Evidence/25d/T08A/dresser-v1-source.png"
+      ],
+      "validation": "Candidata individual de pintura;nao e faseintegrada;revisao humana pendente",
+      "at": "2026-11-14T00:07:16.482290+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T08B",
+      "session": "2026-11-13-codex-camera-subida",
+      "done": "Camera ilustrada acompanha altura da menina antes do pouso,semzoom;amortecimento original;prova nativa comUI validada",
+      "next": "Revisao visual do acompanhamento em Evidence/25d/T08B/native-proof-60/camera-ascent.mp4;manterdistancia/campo/escala e estanteadiada",
+      "validation": "BuildSucceeded0erros;retry60success/errors0;Z-9.053300858FOV45fixos,95.999924..96.000092px/m;216framescameraacompanhasubida;video604x7201120frames37.33ssemdeformacao",
+      "pending": "Revisao visual;30/120desta camera nao repetidos;T06/T07globais;comodaT08AsemIntegracao;estanteadiada;aparelhos/WebGL/audio/desempenho",
+      "files": "Assets/Scripts/Runtime/Camera/SideScroll25DCamera.cs;Build/Windows/YunaLegend-Camera;Evidence/25d/T08B",
+      "processes": "CloneUnity encerrado,testes encerrados;abrir candidato normal para usuario;semcommitpush",
+      "at": "2026-11-14T00:18:16.536979+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T08B",
+      "session": "2026-11-13-codex-camera-subida",
+      "evidence": [
+        "Evidence/25d/T08B/README.md",
+        "Evidence/25d/T08B/manifest.json",
+        "Evidence/25d/T08B/native-proof-60/camera-ascent.json",
+        "Evidence/25d/T08B/native-proof-60/camera-ascent.mp4",
+        "Evidence/25d/T08B/native-retry-60/verification.json"
+      ],
+      "validation": "Acompanhamento vertical confirmado;semzoom porZ/FOV/escala;runtime60sucesso0erros;revisao visual pendente",
+      "at": "2026-11-14T00:18:16.635960+00:00"
+    },
+    {
+      "command": "accept",
+      "task": "T08B",
+      "session": "2026-11-13-codex-camera-subida",
+      "reference": "Usuario nesta conversa apos video da camera semzoom: aprovafo. gostei. Registro literal em Evidence/25d/T08B/aprovacao.md. Aceite individual da camera,nao da comoda ou globalT06/T07.",
+      "human_approval": true,
+      "at": "2026-11-14T00:22:00.870288+00:00"
+    },
+    {
+      "command": "accept",
+      "task": "T08A",
+      "session": "2026-11-13-codex-comoda03",
+      "reference": "Usuario autorizou continuidade da fase e agora podeprosseguirmos,apos candidata visual apresentada. Aceita preparacao individual para uso em avaliacao Unity;nao e aceite final do gameplay/apoio ouT06/T07.",
+      "human_approval": true,
+      "at": "2026-11-14T00:35:45.794795+00:00"
+    },
+    {
+      "command": "add-microdelivery",
+      "task": "T08C",
+      "session": "2026-11-13-codex-comoda03",
+      "reference": "Usuario:podeprosseguirmos;proxima peca comoda03 preparada;avaliacaoindividual"
+    },
+    {
+      "command": "claim",
+      "task": "T08C",
+      "session": "2026-11-13-codex-comoda03-runtime",
+      "agent": "Codex GPT-6",
+      "at": "2026-11-14T00:35:46.534071+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T08C",
+      "session": "2026-11-13-codex-comoda03-runtime",
+      "done": "Nova travessia urso/livros/movel/comoda03 integrada em cena propria e build separada;apoio proprio2.5m,arteuniforme,pisoancorado;correcao visual apenas no3",
+      "next": "Revisao individual da travessia em Evidence/25d/T08C/final-video-60/camera-ascent.mp4 e buildContinuacao;aposaceite preparar blocosABC04",
+      "validation": "Buildv3Succeeded0erros;30/60/120duastravessiascada,4saltos,1estralo,resetCleantrue,legacy0/errors0. 133amostrasopacas3em60:gap+-1.348mm;cameraaprovadainalterada;video604x720592frames19.73s",
+      "pending": "Revisao da nova peca/travessia;T06/T07globais;demaispes/fisicaanterioresnaocorrigidos;audio/escuta/aparelhos/retrato/safearea/WebGL/desempenho/oclusao;semexpansaototal",
+      "files": "Assets/Art/Illustrated25D/Environment/Dresser;Assets/Art/Illustrated25D/Preview;Build/Windows/YunaLegend-Continuacao;Evidence/25d/T08C;docs/ia",
+      "processes": "Editorclone eplayersdeprovaencerrados;playernormalnovo sera deixadoaberto;nenhumEditorusuarioalterado;semcommitpush",
+      "at": "2026-11-14T01:05:55.205293+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T08C",
+      "session": "2026-11-13-codex-comoda03-runtime",
+      "evidence": [
+        "Evidence/25d/T08C/README.md",
+        "Evidence/25d/T08C/manifest.json",
+        "Evidence/25d/T08C/revisao-proposta.md",
+        "Evidence/25d/T08C/final-30/verification.json",
+        "Evidence/25d/T08C/final-60/verification.json",
+        "Evidence/25d/T08C/final-120/verification.json",
+        "Evidence/25d/T08C/feet-summary.json",
+        "Evidence/25d/T08C/final-video-60/camera-ascent.mp4"
+      ],
+      "validation": "Candidata comoda03 jogavel30/60/120 e resetduasvezes;contatopintado+-1.35mm no3;aguarda revisao individual,semaceiteglobal",
+      "at": "2026-11-14T01:05:55.325342+00:00"
+    },
+    {
+      "command": "accept",
+      "task": "T08C",
+      "session": "2026-11-13-codex-comoda03-runtime",
+      "reference": "Usuario apos build/video4objetos: aprovado me diga qual e o proximo passo. Aceite literal Evidence/25d/T08C/aprovacao.md;individual da travessia ate comoda,nao globalT06/T07.",
+      "human_approval": true,
+      "at": "2026-11-14T01:46:21.153387+00:00"
+    },
+    {
+      "command": "add-microdelivery",
+      "task": "T08D",
+      "session": "2026-11-13-codex-blocos04-visual",
+      "reference": "Usuario: vamos trabalhar nos blocos ABC, preservando forma e superficie especifica do legado; arte antes da integracao."
+    },
+    {
+      "command": "claim",
+      "task": "T08D",
+      "session": "2026-11-13-codex-blocos04-visual",
+      "agent": "Codex GPT-6",
+      "at": "2026-11-14T02:30:29.182692+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "T08D",
+      "session": "2026-11-13-codex-blocos04-visual",
+      "done": "Referencia legada observada por gameplay; candidata original3-2-1 econtrato normalizado medidos;PNG/metas/prompt/manifesto salvos",
+      "next": "Revisar silhueta e largura do topo da abc-stack-v1 antes de integrar04; depois escalauniforme,apoio3D real,salto e retry",
+      "validation": "PNG1278x1230RGBA,599899transparentes,bbox1194x1129,bloco topo~37.4% e lipfrontal~31% visual;manifesto9arquivos conferido;semUnity/build",
+      "pending": "Revisao visual;colisor legado nao medido;metros/apoio/pes/piso/gap/dificuldade/runtime por validar;estanteadiada;T06/T07globais",
+      "files": "Assets/Art/Illustrated25D/Environment/ABC;Evidence/25d/T08D;docs/ia/PLANO-25D-ESTADO.json;diario.sqlite3",
+      "processes": "SemEditor iniciado;semalterar build aprovada;semcommitpush",
+      "at": "2026-11-14T02:34:14.305558+00:00"
+    },
+    {
+      "command": "submit",
+      "task": "T08D",
+      "session": "2026-11-13-codex-blocos04-visual",
+      "evidence": [
+        "Evidence/25d/T08D/README.md",
+        "Evidence/25d/T08D/CONTRATO-APOIO.md",
+        "Evidence/25d/T08D/manifest.json",
+        "Assets/Art/Illustrated25D/Environment/ABC/abc-stack-v1.png"
+      ],
+      "validation": "Candidata visual individual,nao integrada;revisao da silhueta e topo pendente;largura fisica do legado nao certificada",
+      "at": "2026-11-14T02:34:14.410095+00:00"
+    },
+    {
+      "command": "add-deferred-microdelivery",
+      "task": "T08E",
+      "session": "2026-11-13-codex-blocos04-visual",
+      "reference": "Ficou bem legal, pode usar esse, mas apenas coloque ele e coloque a construção da cena por fazer. Não vou fazer nesse momento. Nesse momento, então, o entregável vai ser só a arte conceitual."
+    },
+    {
+      "command": "accept",
+      "task": "T08D",
+      "session": "2026-11-13-codex-blocos04-visual",
+      "reference": "Usuario aprovou abc-stack-v1 e limitou entregavel a arte conceitual;construcao da cena explicitamente adiada e marcada T08E pending. Mensagem literal em Evidence/25d/T08D/aprovacao-conceitual.md.",
+      "human_approval": true,
+      "at": "2026-11-14T02:47:10.528918+00:00"
     }
   ]
 }

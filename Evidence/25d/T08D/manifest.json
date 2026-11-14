@@ -1,0 +1,47 @@
+[
+  {
+    "path": "Assets/Art/Illustrated25D/Environment/ABC/abc-stack-v1.png",
+    "bytes": 2397095,
+    "sha256": "75af893ca38895c3d3a0984685783064eca5e747ef68bce36b829a42390aa968"
+  },
+  {
+    "path": "Assets/Art/Illustrated25D/Environment/ABC/abc-stack-v1.png.meta",
+    "bytes": 3507,
+    "sha256": "2220a1de3f4a815c46e78be30431480ec3fa3aa303d5262e5d9af3505f84a75e"
+  },
+  {
+    "path": "Assets/Art/Illustrated25D/Environment/ABC.meta",
+    "bytes": 180,
+    "sha256": "68b3362203ac4a4f853ee7048615d92e224700a3a9ee3784dc47af5ccfd8c7f7"
+  },
+  {
+    "path": "Evidence/25d/T08D/alpha-v1.raw",
+    "bytes": 1571940,
+    "sha256": "c65aa59d441a407dce6cea82194512f9f8a56e47039970c4afa05ec24699ce6b"
+  },
+  {
+    "path": "Evidence/25d/T08D/asset-measurements.json",
+    "bytes": 2447,
+    "sha256": "c5f08c23938045ff96c4c41aab03f5f8baacd0e402121e4260344efdcd811c59"
+  },
+  {
+    "path": "Evidence/25d/T08D/CONTRATO-APOIO.md",
+    "bytes": 2294,
+    "sha256": "106fa68a47b64808fe939c5fafc5d54a71a836d6dcda9ec7b5d3b435021e79cc"
+  },
+  {
+    "path": "Evidence/25d/T08D/prompt-v1.txt",
+    "bytes": 1975,
+    "sha256": "dd464f233c46ca387a3ee678d7f742ec10fc355fa50f31354f7d9767cac3aa47"
+  },
+  {
+    "path": "Evidence/25d/T08D/README.md",
+    "bytes": 2120,
+    "sha256": "42be09c4d6f0fb93e328652b1453830d667a5479cb24ee05936e8875468668ea"
+  },
+  {
+    "path": "Evidence/25d/T08D/reviews/v1.md",
+    "bytes": 455,
+    "sha256": "6ee114bc4521dd001949c665831ba7d3cd88e4880466b3614d5bdd147fe27b0b"
+  }
+]

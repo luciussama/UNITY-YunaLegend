@@ -1,0 +1,151 @@
+{
+  "path": "Assets\\Art\\Illustrated25D\\Environment\\ABC\\abc-stack-v1.png",
+  "sha256": "75af893ca38895c3d3a0984685783064eca5e747ef68bce36b829a42390aa968",
+  "width": 1278,
+  "height": 1230,
+  "alpha_bbox128": [
+    40,
+    49,
+    1233,
+    1177
+  ],
+  "transparent": 599899,
+  "opaque": 1103,
+  "semi": 970938,
+  "rows": [
+    {
+      "y": 50,
+      "left": 494,
+      "right": 834
+    },
+    {
+      "y": 60,
+      "left": 475,
+      "right": 854
+    },
+    {
+      "y": 80,
+      "left": 449,
+      "right": 863
+    },
+    {
+      "y": 100,
+      "left": 426,
+      "right": 862
+    },
+    {
+      "y": 110,
+      "left": 419,
+      "right": 861
+    },
+    {
+      "y": 120,
+      "left": 417,
+      "right": 862
+    },
+    {
+      "y": 130,
+      "left": 416,
+      "right": 862
+    },
+    {
+      "y": 140,
+      "left": 416,
+      "right": 862
+    },
+    {
+      "y": 150,
+      "left": 417,
+      "right": 861
+    },
+    {
+      "y": 200,
+      "left": 417,
+      "right": 862
+    },
+    {
+      "y": 390,
+      "left": 417,
+      "right": 861
+    },
+    {
+      "y": 400,
+      "left": 281,
+      "right": 1037
+    },
+    {
+      "y": 450,
+      "left": 226,
+      "right": 1058
+    },
+    {
+      "y": 750,
+      "left": 110,
+      "right": 1193
+    },
+    {
+      "y": 800,
+      "left": 48,
+      "right": 1233
+    },
+    {
+      "y": 1150,
+      "left": 42,
+      "right": 1215
+    },
+    {
+      "y": 1170,
+      "left": 54,
+      "right": 1197
+    },
+    {
+      "y": 1180,
+      "left": null,
+      "right": null
+    },
+    {
+      "y": 1200,
+      "left": null,
+      "right": null
+    }
+  ],
+  "top_block_visible_width_px_approx": 447,
+  "top_block_to_pile_ratio": 0.3743718592964824,
+  "front_support_width_px_visual_estimate": 370,
+  "front_support_to_pile_ratio_visual_estimate": 0.3098827470686767,
+  "contact_status": "Visual estimate only. No physical collider width or world scale validated. Distinguish front horizontal lip from projected depth.",
+  "alpha_histogram_most_common": [
+    [
+      0,
+      599899
+    ],
+    [
+      253,
+      524860
+    ],
+    [
+      252,
+      388705
+    ],
+    [
+      251,
+      21105
+    ],
+    [
+      1,
+      7254
+    ],
+    [
+      250,
+      5111
+    ],
+    [
+      249,
+      2313
+    ],
+    [
+      2,
+      2297
+    ]
+  ]
+}
