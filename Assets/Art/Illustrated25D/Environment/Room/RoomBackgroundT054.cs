@@ -74,7 +74,8 @@ namespace YunaLegend.Illustrated25D.Environment
         public void InstallPanels(Texture2D[] panels, float panelPixelsPerUnit, Texture2D midTexture,
             Texture2D nearTexture, float floorY, float centreX, Material material = null,
             float worldScale = 1f, float nearWorldScale = 1f,
-            float floorInsetFraction = FloorInsetFraction, float travelFraction = FarTravel)
+            float floorInsetFraction = FloorInsetFraction, float travelFraction = FarTravel,
+            int anchorPanelIndex = -1)
         {
             floorWorldY = floorY;
             floorInset = floorInsetFraction;
@@ -91,11 +92,12 @@ namespace YunaLegend.Illustrated25D.Environment
             float panelWidth = panels.Length > 0
                 ? panels[0].width / panelPixelsPerUnit * roomScale
                 : 0f;
+            float anchor = anchorPanelIndex >= 0 ? anchorPanelIndex : (panels.Length - 1) * .5f;
             for (int i = 0; i < panels.Length; i++)
             {
                 var renderer = Build(FarName + "_" + i, panels[i], FarOrder + i, material,
                     roomScale, panelPixelsPerUnit);
-                float offset = (i - (panels.Length - 1) * .5f) * panelWidth;
+                float offset = (i - anchor) * panelWidth;
                 farOffsets.Add(offset);
                 far.Add(renderer);
             }

@@ -1,5 +1,24 @@
 # Estado atual — sala escura ilustrada
 
+## T08J / T08K: extensão do quarto + travessia 08 (Caixa de Música) e 09 (Castelinho) — ACEITA (14/11/2026)
+
+Sessões `2026-11-14-antigravity-08-09-visual` (registro 21, `T08J`) e
+`2026-11-14-antigravity-08-09-cena` (registro 22, `T08K`).
+**Aceite individual** do usuário ([registro](../../Evidence/25d/T08K/aprovacao.md)).
+[Build, cena e provas](../../Evidence/25d/T08K/README.md).
+
+Fundo do quarto estendido continuamente após o tambor com `room-wall-extension-v1.png`
+(`roomPanels = 3`, `_HasMoonWindow` no `PenumbraT054.shader`) e `DresserFloorReceiver` para
+`06`–`09`. Plataformas `08` (`MusicBox08Platform.cs`, `TopY = -3,55 m`, `TargetX = 45,96 m`,
+mesa larga na frente) e `09` (`Castle09Platform.cs`, `TopY = -3,95 m`, `TargetX = 56,27 m`,
+`LandingPixelY = 695f`, torres frontais em `sortingOrder = 25`) integradas com **salto de
+tensão (`~2,75 m`)** entre `08` e `09` em `Castle/Preview-Continuacao-09.unity` e
+`Build/Windows/YunaLegend-Continuacao-09`. 30/60/120 Hz passaram com 2 travessias, **10 saltos**,
+1 estralo, reset limpo, 0 erros, 0 legado e `pinVisibleSole` (`gap = 0,0 m`).
+
+Próximo passo: aguardar definição humana para a Etapa 2 (`10 Pista Elevada do Trem` em diante).
+Estante segue adiada; `T06`/`T07` globais permanecem pendentes.
+
 ## T08H / T08I: travessia até 06 (Almofadão) e 07 (Gavetas) — DONE / ACEITA (14/11/2026)
 
 Sessões `2026-11-14-antigravity-06-07-visual` (registro 19, artes `T08H`) e

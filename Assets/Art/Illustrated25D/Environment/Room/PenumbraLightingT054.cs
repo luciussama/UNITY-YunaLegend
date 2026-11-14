@@ -27,7 +27,7 @@ namespace YunaLegend.Illustrated25D.Environment
         }
         readonly List<Binding> bindings = new List<Binding>();
 
-        public void Bind(Renderer renderer, int role, bool includeDisabled = false, bool blink = false, bool suppressHaze = false)
+        public void Bind(Renderer renderer, int role, bool includeDisabled = false, bool blink = false, bool suppressHaze = false, bool hasMoonWindow = true)
         {
             if (renderer == null || (!includeDisabled && !renderer.enabled)) return;
             foreach (var existing in bindings)
@@ -42,6 +42,7 @@ namespace YunaLegend.Illustrated25D.Environment
                 material.SetTexture("_BlinkTex", source.GetTexture("_BlinkTex"));
             material.SetFloat("_BlinkEnabled", blink ? 1f : 0f);
             material.SetFloat("_SuppressHaze", suppressHaze ? 1f : 0f);
+            material.SetFloat("_HasMoonWindow", hasMoonWindow ? 1f : 0f);
             material.SetFloat("_Sprite", sprite ? 1f : 0f);
             material.SetFloat("_Role", role);
             int queue = source != null ? source.renderQueue : 3000;

@@ -16,13 +16,15 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
         public const string BlocksScene = "Assets/Art/Illustrated25D/Environment/ABC/Preview-Continuacao-04.unity";
         public const string DrumScene = "Assets/Art/Illustrated25D/Environment/Drum/Preview-Continuacao-05.unity";
         public const string Drawers07Scene = "Assets/Art/Illustrated25D/Environment/Drawers/Preview-Continuacao-07.unity";
+        public const string Castle09Scene = "Assets/Art/Illustrated25D/Environment/Castle/Preview-Continuacao-09.unity";
         public const string Output = "Build/Windows/YunaLegend-Acompanhamento/YunaLegend.exe";
         public const string ContinuationOutput = "Build/Windows/YunaLegend-Continuacao/YunaLegend.exe";
         public const string BlocksOutput = "Build/Windows/YunaLegend-Continuacao-04/YunaLegend.exe";
         public const string DrumOutput = "Build/Windows/YunaLegend-Continuacao-05/YunaLegend.exe";
         public const string Drawers07Output = "Build/Windows/YunaLegend-Continuacao-07/YunaLegend.exe";
+        public const string Castle09Output = "Build/Windows/YunaLegend-Continuacao-09/YunaLegend.exe";
 
-        enum Route { Accompaniment, Dresser, Blocks, Drum, Drawers07 }
+        enum Route { Accompaniment, Dresser, Blocks, Drum, Drawers07, Castle09 }
 
         [MenuItem("YunaLegend/Abrir cena de acompanhamento", false, 10)]
         public static void OpenPreview()
@@ -59,7 +61,8 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
         static void Setup(Route route)
         {
             bool continuation = route != Route.Accompaniment;
-            bool drawers07 = route == Route.Drawers07;
+            bool castle09 = route == Route.Castle09;
+            bool drawers07 = route == Route.Drawers07 || castle09;
             bool drum = route == Route.Drum || drawers07;
             bool blocks = route == Route.Blocks || drum;
             EditorSceneManager.OpenScene("Assets/Scenes/DarkRoom_Gameplay.unity");
@@ -73,6 +76,7 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             preview.includeNextBlocks=blocks;
             preview.includeNextDrum=drum;
             preview.includeNextDrawers07=drawers07;
+            preview.includeNextCastle09=castle09;
             if(continuation)
             {
                 const string path="Assets/Art/Illustrated25D/Environment/Dresser/dresser-v1.png";
@@ -117,9 +121,35 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
                 preview.cushionPainting=Load<Texture2D>("Assets/Art/Illustrated25D/Environment/Cushion/cushion-06-v1.png");
                 preview.drawersPainting=Load<Texture2D>("Assets/Art/Illustrated25D/Environment/Drawers/drawers-07-v1.png");
             }
+            if(castle09)
+            {
+                foreach(var p in new[]{"Assets/Art/Illustrated25D/Environment/MusicBox/music-box-08-v2.png","Assets/Art/Illustrated25D/Environment/Castle/block-castle-09-v1.png","Assets/Art/Illustrated25D/Environment/Castle/block-castle-09-front-towers.png"})
+                {
+                    AssetDatabase.ImportAsset(p,ImportAssetOptions.ForceSynchronousImport);
+                    var importer=(TextureImporter)AssetImporter.GetAtPath(p);
+                    importer.textureType=TextureImporterType.Default;importer.npotScale=TextureImporterNPOTScale.None;
+                    importer.maxTextureSize=2048;importer.textureCompression=TextureImporterCompression.Uncompressed;
+                    importer.alphaIsTransparency=true;importer.mipmapEnabled=false;importer.wrapMode=TextureWrapMode.Clamp;
+                    importer.SaveAndReimport();
+                }
+                preview.musicBoxPainting=Load<Texture2D>("Assets/Art/Illustrated25D/Environment/MusicBox/music-box-08-v2.png");
+                preview.castlePainting=Load<Texture2D>("Assets/Art/Illustrated25D/Environment/Castle/block-castle-09-v1.png");
+                preview.castleFrontTowersPainting=Load<Texture2D>("Assets/Art/Illustrated25D/Environment/Castle/block-castle-09-front-towers.png");
+            }
             const string room="Assets/Art/Illustrated25D/Environment/Room/";
             const string furniture="Assets/Art/Illustrated25D/Environment/Furniture/";
             preview.panorama=Load<Texture2D>(room+"room-panorama-v4.png");
+            if(castle09)
+            {
+                const string extPath = room + "room-wall-extension-v1.png";
+                AssetDatabase.ImportAsset(extPath, ImportAssetOptions.ForceSynchronousImport);
+                var extImp = (TextureImporter)AssetImporter.GetAtPath(extPath);
+                extImp.textureType = TextureImporterType.Default; extImp.npotScale = TextureImporterNPOTScale.None;
+                extImp.maxTextureSize = 4096; extImp.textureCompression = TextureImporterCompression.Uncompressed;
+                extImp.mipmapEnabled = false; extImp.wrapMode = TextureWrapMode.Clamp;
+                extImp.SaveAndReimport();
+                preview.roomExtension = Load<Texture2D>(extPath);
+            }
             preview.furnitureBody=Load<Texture2D>(furniture+"furniture-body-v1.png");
             preview.furnitureWood=Load<Texture2D>(furniture+"furniture-top-wood-v1.png");
             preview.nandaFrames=new Sprite[8];
@@ -136,7 +166,7 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             var player=Object.FindFirstObjectByType<Yuna25DPlayerController>();
             if(player.GetComponent<YunaLegend.YunaIllustration.YunaIllustrationInstaller>()==null)
                 throw new InvalidOperationException("Approved Yuna installer missing");
-            string scenePath=drawers07?Drawers07Scene:drum?DrumScene:blocks?BlocksScene:continuation?ContinuationScene:Scene;
+            string scenePath=castle09?Castle09Scene:drawers07?Drawers07Scene:drum?DrumScene:blocks?BlocksScene:continuation?ContinuationScene:Scene;
             EditorSceneManager.SaveScene(player.gameObject.scene,scenePath);
             AssetDatabase.SaveAssets();
             Debug.Log("ILLUSTRATED_PREVIEW_SCENE_SAVED "+scenePath);
@@ -146,13 +176,14 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
         public static void RunContinuationBlocks() { Exit(BuildPlayer(Route.Blocks,BlocksOutput)); }
         public static void RunContinuationDrum() { Exit(BuildPlayer(Route.Drum,DrumOutput)); }
         public static void RunContinuationDrawers07() { Exit(BuildPlayer(Route.Drawers07,Drawers07Output)); }
+        public static void RunContinuationCastle09() { Exit(BuildPlayer(Route.Castle09,Castle09Output)); }
         static void Exit(BuildReport report) => EditorApplication.Exit(report.summary.result==BuildResult.Succeeded?0:1);
         static BuildReport BuildPlayer(Route route,string destination)
         {
             Setup(route);
             var output=Path.GetFullPath(destination);
             Directory.CreateDirectory(Path.GetDirectoryName(output));
-            var scene=route==Route.Drawers07?Drawers07Scene:route==Route.Drum?DrumScene:route==Route.Blocks?BlocksScene:route==Route.Dresser?ContinuationScene:Scene;
+            var scene=route==Route.Castle09?Castle09Scene:route==Route.Drawers07?Drawers07Scene:route==Route.Drum?DrumScene:route==Route.Blocks?BlocksScene:route==Route.Dresser?ContinuationScene:Scene;
             var report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{
                 scenes=new[]{scene}, locationPathName=output,target=BuildTarget.StandaloneWindows64,
                 options=BuildOptions.None});

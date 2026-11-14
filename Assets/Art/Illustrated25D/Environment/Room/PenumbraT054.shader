@@ -10,6 +10,7 @@ Shader "YunaLegend/RoomPenumbraT054"
         _BlinkTex ("Approved closed eye", 2D) = "white" {}
         _BlinkEnabled ("Use approved eye mask", Float) = 0
         _SuppressHaze ("Use approved stumble alpha", Float) = 0
+        _HasMoonWindow ("Panel contains moon window", Float) = 1
     }
     SubShader
     {
@@ -28,7 +29,7 @@ Shader "YunaLegend/RoomPenumbraT054"
             TEXTURE2D(_BlinkTex); SAMPLER(sampler_BlinkTex);
             float _Blink, _BlinkEnabled, _SuppressHaze;
             float4 _Color, _MoonPosition, _NandaPosition;
-            float _Sprite, _Role, _MoonStrength, _NandaStrength, _Phosphor;
+            float _Sprite, _Role, _MoonStrength, _NandaStrength, _Phosphor, _HasMoonWindow;
             float4 _FloorContact0, _FloorContact1, _FloorContact2;
             float FloorContact(float2 world, float4 contact)
             {
@@ -93,7 +94,7 @@ Shader "YunaLegend/RoomPenumbraT054"
                         max(FloorContact(v.world.xy, _FloorContact1), FloorContact(v.world.xy, _FloorContact2)));
                     light += contact * float3(.24,.29,.38) * _MoonStrength;
                     float2 window = abs((v.uv-float2(.564,.558))/float2(.038,.064));
-                    float aperture = (1-smoothstep(.88,1,window.x)) * (1-smoothstep(.88,1,window.y));
+                    float aperture = (1-smoothstep(.88,1,window.x)) * (1-smoothstep(.88,1,window.y)) * _HasMoonWindow;
                     light = lerp(light,float3(.8,.9,1.05)*_MoonStrength,aperture);
                 }
                 return half4(c.rgb * light + emission,c.a);
