@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
@@ -9,6 +10,10 @@ using Object = UnityEngine.Object;
 
 namespace YunaLegend.Illustrated25D.Preview.Editor
 {
+    /// <summary>
+    /// Orquestra a montagem das cenas de acompanhamento e a geração de builds Windows64
+    /// para cada marco do circuito 2.5D ilustrado.
+    /// </summary>
     public static class IllustratedPreviewBuild
     {
         public const string Scene = "Assets/Scenes/DarkRoom_IllustratedPreview.unity";
@@ -18,6 +23,7 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
         public const string Drawers07Scene = "Assets/Art/Illustrated25D/Environment/Drawers/Preview-Continuacao-07.unity";
         public const string Castle09Scene = "Assets/Art/Illustrated25D/Environment/Castle/Preview-Continuacao-09.unity";
         public const string Playable0010Scene = "Assets/Art/Illustrated25D/Environment/Stage2Runtime/Fase-Jogavel-00-10.unity";
+
         public const string Output = "Build/Windows/YunaLegend-Acompanhamento/YunaLegend.exe";
         public const string ContinuationOutput = "Build/Windows/YunaLegend-Continuacao/YunaLegend.exe";
         public const string BlocksOutput = "Build/Windows/YunaLegend-Continuacao-04/YunaLegend.exe";
@@ -26,189 +32,300 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
         public const string Castle09Output = "Build/Windows/YunaLegend-Continuacao-09/YunaLegend.exe";
         public const string Playable0010Output = "Build/Windows/YunaLegend-Jogavel-00-10/YunaLegend.exe";
 
-        enum Route { Accompaniment, Dresser, Blocks, Drum, Drawers07, Castle09, PlayableStage2P10 }
+        private const string BaseGameplayScene = "Assets/Scenes/DarkRoom_Gameplay.unity";
+        private const string RoomArtRoot = "Assets/Art/Illustrated25D/Environment/Room/";
+        private const string FurnitureArtRoot = "Assets/Art/Illustrated25D/Environment/Furniture/";
+
+        private enum Route
+        {
+            Accompaniment,
+            Dresser,
+            Blocks,
+            Drum,
+            Drawers07,
+            Castle09,
+            PlayableStage2P10
+        }
+
+        private readonly struct RouteSpec
+        {
+            public readonly string ScenePath;
+            public readonly string OutputPath;
+            public readonly int MaxPlatformIndex;
+            public readonly bool PlayableLegacyMode;
+
+            public RouteSpec(string scenePath, string outputPath, int maxPlatformIndex, bool playableLegacyMode = false)
+            {
+                ScenePath = scenePath;
+                OutputPath = outputPath;
+                MaxPlatformIndex = maxPlatformIndex;
+                PlayableLegacyMode = playableLegacyMode;
+            }
+
+            public bool IncludeDresser => MaxPlatformIndex >= 3;
+            public bool IncludeBlocks => MaxPlatformIndex >= 4;
+            public bool IncludeDrum => MaxPlatformIndex >= 5;
+            public bool IncludeDrawers07 => MaxPlatformIndex >= 7;
+            public bool IncludeCastle09 => MaxPlatformIndex >= 9;
+            public bool IncludeStage2P10 => MaxPlatformIndex >= 10;
+        }
+
+        private static readonly Dictionary<Route, RouteSpec> RouteTable = new Dictionary<Route, RouteSpec>
+        {
+            { Route.Accompaniment, new RouteSpec(Scene, Output, 2) },
+            { Route.Dresser, new RouteSpec(ContinuationScene, ContinuationOutput, 3) },
+            { Route.Blocks, new RouteSpec(BlocksScene, BlocksOutput, 4) },
+            { Route.Drum, new RouteSpec(DrumScene, DrumOutput, 5) },
+            { Route.Drawers07, new RouteSpec(Drawers07Scene, Drawers07Output, 7) },
+            { Route.Castle09, new RouteSpec(Castle09Scene, Castle09Output, 9) },
+            { Route.PlayableStage2P10, new RouteSpec(Playable0010Scene, Playable0010Output, 10, playableLegacyMode: true) }
+        };
 
         [MenuItem("YunaLegend/Abrir cena de acompanhamento", false, 10)]
         public static void OpenPreview()
         {
-            if (EditorApplication.isPlayingOrWillChangePlaymode) return;
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                return;
+            }
+
             if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+            {
                 EditorSceneManager.OpenScene(Scene);
+            }
         }
 
         [MenuItem("YunaLegend/Gerar build Windows de acompanhamento", false, 20)]
         public static void BuildFromEditor()
         {
-            if (EditorApplication.isPlayingOrWillChangePlaymode || BuildPipeline.isBuildingPlayer) return;
-            if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
+            if (EditorApplication.isPlayingOrWillChangePlaymode || BuildPipeline.isBuildingPlayer)
+            {
+                return;
+            }
+
+            if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+            {
+                return;
+            }
+
             var previousScenes = EditorSceneManager.GetSceneManagerSetup();
             try
             {
                 var report = BuildPlayer(Route.Accompaniment, Output);
-                if (report.summary.result == BuildResult.Succeeded) OpenBuildFolder();
+                if (report.summary.result == BuildResult.Succeeded)
+                {
+                    OpenBuildFolder();
+                }
             }
-            finally { EditorSceneManager.RestoreSceneManagerSetup(previousScenes); }
+            finally
+            {
+                EditorSceneManager.RestoreSceneManagerSetup(previousScenes);
+            }
         }
 
         [MenuItem("YunaLegend/Abrir pasta da build", false, 30)]
         public static void OpenBuildFolder()
         {
             var folder = Path.GetDirectoryName(Path.GetFullPath(Output));
-            if (Directory.Exists(folder)) EditorUtility.RevealInFinder(folder);
-            else Debug.LogWarning("A build ainda não foi gerada. Use YunaLegend > Gerar build Windows de acompanhamento.");
+            if (Directory.Exists(folder))
+            {
+                EditorUtility.RevealInFinder(folder);
+            }
+            else
+            {
+                Debug.LogWarning("A build ainda não foi gerada. Use YunaLegend > Gerar build Windows de acompanhamento.");
+            }
         }
 
-        public static void Setup() { Setup(Route.Accompaniment); }
+        public static void Setup() => Setup(Route.Accompaniment);
+        public static void SetupPlayableStage2P10() => Setup(Route.PlayableStage2P10);
 
-        static void Setup(Route route)
+        public static void Run() => Exit(BuildPlayer(Route.Accompaniment, Output));
+        public static void RunContinuation() => Exit(BuildPlayer(Route.Dresser, ContinuationOutput));
+        public static void RunContinuationBlocks() => Exit(BuildPlayer(Route.Blocks, BlocksOutput));
+        public static void RunContinuationDrum() => Exit(BuildPlayer(Route.Drum, DrumOutput));
+        public static void RunContinuationDrawers07() => Exit(BuildPlayer(Route.Drawers07, Drawers07Output));
+        public static void RunContinuationCastle09() => Exit(BuildPlayer(Route.Castle09, Castle09Output));
+        public static void RunPlayableStage2P10() => Exit(BuildPlayer(Route.PlayableStage2P10, Playable0010Output));
+
+        private static void Setup(Route route)
         {
-            bool continuation = route != Route.Accompaniment;
-            bool playable0010 = route == Route.PlayableStage2P10;
-            bool castle09 = route == Route.Castle09 || playable0010;
-            bool drawers07 = route == Route.Drawers07 || castle09;
-            bool drum = route == Route.Drum || drawers07;
-            bool blocks = route == Route.Blocks || drum;
-            EditorSceneManager.OpenScene("Assets/Scenes/DarkRoom_Gameplay.unity");
-            // A dedicated scene preserves production narrative, menu and the original checkpoint.
-            foreach (var c in Object.FindObjectsByType<DarkRoomOpeningSequence>(FindObjectsSortMode.None)) c.enabled=false;
-            foreach (var c in Object.FindObjectsByType<DarkRoomProgressionManager>(FindObjectsSortMode.None)) c.enabled=false;
-            foreach (var c in Object.FindObjectsByType<DarkRoomBlockoutBuilder>(FindObjectsSortMode.None)) c.enabled=false;
-            var go=new GameObject("Acompanhamento_Ilustrado");
-            var preview=go.AddComponent<IllustratedPreview>();
-            preview.includeNextDresser=continuation;
-            preview.includeNextBlocks=blocks;
-            preview.includeNextDrum=drum;
-            preview.includeNextDrawers07=drawers07;
-            preview.includeNextCastle09=castle09;
-            preview.includeNextStage2Platform10=playable0010;
-            preview.playableLegacyMode=playable0010;
-            if(continuation)
+            var spec = RouteTable[route];
+            EditorSceneManager.OpenScene(BaseGameplayScene);
+
+            DisableProductionFlowManagers();
+
+            var previewRoot = new GameObject("Acompanhamento_Ilustrado");
+            var preview = previewRoot.AddComponent<IllustratedPreview>();
+            ConfigureRouteFlags(preview, spec);
+            AssignPlatformTextures(preview, spec);
+            AssignSharedAssets(preview, spec);
+
+            previewRoot.AddComponent<PreviewVerification>();
+            previewRoot.AddComponent<PreviewRetryVerification>();
+
+            var player = Object.FindFirstObjectByType<Yuna25DPlayerController>();
+            if (player.GetComponent<YunaLegend.YunaIllustration.YunaIllustrationInstaller>() == null)
             {
-                const string path="Assets/Art/Illustrated25D/Environment/Dresser/dresser-v1.png";
-                AssetDatabase.ImportAsset(path,ImportAssetOptions.ForceSynchronousImport);
-                var importer=(TextureImporter)AssetImporter.GetAtPath(path);
-                importer.textureType=TextureImporterType.Default;importer.npotScale=TextureImporterNPOTScale.None;
-                importer.maxTextureSize=2048;importer.textureCompression=TextureImporterCompression.Uncompressed;
-                importer.alphaIsTransparency=true;importer.mipmapEnabled=false;importer.wrapMode=TextureWrapMode.Clamp;
-                importer.SaveAndReimport();preview.dresserPainting=Load<Texture2D>(path);
-            }
-            if(blocks)
-            {
-                const string path="Assets/Art/Illustrated25D/Environment/ABC/abc-stack-v1.png";
-                AssetDatabase.ImportAsset(path,ImportAssetOptions.ForceSynchronousImport);
-                var importer=(TextureImporter)AssetImporter.GetAtPath(path);
-                importer.textureType=TextureImporterType.Default;importer.npotScale=TextureImporterNPOTScale.None;
-                importer.maxTextureSize=2048;importer.textureCompression=TextureImporterCompression.Uncompressed;
-                importer.alphaIsTransparency=true;importer.mipmapEnabled=false;importer.wrapMode=TextureWrapMode.Clamp;
-                importer.SaveAndReimport();preview.blocksPainting=Load<Texture2D>(path);
-            }
-            if(drum)
-            {
-                const string path="Assets/Art/Illustrated25D/Environment/Drum/drum-05-v1.png";
-                AssetDatabase.ImportAsset(path,ImportAssetOptions.ForceSynchronousImport);
-                var importer=(TextureImporter)AssetImporter.GetAtPath(path);
-                importer.textureType=TextureImporterType.Default;importer.npotScale=TextureImporterNPOTScale.None;
-                importer.maxTextureSize=2048;importer.textureCompression=TextureImporterCompression.Uncompressed;
-                importer.alphaIsTransparency=true;importer.mipmapEnabled=false;importer.wrapMode=TextureWrapMode.Clamp;
-                importer.SaveAndReimport();preview.drumPainting=Load<Texture2D>(path);
-            }
-            if(drawers07)
-            {
-                foreach(var p in new[]{"Assets/Art/Illustrated25D/Environment/Cushion/cushion-06-v1.png","Assets/Art/Illustrated25D/Environment/Drawers/drawers-07-v1.png"})
-                {
-                    AssetDatabase.ImportAsset(p,ImportAssetOptions.ForceSynchronousImport);
-                    var importer=(TextureImporter)AssetImporter.GetAtPath(p);
-                    importer.textureType=TextureImporterType.Default;importer.npotScale=TextureImporterNPOTScale.None;
-                    importer.maxTextureSize=2048;importer.textureCompression=TextureImporterCompression.Uncompressed;
-                    importer.alphaIsTransparency=true;importer.mipmapEnabled=false;importer.wrapMode=TextureWrapMode.Clamp;
-                    importer.SaveAndReimport();
-                }
-                preview.cushionPainting=Load<Texture2D>("Assets/Art/Illustrated25D/Environment/Cushion/cushion-06-v1.png");
-                preview.drawersPainting=Load<Texture2D>("Assets/Art/Illustrated25D/Environment/Drawers/drawers-07-v1.png");
-            }
-            if(castle09)
-            {
-                foreach(var p in new[]{"Assets/Art/Illustrated25D/Environment/MusicBox/music-box-08-v2.png","Assets/Art/Illustrated25D/Environment/Castle/block-castle-09-v1.png","Assets/Art/Illustrated25D/Environment/Castle/block-castle-09-front-towers.png"})
-                {
-                    AssetDatabase.ImportAsset(p,ImportAssetOptions.ForceSynchronousImport);
-                    var importer=(TextureImporter)AssetImporter.GetAtPath(p);
-                    importer.textureType=TextureImporterType.Default;importer.npotScale=TextureImporterNPOTScale.None;
-                    importer.maxTextureSize=2048;importer.textureCompression=TextureImporterCompression.Uncompressed;
-                    importer.alphaIsTransparency=true;importer.mipmapEnabled=false;importer.wrapMode=TextureWrapMode.Clamp;
-                    importer.SaveAndReimport();
-                }
-                preview.musicBoxPainting=Load<Texture2D>("Assets/Art/Illustrated25D/Environment/MusicBox/music-box-08-v2.png");
-                preview.castlePainting=Load<Texture2D>("Assets/Art/Illustrated25D/Environment/Castle/block-castle-09-v1.png");
-                preview.castleFrontTowersPainting=Load<Texture2D>("Assets/Art/Illustrated25D/Environment/Castle/block-castle-09-front-towers.png");
-            }
-            if(playable0010)
-            {
-                const string p10 = "Assets/Art/Illustrated25D/Environment/Stage2/10-train-trestle-v1.png";
-                AssetDatabase.ImportAsset(p10, ImportAssetOptions.ForceSynchronousImport);
-                var importer = (TextureImporter)AssetImporter.GetAtPath(p10);
-                importer.textureType = TextureImporterType.Default; importer.npotScale = TextureImporterNPOTScale.None;
-                importer.maxTextureSize = 2048; importer.textureCompression = TextureImporterCompression.Uncompressed;
-                importer.alphaIsTransparency = true; importer.mipmapEnabled = false; importer.wrapMode = TextureWrapMode.Clamp;
-                importer.SaveAndReimport();
-                preview.trainTrestle10Painting = Load<Texture2D>(p10);
-            }
-            const string room="Assets/Art/Illustrated25D/Environment/Room/";
-            const string furniture="Assets/Art/Illustrated25D/Environment/Furniture/";
-            preview.panorama=Load<Texture2D>(room+"room-panorama-v4.png");
-            if(castle09)
-            {
-                const string extPath = room + "room-wall-extension-v1.png";
-                AssetDatabase.ImportAsset(extPath, ImportAssetOptions.ForceSynchronousImport);
-                var extImp = (TextureImporter)AssetImporter.GetAtPath(extPath);
-                extImp.textureType = TextureImporterType.Default; extImp.npotScale = TextureImporterNPOTScale.None;
-                extImp.maxTextureSize = 4096; extImp.textureCompression = TextureImporterCompression.Uncompressed;
-                extImp.mipmapEnabled = false; extImp.wrapMode = TextureWrapMode.Clamp;
-                extImp.SaveAndReimport();
-                preview.roomExtension = Load<Texture2D>(extPath);
-            }
-            preview.furnitureBody=Load<Texture2D>(furniture+"furniture-body-v1.png");
-            preview.furnitureWood=Load<Texture2D>(furniture+"furniture-top-wood-v1.png");
-            preview.nandaFrames=new Sprite[8];
-            for(int i=0;i<8;i++) preview.nandaFrames[i]=Load<Sprite>(
-                "Assets/Art/Illustrated25D/Nanda/Flight/Runtime/Frames/NandaFlight"+i+".asset");
-            preview.requiredShaders=new[]{Shader.Find("YunaLegend/RoomPenumbraT054"),
-                Shader.Find("Sprites/Default"),Shader.Find("Unlit/Texture")};
-            if(continuation) preview.requiredShaders=new[]{preview.requiredShaders[0],preview.requiredShaders[1],
-                preview.requiredShaders[2],Shader.Find("YunaLegend/DresserFloorReceiver")};
-            foreach(var shader in preview.requiredShaders)
-                if(shader==null || ShaderUtil.ShaderHasError(shader)) throw new InvalidOperationException("Required shader missing/invalid");
-            go.AddComponent<PreviewVerification>();
-            go.AddComponent<PreviewRetryVerification>();
-            var player=Object.FindFirstObjectByType<Yuna25DPlayerController>();
-            if(player.GetComponent<YunaLegend.YunaIllustration.YunaIllustrationInstaller>()==null)
                 throw new InvalidOperationException("Approved Yuna installer missing");
-            string scenePath=playable0010?Playable0010Scene:castle09?Castle09Scene:drawers07?Drawers07Scene:drum?DrumScene:blocks?BlocksScene:continuation?ContinuationScene:Scene;
-            EditorSceneManager.SaveScene(player.gameObject.scene,scenePath);
+            }
+
+            EditorSceneManager.SaveScene(player.gameObject.scene, spec.ScenePath);
             AssetDatabase.SaveAssets();
-            Debug.Log("ILLUSTRATED_PREVIEW_SCENE_SAVED "+scenePath);
+            Debug.Log("ILLUSTRATED_PREVIEW_SCENE_SAVED " + spec.ScenePath);
         }
-        public static void SetupPlayableStage2P10() { Setup(Route.PlayableStage2P10); }
-        public static void Run() { Exit(BuildPlayer(Route.Accompaniment,Output)); }
-        public static void RunContinuation() { Exit(BuildPlayer(Route.Dresser,ContinuationOutput)); }
-        public static void RunContinuationBlocks() { Exit(BuildPlayer(Route.Blocks,BlocksOutput)); }
-        public static void RunContinuationDrum() { Exit(BuildPlayer(Route.Drum,DrumOutput)); }
-        public static void RunContinuationDrawers07() { Exit(BuildPlayer(Route.Drawers07,Drawers07Output)); }
-        public static void RunContinuationCastle09() { Exit(BuildPlayer(Route.Castle09,Castle09Output)); }
-        public static void RunPlayableStage2P10() { Exit(BuildPlayer(Route.PlayableStage2P10,Playable0010Output)); }
-        static void Exit(BuildReport report) => EditorApplication.Exit(report.summary.result==BuildResult.Succeeded?0:1);
-        static BuildReport BuildPlayer(Route route,string destination)
+
+        private static void DisableProductionFlowManagers()
+        {
+            // A dedicated scene preserves production narrative, menu and the original checkpoint.
+            foreach (var c in Object.FindObjectsByType<DarkRoomOpeningSequence>(FindObjectsSortMode.None))
+            {
+                c.enabled = false;
+            }
+            foreach (var c in Object.FindObjectsByType<DarkRoomProgressionManager>(FindObjectsSortMode.None))
+            {
+                c.enabled = false;
+            }
+            foreach (var c in Object.FindObjectsByType<DarkRoomBlockoutBuilder>(FindObjectsSortMode.None))
+            {
+                c.enabled = false;
+            }
+        }
+
+        private static void ConfigureRouteFlags(IllustratedPreview preview, RouteSpec spec)
+        {
+            preview.includeNextDresser = spec.IncludeDresser;
+            preview.includeNextBlocks = spec.IncludeBlocks;
+            preview.includeNextDrum = spec.IncludeDrum;
+            preview.includeNextDrawers07 = spec.IncludeDrawers07;
+            preview.includeNextCastle09 = spec.IncludeCastle09;
+            preview.includeNextStage2Platform10 = spec.IncludeStage2P10;
+            preview.playableLegacyMode = spec.PlayableLegacyMode;
+        }
+
+        private static void AssignPlatformTextures(IllustratedPreview preview, RouteSpec spec)
+        {
+            if (spec.IncludeDresser)
+            {
+                preview.dresserPainting = ImportUncompressedTexture("Assets/Art/Illustrated25D/Environment/Dresser/dresser-v1.png");
+            }
+            if (spec.IncludeBlocks)
+            {
+                preview.blocksPainting = ImportUncompressedTexture("Assets/Art/Illustrated25D/Environment/ABC/abc-stack-v1.png");
+            }
+            if (spec.IncludeDrum)
+            {
+                preview.drumPainting = ImportUncompressedTexture("Assets/Art/Illustrated25D/Environment/Drum/drum-05-v1.png");
+            }
+            if (spec.IncludeDrawers07)
+            {
+                preview.cushionPainting = ImportUncompressedTexture("Assets/Art/Illustrated25D/Environment/Cushion/cushion-06-v1.png");
+                preview.drawersPainting = ImportUncompressedTexture("Assets/Art/Illustrated25D/Environment/Drawers/drawers-07-v1.png");
+            }
+            if (spec.IncludeCastle09)
+            {
+                preview.musicBoxPainting = ImportUncompressedTexture("Assets/Art/Illustrated25D/Environment/MusicBox/music-box-08-v2.png");
+                preview.castlePainting = ImportUncompressedTexture("Assets/Art/Illustrated25D/Environment/Castle/block-castle-09-v1.png");
+                preview.castleFrontTowersPainting = ImportUncompressedTexture("Assets/Art/Illustrated25D/Environment/Castle/block-castle-09-front-towers.png");
+                preview.roomExtension = ImportUncompressedTexture(RoomArtRoot + "room-wall-extension-v1.png", maxSize: 4096, alphaIsTransparency: false);
+            }
+            if (spec.IncludeStage2P10)
+            {
+                preview.trainTrestle10Painting = ImportUncompressedTexture("Assets/Art/Illustrated25D/Environment/Stage2/10-train-trestle-v1.png");
+            }
+        }
+
+        private static void AssignSharedAssets(IllustratedPreview preview, RouteSpec spec)
+        {
+            preview.panorama = Load<Texture2D>(RoomArtRoot + "room-panorama-v4.png");
+            preview.furnitureBody = Load<Texture2D>(FurnitureArtRoot + "furniture-body-v1.png");
+            preview.furnitureWood = Load<Texture2D>(FurnitureArtRoot + "furniture-top-wood-v1.png");
+
+            preview.nandaFrames = new Sprite[8];
+            for (int i = 0; i < 8; i++)
+            {
+                preview.nandaFrames[i] = Load<Sprite>(
+                    $"Assets/Art/Illustrated25D/Nanda/Flight/Runtime/Frames/NandaFlight{i}.asset");
+            }
+
+            preview.requiredShaders = CollectRequiredShaders(spec.IncludeDresser);
+        }
+
+        private static Shader[] CollectRequiredShaders(bool includeFloorReceiver)
+        {
+            var shaders = includeFloorReceiver
+                ? new[]
+                {
+                    Shader.Find("YunaLegend/RoomPenumbraT054"),
+                    Shader.Find("Sprites/Default"),
+                    Shader.Find("Unlit/Texture"),
+                    Shader.Find("YunaLegend/DresserFloorReceiver")
+                }
+                : new[]
+                {
+                    Shader.Find("YunaLegend/RoomPenumbraT054"),
+                    Shader.Find("Sprites/Default"),
+                    Shader.Find("Unlit/Texture")
+                };
+
+            foreach (var shader in shaders)
+            {
+                if (shader == null || ShaderUtil.ShaderHasError(shader))
+                {
+                    throw new InvalidOperationException("Required shader missing/invalid");
+                }
+            }
+
+            return shaders;
+        }
+
+        private static Texture2D ImportUncompressedTexture(string assetPath, int maxSize = 2048, bool alphaIsTransparency = true)
+        {
+            AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceSynchronousImport);
+            var importer = (TextureImporter)AssetImporter.GetAtPath(assetPath);
+            importer.textureType = TextureImporterType.Default;
+            importer.npotScale = TextureImporterNPOTScale.None;
+            importer.maxTextureSize = maxSize;
+            importer.textureCompression = TextureImporterCompression.Uncompressed;
+            importer.alphaIsTransparency = alphaIsTransparency;
+            importer.mipmapEnabled = false;
+            importer.wrapMode = TextureWrapMode.Clamp;
+            importer.SaveAndReimport();
+            return Load<Texture2D>(assetPath);
+        }
+
+        private static BuildReport BuildPlayer(Route route, string destination)
         {
             Setup(route);
-            var output=Path.GetFullPath(destination);
+            var spec = RouteTable[route];
+            var output = Path.GetFullPath(destination);
             Directory.CreateDirectory(Path.GetDirectoryName(output));
-            var scene=route==Route.PlayableStage2P10?Playable0010Scene:route==Route.Castle09?Castle09Scene:route==Route.Drawers07?Drawers07Scene:route==Route.Drum?DrumScene:route==Route.Blocks?BlocksScene:route==Route.Dresser?ContinuationScene:Scene;
-            var report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{
-                scenes=new[]{scene}, locationPathName=output,target=BuildTarget.StandaloneWindows64,
-                options=BuildOptions.None});
-            Debug.Log("ILLUSTRATED_PREVIEW_BUILD "+report.summary.result+" errors="+report.summary.totalErrors+" bytes="+report.summary.totalSize);
+
+            var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
+            {
+                scenes = new[] { spec.ScenePath },
+                locationPathName = output,
+                target = BuildTarget.StandaloneWindows64,
+                options = BuildOptions.None
+            });
+
+            Debug.Log($"ILLUSTRATED_PREVIEW_BUILD {report.summary.result} errors={report.summary.totalErrors} bytes={report.summary.totalSize}");
             return report;
         }
-        static T Load<T>(string path) where T:Object
-        { var value=AssetDatabase.LoadAssetAtPath<T>(path);if(value==null)throw new InvalidOperationException(path);return value; }
+
+        private static void Exit(BuildReport report)
+        {
+            EditorApplication.Exit(report.summary.result == BuildResult.Succeeded ? 0 : 1);
+        }
+
+        private static T Load<T>(string path) where T : Object
+        {
+            var value = AssetDatabase.LoadAssetAtPath<T>(path);
+            if (value == null)
+            {
+                throw new InvalidOperationException(path);
+            }
+            return value;
+        }
     }
 }

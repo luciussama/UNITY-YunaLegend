@@ -7,16 +7,25 @@ using YunaLegend.Camera25D;
 using YunaLegend.DarkRoom;
 using YunaLegend.Illustrated25D.Environment;
 using YunaLegend.Illustrated25D.Furniture;
+using YunaLegend.Illustrated25D.Preview.Controllers;
 using YunaLegend.NandaIllustration;
 using YunaLegend.YunaIllustration;
 
 namespace YunaLegend.Illustrated25D.Preview
 {
-    /// <summary>Dedicated accompaniment build. Keeps the original scene and physical controller intact.</summary>
+    /// <summary>
+    /// Composition Root enxuto da cena dedicada de acompanhamento ilustrado 2.5D.
+    /// Delega plataformas, cenografia, iluminação e guia Nanda para controllers especialistas,
+    /// preservando a cena base e o controlador físico 3D originais.
+    /// </summary>
     [DefaultExecutionOrder(260)]
     public sealed class IllustratedPreview : MonoBehaviour
     {
-        public Texture2D panorama, roomExtension, furnitureBody, furnitureWood;
+        public Texture2D panorama;
+        public Texture2D roomExtension;
+        public Texture2D furnitureBody;
+        public Texture2D furnitureWood;
+
         public bool includeNextDresser;
         public bool includeNextBlocks;
         public bool includeNextDrum;
@@ -24,6 +33,7 @@ namespace YunaLegend.Illustrated25D.Preview
         public bool includeNextCastle09;
         public bool includeNextStage2Platform10;
         public bool playableLegacyMode;
+
         public Texture2D dresserPainting;
         public Texture2D blocksPainting;
         public Texture2D drumPainting;
@@ -33,250 +43,332 @@ namespace YunaLegend.Illustrated25D.Preview
         public Texture2D castlePainting;
         public Texture2D castleFrontTowersPainting;
         public Texture2D trainTrestle10Painting;
-        public DresserPlatform Dresser { get; private set; }
-        public AbcStackPlatform Blocks { get; private set; }
-        public Drum05Platform Drum { get; private set; }
-        public Cushion06Platform Cushion { get; private set; }
-        public Drawers07Platform Drawers { get; private set; }
-        public MusicBox08Platform MusicBox { get; private set; }
-        public Castle09Platform Castle { get; private set; }
-        public TrainTrestle10Platform TrainTrestle10 { get; private set; }
-        public LegacyPlayableStageFlow PlayableFlow { get; private set; }
+
         public Sprite[] nandaFrames;
         public Shader[] requiredShaders;
+
+        public StagePlatformController PlatformController { get; private set; }
+        public StageSceneryController SceneryController { get; private set; }
+        public StageLightingController LightingController { get; private set; }
+        public NandaGuideController NandaController { get; private set; }
+        public LegacyPlayableStageFlow PlayableFlow { get; private set; }
+
+        public DresserPlatform Dresser => PlatformController != null ? PlatformController.Dresser : null;
+        public AbcStackPlatform Blocks => PlatformController != null ? PlatformController.Blocks : null;
+        public Drum05Platform Drum => PlatformController != null ? PlatformController.Drum : null;
+        public Cushion06Platform Cushion => PlatformController != null ? PlatformController.Cushion : null;
+        public Drawers07Platform Drawers => PlatformController != null ? PlatformController.Drawers : null;
+        public MusicBox08Platform MusicBox => PlatformController != null ? PlatformController.MusicBox : null;
+        public Castle09Platform Castle => PlatformController != null ? PlatformController.Castle : null;
+        public TrainTrestle10Platform TrainTrestle10 => PlatformController != null ? PlatformController.TrainTrestle10 : null;
+        public YieldingWoodFurniture Furniture => PlatformController != null ? PlatformController.Furniture : null;
+
         public Yuna25DPlayerController Player { get; private set; }
-        public RoomBackgroundT054 Room { get; private set; }
-        public PenumbraLightingT054 Lighting { get; private set; }
-        public NandaFlightIllustration Flight { get; private set; }
-        public YieldingWoodFurniture Furniture { get; private set; }
+        public RoomBackgroundT054 Room => SceneryController != null ? SceneryController.Room : null;
+        public PenumbraLightingT054 Lighting => LightingController != null ? LightingController.Lighting : null;
+        public NandaFlightIllustration Flight => NandaController != null ? NandaController.Flight : null;
         public int LegacyRenderersVisible { get; private set; }
         public bool Finished { get; private set; }
         public bool Started { get; private set; }
         public bool Ready { get; private set; }
         public string Failure { get; private set; }
-        DarkRoomPlatformMarker[] pilot;
-        Renderer[] legacy;
-        NandaFairyGuide guide;
-        YunaIllustrationVisibilityResolver resolver;
-        SideScroll25DCamera cameraDriver;
-        bool paused;
-        float clock;
 
-        void Start()
+        private DarkRoomPlatformMarker[] pilot;
+        private Renderer[] legacy;
+        private NandaFairyGuide guide;
+        private YunaIllustrationVisibilityResolver resolver;
+        private SideScroll25DCamera cameraDriver;
+        private bool paused;
+
+        private void Start()
         {
-            try { Install(); Ready = true; Debug.Log("ILLUSTRATED_PREVIEW_READY legacyVisible=0"); }
+            try
+            {
+                Install();
+                Ready = true;
+                Debug.Log("ILLUSTRATED_PREVIEW_READY legacyVisible=0");
+            }
             catch (Exception e)
             {
                 Failure = "Não foi possível montar a cena ilustrada. Consulte o log da build.";
                 Debug.LogException(e);
-                // A missing approved asset must never reveal the old presentation.
-                foreach (var r in FindObjectsByType<Renderer>(FindObjectsSortMode.None)) r.enabled = false;
-                if (Player != null) Player.AutoRunActive = false;
+
+                foreach (var r in FindObjectsByType<Renderer>(FindObjectsSortMode.None))
+                {
+                    r.enabled = false;
+                }
+                if (Player != null)
+                {
+                    Player.AutoRunActive = false;
+                }
             }
         }
 
-        void Install()
+        public void Begin()
         {
-            if (panorama == null || furnitureBody == null || furnitureWood == null || nandaFrames == null
-                || nandaFrames.Length != 8 || nandaFrames.Any(f => f == null))
-                throw new InvalidOperationException("Approved preview assets missing");
+            if (!Ready || Started)
+            {
+                return;
+            }
+
+            Started = true;
+            Player.AutoRunActive = true;
+            Player.AllowFloorLaunch(Player.transform.position.x);
+        }
+
+        public void Retry()
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        private void Update()
+        {
+            if (!Ready || playableLegacyMode)
+            {
+                return;
+            }
+
+            var keyboard = Keyboard.current;
+            if (keyboard != null && keyboard.rKey.wasPressedThisFrame)
+            {
+                Retry();
+                return;
+            }
+
+            if (keyboard != null
+                && (keyboard.pKey.wasPressedThisFrame || keyboard.escapeKey.wasPressedThisFrame)
+                && Started
+                && !Finished)
+            {
+                paused = !paused;
+                Time.timeScale = paused ? 0f : 1f;
+            }
+
+            if (!Started && keyboard != null && (keyboard.enterKey.wasPressedThisFrame || keyboard.spaceKey.wasPressedThisFrame))
+            {
+                Begin();
+            }
+
+            int endIndex = ResolveLastPlatformIndex();
+            float finishOffset = ResolveFinishOffset();
+            if (!Finished
+                && Player.CurrentSupportIndex == endIndex
+                && Player.IsGrounded
+                && Furniture.HasCracked
+                && !Player.IsStumbling
+                && Player.transform.position.x > pilot[endIndex].transform.position.x + finishOffset)
+            {
+                Finished = true;
+                Player.AutoRunActive = false;
+                cameraDriver.AutoScrollActive = false;
+            }
+        }
+
+        private void LateUpdate()
+        {
+            if (!Ready)
+            {
+                return;
+            }
+
+            resolver.showIdle = playableLegacyMode && PlayableFlow != null
+                ? (PlayableFlow.ShowIdlePose || Player.IsDead)
+                : (!Started || Finished || Player.IsDead);
+
+            SceneryController.FollowCamera(Camera.main.transform.position);
+            foreach (var r in legacy)
+            {
+                if (r != null)
+                {
+                    r.enabled = false;
+                }
+            }
+
+            LegacyRenderersVisible = legacy.Count(r => r != null && r.enabled && r.gameObject.activeInHierarchy);
+        }
+
+        private void OnGUI()
+        {
+            if (playableLegacyMode)
+            {
+                return;
+            }
+
+            GUI.skin.label.fontSize = Mathf.Max(14, Screen.height / 45);
+            GUI.skin.button.fontSize = GUI.skin.label.fontSize;
+
+            GUI.Label(new Rect(18f, 12f, Screen.width - 36f, 32f), ResolvePreviewHeader());
+            GUI.Label(new Rect(18f, 44f, Screen.width - 36f, 32f), "Espaço / ↑ / clique: pular     P: pausa     R: recomeçar");
+
+            string message = ResolvePreviewModalMessage();
+            if (message == null)
+            {
+                return;
+            }
+
+            float w = Mathf.Min(560f, Screen.width - 40f);
+            float x = (Screen.width - w) * 0.5f;
+            float y = Screen.height * 0.28f;
+
+            GUI.Box(new Rect(x, y, w, 170f), string.Empty);
+            GUI.Label(new Rect(x + 22f, y + 20f, w - 44f, 75f), message);
+            if (Failure != null)
+            {
+                return;
+            }
+
+            string buttonLabel = !Started ? "Começar" : paused ? "Continuar" : "Recomeçar";
+            if (GUI.Button(new Rect(x + 22f, y + 108f, w - 44f, 42f), buttonLabel))
+            {
+                if (!Started)
+                {
+                    Begin();
+                }
+                else if (paused)
+                {
+                    paused = false;
+                    Time.timeScale = 1f;
+                }
+                else
+                {
+                    Retry();
+                }
+            }
+        }
+
+        private void OnDestroy()
+        {
+            Time.timeScale = 1f;
+        }
+
+        private void Install()
+        {
+            ValidateBaseAssets();
+
             Player = FindFirstObjectByType<Yuna25DPlayerController>();
             guide = FindFirstObjectByType<NandaFairyGuide>();
             resolver = Player.GetComponent<YunaIllustrationVisibilityResolver>();
-            if (resolver == null || guide == null) throw new InvalidOperationException("Illustrated characters missing");
+            if (resolver == null || guide == null)
+            {
+                throw new InvalidOperationException("Illustrated characters missing");
+            }
+
             cameraDriver = Camera.main.GetComponent<SideScroll25DCamera>();
             var markers = FindObjectsByType<DarkRoomPlatformMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-            int last = includeNextStage2Platform10 ? 10 : includeNextCastle09 ? 9 : includeNextDrawers07 ? 7 : includeNextDrum ? 5 : includeNextBlocks ? 4 : includeNextDresser ? 3 : 2;
-            pilot = Enumerable.Range(0,last+1).Select(i => markers.Single(m => m.spec.index == i)).ToArray();
-            foreach (var m in pilot) m.gameObject.SetActive(true);
-            foreach (var m in markers.Where(m => m.spec.index > last)) m.gameObject.SetActive(false);
+            int last = ResolveLastPlatformIndex();
+            pilot = Enumerable.Range(0, last + 1).Select(i => markers.Single(m => m.spec.index == i)).ToArray();
+            foreach (var m in pilot)
+            {
+                m.gameObject.SetActive(true);
+            }
+            foreach (var m in markers.Where(m => m.spec.index > last))
+            {
+                m.gameObject.SetActive(false);
+            }
 
-            // Snapshot the old presentation before adding the approved runtime paintings.
-            var bearPainting=pilot[0].transform.Find("Visual_Ilustrado_Urso");
-            var bookPainting=pilot[1].transform.Find("Visual_Ilustrado_Livros");
-            if(bearPainting==null || bookPainting==null) throw new InvalidOperationException("Approved platforms missing");
-            legacy = FindObjectsByType<Renderer>(FindObjectsInactive.Include, FindObjectsSortMode.None)
-                .Where(r => r!=resolver.idleRenderer && r!=resolver.run.painting
-                    && r!=resolver.jump.painting && r!=resolver.stumble.painting
-                    && !r.transform.IsChildOf(bearPainting) && !r.transform.IsChildOf(bookPainting)).ToArray();
-            foreach (var r in legacy) r.enabled = false;
-            foreach (var lamp in FindObjectsByType<Light>(FindObjectsSortMode.None)) lamp.enabled = false;
-            foreach (var trail in guide.GetComponentsInChildren<TrailRenderer>(true)) { trail.emitting = false; trail.Clear(); }
+            var bearPainting = pilot[0].transform.Find("Visual_Ilustrado_Urso");
+            var booksPainting = pilot[1].transform.Find("Visual_Ilustrado_Livros");
+            if (bearPainting == null || booksPainting == null)
+            {
+                throw new InvalidOperationException("Approved platforms missing");
+            }
 
-            Furniture = pilot[2].GetComponent<YieldingWoodFurniture>();
-            pilot[2].gameObject.AddComponent<FurnitureIllustrationCandidate>().Install(furnitureBody, furnitureWood);
-            if (includeNextDresser)
-            {
-                Dresser = pilot[3].gameObject.AddComponent<DresserPlatform>();
-                Dresser.Install(dresserPainting,pilot[2]);
-                var feet = Player.gameObject.AddComponent<DresserFootAlignment>();
-                feet.player=Player;feet.surface=Dresser.Top;
-            }
-            if (includeNextBlocks)
-            {
-                if (!includeNextDresser) throw new InvalidOperationException("ABC stack requires the dresser step");
-                if (blocksPainting == null) throw new InvalidOperationException("Approved ABC painting missing");
-                Blocks = pilot[4].gameObject.AddComponent<AbcStackPlatform>();
-                Blocks.Install(blocksPainting);
-                var abcFeet = Player.gameObject.AddComponent<DresserFootAlignment>();
-                abcFeet.player = Player; abcFeet.surface = Blocks.Top; abcFeet.supportIndex = 4; abcFeet.pinVisibleSole = true;
-            }
-            if (includeNextDrum)
-            {
-                if (!includeNextBlocks) throw new InvalidOperationException("Drum 05 requires the ABC stack step");
-                if (drumPainting == null) throw new InvalidOperationException("Approved Drum 05 painting missing");
-                Drum = pilot[5].gameObject.AddComponent<Drum05Platform>();
-                Drum.Install(drumPainting);
-                var drumFeet = Player.gameObject.AddComponent<DresserFootAlignment>();
-                drumFeet.player = Player; drumFeet.surface = Drum.Top; drumFeet.supportIndex = 5; drumFeet.pinVisibleSole = true;
-            }
-            if (includeNextDrawers07)
-            {
-                if (!includeNextDrum) throw new InvalidOperationException("06/07 require the Drum 05 step");
-                if (cushionPainting == null || drawersPainting == null) throw new InvalidOperationException("Approved 06/07 paintings missing");
-                Cushion = pilot[6].gameObject.AddComponent<Cushion06Platform>();
-                Cushion.Install(cushionPainting);
-                var cushionFeet = Player.gameObject.AddComponent<DresserFootAlignment>();
-                cushionFeet.player = Player; cushionFeet.surface = Cushion.Top; cushionFeet.supportIndex = 6; cushionFeet.pinVisibleSole = true;
-                Drawers = pilot[7].gameObject.AddComponent<Drawers07Platform>();
-                Drawers.Install(drawersPainting);
-                var drawersFeet = Player.gameObject.AddComponent<DresserFootAlignment>();
-                drawersFeet.player = Player; drawersFeet.surface = Drawers.Top; drawersFeet.supportIndex = 7; drawersFeet.pinVisibleSole = true;
-            }
-            if (includeNextCastle09)
-            {
-                if (!includeNextDrawers07) throw new InvalidOperationException("08/09 require the 06/07 step");
-                if (musicBoxPainting == null || castlePainting == null) throw new InvalidOperationException("Approved 08/09 paintings missing");
-                MusicBox = pilot[8].gameObject.AddComponent<MusicBox08Platform>();
-                MusicBox.Install(musicBoxPainting);
-                var mbFeet = Player.gameObject.AddComponent<DresserFootAlignment>();
-                mbFeet.player = Player; mbFeet.surface = MusicBox.Top; mbFeet.supportIndex = 8; mbFeet.pinVisibleSole = true;
-                Castle = pilot[9].gameObject.AddComponent<Castle09Platform>();
-                Castle.Install(castlePainting, castleFrontTowersPainting);
-                var castleFeet = Player.gameObject.AddComponent<DresserFootAlignment>();
-                castleFeet.player = Player; castleFeet.surface = Castle.Top; castleFeet.supportIndex = 9; castleFeet.pinVisibleSole = true;
-            }
-            if (includeNextStage2Platform10)
-            {
-                if (!includeNextCastle09) throw new InvalidOperationException("Platform 10 requires Castle 09 step");
-                if (trainTrestle10Painting == null) throw new InvalidOperationException("Approved Train Trestle 10 painting missing");
-                TrainTrestle10 = pilot[10].gameObject.AddComponent<TrainTrestle10Platform>();
-                TrainTrestle10.Install(trainTrestle10Painting);
-                var p10Feet = Player.gameObject.AddComponent<DresserFootAlignment>();
-                p10Feet.player = Player; p10Feet.surface = TrainTrestle10.Top; p10Feet.supportIndex = 10; p10Feet.pinVisibleSole = true;
-            }
-            // The contact colliders describe where feet land, not the bottom of the painting.
-            float floor = bearPainting.TransformPoint(new Vector3(0,
-                IllustratedBearPlatformProfile.Document.mapping.quadBoundsLocal.bottom, 0)).y;
-            var books = pilot[1].transform.Find("Visual_Ilustrado_Livros");
-            if (books == null) throw new InvalidOperationException("Approved books missing");
-            float baseY = books.TransformPoint(new Vector3(0,
-                IllustratedBookStackPlatformProfile.Document.mapping.quadBoundsLocal.bottom,0)).y;
-            if (baseY > floor + .001f)
-            {
-                var lower = Instantiate(books.gameObject,pilot[1].transform);
-                lower.name = "Livros_Base_T054";
-                lower.transform.position = books.position + Vector3.down * (baseY-floor);
-                lower.GetComponent<Renderer>().sortingOrder = books.GetComponent<Renderer>().sortingOrder-1;
-            }
-            // Preserve the approved panorama's anchor while extending the playable route.
-            float min = pilot.Take(3).Min(p => Bounds(p).min.x), max = pilot.Take(3).Max(p => Bounds(p).max.x);
-            Room = new GameObject("Quarto_Ilustrado_Aprovado").AddComponent<RoomBackgroundT054>();
+            HideLegacySceneRenderers(bearPainting, booksPainting);
+
+            PlatformController = gameObject.AddComponent<StagePlatformController>();
+            PlatformController.InstallSequence(this, pilot, Player);
+
+            float floorY = bearPainting.TransformPoint(new Vector3(0f, IllustratedBearPlatformProfile.Document.mapping.quadBoundsLocal.bottom, 0f)).y;
             var spriteMaterial = new Material(Shader.Find("Sprites/Default"));
-            var panels = roomExtension != null
-                ? (includeNextStage2Platform10 ? new[] { panorama, roomExtension, roomExtension, roomExtension } : new[] { panorama, roomExtension, roomExtension })
-                : new[] { panorama };
-            Room.InstallPanels(panels,panorama.width/32f,null,null,floor,(min+max)*.5f,
-                spriteMaterial,1,1,RoomBackgroundT054.PanoramaFloorInsetFraction,.35f,0);
-            var shadows = new GameObject(ContactShadowT054.RootName);
-            foreach (var p in pilot)
-            {
-                var b = Bounds(p);
-                var paintingBounds = p.spec.index == 0 ? bearPainting.GetComponent<Renderer>().bounds
-                    : p.spec.index == 1 ? books.GetComponent<Renderer>().bounds
-                    : p.spec.index == 4 && Blocks != null && Blocks.Painting != null ? Blocks.Painting.bounds
-                    : p.spec.index == 5 && Drum != null && Drum.Painting != null ? Drum.Painting.bounds
-                    : p.spec.index == 8 && MusicBox != null && MusicBox.Painting != null ? MusicBox.Painting.bounds
-                    : p.spec.index == 9 && Castle != null && Castle.Painting != null ? Castle.Painting.bounds
-                    : p.spec.index == 10 && TrainTrestle10 != null && TrainTrestle10.Painting != null ? TrainTrestle10.Painting.bounds : b;
-                ContactShadowT054.Install(shadows.transform,paintingBounds.center.x,floor,
-                    paintingBounds.size.x,b.size.z,.18f,true);
-            }
 
-            var visual = new GameObject("Nanda_Ilustrada"); visual.SetActive(false);
-            visual.transform.SetParent(guide.transform,false);
-            var painting = visual.AddComponent<SpriteRenderer>();
-            painting.sprite = nandaFrames[0]; painting.sortingOrder = 110;
-            Flight = guide.gameObject.AddComponent<NandaFlightIllustration>();
-            Flight.painting = painting; Flight.visualRoot = visual.transform; Flight.frames = nandaFrames;
-            visual.SetActive(true);
-            var lampGo = new GameObject("Nanda_Luz_Azul"); lampGo.transform.SetParent(guide.transform,false);
-            var lampBlue = lampGo.AddComponent<Light>(); lampBlue.type = LightType.Point;
-            var trailGo = new GameObject("Nanda_Trilha_Azul"); trailGo.transform.SetParent(guide.transform,false);
-            var ribbon = trailGo.AddComponent<TrailRenderer>(); ribbon.sharedMaterial = spriteMaterial;
-            var accompaniment = guide.gameObject.AddComponent<NandaAccompaniment>();
-            accompaniment.guide = guide; accompaniment.player = Player; accompaniment.flight = Flight;
-            accompaniment.blueLight = lampBlue; accompaniment.blueTrail = ribbon;
-            // Awake precedes assignment on an active guide; re-enable to initialize trail settings.
-            accompaniment.enabled = false;
-            ConfigureTrail(ribbon);
-            accompaniment.enabled = true;
-            accompaniment.ResetPresentation();
+            SceneryController = gameObject.AddComponent<StageSceneryController>();
+            SceneryController.ExtendBooksBaseToFloor(booksPainting, pilot[1].transform, floorY);
+            SceneryController.InstallRoom(pilot, panorama, roomExtension, includeNextStage2Platform10, floorY, spriteMaterial);
+            SceneryController.InstallContactShadows(
+                pilot,
+                floorY,
+                (marker, fallback) => PlatformController.GetPaintingBounds(marker, bearPainting, booksPainting, fallback));
 
-            Lighting = Room.gameObject.AddComponent<PenumbraLightingT054>();
-            Lighting.lightingShader = requiredShaders.Single(s => s != null && s.name == "YunaLegend/RoomPenumbraT054");
-            Lighting.room = Room; Lighting.nanda = painting.transform;
-            Lighting.floorContacts = pilot.Select(p => {
-                var b = p.spec.index == 4 && Blocks != null && Blocks.Painting != null ? Blocks.Painting.bounds
-                    : p.spec.index == 5 && Drum != null && Drum.Painting != null ? Drum.Painting.bounds
-                    : p.spec.index == 8 && MusicBox != null && MusicBox.Painting != null ? MusicBox.Painting.bounds
-                    : p.spec.index == 9 && Castle != null && Castle.Painting != null ? Castle.Painting.bounds
-                    : p.spec.index == 10 && TrainTrestle10 != null && TrainTrestle10.Painting != null ? TrainTrestle10.Painting.bounds : Bounds(p);
-                return new Vector4(b.center.x, floor, b.size.x * .5f, 1f);
-            }).ToArray();
-            for (int i = 0; i < Room.FarPanels.Count; i++) Lighting.Bind(Room.FarPanels[i], 0, false, false, false, i == 0);
-            foreach (var p in pilot)
-                foreach (var r in p.GetComponentsInChildren<Renderer>()) if (r.enabled) Lighting.Bind(r,1);
-            Lighting.Bind(resolver.idleRenderer,2,true,true);
-            Lighting.Bind(resolver.run.painting,2,true);
-            Lighting.Bind(resolver.jump.painting,2,true);
-            Lighting.Bind(resolver.stumble.painting,2,true,false,true);
-            Lighting.Bind(painting,3);
-            if(includeNextDresser) DresserFloorReceiver.Install(Room,Lighting,pilot[3].transform.position.x);
-            if(includeNextBlocks) DresserFloorReceiver.Install(Room,Lighting,
-                pilot[4].transform.position.x,AbcStackPlatform.FullWidth*.5f+.2f,"Reflexo_Piso_Blocos_ABC");
-            if(includeNextDrum) DresserFloorReceiver.Install(Room,Lighting,
-                pilot[5].transform.position.x,Drum05Platform.FullWidth*.5f+.2f,"Reflexo_Piso_Tambor");
-            if(includeNextDrawers07)
+            NandaController = gameObject.AddComponent<NandaGuideController>();
+            NandaController.Install(guide, Player, nandaFrames, spriteMaterial);
+
+            LightingController = gameObject.AddComponent<StageLightingController>();
+            LightingController.InstallPenumbra(
+                SceneryController.Room,
+                requiredShaders,
+                pilot,
+                floorY,
+                resolver,
+                NandaController.Renderer,
+                (marker, fallback) => PlatformController.GetPaintingBounds(marker, bearPainting, booksPainting, fallback));
+            LightingController.InstallFloorReflections(
+                SceneryController.Room,
+                pilot,
+                includeNextDresser,
+                includeNextBlocks,
+                includeNextDrum,
+                includeNextDrawers07,
+                includeNextCastle09,
+                includeNextStage2Platform10);
+
+            ConfigureCameraAndActors();
+        }
+
+        private void ValidateBaseAssets()
+        {
+            if (panorama == null
+                || furnitureBody == null
+                || furnitureWood == null
+                || nandaFrames == null
+                || nandaFrames.Length != 8
+                || nandaFrames.Any(f => f == null))
             {
-                DresserFloorReceiver.Install(Room,Lighting,pilot[6].transform.position.x,Cushion06Platform.FullWidth*.5f+.2f,"Reflexo_Piso_Almofadao");
-                DresserFloorReceiver.Install(Room,Lighting,pilot[7].transform.position.x,Drawers07Platform.FullWidth*.5f+.2f,"Reflexo_Piso_Gavetas");
+                throw new InvalidOperationException("Approved preview assets missing");
             }
-            if(includeNextCastle09)
+        }
+
+        private void HideLegacySceneRenderers(Transform bearPainting, Transform booksPainting)
+        {
+            legacy = FindObjectsByType<Renderer>(FindObjectsInactive.Include, FindObjectsSortMode.None)
+                .Where(r => r != resolver.idleRenderer
+                    && r != resolver.run.painting
+                    && r != resolver.jump.painting
+                    && r != resolver.stumble.painting
+                    && !r.transform.IsChildOf(bearPainting)
+                    && !r.transform.IsChildOf(booksPainting))
+                .ToArray();
+
+            foreach (var r in legacy)
             {
-                DresserFloorReceiver.Install(Room,Lighting,pilot[8].transform.position.x,MusicBox08Platform.FullWidth*.5f+.2f,"Reflexo_Piso_Caixa_Musica");
-                DresserFloorReceiver.Install(Room,Lighting,pilot[9].transform.position.x,Castle09Platform.FullWidth*.5f+.2f,"Reflexo_Piso_Castelinho");
+                r.enabled = false;
             }
-            if(includeNextStage2Platform10)
+            foreach (var lamp in FindObjectsByType<Light>(FindObjectsSortMode.None))
             {
-                DresserFloorReceiver.Install(Room,Lighting,pilot[10].transform.position.x,TrainTrestle10Platform.FullWidth*.5f+.2f,"Reflexo_Piso_Trem_10");
+                lamp.enabled = false;
             }
+        }
+
+        private void ConfigureCameraAndActors()
+        {
             resolver.idle.previewClock = true;
-            Camera.main.clearFlags = CameraClearFlags.SolidColor;
-            Camera.main.backgroundColor = new Color(.007f,.009f,.018f);
+
             cameraDriver.SetTarget(Player.transform);
             cameraDriver.ConfigureIllustratedPilot(true);
             cameraDriver.ScreenCrushActive = false;
             cameraDriver.AutoScrollActive = false;
+
             Player.PrepareForOpening(DarkRoomStartLayout.Position);
             Player.SetRunSpeed(DarkRoomStartLayout.RunSpeed);
             Player.SetJumpHeight(DarkRoomStartLayout.JumpHeight);
             Player.SetFloorDeathActive(true);
-            guide.SetYuna(Player.transform); guide.ReturnToYuna();
-            guide.transform.position = Player.transform.position + new Vector3(1.65f,1.4f,-.15f);
-            accompaniment.ResetPresentation();
+
+            NandaController.PositionAtStart(guide, Player.transform);
+
             cameraDriver.SnapToTargetX(Player.transform.position.x);
-            Room.Follow(Camera.main.transform.position); Lighting.Apply();
+            SceneryController.FollowCamera(Camera.main.transform.position);
+            LightingController.Apply();
+
             if (playableLegacyMode)
             {
                 PlayableFlow = gameObject.AddComponent<LegacyPlayableStageFlow>();
@@ -284,89 +376,49 @@ namespace YunaLegend.Illustrated25D.Preview
             }
         }
 
-        static Bounds Bounds(DarkRoomPlatformMarker m)
+        private int ResolveLastPlatformIndex()
         {
-            var colliders = m.GetComponentsInChildren<Collider>(true).Where(c => c.enabled).ToArray();
-            var b = colliders[0].bounds; foreach (var c in colliders) b.Encapsulate(c.bounds); return b;
+            if (includeNextStage2Platform10) return 10;
+            if (includeNextCastle09) return 9;
+            if (includeNextDrawers07) return 7;
+            if (includeNextDrum) return 5;
+            if (includeNextBlocks) return 4;
+            if (includeNextDresser) return 3;
+            return 2;
         }
-        static void ConfigureTrail(TrailRenderer ribbon)
+
+        private float ResolveFinishOffset()
         {
-            ribbon.time=.32f; ribbon.minVertexDistance=.04f;
-            ribbon.widthCurve=AnimationCurve.Linear(0,.028f,1,0); ribbon.widthMultiplier=1;
-            ribbon.sortingOrder=109; ribbon.numCapVertices=3;
-            var g=new Gradient(); g.SetKeys(new[]{new GradientColorKey(new Color(.34f,.63f,1),0),
-                new GradientColorKey(new Color(.25f,.48f,.92f),1)},
-                new[]{new GradientAlphaKey(.24f,0),new GradientAlphaKey(0,1)});
-            ribbon.colorGradient=g;
+            if (includeNextCastle09) return 0.6f;
+            if (includeNextDrawers07) return 0.4f;
+            if (includeNextDrum) return 0.6f;
+            if (includeNextDresser) return 0.35f;
+            return 2f;
         }
-        public void Begin()
+
+        private string ResolvePreviewHeader()
         {
-            if (!Ready || Started) return;
-            Started=true; Player.AutoRunActive=true;
-            Player.AllowFloorLaunch(Player.transform.position.x);
+            if (includeNextCastle09)
+                return "Yuna Legend · urso → livros → móvel → cômoda → blocos ABC → tambor → almofadão → gavetas → caixa de música → castelinho";
+            if (includeNextDrawers07)
+                return "Yuna Legend · urso → livros → móvel → cômoda → blocos ABC → tambor → almofadão → gavetas";
+            if (includeNextDrum)
+                return "Yuna Legend · urso → livros → móvel → cômoda → blocos ABC → tambor";
+            if (includeNextBlocks)
+                return "Yuna Legend · urso → livros → móvel → cômoda → blocos ABC";
+            if (includeNextDresser)
+                return "Yuna Legend · urso → livros → móvel → cômoda";
+            return "Yuna Legend · acompanhamento ilustrado · urso → livros → móvel";
         }
-        public void Retry()
+
+        private string ResolvePreviewModalMessage()
         {
-            Time.timeScale=1;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (Failure != null) return Failure;
+            if (!Started) return "O quarto ilustrado\nUma versão para acompanhar o que já construímos.";
+            if (Player != null && Player.IsDead) return "Vamos tentar outra vez?";
+            if (Finished) return "Você chegou ao fim do trecho atual!\nAs próximas plataformas ainda estão em produção.";
+            if (paused) return "Pausado";
+            return null;
         }
-        void Update()
-        {
-            if (!Ready) return;
-            if (playableLegacyMode) return;
-            var k=Keyboard.current;
-            if (k != null && k.rKey.wasPressedThisFrame) { Retry(); return; }
-            if (k != null && (k.pKey.wasPressedThisFrame || k.escapeKey.wasPressedThisFrame) && Started && !Finished)
-            { paused=!paused; Time.timeScale=paused?0:1; }
-            if (!Started && k != null && (k.enterKey.wasPressedThisFrame || k.spaceKey.wasPressedThisFrame)) Begin();
-            int endIndex=includeNextCastle09?9:includeNextDrawers07?7:includeNextDrum?5:includeNextBlocks?4:includeNextDresser?3:2;
-            float finishOffset=includeNextCastle09?.6f:includeNextDrawers07?.4f:includeNextDrum?.6f:includeNextDresser?.35f:2f;
-            if (!Finished && Player.CurrentSupportIndex==endIndex && Player.IsGrounded && Furniture.HasCracked
-                && !Player.IsStumbling && Player.transform.position.x>pilot[endIndex].transform.position.x+finishOffset)
-            { Finished=true; Player.AutoRunActive=false; cameraDriver.AutoScrollActive=false; }
-        }
-        void LateUpdate()
-        {
-            if (!Ready) return;
-            clock+=Time.deltaTime;
-            resolver.showIdle = playableLegacyMode && PlayableFlow != null
-                ? (PlayableFlow.ShowIdlePose || Player.IsDead)
-                : (!Started || Finished || Player.IsDead);
-            Room.Follow(Camera.main.transform.position);
-            foreach (var r in legacy) if (r != null) r.enabled=false;
-            LegacyRenderersVisible=legacy.Count(r=>r!=null && r.enabled && r.gameObject.activeInHierarchy);
-        }
-        void OnGUI()
-        {
-            if (playableLegacyMode) return;
-            GUI.skin.label.fontSize=Mathf.Max(14,Screen.height/45);
-            GUI.skin.button.fontSize=GUI.skin.label.fontSize;
-            GUI.Label(new Rect(18,12,Screen.width-36,32),includeNextCastle09
-                ? "Yuna Legend · urso → livros → móvel → cômoda → blocos ABC → tambor → almofadão → gavetas → caixa de música → castelinho"
-                : includeNextDrawers07
-                ? "Yuna Legend · urso → livros → móvel → cômoda → blocos ABC → tambor → almofadão → gavetas"
-                : includeNextDrum
-                ? "Yuna Legend · urso → livros → móvel → cômoda → blocos ABC → tambor"
-                : includeNextBlocks
-                ? "Yuna Legend · urso → livros → móvel → cômoda → blocos ABC"
-                : includeNextDresser
-                ? "Yuna Legend · urso → livros → móvel → cômoda"
-                : "Yuna Legend · acompanhamento ilustrado · urso → livros → móvel");
-            GUI.Label(new Rect(18,44,Screen.width-36,32),"Espaço / ↑ / clique: pular     P: pausa     R: recomeçar");
-            string message=Failure;
-            if (message==null && !Started) message="O quarto ilustrado\nUma versão para acompanhar o que já construímos.";
-            if (Player != null && Player.IsDead) message="Vamos tentar outra vez?";
-            if (Finished) message="Você chegou ao fim do trecho atual!\nAs próximas plataformas ainda estão em produção.";
-            if (paused) message="Pausado";
-            if (message==null) return;
-            float w=Mathf.Min(560,Screen.width-40),x=(Screen.width-w)*.5f,y=Screen.height*.28f;
-            GUI.Box(new Rect(x,y,w,170),"");
-            GUI.Label(new Rect(x+22,y+20,w-44,75),message);
-            if (Failure!=null) return;
-            if (GUI.Button(new Rect(x+22,y+108,w-44,42),!Started?"Começar":paused?"Continuar":"Recomeçar"))
-            { if (!Started) Begin(); else if(paused) {paused=false;Time.timeScale=1;} else Retry(); }
-        }
-        void OnDestroy() { Time.timeScale=1; }
     }
 }
-
