@@ -276,6 +276,7 @@ namespace YunaLegend.Illustrated25D.Environment
                 case StageFlowStateMachine.FlowPhase.OpeningPoeticIntro:
                 case StageFlowStateMachine.FlowPhase.OpeningNandaWake2:
                 case StageFlowStateMachine.FlowPhase.PreJumpCue:
+                    cam?.SetIllustratedSpanScale(1f);
                     PositionNandaForPhase(next);
                     break;
 
@@ -351,6 +352,7 @@ namespace YunaLegend.Illustrated25D.Environment
                     player.AllowFloorLaunch(player.transform.position.x);
                     player.SetFloorDeathActive(true);
                     player.AutoRunActive = true;
+                    cam?.SetIllustratedSpanScale(1.15f);
                     cam?.SnapToTargetX(player.transform.position.x, DarkRoomReturnLayout.CameraOffset);
                     guide?.ReturnToYuna();
                     break;

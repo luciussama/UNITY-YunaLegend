@@ -49,8 +49,15 @@ namespace YunaLegend.Camera25D
         [SerializeField] private bool illustratedPilotFraming;
         [SerializeField, Min(4f)] private float illustratedVerticalSpan = 9.2f;
         [SerializeField, Min(.05f)] private float illustratedFollowTime = .45f;
+        private float illustratedSpanScale = 1f;
         private Vector3 illustratedVelocity;
+        private float illustratedZVelocity;
         public bool IllustratedPilotFraming => illustratedPilotFraming;
+
+        public void SetIllustratedSpanScale(float scale)
+        {
+            illustratedSpanScale = Mathf.Max(0.5f, scale);
+        }
 
         public void ConfigureIllustratedPilot(bool active, float verticalSpan = 7.5f)
         {
@@ -209,9 +216,10 @@ namespace YunaLegend.Camera25D
         private void ApplyIllustratedFrame(bool snap)
         {
             // A fixed distance preserves the painting's scale. Only X/Y follow the route.
-            float depth = illustratedVerticalSpan / (2f * Mathf.Tan(fixedFov * Mathf.Deg2Rad * .5f));
+            float effectiveSpan = illustratedVerticalSpan * illustratedSpanScale;
+            float depth = effectiveSpan / (2f * Mathf.Tan(fixedFov * Mathf.Deg2Rad * .5f));
             float direction = Mathf.Sign(playerTarget.RunDirection);
-            float width = illustratedVerticalSpan * Aspect;
+            float width = effectiveSpan * Aspect;
             var current = FindPlatform(playerTarget.CurrentSupportIndex);
             float groundY = DarkRoomPlatformGeometry.FloorSurfaceY;
             if (current != null && !current.Support.IsEmpty)
@@ -239,9 +247,13 @@ namespace YunaLegend.Camera25D
             float leadX = focusOnFloorBody && !playerTarget.AutoRunActive ? 0f : direction * width * .18f;
             var desired = new Vector3(playerTarget.transform.position.x + leadX + anticipation, desiredY, -depth);
             var position = snap ? desired : Vector3.SmoothDamp(transform.position, desired, ref illustratedVelocity, illustratedFollowTime);
-            position.z = -depth;
+            position.z = snap ? -depth : Mathf.SmoothDamp(transform.position.z, -depth, ref illustratedZVelocity, 0.45f);
             transform.position = position;
-            if (snap) illustratedVelocity = Vector3.zero;
+            if (snap)
+            {
+                illustratedVelocity = Vector3.zero;
+                illustratedZVelocity = 0f;
+            }
         }
 
         // Also used by editor evidence capture: selects an actual route target, never new geometry.
