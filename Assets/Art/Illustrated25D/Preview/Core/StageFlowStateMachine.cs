@@ -18,7 +18,12 @@ namespace YunaLegend.Illustrated25D.Environment
             CastleCutsceneStep0,
             CastleCutsceneStep1,
             Stage2Gameplay,
-            Stage2Completed
+            Stage2Completed,
+            FalseDoorFalling,
+            FalseDoorCutsceneStep0,
+            FalseDoorCutsceneStep1,
+            Stage3Gameplay,
+            TruePortalVictory
         }
 
         private const float NandaWake1Duration = 4.4f;
@@ -28,8 +33,14 @@ namespace YunaLegend.Illustrated25D.Environment
         public FlowPhase Phase { get; private set; } = FlowPhase.OpeningNandaWake1;
         public float StepTimer { get; private set; }
         public bool Stage2CheckpointReached { get; private set; }
+        public bool Stage3CheckpointReached { get; private set; }
         public bool CastleCutsceneTriggered { get; private set; }
-        public bool ShowIdlePose => Phase != FlowPhase.Stage1Gameplay && Phase != FlowPhase.Stage2Gameplay;
+        public bool FalseDoorTriggered { get; private set; }
+        public bool ShowIdlePose =>
+            Phase != FlowPhase.Stage1Gameplay
+            && Phase != FlowPhase.Stage2Gameplay
+            && Phase != FlowPhase.Stage3Gameplay
+            && Phase != FlowPhase.FalseDoorFalling;
 
         public event Action<FlowPhase> OnPhaseChanged;
 
@@ -37,7 +48,9 @@ namespace YunaLegend.Illustrated25D.Environment
         {
             StepTimer = 0f;
             Stage2CheckpointReached = false;
+            Stage3CheckpointReached = false;
             CastleCutsceneTriggered = false;
+            FalseDoorTriggered = false;
             SetPhase(FlowPhase.OpeningNandaWake1);
         }
 
@@ -89,6 +102,21 @@ namespace YunaLegend.Illustrated25D.Environment
                         SetPhase(FlowPhase.Stage2Gameplay);
                     }
                     break;
+
+                case FlowPhase.FalseDoorCutsceneStep0:
+                    if (confirmPressed)
+                    {
+                        SetPhase(FlowPhase.FalseDoorCutsceneStep1);
+                    }
+                    break;
+
+                case FlowPhase.FalseDoorCutsceneStep1:
+                    if (confirmPressed)
+                    {
+                        Stage3CheckpointReached = true;
+                        SetPhase(FlowPhase.Stage3Gameplay);
+                    }
+                    break;
             }
         }
 
@@ -114,6 +142,13 @@ namespace YunaLegend.Illustrated25D.Environment
                 case FlowPhase.CastleCutsceneStep1:
                     Stage2CheckpointReached = true;
                     SetPhase(FlowPhase.Stage2Gameplay);
+                    break;
+                case FlowPhase.FalseDoorCutsceneStep0:
+                    SetPhase(FlowPhase.FalseDoorCutsceneStep1);
+                    break;
+                case FlowPhase.FalseDoorCutsceneStep1:
+                    Stage3CheckpointReached = true;
+                    SetPhase(FlowPhase.Stage3Gameplay);
                     break;
             }
         }
@@ -144,6 +179,47 @@ namespace YunaLegend.Illustrated25D.Environment
             }
 
             SetPhase(FlowPhase.Stage2Completed);
+            return true;
+        }
+
+        public bool TryTriggerFalseDoorFall()
+        {
+            if (FalseDoorTriggered || Phase != FlowPhase.Stage2Gameplay)
+            {
+                return false;
+            }
+
+            FalseDoorTriggered = true;
+            SetPhase(FlowPhase.FalseDoorFalling);
+            return true;
+        }
+
+        public bool NotifyCinematicFallLanded()
+        {
+            if (Phase != FlowPhase.FalseDoorFalling)
+            {
+                return false;
+            }
+
+            SetPhase(FlowPhase.FalseDoorCutsceneStep0);
+            return true;
+        }
+
+        public void RespawnAtStage3Checkpoint()
+        {
+            Stage2CheckpointReached = true;
+            Stage3CheckpointReached = true;
+            SetPhase(FlowPhase.Stage3Gameplay);
+        }
+
+        public bool TryCompleteTruePortal()
+        {
+            if (Phase != FlowPhase.Stage3Gameplay)
+            {
+                return false;
+            }
+
+            SetPhase(FlowPhase.TruePortalVictory);
             return true;
         }
 

@@ -48,7 +48,10 @@ namespace YunaLegend.Illustrated25D.Environment
         [SerializeField] private float nearScale = 1f;
         [SerializeField] private float floorInset = FloorInsetFraction;
         [SerializeField] private float farTravelFraction = FarTravel;
+        [SerializeField] private bool followVertical;
+        private float farHeight;
         public float FarTravelFraction => farTravelFraction;
+        public bool FollowVertical { get => followVertical; set => followVertical = value; }
 
         public SpriteRenderer Far => far.Count > 0 ? far[0] : null;
         public IReadOnlyList<SpriteRenderer> FarPanels => far;
@@ -110,17 +113,22 @@ namespace YunaLegend.Illustrated25D.Environment
         public void Follow(Vector3 cameraPosition)
         {
             float shift = (cameraPosition.x - centreWorldX) * farTravelFraction;
+            float baseFarY = floorWorldY + farHeight * (.5f - floorInset);
+            float targetY = followVertical && farHeight > 0f
+                ? Mathf.Max(baseFarY, cameraPosition.y - farHeight * .12f)
+                : baseFarY;
             for (int i = 0; i < far.Count; i++)
-                PlaceAt(far[i], centreWorldX + farOffsets[i] + shift);
-            PlaceAt(mid, centreWorldX + (cameraPosition.x - centreWorldX) * MidTravel);
-            PlaceAt(near, centreWorldX + (cameraPosition.x - centreWorldX) * NearTravel);
+                PlaceAt(far[i], centreWorldX + farOffsets[i] + shift, followVertical ? targetY : (float?)null);
+            PlaceAt(mid, centreWorldX + (cameraPosition.x - centreWorldX) * MidTravel, followVertical ? targetY : (float?)null);
+            PlaceAt(near, centreWorldX + (cameraPosition.x - centreWorldX) * NearTravel, followVertical ? targetY : (float?)null);
         }
 
-        private static void PlaceAt(SpriteRenderer layer, float x)
+        private static void PlaceAt(SpriteRenderer layer, float x, float? y = null)
         {
             if (layer == null) return;
             var position = layer.transform.position;
             position.x = x;
+            if (y.HasValue) position.y = y.Value;
             layer.transform.position = position;
         }
 
@@ -136,6 +144,7 @@ namespace YunaLegend.Illustrated25D.Environment
             renderer.sortingOrder = order;
             if (material != null) renderer.sharedMaterial = material;
             float height = texture.height / pixelsPerUnit * scale;
+            if (farHeight <= 0f) farHeight = height;
             go.transform.localScale = Vector3.one * scale;
             go.transform.position = new Vector3(centreWorldX,
                 floorWorldY + height * (.5f - floorInset), 0f);

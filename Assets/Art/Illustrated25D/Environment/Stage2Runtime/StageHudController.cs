@@ -16,6 +16,7 @@ namespace YunaLegend.Illustrated25D.Environment
         public Func<bool> IsPaused;
         public Func<bool> IsMuted;
         public Func<bool> IsPlayerDead;
+        public Func<bool> IsFalseDoorDialogueReady;
         public Func<string> GetFailure;
         public Func<float> GetStage2BannerTimer;
         public Func<Vector3> GetPlayerWorldPosition;
@@ -144,6 +145,47 @@ namespace YunaLegend.Illustrated25D.Environment
                         "✦ A FUGA — PLATAFORMA 10 ✦",
                         "Você alcançou a Pista Elevada do Trem!",
                         "Fim do trecho com plataformas desenhadas em sequência (00 → 10). As plataformas 11–13 ainda estão em produção.",
+                        "Jogar novamente",
+                        () => OnRetryFromBeginningRequested?.Invoke());
+                    break;
+
+                case StageFlowStateMachine.FlowPhase.FalseDoorCutsceneStep0:
+                    if (IsFalseDoorDialogueReady == null || IsFalseDoorDialogueReady())
+                    {
+                        DrawLegacyBottomDialogue(
+                            "YUNA",
+                            "Mas a porta não era ali...",
+                            "Clique ou pressione Espaço / Enter para continuar",
+                            boldBody: false);
+                    }
+                    break;
+
+                case StageFlowStateMachine.FlowPhase.FalseDoorCutsceneStep1:
+                    DrawLegacyPoeticCard(
+                        DarkRoomDialogueScript.PoeticFalseDoor,
+                        "Clique ou pressione Espaço / Enter para continuar");
+                    DrawLegacyBottomDialogue(
+                        "NANDA",
+                        DarkRoomDialogueScript.FalseDoorNanda.text,
+                        "Clique ou pressione Espaço / Enter para iniciar A Subida Caótica",
+                        boldBody: false);
+                    break;
+
+                case StageFlowStateMachine.FlowPhase.Stage3Gameplay:
+                    if (GetStage2BannerTimer != null && GetStage2BannerTimer() > 0f)
+                    {
+                        DrawStageBanner("FASE 3 — A SUBIDA CAÓTICA");
+                    }
+                    break;
+
+                case StageFlowStateMachine.FlowPhase.TruePortalVictory:
+                    DrawLegacyPoeticCard(
+                        DarkRoomDialogueScript.PoeticTruePortal,
+                        "Fim do Quarto Escuro");
+                    DrawCenteredCard(
+                        "✦ QUARTO ESCURO CONCLUÍDO ✦",
+                        "Você encontrou o Verdadeiro Portal dos Sonhos!",
+                        "Yuna e Nanda atravessaram o Quarto Escuro até o fim.",
                         "Jogar novamente",
                         () => OnRetryFromBeginningRequested?.Invoke());
                     break;

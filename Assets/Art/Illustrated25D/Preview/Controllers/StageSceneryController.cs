@@ -26,9 +26,10 @@ namespace YunaLegend.Illustrated25D.Preview.Controllers
             float maxX = platforms.Take(3).Max(p => Bounds(p).max.x);
 
             Room = new GameObject("Quarto_Ilustrado_Aprovado").AddComponent<RoomBackgroundT054>();
+            Room.FollowVertical = extendForStage2;
             var panels = roomExtension != null
                 ? (extendForStage2
-                    ? new[] { panorama, roomExtension, roomExtension, roomExtension }
+                    ? new[] { panorama, roomExtension, roomExtension, roomExtension, roomExtension, roomExtension }
                     : new[] { panorama, roomExtension, roomExtension })
                 : new[] { panorama };
 

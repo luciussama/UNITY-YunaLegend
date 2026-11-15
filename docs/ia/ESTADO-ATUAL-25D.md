@@ -1,5 +1,14 @@
 # Estado atual — sala escura ilustrada
 
+## T08L–T08Y: fase completa 2.5D (00→37), abertura direta no Unity Editor e ajustes visuais — EM REVISÃO (15/11/2026)
+
+- Cena jogável completa `Assets/Art/Illustrated25D/Environment/Stage2Runtime/Fase-Jogavel-Completa.unity` (`00..21` ida, plot twist da Porta Falsa e `22..37` retorno caótico até o Portal Verdadeiro) com exclusão mútua entre plataformas da ida (`00..21`) e do retorno (`22..37`).
+- Abertura direta e Play Mode automático configurados em `PlayableStageEditorStartup.cs` e `ProjectSettings/EditorBuildSettings.asset`.
+- Saída do Castelo 09 corrigida (câmera mantém profundidade ilustrada sem chicote e Nanda acompanha/ilumina continuamente), fundo do quarto acompanha 100% em X e Y (`RoomBackgroundT054.FollowVertical`), queda da Porta Falsa com desmoronamento até o chão (`Chao_Escuro_Sala` ampliado), Yuna caída → levantar → olhar de um lado para o outro → falar `"Mas a porta não era ali..."`, e shader `PenumbraT054.shader` ajustado para penumbra com contorno azulado tênue em Yuna.
+
+**PRÓXIMO PASSO OBRIGATÓRIO:**
+- **Ajustar o enquadramento da câmera e a distância em geral das plataformas** (revisar distância/vãos entre plataformas ao longo da fase e o enquadramento geral da câmera para leitura da cena e jogabilidade).
+
 ## T08J / T08K: extensão do quarto + travessia 08 (Caixa de Música) e 09 (Castelinho) — ACEITA (14/11/2026)
 
 Sessões `2026-11-14-antigravity-08-09-visual` (registro 21, `T08J`) e

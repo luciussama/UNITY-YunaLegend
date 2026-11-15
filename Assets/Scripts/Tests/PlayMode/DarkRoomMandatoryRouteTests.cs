@@ -74,6 +74,23 @@ namespace YunaLegend.Tests
         }
 
         [Test]
+        public void RandomJumpWithinSamePlatform_DoesNotCauseGameOver()
+        {
+            manager.RetryCurrentCheckpoint();
+            Tick(300);
+            Jump();
+            for (int i = 0; i < 160 && manager.CurrentPlatformIndex < 0 && !player.IsDead; i++) Tick();
+            Assert.IsFalse(player.IsDead);
+            Assert.AreEqual(0, manager.CurrentPlatformIndex);
+
+            // Salta no inicio da mesma plataforma e re-pousa nela sem morrer
+            Jump();
+            Tick(80);
+            Assert.IsFalse(player.IsDead, "Pular dentro da mesma plataforma nao pode dar Game Over");
+            Assert.AreEqual(0, manager.CurrentPlatformIndex);
+        }
+
+        [Test]
         public void ValidFirstJumpLands_ThenMissingNextJumpDies()
         {
             manager.RetryCurrentCheckpoint();

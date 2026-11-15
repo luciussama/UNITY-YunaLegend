@@ -23,7 +23,12 @@ namespace YunaLegend.Illustrated25D.Environment
             CastleCutsceneStep0,
             CastleCutsceneStep1,
             Stage2Gameplay,
-            Stage2Completed
+            Stage2Completed,
+            FalseDoorFalling,
+            FalseDoorCutsceneStep0,
+            FalseDoorCutsceneStep1,
+            Stage3Gameplay,
+            TruePortalVictory
         }
 
         private const float Stage2InitialSpeed = 4.0f;
@@ -40,16 +45,32 @@ namespace YunaLegend.Illustrated25D.Environment
         private StageHudController hud;
         private Vector3 bearTopWorld;
 
+        private const float FalseDoorFallenDuration = 1.05f;
+        private const float FalseDoorLookLeftEnd = 1.60f;
+        private const float FalseDoorLookRightEnd = 2.15f;
+        private const float FalseDoorDialogueDelay = 2.35f;
+
         private float stage2BannerTimer;
         private float stage2RunTimer;
         private bool muted;
         private bool paused;
+        private Component falseDoorPlatformView;
+        private Vector3 falseDoorOriginalLocalPos;
+        private Quaternion falseDoorOriginalLocalRot;
+        private bool falseDoorPoseSaved;
+        private bool falseDoorCollapsing;
+        private float falseDoorCollapseVelocityY;
+        private float falseDoorCutsceneElapsed;
+        private int falseDoorBeatStage;
 
         public FlowPhase Phase => (FlowPhase)(int)stateMachine.Phase;
         public bool IsPaused => paused;
         public bool IsMuted => muted;
         public bool Stage2CheckpointReached => stateMachine.Stage2CheckpointReached;
         public bool ShowIdlePose => stateMachine.ShowIdlePose;
+        public bool ShowFalseDoorDialogue =>
+            stateMachine.Phase == StageFlowStateMachine.FlowPhase.FalseDoorCutsceneStep0
+            && falseDoorCutsceneElapsed >= FalseDoorDialogueDelay;
 
         public void Initialize(
             IllustratedPreview owner,
@@ -76,6 +97,7 @@ namespace YunaLegend.Illustrated25D.Environment
             hud.IsPaused = () => paused;
             hud.IsMuted = () => muted;
             hud.IsPlayerDead = () => player != null && player.IsDead;
+            hud.IsFalseDoorDialogueReady = () => ShowFalseDoorDialogue;
             hud.GetFailure = () => preview != null ? preview.Failure : null;
             hud.GetStage2BannerTimer = () => stage2BannerTimer;
             hud.GetPlayerWorldPosition = () => player != null ? player.transform.position : Vector3.zero;
@@ -88,6 +110,7 @@ namespace YunaLegend.Illustrated25D.Environment
 
             if (player != null)
             {
+                player.OnCinematicFallLanded += HandleCinematicFallLanded;
                 player.PrepareForOpening(DarkRoomStartLayout.Position);
                 player.SetRunSpeed(DarkRoomStartLayout.RunSpeed);
                 player.SetJumpHeight(DarkRoomStartLayout.JumpHeight);
@@ -99,12 +122,27 @@ namespace YunaLegend.Illustrated25D.Environment
         private void OnDestroy()
         {
             stateMachine.OnPhaseChanged -= HandlePhaseChanged;
+            if (player != null)
+            {
+                player.OnCinematicFallLanded -= HandleCinematicFallLanded;
+            }
             Time.timeScale = 1f;
             AudioListener.volume = 1f;
         }
 
+        private void HandleCinematicFallLanded()
+        {
+            stateMachine.NotifyCinematicFallLanded();
+        }
+
         public void AdvanceStepForAutomation()
         {
+            if (stateMachine.Phase == StageFlowStateMachine.FlowPhase.FalseDoorCutsceneStep0
+                && falseDoorCutsceneElapsed < FalseDoorDialogueDelay)
+            {
+                falseDoorCutsceneElapsed = FalseDoorDialogueDelay;
+                UpdateFalseDoorCutsceneBeats();
+            }
             stateMachine.AdvanceStep();
         }
 
@@ -121,7 +159,8 @@ namespace YunaLegend.Illustrated25D.Environment
             var currentPhase = stateMachine.Phase;
             if ((CheckKey(Key.P) || CheckKey(Key.Escape))
                 && (currentPhase == StageFlowStateMachine.FlowPhase.Stage1Gameplay
-                    || currentPhase == StageFlowStateMachine.FlowPhase.Stage2Gameplay)
+                    || currentPhase == StageFlowStateMachine.FlowPhase.Stage2Gameplay
+                    || currentPhase == StageFlowStateMachine.FlowPhase.Stage3Gameplay)
                 && !player.IsDead)
             {
                 TogglePause();
@@ -136,7 +175,27 @@ namespace YunaLegend.Illustrated25D.Environment
                 return;
             }
 
-            stateMachine.Tick(Time.deltaTime, CheckConfirmInput(), CheckJumpOrStartInput());
+            if (falseDoorCollapsing && falseDoorPlatformView != null)
+            {
+                falseDoorCollapseVelocityY -= 18f * Time.deltaTime;
+                falseDoorPlatformView.transform.localPosition += Vector3.up * (falseDoorCollapseVelocityY * Time.deltaTime);
+                falseDoorPlatformView.transform.Rotate(0f, 0f, -55f * Time.deltaTime);
+                if (falseDoorPlatformView.transform.position.y < -11f)
+                {
+                    falseDoorCollapsing = false;
+                    falseDoorPlatformView.gameObject.SetActive(false);
+                }
+            }
+
+            if (currentPhase == StageFlowStateMachine.FlowPhase.FalseDoorCutsceneStep0)
+            {
+                falseDoorCutsceneElapsed += Time.deltaTime;
+                UpdateFalseDoorCutsceneBeats();
+            }
+
+            bool allowConfirm = currentPhase != StageFlowStateMachine.FlowPhase.FalseDoorCutsceneStep0
+                || falseDoorCutsceneElapsed >= FalseDoorDialogueDelay;
+            stateMachine.Tick(Time.deltaTime, allowConfirm && CheckConfirmInput(), CheckJumpOrStartInput());
 
             if (stateMachine.Phase == StageFlowStateMachine.FlowPhase.Stage1Gameplay)
             {
@@ -154,15 +213,57 @@ namespace YunaLegend.Illustrated25D.Environment
             {
                 if (stage2BannerTimer > 0f) stage2BannerTimer -= Time.deltaTime;
                 stage2RunTimer += Time.deltaTime;
-                float t = Mathf.Clamp01(stage2RunTimer / Stage2AccelTime);
-                player.SetRunSpeed(Mathf.Lerp(Stage2InitialSpeed, Stage2TargetSpeed, t));
 
-                if (player.CurrentSupportIndex == 10
-                    && player.IsGrounded
-                    && !player.IsStumbling
-                    && player.transform.position.x >= TrainTrestle10Platform.TargetX + TrainTrestle10Platform.SupportWidth * 0.35f)
+                if (preview.LastPlatformIndex <= 10)
                 {
-                    stateMachine.TryCompleteStage2();
+                    float t = Mathf.Clamp01(stage2RunTimer / Stage2AccelTime);
+                    player.SetRunSpeed(Mathf.Lerp(Stage2InitialSpeed, Stage2TargetSpeed, t));
+
+                    if (player.CurrentSupportIndex == 10
+                        && player.IsGrounded
+                        && !player.IsStumbling
+                        && player.transform.position.x >= TrainTrestle10Platform.TargetX + TrainTrestle10Platform.SupportWidth * 0.35f)
+                    {
+                        stateMachine.TryCompleteStage2();
+                    }
+                }
+                else
+                {
+                    int support = Mathf.Clamp(player.CurrentSupportIndex, 10, 21);
+                    float progress = (support - 10) / 11f;
+                    player.SetRunSpeed(Mathf.Lerp(
+                        Preview.Controllers.DarkRoomFullStageCatalog.Stage2InitialSpeed,
+                        Preview.Controllers.DarkRoomFullStageCatalog.Stage2MaxSpeed,
+                        progress));
+                    player.SetJumpHeight(Mathf.Lerp(
+                        Preview.Controllers.DarkRoomFullStageCatalog.Stage2InitialJumpHeight,
+                        Preview.Controllers.DarkRoomFullStageCatalog.Stage2MaxJumpHeight,
+                        progress));
+
+                    if (support >= 21 && player.IsGrounded && !player.IsStumbling)
+                    {
+                        stateMachine.TryTriggerFalseDoorFall();
+                    }
+                }
+            }
+            else if (stateMachine.Phase == StageFlowStateMachine.FlowPhase.Stage3Gameplay)
+            {
+                if (stage2BannerTimer > 0f) stage2BannerTimer -= Time.deltaTime;
+
+                int support = Mathf.Clamp(player.CurrentSupportIndex, 22, 37);
+                float progress = (support - 22) / 15f;
+                player.SetRunSpeed(Mathf.Lerp(
+                    Preview.Controllers.DarkRoomFullStageCatalog.Stage3InitialSpeed,
+                    Preview.Controllers.DarkRoomFullStageCatalog.Stage3MaxSpeed,
+                    progress));
+                player.SetJumpHeight(Mathf.Lerp(
+                    Preview.Controllers.DarkRoomFullStageCatalog.Stage3InitialJumpHeight,
+                    Preview.Controllers.DarkRoomFullStageCatalog.Stage3MaxJumpHeight,
+                    progress));
+
+                if (support >= 37 && player.CurrentSupportIndex == 37 && player.IsGrounded && !player.IsStumbling)
+                {
+                    stateMachine.TryCompleteTruePortal();
                 }
             }
         }
@@ -210,14 +311,170 @@ namespace YunaLegend.Illustrated25D.Environment
                     break;
 
                 case StageFlowStateMachine.FlowPhase.Stage2Completed:
+                case StageFlowStateMachine.FlowPhase.TruePortalVictory:
                     player.AutoRunActive = false;
                     if (cam != null) cam.AutoScrollActive = false;
+                    break;
+
+                case StageFlowStateMachine.FlowPhase.FalseDoorFalling:
+                    if (cam != null) cam.SetScrollState(false);
+                    EnsureFloorCoversPosition(ResolveStage3ReturnStartX());
+                    BeginFalseDoorPlatformCollapse();
+                    player.StartCinematicFall(ResolveStage3ReturnStartX());
+                    break;
+
+                case StageFlowStateMachine.FlowPhase.FalseDoorCutsceneStep0:
+                    preview?.PlatformController?.SetStage3PlatformsActive(true);
+                    player.ResetLastPlatformIndex();
+                    falseDoorCutsceneElapsed = 0f;
+                    falseDoorBeatStage = 0;
+                    player.SetRunDirection(1f);
+                    player.BeginStumble(0f, FalseDoorFallenDuration + 0.5f);
+                    guide?.ReturnToYuna();
+                    break;
+
+                case StageFlowStateMachine.FlowPhase.FalseDoorCutsceneStep1:
+                    player.EndStumble();
+                    player.SetRunDirection(-1f);
+                    guide?.ReturnToYuna();
+                    guide?.ApplyMood(YunaLegend.Dialogue.NandaMood.Annoyed);
+                    break;
+
+                case StageFlowStateMachine.FlowPhase.Stage3Gameplay:
+                    player.EndStumble();
+                    preview?.PlatformController?.SetStage3PlatformsActive(true);
+                    stage2BannerTimer = 2.6f;
+                    player.SetRunDirection(-1f);
+                    player.SetRunSpeed(Preview.Controllers.DarkRoomFullStageCatalog.Stage3InitialSpeed);
+                    player.SetJumpHeight(Preview.Controllers.DarkRoomFullStageCatalog.Stage3InitialJumpHeight);
+                    player.ResetLastPlatformIndex();
+                    player.AllowFloorLaunch(player.transform.position.x);
+                    player.SetFloorDeathActive(true);
+                    player.AutoRunActive = true;
+                    cam?.SnapToTargetX(player.transform.position.x, DarkRoomReturnLayout.CameraOffset);
+                    guide?.ReturnToYuna();
                     break;
             }
         }
 
+        private void UpdateFalseDoorCutsceneBeats()
+        {
+            if (player == null)
+            {
+                return;
+            }
+
+            if (falseDoorBeatStage < 1 && falseDoorCutsceneElapsed >= FalseDoorFallenDuration)
+            {
+                falseDoorBeatStage = 1;
+                player.EndStumble();
+                player.SetRunDirection(-1f);
+            }
+
+            if (falseDoorBeatStage < 2 && falseDoorCutsceneElapsed >= FalseDoorLookLeftEnd)
+            {
+                falseDoorBeatStage = 2;
+                player.SetRunDirection(1f);
+            }
+
+            if (falseDoorBeatStage < 3 && falseDoorCutsceneElapsed >= FalseDoorLookRightEnd)
+            {
+                falseDoorBeatStage = 3;
+                player.SetRunDirection(-1f);
+            }
+        }
+
+        private void BeginFalseDoorPlatformCollapse()
+        {
+            falseDoorPlatformView = preview != null && preview.PlatformController != null
+                ? preview.PlatformController.GetGenericView(21)
+                : null;
+            if (falseDoorPlatformView == null)
+            {
+                return;
+            }
+
+            if (!falseDoorPoseSaved)
+            {
+                falseDoorOriginalLocalPos = falseDoorPlatformView.transform.localPosition;
+                falseDoorOriginalLocalRot = falseDoorPlatformView.transform.localRotation;
+                falseDoorPoseSaved = true;
+            }
+
+            foreach (var col in falseDoorPlatformView.GetComponentsInChildren<Collider>(true))
+            {
+                col.enabled = false;
+            }
+
+            falseDoorCollapseVelocityY = 0f;
+            falseDoorCollapsing = true;
+        }
+
+        private void ResetFalseDoorPlatformView()
+        {
+            falseDoorCollapsing = false;
+            falseDoorCollapseVelocityY = 0f;
+            if (falseDoorPlatformView == null)
+            {
+                return;
+            }
+
+            falseDoorPlatformView.gameObject.SetActive(true);
+            if (falseDoorPoseSaved)
+            {
+                falseDoorPlatformView.transform.localPosition = falseDoorOriginalLocalPos;
+                falseDoorPlatformView.transform.localRotation = falseDoorOriginalLocalRot;
+            }
+
+            foreach (var col in falseDoorPlatformView.GetComponentsInChildren<Collider>(true))
+            {
+                col.enabled = true;
+            }
+        }
+
+        private void EnsureFloorCoversPosition(float targetX)
+        {
+            var floor = GameObject.Find("Chao_Escuro_Sala");
+            if (floor == null)
+            {
+                return;
+            }
+
+            Vector3 scale = floor.transform.localScale;
+            Vector3 pos = floor.transform.position;
+            float maxX = pos.x + scale.x * 0.5f;
+            if (maxX < targetX + 20f)
+            {
+                float newMaxX = targetX + 30f;
+                float minX = pos.x - scale.x * 0.5f;
+                scale.x = newMaxX - minX;
+                pos.x = (minX + newMaxX) * 0.5f;
+                floor.transform.localScale = scale;
+                floor.transform.position = pos;
+            }
+        }
+
+        private float ResolveStage3ReturnStartX()
+        {
+            var portal21 = preview != null && preview.PlatformController != null
+                ? preview.PlatformController.GetGenericView(21)
+                : null;
+            return portal21 != null ? portal21.transform.position.x - 1.2f : player.transform.position.x - 1.2f;
+        }
+
         private void RetryFromCheckpoint()
         {
+            if (stateMachine.Stage3CheckpointReached)
+            {
+                Vector3 stage3Spawn = new Vector3(ResolveStage3ReturnStartX(), DarkRoomReturnLayout.StartY, 0f);
+                player.ResetPlayer(stage3Spawn, -1f);
+                player.ResetLastPlatformIndex();
+                player.AllowFloorLaunch(stage3Spawn.x);
+                stateMachine.RespawnAtStage3Checkpoint();
+                cam?.SnapToTargetX(stage3Spawn.x, DarkRoomReturnLayout.CameraOffset);
+                return;
+            }
+
             if (!stateMachine.Stage2CheckpointReached)
             {
                 preview.Retry();
@@ -225,6 +482,8 @@ namespace YunaLegend.Illustrated25D.Environment
             }
 
             Vector3 castleSpawn = new Vector3(Castle09Platform.TargetX - 0.5f, Castle09Platform.TopY + 0.08f, 0f);
+            ResetFalseDoorPlatformView();
+            preview?.PlatformController?.SetStage3PlatformsActive(false);
             player.ResetPlayer(castleSpawn, 1f);
             player.RestoreRouteSupport(9);
             stateMachine.RespawnAtStage2Checkpoint();

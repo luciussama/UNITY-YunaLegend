@@ -84,7 +84,49 @@ namespace YunaLegend.Illustrated25D.Tests
             sm.Reset();
             Assert.AreEqual(StageFlowStateMachine.FlowPhase.OpeningNandaWake1, sm.Phase);
             Assert.IsFalse(sm.Stage2CheckpointReached);
+            Assert.IsFalse(sm.Stage3CheckpointReached);
             Assert.IsFalse(sm.CastleCutsceneTriggered);
+            Assert.IsFalse(sm.FalseDoorTriggered);
+        }
+
+        [Test]
+        public void FalseDoorPlotTwist_TransitionsToStage3_AndTruePortalVictory()
+        {
+            var sm = new StageFlowStateMachine();
+            sm.RespawnAtStage2Checkpoint();
+
+            Assert.IsTrue(sm.TryTriggerFalseDoorFall());
+            Assert.AreEqual(StageFlowStateMachine.FlowPhase.FalseDoorFalling, sm.Phase);
+            Assert.IsFalse(sm.TryTriggerFalseDoorFall());
+
+            Assert.IsTrue(sm.NotifyCinematicFallLanded());
+            Assert.AreEqual(StageFlowStateMachine.FlowPhase.FalseDoorCutsceneStep0, sm.Phase);
+            Assert.IsTrue(sm.ShowIdlePose);
+
+            sm.Tick(0.016f, confirmPressed: true, jumpOrStartPressed: false);
+            Assert.AreEqual(StageFlowStateMachine.FlowPhase.FalseDoorCutsceneStep1, sm.Phase);
+            Assert.IsFalse(sm.Stage3CheckpointReached);
+
+            sm.Tick(0.016f, confirmPressed: true, jumpOrStartPressed: false);
+            Assert.AreEqual(StageFlowStateMachine.FlowPhase.Stage3Gameplay, sm.Phase);
+            Assert.IsTrue(sm.Stage3CheckpointReached);
+            Assert.IsFalse(sm.ShowIdlePose);
+
+            Assert.IsTrue(sm.TryCompleteTruePortal());
+            Assert.AreEqual(StageFlowStateMachine.FlowPhase.TruePortalVictory, sm.Phase);
+            Assert.IsTrue(sm.ShowIdlePose);
+            Assert.IsFalse(sm.TryCompleteTruePortal());
+        }
+
+        [Test]
+        public void Stage3CheckpointRespawn_WorksDeterministically()
+        {
+            var sm = new StageFlowStateMachine();
+            sm.RespawnAtStage3Checkpoint();
+            Assert.AreEqual(StageFlowStateMachine.FlowPhase.Stage3Gameplay, sm.Phase);
+            Assert.IsTrue(sm.Stage2CheckpointReached);
+            Assert.IsTrue(sm.Stage3CheckpointReached);
+            Assert.IsFalse(sm.ShowIdlePose);
         }
     }
 }

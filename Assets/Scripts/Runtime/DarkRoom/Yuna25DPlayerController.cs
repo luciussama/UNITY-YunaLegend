@@ -175,8 +175,6 @@ namespace YunaLegend.DarkRoom
                 break;
             }
 
-            if (hasRouteSupport && velocity.y < 0f && transform.position.y < lowestReachableTop - 0.55f)
-                TriggerDeath("Yuna falhou o salto e caiu da rota.");
             if (floorLaunchAllowed && launchJumped && controller.isGrounded && !hasRouteSupport)
                 TriggerDeath("Yuna voltou ao chão sem alcançar a primeira plataforma.");
         }
@@ -198,15 +196,23 @@ namespace YunaLegend.DarkRoom
                 {
                     velocity.x = 0f;
                 }
-                velocity.y -= gravity * Time.deltaTime;
+                velocity.y -= gravity * 2.2f * Time.deltaTime;
                 controller.Move(velocity * Time.deltaTime);
                 Enforce2DPlane();
 
-                if (controller.isGrounded && velocity.y <= 0f)
+                if ((controller.isGrounded && velocity.y <= 0f)
+                    || transform.position.y <= DarkRoomPlatformGeometry.FloorSurfaceY)
                 {
+                    if (transform.position.y < DarkRoomPlatformGeometry.FloorSurfaceY)
+                    {
+                        bool wasEnabled = controller.enabled;
+                        controller.enabled = false;
+                        transform.position = new Vector3(transform.position.x, DarkRoomPlatformGeometry.FloorSurfaceY, 0f);
+                        controller.enabled = wasEnabled;
+                    }
                     isCinematicFalling = false;
                     cinematicFallTargetX = null;
-                    velocity = Vector3.zero;
+                    velocity = new Vector3(0f, -5.0f, 0f);
                     PlaySound(comicFallThudSfx != null ? comicFallThudSfx : landSfx);
                     OnCinematicFallLanded?.Invoke();
                 }
@@ -282,12 +288,11 @@ namespace YunaLegend.DarkRoom
         {
             if (isDead) return;
             var collidedPlatform = hit.collider.GetComponentInParent<DarkRoomPlatformMarker>();
-            // A curved landing can have both an upward and an opposing horizontal
-            // normal. Only an actual wall of a new obstacle is a missed landing;
-            // the current support's rounded ears/edges must not trigger defeat.
             if (autoRunActive && floorDeathActive && !isCinematicFalling && velocity.y <= 0f
                 && hit.normal.x * runDirection < -0.5f && hit.normal.y <= 0.5f
-                && collidedPlatform != null && collidedPlatform.spec.index != lastLandedPlatformIndex)
+                && collidedPlatform != null && collidedPlatform.spec.index != lastLandedPlatformIndex
+                && hit.collider.bounds.size.y >= 0.30f
+                && transform.position.y < hit.collider.bounds.max.y - 0.35f)
             {
                 TriggerDeath("Yuna não alcançou o topo da plataforma obrigatória.");
                 return;
@@ -344,7 +349,7 @@ namespace YunaLegend.DarkRoom
             cinematicFallTargetX = targetLandingX;
             airborneHorizontalSpeed = -1f;
             floorDeathActive = false; // Nao letal nesta cena
-            velocity = Vector3.zero;
+            velocity = new Vector3(0f, -5.0f, 0f);
             footstepTimer = 0f;
             footstepCount = 0;
             GetComponentInChildren<YunaCharacterView>()?.ResetPose();
@@ -618,7 +623,7 @@ namespace YunaLegend.DarkRoom
             }
 
             // Qualquer queda no chao da sala e Game Over imediato
-            if (transform.position.y <= floorDeathY)
+            if (transform.position.y <= floorDeathY || (hasRouteSupport && controller.isGrounded && transform.position.y <= -8.95f))
             {
                 TriggerDeath("Yuna caiu no chao escuro do quarto!");
             }
@@ -629,7 +634,7 @@ namespace YunaLegend.DarkRoom
             if (isDead) return;
             isDead = true;
             autoRunActive = false;
-            velocity = Vector3.zero;
+            velocity = new Vector3(0f, -5.0f, 0f);
             Debug.Log($"[GameOver]: {reason}");
             OnGameOverTriggered?.Invoke();
         }
@@ -653,7 +658,7 @@ namespace YunaLegend.DarkRoom
             airborneHorizontalSpeed = -1f;
             lastLandedPlatformIndex = -1;
             runDirection = dir;
-            velocity = Vector3.zero;
+            velocity = new Vector3(0f, -5.0f, 0f);
             footstepTimer = 0f;
             footstepCount = 0;
             GetComponentInChildren<YunaCharacterView>()?.ResetPose();

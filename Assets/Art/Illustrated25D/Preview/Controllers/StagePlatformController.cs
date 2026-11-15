@@ -14,6 +14,7 @@ namespace YunaLegend.Illustrated25D.Preview.Controllers
     public sealed class StagePlatformController : MonoBehaviour
     {
         private readonly Dictionary<int, IllustratedPlatformView> genericViews = new Dictionary<int, IllustratedPlatformView>();
+        private DarkRoomPlatformMarker[] allStageMarkers;
 
         public YieldingWoodFurniture Furniture { get; private set; }
         public DresserPlatform Dresser { get; private set; }
@@ -88,6 +89,60 @@ namespace YunaLegend.Illustrated25D.Preview.Controllers
                 TrainTrestle10 = platforms[10].gameObject.AddComponent<TrainTrestle10Platform>();
                 TrainTrestle10.Install(config.trainTrestle10Painting);
                 AttachFootAlignment(player, TrainTrestle10.Top, supportIndex: 10, pinVisibleSole: true);
+            }
+
+            if (config.includeFullStage)
+            {
+                InstallFullStagePlatforms(config, platforms, player, 37);
+            }
+        }
+
+        public void InstallFullStagePlatforms(
+            IllustratedPreview config,
+            DarkRoomPlatformMarker[] platforms,
+            Yuna25DPlayerController player,
+            int maxIndex)
+        {
+            allStageMarkers = platforms;
+            var specs = DarkRoomFullStageCatalog.BuildSpecsUpTo(maxIndex);
+            foreach (var spec in specs)
+            {
+                if (spec.index < 11 || spec.index >= platforms.Length)
+                {
+                    continue;
+                }
+
+                Texture2D painting = config.GetFullStagePainting(spec.index);
+                if (painting == null)
+                {
+                    throw new InvalidOperationException($"Full stage painting missing for platform {spec.index}");
+                }
+
+                InstallGenericPlatform(platforms[spec.index], player, spec, painting);
+                if (spec.index >= 22)
+                {
+                    platforms[spec.index].gameObject.SetActive(false);
+                }
+            }
+        }
+
+        public void SetStage3PlatformsActive(bool stage3Active)
+        {
+            if (allStageMarkers != null)
+            {
+                foreach (var marker in allStageMarkers)
+                {
+                    if (marker == null) continue;
+                    int idx = marker.spec.index;
+                    marker.gameObject.SetActive(idx >= 22 ? stage3Active : !stage3Active);
+                }
+                return;
+            }
+
+            foreach (var kv in genericViews)
+            {
+                if (kv.Value == null) continue;
+                kv.Value.gameObject.SetActive(kv.Key >= 22 ? stage3Active : !stage3Active);
             }
         }
 

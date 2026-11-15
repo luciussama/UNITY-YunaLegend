@@ -87,6 +87,18 @@ Shader "YunaLegend/RoomPenumbraT054"
                     float value = dot(c.rgb,float3(.2126,.7152,.0722));
                     emission = _Phosphor * float3(.12,.21,.22) * saturate(value*3);
                 }
+                if (_Role > 1.5 && _Role < 2.5)
+                {
+                    float activeLight = saturate(_NandaStrength + _MoonStrength);
+                    light = max(light, float3(.055, .07, .11) * activeLight);
+                    float rimOffset = 0.0045;
+                    float aL = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, v.uv - float2(rimOffset, 0)).a;
+                    float aR = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, v.uv + float2(rimOffset, 0)).a;
+                    float aD = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, v.uv - float2(0, rimOffset)).a;
+                    float aU = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, v.uv + float2(0, rimOffset)).a;
+                    float rim = saturate(c.a - min(min(aL, aR), min(aD, aU)));
+                    emission += rim * float3(.16, .34, .68) * activeLight * c.a;
+                }
                 // The visible window aperture remains the source, not a new lamp.
                 if (_Role < .5)
                 {

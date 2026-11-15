@@ -140,6 +140,15 @@ namespace YunaLegend.DarkRoom
             Vector3 candidate = Vector3.SmoothDamp(transform.position, targetPosition, ref currentVelocity, hoverSmoothTime);
             Vector3 safe = SeparateFromYuna(candidate);
             if ((safe - candidate).sqrMagnitude > .000001f) currentVelocity = Vector3.zero;
+            if (yunaTransform != null && player != null && player.AutoRunActive)
+            {
+                float minLeadX = yunaTransform.position.x + Direction * 1.4f;
+                if (Direction * (safe.x - minLeadX) < 0f)
+                {
+                    safe.x = minLeadX;
+                    currentVelocity.x = Mathf.Max(0f, Direction * currentVelocity.x) * Direction;
+                }
+            }
             transform.position = safe;
         }
 

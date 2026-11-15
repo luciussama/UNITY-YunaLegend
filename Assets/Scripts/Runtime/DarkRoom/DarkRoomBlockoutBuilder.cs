@@ -208,13 +208,13 @@ namespace YunaLegend.DarkRoom
             // Chao escuro da sala: qualquer queda aqui e Game Over imediato (exceto na queda cinematica)
             float thickness = 1.0f;
             float worldY = DarkRoomPlatformGeometry.FloorSurfaceY - thickness * 0.5f;
-            float worldWidth = 170.0f;
+            float worldWidth = 260.0f;
             float worldDepth = 12.0f;
 
             var floorGo = GameObject.CreatePrimitive(PrimitiveType.Cube);
             floorGo.name = "Chao_Escuro_Sala";
             floorGo.transform.SetParent(floorRoot, false);
-            floorGo.transform.position = new Vector3(60.0f, worldY, 0f);
+            floorGo.transform.position = new Vector3(80.0f, worldY, 0f);
             floorGo.transform.localScale = new Vector3(worldWidth, thickness, worldDepth);
 
             var floorRenderer = floorGo.GetComponent<MeshRenderer>();

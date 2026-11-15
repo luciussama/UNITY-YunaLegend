@@ -32,6 +32,7 @@ namespace YunaLegend.Illustrated25D.Preview
         public bool includeNextDrawers07;
         public bool includeNextCastle09;
         public bool includeNextStage2Platform10;
+        public bool includeFullStage;
         public bool playableLegacyMode;
 
         public Texture2D dresserPainting;
@@ -43,6 +44,19 @@ namespace YunaLegend.Illustrated25D.Preview
         public Texture2D castlePainting;
         public Texture2D castleFrontTowersPainting;
         public Texture2D trainTrestle10Painting;
+        public Texture2D[] fullStagePaintings;
+
+        public int LastPlatformIndex => ResolveLastPlatformIndex();
+
+        public Texture2D GetFullStagePainting(int platformIndex)
+        {
+            int slot = platformIndex - 11;
+            if (fullStagePaintings == null || slot < 0 || slot >= fullStagePaintings.Length)
+            {
+                return null;
+            }
+            return fullStagePaintings[slot];
+        }
 
         public Sprite[] nandaFrames;
         public Shader[] requiredShaders;
@@ -378,6 +392,7 @@ namespace YunaLegend.Illustrated25D.Preview
 
         private int ResolveLastPlatformIndex()
         {
+            if (includeFullStage) return 37;
             if (includeNextStage2Platform10) return 10;
             if (includeNextCastle09) return 9;
             if (includeNextDrawers07) return 7;

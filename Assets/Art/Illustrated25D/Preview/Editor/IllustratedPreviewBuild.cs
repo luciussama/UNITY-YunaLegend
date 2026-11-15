@@ -23,6 +23,7 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
         public const string Drawers07Scene = "Assets/Art/Illustrated25D/Environment/Drawers/Preview-Continuacao-07.unity";
         public const string Castle09Scene = "Assets/Art/Illustrated25D/Environment/Castle/Preview-Continuacao-09.unity";
         public const string Playable0010Scene = "Assets/Art/Illustrated25D/Environment/Stage2Runtime/Fase-Jogavel-00-10.unity";
+        public const string PlayableFullStageScene = "Assets/Art/Illustrated25D/Environment/Stage2Runtime/Fase-Jogavel-Completa.unity";
 
         public const string Output = "Build/Windows/YunaLegend-Acompanhamento/YunaLegend.exe";
         public const string ContinuationOutput = "Build/Windows/YunaLegend-Continuacao/YunaLegend.exe";
@@ -31,6 +32,8 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
         public const string Drawers07Output = "Build/Windows/YunaLegend-Continuacao-07/YunaLegend.exe";
         public const string Castle09Output = "Build/Windows/YunaLegend-Continuacao-09/YunaLegend.exe";
         public const string Playable0010Output = "Build/Windows/YunaLegend-Jogavel-00-10/YunaLegend.exe";
+        public const string PlayableFullStageOutput = "Build/Windows/YunaLegend-Jogavel-Completa/YunaLegend.exe";
+        public const string PlayableFullStageMacOutput = "Build/macOS/YunaLegend-Fase-Completa.app";
 
         private const string BaseGameplayScene = "Assets/Scenes/DarkRoom_Gameplay.unity";
         private const string RoomArtRoot = "Assets/Art/Illustrated25D/Environment/Room/";
@@ -44,7 +47,8 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             Drum,
             Drawers07,
             Castle09,
-            PlayableStage2P10
+            PlayableStage2P10,
+            PlayableFullStage
         }
 
         private readonly struct RouteSpec
@@ -68,6 +72,7 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             public bool IncludeDrawers07 => MaxPlatformIndex >= 7;
             public bool IncludeCastle09 => MaxPlatformIndex >= 9;
             public bool IncludeStage2P10 => MaxPlatformIndex >= 10;
+            public bool IncludeFullStage => MaxPlatformIndex >= 37;
         }
 
         private static readonly Dictionary<Route, RouteSpec> RouteTable = new Dictionary<Route, RouteSpec>
@@ -78,7 +83,8 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             { Route.Drum, new RouteSpec(DrumScene, DrumOutput, 5) },
             { Route.Drawers07, new RouteSpec(Drawers07Scene, Drawers07Output, 7) },
             { Route.Castle09, new RouteSpec(Castle09Scene, Castle09Output, 9) },
-            { Route.PlayableStage2P10, new RouteSpec(Playable0010Scene, Playable0010Output, 10, playableLegacyMode: true) }
+            { Route.PlayableStage2P10, new RouteSpec(Playable0010Scene, Playable0010Output, 10, playableLegacyMode: true) },
+            { Route.PlayableFullStage, new RouteSpec(PlayableFullStageScene, PlayableFullStageOutput, 37, playableLegacyMode: true) }
         };
 
         [MenuItem("YunaLegend/Abrir cena de acompanhamento", false, 10)]
@@ -92,6 +98,20 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
             {
                 EditorSceneManager.OpenScene(Scene);
+            }
+        }
+
+        [MenuItem("YunaLegend/Abrir fase jogável completa (2.5D)", false, 15)]
+        public static void OpenPlayableFullStage()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                return;
+            }
+
+            if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+            {
+                EditorSceneManager.OpenScene(PlayableFullStageScene);
             }
         }
 
@@ -139,6 +159,7 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
 
         public static void Setup() => Setup(Route.Accompaniment);
         public static void SetupPlayableStage2P10() => Setup(Route.PlayableStage2P10);
+        public static void SetupPlayableFullStage() => Setup(Route.PlayableFullStage);
 
         public static void Run() => Exit(BuildPlayer(Route.Accompaniment, Output));
         public static void RunContinuation() => Exit(BuildPlayer(Route.Dresser, ContinuationOutput));
@@ -147,6 +168,8 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
         public static void RunContinuationDrawers07() => Exit(BuildPlayer(Route.Drawers07, Drawers07Output));
         public static void RunContinuationCastle09() => Exit(BuildPlayer(Route.Castle09, Castle09Output));
         public static void RunPlayableStage2P10() => Exit(BuildPlayer(Route.PlayableStage2P10, Playable0010Output));
+        public static void RunPlayableFullStage() => Exit(BuildPlayer(Route.PlayableFullStage, PlayableFullStageOutput));
+        public static void RunPlayableFullStageMac() => Exit(BuildPlayer(Route.PlayableFullStage, PlayableFullStageMacOutput, BuildTarget.StandaloneOSX));
 
         private static void Setup(Route route)
         {
@@ -200,6 +223,7 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             preview.includeNextDrawers07 = spec.IncludeDrawers07;
             preview.includeNextCastle09 = spec.IncludeCastle09;
             preview.includeNextStage2Platform10 = spec.IncludeStage2P10;
+            preview.includeFullStage = spec.IncludeFullStage;
             preview.playableLegacyMode = spec.PlayableLegacyMode;
         }
 
@@ -232,6 +256,15 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             if (spec.IncludeStage2P10)
             {
                 preview.trainTrestle10Painting = ImportUncompressedTexture("Assets/Art/Illustrated25D/Environment/Stage2/10-train-trestle-v1.png");
+            }
+            if (spec.IncludeFullStage)
+            {
+                preview.fullStagePaintings = new Texture2D[27];
+                for (int index = 11; index <= 37; index++)
+                {
+                    string assetPath = Controllers.DarkRoomFullStageCatalog.GetTextureAssetPath(index);
+                    preview.fullStagePaintings[index - 11] = ImportUncompressedTexture(assetPath);
+                }
             }
         }
 
@@ -294,22 +327,26 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             return Load<Texture2D>(assetPath);
         }
 
-        private static BuildReport BuildPlayer(Route route, string destination)
+        private static BuildReport BuildPlayer(Route route, string destination, BuildTarget target = BuildTarget.StandaloneWindows64)
         {
             Setup(route);
             var spec = RouteTable[route];
             var output = Path.GetFullPath(destination);
             Directory.CreateDirectory(Path.GetDirectoryName(output));
+            if (target == BuildTarget.StandaloneOSX && Directory.Exists(output))
+            {
+                Directory.Delete(output, true);
+            }
 
             var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
             {
                 scenes = new[] { spec.ScenePath },
                 locationPathName = output,
-                target = BuildTarget.StandaloneWindows64,
+                target = target,
                 options = BuildOptions.None
             });
 
-            Debug.Log($"ILLUSTRATED_PREVIEW_BUILD {report.summary.result} errors={report.summary.totalErrors} bytes={report.summary.totalSize}");
+            Debug.Log($"ILLUSTRATED_PREVIEW_BUILD {report.summary.result} target={target} errors={report.summary.totalErrors} bytes={report.summary.totalSize}");
             return report;
         }
 

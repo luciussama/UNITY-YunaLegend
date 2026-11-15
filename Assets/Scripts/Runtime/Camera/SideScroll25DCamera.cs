@@ -47,7 +47,7 @@ namespace YunaLegend.Camera25D
 
         [Header("Prova ilustrada — opt-in, sem alterar a câmera da fase principal")]
         [SerializeField] private bool illustratedPilotFraming;
-        [SerializeField, Min(4f)] private float illustratedVerticalSpan = 7.5f;
+        [SerializeField, Min(4f)] private float illustratedVerticalSpan = 9.2f;
         [SerializeField, Min(.05f)] private float illustratedFollowTime = .45f;
         private Vector3 illustratedVelocity;
         public bool IllustratedPilotFraming => illustratedPilotFraming;
@@ -227,12 +227,17 @@ namespace YunaLegend.Camera25D
             // vertical translation only: depth, FOV and painting scale stay fixed.
             // The route remains the lower framing bound during an ordinary jump.
             desiredY = Mathf.Max(desiredY, playerTarget.transform.position.y + 1.8f);
-            if (playerTarget.IsCinematicFalling || playerTarget.IsDead)
+            bool focusOnFloorBody = playerTarget.IsCinematicFalling
+                || playerTarget.IsDead
+                || playerTarget.IsStumbling
+                || (!playerTarget.AutoRunActive && playerTarget.transform.position.y <= DarkRoomPlatformGeometry.FloorSurfaceY + 1.0f);
+            if (focusOnFloorBody)
                 desiredY = playerTarget.transform.position.y + 1.8f;
             // Compensate the lag of a damped camera following constant-speed travel.
             float anticipation = playerTarget.AutoRunActive && !playerTarget.IsDead
                 ? direction * playerTarget.RunSpeed * illustratedFollowTime : 0f;
-            var desired = new Vector3(playerTarget.transform.position.x + direction * width * .18f + anticipation, desiredY, -depth);
+            float leadX = focusOnFloorBody && !playerTarget.AutoRunActive ? 0f : direction * width * .18f;
+            var desired = new Vector3(playerTarget.transform.position.x + leadX + anticipation, desiredY, -depth);
             var position = snap ? desired : Vector3.SmoothDamp(transform.position, desired, ref illustratedVelocity, illustratedFollowTime);
             position.z = -depth;
             transform.position = position;
@@ -253,8 +258,24 @@ namespace YunaLegend.Camera25D
         public void BeginCastleRouteOverview()
         {
             var castle = FindPlatform(9);
+            if (castle == null) return;
+            if (illustratedPilotFraming)
+            {
+                var next = FindPlatform(10);
+                float illustratedDepth = illustratedVerticalSpan / (2f * Mathf.Tan(fixedFov * Mathf.Deg2Rad * 0.5f));
+                float castleX = castle.GetTopCenterWorld().x;
+                float nextX = next != null && !next.Support.IsEmpty ? next.GetLandingPoint(1f).x : castleX + 4f;
+                float castleY = castle.GetTopCenterWorld().y;
+                float nextY = next != null && !next.Support.IsEmpty ? next.GetLandingPoint(1f).y : castleY;
+                float focusX = Mathf.Lerp(castleX, nextX, 0.45f);
+                float focusY = Mathf.Max(castleY, nextY) + 1.8f;
+                overviewPosition = new Vector3(focusX, focusY, -illustratedDepth);
+                overviewVelocity = Vector3.zero;
+                routeOverview = true;
+                return;
+            }
             var door = FindPlatform(21);
-            if (castle == null || door == null) return;
+            if (door == null) return;
             float left = castle.Support.MinX;
             float right = door.Support.MaxX;
             float width = right - left + 3f;
@@ -269,6 +290,8 @@ namespace YunaLegend.Camera25D
             returningFromOverview = routeOverview;
             routeOverview = false;
             framedTarget = -1;
+            overviewVelocity = Vector3.zero;
+            illustratedVelocity = Vector3.zero;
         }
 
         private void CheckScreenCrush()
