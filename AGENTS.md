@@ -49,3 +49,14 @@ Skill de engenharia: [agent-coordination](skills/agent-coordination/SKILL.md).
 
 ## 6. Referência Jogável (Legado)
 - Autorizada consulta/jogo exclusivamente via `https://luciussama.github.io/legendGirl/` (somente quando o modelo ativo suportar navegação/visão) para comparação visual e comportamental com a fase Unity. **Proibido** copiar, migrar, clonar ou utilizar cópia local do código HTML legado; a implementação permanece 100% nativa Unity/C#. A build Web da Unity é uma exportação deste projeto, não uma retomada da implementação HTML antiga.
+
+## 7. Padrões de Projeto e Arquitetura Obrigatórios (Unity / C#)
+Toda nova funcionalidade ou refatoração deve observar obrigatoriamente os seguintes padrões para evitar acoplamento e código monolítico:
+
+- **Responsabilidade Única e Controllers por Domínio (SRP):** separar cenografia (`StageSceneryController`), iluminação (`StageLightingController`), guia (`NandaGuideController`), plataformas (`StagePlatformController`) e interface (`StageHudController`) em controllers especialistas; o *Composition Root* (`IllustratedPreview` / bootstrap de cena) deve apenas conectar dependências, sem conter regras de negócio ou `OnGUI`.
+- **Humble Object + Isolamento por `.asmdef`:** manter regras de negócio, máquinas de estado e especificações matemáticas em C# puro sem dependência de `MonoBehaviour` ou UI (`YunaLegend.Illustrated25D.Core.asmdef` com `noEngineReferences: true`); componentes `MonoBehaviour` atuam apenas como adaptadores finos de entrada, física e renderização.
+- **Orientação a Dados (`Data-Driven`) e Fábrica Única:** novas plataformas, diálogos e estágios devem usar descritores de dados (`IllustratedPlatformSpec`, `StageCatalogSpec`) e o instalador genérico (`IllustratedPlatformView`), sendo **proibido** duplicar classes C# por plataforma (`PlatformXX.cs`) ou empilhar cadeias de flags `bool` / `if-else` no bootstrap.
+- **Observer / Eventos de Domínio:** controllers especialistas não devem referenciar ou buscar uns aos outros diretamente; transições de fase e ações de UI devem trafegar por eventos (`Action<...>`) ou pela máquina de estados pura.
+- **Testabilidade Contínua (EditMode + PlayMode):** toda regra pura em `Core` deve possuir testes unitários rápidos em `EditMode` (`-runTests -testPlatform EditMode` via NUnit), preservando as validações integradas de física/cena (`30/60/120 Hz`).
+- **Strangler Fig (Migração Segura):** refatorar código legado de forma incremental, preservando APIs públicas de compatibilidade e validando testes após cada etapa antes de avançar.
+- **Legibilidade e Estilo C#:** usar estilo Allman (chaves em linha própria), indentação de 4 espaços, uma instrução por linha, métodos curtos com *early returns* e extração de helpers/tabelas para eliminar lógica duplicada.
