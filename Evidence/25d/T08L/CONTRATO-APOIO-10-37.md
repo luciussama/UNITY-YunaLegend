@@ -74,4 +74,18 @@ Regra vinculante: `AGENTS.md` § 4 (*Definir primeiro onde os pés pousam antes 
 | `31` | `Stage3/31-leaning-music-box-v1.png` | `896x1200` | `62,308,840,969` | `501` | `63..818` | `13ef75c57754d4eb0f674ed4d7b8a4398096879dab269b7c15302be9bb401381` |
 | `34` | `Stage3/34-floating-spool-v1.png` | `896x1200` | `113,332,779,1095` | `454` | `121..776` | `5564d76ccb8ca4303ad01907822ca73ae90ea44a846781f62576ae22583361e0` |
 
-> **Pendentes (bloqueados por cota `429 RESOURCE_EXHAUSTED` em `gemini-3.1-flash-image`):** `11`, `12`, `13`, `16`, `17`, `21`, `25`, `28`, `29`, `32`, `33`, `35`, `36`, `37`.
+> **Lote 2 (15/11/2026) — 9 novos assets convertidos em RGBA (`896x1200`):**
+>
+> | Índice | Arquivo | Dimensões | `BBox` (`minX,minY,maxX,maxY`) | `SHA256` |
+> | --- | --- | --- | --- | --- |
+> | `11` | `Stage2/11-wall-shelf-v1.png` | `896x1200` | `26,311,870,912` | `23aaa71bdb5cd453bd29a3097a714e18bdc0e7d19a3ec2d7b9989b986f993e98` |
+> | `12` | `Stage2/12-mushroom-lamp-v1.png` | `896x1200` | `56,90,839,1116` | `abd296cebc51132417eeb8ca48ae3fafe42b2ec6409c4eb1b3f98f14e28e4e70` |
+> | `13` | `Stage2/13-dollhouse-roof-v1.png` | `896x1200` | `22,169,875,951` | `a6b792ef33898ad9ddb65e8f7cfee1e3df8bf3080a54792916bad7db1913d5ab` |
+> | `16` | `Stage2/16-floating-books-v1.png` | `896x1200` | `24,365,873,776` | `acaeb06679831301a87bc54416a6d85c576966e06416d0e288a1046b5ce2c60f` |
+> | `17` | `Stage2/17-chandelier-crystals-v1.png` | `896x1200` | `14,365,882,955` | `74c81d5a6cf8e48af26fbc3d81de0ce199aa6f4cb0a4cafb1457cbb955a24c41` |
+> | `21` | `Stage2/21-false-door-portal-v1.png` | `896x1200` | `77,203,828,1029` | `4cdd082eb6ce0294eadb16c940e162298b9b3b24894eae62c320d135699b1c52` |
+> | `25` | `Stage3/25-crooked-books-v1.png` | `896x1200` | `106,278,803,1103` | `1913ee7dfac177ee768be6562688b7e5f8928c8954a8d2defbdb1a22a9430d05` |
+> | `28` | `Stage3/28-xylophone-v1.png` | `896x1200` | `60,430,831,881` | `d3e240f9e86eaf95cdfa2954b891b0e8fd305408b7898783cf39f10b7f5f15d3` |
+> | `29` | `Stage3/29-derailed-locomotive-v1.png` | `896x1200` | `90,304,830,966` | `62cf31888b539992689683e119c57c4bd70a829a3b67cfb036a931d4b03bb360` |
+>
+> **Pendentes (bloqueados por cota `429 RESOURCE_EXHAUSTED`, reset em `4h50m38s`):** `32`, `33`, `35`, `36`, `37`.
