@@ -1,0 +1,14 @@
+{
+    "name": "YunaLegend.Illustrated25D.Core",
+    "rootNamespace": "YunaLegend.Illustrated25D",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

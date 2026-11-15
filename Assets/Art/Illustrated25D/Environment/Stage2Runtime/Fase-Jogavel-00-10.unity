@@ -31179,6 +31179,110 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1432347700}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1438082256
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1438082260}
+  - component: {fileID: 1438082259}
+  - component: {fileID: 1438082258}
+  - component: {fileID: 1438082257}
+  m_Layer: 0
+  m_Name: Acompanhamento_Ilustrado
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1438082257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438082256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dec21ea26228c4458e48fdd4dd8e624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::YunaLegend.Illustrated25D.Preview.PreviewRetryVerification
+--- !u!114 &1438082258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438082256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4aaa11d81215cd41973e81f85800c7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::YunaLegend.Illustrated25D.Preview.PreviewVerification
+--- !u!114 &1438082259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438082256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6874247fa8e1d94cbc57474c9faca52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::YunaLegend.Illustrated25D.Preview.IllustratedPreview
+  panorama: {fileID: 2800000, guid: 7e6bab51ef45e94459c96e82a1a10ebe, type: 3}
+  roomExtension: {fileID: 2800000, guid: 2009c14ea21d61048b1866be179d91b5, type: 3}
+  furnitureBody: {fileID: 2800000, guid: 652a974e1d3b4e81b57822e513396b16, type: 3}
+  furnitureWood: {fileID: 2800000, guid: e5652639cf3048388ab9afea5d9269d3, type: 3}
+  includeNextDresser: 1
+  includeNextBlocks: 1
+  includeNextDrum: 1
+  includeNextDrawers07: 1
+  includeNextCastle09: 1
+  includeNextStage2Platform10: 1
+  playableLegacyMode: 1
+  dresserPainting: {fileID: 2800000, guid: 6aa89cda3e9dcda4092ff762c223fe31, type: 3}
+  blocksPainting: {fileID: 2800000, guid: f88693cae9cf4445b933aa145295bbf0, type: 3}
+  drumPainting: {fileID: 2800000, guid: e6dde530e74897e4a8f8a448afecc9a5, type: 3}
+  cushionPainting: {fileID: 2800000, guid: 2d288b891eb0f174292cbe4738da357b, type: 3}
+  drawersPainting: {fileID: 2800000, guid: db08cafcb8e26bf4cb79883d7037e14b, type: 3}
+  musicBoxPainting: {fileID: 2800000, guid: 97d3fb8df817cc24a8e75666f5d22218, type: 3}
+  castlePainting: {fileID: 2800000, guid: 4891cc749f868ae4f8d06164ff55c589, type: 3}
+  castleFrontTowersPainting: {fileID: 2800000, guid: 1906bbb2bf7f84946a55df5cbf0f9c5b, type: 3}
+  trainTrestle10Painting: {fileID: 2800000, guid: e31cd04fe0b544330a6b27215d9aa7bd, type: 3}
+  nandaFrames:
+  - {fileID: 21300000, guid: c27ceb7a1f8dacc42aad51f60f233dea, type: 2}
+  - {fileID: 21300000, guid: d8ac8ad2ef39f424683aa7e8ada6af5b, type: 2}
+  - {fileID: 21300000, guid: ee5795706cf94b3439e100cc4f7a0eb5, type: 2}
+  - {fileID: 21300000, guid: 7208abe99f48d444da8c799b0f7a64b0, type: 2}
+  - {fileID: 21300000, guid: d7cc93fe40f55e44783d3780a8641d90, type: 2}
+  - {fileID: 21300000, guid: 71ef9af0ce9ace14483aed9dd62e965e, type: 2}
+  - {fileID: 21300000, guid: b40e26af7017d884281ee53c9c192cc7, type: 2}
+  - {fileID: 21300000, guid: a4b23386c779830438dbbe67bae17b4c, type: 2}
+  requiredShaders:
+  - {fileID: 4800000, guid: 924762ea7256bc54c91e2e806806729a, type: 3}
+  - {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 4800000, guid: 2f5dee496ea14cf4b5d4eb557c00131b, type: 3}
+--- !u!4 &1438082260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438082256}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1440097147
 GameObject:
   m_ObjectHideFlags: 0
@@ -33069,110 +33173,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1515721940}
   m_Mesh: {fileID: 343955887}
---- !u!1 &1521850114
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1521850118}
-  - component: {fileID: 1521850117}
-  - component: {fileID: 1521850116}
-  - component: {fileID: 1521850115}
-  m_Layer: 0
-  m_Name: Acompanhamento_Ilustrado
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1521850115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1521850114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dec21ea26228c4458e48fdd4dd8e624, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::YunaLegend.Illustrated25D.Preview.PreviewRetryVerification
---- !u!114 &1521850116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1521850114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4aaa11d81215cd41973e81f85800c7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::YunaLegend.Illustrated25D.Preview.PreviewVerification
---- !u!114 &1521850117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1521850114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6874247fa8e1d94cbc57474c9faca52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::YunaLegend.Illustrated25D.Preview.IllustratedPreview
-  panorama: {fileID: 2800000, guid: 7e6bab51ef45e94459c96e82a1a10ebe, type: 3}
-  roomExtension: {fileID: 2800000, guid: 2009c14ea21d61048b1866be179d91b5, type: 3}
-  furnitureBody: {fileID: 2800000, guid: 652a974e1d3b4e81b57822e513396b16, type: 3}
-  furnitureWood: {fileID: 2800000, guid: e5652639cf3048388ab9afea5d9269d3, type: 3}
-  includeNextDresser: 1
-  includeNextBlocks: 1
-  includeNextDrum: 1
-  includeNextDrawers07: 1
-  includeNextCastle09: 1
-  includeNextStage2Platform10: 1
-  playableLegacyMode: 1
-  dresserPainting: {fileID: 2800000, guid: 6aa89cda3e9dcda4092ff762c223fe31, type: 3}
-  blocksPainting: {fileID: 2800000, guid: f88693cae9cf4445b933aa145295bbf0, type: 3}
-  drumPainting: {fileID: 2800000, guid: e6dde530e74897e4a8f8a448afecc9a5, type: 3}
-  cushionPainting: {fileID: 2800000, guid: 2d288b891eb0f174292cbe4738da357b, type: 3}
-  drawersPainting: {fileID: 2800000, guid: db08cafcb8e26bf4cb79883d7037e14b, type: 3}
-  musicBoxPainting: {fileID: 2800000, guid: 97d3fb8df817cc24a8e75666f5d22218, type: 3}
-  castlePainting: {fileID: 2800000, guid: 4891cc749f868ae4f8d06164ff55c589, type: 3}
-  castleFrontTowersPainting: {fileID: 2800000, guid: 1906bbb2bf7f84946a55df5cbf0f9c5b, type: 3}
-  trainTrestle10Painting: {fileID: 2800000, guid: e31cd04fe0b544330a6b27215d9aa7bd, type: 3}
-  nandaFrames:
-  - {fileID: 21300000, guid: c27ceb7a1f8dacc42aad51f60f233dea, type: 2}
-  - {fileID: 21300000, guid: d8ac8ad2ef39f424683aa7e8ada6af5b, type: 2}
-  - {fileID: 21300000, guid: ee5795706cf94b3439e100cc4f7a0eb5, type: 2}
-  - {fileID: 21300000, guid: 7208abe99f48d444da8c799b0f7a64b0, type: 2}
-  - {fileID: 21300000, guid: d7cc93fe40f55e44783d3780a8641d90, type: 2}
-  - {fileID: 21300000, guid: 71ef9af0ce9ace14483aed9dd62e965e, type: 2}
-  - {fileID: 21300000, guid: b40e26af7017d884281ee53c9c192cc7, type: 2}
-  - {fileID: 21300000, guid: a4b23386c779830438dbbe67bae17b4c, type: 2}
-  requiredShaders:
-  - {fileID: 4800000, guid: 924762ea7256bc54c91e2e806806729a, type: 3}
-  - {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 4800000, guid: 2f5dee496ea14cf4b5d4eb557c00131b, type: 3}
---- !u!4 &1521850118
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1521850114}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1521965176
 GameObject:
   m_ObjectHideFlags: 0
@@ -51624,4 +51624,4 @@ SceneRoots:
   - {fileID: 23939316}
   - {fileID: 801017246}
   - {fileID: 1806264201}
-  - {fileID: 1521850118}
+  - {fileID: 1438082260}
