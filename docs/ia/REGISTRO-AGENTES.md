@@ -28,6 +28,8 @@ python tools/plan_25d.py status
 python tools/agent_registry.py claim --subject infra/exemplo-v1 --session sessao-unica --agent MODELO --resource tools/exemplo.py --details 'Objetivo e limites'
 # Usar o ID retornado; 123 e apenas exemplo.
 python tools/agent_registry.py run --id 123 --session sessao-unica --details 'Execucao iniciada'
+# Transferencia explicita (somente com decisao humana / verificacao quando o dono anterior estiver indisponivel):
+python tools/agent_registry.py handover --id 123 --session nova-sessao --agent MODELO --from-session sessao-unica --reason 'Motivo e autorizacao humana'
 # Registrar planned/resultado no diario para cada passo e realizar validacoes.
 python tools/agent_registry.py finish --id 123 --session sessao-unica --outcome concluido --details 'Arquivos, testes executados, resultado e pendencias'
 python tools/agent_registry.py history --id 123
@@ -58,10 +60,13 @@ Normalização ignora caixa, troca barras Windows e rejeita segmentos ambíguos.
 Uma queda durante a transação faz rollback; depois do commit a reserva permanece,
 sem prazo de expiração. O dono retoma com a mesma sessão e ID.
 
-Se o dono estiver indisponível, a IA registra o impedimento no diário e aguarda
-decisão humana para recuperação. O CLI v1 não oferece transferência de dono:
-não editar as tabelas nem inventar outra chave para assumir trabalho abandonado.
-Essa limitação preserva a evidência até um procedimento de transferência auditável.
+Se o dono estiver indisponível (por exemplo, fim de créditos ou interrupção definitiva),
+a nova IA registra o impedimento no diário e só assume após decisão humana explícita
+usando `handover --id ID --session NOVA_SESSAO --agent MODELO --from-session SESSAO_ATUAL --reason "..."`
+(e `plan_25d.py handover` quando também houver reserva no coordenador macro).
+O `handover` é append-only na tabela imutável `agent_handovers`: preserva o dono
+original, registra a transferência com motivo e nunca deve ser acionado apenas por
+tempo decorrido, sem editar as tabelas nem inventar outra chave.
 
 Todos devem acessar o mesmo banco físico central, com `--db CAMINHO` antes do
 subcomando se necessário. `claim` consulta o coordenador deste checkout central;

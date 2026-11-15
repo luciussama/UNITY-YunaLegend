@@ -22,6 +22,8 @@ namespace YunaLegend.Illustrated25D.Preview
         public bool includeNextDrum;
         public bool includeNextDrawers07;
         public bool includeNextCastle09;
+        public bool includeNextStage2Platform10;
+        public bool playableLegacyMode;
         public Texture2D dresserPainting;
         public Texture2D blocksPainting;
         public Texture2D drumPainting;
@@ -30,6 +32,7 @@ namespace YunaLegend.Illustrated25D.Preview
         public Texture2D musicBoxPainting;
         public Texture2D castlePainting;
         public Texture2D castleFrontTowersPainting;
+        public Texture2D trainTrestle10Painting;
         public DresserPlatform Dresser { get; private set; }
         public AbcStackPlatform Blocks { get; private set; }
         public Drum05Platform Drum { get; private set; }
@@ -37,6 +40,8 @@ namespace YunaLegend.Illustrated25D.Preview
         public Drawers07Platform Drawers { get; private set; }
         public MusicBox08Platform MusicBox { get; private set; }
         public Castle09Platform Castle { get; private set; }
+        public TrainTrestle10Platform TrainTrestle10 { get; private set; }
+        public LegacyPlayableStageFlow PlayableFlow { get; private set; }
         public Sprite[] nandaFrames;
         public Shader[] requiredShaders;
         public Yuna25DPlayerController Player { get; private set; }
@@ -81,7 +86,7 @@ namespace YunaLegend.Illustrated25D.Preview
             if (resolver == null || guide == null) throw new InvalidOperationException("Illustrated characters missing");
             cameraDriver = Camera.main.GetComponent<SideScroll25DCamera>();
             var markers = FindObjectsByType<DarkRoomPlatformMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-            int last = includeNextCastle09 ? 9 : includeNextDrawers07 ? 7 : includeNextDrum ? 5 : includeNextBlocks ? 4 : includeNextDresser ? 3 : 2;
+            int last = includeNextStage2Platform10 ? 10 : includeNextCastle09 ? 9 : includeNextDrawers07 ? 7 : includeNextDrum ? 5 : includeNextBlocks ? 4 : includeNextDresser ? 3 : 2;
             pilot = Enumerable.Range(0,last+1).Select(i => markers.Single(m => m.spec.index == i)).ToArray();
             foreach (var m in pilot) m.gameObject.SetActive(true);
             foreach (var m in markers.Where(m => m.spec.index > last)) m.gameObject.SetActive(false);
@@ -151,6 +156,15 @@ namespace YunaLegend.Illustrated25D.Preview
                 var castleFeet = Player.gameObject.AddComponent<DresserFootAlignment>();
                 castleFeet.player = Player; castleFeet.surface = Castle.Top; castleFeet.supportIndex = 9; castleFeet.pinVisibleSole = true;
             }
+            if (includeNextStage2Platform10)
+            {
+                if (!includeNextCastle09) throw new InvalidOperationException("Platform 10 requires Castle 09 step");
+                if (trainTrestle10Painting == null) throw new InvalidOperationException("Approved Train Trestle 10 painting missing");
+                TrainTrestle10 = pilot[10].gameObject.AddComponent<TrainTrestle10Platform>();
+                TrainTrestle10.Install(trainTrestle10Painting);
+                var p10Feet = Player.gameObject.AddComponent<DresserFootAlignment>();
+                p10Feet.player = Player; p10Feet.surface = TrainTrestle10.Top; p10Feet.supportIndex = 10; p10Feet.pinVisibleSole = true;
+            }
             // The contact colliders describe where feet land, not the bottom of the painting.
             float floor = bearPainting.TransformPoint(new Vector3(0,
                 IllustratedBearPlatformProfile.Document.mapping.quadBoundsLocal.bottom, 0)).y;
@@ -169,7 +183,9 @@ namespace YunaLegend.Illustrated25D.Preview
             float min = pilot.Take(3).Min(p => Bounds(p).min.x), max = pilot.Take(3).Max(p => Bounds(p).max.x);
             Room = new GameObject("Quarto_Ilustrado_Aprovado").AddComponent<RoomBackgroundT054>();
             var spriteMaterial = new Material(Shader.Find("Sprites/Default"));
-            var panels = roomExtension != null ? new[] { panorama, roomExtension, roomExtension } : new[] { panorama };
+            var panels = roomExtension != null
+                ? (includeNextStage2Platform10 ? new[] { panorama, roomExtension, roomExtension, roomExtension } : new[] { panorama, roomExtension, roomExtension })
+                : new[] { panorama };
             Room.InstallPanels(panels,panorama.width/32f,null,null,floor,(min+max)*.5f,
                 spriteMaterial,1,1,RoomBackgroundT054.PanoramaFloorInsetFraction,.35f,0);
             var shadows = new GameObject(ContactShadowT054.RootName);
@@ -181,7 +197,8 @@ namespace YunaLegend.Illustrated25D.Preview
                     : p.spec.index == 4 && Blocks != null && Blocks.Painting != null ? Blocks.Painting.bounds
                     : p.spec.index == 5 && Drum != null && Drum.Painting != null ? Drum.Painting.bounds
                     : p.spec.index == 8 && MusicBox != null && MusicBox.Painting != null ? MusicBox.Painting.bounds
-                    : p.spec.index == 9 && Castle != null && Castle.Painting != null ? Castle.Painting.bounds : b;
+                    : p.spec.index == 9 && Castle != null && Castle.Painting != null ? Castle.Painting.bounds
+                    : p.spec.index == 10 && TrainTrestle10 != null && TrainTrestle10.Painting != null ? TrainTrestle10.Painting.bounds : b;
                 ContactShadowT054.Install(shadows.transform,paintingBounds.center.x,floor,
                     paintingBounds.size.x,b.size.z,.18f,true);
             }
@@ -213,7 +230,8 @@ namespace YunaLegend.Illustrated25D.Preview
                 var b = p.spec.index == 4 && Blocks != null && Blocks.Painting != null ? Blocks.Painting.bounds
                     : p.spec.index == 5 && Drum != null && Drum.Painting != null ? Drum.Painting.bounds
                     : p.spec.index == 8 && MusicBox != null && MusicBox.Painting != null ? MusicBox.Painting.bounds
-                    : p.spec.index == 9 && Castle != null && Castle.Painting != null ? Castle.Painting.bounds : Bounds(p);
+                    : p.spec.index == 9 && Castle != null && Castle.Painting != null ? Castle.Painting.bounds
+                    : p.spec.index == 10 && TrainTrestle10 != null && TrainTrestle10.Painting != null ? TrainTrestle10.Painting.bounds : Bounds(p);
                 return new Vector4(b.center.x, floor, b.size.x * .5f, 1f);
             }).ToArray();
             for (int i = 0; i < Room.FarPanels.Count; i++) Lighting.Bind(Room.FarPanels[i], 0, false, false, false, i == 0);
@@ -239,6 +257,10 @@ namespace YunaLegend.Illustrated25D.Preview
                 DresserFloorReceiver.Install(Room,Lighting,pilot[8].transform.position.x,MusicBox08Platform.FullWidth*.5f+.2f,"Reflexo_Piso_Caixa_Musica");
                 DresserFloorReceiver.Install(Room,Lighting,pilot[9].transform.position.x,Castle09Platform.FullWidth*.5f+.2f,"Reflexo_Piso_Castelinho");
             }
+            if(includeNextStage2Platform10)
+            {
+                DresserFloorReceiver.Install(Room,Lighting,pilot[10].transform.position.x,TrainTrestle10Platform.FullWidth*.5f+.2f,"Reflexo_Piso_Trem_10");
+            }
             resolver.idle.previewClock = true;
             Camera.main.clearFlags = CameraClearFlags.SolidColor;
             Camera.main.backgroundColor = new Color(.007f,.009f,.018f);
@@ -255,6 +277,11 @@ namespace YunaLegend.Illustrated25D.Preview
             accompaniment.ResetPresentation();
             cameraDriver.SnapToTargetX(Player.transform.position.x);
             Room.Follow(Camera.main.transform.position); Lighting.Apply();
+            if (playableLegacyMode)
+            {
+                PlayableFlow = gameObject.AddComponent<LegacyPlayableStageFlow>();
+                PlayableFlow.Initialize(this, Player, guide, cameraDriver, pilot[0].GetTopCenterWorld());
+            }
         }
 
         static Bounds Bounds(DarkRoomPlatformMarker m)
@@ -286,6 +313,7 @@ namespace YunaLegend.Illustrated25D.Preview
         void Update()
         {
             if (!Ready) return;
+            if (playableLegacyMode) return;
             var k=Keyboard.current;
             if (k != null && k.rKey.wasPressedThisFrame) { Retry(); return; }
             if (k != null && (k.pKey.wasPressedThisFrame || k.escapeKey.wasPressedThisFrame) && Started && !Finished)
@@ -301,13 +329,16 @@ namespace YunaLegend.Illustrated25D.Preview
         {
             if (!Ready) return;
             clock+=Time.deltaTime;
-            resolver.showIdle=!Started || Finished || Player.IsDead;
+            resolver.showIdle = playableLegacyMode && PlayableFlow != null
+                ? (PlayableFlow.ShowIdlePose || Player.IsDead)
+                : (!Started || Finished || Player.IsDead);
             Room.Follow(Camera.main.transform.position);
             foreach (var r in legacy) if (r != null) r.enabled=false;
             LegacyRenderersVisible=legacy.Count(r=>r!=null && r.enabled && r.gameObject.activeInHierarchy);
         }
         void OnGUI()
         {
+            if (playableLegacyMode) return;
             GUI.skin.label.fontSize=Mathf.Max(14,Screen.height/45);
             GUI.skin.button.fontSize=GUI.skin.label.fontSize;
             GUI.Label(new Rect(18,12,Screen.width-36,32),includeNextCastle09

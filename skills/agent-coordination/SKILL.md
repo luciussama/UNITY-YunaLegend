@@ -20,7 +20,8 @@ Ao alterar a implementação, preservar estes invariantes:
 - Consulta + decisão + aquisição sob transação; nunca usar consulta seguida de
   gravação sem trava. Uma consulta de status é somente um retrato.
 - Chave única permanente, repetição sem novo evento, transições ordenadas,
-  proprietário validado e histórico append-only.
+  proprietário validado, transferência explícita via `handover` (`agent_handovers`)
+  apenas por decisão humana registrada e histórico append-only.
 - Queda não libera reserva comprometida; ausência de heartbeat não autoriza posse.
 - Reservas do coordenador antigo e do novo registro respeitam-se mutuamente.
 - Exclusão por recurso cobre pasta/descendente, sem reservar o projeto inteiro.

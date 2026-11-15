@@ -29,6 +29,15 @@ CREATE TABLE IF NOT EXISTS agent_events (
  details TEXT NOT NULL,
  created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
 );
+CREATE TABLE IF NOT EXISTS agent_handovers (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ job_id INTEGER NOT NULL REFERENCES agent_jobs(id),
+ from_session TEXT NOT NULL,
+ to_session TEXT NOT NULL,
+ to_agent TEXT NOT NULL,
+ reason TEXT NOT NULL,
+ created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
+);
 CREATE TRIGGER IF NOT EXISTS agent_event_sequence BEFORE INSERT ON agent_events
 BEGIN
  SELECT CASE WHEN
@@ -53,9 +62,13 @@ def overlaps(a, b):
     return a == b or a.startswith(b + '/') or b.startswith(a + '/')
 
 
+def has_handovers_table(db):
+    return db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='agent_handovers'").fetchone() is not None
+
+
 def initialize(db):
     db.executescript(SCHEMA)
-    for table in ('agent_jobs', 'agent_resources', 'agent_events'):
+    for table in ('agent_jobs', 'agent_resources', 'agent_events', 'agent_handovers'):
         for operation in ('UPDATE', 'DELETE'):
             db.execute(f"CREATE TRIGGER IF NOT EXISTS {table}_no_{operation.lower()} "
                        f"BEFORE {operation} ON {table} BEGIN SELECT RAISE(ABORT,'Registro imutavel'); END")
@@ -64,6 +77,7 @@ def initialize(db):
 
 def jobs(db):
     result = []
+    with_handovers = has_handovers_table(db)
     for row in db.execute('SELECT * FROM agent_jobs ORDER BY id'):
         job = dict(row)
         event = db.execute('SELECT * FROM agent_events WHERE job_id=? ORDER BY id DESC LIMIT 1',
@@ -71,6 +85,16 @@ def jobs(db):
         job.update(state=event['state'], outcome=event['outcome'])
         job['resources'] = [r[0] for r in db.execute(
             'SELECT resource FROM agent_resources WHERE job_id=? ORDER BY resource', (job['id'],))]
+        if with_handovers:
+            transfers = [dict(r) for r in db.execute(
+                'SELECT id, from_session, to_session, to_agent, reason, created_at '
+                'FROM agent_handovers WHERE job_id=? ORDER BY id', (job['id'],))]
+            if transfers:
+                job['original_session'] = job['session']
+                job['original_agent'] = job['agent']
+                job['session'] = transfers[-1]['to_session']
+                job['agent'] = transfers[-1]['to_agent']
+                job['handovers'] = transfers
         result.append(job)
     return result
 
@@ -126,6 +150,40 @@ def transition(db, identifier, session, state, details, outcome=''):
     return dict(id=identifier, state=state, outcome=outcome, reused=False)
 
 
+def handover(db, identifier, session, agent, from_session, reason):
+    if from_session == session:
+        raise ValueError('Sessao de destino deve ser diferente da sessao atual')
+    if not has_handovers_table(db):
+        initialize(db)
+    db.execute('BEGIN IMMEDIATE')
+    try:
+        job = next((j for j in jobs(db) if j['id'] == identifier), None)
+        if not job:
+            raise ValueError('Registro inexistente')
+        if job['state'] == 'finalizado':
+            raise ValueError('Assunto ja finalizado; abra nova revisao em vez de handover')
+        if job['session'] == session:
+            last = db.execute(
+                'SELECT from_session, to_session, to_agent, reason FROM agent_handovers WHERE job_id=? ORDER BY id DESC LIMIT 1',
+                (identifier,)).fetchone()
+            if last and (last['from_session'], last['to_session'], last['to_agent'], last['reason']) == (
+                    from_session, session, agent, reason):
+                db.rollback()
+                return dict(job, reused=True)
+            raise ValueError('Repeticao divergente ou sessao ja e dona deste registro')
+        if job['session'] != from_session:
+            raise ValueError(f"Dono esperado nao coincide: atual={job['session']}")
+        db.execute(
+            'INSERT INTO agent_handovers(job_id,from_session,to_session,to_agent,reason) VALUES (?,?,?,?,?)',
+            (identifier, from_session, session, agent, reason))
+        db.commit()
+    except Exception:
+        if db.in_transaction:
+            db.rollback()
+        raise
+    return dict(next(j for j in jobs(db) if j['id'] == identifier), reused=False)
+
+
 def nonempty(value):
     if not value.strip():
         raise argparse.ArgumentTypeError('Valor vazio')
@@ -153,6 +211,12 @@ def main(argv=None):
             command.add_argument('--id', type=int, required=True)
         if name == 'finish':
             command.add_argument('--outcome', required=True, choices=['concluido', 'falhou', 'cancelado'])
+    transfer = commands.add_parser('handover')
+    transfer.add_argument('--id', type=int, required=True)
+    transfer.add_argument('--session', required=True, type=nonempty)
+    transfer.add_argument('--agent', required=True, type=nonempty)
+    transfer.add_argument('--from-session', required=True, type=nonempty)
+    transfer.add_argument('--reason', required=True, type=nonempty)
     args = parser.parse_args(argv)
     try:
         with closing(sqlite3.connect(args.db.resolve().as_uri() + '?mode=rw', uri=True, timeout=30)) as db:
@@ -164,9 +228,14 @@ def main(argv=None):
             elif args.command == 'status':
                 result = [j for j in jobs(db) if args.all or j['state'] != 'finalizado']
             elif args.command == 'history':
-                result = [dict(r) for r in db.execute('SELECT * FROM agent_events WHERE job_id=? ORDER BY id', (args.id,))]
+                events = [dict(r) for r in db.execute('SELECT * FROM agent_events WHERE job_id=? ORDER BY id', (args.id,))]
+                handovers = ([dict(r) for r in db.execute('SELECT * FROM agent_handovers WHERE job_id=? ORDER BY id', (args.id,))]
+                             if has_handovers_table(db) else [])
+                result = {'events': events, 'handovers': handovers}
             elif args.command == 'claim':
                 result = claim(db, args.subject, args.session, args.agent, args.resource, args.details)
+            elif args.command == 'handover':
+                result = handover(db, args.id, args.session, args.agent, args.from_session, args.reason)
             else:
                 result = transition(db, args.id, args.session,
                                     'em_execucao' if args.command == 'run' else 'finalizado',

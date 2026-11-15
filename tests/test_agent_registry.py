@@ -106,6 +106,53 @@ class RegistryTests(unittest.TestCase):
             self.assertEqual(len(registry.jobs(db)), 1)
             self.assertEqual(db.execute('SELECT count(*) FROM agent_events').fetchone()[0], 1)
 
+    def test_explicit_handover_transfers_ownership_and_is_immutable(self):
+        job = self.claim(subject='test/handover', resources=['test/handoff-file'])
+        self.change(job['id'], 'em_execucao', session='owner')
+
+        with self.connect() as db:
+            with self.assertRaises(ValueError):
+                registry.handover(db, job['id'], 'new-owner', 'new-agent', 'wrong-owner', 'motivo')
+            with self.assertRaises(ValueError):
+                registry.handover(db, job['id'], 'owner', 'new-agent', 'owner', 'mesma sessao')
+
+            transferred = registry.handover(
+                db, job['id'], 'new-owner', 'new-agent', 'owner', 'Credito esgotado; usuario autorizou retomada')
+            self.assertFalse(transferred['reused'])
+            self.assertEqual(transferred['session'], 'new-owner')
+            self.assertEqual(transferred['agent'], 'new-agent')
+            self.assertEqual(transferred['original_session'], 'owner')
+            self.assertEqual(len(transferred['handovers']), 1)
+
+            repeated = registry.handover(
+                db, job['id'], 'new-owner', 'new-agent', 'owner', 'Credito esgotado; usuario autorizou retomada')
+            self.assertTrue(repeated['reused'])
+            with self.assertRaises(ValueError):
+                registry.handover(db, job['id'], 'new-owner', 'new-agent', 'owner', 'motivo diferente')
+
+            with self.assertRaises(sqlite3.IntegrityError):
+                db.execute('UPDATE agent_handovers SET to_session=?', ('hacker',))
+            with self.assertRaises(sqlite3.IntegrityError):
+                db.execute('DELETE FROM agent_handovers')
+
+        with self.assertRaises(ValueError):
+            self.change(job['id'], 'finalizado', session='owner', outcome='concluido')
+
+        root = Path(self.temp.name)
+        destination = root / 'docs/ia'
+        destination.mkdir(parents=True)
+        import shutil
+        shutil.copy2(self.path, destination / 'diario.sqlite3')
+        with self.assertRaisesRegex(ValueError, 'Registro de agentes ocupado'):
+            plan_25d.check_agent_registry(root, {'id': 'T99', 'resources': ['test/handoff-file']}, 'owner')
+        plan_25d.check_agent_registry(root, {'id': 'T99', 'resources': ['test/handoff-file']}, 'new-owner')
+
+        finished = self.change(job['id'], 'finalizado', session='new-owner', outcome='concluido')
+        self.assertEqual(finished['state'], 'finalizado')
+        with self.connect() as db:
+            with self.assertRaises(ValueError):
+                registry.handover(db, job['id'], 'third', 'third-agent', 'new-owner', 'apos finalizar')
+
 
 if __name__ == '__main__':
     unittest.main()
