@@ -43,6 +43,8 @@ namespace YunaLegend.Illustrated25D.Environment
         private NandaFairyGuide guide;
         private SideScroll25DCamera cam;
         private StageHudController hud;
+        private OpeningCinematicController openingCinematic;
+        private FalseDoorCinematicController falseDoorCinematic;
         private Vector3 bearTopWorld;
 
         private const float FalseDoorFallenDuration = 1.05f;
@@ -100,6 +102,10 @@ namespace YunaLegend.Illustrated25D.Environment
             hud.IsFalseDoorDialogueReady = () => ShowFalseDoorDialogue;
             hud.GetFailure = () => preview != null ? preview.Failure : null;
             hud.GetStage2BannerTimer = () => stage2BannerTimer;
+            hud.GetOpeningChapterBannerAlpha = () => openingCinematic != null ? openingCinematic.ChapterBannerAlpha : 0f;
+            hud.GetOpeningCurtainAlpha = () => openingCinematic != null ? openingCinematic.CurtainFadeAlpha : 0f;
+            hud.GetOpeningDialogueBeat = () => openingCinematic != null ? openingCinematic.DialogueBeat : 0;
+            hud.IsOpeningYunaInBed = () => openingCinematic != null && openingCinematic.IsYunaInBed;
             hud.GetPlayerWorldPosition = () => player != null ? player.transform.position : Vector3.zero;
             hud.GetBearTopWorldPosition = () => bearTopWorld;
             hud.OnAdvanceRequested += AdvanceStepForAutomation;
@@ -107,6 +113,19 @@ namespace YunaLegend.Illustrated25D.Environment
             hud.OnToggleMuteRequested += ToggleMute;
             hud.OnRetryFromBeginningRequested += () => preview.Retry();
             hud.OnRetryFromCheckpointRequested += RetryFromCheckpoint;
+
+            openingCinematic = gameObject.AddComponent<OpeningCinematicController>();
+            openingCinematic.Initialize(
+                player,
+                guide,
+                cam,
+                preview != null ? preview.Lighting : null);
+
+            falseDoorCinematic = gameObject.AddComponent<FalseDoorCinematicController>();
+            falseDoorCinematic.Initialize(
+                player,
+                cam,
+                preview != null ? preview.Lighting : null);
 
             if (player != null)
             {
@@ -190,7 +209,6 @@ namespace YunaLegend.Illustrated25D.Environment
             if (currentPhase == StageFlowStateMachine.FlowPhase.FalseDoorCutsceneStep0)
             {
                 falseDoorCutsceneElapsed += Time.deltaTime;
-                UpdateFalseDoorCutsceneBeats();
             }
 
             bool allowConfirm = currentPhase != StageFlowStateMachine.FlowPhase.FalseDoorCutsceneStep0
@@ -270,6 +288,8 @@ namespace YunaLegend.Illustrated25D.Environment
 
         private void HandlePhaseChanged(StageFlowStateMachine.FlowPhase next)
         {
+            openingCinematic?.OnPhaseChanged(next);
+            falseDoorCinematic?.OnPhaseChanged(next);
             switch (next)
             {
                 case StageFlowStateMachine.FlowPhase.OpeningNandaWake1:
