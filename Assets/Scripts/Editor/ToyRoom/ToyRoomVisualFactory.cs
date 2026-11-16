@@ -10,33 +10,64 @@ namespace YunaLegend.Editor.ToyRoom
     /// </summary>
     public static class ToyRoomVisualFactory
     {
-        private const string PainterlyShaderName = "YunaLegend/ToyRoom_Painterly3D";
+        private const string PainterlyShaderName = "Universal Render Pipeline/Lit";
+        private const string MaterialsFolder = "Assets/Art/ToyRoom/Materials";
+        private static int materialCounter;
+
+        public static void ResetMaterialCounter()
+        {
+            materialCounter = 0;
+            System.IO.Directory.CreateDirectory(MaterialsFolder);
+        }
 
         public static Material CreatePainterlyMaterial(Color tint, string texturePath = null, Vector2? tiling = null, Color? emission = null)
         {
-            var shader = Shader.Find(PainterlyShaderName) ?? Shader.Find("Universal Render Pipeline/Lit");
-            var mat = new Material(shader);
-            mat.SetColor("_BaseColor", tint);
+            var shader = Shader.Find(PainterlyShaderName);
+            string matPath = $"{MaterialsFolder}/M_ToyRoom_{materialCounter++:000}.mat";
+            var mat = AssetDatabase.LoadAssetAtPath<Material>(matPath);
+            if (mat == null)
+            {
+                mat = new Material(shader);
+                AssetDatabase.CreateAsset(mat, matPath);
+            }
+            else
+            {
+                mat.shader = shader;
+            }
 
+            mat.SetColor("_BaseColor", tint);
+            mat.SetFloat("_Smoothness", 0.14f);
+            mat.SetFloat("_Metallic", 0.02f);
+
+            Texture2D tex = null;
             if (!string.IsNullOrEmpty(texturePath))
             {
-                var tex = AssetDatabase.LoadAssetAtPath<Texture2D>(texturePath);
-                if (tex != null)
-                {
-                    mat.SetTexture("_BaseMap", tex);
-                }
+                tex = AssetDatabase.LoadAssetAtPath<Texture2D>(texturePath);
             }
+
+            mat.SetTexture("_BaseMap", tex != null ? tex : Texture2D.whiteTexture);
 
             if (tiling.HasValue)
             {
                 mat.SetTextureScale("_BaseMap", tiling.Value);
             }
+            else
+            {
+                mat.SetTextureScale("_BaseMap", Vector2.one);
+            }
 
             if (emission.HasValue)
             {
+                mat.EnableKeyword("_EMISSION");
                 mat.SetColor("_EmissionColor", emission.Value);
             }
+            else
+            {
+                mat.DisableKeyword("_EMISSION");
+                mat.SetColor("_EmissionColor", Color.black);
+            }
 
+            EditorUtility.SetDirty(mat);
             return mat;
         }
 
