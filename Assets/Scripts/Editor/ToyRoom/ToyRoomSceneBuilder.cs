@@ -12,13 +12,13 @@ namespace YunaLegend.Editor.ToyRoom
 {
     /// <summary>
     /// Constroi a cena base 3D isometrica da Fase 2 (ToyRoom_Gameplay.unity) com camera fixa,
-    /// iluminacao matinal URP, controladores runtime e blockout dos 7 moveis e 8 brinquedos.
+    /// iluminacao matinal URP, HUD, narrativa, espada e blockout dos 7 moveis e 8 brinquedos.
     /// </summary>
     public static class ToyRoomSceneBuilder
     {
         public const string ScenePath = "Assets/Scenes/ToyRoom_Gameplay.unity";
 
-        [MenuItem("YunaLegend/Fase 2 - Toy Room/Build Base Scene (P1-P4)")]
+        [MenuItem("YunaLegend/Fase 2 - Toy Room/Build Base Scene (P1-P6)")]
         public static void BuildBaseScene()
         {
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
@@ -30,12 +30,19 @@ namespace YunaLegend.Editor.ToyRoom
             var chest = CreateFurnitureBlockout();
             var toys = CreateToyPlaceholders();
             var player = CreatePlayer();
-            var swordAnchor = CreateSwordAnchor(chest.transform.position);
-            var nanda = CreateNandaGuide(player.transform, chest.transform, swordAnchor);
+            var swordView = CreateToySword(chest.transform.position);
+            var nanda = CreateNandaGuide(player.transform, chest.transform, swordView.transform);
+
+            var hudGo = new GameObject("ToyRoom_HUD");
+            var hud = hudGo.AddComponent<ToyRoomHudController>();
+
+            var narrativeGo = new GameObject("ToyRoom_Narrative");
+            var narrative = narrativeGo.AddComponent<ToyRoomNarrativeController>();
+            narrative.Configure(hud, swordView);
 
             var bootstrapGo = new GameObject("ToyRoom_Bootstrap");
             var bootstrap = bootstrapGo.AddComponent<ToyRoomStageBootstrap>();
-            bootstrap.Configure(cam, player, chest, nanda, toys, autoExplore: true);
+            bootstrap.Configure(cam, player, chest, nanda, swordView, hud, narrative, toys, autoExplore: false);
 
             Directory.CreateDirectory(Path.GetDirectoryName(ScenePath) ?? "Assets/Scenes");
             EditorSceneManager.SaveScene(scene, ScenePath);
@@ -101,10 +108,9 @@ namespace YunaLegend.Editor.ToyRoom
         {
             var root = new GameObject("Architecture");
 
-            var floor = CreateBox("Floor_Wood", root.transform, new Vector3(0f, -0.1f, 0f), new Vector3(ToyRoomCatalog.RoomWidth, 0.2f, ToyRoomCatalog.RoomDepth), new Color(0.68f, 0.48f, 0.28f));
+            CreateBox("Floor_Wood", root.transform, new Vector3(0f, -0.1f, 0f), new Vector3(ToyRoomCatalog.RoomWidth, 0.2f, ToyRoomCatalog.RoomDepth), new Color(0.68f, 0.48f, 0.28f));
             var rug = CreateBox("Rug_Central", root.transform, new Vector3(0f, 0.015f, -0.4f), new Vector3(8.5f, 0.03f, 5.8f), new Color(0.84f, 0.68f, 0.68f));
             Object.DestroyImmediate(rug.GetComponent<Collider>());
-            _ = floor;
 
             CreateBox("Wall_North", root.transform, new Vector3(0f, 2.5f, ToyRoomCatalog.HalfDepth + 0.15f), new Vector3(ToyRoomCatalog.RoomWidth + 0.6f, 5.0f, 0.3f), new Color(0.95f, 0.89f, 0.78f));
             CreateBox("Wall_West", root.transform, new Vector3(-ToyRoomCatalog.HalfWidth - 0.15f, 2.5f, 0f), new Vector3(0.3f, 5.0f, ToyRoomCatalog.RoomDepth), new Color(0.92f, 0.85f, 0.74f));
@@ -227,15 +233,34 @@ namespace YunaLegend.Editor.ToyRoom
                 renderer.sharedMaterial = mat;
             }
 
-            var controller = playerGo.AddComponent<ToyRoomPlayerController>();
-            return controller;
+            return playerGo.AddComponent<ToyRoomPlayerController>();
         }
 
-        private static Transform CreateSwordAnchor(Vector3 chestPosition)
+        private static ToySwordView CreateToySword(Vector3 chestPosition)
         {
-            var swordGo = new GameObject("ToySword_Anchor");
-            swordGo.transform.position = chestPosition + new Vector3(2.3f, -chestPosition.y + 0.2f, -0.4f);
-            return swordGo.transform;
+            var swordRoot = new GameObject("ToySword_Anchor");
+            swordRoot.transform.position = chestPosition + new Vector3(2.3f, -chestPosition.y + 0.35f, -0.4f);
+
+            var blade = CreateBox("Blade", swordRoot.transform, new Vector3(0f, 0.35f, 0f), new Vector3(0.10f, 0.65f, 0.04f), new Color(0.91f, 0.79f, 0.56f));
+            Object.DestroyImmediate(blade.GetComponent<Collider>());
+
+            var guard = CreateBox("Guard", swordRoot.transform, new Vector3(0f, 0.02f, 0f), new Vector3(0.32f, 0.07f, 0.08f), new Color(0.51f, 0.77f, 0.78f));
+            Object.DestroyImmediate(guard.GetComponent<Collider>());
+
+            var hilt = CreateBox("Hilt", swordRoot.transform, new Vector3(0f, -0.13f, 0f), new Vector3(0.08f, 0.22f, 0.06f), new Color(0.78f, 0.47f, 0.41f));
+            Object.DestroyImmediate(hilt.GetComponent<Collider>());
+
+            var auraGo = new GameObject("SwordAura");
+            auraGo.transform.SetParent(swordRoot.transform, false);
+            var aura = auraGo.AddComponent<Light>();
+            aura.type = LightType.Point;
+            aura.color = new Color(1.0f, 0.90f, 0.55f);
+            aura.range = 3.5f;
+            aura.intensity = 2.4f;
+
+            var swordView = swordRoot.AddComponent<ToySwordView>();
+            swordView.Configure(aura);
+            return swordView;
         }
 
         private static NandaToyRoomGuideController CreateNandaGuide(Transform player, Transform chest, Transform sword)

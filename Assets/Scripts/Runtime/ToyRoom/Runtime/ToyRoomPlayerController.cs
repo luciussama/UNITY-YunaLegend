@@ -35,6 +35,7 @@ namespace YunaLegend.ToyRoom.Runtime
         private void Awake()
         {
             characterController = GetComponent<CharacterController>();
+            characterController.minMoveDistance = 0f;
             EnsureCarryAnchor();
         }
 

@@ -7,7 +7,7 @@ namespace YunaLegend.ToyRoom.Runtime
 {
     /// <summary>
     /// Composition Root da Fase 2 (Toy Room): conecta maquina de estados pura,
-    /// movimentacao da Yuna, bau, brinquedos e Nanda azul por eventos.
+    /// movimentacao da Yuna, bau, brinquedos, espada, HUD, narrativa e Nanda azul por eventos.
     /// </summary>
     public sealed class ToyRoomStageBootstrap : MonoBehaviour
     {
@@ -15,8 +15,11 @@ namespace YunaLegend.ToyRoom.Runtime
         [SerializeField] private ToyRoomPlayerController player;
         [SerializeField] private ToyChestController chest;
         [SerializeField] private NandaToyRoomGuideController nandaGuide;
+        [SerializeField] private ToySwordView swordView;
+        [SerializeField] private ToyRoomHudController hud;
+        [SerializeField] private ToyRoomNarrativeController narrative;
         [SerializeField] private List<ToyItemView> toys = new List<ToyItemView>();
-        [SerializeField] private bool startInExploring = true;
+        [SerializeField] private bool startInExploring;
 
         private readonly Dictionary<string, ToyItemView> toyLookup = new Dictionary<string, ToyItemView>();
 
@@ -27,13 +30,19 @@ namespace YunaLegend.ToyRoom.Runtime
             ToyRoomPlayerController playerController,
             ToyChestController chestController,
             NandaToyRoomGuideController guideController,
+            ToySwordView sword,
+            ToyRoomHudController hudController,
+            ToyRoomNarrativeController narrativeController,
             List<ToyItemView> toyViews,
-            bool autoExplore = true)
+            bool autoExplore = false)
         {
             isometricCamera = mainCam;
             player = playerController;
             chest = chestController;
             nandaGuide = guideController;
+            swordView = sword;
+            hud = hudController;
+            narrative = narrativeController;
             toys = toyViews ?? new List<ToyItemView>();
             startInExploring = autoExplore;
         }
@@ -43,11 +52,22 @@ namespace YunaLegend.ToyRoom.Runtime
             StateMachine = new ToyRoomStateMachine();
             BuildToyLookup();
             SubscribeEvents();
+        }
 
-            if (startInExploring)
+        private void Start()
+        {
+            if (startInExploring || narrative == null)
             {
                 StateMachine.CompleteIntro();
+                return;
             }
+
+            if (player != null)
+            {
+                player.ControlsEnabled = false;
+            }
+
+            narrative.PlayIntro(() => StateMachine.CompleteIntro());
         }
 
         private void OnDestroy()
@@ -61,6 +81,8 @@ namespace YunaLegend.ToyRoom.Runtime
             if (StateMachine != null)
             {
                 StateMachine.OnToyRespawnedOutsideView -= HandleToyRespawned;
+                StateMachine.OnStrangeDialogueTriggered -= HandleStrangeDialogue;
+                StateMachine.OnInvestigationTriggered -= HandleInvestigationTriggered;
                 StateMachine.OnPhaseChanged -= HandlePhaseChanged;
             }
         }
@@ -75,7 +97,7 @@ namespace YunaLegend.ToyRoom.Runtime
             var keyboard = Keyboard.current;
             if (keyboard != null && (keyboard.eKey.wasPressedThisFrame || keyboard.spaceKey.wasPressedThisFrame))
             {
-                player.TryInteract(toys, chest);
+                RequestPlayerInteraction();
             }
 
             if (chest != null)
@@ -84,15 +106,38 @@ namespace YunaLegend.ToyRoom.Runtime
                 chest.SetPlayerCarryingNear(carryingNear);
             }
 
+            UpdateContextualPrompt();
+
             var playerPoint = new ToyRoomPoint(player.transform.position.x, player.transform.position.z);
             StateMachine.Tick(Time.deltaTime, playerPoint, IsInsideMainCameraFocus);
         }
 
         public void RequestPlayerInteraction()
         {
-            if (player != null)
+            if (StateMachine == null || player == null)
             {
-                player.TryInteract(toys, chest);
+                return;
+            }
+
+            if (StateMachine.CurrentPhase == ToyRoomPhase.SeekingSword)
+            {
+                if (swordView != null && swordView.IsWithinPickupRange(player.transform.position))
+                {
+                    swordView.Collect();
+                    StateMachine.CollectToySword();
+                }
+
+                return;
+            }
+
+            player.TryInteract(toys, chest);
+        }
+
+        public void SkipActiveCutscene()
+        {
+            if (narrative != null)
+            {
+                narrative.SkipActiveSequence();
             }
         }
 
@@ -118,6 +163,8 @@ namespace YunaLegend.ToyRoom.Runtime
             }
 
             StateMachine.OnToyRespawnedOutsideView += HandleToyRespawned;
+            StateMachine.OnStrangeDialogueTriggered += HandleStrangeDialogue;
+            StateMachine.OnInvestigationTriggered += HandleInvestigationTriggered;
             StateMachine.OnPhaseChanged += HandlePhaseChanged;
         }
 
@@ -160,7 +207,9 @@ namespace YunaLegend.ToyRoom.Runtime
                 chest.TriggerStoreFeedback();
             }
 
-            if (nandaGuide != null && StateMachine.CurrentPhase != ToyRoomPhase.SeekingSword)
+            RefreshCounterHud();
+
+            if (nandaGuide != null && StateMachine.CurrentPhase != ToyRoomPhase.SeekingSword && StateMachine.CurrentPhase != ToyRoomPhase.InvestigationCutscene)
             {
                 nandaGuide.SetMode(NandaGuideTargetMode.FollowPlayer);
             }
@@ -171,6 +220,38 @@ namespace YunaLegend.ToyRoom.Runtime
             if (toyLookup.TryGetValue(toyId, out var toy) && toy != null)
             {
                 toy.RespawnAt(new Vector3(point.X, 0.25f, point.Z));
+            }
+
+            RefreshCounterHud();
+        }
+
+        private void HandleStrangeDialogue()
+        {
+            if (narrative != null)
+            {
+                narrative.PlayStrangeDialogue();
+            }
+        }
+
+        private void HandleInvestigationTriggered()
+        {
+            if (nandaGuide != null)
+            {
+                nandaGuide.SetMode(NandaGuideTargetMode.HoverOverSword);
+            }
+
+            if (narrative != null)
+            {
+                narrative.PlayInvestigation(() => StateMachine.CompleteInvestigationCutscene());
+            }
+            else
+            {
+                if (swordView != null)
+                {
+                    swordView.Reveal();
+                }
+
+                StateMachine.CompleteInvestigationCutscene();
             }
         }
 
@@ -187,6 +268,81 @@ namespace YunaLegend.ToyRoom.Runtime
             {
                 nandaGuide.SetMode(NandaGuideTargetMode.HoverOverSword);
             }
+
+            if (phase == ToyRoomPhase.SwordPickup)
+            {
+                if (narrative != null)
+                {
+                    narrative.PlaySwordPickup(() => StateMachine.CompleteSwordPickup());
+                }
+                else
+                {
+                    StateMachine.CompleteSwordPickup();
+                }
+            }
+        }
+
+        private void RefreshCounterHud()
+        {
+            if (hud == null)
+            {
+                return;
+            }
+
+            int activeOnFloorOrCarried = 0;
+            for (int i = 0; i < toys.Count; i++)
+            {
+                if (toys[i] != null && !toys[i].IsStored)
+                {
+                    activeOnFloorOrCarried++;
+                }
+            }
+
+            hud.UpdateToyCounter(ToyRoomCatalog.TotalToyCount - activeOnFloorOrCarried);
+        }
+
+        private void UpdateContextualPrompt()
+        {
+            if (hud == null || player == null || !player.ControlsEnabled)
+            {
+                if (hud != null)
+                {
+                    hud.SetActionPrompt(null);
+                }
+
+                return;
+            }
+
+            if (StateMachine.CurrentPhase == ToyRoomPhase.SeekingSword)
+            {
+                bool nearSword = swordView != null && swordView.IsWithinPickupRange(player.transform.position);
+                hud.SetActionPrompt(nearSword ? "PEGAR ESPADA" : null);
+                return;
+            }
+
+            if (player.CarriedToy != null)
+            {
+                bool nearChest = chest != null && chest.IsWithinDeliveryRange(player.transform.position);
+                hud.SetActionPrompt(nearChest ? "GUARDAR" : null);
+                return;
+            }
+
+            for (int i = 0; i < toys.Count; i++)
+            {
+                var toy = toys[i];
+                if (toy != null && toy.gameObject.activeInHierarchy && !toy.IsCarried && !toy.IsStored)
+                {
+                    Vector3 delta = toy.transform.position - player.transform.position;
+                    delta.y = 0f;
+                    if (delta.sqrMagnitude <= 1.35f * 1.35f)
+                    {
+                        hud.SetActionPrompt("PEGAR");
+                        return;
+                    }
+                }
+            }
+
+            hud.SetActionPrompt(null);
         }
 
         private bool IsInsideMainCameraFocus(ToyRoomPoint point)
