@@ -18,6 +18,7 @@ namespace YunaLegend.ToyRoom.Runtime
         [SerializeField] private ToySwordView swordView;
         [SerializeField] private ToyRoomHudController hud;
         [SerializeField] private ToyRoomNarrativeController narrative;
+        [SerializeField] private ToyRoomAudioController audioController;
         [SerializeField] private List<ToyItemView> toys = new List<ToyItemView>();
         [SerializeField] private bool startInExploring;
 
@@ -33,6 +34,7 @@ namespace YunaLegend.ToyRoom.Runtime
             ToySwordView sword,
             ToyRoomHudController hudController,
             ToyRoomNarrativeController narrativeController,
+            ToyRoomAudioController audioCtrl,
             List<ToyItemView> toyViews,
             bool autoExplore = false)
         {
@@ -43,6 +45,7 @@ namespace YunaLegend.ToyRoom.Runtime
             swordView = sword;
             hud = hudController;
             narrative = narrativeController;
+            audioController = audioCtrl;
             toys = toyViews ?? new List<ToyItemView>();
             startInExploring = autoExplore;
         }
@@ -181,6 +184,11 @@ namespace YunaLegend.ToyRoom.Runtime
             }
 
             player.SetCarriedToy(toy);
+            if (audioController != null)
+            {
+                audioController.PlayPickup();
+            }
+
             if (nandaGuide != null)
             {
                 nandaGuide.SetMode(NandaGuideTargetMode.BeaconOverChest);
@@ -207,6 +215,11 @@ namespace YunaLegend.ToyRoom.Runtime
                 chest.TriggerStoreFeedback();
             }
 
+            if (audioController != null)
+            {
+                audioController.PlayStore();
+            }
+
             RefreshCounterHud();
 
             if (nandaGuide != null && StateMachine.CurrentPhase != ToyRoomPhase.SeekingSword && StateMachine.CurrentPhase != ToyRoomPhase.InvestigationCutscene)
@@ -227,6 +240,11 @@ namespace YunaLegend.ToyRoom.Runtime
 
         private void HandleStrangeDialogue()
         {
+            if (audioController != null)
+            {
+                audioController.PlayStrangeStinger();
+            }
+
             if (narrative != null)
             {
                 narrative.PlayStrangeDialogue();
@@ -235,6 +253,11 @@ namespace YunaLegend.ToyRoom.Runtime
 
         private void HandleInvestigationTriggered()
         {
+            if (audioController != null)
+            {
+                audioController.PlaySwordReveal();
+            }
+
             if (nandaGuide != null)
             {
                 nandaGuide.SetMode(NandaGuideTargetMode.HoverOverSword);

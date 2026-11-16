@@ -50,6 +50,39 @@ namespace YunaLegend.Editor.ToyRoom
             Debug.Log($"[ToyRoomSceneBuilder] Cena base salva em {ScenePath}");
         }
 
+        [MenuItem("YunaLegend/Fase 2 - Toy Room/Capture Preview")]
+        public static void CapturePreview()
+        {
+            EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
+            var cam = Camera.main;
+            if (cam == null)
+            {
+                Debug.LogError("[ToyRoomSceneBuilder] MainCamera nao encontrada.");
+                return;
+            }
+
+            const int width = 1280;
+            const int height = 720;
+            var rt = new RenderTexture(width, height, 24, RenderTextureFormat.ARGB32);
+            cam.targetTexture = rt;
+            cam.Render();
+
+            RenderTexture.active = rt;
+            var tex = new Texture2D(width, height, TextureFormat.RGB24, false);
+            tex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+            tex.Apply();
+
+            cam.targetTexture = null;
+            RenderTexture.active = null;
+            Object.DestroyImmediate(rt);
+
+            string outPath = "/Users/sergio/.gemini/antigravity/brain/779e5ec9-ec3b-4b7a-9392-60ee6785d855/scratch/toyroom_preview.png";
+            Directory.CreateDirectory(Path.GetDirectoryName(outPath) ?? "/tmp");
+            File.WriteAllBytes(outPath, tex.EncodeToPNG());
+            Object.DestroyImmediate(tex);
+            Debug.Log($"[ToyRoomSceneBuilder] Preview salvo em {outPath}");
+        }
+
         private static void ConfigureLighting()
         {
             RenderSettings.ambientMode = AmbientMode.Trilight;
