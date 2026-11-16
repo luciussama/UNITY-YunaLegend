@@ -16,15 +16,50 @@ namespace YunaLegend.Editor.ToyRoom
     /// Constroi a cena 3D isometrica da Fase 2 (ToyRoom_Gameplay.unity) com direcao artistica
     /// Diablo IV x Legend of Mana, shader pictorico, VFX de luz matinal, audio e registro de build.
     /// </summary>
+    [InitializeOnLoad]
     public static class ToyRoomSceneBuilder
     {
         public const string ScenePath = "Assets/Scenes/ToyRoom_Gameplay.unity";
         private const string PreviewOutputPath = "/Users/sergio/.gemini/antigravity/brain/779e5ec9-ec3b-4b7a-9392-60ee6785d855/scratch/toyroom_preview.png";
+        private const string AutoBuildVersionKey = "YunaLegend.ToyRoomSceneBuildVersion";
+        private const int CurrentSceneBuildVersion = 5;
+
+        static ToyRoomSceneBuilder()
+        {
+            if (!Application.isBatchMode)
+            {
+                EditorApplication.delayCall += TryAutoRebuildIfOutdated;
+            }
+        }
+
+        private static void TryAutoRebuildIfOutdated()
+        {
+            if (Application.isBatchMode || EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                return;
+            }
+
+            if (SessionState.GetInt(AutoBuildVersionKey, 0) >= CurrentSceneBuildVersion
+                && File.Exists("Assets/Art/ToyRoom/Materials/T_Yuna_Dress_Painted.png"))
+            {
+                return;
+            }
+
+            SessionState.SetInt(AutoBuildVersionKey, CurrentSceneBuildVersion);
+            string activePath = EditorSceneManager.GetActiveScene().path;
+            BuildBaseScene();
+
+            if (!string.IsNullOrEmpty(activePath) && activePath != ScenePath && File.Exists(activePath))
+            {
+                EditorSceneManager.OpenScene(activePath, OpenSceneMode.Single);
+            }
+        }
 
         [MenuItem("YunaLegend/Fase 2 - Toy Room/Build Final Scene (P1-P8)")]
         public static void BuildBaseScene()
         {
             ToyRoomVisualFactory.ResetMaterialCounter();
+            EnsurePainterlyRendererFeature();
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
             ConfigureLighting();
@@ -377,6 +412,97 @@ namespace YunaLegend.Editor.ToyRoom
             return mat;
         }
 
+        private static void EnsurePainterlyRendererFeature()
+        {
+            const string rendererPath = "Assets/Settings/DarkRoomRenderer.asset";
+            const string postMatPath = "Assets/Art/ToyRoom/Materials/M_ToyRoomPainterlyPostProcess.mat";
+
+            Directory.CreateDirectory("Assets/Art/ToyRoom/Materials");
+            var postShader = Shader.Find("YunaLegend/ToyRoom_PainterlyPostProcess");
+            if (postShader == null)
+            {
+                return;
+            }
+
+            var postMat = AssetDatabase.LoadAssetAtPath<Material>(postMatPath);
+            if (postMat == null)
+            {
+                postMat = new Material(postShader);
+                AssetDatabase.CreateAsset(postMat, postMatPath);
+            }
+            else
+            {
+                postMat.shader = postShader;
+            }
+
+            EditorUtility.SetDirty(postMat);
+
+            var rendererData = AssetDatabase.LoadAssetAtPath<UniversalRendererData>(rendererPath);
+            if (rendererData == null)
+            {
+                return;
+            }
+
+            foreach (var existing in rendererData.rendererFeatures)
+            {
+                if (existing is ToyRoomPainterlyRendererFeature painterlyFeature)
+                {
+                    painterlyFeature.PassMaterial = postMat;
+                    EditorUtility.SetDirty(painterlyFeature);
+                    EditorUtility.SetDirty(rendererData);
+                    return;
+                }
+            }
+
+            var feature = ScriptableObject.CreateInstance<ToyRoomPainterlyRendererFeature>();
+            feature.name = "ToyRoomPainterlyRendererFeature";
+            feature.PassMaterial = postMat;
+
+            AssetDatabase.AddObjectToAsset(feature, rendererData);
+            AssetDatabase.TryGetGUIDAndLocalFileIdentifier(feature, out _, out long localId);
+
+            var so = new SerializedObject(rendererData);
+            var featuresProp = so.FindProperty("m_RendererFeatures");
+            var mapProp = so.FindProperty("m_RendererFeatureMap");
+
+            int idx = featuresProp.arraySize;
+            featuresProp.InsertArrayElementAtIndex(idx);
+            featuresProp.GetArrayElementAtIndex(idx).objectReferenceValue = feature;
+
+            mapProp.InsertArrayElementAtIndex(mapProp.arraySize);
+            mapProp.GetArrayElementAtIndex(mapProp.arraySize - 1).longValue = localId;
+
+            so.ApplyModifiedPropertiesWithoutUndo();
+            EditorUtility.SetDirty(feature);
+            EditorUtility.SetDirty(rendererData);
+        }
+
+        private static Material CreateSparkleParticleMaterial()
+        {
+            const string matPath = "Assets/Art/ToyRoom/Materials/M_SparkleParticle.mat";
+            var shader = Shader.Find("Sprites/Default");
+            var mat = AssetDatabase.LoadAssetAtPath<Material>(matPath);
+            if (mat == null)
+            {
+                mat = new Material(shader);
+                AssetDatabase.CreateAsset(mat, matPath);
+            }
+            else
+            {
+                mat.shader = shader;
+            }
+
+            mat.color = Color.white;
+            var tex = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Materials/T_Sparkle_Glow.png");
+            if (tex != null)
+            {
+                mat.mainTexture = tex;
+            }
+
+            EditorUtility.SetDirty(mat);
+            return mat;
+        }
+
         private static void CreateFloatingDustMotes()
         {
             var dustGo = new GameObject("MorningDust_Particles");
@@ -385,13 +511,19 @@ namespace YunaLegend.Editor.ToyRoom
             var main = ps.main;
             main.startLifetime = 6f;
             main.startSpeed = 0.12f;
-            main.startSize = 0.06f;
+            main.startSize = 0.09f;
             main.startColor = new Color(1.0f, 0.94f, 0.72f, 0.55f);
             main.maxParticles = 60;
 
             var shape = ps.shape;
             shape.shapeType = ParticleSystemShapeType.Box;
             shape.scale = new Vector3(22f, 3.5f, 16f);
+
+            var psr = dustGo.GetComponent<ParticleSystemRenderer>();
+            if (psr != null)
+            {
+                psr.sharedMaterial = CreateSparkleParticleMaterial();
+            }
         }
 
         private static ToyChestController CreateFurnitureModels()
@@ -550,6 +682,25 @@ namespace YunaLegend.Editor.ToyRoom
 
             var guide = nandaGo.AddComponent<NandaToyRoomGuideController>();
             guide.Configure(player, chest, sword, light);
+
+            var trailPs = nandaGo.AddComponent<ParticleSystem>();
+            var main = trailPs.main;
+            main.startLifetime = 0.85f;
+            main.startSpeed = 0.08f;
+            main.startSize = 0.07f;
+            main.startColor = new Color(0.45f, 0.92f, 1.0f, 0.75f);
+            main.simulationSpace = ParticleSystemSimulationSpace.World;
+            main.maxParticles = 24;
+
+            var emission = trailPs.emission;
+            emission.rateOverTime = 14f;
+
+            var psr = nandaGo.GetComponent<ParticleSystemRenderer>();
+            if (psr != null)
+            {
+                psr.sharedMaterial = CreateSparkleParticleMaterial();
+            }
+
             return guide;
         }
 
