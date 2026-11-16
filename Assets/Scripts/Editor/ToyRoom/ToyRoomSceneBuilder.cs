@@ -5,8 +5,10 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 using YunaLegend.ToyRoom.Core;
 using YunaLegend.ToyRoom.Runtime;
+using YunaLegend.UI;
 
 namespace YunaLegend.Editor.ToyRoom
 {
@@ -110,6 +112,78 @@ namespace YunaLegend.Editor.ToyRoom
 
             scenes.Add(new EditorBuildSettingsScene(ScenePath, true));
             EditorBuildSettings.scenes = scenes.ToArray();
+        }
+
+        [MenuItem("YunaLegend/Fase 2 - Toy Room/Register In TitleScreen")]
+        public static void RegisterToyRoomInTitleScreen()
+        {
+            const string titleScenePath = "Assets/Scenes/TitleScreen.unity";
+            var scene = EditorSceneManager.OpenScene(titleScenePath, OpenSceneMode.Single);
+            var selector = Object.FindFirstObjectByType<TitlePhaseSelector>();
+            if (selector == null)
+            {
+                Debug.LogError("[ToyRoomSceneBuilder] TitlePhaseSelector nao encontrado em TitleScreen.");
+                return;
+            }
+
+            var so = new SerializedObject(selector);
+            var scenesProp = so.FindProperty("itemScenes");
+            var buttonsProp = so.FindProperty("itemButtons");
+            var labelsProp = so.FindProperty("itemLabels");
+
+            for (int i = 0; i < scenesProp.arraySize; i++)
+            {
+                if (scenesProp.GetArrayElementAtIndex(i).stringValue == "ToyRoom_Gameplay")
+                {
+                    Debug.Log("[ToyRoomSceneBuilder] ToyRoom_Gameplay ja esta registrado no TitlePhaseSelector.");
+                    return;
+                }
+            }
+
+            if (buttonsProp.arraySize == 0 || labelsProp.arraySize == 0)
+            {
+                Debug.LogError("[ToyRoomSceneBuilder] Dropdown sem itens base para clonar.");
+                return;
+            }
+
+            var templateButton = buttonsProp.GetArrayElementAtIndex(0).objectReferenceValue as Button;
+            if (templateButton == null)
+            {
+                return;
+            }
+
+            var clonedGo = Object.Instantiate(templateButton.gameObject, templateButton.transform.parent);
+            clonedGo.name = "PhaseItem_ToyRoom";
+            var clonedRt = clonedGo.GetComponent<RectTransform>();
+            var templateRt = templateButton.GetComponent<RectTransform>();
+            clonedRt.anchoredPosition = templateRt.anchoredPosition + new Vector2(0f, -38f * scenesProp.arraySize);
+
+            var dropdownRt = templateButton.transform.parent.GetComponent<RectTransform>();
+            if (dropdownRt != null)
+            {
+                dropdownRt.sizeDelta = new Vector2(dropdownRt.sizeDelta.x, dropdownRt.sizeDelta.y + 38f);
+            }
+
+            var clonedButton = clonedGo.GetComponent<Button>();
+            var clonedLabel = clonedGo.GetComponentInChildren<Text>(true);
+            if (clonedLabel != null)
+            {
+                clonedLabel.text = "Sala de Brinquedos";
+            }
+
+            int nextIdx = scenesProp.arraySize;
+            scenesProp.InsertArrayElementAtIndex(nextIdx);
+            scenesProp.GetArrayElementAtIndex(nextIdx).stringValue = "ToyRoom_Gameplay";
+
+            buttonsProp.InsertArrayElementAtIndex(nextIdx);
+            buttonsProp.GetArrayElementAtIndex(nextIdx).objectReferenceValue = clonedButton;
+
+            labelsProp.InsertArrayElementAtIndex(nextIdx);
+            labelsProp.GetArrayElementAtIndex(nextIdx).objectReferenceValue = clonedLabel;
+
+            so.ApplyModifiedPropertiesWithoutUndo();
+            EditorSceneManager.SaveScene(scene, titleScenePath);
+            Debug.Log("[ToyRoomSceneBuilder] ToyRoom_Gameplay registrado no TitlePhaseSelector.");
         }
 
         private static void ConfigureLighting()

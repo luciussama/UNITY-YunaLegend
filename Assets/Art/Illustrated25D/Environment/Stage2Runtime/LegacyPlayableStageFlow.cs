@@ -64,6 +64,8 @@ namespace YunaLegend.Illustrated25D.Environment
         private float falseDoorCollapseVelocityY;
         private float falseDoorCutsceneElapsed;
         private int falseDoorBeatStage;
+        private float portalVictoryElapsed;
+        private bool transitionedToToyRoom;
 
         public FlowPhase Phase => (FlowPhase)(int)stateMachine.Phase;
         public bool IsPaused => paused;
@@ -206,6 +208,19 @@ namespace YunaLegend.Illustrated25D.Environment
                 }
             }
 
+            if (currentPhase == StageFlowStateMachine.FlowPhase.TruePortalVictory)
+            {
+                portalVictoryElapsed += Time.deltaTime;
+                if (!transitionedToToyRoom
+                    && (portalVictoryElapsed >= 2.8f || (portalVictoryElapsed >= 0.4f && CheckConfirmInput()))
+                    && UnityEngine.Application.CanStreamedLevelBeLoaded("ToyRoom_Gameplay"))
+                {
+                    transitionedToToyRoom = true;
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("ToyRoom_Gameplay");
+                }
+                return;
+            }
+
             if (currentPhase == StageFlowStateMachine.FlowPhase.FalseDoorCutsceneStep0)
             {
                 falseDoorCutsceneElapsed += Time.deltaTime;
@@ -333,6 +348,8 @@ namespace YunaLegend.Illustrated25D.Environment
 
                 case StageFlowStateMachine.FlowPhase.Stage2Completed:
                 case StageFlowStateMachine.FlowPhase.TruePortalVictory:
+                    portalVictoryElapsed = 0f;
+                    transitionedToToyRoom = false;
                     player.AutoRunActive = false;
                     if (cam != null) cam.AutoScrollActive = false;
                     break;

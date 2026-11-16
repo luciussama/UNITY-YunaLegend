@@ -4,6 +4,8 @@
     "references": [
         "YunaLegend.ToyRoom.Core",
         "YunaLegend.ToyRoom.Runtime",
+        "YunaLegend.Runtime",
+        "UnityEngine.UI",
         "Unity.RenderPipelines.Universal.Runtime",
         "Unity.RenderPipelines.Core.Runtime"
     ],
