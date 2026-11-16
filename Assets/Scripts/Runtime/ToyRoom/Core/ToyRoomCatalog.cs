@@ -7,26 +7,26 @@ namespace YunaLegend.ToyRoom.Core
     /// </summary>
     public static class ToyRoomCatalog
     {
-        public const float RoomWidth = 16.0f;
-        public const float RoomDepth = 12.0f;
+        public const float RoomWidth = 28.0f;
+        public const float RoomDepth = 20.0f;
         public const float HalfWidth = RoomWidth * 0.5f;
         public const float HalfDepth = RoomDepth * 0.5f;
         public const int TotalToyCount = 8;
 
         public static ToyRoomPoint FromLegacyCoordinates(float legacyX, float legacyY)
         {
-            return new ToyRoomPoint((legacyX - 800f) / 100f, (600f - legacyY) / 100f);
+            return new ToyRoomPoint((legacyX - 800f) / 60f, (600f - legacyY) / 60f);
         }
 
         public static readonly IReadOnlyList<FurnitureSpec> Furniture = new List<FurnitureSpec>
         {
-            new FurnitureSpec("toy-chest", "Bau de Brinquedos", FromLegacyCoordinates(1040f, 190f), 1.90f, 1.15f, isToyChest: true),
-            new FurnitureSpec("bookshelf", "Estante de Livros", FromLegacyCoordinates(380f, 170f), 2.20f, 0.90f),
-            new FurnitureSpec("wardrobe", "Guarda-Roupa", FromLegacyCoordinates(740f, 170f), 1.40f, 0.90f),
-            new FurnitureSpec("rocking-horse", "Cavalinho de Pau", FromLegacyCoordinates(480f, 420f), 1.00f, 0.80f),
-            new FurnitureSpec("table", "Mesinha Infantil", FromLegacyCoordinates(620f, 780f), 1.60f, 1.10f),
-            new FurnitureSpec("armchair", "Poltrona Aconchegante", FromLegacyCoordinates(180f, 840f), 1.30f, 1.20f),
-            new FurnitureSpec("block-fortress", "Fortaleza de Blocos", FromLegacyCoordinates(1240f, 800f), 2.20f, 1.70f)
+            new FurnitureSpec("toy-chest", "Bau de Brinquedos", FromLegacyCoordinates(1040f, 190f), 2.30f, 1.35f, isToyChest: true),
+            new FurnitureSpec("bookshelf", "Estante de Livros", FromLegacyCoordinates(380f, 170f), 2.80f, 1.05f),
+            new FurnitureSpec("wardrobe", "Guarda-Roupa", FromLegacyCoordinates(740f, 170f), 1.85f, 1.05f),
+            new FurnitureSpec("rocking-horse", "Cavalinho de Pau", FromLegacyCoordinates(480f, 420f), 1.25f, 0.95f),
+            new FurnitureSpec("table", "Mesinha Infantil", FromLegacyCoordinates(620f, 780f), 2.00f, 1.35f),
+            new FurnitureSpec("armchair", "Poltrona Aconchegante", FromLegacyCoordinates(180f, 840f), 1.65f, 1.45f),
+            new FurnitureSpec("block-fortress", "Fortaleza de Blocos", FromLegacyCoordinates(1240f, 800f), 2.70f, 2.05f)
         };
 
         public static readonly IReadOnlyList<ToySpec> Toys = new List<ToySpec>
@@ -43,12 +43,12 @@ namespace YunaLegend.ToyRoom.Core
 
         public static readonly IReadOnlyList<ToyRoomPoint> PeripheralRespawnCandidates = new List<ToyRoomPoint>
         {
-            new ToyRoomPoint(-6.4f, -4.5f), // Canto sudoeste atras da poltrona
-            new ToyRoomPoint(6.3f, -4.4f),  // Canto sudeste perto da fortaleza de blocos
-            new ToyRoomPoint(-6.2f, 2.2f),  // Lateral oeste proximo a estante
-            new ToyRoomPoint(6.4f, 1.8f),   // Lateral leste longe do bau
-            new ToyRoomPoint(-2.8f, -4.8f), // Borda sul-oeste
-            new ToyRoomPoint(2.9f, -4.7f)   // Borda sul-leste
+            new ToyRoomPoint(-11.2f, -7.6f), // Canto sudoeste atras da poltrona
+            new ToyRoomPoint(11.0f, -7.4f),  // Canto sudeste perto da fortaleza de blocos
+            new ToyRoomPoint(-11.4f, 3.6f),  // Lateral oeste proximo a estante
+            new ToyRoomPoint(11.4f, 2.8f),   // Lateral leste longe do bau
+            new ToyRoomPoint(-4.8f, -8.0f),  // Borda sul-oeste
+            new ToyRoomPoint(5.2f, -7.9f)    // Borda sul-leste
         };
     }
 }

@@ -12,6 +12,7 @@ namespace YunaLegend.ToyRoom.Runtime
     public sealed class ToyRoomStageBootstrap : MonoBehaviour
     {
         [SerializeField] private Camera isometricCamera;
+        [SerializeField] private IsometricToyRoomCamera cameraController;
         [SerializeField] private ToyRoomPlayerController player;
         [SerializeField] private ToyChestController chest;
         [SerializeField] private NandaToyRoomGuideController nandaGuide;
@@ -39,6 +40,7 @@ namespace YunaLegend.ToyRoom.Runtime
             bool autoExplore = false)
         {
             isometricCamera = mainCam;
+            cameraController = mainCam != null ? mainCam.GetComponent<IsometricToyRoomCamera>() : null;
             player = playerController;
             chest = chestController;
             nandaGuide = guideController;
@@ -258,6 +260,11 @@ namespace YunaLegend.ToyRoom.Runtime
                 audioController.PlaySwordReveal();
             }
 
+            if (cameraController != null && swordView != null)
+            {
+                cameraController.SetOverrideTarget(swordView.transform);
+            }
+
             if (nandaGuide != null)
             {
                 nandaGuide.SetMode(NandaGuideTargetMode.HoverOverSword);
@@ -290,6 +297,10 @@ namespace YunaLegend.ToyRoom.Runtime
             if (nandaGuide != null && phase == ToyRoomPhase.SeekingSword)
             {
                 nandaGuide.SetMode(NandaGuideTargetMode.HoverOverSword);
+                if (cameraController != null)
+                {
+                    cameraController.SetOverrideTarget(null);
+                }
             }
 
             if (phase == ToyRoomPhase.SwordPickup)
