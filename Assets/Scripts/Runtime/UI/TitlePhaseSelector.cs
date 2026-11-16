@@ -47,7 +47,17 @@ namespace YunaLegend.UI
                 for (int i = 0; i < itemButtons.Length; i++)
                 {
                     int index = i;
-                    if (itemButtons[i] != null) itemButtons[i].onClick.AddListener(() => Choose(index));
+                    if (itemButtons[i] != null)
+                    {
+                        if (itemButtons[i].GetComponent<Graphic>() == null)
+                        {
+                            var hitArea = itemButtons[i].gameObject.AddComponent<Image>();
+                            hitArea.color = new Color(1f, 1f, 1f, 0.002f);
+                            hitArea.raycastTarget = true;
+                        }
+
+                        itemButtons[i].onClick.AddListener(() => Choose(index));
+                    }
                 }
             }
             CurrentPhaseScene = itemScenes != null && itemScenes.Length > 0 ? itemScenes[0] : null;
@@ -63,6 +73,7 @@ namespace YunaLegend.UI
 
         public void Toggle()
         {
+            Debug.Log($"[TitlePhaseSelector] Toggle dropdown (wasOpen={IsOpen}, items={ItemCount})");
             if (IsOpen) Close();
             else Open();
         }
@@ -87,6 +98,7 @@ namespace YunaLegend.UI
         {
             if (itemScenes == null || index < 0 || index >= itemScenes.Length) return;
             CurrentPhaseScene = itemScenes[index];
+            Debug.Log($"[TitlePhaseSelector] Fase selecionada: {CurrentPhaseScene}");
             UpdateSelection();
             Close();
             if (controller != null) controller.StartPhase(CurrentPhaseScene);
