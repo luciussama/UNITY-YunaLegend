@@ -24,8 +24,9 @@ MonoBehaviour:
     probeSamplingDebugMesh: {fileID: 0}
     probeSamplingDebugTexture: {fileID: 0}
     probeVolumeBlendStatesCS: {fileID: 0}
-  m_RendererFeatures: []
-  m_RendererFeatureMap: 
+  m_RendererFeatures:
+  - {fileID: 8906846872169988942}
+  m_RendererFeatureMap: 4ec37d2c0a7a9b7b
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   m_AssetVersion: 3
@@ -53,3 +54,18 @@ MonoBehaviour:
   m_DepthTextureFormat: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &8906846872169988942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb49f9a6df9c4e43a871ddb2b9b6861, type: 3}
+  m_Name: ToyRoomPainterlyRendererFeature
+  m_EditorClassIdentifier: YunaLegend.ToyRoom.Runtime::YunaLegend.ToyRoom.Runtime.ToyRoomPainterlyRendererFeature
+  m_Active: 1
+  passMaterial: {fileID: 2100000, guid: 8425ee613b99040e08d66a19690e8f68, type: 2}
+  applyOnlyInToyRoomScene: 1
