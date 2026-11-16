@@ -3,6 +3,7 @@
     "rootNamespace": "YunaLegend.Editor.ToyRoom",
     "references": [
         "YunaLegend.ToyRoom.Core",
+        "YunaLegend.ToyRoom.Runtime",
         "Unity.RenderPipelines.Universal.Runtime",
         "Unity.RenderPipelines.Core.Runtime"
     ],
