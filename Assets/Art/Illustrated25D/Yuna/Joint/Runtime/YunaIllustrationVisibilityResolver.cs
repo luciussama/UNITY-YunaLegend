@@ -19,6 +19,8 @@ namespace YunaLegend.YunaIllustration
         public YunaStumbleIllustration stumble;
         [Tooltip("When true, Idle is the fallback source. When false, Run is the fallback.")]
         public bool showIdle;
+        [Tooltip("When true, hides all standing Yuna renderers (e.g. while Yuna is in bed during opening).")]
+        public bool suppressAll;
 
         public string VisibleSource { get; private set; } = "None";
         public int VisibleCount { get; private set; }
@@ -50,6 +52,17 @@ namespace YunaLegend.YunaIllustration
                 componentFrame = Time.frameCount;
                 if (ComponentRequests > 1) ComponentOverlapFrames++;
                 if (ComponentRequests == 0) EmptyComponentFrames++;
+            }
+
+            if (suppressAll)
+            {
+                stumble.painting.enabled = false;
+                jump.painting.enabled = false;
+                run.painting.enabled = false;
+                if (idleRenderer != null) idleRenderer.enabled = false;
+                VisibleSource = "Suppressed";
+                VisibleCount = 0;
+                return;
             }
 
             bool stumbleOn = stumble.Pose >= 0;

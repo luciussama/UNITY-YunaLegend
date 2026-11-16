@@ -47,9 +47,10 @@ namespace YunaLegend.Camera25D
 
         [Header("Prova ilustrada — opt-in, sem alterar a câmera da fase principal")]
         [SerializeField] private bool illustratedPilotFraming;
-        [SerializeField, Min(4f)] private float illustratedVerticalSpan = 9.2f;
+        [SerializeField, Min(4f)] private float illustratedVerticalSpan = 10.8f;
         [SerializeField, Min(.05f)] private float illustratedFollowTime = .45f;
         private float illustratedSpanScale = 1f;
+        private Vector2 illustratedCinematicOffset;
         private Vector3 illustratedVelocity;
         private float illustratedZVelocity;
         public bool IllustratedPilotFraming => illustratedPilotFraming;
@@ -59,7 +60,12 @@ namespace YunaLegend.Camera25D
             illustratedSpanScale = Mathf.Max(0.5f, scale);
         }
 
-        public void ConfigureIllustratedPilot(bool active, float verticalSpan = 7.5f)
+        public void SetIllustratedCinematicOffset(Vector2 offset)
+        {
+            illustratedCinematicOffset = offset;
+        }
+
+        public void ConfigureIllustratedPilot(bool active, float verticalSpan = 10.8f)
         {
             illustratedPilotFraming = active;
             illustratedVerticalSpan = Mathf.Max(4f, verticalSpan);
@@ -230,22 +236,24 @@ namespace YunaLegend.Camera25D
             int nextIndex = playerTarget.CurrentSupportIndex < 0 ? 0 : playerTarget.CurrentSupportIndex + 1;
             var next = FindPlatform(nextIndex);
             float nextY = next != null && !next.Support.IsEmpty ? next.GetLandingPoint(direction).y : groundY;
-            float desiredY = groundY + 1.8f + Mathf.Clamp((nextY - groundY) * .25f, -.5f, .5f);
-            // Track the girl's ascent before landing on the next support. This is a
-            // vertical translation only: depth, FOV and painting scale stay fixed.
-            // The route remains the lower framing bound during an ordinary jump.
-            desiredY = Mathf.Max(desiredY, playerTarget.transform.position.y + 1.8f);
+            float routeBaseY = groundY + 0.85f + Mathf.Clamp((nextY - groundY) * .25f, -.5f, .5f);
+            // Zona morta cobre o pulo padrão (2m) e sobe apenas pouca coisa em saltos maiores, preservando os objetos.
+            float jumpLift = Mathf.Clamp((playerTarget.transform.position.y - groundY - 2.1f) * 0.35f, 0f, 0.7f);
+            float desiredY = routeBaseY + jumpLift;
             bool focusOnFloorBody = playerTarget.IsCinematicFalling
                 || playerTarget.IsDead
                 || playerTarget.IsStumbling
                 || (!playerTarget.AutoRunActive && playerTarget.transform.position.y <= DarkRoomPlatformGeometry.FloorSurfaceY + 1.0f);
             if (focusOnFloorBody)
-                desiredY = playerTarget.transform.position.y + 1.8f;
+                desiredY = playerTarget.transform.position.y + 0.85f;
             // Compensate the lag of a damped camera following constant-speed travel.
             float anticipation = playerTarget.AutoRunActive && !playerTarget.IsDead
                 ? direction * playerTarget.RunSpeed * illustratedFollowTime : 0f;
             float leadX = focusOnFloorBody && !playerTarget.AutoRunActive ? 0f : direction * width * .18f;
-            var desired = new Vector3(playerTarget.transform.position.x + leadX + anticipation, desiredY, -depth);
+            var desired = new Vector3(
+                playerTarget.transform.position.x + leadX + anticipation + illustratedCinematicOffset.x,
+                desiredY + illustratedCinematicOffset.y,
+                -depth);
             var position = snap ? desired : Vector3.SmoothDamp(transform.position, desired, ref illustratedVelocity, illustratedFollowTime);
             position.z = snap ? -depth : Mathf.SmoothDamp(transform.position.z, -depth, ref illustratedZVelocity, 0.45f);
             transform.position = position;

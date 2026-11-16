@@ -44,6 +44,7 @@ namespace YunaLegend.DarkRoom
 
         public NandaMood Mood => currentMood;
         public int CurrentTargetPlatformIndex => currentTargetPlatformIndex;
+        public bool ExternalPositionControl { get; set; }
 
         public void ConfigureAudio(AudioClip twinkle)
         {
@@ -79,6 +80,7 @@ namespace YunaLegend.DarkRoom
         private void LateUpdate()
         {
             hoverTimer += Time.deltaTime;
+            if (ExternalPositionControl) return;
             CalculateTargetPosition();
             SmoothFlyToTarget();
         }

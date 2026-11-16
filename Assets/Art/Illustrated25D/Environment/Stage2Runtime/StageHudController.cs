@@ -19,6 +19,10 @@ namespace YunaLegend.Illustrated25D.Environment
         public Func<bool> IsFalseDoorDialogueReady;
         public Func<string> GetFailure;
         public Func<float> GetStage2BannerTimer;
+        public Func<float> GetOpeningChapterBannerAlpha;
+        public Func<float> GetOpeningCurtainAlpha;
+        public Func<int> GetOpeningDialogueBeat;
+        public Func<bool> IsOpeningYunaInBed;
         public Func<Vector3> GetPlayerWorldPosition;
         public Func<Vector3> GetBearTopWorldPosition;
 
@@ -85,6 +89,16 @@ namespace YunaLegend.Illustrated25D.Environment
                 return;
             }
 
+            float curtainAlpha = GetOpeningCurtainAlpha != null ? Mathf.Clamp01(GetOpeningCurtainAlpha()) : 0f;
+            if (curtainAlpha > 0.01f && solidTex != null)
+            {
+                Color prev = GUI.color;
+                GUI.color = new Color(0.012f, 0.020f, 0.047f, curtainAlpha);
+                GUI.DrawTexture(new Rect(0f, 0f, Screen.width, Screen.height), solidTex);
+                GUI.color = prev;
+            }
+
+            int openingBeat = GetOpeningDialogueBeat != null ? GetOpeningDialogueBeat() : 0;
             var phase = GetPhase();
             switch (phase)
             {
@@ -98,20 +112,34 @@ namespace YunaLegend.Illustrated25D.Environment
 
                 case StageFlowStateMachine.FlowPhase.OpeningPoeticIntro:
                     DrawLegacyPoeticCard(
-                        "Cada coisa guardava seu nome.\nEntre elas, nada dizia por onde ir.",
+                        openingBeat == 0
+                            ? "O quarto era o mesmo.\nSó não a reconhecia."
+                            : "Cada coisa guardava seu nome.\nEntre elas, nada dizia por onde ir.",
                         "Avança sozinho · Clique ou Enter adianta");
                     break;
 
                 case StageFlowStateMachine.FlowPhase.OpeningNandaWake2:
                     DrawLegacyBottomDialogue(
                         "NANDA",
-                        "SENÃO A GENTE NÃO SAI DAQUI NUNQUINHA!",
+                        openingBeat == 0
+                            ? "LEVANTA, SUA PREGUIÇOSA!"
+                            : "SENÃO A GENTE NÃO SAI DAQUI NUNQUINHA!",
                         "Avança sozinho · Clique ou Enter adianta",
                         boldBody: true);
                     break;
 
                 case StageFlowStateMachine.FlowPhase.PreJumpCue:
-                    DrawPreJumpCue();
+                    if (GetOpeningChapterBannerAlpha != null && GetOpeningChapterBannerAlpha() > 0.01f)
+                    {
+                        Color prevColor = GUI.color;
+                        GUI.color = new Color(1f, 1f, 1f, GetOpeningChapterBannerAlpha());
+                        DrawStageBanner("CAPÍTULO 1 — Quarto de brinquedos");
+                        GUI.color = prevColor;
+                    }
+                    if ((IsOpeningYunaInBed == null || !IsOpeningYunaInBed()) && curtainAlpha < 0.25f)
+                    {
+                        DrawPreJumpCue();
+                    }
                     break;
 
                 case StageFlowStateMachine.FlowPhase.CastleCutsceneStep0:
@@ -229,32 +257,32 @@ namespace YunaLegend.Illustrated25D.Environment
 
         private void DrawLegacyBottomDialogue(string speaker, string body, string footer, bool boldBody)
         {
-            float w = Mathf.Min(680f, Screen.width - 48f);
-            const float h = 158f;
+            float w = Mathf.Min(560f, Screen.width - 48f);
+            const float h = 84f;
             float x = (Screen.width - w) * 0.5f;
-            float y = Screen.height - h - 28f;
+            float y = Screen.height - h - 14f;
 
             Color prev = GUI.color;
-            GUI.color = new Color(0.04f, 0.05f, 0.10f, 0.90f);
+            GUI.color = new Color(0.03f, 0.04f, 0.09f, 0.78f);
             GUI.DrawTexture(new Rect(x, y, w, h), solidTex);
-            GUI.color = new Color(0.28f, 0.30f, 0.42f, 0.55f);
-            DrawBorder(new Rect(x, y, w, h), 1.5f);
+            GUI.color = new Color(0.55f, 0.72f, 0.92f, 0.40f);
+            DrawBorder(new Rect(x, y, w, h), 1.2f);
             GUI.color = prev;
 
             GUI.Label(
-                new Rect(x + 20f, y + 14f, w - 40f, 20f),
+                new Rect(x + 16f, y + 6f, w - 32f, 16f),
                 speaker,
-                CreateLabelStyle(TextAnchor.UpperCenter, 12, new Color(0.75f, 0.78f, 0.86f), FontStyle.Bold));
+                CreateLabelStyle(TextAnchor.UpperCenter, 11, new Color(0.68f, 0.84f, 1.0f), FontStyle.Bold));
 
             GUI.Label(
-                new Rect(x + 28f, y + 36f, w - 56f, 84f),
+                new Rect(x + 20f, y + 20f, w - 40f, 44f),
                 body,
-                CreateLabelStyle(TextAnchor.MiddleCenter, 21, new Color(0.98f, 0.97f, 0.94f), boldBody ? FontStyle.Bold : FontStyle.Normal, wrap: true));
+                CreateLabelStyle(TextAnchor.MiddleCenter, 15, new Color(0.98f, 0.97f, 0.94f), boldBody ? FontStyle.Bold : FontStyle.Normal, wrap: true));
 
             GUI.Label(
-                new Rect(x + 20f, y + h - 28f, w - 40f, 20f),
+                new Rect(x + 16f, y + h - 18f, w - 32f, 14f),
                 footer,
-                CreateLabelStyle(TextAnchor.LowerCenter, 11, new Color(0.68f, 0.70f, 0.78f)));
+                CreateLabelStyle(TextAnchor.LowerCenter, 10, new Color(0.62f, 0.66f, 0.76f)));
 
             if (GUI.Button(new Rect(x, y, w, h), GUIContent.none, GUIStyle.none))
             {
@@ -264,28 +292,28 @@ namespace YunaLegend.Illustrated25D.Environment
 
         private void DrawLegacyPoeticCard(string text, string footer)
         {
-            float w = Mathf.Min(640f, Screen.width - 64f);
-            const float h = 118f;
+            float w = Mathf.Min(540f, Screen.width - 64f);
+            const float h = 80f;
             float x = (Screen.width - w) * 0.5f;
-            const float y = 26f;
+            const float y = 16f;
 
             Color prev = GUI.color;
-            GUI.color = new Color(0.98f, 0.96f, 0.91f, 0.98f);
+            GUI.color = new Color(0.98f, 0.96f, 0.91f, 0.92f);
             GUI.DrawTexture(new Rect(x, y, w, h), solidTex);
-            GUI.color = new Color(0.88f, 0.72f, 0.75f, 0.95f);
-            DrawBorder(new Rect(x, y, w, h), 2f);
-            DrawBorder(new Rect(x + 4f, y + 4f, w - 8f, h - 8f), 1f);
+            GUI.color = new Color(0.88f, 0.72f, 0.75f, 0.85f);
+            DrawBorder(new Rect(x, y, w, h), 1.5f);
+            DrawBorder(new Rect(x + 3f, y + 3f, w - 6f, h - 6f), 1f);
             GUI.color = prev;
 
             GUI.Label(
-                new Rect(x + 24f, y + 14f, w - 48f, 68f),
+                new Rect(x + 20f, y + 8f, w - 40f, 48f),
                 text,
-                CreateLabelStyle(TextAnchor.MiddleCenter, 19, new Color(0.22f, 0.16f, 0.18f), FontStyle.Italic, wrap: true));
+                CreateLabelStyle(TextAnchor.MiddleCenter, 15, new Color(0.22f, 0.16f, 0.18f), FontStyle.Italic, wrap: true));
 
             GUI.Label(
-                new Rect(x + 20f, y + h - 26f, w - 40f, 18f),
+                new Rect(x + 16f, y + h - 18f, w - 32f, 14f),
                 footer,
-                CreateLabelStyle(TextAnchor.LowerCenter, 11, new Color(0.45f, 0.36f, 0.38f)));
+                CreateLabelStyle(TextAnchor.LowerCenter, 10, new Color(0.45f, 0.36f, 0.38f)));
 
             if (GUI.Button(new Rect(x, y, w, h), GUIContent.none, GUIStyle.none))
             {
