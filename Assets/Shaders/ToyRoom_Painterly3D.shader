@@ -4,16 +4,16 @@ Shader "YunaLegend/ToyRoom_Painterly3D"
     {
         _BaseMap ("Base Map", 2D) = "white" {}
         _BaseColor ("Base Color", Color) = (1, 1, 1, 1)
-        _ShadowColor ("Shadow Tint", Color) = (0.42, 0.34, 0.50, 1)
-        _RimColor ("Rim Color", Color) = (1, 0.92, 0.76, 1)
+        _ShadowColor ("Shadow Tint", Color) = (0.66, 0.56, 0.64, 1)
+        _RimColor ("Rim Color", Color) = (1, 0.94, 0.80, 1)
         _RimPower ("Rim Power", Range(1.0, 8.0)) = 4.2
         _RimStrength ("Rim Strength", Range(0.0, 1.0)) = 0.14
-        _ShadowStep ("Shadow Threshold", Range(-0.5, 0.5)) = 0.02
-        _ShadowFeather ("Shadow Feather", Range(0.02, 0.5)) = 0.14
-        _BrushNoiseStrength ("Brush Terminator Noise", Range(0.0, 0.35)) = 0.11
+        _ShadowStep ("Shadow Threshold", Range(-0.5, 0.5)) = -0.04
+        _ShadowFeather ("Shadow Feather", Range(0.02, 0.5)) = 0.18
+        _BrushNoiseStrength ("Brush Terminator Noise", Range(0.0, 0.35)) = 0.045
         _EmissionColor ("Emission Color", Color) = (0, 0, 0, 1)
-        _OutlineColor ("Outline Color", Color) = (0.20, 0.11, 0.08, 1)
-        _OutlineWidth ("Outline Width", Range(0.0, 0.05)) = 0.006
+        _OutlineColor ("Outline Color", Color) = (0.22, 0.12, 0.09, 1)
+        _OutlineWidth ("Outline Width", Range(0.0, 0.05)) = 0.0045
     }
 
     SubShader
@@ -112,32 +112,32 @@ Shader "YunaLegend/ToyRoom_Painterly3D"
                 float4 shadowCoord = TransformWorldToShadowCoord(input.positionWS);
                 Light mainLight = GetMainLight(shadowCoord);
 
-                // Hand-brushed terminator noise breaks up mathematical cel-shading bands
-                float strokeNoise = (BrushNoise(input.uv * float2(24.0, 14.0) + input.positionWS.xz * 3.5) - 0.5) * _BrushNoiseStrength;
-                half rawNdl = dot(normalWS, mainLight.direction) * mainLight.shadowAttenuation + strokeNoise;
+                // Subtle hand-brushed terminator modulation preserving fine painted albedo details
+                float strokeNoise = (BrushNoise(input.uv * float2(28.0, 18.0) + input.positionWS.xz * 2.5) - 0.5) * _BrushNoiseStrength;
+                half rawNdl = dot(normalWS, mainLight.direction) * lerp(0.35h, 1.0h, mainLight.shadowAttenuation) + strokeNoise;
 
-                // 3-step quantized storybook cel-ramp (Shadow -> Warm Midtone -> Soft Lit)
+                // 3-step storybook gouache ramp (Warm Shadow -> True Painted Albedo Midtone -> Sunlit Highlight)
                 half shadowBand = smoothstep(_ShadowStep - _ShadowFeather, _ShadowStep + _ShadowFeather, rawNdl);
-                half highlightBand = smoothstep(0.55h, 0.72h, rawNdl);
+                half highlightBand = smoothstep(0.58h, 0.78h, rawNdl);
 
                 half3 shadowTone = _ShadowColor.rgb * tex.rgb;
-                half3 midTone = tex.rgb * lerp(half3(0.92h, 0.88h, 0.86h), mainLight.color, 0.75h);
-                half3 highTone = tex.rgb * mainLight.color * 1.04h;
+                half3 midTone = tex.rgb * lerp(half3(0.96h, 0.93h, 0.90h), mainLight.color, 0.55h);
+                half3 highTone = tex.rgb * mainLight.color * 1.05h;
 
                 half3 litColor = lerp(shadowTone, midTone, shadowBand);
-                litColor = lerp(litColor, highTone, highlightBand * 0.45h);
+                litColor = lerp(litColor, highTone, highlightBand * 0.35h);
 
                 #ifdef _ADDITIONAL_LIGHTS
                 uint lightCount = GetAdditionalLightsCount();
                 for (uint i = 0u; i < lightCount; ++i)
                 {
                     Light addLight = GetAdditionalLight(i, input.positionWS);
-                    half addNdl = smoothstep(0.0h, 0.45h, saturate(dot(normalWS, addLight.direction)));
-                    litColor += tex.rgb * addLight.color * (addNdl * addLight.distanceAttenuation * addLight.shadowAttenuation * 0.65h);
+                    half addNdl = smoothstep(-0.1h, 0.45h, saturate(dot(normalWS, addLight.direction)));
+                    litColor += tex.rgb * addLight.color * (addNdl * addLight.distanceAttenuation * addLight.shadowAttenuation * 0.55h);
                 }
                 #endif
 
-                // Suppress rim on upward-facing horizontal surfaces so isometric view never washes out
+                // Suppress rim on upward-facing horizontal surfaces so isometric view stays crisp
                 half lateralMask = saturate(1.0h - abs(normalWS.y) * 0.75h);
                 half fresnel = pow(1.0h - saturate(dot(normalWS, viewDirWS)), _RimPower) * lateralMask;
                 litColor += _RimColor.rgb * (fresnel * _RimStrength * saturate(shadowBand + 0.25h));
@@ -189,6 +189,114 @@ Shader "YunaLegend/ToyRoom_Painterly3D"
             ENDHLSL
         }
 
-        UsePass "Universal Render Pipeline/Lit/ShadowCaster"
+        Pass
+        {
+            Name "ShadowCaster"
+            Tags { "LightMode"="ShadowCaster" }
+            ZWrite On
+            ZTest LEqual
+            ColorMask 0
+
+            HLSLPROGRAM
+            #pragma vertex vertShadow
+            #pragma fragment fragShadow
+
+            struct Attributes
+            {
+                float4 positionOS : POSITION;
+                float3 normalOS : NORMAL;
+            };
+
+            struct Varyings
+            {
+                float4 positionHCS : SV_POSITION;
+            };
+
+            Varyings vertShadow(Attributes input)
+            {
+                Varyings output;
+                float3 posWS = TransformObjectToWorld(input.positionOS.xyz);
+                output.positionHCS = TransformWorldToHClip(posWS);
+                return output;
+            }
+
+            half4 fragShadow(Varyings input) : SV_Target
+            {
+                return 0;
+            }
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "DepthOnly"
+            Tags { "LightMode"="DepthOnly" }
+            ZWrite On
+            ColorMask R
+
+            HLSLPROGRAM
+            #pragma vertex vertDepth
+            #pragma fragment fragDepth
+
+            struct Attributes
+            {
+                float4 positionOS : POSITION;
+            };
+
+            struct Varyings
+            {
+                float4 positionHCS : SV_POSITION;
+            };
+
+            Varyings vertDepth(Attributes input)
+            {
+                Varyings output;
+                output.positionHCS = TransformObjectToHClip(input.positionOS.xyz);
+                return output;
+            }
+
+            half4 fragDepth(Varyings input) : SV_Target
+            {
+                return 0;
+            }
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "DepthNormals"
+            Tags { "LightMode"="DepthNormals" }
+            ZWrite On
+
+            HLSLPROGRAM
+            #pragma vertex vertDepthNormals
+            #pragma fragment fragDepthNormals
+
+            struct Attributes
+            {
+                float4 positionOS : POSITION;
+                float3 normalOS : NORMAL;
+            };
+
+            struct Varyings
+            {
+                float4 positionHCS : SV_POSITION;
+                float3 normalWS : TEXCOORD0;
+            };
+
+            Varyings vertDepthNormals(Attributes input)
+            {
+                Varyings output;
+                output.positionHCS = TransformObjectToHClip(input.positionOS.xyz);
+                output.normalWS = TransformObjectToWorldNormal(input.normalOS);
+                return output;
+            }
+
+            half4 fragDepthNormals(Varyings input) : SV_Target
+            {
+                return half4(NormalizeNormalPerPixel(input.normalWS), 0.0);
+            }
+            ENDHLSL
+        }
     }
 }

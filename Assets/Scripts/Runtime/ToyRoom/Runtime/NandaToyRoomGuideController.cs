@@ -22,6 +22,11 @@ namespace YunaLegend.ToyRoom.Runtime
 
         private Vector3 velocity;
         private NandaGuideTargetMode mode = NandaGuideTargetMode.FollowPlayer;
+        private Transform wingUpperL;
+        private Transform wingUpperR;
+        private Transform wingLowerL;
+        private Transform wingLowerR;
+        private bool wingsSearched;
 
         public NandaGuideTargetMode Mode => mode;
 
@@ -50,6 +55,46 @@ namespace YunaLegend.ToyRoom.Runtime
             Vector3 desired = anchor + new Vector3(0f, hoverY, 0f);
 
             transform.position = Vector3.SmoothDamp(transform.position, desired, ref velocity, smoothTime);
+            AnimateWingFlutter();
+        }
+
+        private void AnimateWingFlutter()
+        {
+            if (!wingsSearched)
+            {
+                wingsSearched = true;
+                var body = transform.Find("Nanda_FairyBody");
+                if (body != null)
+                {
+                    wingUpperL = body.Find("Wing_Upper_L");
+                    wingUpperR = body.Find("Wing_Upper_R");
+                    wingLowerL = body.Find("Wing_Lower_L");
+                    wingLowerR = body.Find("Wing_Lower_R");
+                }
+            }
+
+            float flap = Mathf.Sin(Time.time * 16.0f) * 24.0f;
+            float subFlap = Mathf.Sin(Time.time * 16.0f - 0.6f) * 18.0f;
+
+            if (wingUpperL != null)
+            {
+                wingUpperL.localRotation = Quaternion.Euler(0f, 22f + flap, 0f);
+            }
+
+            if (wingUpperR != null)
+            {
+                wingUpperR.localRotation = Quaternion.Euler(0f, -22f - flap, 0f);
+            }
+
+            if (wingLowerL != null)
+            {
+                wingLowerL.localRotation = Quaternion.Euler(0f, 28f + subFlap, 0f);
+            }
+
+            if (wingLowerR != null)
+            {
+                wingLowerR.localRotation = Quaternion.Euler(0f, -28f - subFlap, 0f);
+            }
         }
 
         private Vector3 ResolveAnchorPosition()

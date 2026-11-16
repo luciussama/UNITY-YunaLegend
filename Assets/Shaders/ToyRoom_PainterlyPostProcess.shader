@@ -2,13 +2,13 @@ Shader "YunaLegend/ToyRoom_PainterlyPostProcess"
 {
     Properties
     {
-        _KuwaharaBlend ("Kuwahara Painterly Blend", Range(0.0, 1.0)) = 0.68
-        _KuwaharaRadius ("Brush Radius (Texels)", Range(0.5, 2.5)) = 1.15
+        _KuwaharaBlend ("Kuwahara Painterly Blend", Range(0.0, 1.0)) = 0.18
+        _KuwaharaRadius ("Brush Radius (Texels)", Range(0.5, 2.5)) = 0.85
         _InkColor ("Sepia Ink Color", Color) = (0.18, 0.10, 0.07, 1.0)
-        _InkStrength ("Ink Line Strength", Range(0.0, 1.0)) = 0.62
-        _DepthThreshold ("Depth Edge Threshold", Range(0.05, 2.0)) = 0.35
-        _NormalThreshold ("Normal Edge Threshold", Range(0.1, 1.5)) = 0.52
-        _PaperGrainStrength ("Watercolor Paper Grain", Range(0.0, 0.15)) = 0.032
+        _InkStrength ("Ink Line Strength", Range(0.0, 1.0)) = 0.28
+        _DepthThreshold ("Depth Edge Threshold", Range(0.05, 2.0)) = 0.42
+        _NormalThreshold ("Normal Edge Threshold", Range(0.1, 1.5)) = 0.58
+        _PaperGrainStrength ("Watercolor Paper Grain", Range(0.0, 0.15)) = 0.024
     }
 
     SubShader

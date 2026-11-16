@@ -24,22 +24,22 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: f335a33d403b2a544a41e3a57665be10, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BrushNoiseStrength: 0.11
-    - _OutlineWidth: 0
+    - _BrushNoiseStrength: 0.045
+    - _OutlineWidth: 0.004
     - _RimPower: 4.2
     - _RimStrength: 0.14
     - _ShadowFeather: 0.14
     - _ShadowStep: 0.02
     m_Colors:
-    - _BaseColor: {r: 0.76, g: 0.96, b: 1, a: 1}
-    - _EmissionColor: {r: 0.22, g: 0.64, b: 0.92, a: 1}
-    - _OutlineColor: {r: 0.2, g: 0.11, b: 0.08, a: 1}
-    - _RimColor: {r: 1, g: 0.92, b: 0.76, a: 1}
-    - _ShadowColor: {r: 0.42, g: 0.34, b: 0.5, a: 1}
+    - _BaseColor: {r: 0.96, g: 0.88, b: 0.68, a: 1}
+    - _EmissionColor: {r: 0.28, g: 0.22, b: 0.1, a: 1}
+    - _OutlineColor: {r: 0.22, g: 0.12, b: 0.09, a: 1}
+    - _RimColor: {r: 1, g: 0.94, b: 0.8, a: 1}
+    - _ShadowColor: {r: 0.66, g: 0.56, b: 0.64, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

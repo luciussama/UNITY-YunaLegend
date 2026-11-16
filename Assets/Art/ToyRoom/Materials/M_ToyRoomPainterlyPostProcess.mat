@@ -25,12 +25,12 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _DepthThreshold: 0.35
-    - _InkStrength: 0.62
-    - _KuwaharaBlend: 0.68
-    - _KuwaharaRadius: 1.15
-    - _NormalThreshold: 0.52
-    - _PaperGrainStrength: 0.032
+    - _DepthThreshold: 0.42
+    - _InkStrength: 0.28
+    - _KuwaharaBlend: 0.18
+    - _KuwaharaRadius: 0.85
+    - _NormalThreshold: 0.58
+    - _PaperGrainStrength: 0.024
     m_Colors:
     - _InkColor: {r: 0.18, g: 0.1, b: 0.07, a: 1}
   m_BuildTextureStacks: []
