@@ -56,7 +56,21 @@ namespace YunaLegend.Editor.ToyRoom
             }
         }
 
-        [MenuItem("YunaLegend/Fase 2 - Toy Room/Build Final Scene (P1-P8)")]
+        [MenuItem("YunaLegend/Fase 2 - Toy Room/Abrir Cena (ToyRoom_Gameplay)", false, 10)]
+        public static void OpenToyRoomScene()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                return;
+            }
+
+            if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+            {
+                EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
+            }
+        }
+
+        [MenuItem("YunaLegend/Fase 2 - Toy Room/Build Final Scene (P1-P8)", false, 20)]
         public static void BuildBaseScene()
         {
             ToyRoomVisualFactory.ResetMaterialCounter();

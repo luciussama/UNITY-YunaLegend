@@ -14,7 +14,7 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
     {
         private const string AutoPlayPrefKey = "YunaLegend.AutoPlayFullStage";
         private const string OpenedSessionKey = "YunaLegend.OpenedPlayableSceneOnce";
-        private const string ToggleMenuPath = "YunaLegend/Iniciar Play na fase completa (2.5D)";
+        private const string ToggleMenuPath = "YunaLegend/Fase 1 - Dark Room/Iniciar Play na fase completa (2.5D)";
 
         static PlayableStageEditorStartup()
         {

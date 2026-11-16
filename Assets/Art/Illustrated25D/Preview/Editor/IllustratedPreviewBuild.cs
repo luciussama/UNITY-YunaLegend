@@ -87,7 +87,7 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             { Route.PlayableFullStage, new RouteSpec(PlayableFullStageScene, PlayableFullStageOutput, 37, playableLegacyMode: true) }
         };
 
-        [MenuItem("YunaLegend/Abrir cena de acompanhamento", false, 10)]
+        [MenuItem("YunaLegend/Fase 1 - Dark Room/Abrir cena de acompanhamento", false, 20)]
         public static void OpenPreview()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode)
@@ -101,7 +101,7 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             }
         }
 
-        [MenuItem("YunaLegend/Abrir fase jogável completa (2.5D)", false, 15)]
+        [MenuItem("YunaLegend/Fase 1 - Dark Room/Abrir fase jogável completa (2.5D)", false, 25)]
         public static void OpenPlayableFullStage()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode)
@@ -115,7 +115,7 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             }
         }
 
-        [MenuItem("YunaLegend/Gerar build Windows de acompanhamento", false, 20)]
+        [MenuItem("YunaLegend/Fase 1 - Dark Room/Gerar build Windows de acompanhamento", false, 30)]
         public static void BuildFromEditor()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode || BuildPipeline.isBuildingPlayer)
@@ -143,7 +143,7 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             }
         }
 
-        [MenuItem("YunaLegend/Abrir pasta da build", false, 30)]
+        [MenuItem("YunaLegend/Fase 1 - Dark Room/Abrir pasta da build", false, 40)]
         public static void OpenBuildFolder()
         {
             var folder = Path.GetDirectoryName(Path.GetFullPath(Output));
@@ -153,7 +153,7 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             }
             else
             {
-                Debug.LogWarning("A build ainda não foi gerada. Use YunaLegend > Gerar build Windows de acompanhamento.");
+                Debug.LogWarning("A build ainda não foi gerada. Use YunaLegend > Fase 1 - Dark Room > Gerar build Windows de acompanhamento.");
             }
         }
 
