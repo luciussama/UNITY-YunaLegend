@@ -28,7 +28,7 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
 
         private static bool IsEnabled
         {
-            get => EditorPrefs.GetBool(AutoPlayPrefKey, true);
+            get => EditorPrefs.GetBool(AutoPlayPrefKey, false);
             set => EditorPrefs.SetBool(AutoPlayPrefKey, value);
         }
 
@@ -93,7 +93,8 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
         {
             if (!IsEnabled)
             {
-                EditorSceneManager.playModeStartScene = null;
+                SceneAsset titleScene = AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/Scenes/TitleScreen.unity");
+                EditorSceneManager.playModeStartScene = titleScene;
                 return;
             }
 

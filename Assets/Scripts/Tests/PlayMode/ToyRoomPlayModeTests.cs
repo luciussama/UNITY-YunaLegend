@@ -120,6 +120,32 @@ namespace YunaLegend.RoutePhysics.Tests
             Assert.AreEqual(ToyRoomPhase.Completed, bootstrap.StateMachine.CurrentPhase);
         }
 
+        [UnityTest]
+        public IEnumerator TitleScreenFlagSelectorLoadsToyRoom()
+        {
+#if UNITY_EDITOR
+            yield return UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode(
+                "Assets/Scenes/TitleScreen.unity",
+                new LoadSceneParameters(LoadSceneMode.Single));
+#else
+            yield return SceneManager.LoadSceneAsync("Assets/Scenes/TitleScreen.unity");
+#endif
+            yield return null;
+
+            var selector = Object.FindFirstObjectByType<YunaLegend.UI.TitlePhaseSelector>();
+            Assert.IsNotNull(selector, "TitlePhaseSelector ausente na TitleScreen");
+            Assert.GreaterOrEqual(selector.ItemCount, 2, "Bandeirinha deve listar Quarto Escuro e Sala de Brinquedos");
+
+            selector.Open();
+            Assert.IsTrue(selector.IsOpen);
+
+            selector.Choose(1);
+            yield return null;
+            yield return null;
+
+            Assert.AreEqual("ToyRoom_Gameplay", SceneManager.GetActiveScene().name);
+        }
+
         private static IEnumerator LoadToyRoomScene()
         {
 #if UNITY_EDITOR
