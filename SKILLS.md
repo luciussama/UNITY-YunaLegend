@@ -16,6 +16,7 @@ quem preparou o pacote.
 
 | Skill incluída | Quando consultar | Requisitos de execução |
 | --- | --- | --- |
+| [studio-agents](skills/studio-agents/SKILL.md) | **Obrigatória para arte 3D/2.5D, personagens, cenários, shaders, design, narrativa e QA:** contém a árvore completa dos **24 Agentes do Estúdio** (`Creative Director` + 5 Diretores + 18 Especialistas) e o contrato de **≥ 95% de fidelidade visual** | Checkout do projeto; leitura obrigatória por qualquer IA antes de produzir/validar assets ou sistemas |
 | [agent-coordination](skills/agent-coordination/SKILL.md) | Engenharia do registro de agentes, reservas idempotentes e concorrência por assunto | Python 3; banco central do diário; sem dependências externas |
 | [yuna-project](skills/yuna-project/SKILL.md) | Entrada no projeto, C#/Unity, coordenação, diário, implementação e retomada | Checkout do projeto; Python 3 ou cliente SQLite; Unity quando a tarefa exigir |
 | [imagegen](skills/imagegen/SKILL.md) | Criar/editar pinturas, personagens, poses, sprites e conceitos raster | Ferramenta de geração/edição de imagens disponível no ambiente; fallback de API somente conforme a própria skill |
