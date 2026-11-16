@@ -2,7 +2,7 @@
 
 > **Status:** Planejamento aprovado para produção (após limpeza da Fase 1 e pesquisa de direção artística).
 > **Branch:** `feature/toyroom`
-> **Nota de Pesquisa Legada:** A execução ao vivo da URL legada (`https://luciussama.github.io/legendGirl/`) via `chrome_devtools` não pôde ser concluída nesta sessão porque o Chrome não estava com `DevToolsActivePort` ativo (`chrome://inspect/#remote-debugging`). Os detalhes de mecânica e narrativa legada abaixo foram extraídos do roteiro oficial já consolidado no repositório ([02-CAPITULO-1-PARTE-2-SALA-DE-BRINQUEDOS-EXPLORACAO.md](../roteiro-unity/02-CAPITULO-1-PARTE-2-SALA-DE-BRINQUEDOS-EXPLORACAO.md)) e devem ser conferidos visualmente ao vivo assim que o debug remoto do Chrome for habilitado.
+> **Nota de Pesquisa Legada:** A Fase 2 (`Toy Room`) foi observada ao vivo em `https://luciussama.github.io/legendGirl/` até `Brinquedos Arrumados: 6/8`, confirmando visualmente: papel de parede creme floral, duas janelas arqueadas com feixes diagonais de luz matinal e poeira flutuante, piso de tábuas envernizadas, trilhos de trem no chão, tapetes ornamentados, baú vermelho/dourado escrito `BRINQUEDOS`, HUD `Brinquedos Arrumados: X/8` com barra de progresso no topo esquerdo e botão contextual `PEGAR` no canto inferior direito. Os eventos finais da recorrência e da Espada foram complementados com o roteiro oficial ([02-CAPITULO-1-PARTE-2-SALA-DE-BRINQUEDOS-EXPLORACAO.md](../roteiro-unity/02-CAPITULO-1-PARTE-2-SALA-DE-BRINQUEDOS-EXPLORACAO.md)).
 
 ---
 
