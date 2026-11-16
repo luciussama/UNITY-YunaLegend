@@ -10,7 +10,7 @@ namespace YunaLegend.Editor.ToyRoom
     /// </summary>
     public static class ToyRoomVisualFactory
     {
-        private const string PainterlyShaderName = "Universal Render Pipeline/Lit";
+        private const string PainterlyShaderName = "YunaLegend/ToyRoom_Painterly3D";
         private const string MaterialsFolder = "Assets/Art/ToyRoom/Materials";
         private static int materialCounter;
 
@@ -20,9 +20,14 @@ namespace YunaLegend.Editor.ToyRoom
             System.IO.Directory.CreateDirectory(MaterialsFolder);
         }
 
-        public static Material CreatePainterlyMaterial(Color tint, string texturePath = null, Vector2? tiling = null, Color? emission = null)
+        public static Material CreatePainterlyMaterial(
+            Color tint,
+            string texturePath = null,
+            Vector2? tiling = null,
+            Color? emission = null,
+            float outlineWidth = 0.011f)
         {
-            var shader = Shader.Find(PainterlyShaderName);
+            var shader = Shader.Find(PainterlyShaderName) ?? Shader.Find("Universal Render Pipeline/Lit");
             string matPath = $"{MaterialsFolder}/M_ToyRoom_{materialCounter++:000}.mat";
             var mat = AssetDatabase.LoadAssetAtPath<Material>(matPath);
             if (mat == null)
@@ -36,8 +41,10 @@ namespace YunaLegend.Editor.ToyRoom
             }
 
             mat.SetColor("_BaseColor", tint);
-            mat.SetFloat("_Smoothness", 0.14f);
-            mat.SetFloat("_Metallic", 0.02f);
+            mat.SetColor("_ShadowColor", new Color(0.36f, 0.30f, 0.46f, 1f));
+            mat.SetColor("_RimColor", new Color(1.0f, 0.92f, 0.74f, 1f));
+            mat.SetColor("_OutlineColor", new Color(0.24f, 0.14f, 0.10f, 1f));
+            mat.SetFloat("_OutlineWidth", outlineWidth);
 
             Texture2D tex = null;
             if (!string.IsNullOrEmpty(texturePath))
@@ -56,17 +63,7 @@ namespace YunaLegend.Editor.ToyRoom
                 mat.SetTextureScale("_BaseMap", Vector2.one);
             }
 
-            if (emission.HasValue)
-            {
-                mat.EnableKeyword("_EMISSION");
-                mat.SetColor("_EmissionColor", emission.Value);
-            }
-            else
-            {
-                mat.DisableKeyword("_EMISSION");
-                mat.SetColor("_EmissionColor", Color.black);
-            }
-
+            mat.SetColor("_EmissionColor", emission ?? Color.black);
             EditorUtility.SetDirty(mat);
             return mat;
         }
@@ -105,38 +102,86 @@ namespace YunaLegend.Editor.ToyRoom
             return go;
         }
 
-        public static void BuildYunaCharacter3D(Transform parent)
+        public static void BuildYunaCharacter3D(
+            Transform parent,
+            out Transform bodyRoot,
+            out Transform legLeftPivot,
+            out Transform legRightPivot,
+            out Transform armLeftPivot,
+            out Transform armRightPivot,
+            out Transform ponytailPivot)
         {
-            var skinMat = CreatePainterlyMaterial(new Color(0.98f, 0.84f, 0.76f));
-            var hairMat = CreatePainterlyMaterial(new Color(0.38f, 0.22f, 0.16f));
-            var dressMat = CreatePainterlyMaterial(new Color(0.96f, 0.91f, 0.82f));
-            var crimsonMat = CreatePainterlyMaterial(new Color(0.84f, 0.24f, 0.34f));
-            var shoeMat = CreatePainterlyMaterial(new Color(0.22f, 0.15f, 0.14f));
-            var eyeMat = CreatePainterlyMaterial(new Color(0.14f, 0.10f, 0.10f));
+            var skinMat = CreatePainterlyMaterial(new Color(0.98f, 0.82f, 0.71f), outlineWidth: 0.011f);
+            var blushMat = CreatePainterlyMaterial(new Color(0.95f, 0.62f, 0.58f), outlineWidth: 0f);
+            var hairMat = CreatePainterlyMaterial(new Color(0.36f, 0.20f, 0.12f), outlineWidth: 0.012f);
+            var dressMat = CreatePainterlyMaterial(new Color(0.95f, 0.89f, 0.77f), outlineWidth: 0.011f);
+            var sockMat = CreatePainterlyMaterial(new Color(0.93f, 0.87f, 0.76f), outlineWidth: 0.008f);
+            var coralMat = CreatePainterlyMaterial(new Color(0.80f, 0.30f, 0.31f), outlineWidth: 0.009f);
+            var scrunchieMat = CreatePainterlyMaterial(new Color(0.85f, 0.47f, 0.46f), outlineWidth: 0.009f);
+            var shoeMat = CreatePainterlyMaterial(new Color(0.54f, 0.15f, 0.15f), outlineWidth: 0.010f);
+            var eyeMat = CreatePainterlyMaterial(new Color(0.18f, 0.11f, 0.08f), outlineWidth: 0f);
+            var glintMat = CreatePainterlyMaterial(Color.white, emission: Color.white * 0.4f, outlineWidth: 0f);
 
-            // Sapatinhos e pernas
-            CreateVisualPrimitive(PrimitiveType.Capsule, "Shoe_L", parent, new Vector3(-0.11f, 0.08f, 0.03f), new Vector3(0.12f, 0.08f, 0.18f), shoeMat);
-            CreateVisualPrimitive(PrimitiveType.Capsule, "Shoe_R", parent, new Vector3(0.11f, 0.08f, 0.03f), new Vector3(0.12f, 0.08f, 0.18f), shoeMat);
-            CreateVisualPrimitive(PrimitiveType.Cylinder, "Leg_L", parent, new Vector3(-0.10f, 0.26f, 0f), new Vector3(0.10f, 0.16f, 0.10f), skinMat);
-            CreateVisualPrimitive(PrimitiveType.Cylinder, "Leg_R", parent, new Vector3(0.10f, 0.26f, 0f), new Vector3(0.10f, 0.16f, 0.10f), skinMat);
+            var bodyGo = new GameObject("Yuna_BodyRoot");
+            bodyGo.transform.SetParent(parent, false);
+            bodyRoot = bodyGo.transform;
 
-            // Vestido vintage creme + barra carmim
-            CreateVisualPrimitive(PrimitiveType.Cylinder, "Skirt", parent, new Vector3(0f, 0.50f, 0f), new Vector3(0.46f, 0.20f, 0.46f), dressMat);
-            CreateVisualPrimitive(PrimitiveType.Cylinder, "Skirt_Trim", parent, new Vector3(0f, 0.34f, 0f), new Vector3(0.48f, 0.03f, 0.48f), crimsonMat);
-            CreateVisualPrimitive(PrimitiveType.Cylinder, "Torso", parent, new Vector3(0f, 0.78f, 0f), new Vector3(0.30f, 0.16f, 0.24f), dressMat);
-            CreateVisualPrimitive(PrimitiveType.Cylinder, "Sash", parent, new Vector3(0f, 0.67f, 0f), new Vector3(0.32f, 0.04f, 0.26f), crimsonMat);
+            // Pivots de pernas (meias creme + sapatinhos Mary Jane burgundy)
+            legLeftPivot = new GameObject("Leg_L_Pivot").transform;
+            legLeftPivot.SetParent(bodyRoot, false);
+            legLeftPivot.localPosition = new Vector3(-0.10f, 0.36f, 0f);
+            CreateVisualPrimitive(PrimitiveType.Cylinder, "Leg_L", legLeftPivot, new Vector3(0f, -0.10f, 0f), new Vector3(0.09f, 0.10f, 0.09f), skinMat);
+            CreateVisualPrimitive(PrimitiveType.Cylinder, "Sock_L", legLeftPivot, new Vector3(0f, -0.22f, 0f), new Vector3(0.10f, 0.09f, 0.10f), sockMat);
+            CreateVisualPrimitive(PrimitiveType.Capsule, "Shoe_L", legLeftPivot, new Vector3(0f, -0.30f, 0.03f), new Vector3(0.12f, 0.08f, 0.18f), shoeMat, new Vector3(90f, 0f, 0f));
 
-            // Bracinhos
-            CreateVisualPrimitive(PrimitiveType.Capsule, "Arm_L", parent, new Vector3(-0.21f, 0.76f, 0.04f), new Vector3(0.09f, 0.14f, 0.09f), skinMat, new Vector3(12f, 0f, 18f));
-            CreateVisualPrimitive(PrimitiveType.Capsule, "Arm_R", parent, new Vector3(0.21f, 0.76f, 0.04f), new Vector3(0.09f, 0.14f, 0.09f), skinMat, new Vector3(12f, 0f, -18f));
+            legRightPivot = new GameObject("Leg_R_Pivot").transform;
+            legRightPivot.SetParent(bodyRoot, false);
+            legRightPivot.localPosition = new Vector3(0.10f, 0.36f, 0f);
+            CreateVisualPrimitive(PrimitiveType.Cylinder, "Leg_R", legRightPivot, new Vector3(0f, -0.10f, 0f), new Vector3(0.09f, 0.10f, 0.09f), skinMat);
+            CreateVisualPrimitive(PrimitiveType.Cylinder, "Sock_R", legRightPivot, new Vector3(0f, -0.22f, 0f), new Vector3(0.10f, 0.09f, 0.10f), sockMat);
+            CreateVisualPrimitive(PrimitiveType.Capsule, "Shoe_R", legRightPivot, new Vector3(0f, -0.30f, 0.03f), new Vector3(0.12f, 0.08f, 0.18f), shoeMat, new Vector3(90f, 0f, 0f));
 
-            // Cabeca, olhos, franja, rabo de cavalo alto + xuxinha rosa/carmim
-            CreateVisualPrimitive(PrimitiveType.Sphere, "Head", parent, new Vector3(0f, 1.12f, 0f), new Vector3(0.40f, 0.38f, 0.38f), skinMat);
-            CreateVisualPrimitive(PrimitiveType.Sphere, "Eye_L", parent, new Vector3(-0.08f, 1.13f, 0.17f), new Vector3(0.05f, 0.07f, 0.04f), eyeMat);
-            CreateVisualPrimitive(PrimitiveType.Sphere, "Eye_R", parent, new Vector3(0.08f, 1.13f, 0.17f), new Vector3(0.05f, 0.07f, 0.04f), eyeMat);
-            CreateVisualPrimitive(PrimitiveType.Sphere, "Hair_Cap", parent, new Vector3(0f, 1.18f, -0.03f), new Vector3(0.43f, 0.34f, 0.40f), hairMat);
-            CreateVisualPrimitive(PrimitiveType.Sphere, "Hair_Ribbon", parent, new Vector3(0f, 1.38f, -0.14f), new Vector3(0.14f, 0.10f, 0.10f), crimsonMat);
-            CreateVisualPrimitive(PrimitiveType.Capsule, "Hair_Ponytail", parent, new Vector3(0f, 1.24f, -0.24f), new Vector3(0.16f, 0.18f, 0.16f), hairMat, new Vector3(38f, 0f, 0f));
+            // Vestido vintage creme com babado coral-carmim e gola com laco
+            CreateVisualPrimitive(PrimitiveType.Cylinder, "Skirt_Base", bodyRoot, new Vector3(0f, 0.48f, 0f), new Vector3(0.50f, 0.18f, 0.50f), dressMat);
+            CreateVisualPrimitive(PrimitiveType.Cylinder, "Skirt_CoralTrim", bodyRoot, new Vector3(0f, 0.35f, 0f), new Vector3(0.53f, 0.04f, 0.53f), coralMat);
+            CreateVisualPrimitive(PrimitiveType.Cylinder, "Skirt_LaceBottom", bodyRoot, new Vector3(0f, 0.31f, 0f), new Vector3(0.54f, 0.02f, 0.54f), dressMat);
+            CreateVisualPrimitive(PrimitiveType.Cylinder, "Torso", bodyRoot, new Vector3(0f, 0.72f, 0f), new Vector3(0.28f, 0.14f, 0.24f), dressMat);
+            CreateVisualPrimitive(PrimitiveType.Cylinder, "Collar", bodyRoot, new Vector3(0f, 0.85f, 0f), new Vector3(0.34f, 0.03f, 0.28f), dressMat);
+            CreateVisualPrimitive(PrimitiveType.Cube, "ChestBow", bodyRoot, new Vector3(0f, 0.82f, 0.14f), new Vector3(0.12f, 0.07f, 0.05f), coralMat);
+
+            // Bracinhos com mangas bufantes
+            armLeftPivot = new GameObject("Arm_L_Pivot").transform;
+            armLeftPivot.SetParent(bodyRoot, false);
+            armLeftPivot.localPosition = new Vector3(-0.19f, 0.80f, 0f);
+            CreateVisualPrimitive(PrimitiveType.Sphere, "Sleeve_L", armLeftPivot, new Vector3(-0.02f, -0.02f, 0f), new Vector3(0.15f, 0.14f, 0.15f), dressMat);
+            CreateVisualPrimitive(PrimitiveType.Capsule, "Arm_L", armLeftPivot, new Vector3(-0.02f, -0.14f, 0.02f), new Vector3(0.08f, 0.12f, 0.08f), skinMat);
+
+            armRightPivot = new GameObject("Arm_R_Pivot").transform;
+            armRightPivot.SetParent(bodyRoot, false);
+            armRightPivot.localPosition = new Vector3(0.19f, 0.80f, 0f);
+            CreateVisualPrimitive(PrimitiveType.Sphere, "Sleeve_R", armRightPivot, new Vector3(0.02f, -0.02f, 0f), new Vector3(0.15f, 0.14f, 0.15f), dressMat);
+            CreateVisualPrimitive(PrimitiveType.Capsule, "Arm_R", armRightPivot, new Vector3(0.02f, -0.14f, 0.02f), new Vector3(0.08f, 0.12f, 0.08f), skinMat);
+
+            // Cabeca chibi expressiva (42% da altura, olhos grandes com brilho, bochechas rosadas)
+            CreateVisualPrimitive(PrimitiveType.Sphere, "Head", bodyRoot, new Vector3(0f, 1.16f, 0.02f), new Vector3(0.48f, 0.45f, 0.46f), skinMat);
+            CreateVisualPrimitive(PrimitiveType.Sphere, "Cheek_L", bodyRoot, new Vector3(-0.14f, 1.09f, 0.20f), new Vector3(0.08f, 0.05f, 0.04f), blushMat);
+            CreateVisualPrimitive(PrimitiveType.Sphere, "Cheek_R", bodyRoot, new Vector3(0.14f, 1.09f, 0.20f), new Vector3(0.08f, 0.05f, 0.04f), blushMat);
+            CreateVisualPrimitive(PrimitiveType.Sphere, "Eye_L", bodyRoot, new Vector3(-0.09f, 1.16f, 0.22f), new Vector3(0.065f, 0.085f, 0.04f), eyeMat);
+            CreateVisualPrimitive(PrimitiveType.Sphere, "Eye_R", bodyRoot, new Vector3(0.09f, 1.16f, 0.22f), new Vector3(0.065f, 0.085f, 0.04f), eyeMat);
+            CreateVisualPrimitive(PrimitiveType.Sphere, "Glint_L", bodyRoot, new Vector3(-0.08f, 1.18f, 0.24f), new Vector3(0.022f, 0.024f, 0.02f), glintMat);
+            CreateVisualPrimitive(PrimitiveType.Sphere, "Glint_R", bodyRoot, new Vector3(0.10f, 1.18f, 0.24f), new Vector3(0.022f, 0.024f, 0.02f), glintMat);
+
+            // Cabelo castanho volumoso + franja + rabo de cavalo alto cacheado + xuxinha rosa ondulada
+            CreateVisualPrimitive(PrimitiveType.Sphere, "Hair_Crown", bodyRoot, new Vector3(0f, 1.24f, -0.02f), new Vector3(0.52f, 0.42f, 0.49f), hairMat);
+            CreateVisualPrimitive(PrimitiveType.Sphere, "Hair_Bangs", bodyRoot, new Vector3(0f, 1.29f, 0.16f), new Vector3(0.42f, 0.20f, 0.22f), hairMat);
+
+            ponytailPivot = new GameObject("Ponytail_Pivot").transform;
+            ponytailPivot.SetParent(bodyRoot, false);
+            ponytailPivot.localPosition = new Vector3(0f, 1.38f, -0.18f);
+            CreateVisualPrimitive(PrimitiveType.Sphere, "Scrunchie", ponytailPivot, new Vector3(0f, 0.02f, -0.02f), new Vector3(0.18f, 0.14f, 0.14f), scrunchieMat);
+            CreateVisualPrimitive(PrimitiveType.Sphere, "Curl_Top", ponytailPivot, new Vector3(0f, 0.04f, -0.14f), new Vector3(0.28f, 0.28f, 0.28f), hairMat);
+            CreateVisualPrimitive(PrimitiveType.Sphere, "Curl_Mid", ponytailPivot, new Vector3(0f, -0.12f, -0.22f), new Vector3(0.32f, 0.30f, 0.28f), hairMat);
+            CreateVisualPrimitive(PrimitiveType.Sphere, "Curl_Tip", ponytailPivot, new Vector3(0f, -0.26f, -0.20f), new Vector3(0.24f, 0.22f, 0.22f), hairMat);
         }
 
         public static void BuildNandaFairy3D(Transform parent)
@@ -210,13 +255,18 @@ namespace YunaLegend.Editor.ToyRoom
             switch (spec.Id)
             {
                 case "teddy":
-                    var fur = CreatePainterlyMaterial(new Color(0.76f, 0.52f, 0.32f), "Assets/Materials/T_Bear_Fur_Painted.png");
-                    var tie = CreatePainterlyMaterial(new Color(0.85f, 0.22f, 0.26f));
-                    CreateVisualPrimitive(PrimitiveType.Sphere, "Torso", parent, new Vector3(0f, 0.18f, 0f), new Vector3(0.32f, 0.34f, 0.28f), fur);
-                    CreateVisualPrimitive(PrimitiveType.Sphere, "Head", parent, new Vector3(0f, 0.42f, 0f), Vector3.one * 0.26f, fur);
-                    CreateVisualPrimitive(PrimitiveType.Sphere, "Ear_L", parent, new Vector3(-0.11f, 0.54f, 0f), Vector3.one * 0.10f, fur);
-                    CreateVisualPrimitive(PrimitiveType.Sphere, "Ear_R", parent, new Vector3(0.11f, 0.54f, 0f), Vector3.one * 0.10f, fur);
-                    CreateVisualPrimitive(PrimitiveType.Cube, "Bowtie", parent, new Vector3(0f, 0.29f, 0.14f), new Vector3(0.14f, 0.06f, 0.04f), tie);
+                    var fur = CreatePainterlyMaterial(new Color(0.76f, 0.50f, 0.30f), "Assets/Materials/T_Bear_Fur_Painted.png", outlineWidth: 0.010f);
+                    var muzzle = CreatePainterlyMaterial(new Color(0.95f, 0.87f, 0.74f), outlineWidth: 0.006f);
+                    var buttonMat = CreatePainterlyMaterial(new Color(0.24f, 0.14f, 0.08f), outlineWidth: 0f);
+                    var tie = CreatePainterlyMaterial(new Color(0.80f, 0.22f, 0.24f), outlineWidth: 0.008f);
+                    CreateVisualPrimitive(PrimitiveType.Sphere, "Torso", parent, new Vector3(0f, 0.18f, 0f), new Vector3(0.34f, 0.34f, 0.28f), fur);
+                    CreateVisualPrimitive(PrimitiveType.Sphere, "Head", parent, new Vector3(0f, 0.44f, 0f), new Vector3(0.32f, 0.28f, 0.28f), fur);
+                    CreateVisualPrimitive(PrimitiveType.Sphere, "Ear_L", parent, new Vector3(-0.14f, 0.56f, 0f), Vector3.one * 0.12f, fur);
+                    CreateVisualPrimitive(PrimitiveType.Sphere, "Ear_R", parent, new Vector3(0.14f, 0.56f, 0f), Vector3.one * 0.12f, fur);
+                    CreateVisualPrimitive(PrimitiveType.Sphere, "Muzzle", parent, new Vector3(0f, 0.40f, 0.12f), new Vector3(0.14f, 0.10f, 0.08f), muzzle);
+                    CreateVisualPrimitive(PrimitiveType.Sphere, "Eye_L", parent, new Vector3(-0.07f, 0.46f, 0.13f), Vector3.one * 0.045f, buttonMat);
+                    CreateVisualPrimitive(PrimitiveType.Sphere, "Eye_R", parent, new Vector3(0.07f, 0.46f, 0.13f), Vector3.one * 0.045f, buttonMat);
+                    CreateVisualPrimitive(PrimitiveType.Cube, "Bowtie", parent, new Vector3(0f, 0.29f, 0.14f), new Vector3(0.15f, 0.07f, 0.05f), tie);
                     break;
                 case "train":
                     var red = CreatePainterlyMaterial(new Color(0.84f, 0.22f, 0.22f));
@@ -261,10 +311,13 @@ namespace YunaLegend.Editor.ToyRoom
                     CreateVisualPrimitive(PrimitiveType.Cube, "Block_3", parent, new Vector3(0f, 0.30f, 0.02f), Vector3.one * 0.20f, b3);
                     break;
                 case "drum":
-                    var drumMat = CreatePainterlyMaterial(Color.white, "Assets/Materials/T_CircusDrum.png");
-                    var rimMat = CreatePainterlyMaterial(new Color(0.90f, 0.74f, 0.28f));
+                    var drumMat = CreatePainterlyMaterial(Color.white, "Assets/Materials/T_CircusDrum.png", outlineWidth: 0.010f);
+                    var hoopMat = CreatePainterlyMaterial(new Color(0.84f, 0.58f, 0.26f), outlineWidth: 0.008f);
+                    var headMat = CreatePainterlyMaterial(new Color(0.95f, 0.90f, 0.80f), outlineWidth: 0f);
                     CreateVisualPrimitive(PrimitiveType.Cylinder, "Shell", parent, new Vector3(0f, 0.18f, 0f), new Vector3(0.36f, 0.16f, 0.36f), drumMat);
-                    CreateVisualPrimitive(PrimitiveType.Cylinder, "Rim_Top", parent, new Vector3(0f, 0.33f, 0f), new Vector3(0.38f, 0.03f, 0.38f), rimMat);
+                    CreateVisualPrimitive(PrimitiveType.Cylinder, "Rim_Top", parent, new Vector3(0f, 0.34f, 0f), new Vector3(0.39f, 0.03f, 0.39f), hoopMat);
+                    CreateVisualPrimitive(PrimitiveType.Cylinder, "Rim_Bot", parent, new Vector3(0f, 0.04f, 0f), new Vector3(0.39f, 0.03f, 0.39f), hoopMat);
+                    CreateVisualPrimitive(PrimitiveType.Cylinder, "Drumhead", parent, new Vector3(0f, 0.355f, 0f), new Vector3(0.34f, 0.01f, 0.34f), headMat);
                     break;
                 default: // jack-in-the-box
                     var boxMat = CreatePainterlyMaterial(new Color(0.74f, 0.38f, 0.82f), "Assets/Materials/T_Pastel_ToyWood.png");

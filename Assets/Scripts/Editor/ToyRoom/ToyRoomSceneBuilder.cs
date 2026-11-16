@@ -292,11 +292,11 @@ namespace YunaLegend.Editor.ToyRoom
         {
             var root = new GameObject("Architecture");
 
-            var floorMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.84f, 0.66f, 0.44f), "Assets/Materials/T_DarkOak_Planks.png", new Vector2(10f, 7f));
-            var rugMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.92f, 0.84f, 0.80f), "Assets/Materials/T_Floor_Rug_Mandala.png");
-            var wallMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.92f, 0.85f, 0.74f), "Assets/Materials/T_Victorian_Wallpaper.png", new Vector2(8f, 2f));
-            var baseMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.62f, 0.42f, 0.26f), "Assets/Materials/T_Wall_Baseboard.png", new Vector2(10f, 1f));
-            var trackMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.45f, 0.28f, 0.16f));
+            var floorMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.84f, 0.66f, 0.44f), "Assets/Materials/T_DarkOak_Planks.png", new Vector2(10f, 7f), outlineWidth: 0f);
+            var rugMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.92f, 0.84f, 0.80f), "Assets/Materials/T_Floor_Rug_Mandala.png", outlineWidth: 0f);
+            var wallMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.92f, 0.85f, 0.74f), "Assets/Materials/T_Victorian_Wallpaper.png", new Vector2(8f, 2f), outlineWidth: 0f);
+            var baseMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.62f, 0.42f, 0.26f), "Assets/Materials/T_Wall_Baseboard.png", new Vector2(10f, 1f), outlineWidth: 0f);
+            var trackMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.45f, 0.28f, 0.16f), outlineWidth: 0.005f);
 
             CreateBox("Floor_Wood", root.transform, new Vector3(0f, -0.1f, 0f), new Vector3(ToyRoomCatalog.RoomWidth, 0.2f, ToyRoomCatalog.RoomDepth), floorMat);
 
@@ -495,8 +495,19 @@ namespace YunaLegend.Editor.ToyRoom
             cc.height = 1.3f;
             cc.radius = 0.32f;
 
-            ToyRoomVisualFactory.BuildYunaCharacter3D(playerGo.transform);
-            return playerGo.AddComponent<ToyRoomPlayerController>();
+            ToyRoomVisualFactory.BuildYunaCharacter3D(
+                playerGo.transform,
+                out var bodyRoot,
+                out var legL,
+                out var legR,
+                out var armL,
+                out var armR,
+                out var ponytail);
+
+            var controller = playerGo.AddComponent<ToyRoomPlayerController>();
+            var animator = playerGo.AddComponent<YunaToyRoomAnimator>();
+            animator.Configure(controller, bodyRoot, legL, legR, armL, armR, ponytail);
+            return controller;
         }
 
         private static ToySwordView CreateToySword(Vector3 chestPosition)
