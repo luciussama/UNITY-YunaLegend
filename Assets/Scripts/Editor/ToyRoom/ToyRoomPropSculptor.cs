@@ -980,5 +980,63 @@ namespace YunaLegend.Editor.ToyRoom
             File.WriteAllBytes(path, tex.EncodeToPNG());
             UnityEngine.Object.DestroyImmediate(tex);
         }
+
+        /// <summary>
+        /// Anexa um modelo 3D gerado via Hunyuan3D-2 (Assets/Art/ToyRoom/Models/Props/{propId}.obj + _Albedo.png)
+        /// normalizando a escala para caber na pegada/altura canonica do objeto. Retorna false se o arquivo ainda nao existir.
+        /// </summary>
+        public static bool TryAttachGeneratedPropModel(Transform parent, string propId, float targetHeight, float maxFootprintX, float maxFootprintZ)
+        {
+            string objPath = $"Assets/Art/ToyRoom/Models/Props/{propId}.obj";
+            if (!File.Exists(objPath))
+            {
+                return false;
+            }
+
+            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(objPath);
+            if (prefab == null)
+            {
+                return false;
+            }
+
+            string texPath = $"Assets/Art/ToyRoom/Models/Props/{propId}_Albedo.png";
+            var mat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, File.Exists(texPath) ? texPath : null, outlineWidth: 0.004f);
+
+            var instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab, parent);
+            instance.name = $"Model3D_{propId}";
+
+            var renderers = instance.GetComponentsInChildren<Renderer>(true);
+            Bounds combined = new Bounds(Vector3.zero, Vector3.zero);
+            bool hasBounds = false;
+            foreach (var r in renderers)
+            {
+                r.sharedMaterial = mat;
+                if (!hasBounds)
+                {
+                    combined = r.bounds;
+                    hasBounds = true;
+                }
+                else
+                {
+                    combined.Encapsulate(r.bounds);
+                }
+            }
+
+            if (hasBounds)
+            {
+                Vector3 size = combined.size;
+                float scaleY = size.y > 0.001f ? targetHeight / size.y : 1f;
+                float scaleX = size.x > 0.001f ? maxFootprintX / size.x : scaleY;
+                float scaleZ = size.z > 0.001f ? maxFootprintZ / size.z : scaleY;
+                float uniformScale = Mathf.Min(scaleY, Mathf.Min(scaleX, scaleZ));
+                instance.transform.localScale = Vector3.one * uniformScale;
+                instance.transform.localPosition = new Vector3(
+                    -combined.center.x * uniformScale,
+                    -combined.min.y * uniformScale,
+                    -combined.center.z * uniformScale);
+            }
+
+            return true;
+        }
     }
 }

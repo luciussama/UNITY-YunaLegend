@@ -49,6 +49,17 @@ namespace YunaLegend.ToyRoom.Core
             }
         }
 
+        public void AdvanceCurrentBeat()
+        {
+            if (!IsPlaying)
+            {
+                return;
+            }
+
+            elapsedInBeat = 0f;
+            Advance();
+        }
+
         public void SkipAll()
         {
             if (!IsPlaying)

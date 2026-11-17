@@ -139,6 +139,11 @@ namespace YunaLegend.Editor.ToyRoom
 
             var hudGo = new GameObject("ToyRoom_HUD");
             var hud = hudGo.AddComponent<ToyRoomHudController>();
+            var caveatFont = AssetDatabase.LoadAssetAtPath<Font>("Assets/Fonts/Caveat-Variable.ttf");
+            if (caveatFont != null)
+            {
+                hud.ConfigureFont(caveatFont);
+            }
 
             var narrativeGo = new GameObject("ToyRoom_Narrative");
             var narrative = narrativeGo.AddComponent<ToyRoomNarrativeController>();
@@ -146,10 +151,13 @@ namespace YunaLegend.Editor.ToyRoom
 
             var audioGo = new GameObject("ToyRoom_Audio");
             var audioCtrl = audioGo.AddComponent<ToyRoomAudioController>();
+            var explorationClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/ToyRoom/The Circle Game.mp3");
+            var swordClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/ToyRoom/Circular Dissonance (1).mp3");
+            audioCtrl.ConfigureMusic(explorationClip, swordClip);
 
             var bootstrapGo = new GameObject("ToyRoom_Bootstrap");
             var bootstrap = bootstrapGo.AddComponent<ToyRoomStageBootstrap>();
-            bootstrap.Configure(cam, player, chest, nanda, swordView, hud, narrative, audioCtrl, toys, autoExplore: true);
+            bootstrap.Configure(cam, player, chest, nanda, swordView, hud, narrative, audioCtrl, toys, autoExplore: false);
 
             Directory.CreateDirectory(Path.GetDirectoryName(ScenePath) ?? "Assets/Scenes");
             AssetDatabase.SaveAssets();
@@ -428,29 +436,56 @@ namespace YunaLegend.Editor.ToyRoom
             EditorUtility.SetDirty(floorMat);
 
             var rugMat = ToyRoomVisualFactory.CreatePainterlyMaterial(
-                new Color(0.52f, 0.48f, 0.46f),
-                "Assets/Materials/T_Floor_Rug_Mandala.png",
-                emission: new Color(0.36f, 0.33f, 0.30f),
+                Color.white,
+                "Assets/Art/ToyRoom/Textures/Legacy/central-rug-v1.png",
+                emission: new Color(0.20f, 0.18f, 0.16f),
                 outlineWidth: 0f);
             rugMat.SetColor("_ShadowColor", new Color(0.82f, 0.78f, 0.76f, 1f));
             EditorUtility.SetDirty(rugMat);
 
-            var stripedRugMat = ToyRoomVisualFactory.CreatePainterlyMaterial(
-                new Color(0.54f, 0.50f, 0.47f),
-                "Assets/Materials/T_Floor_Rug_Striped.png",
-                emission: new Color(0.35f, 0.32f, 0.29f),
+            var ovalRugMat = ToyRoomVisualFactory.CreatePainterlyMaterial(
+                Color.white,
+                "Assets/Art/ToyRoom/Textures/Legacy/oval-rug-v1.png",
+                emission: new Color(0.20f, 0.18f, 0.16f),
                 outlineWidth: 0f);
-            stripedRugMat.SetColor("_ShadowColor", new Color(0.82f, 0.78f, 0.76f, 1f));
-            EditorUtility.SetDirty(stripedRugMat);
-            var wallMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.94f, 0.88f, 0.78f), "Assets/Materials/T_Victorian_Wallpaper.png", new Vector2(8f, 2f), outlineWidth: 0f);
-            var baseMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.66f, 0.46f, 0.30f), "Assets/Materials/T_Wall_Baseboard.png", new Vector2(10f, 1f), outlineWidth: 0f);
-            var trackMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.78f, 0.56f, 0.38f), "Assets/Materials/T_TrainTrack_Wood.png", outlineWidth: 0.004f);
+            ovalRugMat.SetColor("_ShadowColor", new Color(0.82f, 0.78f, 0.76f, 1f));
+            EditorUtility.SetDirty(ovalRugMat);
+
+            var rectRugMat = ToyRoomVisualFactory.CreatePainterlyMaterial(
+                Color.white,
+                "Assets/Art/ToyRoom/Textures/Legacy/rectangular-rug-v1.png",
+                emission: new Color(0.20f, 0.18f, 0.16f),
+                outlineWidth: 0f);
+            rectRugMat.SetColor("_ShadowColor", new Color(0.82f, 0.78f, 0.76f, 1f));
+            EditorUtility.SetDirty(rectRugMat);
+
+            var wallMat = ToyRoomVisualFactory.CreatePainterlyMaterial(
+                new Color(0.98f, 0.94f, 0.88f),
+                "Assets/Art/ToyRoom/Textures/Legacy/wallpaper-v1.png",
+                new Vector2(6f, 1.5f),
+                outlineWidth: 0f);
+            var baseMat = ToyRoomVisualFactory.CreatePainterlyMaterial(
+                Color.white,
+                "Assets/Art/ToyRoom/Textures/Legacy/oak-trim-v1.png",
+                new Vector2(10f, 1f),
+                outlineWidth: 0f);
+            var trackMat = ToyRoomVisualFactory.CreatePainterlyMaterial(
+                Color.white,
+                "Assets/Art/ToyRoom/Textures/Legacy/wooden-track-v1.png",
+                outlineWidth: 0.004f);
 
             CreateBox("Floor_Wood", root.transform, new Vector3(0f, -0.1f, 0f), new Vector3(ToyRoomCatalog.RoomWidth, 0.2f, ToyRoomCatalog.RoomDepth), floorMat);
 
-            var rug = ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cylinder, "Rug_Central", root.transform, new Vector3(0f, 0.01f, -0.6f), new Vector3(11.5f, 0.015f, 8.2f), rugMat);
-            var rugSide = ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Rug_StripedPlayArea", root.transform, new Vector3(6.8f, 0.012f, -2.2f), new Vector3(4.8f, 0.015f, 3.4f), stripedRugMat, new Vector3(0f, -14f, 0f));
-            _ = rugSide;
+            var centralRugPt = ToyRoomCatalog.FromLegacyCoordinates(800f, 700f);
+            var rug = ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cylinder, "Rug_Central", root.transform, new Vector3(centralRugPt.X, 0.01f, centralRugPt.Z), new Vector3(6.8f, 0.015f, 5.6f), rugMat);
+
+            var ovalRugPt = ToyRoomCatalog.FromLegacyCoordinates(1180f, 520f);
+            var rugOval = ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cylinder, "Rug_OvalPlayMat", root.transform, new Vector3(ovalRugPt.X, 0.012f, ovalRugPt.Z), new Vector3(4.6f, 0.015f, 3.2f), ovalRugMat);
+            _ = rugOval;
+
+            var rectRugPt = ToyRoomCatalog.FromLegacyCoordinates(280f, 920f);
+            var rugBedside = ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Rug_BedsideFringe", root.transform, new Vector3(rectRugPt.X, 0.012f, rectRugPt.Z), new Vector3(4.4f, 0.015f, 2.8f), rectRugMat);
+            _ = rugBedside;
 
             // Trilho de trem decorativo no piso com textura de madeira pintada
             for (int i = 0; i < 24; i++)
@@ -498,7 +533,12 @@ namespace YunaLegend.Editor.ToyRoom
             var skyMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.54f, 0.80f, 0.96f), emission: new Color(0.28f, 0.44f, 0.56f));
             var shaftMat = CreateLightShaftMaterial();
 
-            float[] windowXs = { -7.2f, 6.4f };
+            float[] windowXs =
+            {
+                ToyRoomCatalog.FromLegacyCoordinates(520f, 30f).X,
+                ToyRoomCatalog.FromLegacyCoordinates(1280f, 30f).X
+            };
+            var curtainMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, "Assets/Art/ToyRoom/Textures/Legacy/window-curtains-v1.png", outlineWidth: 0f);
             foreach (float wx in windowXs)
             {
                 var win = new GameObject($"Window_{wx:0.0}");
@@ -509,6 +549,7 @@ namespace YunaLegend.Editor.ToyRoom
                 ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Glass", win.transform, new Vector3(0f, 0f, -0.04f), new Vector3(1.85f, 2.05f, 0.06f), skyMat);
                 ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Cross_V", win.transform, new Vector3(0f, 0f, -0.06f), new Vector3(0.08f, 2.05f, 0.06f), frameMat);
                 ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Cross_H", win.transform, new Vector3(0f, 0f, -0.06f), new Vector3(1.85f, 0.08f, 0.06f), frameMat);
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Quad, "Curtains", win.transform, new Vector3(0f, 0f, -0.10f), new Vector3(2.6f, 2.8f, 1f), curtainMat, new Vector3(0f, 180f, 0f));
 
                 var shaft = ToyRoomVisualFactory.CreateVisualPrimitive(
                     PrimitiveType.Quad,
@@ -689,7 +730,10 @@ namespace YunaLegend.Editor.ToyRoom
                 col.center = new Vector3(0f, 0.75f, 0f);
                 col.size = new Vector3(item.Width, 1.50f, item.Depth);
 
-                ToyRoomVisualFactory.BuildFurnitureDetail(host.transform, item);
+                if (!ToyRoomPropSculptor.TryAttachGeneratedPropModel(host.transform, item.Id, 1.50f, item.Width, item.Depth))
+                {
+                    ToyRoomVisualFactory.BuildFurnitureDetail(host.transform, item);
+                }
             }
 
             return chestController;
@@ -737,7 +781,10 @@ namespace YunaLegend.Editor.ToyRoom
                 col.center = new Vector3(0f, 0.25f, 0f);
                 col.radius = 0.42f;
 
-                ToyRoomVisualFactory.BuildToyModel3D(go.transform, toy);
+                if (!ToyRoomPropSculptor.TryAttachGeneratedPropModel(go.transform, toy.Id, 0.72f, 0.85f, 0.85f))
+                {
+                    ToyRoomVisualFactory.BuildToyModel3D(go.transform, toy);
+                }
 
                 var view = go.AddComponent<ToyItemView>();
                 view.Configure(toy.Id, toy.WeightMultiplier);
@@ -750,7 +797,8 @@ namespace YunaLegend.Editor.ToyRoom
         private static ToyRoomPlayerController CreatePlayer()
         {
             var playerGo = new GameObject("Yuna_ToyRoomPlayer");
-            playerGo.transform.position = new Vector3(0f, 0f, -1.2f);
+            var startPt = ToyRoomCatalog.FromLegacyCoordinates(280f, 640f);
+            playerGo.transform.position = new Vector3(startPt.X, 0f, startPt.Z);
             playerGo.transform.rotation = Quaternion.Euler(0f, 165f, 0f);
 
             var cc = playerGo.AddComponent<CharacterController>();
@@ -836,7 +884,8 @@ namespace YunaLegend.Editor.ToyRoom
         private static NandaToyRoomGuideController CreateNandaGuide(Transform player, Transform chest, Transform sword)
         {
             var nandaGo = new GameObject("Nanda_BlueGuide");
-            nandaGo.transform.position = player.position + new Vector3(-0.46f, 1.06f, 0.12f);
+            var nandaPt = ToyRoomCatalog.FromLegacyCoordinates(290f, 600f);
+            nandaGo.transform.position = new Vector3(nandaPt.X, 1.06f, nandaPt.Z);
             ToyRoomVisualFactory.BuildNandaFairy3D(nandaGo.transform);
 
             var lightGo = new GameObject("Nanda_AuraLight");
