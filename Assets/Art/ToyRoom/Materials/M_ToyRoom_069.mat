@@ -24,19 +24,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 7ec99d9a02db8471f99acb09fd87dc8b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BrushNoiseStrength: 0.045
-    - _OutlineWidth: 0.0038
+    - _OutlineWidth: 0.0028
     - _RimPower: 3.2
     - _RimStrength: 0.24
     - _ShadowFeather: 0.18
     - _ShadowStep: 0.05
     m_Colors:
-    - _BaseColor: {r: 0.84, g: 0.28, b: 0.3, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0.22, g: 0.12, b: 0.09, a: 1}
     - _RimColor: {r: 1, g: 0.94, b: 0.8, a: 1}

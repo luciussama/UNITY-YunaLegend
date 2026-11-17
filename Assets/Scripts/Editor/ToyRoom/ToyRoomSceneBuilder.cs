@@ -20,10 +20,10 @@ namespace YunaLegend.Editor.ToyRoom
     public static class ToyRoomSceneBuilder
     {
         public const string ScenePath = "Assets/Scenes/ToyRoom_Gameplay.unity";
-        private const string PreviewOutputPath = "/Users/sergio/.gemini/antigravity/brain/779e5ec9-ec3b-4b7a-9392-60ee6785d855/scratch/toyroom_preview.png";
-        private const string CloseupPreviewOutputPath = "/Users/sergio/.gemini/antigravity/brain/779e5ec9-ec3b-4b7a-9392-60ee6785d855/scratch/toyroom_closeup_yuna_nanda.png";
+        private const string PreviewOutputPath = "/Users/sergio/.gemini/antigravity/brain/1d17e175-ea96-41be-9e53-6cf1d38c269a/scratch/toyroom_preview.png";
+        private const string CloseupPreviewOutputPath = "/Users/sergio/.gemini/antigravity/brain/1d17e175-ea96-41be-9e53-6cf1d38c269a/scratch/toyroom_closeup_yuna_nanda.png";
         private const string AutoBuildVersionKey = "YunaLegend.ToyRoomSceneBuildVersion";
-        private const int CurrentSceneBuildVersion = 10;
+        private const int CurrentSceneBuildVersion = 16;
 
         static ToyRoomSceneBuilder()
         {
@@ -61,11 +61,13 @@ namespace YunaLegend.Editor.ToyRoom
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode)
             {
+                Debug.LogWarning("[ToyRoomSceneBuilder] Saia do Play Mode antes de abrir a cena ToyRoom_Gameplay.");
                 return;
             }
 
             if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
             {
+                EditorSceneManager.playModeStartScene = null;
                 EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
             }
         }
@@ -134,10 +136,10 @@ namespace YunaLegend.Editor.ToyRoom
             Quaternion origRot = cam.transform.rotation;
             float origFov = cam.fieldOfView;
 
-            // Close-up de auditoria visual (Art Director Agent) focado em Yuna, Nanda e brinquedos
-            cam.transform.position = new Vector3(-0.15f, 1.45f, -3.15f);
-            cam.transform.LookAt(new Vector3(-0.10f, 0.88f, -1.10f));
-            cam.fieldOfView = 24f;
+            // Close-up 3/4 de auditoria visual (Art Director Agent) enquadrando Yuna inteira (do rabo de cavalo aos sapatos)
+            cam.transform.position = new Vector3(-1.55f, 1.32f, -3.85f);
+            cam.transform.LookAt(new Vector3(-0.08f, 0.65f, -1.10f));
+            cam.fieldOfView = 27f;
             RenderCameraToPng(cam, CloseupPreviewOutputPath, 1280, 720);
 
             cam.transform.position = origPos;

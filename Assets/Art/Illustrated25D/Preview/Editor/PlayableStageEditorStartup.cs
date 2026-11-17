@@ -23,7 +23,18 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
                 return;
             }
 
+            EditorSceneManager.activeSceneChangedInEditMode += OnActiveSceneChangedInEditMode;
             EditorApplication.delayCall += ApplyStartupConfiguration;
+        }
+
+        private static void OnActiveSceneChangedInEditMode(Scene previousScene, Scene newScene)
+        {
+            if (Application.isBatchMode || EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                return;
+            }
+
+            ApplyPlayModeStartScene();
         }
 
         private static bool IsEnabled
@@ -73,7 +84,8 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             }
 
             Scene activeScene = SceneManager.GetActiveScene();
-            if (activeScene.path == IllustratedPreviewBuild.PlayableFullStageScene)
+            if (activeScene.path == IllustratedPreviewBuild.PlayableFullStageScene
+                || activeScene.path == "Assets/Scenes/ToyRoom_Gameplay.unity")
             {
                 return;
             }
@@ -91,6 +103,13 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
 
         private static void ApplyPlayModeStartScene()
         {
+            // Se o usuario abriu explicitamente a Toy Room (Fase 2), o Play deve iniciar nela
+            if (SceneManager.GetActiveScene().path == "Assets/Scenes/ToyRoom_Gameplay.unity")
+            {
+                EditorSceneManager.playModeStartScene = null;
+                return;
+            }
+
             if (!IsEnabled)
             {
                 SceneAsset titleScene = AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/Scenes/TitleScreen.unity");
