@@ -30,7 +30,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _BrushNoiseStrength: 0.045
-    - _OutlineWidth: 0.0038
+    - _OutlineWidth: 0.0026
     - _RimPower: 3.2
     - _RimStrength: 0.24
     - _ShadowFeather: 0.18
@@ -39,7 +39,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0.22, g: 0.12, b: 0.09, a: 1}
-    - _RimColor: {r: 1, g: 0.94, b: 0.8, a: 1}
-    - _ShadowColor: {r: 0.66, g: 0.56, b: 0.64, a: 1}
+    - _RimColor: {r: 1, g: 0.84, b: 0.6, a: 1}
+    - _ShadowColor: {r: 0.78, g: 0.62, b: 0.52, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

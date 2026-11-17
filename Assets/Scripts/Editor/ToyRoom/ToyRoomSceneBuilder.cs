@@ -23,14 +23,55 @@ namespace YunaLegend.Editor.ToyRoom
         private const string PreviewOutputPath = "/Users/sergio/.gemini/antigravity/brain/1d17e175-ea96-41be-9e53-6cf1d38c269a/scratch/toyroom_preview.png";
         private const string CloseupPreviewOutputPath = "/Users/sergio/.gemini/antigravity/brain/1d17e175-ea96-41be-9e53-6cf1d38c269a/scratch/toyroom_closeup_yuna_nanda.png";
         private const string AutoBuildVersionKey = "YunaLegend.ToyRoomSceneBuildVersion";
-        private const int CurrentSceneBuildVersion = 16;
+        private const int CurrentSceneBuildVersion = 20;
+        private static double lastTriggerCheckTime;
 
         static ToyRoomSceneBuilder()
         {
             if (!Application.isBatchMode)
             {
                 EditorApplication.delayCall += TryAutoRebuildIfOutdated;
+                EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+                EditorApplication.update += PollExternalRebuildTrigger;
             }
+        }
+
+        private static void OnPlayModeStateChanged(PlayModeStateChange state)
+        {
+            if (state == PlayModeStateChange.EnteredEditMode)
+            {
+                EditorApplication.delayCall += TryAutoRebuildIfOutdated;
+            }
+        }
+
+        private static void PollExternalRebuildTrigger()
+        {
+            if (Application.isBatchMode || EditorApplication.timeSinceStartup - lastTriggerCheckTime < 1.0)
+            {
+                return;
+            }
+
+            lastTriggerCheckTime = EditorApplication.timeSinceStartup;
+            const string triggerPath = "Temp/trigger_toyroom_rebuild.txt";
+            if (!File.Exists(triggerPath))
+            {
+                return;
+            }
+
+            if (EditorApplication.isPlaying)
+            {
+                EditorApplication.isPlaying = false;
+                return;
+            }
+
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                return;
+            }
+
+            File.Delete(triggerPath);
+            SessionState.SetInt(AutoBuildVersionKey, CurrentSceneBuildVersion);
+            BuildBaseScene();
         }
 
         private static void TryAutoRebuildIfOutdated()
@@ -136,11 +177,25 @@ namespace YunaLegend.Editor.ToyRoom
             Quaternion origRot = cam.transform.rotation;
             float origFov = cam.fieldOfView;
 
-            // Close-up 3/4 de auditoria visual (Art Director Agent) enquadrando Yuna inteira (do rabo de cavalo aos sapatos)
-            cam.transform.position = new Vector3(-1.55f, 1.32f, -3.85f);
-            cam.transform.LookAt(new Vector3(-0.08f, 0.65f, -1.10f));
-            cam.fieldOfView = 27f;
+            // Afastar temporariamente a Nanda no close-up para nao cobrir o rabo de cavalo da Yuna
+            var nandaObj = GameObject.Find("Nanda_BlueGuide");
+            Vector3 nandaOrigPos = Vector3.zero;
+            if (nandaObj != null)
+            {
+                nandaOrigPos = nandaObj.transform.position;
+                nandaObj.transform.position = nandaOrigPos + new Vector3(-1.80f, 0.10f, 0.25f);
+            }
+
+            // Close-up 3/4 ligeiramente elevado (enquadrando 100% da Yuna sem cortar o rabo de cavalo nem os sapatos)
+            cam.transform.position = new Vector3(-1.82f, 1.50f, -4.00f);
+            cam.transform.LookAt(new Vector3(-0.08f, 0.72f, -1.10f));
+            cam.fieldOfView = 28f;
             RenderCameraToPng(cam, CloseupPreviewOutputPath, 1280, 720);
+
+            if (nandaObj != null)
+            {
+                nandaObj.transform.position = nandaOrigPos;
+            }
 
             cam.transform.position = origPos;
             cam.transform.rotation = origRot;

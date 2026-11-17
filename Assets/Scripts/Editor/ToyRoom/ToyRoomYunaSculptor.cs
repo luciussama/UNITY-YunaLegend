@@ -63,11 +63,21 @@ namespace YunaLegend.Editor.ToyRoom
             // Materiais pictoricos com texturas 1024x1024 pintadas a mao
             var faceMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, FaceTexPath, outlineWidth: 0.0030f);
             var skinMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.98f, 0.83f, 0.72f), outlineWidth: 0.0030f);
-            var hairMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, HairTexPath, outlineWidth: 0.0038f);
+            var hairMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, HairTexPath, outlineWidth: 0.0026f);
+            hairMat.SetColor("_ShadowColor", new Color(0.78f, 0.62f, 0.52f, 1f));
+            hairMat.SetColor("_RimColor", new Color(1.0f, 0.84f, 0.60f, 1f));
+            EditorUtility.SetDirty(hairMat);
+
+            var hairStrandMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, HairTexPath, outlineWidth: 0.0007f);
+            hairStrandMat.SetColor("_ShadowColor", new Color(0.78f, 0.62f, 0.52f, 1f));
+            hairStrandMat.SetColor("_RimColor", new Color(1.0f, 0.84f, 0.60f, 1f));
+            hairStrandMat.SetColor("_OutlineColor", new Color(0.28f, 0.13f, 0.08f, 1f));
+            EditorUtility.SetDirty(hairStrandMat);
+
             var dressMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, DressTexPath, outlineWidth: 0.0035f);
             var collarSleeveMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, CollarSleeveTexPath, outlineWidth: 0.0032f);
             var coralRibbonMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, CoralRibbonTexPath, outlineWidth: 0.0028f);
-            var scrunchieMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.88f, 0.44f, 0.45f), outlineWidth: 0.0035f);
+            var scrunchieMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, CoralRibbonTexPath, outlineWidth: 0.0032f);
             var sockMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.95f, 0.90f, 0.80f), outlineWidth: 0.0028f);
             var shoeMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.50f, 0.13f, 0.15f), outlineWidth: 0.0035f);
             var soleMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.24f, 0.13f, 0.10f), outlineWidth: 0.0025f);
@@ -81,13 +91,13 @@ namespace YunaLegend.Editor.ToyRoom
             headRoot.localPosition = new Vector3(0f, 0.935f, 0.01f);
             headRoot.localRotation = Quaternion.Euler(-4f, 0f, 0f);
 
-            BuildSculptedHeadAndFace(headRoot, faceMat, skinMat, hairMat);
+            BuildSculptedHeadAndFace(headRoot, faceMat, skinMat, hairMat, hairStrandMat);
 
             // 3. Rabo de Cavalo Alto Cacheado Volumoso + Xuxinha Coral-Rosa Frisada
             ponytailPivot = new GameObject("Ponytail_Pivot").transform;
             ponytailPivot.SetParent(headRoot, false);
-            ponytailPivot.localPosition = new Vector3(0f, 0.315f, -0.118f);
-            BuildScrunchieAndCurlyPonytail(ponytailPivot, scrunchieMat, hairMat);
+            ponytailPivot.localPosition = new Vector3(-0.010f, 0.285f, -0.125f);
+            BuildScrunchieAndCurlyPonytail(ponytailPivot, scrunchieMat, hairMat, hairStrandMat);
 
             // 4. Bracos Articulados com Mangas Bufantes Plissadas e Maozinhas Esculpidas
             armLeftPivot = new GameObject("Arm_L_Pivot").transform;
@@ -453,13 +463,14 @@ namespace YunaLegend.Editor.ToyRoom
             Transform headRoot,
             Material faceMat,
             Material skinMat,
-            Material hairMat)
+            Material hairMat,
+            Material hairStrandMat)
         {
             // 1. Cabeca Esculpida com UV Centrada na Face e Textura Facial 1024x1024
             var headMesh = CreateParametricMesh("Yuna_Head", 72, 40, (u, v) => EvaluateYunaHeadPoint(u, v, 0f), blendArcSysFaceNormals: true);
             AttachMesh("Head_Mesh", headRoot, headMesh, faceMat);
 
-            // 2. Orelhas Esculpidas bem visiveis atras da mecha lateral
+            // 2. Orelhas Esculpidas bem visiveis na frente dos cachos da nuca
             for (int side = -1; side <= 1; side += 2)
             {
                 var earGo = AttachMesh(
@@ -467,133 +478,293 @@ namespace YunaLegend.Editor.ToyRoom
                     headRoot,
                     CreateEllipsoidMesh(
                         $"Ear_{side}",
-                        new Vector3(side * 0.192f, 0.126f, -0.004f),
-                        new Vector3(0.028f, 0.044f, 0.024f),
+                        new Vector3(side * 0.194f, 0.128f, 0.002f),
+                        new Vector3(0.030f, 0.046f, 0.024f),
                         18),
                     skinMat);
-                earGo.transform.localRotation = Quaternion.Euler(0f, side * -14f, side * 12f);
+                earGo.transform.localRotation = Quaternion.Euler(0f, side * -18f, side * 12f);
             }
 
-            // 3. Domo de Cabelo Volumoso e Fofo (suave, sem sulcos duros)
-            var hairCap = CreateParametricMesh("Yuna_HairCap", 72, 32, (u, v) =>
+            // 3. Domo de Cabelo Cheio, Macio e Arredondado (sem ondulacao artificial de "macarrao")
+            var hairCap = CreateParametricMesh("Yuna_HairCap", 80, 36, (u, v) =>
             {
                 float a = (u - 0.5f) * 2f * Pi;
-                float frontFaceMask = Mathf.Exp(-Mathf.Pow(a / 1.05f, 2f));
-                float maxPhi = Mathf.Lerp(2.38f, 1.08f, frontFaceMask);
+                float frontFaceMask = Mathf.Exp(-Mathf.Pow(a / 1.02f, 2f));
+                float maxPhi = Mathf.Lerp(2.42f, 1.04f, frontFaceMask);
                 float phi = 0.001f + v * maxPhi;
-                float waves = 1f + 0.012f * Mathf.Cos(a * 8f + phi * 1.4f);
+                float crownLift = Mathf.Exp(-phi * 1.4f) * 0.022f;
+                float gentleLocks = 1f + 0.009f * Mathf.Cos(a * 6f);
                 return new Vector3(
-                    0.218f * Mathf.Sin(phi) * Mathf.Sin(a) * waves,
-                    0.188f + 0.228f * Mathf.Cos(phi),
-                    -0.008f + 0.206f * Mathf.Sin(phi) * Mathf.Cos(a) * waves);
+                    0.222f * Mathf.Sin(phi) * Mathf.Sin(a) * gentleLocks,
+                    0.192f + (0.232f + crownLift) * Mathf.Cos(phi),
+                    -0.010f + 0.212f * Mathf.Sin(phi) * Mathf.Cos(a) * gentleLocks);
             });
             AttachMesh("Hair_Cap", headRoot, hairCap, hairMat);
 
-            // 4. Franja Macia em Mechas Largas Achatadas (integradas ao domo) + Mecha Lateral Fina + Cachos na Nuca
-            float partU = -0.015f;
+            // 4. Mechas em Fita (Ribbon Locks) assentadas no topo da cabeca (sem levantar do cranio)
+            Vector3 crownOrigin = new Vector3(-0.012f, 0.415f, -0.015f);
+            for (int c = 0; c < 10; c++)
+            {
+                float ang = c * 2f * Pi / 10f + 0.20f;
+                float dirX = Mathf.Sin(ang);
+                float dirZ = Mathf.Cos(ang);
+                float reach = dirZ > 0.30f ? 0.148f : 0.212f;
+                float dropY = dirZ > 0.30f ? 0.318f : 0.205f;
+
+                var crownLock = CreateHairRibbonLockMesh(
+                    $"CrownLock_{c}",
+                    crownOrigin,
+                    crownOrigin + new Vector3(dirX * 0.09f, 0.006f, dirZ * 0.09f),
+                    new Vector3(dirX * reach * 0.85f, Mathf.Lerp(0.40f, dropY, 0.48f), dirZ * reach * 0.85f - 0.008f),
+                    new Vector3(dirX * reach, dropY, dirZ * reach - 0.008f),
+                    0.062f,
+                    0.014f,
+                    0f,
+                    14,
+                    20);
+                AttachMesh($"CrownLock_{c}", headRoot, crownLock, hairStrandMat);
+            }
+
+            // 5. Franja Macia e Cheia Abracando a Testa com Gravidade Natural (zero pontas arrepiadas)
+            var bangSpecs = new (Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float w, float th, float hook)[]
+            {
+                // Onda principal varrida para a direita com caimento macio junto ao rosto
+                (new Vector3(-0.02f, 0.402f, 0.065f), new Vector3(0.03f, 0.370f, 0.178f), new Vector3(0.075f, 0.302f, 0.194f), new Vector3(0.098f, 0.246f, 0.174f), 0.074f, 0.018f, 0.010f),
+                (new Vector3(0.01f, 0.398f, 0.060f), new Vector3(0.078f, 0.362f, 0.170f), new Vector3(0.128f, 0.295f, 0.180f), new Vector3(0.155f, 0.240f, 0.150f), 0.070f, 0.018f, 0.012f),
+                (new Vector3(0.04f, 0.390f, 0.050f), new Vector3(0.125f, 0.348f, 0.148f), new Vector3(0.175f, 0.280f, 0.152f), new Vector3(0.196f, 0.230f, 0.120f), 0.064f, 0.017f, 0.010f),
+                // Onda lateral esquerda emoldurando a testa
+                (new Vector3(-0.025f, 0.402f, 0.065f), new Vector3(-0.055f, 0.366f, 0.174f), new Vector3(-0.090f, 0.295f, 0.188f), new Vector3(-0.112f, 0.244f, 0.164f), 0.070f, 0.018f, -0.010f),
+                (new Vector3(-0.045f, 0.395f, 0.055f), new Vector3(-0.108f, 0.354f, 0.158f), new Vector3(-0.155f, 0.280f, 0.162f), new Vector3(-0.178f, 0.228f, 0.128f), 0.066f, 0.018f, -0.010f),
+                // Mecha central suave sobre a testa
+                (new Vector3(-0.015f, 0.404f, 0.070f), new Vector3(0.005f, 0.372f, 0.182f), new Vector3(0.026f, 0.312f, 0.198f), new Vector3(0.042f, 0.264f, 0.184f), 0.058f, 0.016f, 0.006f)
+            };
+            for (int b = 0; b < bangSpecs.Length; b++)
+            {
+                var s = bangSpecs[b];
+                var bangMesh = CreateHairRibbonLockMesh($"BangRibbon_{b}", s.p0, s.p1, s.p2, s.p3, s.w, s.th, s.hook, 14, 22);
+                AttachMesh($"BangRibbon_{b}", headRoot, bangMesh, hairStrandMat);
+            }
+
+            // 6. Mecha em C na Bochecha (na frente da orelha) + Cachinhos Suaves na Nuca (abaixo da orelha)
             for (int side = -1; side <= 1; side += 2)
             {
-                for (int layer = 0; layer < 3; layer++)
+                var cheekCurl = CreateHairRibbonLockMesh(
+                    $"CheekCurl_{side}",
+                    new Vector3(side * 0.165f, 0.265f, 0.062f),
+                    new Vector3(side * 0.194f, 0.195f, 0.080f),
+                    new Vector3(side * 0.184f, 0.122f, 0.084f),
+                    new Vector3(side * 0.154f, 0.095f, 0.096f),
+                    0.036f,
+                    0.013f,
+                    -side * 0.010f,
+                    12,
+                    20);
+                AttachMesh($"CheekCurl_{side}", headRoot, cheekCurl, hairStrandMat);
+
+                for (int n = 0; n < 3; n++)
                 {
-                    float startX = partU + side * (0.008f + layer * 0.034f);
-                    float endX = side * (0.048f + layer * 0.056f);
-                    float endY = 0.236f - layer * 0.014f;
-                    float endZ = Mathf.Sqrt(Mathf.Max(0.01f, 0.200f * 0.200f - endX * endX * 0.60f));
-
-                    var sweptBang = CreateCurveTubeMesh(
-                        $"SweptBang_{side}_{layer}",
-                        new Vector3(startX * 0.45f, 0.376f, 0.068f),
-                        new Vector3(Mathf.Lerp(startX, endX, 0.42f), 0.352f, 0.172f),
-                        new Vector3(Mathf.Lerp(startX, endX, 0.85f), 0.280f, endZ + 0.016f),
-                        new Vector3(endX + side * 0.028f, endY, endZ - 0.006f),
-                        0.064f - layer * 0.004f,
-                        0.28f,
-                        16,
-                        20);
-                    AttachMesh($"SweptBang_{side}_{layer}", headRoot, sweptBang, hairMat);
+                    float ny = 0.095f - n * 0.018f;
+                    float nz = -0.055f - n * 0.032f;
+                    var napeCurl = CreateHairRibbonLockMesh(
+                        $"NapeHookCurl_{side}_{n}",
+                        new Vector3(side * 0.150f, ny + 0.025f, nz),
+                        new Vector3(side * 0.188f, ny - 0.015f, nz - 0.015f),
+                        new Vector3(side * 0.184f, ny - 0.048f, nz + 0.012f),
+                        new Vector3(side * 0.194f, ny - 0.036f, nz + 0.028f),
+                        0.040f - n * 0.004f,
+                        0.016f,
+                        side * 0.014f,
+                        12,
+                        18);
+                    AttachMesh($"NapeHookCurl_{side}_{n}", headRoot, napeCurl, hairStrandMat);
                 }
-
-                // Mecha Lateral Delicada Curvada na Frente da Orelha (sem tampar a orelha)
-                var sideLock = CreateCurveTubeMesh(
-                    $"SideLock_{side}",
-                    new Vector3(side * 0.156f, 0.295f, 0.068f),
-                    new Vector3(side * 0.194f, 0.222f, 0.078f),
-                    new Vector3(side * 0.184f, 0.145f, 0.066f),
-                    new Vector3(side * 0.152f, 0.095f, 0.058f),
-                    0.028f,
-                    0.35f,
-                    14,
-                    18);
-                AttachMesh($"SideLock_{side}", headRoot, sideLock, hairMat);
-
-                // Cachinhos Curtos da Nuca atras da Orelha
-                var napeCurl = CreateCurveTubeMesh(
-                    $"NapeCurl_{side}",
-                    new Vector3(side * 0.145f, 0.165f, -0.085f),
-                    new Vector3(side * 0.185f, 0.095f, -0.095f),
-                    new Vector3(side * 0.175f, 0.032f, -0.065f),
-                    new Vector3(side * 0.145f, 0.015f, -0.025f),
-                    0.044f,
-                    0.65f,
-                    14,
-                    18);
-                AttachMesh($"NapeCurl_{side}", headRoot, napeCurl, hairMat);
             }
         }
 
-        private static void BuildScrunchieAndCurlyPonytail(Transform ponytailPivot, Material scrunchieMat, Material hairMat)
+        private static void BuildScrunchieAndCurlyPonytail(
+            Transform ponytailPivot,
+            Material scrunchieMat,
+            Material hairMat,
+            Material hairStrandMat)
         {
-            // Xuxinha coral-rosa bem fofa, gordinha e visivel em 3/4
-            var scrunchieMesh = CreateParametricMesh("Yuna_Scrunchie", 48, 18, (u, v) =>
+            // Xuxinha coral-rosa fofa e franzida
+            var scrunchieMesh = CreateParametricMesh("Yuna_Scrunchie", 56, 22, (u, v) =>
             {
                 float a = u * 2f * Pi;
                 float b = v * 2f * Pi;
-                float ruffle = 1f + 0.26f * Mathf.Sin(a * 14f);
-                float majorR = 0.094f;
-                float minorR = 0.044f * ruffle;
+                float folds = 1f + 0.30f * Mathf.Sin(a * 12f + Mathf.Sin(b * 2f));
+                float majorR = 0.102f;
+                float minorR = 0.046f * folds;
                 float r = majorR + minorR * Mathf.Cos(b);
                 return new Vector3(
                     r * Mathf.Cos(a),
-                    minorR * Mathf.Sin(b) + 0.012f * Mathf.Cos(a * 14f),
-                    r * Mathf.Sin(a) * 0.88f);
+                    minorR * 1.15f * Mathf.Sin(b) + 0.014f * Mathf.Cos(a * 12f),
+                    r * Mathf.Sin(a) * 0.90f);
             });
             var scGo = AttachMesh("Ruffled_Scrunchie", ponytailPivot, scrunchieMesh, scrunchieMat);
-            scGo.transform.localRotation = Quaternion.Euler(36f, 0f, 0f);
+            scGo.transform.localRotation = Quaternion.Euler(46f, -10f, 0f);
 
-            // Nucleo bem alto, farto e cacheado (marca registrada da silhueta da Yuna)
-            var coreTail = CreateCurveTubeMesh(
-                "Ponytail_Core",
-                new Vector3(0f, 0.02f, -0.02f),
-                new Vector3(0f, 0.28f, -0.20f),
-                new Vector3(0f, 0.08f, -0.44f),
-                new Vector3(0f, -0.22f, -0.34f),
-                0.148f,
-                0.90f,
-                20,
-                24);
-            AttachMesh("Ponytail_Core", ponytailPivot, coreTail, hairMat);
-
-            // 16 cachos em espiral bem fartos e abertos para silhueta inconfundivel
-            for (int i = 0; i < 16; i++)
+            // 1. MASSA CHEIA E VOLUMOSA DE CACHOS (forma de nuvem cheia ao vento, esculpida em gomos/ondas)
+            var cloudMassMesh = CreateParametricMesh("Ponytail_CloudMass", 72, 44, (u, v) =>
             {
-                float angle = i * 2f * Pi / 16f;
-                float ring = i % 2 == 0 ? 1.0f : 0.72f;
-                float ox = Mathf.Cos(angle) * 0.098f * ring;
-                float oy = Mathf.Sin(angle) * 0.082f * ring;
-                float curlTwist = (i % 2 == 0 ? 1f : -1f) * 0.068f;
+                float t = Mathf.Clamp(v, 0.001f, 0.999f);
+                float a = u * 2f * Pi;
 
-                var curlMesh = CreateCurveTubeMesh(
-                    $"Ponytail_Curl_{i}",
-                    new Vector3(ox * 0.35f, 0.02f + oy * 0.3f, -0.02f),
-                    new Vector3(ox * 1.88f, 0.29f + oy * 1.25f, -0.20f),
-                    new Vector3(ox * 1.72f + curlTwist, 0.05f + oy * 0.75f, -0.45f - Mathf.Abs(ox) * 0.35f),
-                    new Vector3(ox * 1.02f - curlTwist, -0.24f + (i % 3) * 0.036f, -0.32f),
-                    0.066f,
-                    0.92f,
-                    14,
-                    22);
-                AttachMesh($"Ponytail_Curl_{i}", ponytailPivot, curlMesh, hairMat);
+                // Espinha dorsal do volume: sai da xuxinha, arqueia cheio para tras e cai em gota larga arredondada
+                Vector3 spine = Bezier(
+                    new Vector3(0f, 0.01f, -0.02f),
+                    new Vector3(0f, 0.14f, -0.18f),
+                    new Vector3(0f, 0.02f, -0.34f),
+                    new Vector3(0f, -0.22f, -0.29f),
+                    t);
+
+                // Envelope bem cheio e arredondado (largo no meio/baixo como nuvem de cachos, sem pontas finas)
+                float env = Mathf.Sin(Pi * Mathf.Pow(t, 0.65f));
+                float rx = 0.068f + 0.155f * env;
+                float ry = 0.068f + 0.165f * env;
+
+                // Lobulos organicos de cachos esculpidos na propria massa cheia
+                float curlLobes = 1f
+                    + 0.13f * Mathf.Sin(a * 7f + t * 8.5f) * env
+                    + 0.08f * Mathf.Cos(a * 11f - t * 11.0f) * env;
+
+                Vector3 tangent = (Bezier(
+                    new Vector3(0f, 0.01f, -0.02f),
+                    new Vector3(0f, 0.14f, -0.18f),
+                    new Vector3(0f, 0.02f, -0.34f),
+                    new Vector3(0f, -0.22f, -0.29f),
+                    Mathf.Min(1f, t + 0.005f)) - spine).normalized;
+                if (tangent.sqrMagnitude < 0.01f)
+                {
+                    tangent = Vector3.back;
+                }
+                Vector3 bx = Vector3.Cross(tangent, Vector3.up).normalized;
+                if (bx.sqrMagnitude < 0.01f)
+                {
+                    bx = Vector3.right;
+                }
+                Vector3 by = Vector3.Cross(bx, tangent).normalized;
+
+                return spine + bx * (rx * curlLobes * Mathf.Cos(a)) + by * (ry * curlLobes * Mathf.Sin(a));
+            });
+            AttachMesh("Ponytail_CloudMass", ponytailPivot, cloudMassMesh, hairMat);
+
+            // 2. CACHINHOS EM C / CARACOIS ARREDONDADOS BROTANDO DA BORDA DA MASSA CHEIA (como na foto!)
+            for (int i = 0; i < 18; i++)
+            {
+                float ringT = 0.28f + 0.64f * ((i % 3) / 2f); // distribuidos do topo, meio e base da massa
+                float angle = (i * 2f * Pi / 18f) + (i % 3) * 0.45f;
+                Vector3 anchor = Bezier(
+                    new Vector3(0f, 0.01f, -0.02f),
+                    new Vector3(0f, 0.14f, -0.18f),
+                    new Vector3(0f, 0.02f, -0.34f),
+                    new Vector3(0f, -0.22f, -0.29f),
+                    ringT);
+
+                float env = Mathf.Sin(Pi * Mathf.Pow(ringT, 0.65f));
+                Vector3 outDir = new Vector3(Mathf.Cos(angle) * 0.145f * env, Mathf.Sin(angle) * 0.145f * env, -0.06f * env);
+                Vector3 curlDir = new Vector3(outDir.x * 1.45f, outDir.y * 1.35f - 0.055f, outDir.z - 0.065f);
+                float hookSign = (i % 2 == 0) ? 1f : -1f;
+
+                var cCurlMesh = CreateStorybookSpiralCurlMesh(
+                    $"Ponytail_RimCurl_{i}",
+                    anchor + outDir * 0.45f,
+                    anchor + outDir * 1.10f + Vector3.up * 0.03f,
+                    anchor + curlDir,
+                    anchor + curlDir + new Vector3(hookSign * 0.045f, 0.035f, 0.040f),
+                    0.072f,
+                    0.044f,
+                    0.014f,
+                    hookSign * 0.028f,
+                    angle,
+                    12,
+                    20);
+                AttachMesh($"Ponytail_RimCurl_{i}", ponytailPivot, cCurlMesh, hairStrandMat);
             }
+        }
+
+        private static Mesh CreateHairRibbonLockMesh(
+            string name,
+            Vector3 p0,
+            Vector3 p1,
+            Vector3 p2,
+            Vector3 p3,
+            float width,
+            float thickness,
+            float tipHookOffset,
+            int sides,
+            int segments)
+        {
+            return CreateParametricMesh(name, sides, segments, (u, v) =>
+            {
+                float t = Mathf.Clamp(v, 0.001f, 0.999f);
+                Vector3 center = Bezier(p0, p1, p2, p3, t);
+                Vector3 tangent = (Bezier(p0, p1, p2, p3, Mathf.Min(1f, t + 0.003f))
+                    - Bezier(p0, p1, p2, p3, Mathf.Max(0f, t - 0.003f))).normalized;
+                Vector3 radialOut = center.normalized;
+                Vector3 bx = Vector3.Cross(tangent, radialOut).normalized;
+                if (bx.sqrMagnitude < 0.01f)
+                {
+                    bx = Vector3.right;
+                }
+                Vector3 bz = Vector3.Cross(bx, tangent).normalized;
+
+                // Curvinha em gancho (J-hook) nos ultimos 28% da ponta da mecha
+                float hookT = Mathf.Clamp01((t - 0.72f) / 0.28f);
+                center += bx * (tipHookOffset * hookT * hookT) + bz * (Mathf.Abs(tipHookOffset) * 0.45f * hookT * hookT);
+
+                float taper = Mathf.Pow(Mathf.Sin(Pi * t), 0.30f) * (1f - 0.82f * Mathf.Pow(t, 2.2f));
+                float a = u * 2f * Pi;
+                // Secao em fita meia-lua com 3 vincos longitudinais de fios
+                float strandGroove = 1f + 0.14f * Mathf.Cos(a * 3f);
+                float xOff = Mathf.Cos(a) * width * 0.5f * taper;
+                float zOff = (Mathf.Sin(a) * thickness * 0.5f * strandGroove - 0.25f * thickness * Mathf.Cos(a) * Mathf.Cos(a)) * taper;
+                return center + bx * xOff + bz * zOff;
+            });
+        }
+
+        private static Mesh CreateStorybookSpiralCurlMesh(
+            string name,
+            Vector3 p0,
+            Vector3 p1,
+            Vector3 p2,
+            Vector3 p3,
+            float width,
+            float thickness,
+            float waveAmplitude,
+            float endSpiralRadius,
+            float phaseOffset,
+            int sides,
+            int segments)
+        {
+            return CreateParametricMesh(name, sides, segments, (u, v) =>
+            {
+                float t = Mathf.Clamp(v, 0.001f, 0.999f);
+                Vector3 spine = Bezier(p0, p1, p2, p3, t);
+                Vector3 tangent = (Bezier(p0, p1, p2, p3, Mathf.Min(1f, t + 0.003f))
+                    - Bezier(p0, p1, p2, p3, Mathf.Max(0f, t - 0.003f))).normalized;
+                Vector3 refAxis = Mathf.Abs(Vector3.Dot(tangent, Vector3.right)) > 0.95f ? Vector3.up : Vector3.right;
+                Vector3 bx = Vector3.Cross(tangent, refAxis).normalized;
+                Vector3 bz = Vector3.Cross(tangent, bx).normalized;
+
+                // Onda S ampla ao longo da mecha + caracol enrolado na ponta (ultimos 35%)
+                float sWave = Mathf.Sin(phaseOffset + t * 2.2f * 2f * Pi) * waveAmplitude * Mathf.Sin(Pi * t);
+                float cWave = Mathf.Cos(phaseOffset + t * 2.2f * 2f * Pi) * waveAmplitude * 0.55f * Mathf.Sin(Pi * t);
+                Vector3 center = spine + bx * sWave + bz * cWave;
+
+                if (t > 0.65f)
+                {
+                    float st = (t - 0.65f) / 0.35f;
+                    float spiralAng = st * 1.65f * Pi;
+                    center += bx * (Mathf.Sin(spiralAng) * endSpiralRadius * st)
+                        + Vector3.up * ((1f - Mathf.Cos(spiralAng)) * Mathf.Abs(endSpiralRadius) * 0.85f * st);
+                }
+
+                float taper = Mathf.Pow(Mathf.Sin(Pi * t), 0.28f) * (1f - 0.78f * Mathf.Pow(t, 2.0f));
+                float a = u * 2f * Pi;
+                float groove = 1f + 0.16f * Mathf.Cos(a * 4f);
+                return center + bx * (Mathf.Cos(a) * width * 0.5f * taper) + bz * (Mathf.Sin(a) * thickness * 0.5f * groove * taper);
+            });
         }
 
         private static void BuildSculptedArm(Transform armPivot, int side, Material ivoryMat, Material coralMat, Material skinMat)
@@ -1160,10 +1331,10 @@ namespace YunaLegend.Editor.ToyRoom
         {
             const int size = 1024;
             var tex = new Texture2D(size, size, TextureFormat.RGBA32, true);
-            Color deepEspresso = new Color(0.20f, 0.10f, 0.06f);
-            Color richChestnut = new Color(0.40f, 0.21f, 0.11f);
-            Color warmCaramel = new Color(0.60f, 0.35f, 0.19f);
-            Color goldenHalo = new Color(0.76f, 0.49f, 0.28f);
+            Color deepEspresso = new Color(0.16f, 0.08f, 0.04f);
+            Color richChestnut = new Color(0.39f, 0.20f, 0.10f);
+            Color warmCaramel = new Color(0.62f, 0.36f, 0.19f);
+            Color goldenHalo = new Color(0.80f, 0.52f, 0.29f);
 
             for (int y = 0; y < size; y++)
             {
@@ -1171,17 +1342,21 @@ namespace YunaLegend.Editor.ToyRoom
                 for (int x = 0; x < size; x++)
                 {
                     float u = (float)x / (size - 1);
-                    float waveU = u + 0.045f * Mathf.Sin(v * Pi * 5f + u * Pi * 3f);
+                    // Fios longos e suaves (sem ondas curtas de "macarrao")
+                    float waveU = u + 0.022f * Mathf.Sin(v * Pi * 1.6f + u * Pi * 2f);
                     float lockGroup = 0.5f + 0.5f * Mathf.Sin(waveU * Pi * 2f * 10f);
-                    float painterlyStrands = Mathf.PerlinNoise(waveU * 26f, v * 12f) * 0.65f
-                        + Mathf.PerlinNoise(waveU * 58f, v * 22f) * 0.35f;
+                    float fineStrands = 0.5f + 0.5f * Mathf.Sin(waveU * Pi * 2f * 72f + Mathf.PerlinNoise(waveU * 14f, v * 5f) * 2.2f);
+                    float painterlyStrands = Mathf.Lerp(
+                        Mathf.PerlinNoise(waveU * 24f, v * 6f),
+                        fineStrands,
+                        0.42f);
 
-                    Color col = Color.Lerp(deepEspresso, richChestnut, painterlyStrands * (0.45f + 0.55f * lockGroup));
+                    Color col = Color.Lerp(deepEspresso, richChestnut, painterlyStrands * (0.35f + 0.65f * lockGroup));
 
-                    float halo1 = Mathf.Exp(-Mathf.Pow((v - 0.60f - 0.04f * Mathf.Sin(u * Pi * 10f)) / 0.13f, 2f));
-                    float halo2 = Mathf.Exp(-Mathf.Pow((v - 0.30f + 0.03f * Mathf.Cos(u * Pi * 8f)) / 0.11f, 2f));
-                    col = Color.Lerp(col, warmCaramel, (halo1 * 0.72f + halo2 * 0.48f) * painterlyStrands);
-                    col = Color.Lerp(col, goldenHalo, halo1 * Mathf.Pow(painterlyStrands, 1.8f) * 0.42f);
+                    float halo1 = Mathf.Exp(-Mathf.Pow((v - 0.58f - 0.035f * Mathf.Sin(u * Pi * 12f)) / 0.14f, 2f));
+                    float halo2 = Mathf.Exp(-Mathf.Pow((v - 0.28f + 0.025f * Mathf.Cos(u * Pi * 10f)) / 0.11f, 2f));
+                    col = Color.Lerp(col, warmCaramel, (halo1 * 0.78f + halo2 * 0.52f) * painterlyStrands);
+                    col = Color.Lerp(col, goldenHalo, halo1 * Mathf.Pow(painterlyStrands, 1.6f) * 0.48f);
 
                     tex.SetPixel(x, y, col);
                 }
