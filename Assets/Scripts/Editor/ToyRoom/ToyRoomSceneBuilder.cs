@@ -23,7 +23,7 @@ namespace YunaLegend.Editor.ToyRoom
         private const string PreviewOutputPath = "/Users/sergio/.gemini/antigravity/brain/1d17e175-ea96-41be-9e53-6cf1d38c269a/scratch/toyroom_preview.png";
         private const string CloseupPreviewOutputPath = "/Users/sergio/.gemini/antigravity/brain/1d17e175-ea96-41be-9e53-6cf1d38c269a/scratch/toyroom_closeup_yuna_nanda.png";
         private const string AutoBuildVersionKey = "YunaLegend.ToyRoomSceneBuildVersion";
-        private const int CurrentSceneBuildVersion = 20;
+        private const int CurrentSceneBuildVersion = 30;
         private static double lastTriggerCheckTime;
 
         static ToyRoomSceneBuilder()
@@ -149,7 +149,7 @@ namespace YunaLegend.Editor.ToyRoom
 
             var bootstrapGo = new GameObject("ToyRoom_Bootstrap");
             var bootstrap = bootstrapGo.AddComponent<ToyRoomStageBootstrap>();
-            bootstrap.Configure(cam, player, chest, nanda, swordView, hud, narrative, audioCtrl, toys, autoExplore: false);
+            bootstrap.Configure(cam, player, chest, nanda, swordView, hud, narrative, audioCtrl, toys, autoExplore: true);
 
             Directory.CreateDirectory(Path.GetDirectoryName(ScenePath) ?? "Assets/Scenes");
             AssetDatabase.SaveAssets();
@@ -381,7 +381,7 @@ namespace YunaLegend.Editor.ToyRoom
             var cam = camGo.AddComponent<Camera>();
             cam.clearFlags = CameraClearFlags.SolidColor;
             cam.backgroundColor = new Color(0.09f, 0.08f, 0.14f);
-            cam.fieldOfView = 26f;
+            cam.fieldOfView = 27f;
             cam.nearClipPlane = 0.5f;
             cam.farClipPlane = 60f;
 
@@ -389,8 +389,8 @@ namespace YunaLegend.Editor.ToyRoom
             camGo.AddComponent<UniversalAdditionalCameraData>();
             camGo.AddComponent<IsometricToyRoomCamera>();
 
-            camGo.transform.position = new Vector3(0.0f, 7.2f, -9.0f);
-            camGo.transform.LookAt(new Vector3(0.0f, 0.7f, -1.0f));
+            camGo.transform.position = new Vector3(0.0f, 4.35f, -9.20f);
+            camGo.transform.LookAt(new Vector3(0.0f, 0.95f, -1.0f));
             return cam;
         }
 
@@ -417,9 +417,31 @@ namespace YunaLegend.Editor.ToyRoom
         {
             var root = new GameObject("Architecture");
 
-            var floorMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.86f, 0.68f, 0.48f), "Assets/Materials/T_DarkOak_Planks.png", new Vector2(10f, 7f), outlineWidth: 0f);
-            var rugMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.95f, 0.88f, 0.84f), "Assets/Materials/T_Floor_Rug_Mandala.png", outlineWidth: 0f);
-            var stripedRugMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.96f, 0.90f, 0.84f), "Assets/Materials/T_Floor_Rug_Striped.png", outlineWidth: 0f);
+            // Piso e tapetes em tons pasteis leves/envelhecidos para destacar Yuna na cena
+            var floorMat = ToyRoomVisualFactory.CreatePainterlyMaterial(
+                new Color(0.58f, 0.52f, 0.45f),
+                "Assets/Materials/T_DarkOak_Planks.png",
+                new Vector2(10f, 7f),
+                emission: new Color(0.24f, 0.21f, 0.18f),
+                outlineWidth: 0f);
+            floorMat.SetColor("_ShadowColor", new Color(0.78f, 0.74f, 0.72f, 1f));
+            EditorUtility.SetDirty(floorMat);
+
+            var rugMat = ToyRoomVisualFactory.CreatePainterlyMaterial(
+                new Color(0.52f, 0.48f, 0.46f),
+                "Assets/Materials/T_Floor_Rug_Mandala.png",
+                emission: new Color(0.36f, 0.33f, 0.30f),
+                outlineWidth: 0f);
+            rugMat.SetColor("_ShadowColor", new Color(0.82f, 0.78f, 0.76f, 1f));
+            EditorUtility.SetDirty(rugMat);
+
+            var stripedRugMat = ToyRoomVisualFactory.CreatePainterlyMaterial(
+                new Color(0.54f, 0.50f, 0.47f),
+                "Assets/Materials/T_Floor_Rug_Striped.png",
+                emission: new Color(0.35f, 0.32f, 0.29f),
+                outlineWidth: 0f);
+            stripedRugMat.SetColor("_ShadowColor", new Color(0.82f, 0.78f, 0.76f, 1f));
+            EditorUtility.SetDirty(stripedRugMat);
             var wallMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.94f, 0.88f, 0.78f), "Assets/Materials/T_Victorian_Wallpaper.png", new Vector2(8f, 2f), outlineWidth: 0f);
             var baseMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.66f, 0.46f, 0.30f), "Assets/Materials/T_Wall_Baseboard.png", new Vector2(10f, 1f), outlineWidth: 0f);
             var trackMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.78f, 0.56f, 0.38f), "Assets/Materials/T_TrainTrack_Wood.png", outlineWidth: 0.004f);
@@ -748,6 +770,46 @@ namespace YunaLegend.Editor.ToyRoom
             var controller = playerGo.AddComponent<ToyRoomPlayerController>();
             var animator = playerGo.AddComponent<YunaToyRoomAnimator>();
             animator.Configure(controller, bodyRoot, legL, legR, armL, armR, ponytail);
+
+            var rigRoot = bodyRoot != null ? bodyRoot.Find("Yuna_RigRoot") : null;
+            if (rigRoot != null)
+            {
+                var hips = rigRoot.Find("Hips");
+                var spine = hips != null ? hips.Find("Spine") : null;
+                var chest = spine != null ? spine.Find("Chest") : null;
+                var neck = chest != null ? chest.Find("Neck") : null;
+                var head = neck != null ? neck.Find("Head") : null;
+                var upperArmL = chest != null ? chest.Find("UpperArm_L") : null;
+                var forearmL = upperArmL != null ? upperArmL.Find("Forearm_L") : null;
+                var upperArmR = chest != null ? chest.Find("UpperArm_R") : null;
+                var forearmR = upperArmR != null ? upperArmR.Find("Forearm_R") : null;
+                var thighL = hips != null ? hips.Find("Thigh_L") : null;
+                var shinL = thighL != null ? thighL.Find("Shin_L") : null;
+                var thighR = hips != null ? hips.Find("Thigh_R") : null;
+                var shinR = thighR != null ? thighR.Find("Shin_R") : null;
+
+                animator.ConfigureRig(new YunaToyRoomAnimator.RigBones
+                {
+                    Hips = hips,
+                    Spine = spine,
+                    Chest = chest,
+                    Neck = neck,
+                    Head = head,
+                    UpperArmL = upperArmL,
+                    ForearmL = forearmL,
+                    HandL = forearmL != null ? forearmL.Find("Hand_L") : null,
+                    UpperArmR = upperArmR,
+                    ForearmR = forearmR,
+                    HandR = forearmR != null ? forearmR.Find("Hand_R") : null,
+                    ThighL = thighL,
+                    ShinL = shinL,
+                    FootL = shinL != null ? shinL.Find("Foot_L") : null,
+                    ThighR = thighR,
+                    ShinR = shinR,
+                    FootR = shinR != null ? shinR.Find("Foot_R") : null
+                });
+            }
+
             return controller;
         }
 

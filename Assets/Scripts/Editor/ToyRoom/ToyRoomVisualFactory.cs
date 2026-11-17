@@ -98,6 +98,9 @@ namespace YunaLegend.Editor.ToyRoom
             return go;
         }
 
+        private const string ImportedYunaObjPath = "Assets/Art/ToyRoom/Yuna 3D/Yuna_ImportedMesh.obj";
+        private const string ImportedYunaTexPath = "Assets/Art/ToyRoom/Yuna 3D/Yuna_ImportedMesh_Albedo.png";
+
         public static void BuildYunaCharacter3D(
             Transform parent,
             out Transform bodyRoot,
@@ -115,6 +118,68 @@ namespace YunaLegend.Editor.ToyRoom
                 out armLeftPivot,
                 out armRightPivot,
                 out ponytailPivot);
+        }
+
+        private static bool TryBuildImportedYunaMesh(
+            Transform parent,
+            out Transform bodyRoot,
+            out Transform legLeftPivot,
+            out Transform legRightPivot,
+            out Transform armLeftPivot,
+            out Transform armRightPivot,
+            out Transform ponytailPivot)
+        {
+            bodyRoot = null;
+            legLeftPivot = null;
+            legRightPivot = null;
+            armLeftPivot = null;
+            armRightPivot = null;
+            ponytailPivot = null;
+
+            var importedPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(ImportedYunaObjPath);
+            if (importedPrefab == null)
+            {
+                return false;
+            }
+
+            var rootGo = new GameObject("Yuna_BodyRoot");
+            rootGo.transform.SetParent(parent, false);
+            bodyRoot = rootGo.transform;
+
+            var model = (GameObject)PrefabUtility.InstantiatePrefab(importedPrefab, bodyRoot);
+            model.name = "Yuna_ImportedMesh";
+            model.transform.localPosition = new Vector3(0f, 0.635f, 0f);
+            model.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
+            model.transform.localScale = Vector3.one * 1.28f;
+
+            var mat = CreatePainterlyMaterial(
+                Color.white,
+                ImportedYunaTexPath,
+                outlineWidth: 0.0012f);
+            mat.SetFloat("_BrushNoiseStrength", 0.0f);
+
+            foreach (var r in model.GetComponentsInChildren<Renderer>(true))
+            {
+                r.sharedMaterial = mat;
+            }
+
+            ToyRoomYunaRigBuilder.AttachSkinnedRig(
+                model,
+                bodyRoot,
+                out _,
+                out legLeftPivot,
+                out legRightPivot,
+                out armLeftPivot,
+                out armRightPivot,
+                out ponytailPivot);
+            return true;
+        }
+
+        private static Transform CreateEmptyPivot(Transform parent, string name)
+        {
+            var go = new GameObject(name);
+            go.transform.SetParent(parent, false);
+            return go.transform;
         }
 
         public static void BuildNandaFairy3D(Transform parent)

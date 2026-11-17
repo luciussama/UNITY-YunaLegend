@@ -23,6 +23,7 @@ namespace YunaLegend.ToyRoom.Runtime
         public ToyItemView CarriedToy { get; private set; }
         public Transform CarryAnchor => carryAnchor;
         public Vector2? ScriptedMoveInput { get; set; }
+        public float TurnDeltaDeg { get; private set; }
         public bool ControlsEnabled
         {
             get => controlsEnabled;
@@ -107,8 +108,14 @@ namespace YunaLegend.ToyRoom.Runtime
             bool isMoving = planar.sqrMagnitude > 0.001f;
             if (isMoving)
             {
+                float signedTurn = Vector3.SignedAngle(transform.forward, planar, Vector3.up);
+                TurnDeltaDeg = Mathf.Lerp(TurnDeltaDeg, signedTurn, Time.deltaTime * 10f);
                 Quaternion targetRot = Quaternion.LookRotation(planar, Vector3.up);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotationSpeed);
+            }
+            else
+            {
+                TurnDeltaDeg = Mathf.Lerp(TurnDeltaDeg, 0f, Time.deltaTime * 10f);
             }
 
             if (CarriedToy != null)

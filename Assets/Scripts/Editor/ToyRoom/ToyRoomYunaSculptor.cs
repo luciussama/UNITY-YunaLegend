@@ -17,7 +17,9 @@ namespace YunaLegend.Editor.ToyRoom
     {
         public const string ModelsFolder = "Assets/Art/ToyRoom/Models";
         public const string CustomModelPathFbx = ModelsFolder + "/Yuna_ToyRoom.fbx";
+        public const string CustomModelPathObj = ModelsFolder + "/Yuna_ToyRoom.obj";
         public const string CustomModelPathGlb = ModelsFolder + "/Yuna_ToyRoom.glb";
+        public const string CustomModelAlbedoPath = ModelsFolder + "/Yuna_ToyRoom_Albedo.png";
 
         private const string FaceTexPath = "Assets/Art/ToyRoom/Materials/T_Yuna_Face_Painted.png";
         private const string DressTexPath = "Assets/Art/ToyRoom/Materials/T_Yuna_Dress_Painted.png";
@@ -44,19 +46,36 @@ namespace YunaLegend.Editor.ToyRoom
 
             var bodyGo = new GameObject("Yuna_BodyRoot");
             bodyGo.transform.SetParent(parent, false);
+            // Escala de fantasia um pouco maior para destacar Yuna na sala sem fechar o enquadramento
+            bodyGo.transform.localScale = Vector3.one * 1.28f;
             bodyRoot = bodyGo.transform;
 
             var customPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(CustomModelPathFbx)
+                ?? AssetDatabase.LoadAssetAtPath<GameObject>(CustomModelPathObj)
                 ?? AssetDatabase.LoadAssetAtPath<GameObject>(CustomModelPathGlb);
             if (customPrefab != null)
             {
                 var inst = (GameObject)PrefabUtility.InstantiatePrefab(customPrefab, bodyRoot);
                 inst.name = "Yuna_ImportedMesh";
-                legLeftPivot = FindOrCreatePivot(bodyRoot, "Leg_L_Pivot", new Vector3(-0.08f, 0.38f, 0f));
-                legRightPivot = FindOrCreatePivot(bodyRoot, "Leg_R_Pivot", new Vector3(0.08f, 0.38f, 0f));
-                armLeftPivot = FindOrCreatePivot(bodyRoot, "Arm_L_Pivot", new Vector3(-0.14f, 0.86f, 0f));
-                armRightPivot = FindOrCreatePivot(bodyRoot, "Arm_R_Pivot", new Vector3(0.14f, 0.86f, 0f));
-                ponytailPivot = FindOrCreatePivot(bodyRoot, "Ponytail_Pivot", new Vector3(0f, 1.32f, -0.14f));
+                if (File.Exists(CustomModelAlbedoPath))
+                {
+                    var importedMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, CustomModelAlbedoPath, outlineWidth: 0.0025f);
+                    importedMat.SetColor("_ShadowColor", new Color(0.76f, 0.64f, 0.62f, 1f));
+                    EditorUtility.SetDirty(importedMat);
+                    foreach (var mr in inst.GetComponentsInChildren<MeshRenderer>(true))
+                    {
+                        mr.sharedMaterial = importedMat;
+                    }
+                }
+                ToyRoomYunaRigBuilder.AttachSkinnedRig(
+                    inst,
+                    bodyRoot,
+                    out _,
+                    out legLeftPivot,
+                    out legRightPivot,
+                    out armLeftPivot,
+                    out armRightPivot,
+                    out ponytailPivot);
                 return;
             }
 

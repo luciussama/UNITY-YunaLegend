@@ -14,6 +14,7 @@ Shader "YunaLegend/ToyRoom_Painterly3D"
         _EmissionColor ("Emission Color", Color) = (0, 0, 0, 1)
         _OutlineColor ("Outline Color", Color) = (0.22, 0.12, 0.09, 1)
         _OutlineWidth ("Outline Width", Range(0.0, 0.05)) = 0.0045
+        _OcclusionFade ("Occlusion Fade", Range(0.15, 1.0)) = 1.0
     }
 
     SubShader
@@ -37,7 +38,20 @@ Shader "YunaLegend/ToyRoom_Painterly3D"
             half4 _EmissionColor;
             half4 _OutlineColor;
             float _OutlineWidth;
+            half _OcclusionFade;
         CBUFFER_END
+
+        float BayerDither4x4(float2 screenPos)
+        {
+            static const float dither[16] = {
+                0.0 / 16.0,  8.0 / 16.0,  2.0 / 16.0, 10.0 / 16.0,
+               12.0 / 16.0,  4.0 / 16.0, 14.0 / 16.0,  6.0 / 16.0,
+                3.0 / 16.0, 11.0 / 16.0,  1.0 / 16.0,  9.0 / 16.0,
+               15.0 / 16.0,  7.0 / 16.0, 13.0 / 16.0,  5.0 / 16.0
+            };
+            int2 p = int2(screenPos) & 3;
+            return dither[p.y * 4 + p.x];
+        }
 
         float Hash21(float2 p)
         {
@@ -105,6 +119,11 @@ Shader "YunaLegend/ToyRoom_Painterly3D"
 
             half4 frag(Varyings input) : SV_Target
             {
+                if (_OcclusionFade < 0.99h)
+                {
+                    clip(_OcclusionFade - (half)BayerDither4x4(input.positionHCS.xy) - 0.001h);
+                }
+
                 half4 tex = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.uv) * _BaseColor;
                 float3 normalWS = normalize(input.normalWS);
                 float3 viewDirWS = GetWorldSpaceNormalizeViewDir(input.positionWS);
@@ -184,6 +203,10 @@ Shader "YunaLegend/ToyRoom_Painterly3D"
 
             half4 fragOutline(Varyings input) : SV_Target
             {
+                if (_OcclusionFade < 0.99h)
+                {
+                    clip(_OcclusionFade - (half)BayerDither4x4(input.positionHCS.xy) - 0.001h);
+                }
                 return _OutlineColor;
             }
             ENDHLSL
