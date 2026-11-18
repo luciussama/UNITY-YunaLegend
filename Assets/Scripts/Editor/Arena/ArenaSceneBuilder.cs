@@ -157,16 +157,70 @@ namespace YunaLegend.Editor.Arena
             // Janela em arco centralizada na parede (y=110..429 no legado -> base em +2.60m)
             PlaceProp("Window_Curtains", envRoot, $"{EnvArtDir}/window-curtains-v1.png", new Vector3(0f, 2.60f, 4.2f), Vector3.one * 2.0f, -45, Color.white, bottomPivot: true);
 
-            // Moveis monumentais apoiados no piso conforme footY canonico (ordenados por profundidade)
-            PlaceProp("Bookshelf", envRoot, $"{EnvArtDir}/bookshelf-v1.png", new Vector3(-5.8f, 1.38f, 3.1f), Vector3.one * 2.15f, -35, new Color(0.88f, 0.84f, 0.86f), bottomPivot: true);
-            PlaceProp("Oak_Cabinet", envRoot, $"{EnvArtDir}/oak-cabinet-v1.png", new Vector3(2.4f, 1.38f, 3.0f), Vector3.one * 2.05f, -34, new Color(0.88f, 0.84f, 0.86f), bottomPivot: true);
-            PlaceProp("Rocking_Horse", envRoot, $"{EnvArtDir}/rocking-horse-v1.png", new Vector3(-2.0f, 1.00f, 2.6f), Vector3.one * 1.45f, -30, new Color(0.88f, 0.84f, 0.84f), bottomPivot: true);
+            // Moveis apoiados no piso sem sobreposicao e com sombra de contato
+            PlacePropWithShadow("Bookshelf", envRoot, $"{EnvArtDir}/bookshelf-v1.png", new Vector3(-5.6f, 1.45f, 3.1f), Vector3.one * 1.85f, -35, new Color(0.88f, 0.84f, 0.86f), 3.6f);
+            PlacePropWithShadow("Rocking_Horse", envRoot, $"{EnvArtDir}/rocking-horse-v1.png", new Vector3(-2.3f, 1.10f, 2.7f), Vector3.one * 1.25f, -30, new Color(0.88f, 0.84f, 0.84f), 2.1f);
+            PlacePropWithShadow("Oak_Cabinet", envRoot, $"{EnvArtDir}/oak-cabinet-v1.png", new Vector3(1.85f, 1.45f, 3.0f), Vector3.one * 1.50f, -34, new Color(0.88f, 0.84f, 0.86f), 2.3f);
 
             // Tapete oval no chao sob projecao vertical 0.7 (cobrindo a area central de combate)
             PlaceProp("Oval_Rug", envRoot, $"{EnvArtDir}/oval-rug-v1.png", new Vector3(0f, -0.35f, 2.2f), new Vector3(5.2f, 2.25f, 1f), -25, new Color(0.88f, 0.82f, 0.78f));
 
-            // Bau aberto monumental na direita (footY=610 -> +0.80m)
-            PlaceProp("Open_Chest", envRoot, $"{EnvArtDir}/chest-toys-open-v2.png", new Vector3(4.85f, 0.75f, 1.2f), Vector3.one * 0.92f, -10, Color.white, bottomPivot: true);
+            // Bau aberto separado do armario, apoiado no chao com sombra de contato
+            PlacePropWithShadow("Open_Chest", envRoot, $"{EnvArtDir}/chest-toys-open-v2.png", new Vector3(5.15f, 0.55f, 1.2f), Vector3.one * 0.78f, -10, Color.white, 2.6f);
+        }
+
+        private static void PlacePropWithShadow(
+            string name,
+            Transform parent,
+            string assetPath,
+            Vector3 pos,
+            Vector3 scale,
+            int sortingOrder,
+            Color tint,
+            float shadowWidth)
+        {
+            var shadowSprite = EnsureContactShadowSprite($"{EnvArtDir}/contact-shadow.png");
+            if (shadowSprite != null)
+            {
+                var shadowGo = new GameObject(name + "_ContactShadow");
+                shadowGo.transform.SetParent(parent, false);
+                shadowGo.transform.position = new Vector3(pos.x, pos.y + 0.05f, pos.z + 0.05f);
+                shadowGo.transform.localScale = new Vector3(shadowWidth, 0.45f, 1f);
+                var sr = shadowGo.AddComponent<SpriteRenderer>();
+                sr.sprite = shadowSprite;
+                sr.color = new Color(0.08f, 0.04f, 0.02f, 0.55f);
+                sr.sortingOrder = sortingOrder - 1;
+            }
+
+            PlaceProp(name, parent, assetPath, pos, scale, sortingOrder, tint, bottomPivot: true);
+        }
+
+        private static Sprite EnsureContactShadowSprite(string path)
+        {
+            if (!File.Exists(path))
+            {
+                const int w = 64;
+                const int h = 32;
+                var tex = new Texture2D(w, h, TextureFormat.RGBA32, false);
+                for (int y = 0; y < h; y++)
+                {
+                    float ny = (y / (float)(h - 1)) * 2f - 1f;
+                    for (int x = 0; x < w; x++)
+                    {
+                        float nx = (x / (float)(w - 1)) * 2f - 1f;
+                        float d = Mathf.Sqrt(nx * nx + ny * ny);
+                        float alpha = Mathf.Pow(Mathf.Clamp01(1f - d), 1.8f);
+                        tex.SetPixel(x, y, new Color(1f, 1f, 1f, alpha));
+                    }
+                }
+
+                tex.Apply();
+                File.WriteAllBytes(path, tex.EncodeToPNG());
+                Object.DestroyImmediate(tex);
+                AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
+            }
+
+            return LoadSingleSprite(path, new Vector2(0.5f, 0.5f), 64f);
         }
 
         private static void CreateColorQuad(string name, Transform parent, Vector3 pos, Vector3 scale, Color color)

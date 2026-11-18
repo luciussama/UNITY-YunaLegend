@@ -101,7 +101,7 @@ namespace YunaLegend.Arena.Runtime
         {
             float moveX = hudController != null ? hudController.TouchMove.x : 0f;
             bool jump = hudController != null && hudController.ConsumeTouchJump();
-            bool crouch = false;
+            bool crouch = hudController != null && hudController.TouchCrouchHeld;
             bool attack = hudController != null && hudController.ConsumeTouchAttack();
             bool special = hudController != null && hudController.ConsumeTouchSpecial();
 

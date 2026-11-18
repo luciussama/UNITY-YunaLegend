@@ -34,13 +34,15 @@ namespace YunaLegend.Arena.Runtime
         private Text outcomeBodyText;
 
         private GameObject mobileControlsRoot;
-        private Vector2 touchMove;
-        private bool touchJumpQueued;
+        private ArenaVirtualDPad virtualDPad;
+        private Image fadeOverlay;
+        private float fadeAlpha = 1f;
         private bool touchAttackQueued;
         private bool touchSpecialQueued;
 
         public bool IsPaused { get; private set; }
-        public Vector2 TouchMove => touchMove;
+        public Vector2 TouchMove => virtualDPad != null ? virtualDPad.Direction : Vector2.zero;
+        public bool TouchCrouchHeld => virtualDPad != null && virtualDPad.CrouchHeld;
 
         public event Action<bool> OnPauseToggled;
         public event Action OnMuteToggled;
@@ -66,9 +68,7 @@ namespace YunaLegend.Arena.Runtime
 
         public bool ConsumeTouchJump()
         {
-            bool v = touchJumpQueued;
-            touchJumpQueued = false;
-            return v;
+            return virtualDPad != null && virtualDPad.ConsumeJumpPressed();
         }
 
         public bool ConsumeTouchAttack()
@@ -245,6 +245,31 @@ namespace YunaLegend.Arena.Runtime
             BuildMobileControls(root);
             BuildPausePanel(root);
             BuildOutcomePanel(root);
+            BuildFadeOverlay(root);
+        }
+
+        private void Update()
+        {
+            if (fadeOverlay != null && fadeAlpha > 0f)
+            {
+                fadeAlpha = Mathf.Max(0f, fadeAlpha - Time.unscaledDeltaTime * 1.6f);
+                fadeOverlay.color = new Color(0.02f, 0.01f, 0.03f, fadeAlpha);
+                if (fadeAlpha <= 0f)
+                {
+                    fadeOverlay.gameObject.SetActive(false);
+                }
+            }
+        }
+
+        private void BuildFadeOverlay(Transform root)
+        {
+            var fadeGo = new GameObject("Fade_In_Overlay", typeof(RectTransform), typeof(Image));
+            fadeGo.transform.SetParent(root, false);
+            Stretch(fadeGo.GetComponent<RectTransform>());
+            fadeOverlay = fadeGo.GetComponent<Image>();
+            fadeOverlay.color = new Color(0.02f, 0.01f, 0.03f, 1f);
+            fadeOverlay.raycastTarget = false;
+            fadeAlpha = 1f;
         }
 
         private void BuildSpecialOverlay(Transform root)
@@ -285,19 +310,13 @@ namespace YunaLegend.Arena.Runtime
             mobileControlsRoot.transform.SetParent(root, false);
             Stretch(mobileControlsRoot.GetComponent<RectTransform>());
 
-            CreateHoldButton("Pad_Left", mobileControlsRoot.transform, "◄", new Vector2(0f, 0f), new Vector2(26f, 28f), new Vector2(76f, 76f),
-                () => touchMove.x = -1f, () => { if (touchMove.x < 0f) touchMove.x = 0f; });
-            CreateHoldButton("Pad_Right", mobileControlsRoot.transform, "►", new Vector2(0f, 0f), new Vector2(182f, 28f), new Vector2(76f, 76f),
-                () => touchMove.x = 1f, () => { if (touchMove.x > 0f) touchMove.x = 0f; });
-            CreateHoldButton("Pad_Jump", mobileControlsRoot.transform, "▲", new Vector2(0f, 0f), new Vector2(104f, 106f), new Vector2(76f, 76f),
-                () => touchJumpQueued = true, null);
+            virtualDPad = ArenaVirtualDPad.CreateVisualDPad(mobileControlsRoot.transform, uiFont);
 
-            var attackBtn = CreateActionButton("Btn_Attack", mobileControlsRoot.transform, "ESPADA", new Vector2(-30f, 28f), new Vector2(124f, 124f),
-                new Color(0.82f, 0.28f, 0.24f, 0.85f), () => touchAttackQueued = true);
-            _ = attackBtn;
+            CreateActionButton("Btn_Attack", mobileControlsRoot.transform, "attack", new Vector2(-34f, 34f), new Vector2(128f, 128f),
+                new Color(0.84f, 0.28f, 0.24f, 0.88f), () => touchAttackQueued = true);
 
-            specialMobileButton = CreateActionButton("Btn_Special", mobileControlsRoot.transform, "ARCO-ÍRIS", new Vector2(-170f, 36f), new Vector2(110f, 76f),
-                new Color(0.32f, 0.56f, 0.92f, 0.85f), () => touchSpecialQueued = true);
+            specialMobileButton = CreateActionButton("Btn_Special", mobileControlsRoot.transform, "special", new Vector2(-178f, 44f), new Vector2(114f, 84f),
+                new Color(0.28f, 0.56f, 0.94f, 0.88f), () => touchSpecialQueued = true);
 
             mobileControlsRoot.SetActive(false);
         }

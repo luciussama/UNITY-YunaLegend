@@ -1,7 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using YunaLegend.ToyRoom.Core;
 
 namespace YunaLegend.ToyRoom.Runtime
@@ -415,8 +417,63 @@ namespace YunaLegend.ToyRoom.Runtime
 
             if (phase == ToyRoomPhase.Completed)
             {
-                SceneManager.LoadScene("Arena_Gameplay");
+                StartCoroutine(PlayArenaTransitionAndLoad());
             }
+        }
+
+        private IEnumerator PlayArenaTransitionAndLoad()
+        {
+            if (player != null)
+            {
+                player.ControlsEnabled = false;
+            }
+
+            var fadeCanvasGo = new GameObject("ArenaTransition_Fade", typeof(Canvas), typeof(GraphicRaycaster));
+            var fadeCanvas = fadeCanvasGo.GetComponent<Canvas>();
+            fadeCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            fadeCanvas.sortingOrder = 999;
+
+            var overlayGo = new GameObject("BlackFade", typeof(RectTransform), typeof(Image));
+            overlayGo.transform.SetParent(fadeCanvasGo.transform, false);
+            var rect = overlayGo.GetComponent<RectTransform>();
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.offsetMin = Vector2.zero;
+            rect.offsetMax = Vector2.zero;
+            var overlayImage = overlayGo.GetComponent<Image>();
+            overlayImage.color = new Color(0.02f, 0.01f, 0.03f, 0f);
+            overlayImage.raycastTarget = true;
+
+            Camera activeCam = isometricCamera != null ? isometricCamera : Camera.main;
+            Vector3 baseCamPos = activeCam != null ? activeCam.transform.position : Vector3.zero;
+            if (cameraController != null)
+            {
+                cameraController.enabled = false;
+            }
+
+            const float totalDuration = 1.25f;
+            float elapsed = 0f;
+            while (elapsed < totalDuration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / totalDuration);
+
+                if (activeCam != null)
+                {
+                    float amp = Mathf.Sin(t * Mathf.PI) * 0.18f;
+                    activeCam.transform.position = baseCamPos + new Vector3(
+                        Random.Range(-amp, amp),
+                        Random.Range(-amp, amp),
+                        0f);
+                }
+
+                float fadeT = Mathf.Clamp01((elapsed - 0.40f) / (totalDuration - 0.40f));
+                overlayImage.color = new Color(0.02f, 0.01f, 0.03f, fadeT);
+                yield return null;
+            }
+
+            overlayImage.color = new Color(0.02f, 0.01f, 0.03f, 1f);
+            SceneManager.LoadScene("Arena_Gameplay");
         }
 
         private void RefreshCounterHud()
