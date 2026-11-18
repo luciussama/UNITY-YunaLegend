@@ -572,7 +572,7 @@ namespace YunaLegend.Editor.ToyRoom
                 "Assets/Materials/T_WallDrawing_Rainbow.png",
                 "Assets/Materials/T_WallDrawing_Sun.png"
             };
-            float[] drawingXs = { -10.5f, -2.8f, 2.6f, 10.2f };
+            float[] drawingXs = { -9.8f, -0.6f, 5.4f, 11.0f };
             for (int i = 0; i < wallDrawings.Length; i++)
             {
                 var artMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, wallDrawings[i], outlineWidth: 0.004f);
@@ -580,9 +580,10 @@ namespace YunaLegend.Editor.ToyRoom
                     PrimitiveType.Cube,
                     $"WallDrawing_{i}",
                     root.transform,
-                    new Vector3(drawingXs[i], 2.55f, ToyRoomCatalog.HalfDepth - 0.04f),
+                    new Vector3(drawingXs[i], 2.65f, ToyRoomCatalog.HalfDepth - 0.04f),
                     new Vector3(1.45f, 1.15f, 0.04f),
-                    artMat);
+                    artMat,
+                    new Vector3(0f, 0f, 180f));
             }
         }
 
@@ -1036,16 +1037,22 @@ namespace YunaLegend.Editor.ToyRoom
             nandaGo.transform.position = player.position + new Vector3(-1.25f, 1.75f, 0.35f);
             ToyRoomVisualFactory.BuildNandaFairy3D(nandaGo.transform);
 
+            var fairyBody = nandaGo.transform.Find("Nanda_FairyBody");
+            if (fairyBody != null)
+            {
+                fairyBody.localScale = Vector3.one * 0.45f;
+            }
+
             var lightGo = new GameObject("Nanda_AuraLight");
             lightGo.transform.SetParent(nandaGo.transform, false);
-            lightGo.transform.localPosition = new Vector3(0f, 0.55f, 0.45f);
+            lightGo.transform.localPosition = new Vector3(0f, 0.05f, 0f);
             var light = lightGo.AddComponent<Light>();
             light.type = LightType.Point;
-            light.color = new Color(0.30f, 0.84f, 1.0f);
-            light.range = 10.5f;
-            light.intensity = 9.0f;
+            light.color = new Color(0.36f, 0.86f, 1.0f);
+            light.range = 5.5f;
+            light.intensity = 2.4f;
             light.shadows = LightShadows.Soft;
-            light.shadowStrength = 0.88f;
+            light.shadowStrength = 0.65f;
             light.shadowResolution = LightShadowResolution.High;
             light.shadowBias = 0.02f;
             light.shadowNormalBias = 0.20f;
@@ -1055,12 +1062,12 @@ namespace YunaLegend.Editor.ToyRoom
 
             var trailPs = nandaGo.AddComponent<ParticleSystem>();
             var main = trailPs.main;
-            main.startLifetime = 0.85f;
-            main.startSpeed = 0.08f;
-            main.startSize = 0.07f;
-            main.startColor = new Color(0.45f, 0.92f, 1.0f, 0.75f);
+            main.startLifetime = 0.75f;
+            main.startSpeed = 0.06f;
+            main.startSize = 0.035f;
+            main.startColor = new Color(0.45f, 0.92f, 1.0f, 0.65f);
             main.simulationSpace = ParticleSystemSimulationSpace.World;
-            main.maxParticles = 24;
+            main.maxParticles = 16;
 
             var emission = trailPs.emission;
             emission.rateOverTime = 14f;
