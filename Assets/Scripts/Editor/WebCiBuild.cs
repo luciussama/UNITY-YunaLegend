@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
@@ -15,15 +16,37 @@ namespace YunaLegend.EditorScripts
     public static class WebCiBuild
     {
         private const string TitleScene = "Assets/Scenes/TitleScreen.unity";
-        private const string GameplayScene = "Assets/Scenes/DarkRoom_Gameplay.unity";
+        private const string DarkRoomScene = "Assets/Scenes/DarkRoom_Gameplay.unity";
+        private const string ToyRoomScene = "Assets/Scenes/ToyRoom_Gameplay.unity";
+
+        [MenuItem("YunaLegend/Build Web para GitHub Pages", false, 100)]
+        public static void BuildFromMenu()
+        {
+            try
+            {
+                Build();
+                string output = ResolveOutputPath();
+                EditorUtility.DisplayDialog(
+                    "Build WebGL concluida",
+                    $"Build gerada em:\n{output}\n\nAgora basta fazer commit e push da pasta WebGL/ para publicar no GitHub Pages.",
+                    "OK");
+            }
+            catch (Exception ex)
+            {
+                EditorUtility.DisplayDialog(
+                    "Falha na Build WebGL",
+                    ex.Message,
+                    "OK");
+                throw;
+            }
+        }
 
         public static void Build()
         {
             if (!BuildPipeline.IsBuildTargetSupported(BuildTargetGroup.WebGL, BuildTarget.WebGL))
                 throw new InvalidOperationException("Instale WebGL Build Support pelo Unity Hub.");
 
-            string output = Environment.GetEnvironmentVariable("YUNA_WEB_OUTPUT");
-            if (string.IsNullOrWhiteSpace(output)) output = "WebGL";
+            string output = ResolveOutputPath();
 
             int initialMb = ReadInt("YUNA_WEB_INITIAL_MB", 256);
             int maxMb = ReadInt("YUNA_WEB_MAX_MB", 1024);
@@ -47,10 +70,11 @@ namespace YunaLegend.EditorScripts
                 PlayerSettings.WebGL.template = "APPLICATION:Default";
                 ApplyMemory(initialMb, maxMb);
 
+                string[] scenes = ResolveBuildScenes();
                 Directory.CreateDirectory(output);
                 var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
                 {
-                    scenes = new[] { TitleScene, GameplayScene },
+                    scenes = scenes,
                     locationPathName = output,
                     target = BuildTarget.WebGL,
                     options = BuildOptions.None
@@ -73,6 +97,51 @@ namespace YunaLegend.EditorScripts
                 PlayerSettings.WebGL.template = previousTemplate;
                 ApplyMemory(32, 2048);
             }
+        }
+
+        private static string[] ResolveBuildScenes()
+        {
+            var scenes = new List<string>();
+            foreach (var scene in EditorBuildSettings.scenes)
+            {
+                if (!scene.enabled || string.IsNullOrWhiteSpace(scene.path))
+                {
+                    continue;
+                }
+
+                if (!File.Exists(scene.path))
+                {
+                    continue;
+                }
+
+                if (string.Equals(scene.path, TitleScene, StringComparison.OrdinalIgnoreCase))
+                {
+                    scenes.Insert(0, scene.path);
+                }
+                else
+                {
+                    scenes.Add(scene.path);
+                }
+            }
+
+            if (scenes.Count > 0)
+            {
+                return scenes.ToArray();
+            }
+
+            return new[] { TitleScene, DarkRoomScene, ToyRoomScene };
+        }
+
+        private static string ResolveOutputPath()
+        {
+            string output = Environment.GetEnvironmentVariable("YUNA_WEB_OUTPUT");
+            if (!string.IsNullOrWhiteSpace(output))
+            {
+                return output;
+            }
+
+            string projectRoot = Directory.GetParent(Application.dataPath)?.FullName ?? Directory.GetCurrentDirectory();
+            return Path.Combine(projectRoot, "WebGL");
         }
 
         private static int ReadInt(string name, int fallback)

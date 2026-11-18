@@ -74,6 +74,12 @@ namespace YunaLegend.UI
 
         private void Awake()
         {
+            EnsureHitArea(newGameButton);
+            EnsureHitArea(loadGameButton);
+            EnsureHitArea(easyModeButton);
+            EnsureHitArea(settingsButton);
+            EnsureHitArea(closeSettingsButton);
+
             if (newGameButton != null) newGameButton.onClick.AddListener(StartNewGame);
             if (loadGameButton != null) loadGameButton.onClick.AddListener(ContinueGame);
             if (easyModeButton != null) easyModeButton.onClick.AddListener(ToggleEasyMode);
@@ -113,6 +119,18 @@ namespace YunaLegend.UI
                 var keyboard = UnityEngine.InputSystem.Keyboard.current;
                 if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame) CloseSettings();
             }
+        }
+
+        private static void EnsureHitArea(Button button)
+        {
+            if (button == null || button.GetComponent<Graphic>() != null)
+            {
+                return;
+            }
+
+            var hitArea = button.gameObject.AddComponent<Image>();
+            hitArea.color = new Color(1f, 1f, 1f, 0.002f);
+            hitArea.raycastTarget = true;
         }
 
         private void RefreshState()
