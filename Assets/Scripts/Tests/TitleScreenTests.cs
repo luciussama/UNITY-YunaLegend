@@ -118,5 +118,65 @@ namespace YunaLegend.Tests
                 TitleScreenController.MasterVolume = previousVolume;
             }
         }
+
+        [Test]
+        public void TitleScreenResponsiveLayout_SwitchesBetweenPortraitAndLandscape()
+        {
+            var canvasGo = new GameObject("Canvas", typeof(RectTransform));
+            var canvasRect = canvasGo.GetComponent<RectTransform>();
+            var artGo = new GameObject("Art_Container", typeof(RectTransform));
+            artGo.transform.SetParent(canvasGo.transform, false);
+            var artRect = artGo.GetComponent<RectTransform>();
+            var leftShade = new GameObject("Sombra_Lateral");
+            var bottomScrim = new GameObject("Sombra_Inferior");
+            var titleGo = new GameObject("Titulo", typeof(RectTransform), typeof(Text));
+            var newGameGo = new GameObject("Novo", typeof(RectTransform));
+            var footerGo = new GameObject("Rodape", typeof(RectTransform));
+
+            try
+            {
+                var layout = canvasGo.AddComponent<TitleScreenResponsiveLayout>();
+                layout.Configure(
+                    canvasRect,
+                    artRect,
+                    leftShade,
+                    bottomScrim,
+                    titleGo.GetComponent<Text>(),
+                    newGameGo.GetComponent<RectTransform>(),
+                    null,
+                    null,
+                    null,
+                    footerGo.GetComponent<RectTransform>(),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+
+                canvasRect.sizeDelta = new Vector2(1920f, 1080f);
+                layout.ApplyLayout(force: true);
+                Assert.IsTrue(leftShade.activeSelf, "Paisagem deve manter sombra lateral");
+                Assert.IsFalse(bottomScrim.activeSelf, "Paisagem nao deve ativar gradiente inferior");
+                Assert.AreEqual(0f, artRect.anchoredPosition.x, 0.5f);
+
+                canvasRect.sizeDelta = new Vector2(979f, 2118f);
+                layout.ApplyLayout(force: true);
+                Assert.IsFalse(leftShade.activeSelf, "Retrato deve ocultar sombra lateral");
+                Assert.IsTrue(bottomScrim.activeSelf, "Retrato deve ativar gradiente inferior");
+                Assert.Less(artRect.anchoredPosition.x, -100f, "Retrato deve centralizar a menina na poltrona");
+                Assert.Greater(artRect.sizeDelta.x, canvasRect.sizeDelta.x);
+                Assert.AreEqual(0f, newGameGo.GetComponent<RectTransform>().anchorMin.y, 0.001f);
+            }
+            finally
+            {
+                UnityEngine.Object.DestroyImmediate(canvasGo);
+                UnityEngine.Object.DestroyImmediate(leftShade);
+                UnityEngine.Object.DestroyImmediate(bottomScrim);
+                UnityEngine.Object.DestroyImmediate(titleGo);
+                UnityEngine.Object.DestroyImmediate(newGameGo);
+                UnityEngine.Object.DestroyImmediate(footerGo);
+            }
+        }
     }
 }

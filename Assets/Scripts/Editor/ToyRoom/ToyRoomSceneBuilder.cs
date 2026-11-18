@@ -1363,7 +1363,46 @@ namespace YunaLegend.Editor.ToyRoom
                 psr.sharedMaterial = CreateSparkleParticleMaterial();
             }
 
+            CreateWingMagicDustParticles(fairyBody != null ? fairyBody : nandaGo.transform);
+
             return guide;
+        }
+
+        private static void CreateWingMagicDustParticles(Transform wingsParent)
+        {
+            var dustGo = new GameObject("Nanda_WingMagicDust");
+            dustGo.transform.SetParent(wingsParent, false);
+            dustGo.transform.localPosition = new Vector3(0f, 0.08f, -0.06f);
+
+            var ps = dustGo.AddComponent<ParticleSystem>();
+            var main = ps.main;
+            main.startLifetime = 1.15f;
+            main.startSpeed = 0.08f;
+            main.startSize = new ParticleSystem.MinMaxCurve(0.014f, 0.032f);
+            main.startColor = new ParticleSystem.MinMaxGradient(
+                new Color(0.52f, 0.92f, 1.0f, 0.85f),
+                new Color(0.85f, 0.98f, 1.0f, 0.70f));
+            main.gravityModifier = 0.22f;
+            main.simulationSpace = ParticleSystemSimulationSpace.World;
+            main.maxParticles = 48;
+
+            var emission = ps.emission;
+            emission.rateOverTime = 22f;
+
+            var shape = ps.shape;
+            shape.enabled = true;
+            shape.shapeType = ParticleSystemShapeType.Box;
+            shape.scale = new Vector3(0.32f, 0.16f, 0.08f);
+
+            var sizeOverLifetime = ps.sizeOverLifetime;
+            sizeOverLifetime.enabled = true;
+            sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.Linear(0f, 1f, 1f, 0f));
+
+            var psr = dustGo.GetComponent<ParticleSystemRenderer>();
+            if (psr != null)
+            {
+                psr.sharedMaterial = CreateSparkleParticleMaterial();
+            }
         }
 
         private static GameObject CreateBox(string name, Transform parent, Vector3 pos, Vector3 scale, Material mat)

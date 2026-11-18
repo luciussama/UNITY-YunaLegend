@@ -28,7 +28,17 @@ namespace YunaLegend.ToyRoom.Runtime
         private Transform wingUpperR;
         private Transform wingLowerL;
         private Transform wingLowerR;
-        private bool wingsSearched;
+        private Transform boneTorso;
+        private Transform boneHead;
+        private Transform boneWingL;
+        private Transform boneWingR;
+        private Transform boneArmL;
+        private Transform boneArmR;
+        private Transform boneLegL;
+        private Transform boneLegR;
+        private float wingPhase;
+        private float limbPhase;
+        private bool rigSearched;
 
         public NandaGuideTargetMode Mode => mode;
 
@@ -62,29 +72,69 @@ namespace YunaLegend.ToyRoom.Runtime
             Vector3 desired = anchor + new Vector3(0f, hoverY, 0f);
 
             transform.position = Vector3.SmoothDamp(transform.position, desired, ref velocity, smoothTime);
+            float speedNormalized = Mathf.Clamp01(velocity.magnitude / 2.2f);
             UpdateFacing();
             UpdateToyFocusLight();
-            AnimateWingFlutter();
+            EnsureRigCached();
+            AnimateWingFlutter(speedNormalized);
+            AnimateHumanMotion(speedNormalized);
         }
 
-        private void AnimateWingFlutter()
+        private void EnsureRigCached()
         {
-            if (!wingsSearched)
+            if (rigSearched)
             {
-                wingsSearched = true;
-                var body = transform.Find("Nanda_FairyBody");
-                if (body != null)
-                {
-                    wingUpperL = body.Find("Wing_Upper_L");
-                    wingUpperR = body.Find("Wing_Upper_R");
-                    wingLowerL = body.Find("Wing_Lower_L");
-                    wingLowerR = body.Find("Wing_Lower_R");
-                }
+                return;
             }
 
-            float flap = Mathf.Sin(Time.time * 16.0f) * 24.0f;
-            float subFlap = Mathf.Sin(Time.time * 16.0f - 0.6f) * 18.0f;
+            rigSearched = true;
+            var body = transform.Find("Nanda_FairyBody");
+            if (body == null)
+            {
+                return;
+            }
 
+            wingUpperL = body.Find("Wing_Upper_L");
+            wingUpperR = body.Find("Wing_Upper_R");
+            wingLowerL = body.Find("Wing_Lower_L");
+            wingLowerR = body.Find("Wing_Lower_R");
+
+            var rig = body.Find("Nanda_GlbMesh");
+            if (rig == null)
+            {
+                return;
+            }
+
+            boneTorso = rig.Find("Bone_Torso");
+            if (boneTorso != null)
+            {
+                boneHead = boneTorso.Find("Bone_Head");
+                boneWingL = boneTorso.Find("Bone_Wing_L");
+                boneWingR = boneTorso.Find("Bone_Wing_R");
+                boneArmL = boneTorso.Find("Bone_Arm_L");
+                boneArmR = boneTorso.Find("Bone_Arm_R");
+                boneLegL = boneTorso.Find("Bone_Leg_L");
+                boneLegR = boneTorso.Find("Bone_Leg_R");
+            }
+        }
+
+        private void AnimateWingFlutter(float speedNormalized)
+        {
+            wingPhase += Time.deltaTime * Mathf.Lerp(18.0f, 26.0f, speedNormalized);
+            float flap = Mathf.Sin(wingPhase) * Mathf.Lerp(26.0f, 34.0f, speedNormalized);
+            float roll = Mathf.Cos(wingPhase) * 6.0f;
+
+            if (boneWingL != null)
+            {
+                boneWingL.localRotation = Quaternion.Euler(0f, 10f + flap, roll);
+            }
+
+            if (boneWingR != null)
+            {
+                boneWingR.localRotation = Quaternion.Euler(0f, -10f - flap, -roll);
+            }
+
+            float subFlap = Mathf.Sin(wingPhase - 0.6f) * 18.0f;
             if (wingUpperL != null)
             {
                 wingUpperL.localRotation = Quaternion.Euler(0f, 22f + flap, 0f);
@@ -104,6 +154,82 @@ namespace YunaLegend.ToyRoom.Runtime
             {
                 wingLowerR.localRotation = Quaternion.Euler(0f, -28f - subFlap, 0f);
             }
+        }
+
+        private void AnimateHumanMotion(float speedNormalized)
+        {
+            limbPhase += Time.deltaTime * Mathf.Lerp(2.8f, 8.5f, speedNormalized);
+
+            if (boneTorso != null)
+            {
+                float leanForward = Mathf.Lerp(4f, 16f, speedNormalized);
+                float swayRoll = Mathf.Sin(limbPhase * 0.5f) * 3.5f;
+                boneTorso.localRotation = Quaternion.Slerp(
+                    boneTorso.localRotation,
+                    Quaternion.Euler(leanForward, 0f, swayRoll),
+                    Time.deltaTime * 6f);
+            }
+
+            Transform lookTarget = ResolveLookTarget();
+            if (boneHead != null)
+            {
+                Quaternion desiredHeadRot = Quaternion.Euler(0f, 0f, Mathf.Sin(limbPhase * 0.45f) * 4f);
+                if (lookTarget != null && boneHead.parent != null)
+                {
+                    Vector3 worldDir = (lookTarget.position + Vector3.up * 0.35f) - boneHead.position;
+                    if (worldDir.sqrMagnitude > 0.002f)
+                    {
+                        Vector3 localDir = boneHead.parent.InverseTransformDirection(worldDir.normalized);
+                        float yaw = Mathf.Clamp(Mathf.Atan2(localDir.x, Mathf.Max(0.15f, localDir.z)) * Mathf.Rad2Deg, -42f, 42f);
+                        float pitch = Mathf.Clamp(-Mathf.Asin(Mathf.Clamp(localDir.y, -0.7f, 0.7f)) * Mathf.Rad2Deg, -22f, 24f);
+                        desiredHeadRot = Quaternion.Euler(pitch, yaw, Mathf.Sin(limbPhase * 0.45f) * 3.5f);
+                    }
+                }
+
+                boneHead.localRotation = Quaternion.Slerp(boneHead.localRotation, desiredHeadRot, Time.deltaTime * 7f);
+            }
+
+            float armSwing = Mathf.Sin(limbPhase) * Mathf.Lerp(7f, 24f, speedNormalized);
+            bool isPointing = lookTarget != null && lookTarget != playerTarget;
+
+            if (boneArmL != null)
+            {
+                Quaternion targetArmL = Quaternion.Euler(-armSwing, 0f, -6f - speedNormalized * 8f);
+                boneArmL.localRotation = Quaternion.Slerp(boneArmL.localRotation, targetArmL, Time.deltaTime * 7f);
+            }
+
+            if (boneArmR != null)
+            {
+                float pointPitch = isPointing ? -28f : armSwing;
+                float pointYaw = isPointing ? -10f : 0f;
+                Quaternion targetArmR = Quaternion.Euler(pointPitch, pointYaw, 6f + speedNormalized * 8f);
+                boneArmR.localRotation = Quaternion.Slerp(boneArmR.localRotation, targetArmR, Time.deltaTime * 7f);
+            }
+
+            float legKick = Mathf.Sin(limbPhase + 0.4f) * Mathf.Lerp(5f, 20f, speedNormalized);
+            float legTrail = Mathf.Lerp(6f, 18f, speedNormalized);
+
+            if (boneLegL != null)
+            {
+                Quaternion targetLegL = Quaternion.Euler(legTrail + legKick, 0f, -2f);
+                boneLegL.localRotation = Quaternion.Slerp(boneLegL.localRotation, targetLegL, Time.deltaTime * 7f);
+            }
+
+            if (boneLegR != null)
+            {
+                Quaternion targetLegR = Quaternion.Euler(legTrail - legKick, 0f, 2f);
+                boneLegR.localRotation = Quaternion.Slerp(boneLegR.localRotation, targetLegR, Time.deltaTime * 7f);
+            }
+        }
+
+        private Transform ResolveLookTarget()
+        {
+            return mode switch
+            {
+                NandaGuideTargetMode.BeaconOverChest => chestTarget,
+                NandaGuideTargetMode.HoverOverSword => swordTarget,
+                _ => nearestToyTarget != null ? nearestToyTarget : playerTarget
+            };
         }
 
         private Vector3 ResolveAnchorPosition()

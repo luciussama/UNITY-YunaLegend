@@ -412,6 +412,11 @@ namespace YunaLegend.ToyRoom.Runtime
                     StateMachine.CompleteSwordPickup();
                 }
             }
+
+            if (phase == ToyRoomPhase.Completed)
+            {
+                SceneManager.LoadScene("Arena_Gameplay");
+            }
         }
 
         private void RefreshCounterHud()

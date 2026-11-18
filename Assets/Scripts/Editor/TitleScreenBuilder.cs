@@ -24,8 +24,8 @@ namespace YunaLegend.EditorScripts
         private const string EvidenceFolder = "Evidence/title-screen-2026-11-11";
 
         // Fases disponiveis no dropdown da bandeirinha. Novas fases entram aqui.
-        private static readonly string[] PhaseLabels = { "O Quarto Escuro" };
-        private static readonly string[] PhaseScenes = { "Fase-Jogavel-Completa" };
+        private static readonly string[] PhaseLabels = { "O Quarto Escuro", "Quarto dos Brinquedos", "Arena Imaginária" };
+        private static readonly string[] PhaseScenes = { "Fase-Jogavel-Completa", "ToyRoom_Gameplay", "Arena_Gameplay" };
 
         private static readonly Color Cream = new Color(0.95f, 0.90f, 0.78f);
         private static readonly Color Gold = new Color(1f, 0.84f, 0.55f);
@@ -70,11 +70,19 @@ namespace YunaLegend.EditorScripts
 
             var root = canvasGo.transform;
 
-            var backgroundImage = AddImage("Fundo_Canonico", root, background, Color.white);
+            var artContainerGo = new GameObject("Art_Container", typeof(RectTransform));
+            artContainerGo.transform.SetParent(root, false);
+            var artContainer = artContainerGo.GetComponent<RectTransform>();
+            artContainer.anchorMin = new Vector2(0.5f, 0.5f);
+            artContainer.anchorMax = new Vector2(0.5f, 0.5f);
+            artContainer.pivot = new Vector2(0.5f, 0.5f);
+            artContainer.sizeDelta = new Vector2(1920f, 1080f);
+
+            var backgroundImage = AddImage("Fundo_Canonico", artContainer, background, Color.white);
             Stretch(backgroundImage.rectTransform);
 
             // Perna sobreposta (mesmo recorte da arte) animada como pendulo curto.
-            var legImage = AddImage("Perna_Balanco", root, leg, Color.white);
+            var legImage = AddImage("Perna_Balanco", artContainer, leg, Color.white);
             var legRect = legImage.rectTransform;
             // Recorte da perna na arte: x 1300..1540, y 820..1080 de 1920x1080.
             legRect.anchorMin = new Vector2(1300f / 1920f, 0f);
@@ -87,6 +95,15 @@ namespace YunaLegend.EditorScripts
 
             var shadeImage = AddImage("Sombra_Lateral", root, shade, Color.white);
             Stretch(shadeImage.rectTransform);
+
+            var bottomScrimSprite = EnsureBottomScrimSprite($"{ArtFolder}/Title_BottomScrim.png");
+            var bottomScrimImage = AddImage("Sombra_Inferior", root, bottomScrimSprite, Color.white);
+            var bottomScrimRect = bottomScrimImage.rectTransform;
+            bottomScrimRect.anchorMin = Vector2.zero;
+            bottomScrimRect.anchorMax = new Vector2(1f, 0.54f);
+            bottomScrimRect.offsetMin = Vector2.zero;
+            bottomScrimRect.offsetMax = Vector2.zero;
+            bottomScrimImage.gameObject.SetActive(false);
 
             var title = AddText("Titulo", root, "O Quarto\ndos Brinquedos", 92, Cream, TextAnchor.UpperLeft);
             AnchorTopLeft(title.rectTransform, 130f, -180f, 1000f, 320f);
@@ -133,6 +150,26 @@ namespace YunaLegend.EditorScripts
             var selector = new GameObject("Seletor_Fase").AddComponent<TitlePhaseSelector>();
             selector.Configure(controller, flagButton, phasesRoot, phasesBackdrop, phaseButtons, phaseLabels, PhaseScenes);
             phasesRoot.SetActive(false);
+
+            var phasePanel = phasesRoot.transform.Find("Painel_Fases") as RectTransform;
+            var responsive = canvasGo.AddComponent<TitleScreenResponsiveLayout>();
+            responsive.Configure(
+                canvasGo.GetComponent<RectTransform>(),
+                artContainer,
+                shadeImage.gameObject,
+                bottomScrimImage.gameObject,
+                title,
+                newGame.GetComponent<RectTransform>(),
+                loadGame.GetComponent<RectTransform>(),
+                easyMode.GetComponent<RectTransform>(),
+                easyTag.rectTransform,
+                footer.rectTransform,
+                focusMarker,
+                settingsRect,
+                flagButton.GetComponent<RectTransform>(),
+                panel.GetComponent<RectTransform>(),
+                volumeSlider.GetComponent<RectTransform>(),
+                phasePanel);
 
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene, ScenePath);
@@ -221,6 +258,40 @@ namespace YunaLegend.EditorScripts
             _ = scene;
         }
 
+        public static void CaptureMobile()
+        {
+            var scene = EditorSceneManager.OpenScene(ScenePath);
+            var camera = Object.FindFirstObjectByType<Camera>();
+            camera.aspect = 390f / 844f;
+
+            var rt = new RenderTexture(780, 1688, 24);
+            camera.targetTexture = rt;
+            Canvas.ForceUpdateCanvases();
+            var responsive = Object.FindFirstObjectByType<TitleScreenResponsiveLayout>();
+            if (responsive != null)
+            {
+                responsive.ApplyLayout(force: true);
+                Canvas.ForceUpdateCanvases();
+            }
+
+            camera.Render();
+            RenderTexture.active = rt;
+            var image = new Texture2D(780, 1688, TextureFormat.RGBA32, false);
+            image.ReadPixels(new Rect(0, 0, 780, 1688), 0, 0);
+            image.Apply();
+            RenderTexture.active = null;
+            camera.targetTexture = null;
+            Object.DestroyImmediate(rt);
+
+            System.IO.Directory.CreateDirectory("Logs");
+            System.IO.File.WriteAllBytes("Logs/title_mobile_portrait.png", image.EncodeToPNG());
+            Object.DestroyImmediate(image);
+
+            Debug.Log("TITLE_SCREEN_MOBILE_CAPTURE Logs/title_mobile_portrait.png");
+            EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            _ = scene;
+        }
+
         private static void BuildPhaseSelector(Transform root, Sprite flag, out Button flagButton,
             out GameObject dropdownRoot, out Button backdrop, out Button[] itemButtons, out Text[] itemLabels)
         {
@@ -253,7 +324,7 @@ namespace YunaLegend.EditorScripts
             panelRect.anchorMax = new Vector2(0.5f, 1f);
             panelRect.pivot = new Vector2(0.5f, 1f);
             panelRect.anchoredPosition = new Vector2(0f, -124f);
-            panelRect.sizeDelta = new Vector2(420f, 104f);
+            panelRect.sizeDelta = new Vector2(420f, 56f + PhaseScenes.Length * 50f);
             panelGo.GetComponent<Image>().color = new Color(0.05f, 0.038f, 0.028f, 0.97f);
             var border = panelGo.AddComponent<Outline>();
             border.effectColor = new Color(0.85f, 0.70f, 0.42f, 0.55f);
@@ -489,6 +560,63 @@ namespace YunaLegend.EditorScripts
                 if (uiFont == null) uiFont = Font.CreateDynamicFontFromOSFont("Arial", 16);
                 return uiFont;
             }
+        }
+
+        private static Sprite EnsureBottomScrimSprite(string path)
+        {
+            if (AssetDatabase.LoadAssetAtPath<Sprite>(path) == null)
+            {
+                const int width = 4;
+                const int height = 128;
+                var texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
+                for (int y = 0; y < height; y++)
+                {
+                    float t = y / (float)(height - 1);
+                    // y = 0 (baixo): escuro opaco; y = height - 1 (topo): transparente.
+                    float alpha = Mathf.Pow(1f - t, 1.55f) * 0.92f;
+                    var color = new Color(0.055f, 0.035f, 0.025f, alpha);
+                    for (int x = 0; x < width; x++)
+                    {
+                        texture.SetPixel(x, y, color);
+                    }
+                }
+
+                texture.Apply();
+                System.IO.File.WriteAllBytes(path, texture.EncodeToPNG());
+                Object.DestroyImmediate(texture);
+                AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
+            }
+
+            var importer = AssetImporter.GetAtPath(path) as TextureImporter;
+            if (importer != null)
+            {
+                bool dirty = false;
+                if (importer.textureType != TextureImporterType.Sprite)
+                {
+                    importer.textureType = TextureImporterType.Sprite;
+                    importer.spriteImportMode = SpriteImportMode.Single;
+                    dirty = true;
+                }
+
+                if (importer.wrapMode != TextureWrapMode.Clamp)
+                {
+                    importer.wrapMode = TextureWrapMode.Clamp;
+                    dirty = true;
+                }
+
+                if (!importer.alphaIsTransparency)
+                {
+                    importer.alphaIsTransparency = true;
+                    dirty = true;
+                }
+
+                if (dirty)
+                {
+                    importer.SaveAndReimport();
+                }
+            }
+
+            return AssetDatabase.LoadAssetAtPath<Sprite>(path);
         }
 
         private static Sprite LoadSprite(string path, int maxSize)

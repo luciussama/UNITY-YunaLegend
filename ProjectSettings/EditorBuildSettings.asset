@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ToyRoom_Gameplay.unity
     guid: a8f148e9f4d3041208f9d532fdc9c46c
+  - enabled: 1
+    path: Assets/Scenes/Arena_Gameplay.unity
+    guid: 25a14aebf1e644fb8b5b7db53200604f
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
