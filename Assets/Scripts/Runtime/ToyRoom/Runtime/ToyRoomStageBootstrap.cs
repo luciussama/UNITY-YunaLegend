@@ -21,10 +21,10 @@ namespace YunaLegend.ToyRoom.Runtime
         [SerializeField] private ToyRoomHudController hud;
         [SerializeField] private ToyRoomNarrativeController narrative;
         [SerializeField] private ToyRoomAudioController audioController;
-        [SerializeField] private List<ToyItemView> toys = new List<ToyItemView>();
+        [SerializeField] private List<ToyItemView> toys = new();
         [SerializeField] private bool startInExploring;
 
-        private readonly Dictionary<string, ToyItemView> toyLookup = new Dictionary<string, ToyItemView>();
+        private readonly Dictionary<string, ToyItemView> toyLookup = new();
 
         public ToyRoomStateMachine StateMachine { get; private set; }
 
@@ -83,6 +83,8 @@ namespace YunaLegend.ToyRoom.Runtime
             if (hud != null)
             {
                 hud.OnAdvanceRequested -= HandleAdvanceDialogueRequested;
+                hud.OnActionRequested -= RequestPlayerInteraction;
+                hud.OnMoveInputChanged -= HandleVirtualMoveInput;
                 hud.OnPauseToggled -= HandlePauseToggled;
                 hud.OnMuteToggled -= HandleMuteToggled;
                 hud.OnRestartRequested -= HandleRestartRequested;
@@ -120,6 +122,7 @@ namespace YunaLegend.ToyRoom.Runtime
 
             if (hud != null && hud.IsPaused)
             {
+                UpdateContextualPrompt();
                 return;
             }
 
@@ -141,6 +144,7 @@ namespace YunaLegend.ToyRoom.Runtime
             }
 
             UpdateContextualPrompt();
+            UpdateNandaToyGuide();
 
             var playerPoint = new ToyRoomPoint(player.transform.position.x, player.transform.position.z);
             StateMachine.Tick(Time.deltaTime, playerPoint, IsInsideMainCameraFocus);
@@ -204,10 +208,20 @@ namespace YunaLegend.ToyRoom.Runtime
             if (hud != null)
             {
                 hud.OnAdvanceRequested += HandleAdvanceDialogueRequested;
+                hud.OnActionRequested += RequestPlayerInteraction;
+                hud.OnMoveInputChanged += HandleVirtualMoveInput;
                 hud.OnPauseToggled += HandlePauseToggled;
                 hud.OnMuteToggled += HandleMuteToggled;
                 hud.OnRestartRequested += HandleRestartRequested;
                 hud.OnReturnToTitleRequested += HandleReturnToTitleRequested;
+            }
+        }
+
+        private void HandleVirtualMoveInput(Vector2 move)
+        {
+            if (player != null)
+            {
+                player.VirtualMoveInput = move;
             }
         }
 
@@ -421,30 +435,81 @@ namespace YunaLegend.ToyRoom.Runtime
 
         private void UpdateContextualPrompt()
         {
-            if (hud == null || player == null || !player.ControlsEnabled)
+            if (hud == null || player == null || !player.ControlsEnabled || hud.IsPaused)
             {
+                if (player != null)
+                {
+                    player.VirtualMoveInput = Vector2.zero;
+                }
+
                 if (hud != null)
                 {
                     hud.SetActionPrompt(null);
+                    hud.SetMobileControlsVisible(false);
                 }
 
                 return;
             }
 
+            hud.SetMobileControlsVisible(true);
+
             if (StateMachine.CurrentPhase == ToyRoomPhase.SeekingSword)
             {
                 bool nearSword = swordView != null && swordView.IsWithinPickupRange(player.transform.position);
-                hud.SetActionPrompt(nearSword ? "PEGAR ESPADA" : null);
+                hud.SetActionPrompt("PEGAR ESPADA", nearSword);
                 return;
             }
 
             if (player.CarriedToy != null)
             {
                 bool nearChest = chest != null && chest.IsWithinDeliveryRange(player.transform.position);
-                hud.SetActionPrompt(nearChest ? "GUARDAR" : null);
+                hud.SetActionPrompt("GUARDAR", nearChest);
                 return;
             }
 
+            hud.SetActionPrompt("PEGAR", IsAnyToyInPickupRange());
+        }
+
+        private void UpdateNandaToyGuide()
+        {
+            if (nandaGuide == null || player == null)
+            {
+                return;
+            }
+
+            if (player.CarriedToy != null || StateMachine.CurrentPhase == ToyRoomPhase.SeekingSword || StateMachine.CurrentPhase == ToyRoomPhase.InvestigationCutscene)
+            {
+                nandaGuide.SetNearestToyTarget(null);
+                return;
+            }
+
+            ToyItemView nearest = null;
+            float bestDistSq = float.MaxValue;
+            Vector3 playerPos = player.transform.position;
+
+            for (int i = 0; i < toys.Count; i++)
+            {
+                var toy = toys[i];
+                if (toy == null || !toy.gameObject.activeInHierarchy || toy.IsCarried || toy.IsStored)
+                {
+                    continue;
+                }
+
+                Vector3 delta = toy.transform.position - playerPos;
+                delta.y = 0f;
+                float dSq = delta.sqrMagnitude;
+                if (dSq < bestDistSq)
+                {
+                    bestDistSq = dSq;
+                    nearest = toy;
+                }
+            }
+
+            nandaGuide.SetNearestToyTarget(nearest != null ? nearest.transform : null);
+        }
+
+        private bool IsAnyToyInPickupRange()
+        {
             for (int i = 0; i < toys.Count; i++)
             {
                 var toy = toys[i];
@@ -454,13 +519,12 @@ namespace YunaLegend.ToyRoom.Runtime
                     delta.y = 0f;
                     if (delta.sqrMagnitude <= 1.35f * 1.35f)
                     {
-                        hud.SetActionPrompt("PEGAR");
-                        return;
+                        return true;
                     }
                 }
             }
 
-            hud.SetActionPrompt(null);
+            return false;
         }
 
         private bool IsInsideMainCameraFocus(ToyRoomPoint point)

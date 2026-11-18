@@ -20,6 +20,8 @@ namespace YunaLegend.ToyRoom.Runtime
         [SerializeField] private Light bluePointLight;
         [SerializeField] private float smoothTime = 0.25f;
 
+        private Transform nearestToyTarget;
+        private Light toyFocusLight;
         private Vector3 velocity;
         private NandaGuideTargetMode mode = NandaGuideTargetMode.FollowPlayer;
         private Transform wingUpperL;
@@ -48,6 +50,11 @@ namespace YunaLegend.ToyRoom.Runtime
             mode = nextMode;
         }
 
+        public void SetNearestToyTarget(Transform nearestToy)
+        {
+            nearestToyTarget = nearestToy;
+        }
+
         private void LateUpdate()
         {
             Vector3 anchor = ResolveAnchorPosition();
@@ -55,6 +62,8 @@ namespace YunaLegend.ToyRoom.Runtime
             Vector3 desired = anchor + new Vector3(0f, hoverY, 0f);
 
             transform.position = Vector3.SmoothDamp(transform.position, desired, ref velocity, smoothTime);
+            UpdateFacing();
+            UpdateToyFocusLight();
             AnimateWingFlutter();
         }
 
@@ -110,10 +119,79 @@ namespace YunaLegend.ToyRoom.Runtime
                         ? swordTarget.position + new Vector3(0f, 1.45f, 0f)
                         : transform.position;
                 default:
-                    return playerTarget != null
-                        ? playerTarget.position + new Vector3(-1.25f, 1.75f, 0.35f)
-                        : transform.position;
+                    if (playerTarget == null)
+                    {
+                        return transform.position;
+                    }
+
+                    if (nearestToyTarget != null)
+                    {
+                        Vector3 toToy = nearestToyTarget.position - playerTarget.position;
+                        toToy.y = 0f;
+                        float dist = toToy.magnitude;
+                        if (dist > 0.01f)
+                        {
+                            Vector3 dir = toToy / dist;
+                            Vector3 leadPos = playerTarget.position + dir * Mathf.Min(1.45f, dist * 0.55f) + new Vector3(0f, 1.48f, 0f);
+                            Vector3 hoverToyPos = nearestToyTarget.position + new Vector3(0f, 1.05f, 0f);
+                            float t = 1f - Mathf.InverseLerp(1.6f, 4.8f, dist);
+                            return Vector3.Lerp(leadPos, hoverToyPos, t);
+                        }
+                    }
+
+                    return playerTarget.position + new Vector3(-1.25f, 1.75f, 0.35f);
             }
+        }
+
+        private void UpdateFacing()
+        {
+            Transform lookTarget = mode switch
+            {
+                NandaGuideTargetMode.BeaconOverChest => chestTarget,
+                NandaGuideTargetMode.HoverOverSword => swordTarget,
+                _ => nearestToyTarget
+            };
+
+            if (lookTarget == null)
+            {
+                return;
+            }
+
+            Vector3 dir = lookTarget.position - transform.position;
+            dir.y = 0f;
+            if (dir.sqrMagnitude > 0.001f)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(dir.normalized, Vector3.up);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 6f);
+            }
+        }
+
+        private void UpdateToyFocusLight()
+        {
+            bool active = mode == NandaGuideTargetMode.FollowPlayer && nearestToyTarget != null && nearestToyTarget.gameObject.activeInHierarchy;
+            if (!active)
+            {
+                if (toyFocusLight != null)
+                {
+                    toyFocusLight.enabled = false;
+                }
+
+                return;
+            }
+
+            if (toyFocusLight == null)
+            {
+                var lightGo = new GameObject("Nanda_ToyFocusLight");
+                toyFocusLight = lightGo.AddComponent<Light>();
+                toyFocusLight.type = LightType.Point;
+                toyFocusLight.color = new Color(0.42f, 0.90f, 1.0f, 1f);
+                toyFocusLight.range = 2.4f;
+                toyFocusLight.shadows = LightShadows.None;
+            }
+
+            toyFocusLight.enabled = true;
+            toyFocusLight.transform.position = nearestToyTarget.position + new Vector3(0f, 0.95f, 0f);
+            toyFocusLight.intensity = 1.45f + Mathf.Sin(Time.time * 3.2f) * 0.25f;
         }
     }
 }

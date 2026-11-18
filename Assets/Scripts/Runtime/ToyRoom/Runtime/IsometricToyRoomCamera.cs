@@ -13,17 +13,17 @@ namespace YunaLegend.ToyRoom.Runtime
         private static readonly int OcclusionFadePropId = Shader.PropertyToID("_OcclusionFade");
 
         [SerializeField] private Transform followTarget;
-        [SerializeField] private Vector3 offset = new Vector3(0f, 4.35f, -9.20f);
-        [SerializeField] private Vector3 lookAtOffset = new Vector3(0f, 0.95f, 0.15f);
+        [SerializeField] private Vector3 offset = new(0f, 4.35f, -9.20f);
+        [SerializeField] private Vector3 lookAtOffset = new(0f, 0.95f, 0.15f);
         [SerializeField] private float smoothTime = 0.22f;
         [SerializeField] private float occludedAlpha = 0.28f;
         [SerializeField] private float fadeSpeed = 8.0f;
 
         private Transform overrideTarget;
         private Vector3 velocity;
-        private readonly Dictionary<Renderer, float> activeFades = new Dictionary<Renderer, float>();
-        private readonly HashSet<Renderer> currentlyOccluding = new HashSet<Renderer>();
-        private readonly List<Renderer> fadeCleanupList = new List<Renderer>();
+        private readonly Dictionary<Renderer, float> activeFades = new();
+        private readonly HashSet<Renderer> currentlyOccluding = new();
+        private readonly List<Renderer> fadeCleanupList = new();
         private MaterialPropertyBlock mpb;
 
         public void Configure(Transform target)

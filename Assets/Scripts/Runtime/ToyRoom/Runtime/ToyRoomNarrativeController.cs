@@ -12,7 +12,7 @@ namespace YunaLegend.ToyRoom.Runtime
         [SerializeField] private ToyRoomHudController hud;
         [SerializeField] private ToySwordView swordView;
 
-        private readonly ToyRoomBeatPlayer beatPlayer = new ToyRoomBeatPlayer();
+        private readonly ToyRoomBeatPlayer beatPlayer = new();
         private Action onCurrentSequenceComplete;
 
         public bool IsPlaying => beatPlayer.IsPlaying;

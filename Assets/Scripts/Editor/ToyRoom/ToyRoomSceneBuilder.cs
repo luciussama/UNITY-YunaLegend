@@ -542,14 +542,11 @@ namespace YunaLegend.Editor.ToyRoom
             var rugBedside = ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Rug_BedsideFringe", root.transform, new Vector3(rectRugPt.X, 0.012f, rectRugPt.Z), new Vector3(4.4f, 0.015f, 2.8f), rectRugMat);
             _ = rugBedside;
 
-            // Trilho de trem decorativo no piso com textura de madeira pintada
-            for (int i = 0; i < 24; i++)
-            {
-                float angle = i * Mathf.PI * 2f / 24f;
-                Vector3 pos = new Vector3(-4.5f + Mathf.Cos(angle) * 3.4f, 0.02f, -2.5f + Mathf.Sin(angle) * 2.2f);
-                var seg = ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, $"TrainTrack_{i}", root.transform, pos, new Vector3(0.55f, 0.025f, 0.18f), trackMat, new Vector3(0f, -angle * Mathf.Rad2Deg, 0f));
-                _ = seg;
-            }
+            // Trilho de trem completo (dormentes, trilhos interno/externo, tunel, estacao, placa e vagao)
+            BuildCompleteTrainTrack(root.transform, trackMat);
+
+            // Props decorativos nao interagiveis para dar sensacao de quarto de brinquedos baguncado
+            BuildDecorativeClutterProps(root.transform);
             _ = rug;
 
             var wallNorth = CreateBox("Wall_North", root.transform, new Vector3(0f, 2.5f, ToyRoomCatalog.HalfDepth + 0.15f), new Vector3(ToyRoomCatalog.RoomWidth + 0.6f, 5.0f, 0.3f), wallMat);
@@ -585,6 +582,294 @@ namespace YunaLegend.Editor.ToyRoom
                     artMat,
                     new Vector3(0f, 0f, 180f));
             }
+        }
+
+        private static void BuildCompleteTrainTrack(Transform parent, Material sleeperMat)
+        {
+            var trackRoot = new GameObject("TrainTrack_Set").transform;
+            trackRoot.SetParent(parent, false);
+
+            var railMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.72f, 0.74f, 0.78f), outlineWidth: 0.002f);
+            var darkWoodMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.52f, 0.34f, 0.20f), "Assets/Art/ToyRoom/Textures/Legacy/oak-trim-v1.png", outlineWidth: 0.003f);
+            var redMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.84f, 0.24f, 0.22f), outlineWidth: 0.003f);
+            var creamMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.96f, 0.91f, 0.78f), outlineWidth: 0.003f);
+            var brassMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.92f, 0.76f, 0.28f), outlineWidth: 0.002f);
+            var darkMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.18f, 0.16f, 0.18f), outlineWidth: 0.002f);
+
+            const int segments = 36;
+            const float centerX = -4.5f;
+            const float centerZ = -2.5f;
+            const float rx = 3.4f;
+            const float rz = 2.2f;
+            const float railHalfGauge = 0.18f;
+
+            for (int i = 0; i < segments; i++)
+            {
+                float a0 = i * Mathf.PI * 2f / segments;
+                float a1 = (i + 1) * Mathf.PI * 2f / segments;
+
+                Vector3 p0 = new Vector3(centerX + Mathf.Cos(a0) * rx, 0f, centerZ + Mathf.Sin(a0) * rz);
+                Vector3 p1 = new Vector3(centerX + Mathf.Cos(a1) * rx, 0f, centerZ + Mathf.Sin(a1) * rz);
+
+                Vector3 tangent = (p1 - p0).normalized;
+                Vector3 outward = new Vector3(tangent.z, 0f, -tangent.x);
+                float yaw = Mathf.Atan2(outward.x, outward.z) * Mathf.Rad2Deg;
+
+                // Dormente de madeira perpendicular aos trilhos
+                ToyRoomVisualFactory.CreateVisualPrimitive(
+                    PrimitiveType.Cube,
+                    $"TrainTrack_Sleeper_{i}",
+                    trackRoot,
+                    new Vector3(p0.x, 0.016f, p0.z),
+                    new Vector3(0.12f, 0.022f, 0.56f),
+                    sleeperMat,
+                    new Vector3(0f, yaw, 0f));
+
+                // Segmentos continuos de trilho interno e externo ligando p0 a p1
+                Vector3 tan1 = new Vector3(-Mathf.Sin(a1) * rx, 0f, Mathf.Cos(a1) * rz).normalized;
+                Vector3 out1 = new Vector3(tan1.z, 0f, -tan1.x);
+
+                for (int side = -1; side <= 1; side += 2)
+                {
+                    Vector3 r0 = p0 + outward * (side * railHalfGauge);
+                    Vector3 r1 = p1 + out1 * (side * railHalfGauge);
+                    Vector3 mid = (r0 + r1) * 0.5f;
+                    float segLen = Vector3.Distance(r0, r1) + 0.03f;
+                    float railYaw = Mathf.Atan2((r1 - r0).x, (r1 - r0).z) * Mathf.Rad2Deg;
+
+                    ToyRoomVisualFactory.CreateVisualPrimitive(
+                        PrimitiveType.Cube,
+                        $"TrainTrack_Rail_{(side < 0 ? "In" : "Out")}_{i}",
+                        trackRoot,
+                        new Vector3(mid.x, 0.036f, mid.z),
+                        new Vector3(0.045f, 0.028f, segLen),
+                        railMat,
+                        new Vector3(0f, railYaw, 0f));
+                }
+            }
+
+            // Tunel/ponte arqueada de brinquedo sobre o trecho norte-oeste do trilho
+            var tunnelPos = new Vector3(centerX - 0.2f, 0f, centerZ + rz);
+            var tunnelGo = new GameObject("TrainTrack_Tunnel");
+            tunnelGo.transform.SetParent(trackRoot, false);
+            tunnelGo.transform.position = tunnelPos;
+            tunnelGo.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+            ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Tunnel_WallL", tunnelGo.transform, new Vector3(-0.36f, 0.26f, 0f), new Vector3(0.16f, 0.52f, 0.95f), redMat);
+            ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Tunnel_WallR", tunnelGo.transform, new Vector3(0.36f, 0.26f, 0f), new Vector3(0.16f, 0.52f, 0.95f), redMat);
+            ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Tunnel_Roof", tunnelGo.transform, new Vector3(0f, 0.56f, 0f), new Vector3(0.96f, 0.14f, 1.02f), darkWoodMat);
+            ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Tunnel_Trim", tunnelGo.transform, new Vector3(0f, 0.65f, 0f), new Vector3(0.72f, 0.06f, 0.88f), creamMat);
+
+            // Mini estacao ferroviaria ao lado do trilho
+            var stationGo = new GameObject("TrainTrack_Station");
+            stationGo.transform.SetParent(trackRoot, false);
+            stationGo.transform.position = new Vector3(centerX - rx - 0.85f, 0f, centerZ + 0.35f);
+            stationGo.transform.rotation = Quaternion.Euler(0f, 18f, 0f);
+            ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Station_Base", stationGo.transform, new Vector3(0f, 0.06f, 0f), new Vector3(0.72f, 0.12f, 1.15f), darkWoodMat);
+            ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Station_Body", stationGo.transform, new Vector3(-0.08f, 0.34f, 0f), new Vector3(0.46f, 0.44f, 0.82f), creamMat);
+            ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Station_Roof", stationGo.transform, new Vector3(-0.04f, 0.62f, 0f), new Vector3(0.66f, 0.12f, 0.98f), redMat, new Vector3(0f, 0f, 8f));
+            ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Station_Bench", stationGo.transform, new Vector3(0.22f, 0.18f, 0f), new Vector3(0.14f, 0.10f, 0.52f), brassMat);
+
+            // Placa de cruzamento (X) perto do trilho
+            var signGo = new GameObject("TrainTrack_CrossingSign");
+            signGo.transform.SetParent(trackRoot, false);
+            signGo.transform.position = new Vector3(centerX + rx + 0.42f, 0f, centerZ - 0.65f);
+            ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cylinder, "Sign_Base", signGo.transform, new Vector3(0f, 0.025f, 0f), new Vector3(0.22f, 0.025f, 0.22f), darkWoodMat);
+            ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cylinder, "Sign_Post", signGo.transform, new Vector3(0f, 0.34f, 0f), new Vector3(0.045f, 0.32f, 0.045f), creamMat);
+            ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Sign_CrossA", signGo.transform, new Vector3(0f, 0.58f, 0f), new Vector3(0.32f, 0.065f, 0.03f), creamMat, new Vector3(0f, 0f, 45f));
+            ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Sign_CrossB", signGo.transform, new Vector3(0f, 0.58f, 0f), new Vector3(0.32f, 0.065f, 0.03f), redMat, new Vector3(0f, 0f, -45f));
+
+            // Versao menor da locomotiva principal (train.obj) sobre os trilhos, puxando o vagao
+            float locoAngle = 3.85f;
+            Vector3 locoPos = new Vector3(centerX + Mathf.Cos(locoAngle) * rx, 0.045f, centerZ + Mathf.Sin(locoAngle) * rz);
+            Vector3 locoTangent = new Vector3(-Mathf.Sin(locoAngle) * rx, 0f, Mathf.Cos(locoAngle) * rz).normalized;
+            var locoGo = new GameObject("TrainTrack_MiniLocomotive");
+            locoGo.transform.SetParent(trackRoot, false);
+            locoGo.transform.position = locoPos;
+            locoGo.transform.rotation = Quaternion.LookRotation(locoTangent, Vector3.up);
+            if (!ToyRoomPropSculptor.TryAttachGeneratedPropModel(locoGo.transform, "train", 0.38f, 0.48f, 0.48f))
+            {
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Loco_Fallback", locoGo.transform, new Vector3(0f, 0.18f, 0f), new Vector3(0.28f, 0.30f, 0.46f), redMat);
+            }
+
+            // Vagao de carga decorativo estacionado atras da mini locomotiva sobre o trilho
+            float cabAngle = 4.22f;
+            Vector3 cabPos = new Vector3(centerX + Mathf.Cos(cabAngle) * rx, 0.04f, centerZ + Mathf.Sin(cabAngle) * rz);
+            Vector3 cabTangent = new Vector3(-Mathf.Sin(cabAngle) * rx, 0f, Mathf.Cos(cabAngle) * rz).normalized;
+            var cabGo = new GameObject("TrainTrack_Caboose");
+            cabGo.transform.SetParent(trackRoot, false);
+            cabGo.transform.position = cabPos;
+            cabGo.transform.rotation = Quaternion.LookRotation(cabTangent, Vector3.up);
+            ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Caboose_Chassis", cabGo.transform, new Vector3(0f, 0.08f, 0f), new Vector3(0.30f, 0.06f, 0.52f), darkWoodMat);
+            ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Caboose_Body", cabGo.transform, new Vector3(0f, 0.24f, 0f), new Vector3(0.26f, 0.26f, 0.44f), redMat);
+            ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Caboose_Roof", cabGo.transform, new Vector3(0f, 0.39f, 0f), new Vector3(0.30f, 0.05f, 0.48f), brassMat);
+            for (int w = -1; w <= 1; w += 2)
+            {
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cylinder, $"Caboose_WheelL_{w}", cabGo.transform, new Vector3(-0.15f, 0.05f, w * 0.16f), new Vector3(0.09f, 0.02f, 0.09f), darkMat, new Vector3(0f, 0f, 90f));
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cylinder, $"Caboose_WheelR_{w}", cabGo.transform, new Vector3(0.15f, 0.05f, w * 0.16f), new Vector3(0.09f, 0.02f, 0.09f), darkMat, new Vector3(0f, 0f, 90f));
+            }
+        }
+
+        private static void BuildDecorativeClutterProps(Transform parent)
+        {
+            var clutter = new GameObject("Decorative_ClutterProps").transform;
+            clutter.SetParent(parent, false);
+
+            var redMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.88f, 0.28f, 0.30f), outlineWidth: 0.003f);
+            var blueMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.26f, 0.58f, 0.88f), outlineWidth: 0.003f);
+            var yellowMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.96f, 0.80f, 0.26f), outlineWidth: 0.003f);
+            var mintMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.42f, 0.78f, 0.62f), outlineWidth: 0.003f);
+            var lavenderMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.66f, 0.52f, 0.86f), outlineWidth: 0.003f);
+            var coralMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.94f, 0.56f, 0.50f), outlineWidth: 0.003f);
+            var creamMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.96f, 0.92f, 0.82f), outlineWidth: 0.003f);
+            var woodMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.76f, 0.52f, 0.30f), "Assets/Art/ToyRoom/Textures/Legacy/oak-trim-v1.png", outlineWidth: 0.003f);
+            var blockMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, "Assets/Materials/T_ToyBlock_ABC.png", outlineWidth: 0.003f);
+
+            // 1. Pilhas de livros infantis pequenas espalhadas pelos cantos e perto das paredes
+            Vector3[] bookStackPositions =
+            {
+                new Vector3(-11.8f, 0f, 8.2f),
+                new Vector3(-10.2f, 0f, 8.6f),
+                new Vector3(11.6f, 0f, 8.0f),
+                new Vector3(-12.4f, 0f, -8.2f),
+                new Vector3(12.0f, 0f, -7.8f)
+            };
+            Material[] bookCovers = { redMat, blueMat, mintMat, lavenderMat, yellowMat };
+            for (int i = 0; i < bookStackPositions.Length; i++)
+            {
+                var stack = new GameObject($"Decor_BookStack_{i}").transform;
+                stack.SetParent(clutter, false);
+                stack.position = bookStackPositions[i];
+                stack.rotation = Quaternion.Euler(0f, i * 37f - 25f, 0f);
+                stack.localScale = Vector3.one * 0.52f;
+                int count = 2 + (i % 2);
+                for (int b = 0; b < count; b++)
+                {
+                    float y = 0.03f + b * 0.062f;
+                    float yaw = b * 14f - 7f;
+                    ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, $"Book_{b}", stack, new Vector3(0f, y, 0f), new Vector3(0.42f, 0.055f, 0.32f), bookCovers[(i + b) % bookCovers.Length], new Vector3(0f, yaw, 0f));
+                    ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, $"Pages_{b}", stack, new Vector3(0.015f, y, 0f), new Vector3(0.39f, 0.042f, 0.29f), creamMat, new Vector3(0f, yaw, 0f));
+                }
+            }
+
+            // 2. Mini conjuntos de blocos de madeira nos cantos da sala
+            Vector3[] blockClusterPositions =
+            {
+                new Vector3(-12.5f, 0f, 6.2f),
+                new Vector3(12.4f, 0f, 6.4f),
+                new Vector3(12.2f, 0f, -2.4f),
+                new Vector3(-12.6f, 0f, 2.2f),
+                new Vector3(10.8f, 0f, -8.6f),
+                new Vector3(-6.2f, 0f, 8.6f)
+            };
+            for (int i = 0; i < blockClusterPositions.Length; i++)
+            {
+                var cluster = new GameObject($"Decor_BlockCluster_{i}").transform;
+                cluster.SetParent(clutter, false);
+                cluster.position = blockClusterPositions[i];
+                cluster.localScale = Vector3.one * 0.50f;
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Block_A", cluster, new Vector3(-0.14f, 0.10f, 0.02f), Vector3.one * 0.20f, blockMat, new Vector3(0f, 18f * i, 0f));
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Block_B", cluster, new Vector3(0.12f, 0.10f, -0.06f), Vector3.one * 0.20f, blueMat, new Vector3(0f, -24f * i, 0f));
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Block_C", cluster, new Vector3(-0.02f, 0.30f, -0.01f), Vector3.one * 0.19f, yellowMat, new Vector3(0f, 32f + i * 11f, 0f));
+            }
+
+            // 3. Bolinhas coloridas nos cantos e bordas
+            Vector3[] ballPositions =
+            {
+                new Vector3(12.4f, 0.11f, 4.6f),
+                new Vector3(-12.2f, 0.10f, -1.2f),
+                new Vector3(9.4f, 0.10f, -8.4f),
+                new Vector3(-1.4f, 0.11f, 8.6f)
+            };
+            Material[] ballMats = { coralMat, blueMat, yellowMat, lavenderMat };
+            for (int i = 0; i < ballPositions.Length; i++)
+            {
+                float dia = 0.20f + (i % 2) * 0.04f;
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Sphere, $"Decor_ToyBall_{i}", clutter, ballPositions[i], Vector3.one * dia, ballMats[i]);
+            }
+
+            // 4. Almofadas pequenas encostadas nos cantos
+            Vector3[] cushionPositions =
+            {
+                new Vector3(-11.6f, 0.05f, -7.2f),
+                new Vector3(11.8f, 0.05f, 1.8f),
+                new Vector3(-8.8f, 0.05f, 8.4f)
+            };
+            Material[] cushionMats = { coralMat, mintMat, lavenderMat };
+            for (int i = 0; i < cushionPositions.Length; i++)
+            {
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cylinder, $"Decor_Cushion_{i}", clutter, cushionPositions[i], new Vector3(0.42f, 0.05f, 0.42f), cushionMats[i], new Vector3(0f, i * 25f, 0f));
+            }
+
+            // 5. Mini torres de argolas empilhaveis nos cantos
+            Vector3[] pyramidPositions =
+            {
+                new Vector3(12.2f, 0f, 8.5f),
+                new Vector3(-12.0f, 0f, 4.2f)
+            };
+            Material[] ringMats = { redMat, yellowMat, mintMat, blueMat, lavenderMat };
+            for (int p = 0; p < pyramidPositions.Length; p++)
+            {
+                var pyr = new GameObject($"Decor_RingPyramid_{p}").transform;
+                pyr.SetParent(clutter, false);
+                pyr.position = pyramidPositions[p];
+                pyr.localScale = Vector3.one * 0.48f;
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cylinder, "Base", pyr, new Vector3(0f, 0.03f, 0f), new Vector3(0.40f, 0.03f, 0.40f), woodMat);
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cylinder, "Peg", pyr, new Vector3(0f, 0.24f, 0f), new Vector3(0.07f, 0.22f, 0.07f), woodMat);
+                for (int r = 0; r < 5; r++)
+                {
+                    float d = 0.34f - r * 0.045f;
+                    ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cylinder, $"Ring_{r}", pyr, new Vector3(0f, 0.09f + r * 0.065f, 0f), new Vector3(d, 0.03f, d), ringMats[r]);
+                }
+            }
+
+            // 6. Mini pioes de madeira nos cantos
+            Vector3[] topPositions =
+            {
+                new Vector3(5.6f, 0f, 8.6f),
+                new Vector3(-9.6f, 0f, -8.5f),
+                new Vector3(12.3f, 0f, -5.6f)
+            };
+            for (int i = 0; i < topPositions.Length; i++)
+            {
+                var top = new GameObject($"Decor_SpinningTop_{i}").transform;
+                top.SetParent(clutter, false);
+                top.position = topPositions[i];
+                top.rotation = Quaternion.Euler(14f, i * 48f, -10f);
+                top.localScale = Vector3.one * 0.48f;
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cylinder, "Body", top, new Vector3(0f, 0.12f, 0f), new Vector3(0.22f, 0.08f, 0.22f), ringMats[i % ringMats.Length]);
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cylinder, "Stem", top, new Vector3(0f, 0.24f, 0f), new Vector3(0.05f, 0.06f, 0.05f), woodMat);
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Sphere, "Tip", top, new Vector3(0f, 0.04f, 0f), Vector3.one * 0.07f, woodMat);
+            }
+
+            // 7. Folhas de desenho e giz de cera nos cantos
+            Vector3[] drawingPositions =
+            {
+                new Vector3(-11.4f, 0f, -4.6f),
+                new Vector3(11.4f, 0f, 7.2f)
+            };
+            for (int i = 0; i < drawingPositions.Length; i++)
+            {
+                var draw = new GameObject($"Decor_DrawingSet_{i}").transform;
+                draw.SetParent(clutter, false);
+                draw.position = drawingPositions[i];
+                draw.rotation = Quaternion.Euler(0f, i * 33f - 15f, 0f);
+                draw.localScale = Vector3.one * 0.55f;
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "PaperA", draw, new Vector3(0f, 0.008f, 0f), new Vector3(0.48f, 0.008f, 0.36f), creamMat);
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "PaperB", draw, new Vector3(0.18f, 0.012f, 0.12f), new Vector3(0.42f, 0.008f, 0.32f), creamMat, new Vector3(0f, 22f, 0f));
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cylinder, "CrayonR", draw, new Vector3(-0.18f, 0.025f, 0.20f), new Vector3(0.03f, 0.11f, 0.03f), redMat, new Vector3(90f, 25f, 0f));
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cylinder, "CrayonB", draw, new Vector3(-0.04f, 0.025f, 0.24f), new Vector3(0.03f, 0.11f, 0.03f), blueMat, new Vector3(90f, -15f, 0f));
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cylinder, "CrayonY", draw, new Vector3(0.10f, 0.025f, 0.22f), new Vector3(0.03f, 0.11f, 0.03f), yellowMat, new Vector3(90f, 40f, 0f));
+            }
+
+            // 8. Mini barquinho de madeira no canto inferior esquerdo
+            var boat = new GameObject("Decor_Sailboat").transform;
+            boat.SetParent(clutter, false);
+            boat.position = new Vector3(-11.8f, 0f, -8.5f);
+            boat.rotation = Quaternion.Euler(0f, 32f, 0f);
+            boat.localScale = Vector3.one * 0.50f;
+            ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Hull", boat, new Vector3(0f, 0.09f, 0f), new Vector3(0.32f, 0.14f, 0.62f), woodMat);
+            ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cylinder, "Mast", boat, new Vector3(0f, 0.36f, 0f), new Vector3(0.035f, 0.26f, 0.035f), woodMat);
+            ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Sail", boat, new Vector3(0f, 0.38f, 0.06f), new Vector3(0.02f, 0.34f, 0.28f), creamMat);
         }
 
         private static void CreateWindowsAndLightShafts()
