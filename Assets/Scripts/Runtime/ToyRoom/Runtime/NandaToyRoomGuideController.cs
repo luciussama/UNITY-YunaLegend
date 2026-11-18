@@ -111,7 +111,7 @@ namespace YunaLegend.ToyRoom.Runtime
                         : transform.position;
                 default:
                     return playerTarget != null
-                        ? playerTarget.position + new Vector3(-0.65f, 1.55f, 0.45f)
+                        ? playerTarget.position + new Vector3(-1.25f, 1.75f, 0.35f)
                         : transform.position;
             }
         }

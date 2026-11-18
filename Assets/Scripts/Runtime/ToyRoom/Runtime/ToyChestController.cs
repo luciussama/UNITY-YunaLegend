@@ -8,6 +8,8 @@ namespace YunaLegend.ToyRoom.Runtime
     public sealed class ToyChestController : MonoBehaviour
     {
         [SerializeField] private Transform lidPivot;
+        [SerializeField] private GameObject closedVisual;
+        [SerializeField] private GameObject openVisual;
         [SerializeField] private Light interiorGlowLight;
         [SerializeField] private float deliveryRadius = 2.1f;
         [SerializeField] private float openLidAngle = -68f;
@@ -22,6 +24,14 @@ namespace YunaLegend.ToyRoom.Runtime
         {
             lidPivot = lid;
             interiorGlowLight = glowLight;
+        }
+
+        public void ConfigureStates(GameObject closedStateVisual, GameObject openStateVisual, Light glowLight)
+        {
+            closedVisual = closedStateVisual;
+            openVisual = openStateVisual;
+            interiorGlowLight = glowLight;
+            ApplyStateVisuals(false);
         }
 
         public bool IsWithinDeliveryRange(Vector3 worldPos)
@@ -52,6 +62,8 @@ namespace YunaLegend.ToyRoom.Runtime
             float targetAngle = shouldOpen ? openLidAngle : 0f;
             float targetGlow = shouldOpen ? maxGlowIntensity : 0f;
 
+            ApplyStateVisuals(shouldOpen);
+
             if (lidPivot != null)
             {
                 Quaternion targetRot = Quaternion.Euler(targetAngle, 0f, 0f);
@@ -61,6 +73,19 @@ namespace YunaLegend.ToyRoom.Runtime
             if (interiorGlowLight != null)
             {
                 interiorGlowLight.intensity = Mathf.Lerp(interiorGlowLight.intensity, targetGlow, Time.deltaTime * 10f);
+            }
+        }
+
+        private void ApplyStateVisuals(bool isOpen)
+        {
+            if (closedVisual != null && closedVisual.activeSelf == isOpen)
+            {
+                closedVisual.SetActive(!isOpen);
+            }
+
+            if (openVisual != null && openVisual.activeSelf != isOpen)
+            {
+                openVisual.SetActive(isOpen);
             }
         }
     }

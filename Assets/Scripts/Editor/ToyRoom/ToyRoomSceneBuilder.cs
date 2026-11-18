@@ -52,6 +52,14 @@ namespace YunaLegend.Editor.ToyRoom
             }
 
             lastTriggerCheckTime = EditorApplication.timeSinceStartup;
+            const string auditTriggerPath = "Temp/trigger_toyroom_audit.txt";
+            if (File.Exists(auditTriggerPath) && !EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                File.Delete(auditTriggerPath);
+                CapturePropsAudit();
+                return;
+            }
+
             const string triggerPath = "Temp/trigger_toyroom_rebuild.txt";
             if (!File.Exists(triggerPath))
             {
@@ -116,6 +124,7 @@ namespace YunaLegend.Editor.ToyRoom
         [MenuItem("YunaLegend/Fase 2 - Toy Room/Build Final Scene (P1-P8)", false, 20)]
         public static void BuildBaseScene()
         {
+            AssetDatabase.Refresh();
             ToyRoomVisualFactory.ResetMaterialCounter();
             EnsurePainterlyRendererFeature();
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
@@ -208,6 +217,55 @@ namespace YunaLegend.Editor.ToyRoom
             cam.transform.position = origPos;
             cam.transform.rotation = origRot;
             cam.fieldOfView = origFov;
+        }
+
+        [MenuItem("YunaLegend/Fase 2 - Toy Room/Capture Props Audit")]
+        public static void CapturePropsAudit()
+        {
+            EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
+            var cam = Camera.main;
+            if (cam == null)
+            {
+                Debug.LogError("[ToyRoomSceneBuilder] MainCamera nao encontrada.");
+                return;
+            }
+
+            const string auditDir = "/Users/sergio/.gemini/antigravity/brain/d3320b50-1c20-45d4-95f7-1ce8df59d425/scratch/audit";
+            Directory.CreateDirectory(auditDir);
+
+            Vector3 origPos = cam.transform.position;
+            Quaternion origRot = cam.transform.rotation;
+            float origFov = cam.fieldOfView;
+
+            cam.fieldOfView = 35f;
+            cam.transform.position = new Vector3(0f, 13.5f, -15.5f);
+            cam.transform.LookAt(new Vector3(0f, 0.5f, 0.5f));
+            RenderCameraToPng(cam, Path.Combine(auditDir, "00_room_overview.png"), 1280, 720);
+
+            foreach (var item in ToyRoomCatalog.Furniture)
+            {
+                var go = GameObject.Find($"Furniture_{item.Id}");
+                if (go == null) continue;
+                Vector3 p = go.transform.position;
+                cam.transform.position = p + new Vector3(0f, 1.85f, -3.2f);
+                cam.transform.LookAt(p + new Vector3(0f, 0.70f, 0f));
+                RenderCameraToPng(cam, Path.Combine(auditDir, $"furn_{item.Id}.png"), 640, 480);
+            }
+
+            foreach (var toy in ToyRoomCatalog.Toys)
+            {
+                var go = GameObject.Find($"Toy_{toy.Id}");
+                if (go == null) continue;
+                Vector3 p = go.transform.position;
+                cam.transform.position = p + new Vector3(0f, 0.85f, -1.65f);
+                cam.transform.LookAt(p + new Vector3(0f, 0.35f, 0f));
+                RenderCameraToPng(cam, Path.Combine(auditDir, $"toy_{toy.Id}.png"), 640, 480);
+            }
+
+            cam.transform.position = origPos;
+            cam.transform.rotation = origRot;
+            cam.fieldOfView = origFov;
+            Debug.Log($"[ToyRoomSceneBuilder] Props audit salvo em {auditDir}");
         }
 
         private static void RenderCameraToPng(Camera cam, string outputPath, int width, int height)
@@ -368,18 +426,12 @@ namespace YunaLegend.Editor.ToyRoom
 
         private static void ConfigureLighting()
         {
+            // Toda a iluminacao direta parte exclusivamente das 2 janelas e da fadinha Nanda;
+            // o ambiente fornece apenas bounce indireto suave para manter a sala bem iluminada sem lavar as sombras.
             RenderSettings.ambientMode = AmbientMode.Trilight;
-            RenderSettings.ambientSkyColor = new Color(0.76f, 0.68f, 0.60f);
-            RenderSettings.ambientEquatorColor = new Color(0.52f, 0.44f, 0.50f);
-            RenderSettings.ambientGroundColor = new Color(0.24f, 0.20f, 0.36f);
-
-            var sunGo = new GameObject("MorningSun_DirectionalLight");
-            var light = sunGo.AddComponent<Light>();
-            light.type = LightType.Directional;
-            light.color = new Color(1.0f, 0.88f, 0.68f);
-            light.intensity = 1.05f;
-            light.shadows = LightShadows.Soft;
-            sunGo.transform.rotation = Quaternion.Euler(46f, -30f, 0f);
+            RenderSettings.ambientSkyColor = new Color(0.44f, 0.40f, 0.46f);
+            RenderSettings.ambientEquatorColor = new Color(0.34f, 0.30f, 0.35f);
+            RenderSettings.ambientGroundColor = new Color(0.18f, 0.15f, 0.20f);
         }
 
         private static Camera CreateIsometricCamera()
@@ -410,13 +462,16 @@ namespace YunaLegend.Editor.ToyRoom
             volume.priority = 1f;
 
             var profile = ScriptableObject.CreateInstance<VolumeProfile>();
+            var tonemapping = profile.Add<Tonemapping>(true);
+            tonemapping.mode.value = TonemappingMode.ACES;
+
             var vignette = profile.Add<Vignette>(true);
-            vignette.intensity.value = 0.30f;
-            vignette.smoothness.value = 0.48f;
+            vignette.intensity.value = 0.24f;
+            vignette.smoothness.value = 0.46f;
 
             var bloom = profile.Add<Bloom>(true);
-            bloom.threshold.value = 0.95f;
-            bloom.intensity.value = 0.32f;
+            bloom.threshold.value = 1.05f;
+            bloom.intensity.value = 0.28f;
 
             volume.sharedProfile = profile;
         }
@@ -427,36 +482,36 @@ namespace YunaLegend.Editor.ToyRoom
 
             // Piso e tapetes em tons pasteis leves/envelhecidos para destacar Yuna na cena
             var floorMat = ToyRoomVisualFactory.CreatePainterlyMaterial(
-                new Color(0.58f, 0.52f, 0.45f),
+                new Color(0.78f, 0.72f, 0.64f),
                 "Assets/Materials/T_DarkOak_Planks.png",
                 new Vector2(10f, 7f),
-                emission: new Color(0.24f, 0.21f, 0.18f),
+                emission: Color.black,
                 outlineWidth: 0f);
-            floorMat.SetColor("_ShadowColor", new Color(0.78f, 0.74f, 0.72f, 1f));
+            floorMat.SetColor("_ShadowColor", new Color(0.42f, 0.36f, 0.44f, 1f));
             EditorUtility.SetDirty(floorMat);
 
             var rugMat = ToyRoomVisualFactory.CreatePainterlyMaterial(
                 Color.white,
-                "Assets/Art/ToyRoom/Textures/Legacy/central-rug-v1.png",
-                emission: new Color(0.20f, 0.18f, 0.16f),
+                "Assets/Materials/T_Floor_Rug_Mandala.png",
+                emission: Color.black,
                 outlineWidth: 0f);
-            rugMat.SetColor("_ShadowColor", new Color(0.82f, 0.78f, 0.76f, 1f));
+            rugMat.SetColor("_ShadowColor", new Color(0.42f, 0.36f, 0.44f, 1f));
             EditorUtility.SetDirty(rugMat);
 
             var ovalRugMat = ToyRoomVisualFactory.CreatePainterlyMaterial(
                 Color.white,
                 "Assets/Art/ToyRoom/Textures/Legacy/oval-rug-v1.png",
-                emission: new Color(0.20f, 0.18f, 0.16f),
+                emission: Color.black,
                 outlineWidth: 0f);
-            ovalRugMat.SetColor("_ShadowColor", new Color(0.82f, 0.78f, 0.76f, 1f));
+            ovalRugMat.SetColor("_ShadowColor", new Color(0.42f, 0.36f, 0.44f, 1f));
             EditorUtility.SetDirty(ovalRugMat);
 
             var rectRugMat = ToyRoomVisualFactory.CreatePainterlyMaterial(
                 Color.white,
                 "Assets/Art/ToyRoom/Textures/Legacy/rectangular-rug-v1.png",
-                emission: new Color(0.20f, 0.18f, 0.16f),
+                emission: Color.black,
                 outlineWidth: 0f);
-            rectRugMat.SetColor("_ShadowColor", new Color(0.82f, 0.78f, 0.76f, 1f));
+            rectRugMat.SetColor("_ShadowColor", new Color(0.42f, 0.36f, 0.44f, 1f));
             EditorUtility.SetDirty(rectRugMat);
 
             var wallMat = ToyRoomVisualFactory.CreatePainterlyMaterial(
@@ -497,7 +552,12 @@ namespace YunaLegend.Editor.ToyRoom
             }
             _ = rug;
 
-            CreateBox("Wall_North", root.transform, new Vector3(0f, 2.5f, ToyRoomCatalog.HalfDepth + 0.15f), new Vector3(ToyRoomCatalog.RoomWidth + 0.6f, 5.0f, 0.3f), wallMat);
+            var wallNorth = CreateBox("Wall_North", root.transform, new Vector3(0f, 2.5f, ToyRoomCatalog.HalfDepth + 0.15f), new Vector3(ToyRoomCatalog.RoomWidth + 0.6f, 5.0f, 0.3f), wallMat);
+            var wallNorthRenderer = wallNorth.GetComponent<Renderer>();
+            if (wallNorthRenderer != null)
+            {
+                wallNorthRenderer.shadowCastingMode = ShadowCastingMode.Off;
+            }
             CreateBox("Baseboard_North", root.transform, new Vector3(0f, 0.28f, ToyRoomCatalog.HalfDepth - 0.02f), new Vector3(ToyRoomCatalog.RoomWidth, 0.55f, 0.08f), baseMat);
 
             CreateBox("Wall_West", root.transform, new Vector3(-ToyRoomCatalog.HalfWidth - 0.15f, 2.5f, 0f), new Vector3(0.3f, 5.0f, ToyRoomCatalog.RoomDepth), wallMat);
@@ -530,7 +590,7 @@ namespace YunaLegend.Editor.ToyRoom
         {
             var root = new GameObject("Windows_And_Shafts");
             var frameMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.60f, 0.40f, 0.24f));
-            var skyMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.54f, 0.80f, 0.96f), emission: new Color(0.28f, 0.44f, 0.56f));
+            var skyMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.75f, 0.92f, 1.0f), emission: new Color(0.55f, 0.78f, 0.96f), outlineWidth: 0f);
             var shaftMat = CreateLightShaftMaterial();
 
             float[] windowXs =
@@ -538,7 +598,14 @@ namespace YunaLegend.Editor.ToyRoom
                 ToyRoomCatalog.FromLegacyCoordinates(520f, 30f).X,
                 ToyRoomCatalog.FromLegacyCoordinates(1280f, 30f).X
             };
-            var curtainMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, "Assets/Art/ToyRoom/Textures/Legacy/window-curtains-v1.png", outlineWidth: 0f);
+            var curtainShader = Shader.Find("Sprites/Default");
+            var curtainMat = new Material(curtainShader);
+            var curtainTex = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Art/ToyRoom/Textures/Legacy/window-curtains-v1.png");
+            if (curtainTex != null)
+            {
+                curtainMat.mainTexture = curtainTex;
+            }
+            curtainMat.color = Color.white;
             foreach (float wx in windowXs)
             {
                 var win = new GameObject($"Window_{wx:0.0}");
@@ -546,10 +613,10 @@ namespace YunaLegend.Editor.ToyRoom
                 win.transform.position = new Vector3(wx, 2.8f, ToyRoomCatalog.HalfDepth - 0.03f);
 
                 ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Frame", win.transform, Vector3.zero, new Vector3(2.2f, 2.4f, 0.12f), frameMat);
-                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Glass", win.transform, new Vector3(0f, 0f, -0.04f), new Vector3(1.85f, 2.05f, 0.06f), skyMat);
-                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Cross_V", win.transform, new Vector3(0f, 0f, -0.06f), new Vector3(0.08f, 2.05f, 0.06f), frameMat);
-                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Cross_H", win.transform, new Vector3(0f, 0f, -0.06f), new Vector3(1.85f, 0.08f, 0.06f), frameMat);
-                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Quad, "Curtains", win.transform, new Vector3(0f, 0f, -0.10f), new Vector3(2.6f, 2.8f, 1f), curtainMat, new Vector3(0f, 180f, 0f));
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Glass", win.transform, new Vector3(0f, 0f, -0.05f), new Vector3(1.85f, 2.05f, 0.06f), skyMat);
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Cross_V", win.transform, new Vector3(0f, 0f, -0.07f), new Vector3(0.08f, 2.05f, 0.06f), frameMat);
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Cube, "Cross_H", win.transform, new Vector3(0f, 0f, -0.07f), new Vector3(1.85f, 0.08f, 0.06f), frameMat);
+                ToyRoomVisualFactory.CreateVisualPrimitive(PrimitiveType.Quad, "Curtains", win.transform, new Vector3(0f, 0f, -0.11f), new Vector3(2.8f, 2.9f, 1f), curtainMat, Vector3.zero);
 
                 var shaft = ToyRoomVisualFactory.CreateVisualPrimitive(
                     PrimitiveType.Quad,
@@ -560,6 +627,35 @@ namespace YunaLegend.Editor.ToyRoom
                     shaftMat,
                     new Vector3(38f, -18f, -16f));
                 _ = shaft;
+
+                // Fonte de luz principal da janela posicionada fora do vidro para entrar difusa e uniforme (sem hotspot)
+                var spotGo = new GameObject("WindowSun_SpotLight");
+                spotGo.transform.SetParent(win.transform, false);
+                spotGo.transform.localPosition = new Vector3(0f, 2.2f, 6.5f);
+                spotGo.transform.rotation = Quaternion.Euler(26f, wx < 0f ? 170f : 190f, 0f);
+                var spot = spotGo.AddComponent<Light>();
+                spot.type = LightType.Spot;
+                spot.color = new Color(1.0f, 0.96f, 0.88f);
+                spot.intensity = 195f;
+                spot.range = 48f;
+                spot.spotAngle = 148f;
+                spot.innerSpotAngle = 110f;
+                spot.shadows = LightShadows.Soft;
+                spot.shadowStrength = 0.72f;
+                spot.shadowResolution = LightShadowResolution.VeryHigh;
+                spot.shadowBias = 0.02f;
+                spot.shadowNormalBias = 0.25f;
+
+                // Rebote indireto difuso do ceu passando pela cortina/vidro (sem sombra dupla)
+                var bounceGo = new GameObject("WindowBounce_PointLight");
+                bounceGo.transform.SetParent(win.transform, false);
+                bounceGo.transform.localPosition = new Vector3(0f, 0.3f, -4.5f);
+                var bounce = bounceGo.AddComponent<Light>();
+                bounce.type = LightType.Point;
+                bounce.color = new Color(0.92f, 0.95f, 1.0f);
+                bounce.intensity = 14f;
+                bounce.range = 28f;
+                bounce.shadows = LightShadows.None;
             }
         }
 
@@ -626,6 +722,8 @@ namespace YunaLegend.Editor.ToyRoom
                 return;
             }
 
+            EnsureSsaoRendererFeature(rendererData);
+
             foreach (var existing in rendererData.rendererFeatures)
             {
                 if (existing is ToyRoomPainterlyRendererFeature painterlyFeature)
@@ -657,6 +755,46 @@ namespace YunaLegend.Editor.ToyRoom
 
             so.ApplyModifiedPropertiesWithoutUndo();
             EditorUtility.SetDirty(feature);
+            EditorUtility.SetDirty(rendererData);
+        }
+
+        private static void EnsureSsaoRendererFeature(UniversalRendererData rendererData)
+        {
+            var ssaoType = typeof(UniversalRendererData).Assembly.GetType("UnityEngine.Rendering.Universal.ScreenSpaceAmbientOcclusion");
+            if (ssaoType == null)
+            {
+                return;
+            }
+
+            foreach (var existing in rendererData.rendererFeatures)
+            {
+                if (existing != null && existing.GetType() == ssaoType)
+                {
+                    return;
+                }
+            }
+
+            var ssao = ScriptableObject.CreateInstance(ssaoType) as ScriptableRendererFeature;
+            if (ssao == null)
+            {
+                return;
+            }
+
+            ssao.name = "ScreenSpaceAmbientOcclusion";
+            AssetDatabase.AddObjectToAsset(ssao, rendererData);
+            AssetDatabase.TryGetGUIDAndLocalFileIdentifier(ssao, out _, out long localId);
+
+            var so = new SerializedObject(rendererData);
+            var featuresProp = so.FindProperty("m_RendererFeatures");
+            var mapProp = so.FindProperty("m_RendererFeatureMap");
+            int idx = featuresProp.arraySize;
+            featuresProp.InsertArrayElementAtIndex(idx);
+            featuresProp.GetArrayElementAtIndex(idx).objectReferenceValue = ssao;
+            mapProp.InsertArrayElementAtIndex(mapProp.arraySize);
+            mapProp.GetArrayElementAtIndex(mapProp.arraySize - 1).longValue = localId;
+            so.ApplyModifiedPropertiesWithoutUndo();
+
+            EditorUtility.SetDirty(ssao);
             EditorUtility.SetDirty(rendererData);
         }
 
@@ -749,8 +887,6 @@ namespace YunaLegend.Editor.ToyRoom
             col.center = new Vector3(0f, 0.45f, 0f);
             col.size = new Vector3(item.Width, 0.90f, item.Depth);
 
-            ToyRoomPropSculptor.BuildSculptedToyChest(chestGo.transform, item, out var lidPivot);
-
             var glowGo = new GameObject("InteriorGlow");
             glowGo.transform.SetParent(chestGo.transform, false);
             glowGo.transform.localPosition = new Vector3(0f, 0.85f, 0f);
@@ -761,7 +897,20 @@ namespace YunaLegend.Editor.ToyRoom
             glow.intensity = 0f;
 
             var controller = chestGo.AddComponent<ToyChestController>();
-            controller.Configure(lidPivot, glow);
+            bool hasClosed = ToyRoomPropSculptor.TryAttachGeneratedPropModel(chestGo.transform, "toy-chest", 1.35f, item.Width, item.Depth);
+            bool hasOpen = ToyRoomPropSculptor.TryAttachGeneratedPropModel(chestGo.transform, "toy-chest-open", 1.45f, item.Width, item.Depth);
+            if (hasClosed && hasOpen)
+            {
+                var closedGo = chestGo.transform.Find("Model3D_toy-chest")?.gameObject;
+                var openGo = chestGo.transform.Find("Model3D_toy-chest-open")?.gameObject;
+                controller.ConfigureStates(closedGo, openGo, glow);
+            }
+            else
+            {
+                ToyRoomPropSculptor.BuildSculptedToyChest(chestGo.transform, item, out var lidPivot);
+                controller.Configure(lidPivot, glow);
+            }
+
             return controller;
         }
 
@@ -884,8 +1033,7 @@ namespace YunaLegend.Editor.ToyRoom
         private static NandaToyRoomGuideController CreateNandaGuide(Transform player, Transform chest, Transform sword)
         {
             var nandaGo = new GameObject("Nanda_BlueGuide");
-            var nandaPt = ToyRoomCatalog.FromLegacyCoordinates(290f, 600f);
-            nandaGo.transform.position = new Vector3(nandaPt.X, 1.06f, nandaPt.Z);
+            nandaGo.transform.position = player.position + new Vector3(-1.25f, 1.75f, 0.35f);
             ToyRoomVisualFactory.BuildNandaFairy3D(nandaGo.transform);
 
             var lightGo = new GameObject("Nanda_AuraLight");
@@ -893,9 +1041,14 @@ namespace YunaLegend.Editor.ToyRoom
             lightGo.transform.localPosition = new Vector3(0f, 0.55f, 0.45f);
             var light = lightGo.AddComponent<Light>();
             light.type = LightType.Point;
-            light.color = new Color(0.36f, 0.88f, 1.0f);
-            light.range = 4.2f;
-            light.intensity = 0.85f;
+            light.color = new Color(0.30f, 0.84f, 1.0f);
+            light.range = 10.5f;
+            light.intensity = 9.0f;
+            light.shadows = LightShadows.Soft;
+            light.shadowStrength = 0.88f;
+            light.shadowResolution = LightShadowResolution.High;
+            light.shadowBias = 0.02f;
+            light.shadowNormalBias = 0.20f;
 
             var guide = nandaGo.AddComponent<NandaToyRoomGuideController>();
             guide.Configure(player, chest, sword, light);

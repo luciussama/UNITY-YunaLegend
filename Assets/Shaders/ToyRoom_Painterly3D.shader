@@ -81,8 +81,10 @@ Shader "YunaLegend/ToyRoom_Painterly3D"
             #pragma vertex vert
             #pragma fragment frag
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE
-            #pragma multi_compile _ _SHADOWS_SOFT
-            #pragma multi_compile _ _ADDITIONAL_LIGHTS
+            #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
+            #pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
+            #pragma multi_compile_fragment _ _SHADOWS_SOFT
+            #pragma multi_compile_fragment _ _SCREEN_SPACE_OCCLUSION
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 
@@ -127,40 +129,58 @@ Shader "YunaLegend/ToyRoom_Painterly3D"
                 half4 tex = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.uv) * _BaseColor;
                 float3 normalWS = normalize(input.normalWS);
                 float3 viewDirWS = GetWorldSpaceNormalizeViewDir(input.positionWS);
+                float2 screenUV = GetNormalizedScreenSpaceUV(input.positionHCS);
 
-                float4 shadowCoord = TransformWorldToShadowCoord(input.positionWS);
-                Light mainLight = GetMainLight(shadowCoord);
-
-                // Subtle hand-brushed terminator modulation preserving fine painted albedo details
-                float strokeNoise = (BrushNoise(input.uv * float2(28.0, 18.0) + input.positionWS.xz * 2.5) - 0.5) * _BrushNoiseStrength;
-                half rawNdl = dot(normalWS, mainLight.direction) * lerp(0.35h, 1.0h, mainLight.shadowAttenuation) + strokeNoise;
-
-                // 3-step storybook gouache ramp (Warm Shadow -> True Painted Albedo Midtone -> Sunlit Highlight)
-                half shadowBand = smoothstep(_ShadowStep - _ShadowFeather, _ShadowStep + _ShadowFeather, rawNdl);
-                half highlightBand = smoothstep(0.58h, 0.78h, rawNdl);
-
-                half3 shadowTone = _ShadowColor.rgb * tex.rgb;
-                half3 midTone = tex.rgb * lerp(half3(0.96h, 0.93h, 0.90h), mainLight.color, 0.55h);
-                half3 highTone = tex.rgb * mainLight.color * 1.05h;
-
-                half3 litColor = lerp(shadowTone, midTone, shadowBand);
-                litColor = lerp(litColor, highTone, highlightBand * 0.35h);
-
-                #ifdef _ADDITIONAL_LIGHTS
-                uint lightCount = GetAdditionalLightsCount();
-                for (uint i = 0u; i < lightCount; ++i)
-                {
-                    Light addLight = GetAdditionalLight(i, input.positionWS);
-                    half addNdl = smoothstep(-0.1h, 0.45h, saturate(dot(normalWS, addLight.direction)));
-                    litColor += tex.rgb * addLight.color * (addNdl * addLight.distanceAttenuation * addLight.shadowAttenuation * 0.55h);
-                }
+                half directAO = 1.0h;
+                half indirectAO = 1.0h;
+                #if defined(_SCREEN_SPACE_OCCLUSION)
+                    AmbientOcclusionFactor aoFactor = GetScreenSpaceAmbientOcclusion(screenUV);
+                    directAO = aoFactor.directAmbientOcclusion;
+                    indirectAO = aoFactor.indirectAmbientOcclusion;
                 #endif
 
-                // Suppress rim on upward-facing horizontal surfaces so isometric view stays crisp
+                // Indirect bounce GI (SH) modulated by SSAO for rich ray-traced-like contact crevices
+                half3 indirectGI = SampleSH(normalWS) * indirectAO * 0.65h;
+                half3 litColor = tex.rgb * indirectGI;
+
+                // Main light (only contributes when enabled/non-zero)
+                float4 shadowCoord = TransformWorldToShadowCoord(input.positionWS);
+                Light mainLight = GetMainLight(shadowCoord);
+                half mainLum = dot(mainLight.color, half3(0.3h, 0.59h, 0.11h));
+                if (mainLum > 0.001h)
+                {
+                    float strokeNoise = (BrushNoise(input.uv * float2(28.0, 18.0) + input.positionWS.xz * 2.5) - 0.5) * _BrushNoiseStrength;
+                    half rawNdl = saturate(dot(normalWS, mainLight.direction) + strokeNoise);
+                    half atten = mainLight.distanceAttenuation * mainLight.shadowAttenuation * directAO;
+                    litColor += tex.rgb * mainLight.color * (rawNdl * atten);
+                }
+
+                // Additional lights (the 2 windows + Nanda) with full real-time soft shadows
+                #ifdef _ADDITIONAL_LIGHTS
+                half4 shadowMask = half4(1.0h, 1.0h, 1.0h, 1.0h);
+                uint lightCount = GetAdditionalLightsCount();
+                half totalDirectMask = 0.0h;
+                for (uint i = 0u; i < lightCount; ++i)
+                {
+                    Light addLight = GetAdditionalLight(i, input.positionWS, shadowMask);
+                    half ndl = saturate(dot(normalWS, addLight.direction) * 0.65h + 0.35h);
+                    half atten = addLight.distanceAttenuation * addLight.shadowAttenuation * directAO;
+                    half3 contrib = tex.rgb * addLight.color * (ndl * atten);
+                    litColor += contrib;
+                    totalDirectMask = saturate(totalDirectMask + ndl * atten);
+                }
+                #else
+                half totalDirectMask = 0.0h;
+                #endif
+
+                // Subtle rim on lateral silhouettes where light hits
                 half lateralMask = saturate(1.0h - abs(normalWS.y) * 0.75h);
                 half fresnel = pow(1.0h - saturate(dot(normalWS, viewDirWS)), _RimPower) * lateralMask;
-                litColor += _RimColor.rgb * (fresnel * _RimStrength * saturate(shadowBand + 0.25h));
+                litColor += _RimColor.rgb * (fresnel * _RimStrength * saturate(totalDirectMask + 0.15h));
                 litColor += _EmissionColor.rgb;
+
+                // Soft-knee highlight compression so diffused daylight never blows out flat tops
+                litColor = litColor / (1.0h + litColor * 0.22h) * 1.16h;
 
                 return half4(litColor, tex.a);
             }

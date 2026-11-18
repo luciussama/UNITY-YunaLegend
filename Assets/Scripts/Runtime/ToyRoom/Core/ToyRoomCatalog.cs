@@ -20,9 +20,9 @@ namespace YunaLegend.ToyRoom.Core
 
         public static readonly IReadOnlyList<FurnitureSpec> Furniture = new List<FurnitureSpec>
         {
-            new FurnitureSpec("toy-chest", "Bau de Brinquedos", FromLegacyCoordinates(1040f, 190f), 2.30f, 1.35f, isToyChest: true),
-            new FurnitureSpec("bookshelf", "Estante de Livros", FromLegacyCoordinates(380f, 170f), 2.80f, 1.05f),
-            new FurnitureSpec("wardrobe", "Guarda-Roupa", FromLegacyCoordinates(740f, 170f), 1.85f, 1.05f),
+            new FurnitureSpec("toy-chest", "Bau de Brinquedos", new ToyRoomPoint(2.67f, HalfDepth - 1.35f * 0.5f - 0.06f), 2.30f, 1.35f, isToyChest: true),
+            new FurnitureSpec("bookshelf", "Estante de Livros", new ToyRoomPoint(FromLegacyCoordinates(520f, 30f).X, HalfDepth - 1.05f * 0.5f - 0.06f), 2.80f, 1.05f),
+            new FurnitureSpec("wardrobe", "Guarda-Roupa", new ToyRoomPoint(FromLegacyCoordinates(1280f, 30f).X, HalfDepth - 1.05f * 0.5f - 0.06f), 1.85f, 1.05f),
             new FurnitureSpec("rocking-horse", "Cavalinho de Pau", FromLegacyCoordinates(480f, 420f), 1.25f, 0.95f),
             new FurnitureSpec("table", "Mesinha Infantil", FromLegacyCoordinates(620f, 780f), 2.00f, 1.35f),
             new FurnitureSpec("armchair", "Poltrona Aconchegante", FromLegacyCoordinates(180f, 840f), 1.65f, 1.45f),
