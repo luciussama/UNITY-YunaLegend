@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScreen.unity
     guid: 63165d40c322cd949af4abc1912fda67
   - enabled: 1
-    path: Assets/Scenes/DarkRoom_Gameplay.unity
-    guid: a9465ee75c37b874e94c21c0fcf9b22b
-  - enabled: 1
     path: Assets/Art/Illustrated25D/Environment/Stage2Runtime/Fase-Jogavel-Completa.unity
     guid: e7dfcaefddff44b0b83c99bf954bc524
   - enabled: 1

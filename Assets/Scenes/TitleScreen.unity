@@ -1124,7 +1124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41793063027adec489189c0f523355dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::YunaLegend.UI.TitleScreenController
-  gameplaySceneName: DarkRoom_Gameplay
+  gameplaySceneName: Fase-Jogavel-Completa
   selectedPhaseScene: 
   newGameButton: {fileID: 631272837}
   loadGameButton: {fileID: 1710224395}
@@ -2099,7 +2099,7 @@ MonoBehaviour:
   - {fileID: 1957445793}
   - {fileID: 1239242794}
   itemScenes:
-  - DarkRoom_Gameplay
+  - Fase-Jogavel-Completa
   - ToyRoom_Gameplay
 --- !u!4 &1394352770
 Transform:

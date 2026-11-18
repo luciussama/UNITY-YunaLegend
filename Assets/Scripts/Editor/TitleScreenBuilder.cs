@@ -19,13 +19,13 @@ namespace YunaLegend.EditorScripts
     public static class TitleScreenBuilder
     {
         private const string ScenePath = "Assets/Scenes/TitleScreen.unity";
-        private const string GameplayPath = "Assets/Scenes/DarkRoom_Gameplay.unity";
+        private const string GameplayPath = "Assets/Art/Illustrated25D/Environment/Stage2Runtime/Fase-Jogavel-Completa.unity";
         private const string ArtFolder = "Assets/Art/UI";
         private const string EvidenceFolder = "Evidence/title-screen-2026-11-11";
 
         // Fases disponiveis no dropdown da bandeirinha. Novas fases entram aqui.
         private static readonly string[] PhaseLabels = { "O Quarto Escuro" };
-        private static readonly string[] PhaseScenes = { "DarkRoom_Gameplay" };
+        private static readonly string[] PhaseScenes = { "Fase-Jogavel-Completa" };
 
         private static readonly Color Cream = new Color(0.95f, 0.90f, 0.78f);
         private static readonly Color Gold = new Color(1f, 0.84f, 0.55f);
@@ -124,7 +124,7 @@ namespace YunaLegend.EditorScripts
             var controller = controllerGo.AddComponent<TitleScreenController>();
             controller.Configure(
                 newGame, loadGame, easyMode, easyTag, footer, focusMarker,
-                settingsButton, panel, volumeSlider, closeButton, "DarkRoom_Gameplay");
+                settingsButton, panel, volumeSlider, closeButton, "Fase-Jogavel-Completa");
 
             // Bandeirinha no topo: dropdown para escolher a fase.
             var flagSprite = LoadSprite($"{ArtFolder}/Title_Flag.png", 256);
@@ -147,7 +147,7 @@ namespace YunaLegend.EditorScripts
             var scene = EditorSceneManager.OpenScene(ScenePath);
             var controller = Object.FindFirstObjectByType<TitleScreenController>();
             if (controller == null) throw new System.InvalidOperationException("TitleScreenController ausente.");
-            if (controller.GameplaySceneName != "DarkRoom_Gameplay")
+            if (controller.GameplaySceneName != "Fase-Jogavel-Completa")
                 throw new System.InvalidOperationException("Cena de destino inesperada: " + controller.GameplaySceneName);
 
             if (Object.FindFirstObjectByType<Canvas>() == null) throw new System.InvalidOperationException("Canvas ausente.");

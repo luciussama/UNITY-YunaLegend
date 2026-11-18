@@ -16,7 +16,7 @@ namespace YunaLegend.EditorScripts
     public static class WebCiBuild
     {
         private const string TitleScene = "Assets/Scenes/TitleScreen.unity";
-        private const string DarkRoomScene = "Assets/Scenes/DarkRoom_Gameplay.unity";
+        private const string Stage1Scene = "Assets/Art/Illustrated25D/Environment/Stage2Runtime/Fase-Jogavel-Completa.unity";
         private const string ToyRoomScene = "Assets/Scenes/ToyRoom_Gameplay.unity";
 
         [MenuItem("YunaLegend/Build Web para GitHub Pages", false, 100)]
@@ -129,7 +129,7 @@ namespace YunaLegend.EditorScripts
                 return scenes.ToArray();
             }
 
-            return new[] { TitleScene, DarkRoomScene, ToyRoomScene };
+            return new[] { TitleScene, Stage1Scene, ToyRoomScene };
         }
 
         private static string ResolveOutputPath()
