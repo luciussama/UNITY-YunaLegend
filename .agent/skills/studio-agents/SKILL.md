@@ -1,6 +1,6 @@
 ---
 name: studio-agents
-description: Hierarquia completa de 24 Agentes/Skills do Estúdio (Creative Director + 5 Diretores + 18 Especialistas) para direção de arte, engenharia gráfica, design, narrativa e produção em Yuna Legend. Obrigatório consultar antes de produzir ou validar personagens 3D, cenários, shaders, mecânicas, UI, narrativa ou builds.
+description: Hierarquia completa de 24 Agentes/  do Estúdio (Creative Director + 5 Diretores + 18 Especialistas) para direção de arte, engenharia gráfica, design, narrativa e produção em Yuna Legend. Obrigatório consultar antes de produzir ou validar personagens 3D, cenários, shaders, mecânicas, UI, narrativa ou builds.
 ---
 
 # Studio Agents Hierarchy — Atalho de Descoberta Automática

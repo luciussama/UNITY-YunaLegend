@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using YunaLegend.ToyRoom.Core;
 
 namespace YunaLegend.ToyRoom.Runtime
@@ -77,6 +78,17 @@ namespace YunaLegend.ToyRoom.Runtime
 
         private void OnDestroy()
         {
+            Time.timeScale = 1f;
+
+            if (hud != null)
+            {
+                hud.OnAdvanceRequested -= HandleAdvanceDialogueRequested;
+                hud.OnPauseToggled -= HandlePauseToggled;
+                hud.OnMuteToggled -= HandleMuteToggled;
+                hud.OnRestartRequested -= HandleRestartRequested;
+                hud.OnReturnToTitleRequested -= HandleReturnToTitleRequested;
+            }
+
             if (player != null)
             {
                 player.OnPickUpRequested -= HandlePickUpRequested;
@@ -100,8 +112,25 @@ namespace YunaLegend.ToyRoom.Runtime
             }
 
             var keyboard = Keyboard.current;
+            if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame)
+            {
+                HandlePauseToggled(hud == null || !hud.IsPaused);
+                return;
+            }
+
+            if (hud != null && hud.IsPaused)
+            {
+                return;
+            }
+
             if (keyboard != null && (keyboard.eKey.wasPressedThisFrame || keyboard.spaceKey.wasPressedThisFrame))
             {
+                if (narrative != null && narrative.IsPlaying && keyboard.spaceKey.wasPressedThisFrame)
+                {
+                    narrative.AdvanceActiveBeat();
+                    return;
+                }
+
                 RequestPlayerInteraction();
             }
 
@@ -171,6 +200,61 @@ namespace YunaLegend.ToyRoom.Runtime
             StateMachine.OnStrangeDialogueTriggered += HandleStrangeDialogue;
             StateMachine.OnInvestigationTriggered += HandleInvestigationTriggered;
             StateMachine.OnPhaseChanged += HandlePhaseChanged;
+
+            if (hud != null)
+            {
+                hud.OnAdvanceRequested += HandleAdvanceDialogueRequested;
+                hud.OnPauseToggled += HandlePauseToggled;
+                hud.OnMuteToggled += HandleMuteToggled;
+                hud.OnRestartRequested += HandleRestartRequested;
+                hud.OnReturnToTitleRequested += HandleReturnToTitleRequested;
+            }
+        }
+
+        private void HandleAdvanceDialogueRequested()
+        {
+            if (narrative != null && narrative.IsPlaying)
+            {
+                narrative.AdvanceActiveBeat();
+            }
+        }
+
+        private void HandlePauseToggled(bool paused)
+        {
+            Time.timeScale = paused ? 0f : 1f;
+            if (hud != null)
+            {
+                hud.SetPausedState(paused);
+            }
+
+            if (audioController != null)
+            {
+                audioController.SetPaused(paused);
+            }
+        }
+
+        private void HandleMuteToggled()
+        {
+            if (audioController != null)
+            {
+                audioController.ToggleMute();
+                if (hud != null)
+                {
+                    hud.SetMutedState(audioController.IsMuted);
+                }
+            }
+        }
+
+        private void HandleRestartRequested()
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        private void HandleReturnToTitleRequested()
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("TitleScreen");
         }
 
         private void HandlePickUpRequested(ToyItemView toy)

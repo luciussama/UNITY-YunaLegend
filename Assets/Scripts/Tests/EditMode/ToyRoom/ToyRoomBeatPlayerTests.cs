@@ -48,5 +48,28 @@ namespace YunaLegend.ToyRoom.Tests
             Assert.IsFalse(player.IsPlaying);
             Assert.IsTrue(completed);
         }
+
+        [Test]
+        public void AdvanceCurrentBeatMovesExactlyOneBeatAndCompletesAtEnd()
+        {
+            var player = new ToyRoomBeatPlayer();
+            int enteredCount = 0;
+            bool completed = false;
+            player.OnBeatEntered += _ => enteredCount++;
+            player.OnSequenceCompleted += () => completed = true;
+
+            player.Play(ToyRoomNarrativeScript.StrangeDialogueBeats);
+            Assert.AreEqual(1, enteredCount);
+            Assert.IsTrue(player.IsPlaying);
+
+            player.AdvanceCurrentBeat();
+            Assert.AreEqual(2, enteredCount);
+            Assert.IsTrue(player.IsPlaying);
+            Assert.IsFalse(completed);
+
+            player.AdvanceCurrentBeat();
+            Assert.IsFalse(player.IsPlaying);
+            Assert.IsTrue(completed);
+        }
     }
 }

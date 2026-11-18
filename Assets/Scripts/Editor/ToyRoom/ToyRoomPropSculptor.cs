@@ -368,10 +368,16 @@ namespace YunaLegend.Editor.ToyRoom
             {
                 case "teddy":
                 {
-                    var plushMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.92f, 0.68f, 0.44f), "Assets/Materials/T_Bear_Fur_Painted.png", outlineWidth: 0.0045f);
-                    var muzzleMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.98f, 0.91f, 0.80f), "Assets/Materials/T_Bear_Muzzle.png", outlineWidth: 0.003f);
-                    var buttonMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.18f, 0.09f, 0.06f), outlineWidth: 0f);
-                    var ribbonMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.86f, 0.24f, 0.26f), ChestTexPath, outlineWidth: 0.0035f);
+                    var plushMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.74f, 0.46f, 0.24f), "Assets/Materials/T_Bear_Fur_Painted.png", outlineWidth: 0.003f);
+                    plushMat.SetFloat("_BrushNoiseStrength", 0.0f);
+                    var muzzleMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.98f, 0.90f, 0.76f), outlineWidth: 0.002f);
+                    var buttonMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.14f, 0.07f, 0.05f), outlineWidth: 0f);
+                    var shineMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, emission: new Color(0.4f, 0.4f, 0.4f), outlineWidth: 0f);
+                    var ribbonMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.86f, 0.20f, 0.20f), outlineWidth: 0.0025f);
+
+                    var root = new GameObject("Teddy_Root").transform;
+                    root.SetParent(parent, false);
+                    root.localRotation = Quaternion.Euler(0f, 180f, 0f);
 
                     var bellyMesh = ToyRoomYunaSculptor.CreateParametricMesh("Teddy_PlumpBody", 28, 18, (u, v) =>
                     {
@@ -383,7 +389,7 @@ namespace YunaLegend.Editor.ToyRoom
                             0.19f * Mathf.Cos(p),
                             0.15f * pear * Mathf.Sin(p) * Mathf.Cos(a));
                     });
-                    ToyRoomYunaSculptor.AttachMesh("Teddy_Body", parent, bellyMesh, plushMat);
+                    ToyRoomYunaSculptor.AttachMesh("Teddy_Body", root, bellyMesh, plushMat);
 
                     var headMesh = ToyRoomYunaSculptor.CreateParametricMesh("Teddy_Head", 28, 18, (u, v) =>
                     {
@@ -395,21 +401,27 @@ namespace YunaLegend.Editor.ToyRoom
                             0.155f * Mathf.Cos(p),
                             0.155f * cheeks * Mathf.Sin(p) * Mathf.Cos(a));
                     });
-                    ToyRoomYunaSculptor.AttachMesh("Teddy_Head", parent, headMesh, plushMat);
+                    ToyRoomYunaSculptor.AttachMesh("Teddy_Head", root, headMesh, plushMat);
 
                     var snoutMesh = ToyRoomYunaSculptor.CreateEllipsoidMesh("Teddy_Snout", new Vector3(0f, 0.45f, 0.15f), new Vector3(0.078f, 0.062f, 0.058f), 18);
-                    ToyRoomYunaSculptor.AttachMesh("Teddy_Snout", parent, snoutMesh, muzzleMat);
+                    ToyRoomYunaSculptor.AttachMesh("Teddy_Snout", root, snoutMesh, muzzleMat);
 
-                    var noseMesh = ToyRoomYunaSculptor.CreateEllipsoidMesh("Teddy_Nose", new Vector3(0f, 0.47f, 0.20f), new Vector3(0.028f, 0.022f, 0.020f), 14);
-                    ToyRoomYunaSculptor.AttachMesh("Teddy_Nose", parent, noseMesh, buttonMat);
+                    var noseMesh = ToyRoomYunaSculptor.CreateEllipsoidMesh("Teddy_Nose", new Vector3(0f, 0.47f, 0.205f), new Vector3(0.028f, 0.022f, 0.020f), 14);
+                    ToyRoomYunaSculptor.AttachMesh("Teddy_Nose", root, noseMesh, buttonMat);
 
                     for (int side = -1; side <= 1; side += 2)
                     {
                         var earMesh = ToyRoomYunaSculptor.CreateEllipsoidMesh($"Teddy_Ear_{side}", new Vector3(side * 0.145f, 0.60f, 0f), new Vector3(0.068f, 0.068f, 0.038f), 16);
-                        ToyRoomYunaSculptor.AttachMesh($"Ear_{side}", parent, earMesh, plushMat);
+                        ToyRoomYunaSculptor.AttachMesh($"Ear_{side}", root, earMesh, plushMat);
+
+                        var innerEar = ToyRoomYunaSculptor.CreateEllipsoidMesh($"Teddy_InnerEar_{side}", new Vector3(side * 0.145f, 0.60f, 0.022f), new Vector3(0.042f, 0.042f, 0.022f), 14);
+                        ToyRoomYunaSculptor.AttachMesh($"InnerEar_{side}", root, innerEar, muzzleMat);
 
                         var eyeMesh = ToyRoomYunaSculptor.CreateEllipsoidMesh($"Teddy_Eye_{side}", new Vector3(side * 0.068f, 0.51f, 0.152f), new Vector3(0.022f, 0.024f, 0.014f), 14);
-                        ToyRoomYunaSculptor.AttachMesh($"Eye_{side}", parent, eyeMesh, buttonMat);
+                        ToyRoomYunaSculptor.AttachMesh($"Eye_{side}", root, eyeMesh, buttonMat);
+
+                        var eyeShine = ToyRoomYunaSculptor.CreateEllipsoidMesh($"Teddy_EyeShine_{side}", new Vector3(side * 0.064f + 0.006f, 0.518f, 0.165f), new Vector3(0.007f, 0.007f, 0.005f), 8);
+                        ToyRoomYunaSculptor.AttachMesh($"EyeShine_{side}", root, eyeShine, shineMat);
 
                         var armMesh = ToyRoomYunaSculptor.CreateCurveTubeMesh(
                             $"Teddy_Arm_{side}",
@@ -421,7 +433,7 @@ namespace YunaLegend.Editor.ToyRoom
                             0.85f,
                             12,
                             12);
-                        ToyRoomYunaSculptor.AttachMesh($"Arm_{side}", parent, armMesh, plushMat);
+                        ToyRoomYunaSculptor.AttachMesh($"Arm_{side}", root, armMesh, plushMat);
 
                         var legMesh = ToyRoomYunaSculptor.CreateCurveTubeMesh(
                             $"Teddy_Leg_{side}",
@@ -433,11 +445,14 @@ namespace YunaLegend.Editor.ToyRoom
                             0.90f,
                             12,
                             12);
-                        ToyRoomYunaSculptor.AttachMesh($"Leg_{side}", parent, legMesh, plushMat);
+                        ToyRoomYunaSculptor.AttachMesh($"Leg_{side}", root, legMesh, plushMat);
+
+                        var pawPad = ToyRoomYunaSculptor.CreateEllipsoidMesh($"Teddy_PawPad_{side}", new Vector3(side * 0.13f, 0.10f, 0.275f), new Vector3(0.045f, 0.052f, 0.018f), 14);
+                        ToyRoomYunaSculptor.AttachMesh($"PawPad_{side}", root, pawPad, muzzleMat);
                     }
 
-                    var bowMesh = ToyRoomYunaSculptor.CreateEllipsoidMesh("Teddy_Bow", new Vector3(0f, 0.34f, 0.15f), new Vector3(0.095f, 0.042f, 0.032f), 16);
-                    ToyRoomYunaSculptor.AttachMesh("Teddy_Bow", parent, bowMesh, ribbonMat);
+                    var bowMesh = ToyRoomYunaSculptor.CreateEllipsoidMesh("Teddy_Bow", new Vector3(0f, 0.34f, 0.155f), new Vector3(0.095f, 0.042f, 0.032f), 16);
+                    ToyRoomYunaSculptor.AttachMesh("Teddy_Bow", root, bowMesh, ribbonMat);
                     break;
                 }
 
@@ -544,31 +559,92 @@ namespace YunaLegend.Editor.ToyRoom
 
                 case "duck":
                 {
-                    var duckMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, DuckTexPath, outlineWidth: 0.0045f);
-                    var billMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.98f, 0.50f, 0.16f), outlineWidth: 0.004f);
-                    var crownMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.98f, 0.82f, 0.28f), emission: new Color(0.20f, 0.14f, 0.02f), outlineWidth: 0.0035f);
+                    var duckMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(1.0f, 0.88f, 0.26f), DuckTexPath, outlineWidth: 0.003f);
+                    duckMat.SetFloat("_BrushNoiseStrength", 0.02f);
+                    var wingMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.95f, 0.72f, 0.12f), DuckTexPath, outlineWidth: 0.0025f);
+                    wingMat.SetFloat("_BrushNoiseStrength", 0.02f);
+                    var billMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.98f, 0.44f, 0.10f), outlineWidth: 0.0025f);
+                    var crownMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(1.0f, 0.82f, 0.20f), emission: new Color(0.18f, 0.12f, 0.02f), outlineWidth: 0.002f);
+                    var gemMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.90f, 0.18f, 0.28f), emission: new Color(0.25f, 0.04f, 0.08f), outlineWidth: 0f);
+                    var eyeMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.10f, 0.07f, 0.06f), outlineWidth: 0f);
+                    var shineMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, emission: new Color(0.5f, 0.5f, 0.5f), outlineWidth: 0f);
 
-                    var duckBody = ToyRoomYunaSculptor.CreateParametricMesh("Duck_SculptedBody", 32, 18, (u, v) =>
+                    var root = new GameObject("Duck_Root").transform;
+                    root.SetParent(parent, false);
+                    root.localRotation = Quaternion.Euler(0f, -135f, 0f);
+
+                    // Corpo 3D com peito arredondado e cauda arrebitada
+                    var duckBody = ToyRoomYunaSculptor.CreateParametricMesh("Duck_SculptedBody", 36, 22, (u, v) =>
                     {
                         float p = Mathf.Clamp(v, 0.001f, 0.999f) * Pi;
                         float a = (u - 0.5f) * 2f * Pi;
-                        float tailLift = Mathf.Clamp01(-Mathf.Cos(p)) * 0.08f;
-                        return new Vector3(0f, 0.17f + tailLift, 0f) + new Vector3(
-                            0.14f * Mathf.Sin(p) * Mathf.Sin(a),
-                            0.11f * Mathf.Cos(p),
-                            0.19f * Mathf.Sin(p) * Mathf.Cos(a));
+                        float cosA = Mathf.Cos(a);
+                        float sinP = Mathf.Sin(p);
+                        float cosP = Mathf.Cos(p);
+                        float tailCurve = Mathf.Pow(Mathf.Clamp01(-cosA), 1.8f) * 0.12f;
+                        float chestCurve = Mathf.Pow(Mathf.Clamp01(cosA), 1.5f) * 0.03f;
+                        float rX = 0.165f * (1f - 0.30f * Mathf.Clamp01(-cosA));
+                        float rZ = 0.235f;
+                        return new Vector3(0f, 0.155f + tailCurve + chestCurve, 0f) + new Vector3(
+                            rX * sinP * Mathf.Sin(a),
+                            0.125f * cosP * (1f - 0.25f * Mathf.Clamp01(-cosA)),
+                            rZ * sinP * cosA);
                     });
-                    ToyRoomYunaSculptor.AttachMesh("Duck_Body", parent, duckBody, duckMat);
+                    ToyRoomYunaSculptor.AttachMesh("Duck_Body", root, duckBody, duckMat);
 
-                    var duckHead = ToyRoomYunaSculptor.CreateEllipsoidMesh("Duck_Head", new Vector3(0f, 0.35f, 0.11f), new Vector3(0.11f, 0.11f, 0.11f), 22);
-                    ToyRoomYunaSculptor.AttachMesh("Duck_Head", parent, duckHead, duckMat);
+                    // Pescoco suave e cabeca arredondada com bochechas
+                    var duckNeck = ToyRoomYunaSculptor.CreateEllipsoidMesh("Duck_Neck", new Vector3(0f, 0.285f, 0.105f), new Vector3(0.088f, 0.095f, 0.088f), 18);
+                    ToyRoomYunaSculptor.AttachMesh("Duck_Neck", root, duckNeck, duckMat);
 
-                    var duckBill = ToyRoomYunaSculptor.CreateEllipsoidMesh("Duck_Bill", new Vector3(0f, 0.33f, 0.22f), new Vector3(0.068f, 0.028f, 0.062f), 18);
-                    ToyRoomYunaSculptor.AttachMesh("Duck_Bill", parent, duckBill, billMat);
+                    var duckHead = ToyRoomYunaSculptor.CreateEllipsoidMesh("Duck_Head", new Vector3(0f, 0.395f, 0.125f), new Vector3(0.120f, 0.112f, 0.118f), 24);
+                    ToyRoomYunaSculptor.AttachMesh("Duck_Head", root, duckHead, duckMat);
 
-                    var crownMesh = CreateTurnedColumnMesh("Duck_Crown", 0.055f, 0.075f, 18, 8);
-                    var crGo = ToyRoomYunaSculptor.AttachMesh("Duck_Crown", parent, crownMesh, crownMat);
-                    crGo.transform.localPosition = new Vector3(0f, 0.44f, 0.11f);
+                    // Bico superior e inferior esculpidos
+                    var upperBill = ToyRoomYunaSculptor.CreateEllipsoidMesh("Duck_UpperBill", new Vector3(0f, 0.378f, 0.245f), new Vector3(0.074f, 0.024f, 0.076f), 18);
+                    ToyRoomYunaSculptor.AttachMesh("Duck_UpperBill", root, upperBill, billMat);
+                    var lowerBill = ToyRoomYunaSculptor.CreateEllipsoidMesh("Duck_LowerBill", new Vector3(0f, 0.354f, 0.232f), new Vector3(0.058f, 0.016f, 0.062f), 16);
+                    ToyRoomYunaSculptor.AttachMesh("Duck_LowerBill", root, lowerBill, billMat);
+
+                    // Asas 3D arqueadas com volume e pontas destacadas
+                    for (int side = -1; side <= 1; side += 2)
+                    {
+                        var wing = ToyRoomYunaSculptor.CreateCurveTubeMesh(
+                            $"Duck_Wing_{side}",
+                            new Vector3(side * 0.135f, 0.21f, 0.07f),
+                            new Vector3(side * 0.185f, 0.20f, -0.01f),
+                            new Vector3(side * 0.175f, 0.18f, -0.10f),
+                            new Vector3(side * 0.130f, 0.20f, -0.17f),
+                            0.048f,
+                            0.45f,
+                            14,
+                            14);
+                        ToyRoomYunaSculptor.AttachMesh($"Duck_Wing_{side}", root, wing, wingMat);
+
+                        var eye = ToyRoomYunaSculptor.CreateEllipsoidMesh($"Duck_Eye_{side}", new Vector3(side * 0.072f, 0.420f, 0.215f), new Vector3(0.019f, 0.024f, 0.015f), 14);
+                        ToyRoomYunaSculptor.AttachMesh($"Duck_Eye_{side}", root, eye, eyeMat);
+
+                        var shine = ToyRoomYunaSculptor.CreateEllipsoidMesh($"Duck_EyeShine_{side}", new Vector3(side * 0.068f + 0.005f, 0.428f, 0.228f), new Vector3(0.007f, 0.007f, 0.005f), 8);
+                        ToyRoomYunaSculptor.AttachMesh($"Duck_EyeShine_{side}", root, shine, shineMat);
+                    }
+
+                    // Coroa real de 5 pontas com rubis
+                    var crownMesh = ToyRoomYunaSculptor.CreateParametricMesh("Duck_RoyalCrown", 36, 10, (u, v) =>
+                    {
+                        float a = u * 2f * Pi;
+                        float points = 0.032f * Mathf.Pow(Mathf.Abs(Mathf.Cos(a * 2.5f)), 1.5f);
+                        float y = v * (0.048f + points);
+                        float r = Mathf.Lerp(0.056f, 0.068f, v);
+                        return new Vector3(r * Mathf.Sin(a), y, r * Mathf.Cos(a));
+                    });
+                    var crGo = ToyRoomYunaSculptor.AttachMesh("Duck_Crown", root, crownMesh, crownMat);
+                    crGo.transform.localPosition = new Vector3(0f, 0.488f, 0.125f);
+
+                    for (int g = 0; g < 5; g++)
+                    {
+                        float ga = g * (2f * Pi / 5f);
+                        var gem = ToyRoomYunaSculptor.CreateEllipsoidMesh($"Duck_CrownGem_{g}", new Vector3(0.068f * Mathf.Sin(ga), 0.562f, 0.125f + 0.068f * Mathf.Cos(ga)), new Vector3(0.011f, 0.011f, 0.011f), 8);
+                        ToyRoomYunaSculptor.AttachMesh($"Duck_CrownGem_{g}", root, gem, gemMat);
+                    }
                     break;
                 }
 
@@ -619,18 +695,35 @@ namespace YunaLegend.Editor.ToyRoom
 
                 default:
                 {
-                    var jackMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, JackTexPath, outlineWidth: 0.0045f);
-                    var goldMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.96f, 0.80f, 0.32f), outlineWidth: 0.0035f);
+                    var jackMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, JackTexPath, outlineWidth: 0.003f);
+                    var skinMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.99f, 0.85f, 0.76f), outlineWidth: 0.002f);
+                    var goldMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.96f, 0.80f, 0.32f), outlineWidth: 0.0025f);
+                    var eyeMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.12f, 0.08f, 0.06f), outlineWidth: 0f);
+                    var blushMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.96f, 0.54f, 0.60f), outlineWidth: 0f);
+
+                    var root = new GameObject("Jack_Root").transform;
+                    root.SetParent(parent, false);
+                    root.localRotation = Quaternion.Euler(0f, 180f, 0f);
 
                     var boxMesh = CreateBeveledBoxMesh("Jack_MusicBox", Vector3.one * 0.32f, 0.04f, 22, 12);
-                    var boxGo = ToyRoomYunaSculptor.AttachMesh("Jack_Box", parent, boxMesh, jackMat);
+                    var boxGo = ToyRoomYunaSculptor.AttachMesh("Jack_Box", root, boxMesh, jackMat);
                     boxGo.transform.localPosition = new Vector3(0f, 0.16f, 0f);
 
+                    var crankArm = CreateBeveledBoxMesh("Jack_Crank", new Vector3(0.10f, 0.025f, 0.025f), 0.008f, 8, 6);
+                    var crGo = ToyRoomYunaSculptor.AttachMesh("Jack_Crank", root, crankArm, goldMat);
+                    crGo.transform.localPosition = new Vector3(0.20f, 0.18f, 0f);
+
                     var jesterHead = ToyRoomYunaSculptor.CreateEllipsoidMesh("Jack_JesterHead", new Vector3(0f, 0.42f, 0f), new Vector3(0.095f, 0.095f, 0.095f), 20);
-                    ToyRoomYunaSculptor.AttachMesh("Jack_JesterHead", parent, jesterHead, jackMat);
+                    ToyRoomYunaSculptor.AttachMesh("Jack_JesterHead", root, jesterHead, skinMat);
 
                     for (int side = -1; side <= 1; side += 2)
                     {
+                        var eye = ToyRoomYunaSculptor.CreateEllipsoidMesh($"Jack_Eye_{side}", new Vector3(side * 0.036f, 0.435f, 0.085f), new Vector3(0.014f, 0.018f, 0.010f), 10);
+                        ToyRoomYunaSculptor.AttachMesh($"Jack_Eye_{side}", root, eye, eyeMat);
+
+                        var blush = ToyRoomYunaSculptor.CreateEllipsoidMesh($"Jack_Blush_{side}", new Vector3(side * 0.056f, 0.408f, 0.078f), new Vector3(0.018f, 0.012f, 0.008f), 10);
+                        ToyRoomYunaSculptor.AttachMesh($"Jack_Blush_{side}", root, blush, blushMat);
+
                         var horn = ToyRoomYunaSculptor.CreateCurveTubeMesh(
                             $"Jack_CapHorn_{side}",
                             new Vector3(side * 0.03f, 0.49f, 0f),
@@ -641,7 +734,7 @@ namespace YunaLegend.Editor.ToyRoom
                             0.85f,
                             12,
                             12);
-                        ToyRoomYunaSculptor.AttachMesh($"JesterHorn_{side}", parent, horn, goldMat);
+                        ToyRoomYunaSculptor.AttachMesh($"JesterHorn_{side}", root, horn, goldMat);
                     }
                     break;
                 }
@@ -979,6 +1072,93 @@ namespace YunaLegend.Editor.ToyRoom
             tex.Apply();
             File.WriteAllBytes(path, tex.EncodeToPNG());
             UnityEngine.Object.DestroyImmediate(tex);
+        }
+
+        /// <summary>
+        /// Anexa um modelo 3D gerado via Hunyuan3D-2 (Assets/Art/ToyRoom/Models/Props/{propId}.obj + _Albedo.png)
+        /// normalizando a escala para caber na pegada/altura canonica do objeto. Retorna false se o arquivo ainda nao existir.
+        /// </summary>
+        public static bool TryAttachGeneratedPropModel(Transform parent, string propId, float targetHeight, float maxFootprintX, float maxFootprintZ)
+        {
+            string objPath = $"Assets/Art/ToyRoom/Models/Props/{propId}.obj";
+            if (!File.Exists(objPath))
+            {
+                return false;
+            }
+
+            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(objPath);
+            if (prefab == null)
+            {
+                return false;
+            }
+
+            string texPath = $"Assets/Art/ToyRoom/Models/Props/{propId}_Albedo.png";
+            if (File.Exists(texPath) && AssetDatabase.LoadAssetAtPath<Texture2D>(texPath) == null)
+            {
+                AssetDatabase.ImportAsset(texPath, ImportAssetOptions.ForceUpdate);
+            }
+
+            var mat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, File.Exists(texPath) ? texPath : null, outlineWidth: 0.0018f);
+            mat.SetFloat("_BrushNoiseStrength", 0.0f);
+            EditorUtility.SetDirty(mat);
+
+            var instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab, parent);
+            instance.name = $"Model3D_{propId}";
+            instance.transform.localPosition = Vector3.zero;
+            instance.transform.localRotation = GetGeneratedPropRotation(propId);
+            instance.transform.localScale = Vector3.one;
+
+            var renderers = instance.GetComponentsInChildren<Renderer>(true);
+            Bounds combined = new Bounds(parent.position, Vector3.zero);
+            bool hasBounds = false;
+            foreach (var r in renderers)
+            {
+                r.sharedMaterial = mat;
+                if (!hasBounds)
+                {
+                    combined = r.bounds;
+                    hasBounds = true;
+                }
+                else
+                {
+                    combined.Encapsulate(r.bounds);
+                }
+            }
+
+            if (hasBounds)
+            {
+                Vector3 size = combined.size;
+                float scaleY = size.y > 0.001f ? targetHeight / size.y : 1f;
+                float scaleX = size.x > 0.001f ? maxFootprintX / size.x : scaleY;
+                float scaleZ = size.z > 0.001f ? maxFootprintZ / size.z : scaleY;
+                float uniformScale = Mathf.Min(scaleY, Mathf.Min(scaleX, scaleZ));
+                Vector3 localCenter = combined.center - parent.position;
+                float localMinY = combined.min.y - parent.position.y;
+                instance.transform.localScale = Vector3.one * uniformScale;
+                instance.transform.localPosition = new Vector3(
+                    -localCenter.x * uniformScale,
+                    -localMinY * uniformScale,
+                    -localCenter.z * uniformScale);
+            }
+
+            return true;
+        }
+
+        private static Quaternion GetGeneratedPropRotation(string propId)
+        {
+            switch (propId)
+            {
+                case "bookshelf":
+                case "wardrobe":
+                case "robot":
+                case "toy-chest":
+                case "toy-chest-open":
+                    return Quaternion.Euler(0f, 180f, 0f);
+                case "armchair":
+                    return Quaternion.Euler(0f, 135f, 0f);
+                default:
+                    return Quaternion.identity;
+            }
         }
     }
 }

@@ -64,6 +64,11 @@ namespace YunaLegend.ToyRoom.Runtime
             beatPlayer.Play(ToyRoomNarrativeScript.SwordPickupBeats);
         }
 
+        public void AdvanceActiveBeat()
+        {
+            beatPlayer.AdvanceCurrentBeat();
+        }
+
         public void SkipActiveSequence()
         {
             beatPlayer.SkipAll();

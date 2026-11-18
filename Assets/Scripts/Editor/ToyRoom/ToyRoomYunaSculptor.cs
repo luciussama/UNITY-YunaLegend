@@ -17,10 +17,14 @@ namespace YunaLegend.Editor.ToyRoom
     {
         public const string ModelsFolder = "Assets/Art/ToyRoom/Models";
         public const string CustomModelPathFbx = ModelsFolder + "/Yuna_ToyRoom.fbx";
+        public const string CustomModelPathObj = ModelsFolder + "/Yuna_ToyRoom.obj";
         public const string CustomModelPathGlb = ModelsFolder + "/Yuna_ToyRoom.glb";
+        public const string CustomModelAlbedoPath = ModelsFolder + "/Yuna_ToyRoom_Albedo.png";
 
         private const string FaceTexPath = "Assets/Art/ToyRoom/Materials/T_Yuna_Face_Painted.png";
         private const string DressTexPath = "Assets/Art/ToyRoom/Materials/T_Yuna_Dress_Painted.png";
+        private const string CollarSleeveTexPath = "Assets/Art/ToyRoom/Materials/T_Yuna_CollarSleeve_Painted.png";
+        private const string CoralRibbonTexPath = "Assets/Art/ToyRoom/Materials/T_Yuna_CoralRibbon_Painted.png";
         private const string HairTexPath = "Assets/Art/ToyRoom/Materials/T_Yuna_Hair_Painted.png";
         private const string NandaFaceTexPath = "Assets/Art/ToyRoom/Materials/T_Nanda_Face_Painted.png";
         private const string NandaWingTexPath = "Assets/Art/ToyRoom/Materials/T_Nanda_Wing_Painted.png";
@@ -38,78 +42,103 @@ namespace YunaLegend.Editor.ToyRoom
             out Transform ponytailPivot)
         {
             Directory.CreateDirectory(ModelsFolder);
-            EnsurePaintedTextures();
+            EnsurePaintedTextures(forceRegenerate: true);
 
             var bodyGo = new GameObject("Yuna_BodyRoot");
             bodyGo.transform.SetParent(parent, false);
+            // Escala de fantasia um pouco maior para destacar Yuna na sala sem fechar o enquadramento
+            bodyGo.transform.localScale = Vector3.one * 1.28f;
             bodyRoot = bodyGo.transform;
 
             var customPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(CustomModelPathFbx)
+                ?? AssetDatabase.LoadAssetAtPath<GameObject>(CustomModelPathObj)
                 ?? AssetDatabase.LoadAssetAtPath<GameObject>(CustomModelPathGlb);
             if (customPrefab != null)
             {
                 var inst = (GameObject)PrefabUtility.InstantiatePrefab(customPrefab, bodyRoot);
                 inst.name = "Yuna_ImportedMesh";
-                legLeftPivot = FindOrCreatePivot(bodyRoot, "Leg_L_Pivot", new Vector3(-0.08f, 0.38f, 0f));
-                legRightPivot = FindOrCreatePivot(bodyRoot, "Leg_R_Pivot", new Vector3(0.08f, 0.38f, 0f));
-                armLeftPivot = FindOrCreatePivot(bodyRoot, "Arm_L_Pivot", new Vector3(-0.14f, 0.86f, 0f));
-                armRightPivot = FindOrCreatePivot(bodyRoot, "Arm_R_Pivot", new Vector3(0.14f, 0.86f, 0f));
-                ponytailPivot = FindOrCreatePivot(bodyRoot, "Ponytail_Pivot", new Vector3(0f, 1.32f, -0.14f));
+                if (File.Exists(CustomModelAlbedoPath))
+                {
+                    var importedMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, CustomModelAlbedoPath, outlineWidth: 0.0025f);
+                    importedMat.SetColor("_ShadowColor", new Color(0.76f, 0.64f, 0.62f, 1f));
+                    EditorUtility.SetDirty(importedMat);
+                    foreach (var mr in inst.GetComponentsInChildren<MeshRenderer>(true))
+                    {
+                        mr.sharedMaterial = importedMat;
+                    }
+                }
+                ToyRoomYunaRigBuilder.AttachSkinnedRig(
+                    inst,
+                    bodyRoot,
+                    out _,
+                    out legLeftPivot,
+                    out legRightPivot,
+                    out armLeftPivot,
+                    out armRightPivot,
+                    out ponytailPivot);
                 return;
             }
 
             // Materiais pictoricos com texturas 1024x1024 pintadas a mao
-            var faceMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, FaceTexPath, outlineWidth: 0.0042f);
-            var skinMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.98f, 0.83f, 0.72f), outlineWidth: 0.0040f);
-            var hairMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, HairTexPath, outlineWidth: 0.0048f);
-            var dressMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, DressTexPath, outlineWidth: 0.0045f);
-            var ivoryClothMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.97f, 0.91f, 0.80f), outlineWidth: 0.0040f);
-            var coralMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.84f, 0.28f, 0.30f), outlineWidth: 0.0038f);
-            var scrunchieMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.91f, 0.48f, 0.49f), outlineWidth: 0.0042f);
-            var sockMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.96f, 0.91f, 0.82f), outlineWidth: 0.0035f);
-            var shoeMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.56f, 0.15f, 0.17f), outlineWidth: 0.0042f);
-            var soleMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.25f, 0.14f, 0.11f), outlineWidth: 0.0030f);
-            var goldBuckleMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.96f, 0.80f, 0.35f), emission: new Color(0.18f, 0.12f, 0.03f), outlineWidth: 0.002f);
-            var lashMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.18f, 0.09f, 0.07f), outlineWidth: 0f);
+            var faceMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, FaceTexPath, outlineWidth: 0.0030f);
+            var skinMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.98f, 0.83f, 0.72f), outlineWidth: 0.0030f);
+            var hairMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, HairTexPath, outlineWidth: 0.0026f);
+            hairMat.SetColor("_ShadowColor", new Color(0.78f, 0.62f, 0.52f, 1f));
+            hairMat.SetColor("_RimColor", new Color(1.0f, 0.84f, 0.60f, 1f));
+            EditorUtility.SetDirty(hairMat);
+
+            var hairStrandMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, HairTexPath, outlineWidth: 0.0007f);
+            hairStrandMat.SetColor("_ShadowColor", new Color(0.78f, 0.62f, 0.52f, 1f));
+            hairStrandMat.SetColor("_RimColor", new Color(1.0f, 0.84f, 0.60f, 1f));
+            hairStrandMat.SetColor("_OutlineColor", new Color(0.28f, 0.13f, 0.08f, 1f));
+            EditorUtility.SetDirty(hairStrandMat);
+
+            var dressMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, DressTexPath, outlineWidth: 0.0035f);
+            var collarSleeveMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, CollarSleeveTexPath, outlineWidth: 0.0032f);
+            var coralRibbonMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, CoralRibbonTexPath, outlineWidth: 0.0028f);
+            var scrunchieMat = ToyRoomVisualFactory.CreatePainterlyMaterial(Color.white, CoralRibbonTexPath, outlineWidth: 0.0032f);
+            var sockMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.95f, 0.90f, 0.80f), outlineWidth: 0.0028f);
+            var shoeMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.50f, 0.13f, 0.15f), outlineWidth: 0.0035f);
+            var soleMat = ToyRoomVisualFactory.CreatePainterlyMaterial(new Color(0.24f, 0.13f, 0.10f), outlineWidth: 0.0025f);
 
             // 1. Corpo / Vestido Esculpido (Busto + Saia Plissada em Sino + Gola Peter Pan + Laco Coral)
-            BuildTorsoAndSkirt(bodyRoot, dressMat, ivoryClothMat, coralMat, skinMat, goldBuckleMat);
+            BuildTorsoAndSkirt(bodyRoot, dressMat, collarSleeveMat, coralRibbonMat, skinMat);
 
-            // 2. Cabeca Expressiva com Rosto Pintado a Mao (inclinada -16 graus para leitura clara na camera isometrica)
+            // 2. Cabeca Expressiva com Rosto Pintado a Mao
             var headRoot = new GameObject("Head_Root").transform;
             headRoot.SetParent(bodyRoot, false);
-            headRoot.localPosition = new Vector3(0f, 0.95f, 0.01f);
-            headRoot.localRotation = Quaternion.Euler(-16f, 0f, 0f);
+            headRoot.localPosition = new Vector3(0f, 0.935f, 0.01f);
+            headRoot.localRotation = Quaternion.Euler(-4f, 0f, 0f);
 
-            BuildSculptedHeadAndFace(headRoot, faceMat, skinMat, lashMat, hairMat);
+            BuildSculptedHeadAndFace(headRoot, faceMat, skinMat, hairMat, hairStrandMat);
 
-            // 3. Rabo de Cavalo Alto Cacheado Volumoso + Xuxinha Rosa Frisada
+            // 3. Rabo de Cavalo Alto Cacheado Volumoso + Xuxinha Coral-Rosa Frisada
             ponytailPivot = new GameObject("Ponytail_Pivot").transform;
             ponytailPivot.SetParent(headRoot, false);
-            ponytailPivot.localPosition = new Vector3(0f, 0.35f, -0.13f);
-            BuildScrunchieAndCurlyPonytail(ponytailPivot, scrunchieMat, hairMat);
+            ponytailPivot.localPosition = new Vector3(-0.010f, 0.285f, -0.125f);
+            BuildScrunchieAndCurlyPonytail(ponytailPivot, scrunchieMat, hairMat, hairStrandMat);
 
             // 4. Bracos Articulados com Mangas Bufantes Plissadas e Maozinhas Esculpidas
             armLeftPivot = new GameObject("Arm_L_Pivot").transform;
             armLeftPivot.SetParent(bodyRoot, false);
-            armLeftPivot.localPosition = new Vector3(-0.138f, 0.88f, 0f);
-            BuildSculptedArm(armLeftPivot, -1, ivoryClothMat, coralMat, skinMat);
+            armLeftPivot.localPosition = new Vector3(-0.132f, 0.865f, 0f);
+            BuildSculptedArm(armLeftPivot, -1, collarSleeveMat, coralRibbonMat, skinMat);
 
             armRightPivot = new GameObject("Arm_R_Pivot").transform;
             armRightPivot.SetParent(bodyRoot, false);
-            armRightPivot.localPosition = new Vector3(0.138f, 0.88f, 0f);
-            BuildSculptedArm(armRightPivot, 1, ivoryClothMat, coralMat, skinMat);
+            armRightPivot.localPosition = new Vector3(0.132f, 0.865f, 0f);
+            BuildSculptedArm(armRightPivot, 1, collarSleeveMat, coralRibbonMat, skinMat);
 
-            // 5. Pernas Articuladas com Meias de Babado e Sapatos Mary Jane com Fivela Dourada
+            // 5. Pernas Articuladas com Meias Caneladas de Babado e Sapatos Mary Jane Vinho
             legLeftPivot = new GameObject("Leg_L_Pivot").transform;
             legLeftPivot.SetParent(bodyRoot, false);
             legLeftPivot.localPosition = new Vector3(-0.075f, 0.44f, 0f);
-            BuildSculptedLegAndShoe(legLeftPivot, -1, skinMat, sockMat, shoeMat, soleMat, goldBuckleMat);
+            BuildSculptedLegAndShoe(legLeftPivot, -1, skinMat, sockMat, shoeMat, soleMat);
 
             legRightPivot = new GameObject("Leg_R_Pivot").transform;
             legRightPivot.SetParent(bodyRoot, false);
             legRightPivot.localPosition = new Vector3(0.075f, 0.44f, 0f);
-            BuildSculptedLegAndShoe(legRightPivot, 1, skinMat, sockMat, shoeMat, soleMat, goldBuckleMat);
+            BuildSculptedLegAndShoe(legRightPivot, 1, skinMat, sockMat, shoeMat, soleMat);
         }
 
         public static void BuildNandaFairySculpted(Transform parent)
@@ -284,90 +313,134 @@ namespace YunaLegend.Editor.ToyRoom
             Material dressMat,
             Material ivoryMat,
             Material coralMat,
-            Material skinMat,
-            Material goldMat)
+            Material skinMat)
         {
-            // Pescoco
-            var neckMesh = CreateParametricMesh("Yuna_Neck", 24, 8, (u, v) =>
+            // Pescoco continuo ate o busto (sem buraco na gola)
+            var neckMesh = CreateParametricMesh("Yuna_Neck", 24, 10, (u, v) =>
             {
                 float a = (u - 0.5f) * 2f * Pi;
-                float y = Mathf.Lerp(0.89f, 0.98f, v);
-                return new Vector3(0.046f * Mathf.Sin(a), y, 0.044f * Mathf.Cos(a));
+                float y = Mathf.Lerp(0.86f, 0.97f, v);
+                float r = Mathf.Lerp(0.056f, 0.044f, v);
+                return new Vector3(r * Mathf.Sin(a), y, r * 0.95f * Mathf.Cos(a));
             });
             AttachMesh("Neck", bodyRoot, neckMesh, skinMat);
 
-            // Busto + Saia Plissada Continua em Sino com Anagua Ondulada
-            var dressMesh = CreateParametricMesh("Yuna_DressBell", 80, 42, (u, v) =>
+            // Busto com pregas convergindo ACIMA do cinto + Saia com pregas nascendo ABAIXO do cinto
+            var dressMesh = CreateParametricMesh("Yuna_DressBell", 96, 54, (u, v) =>
             {
                 float a = (u - 0.5f) * 2f * Pi;
-                if (v < 0.26f)
+                if (v < 0.28f)
                 {
-                    float tv = v / 0.26f;
-                    float y = Mathf.Lerp(0.91f, 0.72f, tv);
-                    float rx = Mathf.Lerp(0.090f, 0.114f, Mathf.Sin(tv * Pi * 0.5f));
-                    float rz = Mathf.Lerp(0.074f, 0.090f, Mathf.Sin(tv * Pi * 0.5f));
-                    return new Vector3(rx * Mathf.Sin(a), y, rz * Mathf.Cos(a));
+                    float tv = v / 0.28f;
+                    float y = Mathf.Lerp(0.922f, 0.72f, tv);
+                    // O corpete abre um pouco no peito e franze ao entrar no cinto
+                    float bustCurve = Mathf.Sin(tv * Pi * 0.65f);
+                    float rx = Mathf.Lerp(0.062f, 0.118f, bustCurve);
+                    float rz = Mathf.Lerp(0.056f, 0.100f, bustCurve);
+                    // Pregas suaves no corpete acima do cinto (convergindo na cintura)
+                    float upperGatherAmp = 0.042f * Mathf.SmoothStep(0.18f, 0.92f, tv);
+                    float upperPleats = 1f + upperGatherAmp * (0.65f * Mathf.Cos(a * 10f) + 0.35f * Mathf.Cos(a * 20f));
+                    return new Vector3(rx * upperPleats * Mathf.Sin(a), y, rz * upperPleats * Mathf.Cos(a));
                 }
                 else
                 {
-                    float sv = (v - 0.26f) / 0.74f;
-                    float y = Mathf.Lerp(0.72f, 0.33f, sv);
-                    float flare = Mathf.Pow(sv, 0.84f);
-                    float baseRx = Mathf.Lerp(0.114f, 0.295f, flare);
-                    float baseRz = Mathf.Lerp(0.090f, 0.265f, flare);
-                    float pleats = 1f + (0.018f + 0.036f * sv) * Mathf.Cos(a * 14f);
-                    float hemWave = sv > 0.82f ? 0.012f * Mathf.Sin(a * 28f) * ((sv - 0.82f) / 0.18f) : 0f;
+                    float sv = (v - 0.28f) / 0.72f;
+                    float y = Mathf.Lerp(0.72f, 0.34f, sv);
+                    float flare = Mathf.Pow(sv, 0.76f);
+                    float baseRx = Mathf.Lerp(0.118f, 0.318f, flare);
+                    float baseRz = Mathf.Lerp(0.098f, 0.288f, flare);
+
+                    // Pregas principais (10) + franzido fino logo abaixo do cinto (20)
+                    float mainPleat = Mathf.Cos(a * 10f);
+                    float fineGather = Mathf.Cos(a * 20f) * (1f - 0.55f * sv);
+                    float pleatShape = 0.68f * mainPleat + 0.32f * fineGather;
+                    float pleatAmp = Mathf.Lerp(0.040f, 0.070f, Mathf.Pow(sv, 0.62f));
+                    float pleats = 1f + pleatAmp * pleatShape;
+
+                    float hemWave = sv > 0.84f ? 0.015f * Mathf.Sin(a * 20f) * ((sv - 0.84f) / 0.16f) : 0f;
                     return new Vector3(baseRx * pleats * Mathf.Sin(a), y + hemWave, baseRz * pleats * Mathf.Cos(a));
                 }
             });
             AttachMesh("Dress_BellSkirt", bodyRoot, dressMesh, dressMat);
 
-            // Faixa de cintura coral-marfim com laco traseiro
-            var sashMesh = CreateParametricMesh("Yuna_WaistSash", 48, 8, (u, v) =>
+            // Anagua/babado creme franzido visivel sob a barra da saia
+            var underskirtMesh = CreateParametricMesh("Yuna_UnderskirtRuffle", 80, 12, (u, v) =>
             {
                 float a = (u - 0.5f) * 2f * Pi;
-                float y = Mathf.Lerp(0.738f, 0.702f, v);
-                return new Vector3(0.118f * Mathf.Sin(a), y, 0.094f * Mathf.Cos(a));
+                float y = Mathf.Lerp(0.365f, 0.298f, v);
+                float r = Mathf.Lerp(0.268f, 0.336f, v) * (1f + 0.055f * Mathf.Cos(a * 24f));
+                return new Vector3(r * Mathf.Sin(a), y, r * 0.91f * Mathf.Cos(a));
             });
-            AttachMesh("Waist_Sash", bodyRoot, sashMesh, coralMat);
+            AttachMesh("Dress_UnderskirtRuffle", bodyRoot, underskirtMesh, ivoryMat);
 
-            // Gola Peter Pan ondulada em duas abas arredondadas
-            var collarMesh = CreateParametricMesh("Yuna_Collar", 64, 12, (u, v) =>
+            // Cinto em linho creme com costuras horizontais, apertando entre as pregas de cima e de baixo
+            var sashMesh = CreateParametricMesh("Yuna_WaistSash", 64, 12, (u, v) =>
             {
                 float a = (u - 0.5f) * 2f * Pi;
-                float frontNotch = 1f - 0.22f * Mathf.Exp(-Mathf.Pow(a / 0.28f, 2f));
-                float scallop = 1f + 0.045f * Mathf.Cos(a * 18f);
-                float r = Mathf.Lerp(0.070f, 0.152f, v) * scallop * frontNotch;
-                float y = 0.908f - 0.036f * v + 0.005f * Mathf.Sin(a * 18f) * v;
+                float y = Mathf.Lerp(0.750f, 0.700f, v);
+                float stitchRidge = 1f + 0.028f * Mathf.Sin(v * Pi * 5f);
+                return new Vector3(0.112f * stitchRidge * Mathf.Sin(a), y, 0.093f * stitchRidge * Mathf.Cos(a));
+            });
+            AttachMesh("Waist_Sash", bodyRoot, sashMesh, ivoryMat);
+
+            // Gola Peter Pan fofa em linho creme com pregas radiais e encontro frontal fechado para o laco
+            var collarMesh = CreateParametricMesh("Yuna_Collar", 84, 16, (u, v) =>
+            {
+                float a = (u - 0.5f) * 2f * Pi;
+                float frontNotch = 1f - 0.30f * Mathf.Exp(-Mathf.Pow(a / 0.19f, 2f));
+                float scallop = 1f + 0.042f * Mathf.Cos(a * 14f);
+                float r = Mathf.Lerp(0.054f, 0.148f, v) * scallop * frontNotch;
+                float archOverShoulders = 0.012f * Mathf.Sin(v * Pi);
+                float pleatWave = 0.008f * Mathf.Cos(a * 14f) * Mathf.Pow(v, 0.7f);
+                float y = 0.926f - 0.048f * Mathf.Pow(v, 1.05f) + archOverShoulders + pleatWave;
                 return new Vector3(r * Mathf.Sin(a), y, r * 0.88f * Mathf.Cos(a));
             });
             AttachMesh("PeterPan_Collar", bodyRoot, collarMesh, ivoryMat);
 
-            // Broche dourado + Laco coral no peito (2 lacos + no central + 2 fitas)
-            var broochMesh = CreateEllipsoidMesh("ChestBow_Brooch", new Vector3(0f, 0.852f, 0.108f), new Vector3(0.018f, 0.018f, 0.012f), 16);
-            AttachMesh("ChestBow_Brooch", bodyRoot, broochMesh, goldMat);
+            // Enfeite/debrum coral ondulado acompanhando toda a borda da gola (inclusive o encontro frontal)
+            var collarTrimMesh = CreateParametricMesh("Yuna_CollarTrim", 84, 10, (u, v) =>
+            {
+                float a = (u - 0.5f) * 2f * Pi;
+                float b = v * 2f * Pi;
+                float frontNotch = 1f - 0.30f * Mathf.Exp(-Mathf.Pow(a / 0.19f, 2f));
+                float scallop = 1f + 0.045f * Mathf.Cos(a * 14f);
+                float baseR = 0.148f * scallop * frontNotch;
+                float tubeR = 0.0085f;
+                float r = baseR + tubeR * Mathf.Cos(b);
+                float y = 0.878f + 0.008f * Mathf.Cos(a * 14f) + 0.022f * Mathf.Exp(-Mathf.Pow(a / 0.19f, 2f)) + tubeR * Mathf.Sin(b);
+                return new Vector3(r * Mathf.Sin(a), y, r * 0.88f * Mathf.Cos(a));
+            });
+            AttachMesh("PeterPan_CollarTrim", bodyRoot, collarTrimMesh, coralMat);
+
+            // Gravatinha / Laco de fita coral-salmao assentado SOBRE a golinha e o enfeite vermelho
+            var bowKnotMesh = CreateEllipsoidMesh("ChestBow_Knot", new Vector3(0f, 0.892f, 0.104f), new Vector3(0.018f, 0.017f, 0.017f), 16);
+            AttachMesh("ChestBow_Knot", bodyRoot, bowKnotMesh, coralMat);
 
             for (int side = -1; side <= 1; side += 2)
             {
-                var loopMesh = CreateParametricMesh($"ChestBow_Loop_{side}", 24, 12, (u, v) =>
+                // Alca larga achatada sobre a gola, abrindo em leque com vinco central franzido
+                var loopMesh = CreateParametricMesh($"ChestBow_Loop_{side}", 28, 14, (u, v) =>
                 {
                     float s = Mathf.Sin(v * Pi);
+                    float fan = Mathf.Lerp(0.45f, 1.25f, v);
+                    float pinch = 1f - 0.35f * Mathf.Exp(-Mathf.Pow((u - 0.25f) * 4f, 2f));
                     return new Vector3(
-                        side * (0.010f + 0.054f * v),
-                        0.852f + 0.025f * s * Mathf.Sin(u * 2f * Pi),
-                        0.105f + 0.014f * s * Mathf.Cos(u * 2f * Pi));
+                        side * (0.010f + 0.056f * v),
+                        0.894f + 0.025f * s * fan * pinch * Mathf.Sin(u * 2f * Pi) - 0.008f * v,
+                        0.104f + 0.016f * v + 0.012f * s * Mathf.Cos(u * 2f * Pi));
                 });
                 AttachMesh($"ChestBow_Loop_{side}", bodyRoot, loopMesh, coralMat);
 
+                // Ponta da gravatinha passando SOBRE a borda da gola e do enfeite coral
                 var ribbonMesh = CreateCurveTubeMesh(
                     $"ChestBow_Tail_{side}",
-                    new Vector3(side * 0.012f, 0.845f, 0.106f),
-                    new Vector3(side * 0.030f, 0.808f, 0.112f),
-                    new Vector3(side * 0.040f, 0.765f, 0.114f),
-                    new Vector3(side * 0.046f, 0.728f, 0.108f),
-                    0.013f,
-                    0.35f,
-                    12,
+                    new Vector3(side * 0.008f, 0.884f, 0.108f),
+                    new Vector3(side * 0.022f, 0.854f, 0.120f),
+                    new Vector3(side * 0.032f, 0.824f, 0.124f),
+                    new Vector3(side * 0.038f, 0.798f, 0.118f),
+                    0.017f,
+                    0.28f,
+                    14,
                     14);
                 AttachMesh($"ChestBow_Tail_{side}", bodyRoot, ribbonMesh, coralMat);
             }
@@ -379,23 +452,26 @@ namespace YunaLegend.Editor.ToyRoom
             float a = (u - 0.5f) * 2f * Pi;
             Vector3 q = new Vector3(Mathf.Sin(p) * Mathf.Sin(a), Mathf.Cos(p), Mathf.Sin(p) * Mathf.Cos(a));
 
-            float cheekBulge = 1f + 0.085f * Mathf.Exp(-Mathf.Pow((q.y + 0.16f) * 3.4f, 2f)) * Mathf.Max(0f, q.z);
-            float chinTaper = Mathf.SmoothStep(0.78f, 1.0f, Mathf.InverseLerp(-1.0f, -0.12f, q.y));
+            // Bochechas infantis bem cheinhas + queixo curto e arredondado (proporcao storybook em 3/4)
+            float cheekBulge = 1f + 0.140f * Mathf.Exp(-Mathf.Pow((q.y + 0.22f) * 2.8f, 2f)) * Mathf.Max(0f, q.z);
+            float chinTaper = Mathf.SmoothStep(0.80f, 1.0f, Mathf.InverseLerp(-1.0f, -0.16f, q.y));
             q.x *= chinTaper * cheekBulge;
             q.z *= cheekBulge;
 
-            Vector3 pos = new Vector3(0f, 0.165f, 0.012f) + Vector3.Scale(q, new Vector3(0.188f, 0.182f, 0.178f));
+            // Queixo mais curto para proporcao infantil fofa em 3/4
+            float yScale = q.y < 0f ? 0.142f : 0.175f;
+            Vector3 pos = new Vector3(0f, 0.155f, 0.010f) + new Vector3(q.x * 0.194f, q.y * yScale, q.z * 0.176f);
 
-            // Narizinho delicado esculpido no centro da face
+            // Narizinho arrebitado delicado logo abaixo da linha dos olhos
             if (q.z > 0.2f)
             {
-                float nose = 0.016f * Mathf.Exp(-Mathf.Pow(pos.x / 0.020f, 2f) - Mathf.Pow((pos.y - 0.135f) / 0.020f, 2f));
+                float nose = 0.017f * Mathf.Exp(-Mathf.Pow(pos.x / 0.018f, 2f) - Mathf.Pow((pos.y - 0.128f) / 0.018f, 2f));
                 pos.z += nose;
             }
 
             if (Mathf.Abs(outwardOffset) > 0.0001f)
             {
-                Vector3 radial = (pos - new Vector3(0f, 0.165f, 0.012f)).normalized;
+                Vector3 radial = (pos - new Vector3(0f, 0.155f, 0.010f)).normalized;
                 pos += radial * outwardOffset;
             }
 
@@ -406,184 +482,382 @@ namespace YunaLegend.Editor.ToyRoom
             Transform headRoot,
             Material faceMat,
             Material skinMat,
-            Material lashMat,
-            Material hairMat)
+            Material hairMat,
+            Material hairStrandMat)
         {
-            // 1. Cabeca Esculpida com UV Centrada na Face (u=0.5 centro frontal) e Textura Facial 1024x1024
+            // 1. Cabeca Esculpida com UV Centrada na Face e Textura Facial 1024x1024
             var headMesh = CreateParametricMesh("Yuna_Head", 72, 40, (u, v) => EvaluateYunaHeadPoint(u, v, 0f), blendArcSysFaceNormals: true);
             AttachMesh("Head_Mesh", headRoot, headMesh, faceMat);
 
-            // 2. Orelhas Esculpidas + Cilios Superiores 3D Curvos Acima da Superficie (zero clipping!)
+            // 2. Orelhas Esculpidas bem visiveis na frente dos cachos da nuca
             for (int side = -1; side <= 1; side += 2)
             {
-                var earMesh = CreateEllipsoidMesh(
+                var earGo = AttachMesh(
                     $"Ear_{side}",
-                    new Vector3(side * 0.184f, 0.150f, -0.005f),
-                    new Vector3(0.028f, 0.042f, 0.024f),
-                    18);
-                AttachMesh($"Ear_{side}", headRoot, earMesh, skinMat);
-
-                // Cilios superiores 3D esculpidos acompanhando exatamente a curvatura da cabeca
-                float eyeCenterU = 0.5f + side * 0.078f;
-                var lashArc = CreateCurveTubeMesh(
-                    $"Eyelash3D_{side}",
-                    EvaluateYunaHeadPoint(eyeCenterU - side * 0.036f, 0.492f, 0.004f),
-                    EvaluateYunaHeadPoint(eyeCenterU - side * 0.012f, 0.468f, 0.006f),
-                    EvaluateYunaHeadPoint(eyeCenterU + side * 0.018f, 0.472f, 0.006f),
-                    EvaluateYunaHeadPoint(eyeCenterU + side * 0.042f, 0.498f, 0.005f),
-                    0.0065f,
-                    0.5f,
-                    10,
-                    14);
-                AttachMesh($"Eyelash3D_{side}", headRoot, lashArc, lashMat);
+                    headRoot,
+                    CreateEllipsoidMesh(
+                        $"Ear_{side}",
+                        new Vector3(side * 0.194f, 0.128f, 0.002f),
+                        new Vector3(0.030f, 0.046f, 0.024f),
+                        18),
+                    skinMat);
+                earGo.transform.localRotation = Quaternion.Euler(0f, side * -18f, side * 12f);
             }
 
-            // 3. Domo de Cabelo Volumoso + Cortina de Franja Esculpida Continua (sem buracos na testa!)
-            var hairCap = CreateParametricMesh("Yuna_HairCap", 72, 32, (u, v) =>
+            // 3. Domo de Cabelo Cheio, Macio e Arredondado (sem ondulacao artificial de "macarrao")
+            var hairCap = CreateParametricMesh("Yuna_HairCap", 80, 36, (u, v) =>
             {
                 float a = (u - 0.5f) * 2f * Pi;
-                float frontFaceMask = Mathf.Exp(-Mathf.Pow(a / 0.92f, 2f));
-                float partNotch = 0.04f * Mathf.Exp(-Mathf.Pow((a + 0.10f) / 0.10f, 2f));
-                float maxPhi = Mathf.Lerp(2.32f, 1.14f - partNotch, frontFaceMask);
+                float frontFaceMask = Mathf.Exp(-Mathf.Pow(a / 1.02f, 2f));
+                float maxPhi = Mathf.Lerp(2.42f, 1.04f, frontFaceMask);
                 float phi = 0.001f + v * maxPhi;
-                float grooves = 1f + 0.028f * Mathf.Cos(a * 16f + phi * 2.0f);
+                float crownLift = Mathf.Exp(-phi * 1.4f) * 0.022f;
+                float gentleLocks = 1f + 0.009f * Mathf.Cos(a * 6f);
                 return new Vector3(
-                    0.206f * Mathf.Sin(phi) * Mathf.Sin(a) * grooves,
-                    0.184f + 0.226f * Mathf.Cos(phi),
-                    -0.004f + 0.196f * Mathf.Sin(phi) * Mathf.Cos(a) * grooves);
+                    0.222f * Mathf.Sin(phi) * Mathf.Sin(a) * gentleLocks,
+                    0.192f + (0.232f + crownLift) * Mathf.Cos(phi),
+                    -0.010f + 0.212f * Mathf.Sin(phi) * Mathf.Cos(a) * gentleLocks);
             });
             AttachMesh("Hair_Cap", headRoot, hairCap, hairMat);
 
-            // 4. Mechas de Franja Volumosas Sobrepostas Emoldurando a Testa e as Bochechas
-            float partU = -0.018f;
+            // 4. Mechas em Fita (Ribbon Locks) assentadas no topo da cabeca (sem levantar do cranio)
+            Vector3 crownOrigin = new Vector3(-0.012f, 0.415f, -0.015f);
+            for (int c = 0; c < 10; c++)
+            {
+                float ang = c * 2f * Pi / 10f + 0.20f;
+                float dirX = Mathf.Sin(ang);
+                float dirZ = Mathf.Cos(ang);
+                float reach = dirZ > 0.30f ? 0.148f : 0.212f;
+                float dropY = dirZ > 0.30f ? 0.318f : 0.205f;
+
+                var crownLock = CreateHairRibbonLockMesh(
+                    $"CrownLock_{c}",
+                    crownOrigin,
+                    crownOrigin + new Vector3(dirX * 0.09f, 0.006f, dirZ * 0.09f),
+                    new Vector3(dirX * reach * 0.85f, Mathf.Lerp(0.40f, dropY, 0.48f), dirZ * reach * 0.85f - 0.008f),
+                    new Vector3(dirX * reach, dropY, dirZ * reach - 0.008f),
+                    0.062f,
+                    0.014f,
+                    0f,
+                    14,
+                    20);
+                AttachMesh($"CrownLock_{c}", headRoot, crownLock, hairStrandMat);
+            }
+
+            // 5. Franja Macia e Cheia Abracando a Testa com Gravidade Natural (zero pontas arrepiadas)
+            var bangSpecs = new (Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float w, float th, float hook)[]
+            {
+                // Onda principal varrida para a direita com caimento macio junto ao rosto
+                (new Vector3(-0.02f, 0.402f, 0.065f), new Vector3(0.03f, 0.370f, 0.178f), new Vector3(0.075f, 0.302f, 0.194f), new Vector3(0.098f, 0.246f, 0.174f), 0.074f, 0.018f, 0.010f),
+                (new Vector3(0.01f, 0.398f, 0.060f), new Vector3(0.078f, 0.362f, 0.170f), new Vector3(0.128f, 0.295f, 0.180f), new Vector3(0.155f, 0.240f, 0.150f), 0.070f, 0.018f, 0.012f),
+                (new Vector3(0.04f, 0.390f, 0.050f), new Vector3(0.125f, 0.348f, 0.148f), new Vector3(0.175f, 0.280f, 0.152f), new Vector3(0.196f, 0.230f, 0.120f), 0.064f, 0.017f, 0.010f),
+                // Onda lateral esquerda emoldurando a testa
+                (new Vector3(-0.025f, 0.402f, 0.065f), new Vector3(-0.055f, 0.366f, 0.174f), new Vector3(-0.090f, 0.295f, 0.188f), new Vector3(-0.112f, 0.244f, 0.164f), 0.070f, 0.018f, -0.010f),
+                (new Vector3(-0.045f, 0.395f, 0.055f), new Vector3(-0.108f, 0.354f, 0.158f), new Vector3(-0.155f, 0.280f, 0.162f), new Vector3(-0.178f, 0.228f, 0.128f), 0.066f, 0.018f, -0.010f),
+                // Mecha central suave sobre a testa
+                (new Vector3(-0.015f, 0.404f, 0.070f), new Vector3(0.005f, 0.372f, 0.182f), new Vector3(0.026f, 0.312f, 0.198f), new Vector3(0.042f, 0.264f, 0.184f), 0.058f, 0.016f, 0.006f)
+            };
+            for (int b = 0; b < bangSpecs.Length; b++)
+            {
+                var s = bangSpecs[b];
+                var bangMesh = CreateHairRibbonLockMesh($"BangRibbon_{b}", s.p0, s.p1, s.p2, s.p3, s.w, s.th, s.hook, 14, 22);
+                AttachMesh($"BangRibbon_{b}", headRoot, bangMesh, hairStrandMat);
+            }
+
+            // 6. Mecha em C na Bochecha (na frente da orelha) + Cachinhos Suaves na Nuca (abaixo da orelha)
             for (int side = -1; side <= 1; side += 2)
             {
-                for (int layer = 0; layer < 4; layer++)
+                var cheekCurl = CreateHairRibbonLockMesh(
+                    $"CheekCurl_{side}",
+                    new Vector3(side * 0.165f, 0.265f, 0.062f),
+                    new Vector3(side * 0.194f, 0.195f, 0.080f),
+                    new Vector3(side * 0.184f, 0.122f, 0.084f),
+                    new Vector3(side * 0.154f, 0.095f, 0.096f),
+                    0.036f,
+                    0.013f,
+                    -side * 0.010f,
+                    12,
+                    20);
+                AttachMesh($"CheekCurl_{side}", headRoot, cheekCurl, hairStrandMat);
+
+                for (int n = 0; n < 3; n++)
                 {
-                    float startX = partU + side * (0.008f + layer * 0.024f);
-                    float endX = side * (0.028f + layer * 0.040f);
-                    float endY = 0.256f - layer * 0.012f;
-                    float endZ = Mathf.Sqrt(Mathf.Max(0.01f, 0.195f * 0.195f - endX * endX * 0.65f));
-
-                    var sweptBang = CreateCurveTubeMesh(
-                        $"SweptBang_{side}_{layer}",
-                        new Vector3(startX * 0.5f, 0.375f, 0.055f),
-                        new Vector3(Mathf.Lerp(startX, endX, 0.45f), 0.378f, 0.158f),
-                        new Vector3(Mathf.Lerp(startX, endX, 0.85f), 0.312f, endZ + 0.016f),
-                        new Vector3(endX, endY, endZ),
-                        0.046f - layer * 0.003f,
-                        0.48f,
-                        14,
+                    float ny = 0.095f - n * 0.018f;
+                    float nz = -0.055f - n * 0.032f;
+                    var napeCurl = CreateHairRibbonLockMesh(
+                        $"NapeHookCurl_{side}_{n}",
+                        new Vector3(side * 0.150f, ny + 0.025f, nz),
+                        new Vector3(side * 0.188f, ny - 0.015f, nz - 0.015f),
+                        new Vector3(side * 0.184f, ny - 0.048f, nz + 0.012f),
+                        new Vector3(side * 0.194f, ny - 0.036f, nz + 0.028f),
+                        0.040f - n * 0.004f,
+                        0.016f,
+                        side * 0.014f,
+                        12,
                         18);
-                    AttachMesh($"SweptBang_{side}_{layer}", headRoot, sweptBang, hairMat);
+                    AttachMesh($"NapeHookCurl_{side}_{n}", headRoot, napeCurl, hairStrandMat);
                 }
-
-                // Mechas Laterais Longas Emoldurando as Bochechas (Side Locks)
-                var sideLock = CreateCurveTubeMesh(
-                    $"SideLock_{side}",
-                    new Vector3(side * 0.145f, 0.325f, 0.065f),
-                    new Vector3(side * 0.212f, 0.245f, 0.088f),
-                    new Vector3(side * 0.204f, 0.135f, 0.078f),
-                    new Vector3(side * 0.162f, 0.045f, 0.052f),
-                    0.042f,
-                    0.52f,
-                    14,
-                    18);
-                AttachMesh($"SideLock_{side}", headRoot, sideLock, hairMat);
             }
         }
 
-        private static void BuildScrunchieAndCurlyPonytail(Transform ponytailPivot, Material scrunchieMat, Material hairMat)
+        private static void BuildScrunchieAndCurlyPonytail(
+            Transform ponytailPivot,
+            Material scrunchieMat,
+            Material hairMat,
+            Material hairStrandMat)
         {
-            var scrunchieMesh = CreateParametricMesh("Yuna_Scrunchie", 48, 18, (u, v) =>
+            // Xuxinha coral-rosa fofa e franzida
+            var scrunchieMesh = CreateParametricMesh("Yuna_Scrunchie", 56, 22, (u, v) =>
             {
                 float a = u * 2f * Pi;
                 float b = v * 2f * Pi;
-                float ruffle = 1f + 0.24f * Mathf.Sin(a * 14f);
-                float majorR = 0.070f;
-                float minorR = 0.028f * ruffle;
+                float folds = 1f + 0.30f * Mathf.Sin(a * 12f + Mathf.Sin(b * 2f));
+                float majorR = 0.102f;
+                float minorR = 0.046f * folds;
                 float r = majorR + minorR * Mathf.Cos(b);
                 return new Vector3(
                     r * Mathf.Cos(a),
-                    minorR * Mathf.Sin(b) + 0.011f * Mathf.Cos(a * 14f),
-                    r * Mathf.Sin(a) * 0.86f);
+                    minorR * 1.15f * Mathf.Sin(b) + 0.014f * Mathf.Cos(a * 12f),
+                    r * Mathf.Sin(a) * 0.90f);
             });
             var scGo = AttachMesh("Ruffled_Scrunchie", ponytailPivot, scrunchieMesh, scrunchieMat);
-            scGo.transform.localRotation = Quaternion.Euler(52f, 0f, 0f);
+            scGo.transform.localRotation = Quaternion.Euler(46f, -10f, 0f);
 
-            var coreTail = CreateCurveTubeMesh(
-                "Ponytail_Core",
-                new Vector3(0f, 0.01f, -0.02f),
-                new Vector3(0f, 0.15f, -0.19f),
-                new Vector3(0f, -0.12f, -0.34f),
-                new Vector3(0f, -0.34f, -0.23f),
-                0.098f,
-                0.82f,
-                20,
-                24);
-            AttachMesh("Ponytail_Core", ponytailPivot, coreTail, hairMat);
-
-            for (int i = 0; i < 11; i++)
+            // 1. MASSA CHEIA E VOLUMOSA DE CACHOS (forma de nuvem cheia ao vento, esculpida em gomos/ondas)
+            var cloudMassMesh = CreateParametricMesh("Ponytail_CloudMass", 72, 44, (u, v) =>
             {
-                float angle = i * 2f * Pi / 11f;
-                float ox = Mathf.Cos(angle) * 0.058f;
-                float oy = Mathf.Sin(angle) * 0.048f;
-                float curlTwist = (i % 2 == 0 ? 1f : -1f) * 0.042f;
+                float t = Mathf.Clamp(v, 0.001f, 0.999f);
+                float a = u * 2f * Pi;
 
-                var curlMesh = CreateCurveTubeMesh(
-                    $"Ponytail_Curl_{i}",
-                    new Vector3(ox * 0.4f, 0.01f + oy * 0.3f, -0.02f),
-                    new Vector3(ox * 1.65f, 0.16f + oy, -0.19f),
-                    new Vector3(ox * 1.48f + curlTwist, -0.14f + oy * 0.5f, -0.35f - Mathf.Abs(ox) * 0.3f),
-                    new Vector3(ox * 0.72f - curlTwist, -0.35f + (i % 3) * 0.025f, -0.23f),
-                    0.050f,
-                    0.85f,
-                    14,
-                    22);
-                AttachMesh($"Ponytail_Curl_{i}", ponytailPivot, curlMesh, hairMat);
+                // Espinha dorsal do volume: sai da xuxinha, arqueia cheio para tras e cai em gota larga arredondada
+                Vector3 spine = Bezier(
+                    new Vector3(0f, 0.01f, -0.02f),
+                    new Vector3(0f, 0.14f, -0.18f),
+                    new Vector3(0f, 0.02f, -0.34f),
+                    new Vector3(0f, -0.22f, -0.29f),
+                    t);
+
+                // Envelope bem cheio e arredondado (largo no meio/baixo como nuvem de cachos, sem pontas finas)
+                float env = Mathf.Sin(Pi * Mathf.Pow(t, 0.65f));
+                float rx = 0.068f + 0.155f * env;
+                float ry = 0.068f + 0.165f * env;
+
+                // Lobulos organicos de cachos esculpidos na propria massa cheia
+                float curlLobes = 1f
+                    + 0.13f * Mathf.Sin(a * 7f + t * 8.5f) * env
+                    + 0.08f * Mathf.Cos(a * 11f - t * 11.0f) * env;
+
+                Vector3 tangent = (Bezier(
+                    new Vector3(0f, 0.01f, -0.02f),
+                    new Vector3(0f, 0.14f, -0.18f),
+                    new Vector3(0f, 0.02f, -0.34f),
+                    new Vector3(0f, -0.22f, -0.29f),
+                    Mathf.Min(1f, t + 0.005f)) - spine).normalized;
+                if (tangent.sqrMagnitude < 0.01f)
+                {
+                    tangent = Vector3.back;
+                }
+                Vector3 bx = Vector3.Cross(tangent, Vector3.up).normalized;
+                if (bx.sqrMagnitude < 0.01f)
+                {
+                    bx = Vector3.right;
+                }
+                Vector3 by = Vector3.Cross(bx, tangent).normalized;
+
+                return spine + bx * (rx * curlLobes * Mathf.Cos(a)) + by * (ry * curlLobes * Mathf.Sin(a));
+            });
+            AttachMesh("Ponytail_CloudMass", ponytailPivot, cloudMassMesh, hairMat);
+
+            // 2. CACHINHOS EM C / CARACOIS ARREDONDADOS BROTANDO DA BORDA DA MASSA CHEIA (como na foto!)
+            for (int i = 0; i < 18; i++)
+            {
+                float ringT = 0.28f + 0.64f * ((i % 3) / 2f); // distribuidos do topo, meio e base da massa
+                float angle = (i * 2f * Pi / 18f) + (i % 3) * 0.45f;
+                Vector3 anchor = Bezier(
+                    new Vector3(0f, 0.01f, -0.02f),
+                    new Vector3(0f, 0.14f, -0.18f),
+                    new Vector3(0f, 0.02f, -0.34f),
+                    new Vector3(0f, -0.22f, -0.29f),
+                    ringT);
+
+                float env = Mathf.Sin(Pi * Mathf.Pow(ringT, 0.65f));
+                Vector3 outDir = new Vector3(Mathf.Cos(angle) * 0.145f * env, Mathf.Sin(angle) * 0.145f * env, -0.06f * env);
+                Vector3 curlDir = new Vector3(outDir.x * 1.45f, outDir.y * 1.35f - 0.055f, outDir.z - 0.065f);
+                float hookSign = (i % 2 == 0) ? 1f : -1f;
+
+                var cCurlMesh = CreateStorybookSpiralCurlMesh(
+                    $"Ponytail_RimCurl_{i}",
+                    anchor + outDir * 0.45f,
+                    anchor + outDir * 1.10f + Vector3.up * 0.03f,
+                    anchor + curlDir,
+                    anchor + curlDir + new Vector3(hookSign * 0.045f, 0.035f, 0.040f),
+                    0.072f,
+                    0.044f,
+                    0.014f,
+                    hookSign * 0.028f,
+                    angle,
+                    12,
+                    20);
+                AttachMesh($"Ponytail_RimCurl_{i}", ponytailPivot, cCurlMesh, hairStrandMat);
             }
+        }
+
+        private static Mesh CreateHairRibbonLockMesh(
+            string name,
+            Vector3 p0,
+            Vector3 p1,
+            Vector3 p2,
+            Vector3 p3,
+            float width,
+            float thickness,
+            float tipHookOffset,
+            int sides,
+            int segments)
+        {
+            return CreateParametricMesh(name, sides, segments, (u, v) =>
+            {
+                float t = Mathf.Clamp(v, 0.001f, 0.999f);
+                Vector3 center = Bezier(p0, p1, p2, p3, t);
+                Vector3 tangent = (Bezier(p0, p1, p2, p3, Mathf.Min(1f, t + 0.003f))
+                    - Bezier(p0, p1, p2, p3, Mathf.Max(0f, t - 0.003f))).normalized;
+                Vector3 radialOut = center.normalized;
+                Vector3 bx = Vector3.Cross(tangent, radialOut).normalized;
+                if (bx.sqrMagnitude < 0.01f)
+                {
+                    bx = Vector3.right;
+                }
+                Vector3 bz = Vector3.Cross(bx, tangent).normalized;
+
+                // Curvinha em gancho (J-hook) nos ultimos 28% da ponta da mecha
+                float hookT = Mathf.Clamp01((t - 0.72f) / 0.28f);
+                center += bx * (tipHookOffset * hookT * hookT) + bz * (Mathf.Abs(tipHookOffset) * 0.45f * hookT * hookT);
+
+                float taper = Mathf.Pow(Mathf.Sin(Pi * t), 0.30f) * (1f - 0.82f * Mathf.Pow(t, 2.2f));
+                float a = u * 2f * Pi;
+                // Secao em fita meia-lua com 3 vincos longitudinais de fios
+                float strandGroove = 1f + 0.14f * Mathf.Cos(a * 3f);
+                float xOff = Mathf.Cos(a) * width * 0.5f * taper;
+                float zOff = (Mathf.Sin(a) * thickness * 0.5f * strandGroove - 0.25f * thickness * Mathf.Cos(a) * Mathf.Cos(a)) * taper;
+                return center + bx * xOff + bz * zOff;
+            });
+        }
+
+        private static Mesh CreateStorybookSpiralCurlMesh(
+            string name,
+            Vector3 p0,
+            Vector3 p1,
+            Vector3 p2,
+            Vector3 p3,
+            float width,
+            float thickness,
+            float waveAmplitude,
+            float endSpiralRadius,
+            float phaseOffset,
+            int sides,
+            int segments)
+        {
+            return CreateParametricMesh(name, sides, segments, (u, v) =>
+            {
+                float t = Mathf.Clamp(v, 0.001f, 0.999f);
+                Vector3 spine = Bezier(p0, p1, p2, p3, t);
+                Vector3 tangent = (Bezier(p0, p1, p2, p3, Mathf.Min(1f, t + 0.003f))
+                    - Bezier(p0, p1, p2, p3, Mathf.Max(0f, t - 0.003f))).normalized;
+                Vector3 refAxis = Mathf.Abs(Vector3.Dot(tangent, Vector3.right)) > 0.95f ? Vector3.up : Vector3.right;
+                Vector3 bx = Vector3.Cross(tangent, refAxis).normalized;
+                Vector3 bz = Vector3.Cross(tangent, bx).normalized;
+
+                // Onda S ampla ao longo da mecha + caracol enrolado na ponta (ultimos 35%)
+                float sWave = Mathf.Sin(phaseOffset + t * 2.2f * 2f * Pi) * waveAmplitude * Mathf.Sin(Pi * t);
+                float cWave = Mathf.Cos(phaseOffset + t * 2.2f * 2f * Pi) * waveAmplitude * 0.55f * Mathf.Sin(Pi * t);
+                Vector3 center = spine + bx * sWave + bz * cWave;
+
+                if (t > 0.65f)
+                {
+                    float st = (t - 0.65f) / 0.35f;
+                    float spiralAng = st * 1.65f * Pi;
+                    center += bx * (Mathf.Sin(spiralAng) * endSpiralRadius * st)
+                        + Vector3.up * ((1f - Mathf.Cos(spiralAng)) * Mathf.Abs(endSpiralRadius) * 0.85f * st);
+                }
+
+                float taper = Mathf.Pow(Mathf.Sin(Pi * t), 0.28f) * (1f - 0.78f * Mathf.Pow(t, 2.0f));
+                float a = u * 2f * Pi;
+                float groove = 1f + 0.16f * Mathf.Cos(a * 4f);
+                return center + bx * (Mathf.Cos(a) * width * 0.5f * taper) + bz * (Mathf.Sin(a) * thickness * 0.5f * groove * taper);
+            });
         }
 
         private static void BuildSculptedArm(Transform armPivot, int side, Material ivoryMat, Material coralMat, Material skinMat)
         {
-            var sleeveMesh = CreateParametricMesh($"Sleeve_{side}", 32, 16, (u, v) =>
+            // Manga bufante em linho texturizado com 10 pregas profundas saindo do ombro e do punho
+            var sleeveMesh = CreateParametricMesh($"Sleeve_{side}", 48, 22, (u, v) =>
             {
                 float p = Mathf.Clamp(v, 0.001f, 0.999f) * Pi;
                 float a = u * 2f * Pi;
-                float gathers = 1f + 0.065f * Mathf.Cos(a * 10f) * Mathf.Sin(p);
+                float gatherAmp = 0.115f * Mathf.Pow(Mathf.Sin(p), 0.75f);
+                float gathers = 1f + gatherAmp * Mathf.Cos(a * 10f);
+                float puffProfile = 1f + 0.16f * Mathf.Sin(p * 0.85f);
                 return new Vector3(
-                    side * 0.025f + 0.070f * Mathf.Sin(p) * Mathf.Cos(a) * gathers,
-                    -0.04f + 0.070f * Mathf.Cos(p),
-                    0.070f * Mathf.Sin(p) * Mathf.Sin(a) * gathers);
+                    side * 0.022f + 0.078f * Mathf.Sin(p) * Mathf.Cos(a) * gathers * puffProfile,
+                    -0.042f + 0.072f * Mathf.Cos(p),
+                    0.076f * Mathf.Sin(p) * Mathf.Sin(a) * gathers * puffProfile);
             });
             AttachMesh("Puff_Sleeve", armPivot, sleeveMesh, ivoryMat);
 
-            var cuffMesh = CreateParametricMesh($"SleeveCuff_{side}", 24, 6, (u, v) =>
+            // Elastico/debrum coral franzido abracando o punho da manga
+            var cuffBandMesh = CreateParametricMesh($"SleeveCuffBand_{side}", 36, 8, (u, v) =>
             {
                 float a = u * 2f * Pi;
-                float r = 0.046f + 0.006f * v + 0.004f * Mathf.Sin(a * 12f);
-                return new Vector3(side * 0.032f + r * Mathf.Cos(a), -0.105f - 0.018f * v, r * Mathf.Sin(a));
+                float b = v * Pi;
+                float wave = 0.0045f * Mathf.Cos(a * 12f);
+                float r = 0.047f + 0.006f * Mathf.Sin(b) + wave;
+                return new Vector3(side * 0.032f + r * Mathf.Cos(a), -0.098f - 0.016f * v + 0.002f * Mathf.Sin(a * 12f), r * Mathf.Sin(a));
             });
-            AttachMesh("Sleeve_Cuff", armPivot, cuffMesh, coralMat);
+            AttachMesh("Sleeve_CuffBand", armPivot, cuffBandMesh, coralMat);
 
+            // Babadinho creme ondulado em linho texturizado saindo sob o elastico coral
+            var cuffRuffleMesh = CreateParametricMesh($"SleeveCuffRuffle_{side}", 40, 8, (u, v) =>
+            {
+                float a = u * 2f * Pi;
+                float r = 0.048f + 0.017f * v + 0.0085f * Mathf.Cos(a * 12f) * v;
+                float yWave = 0.004f * Mathf.Sin(a * 12f) * v;
+                return new Vector3(side * 0.032f + r * Mathf.Cos(a), -0.110f - 0.022f * v + yWave, r * Mathf.Sin(a));
+            });
+            AttachMesh("Sleeve_CuffRuffle", armPivot, cuffRuffleMesh, ivoryMat);
+
+            // Antebraco infantil proporcional com leve curva natural para frente
             var forearm = CreateCurveTubeMesh(
                 $"Forearm_{side}",
-                new Vector3(side * 0.035f, -0.11f, 0f),
-                new Vector3(side * 0.045f, -0.18f, 0.012f),
-                new Vector3(side * 0.050f, -0.24f, 0.024f),
-                new Vector3(side * 0.048f, -0.29f, 0.034f),
-                0.034f,
-                0.88f,
-                14,
-                14);
+                new Vector3(side * 0.034f, -0.112f, 0f),
+                new Vector3(side * 0.048f, -0.170f, 0.022f),
+                new Vector3(side * 0.054f, -0.225f, 0.052f),
+                new Vector3(side * 0.048f, -0.268f, 0.082f),
+                0.045f,
+                0.94f,
+                16,
+                16);
             AttachMesh("Forearm", armPivot, forearm, skinMat);
 
-            var handMesh = CreateEllipsoidMesh(
-                $"Hand_{side}",
-                new Vector3(side * 0.048f, -0.305f, 0.038f),
-                new Vector3(0.030f, 0.034f, 0.026f),
+            // Maozinha esculpida (palma fofa + polegar + dedinhos dobrados)
+            var palmMesh = CreateEllipsoidMesh(
+                $"HandPalm_{side}",
+                new Vector3(side * 0.048f, -0.284f, 0.095f),
+                new Vector3(0.030f, 0.032f, 0.032f),
                 16);
-            AttachMesh("Hand", armPivot, handMesh, skinMat);
+            AttachMesh("Hand_Palm", armPivot, palmMesh, skinMat);
+
+            var fingersMesh = CreateEllipsoidMesh(
+                $"HandFingers_{side}",
+                new Vector3(side * 0.042f, -0.296f, 0.114f),
+                new Vector3(0.026f, 0.022f, 0.024f),
+                14);
+            AttachMesh("Hand_Fingers", armPivot, fingersMesh, skinMat);
+
+            var thumbMesh = CreateEllipsoidMesh(
+                $"HandThumb_{side}",
+                new Vector3(side * 0.022f, -0.274f, 0.112f),
+                new Vector3(0.015f, 0.018f, 0.016f),
+                12);
+            AttachMesh("Hand_Thumb", armPivot, thumbMesh, skinMat);
         }
 
         private static void BuildSculptedLegAndShoe(
@@ -592,62 +866,64 @@ namespace YunaLegend.Editor.ToyRoom
             Material skinMat,
             Material sockMat,
             Material shoeMat,
-            Material soleMat,
-            Material goldBuckleMat)
+            Material soleMat)
         {
             var legMesh = CreateParametricMesh($"Leg_{side}", 24, 14, (u, v) =>
             {
                 float a = u * 2f * Pi;
                 float y = Mathf.Lerp(0f, -0.22f, v);
-                float r = Mathf.Lerp(0.046f, 0.035f, v);
+                float r = Mathf.Lerp(0.052f, 0.040f, v);
                 return new Vector3(r * Mathf.Cos(a), y, r * Mathf.Sin(a));
             });
             AttachMesh("Leg_Upper", legPivot, legMesh, skinMat);
 
-            var sockMesh = CreateParametricMesh($"Sock_{side}", 28, 12, (u, v) =>
+            // Meia canelada com babado fofo no topo
+            var sockMesh = CreateParametricMesh($"Sock_{side}", 32, 14, (u, v) =>
             {
                 float a = u * 2f * Pi;
-                float y = Mathf.Lerp(-0.20f, -0.36f, v);
-                float ruffle = v < 0.20f ? 0.007f * Mathf.Sin(a * 14f) : 0.0018f * Mathf.Cos(a * 18f);
-                float r = 0.039f + ruffle;
+                float y = Mathf.Lerp(-0.195f, -0.365f, v);
+                float ruffle = v < 0.24f ? 0.011f * Mathf.Sin(a * 14f) * (1f - v / 0.24f) : 0.0022f * Mathf.Cos(a * 18f);
+                float r = 0.044f + ruffle;
                 return new Vector3(r * Mathf.Cos(a), y, r * Mathf.Sin(a));
             });
             AttachMesh("Ribbed_Sock", legPivot, sockMesh, sockMat);
 
+            // Sapatinho Mary Jane vinho arredondado e fofo
             var shoeUpper = CreateParametricMesh($"Shoe_{side}", 32, 16, (u, v) =>
             {
                 float p = Mathf.Max(0.001f, v) * Pi * 0.5f;
                 float a = u * 2f * Pi;
                 return new Vector3(
-                    0.058f * Mathf.Sin(p) * Mathf.Cos(a),
-                    -0.425f + 0.084f * Mathf.Cos(p),
-                    0.034f + 0.102f * Mathf.Sin(p) * Mathf.Sin(a));
+                    0.062f * Mathf.Sin(p) * Mathf.Cos(a),
+                    -0.425f + 0.082f * Mathf.Cos(p),
+                    0.036f + 0.106f * Mathf.Sin(p) * Mathf.Sin(a));
             });
             AttachMesh("MaryJane_Shoe", legPivot, shoeUpper, shoeMat);
 
             var strapMesh = CreateCurveTubeMesh(
                 $"ShoeStrap_{side}",
-                new Vector3(-0.048f, -0.375f, 0.025f),
-                new Vector3(-0.024f, -0.352f, 0.042f),
-                new Vector3(0.024f, -0.352f, 0.042f),
-                new Vector3(0.048f, -0.375f, 0.025f),
-                0.010f,
+                new Vector3(-0.050f, -0.375f, 0.024f),
+                new Vector3(-0.025f, -0.352f, 0.042f),
+                new Vector3(0.025f, -0.352f, 0.042f),
+                new Vector3(0.050f, -0.375f, 0.024f),
+                0.011f,
                 0.6f,
                 10,
                 10);
             AttachMesh("Shoe_Strap", legPivot, strapMesh, shoeMat);
 
-            var buckleMesh = CreateEllipsoidMesh(
-                $"ShoeBuckle_{side}",
-                new Vector3(side * 0.044f, -0.365f, 0.032f),
-                new Vector3(0.010f, 0.014f, 0.014f),
+            // Botao redondo vinho na tira (igual a arte conceitual)
+            var buttonMesh = CreateEllipsoidMesh(
+                $"ShoeButton_{side}",
+                new Vector3(side * 0.048f, -0.366f, 0.030f),
+                new Vector3(0.011f, 0.014f, 0.014f),
                 12);
-            AttachMesh("Shoe_Buckle", legPivot, buckleMesh, goldBuckleMat);
+            AttachMesh("Shoe_Button", legPivot, buttonMesh, shoeMat);
 
             var soleMesh = CreateEllipsoidMesh(
                 $"Sole_{side}",
-                new Vector3(0f, -0.425f, 0.034f),
-                new Vector3(0.060f, 0.015f, 0.106f),
+                new Vector3(0f, -0.426f, 0.036f),
+                new Vector3(0.064f, 0.017f, 0.110f),
                 24);
             AttachMesh("Shoe_Sole", legPivot, soleMesh, soleMat);
         }
@@ -664,6 +940,16 @@ namespace YunaLegend.Editor.ToyRoom
             if (forceRegenerate || !File.Exists(DressTexPath))
             {
                 GeneratePaintedDressTexture(DressTexPath);
+            }
+
+            if (forceRegenerate || !File.Exists(CollarSleeveTexPath))
+            {
+                GeneratePaintedCollarSleeveTexture(CollarSleeveTexPath);
+            }
+
+            if (forceRegenerate || !File.Exists(CoralRibbonTexPath))
+            {
+                GeneratePaintedCoralRibbonTexture(CoralRibbonTexPath);
             }
 
             if (forceRegenerate || !File.Exists(HairTexPath))
@@ -688,6 +974,8 @@ namespace YunaLegend.Editor.ToyRoom
 
             AssetDatabase.ImportAsset(FaceTexPath, ImportAssetOptions.ForceUpdate);
             AssetDatabase.ImportAsset(DressTexPath, ImportAssetOptions.ForceUpdate);
+            AssetDatabase.ImportAsset(CollarSleeveTexPath, ImportAssetOptions.ForceUpdate);
+            AssetDatabase.ImportAsset(CoralRibbonTexPath, ImportAssetOptions.ForceUpdate);
             AssetDatabase.ImportAsset(HairTexPath, ImportAssetOptions.ForceUpdate);
             AssetDatabase.ImportAsset(NandaFaceTexPath, ImportAssetOptions.ForceUpdate);
             AssetDatabase.ImportAsset(NandaWingTexPath, ImportAssetOptions.ForceUpdate);
@@ -699,20 +987,20 @@ namespace YunaLegend.Editor.ToyRoom
             const int size = 1024;
             var tex = new Texture2D(size, size, TextureFormat.RGBA32, true);
 
-            Color skinBase = new Color(0.98f, 0.84f, 0.73f);
-            Color skinWarmShade = new Color(0.92f, 0.69f, 0.56f);
-            Color blushRose = new Color(0.95f, 0.52f, 0.50f);
-            Color scleraCream = new Color(1.0f, 0.98f, 0.95f);
-            Color scleraShadow = new Color(0.86f, 0.77f, 0.74f);
-            Color limbalDark = new Color(0.18f, 0.08f, 0.05f);
-            Color irisUpper = new Color(0.34f, 0.15f, 0.08f);
-            Color irisMid = new Color(0.58f, 0.29f, 0.14f);
-            Color irisAmberGlow = new Color(0.92f, 0.58f, 0.24f);
-            Color pupilColor = new Color(0.10f, 0.04f, 0.03f);
-            Color lashInk = new Color(0.16f, 0.07f, 0.05f);
-            Color browColor = new Color(0.32f, 0.16f, 0.10f);
-            Color smileLine = new Color(0.76f, 0.32f, 0.30f);
-            Color lowerLipTint = new Color(0.95f, 0.58f, 0.54f);
+            Color skinBase = new Color(0.99f, 0.85f, 0.74f);
+            Color skinWarmShade = new Color(0.93f, 0.70f, 0.57f);
+            Color blushRose = new Color(0.95f, 0.53f, 0.50f);
+            Color scleraCream = new Color(1.0f, 0.99f, 0.97f);
+            Color scleraShadow = new Color(0.84f, 0.76f, 0.74f);
+            Color limbalDark = new Color(0.16f, 0.07f, 0.04f);
+            Color irisUpper = new Color(0.28f, 0.12f, 0.06f);
+            Color irisMid = new Color(0.55f, 0.27f, 0.13f);
+            Color irisAmberGlow = new Color(0.88f, 0.52f, 0.20f);
+            Color pupilColor = new Color(0.08f, 0.03f, 0.02f);
+            Color lashInk = new Color(0.14f, 0.06f, 0.04f);
+            Color browColor = new Color(0.36f, 0.18f, 0.11f);
+            Color mouthInterior = new Color(0.52f, 0.16f, 0.17f);
+            Color tongueRose = new Color(0.90f, 0.45f, 0.46f);
 
             for (int y = 0; y < size; y++)
             {
@@ -721,142 +1009,162 @@ namespace YunaLegend.Editor.ToyRoom
                 {
                     float u = (float)x / (size - 1); // u=0.5 centro frontal da face
 
-                    // Base de pele em aquarela com sombreado suave no topo da testa e queixo
-                    float edgeShade = Mathf.Clamp01(Mathf.Abs(u - 0.5f) * 2.2f);
-                    float topBottomShade = Mathf.Clamp01(Mathf.Max(0.38f - v, v - 0.75f) * 2.4f);
-                    float paperGrain = (Mathf.PerlinNoise(u * 64f, v * 64f) - 0.5f) * 0.018f;
-                    Color col = Color.Lerp(skinBase, skinWarmShade, Mathf.Clamp01(edgeShade * 0.45f + topBottomShade * 0.55f));
+                    // Base de pele em aquarela quente com sombreado suave nas bordas
+                    float edgeShade = Mathf.Clamp01(Mathf.Abs(u - 0.5f) * 2.1f);
+                    float topBottomShade = Mathf.Clamp01(Mathf.Max(0.36f - v, v - 0.76f) * 2.2f);
+                    float paperGrain = (Mathf.PerlinNoise(u * 64f, v * 64f) - 0.5f) * 0.014f;
+                    Color col = Color.Lerp(skinBase, skinWarmShade, Mathf.Clamp01(edgeShade * 0.40f + topBottomShade * 0.50f));
                     col.r = Mathf.Clamp01(col.r + paperGrain);
                     col.g = Mathf.Clamp01(col.g + paperGrain);
                     col.b = Mathf.Clamp01(col.b + paperGrain);
 
-                    // Blush aquarelado nas bochechas
+                    // Blush rosado amplo e fofo nas bochechas
                     for (int side = -1; side <= 1; side += 2)
                     {
-                        float bu = (u - (0.5f + side * 0.102f)) / 0.044f;
-                        float bv = (v - 0.625f) / 0.055f;
+                        float bu = (u - (0.5f + side * 0.098f)) / 0.048f;
+                        float bv = (v - 0.605f) / 0.046f;
                         float bd = bu * bu + bv * bv;
                         if (bd < 1f)
                         {
-                            float blushAlpha = Mathf.Pow(1f - bd, 1.6f) * 0.68f;
+                            float blushAlpha = Mathf.Pow(1f - bd, 1.5f) * 0.62f;
                             col = Color.Lerp(col, blushRose, blushAlpha);
                         }
 
-                        // Olhos Grandes Expressivos Estilo Storybook (Fase 1)
-                        float eyeCx = 0.5f + side * 0.078f;
-                        float eyeCy = 0.542f;
-                        float eu = (u - eyeCx) / 0.042f;
-                        float ev = (v - eyeCy) / 0.086f;
+                        // Olhos Grandes Expressivos Estilo Storybook (compensando proporcao UV da esfera para ficarem altos e redondos)
+                        float eyeCx = 0.5f + side * 0.064f;
+                        float eyeCy = 0.512f;
+                        float eu = (u - eyeCx) / 0.032f;
+                        float ev = (v - eyeCy) / 0.090f;
                         float ed = Mathf.Sqrt(eu * eu + ev * ev);
 
-                        // Sobrancelhas arqueadas suaves
+                        // Sobrancelhas castanhas suaves e arqueadas acima dos olhos
                         float browU = (u - eyeCx) * side;
-                        float browArchY = 0.405f - 0.018f * Mathf.Cos(Mathf.Clamp(browU / 0.042f, -1f, 1f) * Pi * 0.5f) + 0.004f * (browU / 0.042f);
+                        float browArchY = 0.398f - 0.016f * Mathf.Cos(Mathf.Clamp(browU / 0.034f, -1f, 1f) * Pi * 0.5f) + 0.005f * (browU / 0.034f);
                         float browDist = Mathf.Abs(v - browArchY);
-                        if (Mathf.Abs(browU) < 0.042f && browDist < 0.011f)
+                        if (Mathf.Abs(browU) < 0.034f && browDist < 0.012f)
                         {
-                            float taper = 1f - Mathf.Pow(Mathf.Abs(browU) / 0.042f, 1.6f);
-                            float bMask = Mathf.SmoothStep(0.011f * taper, 0f, browDist);
-                            col = Color.Lerp(col, browColor, bMask * 0.88f);
+                            float taper = 1f - Mathf.Pow(Mathf.Abs(browU) / 0.034f, 1.5f);
+                            float bMask = Mathf.SmoothStep(0.012f * taper, 0f, browDist);
+                            col = Color.Lerp(col, browColor, bMask * 0.92f);
                         }
 
-                        // Prega da palpebra dupla
-                        float creaseY = eyeCy - 0.092f + 0.022f * eu * eu;
-                        if (Mathf.Abs(eu) < 0.92f && Mathf.Abs(v - creaseY) < 0.005f)
+                        // Prega delicada da palpebra superior
+                        float creaseY = eyeCy - 0.098f + 0.024f * eu * eu;
+                        if (Mathf.Abs(eu) < 0.88f && Mathf.Abs(v - creaseY) < 0.005f)
                         {
-                            col = Color.Lerp(col, browColor, 0.45f);
+                            col = Color.Lerp(col, browColor, 0.42f);
                         }
 
-                        // Esclera + Iris em degradê + Pupila + Brilhos Estelares
+                        // Esclera + Iris castanho-mel em degrade + Pupila + Brilhos duplos nitidos
                         if (ed <= 1.0f)
                         {
-                            Color eyeCol = Color.Lerp(scleraCream, scleraShadow, Mathf.Clamp01((-ev + 0.25f) * 0.65f));
+                            Color eyeCol = Color.Lerp(scleraCream, scleraShadow, Mathf.Clamp01((-ev + 0.28f) * 0.62f));
 
-                            float iu = (u - eyeCx) / 0.033f;
-                            float iv = (v - (eyeCy + 0.004f)) / 0.076f;
+                            float iu = (u - (eyeCx - side * 0.002f)) / 0.025f;
+                            float iv = (v - (eyeCy + 0.004f)) / 0.078f;
                             float id = Mathf.Sqrt(iu * iu + iv * iv);
                             if (id <= 1.0f)
                             {
-                                float vertGrad = Mathf.Clamp01((iv + 0.85f) / 1.7f);
+                                float vertGrad = Mathf.Clamp01((iv + 0.80f) / 1.6f);
                                 float angle = Mathf.Atan2(iv, iu);
-                                float fibers = 0.5f + 0.5f * Mathf.Sin(angle * 22f + id * 6f);
-                                Color irisCol = Color.Lerp(irisUpper, irisMid, Mathf.Clamp01(vertGrad * 1.4f));
-                                irisCol = Color.Lerp(irisCol, irisAmberGlow, Mathf.Pow(vertGrad, 1.8f) * (0.75f + 0.25f * fibers));
+                                float fibers = 0.5f + 0.5f * Mathf.Sin(angle * 24f + id * 5f);
+                                Color irisCol = Color.Lerp(irisUpper, irisMid, Mathf.Clamp01(vertGrad * 1.35f));
+                                irisCol = Color.Lerp(irisCol, irisAmberGlow, Mathf.Pow(vertGrad, 1.7f) * (0.72f + 0.28f * fibers));
 
-                                // Anel limbal escuro na borda da iris
-                                float limbal = Mathf.SmoothStep(0.76f, 0.98f, id);
-                                irisCol = Color.Lerp(irisCol, limbalDark, limbal * 0.85f);
+                                float limbal = Mathf.SmoothStep(0.75f, 0.98f, id);
+                                irisCol = Color.Lerp(irisCol, limbalDark, limbal * 0.88f);
 
-                                // Pupila aveludada central
-                                if (id < 0.46f)
+                                if (id < 0.48f)
                                 {
-                                    float pBlend = Mathf.SmoothStep(0.46f, 0.34f, id);
+                                    float pBlend = Mathf.SmoothStep(0.48f, 0.35f, id);
                                     irisCol = Color.Lerp(irisCol, pupilColor, pBlend);
                                 }
 
                                 eyeCol = irisCol;
                             }
 
-                            // Brilho principal (canto superior esquerdo) + brilho secundario (inferior direito)
-                            float g1u = (u - (eyeCx - 0.012f)) / 0.012f;
-                            float g1v = (v - (eyeCy - 0.026f)) / 0.025f;
+                            // Brilho principal nitido + brilho secundario
+                            float g1u = (u - (eyeCx - 0.009f)) / 0.009f;
+                            float g1v = (v - (eyeCy - 0.026f)) / 0.026f;
                             if (g1u * g1u + g1v * g1v <= 1f)
                             {
-                                eyeCol = Color.Lerp(eyeCol, Color.white, Mathf.SmoothStep(1f, 0.4f, g1u * g1u + g1v * g1v));
+                                eyeCol = Color.Lerp(eyeCol, Color.white, Mathf.SmoothStep(1f, 0.35f, g1u * g1u + g1v * g1v));
                             }
 
-                            float g2u = (u - (eyeCx + 0.011f)) / 0.006f;
-                            float g2v = (v - (eyeCy + 0.028f)) / 0.013f;
+                            float g2u = (u - (eyeCx + 0.008f)) / 0.0045f;
+                            float g2v = (v - (eyeCy + 0.026f)) / 0.012f;
                             if (g2u * g2u + g2v * g2v <= 1f)
                             {
-                                eyeCol = Color.Lerp(eyeCol, new Color(1f, 0.97f, 0.88f), Mathf.SmoothStep(1f, 0.3f, g2u * g2u + g2v * g2v));
+                                eyeCol = Color.Lerp(eyeCol, new Color(1f, 0.98f, 0.92f), Mathf.SmoothStep(1f, 0.3f, g2u * g2u + g2v * g2v));
                             }
 
                             float edgeSoft = Mathf.SmoothStep(1.0f, 0.88f, ed);
                             col = Color.Lerp(col, eyeCol, edgeSoft);
                         }
 
-                        // Linha de cilios superiores caligrafada em nanquim sepia
-                        float lashArchY = (eyeCy - 0.078f) + 0.056f * eu * eu;
+                        // Cilios superiores caligrafados bem encorpados com pontinhas externas curvadas
+                        float lashArchY = (eyeCy - 0.086f) + 0.064f * eu * eu;
                         float lashDist = Mathf.Abs(v - lashArchY);
-                        if (Mathf.Abs(eu) <= 1.18f && lashDist < 0.016f)
+                        if (Mathf.Abs(eu) <= 1.18f && lashDist < 0.028f)
                         {
-                            float thickness = 0.014f * (1f - 0.35f * Mathf.Abs(eu));
+                            float thickness = 0.025f * (1f - 0.18f * Mathf.Abs(eu));
                             if (lashDist < thickness)
                             {
-                                col = Color.Lerp(col, lashInk, Mathf.SmoothStep(thickness, thickness * 0.25f, lashDist));
+                                col = Color.Lerp(col, lashInk, Mathf.SmoothStep(thickness, thickness * 0.20f, lashDist));
+                            }
+                        }
+
+                        // 2 pontinhas delicadas de cilios no canto externo
+                        float outerX = eyeCx + side * 0.034f;
+                        float flickU = (u - outerX) * side;
+                        if (flickU >= 0f && flickU < 0.013f)
+                        {
+                            float flick1Y = (eyeCy - 0.020f) - 0.018f * (flickU / 0.013f);
+                            float flick2Y = (eyeCy - 0.004f) - 0.012f * (flickU / 0.013f);
+                            if (Mathf.Abs(v - flick1Y) < 0.006f || (flickU < 0.010f && Mathf.Abs(v - flick2Y) < 0.005f))
+                            {
+                                col = Color.Lerp(col, lashInk, 0.92f);
                             }
                         }
                     }
 
-                    // Sombra e brilho delicado do narizinho (logo abaixo da linha dos olhos)
-                    float nu = (u - 0.5f) / 0.012f;
-                    float nv = (v - 0.588f) / 0.018f;
+                    // Sombra e brilho delicado do narizinho arrebitado
+                    float nu = (u - 0.5f) / 0.010f;
+                    float nv = (v - 0.585f) / 0.016f;
                     if (nu * nu + nv * nv < 1f)
                     {
-                        Color noseShade = nv > 0f ? new Color(0.82f, 0.50f, 0.40f) : new Color(1.0f, 0.96f, 0.90f);
-                        col = Color.Lerp(col, noseShade, (1f - (nu * nu + nv * nv)) * 0.72f);
+                        Color noseShade = nv > 0f ? new Color(0.84f, 0.54f, 0.44f) : new Color(1.0f, 0.96f, 0.90f);
+                        col = Color.Lerp(col, noseShade, (1f - (nu * nu + nv * nv)) * 0.65f);
                     }
 
-                    // Sorriso doce e delicado estilo livro ilustrado (bem visivel na camera isometrica)
-                    float mu = (u - 0.5f) / 0.038f;
+                    // Sorriso aberto alegre e contagiante (fiel a arte conceitual)
+                    float mu = (u - 0.5f) / 0.036f;
                     if (Mathf.Abs(mu) <= 1.0f)
                     {
-                        float smileCurveY = 0.648f - 0.018f * mu * mu;
-                        float mDist = Mathf.Abs(v - smileCurveY);
+                        float upperLipY = 0.630f + 0.010f * mu * mu;
+                        float lowerMouthY = 0.678f - 0.038f * mu * mu;
 
-                        // Labio inferior / boca sorridente rosada suave
-                        float lipU = mu / 0.78f;
-                        float lipV = (v - 0.658f) / 0.018f;
-                        if (lipU * lipU + lipV * lipV < 1f && v >= smileCurveY - 0.002f)
+                        if (v >= upperLipY && v <= lowerMouthY && lowerMouthY > upperLipY)
                         {
-                            col = Color.Lerp(col, new Color(0.92f, 0.44f, 0.43f), (1f - (lipU * lipU + lipV * lipV)) * 0.78f);
+                            Color mCol = mouthInterior;
+                            float tongueU = mu / 0.66f;
+                            float tongueV = (v - 0.664f) / 0.018f;
+                            if (tongueU * tongueU + tongueV * tongueV < 1f)
+                            {
+                                mCol = Color.Lerp(mCol, tongueRose, Mathf.SmoothStep(1f, 0.35f, tongueU * tongueU + tongueV * tongueV));
+                            }
+
+                            if (v < upperLipY + 0.008f && Mathf.Abs(mu) < 0.72f)
+                            {
+                                mCol = Color.Lerp(mCol, new Color(0.99f, 0.97f, 0.94f), 0.88f);
+                            }
+
+                            col = Color.Lerp(col, mCol, 0.95f);
                         }
 
-                        if (mDist < 0.009f)
+                        if (Mathf.Abs(v - upperLipY) < 0.0045f || (lowerMouthY > upperLipY && Mathf.Abs(v - lowerMouthY) < 0.0040f))
                         {
-                            float mAlpha = Mathf.SmoothStep(0.009f, 0.0020f, mDist) * (1f - 0.25f * mu * mu);
-                            col = Color.Lerp(col, new Color(0.54f, 0.16f, 0.15f), mAlpha);
+                            col = Color.Lerp(col, new Color(0.46f, 0.15f, 0.14f), 0.78f);
                         }
                     }
 
@@ -873,14 +1181,14 @@ namespace YunaLegend.Editor.ToyRoom
         {
             const int size = 1024;
             var tex = new Texture2D(size, size, TextureFormat.RGBA32, true);
-            Color baseCream = new Color(0.96f, 0.90f, 0.78f);
-            Color foldShadow = new Color(0.82f, 0.71f, 0.56f);
-            Color coralRed = new Color(0.82f, 0.26f, 0.28f);
-            Color coralFlower = new Color(0.90f, 0.42f, 0.42f);
-            Color leafGreen = new Color(0.45f, 0.64f, 0.44f);
-            Color flowerCenter = new Color(0.98f, 0.84f, 0.36f);
-            Color laceCream = new Color(0.99f, 0.96f, 0.88f);
-            Color sepiaLine = new Color(0.34f, 0.18f, 0.13f);
+            Color baseCream = new Color(0.95f, 0.89f, 0.77f);
+            Color foldShadow = new Color(0.77f, 0.65f, 0.50f);
+            Color deepGatherShadow = new Color(0.67f, 0.54f, 0.40f);
+            Color coralBand = new Color(0.79f, 0.33f, 0.34f);
+            Color coralBandEdge = new Color(0.65f, 0.23f, 0.25f);
+            Color coralFlower = new Color(0.89f, 0.44f, 0.43f);
+            Color coralFlowerLight = new Color(0.94f, 0.60f, 0.56f);
+            Color laceCream = new Color(0.98f, 0.94f, 0.86f);
 
             for (int y = 0; y < size; y++)
             {
@@ -888,64 +1196,147 @@ namespace YunaLegend.Editor.ToyRoom
                 for (int x = 0; x < size; x++)
                 {
                     float u = (float)x / (size - 1);
-                    float pleat = 0.5f + 0.5f * Mathf.Sin(u * Pi * 2f * 14f);
-                    float brush = (Mathf.PerlinNoise(u * 48f, v * 48f) - 0.5f) * 0.045f;
-                    Color col = Color.Lerp(foldShadow, baseCream, Mathf.Lerp(0.32f, 1f, pleat));
-                    col.r = Mathf.Clamp01(col.r + brush);
-                    col.g = Mathf.Clamp01(col.g + brush);
-                    col.b = Mathf.Clamp01(col.b + brush);
 
-                    // Costuras e botoes frontais do corpete
-                    if (v < 0.28f && Mathf.Abs(u - 0.5f) < 0.006f)
+                    // Trama de linho pintada à mão em todo o tecido
+                    float weaveX = Mathf.Sin(u * 520f) * 0.014f;
+                    float weaveY = Mathf.Sin(v * 520f) * 0.014f;
+                    float watercolorGrain = (Mathf.PerlinNoise(u * 48f, v * 48f) - 0.5f) * 0.042f;
+                    float fabricTex = weaveX + weaveY + watercolorGrain;
+
+                    Color col;
+                    if (v < 0.28f)
                     {
-                        col = Color.Lerp(col, sepiaLine, 0.38f);
+                        // Corpete: pregas suaves convergindo acima do cinto + oclusao logo acima da borda do cinto
+                        float tv = v / 0.28f;
+                        float mainPleat = 0.5f + 0.5f * Mathf.Cos(u * Pi * 2f * 10f);
+                        float fineGather = 0.5f + 0.5f * Mathf.Cos(u * Pi * 2f * 20f);
+                        float upperPleatMask = Mathf.Lerp(1.0f, 0.65f * mainPleat + 0.35f * fineGather, Mathf.SmoothStep(0.15f, 0.90f, tv));
+                        float aboveWaistAO = Mathf.Exp(-(1f - tv) * 5.8f) * (1f - upperPleatMask) * 0.65f;
+                        col = Color.Lerp(foldShadow, baseCream, Mathf.Lerp(0.32f, 1.0f, upperPleatMask));
+                        col = Color.Lerp(col, deepGatherShadow, aboveWaistAO);
+                    }
+                    else
+                    {
+                        // Saia: pregas alinhadas com a malha 3D (10 principais + 20 franzidas abaixo do cinto)
+                        float sv = (v - 0.28f) / 0.72f;
+                        float mainPleat = 0.5f + 0.5f * Mathf.Cos(u * Pi * 2f * 10f);
+                        float fineGather = 0.5f + 0.5f * Mathf.Cos(u * Pi * 2f * 20f);
+                        float pleatMask = Mathf.Lerp(fineGather * 0.6f + mainPleat * 0.4f, mainPleat, Mathf.SmoothStep(0f, 0.45f, sv));
+
+                        // Oclusao mais funda nos sulcos logo abaixo do cinto (v = 0.28..0.40)
+                        float underWaistAO = Mathf.Exp(-sv * 6.5f) * (1f - pleatMask) * 0.70f;
+                        col = Color.Lerp(foldShadow, baseCream, Mathf.Lerp(0.18f, 1.0f, pleatMask));
+                        col = Color.Lerp(col, deepGatherShadow, underWaistAO);
                     }
 
-                    // Guirlanda de florzinhas de 5 petalas coral com folhinhas verdes
-                    if (v > 0.56f && v < 0.76f)
+                    col.r = Mathf.Clamp01(col.r + fabricTex);
+                    col.g = Mathf.Clamp01(col.g + fabricTex);
+                    col.b = Mathf.Clamp01(col.b + fabricTex);
+
+                    // Duas fileiras alternadas de florzinhas coral simples de 5 petalas (em escala metrica 1:1 para nao esticar na saia)
+                    for (int row = 0; row < 2; row++)
                     {
-                        float cellU = Mathf.Repeat(u * 14f, 1f) - 0.5f;
-                        float cellV = (v - 0.66f) / 0.075f;
-                        float r = Mathf.Sqrt(cellU * cellU + cellV * cellV);
-                        float ang = Mathf.Atan2(cellV, cellU);
-                        float petalRadius = 0.28f + 0.12f * Mathf.Cos(ang * 5f);
-                        if (r < 0.09f)
+                        float rowCenterV = row == 0 ? 0.61f : 0.715f;
+                        float freq = row == 0 ? 12f : 14f;
+                        float phase = row == 0 ? 0f : 0.5f;
+                        float circMeters = row == 0 ? 1.32f : 1.54f;
+                        float flowerRadiusMeters = row == 0 ? 0.022f : 0.017f;
+
+                        float dx = (Mathf.Repeat(u * freq + phase, 1f) - 0.5f) * (circMeters / freq);
+                        float dy = (v - rowCenterV) * 0.58f;
+                        float rNorm = Mathf.Sqrt(dx * dx + dy * dy) / flowerRadiusMeters;
+                        float ang = Mathf.Atan2(dy, dx);
+                        float petalRadius = 0.72f + 0.32f * Mathf.Cos(ang * 5f);
+                        if (rNorm < petalRadius)
                         {
-                            col = flowerCenter;
-                        }
-                        else if (r < petalRadius)
-                        {
-                            col = Color.Lerp(coralRed, coralFlower, r / petalRadius);
-                        }
-                        else if (r < 0.44f && Mathf.Abs(Mathf.Sin(ang * 2f)) > 0.82f)
-                        {
-                            col = Color.Lerp(col, leafGreen, 0.75f);
+                            Color fCol = Color.Lerp(coralFlowerLight, coralFlower, rNorm / petalRadius);
+                            col = Color.Lerp(col, fCol, 0.90f);
                         }
                     }
 
-                    // Barra ondulada coral-carmim + babado de renda bordada
-                    float wave = 0.018f * Mathf.Sin(u * Pi * 2f * 18f);
+                    // Barra ondulada coral-rosada suave perto da extremidade inferior
+                    float wave = 0.016f * Mathf.Sin(u * Pi * 2f * 16f);
                     float vWave = v + wave;
-                    if (vWave >= 0.78f && vWave <= 0.90f)
+                    if (vWave >= 0.79f && vWave <= 0.89f)
                     {
-                        col = coralRed;
-                        if (Mathf.Abs(vWave - 0.78f) < 0.008f || Mathf.Abs(vWave - 0.90f) < 0.008f)
-                        {
-                            col = Color.Lerp(col, sepiaLine, 0.65f);
-                        }
+                        float edgeSoft = Mathf.Min(
+                            Mathf.SmoothStep(0.79f, 0.805f, vWave),
+                            Mathf.SmoothStep(0.89f, 0.875f, vWave));
+                        Color bandCol = Color.Lerp(coralBandEdge, coralBand, edgeSoft);
+                        col = Color.Lerp(col, bandCol, 0.94f);
                     }
-                    else if (vWave > 0.90f)
+                    else if (vWave > 0.89f)
                     {
-                        float lacePleat = 0.5f + 0.5f * Mathf.Sin(u * Pi * 2f * 36f);
-                        col = Color.Lerp(foldShadow, laceCream, lacePleat);
-                        float eyeletU = Mathf.Repeat(u * 36f, 1f) - 0.5f;
-                        float eyeletV = (vWave - 0.94f) / 0.025f;
-                        if (eyeletU * eyeletU + eyeletV * eyeletV < 0.16f)
-                        {
-                            col = Color.Lerp(col, foldShadow, 0.65f);
-                        }
+                        float lacePleat = 0.5f + 0.5f * Mathf.Sin(u * Pi * 2f * 28f);
+                        col = Color.Lerp(foldShadow, laceCream, Mathf.Lerp(0.45f, 1f, lacePleat));
                     }
 
+                    tex.SetPixel(x, y, col);
+                }
+            }
+
+            tex.Apply();
+            File.WriteAllBytes(path, tex.EncodeToPNG());
+            UnityEngine.Object.DestroyImmediate(tex);
+        }
+
+        private static void GeneratePaintedCollarSleeveTexture(string path)
+        {
+            const int size = 512;
+            var tex = new Texture2D(size, size, TextureFormat.RGBA32, true);
+            Color baseCream = new Color(0.95f, 0.89f, 0.77f);
+            Color foldShadow = new Color(0.76f, 0.64f, 0.49f);
+            Color deepGather = new Color(0.66f, 0.53f, 0.39f);
+
+            for (int y = 0; y < size; y++)
+            {
+                float v = (float)y / (size - 1);
+                for (int x = 0; x < size; x++)
+                {
+                    float u = (float)x / (size - 1);
+                    float pleat = 0.5f + 0.5f * Mathf.Cos(u * Pi * 2f * 10f);
+                    float endGather = Mathf.Pow(Mathf.Abs(v - 0.5f) * 2f, 1.5f);
+                    float weave = (Mathf.Sin(u * 380f) + Mathf.Sin(v * 380f)) * 0.012f
+                        + (Mathf.PerlinNoise(u * 36f, v * 36f) - 0.5f) * 0.038f;
+
+                    Color col = Color.Lerp(foldShadow, baseCream, Mathf.Lerp(0.24f, 1.0f, pleat));
+                    col = Color.Lerp(col, deepGather, endGather * (1f - pleat) * 0.65f);
+                    col.r = Mathf.Clamp01(col.r + weave);
+                    col.g = Mathf.Clamp01(col.g + weave);
+                    col.b = Mathf.Clamp01(col.b + weave);
+                    tex.SetPixel(x, y, col);
+                }
+            }
+
+            tex.Apply();
+            File.WriteAllBytes(path, tex.EncodeToPNG());
+            UnityEngine.Object.DestroyImmediate(tex);
+        }
+
+        private static void GeneratePaintedCoralRibbonTexture(string path)
+        {
+            const int size = 512;
+            var tex = new Texture2D(size, size, TextureFormat.RGBA32, true);
+            Color coralLight = new Color(0.92f, 0.54f, 0.52f);
+            Color coralMid = new Color(0.84f, 0.38f, 0.39f);
+            Color coralShadow = new Color(0.62f, 0.22f, 0.24f);
+
+            for (int y = 0; y < size; y++)
+            {
+                float v = (float)y / (size - 1);
+                for (int x = 0; x < size; x++)
+                {
+                    float u = (float)x / (size - 1);
+                    float ribbonRib = Mathf.Sin(u * 420f) * 0.015f;
+                    float crease = Mathf.Exp(-Mathf.Pow((v - 0.5f) * 4.5f, 2f)) * 0.35f;
+                    float edgeShade = Mathf.Pow(Mathf.Abs(v - 0.5f) * 2f, 2.2f) * 0.55f;
+                    float grain = (Mathf.PerlinNoise(u * 40f, v * 40f) - 0.5f) * 0.032f;
+
+                    Color col = Color.Lerp(coralMid, coralLight, crease);
+                    col = Color.Lerp(col, coralShadow, edgeShade);
+                    col.r = Mathf.Clamp01(col.r + ribbonRib + grain);
+                    col.g = Mathf.Clamp01(col.g + ribbonRib + grain);
+                    col.b = Mathf.Clamp01(col.b + ribbonRib + grain);
                     tex.SetPixel(x, y, col);
                 }
             }
@@ -959,10 +1350,10 @@ namespace YunaLegend.Editor.ToyRoom
         {
             const int size = 1024;
             var tex = new Texture2D(size, size, TextureFormat.RGBA32, true);
-            Color deepEspresso = new Color(0.17f, 0.08f, 0.05f);
-            Color richChestnut = new Color(0.38f, 0.19f, 0.11f);
-            Color warmCaramel = new Color(0.62f, 0.36f, 0.20f);
-            Color goldenHalo = new Color(0.78f, 0.50f, 0.28f);
+            Color deepEspresso = new Color(0.16f, 0.08f, 0.04f);
+            Color richChestnut = new Color(0.39f, 0.20f, 0.10f);
+            Color warmCaramel = new Color(0.62f, 0.36f, 0.19f);
+            Color goldenHalo = new Color(0.80f, 0.52f, 0.29f);
 
             for (int y = 0; y < size; y++)
             {
@@ -970,15 +1361,21 @@ namespace YunaLegend.Editor.ToyRoom
                 for (int x = 0; x < size; x++)
                 {
                     float u = (float)x / (size - 1);
-                    float lockGroup = 0.5f + 0.5f * Mathf.Sin(u * Pi * 2f * 18f);
-                    float fineStrands = Mathf.PerlinNoise(u * 90f, v * 10f) * 0.6f
-                        + Mathf.PerlinNoise(u * 210f, v * 20f) * 0.4f;
-                    Color col = Color.Lerp(deepEspresso, richChestnut, fineStrands * (0.4f + 0.6f * lockGroup));
+                    // Fios longos e suaves (sem ondas curtas de "macarrao")
+                    float waveU = u + 0.022f * Mathf.Sin(v * Pi * 1.6f + u * Pi * 2f);
+                    float lockGroup = 0.5f + 0.5f * Mathf.Sin(waveU * Pi * 2f * 10f);
+                    float fineStrands = 0.5f + 0.5f * Mathf.Sin(waveU * Pi * 2f * 72f + Mathf.PerlinNoise(waveU * 14f, v * 5f) * 2.2f);
+                    float painterlyStrands = Mathf.Lerp(
+                        Mathf.PerlinNoise(waveU * 24f, v * 6f),
+                        fineStrands,
+                        0.42f);
 
-                    float halo1 = Mathf.Exp(-Mathf.Pow((v - 0.62f - 0.035f * Mathf.Sin(u * Pi * 20f)) / 0.09f, 2f));
-                    float halo2 = Mathf.Exp(-Mathf.Pow((v - 0.32f + 0.025f * Mathf.Cos(u * Pi * 16f)) / 0.07f, 2f));
-                    col = Color.Lerp(col, warmCaramel, (halo1 + halo2 * 0.6f) * fineStrands);
-                    col = Color.Lerp(col, goldenHalo, halo1 * Mathf.Pow(fineStrands, 2f) * 0.55f);
+                    Color col = Color.Lerp(deepEspresso, richChestnut, painterlyStrands * (0.35f + 0.65f * lockGroup));
+
+                    float halo1 = Mathf.Exp(-Mathf.Pow((v - 0.58f - 0.035f * Mathf.Sin(u * Pi * 12f)) / 0.14f, 2f));
+                    float halo2 = Mathf.Exp(-Mathf.Pow((v - 0.28f + 0.025f * Mathf.Cos(u * Pi * 10f)) / 0.11f, 2f));
+                    col = Color.Lerp(col, warmCaramel, (halo1 * 0.78f + halo2 * 0.52f) * painterlyStrands);
+                    col = Color.Lerp(col, goldenHalo, halo1 * Mathf.Pow(painterlyStrands, 1.6f) * 0.48f);
 
                     tex.SetPixel(x, y, col);
                 }
