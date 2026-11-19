@@ -20,6 +20,13 @@ namespace YunaLegend.Arena.Runtime
         [SerializeField] private Transform nandaFairyTransform;
 
         private ArenaCombatSimulation simulation;
+        private Transform nandaWingL;
+        private Transform nandaWingR;
+        private Transform nandaHead;
+        private bool nandaBonesCached;
+        private float jumpBufferTimer;
+        private bool pendingAttack;
+        private bool pendingSpecial;
 
         public void Configure(
             ArenaSpriteCatalog catalog,
@@ -71,12 +78,43 @@ namespace YunaLegend.Arena.Runtime
                 return;
             }
 
-            ArenaInputState input = ReadInput();
-            simulation.Step(Time.deltaTime, input);
+            ArenaInputState rawInput = ReadInput();
+            if (rawInput.JumpPressed)
+            {
+                jumpBufferTimer = 0.14f;
+            }
+            else if (jumpBufferTimer > 0f)
+            {
+                jumpBufferTimer = Mathf.Max(0f, jumpBufferTimer - Time.deltaTime);
+            }
+
+            if (rawInput.AttackPressed) pendingAttack = true;
+            if (rawInput.SpecialPressed) pendingSpecial = true;
+
+            var bufferedInput = new ArenaInputState
+            {
+                MoveX = rawInput.MoveX,
+                CrouchHeld = rawInput.CrouchHeld,
+                JumpPressed = jumpBufferTimer > 0f,
+                AttackPressed = pendingAttack,
+                SpecialPressed = pendingSpecial
+            };
+
+            int ticks = simulation.Step(Time.deltaTime, bufferedInput);
+            if (ticks > 0)
+            {
+                if (!simulation.PlayerOnGround)
+                {
+                    jumpBufferTimer = 0f;
+                }
+
+                pendingAttack = false;
+                pendingSpecial = false;
+            }
 
             if (playerView != null)
             {
-                playerView.UpdatePlayerVisual(simulation, spriteCatalog, input.MoveX, Time.deltaTime);
+                playerView.UpdatePlayerVisual(simulation, spriteCatalog, bufferedInput.MoveX, Time.deltaTime);
             }
 
             if (enemyView != null)
@@ -145,8 +183,36 @@ namespace YunaLegend.Arena.Runtime
             }
 
             Vector3 playerPos = ArenaCoordinateMapper.ToWorldPosition(simulation.PlayerX, simulation.PlayerY);
-            Vector3 desired = playerPos + new Vector3(-simulation.PlayerFacing * 1.15f, 2.05f + Mathf.Sin(Time.time * 3.1f) * 0.12f, 0.25f);
+            Vector3 enemyPos = ArenaCoordinateMapper.ToWorldPosition(simulation.EnemyX, simulation.EnemyY);
+            Vector3 desired = playerPos + new Vector3(-simulation.PlayerFacing * 1.15f, 2.05f + Mathf.Sin(Time.time * 3.1f) * 0.12f, 0.45f);
             nandaFairyTransform.position = Vector3.Lerp(nandaFairyTransform.position, desired, Time.deltaTime * 5f);
+
+            Vector3 lookDir = enemyPos - nandaFairyTransform.position;
+            lookDir.y = 0f;
+            if (lookDir.sqrMagnitude > 0.002f)
+            {
+                nandaFairyTransform.rotation = Quaternion.Slerp(
+                    nandaFairyTransform.rotation,
+                    Quaternion.LookRotation(lookDir.normalized, Vector3.up),
+                    Time.deltaTime * 6f);
+            }
+
+            if (!nandaBonesCached)
+            {
+                nandaBonesCached = true;
+                var rig = nandaFairyTransform.Find("Nanda_FairyBody/Nanda_GlbMesh/Bone_Torso");
+                if (rig != null)
+                {
+                    nandaWingL = rig.Find("Bone_Wing_L");
+                    nandaWingR = rig.Find("Bone_Wing_R");
+                    nandaHead = rig.Find("Bone_Head");
+                }
+            }
+
+            float flap = Mathf.Sin(Time.time * 20f) * 28f;
+            if (nandaWingL != null) nandaWingL.localRotation = Quaternion.Euler(0f, 10f + flap, 0f);
+            if (nandaWingR != null) nandaWingR.localRotation = Quaternion.Euler(0f, -10f - flap, 0f);
+            if (nandaHead != null) nandaHead.localRotation = Quaternion.Euler(0f, Mathf.Sin(Time.time * 2.4f) * 8f, 0f);
         }
 
         private void SubscribeEvents()
@@ -205,28 +271,28 @@ namespace YunaLegend.Arena.Runtime
         {
             if (validHit)
             {
-                enemyView?.TriggerImpactFeedback(new Color(1f, 0.88f, 0.45f));
-                cameraController?.AddShake(0.08f, 0.12f);
+                enemyView?.TriggerImpactFeedback(new Color(1f, 0.94f, 0.68f));
+                cameraController?.AddShake(0.22f, 0.16f);
             }
             else
             {
-                enemyView?.TriggerImpactFeedback(new Color(0.65f, 0.88f, 1f));
+                enemyView?.TriggerImpactFeedback(new Color(0.68f, 0.92f, 1f));
                 audioController?.PlayBlock();
-                cameraController?.AddShake(0.05f, 0.08f);
+                cameraController?.AddShake(0.14f, 0.12f);
             }
         }
 
         private void HandleAttackBlocked()
         {
-            playerView?.TriggerImpactFeedback(new Color(0.65f, 0.88f, 1f));
+            playerView?.TriggerImpactFeedback(new Color(0.68f, 0.92f, 1f));
             audioController?.PlayBlock();
-            cameraController?.AddShake(0.06f, 0.1f);
+            cameraController?.AddShake(0.16f, 0.13f);
         }
 
         private void HandlePlayerDamaged()
         {
-            playerView?.TriggerImpactFeedback(new Color(1f, 0.35f, 0.35f));
-            cameraController?.AddShake(0.14f, 0.18f);
+            playerView?.TriggerImpactFeedback(new Color(1f, 0.42f, 0.32f));
+            cameraController?.AddShake(0.28f, 0.22f);
         }
 
         private void HandleEnemyAttackStarted(ArenaEnemyId enemyId, ArenaAttackKind kind)
@@ -239,7 +305,12 @@ namespace YunaLegend.Arena.Runtime
             if (phase == ArenaSpecialPhase.Launch)
             {
                 audioController?.PlaySpecialLaunch();
-                cameraController?.AddShake(0.18f, 0.35f);
+                cameraController?.AddShake(0.26f, 0.30f);
+            }
+            else if (phase == ArenaSpecialPhase.Impact)
+            {
+                enemyView?.TriggerImpactFeedback(Color.white);
+                cameraController?.AddShake(0.36f, 0.28f);
             }
         }
 

@@ -24,6 +24,8 @@ namespace YunaLegend.Arena.Core
         private bool specialImpactApplied;
         private int attackChoiceCounter;
         private bool chainPending;
+        private int comboResetTimer;
+        private int nextComboStep;
 
         public ArenaTuning Tuning => tuning;
         public ArenaEnemySpec CurrentEnemySpec { get; private set; }
@@ -36,12 +38,14 @@ namespace YunaLegend.Arena.Core
         public float PlayerX { get; private set; }
         public float PlayerY { get; private set; }
         public float PlayerVy { get; private set; }
+        public float PlayerKnockbackVx { get; private set; }
         public int PlayerFacing { get; private set; } = 1;
         public int PlayerHp { get; private set; }
         public int PlayerMaxHp => tuning.MaxPlayerHp;
         public bool IsCrouching { get; private set; }
         public bool IsGuarding { get; private set; }
         public int SwordTick { get; private set; }
+        public int SwordComboStep { get; private set; }
         public int SwordCooldown { get; private set; }
         public int PlayerImmunity { get; private set; }
         public int PlayerHitRecovery { get; private set; }
@@ -52,6 +56,7 @@ namespace YunaLegend.Arena.Core
         public float EnemyX { get; private set; }
         public float EnemyY { get; private set; }
         public float EnemyVy { get; private set; }
+        public float EnemyKnockbackVx { get; private set; }
         public int EnemyFacing { get; private set; } = -1;
         public int EnemyHp { get; private set; }
         public int EnemyMaxHp => CurrentEnemySpec.MaxHp;
@@ -107,11 +112,15 @@ namespace YunaLegend.Arena.Core
             PlayerX = PlayerStartX;
             PlayerY = tuning.GroundY;
             PlayerVy = 0f;
+            PlayerKnockbackVx = 0f;
             PlayerFacing = 1;
             PlayerHp = tuning.MaxPlayerHp;
             IsCrouching = false;
             IsGuarding = false;
             SwordTick = 0;
+            SwordComboStep = 0;
+            nextComboStep = 0;
+            comboResetTimer = 0;
             SwordCooldown = 0;
             PlayerImmunity = 0;
             PlayerHitRecovery = 0;
@@ -121,23 +130,27 @@ namespace YunaLegend.Arena.Core
             StartWave(0);
         }
 
-        public void Step(float dt, ArenaInputState input)
+        public int Step(float dt, ArenaInputState input)
         {
             if (Outcome != ArenaBattleOutcome.Ongoing)
             {
-                return;
+                return 0;
             }
 
+            int ticksExecuted = 0;
             accumulator += Math.Min(dt, 0.1f);
             while (accumulator >= FixedStepSeconds)
             {
                 accumulator -= FixedStepSeconds;
                 TickFixed(input);
+                ticksExecuted++;
                 if (Outcome != ArenaBattleOutcome.Ongoing)
                 {
                     break;
                 }
             }
+
+            return ticksExecuted;
         }
 
         public void TickFixed(ArenaInputState input)
@@ -160,6 +173,7 @@ namespace YunaLegend.Arena.Core
 
             UpdatePlayer(input);
             UpdateEnemy();
+            ApplyKnockbackVelocities();
             ResolveBodySeparation();
             UpdateStatusHint();
         }
@@ -173,6 +187,7 @@ namespace YunaLegend.Arena.Core
             EnemyX = ChestOriginX;
             EnemyY = tuning.GroundY;
             EnemyVy = 0f;
+            EnemyKnockbackVx = 0f;
             EnemyFacing = -1;
             EnemySpawnScale = 0.16f;
             EnemyState = ArenaEnemyState.Spawning;
@@ -281,6 +296,14 @@ namespace YunaLegend.Arena.Core
         private void UpdatePlayer(ArenaInputState input)
         {
             if (SwordCooldown > 0) SwordCooldown--;
+            if (comboResetTimer > 0)
+            {
+                comboResetTimer--;
+                if (comboResetTimer == 0 && SwordTick == 0)
+                {
+                    nextComboStep = 0;
+                }
+            }
             if (PlayerImmunity > 0) PlayerImmunity--;
             if (PlayerHitRecovery > 0) PlayerHitRecovery--;
             if (BlockRecovery > 0) BlockRecovery--;
@@ -298,6 +321,9 @@ namespace YunaLegend.Arena.Core
             if (input.AttackPressed && SwordTick == 0 && SwordCooldown == 0 && BlockRecovery == 0)
             {
                 SwordTick = 1;
+                SwordComboStep = nextComboStep;
+                nextComboStep = (nextComboStep + 1) % 3;
+                comboResetTimer = 115;
                 SwordCooldown = tuning.SwordCooldownTicks;
                 SwordHitAppliedThisSwing = false;
                 IsGuarding = false;
@@ -414,7 +440,7 @@ namespace YunaLegend.Arena.Core
             }
 
             float pushDir = EnemyX >= PlayerX ? 1f : -1f;
-            EnemyX = ClampToArena(EnemyX + pushDir * tuning.KnockbackDistance, CurrentEnemySpec.BodyWidth * 0.5f);
+            EnemyKnockbackVx = pushDir * tuning.SwordHitEnemyKnockbackVelocity;
 
             OnSwordHit?.Invoke(true);
             CheckBearEnrage();
@@ -683,7 +709,7 @@ namespace YunaLegend.Arena.Core
                 return;
             }
 
-            if (!PlayerOnGround && PlayerY < tuning.GroundY - 95f && ActiveAttackKind != ArenaAttackKind.ToyLeap)
+            if (!PlayerOnGround && PlayerY < tuning.GroundY - 75f && ActiveAttackKind != ArenaAttackKind.ToyLeap)
             {
                 return;
             }
@@ -693,6 +719,8 @@ namespace YunaLegend.Arena.Core
             if (IsGuarding)
             {
                 BlockRecovery = tuning.BlockRecoveryTicks;
+                float guardKnockDir = PlayerX >= EnemyX ? 1f : -1f;
+                PlayerKnockbackVx = guardKnockDir * tuning.EnemyBlockPlayerKnockbackVelocity;
                 OnAttackBlocked?.Invoke();
                 return;
             }
@@ -710,7 +738,7 @@ namespace YunaLegend.Arena.Core
             chainPending = CurrentEnemySpec.PressureChainEnabled && !EnemyProtectedResponse;
 
             float knockDir = PlayerX >= EnemyX ? 1f : -1f;
-            PlayerX = ClampToArena(PlayerX + knockDir * (tuning.KnockbackDistance * 0.65f), tuning.PlayerBodyWidth * 0.5f);
+            PlayerKnockbackVx = knockDir * tuning.EnemyHitPlayerKnockbackVelocity;
 
             OnPlayerDamaged?.Invoke();
 
@@ -733,19 +761,59 @@ namespace YunaLegend.Arena.Core
             };
         }
 
+        public float GetMinBodySeparation()
+        {
+            if (CurrentEnemySpec == null)
+            {
+                return tuning.PlayerBodyWidth;
+            }
+
+            return (tuning.PlayerBodyWidth * 0.5f)
+                + (CurrentEnemySpec.BodyWidth * 0.5f)
+                + tuning.BodySeparationPadding;
+        }
+
+        private void ApplyKnockbackVelocities()
+        {
+            if (Math.Abs(PlayerKnockbackVx) > 0.08f)
+            {
+                PlayerX = ClampToArena(PlayerX + PlayerKnockbackVx, tuning.PlayerBodyWidth * 0.5f);
+                PlayerKnockbackVx *= tuning.KnockbackFriction;
+            }
+            else
+            {
+                PlayerKnockbackVx = 0f;
+            }
+
+            if (Math.Abs(EnemyKnockbackVx) > 0.08f)
+            {
+                EnemyX = ClampToArena(EnemyX + EnemyKnockbackVx, CurrentEnemySpec.BodyWidth * 0.5f);
+                EnemyKnockbackVx *= tuning.KnockbackFriction;
+            }
+            else
+            {
+                EnemyKnockbackVx = 0f;
+            }
+        }
+
         private void ResolveBodySeparation()
         {
-            if (EnemyState == ArenaEnemyState.Spawning || EnemyState == ArenaEnemyState.Defeated)
+            if (EnemyState == ArenaEnemyState.Defeated)
             {
                 return;
             }
 
-            if (!PlayerOnGround && PlayerY < tuning.GroundY - (CurrentEnemySpec.BodyHeight * 0.55f))
+            if (EnemyState == ArenaEnemyState.Spawning && EnemySpawnScale < 0.45f)
             {
                 return;
             }
 
-            float minSep = (tuning.PlayerBodyWidth * 0.5f) + (CurrentEnemySpec.BodyWidth * 0.5f);
+            if (!PlayerOnGround && PlayerY < tuning.GroundY - (CurrentEnemySpec.BodyHeight * 0.62f))
+            {
+                return;
+            }
+
+            float minSep = GetMinBodySeparation();
             float delta = PlayerX - EnemyX;
             float dist = Math.Abs(delta);
             if (dist >= minSep)
@@ -753,16 +821,36 @@ namespace YunaLegend.Arena.Core
                 return;
             }
 
-            float dir = delta >= 0f ? 1f : -1f;
+            float dir = Math.Abs(delta) > 0.001f ? (delta > 0f ? 1f : -1f) : -PlayerFacing;
             float overlap = minSep - dist;
+            float playerHalf = tuning.PlayerBodyWidth * 0.5f;
+            float enemyHalf = CurrentEnemySpec.BodyWidth * 0.5f;
+
             if (IsGuarding)
             {
-                EnemyX = ClampToArena(EnemyX - dir * overlap, CurrentEnemySpec.BodyWidth * 0.5f);
+                EnemyX = ClampToArena(EnemyX - dir * overlap, enemyHalf);
             }
             else
             {
-                PlayerX = ClampToArena(PlayerX + dir * (overlap * 0.5f), tuning.PlayerBodyWidth * 0.5f);
-                EnemyX = ClampToArena(EnemyX - dir * (overlap * 0.5f), CurrentEnemySpec.BodyWidth * 0.5f);
+                PlayerX = ClampToArena(PlayerX + dir * (overlap * 0.5f), playerHalf);
+                EnemyX = ClampToArena(EnemyX - dir * (overlap * 0.5f), enemyHalf);
+            }
+
+            // Garante separacao solida mesmo quando um dos dois encosta na parede da arena
+            float remainingOverlap = minSep - Math.Abs(PlayerX - EnemyX);
+            if (remainingOverlap > 0.01f)
+            {
+                float postDir = Math.Abs(PlayerX - EnemyX) > 0.001f
+                    ? (PlayerX > EnemyX ? 1f : -1f)
+                    : dir;
+                float prevPlayerX = PlayerX;
+                PlayerX = ClampToArena(PlayerX + postDir * remainingOverlap, playerHalf);
+                float movedPlayer = Math.Abs(PlayerX - prevPlayerX);
+                float stillRemaining = remainingOverlap - movedPlayer;
+                if (stillRemaining > 0.01f)
+                {
+                    EnemyX = ClampToArena(EnemyX - postDir * stillRemaining, enemyHalf);
+                }
             }
         }
 

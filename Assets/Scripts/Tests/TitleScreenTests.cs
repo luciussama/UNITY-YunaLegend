@@ -178,5 +178,32 @@ namespace YunaLegend.Tests
                 UnityEngine.Object.DestroyImmediate(footerGo);
             }
         }
+
+        [Test]
+        public void TitleScene_PhaseSelector_ListsArenaAndSetsDestination()
+        {
+            UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/TitleScreen.unity");
+            try
+            {
+                var controller = UnityEngine.Object.FindFirstObjectByType<TitleScreenController>();
+                var selector = UnityEngine.Object.FindFirstObjectByType<TitlePhaseSelector>();
+                Assert.IsNotNull(controller);
+                Assert.IsNotNull(selector);
+                Assert.GreaterOrEqual(selector.ItemCount, 3, "Bandeirinha deve listar Fase 1, Toy Room e Arena.");
+
+                selector.Open();
+                Assert.IsTrue(selector.IsOpen);
+                var item2 = UnityEngine.GameObject.Find("Fase_02")?.GetComponent<Button>();
+                Assert.IsNotNull(item2, "Botao Fase_02 (Arena Imaginaria) deve existir no dropdown.");
+                var label2 = item2.GetComponentInChildren<Text>();
+                Assert.IsNotNull(label2);
+                StringAssert.Contains("Arena", label2.text);
+            }
+            finally
+            {
+                UnityEditor.SceneManagement.EditorSceneManager.NewScene(
+                    UnityEditor.SceneManagement.NewSceneSetup.EmptyScene);
+            }
+        }
     }
 }

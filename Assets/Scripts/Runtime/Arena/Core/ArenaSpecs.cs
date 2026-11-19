@@ -92,6 +92,11 @@ namespace YunaLegend.Arena.Core
         public int EnemyDeathTicks { get; set; } = 60;
         public int EnemySpawnTicks { get; set; } = 60;
         public float KnockbackDistance { get; set; } = 173.6f;
+        public float BodySeparationPadding { get; set; } = 32f;
+        public float KnockbackFriction { get; set; } = 0.78f;
+        public float SwordHitEnemyKnockbackVelocity { get; set; } = 12.5f;
+        public float EnemyHitPlayerKnockbackVelocity { get; set; } = 25.0f;
+        public float EnemyBlockPlayerKnockbackVelocity { get; set; } = 10.0f;
         public int MaxPlayerHp { get; set; } = 3;
     }
 

@@ -149,6 +149,152 @@ namespace YunaLegend.Arena.Tests
             Assert.AreEqual(ArenaEnemyId.Bear, sim.CurrentEnemySpec.Id);
         }
 
+        [TestCase(30f)]
+        [TestCase(60f)]
+        [TestCase(120f)]
+        public void JumpInput_WithLatching_WorksReliably_At30_60_And120Hz(float renderHz)
+        {
+            var sim = new ArenaCombatSimulation(easyMode: false);
+            float dt = 1f / renderHz;
+            float jumpBuffer = 0.14f;
+            bool leftGround = false;
+            float minY = sim.Tuning.GroundY;
+
+            // Simula 1 segundo de renderizacao com o pulo pressionado apenas no 1o frame
+            int frames = (int)System.Math.Ceiling(renderHz * 1.4f);
+            for (int f = 0; f < frames; f++)
+            {
+                if (f > 0 && jumpBuffer > 0f)
+                {
+                    jumpBuffer = System.Math.Max(0f, jumpBuffer - dt);
+                }
+
+                int ticks = sim.Step(dt, new ArenaInputState { JumpPressed = jumpBuffer > 0f });
+                if (ticks > 0 && !sim.PlayerOnGround)
+                {
+                    jumpBuffer = 0f;
+                    leftGround = true;
+                }
+
+                if (sim.PlayerY < minY)
+                {
+                    minY = sim.PlayerY;
+                }
+            }
+
+            Assert.IsTrue(leftGround, $"Menina deve sair do chao ao pular em {renderHz} Hz.");
+            Assert.Less(minY, sim.Tuning.GroundY - 120f, $"Altura do pulo deve ser significativa em {renderHz} Hz.");
+            Assert.IsTrue(sim.PlayerOnGround, $"Menina deve retornar ao chao apos o pulo em {renderHz} Hz.");
+        }
+
+        [Test]
+        public void BodyCollision_PreventsPlayerAndEnemyOverlap_EvenAgainstArenaWall()
+        {
+            var sim = new ArenaCombatSimulation(easyMode: false);
+            AdvanceTicks(sim, 70, default);
+            float minSep = sim.GetMinBodySeparation();
+
+            // Empurra continuamente a menina contra o Trem ate encostar na parede direita
+            for (int i = 0; i < 240; i++)
+            {
+                sim.TickFixed(new ArenaInputState { MoveX = 1f });
+                float dist = System.Math.Abs(sim.EnemyX - sim.PlayerX);
+                Assert.GreaterOrEqual(dist, minSep - 0.1f, $"Sobreposicao detectada no tick {i}: dist={dist}, minSep={minSep}");
+            }
+        }
+
+        [Test]
+        public void SwordHit_PushesEnemyBackLightly_SmoothlyOverTicks()
+        {
+            var sim = new ArenaCombatSimulation(easyMode: false);
+            AdvanceTicks(sim, 70, default);
+
+            for (int i = 0; i < 80; i++)
+            {
+                sim.TickFixed(new ArenaInputState { MoveX = 1f });
+                if (System.Math.Abs(sim.EnemyX - sim.PlayerX) <= 275f)
+                {
+                    break;
+                }
+            }
+
+            float enemyXBeforeHit = sim.EnemyX;
+            bool hit = false;
+            sim.OnSwordHit += valid => { if (valid) hit = true; };
+
+            sim.TickFixed(new ArenaInputState { AttackPressed = true });
+            AdvanceTicks(sim, 18, default);
+
+            Assert.IsTrue(hit, "Espada deve acertar o Trem.");
+            float recoil = sim.EnemyX - enemyXBeforeHit;
+            Assert.Greater(recoil, 25f, "Golpe da espada deve empurrar o Trem de leve para tras.");
+            Assert.Less(recoil, 100f, "Recuo do Trem ao golpe da espada deve ser suave, sem teleporte.");
+        }
+
+        [Test]
+        public void EnemyAttack_PushesPlayerBack_OnHitAndOnBlock()
+        {
+            // Caso 1: Menina leva o golpe do Trem e e empurrada para tras
+            var simHit = new ArenaCombatSimulation(easyMode: false);
+            AdvanceTicks(simHit, 70, default);
+            int guardSafety = 0;
+            while (simHit.EnemyState != ArenaEnemyState.Windup && guardSafety++ < 250)
+            {
+                simHit.TickFixed(new ArenaInputState { MoveX = 1f });
+            }
+
+            float playerXBeforeHit = simHit.PlayerX;
+            bool damaged = false;
+            simHit.OnPlayerDamaged += () => damaged = true;
+            AdvanceTicks(simHit, 90, default);
+
+            Assert.IsTrue(damaged, "Ataque do Trem deve acertar a menina sem defesa.");
+            Assert.Less(simHit.PlayerX, playerXBeforeHit - 50f, "Ataque do Trem deve empurrar a menina para tras.");
+
+            // Caso 2: Menina bloqueia o ataque e sente um recuo leve de guarda
+            var simBlock = new ArenaCombatSimulation(easyMode: false);
+            AdvanceTicks(simBlock, 70, default);
+            guardSafety = 0;
+            while (simBlock.EnemyState != ArenaEnemyState.Windup && guardSafety++ < 250)
+            {
+                simBlock.TickFixed(new ArenaInputState { MoveX = 1f });
+            }
+
+            float playerXBeforeBlock = simBlock.PlayerX;
+            bool blocked = false;
+            simBlock.OnAttackBlocked += () => blocked = true;
+            AdvanceTicks(simBlock, 85, new ArenaInputState { MoveX = -1f });
+
+            Assert.IsTrue(blocked, "Defesa direcional deve bloquear o ataque.");
+            Assert.Less(simBlock.PlayerX, playerXBeforeBlock - 20f, "Bloqueio deve aplicar recuo fisico leve na menina.");
+        }
+
+        [Test]
+        public void SwordCombo_CyclesThreeSteps_AndResetsAfterPause()
+        {
+            var sim = new ArenaCombatSimulation(easyMode: false);
+            AdvanceTicks(sim, 70, default);
+
+            // 1o golpe: corte vertical (step 0)
+            sim.TickFixed(new ArenaInputState { AttackPressed = true });
+            Assert.AreEqual(0, sim.SwordComboStep, "Primeiro golpe do combo deve ser vertical (0).");
+            AdvanceTicks(sim, sim.Tuning.SwordCooldownTicks + 2, default);
+
+            // 2o golpe dentro da janela de combo: corte horizontal (step 1)
+            sim.TickFixed(new ArenaInputState { AttackPressed = true });
+            Assert.AreEqual(1, sim.SwordComboStep, "Segundo golpe do combo deve ser horizontal (1).");
+            AdvanceTicks(sim, sim.Tuning.SwordCooldownTicks + 2, default);
+
+            // 3o golpe dentro da janela de combo: estocada (step 2)
+            sim.TickFixed(new ArenaInputState { AttackPressed = true });
+            Assert.AreEqual(2, sim.SwordComboStep, "Terceiro golpe do combo deve ser estocada (2).");
+
+            // Aguarda pausa longa para resetar o combo para 0
+            AdvanceTicks(sim, 130, default);
+            sim.TickFixed(new ArenaInputState { AttackPressed = true });
+            Assert.AreEqual(0, sim.SwordComboStep, "Apos pausa longa, combo deve voltar ao golpe vertical (0).");
+        }
+
         private static void AdvanceTicks(ArenaCombatSimulation sim, int ticks, ArenaInputState input)
         {
             for (int i = 0; i < ticks; i++)
