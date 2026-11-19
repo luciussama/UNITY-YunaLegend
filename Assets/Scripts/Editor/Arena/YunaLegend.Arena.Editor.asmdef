@@ -1,0 +1,26 @@
+{
+    "name": "YunaLegend.Arena.Editor",
+    "rootNamespace": "YunaLegend.Editor.Arena",
+    "references": [
+        "YunaLegend.Arena.Core",
+        "YunaLegend.Arena.Runtime",
+        "YunaLegend.ToyRoom.Runtime",
+        "YunaLegend.ToyRoom.Editor",
+        "YunaLegend.Runtime",
+        "Unity.InputSystem",
+        "UnityEngine.UI",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unity.RenderPipelines.Core.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

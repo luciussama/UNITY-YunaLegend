@@ -29,6 +29,10 @@ namespace YunaLegend.Editor.ToyRoom
         private const string NandaFaceTexPath = "Assets/Art/ToyRoom/Materials/T_Nanda_Face_Painted.png";
         private const string NandaWingTexPath = "Assets/Art/ToyRoom/Materials/T_Nanda_Wing_Painted.png";
         private const string NandaDressTexPath = "Assets/Art/ToyRoom/Materials/T_Nanda_Dress_Painted.png";
+        private const string NandaGlbModelPath = "Assets/Art/ToyRoom/Models/fairy/nanda_extracted.obj";
+        private const string NandaGlbAlbedoPath = "Assets/Art/ToyRoom/Models/fairy/T_Nanda_Albedo.png";
+        private const string NandaSkinnedMeshPath = "Assets/Art/ToyRoom/Models/fairy/Nanda_SkinnedMesh.asset";
+        private const string NandaFairyMatPath = "Assets/Art/ToyRoom/Models/fairy/M_Nanda_Fairy.mat";
 
         private static float Pi => Mathf.PI;
 
@@ -141,12 +145,192 @@ namespace YunaLegend.Editor.ToyRoom
             BuildSculptedLegAndShoe(legRightPivot, 1, skinMat, sockMat, shoeMat, soleMat);
         }
 
+        private static bool TryAttachNandaGlbModel(Transform fairyRoot)
+        {
+            var modelImporter = AssetImporter.GetAtPath(NandaGlbModelPath) as ModelImporter;
+            if (modelImporter != null && !modelImporter.isReadable)
+            {
+                modelImporter.isReadable = true;
+                modelImporter.SaveAndReimport();
+            }
+
+            var sourceMesh = AssetDatabase.LoadAssetAtPath<Mesh>(NandaGlbModelPath);
+            if (sourceMesh == null)
+            {
+                return false;
+            }
+
+            if (File.Exists(NandaGlbAlbedoPath))
+            {
+                AssetDatabase.ImportAsset(NandaGlbAlbedoPath, ImportAssetOptions.Default);
+            }
+
+            var tex = AssetDatabase.LoadAssetAtPath<Texture2D>(NandaGlbAlbedoPath);
+            var unlitShader = Shader.Find("Universal Render Pipeline/Unlit");
+            Material mat = AssetDatabase.LoadAssetAtPath<Material>(NandaFairyMatPath);
+            if (mat == null)
+            {
+                mat = unlitShader != null
+                    ? new Material(unlitShader)
+                    : ToyRoomVisualFactory.CreatePainterlyMaterial(
+                        Color.white,
+                        NandaGlbAlbedoPath,
+                        emission: Color.black,
+                        outlineWidth: 0f);
+                AssetDatabase.CreateAsset(mat, NandaFairyMatPath);
+            }
+
+            if (unlitShader != null)
+            {
+                mat.shader = unlitShader;
+                mat.SetColor("_BaseColor", new Color(0.95f, 0.98f, 1.0f, 1.0f));
+                mat.SetTexture("_BaseMap", tex != null ? tex : Texture2D.whiteTexture);
+                EditorUtility.SetDirty(mat);
+            }
+
+            var rigRoot = new GameObject("Nanda_GlbMesh").transform;
+            rigRoot.SetParent(fairyRoot, false);
+            rigRoot.localPosition = Vector3.zero;
+            rigRoot.localRotation = Quaternion.identity;
+            rigRoot.localScale = Vector3.one * 1.35f;
+
+            Transform[] bones = CreateNandaBones(rigRoot);
+            Mesh skinnedMesh = BuildOrUpdateNandaSkinnedMesh(sourceMesh, bones, rigRoot);
+
+            var smr = rigRoot.gameObject.AddComponent<SkinnedMeshRenderer>();
+            smr.sharedMesh = skinnedMesh;
+            smr.sharedMaterial = mat;
+            smr.bones = bones;
+            smr.rootBone = bones[0];
+            smr.updateWhenOffscreen = true;
+            smr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            return true;
+        }
+
+        private static Transform[] CreateNandaBones(Transform rigRoot)
+        {
+            var torso = CreateBone("Bone_Torso", rigRoot, Vector3.zero);
+            var head = CreateBone("Bone_Head", torso, new Vector3(0f, 0.19f, 0.04f));
+            var wingL = CreateBone("Bone_Wing_L", torso, new Vector3(-0.07f, 0.10f, -0.05f));
+            var wingR = CreateBone("Bone_Wing_R", torso, new Vector3(0.07f, 0.10f, -0.05f));
+            var armL = CreateBone("Bone_Arm_L", torso, new Vector3(-0.13f, 0.13f, 0.03f));
+            var armR = CreateBone("Bone_Arm_R", torso, new Vector3(0.13f, 0.13f, 0.03f));
+            var legL = CreateBone("Bone_Leg_L", torso, new Vector3(-0.045f, -0.17f, 0.04f));
+            var legR = CreateBone("Bone_Leg_R", torso, new Vector3(0.045f, -0.17f, 0.04f));
+            return new[] { torso, head, wingL, wingR, armL, armR, legL, legR };
+        }
+
+        private static Transform CreateBone(string name, Transform parent, Vector3 localPos)
+        {
+            var go = new GameObject(name);
+            go.transform.SetParent(parent, false);
+            go.transform.localPosition = localPos;
+            go.transform.localRotation = Quaternion.identity;
+            return go.transform;
+        }
+
+        private static Mesh BuildOrUpdateNandaSkinnedMesh(Mesh sourceMesh, Transform[] bones, Transform rigRoot)
+        {
+            var mesh = UnityEngine.Object.Instantiate(sourceMesh);
+            mesh.name = "Nanda_SkinnedMesh";
+
+            Vector3[] verts = mesh.vertices;
+            var weights = new BoneWeight[verts.Length];
+
+            for (int i = 0; i < verts.Length; i++)
+            {
+                weights[i] = ComputeNandaBoneWeight(verts[i]);
+            }
+
+            mesh.boneWeights = weights;
+
+            var bindposes = new Matrix4x4[bones.Length];
+            for (int i = 0; i < bones.Length; i++)
+            {
+                bindposes[i] = bones[i].worldToLocalMatrix * rigRoot.localToWorldMatrix;
+            }
+
+            mesh.bindposes = bindposes;
+
+            var existing = AssetDatabase.LoadAssetAtPath<Mesh>(NandaSkinnedMeshPath);
+            if (existing != null)
+            {
+                AssetDatabase.DeleteAsset(NandaSkinnedMeshPath);
+            }
+
+            AssetDatabase.CreateAsset(mesh, NandaSkinnedMeshPath);
+            AssetDatabase.SaveAssets();
+            return AssetDatabase.LoadAssetAtPath<Mesh>(NandaSkinnedMeshPath);
+        }
+
+        private static BoneWeight ComputeNandaBoneWeight(Vector3 v)
+        {
+            // Indices: 0=Torso, 1=Head, 2=Wing_L, 3=Wing_R, 4=Arm_L, 5=Arm_R, 6=Leg_L, 7=Leg_R
+            float wWing = 0f;
+            if (v.y > -0.06f && v.y < 0.44f)
+            {
+                float backFactor = Mathf.InverseLerp(-0.01f, -0.07f, v.z);
+                float sideFactor = Mathf.InverseLerp(0.16f, 0.24f, Mathf.Abs(v.x)) * Mathf.InverseLerp(0.06f, -0.02f, v.z);
+                wWing = Mathf.Clamp01(Mathf.Max(backFactor, sideFactor));
+            }
+
+            if (wWing > 0.01f)
+            {
+                int wingBone = v.x < 0f ? 2 : 3;
+                return MakeTwoBoneWeight(wingBone, wWing, 0, 1f - wWing);
+            }
+
+            if (v.y > 0.17f)
+            {
+                float wHead = Mathf.Clamp01(Mathf.InverseLerp(0.17f, 0.23f, v.y));
+                return MakeTwoBoneWeight(1, wHead, 0, 1f - wHead);
+            }
+
+            if (v.y < -0.15f)
+            {
+                float wLeg = Mathf.Clamp01(Mathf.InverseLerp(-0.15f, -0.22f, v.y));
+                int legBone = v.x < -0.01f ? 6 : 7;
+                return MakeTwoBoneWeight(legBone, wLeg, 0, 1f - wLeg);
+            }
+
+            if (v.y > -0.02f && Mathf.Abs(v.x) > 0.13f)
+            {
+                float wArm = Mathf.Clamp01(Mathf.InverseLerp(0.13f, 0.19f, Mathf.Abs(v.x)));
+                int armBone = v.x < 0f ? 4 : 5;
+                return MakeTwoBoneWeight(armBone, wArm, 0, 1f - wArm);
+            }
+
+            return new BoneWeight { boneIndex0 = 0, weight0 = 1f };
+        }
+
+        private static BoneWeight MakeTwoBoneWeight(int primaryBone, float primaryWeight, int secondaryBone, float secondaryWeight)
+        {
+            float sum = primaryWeight + secondaryWeight;
+            if (sum <= 0.0001f)
+            {
+                return new BoneWeight { boneIndex0 = 0, weight0 = 1f };
+            }
+
+            return new BoneWeight
+            {
+                boneIndex0 = primaryBone,
+                weight0 = primaryWeight / sum,
+                boneIndex1 = secondaryBone,
+                weight1 = secondaryWeight / sum
+            };
+        }
+
         public static void BuildNandaFairySculpted(Transform parent)
         {
-            EnsurePaintedTextures();
-
             var fairyRoot = new GameObject("Nanda_FairyBody").transform;
             fairyRoot.SetParent(parent, false);
+
+            if (TryAttachNandaGlbModel(fairyRoot))
+            {
+                return;
+            }
+
+            EnsurePaintedTextures();
             fairyRoot.localRotation = Quaternion.Euler(-12f, 165f, 0f);
 
             var faceMat = ToyRoomVisualFactory.CreatePainterlyMaterial(

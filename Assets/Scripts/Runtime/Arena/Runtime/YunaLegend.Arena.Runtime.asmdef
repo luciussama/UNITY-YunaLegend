@@ -1,0 +1,21 @@
+{
+    "name": "YunaLegend.Arena.Runtime",
+    "rootNamespace": "YunaLegend.Arena.Runtime",
+    "references": [
+        "YunaLegend.Arena.Core",
+        "YunaLegend.ToyRoom.Runtime",
+        "Unity.InputSystem",
+        "UnityEngine.UI",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unity.RenderPipelines.Core.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

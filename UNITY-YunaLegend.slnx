@@ -1,5 +1,6 @@
 ﻿<Solution>
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="YunaLegend.Arena.Core.csproj" />
   <Project Path="YunaLegend.ToyRoom.Core.csproj" />
   <Project Path="YunaLegend.Runtime.csproj" />
   <Project Path="YunaLegend.ToyRoom.Tests.csproj" />
@@ -11,4 +12,7 @@
   <Project Path="YunaLegend.Illustrated25D.Core.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="YunaLegend.Tests.csproj" />
+  <Project Path="YunaLegend.Arena.Editor.csproj" />
+  <Project Path="YunaLegend.Arena.Runtime.csproj" />
+  <Project Path="YunaLegend.Arena.Tests.csproj" />
 </Solution>

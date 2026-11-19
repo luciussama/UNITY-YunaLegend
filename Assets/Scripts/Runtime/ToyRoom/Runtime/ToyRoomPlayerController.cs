@@ -23,6 +23,7 @@ namespace YunaLegend.ToyRoom.Runtime
         public ToyItemView CarriedToy { get; private set; }
         public Transform CarryAnchor => carryAnchor;
         public Vector2? ScriptedMoveInput { get; set; }
+        public Vector2 VirtualMoveInput { get; set; }
         public float TurnDeltaDeg { get; private set; }
         public bool ControlsEnabled
         {
@@ -92,7 +93,7 @@ namespace YunaLegend.ToyRoom.Runtime
             }
 
             Vector2 move = ReadMoveInput();
-            Vector3 planar = new Vector3(move.x, 0f, move.y);
+            Vector3 planar = new(move.x, 0f, move.y);
             if (planar.sqrMagnitude > 1f)
             {
                 planar.Normalize();
@@ -131,21 +132,22 @@ namespace YunaLegend.ToyRoom.Runtime
                 return ScriptedMoveInput.Value;
             }
 
+            Vector2 move = VirtualMoveInput;
             var keyboard = Keyboard.current;
-            if (keyboard == null)
+            if (keyboard != null)
             {
-                return Vector2.zero;
+                if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed) move.x -= 1f;
+                if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed) move.x += 1f;
+                if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed) move.y -= 1f;
+                if (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed) move.y += 1f;
             }
 
-            float x = 0f;
-            float z = 0f;
+            if (move.sqrMagnitude > 1f)
+            {
+                move.Normalize();
+            }
 
-            if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed) x -= 1f;
-            if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed) x += 1f;
-            if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed) z -= 1f;
-            if (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed) z += 1f;
-
-            return new Vector2(x, z);
+            return move;
         }
 
         private ToyItemView FindNearestToyInRange(IReadOnlyList<ToyItemView> allToys)

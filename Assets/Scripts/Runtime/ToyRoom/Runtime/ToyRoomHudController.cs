@@ -1,5 +1,8 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 using YunaLegend.ToyRoom.Core;
 
@@ -20,7 +23,10 @@ namespace YunaLegend.ToyRoom.Runtime
         private Text counterText;
         private Image progressFill;
         private GameObject promptRoot;
+        private Image promptBackground;
+        private Button promptButton;
         private Text promptText;
+        private GameObject joystickRoot;
         private GameObject dialogueRoot;
         private Image portraitRing;
         private Image portraitHalo;
@@ -38,6 +44,8 @@ namespace YunaLegend.ToyRoom.Runtime
         private bool isMuted;
 
         public event Action OnAdvanceRequested;
+        public event Action OnActionRequested;
+        public event Action<Vector2> OnMoveInputChanged;
         public event Action<bool> OnPauseToggled;
         public event Action OnMuteToggled;
         public event Action OnRestartRequested;
@@ -65,13 +73,48 @@ namespace YunaLegend.ToyRoom.Runtime
 
         public void SetActionPrompt(string label)
         {
+            SetActionPrompt(label, true);
+        }
+
+        public void SetActionPrompt(string label, bool isActionReady)
+        {
             EnsureBuilt();
             bool visible = !string.IsNullOrEmpty(label);
             promptRoot.SetActive(visible);
-            if (visible)
+            if (!visible)
             {
-                promptText.text = label;
+                return;
             }
+
+            promptText.text = label;
+            if (promptBackground != null)
+            {
+                promptBackground.color = isActionReady
+                    ? new Color(0.980f, 0.800f, 0.082f, 0.96f)
+                    : new Color(0.980f, 0.800f, 0.082f, 0.52f);
+            }
+
+            if (promptText != null)
+            {
+                promptText.color = isActionReady
+                    ? new Color(0.14f, 0.09f, 0.04f, 1f)
+                    : new Color(0.14f, 0.09f, 0.04f, 0.78f);
+            }
+        }
+
+        public void SetMobileControlsVisible(bool visible)
+        {
+            EnsureBuilt();
+            bool showJoystick = visible && IsMobileOrTouchDevice();
+            if (joystickRoot != null && joystickRoot.activeSelf != showJoystick)
+            {
+                joystickRoot.SetActive(showJoystick);
+            }
+        }
+
+        private static bool IsMobileOrTouchDevice()
+        {
+            return Application.isMobilePlatform || Touchscreen.current != null;
         }
 
         public void ShowBeat(ToyRoomNarrativeBeat beat)
@@ -152,6 +195,7 @@ namespace YunaLegend.ToyRoom.Runtime
             }
 
             initialized = true;
+            EnsureEventSystem();
             var uiFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             var narrativeFont = poeticFont != null ? poeticFont : uiFont;
 
@@ -171,12 +215,14 @@ namespace YunaLegend.ToyRoom.Runtime
             BuildCounterPanel(canvasGo.transform, uiFont);
             BuildTopRightControls(canvasGo.transform, uiFont);
             BuildActionPrompt(canvasGo.transform, uiFont);
+            BuildVirtualJoystick(canvasGo.transform);
             BuildDialogueBox(canvasGo.transform, uiFont);
             BuildPoeticOverlay(canvasGo.transform, narrativeFont, uiFont);
             BuildPauseMenu(canvasGo.transform, uiFont);
 
             UpdateToyCounter(0);
             SetActionPrompt(null);
+            SetMobileControlsVisible(false);
             ClearNarrativeOverlays();
             SetPausedState(false);
             SetMutedState(false);
@@ -248,26 +294,94 @@ namespace YunaLegend.ToyRoom.Runtime
 
         private void BuildActionPrompt(Transform parent, Font font)
         {
-            promptRoot = CreateBorderedPanel(
-                "ActionPrompt",
-                parent,
-                new Vector2(1f, 0f),
-                new Vector2(1f, 0f),
-                new Vector2(-44f, 44f),
-                new Vector2(180f, 74f),
-                new Color(0.980f, 0.800f, 0.082f, 0.96f),
-                new Color(1f, 0.98f, 0.90f, 0.95f),
-                2.5f);
-            var rt = promptRoot.GetComponent<RectTransform>();
+            promptRoot = new GameObject("ActionPrompt");
+            promptRoot.transform.SetParent(parent, false);
+            var rt = promptRoot.AddComponent<RectTransform>();
+            rt.anchorMin = new Vector2(1f, 0f);
+            rt.anchorMax = new Vector2(1f, 0f);
             rt.pivot = new Vector2(1f, 0f);
+            rt.anchoredPosition = new Vector2(-44f, 44f);
+            rt.sizeDelta = new Vector2(136f, 136f);
 
-            promptText = CreateLabel("PromptText", promptRoot.transform, font, 24, TextAnchor.MiddleCenter, new Color(0.14f, 0.09f, 0.04f, 1f));
+            promptBackground = promptRoot.AddComponent<Image>();
+            promptBackground.sprite = ToyRoomVirtualJoystick.CreateCircleSprite(128, 0f, 0.96f);
+            promptBackground.color = new Color(0.980f, 0.800f, 0.082f, 0.96f);
+            promptBackground.raycastTarget = true;
+
+            GameObject ringGo = new("ActionRing");
+            ringGo.transform.SetParent(promptRoot.transform, false);
+            var ringRt = ringGo.AddComponent<RectTransform>();
+            StretchFull(ringRt);
+            var ringImg = ringGo.AddComponent<Image>();
+            ringImg.sprite = ToyRoomVirtualJoystick.CreateCircleSprite(128, 0.88f, 0.98f);
+            ringImg.color = new Color(1f, 0.98f, 0.90f, 0.95f);
+            ringImg.raycastTarget = false;
+
+            promptButton = promptRoot.AddComponent<Button>();
+            promptButton.targetGraphic = promptBackground;
+            promptButton.onClick.AddListener(() => OnActionRequested?.Invoke());
+
+            promptText = CreateLabel("PromptText", promptRoot.transform, font, 21, TextAnchor.MiddleCenter, new Color(0.14f, 0.09f, 0.04f, 1f));
             promptText.fontStyle = FontStyle.Bold;
+            promptText.raycastTarget = false;
             var textRt = promptText.rectTransform;
             textRt.anchorMin = Vector2.zero;
             textRt.anchorMax = Vector2.one;
-            textRt.offsetMin = new Vector2(10f, 4f);
-            textRt.offsetMax = new Vector2(-10f, -4f);
+            textRt.offsetMin = new Vector2(12f, 12f);
+            textRt.offsetMax = new Vector2(-12f, -12f);
+        }
+
+        private void BuildVirtualJoystick(Transform parent)
+        {
+            joystickRoot = new GameObject("VirtualJoystick");
+            joystickRoot.transform.SetParent(parent, false);
+            var rootRt = joystickRoot.AddComponent<RectTransform>();
+            rootRt.anchorMin = new Vector2(0f, 0f);
+            rootRt.anchorMax = new Vector2(0f, 0f);
+            rootRt.pivot = new Vector2(0.5f, 0.5f);
+            rootRt.anchoredPosition = new Vector2(132f, 132f);
+            rootRt.sizeDelta = new Vector2(176f, 176f);
+
+            var baseImg = joystickRoot.AddComponent<Image>();
+            baseImg.sprite = ToyRoomVirtualJoystick.CreateCircleSprite(128, 0f, 0.98f);
+            baseImg.color = new Color(0.102f, 0.063f, 0.149f, 0.62f);
+            baseImg.raycastTarget = true;
+
+            var ringGo = new GameObject("JoystickRing");
+            ringGo.transform.SetParent(joystickRoot.transform, false);
+            var ringRt = ringGo.AddComponent<RectTransform>();
+            StretchFull(ringRt);
+            var ringImg = ringGo.AddComponent<Image>();
+            ringImg.sprite = ToyRoomVirtualJoystick.CreateCircleSprite(128, 0.88f, 0.98f);
+            ringImg.color = new Color(0.980f, 0.800f, 0.082f, 0.85f);
+            ringImg.raycastTarget = false;
+
+            var handleGo = new GameObject("JoystickHandle");
+            handleGo.transform.SetParent(joystickRoot.transform, false);
+            var handleRt = handleGo.AddComponent<RectTransform>();
+            handleRt.anchorMin = new Vector2(0.5f, 0.5f);
+            handleRt.anchorMax = new Vector2(0.5f, 0.5f);
+            handleRt.pivot = new Vector2(0.5f, 0.5f);
+            handleRt.anchoredPosition = Vector2.zero;
+            handleRt.sizeDelta = new Vector2(74f, 74f);
+            var handleImg = handleGo.AddComponent<Image>();
+            handleImg.sprite = ToyRoomVirtualJoystick.CreateCircleSprite(96, 0f, 0.96f);
+            handleImg.color = new Color(0.980f, 0.800f, 0.082f, 0.92f);
+            handleImg.raycastTarget = false;
+
+            var joystick = joystickRoot.AddComponent<ToyRoomVirtualJoystick>();
+            joystick.Configure(rootRt, handleRt, 54f, 0.1f);
+            joystick.OnValueChanged += value => OnMoveInputChanged?.Invoke(value);
+        }
+
+        private static void EnsureEventSystem()
+        {
+            if (FindFirstObjectByType<EventSystem>() != null)
+            {
+                return;
+            }
+
+            new GameObject("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
         }
 
         private void BuildDialogueBox(Transform parent, Font font)
@@ -450,10 +564,10 @@ namespace YunaLegend.ToyRoom.Runtime
             var petalColor = new Color(0.898f, 0.745f, 0.765f, 1f);
             Vector2[] offsets =
             {
-                new Vector2(0f, 4.5f),
-                new Vector2(0f, -4.5f),
-                new Vector2(-4.5f, 0f),
-                new Vector2(4.5f, 0f)
+                new(0f, 4.5f),
+                new(0f, -4.5f),
+                new(-4.5f, 0f),
+                new(4.5f, 0f)
             };
             for (int i = 0; i < offsets.Length; i++)
             {

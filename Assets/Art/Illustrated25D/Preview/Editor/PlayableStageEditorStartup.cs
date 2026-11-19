@@ -85,7 +85,9 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
 
             Scene activeScene = SceneManager.GetActiveScene();
             if (activeScene.path == IllustratedPreviewBuild.PlayableFullStageScene
-                || activeScene.path == "Assets/Scenes/ToyRoom_Gameplay.unity")
+                || activeScene.path == "Assets/Scenes/ToyRoom_Gameplay.unity"
+                || activeScene.path == "Assets/Scenes/Arena_Gameplay.unity"
+                || activeScene.path == "Assets/Scenes/Arena_3D_Showcase.unity")
             {
                 return;
             }
@@ -103,8 +105,11 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
 
         private static void ApplyPlayModeStartScene()
         {
-            // Se o usuario abriu explicitamente a Toy Room (Fase 2), o Play deve iniciar nela
-            if (SceneManager.GetActiveScene().path == "Assets/Scenes/ToyRoom_Gameplay.unity")
+            // Se o usuario abriu explicitamente a Toy Room (Fase 2) ou a Arena (Fase 3), o Play deve iniciar nela
+            string activePath = SceneManager.GetActiveScene().path;
+            if (activePath == "Assets/Scenes/ToyRoom_Gameplay.unity"
+                || activePath == "Assets/Scenes/Arena_Gameplay.unity"
+                || activePath == "Assets/Scenes/Arena_3D_Showcase.unity")
             {
                 EditorSceneManager.playModeStartScene = null;
                 return;
