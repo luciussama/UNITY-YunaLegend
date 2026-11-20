@@ -70,6 +70,9 @@ namespace YunaLegend.Arena.Runtime
         private Light impactFlashLight;
         private float impactFlashTimer;
         private float impactFlashSpin;
+        private ArenaEnemyRigAnimator robotRigAnimator;
+        private ArenaEnemyRigAnimator dinosaurRigAnimator;
+        private ArenaEnemyRigAnimator bearRigAnimator;
 
         private const float VisualComboDuration = 0.41f;
         private const float ImpactFlashDuration = 0.16f;
@@ -253,6 +256,10 @@ namespace YunaLegend.Arena.Runtime
             if (steamJetObject != null) steamJetObject.SetActive(false);
             if (trainHeadlight != null) trainHeadlight.enabled = false;
             if (rocketPunchObject != null) rocketPunchObject.SetActive(false);
+
+            robotRigAnimator = robotModel != null ? robotModel.GetComponent<ArenaEnemyRigAnimator>() : null;
+            dinosaurRigAnimator = dinosaurModel != null ? dinosaurModel.GetComponent<ArenaEnemyRigAnimator>() : null;
+            bearRigAnimator = bearModel != null ? bearModel.GetComponent<ArenaEnemyRigAnimator>() : null;
         }
 
         public void TriggerImpactFeedback(Color burstColor)
@@ -385,20 +392,38 @@ namespace YunaLegend.Arena.Runtime
                 tiltX = Mathf.Sin(animTimer * 10f) * 4f;
             }
 
+            ArenaEnemyRigAnimator activeRig = activeId switch
+            {
+                ArenaEnemyId.Robot => robotRigAnimator ?? (robotRigAnimator = robotModel != null ? robotModel.GetComponent<ArenaEnemyRigAnimator>() : null),
+                ArenaEnemyId.Dinosaur => dinosaurRigAnimator ?? (dinosaurRigAnimator = dinosaurModel != null ? dinosaurModel.GetComponent<ArenaEnemyRigAnimator>() : null),
+                ArenaEnemyId.Bear => bearRigAnimator ?? (bearRigAnimator = bearModel != null ? bearModel.GetComponent<ArenaEnemyRigAnimator>() : null),
+                _ => null
+            };
+
             if (visualRoot != null)
             {
-                // Mantem as 6 rodas do Trem bem apoiadas no chao limitando a inclinacao de pitch
-                float clampedTilt = activeId == ArenaEnemyId.Train ? Mathf.Clamp(tiltX, -4.5f, 4.5f) : tiltX;
+                // Chefes com esqueleto articulado animam o corpo via bones (sem inclinar a caixa inteira como bloco rigido)
+                float clampedTilt = activeRig != null
+                    ? 0f
+                    : (activeId == ArenaEnemyId.Train ? Mathf.Clamp(tiltX, -4.5f, 4.5f) : tiltX);
                 float yaw = sim.EnemyFacing >= 0 ? 90f : -90f;
                 visualRoot.localRotation = Quaternion.Slerp(
                     visualRoot.localRotation,
                     Quaternion.Euler(clampedTilt, yaw, 0f),
                     dt * 14f);
-                visualRoot.localPosition = new Vector3(sim.EnemyFacing * lungeZ, 0f, 0f);
+                visualRoot.localPosition = new Vector3(sim.EnemyFacing * (activeRig != null ? lungeZ * 0.35f : lungeZ), 0f, 0f);
+                float rigSquashX = activeRig != null ? Mathf.Lerp(1f, squashX, 0.35f) : squashX;
+                float rigSquashY = activeRig != null ? Mathf.Lerp(1f, squashY, 0.35f) : squashY;
                 visualRoot.localScale = new Vector3(
-                    baseScale.x * spawnScale * squashX,
-                    baseScale.y * spawnScale * squashY,
-                    baseScale.z * spawnScale * squashX);
+                    baseScale.x * spawnScale * rigSquashX,
+                    baseScale.y * spawnScale * rigSquashY,
+                    baseScale.z * spawnScale * rigSquashX);
+            }
+
+            if (activeRig != null)
+            {
+                Vector3 playerWorldPos = ArenaCoordinateMapper.ToWorldPosition(sim.PlayerX, sim.PlayerY, 0f);
+                activeRig.UpdateRig(sim, playerWorldPos, dt);
             }
 
             if (hitFlashTimer > 0f)
@@ -491,32 +516,40 @@ namespace YunaLegend.Arena.Runtime
                 float progress = 1f - Mathf.Clamp01(visualComboTimer / VisualComboDuration);
                 pose = EvaluateMartialComboPose(activeVisualComboStep, progress);
             }
-            else if (sim.IsGuarding)
+            else if (sim.IsGuarding || sim.BlockRecovery > 0)
             {
-                // Pose de defesa adaptada da referencia do esqueleto:
-                // Pernas bem arqueadas (joelho frontal dobrado ~90 deg, perna traseira arqueada atras),
-                // tronco inclinado e firme, mao direita no cabo e mao esquerda escorando a lateral da lamina a ~46 deg
+                // Pose de defesa adaptada com extrema fidelidade anatomica e marcial da referencia do esqueleto:
+                // Base marcial baixa e profunda (deep lunge / rooted guard stance):
+                // - Centro de massa rebaixado significativamente (BodyYOffset -0.25m) para absorver impacto
+                // - Perna frontal (Direita, lado da camera): avanca em lunge com coxa a -76 deg e joelho flexionado a 96 deg, pe plano no chao
+                // - Perna traseira (Esquerda, fundo): esticada para tras em arco a 54 deg, joelho leve (16 deg) e pe plantado na ponta (-48 deg)
+                // - Tronco inclinado agressivamente para a frente (Hips+Spine+Chest = ~52 deg de pitch) sobre a base frontal
+                // - Cabeca contra-rotacionada (-50 deg) erguendo o queixo para travar o olhar horizontalmente no oponente
+                // - Bracos estendidos a frente (SwordLocalPos.z = 0.48m) sustentando a espada na diagonal defensiva (~40 deg)
+                // - Mao direita firme no cabo e mao esquerda estendida escorando a lateral da lamina
                 pose = CreateNeutralStancePose();
-                pose.BodyYOffset = -0.115f;
-                pose.BodyZOffset = -0.06f;
-                pose.HipsPitch = 0f;
+                pose.BodyYOffset = -0.25f;
+                pose.BodyZOffset = -0.04f;
+                pose.HipsPitch = 12f;
                 pose.HipsYaw = -10f;
-                pose.SpinePitch = 14f;
+                pose.SpinePitch = 24f;
                 pose.SpineYaw = -8f;
-                pose.ChestPitch = 12f;
+                pose.ChestPitch = 18f;
                 pose.ChestYaw = -12f;
-                pose.HeadPitch = -22f;
+                pose.HeadPitch = -52f;
                 pose.HeadYaw = 24f;
-                // Pernas arqueadas de defesa (base baixa e ampla)
-                pose.ThighLPitch = -62f;
-                pose.ShinLPitch = 68f;
-                pose.FootLPitch = -6f;
-                pose.ThighRPitch = 36f;
-                pose.ShinRPitch = 30f;
-                pose.FootRPitch = -42f;
-                // Espada segurada na lateral/diagonal defensiva (~46 deg mundo)
-                pose.SwordLocalPos = new Vector3(0.03f, -0.08f, 0.25f);
-                pose.SwordLocalEuler = new Vector3(46f, -8f, -14f);
+                // Pernas arqueadas (base marcial profunda do esqueleto):
+                // Perna frontal (Direita, lado da camera): lunge profundo para frente, joelho dobrado ~96 deg, sola plana
+                pose.ThighRPitch = -76f;
+                pose.ShinRPitch = 96f;
+                pose.FootRPitch = -10f;
+                // Perna traseira (Esquerda, fundo): esticada para tras em arco firme, pe apoiado na ponta
+                pose.ThighLPitch = 54f;
+                pose.ShinLPitch = 16f;
+                pose.FootLPitch = -48f;
+                // Espada segurada na diagonal defensiva estendida bem a frente
+                pose.SwordLocalPos = new Vector3(0.04f, 0.08f, 0.48f);
+                pose.SwordLocalEuler = new Vector3(40f, -4f, -10f);
             }
             else if (sim.IsCrouching)
             {
@@ -629,7 +662,7 @@ namespace YunaLegend.Arena.Runtime
             }
 
             // Resolve IK analitico de 2 ossos para ambos os bracos ficarem 100% presos ao cabo (ou lateral da lamina na defesa)
-            SolveTwoHandedSwordArmsIK(pose.SwordLocalPos.y, sim.IsGuarding);
+            SolveTwoHandedSwordArmsIK(pose.SwordLocalPos.y, sim.IsGuarding || sim.BlockRecovery > 0);
             UpdateSwordReflectionGlint(sim);
         }
 
@@ -884,8 +917,8 @@ namespace YunaLegend.Arena.Runtime
             float liftT = Mathf.InverseLerp(0.05f, 0.28f, swordLocalY);
             float poleY = Mathf.Lerp(-0.65f, -0.10f, liftT);
             float poleZ = Mathf.Lerp(-0.28f, 0.35f, liftT);
-            Vector3 poleR = chestBone.TransformDirection(new Vector3(0.75f, poleY, poleZ));
-            Vector3 poleL = chestBone.TransformDirection(new Vector3(-0.75f, useGuardBladeBrace ? -0.35f : poleY, useGuardBladeBrace ? 0.20f : poleZ));
+            Vector3 poleR = chestBone.TransformDirection(new Vector3(0.75f, useGuardBladeBrace ? -0.45f : poleY, useGuardBladeBrace ? 0.35f : poleZ));
+            Vector3 poleL = chestBone.TransformDirection(new Vector3(-0.75f, useGuardBladeBrace ? -0.30f : poleY, useGuardBladeBrace ? 0.30f : poleZ));
 
             Transform leftTarget = useGuardBladeBrace && guardTargetL != null ? guardTargetL : gripTargetL;
             SolveTwoBoneArmIK(armRightPivot, forearmRightPivot, handRightBone, gripTargetR.position, poleR);
@@ -1139,7 +1172,9 @@ namespace YunaLegend.Arena.Runtime
 
             if (rocketPunchObject != null)
             {
-                bool punchActive = sim.CurrentEnemySpec.Id == ArenaEnemyId.Robot
+                // Quando o Robo possui esqueleto articulado, o RocketPunch e executado pelo PROPRIO braco do Robo
+                bool punchActive = robotRigAnimator == null
+                    && sim.CurrentEnemySpec.Id == ArenaEnemyId.Robot
                     && sim.EnemyState == ArenaEnemyState.ActiveAttack
                     && sim.ActiveAttackKind == ArenaAttackKind.RocketPunch;
                 rocketPunchObject.SetActive(punchActive);

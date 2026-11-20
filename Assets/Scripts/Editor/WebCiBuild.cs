@@ -18,6 +18,7 @@ namespace YunaLegend.EditorScripts
         private const string TitleScene = "Assets/Scenes/TitleScreen.unity";
         private const string Stage1Scene = "Assets/Art/Illustrated25D/Environment/Stage2Runtime/Fase-Jogavel-Completa.unity";
         private const string ToyRoomScene = "Assets/Scenes/ToyRoom_Gameplay.unity";
+        private const string ArenaScene = "Assets/Scenes/Arena_Gameplay.unity";
 
         [MenuItem("YunaLegend/Build Web para GitHub Pages", false, 100)]
         public static void BuildFromMenu()
@@ -129,7 +130,7 @@ namespace YunaLegend.EditorScripts
                 return scenes.ToArray();
             }
 
-            return new[] { TitleScene, Stage1Scene, ToyRoomScene };
+            return new[] { TitleScene, Stage1Scene, ToyRoomScene, ArenaScene };
         }
 
         private static string ResolveOutputPath()
