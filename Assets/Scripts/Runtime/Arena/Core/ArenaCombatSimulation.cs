@@ -645,6 +645,11 @@ namespace YunaLegend.Arena.Core
             StartEnemyWindup();
         }
 
+        public void ForceEnemyWindupForTest()
+        {
+            StartEnemyWindup();
+        }
+
         private void StartEnemyWindup()
         {
             ActiveAttackKind = PickAttackKind();

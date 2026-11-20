@@ -683,12 +683,17 @@ namespace YunaLegend.Editor.Arena
 
             var train = PlaceNormalizedModel("Enemy_Train", visual.transform, $"{ToyPropsDir}/train.obj", $"{ToyPropsDir}/train_Albedo.png",
                 Vector3.zero, 2.25f, -90f, "M_Arena_Train");
-            var robot = PlaceNormalizedModel("Enemy_Robot", visual.transform, $"{ArenaModelsDir}/robot_hunyuan.obj", $"{ArenaModelsDir}/T_Robot_Albedo.png",
-                Vector3.zero, 2.50f, 0f, "M_Arena_Robot");
-            var dino = PlaceNormalizedModel("Enemy_Dinosaur", visual.transform, $"{ArenaModelsDir}/dinosaur_hunyuan.obj", $"{ArenaModelsDir}/T_Dinosaur_Albedo.png",
-                Vector3.zero, 2.50f, 0f, "M_Arena_DinoEnemy");
-            var bear = PlaceNormalizedModel("Enemy_Bear", visual.transform, $"{ArenaModelsDir}/bear_hunyuan.obj", $"{ArenaModelsDir}/T_Bear_Albedo.png",
-                Vector3.zero, 3.25f, 0f, "M_Arena_BearEnemy");
+
+            var robotMat = CreateLitMat("M_Arena_Robot", $"{ArenaModelsDir}/T_Robot_Albedo.png", Color.white);
+            var dinoMat = CreateLitMat("M_Arena_DinoEnemy", $"{ArenaModelsDir}/T_Dinosaur_Albedo.png", Color.white);
+            var bearMat = CreateLitMat("M_Arena_BearEnemy", $"{ArenaModelsDir}/T_Bear_Albedo.png", Color.white);
+
+            var robot = ArenaEnemyRigBuilder.BuildRiggedEnemy(
+                "Enemy_Robot", ArenaEnemyId.Robot, visual.transform, $"{ArenaModelsDir}/robot_hunyuan.obj", robotMat, 2.50f);
+            var dino = ArenaEnemyRigBuilder.BuildRiggedEnemy(
+                "Enemy_Dinosaur", ArenaEnemyId.Dinosaur, visual.transform, $"{ArenaModelsDir}/dinosaur_hunyuan.obj", dinoMat, 2.50f);
+            var bear = ArenaEnemyRigBuilder.BuildRiggedEnemy(
+                "Enemy_Bear", ArenaEnemyId.Bear, visual.transform, $"{ArenaModelsDir}/bear_hunyuan.obj", bearMat, 3.25f);
 
             robot.SetActive(false);
             dino.SetActive(false);
@@ -1255,6 +1260,7 @@ namespace YunaLegend.Editor.Arena
                 enemyView.UpdateEnemyVisual(sim, null, 1f / 60f);
             }
 
+            sim.ForceEnemyWindupForTest();
             for (int g = 0; g < 18; g++)
             {
                 var guardInp = new YunaLegend.Arena.Core.ArenaInputState { MoveX = -1f };
@@ -1264,8 +1270,8 @@ namespace YunaLegend.Editor.Arena
             }
 
             Vector3 guardWorld = playerView.transform.position;
-            cam.transform.position = new Vector3(guardWorld.x + 0.45f, 1.25f, -4.15f);
-            cam.transform.LookAt(new Vector3(guardWorld.x + 0.30f, 0.95f, 0f));
+            cam.transform.position = new Vector3(guardWorld.x + 0.35f, 1.00f, -4.60f);
+            cam.transform.LookAt(new Vector3(guardWorld.x + 0.15f, 0.70f, 0f));
             RenderToPng(cam, 512, 512, "Logs/arena_choreo_guard_pose.png");
 
             cam.aspect = prevAspect;
@@ -1280,6 +1286,9 @@ namespace YunaLegend.Editor.Arena
             bool[] capturedWave = new bool[4];
             bool capturedSteam = false;
             bool capturedImpactBang = false;
+            bool capRobotWalk = false, capRobotPunch = false, capRobotHit = false;
+            bool capDinoTell = false, capDinoBite = false, capDinoHit = false;
+            bool capBearWalk = false, capBearHug = false, capBearHit = false;
 
             sim.OnSwordHit += valid =>
             {
@@ -1325,6 +1334,63 @@ namespace YunaLegend.Editor.Arena
                 {
                     RenderToPng(cam, 1280, 720, "Logs/arena_gameplay_impact_bang.png");
                     capturedImpactBang = true;
+                }
+
+                // Capturas de comprovacao visual dos 3 chefes articulados (Passo, Golpe e Reacao de Dor)
+                var eid = sim.CurrentEnemySpec.Id;
+                if (eid == ArenaEnemyId.Robot)
+                {
+                    if (!capRobotWalk && sim.EnemyState == ArenaEnemyState.Approaching && sim.EnemyStateTick == 18)
+                    {
+                        RenderToPng(cam, 1280, 720, "Logs/arena_boss_robot_walk.png");
+                        capRobotWalk = true;
+                    }
+                    if (!capRobotPunch && sim.EnemyState == ArenaEnemyState.ActiveAttack && sim.ActiveAttackKind == ArenaAttackKind.RocketPunch && sim.EnemyStateTick == 8)
+                    {
+                        RenderToPng(cam, 1280, 720, "Logs/arena_boss_robot_punch.png");
+                        capRobotPunch = true;
+                    }
+                    if (!capRobotHit && sim.EnemyState == ArenaEnemyState.HitReaction && sim.EnemyStateTick == 7)
+                    {
+                        RenderToPng(cam, 1280, 720, "Logs/arena_boss_robot_hit.png");
+                        capRobotHit = true;
+                    }
+                }
+                else if (eid == ArenaEnemyId.Dinosaur)
+                {
+                    if (!capDinoTell && sim.EnemyState == ArenaEnemyState.Windup && sim.EnemyStateTick == 26)
+                    {
+                        RenderToPng(cam, 1280, 720, "Logs/arena_boss_dino_tail_tell.png");
+                        capDinoTell = true;
+                    }
+                    if (!capDinoBite && sim.EnemyState == ArenaEnemyState.ActiveAttack && sim.EnemyStateTick == 8)
+                    {
+                        RenderToPng(cam, 1280, 720, "Logs/arena_boss_dino_bite.png");
+                        capDinoBite = true;
+                    }
+                    if (!capDinoHit && sim.EnemyState == ArenaEnemyState.HitReaction && sim.EnemyStateTick == 7)
+                    {
+                        RenderToPng(cam, 1280, 720, "Logs/arena_boss_dino_hit.png");
+                        capDinoHit = true;
+                    }
+                }
+                else if (eid == ArenaEnemyId.Bear)
+                {
+                    if (!capBearWalk && sim.EnemyState == ArenaEnemyState.Approaching && sim.EnemyStateTick == 18)
+                    {
+                        RenderToPng(cam, 1280, 720, "Logs/arena_boss_bear_walk.png");
+                        capBearWalk = true;
+                    }
+                    if (!capBearHug && sim.EnemyState == ArenaEnemyState.ActiveAttack && sim.ActiveAttackKind == ArenaAttackKind.BearHug && sim.EnemyStateTick == 8)
+                    {
+                        RenderToPng(cam, 1280, 720, "Logs/arena_boss_bear_hug.png");
+                        capBearHug = true;
+                    }
+                    if (!capBearHit && sim.EnemyState == ArenaEnemyState.HitReaction && sim.EnemyStateTick == 7)
+                    {
+                        RenderToPng(cam, 1280, 720, "Logs/arena_boss_bear_hit.png");
+                        capBearHit = true;
+                    }
                 }
 
                 int wave = sim.WaveIndex;
@@ -1386,6 +1452,69 @@ namespace YunaLegend.Editor.Arena
                 AssetDatabase.LoadAssetAtPath<AudioClip>($"{AudioDir}/robot-punch.mp3"),
                 AssetDatabase.LoadAssetAtPath<AudioClip>($"{AudioDir}/dinossaur-attack.mp3"),
                 AssetDatabase.LoadAssetAtPath<AudioClip>($"{AudioDir}/bear-attack.mp3"));
+        }
+
+        [MenuItem("Yuna Legend/Arena/Exportar WebGL da Arena")]
+        public static void BuildArenaWebGL()
+        {
+            if (!BuildPipeline.IsBuildTargetSupported(BuildTargetGroup.WebGL, BuildTarget.WebGL))
+            {
+                throw new System.InvalidOperationException("Instale WebGL Build Support para esta versao do Unity pelo Hub.");
+            }
+
+            BuildArenaScene();
+
+            string output = "Build/ArenaWebGL";
+            Directory.CreateDirectory(output);
+
+            var previousCompression = PlayerSettings.WebGL.compressionFormat;
+            var previousBackground = PlayerSettings.runInBackground;
+            try
+            {
+                PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Disabled;
+                PlayerSettings.runInBackground = true;
+                var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
+                {
+                    scenes = new[] { ScenePath },
+                    locationPathName = output,
+                    target = BuildTarget.WebGL,
+                    options = BuildOptions.Development
+                });
+
+                if (report.summary.result != UnityEditor.Build.Reporting.BuildResult.Succeeded)
+                {
+                    throw new System.InvalidOperationException(
+                        $"Build WebGL da Arena falhou: {report.summary.result}, {report.summary.totalErrors} erros.");
+                }
+
+                string htmlPath = Path.Combine(output, "index.html");
+                if (File.Exists(htmlPath))
+                {
+                    string text = File.ReadAllText(htmlPath);
+                    const string marker = "var canvas = document.querySelector(\"#unity-canvas\");";
+                    const string patch =
+                        "(function() {\n" +
+                        "  const orig = HTMLCanvasElement.prototype.getContext;\n" +
+                        "  HTMLCanvasElement.prototype.getContext = function(t, a) {\n" +
+                        "    if (t === 'webgl' || t === 'webgl2') a = Object.assign({}, a, { preserveDrawingBuffer: true });\n" +
+                        "    return orig.call(this, t, a);\n" +
+                        "  };\n" +
+                        "})();\n" +
+                        "var canvas = document.querySelector(\"#unity-canvas\");";
+                    if (!text.Contains("preserveDrawingBuffer: true") && text.Contains(marker))
+                    {
+                        text = text.Replace(marker, patch);
+                        File.WriteAllText(htmlPath, text);
+                    }
+                }
+
+                Debug.Log($"YUNA_ARENA_WEBGL_OK: {Path.GetFullPath(output)}");
+            }
+            finally
+            {
+                PlayerSettings.WebGL.compressionFormat = previousCompression;
+                PlayerSettings.runInBackground = previousBackground;
+            }
         }
 
         private static void RegisterSceneInBuildSettings()
