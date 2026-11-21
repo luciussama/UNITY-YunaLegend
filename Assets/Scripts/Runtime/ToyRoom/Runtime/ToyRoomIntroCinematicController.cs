@@ -524,7 +524,7 @@ namespace YunaLegend.ToyRoom.Runtime
                 fairyRootRect,
                 Vector2.zero,
                 new Vector2(88f, 150f),
-                new Color(1.0f, 0.8588f, 0.5176f, 0.45f));
+                new Color(0.40f, 0.82f, 1.00f, 0.45f));
             fairyBodyGlowRect = glowGo.GetComponent<RectTransform>();
             fairyBodyGlowImage = glowGo.GetComponent<Image>();
             fairyBodyGlowImage.sprite = CreateSoftRadialGlowSprite(96);
