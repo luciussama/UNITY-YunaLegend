@@ -248,30 +248,33 @@ namespace YunaLegend.EditorScripts
             var prevDistances = new float[canvases.Length];
             var prevLayers = new int[canvases.Length];
 
-            var rt = new RenderTexture(width, height, 24, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB);
+            var rtScene = new RenderTexture(width, height, 24, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB);
+            var rtUi = new RenderTexture(width, height, 24, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB);
             var prevTarget = cam.targetTexture;
             float prevAspect = cam.aspect;
             int prevMask = cam.cullingMask;
 
             var uiCamGo = new GameObject("__TempUiOverlayCam");
             var uiCam = uiCamGo.AddComponent<Camera>();
+            uiCam.cameraType = CameraType.Preview;
             uiCam.orthographic = true;
             uiCam.orthographicSize = 5f;
             uiCam.nearClipPlane = 0.1f;
             uiCam.farClipPlane = 10f;
-            uiCam.clearFlags = CameraClearFlags.Depth;
+            uiCam.clearFlags = CameraClearFlags.SolidColor;
+            uiCam.backgroundColor = new Color(0f, 0f, 0f, 0f);
             uiCam.cullingMask = 1 << 5; // UI layer only
             uiCam.aspect = (float)width / height;
-            uiCam.targetTexture = rt;
+            uiCam.targetTexture = rtUi;
 
             try
             {
-                // 1) Renderiza a cena 3D/2.5D sem a layer UI (para que post-process 3D nao desenhe bordas sobre a UI)
+                // 1) Renderiza a cena 3D/2.5D sem a layer UI em rtScene
                 cam.aspect = (float)width / height;
                 cam.cullingMask = prevMask & ~(1 << 5);
-                cam.targetTexture = rt;
+                cam.targetTexture = rtScene;
 
-                // 2) Renderiza todos os Canvases de UI em uma camera dedicada sem post-process (fiel ao ScreenSpaceOverlay)
+                // 2) Renderiza todos os Canvases de UI com fundo transparente em rtUi
                 for (int i = 0; i < canvases.Length; i++)
                 {
                     prevModes[i] = canvases[i].renderMode;
@@ -292,15 +295,49 @@ namespace YunaLegend.EditorScripts
                 cam.Render();
                 uiCam.Render();
 
+                // 3) Compoe UI sobre a cena 3D com alpha blending padrao (identico a ScreenSpaceOverlay)
                 var prevActive = RenderTexture.active;
-                RenderTexture.active = rt;
-                var tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
-                tex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
-                tex.Apply();
+                RenderTexture.active = rtScene;
+                var sceneTex = new Texture2D(width, height, TextureFormat.RGBA32, false);
+                sceneTex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+                sceneTex.Apply();
+
+                RenderTexture.active = rtUi;
+                var uiTex = new Texture2D(width, height, TextureFormat.RGBA32, false);
+                uiTex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+                uiTex.Apply();
                 RenderTexture.active = prevActive;
 
-                File.WriteAllBytes(Path.Combine(OutputDir, fileName), tex.EncodeToPNG());
-                UnityEngine.Object.DestroyImmediate(tex);
+                var scenePixels = sceneTex.GetPixels32();
+                var uiPixels = uiTex.GetPixels32();
+                for (int p = 0; p < scenePixels.Length; p++)
+                {
+                    byte a = uiPixels[p].a;
+                    if (a == 0)
+                    {
+                        continue;
+                    }
+
+                    if (a == 255)
+                    {
+                        scenePixels[p] = uiPixels[p];
+                        scenePixels[p].a = 255;
+                        continue;
+                    }
+
+                    float alpha = a / 255f;
+                    float inv = 1f - alpha;
+                    scenePixels[p].r = (byte)Mathf.Clamp(Mathf.RoundToInt(uiPixels[p].r * alpha + scenePixels[p].r * inv), 0, 255);
+                    scenePixels[p].g = (byte)Mathf.Clamp(Mathf.RoundToInt(uiPixels[p].g * alpha + scenePixels[p].g * inv), 0, 255);
+                    scenePixels[p].b = (byte)Mathf.Clamp(Mathf.RoundToInt(uiPixels[p].b * alpha + scenePixels[p].b * inv), 0, 255);
+                    scenePixels[p].a = 255;
+                }
+
+                sceneTex.SetPixels32(scenePixels);
+                sceneTex.Apply();
+                File.WriteAllBytes(Path.Combine(OutputDir, fileName), sceneTex.EncodeToPNG());
+                UnityEngine.Object.DestroyImmediate(sceneTex);
+                UnityEngine.Object.DestroyImmediate(uiTex);
             }
             finally
             {
@@ -320,7 +357,8 @@ namespace YunaLegend.EditorScripts
                 cam.aspect = prevAspect;
                 uiCam.targetTexture = null;
                 UnityEngine.Object.DestroyImmediate(uiCamGo);
-                UnityEngine.Object.DestroyImmediate(rt);
+                UnityEngine.Object.DestroyImmediate(rtScene);
+                UnityEngine.Object.DestroyImmediate(rtUi);
             }
         }
 

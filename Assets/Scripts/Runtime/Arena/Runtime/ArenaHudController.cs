@@ -425,12 +425,12 @@ namespace YunaLegend.Arena.Runtime
                 SetRect(statusHintText.rectTransform, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0f, topY - pillH - 8f * px), new Vector2(usableW, 34f * px));
             }
 
-            // Controles touch inferiores com margem inferior segura para TRAS: DEFENDER
+            // Controles touch inferiores com margem esquerda e inferior seguras para todos os rotulos do D-Pad
             if (virtualDPad != null)
             {
-                float dpadSize = isPortrait ? 110f * px : 112f * px;
-                float dpadX = marginX + dpadSize * 0.5f + 12f * px;
-                float dpadY = isPortrait ? 92f * px : 86f * px;
+                float dpadSize = isPortrait ? 108f * px : 106f * px;
+                float dpadX = isPortrait ? (marginX + dpadSize * 0.5f + 18f * px) : (marginX + dpadSize * 0.5f + 28f * px);
+                float dpadY = isPortrait ? 94f * px : 92f * px;
                 virtualDPad.ApplyMobileSizing(dpadSize, new Vector2(dpadX, dpadY), f14, px);
             }
 

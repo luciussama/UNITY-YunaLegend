@@ -478,13 +478,15 @@ namespace YunaLegend.UI
                     float panelHeight = 192f * px;
 
                     // Prioridade 1: em retrato, posicionar o painel de configuracoes na faixa SUPERIOR
-                    // escura (acima da menina na poltrona) para nunca encobrir Yuna.
+                    // escura (acima da menina na poltrona) com backdrop opaco cobrindo o menu atras.
                     if (isPortrait)
                     {
                         settingsPanelRect.anchorMin = new Vector2(0.5f, 1f);
                         settingsPanelRect.anchorMax = new Vector2(0.5f, 1f);
                         settingsPanelRect.pivot = new Vector2(0.5f, 1f);
                         settingsPanelRect.anchoredPosition = new Vector2(0f, -56f * px);
+                        panelHeight = 238f * px;
+                        panelWidth = canvasSize.x - 16f * px;
                     }
                     else
                     {
@@ -499,7 +501,7 @@ namespace YunaLegend.UI
                     var bgImg = settingsPanelRect.GetComponent<Image>();
                     if (bgImg != null)
                     {
-                        bgImg.color = new Color(0.06f, 0.042f, 0.032f, 0.98f);
+                        bgImg.color = new Color(0.055f, 0.038f, 0.028f, 1f);
                     }
 
                     var outline = settingsPanelRect.GetComponent<Outline>();
