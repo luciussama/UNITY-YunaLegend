@@ -163,10 +163,10 @@ namespace YunaLegend.Tests
                 canvasRect.sizeDelta = new Vector2(979f, 2118f);
                 layout.ApplyLayout(force: true);
                 Assert.IsFalse(leftShade.activeSelf, "Retrato deve ocultar sombra lateral");
-                Assert.IsTrue(bottomScrim.activeSelf, "Retrato deve ativar gradiente inferior");
+                Assert.IsTrue(bottomScrim.activeSelf, "Retrato deve ativar gradiente superior");
                 Assert.Less(artRect.anchoredPosition.x, -100f, "Retrato deve centralizar a menina na poltrona");
                 Assert.Greater(artRect.sizeDelta.x, canvasRect.sizeDelta.x);
-                Assert.AreEqual(0f, newGameGo.GetComponent<RectTransform>().anchorMin.y, 0.001f);
+                Assert.AreEqual(1f, newGameGo.GetComponent<RectTransform>().anchorMin.y, 0.001f);
             }
             finally
             {

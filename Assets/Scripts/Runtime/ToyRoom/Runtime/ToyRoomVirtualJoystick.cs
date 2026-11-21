@@ -101,6 +101,12 @@ namespace YunaLegend.ToyRoom.Runtime
             OnValueChanged?.Invoke(Value);
         }
 
+        private static float SmoothRange(float edge0, float edge1, float x)
+        {
+            float t = Mathf.Clamp01((x - edge0) / Mathf.Max(0.0001f, edge1 - edge0));
+            return t * t * (3f - 2f * t);
+        }
+
         public static Sprite CreateCircleSprite(int size, float innerRadiusRatio, float outerRadiusRatio)
         {
             int clampedSize = Mathf.Max(16, size);
@@ -122,9 +128,9 @@ namespace YunaLegend.ToyRoom.Runtime
                     float dx = (x - half) * invHalf;
                     float dist = Mathf.Sqrt(dx * dx + dy * dy);
 
-                    float outerAlpha = 1f - Mathf.SmoothStep(outerRadiusRatio - 0.04f, outerRadiusRatio, dist);
+                    float outerAlpha = 1f - SmoothRange(outerRadiusRatio - 0.04f, outerRadiusRatio, dist);
                     float innerAlpha = innerRadiusRatio > 0f
-                        ? Mathf.SmoothStep(innerRadiusRatio - 0.04f, innerRadiusRatio, dist)
+                        ? SmoothRange(innerRadiusRatio - 0.04f, innerRadiusRatio, dist)
                         : 1f;
 
                     byte alpha = (byte)Mathf.Clamp(Mathf.RoundToInt(outerAlpha * innerAlpha * 255f), 0, 255);
@@ -159,7 +165,7 @@ namespace YunaLegend.ToyRoom.Runtime
             float invHalf = 1f / half;
             var pixels = new Color32[s * s];
 
-            Color fillCol = new Color(0.10f, 0.08f, 0.14f, 0.36f);
+            Color fillCol = new Color(0.10f, 0.08f, 0.14f, 0.48f);
             Color goldCol = new Color(0.953f, 0.847f, 0.486f, 0.96f);
 
             for (int y = 0; y < s; y++)
@@ -176,16 +182,14 @@ namespace YunaLegend.ToyRoom.Runtime
                     }
 
                     Color c = fillCol;
-                    float outerFade = 1f - Mathf.SmoothStep(0.955f, 0.985f, r);
+                    float outerFade = 1f - SmoothRange(0.955f, 0.985f, r);
                     c.a *= outerFade;
 
-                    // Anel dourado fino na borda externa
-                    float ring = Mathf.SmoothStep(0.915f, 0.935f, r) * (1f - Mathf.SmoothStep(0.965f, 0.985f, r));
+                    float ring = SmoothRange(0.915f, 0.935f, r) * (1f - SmoothRange(0.965f, 0.985f, r));
 
-                    // 4 marcas cardinais (ticks) entrando a partir da borda em 12h, 3h, 6h, 9h
                     bool inTickRadius = r >= 0.78f && r <= 0.94f;
-                    float tickV = inTickRadius ? (1f - Mathf.SmoothStep(0.014f, 0.024f, Mathf.Abs(dx))) : 0f;
-                    float tickH = inTickRadius ? (1f - Mathf.SmoothStep(0.014f, 0.024f, Mathf.Abs(dy))) : 0f;
+                    float tickV = inTickRadius ? (1f - SmoothRange(0.014f, 0.024f, Mathf.Abs(dx))) : 0f;
+                    float tickH = inTickRadius ? (1f - SmoothRange(0.014f, 0.024f, Mathf.Abs(dy))) : 0f;
                     float goldMask = Mathf.Clamp01(Mathf.Max(ring, Mathf.Max(tickV, tickH)));
 
                     Color final = Color.Lerp(c, goldCol, goldMask);
@@ -234,15 +238,14 @@ namespace YunaLegend.ToyRoom.Runtime
                         continue;
                     }
 
-                    // Gradiente radial deslocado ligeiramente para cima (iluminacao quente de botao)
                     float gx = dx;
                     float gy = dy - 0.16f;
                     float gr = Mathf.Clamp01(Mathf.Sqrt(gx * gx + gy * gy) * 0.92f);
                     Color grad = Color.Lerp(brightCenter, warmEdge, gr * gr);
 
-                    float borderMask = Mathf.SmoothStep(borderInner - 0.015f, borderInner + 0.01f, r);
+                    float borderMask = SmoothRange(borderInner - 0.015f, borderInner + 0.01f, r);
                     Color c = Color.Lerp(grad, borderWhite, borderMask);
-                    c.a = 1f - Mathf.SmoothStep(0.95f, 0.98f, r);
+                    c.a = 1f - SmoothRange(0.95f, 0.98f, r);
                     pixels[y * s + x] = (Color32)c;
                 }
             }
@@ -275,7 +278,7 @@ namespace YunaLegend.ToyRoom.Runtime
                 {
                     float dx = (x - half) * invHalf;
                     float r = Mathf.Sqrt(dx * dx + dy * dy);
-                    float ring = Mathf.SmoothStep(0.91f, 0.93f, r) * (1f - Mathf.SmoothStep(0.96f, 0.98f, r));
+                    float ring = SmoothRange(0.91f, 0.93f, r) * (1f - SmoothRange(0.96f, 0.98f, r));
                     float angle = Mathf.Atan2(dy, dx);
                     float dash = Mathf.Sin(angle * dashCount) > 0.15f ? 1f : 0f;
                     byte a = (byte)Mathf.Clamp(Mathf.RoundToInt(ring * dash * 255f), 0, 255);

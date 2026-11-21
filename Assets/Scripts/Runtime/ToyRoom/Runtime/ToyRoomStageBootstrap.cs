@@ -27,8 +27,10 @@ namespace YunaLegend.ToyRoom.Runtime
         [SerializeField] private bool startInExploring;
 
         private readonly Dictionary<string, ToyItemView> toyLookup = new();
+        private ToyRoomIntroCinematicController introCinematic;
 
         public ToyRoomStateMachine StateMachine { get; private set; }
+        public ToyRoomIntroCinematicController IntroCinematic => introCinematic;
 
         public void Configure(
             Camera mainCam,
@@ -75,7 +77,17 @@ namespace YunaLegend.ToyRoom.Runtime
                 player.ControlsEnabled = false;
             }
 
-            narrative.PlayIntro(() => StateMachine.CompleteIntro());
+            introCinematic = GetComponent<ToyRoomIntroCinematicController>();
+            if (introCinematic == null)
+            {
+                introCinematic = gameObject.AddComponent<ToyRoomIntroCinematicController>();
+            }
+
+            introCinematic.Configure(audioController);
+            introCinematic.BeginIntroCinematic(() =>
+            {
+                StateMachine.CompleteIntro();
+            });
         }
 
         private void OnDestroy()
@@ -129,8 +141,9 @@ namespace YunaLegend.ToyRoom.Runtime
             }
 
             // No modo mobile, tocar em qualquer ponto da tela durante falas/narracoes avanca imediatamente
-            if (narrative != null
-                && narrative.IsPlaying
+            bool introOrNarrativePlaying = (introCinematic != null && introCinematic.IsActive)
+                || (narrative != null && narrative.IsPlaying);
+            if (introOrNarrativePlaying
                 && (Application.isMobilePlatform || Touchscreen.current != null)
                 && Touchscreen.current != null
                 && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
@@ -144,15 +157,24 @@ namespace YunaLegend.ToyRoom.Runtime
                 }
             }
 
-            if (keyboard != null && (keyboard.eKey.wasPressedThisFrame || keyboard.spaceKey.wasPressedThisFrame))
+            if (keyboard != null && (keyboard.eKey.wasPressedThisFrame || keyboard.spaceKey.wasPressedThisFrame || keyboard.enterKey.wasPressedThisFrame))
             {
-                if (narrative != null && narrative.IsPlaying && keyboard.spaceKey.wasPressedThisFrame)
+                if (introCinematic != null && introCinematic.IsActive && (keyboard.spaceKey.wasPressedThisFrame || keyboard.enterKey.wasPressedThisFrame))
+                {
+                    introCinematic.TryAdvanceDialogue();
+                    return;
+                }
+
+                if (narrative != null && narrative.IsPlaying && (keyboard.spaceKey.wasPressedThisFrame || keyboard.enterKey.wasPressedThisFrame))
                 {
                     narrative.AdvanceActiveBeat();
                     return;
                 }
 
-                RequestPlayerInteraction();
+                if (keyboard.eKey.wasPressedThisFrame || keyboard.spaceKey.wasPressedThisFrame)
+                {
+                    RequestPlayerInteraction();
+                }
             }
 
             if (chest != null)
@@ -191,6 +213,11 @@ namespace YunaLegend.ToyRoom.Runtime
 
         public void SkipActiveCutscene()
         {
+            if (introCinematic != null && introCinematic.IsActive)
+            {
+                introCinematic.SkipCinematic();
+            }
+
             if (narrative != null)
             {
                 narrative.SkipActiveSequence();
@@ -247,7 +274,19 @@ namespace YunaLegend.ToyRoom.Runtime
 
         private void HandleAdvanceDialogueRequested()
         {
-            if (narrative != null && narrative.IsPlaying && (Time.unscaledTime - lastDialogueAdvanceTime) >= 0.18f)
+            if ((Time.unscaledTime - lastDialogueAdvanceTime) < 0.18f)
+            {
+                return;
+            }
+
+            if (introCinematic != null && introCinematic.IsActive)
+            {
+                lastDialogueAdvanceTime = Time.unscaledTime;
+                introCinematic.TryAdvanceDialogue();
+                return;
+            }
+
+            if (narrative != null && narrative.IsPlaying)
             {
                 lastDialogueAdvanceTime = Time.unscaledTime;
                 narrative.AdvanceActiveBeat();

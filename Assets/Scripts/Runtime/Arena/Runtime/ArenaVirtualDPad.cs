@@ -37,6 +37,44 @@ namespace YunaLegend.Arena.Runtime
             maxRadius = radius;
         }
 
+        public void ApplyMobileSizing(float dpadSize, Vector2 anchoredPos, int helperFontSize, float px)
+        {
+            if (padArea == null)
+            {
+                padArea = GetComponent<RectTransform>();
+            }
+
+            if (padArea != null)
+            {
+                padArea.anchoredPosition = anchoredPos;
+                padArea.sizeDelta = new Vector2(dpadSize, dpadSize);
+            }
+
+            maxRadius = dpadSize * 0.34f;
+
+            if (thumbIndicator != null)
+            {
+                float thumbSize = dpadSize * 0.18f;
+                thumbIndicator.sizeDelta = new Vector2(thumbSize, thumbSize);
+            }
+
+            var topHint = transform.Find("DPad_HintTop")?.GetComponent<Text>();
+            if (topHint != null)
+            {
+                topHint.fontSize = helperFontSize;
+                topHint.rectTransform.anchoredPosition = new Vector2(0f, dpadSize * 0.5f + 12f * px);
+                topHint.rectTransform.sizeDelta = new Vector2(Mathf.Max(dpadSize + 40f * px, 160f * px), 20f * px);
+            }
+
+            var bottomHint = transform.Find("DPad_HintBottom")?.GetComponent<Text>();
+            if (bottomHint != null)
+            {
+                bottomHint.fontSize = helperFontSize;
+                bottomHint.rectTransform.anchoredPosition = new Vector2(0f, -(dpadSize * 0.5f + 12f * px));
+                bottomHint.rectTransform.sizeDelta = new Vector2(Mathf.Max(dpadSize + 40f * px, 160f * px), 20f * px);
+            }
+        }
+
         public void OnPointerDown(PointerEventData eventData)
         {
             UpdateInput(eventData);
