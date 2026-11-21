@@ -64,7 +64,8 @@ namespace YunaLegend.Arena.Runtime
             }
 
             animTimer += dt;
-            float blend = Mathf.Clamp01(dt * 18f);
+            bool isStriking = sim.EnemyState == ArenaEnemyState.ActiveAttack;
+            float blend = Mathf.Clamp01(dt * (isStriking ? 30f : 18f));
 
             switch (enemyId)
             {
@@ -140,9 +141,9 @@ namespace YunaLegend.Arena.Runtime
             }
             else if (isPunchActive)
             {
-                // ROCKET PUNCH real feito pelo PROPRIO BRACO DIREITO do robo (luva estendida + mola alongada!)
+                // ROCKET PUNCH real feito pelo PROPRIO BRACO DIREITO do robo (golpe rapido e seco!)
                 float t = Mathf.Clamp01(sim.EnemyStateTick / (float)Mathf.Max(1, sim.Tuning.EnemyActiveTicks));
-                float ext = Mathf.Sin(t * Mathf.PI);
+                float ext = Mathf.Pow(Mathf.Sin(t * Mathf.PI), 0.65f);
                 hipsY = -0.05f;
                 hipsYaw = -16f * ext;
                 chestYaw = -34f * ext;
@@ -233,14 +234,14 @@ namespace YunaLegend.Arena.Runtime
             float headPitch = 0f;
             float jawOpen = 0f;
             float thighL = 0f, thighR = 0f;
-            float tail1Yaw = Mathf.Sin(animTimer * 4.2f) * 14f;
-            float tail2Yaw = Mathf.Sin(animTimer * 4.2f - 0.7f) * 20f;
-            float tail3Yaw = Mathf.Sin(animTimer * 4.2f - 1.4f) * 26f;
+            float tail1Yaw = Mathf.Sin(animTimer * 4.2f) * 7f;
+            float tail2Yaw = Mathf.Sin(animTimer * 4.2f - 0.7f) * 12f;
+            float tail3Yaw = Mathf.Sin(animTimer * 4.2f - 1.4f) * 18f;
             float tailPitch = 0f;
 
             if (isHit)
             {
-                // Reacao de dor: joga cabeca/pescoco para tras, abre a boca e chicoteia a cauda
+                // Reacao de dor: joga cabeca/pescoco para tras, abre a boca e balanca a cauda sem torcer a base
                 float t = Mathf.Clamp01(sim.EnemyStateTick / (float)Mathf.Max(1, sim.Tuning.EnemyHitReactionTicks));
                 float pain = Mathf.Sin(t * Mathf.PI);
                 hipsY = -0.025f * pain;
@@ -250,46 +251,48 @@ namespace YunaLegend.Arena.Runtime
                 neckPitch = -16f * pain;
                 headPitch = -14f * pain;
                 jawOpen = 36f * pain;
-                tail1Yaw = Mathf.Sin(t * Mathf.PI * 3f) * 32f;
-                tail2Yaw = Mathf.Sin(t * Mathf.PI * 3f - 0.5f) * 42f;
-                tail3Yaw = Mathf.Sin(t * Mathf.PI * 3f - 1.0f) * 50f;
+                tail1Yaw = Mathf.Sin(t * Mathf.PI * 3f) * 14f;
+                tail2Yaw = Mathf.Sin(t * Mathf.PI * 3f - 0.5f) * 22f;
+                tail3Yaw = Mathf.Sin(t * Mathf.PI * 3f - 1.0f) * 30f;
                 thighL = -16f * pain;
                 thighR = 14f * pain;
             }
             else if (isWindup)
             {
-                // CAGUETE (Telegraph): balancada rapida e intensa da cauda antes de atacar!
+                // CAGUETE (Telegraph): balancada rapida e organica na ponta da cauda (base estavel sem vincar barriga!)
                 float t = Mathf.Clamp01(sim.EnemyStateTick / (float)Mathf.Max(1, sim.Tuning.EnemyWindupTicks));
-                float rapidWag = Mathf.Sin(animTimer * 36f);
+                float rapidWag = Mathf.Sin(animTimer * 32f);
                 hipsY = -0.04f * t;
                 hipsZ = -0.06f * t;
                 spinePitch = -12f * t;
                 neckPitch = -14f * t;
                 jawOpen = 38f * t; // Abre a bocarra preparando a mordida
-                tail1Yaw = rapidWag * 34f;
-                tail2Yaw = Mathf.Sin(animTimer * 36f - 0.6f) * 46f;
-                tail3Yaw = Mathf.Sin(animTimer * 36f - 1.2f) * 58f;
-                tailPitch = 14f * t;
-                thighL = -24f * t;
-                thighR = 24f * t;
+                tail1Yaw = rapidWag * 12f;
+                tail2Yaw = Mathf.Sin(animTimer * 32f - 0.6f) * 22f;
+                tail3Yaw = Mathf.Sin(animTimer * 32f - 1.2f) * 32f;
+                tailPitch = 6f * t;
+                thighL = -14f * t;
+                thighR = 14f * t;
             }
             else if (isAttack)
             {
-                // GOLPE (Mordida / Investida): arqueia TODO o corpo para frente alcancando a menina e fecha a mandibula!
+                // GOLPE (Mordida / Investida): bote rapido e impactante alcancando a menina!
                 float t = Mathf.Clamp01(sim.EnemyStateTick / (float)Mathf.Max(1, sim.Tuning.EnemyActiveTicks));
-                float lunge = Mathf.Sin(t * Mathf.PI);
-                hipsY = -0.055f * lunge;
+                float lunge = Mathf.Pow(Mathf.Sin(t * Mathf.PI), 0.68f);
+                hipsY = -0.045f * lunge;
                 hipsZ = 0.14f * lunge;
-                hipsPitch = 12f * lunge;
-                spinePitch = 28f * lunge;
-                neckPitch = 24f * lunge;
+                hipsPitch = 10f * lunge;
+                spinePitch = 24f * lunge;
+                neckPitch = 22f * lunge;
                 headPitch = 10f * lunge;
                 // Abre no inicio do bote e abocanha com forca no pico (sem vincar o focinho)!
                 jawOpen = t < 0.45f ? Mathf.Lerp(20f, 24f, t / 0.45f) : Mathf.Lerp(24f, -2f, (t - 0.45f) / 0.55f);
-                tailPitch = -22f * lunge;
-                tail1Yaw = Mathf.Sin(t * Mathf.PI * 2f) * 18f;
-                thighL = -36f * lunge;
-                thighR = 34f * lunge;
+                tailPitch = -6f * lunge;
+                tail1Yaw = Mathf.Sin(t * Mathf.PI * 2f) * 8f;
+                tail2Yaw = Mathf.Sin(t * Mathf.PI * 2f - 0.6f) * 14f;
+                tail3Yaw = Mathf.Sin(t * Mathf.PI * 2f - 1.2f) * 20f;
+                thighL = -18f * lunge;
+                thighR = 16f * lunge;
             }
             else if (isWalking)
             {
@@ -299,11 +302,11 @@ namespace YunaLegend.Arena.Runtime
                 hipsY = Mathf.Abs(s) * 0.03f;
                 hipsPitch = 6f;
                 spinePitch = 6f + Mathf.Abs(s) * 4f;
-                thighL = s * 34f;
-                thighR = -s * 34f;
-                tail1Yaw = s * 20f;
-                tail2Yaw = Mathf.Sin(cycle - 0.6f) * 28f;
-                tail3Yaw = Mathf.Sin(cycle - 1.2f) * 36f;
+                thighL = s * 22f;
+                thighR = -s * 22f;
+                tail1Yaw = s * 10f;
+                tail2Yaw = Mathf.Sin(cycle - 0.6f) * 16f;
+                tail3Yaw = Mathf.Sin(cycle - 1.2f) * 22f;
             }
             else
             {
@@ -418,7 +421,7 @@ namespace YunaLegend.Arena.Runtime
             else if (isAttack)
             {
                 float t = Mathf.Clamp01(sim.EnemyStateTick / (float)Mathf.Max(1, sim.Tuning.EnemyActiveTicks));
-                float strike = Mathf.Sin(t * Mathf.PI);
+                float strike = Mathf.Pow(Mathf.Sin(t * Mathf.PI), 0.68f);
                 if (sim.ActiveAttackKind == ArenaAttackKind.BearHug)
                 {
                     // Fecha os dois bracos com forca esmagadora a frente (golpe real dos bracos!)

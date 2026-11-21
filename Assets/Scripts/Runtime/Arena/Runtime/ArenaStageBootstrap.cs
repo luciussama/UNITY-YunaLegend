@@ -49,7 +49,8 @@ namespace YunaLegend.Arena.Runtime
         private void Awake()
         {
             bool easyMode = PlayerPrefs.GetInt("YunaLegend.EasyMode", 0) == 1;
-            simulation = new ArenaCombatSimulation(easyMode);
+            bool isMobileTouch = Application.isMobilePlatform || Touchscreen.current != null;
+            simulation = new ArenaCombatSimulation(easyMode, isMobileTouch);
             SubscribeEvents();
         }
 
@@ -224,6 +225,7 @@ namespace YunaLegend.Arena.Runtime
                 simulation.OnAttackBlocked += HandleAttackBlocked;
                 simulation.OnPlayerDamaged += HandlePlayerDamaged;
                 simulation.OnEnemyAttackStarted += HandleEnemyAttackStarted;
+                simulation.OnEnemyAttackActive += HandleEnemyAttackActive;
                 simulation.OnSpecialPhaseChanged += HandleSpecialPhaseChanged;
                 simulation.OnBattleEnded += HandleBattleEnded;
             }
@@ -247,6 +249,7 @@ namespace YunaLegend.Arena.Runtime
                 simulation.OnAttackBlocked -= HandleAttackBlocked;
                 simulation.OnPlayerDamaged -= HandlePlayerDamaged;
                 simulation.OnEnemyAttackStarted -= HandleEnemyAttackStarted;
+                simulation.OnEnemyAttackActive -= HandleEnemyAttackActive;
                 simulation.OnSpecialPhaseChanged -= HandleSpecialPhaseChanged;
                 simulation.OnBattleEnded -= HandleBattleEnded;
             }
@@ -271,6 +274,7 @@ namespace YunaLegend.Arena.Runtime
         {
             if (validHit)
             {
+                audioController?.StopEnemyAttackAudio();
                 enemyView?.TriggerImpactFeedback(new Color(1f, 0.94f, 0.68f));
                 cameraController?.AddShake(0.22f, 0.16f);
             }
@@ -298,6 +302,11 @@ namespace YunaLegend.Arena.Runtime
         private void HandleEnemyAttackStarted(ArenaEnemyId enemyId, ArenaAttackKind kind)
         {
             audioController?.PlayEnemyAttack(enemyId, kind);
+        }
+
+        private void HandleEnemyAttackActive(ArenaEnemyId enemyId, ArenaAttackKind kind)
+        {
+            audioController?.PlayEnemyAttackActive(enemyId, kind);
         }
 
         private void HandleSpecialPhaseChanged(ArenaSpecialPhase phase)

@@ -141,5 +141,151 @@ namespace YunaLegend.ToyRoom.Runtime
                 new Vector2(0.5f, 0.5f),
                 100f);
         }
+
+        /// <summary>
+        /// Gera a base circular do analogico fiel ao legado: disco escuro translucido,
+        /// borda fina dourada (#F3D87C) e 4 marcas cardinais apontando para dentro (12h, 3h, 6h, 9h).
+        /// </summary>
+        public static Sprite CreateLegacyJoystickBaseSprite(int size = 256)
+        {
+            int s = Mathf.Max(64, size);
+            var tex = new Texture2D(s, s, TextureFormat.RGBA32, false)
+            {
+                wrapMode = TextureWrapMode.Clamp,
+                filterMode = FilterMode.Bilinear
+            };
+
+            float half = (s - 1) * 0.5f;
+            float invHalf = 1f / half;
+            var pixels = new Color32[s * s];
+
+            Color fillCol = new Color(0.10f, 0.08f, 0.14f, 0.36f);
+            Color goldCol = new Color(0.953f, 0.847f, 0.486f, 0.96f);
+
+            for (int y = 0; y < s; y++)
+            {
+                float dy = (y - half) * invHalf;
+                for (int x = 0; x < s; x++)
+                {
+                    float dx = (x - half) * invHalf;
+                    float r = Mathf.Sqrt(dx * dx + dy * dy);
+                    if (r > 0.99f)
+                    {
+                        pixels[y * s + x] = new Color32(0, 0, 0, 0);
+                        continue;
+                    }
+
+                    Color c = fillCol;
+                    float outerFade = 1f - Mathf.SmoothStep(0.955f, 0.985f, r);
+                    c.a *= outerFade;
+
+                    // Anel dourado fino na borda externa
+                    float ring = Mathf.SmoothStep(0.915f, 0.935f, r) * (1f - Mathf.SmoothStep(0.965f, 0.985f, r));
+
+                    // 4 marcas cardinais (ticks) entrando a partir da borda em 12h, 3h, 6h, 9h
+                    bool inTickRadius = r >= 0.78f && r <= 0.94f;
+                    float tickV = inTickRadius ? (1f - Mathf.SmoothStep(0.014f, 0.024f, Mathf.Abs(dx))) : 0f;
+                    float tickH = inTickRadius ? (1f - Mathf.SmoothStep(0.014f, 0.024f, Mathf.Abs(dy))) : 0f;
+                    float goldMask = Mathf.Clamp01(Mathf.Max(ring, Mathf.Max(tickV, tickH)));
+
+                    Color final = Color.Lerp(c, goldCol, goldMask);
+                    final.a = Mathf.Max(c.a, goldCol.a * goldMask);
+                    pixels[y * s + x] = (Color32)final;
+                }
+            }
+
+            tex.SetPixels32(pixels);
+            tex.Apply(false, true);
+            return Sprite.Create(tex, new Rect(0f, 0f, s, s), new Vector2(0.5f, 0.5f), 100f);
+        }
+
+        /// <summary>
+        /// Gera o disco dourado com gradiente radial e borda branca nitida (usado no knob do analogico
+        /// e no botao redondo PEGAR/GUARDAR fiel ao jogo legado).
+        /// </summary>
+        public static Sprite CreateGoldenOrbSprite(int size = 256, float borderThickness = 0.055f)
+        {
+            int s = Mathf.Max(64, size);
+            var tex = new Texture2D(s, s, TextureFormat.RGBA32, false)
+            {
+                wrapMode = TextureWrapMode.Clamp,
+                filterMode = FilterMode.Bilinear
+            };
+
+            float half = (s - 1) * 0.5f;
+            float invHalf = 1f / half;
+            var pixels = new Color32[s * s];
+
+            Color brightCenter = new Color(1.00f, 0.937f, 0.545f, 1f);
+            Color warmEdge = new Color(0.847f, 0.580f, 0.133f, 1f);
+            Color borderWhite = new Color(1f, 1f, 1f, 0.98f);
+
+            float borderInner = 0.95f - borderThickness;
+            for (int y = 0; y < s; y++)
+            {
+                float dy = (y - half) * invHalf;
+                for (int x = 0; x < s; x++)
+                {
+                    float dx = (x - half) * invHalf;
+                    float r = Mathf.Sqrt(dx * dx + dy * dy);
+                    if (r > 0.985f)
+                    {
+                        pixels[y * s + x] = new Color32(0, 0, 0, 0);
+                        continue;
+                    }
+
+                    // Gradiente radial deslocado ligeiramente para cima (iluminacao quente de botao)
+                    float gx = dx;
+                    float gy = dy - 0.16f;
+                    float gr = Mathf.Clamp01(Mathf.Sqrt(gx * gx + gy * gy) * 0.92f);
+                    Color grad = Color.Lerp(brightCenter, warmEdge, gr * gr);
+
+                    float borderMask = Mathf.SmoothStep(borderInner - 0.015f, borderInner + 0.01f, r);
+                    Color c = Color.Lerp(grad, borderWhite, borderMask);
+                    c.a = 1f - Mathf.SmoothStep(0.95f, 0.98f, r);
+                    pixels[y * s + x] = (Color32)c;
+                }
+            }
+
+            tex.SetPixels32(pixels);
+            tex.Apply(false, true);
+            return Sprite.Create(tex, new Rect(0f, 0f, s, s), new Vector2(0.5f, 0.5f), 100f);
+        }
+
+        /// <summary>
+        /// Gera halo circular tracejado sutil ao redor do botao PEGAR/GUARDAR.
+        /// </summary>
+        public static Sprite CreateDashedRingSprite(int size = 256, int dashCount = 24)
+        {
+            int s = Mathf.Max(64, size);
+            var tex = new Texture2D(s, s, TextureFormat.RGBA32, false)
+            {
+                wrapMode = TextureWrapMode.Clamp,
+                filterMode = FilterMode.Bilinear
+            };
+
+            float half = (s - 1) * 0.5f;
+            float invHalf = 1f / half;
+            var pixels = new Color32[s * s];
+
+            for (int y = 0; y < s; y++)
+            {
+                float dy = (y - half) * invHalf;
+                for (int x = 0; x < s; x++)
+                {
+                    float dx = (x - half) * invHalf;
+                    float r = Mathf.Sqrt(dx * dx + dy * dy);
+                    float ring = Mathf.SmoothStep(0.91f, 0.93f, r) * (1f - Mathf.SmoothStep(0.96f, 0.98f, r));
+                    float angle = Mathf.Atan2(dy, dx);
+                    float dash = Mathf.Sin(angle * dashCount) > 0.15f ? 1f : 0f;
+                    byte a = (byte)Mathf.Clamp(Mathf.RoundToInt(ring * dash * 255f), 0, 255);
+                    pixels[y * s + x] = new Color32(255, 248, 224, a);
+                }
+            }
+
+            tex.SetPixels32(pixels);
+            tex.Apply(false, true);
+            return Sprite.Create(tex, new Rect(0f, 0f, s, s), new Vector2(0.5f, 0.5f), 100f);
+        }
     }
 }

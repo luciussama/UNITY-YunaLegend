@@ -353,10 +353,10 @@ namespace YunaLegend.Editor.Arena
             gripTargetL.SetParent(swordRoot, false);
             gripTargetL.localPosition = new Vector3(0f, -0.15f, -0.022f);
 
-            // Alvo de IK na lateral da lamina para a pose de defesa (mao esquerda escorando a espada na diagonal)
+            // Alvo de IK na lateral da lamina para a pose de defesa (mao esquerda escorando a lamina horizontal)
             var guardTargetL = new GameObject("GuardTarget_L").transform;
             guardTargetL.SetParent(swordRoot, false);
-            guardTargetL.localPosition = new Vector3(0f, 0.24f, -0.025f);
+            guardTargetL.localPosition = new Vector3(0f, 0.23f, -0.028f);
 
             CreateSwordGlintFlare(swordRoot);
 
@@ -794,20 +794,101 @@ namespace YunaLegend.Editor.Arena
             headlight.intensity = 3.5f;
             headlight.enabled = false;
 
-            // 3) LASER BEAM (Robo — alto, para agachar)
+            // 3) LASER DO ROBO EM 2 ETAPAS:
+            // Etapa 1 (Windup): Mira vermelha fina apontando diretamente para a Yuna + ponto de mira
+            var laserSightMat = CreateProceduralVfxMat(
+                "M_Arena_LaserSight",
+                "T_Arena_LaserSight.png",
+                64,
+                new Color(1.0f, 0.12f, 0.14f, 0.95f),
+                additive: true,
+                (u, v) =>
+                {
+                    float dx = (u - 0.5f) * 2f;
+                    float core = Mathf.Exp(-dx * dx * 8.0f);
+                    Color c = Color.Lerp(new Color(1.0f, 0.08f, 0.10f, core), new Color(1.0f, 0.85f, 0.85f, core), core * 0.65f);
+                    c.a = Mathf.Clamp01(core * 1.15f);
+                    return c;
+                });
+
+            var laserSightGo = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            laserSightGo.name = "LaserSight_3D";
+            laserSightGo.transform.SetParent(root.transform, false);
+            laserSightGo.transform.localScale = new Vector3(0.016f, 2.5f, 0.016f);
+            RemoveCollider(laserSightGo);
+            var sightRend = laserSightGo.GetComponent<Renderer>();
+            sightRend.sharedMaterial = laserSightMat;
+            sightRend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            sightRend.receiveShadows = false;
+            laserSightGo.SetActive(false);
+
+            var laserDotMat = CreateProceduralVfxMat(
+                "M_Arena_LaserSightDot",
+                "T_Arena_LaserSightDot.png",
+                64,
+                new Color(1.0f, 0.16f, 0.16f, 1f),
+                additive: true,
+                (u, v) =>
+                {
+                    float dx = (u - 0.5f) * 2f;
+                    float dy = (v - 0.5f) * 2f;
+                    float r = Mathf.Sqrt(dx * dx + dy * dy);
+                    float core = Mathf.Exp(-r * r * 14f);
+                    float ring = Mathf.Exp(-Mathf.Pow((r - 0.62f) * 14f, 2f)) * 0.85f;
+                    float a = Mathf.Clamp01((core + ring) * Mathf.Clamp01(1f - r));
+                    Color c = Color.Lerp(new Color(1.0f, 0.10f, 0.12f, a), Color.white, core * 0.85f);
+                    c.a = a;
+                    return c;
+                });
+
+            var laserDotGo = GameObject.CreatePrimitive(PrimitiveType.Quad);
+            laserDotGo.name = "LaserSight_Dot";
+            laserDotGo.transform.SetParent(root.transform, false);
+            laserDotGo.transform.localScale = Vector3.one * 0.22f;
+            RemoveCollider(laserDotGo);
+            var dotRend = laserDotGo.GetComponent<Renderer>();
+            dotRend.sharedMaterial = laserDotMat;
+            dotRend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            dotRend.receiveShadows = false;
+            laserDotGo.SetActive(false);
+
+            // Etapa 2 (ActiveAttack): Disparo forte de plasma vermelho-dourado com nucleo branco incandescente
+            var laserBeamMat = CreateProceduralVfxMat(
+                "M_Arena_LaserBeam",
+                "T_Arena_LaserBeam.png",
+                128,
+                new Color(1.0f, 0.35f, 0.20f, 1f),
+                additive: true,
+                (u, v) =>
+                {
+                    float dx = (u - 0.5f) * 2f;
+                    float core = Mathf.Exp(-dx * dx * 12f);
+                    float aura = Mathf.Exp(-dx * dx * 2.4f);
+                    Color c = Color.Lerp(new Color(1.0f, 0.16f, 0.10f, aura), new Color(1.0f, 0.98f, 0.90f, aura), Mathf.Clamp01(core * 1.35f));
+                    c.a = Mathf.Clamp01(aura * 1.15f);
+                    return c;
+                });
+
             var laserGo = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
             laserGo.name = "LaserBeam_3D";
             laserGo.transform.SetParent(root.transform, false);
-            laserGo.transform.localScale = new Vector3(0.22f, 2.85f, 0.22f);
+            laserGo.transform.localScale = new Vector3(0.28f, 4.2f, 0.28f);
             RemoveCollider(laserGo);
-            var unlit = Shader.Find("Universal Render Pipeline/Unlit");
-            if (unlit != null)
-            {
-                var lMat = new Material(unlit);
-                lMat.SetColor("_BaseColor", new Color(1.0f, 0.22f, 0.25f));
-                laserGo.GetComponent<Renderer>().sharedMaterial = lMat;
-            }
+            var beamRend = laserGo.GetComponent<Renderer>();
+            beamRend.sharedMaterial = laserBeamMat;
+            beamRend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            beamRend.receiveShadows = false;
             laserGo.SetActive(false);
+
+            var laserLightGo = new GameObject("Laser_PointLight");
+            laserLightGo.transform.SetParent(root.transform, false);
+            laserLightGo.transform.localPosition = new Vector3(-1.4f, 1.65f, -0.55f);
+            var laserLight = laserLightGo.AddComponent<Light>();
+            laserLight.type = LightType.Point;
+            laserLight.color = new Color(1.0f, 0.25f, 0.15f);
+            laserLight.range = 8.0f;
+            laserLight.intensity = 0f;
+            laserLight.enabled = false;
 
             // 4) ROCKET PUNCH (Robo — baixo/medio, para pular)
             var punchGo = new GameObject("RocketPunch_3D");
@@ -1287,6 +1368,7 @@ namespace YunaLegend.Editor.Arena
             bool capturedSteam = false;
             bool capturedImpactBang = false;
             bool capRobotWalk = false, capRobotPunch = false, capRobotHit = false;
+            bool capRobotLaserAim = false, capRobotLaserFire = false;
             bool capDinoTell = false, capDinoBite = false, capDinoHit = false;
             bool capBearWalk = false, capBearHug = false, capBearHit = false;
 
@@ -1349,6 +1431,16 @@ namespace YunaLegend.Editor.Arena
                     {
                         RenderToPng(cam, 1280, 720, "Logs/arena_boss_robot_punch.png");
                         capRobotPunch = true;
+                    }
+                    if (!capRobotLaserAim && sim.EnemyState == ArenaEnemyState.Windup && sim.ActiveAttackKind == ArenaAttackKind.LaserBeam && sim.EnemyStateTick == 36)
+                    {
+                        RenderToPng(cam, 1280, 720, "Logs/arena_boss_robot_laser_aim.png");
+                        capRobotLaserAim = true;
+                    }
+                    if (!capRobotLaserFire && sim.EnemyState == ArenaEnemyState.ActiveAttack && sim.ActiveAttackKind == ArenaAttackKind.LaserBeam && sim.EnemyStateTick == 8)
+                    {
+                        RenderToPng(cam, 1280, 720, "Logs/arena_boss_robot_laser_fire.png");
+                        capRobotLaserFire = true;
                     }
                     if (!capRobotHit && sim.EnemyState == ArenaEnemyState.HitReaction && sim.EnemyStateTick == 7)
                     {

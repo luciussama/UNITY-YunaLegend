@@ -70,12 +70,15 @@ namespace YunaLegend.Arena.Runtime
         private Light impactFlashLight;
         private float impactFlashTimer;
         private float impactFlashSpin;
+        private GameObject laserSightObject;
+        private GameObject laserSightDotObject;
+        private Light laserPointLight;
         private ArenaEnemyRigAnimator robotRigAnimator;
         private ArenaEnemyRigAnimator dinosaurRigAnimator;
         private ArenaEnemyRigAnimator bearRigAnimator;
 
-        private const float VisualComboDuration = 0.41f;
-        private const float ImpactFlashDuration = 0.16f;
+        private const float VisualComboDuration = 0.30f;
+        private const float ImpactFlashDuration = 0.20f;
 
         private struct MartialPose
         {
@@ -252,10 +255,16 @@ namespace YunaLegend.Arena.Runtime
             chargeSparksVfx = transform.Find("ChargeSparks_VFX")?.GetComponent<ParticleSystem>();
             trainHeadlight = transform.Find("Train_Headlight")?.GetComponent<Light>();
             rocketPunchObject = transform.Find("RocketPunch_3D")?.gameObject;
+            laserSightObject = transform.Find("LaserSight_3D")?.gameObject;
+            laserSightDotObject = transform.Find("LaserSight_Dot")?.gameObject;
+            laserPointLight = transform.Find("Laser_PointLight")?.GetComponent<Light>();
 
             if (steamJetObject != null) steamJetObject.SetActive(false);
             if (trainHeadlight != null) trainHeadlight.enabled = false;
             if (rocketPunchObject != null) rocketPunchObject.SetActive(false);
+            if (laserSightObject != null) laserSightObject.SetActive(false);
+            if (laserSightDotObject != null) laserSightDotObject.SetActive(false);
+            if (laserPointLight != null) laserPointLight.enabled = false;
 
             robotRigAnimator = robotModel != null ? robotModel.GetComponent<ArenaEnemyRigAnimator>() : null;
             dinosaurRigAnimator = dinosaurModel != null ? dinosaurModel.GetComponent<ArenaEnemyRigAnimator>() : null;
@@ -273,8 +282,9 @@ namespace YunaLegend.Arena.Runtime
 
             if (impactFlashLight != null)
             {
-                impactFlashLight.color = Color.Lerp(burstColor, Color.white, 0.45f);
-                impactFlashLight.intensity = 6.5f;
+                impactFlashLight.color = Color.Lerp(burstColor, Color.white, 0.55f);
+                impactFlashLight.intensity = 14.0f;
+                impactFlashLight.range = 8.5f;
                 impactFlashLight.enabled = true;
             }
 
@@ -450,17 +460,17 @@ namespace YunaLegend.Arena.Runtime
                 if (impactFlashObject != null)
                 {
                     impactFlashObject.SetActive(true);
-                    impactFlashObject.transform.localPosition = new Vector3(facingDir * forwardOffset, 1.08f, -0.55f);
-                    impactFlashObject.transform.localRotation = Quaternion.Euler(0f, 0f, impactFlashSpin + t * 42f);
-                    float scale = Mathf.Lerp(0.45f, 2.15f, pop) * Mathf.Clamp01(fade * 2.2f);
+                    impactFlashObject.transform.localPosition = new Vector3(facingDir * forwardOffset, 1.15f, -0.75f);
+                    impactFlashObject.transform.localRotation = Quaternion.Euler(0f, 0f, impactFlashSpin + t * 55f);
+                    float scale = Mathf.Lerp(0.75f, 2.85f, pop) * Mathf.Clamp01(fade * 2.0f);
                     impactFlashObject.transform.localScale = Vector3.one * scale;
                 }
 
                 if (impactFlashLight != null)
                 {
                     impactFlashLight.enabled = true;
-                    impactFlashLight.transform.localPosition = new Vector3(facingDir * forwardOffset, 1.15f, -0.85f);
-                    impactFlashLight.intensity = 6.5f * fade * fade;
+                    impactFlashLight.transform.localPosition = new Vector3(facingDir * forwardOffset, 1.20f, -1.05f);
+                    impactFlashLight.intensity = 14.0f * fade * fade;
                 }
             }
             else
@@ -518,38 +528,35 @@ namespace YunaLegend.Arena.Runtime
             }
             else if (sim.IsGuarding || sim.BlockRecovery > 0)
             {
-                // Pose de defesa adaptada com extrema fidelidade anatomica e marcial da referencia do esqueleto:
-                // Base marcial baixa e profunda (deep lunge / rooted guard stance):
-                // - Centro de massa rebaixado significativamente (BodyYOffset -0.25m) para absorver impacto
-                // - Perna frontal (Direita, lado da camera): avanca em lunge com coxa a -76 deg e joelho flexionado a 96 deg, pe plano no chao
-                // - Perna traseira (Esquerda, fundo): esticada para tras em arco a 54 deg, joelho leve (16 deg) e pe plantado na ponta (-48 deg)
-                // - Tronco inclinado agressivamente para a frente (Hips+Spine+Chest = ~52 deg de pitch) sobre a base frontal
-                // - Cabeca contra-rotacionada (-50 deg) erguendo o queixo para travar o olhar horizontalmente no oponente
-                // - Bracos estendidos a frente (SwordLocalPos.z = 0.48m) sustentando a espada na diagonal defensiva (~40 deg)
-                // - Mao direita firme no cabo e mao esquerda estendida escorando a lateral da lamina
+                // Pose de defesa com base firme, corpo arqueado e espada presa nas duas maos na lateral:
+                // - Centro de massa calibrado (BodyYOffset -0.065m) para ambos os pes tocarem exatamente o chao (y = 0)
+                // - Perna frontal (Direita): joelho dobrado em apoio firme (-48 / +56 / -8) com sola 100% plana no piso
+                // - Perna traseira (Esquerda): esticada para tras em apoio (+32 / +5 / -37) com pe firme no chao sem flutuar
+                // - Tronco arqueado na defesa (Spine+Chest) com torcao lateral apresentando a espada para receber o impacto
+                // - Espada dentro do alcance real dos bracos (z=0.20m): mao direita firme na empunhadura e esquerda apoiando a lamina
                 pose = CreateNeutralStancePose();
-                pose.BodyYOffset = -0.25f;
-                pose.BodyZOffset = -0.04f;
-                pose.HipsPitch = 12f;
-                pose.HipsYaw = -10f;
-                pose.SpinePitch = 24f;
-                pose.SpineYaw = -8f;
-                pose.ChestPitch = 18f;
-                pose.ChestYaw = -12f;
-                pose.HeadPitch = -52f;
-                pose.HeadYaw = 24f;
-                // Pernas arqueadas (base marcial profunda do esqueleto):
-                // Perna frontal (Direita, lado da camera): lunge profundo para frente, joelho dobrado ~96 deg, sola plana
-                pose.ThighRPitch = -76f;
-                pose.ShinRPitch = 96f;
+                pose.BodyYOffset = -0.075f;
+                pose.BodyZOffset = -0.02f;
+                pose.HipsPitch = 0f;
+                pose.HipsYaw = -6f;
+                pose.SpinePitch = 16f;
+                pose.SpineYaw = -4f;
+                pose.ChestPitch = 14f;
+                pose.ChestYaw = -4f;
+                pose.HeadPitch = -26f;
+                pose.HeadYaw = 14f;
+                // Ambas as solas niveladas exatamente no piso (sem afundar o pe da frente nem flutuar o de tras)
+                pose.ThighRPitch = -52f;
+                pose.ShinRPitch = 62f;
                 pose.FootRPitch = -10f;
-                // Perna traseira (Esquerda, fundo): esticada para tras em arco firme, pe apoiado na ponta
-                pose.ThighLPitch = 54f;
-                pose.ShinLPitch = 16f;
-                pose.FootLPitch = -48f;
-                // Espada segurada na diagonal defensiva estendida bem a frente
-                pose.SwordLocalPos = new Vector3(0.04f, 0.08f, 0.48f);
-                pose.SwordLocalEuler = new Vector3(40f, -4f, -10f);
+                pose.ThighLPitch = 36f;
+                pose.ShinLPitch = 4f;
+                pose.FootLPitch = -40f;
+                // Espada HORIZONTAL atravessada a frente do peito/queixo (referencia frontal + lateral 3/4):
+                // z=+90 deg deita a lamina da mao direita (+X, cabo) para a mao esquerda (-X, apoio na lamina),
+                // y=+38 deg projeta a ponta em perspectiva para o lado esquerdo/frente (diminuindo na lateral).
+                pose.SwordLocalPos = new Vector3(0.09f, 0.06f, 0.18f);
+                pose.SwordLocalEuler = new Vector3(0f, 38f, 90f);
             }
             else if (sim.IsCrouching)
             {
@@ -651,14 +658,15 @@ namespace YunaLegend.Arena.Runtime
 
             if (twoHandSwordPivot != null)
             {
-                // Compensa a inclinacao do tronco (Hips+Spine+Chest) para que SwordLocalEuler.x represente o angulo REAL no mundo
+                // Compensa a inclinacao do tronco (Hips+Spine+Chest) ANTES de orientar a espada,
+                // garantindo que SwordLocalEuler represente o angulo REAL no mundo mesmo com z=90 deg (defesa horizontal).
+                // Na defesa, gira 90 deg no eixo longitudinal da lamina para manter a cruzeta/guarda vertical e a face da lamina de frente.
                 float torsoPitch = pose.HipsPitch + pose.SpinePitch + pose.ChestPitch;
-                Vector3 compensatedEuler = new Vector3(
-                    pose.SwordLocalEuler.x - torsoPitch,
-                    pose.SwordLocalEuler.y,
-                    pose.SwordLocalEuler.z);
+                bool isGuardingPose = (sim.IsGuarding || sim.BlockRecovery > 0) && !inVisualCombo && sim.PlayerHitRecovery == 0;
+                Quaternion bladeRoll = isGuardingPose ? Quaternion.Euler(0f, 90f, 0f) : Quaternion.identity;
+                Quaternion worldAlignedSwordRot = Quaternion.Euler(-torsoPitch, 0f, 0f) * Quaternion.Euler(pose.SwordLocalEuler) * bladeRoll;
                 twoHandSwordPivot.localPosition = Vector3.Lerp(twoHandSwordPivot.localPosition, pose.SwordLocalPos, blend);
-                twoHandSwordPivot.localRotation = Quaternion.Slerp(twoHandSwordPivot.localRotation, Quaternion.Euler(compensatedEuler), blend);
+                twoHandSwordPivot.localRotation = Quaternion.Slerp(twoHandSwordPivot.localRotation, worldAlignedSwordRot, blend);
             }
 
             // Resolve IK analitico de 2 ossos para ambos os bracos ficarem 100% presos ao cabo (ou lateral da lamina na defesa)
@@ -853,30 +861,30 @@ namespace YunaLegend.Arena.Runtime
 
         private static MartialPose BlendThreePhasePose(MartialPose neutral, MartialPose windup, MartialPose strike, float t)
         {
-            if (t < 0.30f)
+            if (t < 0.22f)
             {
-                // Fase 1: Antecipacao ampla e expressiva (EaseOutCubic)
-                float u = t / 0.30f;
+                // Fase 1: Antecipacao curta e explosiva (EaseOutCubic)
+                float u = t / 0.22f;
                 float eased = 1f - Mathf.Pow(1f - u, 3f);
                 return LerpPose(neutral, windup, eased);
             }
 
-            if (t < 0.56f)
+            if (t < 0.44f)
             {
-                // Fase 2: Disparo explosivo do golpe (EaseInOutQuart -> chicote rapido)
-                float u = (t - 0.30f) / 0.26f;
+                // Fase 2: Disparo chicoteado de alto impacto (EaseInOutQuart)
+                float u = (t - 0.22f) / 0.22f;
                 float eased = u < 0.5f ? 8f * u * u * u * u : 1f - Mathf.Pow(-2f * u + 2f, 4f) * 0.5f;
                 return LerpPose(windup, strike, eased);
             }
 
-            if (t < 0.72f)
+            if (t < 0.64f)
             {
-                // Fase 3: Micro-assentamento de peso no follow-through para leitura marcial
+                // Fase 3: Assentamento de peso no follow-through para leitura marcial
                 return strike;
             }
 
             // Fase 4: Recuperacao fluida de volta a guarda (EaseInOutQuad)
-            float r = (t - 0.72f) / 0.28f;
+            float r = (t - 0.64f) / 0.36f;
             float rec = r < 0.5f ? 2f * r * r : 1f - Mathf.Pow(-2f * r + 2f, 2f) * 0.5f;
             return LerpPose(strike, neutral, rec);
         }
@@ -1028,11 +1036,11 @@ namespace YunaLegend.Arena.Runtime
             {
                 bool showComboStreak = visualComboTimer > 0f && sim.PlayerHitRecovery == 0;
                 float comboProgress = showComboStreak ? (1f - Mathf.Clamp01(visualComboTimer / VisualComboDuration)) : 0f;
-                // O risco luminoso aparece exatamente durante o corte explosivo (0.32 -> 0.72), nunca durante a antecipacao
-                if (showComboStreak && comboProgress >= 0.32f && comboProgress <= 0.72f)
+                // O risco luminoso aparece exatamente durante o corte explosivo (0.22 -> 0.60), nunca durante a antecipacao
+                if (showComboStreak && comboProgress >= 0.22f && comboProgress <= 0.60f)
                 {
                     slashArcObject.SetActive(true);
-                    float progress = Mathf.Clamp01((comboProgress - 0.32f) / 0.40f);
+                    float progress = Mathf.Clamp01((comboProgress - 0.22f) / 0.38f);
                     float fadeEnvelope = Mathf.Sin(progress * Mathf.PI);
                     int comboStep = activeVisualComboStep;
 
@@ -1155,18 +1163,79 @@ namespace YunaLegend.Arena.Runtime
                 }
             }
 
+            if (laserSightObject == null) laserSightObject = transform.Find("LaserSight_3D")?.gameObject;
+            if (laserSightDotObject == null) laserSightDotObject = transform.Find("LaserSight_Dot")?.gameObject;
+            if (laserPointLight == null) laserPointLight = transform.Find("Laser_PointLight")?.GetComponent<Light>();
+
+            bool isRobotLaser = sim.CurrentEnemySpec.Id == ArenaEnemyId.Robot && sim.ActiveAttackKind == ArenaAttackKind.LaserBeam;
+            bool laserWindup = isRobotLaser && sim.EnemyState == ArenaEnemyState.Windup;
+            bool laserActive = isRobotLaser && sim.EnemyState == ArenaEnemyState.ActiveAttack;
+
+            // ETAPA 1 (Windup): Mira laser vermelha fina saindo do visor do Robo e apontando diretamente para a Yuna
+            if (laserSightObject != null)
+            {
+                laserSightObject.SetActive(laserWindup);
+                if (laserWindup)
+                {
+                    Vector3 visorWorld = transform.position + new Vector3(sim.EnemyFacing * 0.42f, 1.88f, -0.04f);
+                    Vector3 yunaTargetWorld = ArenaCoordinateMapper.ToWorldPosition(sim.PlayerX, sim.PlayerY, 0f) + new Vector3(0f, sim.IsCrouching ? 0.72f : 1.22f, -0.04f);
+                    Vector3 delta = yunaTargetWorld - visorWorld;
+                    float dist = Mathf.Max(0.5f, delta.magnitude);
+                    Vector3 midWorld = (visorWorld + yunaTargetWorld) * 0.5f;
+                    float windupT = Mathf.Clamp01(sim.EnemyStateTick / (float)Mathf.Max(1, sim.Tuning.EnemyWindupTicks));
+                    float pulse = 1f + Mathf.Sin(animTimer * Mathf.Lerp(16f, 44f, windupT)) * 0.25f;
+                    float thinRadius = 0.016f * pulse;
+
+                    laserSightObject.transform.position = midWorld;
+                    laserSightObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, delta.normalized);
+                    laserSightObject.transform.localScale = new Vector3(thinRadius, dist * 0.5f, thinRadius);
+
+                    if (laserSightDotObject != null)
+                    {
+                        laserSightDotObject.SetActive(true);
+                        laserSightDotObject.transform.position = yunaTargetWorld + new Vector3(0f, 0f, -0.18f);
+                        float dotScale = Mathf.Lerp(0.16f, 0.28f, windupT) * pulse;
+                        laserSightDotObject.transform.localScale = Vector3.one * dotScale;
+                    }
+                }
+                else if (laserSightDotObject != null && laserSightDotObject.activeSelf)
+                {
+                    laserSightDotObject.SetActive(false);
+                }
+            }
+
+            // ETAPA 2 (ActiveAttack): Disparo forte e espesso de energia
             if (laserBeamObject != null)
             {
-                bool isRobotLaser = sim.CurrentEnemySpec.Id == ArenaEnemyId.Robot && sim.ActiveAttackKind == ArenaAttackKind.LaserBeam;
-                bool laserWindup = isRobotLaser && sim.EnemyState == ArenaEnemyState.Windup;
-                bool laserActive = isRobotLaser && sim.EnemyState == ArenaEnemyState.ActiveAttack;
-                laserBeamObject.SetActive(laserWindup || laserActive);
-                if (laserWindup || laserActive)
+                laserBeamObject.SetActive(laserActive);
+                if (laserActive)
                 {
-                    float beamRadius = laserActive ? 0.22f : 0.045f;
-                    laserBeamObject.transform.localPosition = new Vector3(sim.EnemyFacing * 2.85f, 1.45f, -0.05f);
+                    float activeT = Mathf.Clamp01(sim.EnemyStateTick / (float)Mathf.Max(1, sim.Tuning.EnemyActiveTicks));
+                    float powerEnv = Mathf.Sin(activeT * Mathf.PI);
+                    float beamRadius = Mathf.Lerp(0.18f, 0.34f, powerEnv) + Mathf.Sin(animTimer * 60f) * 0.025f;
+                    float beamHalfLen = 4.2f;
+                    laserBeamObject.transform.localPosition = new Vector3(sim.EnemyFacing * (0.42f + beamHalfLen), 1.82f, -0.06f);
                     laserBeamObject.transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
-                    laserBeamObject.transform.localScale = new Vector3(beamRadius, 2.85f, beamRadius);
+                    laserBeamObject.transform.localScale = new Vector3(beamRadius, beamHalfLen, beamRadius);
+                }
+            }
+
+            if (laserPointLight != null)
+            {
+                laserPointLight.enabled = laserWindup || laserActive;
+                if (laserActive)
+                {
+                    laserPointLight.color = new Color(1.0f, 0.32f, 0.16f);
+                    laserPointLight.transform.localPosition = new Vector3(sim.EnemyFacing * 1.4f, 1.65f, -0.55f);
+                    laserPointLight.intensity = 9.5f;
+                    laserPointLight.range = 8.0f;
+                }
+                else if (laserWindup)
+                {
+                    laserPointLight.color = new Color(1.0f, 0.12f, 0.12f);
+                    laserPointLight.transform.localPosition = new Vector3(sim.EnemyFacing * 0.55f, 1.88f, -0.35f);
+                    laserPointLight.intensity = 2.4f;
+                    laserPointLight.range = 3.5f;
                 }
             }
 

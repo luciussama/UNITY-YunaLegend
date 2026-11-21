@@ -128,6 +128,22 @@ namespace YunaLegend.ToyRoom.Runtime
                 return;
             }
 
+            // No modo mobile, tocar em qualquer ponto da tela durante falas/narracoes avanca imediatamente
+            if (narrative != null
+                && narrative.IsPlaying
+                && (Application.isMobilePlatform || Touchscreen.current != null)
+                && Touchscreen.current != null
+                && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+            {
+                Vector2 touchPos = Touchscreen.current.primaryTouch.position.ReadValue();
+                bool inTopRightHud = touchPos.x > Screen.width - 260f && touchPos.y > Screen.height - 100f;
+                if (!inTopRightHud)
+                {
+                    HandleAdvanceDialogueRequested();
+                    return;
+                }
+            }
+
             if (keyboard != null && (keyboard.eKey.wasPressedThisFrame || keyboard.spaceKey.wasPressedThisFrame))
             {
                 if (narrative != null && narrative.IsPlaying && keyboard.spaceKey.wasPressedThisFrame)
@@ -227,10 +243,13 @@ namespace YunaLegend.ToyRoom.Runtime
             }
         }
 
+        private float lastDialogueAdvanceTime = -10f;
+
         private void HandleAdvanceDialogueRequested()
         {
-            if (narrative != null && narrative.IsPlaying)
+            if (narrative != null && narrative.IsPlaying && (Time.unscaledTime - lastDialogueAdvanceTime) >= 0.18f)
             {
+                lastDialogueAdvanceTime = Time.unscaledTime;
                 narrative.AdvanceActiveBeat();
             }
         }

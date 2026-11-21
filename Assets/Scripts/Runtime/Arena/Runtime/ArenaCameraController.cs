@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using YunaLegend.Arena.Core;
 
 namespace YunaLegend.Arena.Runtime
@@ -52,25 +53,35 @@ namespace YunaLegend.Arena.Runtime
             Vector3 pPos = ArenaCoordinateMapper.ToWorldPosition(sim.PlayerX, sim.PlayerY);
             Vector3 ePos = ArenaCoordinateMapper.ToWorldPosition(sim.EnemyX, sim.EnemyY);
 
+            float aspect = Mathf.Max(0.45f, targetCamera.aspect);
+            bool isMobile = Application.isMobilePlatform || Touchscreen.current != null;
+            bool wideMobileMode = isMobile || aspect < 1.45f;
+
+            float effMinWidth = wideMobileMode ? Mathf.Max(minWorldWidth, 12.8f) : minWorldWidth;
+            float effMaxWidth = wideMobileMode ? Mathf.Max(maxWorldWidth, 19.5f) : maxWorldWidth;
+
             float separation = Mathf.Abs(pPos.x - ePos.x);
-            // Aproxima bem quando perto e afasta por completo quando os personagens recuam
+            // Aproxima bem quando perto e afasta por completo quando os personagens recuam;
+            // no mobile abre o quadro para exibir toda a arena sem os controles cobrirem os personagens.
             float zoomT = Mathf.InverseLerp(2.4f, 10.5f, separation);
-            float padding = (sim.EnemyState == ArenaEnemyState.Windup || sim.IsSpecialActive) ? 4.4f : 3.4f;
-            float desiredWidth = Mathf.Lerp(minWorldWidth, maxWorldWidth, zoomT);
-            desiredWidth = Mathf.Clamp(Mathf.Max(desiredWidth, separation + padding), minWorldWidth, maxWorldWidth);
+            float basePadding = wideMobileMode ? 5.6f : 3.4f;
+            float padding = (sim.EnemyState == ArenaEnemyState.Windup || sim.IsSpecialActive) ? (basePadding + 1.0f) : basePadding;
+            float desiredWidth = Mathf.Lerp(effMinWidth, effMaxWidth, zoomT);
+            desiredWidth = Mathf.Clamp(Mathf.Max(desiredWidth, separation + padding), effMinWidth, effMaxWidth);
 
             // Quanto mais afastada a camera, mais centralizada na arena ela fica
-            float maxCenterOffset = Mathf.Lerp(3.6f, 0.8f, zoomT);
+            float maxCenterOffset = wideMobileMode ? Mathf.Lerp(1.8f, 0.5f, zoomT) : Mathf.Lerp(3.6f, 0.8f, zoomT);
             float centerX = Mathf.Clamp((pPos.x + ePos.x) * 0.5f, -maxCenterOffset, maxCenterOffset);
 
             targetCamera.orthographic = false;
             targetCamera.fieldOfView = 34f;
-            float aspect = Mathf.Max(0.45f, targetCamera.aspect);
             float halfFovRad = targetCamera.fieldOfView * 0.5f * Mathf.Deg2Rad;
             float distance = (desiredWidth * 0.5f) / (Mathf.Tan(halfFovRad) * aspect);
-            distance = Mathf.Clamp(distance, 7.2f, 18.5f);
+            distance = wideMobileMode
+                ? Mathf.Clamp(distance, 11.5f, 24.0f)
+                : Mathf.Clamp(distance, 7.2f, 18.5f);
 
-            float lookY = Mathf.Max(1.20f, (pPos.y + ePos.y) * 0.35f + Mathf.Lerp(1.12f, 1.48f, zoomT));
+            float lookY = Mathf.Max(1.10f, (pPos.y + ePos.y) * 0.35f + Mathf.Lerp(1.12f, 1.48f, zoomT) - (wideMobileMode ? 0.12f : 0f));
             Vector3 targetPos = new Vector3(centerX, lookY + distance * 0.11f, -distance);
 
             if (!hasInitializedPos)

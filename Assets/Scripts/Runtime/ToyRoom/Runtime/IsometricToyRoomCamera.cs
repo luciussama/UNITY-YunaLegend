@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using YunaLegend.ToyRoom.Core;
 
 namespace YunaLegend.ToyRoom.Runtime
@@ -19,6 +20,7 @@ namespace YunaLegend.ToyRoom.Runtime
         [SerializeField] private float occludedAlpha = 0.28f;
         [SerializeField] private float fadeSpeed = 8.0f;
 
+        private Camera cachedCamera;
         private Transform overrideTarget;
         private Vector3 velocity;
         private readonly Dictionary<Renderer, float> activeFades = new();
@@ -29,6 +31,7 @@ namespace YunaLegend.ToyRoom.Runtime
         public void Configure(Transform target)
         {
             followTarget = target;
+            cachedCamera = GetComponent<Camera>();
             SnapToTarget();
         }
 
@@ -45,8 +48,9 @@ namespace YunaLegend.ToyRoom.Runtime
                 return;
             }
 
+            Vector3 effectiveOffset = ComputeEffectiveOffset();
             Vector3 desiredFocus = ClampFocus(active.position + lookAtOffset);
-            transform.position = desiredFocus + offset;
+            transform.position = desiredFocus + effectiveOffset;
             transform.LookAt(desiredFocus);
         }
 
@@ -58,12 +62,39 @@ namespace YunaLegend.ToyRoom.Runtime
                 return;
             }
 
+            Vector3 effectiveOffset = ComputeEffectiveOffset();
             Vector3 desiredFocus = ClampFocus(active.position + lookAtOffset);
-            Vector3 desiredPos = desiredFocus + offset;
+            Vector3 desiredPos = desiredFocus + effectiveOffset;
             transform.position = Vector3.SmoothDamp(transform.position, desiredPos, ref velocity, smoothTime);
-            transform.LookAt(transform.position - offset);
+            transform.LookAt(transform.position - effectiveOffset);
 
             UpdateDiabloOcclusionFade(active);
+        }
+
+        private Vector3 ComputeEffectiveOffset()
+        {
+            if (cachedCamera == null)
+            {
+                cachedCamera = GetComponent<Camera>();
+            }
+
+            float aspect = cachedCamera != null && cachedCamera.aspect > 0.1f ? cachedCamera.aspect : (16f / 9f);
+            bool isMobile = Application.isMobilePlatform || Touchscreen.current != null;
+
+            float scale = 1.0f;
+            if (isMobile)
+            {
+                // No mobile abre bem o enquadramento da sala (tanto em paisagem quanto em retrato)
+                float narrowBoost = aspect < 1.55f ? Mathf.Clamp(1.68f / Mathf.Max(0.45f, aspect), 1.38f, 2.35f) : 1.38f;
+                scale = narrowBoost;
+            }
+            else if (aspect < 1.45f)
+            {
+                // Janelas estreitas/retrato no desktop tambem abrem o campo de visao horizontal
+                scale = Mathf.Clamp(1.55f / Mathf.Max(0.45f, aspect), 1.0f, 1.95f);
+            }
+
+            return offset * scale;
         }
 
         private void UpdateDiabloOcclusionFade(Transform target)
