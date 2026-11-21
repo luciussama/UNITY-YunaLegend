@@ -9,85 +9,79 @@ using YunaLegend.ToyRoom.Runtime;
 namespace YunaLegend.EditorScripts
 {
     /// <summary>
-    /// Renderiza o filme de abertura da Fase 2 (ToyRoom_Gameplay.unity) a partir dos modelos 3D reais
-    /// na Unity, gerando os quadros de cada plano cinematografico (Shots 1 a 6), closes faciais
-    /// provando o movimento real dos olhos e a interacao com ternura entre Yuna e Nanda,
-    /// e telemetria verificavel de musica, olhos e poses em Logs/toyroom_intro_cinematic/.
+    /// Captura os quadros da cinematica oficial de abertura da Fase 2 (ToyRoom_Gameplay.unity)
+    /// em sprite stop motion (960x540) nos mesmos instantes temporais do projeto legado
+    /// para auditoria de paridade visual 100%.
     /// </summary>
     public static class ToyRoomIntroCinematicCapture
     {
         private const string OutputDir = "Logs/toyroom_intro_cinematic";
-        private const int FrameW = 1280;
-        private const int FrameH = 720;
+        private const int FrameW = 960;
+        private const int FrameH = 540;
 
+        [MenuItem("YunaLegend/Fase 2 - Toy Room/Capture Intro Stop Motion Frames")]
         public static void CaptureAll()
         {
             Directory.CreateDirectory(OutputDir);
 
+            // Limpa capturas 3D antigas para nao restar nenhum vestigio da cena 3D excluida
+            foreach (string oldFile in Directory.GetFiles(OutputDir, "*.png"))
+            {
+                File.Delete(oldFile);
+            }
+
             EditorSceneManager.OpenScene("Assets/Scenes/ToyRoom_Gameplay.unity", OpenSceneMode.Single);
             var cam = Camera.main != null ? Camera.main : UnityEngine.Object.FindFirstObjectByType<Camera>();
-            var isoCam = cam != null ? cam.GetComponent<IsometricToyRoomCamera>() : null;
-            var player = UnityEngine.Object.FindFirstObjectByType<ToyRoomPlayerController>();
-            var nanda = UnityEngine.Object.FindFirstObjectByType<NandaToyRoomGuideController>();
-            var chest = UnityEngine.Object.FindFirstObjectByType<ToyChestController>();
-            var hud = UnityEngine.Object.FindFirstObjectByType<ToyRoomHudController>();
-            var narrative = UnityEngine.Object.FindFirstObjectByType<ToyRoomNarrativeController>();
             var audioCtrl = UnityEngine.Object.FindFirstObjectByType<ToyRoomAudioController>();
+            var caveatFont = AssetDatabase.LoadAssetAtPath<Font>("Assets/Fonts/Caveat-Variable.ttf");
 
-            var hostGo = new GameObject("__TempIntroCinematicDirector");
+            var hostGo = new GameObject("__TempIntroStopMotionDirector");
             try
             {
                 var director = hostGo.AddComponent<ToyRoomIntroCinematicController>();
-                director.Configure(cam, isoCam, player, nanda, chest, narrative, audioCtrl);
+                director.Configure(audioCtrl, caveatFont);
                 director.BeginIntroCinematic();
+                director.SetViewportOverride(FrameW, FrameH);
 
-                var beats = ToyRoomNarrativeScript.IntroBeats;
+                // 1) TR_003 (t = 1.3s — Yuna entrando no tapete, Pose 0, cortina abrindo)
+                director.EvaluateAtTime(1.30f);
+                RenderFrameWithUi(cam, FrameW, FrameH, "01_TR003_arrival_entering.png");
 
-                // 1) Shot 1A — Despertar na Luz Matinal (olhos de Yuna e Nanda olhando para a esquerda)
-                hud?.ShowBeat(beats[0]);
-                director.EvaluateAtBeat(0, 0.15f);
-                RenderFrameWithUi(cam, FrameW, FrameH, "01_shot1_awakening_gaze_left.png");
+                // 2) TR_003 (t = 2.8s — Yuna estabelecida no tapete olhando o quarto, Pose 0)
+                director.EvaluateAtTime(2.80f);
+                RenderFrameWithUi(cam, FrameW, FrameH, "02_TR003_arrival_settled.png");
 
-                // 2) Shot 1B — Despertar na Luz Matinal (olhos de Yuna varrendo para a direita + Nanda olhando para Yuna)
-                director.EvaluateAtBeat(0, 0.88f);
-                RenderFrameWithUi(cam, FrameW, FrameH, "02_shot1_awakening_gaze_right.png");
+                // 3) TR_004 (t = 5.0s — Pose 1, Menina: "Aqui também...")
+                director.EvaluateAtTime(5.00f);
+                RenderFrameWithUi(cam, FrameW, FrameH, "03_TR004_here_too.png");
 
-                // 3) Shot 2 — Close-Up Emocional 3/4 ("Aqui também..." — Yuna olha para os brinquedos no chao, Nanda empatica)
-                hud?.ShowBeat(beats[1]);
-                director.EvaluateAtBeat(1, 0.75f);
-                RenderFrameWithUi(cam, FrameW, FrameH, "03_shot2_here_too_melancholy.png");
+                // 4) TR_005 (t = 9.3s — Pose 1, Menina: "Eu queria espaço pra brincar." + Nanda voando ao fundo)
+                director.EvaluateAtTime(9.30f);
+                RenderFrameWithUi(cam, FrameW, FrameH, "04_TR005_space_to_play.png");
 
-                // 4) Shot 3A — Inicio da fala ("Eu queria espaço pra brincar." — maos abaixadas, olhar inicial baixo)
-                hud?.ShowBeat(beats[2]);
-                director.EvaluateAtBeat(2, 0.18f);
-                RenderFrameWithUi(cam, FrameW, FrameH, "04_shot3_tenderness_eye_contact.png");
+                // 5) TR_006 Parte 1 (t = 12.8s — Pose 2 cabeca baixa, "A sala estava cheia. / Nenhum lugar esperava por ela.")
+                director.EvaluateAtTime(12.80f);
+                RenderFrameWithUi(cam, FrameW, FrameH, "05_TR006_poetic_room_full.png");
 
-                // 5) Shot 3B — Climax de Ternura (Nanda aproxima-se estendendo os bracos e Yuna ergue ambas as maos ao peito/para Nanda olhando nos olhos dela)
-                director.EvaluateAtBeat(2, 0.88f);
-                RenderFrameWithUi(cam, FrameW, FrameH, "05_shot3_tenderness_hand_gesture.png");
+                // 6) TR_006 Pausa (t = 14.8s — Pose 2 respiro silencioso entre os dois cartoes poeticos)
+                director.EvaluateAtTime(14.80f);
+                RenderFrameWithUi(cam, FrameW, FrameH, "06_TR006_poetic_pause.png");
 
-                // 6) Close-Up Macro Facial dos Olhos (sem HUD: metade esquerda Estado A olhando baixo-direita vs metade direita Estado B olhando cima-esquerda para Nanda)
-                hud?.ClearNarrativeOverlays();
-                CaptureEyeMovementMacroProof(cam, director, player.transform.position);
+                // 7) TR_006 Parte 2 (t = 16.5s — Pose 2, "A caixa tinha um fundo. / O resto está vazio.")
+                director.EvaluateAtTime(16.50f);
+                RenderFrameWithUi(cam, FrameW, FrameH, "07_TR006_poetic_box_bottom.png");
 
-                // 7) Shot 4 — Traveling Panoramico Poetico ("A sala estava cheia. / Nenhum lugar esperava por ela.")
-                hud?.ShowBeat(beats[3]);
-                director.EvaluateAtBeat(3, 0.55f);
-                RenderFrameWithUi(cam, FrameW, FrameH, "07_shot4_poetic_room_panorama.png");
+                // 8) TR_007 (t = 19.3s — Pose 3 acenando/apontando, Nanda: "Vamos. Um de cada vez!")
+                director.EvaluateAtTime(19.30f);
+                RenderFrameWithUi(cam, FrameW, FrameH, "08_TR007_nanda_one_by_one.png");
 
-                // 8) Shot 5 — Revelacao do Bau Dourado ("A caixa tinha um fundo. / O resto está vazio." — Nanda aponta e ambas olham para o bau)
-                hud?.ShowBeat(beats[5]);
-                director.EvaluateAtBeat(5, 0.75f);
-                RenderFrameWithUi(cam, FrameW, FrameH, "08_shot5_poetic_chest_discovery.png");
+                // 9) TR_008 (t = 21.5s — Pose 3 plano aberto final com musica subindo)
+                director.EvaluateAtTime(21.50f);
+                RenderFrameWithUi(cam, FrameW, FrameH, "09_TR008_pullback_music.png");
 
-                // 9) Shot 6A — Cumplicidade e Chamado ("Vamos. Um de cada vez!")
-                hud?.ShowBeat(beats[6]);
-                director.EvaluateAtBeat(6, 0.30f);
-                RenderFrameWithUi(cam, FrameW, FrameH, "09_shot6_nanda_call_to_action.png");
-
-                // 10) Shot 6B — Transicao Continua para o Enquadramento de Gameplay
-                director.EvaluateAtBeat(6, 0.95f);
-                RenderFrameWithUi(cam, FrameW, FrameH, "10_shot6_seamless_gameplay_blend.png");
+                // 10) TR_008 (t = 23.0s — Fade creme final para inicio da gameplay)
+                director.EvaluateAtTime(23.00f);
+                RenderFrameWithUi(cam, FrameW, FrameH, "10_TR008_warm_fade_transition.png");
 
                 director.EndIntroCinematic();
             }
@@ -100,66 +94,11 @@ namespace YunaLegend.EditorScripts
             Debug.Log("TOYROOM_INTRO_CINEMATIC_CAPTURE_OK " + Path.GetFullPath(OutputDir));
         }
 
-        private static void CaptureEyeMovementMacroProof(Camera cam, ToyRoomIntroCinematicController director, Vector3 yunaPos)
-        {
-            // Renderiza um painel comparativo 1280x720 lado a lado com a camera 100% FIXA enquadrando os rostos de Yuna e Nanda
-            // (Metade esquerda 640x720: Estado A — olhar para a esquerda e bracos em repouso;
-            //  Metade direita 640x720: Estado B — olhar para a direita/Nanda e gesto de ternura com os bracos erguidos)
-            Vector3 fixedCamPos = yunaPos + new Vector3(-0.22f, 1.24f, -2.05f);
-            Vector3 fixedCamLook = yunaPos + new Vector3(-0.22f, 1.16f, 0.0f);
-
-            director.EvaluateAtBeat(0, 0.15f);
-            cam.transform.position = fixedCamPos;
-            cam.transform.LookAt(fixedCamLook);
-            cam.fieldOfView = 25f;
-            var texA = RenderCameraRaw(cam, 640, 720);
-
-            director.EvaluateAtBeat(2, 0.88f);
-            cam.transform.position = fixedCamPos;
-            cam.transform.LookAt(fixedCamLook);
-            cam.fieldOfView = 25f;
-            var texB = RenderCameraRaw(cam, 640, 720);
-
-            var combined = new Texture2D(1280, 720, TextureFormat.RGBA32, false);
-            combined.SetPixels(0, 0, 640, 720, texA.GetPixels());
-            combined.SetPixels(640, 0, 640, 720, texB.GetPixels());
-            combined.Apply();
-
-            File.WriteAllBytes(Path.Combine(OutputDir, "06_macro_eye_movement_proof_A_vs_B.png"), combined.EncodeToPNG());
-            UnityEngine.Object.DestroyImmediate(texA);
-            UnityEngine.Object.DestroyImmediate(texB);
-            UnityEngine.Object.DestroyImmediate(combined);
-        }
-
-        private static Texture2D RenderCameraRaw(Camera cam, int width, int height)
-        {
-            var rt = new RenderTexture(width, height, 24, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB);
-            var prevTarget = cam.targetTexture;
-            float prevAspect = cam.aspect;
-            try
-            {
-                cam.aspect = (float)width / height;
-                cam.targetTexture = rt;
-                cam.Render();
-                var prevActive = RenderTexture.active;
-                RenderTexture.active = rt;
-                var tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
-                tex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
-                tex.Apply();
-                RenderTexture.active = prevActive;
-                return tex;
-            }
-            finally
-            {
-                cam.targetTexture = prevTarget;
-                cam.aspect = prevAspect;
-                UnityEngine.Object.DestroyImmediate(rt);
-            }
-        }
-
         private static void RenderFrameWithUi(Camera cam, int width, int height, string fileName)
         {
             var canvases = UnityEngine.Object.FindObjectsByType<Canvas>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+            Array.Sort(canvases, (a, b) => a.sortingOrder.CompareTo(b.sortingOrder));
+
             var prevModes = new RenderMode[canvases.Length];
             var prevCameras = new Camera[canvases.Length];
             var prevDistances = new float[canvases.Length];
@@ -224,7 +163,11 @@ namespace YunaLegend.EditorScripts
                 for (int p = 0; p < scenePixels.Length; p++)
                 {
                     byte a = uiPixels[p].a;
-                    if (a == 0) continue;
+                    if (a == 0)
+                    {
+                        continue;
+                    }
+
                     if (a == 255)
                     {
                         scenePixels[p] = uiPixels[p];
@@ -234,9 +177,9 @@ namespace YunaLegend.EditorScripts
 
                     float alpha = a / 255f;
                     float inv = 1f - alpha;
-                    scenePixels[p].r = (byte)Mathf.Clamp(Mathf.RoundToInt(uiPixels[p].r * alpha + scenePixels[p].r * inv), 0, 255);
-                    scenePixels[p].g = (byte)Mathf.Clamp(Mathf.RoundToInt(uiPixels[p].g * alpha + scenePixels[p].g * inv), 0, 255);
-                    scenePixels[p].b = (byte)Mathf.Clamp(Mathf.RoundToInt(uiPixels[p].b * alpha + scenePixels[p].b * inv), 0, 255);
+                    scenePixels[p].r = (byte)Mathf.Clamp(Mathf.RoundToInt((uiPixels[p].r * alpha) + (scenePixels[p].r * inv)), 0, 255);
+                    scenePixels[p].g = (byte)Mathf.Clamp(Mathf.RoundToInt((uiPixels[p].g * alpha) + (scenePixels[p].g * inv)), 0, 255);
+                    scenePixels[p].b = (byte)Mathf.Clamp(Mathf.RoundToInt((uiPixels[p].b * alpha) + (scenePixels[p].b * inv)), 0, 255);
                     scenePixels[p].a = 255;
                 }
 

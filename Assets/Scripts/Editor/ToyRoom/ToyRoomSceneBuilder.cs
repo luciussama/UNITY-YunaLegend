@@ -23,7 +23,7 @@ namespace YunaLegend.Editor.ToyRoom
         private const string PreviewOutputPath = "/Users/sergio/.gemini/antigravity/brain/1d17e175-ea96-41be-9e53-6cf1d38c269a/scratch/toyroom_preview.png";
         private const string CloseupPreviewOutputPath = "/Users/sergio/.gemini/antigravity/brain/1d17e175-ea96-41be-9e53-6cf1d38c269a/scratch/toyroom_closeup_yuna_nanda.png";
         private const string AutoBuildVersionKey = "YunaLegend.ToyRoomSceneBuildVersion";
-        private const int CurrentSceneBuildVersion = 30;
+        private const int CurrentSceneBuildVersion = 31;
         private static double lastTriggerCheckTime;
 
         static ToyRoomSceneBuilder()
@@ -125,6 +125,7 @@ namespace YunaLegend.Editor.ToyRoom
         public static void BuildBaseScene()
         {
             AssetDatabase.Refresh();
+            EnsureIntroResourceTextureImporters();
             ToyRoomVisualFactory.ResetMaterialCounter();
             EnsurePainterlyRendererFeature();
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
@@ -166,6 +167,8 @@ namespace YunaLegend.Editor.ToyRoom
 
             var bootstrapGo = new GameObject("ToyRoom_Bootstrap");
             var bootstrap = bootstrapGo.AddComponent<ToyRoomStageBootstrap>();
+            var introDirector = bootstrapGo.AddComponent<ToyRoomIntroCinematicController>();
+            introDirector.Configure(audioCtrl, caveatFont);
             bootstrap.Configure(cam, player, chest, nanda, swordView, hud, narrative, audioCtrl, toys, autoExplore: false);
 
             Directory.CreateDirectory(Path.GetDirectoryName(ScenePath) ?? "Assets/Scenes");
@@ -175,6 +178,61 @@ namespace YunaLegend.Editor.ToyRoom
             AssetDatabase.Refresh();
             CapturePreview();
             Debug.Log($"[ToyRoomSceneBuilder] Cena final salva em {ScenePath}");
+        }
+
+        private static void EnsureIntroResourceTextureImporters()
+        {
+            string[] paths =
+            {
+                "Assets/Art/ToyRoom/Introduction/Resources/ToyRoomIntro/room-v1.png",
+                "Assets/Art/ToyRoom/Introduction/Resources/ToyRoomIntro/girl-acting-v1.png",
+                "Assets/Art/ToyRoom/Introduction/Resources/ToyRoomIntro/illustrated-fairy-v1.png"
+            };
+
+            for (int i = 0; i < paths.Length; i++)
+            {
+                var importer = AssetImporter.GetAtPath(paths[i]) as TextureImporter;
+                if (importer == null)
+                {
+                    continue;
+                }
+
+                bool dirty = false;
+                if (importer.npotScale != TextureImporterNPOTScale.None)
+                {
+                    importer.npotScale = TextureImporterNPOTScale.None;
+                    dirty = true;
+                }
+
+                if (importer.maxTextureSize < 4096)
+                {
+                    importer.maxTextureSize = 4096;
+                    dirty = true;
+                }
+
+                if (!importer.alphaIsTransparency)
+                {
+                    importer.alphaIsTransparency = true;
+                    dirty = true;
+                }
+
+                if (importer.textureCompression != TextureImporterCompression.Uncompressed)
+                {
+                    importer.textureCompression = TextureImporterCompression.Uncompressed;
+                    dirty = true;
+                }
+
+                if (importer.mipmapEnabled)
+                {
+                    importer.mipmapEnabled = false;
+                    dirty = true;
+                }
+
+                if (dirty)
+                {
+                    importer.SaveAndReimport();
+                }
+            }
         }
 
         [MenuItem("YunaLegend/Fase 2 - Toy Room/Capture Preview")]

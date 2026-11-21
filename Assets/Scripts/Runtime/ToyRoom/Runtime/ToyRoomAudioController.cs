@@ -20,9 +20,12 @@ namespace YunaLegend.ToyRoom.Runtime
         private AudioClip strangeClip;
         private AudioClip swordClip;
         private AudioClip tenderChimeClip;
+        private AudioClip portalWhooshClip;
+        private AudioClip softMagicBurstClip;
         private bool isMuted;
         private bool isPaused;
         private bool swordMusicActive;
+        private bool suppressAutoMusicOnStart;
 
         public bool IsMuted => isMuted;
         public bool IsMusicPlaying => musicSource != null && musicSource.isPlaying && musicSource.clip != null;
@@ -52,13 +55,57 @@ namespace YunaLegend.ToyRoom.Runtime
             strangeClip = CreateToneClip("SFX_Strange", 311.13f, 233.08f, 0.48f);
             swordClip = CreateToneClip("SFX_Sword", 587.33f, 1174.66f, 0.55f);
             tenderChimeClip = CreateWarmChordClip("SFX_TenderChime", 523.25f, 659.25f, 783.99f, 0.85f);
+            portalWhooshClip = CreatePortalWhooshClip("SFX_PortalWhoosh", 0.80f);
+            softMagicBurstClip = CreateWarmChordClip("SFX_SoftMagicBurst", 659.25f, 987.77f, 1318.51f, 0.65f);
         }
 
         public void PlayTenderChime() => PlayClip(tenderChimeClip);
 
+        public void PlayIntroPortalExitEffects()
+        {
+            suppressAutoMusicOnStart = true;
+            StopMusic();
+            PlayClip(portalWhooshClip);
+            PlayClip(softMagicBurstClip);
+        }
+
+        public void StopMusic()
+        {
+            if (musicSource != null)
+            {
+                musicSource.Stop();
+            }
+        }
+
+        public void SetExplorationMusicFade(float normalizedFade)
+        {
+            if (musicSource == null)
+            {
+                return;
+            }
+
+            if (!musicSource.isPlaying && explorationMusicClip != null)
+            {
+                swordMusicActive = false;
+                musicSource.clip = explorationMusicClip;
+                musicSource.loop = true;
+                musicSource.mute = isMuted;
+                musicSource.Play();
+                if (isPaused)
+                {
+                    musicSource.Pause();
+                }
+            }
+
+            musicSource.volume = musicVolume * Mathf.Clamp01(normalizedFade);
+        }
+
         private void Start()
         {
-            PlayExplorationMusic();
+            if (!suppressAutoMusicOnStart)
+            {
+                PlayExplorationMusic();
+            }
         }
 
         public void PlayExplorationMusic()
@@ -192,6 +239,29 @@ namespace YunaLegend.ToyRoom.Runtime
                 float w2 = Mathf.Sin(2f * Mathf.PI * f2 * Mathf.Max(0f, t - 0.06f));
                 float w3 = Mathf.Sin(2f * Mathf.PI * f3 * Mathf.Max(0f, t - 0.12f));
                 samples[i] = (w1 * 0.38f + w2 * 0.34f + w3 * 0.28f) * env * 0.26f;
+            }
+
+            var clip = AudioClip.Create(clipName, sampleCount, 1, sampleRate, false);
+            clip.SetData(samples, 0);
+            return clip;
+        }
+
+        private static AudioClip CreatePortalWhooshClip(string clipName, float duration)
+        {
+            const int sampleRate = 22050;
+            int sampleCount = Mathf.Max(1, Mathf.RoundToInt(sampleRate * duration));
+            var samples = new float[sampleCount];
+            var rng = new System.Random(1337);
+            float lowPass = 0f;
+
+            for (int i = 0; i < sampleCount; i++)
+            {
+                float norm = (float)i / sampleCount;
+                float rawNoise = ((float)rng.NextDouble() * 2f - 1f) * (1f - norm);
+                float alpha = Mathf.Lerp(0.42f, 0.06f, norm);
+                lowPass += alpha * (rawNoise - lowPass);
+                float env = norm < 0.1f ? (norm / 0.1f) : (1f - ((norm - 0.1f) / 0.9f));
+                samples[i] = lowPass * env * 0.32f;
             }
 
             var clip = AudioClip.Create(clipName, sampleCount, 1, sampleRate, false);
