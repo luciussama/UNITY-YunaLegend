@@ -311,6 +311,39 @@ namespace YunaLegend.Arena.Tests
             Assert.IsTrue(desktopEnemies[ArenaEnemyId.Bear].PressureChainEnabled, "Desktop deve manter pressao original.");
         }
 
+        [Test]
+        public void DefeatedEnemy_ReturnsToToyChestInArc_AndShrinksIntoChest()
+        {
+            var sim = new ArenaCombatSimulation(easyMode: false);
+            AdvanceTicks(sim, 70, default);
+
+            // Faz o Trem caminhar para a esquerda (longe da caixa em x=1120)
+            for (int i = 0; i < 65; i++)
+            {
+                sim.TickFixed(default);
+            }
+
+            float defeatedPos = sim.EnemyX;
+            Assert.Less(defeatedPos, 1020f, "Trem deve ter se afastado da caixa antes de ser derrotado.");
+
+            // Usa o especial para derrotar o Trem imediatamente
+            sim.TickFixed(new ArenaInputState { SpecialPressed = true });
+            AdvanceTicks(sim, ArenaSpecialSpec.TotalDurationTicks + 1, default);
+            Assert.AreEqual(ArenaEnemyState.Defeated, sim.EnemyState);
+
+            // No meio da animacao de deposito (tick 30 de 60), deve estar subindo em arco rumo a caixa (x=1120)
+            AdvanceTicks(sim, 30, default);
+            Assert.Greater(sim.EnemyX, defeatedPos + 30f, "Brinquedo derrotado deve se mover de volta para a caixa.");
+            Assert.Less(sim.EnemyY, sim.Tuning.GroundY - 80f, "Brinquedo derrotado deve subir em arco ao entrar na caixa.");
+            Assert.Greater(sim.EnemyDepositPitchDegrees, 15f, "Brinquedo derrotado deve inclinar ao mergulhar na caixa.");
+            Assert.Less(sim.EnemySpawnScale, 0.70f, "Brinquedo derrotado deve diminuir de escala ao entrar na caixa.");
+
+            // Ao final do tick 59 (ultimo frame antes da proxima onda), chega na caixa (x=1120)
+            AdvanceTicks(sim, 29, default);
+            Assert.AreEqual(1120f, sim.EnemyX, 5f, "Brinquedo derrotado deve terminar depositado exatamente na posicao da caixa.");
+            Assert.Less(sim.EnemySpawnScale, 0.20f, "Brinquedo deve estar recolhido dentro da caixa.");
+        }
+
         private static void AdvanceTicks(ArenaCombatSimulation sim, int ticks, ArenaInputState input)
         {
             for (int i = 0; i < ticks; i++)

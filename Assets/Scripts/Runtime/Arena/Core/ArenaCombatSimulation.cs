@@ -61,6 +61,8 @@ namespace YunaLegend.Arena.Core
         public int EnemyHp { get; private set; }
         public int EnemyMaxHp => CurrentEnemySpec.MaxHp;
         public float EnemySpawnScale { get; private set; } = 0.16f;
+        public float EnemyDepositArcHeight { get; private set; }
+        public float EnemyDepositPitchDegrees { get; private set; }
         public ArenaEnemyState EnemyState { get; private set; }
         public int EnemyStateTick { get; private set; }
         public ArenaAttackKind ActiveAttackKind { get; private set; }
@@ -68,6 +70,7 @@ namespace YunaLegend.Arena.Core
         public bool EnemyHitAppliedThisAttack { get; private set; }
         public bool EnemyProtectedResponse { get; private set; }
         public bool BearEnraged { get; private set; }
+        private float defeatedStartX;
 
         // Especial Espada Arco-Iris
         public bool SpecialUsed { get; private set; }
@@ -191,6 +194,9 @@ namespace YunaLegend.Arena.Core
             EnemyKnockbackVx = 0f;
             EnemyFacing = -1;
             EnemySpawnScale = 0.16f;
+            EnemyDepositArcHeight = 0f;
+            EnemyDepositPitchDegrees = 0f;
+            defeatedStartX = ChestOriginX;
             EnemyState = ArenaEnemyState.Spawning;
             EnemyStateTick = 0;
             ActiveAttackKind = ArenaAttackKind.None;
@@ -474,6 +480,11 @@ namespace YunaLegend.Arena.Core
 
         private void EnterEnemyDefeated()
         {
+            defeatedStartX = EnemyX;
+            EnemyKnockbackVx = 0f;
+            EnemyVy = 0f;
+            EnemyDepositArcHeight = 0f;
+            EnemyDepositPitchDegrees = 0f;
             EnemyState = ArenaEnemyState.Defeated;
             EnemyStateTick = 0;
             ActiveAttackKind = ArenaAttackKind.None;
@@ -616,7 +627,13 @@ namespace YunaLegend.Arena.Core
 
                 case ArenaEnemyState.Defeated:
                     float exitT = Math.Clamp(EnemyStateTick / (float)tuning.EnemyDeathTicks, 0f, 1f);
-                    EnemySpawnScale = 1f - 0.84f * exitT;
+                    float smoothT = exitT * exitT * (3f - (2f * exitT));
+                    EnemyX = defeatedStartX + ((ChestOriginX - defeatedStartX) * smoothT);
+                    float arc = (float)Math.Sin(exitT * Math.PI);
+                    EnemyDepositArcHeight = (arc * 185f) - (exitT * 52f);
+                    EnemyY = tuning.GroundY - EnemyDepositArcHeight;
+                    EnemyDepositPitchDegrees = smoothT * 58f;
+                    EnemySpawnScale = 1f - (0.84f * smoothT);
                     if (EnemyStateTick >= tuning.EnemyDeathTicks)
                     {
                         if (waveIndex + 1 < ArenaCatalog.WaveOrder.Length)

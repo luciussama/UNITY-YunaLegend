@@ -332,7 +332,14 @@ namespace YunaLegend.Arena.Runtime
             }
 
             _ = catalog;
-            transform.position = ArenaCoordinateMapper.ToWorldPosition(sim.EnemyX, sim.EnemyY, 0.05f);
+            float spawnScale = sim.EnemySpawnScale;
+            float depositProgress = sim.EnemyState == ArenaEnemyState.Defeated
+                ? Mathf.Clamp01(sim.EnemyStateTick / (float)Mathf.Max(1, sim.Tuning.EnemyDeathTicks))
+                : (sim.EnemyState == ArenaEnemyState.Spawning
+                    ? (1f - Mathf.Clamp01(sim.EnemyStateTick / (float)Mathf.Max(1, sim.Tuning.EnemySpawnTicks)))
+                    : 0f);
+            float enemyDepthZ = Mathf.Lerp(0.05f, 1.45f, depositProgress * depositProgress);
+            transform.position = ArenaCoordinateMapper.ToWorldPosition(sim.EnemyX, sim.EnemyY, enemyDepthZ);
             animTimer += dt;
 
             ArenaEnemyId activeId = sim.CurrentEnemySpec.Id;
@@ -341,13 +348,19 @@ namespace YunaLegend.Arena.Runtime
             if (dinosaurModel != null) dinosaurModel.SetActive(activeId == ArenaEnemyId.Dinosaur);
             if (bearModel != null) bearModel.SetActive(activeId == ArenaEnemyId.Bear);
 
-            float spawnScale = sim.EnemySpawnScale;
             float squashX = 1f;
             float squashY = 1f;
             float tiltX = 0f;
             float lungeZ = 0f;
 
-            if (sim.EnemyState == ArenaEnemyState.HitReaction)
+            if (sim.EnemyState == ArenaEnemyState.Defeated)
+            {
+                // Regressao 4: Animacao do brinquedo derrotado sendo depositado de volta na caixa de brinquedos
+                tiltX = sim.EnemyDepositPitchDegrees;
+                squashX = Mathf.Lerp(1f, 0.88f, depositProgress);
+                squashY = Mathf.Lerp(1f, 1.08f, Mathf.Sin(depositProgress * Mathf.PI));
+            }
+            else if (sim.EnemyState == ArenaEnemyState.HitReaction)
             {
                 float t = Mathf.Clamp01(sim.EnemyStateTick / 16f);
                 float impulse = Mathf.Sin(t * Mathf.PI);
@@ -412,14 +425,19 @@ namespace YunaLegend.Arena.Runtime
 
             if (visualRoot != null)
             {
-                // Chefes com esqueleto articulado animam o corpo via bones (sem inclinar a caixa inteira como bloco rigido)
-                float clampedTilt = activeRig != null
-                    ? 0f
-                    : (activeId == ArenaEnemyId.Train ? Mathf.Clamp(tiltX, -4.5f, 4.5f) : tiltX);
-                float yaw = sim.EnemyFacing >= 0 ? 90f : -90f;
+                // Chefes com esqueleto articulado animam o corpo via bones (exceto quando sendo depositados de volta na caixa)
+                bool isBeingDepositedInChest = sim.EnemyState == ArenaEnemyState.Defeated;
+                float clampedTilt = isBeingDepositedInChest
+                    ? tiltX
+                    : (activeRig != null
+                        ? 0f
+                        : (activeId == ArenaEnemyId.Train ? Mathf.Clamp(tiltX, -4.5f, 4.5f) : tiltX));
+                float yaw = isBeingDepositedInChest
+                    ? Mathf.Lerp(sim.EnemyFacing >= 0 ? 90f : -90f, 115f, depositProgress)
+                    : (sim.EnemyFacing >= 0 ? 90f : -90f);
                 visualRoot.localRotation = Quaternion.Slerp(
                     visualRoot.localRotation,
-                    Quaternion.Euler(clampedTilt, yaw, 0f),
+                    Quaternion.Euler(clampedTilt, yaw, isBeingDepositedInChest ? depositProgress * -22f : 0f),
                     dt * 14f);
                 visualRoot.localPosition = new Vector3(sim.EnemyFacing * (activeRig != null ? lungeZ * 0.35f : lungeZ), 0f, 0f);
                 float rigSquashX = activeRig != null ? Mathf.Lerp(1f, squashX, 0.35f) : squashX;

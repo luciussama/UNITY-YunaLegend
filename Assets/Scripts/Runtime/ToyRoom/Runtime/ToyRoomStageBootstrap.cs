@@ -461,6 +461,14 @@ namespace YunaLegend.ToyRoom.Runtime
                 }
             }
 
+            if (phase == ToyRoomPhase.SeekingSword || phase == ToyRoomPhase.SwordPickup || phase == ToyRoomPhase.Completed)
+            {
+                if (audioController != null)
+                {
+                    audioController.StopMusic();
+                }
+            }
+
             if (phase == ToyRoomPhase.SwordPickup)
             {
                 if (narrative != null)

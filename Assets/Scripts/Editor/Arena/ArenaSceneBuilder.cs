@@ -224,15 +224,20 @@ namespace YunaLegend.Editor.Arena
             RemoveCollider(rugGo);
             rugGo.GetComponent<Renderer>().sharedMaterial = CreateUnlitTransparentMat("M_Arena_Rug", rugTex, Color.white);
 
-            // Moveis 3D apoiados no chao (y = 0) sem sobreposicao e sem cobrir a janela
+            // Regressao 3: Ordem e posicionamento dos objetos no fundo da Arena mantem igualdade com o Quarto de Brinquedos
+            // No Quarto de Brinquedos (ToyRoomCatalog):
+            // - Estante de Livros (Bookshelf): esquerda (X = -4.67m na ToyRoom -> X = -5.15m na Arena)
+            // - Cavalinho de Pau (RockingHorse): centro-esquerda à frente da estante (X = -5.33m na ToyRoom -> X = -2.25m na Arena)
+            // - Bau/Caixa de Brinquedos (OpenChest): centro-direita ao lado da estante (X = +2.67m na ToyRoom -> X = +3.20m na Arena, alinhado a ChestOriginX = 1120)
+            // - Guarda-Roupa / Estante Alta (Wardrobe): extrema direita (X = +8.00m na ToyRoom -> X = +6.15m na Arena)
             PlaceNormalizedModel("Bookshelf_3D", envRoot, $"{ToyPropsDir}/bookshelf.obj", $"{ToyPropsDir}/bookshelf_Albedo.png",
-                new Vector3(-5.6f, 0f, 2.2f), 1.55f, 180f, "M_Arena_Bookshelf");
+                new Vector3(-5.15f, 0f, 2.25f), 1.65f, 180f, "M_Arena_Bookshelf");
             PlaceNormalizedModel("RockingHorse_3D", envRoot, $"{ArenaModelsDir}/rocking_horse_hunyuan.obj", $"{ArenaModelsDir}/T_RockingHorse_Albedo.png",
-                new Vector3(-2.3f, 0f, 1.95f), 1.35f, 140f, "M_Arena_HorseProp");
-            PlaceNormalizedModel("Wardrobe_3D", envRoot, $"{ToyPropsDir}/wardrobe.obj", $"{ToyPropsDir}/wardrobe_Albedo.png",
-                new Vector3(2.9f, 0f, 2.25f), 1.85f, 180f, "M_Arena_Wardrobe");
+                new Vector3(-2.25f, 0f, 1.95f), 1.32f, 145f, "M_Arena_HorseProp");
             PlaceNormalizedModel("OpenChest_3D", envRoot, $"{ToyPropsDir}/toy-chest-open.obj", $"{ToyPropsDir}/toy-chest-open_Albedo.png",
-                new Vector3(5.35f, 0f, 0.95f), 1.85f, 208f, "M_Arena_OpenChest");
+                new Vector3(3.20f, 0f, 1.55f), 1.75f, 198f, "M_Arena_OpenChest");
+            PlaceNormalizedModel("Wardrobe_3D", envRoot, $"{ToyPropsDir}/wardrobe.obj", $"{ToyPropsDir}/wardrobe_Albedo.png",
+                new Vector3(6.15f, 0f, 2.25f), 1.95f, 180f, "M_Arena_Wardrobe");
         }
 
         private static ArenaActorView BuildPlayer3D(float startX)
