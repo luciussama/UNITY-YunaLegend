@@ -573,7 +573,26 @@ namespace YunaLegend.Illustrated25D.Environment
             {
                 return true;
             }
-            return Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame;
+
+            if (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame)
+            {
+                return true;
+            }
+
+            // No modo mobile, toque em qualquer area da tela (exceto botoes do topo direito) passa as falas rapido
+            if ((Application.isMobilePlatform || Touchscreen.current != null)
+                && Touchscreen.current != null
+                && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+            {
+                Vector2 touchPos = Touchscreen.current.primaryTouch.position.ReadValue();
+                bool inTopRightHud = touchPos.x > Screen.width - 180f && touchPos.y > Screen.height - 96f;
+                if (!inTopRightHud)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private static bool CheckJumpOrStartInput()

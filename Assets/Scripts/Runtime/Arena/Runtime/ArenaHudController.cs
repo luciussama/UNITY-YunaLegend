@@ -312,11 +312,34 @@ namespace YunaLegend.Arena.Runtime
 
             virtualDPad = ArenaVirtualDPad.CreateVisualDPad(mobileControlsRoot.transform, uiFont);
 
-            CreateActionButton("Btn_Attack", mobileControlsRoot.transform, "attack", new Vector2(-34f, 34f), new Vector2(128f, 128f),
-                new Color(0.84f, 0.28f, 0.24f, 0.88f), () => touchAttackQueued = true);
+            // Dois botoes lado a lado no canto inferior direito fieis ao legado:
+            // Esquerdo: "X / ESPADA" (dourado-creme com borda branca)
+            // Direito: "Y / ESPECIAL / 1 USO" (cinza-ardosia com borda branca)
+            CreateLegacyCombatButton(
+                "Btn_Attack",
+                mobileControlsRoot.transform,
+                "X",
+                "ESPADA",
+                string.Empty,
+                new Vector2(-188f, 26f),
+                new Vector2(156f, 114f),
+                new Color(0.950f, 0.847f, 0.533f, 0.94f),
+                new Color(1f, 1f, 1f, 0.96f),
+                new Color(0.12f, 0.08f, 0.05f, 1f),
+                () => touchAttackQueued = true);
 
-            specialMobileButton = CreateActionButton("Btn_Special", mobileControlsRoot.transform, "special", new Vector2(-178f, 44f), new Vector2(114f, 84f),
-                new Color(0.28f, 0.56f, 0.94f, 0.88f), () => touchSpecialQueued = true);
+            specialMobileButton = CreateLegacyCombatButton(
+                "Btn_Special",
+                mobileControlsRoot.transform,
+                "Y",
+                "ESPECIAL",
+                "1 USO",
+                new Vector2(-20f, 26f),
+                new Vector2(156f, 114f),
+                new Color(0.290f, 0.275f, 0.337f, 0.92f),
+                new Color(0.90f, 0.89f, 0.94f, 0.96f),
+                Color.white,
+                () => touchSpecialQueued = true);
 
             mobileControlsRoot.SetActive(false);
         }
@@ -384,18 +407,105 @@ namespace YunaLegend.Arena.Runtime
             Stretch(text.rectTransform);
         }
 
-        private Button CreateActionButton(string name, Transform root, string label, Vector2 pos, Vector2 size, Color bgColor, Action onClick)
+        private Button CreateLegacyCombatButton(
+            string name,
+            Transform root,
+            string keyHint,
+            string mainLabel,
+            string subLabel,
+            Vector2 pos,
+            Vector2 size,
+            Color fillColor,
+            Color borderColor,
+            Color textColor,
+            Action onClick)
         {
             var go = new GameObject(name, typeof(RectTransform), typeof(Image), typeof(Button));
             go.transform.SetParent(root, false);
             SetRect(go.GetComponent<RectTransform>(), new Vector2(1f, 0f), new Vector2(1f, 0f), new Vector2(1f, 0f), pos, size);
-            go.GetComponent<Image>().color = bgColor;
+            var img = go.GetComponent<Image>();
+            img.sprite = CreateRoundedRectSprite(256, 192, 26f, 5f, fillColor, borderColor);
+            img.color = Color.white;
+
             var btn = go.GetComponent<Button>();
+            btn.targetGraphic = img;
             btn.onClick.AddListener(() => onClick?.Invoke());
 
-            var text = CreateText("Label", go.transform, label, 18, Color.white, TextAnchor.MiddleCenter);
-            Stretch(text.rectTransform);
+            var keyText = CreateTextNoShadow("KeyHint", go.transform, keyHint, 18, textColor, TextAnchor.UpperCenter);
+            keyText.fontStyle = FontStyle.Bold;
+            SetRect(keyText.rectTransform, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0f, -12f), new Vector2(size.x - 16f, 24f));
+
+            var mainText = CreateTextNoShadow("MainLabel", go.transform, mainLabel, 22, textColor, TextAnchor.MiddleCenter);
+            mainText.fontStyle = FontStyle.Bold;
+            SetRect(mainText.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0f, string.IsNullOrEmpty(subLabel) ? -2f : 2f), new Vector2(size.x - 14f, 32f));
+
+            if (!string.IsNullOrEmpty(subLabel))
+            {
+                Color subColor = new Color(textColor.r, textColor.g, textColor.b, 0.78f);
+                var subText = CreateTextNoShadow("SubLabel", go.transform, subLabel, 13, subColor, TextAnchor.LowerCenter);
+                subText.fontStyle = FontStyle.Bold;
+                SetRect(subText.rectTransform, new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 12f), new Vector2(size.x - 16f, 20f));
+            }
+
             return btn;
+        }
+
+        private Text CreateTextNoShadow(string name, Transform parent, string content, int size, Color color, TextAnchor align)
+        {
+            var go = new GameObject(name, typeof(RectTransform));
+            go.transform.SetParent(parent, false);
+            var text = go.AddComponent<Text>();
+            text.font = uiFont;
+            text.text = content;
+            text.fontSize = size;
+            text.color = color;
+            text.alignment = align;
+            text.raycastTarget = false;
+            return text;
+        }
+
+        private static Sprite CreateRoundedRectSprite(int width, int height, float radiusPx, float borderPx, Color fillColor, Color borderColor)
+        {
+            var tex = new Texture2D(width, height, TextureFormat.RGBA32, false)
+            {
+                wrapMode = TextureWrapMode.Clamp,
+                filterMode = FilterMode.Bilinear
+            };
+
+            float hx = width * 0.5f;
+            float hy = height * 0.5f;
+            float bx = hx - radiusPx - 2f;
+            float by = hy - radiusPx - 2f;
+            var pixels = new Color32[width * height];
+
+            for (int y = 0; y < height; y++)
+            {
+                float py = y + 0.5f - hy;
+                for (int x = 0; x < width; x++)
+                {
+                    float px = x + 0.5f - hx;
+                    float dx = Mathf.Abs(px) - bx;
+                    float dy = Mathf.Abs(py) - by;
+                    float d = Mathf.Sqrt(Mathf.Max(dx, 0f) * Mathf.Max(dx, 0f) + Mathf.Max(dy, 0f) * Mathf.Max(dy, 0f))
+                        + Mathf.Min(Mathf.Max(dx, dy), 0f) - radiusPx;
+
+                    if (d > 1.5f)
+                    {
+                        pixels[y * width + x] = new Color32(0, 0, 0, 0);
+                        continue;
+                    }
+
+                    float outerAlpha = 1f - Mathf.SmoothStep(-0.75f, 1.0f, d);
+                    float borderMask = Mathf.SmoothStep(-borderPx - 0.75f, -borderPx + 0.75f, d);
+                    Color c = Color.Lerp(fillColor, borderColor, borderMask);
+                    c.a *= outerAlpha;
+                    pixels[y * width + x] = (Color32)c;
+                }
+            }
+
+            tex.SetPixels32(pixels);
+            tex.Apply(false, true);
+            return Sprite.Create(tex, new Rect(0f, 0f, width, height), new Vector2(0.5f, 0.5f), 100f);
         }
 
         private void CreateHoldButton(string name, Transform root, string label, Vector2 anchor, Vector2 pos, Vector2 size, Action onDown, Action onUp)

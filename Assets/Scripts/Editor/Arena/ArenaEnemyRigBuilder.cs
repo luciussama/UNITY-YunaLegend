@@ -168,10 +168,10 @@ namespace YunaLegend.Editor.Arena
             var thighL = CreateBone("Thigh_L", hips, new Vector3(-0.14f, -h * 0.06f, 0f));
             var thighR = CreateBone("Thigh_R", hips, new Vector3(0.14f, -h * 0.06f, 0f));
 
-            // Cauda estritamente atras no eixo -Z
-            var tail1 = CreateBone("Tail_1", hips, new Vector3(0f, -h * 0.06f, -0.22f));
-            var tail2 = CreateBone("Tail_2", tail1, new Vector3(0f, -h * 0.02f, -0.15f));
-            var tail3 = CreateBone("Tail_3", tail2, new Vector3(0f, 0.01f, -0.14f));
+            // Cauda centrada no eixo real da malha (-X ~ -0.07 apos -43 deg Y, estritamente atras em -Z)
+            var tail1 = CreateBone("Tail_1", hips, new Vector3(-0.13f, -h * 0.09f, -0.34f));
+            var tail2 = CreateBone("Tail_2", tail1, new Vector3(-0.01f, -h * 0.01f, -0.12f));
+            var tail3 = CreateBone("Tail_3", tail2, new Vector3(0f, 0.01f, -0.11f));
 
             rig.Hips = hips;
             rig.Spine = spine;
@@ -401,34 +401,40 @@ namespace YunaLegend.Editor.Arena
         {
             float ny = Mathf.Clamp01((p.y - b.min.y) / Mathf.Max(0.001f, b.size.y));
 
-            // Cauda (apos pre-rotacao -43 deg, a cauda fica estritamente em Z < -0.20)
-            if (ny < 0.34f && p.z < -0.20f)
+            // Cauda (apos pre-rotacao -43 deg, a cauda pura inicia em Z < -0.22 e ny <= 0.34).
+            // Mascara 2D suave em Z e ny elimina qualquer vinco ou barriga deformada na base da cauda!
+            float tailZ = Mathf.InverseLerp(-0.22f, -0.33f, p.z);
+            float tailY = 1f - Mathf.InverseLerp(0.30f, 0.40f, ny);
+            float tailMask = tailZ * tailY;
+            if (tailMask > 0.001f)
             {
-                float tailDepth = -p.z - 0.20f;
-                if (tailDepth < 0.08f)
+                if (p.z < -0.46f)
                 {
-                    float tHip = Mathf.InverseLerp(0f, 0.08f, tailDepth);
-                    return BlendWeight(0, 1f - tHip, 7, tHip);
+                    float t3 = Mathf.InverseLerp(-0.46f, -0.53f, p.z);
+                    return BlendWeight(8, 1f - t3, 9, t3);
                 }
 
-                if (tailDepth > 0.26f) return SingleWeight(9); // Tail_3 (ponta)
-                if (tailDepth > 0.16f)
+                if (p.z < -0.36f)
                 {
-                    float t = Mathf.InverseLerp(0.16f, 0.26f, tailDepth);
-                    return BlendWeight(8, 1f - t, 9, t);
+                    float t2 = Mathf.InverseLerp(-0.36f, -0.46f, p.z);
+                    return BlendWeight(7, 1f - t2, 8, t2);
                 }
 
-                float tBase = Mathf.InverseLerp(0.08f, 0.16f, tailDepth);
-                return BlendWeight(7, 1f - tBase, 8, tBase);
+                return BlendWeight(0, 1f - tailMask, 7, tailMask);
             }
 
-            // Pernas e pes abaixo do quadril (simetricas em torno de b.center.x)
-            if (ny < 0.22f)
+            // Pernas e pes estritamente na regiao frontal das patinhas (p.z > -0.10), sem capturar a barriga/base da cauda!
+            if (ny < 0.20f && p.z > -0.10f)
             {
                 bool isLeft = p.x < b.center.x;
                 int thigh = isLeft ? 5 : 6;
-                float hipT = Mathf.InverseLerp(0.14f, 0.22f, ny);
-                return BlendWeight(thigh, 1f - hipT, 0, hipT);
+                float hipY = 1f - Mathf.InverseLerp(0.12f, 0.20f, ny);
+                float hipZ = Mathf.InverseLerp(-0.10f, 0.02f, p.z);
+                float legWeight = hipY * hipZ;
+                if (legWeight > 0.001f)
+                {
+                    return BlendWeight(0, 1f - legWeight, thigh, legWeight);
+                }
             }
 
             // Cabeca inteira (sem rasgar a boca fechada da pelucia; a mordida articula Spine+Neck+Head inteiros)

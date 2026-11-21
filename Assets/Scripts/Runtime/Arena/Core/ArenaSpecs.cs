@@ -76,16 +76,16 @@ namespace YunaLegend.Arena.Core
         public float PlayerBodyWidth { get; set; } = 120f;
         public float PlayerBodyHeight { get; set; } = 140f;
         public float SwordContactScale { get; set; } = 1.1f;
-        public int SwordDurationTicks { get; set; } = 18;
-        public int SwordWindupTicks { get; set; } = 6;
+        public int SwordDurationTicks { get; set; } = 14;
+        public int SwordWindupTicks { get; set; } = 4;
         public int SwordActiveTicks { get; set; } = 6;
-        public int SwordCooldownTicks { get; set; } = 36;
+        public int SwordCooldownTicks { get; set; } = 28;
         public int BlockRecoveryTicks { get; set; } = 48;
         public float AttackMoveScale { get; set; } = 0.2f;
         public float RecoveryMoveScale { get; set; } = 0.55f;
         public int EnemyWindupTicks { get; set; } = 54;
         public int EnemyInterruptibleTicks { get; set; } = 18;
-        public int EnemyActiveTicks { get; set; } = 18;
+        public int EnemyActiveTicks { get; set; } = 13;
         public int PlayerImmunityTicks { get; set; } = 48;
         public int PlayerHitRecoveryTicks { get; set; } = 24;
         public int EnemyHitReactionTicks { get; set; } = 20;
@@ -141,23 +141,31 @@ namespace YunaLegend.Arena.Core
             ArenaEnemyId.Bear
         };
 
-        public static ArenaTuning CreateTuning(bool easyMode)
+        public static ArenaTuning CreateTuning(bool easyMode, bool mobileTouchAssist = false)
         {
+            float contactScale = easyMode ? 1.43f : 1.1f;
+            if (mobileTouchAssist)
+            {
+                contactScale *= 1.15f;
+            }
+
             return new ArenaTuning
             {
-                SwordContactScale = easyMode ? 1.43f : 1.1f
+                SwordContactScale = contactScale,
+                EnemyWindupTicks = mobileTouchAssist ? 62 : 54,
+                EnemyInterruptibleTicks = mobileTouchAssist ? 24 : 18
             };
         }
 
-        public static IReadOnlyDictionary<ArenaEnemyId, ArenaEnemySpec> CreateEnemies(bool easyMode)
+        public static IReadOnlyDictionary<ArenaEnemyId, ArenaEnemySpec> CreateEnemies(bool easyMode, bool mobileTouchAssist = false)
         {
-            float walkScale = easyMode ? 0.80f : 1f;
-            float chargeScale = easyMode ? 0.85f : 1f;
-            float idleScale = easyMode ? 1.70f : 1f;
-            float retreatScale = easyMode ? 1.50f : 1f;
-            float recoveryScale = easyMode ? 1.55f : 1f;
-            float evadeCdScale = easyMode ? 1.60f : 1f;
-            bool chain = !easyMode;
+            float walkScale = (easyMode ? 0.80f : 1f) * (mobileTouchAssist ? 0.88f : 1f);
+            float chargeScale = (easyMode ? 0.85f : 1f) * (mobileTouchAssist ? 0.88f : 1f);
+            float idleScale = (easyMode ? 1.70f : 1f) * (mobileTouchAssist ? 1.45f : 1f);
+            float retreatScale = (easyMode ? 1.50f : 1f) * (mobileTouchAssist ? 1.25f : 1f);
+            float recoveryScale = (easyMode ? 1.55f : 1f) * (mobileTouchAssist ? 1.40f : 1f);
+            float evadeCdScale = (easyMode ? 1.60f : 1f) * (mobileTouchAssist ? 1.45f : 1f);
+            bool chain = !easyMode && !mobileTouchAssist;
 
             return new Dictionary<ArenaEnemyId, ArenaEnemySpec>
             {

@@ -84,16 +84,17 @@ namespace YunaLegend.Arena.Core
         public event Action OnAttackBlocked;
         public event Action OnPlayerDamaged;
         public event Action<ArenaEnemyId, ArenaAttackKind> OnEnemyAttackStarted;
+        public event Action<ArenaEnemyId, ArenaAttackKind> OnEnemyAttackActive;
         public event Action<ArenaEnemyId> OnEnemyChanged;
         public event Action OnBearEnraged;
         public event Action<ArenaSpecialPhase> OnSpecialPhaseChanged;
         public event Action<ArenaBattleOutcome> OnBattleEnded;
 
-        public ArenaCombatSimulation(bool easyMode = false)
+        public ArenaCombatSimulation(bool easyMode = false, bool mobileTouchAssist = false)
         {
             EasyMode = easyMode;
-            tuning = ArenaCatalog.CreateTuning(easyMode);
-            enemySpecs = ArenaCatalog.CreateEnemies(easyMode);
+            tuning = ArenaCatalog.CreateTuning(easyMode, mobileTouchAssist);
+            enemySpecs = ArenaCatalog.CreateEnemies(easyMode, mobileTouchAssist);
             ResetBattle();
         }
 
@@ -566,6 +567,8 @@ namespace YunaLegend.Arena.Core
                         {
                             EnemyVy = -11.5f;
                         }
+
+                        OnEnemyAttackActive?.Invoke(CurrentEnemySpec.Id, ActiveAttackKind);
                     }
                     break;
 

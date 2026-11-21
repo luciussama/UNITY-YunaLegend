@@ -90,15 +90,15 @@ namespace YunaLegend.ToyRoom.Runtime
             if (promptBackground != null)
             {
                 promptBackground.color = isActionReady
-                    ? new Color(0.980f, 0.800f, 0.082f, 0.96f)
-                    : new Color(0.980f, 0.800f, 0.082f, 0.52f);
+                    ? Color.white
+                    : new Color(1f, 1f, 1f, 0.72f);
             }
 
             if (promptText != null)
             {
                 promptText.color = isActionReady
-                    ? new Color(0.14f, 0.09f, 0.04f, 1f)
-                    : new Color(0.14f, 0.09f, 0.04f, 0.78f);
+                    ? new Color(0.12f, 0.07f, 0.02f, 1f)
+                    : new Color(0.12f, 0.07f, 0.02f, 0.78f);
             }
         }
 
@@ -294,67 +294,77 @@ namespace YunaLegend.ToyRoom.Runtime
 
         private void BuildActionPrompt(Transform parent, Font font)
         {
+            // Botao redondo dourado de altissima visibilidade (fiel ao legado):
+            // gradiente dourado-ambar, borda branca solida, sombra suave, halo tracejado e rotulo PEGAR/GUARDAR + TOQUE.
             promptRoot = new GameObject("ActionPrompt");
             promptRoot.transform.SetParent(parent, false);
             var rt = promptRoot.AddComponent<RectTransform>();
             rt.anchorMin = new Vector2(1f, 0f);
             rt.anchorMax = new Vector2(1f, 0f);
             rt.pivot = new Vector2(1f, 0f);
-            rt.anchoredPosition = new Vector2(-44f, 44f);
-            rt.sizeDelta = new Vector2(136f, 136f);
+            rt.anchoredPosition = new Vector2(-60f, 52f);
+            rt.sizeDelta = new Vector2(196f, 196f);
+
+            var haloGo = new GameObject("ActionDashedHalo");
+            haloGo.transform.SetParent(promptRoot.transform, false);
+            var haloRt = haloGo.AddComponent<RectTransform>();
+            haloRt.anchorMin = new Vector2(0.5f, 0.5f);
+            haloRt.anchorMax = new Vector2(0.5f, 0.5f);
+            haloRt.pivot = new Vector2(0.5f, 0.5f);
+            haloRt.sizeDelta = new Vector2(236f, 236f);
+            var haloImg = haloGo.AddComponent<Image>();
+            haloImg.sprite = ToyRoomVirtualJoystick.CreateDashedRingSprite(256, 26);
+            haloImg.color = new Color(1f, 0.96f, 0.82f, 0.42f);
+            haloImg.raycastTarget = false;
 
             promptBackground = promptRoot.AddComponent<Image>();
-            promptBackground.sprite = ToyRoomVirtualJoystick.CreateCircleSprite(128, 0f, 0.96f);
-            promptBackground.color = new Color(0.980f, 0.800f, 0.082f, 0.96f);
+            promptBackground.sprite = ToyRoomVirtualJoystick.CreateGoldenOrbSprite(256, 0.048f);
+            promptBackground.color = Color.white;
             promptBackground.raycastTarget = true;
-
-            GameObject ringGo = new("ActionRing");
-            ringGo.transform.SetParent(promptRoot.transform, false);
-            var ringRt = ringGo.AddComponent<RectTransform>();
-            StretchFull(ringRt);
-            var ringImg = ringGo.AddComponent<Image>();
-            ringImg.sprite = ToyRoomVirtualJoystick.CreateCircleSprite(128, 0.88f, 0.98f);
-            ringImg.color = new Color(1f, 0.98f, 0.90f, 0.95f);
-            ringImg.raycastTarget = false;
+            var dropShadow = promptRoot.AddComponent<Shadow>();
+            dropShadow.effectColor = new Color(0.05f, 0.02f, 0.01f, 0.55f);
+            dropShadow.effectDistance = new Vector2(0f, -6f);
 
             promptButton = promptRoot.AddComponent<Button>();
             promptButton.targetGraphic = promptBackground;
             promptButton.onClick.AddListener(() => OnActionRequested?.Invoke());
 
-            promptText = CreateLabel("PromptText", promptRoot.transform, font, 21, TextAnchor.MiddleCenter, new Color(0.14f, 0.09f, 0.04f, 1f));
+            promptText = CreateLabel("PromptText", promptRoot.transform, font, 30, TextAnchor.MiddleCenter, new Color(0.12f, 0.07f, 0.02f, 1f));
             promptText.fontStyle = FontStyle.Bold;
             promptText.raycastTarget = false;
             var textRt = promptText.rectTransform;
             textRt.anchorMin = Vector2.zero;
             textRt.anchorMax = Vector2.one;
-            textRt.offsetMin = new Vector2(12f, 12f);
-            textRt.offsetMax = new Vector2(-12f, -12f);
+            textRt.offsetMin = new Vector2(16f, 44f);
+            textRt.offsetMax = new Vector2(-16f, -18f);
+
+            var subLabel = CreateLabel("PromptSubLabel", promptRoot.transform, font, 18, TextAnchor.LowerCenter, new Color(0.20f, 0.12f, 0.04f, 0.92f));
+            subLabel.fontStyle = FontStyle.Bold;
+            subLabel.text = "TOQUE";
+            subLabel.raycastTarget = false;
+            var subRt = subLabel.rectTransform;
+            subRt.anchorMin = Vector2.zero;
+            subRt.anchorMax = Vector2.one;
+            subRt.offsetMin = new Vector2(16f, 34f);
+            subRt.offsetMax = new Vector2(-16f, -96f);
         }
 
         private void BuildVirtualJoystick(Transform parent)
         {
+            // Analogico virtual fiel ao legado: anel dourado fino com 4 marcas cardinais + orbe dourado com borda branca
             joystickRoot = new GameObject("VirtualJoystick");
             joystickRoot.transform.SetParent(parent, false);
             var rootRt = joystickRoot.AddComponent<RectTransform>();
             rootRt.anchorMin = new Vector2(0f, 0f);
             rootRt.anchorMax = new Vector2(0f, 0f);
             rootRt.pivot = new Vector2(0.5f, 0.5f);
-            rootRt.anchoredPosition = new Vector2(132f, 132f);
-            rootRt.sizeDelta = new Vector2(176f, 176f);
+            rootRt.anchoredPosition = new Vector2(168f, 158f);
+            rootRt.sizeDelta = new Vector2(224f, 224f);
 
             var baseImg = joystickRoot.AddComponent<Image>();
-            baseImg.sprite = ToyRoomVirtualJoystick.CreateCircleSprite(128, 0f, 0.98f);
-            baseImg.color = new Color(0.102f, 0.063f, 0.149f, 0.62f);
+            baseImg.sprite = ToyRoomVirtualJoystick.CreateLegacyJoystickBaseSprite(256);
+            baseImg.color = Color.white;
             baseImg.raycastTarget = true;
-
-            var ringGo = new GameObject("JoystickRing");
-            ringGo.transform.SetParent(joystickRoot.transform, false);
-            var ringRt = ringGo.AddComponent<RectTransform>();
-            StretchFull(ringRt);
-            var ringImg = ringGo.AddComponent<Image>();
-            ringImg.sprite = ToyRoomVirtualJoystick.CreateCircleSprite(128, 0.88f, 0.98f);
-            ringImg.color = new Color(0.980f, 0.800f, 0.082f, 0.85f);
-            ringImg.raycastTarget = false;
 
             var handleGo = new GameObject("JoystickHandle");
             handleGo.transform.SetParent(joystickRoot.transform, false);
@@ -363,14 +373,17 @@ namespace YunaLegend.ToyRoom.Runtime
             handleRt.anchorMax = new Vector2(0.5f, 0.5f);
             handleRt.pivot = new Vector2(0.5f, 0.5f);
             handleRt.anchoredPosition = Vector2.zero;
-            handleRt.sizeDelta = new Vector2(74f, 74f);
+            handleRt.sizeDelta = new Vector2(92f, 92f);
             var handleImg = handleGo.AddComponent<Image>();
-            handleImg.sprite = ToyRoomVirtualJoystick.CreateCircleSprite(96, 0f, 0.96f);
-            handleImg.color = new Color(0.980f, 0.800f, 0.082f, 0.92f);
+            handleImg.sprite = ToyRoomVirtualJoystick.CreateGoldenOrbSprite(128, 0.075f);
+            handleImg.color = Color.white;
             handleImg.raycastTarget = false;
+            var handleShadow = handleGo.AddComponent<Shadow>();
+            handleShadow.effectColor = new Color(0f, 0f, 0f, 0.45f);
+            handleShadow.effectDistance = new Vector2(0f, -4f);
 
             var joystick = joystickRoot.AddComponent<ToyRoomVirtualJoystick>();
-            joystick.Configure(rootRt, handleRt, 54f, 0.1f);
+            joystick.Configure(rootRt, handleRt, 70f, 0.1f);
             joystick.OnValueChanged += value => OnMoveInputChanged?.Invoke(value);
         }
 
@@ -452,7 +465,7 @@ namespace YunaLegend.ToyRoom.Runtime
             bRt.offsetMax = new Vector2(-32f, -50f);
 
             var hintText = CreateLabel("DialogueHint", dialogueRoot.transform, font, 15, TextAnchor.LowerRight, new Color(0.90f, 0.86f, 0.72f, 0.75f));
-            hintText.text = "Clique ou Espaco para avancar";
+            hintText.text = IsMobileOrTouchDevice() ? "Toque na tela para avançar" : "Clique ou Espaço para avançar";
             var hRt = hintText.rectTransform;
             hRt.anchorMin = Vector2.zero;
             hRt.anchorMax = Vector2.one;
@@ -504,7 +517,7 @@ namespace YunaLegend.ToyRoom.Runtime
             tRt.offsetMax = new Vector2(-36f, -20f);
 
             var hintText = CreateLabel("PoeticHint", poeticRoot.transform, uiFont, 14, TextAnchor.LowerCenter, new Color(0.518f, 0.392f, 0.404f, 0.78f));
-            hintText.text = "Avanca automaticamente · clique para adiantar";
+            hintText.text = IsMobileOrTouchDevice() ? "Toque na tela para avançar" : "Avança automaticamente · clique para adiantar";
             var hRt = hintText.rectTransform;
             hRt.anchorMin = Vector2.zero;
             hRt.anchorMax = Vector2.one;

@@ -295,6 +295,22 @@ namespace YunaLegend.Arena.Tests
             Assert.AreEqual(0, sim.SwordComboStep, "Apos pausa longa, combo deve voltar ao golpe vertical (0).");
         }
 
+        [Test]
+        public void MobileTouchAssist_ReducesEnemyAggression_WithoutChangingDesktopDefaults()
+        {
+            var desktopTuning = ArenaCatalog.CreateTuning(easyMode: false, mobileTouchAssist: false);
+            var mobileTuning = ArenaCatalog.CreateTuning(easyMode: false, mobileTouchAssist: true);
+            var desktopEnemies = ArenaCatalog.CreateEnemies(easyMode: false, mobileTouchAssist: false);
+            var mobileEnemies = ArenaCatalog.CreateEnemies(easyMode: false, mobileTouchAssist: true);
+
+            Assert.Greater(mobileTuning.EnemyWindupTicks, desktopTuning.EnemyWindupTicks, "Mobile deve dar mais tempo de leitura no windup.");
+            Assert.Greater(mobileTuning.SwordContactScale, desktopTuning.SwordContactScale, "Mobile deve ter margem de espada ligeiramente maior.");
+            Assert.Greater(mobileEnemies[ArenaEnemyId.Robot].IdleTicks, desktopEnemies[ArenaEnemyId.Robot].IdleTicks);
+            Assert.Greater(mobileEnemies[ArenaEnemyId.Bear].RecoveryTicks, desktopEnemies[ArenaEnemyId.Bear].RecoveryTicks);
+            Assert.IsFalse(mobileEnemies[ArenaEnemyId.Bear].PressureChainEnabled, "Mobile nao deve encadear combos de pressao.");
+            Assert.IsTrue(desktopEnemies[ArenaEnemyId.Bear].PressureChainEnabled, "Desktop deve manter pressao original.");
+        }
+
         private static void AdvanceTicks(ArenaCombatSimulation sim, int ticks, ArenaInputState input)
         {
             for (int i = 0; i < ticks; i++)
