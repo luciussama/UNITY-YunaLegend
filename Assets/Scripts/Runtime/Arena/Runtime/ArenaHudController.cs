@@ -342,6 +342,7 @@ namespace YunaLegend.Arena.Runtime
 
             if (!IsMobileViewport())
             {
+                ApplyDesktopLayout();
                 return;
             }
 
@@ -452,6 +453,42 @@ namespace YunaLegend.Arena.Runtime
             // Modais (Pause e Outcome) cabendo integralmente no celular
             ResizeModalBox(pauseBoxRect, usableW, px, f16, f15, f14);
             ResizeModalBox(outcomeBoxRect, usableW, px, f16, f15, f14);
+        }
+
+        private void ApplyDesktopLayout()
+        {
+            const float marginX = 20f;
+            const float topY = -16f;
+            const float pillH = 58f;
+
+            SetRect(pauseBtnRect, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-marginX, topY), new Vector2(44f, 36f));
+            SetRect(muteBtnRect, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-(marginX + 52f), topY), new Vector2(58f, 36f));
+            muteBtnLabel.fontSize = 14;
+            pauseBtnLabel.fontSize = 15;
+
+            var yunaPillRect = playerHeartsText.transform.parent as RectTransform;
+            SetRect(yunaPillRect, new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(marginX, topY), new Vector2(340f, pillH));
+            playerHeartsText.fontSize = 22;
+            playerHeartsText.alignment = TextAnchor.UpperLeft;
+            SetRect(playerHeartsText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(12f, -6f), new Vector2(-24f, 24f));
+
+            specialReadyText.fontSize = 14;
+            specialReadyText.alignment = TextAnchor.UpperLeft;
+            SetRect(specialReadyText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(12f, -31f), new Vector2(-24f, 20f));
+
+            var enemyPillRect = enemyTitleText.transform.parent as RectTransform;
+            SetRect(enemyPillRect, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-(marginX + 122f), topY), new Vector2(300f, pillH));
+            enemyTitleText.fontSize = 18;
+            enemyTitleText.alignment = TextAnchor.UpperRight;
+            SetRect(enemyTitleText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(12f, -6f), new Vector2(-24f, 22f));
+
+            enemyHeartsText.fontSize = 22;
+            enemyHeartsText.alignment = TextAnchor.UpperRight;
+            SetRect(enemyHeartsText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(12f, -29f), new Vector2(-24f, 24f));
+
+            statusHintText.fontSize = 18;
+            statusHintText.alignment = TextAnchor.LowerCenter;
+            SetRect(statusHintText.rectTransform, new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 24f), new Vector2(760f, 36f));
         }
 
         private static void ResizeCombatButton(RectTransform rt, Vector2 pos, Vector2 size, int f14, int f15, float px)

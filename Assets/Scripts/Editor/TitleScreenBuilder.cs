@@ -24,8 +24,8 @@ namespace YunaLegend.EditorScripts
         private const string EvidenceFolder = "Evidence/title-screen-2026-11-11";
 
         // Fases disponiveis no dropdown da bandeirinha. Novas fases entram aqui.
-        private static readonly string[] PhaseLabels = { "O Quarto Escuro", "Quarto dos Brinquedos", "Arena Imaginária" };
-        private static readonly string[] PhaseScenes = { "Fase-Jogavel-Completa", "ToyRoom_Gameplay", "Arena_Gameplay" };
+        private static readonly string[] PhaseLabels = { "O Quarto Escuro", "Quarto dos Brinquedos", "Arena Imaginária", "Perseguição ao Urso" };
+        private static readonly string[] PhaseScenes = { "Fase-Jogavel-Completa", "ToyRoom_Gameplay", "Arena_Gameplay", "BearChase_Gameplay" };
 
         private static readonly Color Cream = new Color(0.95f, 0.90f, 0.78f);
         private static readonly Color Gold = new Color(1f, 0.84f, 0.55f);

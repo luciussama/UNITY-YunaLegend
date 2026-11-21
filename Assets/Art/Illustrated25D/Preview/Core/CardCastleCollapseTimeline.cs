@@ -56,7 +56,7 @@ namespace YunaLegend.Illustrated25D.Preview.Controllers
         public const int TierCount = 4;
         public const int IndividualCardCount = 15;
         public const int FlutterCardCount = IndividualCardCount;
-        public const float CollapseDurationSeconds = 1.45f;
+        public const float CollapseDurationSeconds = 0.85f;
 
         // Divisoes verticais em pixels (usadas apenas para o bamboleio sutil quando Yuna pisa na estrutura intacta):
         public static readonly int[] TierTopPixelY = { 780, 475, 215, 0 };
@@ -201,53 +201,47 @@ namespace YunaLegend.Illustrated25D.Preview.Controllers
                 sideSign = 1.35f;
             }
 
-            float outwardSpeed = (0.75f + (spec.Tier * 0.32f) + ((idx % 3) * 0.18f)) * sideSign;
-            float initialUpPop = spec.Tier == 3 ? 1.15f : (0.35f + (spec.Tier * 0.15f));
-            float gravity = 7.4f;
+            float outwardSpeed = (0.14f + (spec.Tier * 0.06f) + ((idx % 3) * 0.04f)) * sideSign;
+            float initialUpPop = 0f;
+            float gravity = 8.4f;
 
             float rawY = spec.StartYMetres + (initialUpPop * t) - (0.5f * gravity * t * t);
-            float floorRestY = 0.08f + ((idx % 5) * 0.032f);
+            float floorRestY = 0.06f + ((idx % 5) * 0.024f);
 
             float y;
             float x;
             float rot;
-            float flipScaleX;
+            float flipScaleX = 1f;
 
             if (rawY > floorRestY)
             {
                 y = rawY;
-                float airFlutterX = (float)Math.Sin((t * 8.5f) + (idx * 1.1f)) * (0.22f + (spec.Tier * 0.06f)) * Math.Min(1f, t * 3f);
-                x = spec.StartXMetres + (outwardSpeed * t) + airFlutterX;
+                x = spec.StartXMetres + (outwardSpeed * t);
 
                 float targetFallAngle = spec.IsHorizontalBridge
-                    ? (sideSign * 165f * t)
-                    : (spec.StartRotDegrees + (sideSign * (95f + (idx % 3) * 32f) * t));
-                rot = targetFallAngle + ((float)Math.Sin(t * 10f + idx) * 14f);
-                flipScaleX = 0.42f + (0.58f * (float)Math.Abs(Math.Cos((t * 5.8f) + (idx * 0.6f))));
+                    ? (sideSign * 52f * t)
+                    : (spec.StartRotDegrees + (sideSign * (36f + (idx % 3) * 14f) * t));
+                rot = targetFallAngle;
             }
             else
             {
-                // Pousou no chao: desliza suavemente com atrito e fica deitada sobre o piso
+                // Pousou no chao: desliza discretamente e fica deitada na sombra do piso
                 y = floorRestY;
-                float discriminant = (initialUpPop * initialUpPop) + (2f * gravity * Math.Max(0.01f, spec.StartYMetres - floorRestY));
-                float tLand = (initialUpPop + (float)Math.Sqrt(discriminant)) / gravity;
-                float slideAfterLand = Math.Min(0.18f, Math.Max(0f, t - tLand)) * outwardSpeed * 0.35f;
-                float landFlutterX = (float)Math.Sin((tLand * 8.5f) + (idx * 1.1f)) * (0.22f + (spec.Tier * 0.06f));
-                x = spec.StartXMetres + (outwardSpeed * tLand) + landFlutterX + slideAfterLand;
+                float tLand = (float)Math.Sqrt((2f * Math.Max(0.01f, spec.StartYMetres - floorRestY)) / gravity);
+                float slideAfterLand = Math.Min(0.10f, Math.Max(0f, t - tLand)) * outwardSpeed * 0.20f;
+                x = spec.StartXMetres + (outwardSpeed * tLand) + slideAfterLand;
 
-                // Deita quase horizontal no chao (82..96 graus para cartas verticais, 4..14 graus para pontes horizontais)
                 float restAngle = spec.IsHorizontalBridge
-                    ? (sideSign * (6f + (idx % 3) * 4f))
-                    : (sideSign * (84f + ((idx % 4) * 4f)));
-                float settleT = Clamp01((t - tLand) / 0.16f);
+                    ? (sideSign * (6f + (idx % 3) * 3f))
+                    : (sideSign * (78f + ((idx % 4) * 4f)));
+                float settleT = Clamp01((t - tLand) / 0.14f);
                 float angleAtLand = spec.IsHorizontalBridge
-                    ? (sideSign * 165f * tLand)
-                    : (spec.StartRotDegrees + (sideSign * (95f + (idx % 3) * 32f) * tLand));
+                    ? (sideSign * 52f * tLand)
+                    : (spec.StartRotDegrees + (sideSign * (36f + (idx % 3) * 14f) * tLand));
                 rot = angleAtLand + ((restAngle - angleAtLand) * settleT);
-                flipScaleX = 0.85f + (0.15f * settleT);
             }
 
-            float fadeStart = CollapseDurationSeconds * 0.86f;
+            float fadeStart = CollapseDurationSeconds * 0.45f;
             float alpha = collapseElapsedSeconds <= fadeStart
                 ? 1f
                 : Clamp01(1f - ((collapseElapsedSeconds - fadeStart) / (CollapseDurationSeconds - fadeStart)));

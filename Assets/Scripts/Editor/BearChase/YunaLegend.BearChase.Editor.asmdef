@@ -1,0 +1,30 @@
+{
+    "name": "YunaLegend.BearChase.Editor",
+    "rootNamespace": "YunaLegend.Editor.BearChase",
+    "references": [
+        "YunaLegend.BearChase.Core",
+        "YunaLegend.BearChase.Runtime",
+        "YunaLegend.ToyRoom.Core",
+        "YunaLegend.ToyRoom.Runtime",
+        "YunaLegend.ToyRoom.Editor",
+        "YunaLegend.Arena.Core",
+        "YunaLegend.Arena.Runtime",
+        "YunaLegend.Arena.Editor",
+        "YunaLegend.Runtime",
+        "Unity.InputSystem",
+        "UnityEngine.UI",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unity.RenderPipelines.Core.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

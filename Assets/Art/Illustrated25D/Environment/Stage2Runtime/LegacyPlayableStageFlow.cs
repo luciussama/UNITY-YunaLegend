@@ -210,9 +210,7 @@ namespace YunaLegend.Illustrated25D.Environment
 
             if (currentPhase == StageFlowStateMachine.FlowPhase.TruePortalVictory)
             {
-                portalVictoryElapsed += Time.deltaTime;
                 if (!transitionedToToyRoom
-                    && (portalVictoryElapsed >= 2.8f || (portalVictoryElapsed >= 0.4f && CheckConfirmInput()))
                     && UnityEngine.Application.CanStreamedLevelBeLoaded("ToyRoom_Gameplay"))
                 {
                     transitionedToToyRoom = true;

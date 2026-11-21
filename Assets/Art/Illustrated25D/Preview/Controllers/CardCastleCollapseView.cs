@@ -150,7 +150,7 @@ namespace YunaLegend.Illustrated25D.Preview.Controllers
 
             if (collapseAudioSource != null && collapseCascadeClip != null)
             {
-                collapseAudioSource.PlayOneShot(collapseCascadeClip, 0.72f);
+                collapseAudioSource.PlayOneShot(collapseCascadeClip, 0.10f);
             }
 
             EvaluateAtCollapseTime(0f);
@@ -190,10 +190,15 @@ namespace YunaLegend.Illustrated25D.Preview.Controllers
                 flutterRenderers[i].enabled = show;
                 if (show)
                 {
-                    flutterTransforms[i].localPosition = new Vector3(card.LocalXMetres, card.LocalYMetres, -0.01f * (i % 5));
+                    Color baseTint = mainPainting != null ? mainPainting.color : Color.white;
+                    flutterTransforms[i].localPosition = new Vector3(card.LocalXMetres, card.LocalYMetres, 0.08f + (0.01f * (i % 5)));
                     flutterTransforms[i].localRotation = Quaternion.Euler(0f, 0f, card.RotationDegrees);
                     flutterTransforms[i].localScale = new Vector3(card.ScaleX, 1f, 1f);
-                    flutterRenderers[i].color = new Color(1f, 1f, 1f, card.Alpha);
+                    flutterRenderers[i].color = new Color(
+                        baseTint.r * 0.26f,
+                        baseTint.g * 0.26f,
+                        baseTint.b * 0.32f,
+                        baseTint.a * card.Alpha * 0.36f);
                 }
             }
         }
@@ -356,7 +361,7 @@ namespace YunaLegend.Illustrated25D.Preview.Controllers
                 var sr = cardGo.AddComponent<SpriteRenderer>();
                 sr.sprite = cardSprite;
                 sr.sharedMaterial = mat;
-                sr.sortingOrder = 6 + c;
+                sr.sortingOrder = -6;
                 sr.enabled = false;
 
                 flutterTransforms[c] = cardGo.transform;
@@ -385,14 +390,14 @@ namespace YunaLegend.Illustrated25D.Preview.Controllers
             float boxW = halfW - cornerRadius - 2f;
             float boxH = halfH - cornerRadius - 2f;
 
-            // Paleta identica a 30-card-castle-v1.png (pergaminho aquarelado creme, borda grafite azulada, naipes carmim/azul-marinho)
-            Color parchmentLight = new Color(0.965f, 0.933f, 0.855f, 1f);
-            Color parchmentWarm = new Color(0.898f, 0.847f, 0.745f, 1f);
-            Color edgeStroke = new Color(0.24f, 0.27f, 0.33f, 1f);
+            // Paleta profundamente escurecida para passar despercebida na penumbra do Quarto Escuro
+            Color parchmentLight = new Color(0.20f, 0.19f, 0.23f, 1f);
+            Color parchmentWarm = new Color(0.14f, 0.13f, 0.17f, 1f);
+            Color edgeStroke = new Color(0.06f, 0.06f, 0.09f, 1f);
             Color suitColor = spec.IsRedSuit
-                ? new Color(0.76f, 0.20f, 0.18f, 1f)
-                : new Color(0.16f, 0.21f, 0.31f, 1f);
-            Color goldAccent = new Color(0.82f, 0.65f, 0.26f, 1f);
+                ? new Color(0.22f, 0.08f, 0.09f, 1f)
+                : new Color(0.07f, 0.09f, 0.14f, 1f);
+            Color goldAccent = new Color(0.22f, 0.18f, 0.10f, 1f);
 
             for (int y = 0; y < h; y++)
             {

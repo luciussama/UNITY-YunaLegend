@@ -304,13 +304,6 @@ namespace YunaLegend.Illustrated25D.Environment
                     break;
 
                 case StageFlowStateMachine.FlowPhase.TruePortalVictory:
-                    ShowPoetic(DarkRoomDialogueScript.PoeticTruePortal, "Fim do Quarto Escuro");
-                    ShowModal(
-                        "✦ QUARTO ESCURO CONCLUÍDO ✦",
-                        "Você encontrou o Verdadeiro Portal dos Sonhos!",
-                        "Yuna e Nanda atravessaram o Quarto Escuro até o fim.",
-                        "Jogar novamente",
-                        () => OnRetryFromBeginningRequested?.Invoke());
                     break;
             }
         }

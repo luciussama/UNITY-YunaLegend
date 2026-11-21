@@ -1,0 +1,22 @@
+{
+    "name": "YunaLegend.BearChase.Runtime",
+    "rootNamespace": "YunaLegend.BearChase.Runtime",
+    "references": [
+        "YunaLegend.BearChase.Core",
+        "YunaLegend.ToyRoom.Runtime",
+        "YunaLegend.Arena.Runtime",
+        "Unity.InputSystem",
+        "UnityEngine.UI",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unity.RenderPipelines.Core.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
