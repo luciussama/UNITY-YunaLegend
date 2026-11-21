@@ -27,7 +27,7 @@ namespace YunaLegend.UI
         public string CurrentPhaseScene
         {
             get => !string.IsNullOrEmpty(selectedScene) ? selectedScene
-                : itemScenes != null && itemScenes.Length > 0 ? itemScenes[0] : null;
+                : itemScenes != null && itemScenes.Length > 0 ? itemScenes[itemScenes.Length - 1] : null;
             private set => selectedScene = value;
         }
 
@@ -60,7 +60,11 @@ namespace YunaLegend.UI
                     }
                 }
             }
-            CurrentPhaseScene = itemScenes != null && itemScenes.Length > 0 ? itemScenes[0] : null;
+            CurrentPhaseScene = itemScenes != null && itemScenes.Length > 0 ? itemScenes[itemScenes.Length - 1] : null;
+            if (controller != null && !string.IsNullOrEmpty(CurrentPhaseScene))
+            {
+                controller.SetPhase(CurrentPhaseScene);
+            }
             UpdateSelection();
         }
 
@@ -133,7 +137,7 @@ namespace YunaLegend.UI
             itemButtons = buttons;
             itemLabels = labels;
             itemScenes = scenes;
-            if (scenes != null && scenes.Length > 0) CurrentPhaseScene = scenes[0];
+            if (scenes != null && scenes.Length > 0) CurrentPhaseScene = scenes[scenes.Length - 1];
         }
     }
 }

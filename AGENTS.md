@@ -60,3 +60,7 @@ Toda nova funcionalidade ou refatoração deve observar obrigatoriamente os segu
 - **Testabilidade Contínua (EditMode + PlayMode):** toda regra pura em `Core` deve possuir testes unitários rápidos em `EditMode` (`-runTests -testPlatform EditMode` via NUnit), preservando as validações integradas de física/cena (`30/60/120 Hz`).
 - **Strangler Fig (Migração Segura):** refatorar código legado de forma incremental, preservando APIs públicas de compatibilidade e validando testes após cada etapa antes de avançar.
 - **Legibilidade e Estilo C#:** usar estilo Allman (chaves em linha própria), indentação de 4 espaços, uma instrução por linha, métodos curtos com *early returns* e extração de helpers/tabelas para eliminar lógica duplicada.
+
+## 8. Cadastro e Seleção Obrigatória de Nova Cena no Menu (`TitleScreen` e Editor)
+- **Nova cena obrigatória no início do menu:** Ao criar ou cadastrar qualquer nova cena/fase no projeto, é **obrigatório** que o menu (`TitleScreen`, `TitleScreenController.gameplaySceneName` e `TitlePhaseSelector`) ofereça e pré-selecione **essa nova cena desde o momento do início** (ao clicar em **Novo jogo** e no seletor de fases), além de registrá-la em `ProjectSettings/EditorBuildSettings.asset` e nas exceções de `PlayableStageEditorStartup.cs`.
+- **Proibição de regressão à primeira cena:** É estritamente proibido deixar a primeira cena (`Fase-Jogavel-Completa`) como destino padrão de **Novo jogo** ou do seletor de fases após cadastrar uma nova fase em desenvolvimento.

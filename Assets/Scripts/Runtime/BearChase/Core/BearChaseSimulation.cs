@@ -4,67 +4,108 @@ using System.Collections.Generic;
 namespace YunaLegend.BearChase.Core
 {
     /// <summary>
-    /// Simulacao pura (deterministica e testavel em EditMode) da Fase 4:
-    /// controla a cena de entrada (~6.5s), corrida automatica com desvio lateral,
-    /// vidas (3 normal / 6 facil), tropeço, oferta de modo facil apos 2 falhas e vitoria.
+    /// Simulacao pura (fixed-step 60 Hz deterministico, sem dependencias UnityEngine) da Fase 4:
+    /// controla a cinematica 2D ilustrada de entrada, corrida em alta velocidade em pista curva/ondulada,
+    /// arremesso ativo de brinquedos pelo urso com passagem livre garantida, vidas, modo facil e vitoria.
     /// </summary>
     public sealed class BearChaseSimulation
     {
-        private readonly BearChaseObstacleSpec[] obstacles;
-        private readonly HashSet<int> hitObstacleIds = new HashSet<int>();
+        public const float FixedStepSeconds = 1f / 60f;
+        private const double FixedStepSecondsDouble = 1.0 / 60.0;
+
+        private readonly BearChaseTuningSpec baseTuning;
+        private readonly BearChaseTrackSpec trackSpec;
+        private readonly BearChaseThrowScheduler throwScheduler;
+        private readonly int throwSeed;
+
+        private BearChaseTuningSpec activeTuning;
+        private double fixedAccumulator;
+        private float entranceElapsed;
+        private float lookBackClock;
+        private float currentBearLead;
 
         public BearChasePhase Phase { get; private set; }
+        public BearChaseBearAction BearAction { get; private set; }
         public float PhaseTimer { get; private set; }
+        public float TotalElapsedTime { get; private set; }
         public float TotalChaseTime { get; private set; }
 
         public float YunaZ { get; private set; }
         public float YunaLaneOffsetX { get; private set; }
         public float YunaLateralInput { get; private set; }
+        public float CurrentForwardSpeed { get; private set; }
 
         public float BearZ { get; private set; }
         public float BearLaneOffsetX { get; private set; }
-        public bool BearLookingBack { get; private set; }
+        public bool BearLookingBack => BearAction == BearChaseBearAction.LookingBack || BearAction == BearChaseBearAction.ThrowingToy;
+        public float BearThrowWindupProgress => throwScheduler.IsWindingUp ? throwScheduler.WindupProgress : 0f;
+        public BearChaseObstacleKind BearPendingThrowKind => throwScheduler.PendingKind;
 
         public int Hearts { get; private set; }
         public int MaxHearts { get; private set; }
         public bool EasyMode { get; private set; }
         public int FailureCount { get; private set; }
-        public bool ShouldOfferEasyMode => !EasyMode && FailureCount >= BearChaseConfig.FailuresToOfferEasyMode;
+        public bool ShouldOfferEasyMode => !EasyMode && FailureCount >= activeTuning.FailuresToOfferEasyMode;
+        public bool IsEntrancePhase => Phase.IsEntrance();
 
         public float InvulnerabilityRemaining { get; private set; }
-        public float NormalizedProgress => Math.Max(0f, Math.Min(1f, YunaZ / BearChaseConfig.TrackLength));
+        public float NormalizedProgress => Math.Max(0f, Math.Min(1f, YunaZ / trackSpec.TrackLength));
 
-        public IReadOnlyList<BearChaseObstacleSpec> Obstacles => obstacles;
+        public BearChaseEntranceSample EntranceSample { get; private set; }
+        public IReadOnlyList<BearChaseThrownToyState> ActiveThrownToys => throwScheduler.ActiveToys;
+        public BearChaseTrackSpec TrackSpec => trackSpec;
+        public BearChaseTuningSpec TuningSpec => activeTuning;
 
         public event Action<BearChasePhase> OnPhaseChanged;
         public event Action<int, int> OnHeartsChanged;
-        public event Action<BearChaseObstacleSpec> OnObstacleHit;
+        public event Action<BearChaseObstacleKind> OnBearThrowTelegraphed;
+        public event Action<BearChaseThrownToyState> OnBearToyThrown;
+        public event Action<BearChaseThrownToyState> OnThrownToyLanded;
+        public event Action<BearChaseThrownToyState> OnObstacleHit;
         public event Action OnEasyModeOffered;
         public event Action OnVictory;
         public event Action OnDefeat;
 
-        public BearChaseSimulation(BearChaseObstacleSpec[] customObstacles = null)
+        public BearChaseSimulation(
+            BearChaseTuningSpec tuning = null,
+            BearChaseTrackSpec track = null,
+            int seed = 42019)
         {
-            obstacles = customObstacles ?? BearChaseConfig.BuildDefaultObstacles();
+            baseTuning = tuning ?? BearChaseTuningSpec.Default;
+            trackSpec = track ?? BearChaseTrackSpec.Default;
+            throwSeed = seed;
+            throwScheduler = new BearChaseThrowScheduler(throwSeed);
             ResetFullStage(skipEntrance: false, useEasyMode: false);
         }
 
         public void ResetFullStage(bool skipEntrance, bool useEasyMode)
         {
             EasyMode = useEasyMode;
-            MaxHearts = useEasyMode ? BearChaseConfig.EasyMaxHearts : BearChaseConfig.NormalMaxHearts;
+            activeTuning = useEasyMode ? baseTuning.WithEasyModeSpacing() : baseTuning;
+            MaxHearts = useEasyMode ? activeTuning.EasyMaxHearts : activeTuning.NormalMaxHearts;
             Hearts = MaxHearts;
+            fixedAccumulator = 0.0;
+            TotalElapsedTime = 0f;
             TotalChaseTime = 0f;
+            lookBackClock = 0f;
+            entranceElapsed = skipEntrance ? BearChaseEntranceTimeline.TotalDuration : 0f;
+
             YunaZ = 0f;
             YunaLaneOffsetX = 0f;
             YunaLateralInput = 0f;
-            BearZ = BearChaseConfig.BearInitialLead;
-            BearLaneOffsetX = 0f;
-            BearLookingBack = false;
-            InvulnerabilityRemaining = 0f;
-            hitObstacleIds.Clear();
+            CurrentForwardSpeed = 0f;
 
-            SetPhase(skipEntrance ? BearChasePhase.Chasing : BearChasePhase.EntranceWalk);
+            currentBearLead = activeTuning.BearInitialLead;
+            BearZ = YunaZ + currentBearLead;
+            BearLaneOffsetX = 0f;
+            InvulnerabilityRemaining = 0f;
+            throwScheduler.Reset(initialDelay: 1.05f);
+            EntranceSample = BearChaseEntranceTimeline.Evaluate(entranceElapsed);
+
+            BearAction = skipEntrance ? BearChaseBearAction.Running : BearChaseBearAction.Sleeping;
+            Phase = skipEntrance ? BearChasePhase.Chasing : BearChasePhase.EntranceWalk;
+            PhaseTimer = 0f;
+            OnPhaseChanged?.Invoke(Phase);
             OnHeartsChanged?.Invoke(Hearts, MaxHearts);
         }
 
@@ -90,52 +131,42 @@ namespace YunaLegend.BearChase.Core
                 return;
             }
 
+            fixedAccumulator += dt;
+            while (fixedAccumulator + 1e-9 >= FixedStepSecondsDouble)
+            {
+                fixedAccumulator -= FixedStepSecondsDouble;
+                StepFixed(FixedStepSeconds);
+            }
+        }
+
+        private void StepFixed(float dt)
+        {
+            TotalElapsedTime += dt;
             PhaseTimer += dt;
+
+            if (Phase.IsEntrance())
+            {
+                StepEntrance(dt);
+                return;
+            }
 
             switch (Phase)
             {
-                case BearChasePhase.EntranceWalk:
-                    if (PhaseTimer >= BearChaseConfig.EntranceWalkDuration)
-                    {
-                        SetPhase(BearChasePhase.EntranceNudge);
-                    }
-                    break;
-
-                case BearChasePhase.EntranceNudge:
-                    if (PhaseTimer >= BearChaseConfig.EntranceNudgeDuration)
-                    {
-                        SetPhase(BearChasePhase.BearWakeUp);
-                    }
-                    break;
-
-                case BearChasePhase.BearWakeUp:
-                    if (PhaseTimer >= BearChaseConfig.BearWakeUpDuration)
-                    {
-                        SetPhase(BearChasePhase.TransitionToChase);
-                    }
-                    break;
-
-                case BearChasePhase.TransitionToChase:
-                    if (PhaseTimer >= BearChaseConfig.TransitionDuration)
-                    {
-                        SetPhase(BearChasePhase.Chasing);
-                    }
-                    break;
-
                 case BearChasePhase.Chasing:
                     StepChase(dt, forwardFactor: 1f, allowCollisions: true);
                     break;
 
                 case BearChasePhase.Stumble:
-                    StepChase(dt, forwardFactor: 0.45f, allowCollisions: false);
-                    if (PhaseTimer >= BearChaseConfig.StumbleDuration)
+                    StepChase(dt, forwardFactor: activeTuning.StumbleSpeedFactor, allowCollisions: false);
+                    if (PhaseTimer >= activeTuning.StumbleDuration)
                     {
                         SetPhase(BearChasePhase.Chasing);
                     }
                     break;
 
                 case BearChasePhase.Fallen:
-                    if (PhaseTimer >= BearChaseConfig.FallenBannerDuration)
+                    CurrentForwardSpeed = 0f;
+                    if (PhaseTimer >= activeTuning.FallenBannerDuration)
                     {
                         SetPhase(BearChasePhase.RetryModal);
                         if (ShouldOfferEasyMode)
@@ -144,7 +175,49 @@ namespace YunaLegend.BearChase.Core
                         }
                     }
                     break;
+
+                default:
+                    CurrentForwardSpeed = 0f;
+                    break;
             }
+        }
+
+        private void StepEntrance(float dt)
+        {
+            entranceElapsed = Math.Min(BearChaseEntranceTimeline.TotalDuration, entranceElapsed + dt);
+            EntranceSample = BearChaseEntranceTimeline.Evaluate(entranceElapsed);
+            CurrentForwardSpeed = 0f;
+
+            if (entranceElapsed >= BearChaseEntranceTimeline.TotalDuration)
+            {
+                BearAction = BearChaseBearAction.Running;
+                SetPhase(BearChasePhase.Chasing);
+                return;
+            }
+
+            if (entranceElapsed >= BearChaseEntranceTimeline.WakeUpEnd)
+            {
+                BearAction = BearChaseBearAction.WakingUp;
+                SetPhase(BearChasePhase.TransitionToChase);
+                return;
+            }
+
+            if (entranceElapsed >= BearChaseEntranceTimeline.ReachEnd)
+            {
+                BearAction = BearChaseBearAction.WakingUp;
+                SetPhase(BearChasePhase.BearWakeUp);
+                return;
+            }
+
+            if (entranceElapsed >= BearChaseEntranceTimeline.ApproachEnd)
+            {
+                BearAction = BearChaseBearAction.Sleeping;
+                SetPhase(BearChasePhase.EntranceNudge);
+                return;
+            }
+
+            BearAction = BearChaseBearAction.Sleeping;
+            SetPhase(BearChasePhase.EntranceWalk);
         }
 
         private void StepChase(float dt, float forwardFactor, bool allowCollisions)
@@ -155,83 +228,135 @@ namespace YunaLegend.BearChase.Core
                 InvulnerabilityRemaining = Math.Max(0f, InvulnerabilityRemaining - dt);
             }
 
-            float prevZ = YunaZ;
-            YunaZ += BearChaseConfig.YunaForwardSpeed * forwardFactor * dt;
+            float baseSpeed = activeTuning.EvaluateForwardSpeed(NormalizedProgress);
+            CurrentForwardSpeed = baseSpeed * forwardFactor;
 
-            float nextOffset = YunaLaneOffsetX + YunaLateralInput * BearChaseConfig.YunaLateralSpeed * dt;
-            YunaLaneOffsetX = Math.Max(-BearChaseConfig.LaneHalfWidth, Math.Min(BearChaseConfig.LaneHalfWidth, nextOffset));
+            float prevYunaZ = YunaZ;
+            YunaZ += CurrentForwardSpeed * dt;
+
+            float nextOffset = YunaLaneOffsetX + YunaLateralInput * activeTuning.LateralSpeed * dt;
+            YunaLaneOffsetX = Math.Max(-trackSpec.LaneHalfWidth, Math.Min(trackSpec.LaneHalfWidth, nextOffset));
 
             UpdateBearProgress(dt);
 
-            if (YunaZ >= BearChaseConfig.TrackLength)
+            if (YunaZ >= trackSpec.TrackLength)
             {
-                YunaZ = BearChaseConfig.TrackLength;
-                BearZ = BearChaseConfig.TrackLength + 0.9f;
+                YunaZ = trackSpec.TrackLength;
+                BearZ = trackSpec.TrackLength + 1.0f;
+                CurrentForwardSpeed = 0f;
+                BearAction = BearChaseBearAction.Caught;
                 SetPhase(BearChasePhase.Victory);
                 OnVictory?.Invoke();
                 return;
             }
 
+            throwScheduler.Step(
+                dt,
+                YunaZ,
+                YunaLaneOffsetX,
+                CurrentForwardSpeed,
+                BearZ,
+                BearLaneOffsetX,
+                NormalizedProgress,
+                activeTuning,
+                trackSpec,
+                OnBearThrowTelegraphed,
+                OnBearToyThrown,
+                OnThrownToyLanded);
+
+            if (throwScheduler.IsWindingUp)
+            {
+                BearAction = BearChaseBearAction.ThrowingToy;
+            }
+            else
+            {
+                lookBackClock = TotalChaseTime % 4.4f;
+                BearAction = lookBackClock > 3.4f
+                    ? BearChaseBearAction.LookingBack
+                    : BearChaseBearAction.Running;
+            }
+
             if (allowCollisions && InvulnerabilityRemaining <= 0f)
             {
-                CheckCollisions(prevZ, YunaZ);
+                CheckThrownToyCollisions(prevYunaZ, YunaZ);
             }
         }
 
         private void UpdateBearProgress(float dt)
         {
-            // No inicio, o urso dispara rapido para abrir vantagem; nos ultimos 25%, Yuna se aproxima gradualmente
             float progress = NormalizedProgress;
-            float desiredLead = progress < 0.72f
-                ? BearChaseConfig.BearTargetLead
-                : Lerp(BearChaseConfig.BearTargetLead, BearChaseConfig.BearCatchupThreshold, (progress - 0.72f) / 0.28f);
+            float desiredLead;
+            if (progress < 0.92f)
+            {
+                desiredLead = activeTuning.BearTargetLead;
+            }
+            else
+            {
+                float u = Math.Max(0f, Math.Min(1f, (progress - 0.92f) / 0.08f));
+                float smoothU = u * u * (3f - 2f * u);
+                desiredLead = Lerp(activeTuning.BearTargetLead, activeTuning.BearCatchupThreshold, smoothU);
+            }
 
-            float targetBearZ = Math.Min(BearChaseConfig.TrackLength + 1.2f, YunaZ + desiredLead);
-            float blendRate = progress < 0.1f ? 3.2f : 2.1f;
-            BearZ = Lerp(BearZ, targetBearZ, Math.Min(1f, dt * blendRate));
+            float blendRate = progress < 0.12f ? 3.2f : 4.2f;
+            currentBearLead = Lerp(currentBearLead, desiredLead, Math.Min(1f, dt * blendRate));
+            float minGuaranteedLead = progress < 0.92f
+                ? Math.Max(8.5f, activeTuning.BearInitialLead * 0.88f)
+                : Math.Max(1.6f, activeTuning.BearCatchupThreshold * 0.85f);
+            currentBearLead = Math.Max(minGuaranteedLead, currentBearLead);
 
-            // Ziguezague natural do urso evitando obstaculos e dando dinamismo
-            BearLaneOffsetX = (float)Math.Sin(TotalChaseTime * 1.45) * 1.35f;
+            BearZ = YunaZ + currentBearLead;
 
-            // Urso olha rapidamente para tras a cada ~5.5s por ~0.85s
-            float lookCycle = TotalChaseTime % 5.5f;
-            BearLookingBack = lookCycle > 4.2f && lookCycle < 5.05f;
+            float maxLane = trackSpec.LaneHalfWidth * 0.62f;
+            float targetLane = (float)(Math.Sin(TotalChaseTime * 0.78) * 0.95 + Math.Sin(TotalChaseTime * 0.34 + 0.8) * 0.25);
+            targetLane = Math.Max(-maxLane, Math.Min(maxLane, targetLane));
+            BearLaneOffsetX = Lerp(BearLaneOffsetX, targetLane, Math.Min(1f, dt * 3.2f));
         }
 
-        private void CheckCollisions(float prevZ, float currentZ)
+        private void CheckThrownToyCollisions(float prevYunaZ, float currentYunaZ)
         {
-            float r = BearChaseConfig.YunaCollisionRadius;
-            for (int i = 0; i < obstacles.Length; i++)
+            float r = activeTuning.YunaCollisionRadius;
+            var toys = throwScheduler.ActiveToys;
+            for (int i = 0; i < toys.Count; i++)
             {
-                BearChaseObstacleSpec obs = obstacles[i];
-                if (hitObstacleIds.Contains(obs.Id))
+                BearChaseThrownToyState toy = toys[i];
+                if (toy.WasHit || toy.Phase == BearChaseThrownToyPhase.Deflected || toy.Phase == BearChaseThrownToyPhase.Expired)
                 {
                     continue;
                 }
 
-                float minZ = obs.Z - obs.HalfDepth - r;
-                float maxZ = obs.Z + obs.HalfDepth + r;
-                if (currentZ < minZ || prevZ > maxZ)
+                if (toy.Phase == BearChaseThrownToyPhase.InFlight && (toy.NormalizedFlight < 0.85f || toy.HeightAboveGround > 0.90f))
                 {
                     continue;
                 }
 
-                float dx = Math.Abs(YunaLaneOffsetX - obs.LaneOffsetX);
-                if (dx <= obs.HalfWidth + r)
+                BearChaseObstacleDef def = BearChaseObstacleCatalog.Get(toy.Kind);
+                float minZ = toy.CurrentZ - def.HalfDepth - r;
+                float maxZ = toy.CurrentZ + def.HalfDepth + r;
+                float sweepMinZ = Math.Min(prevYunaZ, currentYunaZ);
+                float sweepMaxZ = Math.Max(prevYunaZ, currentYunaZ);
+
+                if (sweepMaxZ < minZ || sweepMinZ > maxZ)
                 {
-                    hitObstacleIds.Add(obs.Id);
-                    ApplyObstacleHit(obs);
+                    continue;
+                }
+
+                float dx = Math.Abs(YunaLaneOffsetX - toy.CurrentLaneX);
+                if (dx <= def.HalfWidth + r)
+                {
+                    float deflectDir = toy.CurrentLaneX >= YunaLaneOffsetX ? 1f : -1f;
+                    throwScheduler.MarkToyDeflected(toy, deflectDir);
+                    ApplyObstacleHit(toy);
                     return;
                 }
             }
         }
 
-        private void ApplyObstacleHit(BearChaseObstacleSpec obs)
+        private void ApplyObstacleHit(BearChaseThrownToyState toy)
         {
             Hearts = Math.Max(0, Hearts - 1);
-            InvulnerabilityRemaining = BearChaseConfig.InvulnerabilityDuration;
+            InvulnerabilityRemaining = activeTuning.InvulnerabilityDuration;
             OnHeartsChanged?.Invoke(Hearts, MaxHearts);
-            OnObstacleHit?.Invoke(obs);
+            OnObstacleHit?.Invoke(toy);
 
             if (Hearts <= 0)
             {
@@ -249,7 +374,6 @@ namespace YunaLegend.BearChase.Core
         {
             if (Phase == next)
             {
-                PhaseTimer = 0f;
                 return;
             }
 

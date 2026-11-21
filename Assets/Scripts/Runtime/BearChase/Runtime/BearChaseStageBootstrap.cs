@@ -1,154 +1,198 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using YunaLegend.BearChase.Core;
 
 namespace YunaLegend.BearChase.Runtime
 {
     /// <summary>
-    /// Composition Root da Fase 4 (Perseguicao do Urso Fujao):
-    /// conecta simulacao pura, entrada do jogador (A/D, setas, toque), camera, Yuna, Urso, Nanda, audio e HUD.
+    /// Composition Root fino da Fase 4 (Perseguicao do Urso Fujao):
+    /// conecta a simulacao pura aos adaptadores especialistas via eventos de dominio.
     /// </summary>
     public sealed class BearChaseStageBootstrap : MonoBehaviour
     {
+        private const string EasyModePrefKey = "YunaLegend.EasyMode";
+
+        [SerializeField] private BearChaseInputAdapter inputAdapter;
+        [SerializeField] private BearChaseEntranceController entranceController;
+        [SerializeField] private BearChaseSceneryController sceneryController;
+        [SerializeField] private BearChaseLightingController lightingController;
+        [SerializeField] private BearChaseObstacleController obstacleController;
         [SerializeField] private BearChaseCameraController cameraController;
         [SerializeField] private BearChasePlayerController playerController;
         [SerializeField] private BearChaseBearAnimator bearAnimator;
         [SerializeField] private BearChaseNandaController nandaController;
         [SerializeField] private BearChaseHudController hudController;
         [SerializeField] private BearChaseAudioController audioController;
-
-        [SerializeField] private GameObject entranceRoomRoot;
-        [SerializeField] private GameObject chaseCorridorRoot;
-
-        [SerializeField] private Vector3 entranceYunaStart = new Vector3(-2.65f, 0f, 0f);
-        [SerializeField] private Vector3 entranceYunaNudge = new Vector3(0.62f, 0f, 0f);
-        [SerializeField] private Vector3 entranceBearPos = new Vector3(2.15f, 0f, 0.05f);
         [SerializeField] private Vector3 chaseOrigin = new Vector3(0f, 0f, 40f);
 
         private BearChaseSimulation simulation;
         private bool isPaused;
 
-        public GameObject EntranceRoomRoot => entranceRoomRoot;
-        public GameObject ChaseCorridorRoot => chaseCorridorRoot;
+        public Vector3 ChaseOrigin => chaseOrigin;
 
         public void Configure(
+            BearChaseInputAdapter input,
+            BearChaseEntranceController entrance,
+            BearChaseSceneryController scenery,
+            BearChaseLightingController lighting,
+            BearChaseObstacleController obstacles,
             BearChaseCameraController cam,
             BearChasePlayerController player,
             BearChaseBearAnimator bear,
             BearChaseNandaController nanda,
             BearChaseHudController hud,
-            BearChaseAudioController audio,
-            GameObject entranceRoot,
-            GameObject chaseRoot)
+            BearChaseAudioController audio)
         {
+            inputAdapter = input;
+            entranceController = entrance;
+            sceneryController = scenery;
+            lightingController = lighting;
+            obstacleController = obstacles;
             cameraController = cam;
             playerController = player;
             bearAnimator = bear;
             nandaController = nanda;
             hudController = hud;
             audioController = audio;
-            entranceRoomRoot = entranceRoot;
-            chaseCorridorRoot = chaseRoot;
         }
 
         private void Awake()
         {
             simulation = new BearChaseSimulation();
-            simulation.OnPhaseChanged += HandlePhaseChanged;
-            simulation.OnHeartsChanged += HandleHeartsChanged;
-            simulation.OnObstacleHit += HandleObstacleHit;
-            simulation.OnEasyModeOffered += HandleEasyModeOffered;
-            simulation.OnVictory += HandleVictory;
+            bool useEasyMode = PlayerPrefs.GetInt(EasyModePrefKey, 0) == 1;
+            if (useEasyMode)
+            {
+                simulation.ResetFullStage(skipEntrance: false, useEasyMode: true);
+            }
+
+            BindSimulationEvents(bind: true);
         }
 
         private void Start()
         {
-            if (hudController != null)
-            {
-                hudController.OnPauseToggled += HandlePauseToggled;
-                hudController.OnMuteToggled += HandleMuteToggled;
-                hudController.OnRetryRequested += HandleRetryRequested;
-                hudController.OnReturnToTitleRequested += HandleReturnToTitleRequested;
-                hudController.SetHearts(simulation.Hearts, simulation.MaxHearts);
-            }
-
-            ApplyStageRootVisibility(simulation.Phase);
+            BindExternalEvents(bind: true);
+            lightingController?.ApplyAtmosphere();
+            audioController?.ResetForStage(skipEntrance: !simulation.IsEntrancePhase);
+            sceneryController?.ApplyPhaseVisibility(simulation.Phase);
+            hudController?.SetHearts(simulation.Hearts, simulation.MaxHearts);
+            hudController?.HandlePhaseChanged(simulation.Phase, simulation.ShouldOfferEasyMode);
             UpdateControllers(0f);
         }
 
         private void OnDestroy()
         {
             Time.timeScale = 1f;
-            if (simulation != null)
-            {
-                simulation.OnPhaseChanged -= HandlePhaseChanged;
-                simulation.OnHeartsChanged -= HandleHeartsChanged;
-                simulation.OnObstacleHit -= HandleObstacleHit;
-                simulation.OnEasyModeOffered -= HandleEasyModeOffered;
-                simulation.OnVictory -= HandleVictory;
-            }
-
-            if (hudController != null)
-            {
-                hudController.OnPauseToggled -= HandlePauseToggled;
-                hudController.OnMuteToggled -= HandleMuteToggled;
-                hudController.OnRetryRequested -= HandleRetryRequested;
-                hudController.OnReturnToTitleRequested -= HandleReturnToTitleRequested;
-            }
+            BindSimulationEvents(bind: false);
+            BindExternalEvents(bind: false);
         }
 
         private void Update()
         {
-            HandleUtilityHotkeys();
+            inputAdapter?.PollInput();
             if (isPaused || simulation == null)
             {
                 return;
             }
 
-            simulation.SetLateralInput(ReadLateralInput());
-            simulation.Step(Time.deltaTime);
-            UpdateControllers(Time.deltaTime);
+            float dt = Mathf.Min(0.1f, Time.deltaTime);
+            float lateral = inputAdapter != null ? inputAdapter.LateralAxis : 0f;
+            simulation.SetLateralInput(lateral);
+            simulation.Step(dt);
+            UpdateControllers(dt);
         }
 
         private void UpdateControllers(float dt)
         {
-            playerController?.UpdatePlayer(simulation, entranceYunaStart, entranceYunaNudge, chaseOrigin, dt);
-            bearAnimator?.UpdateBear(simulation, entranceBearPos, chaseOrigin, dt);
-            nandaController?.UpdateNanda(simulation.Phase, dt);
+            entranceController?.ApplySample(simulation.EntranceSample, simulation.IsEntrancePhase);
+            playerController?.UpdatePlayer(simulation, chaseOrigin, dt);
+            bearAnimator?.UpdateBear(simulation, chaseOrigin, dt);
+            nandaController?.UpdateNanda(simulation, chaseOrigin, dt);
+            obstacleController?.SyncToys(simulation.ActiveThrownToys, chaseOrigin, simulation.TrackSpec, !simulation.IsEntrancePhase);
+            lightingController?.UpdateWindowLights(simulation);
+            cameraController?.UpdateCamera(simulation, chaseOrigin, dt);
+            audioController?.UpdateFootsteps(simulation, dt);
+            hudController?.UpdatePerFrameOverlays(simulation);
+        }
 
-            Vector3 yunaChasePos = chaseOrigin + new Vector3(
-                BearChaseConfig.TrackCenterX(simulation.YunaZ) + simulation.YunaLaneOffsetX,
-                0f,
-                simulation.YunaZ);
-            cameraController?.UpdateCamera(simulation, yunaChasePos, dt);
-            hudController?.UpdateVisualState(simulation);
+        private void BindSimulationEvents(bool bind)
+        {
+            if (simulation == null)
+            {
+                return;
+            }
+
+            if (bind)
+            {
+                simulation.OnPhaseChanged += HandlePhaseChanged;
+                simulation.OnHeartsChanged += HandleHeartsChanged;
+                simulation.OnBearThrowTelegraphed += HandleBearThrowTelegraphed;
+                simulation.OnBearToyThrown += HandleBearToyThrown;
+                simulation.OnThrownToyLanded += HandleThrownToyLanded;
+                simulation.OnObstacleHit += HandleObstacleHit;
+                simulation.OnDefeat += HandleDefeat;
+                simulation.OnVictory += HandleVictory;
+            }
+            else
+            {
+                simulation.OnPhaseChanged -= HandlePhaseChanged;
+                simulation.OnHeartsChanged -= HandleHeartsChanged;
+                simulation.OnBearThrowTelegraphed -= HandleBearThrowTelegraphed;
+                simulation.OnBearToyThrown -= HandleBearToyThrown;
+                simulation.OnThrownToyLanded -= HandleThrownToyLanded;
+                simulation.OnObstacleHit -= HandleObstacleHit;
+                simulation.OnDefeat -= HandleDefeat;
+                simulation.OnVictory -= HandleVictory;
+            }
+        }
+
+        private void BindExternalEvents(bool bind)
+        {
+            if (bind)
+            {
+                if (inputAdapter != null)
+                {
+                    inputAdapter.OnPausePressed += HandlePauseToggled;
+                    inputAdapter.OnMutePressed += HandleMuteToggled;
+                }
+
+                if (hudController != null)
+                {
+                    hudController.OnPauseToggled += HandlePauseToggled;
+                    hudController.OnMuteToggled += HandleMuteToggled;
+                    hudController.OnRetryRequested += HandleRetryRequested;
+                    hudController.OnReturnToTitleRequested += HandleReturnToTitleRequested;
+                }
+            }
+            else
+            {
+                if (inputAdapter != null)
+                {
+                    inputAdapter.OnPausePressed -= HandlePauseToggled;
+                    inputAdapter.OnMutePressed -= HandleMuteToggled;
+                }
+
+                if (hudController != null)
+                {
+                    hudController.OnPauseToggled -= HandlePauseToggled;
+                    hudController.OnMuteToggled -= HandleMuteToggled;
+                    hudController.OnRetryRequested -= HandleRetryRequested;
+                    hudController.OnReturnToTitleRequested -= HandleReturnToTitleRequested;
+                }
+            }
         }
 
         private void HandlePhaseChanged(BearChasePhase phase)
         {
-            ApplyStageRootVisibility(phase);
+            sceneryController?.ApplyPhaseVisibility(phase);
+            hudController?.HandlePhaseChanged(phase, simulation.ShouldOfferEasyMode);
+
             if (phase == BearChasePhase.BearWakeUp)
             {
                 audioController?.PlayBearWake();
             }
-        }
-
-        private void ApplyStageRootVisibility(BearChasePhase phase)
-        {
-            bool showEntrance = phase == BearChasePhase.EntranceWalk
-                || phase == BearChasePhase.EntranceNudge
-                || phase == BearChasePhase.BearWakeUp
-                || phase == BearChasePhase.TransitionToChase;
-
-            if (entranceRoomRoot != null)
+            else if (phase == BearChasePhase.Chasing)
             {
-                entranceRoomRoot.SetActive(showEntrance);
-            }
-
-            if (chaseCorridorRoot != null)
-            {
-                chaseCorridorRoot.SetActive(!showEntrance);
+                audioController?.EnsureChaseMusicPlaying();
             }
         }
 
@@ -157,15 +201,32 @@ namespace YunaLegend.BearChase.Runtime
             hudController?.SetHearts(current, max);
         }
 
-        private void HandleObstacleHit(BearChaseObstacleSpec spec)
+        private void HandleBearThrowTelegraphed(BearChaseObstacleKind kind)
         {
-            audioController?.PlayHit();
-            cameraController?.AddShake(0.24f, 0.20f);
+            nandaController?.TriggerAlertPulse();
         }
 
-        private void HandleEasyModeOffered()
+        private void HandleBearToyThrown(BearChaseThrownToyState toy)
         {
-            hudController?.ShowEasyModeOffer();
+            audioController?.PlayThrow();
+        }
+
+        private void HandleThrownToyLanded(BearChaseThrownToyState toy)
+        {
+            audioController?.PlayToyLand();
+            obstacleController?.PlayLandEffect(toy, chaseOrigin, simulation.TrackSpec);
+        }
+
+        private void HandleObstacleHit(BearChaseThrownToyState toy)
+        {
+            audioController?.PlayHit();
+            nandaController?.TriggerAlertPulse();
+            cameraController?.AddShake(0.26f, 0.22f);
+        }
+
+        private void HandleDefeat()
+        {
+            audioController?.PlayDefeat();
         }
 
         private void HandleVictory()
@@ -178,6 +239,7 @@ namespace YunaLegend.BearChase.Runtime
             isPaused = !isPaused;
             Time.timeScale = isPaused ? 0f : 1f;
             audioController?.SetPaused(isPaused);
+            hudController?.SetPaused(isPaused);
         }
 
         private void HandleMuteToggled()
@@ -193,8 +255,11 @@ namespace YunaLegend.BearChase.Runtime
         {
             isPaused = false;
             Time.timeScale = 1f;
+            hudController?.SetPaused(false);
+            obstacleController?.ResetAll();
+            cameraController?.ResetCameraPose();
             simulation.RetryChase(activateEasyMode);
-            ApplyStageRootVisibility(simulation.Phase);
+            audioController?.ResetForStage(skipEntrance: true);
             UpdateControllers(0f);
         }
 
@@ -203,54 +268,6 @@ namespace YunaLegend.BearChase.Runtime
             isPaused = false;
             Time.timeScale = 1f;
             SceneManager.LoadScene("TitleScreen");
-        }
-
-        private static void HandleUtilityHotkeys()
-        {
-            var kb = Keyboard.current;
-            if (kb == null)
-            {
-                return;
-            }
-
-            if (kb.pKey.wasPressedThisFrame)
-            {
-                var inst = FindFirstObjectByType<BearChaseStageBootstrap>();
-                inst?.HandlePauseToggled();
-            }
-
-            if (kb.mKey.wasPressedThisFrame)
-            {
-                var inst = FindFirstObjectByType<BearChaseStageBootstrap>();
-                inst?.HandleMuteToggled();
-            }
-        }
-
-        private static float ReadLateralInput()
-        {
-            float val = 0f;
-            var kb = Keyboard.current;
-            if (kb != null)
-            {
-                if (kb.aKey.isPressed || kb.leftArrowKey.isPressed)
-                {
-                    val -= 1f;
-                }
-
-                if (kb.dKey.isPressed || kb.rightArrowKey.isPressed)
-                {
-                    val += 1f;
-                }
-            }
-
-            var pointer = Pointer.current;
-            if (pointer != null && pointer.press.isPressed && Screen.width > 0)
-            {
-                float x = pointer.position.ReadValue().x;
-                val += x < Screen.width * 0.5f ? -1f : 1f;
-            }
-
-            return Mathf.Clamp(val, -1f, 1f);
         }
     }
 }

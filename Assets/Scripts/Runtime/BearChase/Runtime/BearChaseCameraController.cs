@@ -4,20 +4,21 @@ using YunaLegend.BearChase.Core;
 namespace YunaLegend.BearChase.Runtime
 {
     /// <summary>
-    /// Controla a camera da Fase 4: enquadramento lateral 2D fixo na cena de entrada
-    /// e camera 3D em terceira pessoa atras da Yuna durante a perseguicao no corredor curvo.
+    /// Controla a camera da Fase 4: acompanha curvas horizontais e ondulacoes verticais do corredor,
+    /// com FOV dinamico proporcional a velocidade, leve inclinacao nas curvas e shake isolado da posicao base.
     /// </summary>
     public sealed class BearChaseCameraController : MonoBehaviour
     {
         [SerializeField] private Camera targetCamera;
-        [SerializeField] private Vector3 entranceCamPos = new Vector3(0f, 1.55f, -7.85f);
-        [SerializeField] private Vector3 entranceLookAt = new Vector3(0f, 1.35f, 0f);
-        [SerializeField] private float entranceFov = 32f;
-        [SerializeField] private float chaseFov = 46f;
+        [SerializeField] private float minChaseFov = 48f;
+        [SerializeField] private float maxChaseFov = 56f;
 
+        private Vector3 baseCameraPosition;
+        private bool hasBasePosition;
         private float shakeTime;
         private float shakeMagnitude;
-        private Vector3 smoothVelocity;
+        private float animClock;
+        private float smoothedRoll;
 
         public void Configure(Camera cam)
         {
@@ -30,76 +31,90 @@ namespace YunaLegend.BearChase.Runtime
             shakeTime = Mathf.Max(shakeTime, duration);
         }
 
-        public void ApplyEntrancePose()
+        public void ResetCameraPose()
         {
-            if (targetCamera == null)
-            {
-                return;
-            }
-
-            targetCamera.fieldOfView = entranceFov;
-            targetCamera.transform.position = entranceCamPos;
-            targetCamera.transform.LookAt(entranceLookAt);
+            hasBasePosition = false;
+            shakeTime = 0f;
+            shakeMagnitude = 0f;
+            smoothedRoll = 0f;
         }
 
-        public void UpdateCamera(BearChaseSimulation sim, Vector3 yunaChaseWorldPos, float dt)
+        public void UpdateCamera(BearChaseSimulation sim, Vector3 chaseOrigin, float dt)
         {
             if (targetCamera == null || sim == null)
             {
                 return;
             }
 
-            if (sim.Phase == BearChasePhase.EntranceWalk
-                || sim.Phase == BearChasePhase.EntranceNudge
-                || sim.Phase == BearChasePhase.BearWakeUp
-                || sim.Phase == BearChasePhase.TransitionToChase)
+            if (sim.IsEntrancePhase)
             {
-                ApplyEntrancePose();
+                targetCamera.fieldOfView = 36f;
+                targetCamera.transform.position = new Vector3(0f, 2f, -10f);
+                targetCamera.transform.rotation = Quaternion.identity;
+                hasBasePosition = false;
                 return;
             }
 
-            targetCamera.fieldOfView = Mathf.Lerp(targetCamera.fieldOfView, chaseFov, Mathf.Min(1f, dt * 6f));
+            animClock += Mathf.Max(0f, dt);
 
-            float aheadLocalZ = sim.YunaZ + 6.8f;
-            float aheadWorldZ = yunaChaseWorldPos.z + 6.8f;
-            float aheadX = BearChaseConfig.TrackCenterX(aheadLocalZ);
-            float centerX = BearChaseConfig.TrackCenterX(sim.YunaZ);
-            float camX = Mathf.Lerp(centerX, yunaChaseWorldPos.x, 0.52f);
+            float yunaZ = sim.YunaZ;
+            BearChaseTrackSpec track = sim.TrackSpec;
+            float centerX = BearChaseTrackSampler.CenterX(yunaZ, track);
+            float groundY = BearChaseTrackSampler.ElevationY(yunaZ, track);
+            float yunaWorldX = centerX + sim.YunaLaneOffsetX;
+            float camX = Mathf.Lerp(centerX, yunaWorldX, 0.56f);
 
-            Vector3 desiredPos = new Vector3(camX, 2.35f, yunaChaseWorldPos.z - 4.75f);
-            if (dt <= 0f || Vector3.Distance(targetCamera.transform.position, desiredPos) > 10f)
+            float behindZ = yunaZ - 4.45f;
+            float behindGroundY = BearChaseTrackSampler.ElevationY(Mathf.Max(0f, behindZ), track);
+            float camGroundY = Mathf.Lerp(behindGroundY, groundY, 0.45f);
+            float sprintBob = sim.Phase == BearChasePhase.Chasing ? Mathf.Abs(Mathf.Sin(animClock * 11.5f)) * 0.045f : 0f;
+
+            Vector3 desiredBasePos = chaseOrigin + new Vector3(camX, camGroundY + 2.28f + sprintBob, behindZ);
+            if (dt <= 0f || !hasBasePosition || Vector3.Distance(baseCameraPosition, desiredBasePos) > 12f)
             {
-                targetCamera.transform.position = desiredPos;
-                smoothVelocity = Vector3.zero;
+                baseCameraPosition = desiredBasePos;
+                hasBasePosition = true;
             }
             else
             {
-                targetCamera.transform.position = Vector3.SmoothDamp(
-                    targetCamera.transform.position,
-                    desiredPos,
-                    ref smoothVelocity,
-                    0.10f,
-                    Mathf.Infinity,
-                    dt);
+                float posLerp = 1f - Mathf.Exp(-14f * dt);
+                baseCameraPosition = Vector3.Lerp(baseCameraPosition, desiredBasePos, posLerp);
             }
 
-            Vector3 lookTarget = new Vector3(
-                Mathf.Lerp(yunaChaseWorldPos.x, aheadX, 0.45f),
-                1.22f,
-                aheadWorldZ);
+            float aheadZ = Mathf.Min(track.TrackLength + 12f, yunaZ + 9.8f);
+            float aheadX = BearChaseTrackSampler.CenterX(aheadZ, track);
+            float aheadY = BearChaseTrackSampler.ElevationY(aheadZ, track);
 
-            if (shakeTime > 0f)
+            Vector3 lookTarget = chaseOrigin + new Vector3(
+                Mathf.Lerp(yunaWorldX, aheadX, 0.58f),
+                Mathf.Lerp(groundY, aheadY, 0.62f) + 1.18f,
+                aheadZ);
+
+            float speedAlpha = Mathf.InverseLerp(sim.TuningSpec.BaseForwardSpeed, sim.TuningSpec.MaxForwardSpeed, sim.CurrentForwardSpeed);
+            float desiredFov = Mathf.Lerp(minChaseFov, maxChaseFov, speedAlpha);
+            targetCamera.fieldOfView = dt <= 0f
+                ? desiredFov
+                : Mathf.Lerp(targetCamera.fieldOfView, desiredFov, 1f - Mathf.Exp(-6f * dt));
+
+            Vector3 shakeOffset = Vector3.zero;
+            if (shakeTime > 0f && dt > 0f)
             {
                 shakeTime = Mathf.Max(0f, shakeTime - dt);
-                Vector3 offset = new Vector3(
-                    Mathf.Sin(Time.time * 48f) * shakeMagnitude,
-                    Mathf.Cos(Time.time * 41f) * shakeMagnitude * 0.7f,
+                shakeOffset = new Vector3(
+                    Mathf.Sin(animClock * 52f) * shakeMagnitude,
+                    Mathf.Cos(animClock * 43f) * shakeMagnitude * 0.72f,
                     0f);
-                targetCamera.transform.position += offset;
-                shakeMagnitude = Mathf.Lerp(shakeMagnitude, 0f, Mathf.Min(1f, dt * 10f));
+                shakeMagnitude = Mathf.Lerp(shakeMagnitude, 0f, 1f - Mathf.Exp(-10f * dt));
             }
 
-            targetCamera.transform.LookAt(lookTarget);
+            targetCamera.transform.position = baseCameraPosition + shakeOffset;
+            targetCamera.transform.LookAt(lookTarget, Vector3.up);
+
+            float targetRoll = BearChaseTrackSampler.BankDegrees(yunaZ, track) * 0.48f - sim.YunaLateralInput * 1.8f;
+            smoothedRoll = dt <= 0f
+                ? targetRoll
+                : Mathf.Lerp(smoothedRoll, targetRoll, 1f - Mathf.Exp(-8f * dt));
+            targetCamera.transform.Rotate(0f, 0f, smoothedRoll, Space.Self);
         }
     }
 }

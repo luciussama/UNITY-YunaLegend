@@ -1,54 +1,275 @@
 using UnityEngine;
 using YunaLegend.BearChase.Core;
-using YunaLegend.ToyRoom.Runtime;
 
 namespace YunaLegend.BearChase.Runtime
 {
     /// <summary>
-    /// Controla a pose e animacao procedural da Yuna 3D na Fase 4:
-    /// caminhada lateral na entrada, toque no urso, corrida com desvio lateral,
-    /// tropeço, queda e comemoracao.
+    /// Adaptador fino da Yuna 3D na corrida da Fase 4:
+    /// acompanha curvas horizontais, elevacao e inclinacao do terreno em alta velocidade,
+    /// sem espada atravancando a silhueta, com sombra de contato e animacao expressiva de tropeço.
     /// </summary>
     public sealed class BearChasePlayerController : MonoBehaviour
     {
         [SerializeField] private Transform bodyRoot;
-        [SerializeField] private Transform legLeftPivot;
-        [SerializeField] private Transform legRightPivot;
-        [SerializeField] private Transform armLeftPivot;
-        [SerializeField] private Transform armRightPivot;
         [SerializeField] private Transform ponytailPivot;
+        [SerializeField] private BearChaseRigBones rig;
+        [SerializeField] private Vector3 baseHipsPos;
+        [SerializeField] private Transform contactShadowTransform;
+        [SerializeField] private ParticleSystem footstepDust;
 
-        private YunaToyRoomAnimator.RigBones rig;
-        private Vector3 baseHipsPos;
         private bool hasRig;
-        private float walkCycle;
+        private float sprintCycle;
         private float smoothedInput;
+        private float animClock;
         private Renderer[] renderers;
 
         public void Configure(
             Transform body,
-            Transform legL,
-            Transform legR,
-            Transform armL,
-            Transform armR,
-            Transform ponytail)
+            Transform ponytail,
+            BearChaseRigBones rigBones,
+            Transform contactShadow,
+            ParticleSystem dustParticles)
         {
             bodyRoot = body;
-            legLeftPivot = legL;
-            legRightPivot = legR;
-            armLeftPivot = armL;
-            armRightPivot = armR;
             ponytailPivot = ponytail;
-            CacheRig();
+            rig = rigBones;
+            contactShadowTransform = contactShadow;
+            footstepDust = dustParticles;
+            hasRig = rig.IsValid;
+            if (hasRig)
+            {
+                baseHipsPos = rig.Hips.localPosition;
+            }
         }
 
         private void Awake()
         {
-            CacheRig();
+            if (!rig.IsValid)
+            {
+                CacheRigFromHierarchy();
+            }
+
+            hasRig = rig.IsValid;
             renderers = GetComponentsInChildren<Renderer>(true);
         }
 
-        private void CacheRig()
+        public void UpdatePlayer(BearChaseSimulation sim, Vector3 chaseOrigin, float dt)
+        {
+            if (sim == null || sim.IsEntrancePhase)
+            {
+                return;
+            }
+
+            if (!hasRig)
+            {
+                CacheRigFromHierarchy();
+            }
+
+            if (renderers == null || renderers.Length == 0)
+            {
+                renderers = GetComponentsInChildren<Renderer>(true);
+            }
+
+            animClock += Mathf.Max(0f, dt);
+
+            bool blinkOff = sim.InvulnerabilityRemaining > 0f
+                && sim.Phase != BearChasePhase.Fallen
+                && Mathf.FloorToInt(sim.InvulnerabilityRemaining * 15f) % 2 == 1;
+            SetRenderersVisible(!blinkOff);
+
+            float z = sim.YunaZ;
+            BearChaseTrackSpec track = sim.TrackSpec;
+            float centerX = BearChaseTrackSampler.CenterX(z, track);
+            float groundY = BearChaseTrackSampler.ElevationY(z, track);
+            float yawDeg = BearChaseTrackSampler.YawRadians(z, track) * Mathf.Rad2Deg;
+            float pitchDeg = BearChaseTrackSampler.PitchRadians(z, track) * Mathf.Rad2Deg;
+            float bankDeg = BearChaseTrackSampler.BankDegrees(z, track);
+
+            Vector3 groundPos = chaseOrigin + new Vector3(centerX + sim.YunaLaneOffsetX, groundY, z);
+            transform.position = groundPos;
+
+            switch (sim.Phase)
+            {
+                case BearChasePhase.Chasing:
+                case BearChasePhase.Stumble:
+                {
+                    float blend = 1f - Mathf.Exp(-14f * Mathf.Max(0f, dt));
+                    smoothedInput = Mathf.Lerp(smoothedInput, sim.YunaLateralInput, blend);
+                    transform.rotation = Quaternion.Euler(pitchDeg, yawDeg + smoothedInput * 25f, bankDeg);
+
+                    bool stumbling = sim.Phase == BearChasePhase.Stumble;
+                    float cycleRate = Mathf.Max(12f, sim.CurrentForwardSpeed * 1.92f);
+                    sprintCycle += dt * (stumbling ? cycleRate * 0.72f : cycleRate);
+                    float lean = stumbling ? 30f : 22f;
+                    float roll = -smoothedInput * 16f + (stumbling ? Mathf.Sin(animClock * 28f) * 14f : 0f);
+
+                    ApplySprintPose(sprintCycle, lean, roll, stumbling);
+                    UpdateDustEmission(!stumbling && sim.CurrentForwardSpeed > 6f);
+                    UpdateContactShadow(groundPos, pitchDeg, yawDeg, 1f);
+                    break;
+                }
+
+                case BearChasePhase.Fallen:
+                case BearChasePhase.RetryModal:
+                {
+                    transform.rotation = Quaternion.Euler(pitchDeg, yawDeg, 0f);
+                    ApplyFallenPose(Mathf.Clamp01(sim.PhaseTimer / 0.32f));
+                    UpdateDustEmission(false);
+                    UpdateContactShadow(groundPos, pitchDeg, yawDeg, 1.25f);
+                    break;
+                }
+
+                case BearChasePhase.Victory:
+                {
+                    transform.rotation = Quaternion.Euler(pitchDeg, yawDeg, 0f);
+                    ApplyVictoryPose();
+                    UpdateDustEmission(false);
+                    UpdateContactShadow(groundPos, pitchDeg, yawDeg, 1f);
+                    break;
+                }
+            }
+        }
+
+        private void ApplySprintPose(float cycle, float forwardLean, float bankRoll, bool stumbling)
+        {
+            if (!hasRig)
+            {
+                return;
+            }
+
+            float s = Mathf.Sin(cycle);
+            float c = Mathf.Cos(cycle);
+            float absS = Mathf.Abs(s);
+
+            if (rig.Hips != null)
+            {
+                float hop = absS * 0.068f - 0.012f;
+                rig.Hips.localPosition = baseHipsPos + new Vector3(0f, hop, 0f);
+                rig.Hips.localRotation = Quaternion.Euler(forwardLean * 0.25f, s * 9f, bankRoll);
+            }
+
+            if (rig.Spine != null)
+            {
+                rig.Spine.localRotation = Quaternion.Euler(forwardLean * 0.65f, -s * 7f, stumbling ? c * 8f : 0f);
+            }
+
+            if (rig.Chest != null)
+            {
+                rig.Chest.localRotation = Quaternion.Euler(forwardLean * 0.35f, -s * 5f, 0f);
+            }
+
+            if (rig.Head != null)
+            {
+                rig.Head.localRotation = Quaternion.Euler(-forwardLean * 0.62f, 0f, -bankRoll * 0.35f);
+            }
+
+            float thighL = s * 54f;
+            float shinL = Mathf.Max(8f, -c * 58f + 26f);
+            float footL = -(thighL + shinL) * 0.38f;
+
+            float thighR = -s * 54f;
+            float shinR = Mathf.Max(8f, c * 58f + 26f);
+            float footR = -(thighR + shinR) * 0.38f;
+
+            SetLocalRotation(rig.ThighL, thighL, 0f, 0f);
+            SetLocalRotation(rig.ShinL, shinL, 0f, 0f);
+            SetLocalRotation(rig.FootL, footL, 0f, 0f);
+
+            SetLocalRotation(rig.ThighR, thighR, 0f, 0f);
+            SetLocalRotation(rig.ShinR, shinR, 0f, 0f);
+            SetLocalRotation(rig.FootR, footR, 0f, 0f);
+
+            if (stumbling)
+            {
+                SetLocalRotation(rig.UpperArmL, -46f + s * 22f, 0f, 52f);
+                SetLocalRotation(rig.ForearmL, -25f, 0f, 0f);
+                SetLocalRotation(rig.UpperArmR, -46f - s * 22f, 0f, -52f);
+                SetLocalRotation(rig.ForearmR, -25f, 0f, 0f);
+            }
+            else
+            {
+                SetLocalRotation(rig.UpperArmL, -s * 52f - 8f, 0f, 22f);
+                SetLocalRotation(rig.ForearmL, -74f + c * 18f, 0f, 0f);
+                SetLocalRotation(rig.UpperArmR, s * 52f - 8f, 0f, -22f);
+                SetLocalRotation(rig.ForearmR, -74f - c * 18f, 0f, 0f);
+            }
+
+            if (ponytailPivot != null)
+            {
+                ponytailPivot.localRotation = Quaternion.Euler(26f + absS * 18f, 0f, -s * 12f - bankRoll * 0.4f);
+            }
+        }
+
+        private void ApplyFallenPose(float t)
+        {
+            if (!hasRig)
+            {
+                return;
+            }
+
+            if (rig.Hips != null)
+            {
+                rig.Hips.localPosition = baseHipsPos + new Vector3(0f, Mathf.Lerp(0f, -0.46f, t), 0f);
+                rig.Hips.localRotation = Quaternion.Euler(Mathf.Lerp(0f, 82f, t), 0f, 0f);
+            }
+
+            SetLocalRotation(rig.Spine, 10f, 0f, 0f);
+            SetLocalRotation(rig.Head, -24f, 18f, 0f);
+            SetLocalRotation(rig.UpperArmL, -70f, 0f, -25f);
+            SetLocalRotation(rig.UpperArmR, -55f, 0f, 28f);
+            SetLocalRotation(rig.ThighL, -12f, 0f, -6f);
+            SetLocalRotation(rig.ThighR, 8f, 0f, 6f);
+        }
+
+        private void ApplyVictoryPose()
+        {
+            if (!hasRig)
+            {
+                return;
+            }
+
+            float bounce = Mathf.Abs(Mathf.Sin(animClock * 5f)) * 0.04f;
+            if (rig.Hips != null)
+            {
+                rig.Hips.localPosition = baseHipsPos + new Vector3(0f, bounce, 0f);
+                rig.Hips.localRotation = Quaternion.identity;
+            }
+
+            SetLocalRotation(rig.Spine, -4f, 0f, 0f);
+            SetLocalRotation(rig.Chest, 0f, 0f, 0f);
+            SetLocalRotation(rig.Head, -8f, 0f, 0f);
+            SetLocalRotation(rig.UpperArmL, -125f, 0f, 28f);
+            SetLocalRotation(rig.UpperArmR, -125f, 0f, -28f);
+            SetLocalRotation(rig.ThighL, 0f, 0f, 0f);
+            SetLocalRotation(rig.ShinL, 0f, 0f, 0f);
+            SetLocalRotation(rig.ThighR, 0f, 0f, 0f);
+            SetLocalRotation(rig.ShinR, 0f, 0f, 0f);
+        }
+
+        private void UpdateContactShadow(Vector3 groundPos, float pitchDeg, float yawDeg, float scaleMul)
+        {
+            if (contactShadowTransform == null)
+            {
+                return;
+            }
+
+            contactShadowTransform.position = groundPos + new Vector3(0f, 0.024f, 0f);
+            contactShadowTransform.rotation = Quaternion.Euler(pitchDeg + 90f, yawDeg, 0f);
+            contactShadowTransform.localScale = new Vector3(0.95f * scaleMul, 0.95f * scaleMul, 1f);
+        }
+
+        private void UpdateDustEmission(bool active)
+        {
+            if (footstepDust == null)
+            {
+                return;
+            }
+
+            ParticleSystem.EmissionModule emission = footstepDust.emission;
+            emission.enabled = active;
+        }
+
+        private void CacheRigFromHierarchy()
         {
             if (bodyRoot == null)
             {
@@ -74,7 +295,7 @@ namespace YunaLegend.BearChase.Runtime
             Transform thighR = hips != null ? hips.Find("Thigh_R") : null;
             Transform shinR = thighR != null ? thighR.Find("Shin_R") : null;
 
-            rig = new YunaToyRoomAnimator.RigBones
+            rig = new BearChaseRigBones
             {
                 Hips = hips,
                 Spine = spine,
@@ -96,196 +317,10 @@ namespace YunaLegend.BearChase.Runtime
             };
 
             hasRig = rig.IsValid;
-            if (hasRig)
+            if (hasRig && rig.Hips != null)
             {
                 baseHipsPos = rig.Hips.localPosition;
             }
-        }
-
-        public void UpdatePlayer(BearChaseSimulation sim, Vector3 entranceStartPos, Vector3 entranceNudgePos, Vector3 chaseOrigin, float dt)
-        {
-            if (sim == null)
-            {
-                return;
-            }
-
-            if (!hasRig)
-            {
-                CacheRig();
-            }
-
-            if (renderers == null || renderers.Length == 0)
-            {
-                renderers = GetComponentsInChildren<Renderer>(true);
-            }
-
-            bool blinkOff = sim.InvulnerabilityRemaining > 0f
-                && sim.Phase != BearChasePhase.Fallen
-                && Mathf.FloorToInt(sim.InvulnerabilityRemaining * 14f) % 2 == 1;
-            SetRenderersVisible(!blinkOff);
-
-            switch (sim.Phase)
-            {
-                case BearChasePhase.EntranceWalk:
-                {
-                    float t = Mathf.Clamp01(sim.PhaseTimer / BearChaseConfig.EntranceWalkDuration);
-                    transform.position = Vector3.Lerp(entranceStartPos, entranceNudgePos, t);
-                    transform.rotation = Quaternion.Euler(0f, 90f, 0f);
-                    walkCycle += dt * 7.5f;
-                    ApplyLocomotionPose(walkCycle, strideAmp: 0.72f, forwardLean: 6f, bankRoll: 0f, reachLeftArm: 0f, holdingSword: true);
-                    break;
-                }
-
-                case BearChasePhase.EntranceNudge:
-                {
-                    transform.position = entranceNudgePos;
-                    transform.rotation = Quaternion.Euler(0f, 90f, 0f);
-                    float reach = Mathf.Sin(Mathf.Clamp01(sim.PhaseTimer / BearChaseConfig.EntranceNudgeDuration) * Mathf.PI);
-                    ApplyLocomotionPose(0f, strideAmp: 0f, forwardLean: 14f * reach, bankRoll: 0f, reachLeftArm: reach, holdingSword: true);
-                    break;
-                }
-
-                case BearChasePhase.BearWakeUp:
-                case BearChasePhase.TransitionToChase:
-                {
-                    transform.position = entranceNudgePos;
-                    transform.rotation = Quaternion.Euler(0f, 90f, 0f);
-                    ApplyLocomotionPose(0f, strideAmp: 0f, forwardLean: -4f, bankRoll: 0f, reachLeftArm: 0f, holdingSword: true);
-                    break;
-                }
-
-                case BearChasePhase.Chasing:
-                case BearChasePhase.Stumble:
-                {
-                    float worldX = BearChaseConfig.TrackCenterX(sim.YunaZ) + sim.YunaLaneOffsetX;
-                    transform.position = chaseOrigin + new Vector3(worldX, 0f, sim.YunaZ);
-
-                    smoothedInput = Mathf.Lerp(smoothedInput, sim.YunaLateralInput, Mathf.Min(1f, dt * 12f));
-                    float slope = BearChaseConfig.TrackTangentSlopeX(sim.YunaZ);
-                    float yaw = Mathf.Atan2(slope, 1f) * Mathf.Rad2Deg + smoothedInput * 22f;
-                    transform.rotation = Quaternion.Euler(0f, yaw, 0f);
-
-                    float speedMul = sim.Phase == BearChasePhase.Stumble ? 0.55f : 1.0f;
-                    walkCycle += dt * 11.8f * speedMul;
-                    float lean = sim.Phase == BearChasePhase.Stumble ? 22f : 12f;
-                    ApplyLocomotionPose(walkCycle, strideAmp: 1.0f, forwardLean: lean, bankRoll: -smoothedInput * 10f, reachLeftArm: 0f, holdingSword: true);
-                    break;
-                }
-
-                case BearChasePhase.Fallen:
-                case BearChasePhase.RetryModal:
-                {
-                    float worldX = BearChaseConfig.TrackCenterX(sim.YunaZ) + sim.YunaLaneOffsetX;
-                    transform.position = chaseOrigin + new Vector3(worldX, 0f, sim.YunaZ);
-                    transform.rotation = Quaternion.Euler(0f, Mathf.Atan2(BearChaseConfig.TrackTangentSlopeX(sim.YunaZ), 1f) * Mathf.Rad2Deg, 0f);
-                    ApplyFallenPose(Mathf.Clamp01(sim.PhaseTimer / 0.35f));
-                    break;
-                }
-
-                case BearChasePhase.Victory:
-                {
-                    float worldX = BearChaseConfig.TrackCenterX(sim.YunaZ) + sim.YunaLaneOffsetX;
-                    transform.position = chaseOrigin + new Vector3(worldX, 0f, sim.YunaZ);
-                    transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-                    ApplyLocomotionPose(0f, strideAmp: 0f, forwardLean: 0f, bankRoll: 0f, reachLeftArm: 0.45f, holdingSword: true);
-                    break;
-                }
-            }
-        }
-
-        private void ApplyLocomotionPose(float cycle, float strideAmp, float forwardLean, float bankRoll, float reachLeftArm, bool holdingSword)
-        {
-            float s = Mathf.Sin(cycle);
-            float c = Mathf.Cos(cycle);
-            float absS = Mathf.Abs(s);
-
-            if (hasRig)
-            {
-                rig.Hips.localPosition = baseHipsPos + new Vector3(0f, absS * 0.032f * strideAmp, 0f);
-                rig.Hips.localRotation = Quaternion.Euler(0f, s * 6f * strideAmp, bankRoll);
-                rig.Spine.localRotation = Quaternion.Euler(forwardLean, -s * 4f * strideAmp, 0f);
-                rig.Chest.localRotation = Quaternion.Euler(forwardLean * 0.35f, 0f, 0f);
-                rig.Head.localRotation = Quaternion.Euler(-forwardLean * 0.55f, 0f, 0f);
-
-                float thighL = s * 38f * strideAmp;
-                float shinL = Mathf.Max(4f, -c * 42f + 12f) * strideAmp;
-                float thighR = -s * 38f * strideAmp;
-                float shinR = Mathf.Max(4f, c * 42f + 12f) * strideAmp;
-
-                rig.ThighL.localRotation = Quaternion.Euler(thighL, 0f, 0f);
-                rig.ShinL.localRotation = Quaternion.Euler(shinL, 0f, 0f);
-                rig.FootL.localRotation = Quaternion.Euler(-(thighL + shinL) * 0.3f, 0f, 0f);
-
-                rig.ThighR.localRotation = Quaternion.Euler(thighR, 0f, 0f);
-                rig.ShinR.localRotation = Quaternion.Euler(shinR, 0f, 0f);
-                rig.FootR.localRotation = Quaternion.Euler(-(thighR + shinR) * 0.3f, 0f, 0f);
-
-                float armLPitch = Mathf.Lerp(-s * 34f * strideAmp, -68f, reachLeftArm);
-                rig.UpperArmL.localRotation = Quaternion.Euler(armLPitch, 0f, 24f);
-                rig.ForearmL.localRotation = Quaternion.Euler(Mathf.Lerp(-42f, -10f, reachLeftArm), 0f, 0f);
-
-                float armRPitch = holdingSword ? (s * 18f * strideAmp - 32f) : (s * 34f * strideAmp);
-                rig.UpperArmR.localRotation = Quaternion.Euler(armRPitch, 0f, -24f);
-                rig.ForearmR.localRotation = Quaternion.Euler(holdingSword ? -48f : -42f, 0f, 0f);
-            }
-            else
-            {
-                if (bodyRoot != null)
-                {
-                    bodyRoot.localPosition = new Vector3(0f, absS * 0.035f * strideAmp, 0f);
-                    bodyRoot.localRotation = Quaternion.Euler(forwardLean, s * 5f * strideAmp, bankRoll);
-                }
-
-                if (legLeftPivot != null)
-                {
-                    legLeftPivot.localRotation = Quaternion.Euler(s * 36f * strideAmp, 0f, 0f);
-                }
-
-                if (legRightPivot != null)
-                {
-                    legRightPivot.localRotation = Quaternion.Euler(-s * 36f * strideAmp, 0f, 0f);
-                }
-
-                if (armLeftPivot != null)
-                {
-                    float armLPitch = Mathf.Lerp(-s * 34f * strideAmp, -64f, reachLeftArm);
-                    armLeftPivot.localRotation = Quaternion.Euler(armLPitch, 0f, -12f);
-                }
-
-                if (armRightPivot != null)
-                {
-                    float armRPitch = holdingSword ? (s * 16f * strideAmp - 28f) : (s * 34f * strideAmp);
-                    armRightPivot.localRotation = Quaternion.Euler(armRPitch, 0f, 12f);
-                }
-            }
-
-            if (ponytailPivot != null)
-            {
-                ponytailPivot.localRotation = Quaternion.Euler(14f + absS * 12f * strideAmp, 0f, -s * 8f * strideAmp);
-            }
-        }
-
-        private void ApplyFallenPose(float t)
-        {
-            if (!hasRig)
-            {
-                if (bodyRoot != null)
-                {
-                    bodyRoot.localPosition = new Vector3(0f, Mathf.Lerp(0f, -0.42f, t), 0f);
-                    bodyRoot.localRotation = Quaternion.Euler(Mathf.Lerp(0f, 82f, t), 0f, 0f);
-                }
-
-                return;
-            }
-
-            rig.Hips.localPosition = baseHipsPos + new Vector3(0f, Mathf.Lerp(0f, -0.46f, t), 0f);
-            rig.Hips.localRotation = Quaternion.Euler(Mathf.Lerp(0f, 82f, t), 0f, 0f);
-            rig.Spine.localRotation = Quaternion.Euler(10f, 0f, 0f);
-            rig.Head.localRotation = Quaternion.Euler(-25f, 18f, 0f);
-            rig.UpperArmL.localRotation = Quaternion.Euler(-70f, 0f, -25f);
-            rig.UpperArmR.localRotation = Quaternion.Euler(-55f, 0f, 28f);
-            rig.ThighL.localRotation = Quaternion.Euler(-12f, 0f, -6f);
-            rig.ThighR.localRotation = Quaternion.Euler(8f, 0f, 6f);
         }
 
         private void SetRenderersVisible(bool visible)
@@ -301,6 +336,14 @@ namespace YunaLegend.BearChase.Runtime
                 {
                     renderers[i].enabled = visible;
                 }
+            }
+        }
+
+        private static void SetLocalRotation(Transform target, float x, float y, float z)
+        {
+            if (target != null)
+            {
+                target.localRotation = Quaternion.Euler(x, y, z);
             }
         }
     }
