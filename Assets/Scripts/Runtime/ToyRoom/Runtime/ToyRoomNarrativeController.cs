@@ -16,6 +16,10 @@ namespace YunaLegend.ToyRoom.Runtime
         private Action onCurrentSequenceComplete;
 
         public bool IsPlaying => beatPlayer.IsPlaying;
+        public int CurrentBeatIndex => beatPlayer.CurrentBeatIndex;
+        public float ElapsedInBeat => beatPlayer.ElapsedInBeat;
+        public float CurrentBeatProgress => beatPlayer.CurrentBeatProgress;
+        public ToyRoomNarrativeBeat CurrentBeat => beatPlayer.CurrentBeat;
 
         public void Configure(ToyRoomHudController hudController, ToySwordView sword)
         {

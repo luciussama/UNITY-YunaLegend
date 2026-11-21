@@ -14,6 +14,11 @@ namespace YunaLegend.ToyRoom.Core
 
         public bool IsPlaying => activeSequence != null && currentIndex >= 0 && currentIndex < activeSequence.Count;
         public ToyRoomNarrativeBeat CurrentBeat => IsPlaying ? activeSequence[currentIndex] : default;
+        public int CurrentBeatIndex => IsPlaying ? currentIndex : -1;
+        public float ElapsedInBeat => IsPlaying ? elapsedInBeat : 0f;
+        public float CurrentBeatProgress => IsPlaying && activeSequence[currentIndex].DurationSeconds > 0.001f
+            ? System.Math.Clamp(elapsedInBeat / activeSequence[currentIndex].DurationSeconds, 0f, 1f)
+            : 0f;
 
         public event Action<ToyRoomNarrativeBeat> OnBeatEntered;
         public event Action OnSequenceCompleted;

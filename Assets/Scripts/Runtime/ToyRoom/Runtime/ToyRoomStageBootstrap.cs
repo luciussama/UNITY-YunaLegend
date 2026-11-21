@@ -27,8 +27,10 @@ namespace YunaLegend.ToyRoom.Runtime
         [SerializeField] private bool startInExploring;
 
         private readonly Dictionary<string, ToyItemView> toyLookup = new();
+        private ToyRoomIntroCinematicController introCinematic;
 
         public ToyRoomStateMachine StateMachine { get; private set; }
+        public ToyRoomIntroCinematicController IntroCinematic => introCinematic;
 
         public void Configure(
             Camera mainCam,
@@ -75,7 +77,24 @@ namespace YunaLegend.ToyRoom.Runtime
                 player.ControlsEnabled = false;
             }
 
-            narrative.PlayIntro(() => StateMachine.CompleteIntro());
+            introCinematic = GetComponent<ToyRoomIntroCinematicController>();
+            if (introCinematic == null)
+            {
+                introCinematic = gameObject.AddComponent<ToyRoomIntroCinematicController>();
+            }
+
+            introCinematic.Configure(isometricCamera, cameraController, player, nandaGuide, chest, narrative, audioController);
+            introCinematic.BeginIntroCinematic();
+
+            narrative.PlayIntro(() =>
+            {
+                if (introCinematic != null)
+                {
+                    introCinematic.EndIntroCinematic();
+                }
+
+                StateMachine.CompleteIntro();
+            });
         }
 
         private void OnDestroy()
