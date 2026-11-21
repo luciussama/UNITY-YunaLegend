@@ -74,12 +74,22 @@ namespace YunaLegend.Arena.Runtime
             float centerX = Mathf.Clamp((pPos.x + ePos.x) * 0.5f, -maxCenterOffset, maxCenterOffset);
 
             targetCamera.orthographic = false;
-            targetCamera.fieldOfView = 34f;
+            bool isPortrait = aspect < 1.0f;
+            targetCamera.fieldOfView = isPortrait ? 44f : 34f;
             float halfFovRad = targetCamera.fieldOfView * 0.5f * Mathf.Deg2Rad;
             float distance = (desiredWidth * 0.5f) / (Mathf.Tan(halfFovRad) * aspect);
-            distance = wideMobileMode
-                ? Mathf.Clamp(distance, 11.5f, 24.0f)
-                : Mathf.Clamp(distance, 7.2f, 18.5f);
+            if (isPortrait)
+            {
+                distance = Mathf.Clamp(distance, 18.0f, 38.0f);
+            }
+            else if (wideMobileMode)
+            {
+                distance = Mathf.Clamp(distance, 11.5f, 24.0f);
+            }
+            else
+            {
+                distance = Mathf.Clamp(distance, 7.2f, 18.5f);
+            }
 
             float lookY = Mathf.Max(1.10f, (pPos.y + ePos.y) * 0.35f + Mathf.Lerp(1.12f, 1.48f, zoomT) - (wideMobileMode ? 0.12f : 0f));
             Vector3 targetPos = new Vector3(centerX, lookY + distance * 0.11f, -distance);

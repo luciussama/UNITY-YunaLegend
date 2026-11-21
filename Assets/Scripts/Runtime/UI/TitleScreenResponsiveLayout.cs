@@ -4,15 +4,18 @@ using UnityEngine.UI;
 namespace YunaLegend.UI
 {
     /// <summary>
-    /// Adapta a tela de entrada entre o layout widescreen (desktop/notebook)
-    /// e o layout retrato (mobile), centralizando a menina na poltrona e
-    /// reposicionando titulo, menu e rodape sobre um gradiente inferior.
+    /// Adapta a tela de entrada entre o layout widescreen (desktop/notebook),
+    /// mobile paisagem e mobile retrato:
+    /// - Prioridade 1: textos na parte superior no celular, sem encobrir a menina na poltrona.
+    /// - Prioridade 2: fontes entre 14 e 16px logicos no celular.
+    /// - Prioridade 3: preserva a estetica vitoriana/livro ilustrado original.
+    /// - Prioridade 4: enfeites, paineis e enquadramentos cabem integralmente na tela do celular.
     /// </summary>
     [ExecuteAlways]
     public sealed class TitleScreenResponsiveLayout : MonoBehaviour
     {
         private const float TargetArtAspect = 16f / 9f;
-        private const float PortraitFocusNormalizedX = 0.68f;
+        private const float PortraitFocusNormalizedX = 0.67f;
         private const float PortraitThresholdAspect = 1.1f;
 
         [Header("Containers")]
@@ -39,6 +42,9 @@ namespace YunaLegend.UI
 
         private Vector2 lastCanvasSize = new Vector2(-1f, -1f);
         private bool? lastPortraitState;
+        private bool? lastCompactLandscapeState;
+        private float forcedLogicalWidth = -1f;
+        private float forcedLogicalHeight = -1f;
 
         private void OnEnable()
         {
@@ -67,6 +73,23 @@ namespace YunaLegend.UI
         private void OnRectTransformDimensionsChange()
         {
             ApplyLayout(force: false);
+        }
+
+        /// <summary>
+        /// Permite simular uma resolucao logica de viewport (usado em capturas automatizadas).
+        /// </summary>
+        public void SetViewportOverride(float logicalWidth, float logicalHeight)
+        {
+            forcedLogicalWidth = logicalWidth;
+            forcedLogicalHeight = logicalHeight;
+            ApplyLayout(force: true);
+        }
+
+        public void ClearViewportOverride()
+        {
+            forcedLogicalWidth = -1f;
+            forcedLogicalHeight = -1f;
+            ApplyLayout(force: true);
         }
 
         public void Configure(
@@ -125,30 +148,73 @@ namespace YunaLegend.UI
             }
 
             bool isPortrait = (size.x / size.y) < PortraitThresholdAspect;
+            bool isCompactLandscape = !isPortrait && IsMobileLandscapeViewport();
+
             if (!force
                 && Mathf.Approximately(size.x, lastCanvasSize.x)
                 && Mathf.Approximately(size.y, lastCanvasSize.y)
-                && lastPortraitState == isPortrait)
+                && lastPortraitState == isPortrait
+                && lastCompactLandscapeState == isCompactLandscape)
             {
                 return;
             }
 
             lastCanvasSize = size;
             lastPortraitState = isPortrait;
+            lastCompactLandscapeState = isCompactLandscape;
+
+            float pxToCanvas = ComputePxToCanvas(size);
 
             ApplyArtFraming(size, isPortrait);
             ApplyOverlayScrims(isPortrait);
 
             if (isPortrait)
             {
-                ApplyPortraitMenu(size);
+                ApplyPortraitMenu(size, pxToCanvas);
+            }
+            else if (isCompactLandscape)
+            {
+                ApplyCompactLandscapeMenu(size, pxToCanvas);
             }
             else
             {
-                ApplyLandscapeMenu();
+                ApplyDesktopLandscapeMenu();
             }
 
-            ApplyPanels(size, isPortrait);
+            ApplyPanels(size, isPortrait, isCompactLandscape, pxToCanvas);
+        }
+
+        private float ComputePxToCanvas(Vector2 canvasSize)
+        {
+            float logicalW = forcedLogicalWidth > 0f ? forcedLogicalWidth : Screen.width;
+            float logicalH = forcedLogicalHeight > 0f ? forcedLogicalHeight : Screen.height;
+
+            if (logicalW <= 1f || logicalH <= 1f)
+            {
+                return canvasSize.x / 390f;
+            }
+
+            // Em telas retina mobile reais (DPR >= 2), normaliza para pixels logicos CSS (~390px largura em retrato)
+            float minDim = Mathf.Min(logicalW, logicalH);
+            if (forcedLogicalWidth <= 0f && Application.isMobilePlatform && minDim >= 700f)
+            {
+                float dpr = Mathf.Clamp(minDim / 390f, 1.5f, 3.5f);
+                logicalW /= dpr;
+            }
+
+            return Mathf.Clamp(canvasSize.x / Mathf.Max(280f, logicalW), 0.5f, 4.0f);
+        }
+
+        private bool IsMobileLandscapeViewport()
+        {
+            float w = forcedLogicalWidth > 0f ? forcedLogicalWidth : Screen.width;
+            float h = forcedLogicalHeight > 0f ? forcedLogicalHeight : Screen.height;
+            if (w <= 1f || h <= 1f)
+            {
+                return false;
+            }
+
+            return (Application.isMobilePlatform || w <= 960f || h <= 520f) && (w / h >= PortraitThresholdAspect);
         }
 
         private void ApplyArtFraming(Vector2 canvasSize, bool isPortrait)
@@ -162,20 +228,29 @@ namespace YunaLegend.UI
             artContainer.anchorMax = new Vector2(0.5f, 0.5f);
             artContainer.pivot = new Vector2(0.5f, 0.5f);
 
-            float artHeight = Mathf.Max(canvasSize.y, canvasSize.x / TargetArtAspect);
-            float artWidth = artHeight * TargetArtAspect;
-            artContainer.sizeDelta = new Vector2(artWidth, artHeight);
-
             if (!isPortrait)
             {
+                float artHeight = Mathf.Max(canvasSize.y, canvasSize.x / TargetArtAspect);
+                float artWidth = artHeight * TargetArtAspect;
+                artContainer.sizeDelta = new Vector2(artWidth, artHeight);
                 artContainer.anchoredPosition = Vector2.zero;
                 return;
             }
 
-            float maxLeftShift = Mathf.Max(0f, 0.5f * (artWidth - canvasSize.x));
-            float desiredShift = (0.5f - PortraitFocusNormalizedX) * artWidth;
-            float clampedX = Mathf.Clamp(desiredShift, -maxLeftShift, 0f);
-            artContainer.anchoredPosition = new Vector2(clampedX, 0f);
+            // Em retrato mobile: posiciona a menina na poltrona nos ~60% inferiores da tela,
+            // deixando o topo livre para o titulo e menu sem encobrir a menina.
+            float lowerBandHeight = canvasSize.y * 0.64f;
+            float portraitArtHeight = Mathf.Max(lowerBandHeight, canvasSize.x / TargetArtAspect * 1.12f);
+            float portraitArtWidth = portraitArtHeight * TargetArtAspect;
+            artContainer.sizeDelta = new Vector2(portraitArtWidth, portraitArtHeight);
+
+            float maxLeftShift = Mathf.Max(0f, 0.5f * (portraitArtWidth - canvasSize.x));
+            float desiredShiftX = (0.5f - PortraitFocusNormalizedX) * portraitArtWidth;
+            float clampedX = Mathf.Clamp(desiredShiftX, -maxLeftShift, 0f);
+
+            // Alinha a base da ilustracao com a base da tela para manter a menina inteira abaixo do texto superior
+            float bottomAlignY = -0.5f * (canvasSize.y - portraitArtHeight);
+            artContainer.anchoredPosition = new Vector2(clampedX, bottomAlignY);
         }
 
         private void ApplyOverlayScrims(bool isPortrait)
@@ -188,10 +263,23 @@ namespace YunaLegend.UI
             if (bottomScrim != null)
             {
                 bottomScrim.SetActive(isPortrait);
+                if (isPortrait)
+                {
+                    var scrimRt = bottomScrim.GetComponent<RectTransform>();
+                    if (scrimRt != null)
+                    {
+                        // Gradiente escuro suave no TOPO (acima da menina), mantendo legibilidade sem cobrir Yuna
+                        scrimRt.anchorMin = new Vector2(0f, 0.52f);
+                        scrimRt.anchorMax = new Vector2(1f, 1f);
+                        scrimRt.offsetMin = Vector2.zero;
+                        scrimRt.offsetMax = Vector2.zero;
+                        scrimRt.localEulerAngles = new Vector3(0f, 0f, 180f);
+                    }
+                }
             }
         }
 
-        private void ApplyLandscapeMenu()
+        private void ApplyDesktopLandscapeMenu()
         {
             if (titleText != null)
             {
@@ -234,86 +322,303 @@ namespace YunaLegend.UI
             }
         }
 
-        private void ApplyPortraitMenu(Vector2 canvasSize)
+        private void ApplyCompactLandscapeMenu(Vector2 canvasSize, float px)
         {
-            float marginX = Mathf.Max(68f, canvasSize.x * 0.085f);
-            float contentWidth = Mathf.Max(320f, canvasSize.x - marginX * 2f);
-            float bottomMargin = Mathf.Max(64f, canvasSize.y * 0.045f);
+            float marginX = 20f * px;
+            float colWidth = Mathf.Min(canvasSize.x * 0.44f, 320f * px);
+            float topY = -18f * px;
 
-            float footerHeight = 52f;
-            float buttonHeight = 76f;
-            float buttonSpacing = 12f;
-            float easyY = bottomMargin + footerHeight + 22f;
-            float loadY = easyY + buttonHeight + buttonSpacing;
-            float newY = loadY + buttonHeight + buttonSpacing;
-            float titleY = newY + buttonHeight + 28f;
+            int titleFont = Mathf.RoundToInt(16f * px);
+            int btnFont = Mathf.RoundToInt(15f * px);
+            int smallFont = Mathf.RoundToInt(14f * px);
 
-            if (footerRect != null)
-            {
-                SetBottomLeft(footerRect, marginX, bottomMargin, contentWidth, footerHeight);
-                SetTextSize(footerRect, 26);
-            }
-
-            SetMenuButtonLayout(easyModeRect, marginX, easyY, Mathf.Min(360f, contentWidth * 0.56f), buttonHeight, 48, topLeft: false);
-
-            if (easyTagRect != null)
-            {
-                float tagOffsetX = marginX + Mathf.Min(280f, contentWidth * 0.38f);
-                SetBottomLeft(easyTagRect, tagOffsetX, easyY, Mathf.Max(180f, contentWidth - (tagOffsetX - marginX)), buttonHeight);
-                SetTextSize(easyTagRect, 28);
-            }
-
-            SetMenuButtonLayout(loadGameRect, marginX, loadY, contentWidth, buttonHeight, 48, topLeft: false);
-            SetMenuButtonLayout(newGameRect, marginX, newY, contentWidth, buttonHeight, 48, topLeft: false);
+            float titleH = 48f * px;
+            float btnH = 30f * px;
+            float btnGap = 6f * px;
 
             if (titleText != null)
             {
-                float titleHeight = 220f;
-                SetBottomLeft(titleText.rectTransform, marginX, titleY, contentWidth, titleHeight);
-                titleText.fontSize = Mathf.Clamp(Mathf.RoundToInt(canvasSize.x * 0.086f), 64, 92);
-                titleText.lineSpacing = 0.96f;
+                SetTopLeft(titleText.rectTransform, marginX, topY, colWidth, titleH);
+                titleText.fontSize = titleFont;
+                titleText.lineSpacing = 1.05f;
+                titleText.alignment = TextAnchor.UpperLeft;
+            }
+
+            float newY = topY - titleH - 12f * px;
+            float loadY = newY - btnH - btnGap;
+            float easyY = loadY - btnH - btnGap;
+            float footerY = easyY - btnH - 10f * px;
+
+            SetMenuButtonLayout(newGameRect, marginX + 14f * px, newY, colWidth - 14f * px, btnH, btnFont, topLeft: true);
+            SetMenuButtonLayout(loadGameRect, marginX + 14f * px, loadY, colWidth - 14f * px, btnH, btnFont, topLeft: true);
+            SetMenuButtonLayout(easyModeRect, marginX + 14f * px, easyY, colWidth * 0.52f, btnH, btnFont, topLeft: true);
+
+            if (easyTagRect != null)
+            {
+                float tagX = marginX + colWidth * 0.55f;
+                SetTopLeft(easyTagRect, tagX, easyY, colWidth * 0.45f, btnH);
+                SetTextSize(easyTagRect, smallFont);
+            }
+
+            if (footerRect != null)
+            {
+                SetTopLeft(footerRect, marginX + 14f * px, footerY, colWidth - 14f * px, 38f * px);
+                SetTextSize(footerRect, smallFont);
             }
 
             if (focusMarker != null)
             {
-                focusMarker.fontSize = 46;
+                focusMarker.fontSize = btnFont;
                 if (newGameRect != null)
                 {
-                    focusMarker.rectTransform.position = newGameRect.TransformPoint(
-                        new Vector3(newGameRect.rect.xMin - 34f, newGameRect.rect.center.y, 0f));
+                    SetTopLeft(focusMarker.rectTransform, marginX, newY, 12f * px, btnH);
+                    focusMarker.alignment = TextAnchor.MiddleRight;
                 }
             }
 
             if (settingsButtonRect != null)
             {
-                settingsButtonRect.anchoredPosition = new Vector2(-42f, -44f);
-                settingsButtonRect.sizeDelta = new Vector2(84f, 84f);
+                settingsButtonRect.anchoredPosition = new Vector2(-14f * px, -12f * px);
+                settingsButtonRect.sizeDelta = new Vector2(36f * px, 36f * px);
             }
 
             if (flagButtonRect != null)
             {
-                flagButtonRect.anchoredPosition = new Vector2(0f, -28f);
-                flagButtonRect.sizeDelta = new Vector2(80f, 100f);
+                flagButtonRect.anchoredPosition = new Vector2(0f, -8f * px);
+                flagButtonRect.sizeDelta = new Vector2(38f * px, 48f * px);
             }
         }
 
-        private void ApplyPanels(Vector2 canvasSize, bool isPortrait)
+        private void ApplyPortraitMenu(Vector2 canvasSize, float px)
         {
+            // Prioridade 1: TODOS os textos na parte SUPERIOR da tela do celular,
+            // abaixo da bandeirinha/engrenagem e ACIMA da menina na poltrona.
+            // Prioridade 2: fontes estritamente entre 14px e 16px logicos.
+            float marginX = 18f * px;
+            float contentWidth = Mathf.Max(200f * px, canvasSize.x - marginX * 2f);
+
+            int titleFont = Mathf.RoundToInt(16f * px);
+            int btnFont = Mathf.RoundToInt(15f * px);
+            int smallFont = Mathf.RoundToInt(14f * px);
+
+            float topIconsBottom = 56f * px;
+            float titleH = 48f * px;
+            float btnH = 34f * px;
+            float btnGap = 6f * px;
+            float footerH = 38f * px;
+
+            float titleY = -topIconsBottom;
+            float newY = titleY - titleH - 10f * px;
+            float loadY = newY - btnH - btnGap;
+            float easyY = loadY - btnH - btnGap;
+            float footerY = easyY - btnH - 10f * px;
+
+            if (titleText != null)
+            {
+                SetTopLeft(titleText.rectTransform, marginX, titleY, contentWidth, titleH);
+                titleText.fontSize = titleFont;
+                titleText.lineSpacing = 1.05f;
+                titleText.alignment = TextAnchor.UpperLeft;
+            }
+
+            float menuIndent = 14f * px;
+            float menuW = contentWidth - menuIndent;
+
+            SetMenuButtonLayout(newGameRect, marginX + menuIndent, newY, menuW, btnH, btnFont, topLeft: true);
+            SetMenuButtonLayout(loadGameRect, marginX + menuIndent, loadY, menuW, btnH, btnFont, topLeft: true);
+            SetMenuButtonLayout(easyModeRect, marginX + menuIndent, easyY, menuW * 0.54f, btnH, btnFont, topLeft: true);
+
+            if (easyTagRect != null)
+            {
+                float tagOffsetX = marginX + menuIndent + menuW * 0.56f;
+                SetTopLeft(easyTagRect, tagOffsetX, easyY, menuW * 0.44f, btnH);
+                SetTextSize(easyTagRect, smallFont);
+            }
+
+            if (footerRect != null)
+            {
+                SetTopLeft(footerRect, marginX + menuIndent, footerY, menuW, footerH);
+                SetTextSize(footerRect, smallFont);
+            }
+
+            if (focusMarker != null)
+            {
+                focusMarker.fontSize = btnFont;
+                if (newGameRect != null)
+                {
+                    SetTopLeft(focusMarker.rectTransform, marginX, newY, 12f * px, btnH);
+                    focusMarker.alignment = TextAnchor.MiddleRight;
+                }
+            }
+
+            if (settingsButtonRect != null)
+            {
+                settingsButtonRect.anchoredPosition = new Vector2(-14f * px, -10f * px);
+                settingsButtonRect.sizeDelta = new Vector2(36f * px, 36f * px);
+            }
+
+            if (flagButtonRect != null)
+            {
+                flagButtonRect.anchoredPosition = new Vector2(0f, -6f * px);
+                flagButtonRect.sizeDelta = new Vector2(38f * px, 46f * px);
+            }
+        }
+
+        private void ApplyPanels(Vector2 canvasSize, bool isPortrait, bool isCompactLandscape, float px)
+        {
+            bool isMobile = isPortrait || isCompactLandscape;
+            float margin = 16f * px;
+            float maxPanelW = Mathf.Max(220f * px, canvasSize.x - margin * 2f);
+
             if (settingsPanelRect != null)
             {
-                float panelWidth = isPortrait ? Mathf.Min(820f, canvasSize.x - 72f) : 820f;
-                settingsPanelRect.sizeDelta = new Vector2(panelWidth, 400f);
-
-                if (volumeSliderRect != null)
+                if (isMobile)
                 {
-                    volumeSliderRect.sizeDelta = new Vector2(Mathf.Min(560f, panelWidth - 80f), 28f);
+                    float panelWidth = Mathf.Min(346f * px, maxPanelW);
+                    float panelHeight = 192f * px;
+
+                    // Prioridade 1: em retrato, posicionar o painel de configuracoes na faixa SUPERIOR
+                    // escura (acima da menina na poltrona) para nunca encobrir Yuna.
+                    if (isPortrait)
+                    {
+                        settingsPanelRect.anchorMin = new Vector2(0.5f, 1f);
+                        settingsPanelRect.anchorMax = new Vector2(0.5f, 1f);
+                        settingsPanelRect.pivot = new Vector2(0.5f, 1f);
+                        settingsPanelRect.anchoredPosition = new Vector2(0f, -56f * px);
+                    }
+                    else
+                    {
+                        settingsPanelRect.anchorMin = new Vector2(0.5f, 0.5f);
+                        settingsPanelRect.anchorMax = new Vector2(0.5f, 0.5f);
+                        settingsPanelRect.pivot = new Vector2(0.5f, 0.5f);
+                        settingsPanelRect.anchoredPosition = Vector2.zero;
+                    }
+
+                    settingsPanelRect.sizeDelta = new Vector2(panelWidth, panelHeight);
+
+                    var bgImg = settingsPanelRect.GetComponent<Image>();
+                    if (bgImg != null)
+                    {
+                        bgImg.color = new Color(0.06f, 0.042f, 0.032f, 0.98f);
+                    }
+
+                    var outline = settingsPanelRect.GetComponent<Outline>();
+                    if (outline == null)
+                    {
+                        outline = settingsPanelRect.gameObject.AddComponent<Outline>();
+                    }
+
+                    outline.effectColor = new Color(0.90f, 0.74f, 0.42f, 0.88f);
+                    outline.effectDistance = new Vector2(2f * px, -2f * px);
+
+                    var heading = settingsPanelRect.Find("Titulo_Painel")?.GetComponent<Text>();
+                    if (heading != null)
+                    {
+                        heading.fontSize = Mathf.RoundToInt(16f * px);
+                        heading.fontStyle = FontStyle.Bold;
+                        SetTopLeft(heading.rectTransform, 18f * px, -14f * px, panelWidth - 36f * px, 28f * px);
+                    }
+
+                    var volLabel = settingsPanelRect.Find("Rotulo_Volume")?.GetComponent<Text>();
+                    if (volLabel != null)
+                    {
+                        volLabel.fontSize = Mathf.RoundToInt(14f * px);
+                        SetTopLeft(volLabel.rectTransform, 18f * px, -52f * px, panelWidth - 36f * px, 24f * px);
+                    }
+
+                    if (volumeSliderRect != null)
+                    {
+                        SetTopLeft(volumeSliderRect, 18f * px, -84f * px, panelWidth - 36f * px, 24f * px);
+                    }
+
+                    var closeBtn = settingsPanelRect.Find("Botao_Fechar") as RectTransform;
+                    if (closeBtn != null)
+                    {
+                        SetTopLeft(closeBtn, 18f * px, -132f * px, 140f * px, 36f * px);
+                        SetTextSize(closeBtn, Mathf.RoundToInt(15f * px));
+                    }
+                }
+                else
+                {
+                    settingsPanelRect.anchorMin = new Vector2(0.5f, 0.5f);
+                    settingsPanelRect.anchorMax = new Vector2(0.5f, 0.5f);
+                    settingsPanelRect.pivot = new Vector2(0.5f, 0.5f);
+                    settingsPanelRect.anchoredPosition = Vector2.zero;
+                    settingsPanelRect.sizeDelta = new Vector2(820f, 400f);
+                    if (volumeSliderRect != null)
+                    {
+                        volumeSliderRect.sizeDelta = new Vector2(560f, 28f);
+                    }
                 }
             }
 
             if (phasePanelRect != null)
             {
-                float phaseWidth = isPortrait ? Mathf.Min(420f, canvasSize.x - 80f) : 420f;
-                phasePanelRect.sizeDelta = new Vector2(phaseWidth, phasePanelRect.sizeDelta.y);
+                if (isMobile)
+                {
+                    // Escurece o fundo do dropdown para impedir que fragmentos do menu vazem por tras
+                    var backdrop = phasePanelRect.parent != null ? phasePanelRect.parent.Find("Fundo_Clique")?.GetComponent<Image>() : null;
+                    if (backdrop != null)
+                    {
+                        backdrop.color = new Color(0.02f, 0.015f, 0.01f, 0.86f);
+                    }
+
+                    float phaseWidth = Mathf.Min(346f * px, maxPanelW);
+                    int itemCount = 0;
+                    for (int i = 0; i < phasePanelRect.childCount; i++)
+                    {
+                        if (phasePanelRect.GetChild(i).name.StartsWith("Fase_"))
+                        {
+                            itemCount++;
+                        }
+                    }
+
+                    float headerH = 26f * px;
+                    float rowH = 36f * px;
+                    float totalH = headerH + 16f * px + Mathf.Max(1, itemCount) * rowH + 12f * px;
+                    phasePanelRect.anchoredPosition = new Vector2(0f, -56f * px);
+                    phasePanelRect.sizeDelta = new Vector2(phaseWidth, totalH);
+
+                    var phaseImg = phasePanelRect.GetComponent<Image>();
+                    if (phaseImg != null)
+                    {
+                        phaseImg.color = new Color(0.06f, 0.042f, 0.032f, 0.99f);
+                    }
+
+                    var phaseOutline = phasePanelRect.GetComponent<Outline>();
+                    if (phaseOutline != null)
+                    {
+                        phaseOutline.effectColor = new Color(0.90f, 0.74f, 0.42f, 0.88f);
+                        phaseOutline.effectDistance = new Vector2(2f * px, -2f * px);
+                    }
+
+                    var header = phasePanelRect.Find("Titulo_Fases")?.GetComponent<Text>();
+                    if (header != null)
+                    {
+                        header.fontSize = Mathf.RoundToInt(14f * px);
+                        header.rectTransform.anchoredPosition = new Vector2(0f, -8f * px);
+                        header.rectTransform.sizeDelta = new Vector2(-16f * px, headerH);
+                    }
+
+                    int rowIdx = 0;
+                    for (int i = 0; i < phasePanelRect.childCount; i++)
+                    {
+                        var child = phasePanelRect.GetChild(i) as RectTransform;
+                        if (child == null || !child.name.StartsWith("Fase_"))
+                        {
+                            continue;
+                        }
+
+                        child.anchoredPosition = new Vector2(0f, -(headerH + 12f * px + rowIdx * rowH));
+                        child.sizeDelta = new Vector2(-18f * px, rowH - 4f * px);
+                        SetTextSize(child, Mathf.RoundToInt(15f * px));
+                        rowIdx++;
+                    }
+                }
+                else
+                {
+                    phasePanelRect.sizeDelta = new Vector2(420f, phasePanelRect.sizeDelta.y);
+                }
             }
         }
 

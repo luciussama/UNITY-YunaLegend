@@ -8,8 +8,11 @@ using YunaLegend.Arena.Core;
 namespace YunaLegend.Arena.Runtime
 {
     /// <summary>
-    /// Interface da Arena Imaginaria: coracoes da Yuna e do inimigo, dica de abertura/defesa,
-    /// corte dramatico do Especial Arco-Iris (eyes-power-v1.png), controles touch mobile e paineis.
+    /// Interface da Arena Imaginaria com layout responsivo mobile:
+    /// - Prioridade 1: todos os textos e dicas na parte superior, sem cobrir Yuna/inimigos.
+    /// - Prioridade 2: fontes entre 14 e 16px logicos no celular.
+    /// - Prioridade 3: preserva estetica original (coracoes creme/coral, D-Pad cruz, botoes X/Y).
+    /// - Prioridade 4: paineis e controles cabem integralmente no enquadramento do celular.
     /// </summary>
     public sealed class ArenaHudController : MonoBehaviour
     {
@@ -17,11 +20,18 @@ namespace YunaLegend.Arena.Runtime
         [SerializeField] private Sprite eyesCutinSprite;
 
         private Canvas hudCanvas;
+        private RectTransform canvasRect;
         private Text playerHeartsText;
         private Text enemyTitleText;
         private Text enemyHeartsText;
         private Text statusHintText;
         private Text specialReadyText;
+        private RectTransform muteBtnRect;
+        private Text muteBtnLabel;
+        private RectTransform pauseBtnRect;
+        private Text pauseBtnLabel;
+
+        private Button attackMobileButton;
         private Button specialMobileButton;
 
         private GameObject cutinRoot;
@@ -29,7 +39,9 @@ namespace YunaLegend.Arena.Runtime
         private Image rainbowBeamImage;
 
         private GameObject pausePanel;
+        private RectTransform pauseBoxRect;
         private GameObject outcomePanel;
+        private RectTransform outcomeBoxRect;
         private Text outcomeTitleText;
         private Text outcomeBodyText;
 
@@ -39,6 +51,11 @@ namespace YunaLegend.Arena.Runtime
         private float fadeAlpha = 1f;
         private bool touchAttackQueued;
         private bool touchSpecialQueued;
+
+        private Vector2 lastCanvasSize = new Vector2(-1f, -1f);
+        private float forcedLogicalWidth = -1f;
+        private float forcedLogicalHeight = -1f;
+        private bool forceMobileControls;
 
         public bool IsPaused { get; private set; }
         public Vector2 TouchMove => virtualDPad != null ? virtualDPad.Direction : Vector2.zero;
@@ -56,13 +73,43 @@ namespace YunaLegend.Arena.Runtime
             eyesCutinSprite = eyesSprite;
         }
 
+        public void SetViewportOverride(float logicalWidth, float logicalHeight)
+        {
+            forcedLogicalWidth = logicalWidth;
+            forcedLogicalHeight = logicalHeight;
+            lastCanvasSize = new Vector2(-1f, -1f);
+            if (canvasRect != null)
+            {
+                ApplyResponsiveLayout(canvasRect.rect.size);
+            }
+        }
+
+        public void ClearViewportOverride()
+        {
+            forcedLogicalWidth = -1f;
+            forcedLogicalHeight = -1f;
+            lastCanvasSize = new Vector2(-1f, -1f);
+        }
+
+        public void ForceShowMobileControlsForCapture(bool force)
+        {
+            forceMobileControls = force;
+            UpdateMobileControlsVisibility();
+        }
+
+        public void SkipFadeForCapture()
+        {
+            fadeAlpha = 0f;
+            if (fadeOverlay != null)
+            {
+                fadeOverlay.gameObject.SetActive(false);
+            }
+        }
+
         private void Awake()
         {
-            if (uiFont == null)
-            {
-                uiFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            }
-
+            // Usa fonte de interface nitida e legivel em 14-16px no celular (evita fonte cursiva fina)
+            uiFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             BuildHud();
         }
 
@@ -115,7 +162,10 @@ namespace YunaLegend.Arena.Runtime
 
             if (specialReadyText != null)
             {
-                specialReadyText.text = sim.SpecialUsed ? "ESPECIAL: USADO" : "[R] ESPADA ARCO-ÍRIS: PRONTO";
+                bool isMobile = IsMobileViewport();
+                specialReadyText.text = sim.SpecialUsed
+                    ? "ESPECIAL: USADO"
+                    : (isMobile ? "ESPECIAL ARCO-ÍRIS: PRONTO" : "[R] ESPADA ARCO-ÍRIS: PRONTO");
                 specialReadyText.color = sim.SpecialUsed
                     ? new Color(0.55f, 0.52f, 0.48f)
                     : new Color(1f, 0.88f, 0.45f);
@@ -137,6 +187,8 @@ namespace YunaLegend.Arena.Runtime
             {
                 pausePanel.SetActive(paused);
             }
+
+            UpdateMobileControlsVisibility();
         }
 
         public void ShowOutcome(ArenaBattleOutcome outcome)
@@ -204,7 +256,7 @@ namespace YunaLegend.Arena.Runtime
                 return;
             }
 
-            bool isTouch = Application.isMobilePlatform || Touchscreen.current != null;
+            bool isTouch = forceMobileControls || Application.isMobilePlatform || Touchscreen.current != null;
             mobileControlsRoot.SetActive(isTouch && !IsPaused);
         }
 
@@ -215,6 +267,7 @@ namespace YunaLegend.Arena.Runtime
             hudCanvas = canvasGo.GetComponent<Canvas>();
             hudCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
             hudCanvas.sortingOrder = 50;
+            canvasRect = canvasGo.GetComponent<RectTransform>();
 
             var scaler = canvasGo.GetComponent<CanvasScaler>();
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
@@ -223,29 +276,38 @@ namespace YunaLegend.Arena.Runtime
 
             var root = canvasGo.transform;
 
-            playerHeartsText = CreateText("Yuna_Hearts", root, "YUNA  ♥♥♥", 26, new Color(1f, 0.92f, 0.82f), TextAnchor.UpperLeft);
-            SetRect(playerHeartsText.rectTransform, new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(24f, -18f), new Vector2(460f, 36f));
+            var yunaPill = CreateHudPill("Yuna_HudPill", root);
+            playerHeartsText = CreateText("Yuna_Hearts", yunaPill.transform, "YUNA  ♥♥♥", 26, new Color(1f, 0.92f, 0.82f), TextAnchor.UpperLeft);
+            playerHeartsText.fontStyle = FontStyle.Bold;
+            SetRect(playerHeartsText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(8f, -4f), new Vector2(-16f, 24f));
 
-            specialReadyText = CreateText("Special_Badge", root, "[R] ESPADA ARCO-ÍRIS: PRONTO", 16, new Color(1f, 0.88f, 0.45f), TextAnchor.UpperLeft);
-            SetRect(specialReadyText.rectTransform, new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(24f, -56f), new Vector2(460f, 26f));
+            specialReadyText = CreateText("Special_Badge", yunaPill.transform, "[R] ESPADA ARCO-ÍRIS: PRONTO", 16, new Color(1f, 0.88f, 0.45f), TextAnchor.UpperLeft);
+            specialReadyText.fontStyle = FontStyle.Bold;
+            SetRect(specialReadyText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(8f, -26f), new Vector2(-16f, 22f));
 
-            enemyTitleText = CreateText("Enemy_Title", root, "Locomotiva de Cerco", 22, new Color(1f, 0.92f, 0.82f), TextAnchor.UpperRight);
-            SetRect(enemyTitleText.rectTransform, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-140f, -18f), new Vector2(460f, 32f));
+            var enemyPill = CreateHudPill("Enemy_HudPill", root);
+            enemyTitleText = CreateText("Enemy_Title", enemyPill.transform, "Locomotiva de Cerco", 22, new Color(1f, 0.92f, 0.82f), TextAnchor.UpperRight);
+            enemyTitleText.fontStyle = FontStyle.Bold;
+            SetRect(enemyTitleText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(8f, -4f), new Vector2(-16f, 24f));
 
-            enemyHeartsText = CreateText("Enemy_Hearts", root, "♥♥♥", 26, new Color(1f, 0.48f, 0.48f), TextAnchor.UpperRight);
-            SetRect(enemyHeartsText.rectTransform, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-140f, -50f), new Vector2(460f, 34f));
+            enemyHeartsText = CreateText("Enemy_Hearts", enemyPill.transform, "♥♥♥", 26, new Color(1f, 0.48f, 0.48f), TextAnchor.UpperRight);
+            enemyHeartsText.fontStyle = FontStyle.Bold;
+            SetRect(enemyHeartsText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(8f, -26f), new Vector2(-16f, 22f));
 
             statusHintText = CreateText("Status_Hint", root, string.Empty, 20, new Color(0.98f, 0.94f, 0.82f), TextAnchor.LowerCenter);
+            statusHintText.fontStyle = FontStyle.Bold;
             SetRect(statusHintText.rectTransform, new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 24f), new Vector2(760f, 36f));
 
-            CreateTopButton("Btn_Mute", root, "SOM", new Vector2(-78f, -18f), () => OnMuteToggled?.Invoke());
-            CreateTopButton("Btn_Pause", root, "II", new Vector2(-22f, -18f), () => OnPauseToggled?.Invoke(!IsPaused));
+            muteBtnRect = CreateTopButton("Btn_Mute", root, "SOM", new Vector2(-78f, -18f), out muteBtnLabel, () => OnMuteToggled?.Invoke());
+            pauseBtnRect = CreateTopButton("Btn_Pause", root, "II", new Vector2(-22f, -18f), out pauseBtnLabel, () => OnPauseToggled?.Invoke(!IsPaused));
 
             BuildSpecialOverlay(root);
             BuildMobileControls(root);
             BuildPausePanel(root);
             BuildOutcomePanel(root);
             BuildFadeOverlay(root);
+
+            ApplyResponsiveLayout(canvasRect.rect.size.x > 1f ? canvasRect.rect.size : new Vector2(1280f, 720f));
         }
 
         private void Update()
@@ -259,6 +321,239 @@ namespace YunaLegend.Arena.Runtime
                     fadeOverlay.gameObject.SetActive(false);
                 }
             }
+
+            if (canvasRect != null)
+            {
+                Vector2 size = canvasRect.rect.size;
+                if (size.x > 1f && size.y > 1f && (!Mathf.Approximately(size.x, lastCanvasSize.x) || !Mathf.Approximately(size.y, lastCanvasSize.y)))
+                {
+                    lastCanvasSize = size;
+                    ApplyResponsiveLayout(size);
+                }
+            }
+        }
+
+        private void ApplyResponsiveLayout(Vector2 canvasSize)
+        {
+            if (canvasSize.x <= 1f || canvasSize.y <= 1f)
+            {
+                return;
+            }
+
+            if (!IsMobileViewport())
+            {
+                return;
+            }
+
+            float px = ComputePxToCanvas(canvasSize);
+            bool isPortrait = (canvasSize.x / canvasSize.y) < 1.1f;
+            float marginX = 12f * px;
+            float topY = -10f * px;
+            float usableW = Mathf.Max(220f * px, canvasSize.x - marginX * 2f);
+
+            int f14 = Mathf.RoundToInt(14f * px);
+            int f15 = Mathf.RoundToInt(15f * px);
+            int f16 = Mathf.RoundToInt(16f * px);
+
+            // Top-right utility buttons (SOM, II)
+            float muteW = 46f * px;
+            float pauseW = 36f * px;
+            float btnH = 28f * px;
+            float btnGap = 6f * px;
+            SetRect(pauseBtnRect, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-marginX, topY), new Vector2(pauseW, btnH));
+            SetRect(muteBtnRect, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-(marginX + pauseW + btnGap), topY), new Vector2(muteW, btnH));
+            muteBtnLabel.fontSize = f14;
+            pauseBtnLabel.fontSize = f14;
+
+            float buttonsTotalW = muteW + pauseW + btnGap + 8f * px;
+
+            var yunaPillRect = playerHeartsText.transform.parent as RectTransform;
+            var enemyPillRect = enemyTitleText.transform.parent as RectTransform;
+
+            if (isPortrait)
+            {
+                float pillH = 44f * px;
+                float leftW = Mathf.Max(220f * px, usableW - buttonsTotalW);
+                SetRect(yunaPillRect, new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(marginX, topY), new Vector2(leftW, pillH));
+                playerHeartsText.fontSize = f15;
+                playerHeartsText.alignment = TextAnchor.UpperLeft;
+                SetRect(playerHeartsText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(8f * px, -4f * px), new Vector2(-16f * px, 20f * px));
+
+                specialReadyText.fontSize = f14;
+                specialReadyText.alignment = TextAnchor.UpperLeft;
+                SetRect(specialReadyText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(8f * px, -23f * px), new Vector2(-16f * px, 18f * px));
+
+                SetRect(enemyPillRect, new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(marginX, topY - pillH - 6f * px), new Vector2(usableW, pillH));
+                enemyTitleText.fontSize = f15;
+                enemyTitleText.alignment = TextAnchor.UpperLeft;
+                SetRect(enemyTitleText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(8f * px, -4f * px), new Vector2(-16f * px, 20f * px));
+
+                enemyHeartsText.fontSize = f15;
+                enemyHeartsText.alignment = TextAnchor.UpperLeft;
+                SetRect(enemyHeartsText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(8f * px, -23f * px), new Vector2(-16f * px, 20f * px));
+
+                // Status Hint NO TOPO (Prioridade 1), acima da arena e dos controles
+                statusHintText.fontSize = f14;
+                statusHintText.alignment = TextAnchor.UpperCenter;
+                SetRect(statusHintText.rectTransform, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0f, topY - pillH * 2f - 14f * px), new Vector2(usableW, 38f * px));
+            }
+            else
+            {
+                float pillH = 44f * px;
+                float colW = Mathf.Max(220f * px, (usableW - buttonsTotalW - 12f * px) * 0.48f);
+                SetRect(yunaPillRect, new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(marginX, topY), new Vector2(colW, pillH));
+                playerHeartsText.fontSize = f15;
+                playerHeartsText.alignment = TextAnchor.UpperLeft;
+                SetRect(playerHeartsText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(8f * px, -4f * px), new Vector2(-16f * px, 20f * px));
+
+                specialReadyText.fontSize = f14;
+                specialReadyText.alignment = TextAnchor.UpperLeft;
+                SetRect(specialReadyText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(8f * px, -23f * px), new Vector2(-16f * px, 18f * px));
+
+                float rightOffset = -(marginX + buttonsTotalW);
+                SetRect(enemyPillRect, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(rightOffset, topY), new Vector2(colW, pillH));
+                enemyTitleText.fontSize = f15;
+                enemyTitleText.alignment = TextAnchor.UpperRight;
+                SetRect(enemyTitleText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(8f * px, -4f * px), new Vector2(-16f * px, 20f * px));
+
+                enemyHeartsText.fontSize = f15;
+                enemyHeartsText.alignment = TextAnchor.UpperRight;
+                SetRect(enemyHeartsText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(8f * px, -23f * px), new Vector2(-16f * px, 20f * px));
+
+                statusHintText.fontSize = f14;
+                statusHintText.alignment = TextAnchor.UpperCenter;
+                SetRect(statusHintText.rectTransform, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0f, topY - pillH - 8f * px), new Vector2(usableW, 34f * px));
+            }
+
+            // Controles touch inferiores com margem inferior segura para TRAS: DEFENDER
+            if (virtualDPad != null)
+            {
+                float dpadSize = isPortrait ? 110f * px : 112f * px;
+                float dpadX = marginX + dpadSize * 0.5f + 12f * px;
+                float dpadY = isPortrait ? 92f * px : 86f * px;
+                virtualDPad.ApplyMobileSizing(dpadSize, new Vector2(dpadX, dpadY), f14, px);
+            }
+
+            float combatW = isPortrait ? 80f * px : 92f * px;
+            float combatH = isPortrait ? 62f * px : 68f * px;
+            float combatGap = 8f * px;
+            float combatBottomY = 24f * px;
+
+            if (specialMobileButton != null)
+            {
+                ResizeCombatButton(specialMobileButton.GetComponent<RectTransform>(), new Vector2(-marginX, combatBottomY), new Vector2(combatW, combatH), f14, f15, px);
+            }
+
+            if (attackMobileButton != null)
+            {
+                ResizeCombatButton(attackMobileButton.GetComponent<RectTransform>(), new Vector2(-(marginX + combatW + combatGap), combatBottomY), new Vector2(combatW, combatH), f14, f15, px);
+            }
+
+            // Modais (Pause e Outcome) cabendo integralmente no celular
+            ResizeModalBox(pauseBoxRect, usableW, px, f16, f15, f14);
+            ResizeModalBox(outcomeBoxRect, usableW, px, f16, f15, f14);
+        }
+
+        private static void ResizeCombatButton(RectTransform rt, Vector2 pos, Vector2 size, int f14, int f15, float px)
+        {
+            rt.anchoredPosition = pos;
+            rt.sizeDelta = size;
+            var key = rt.Find("KeyHint")?.GetComponent<Text>();
+            if (key != null)
+            {
+                key.fontSize = f14;
+                SetRect(key.rectTransform, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0f, -4f * px), new Vector2(size.x - 8f * px, 18f * px));
+            }
+
+            var main = rt.Find("MainLabel")?.GetComponent<Text>();
+            if (main != null)
+            {
+                main.fontSize = f14;
+                SetRect(main.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0f, 0f), new Vector2(size.x - 6f * px, 22f * px));
+            }
+
+            var sub = rt.Find("SubLabel")?.GetComponent<Text>();
+            if (sub != null)
+            {
+                sub.fontSize = f14;
+                SetRect(sub.rectTransform, new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 4f * px), new Vector2(size.x - 8f * px, 18f * px));
+            }
+        }
+
+        private static void ResizeModalBox(RectTransform box, float usableW, float px, int f16, int f15, int f14)
+        {
+            if (box == null)
+            {
+                return;
+            }
+
+            float w = Mathf.Min(330f * px, usableW);
+            float h = 240f * px;
+            box.sizeDelta = new Vector2(w, h);
+
+            var title = box.Find("Modal_Title")?.GetComponent<Text>();
+            if (title != null)
+            {
+                title.fontSize = f16;
+                SetRect(title.rectTransform, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0f, -14f * px), new Vector2(w - 24f * px, 28f * px));
+            }
+
+            var body = box.Find("Outcome_Body")?.GetComponent<Text>();
+            if (body != null)
+            {
+                body.fontSize = f14;
+                SetRect(body.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0f, 34f * px), new Vector2(w - 28f * px, 58f * px));
+            }
+
+            float btnW = w - 40f * px;
+            float btnH = 38f * px;
+            int btnIndex = 0;
+            for (int i = 0; i < box.childCount; i++)
+            {
+                var child = box.GetChild(i) as RectTransform;
+                if (child == null || !child.name.StartsWith("Btn_"))
+                {
+                    continue;
+                }
+
+                float yOffset = body != null ? (-24f - btnIndex * 46f) * px : (34f - btnIndex * 48f) * px;
+                child.anchoredPosition = new Vector2(0f, yOffset);
+                child.sizeDelta = new Vector2(btnW, btnH);
+                var lbl = child.GetComponentInChildren<Text>();
+                if (lbl != null)
+                {
+                    lbl.fontSize = f15;
+                }
+
+                btnIndex++;
+            }
+        }
+
+        private float ComputePxToCanvas(Vector2 canvasSize)
+        {
+            float logicalW = forcedLogicalWidth > 0f ? forcedLogicalWidth : Screen.width;
+            float logicalH = forcedLogicalHeight > 0f ? forcedLogicalHeight : Screen.height;
+
+            if (logicalW <= 1f || logicalH <= 1f)
+            {
+                return canvasSize.x / 390f;
+            }
+
+            float minDim = Mathf.Min(logicalW, logicalH);
+            if (forcedLogicalWidth <= 0f && Application.isMobilePlatform && minDim >= 700f)
+            {
+                float dpr = Mathf.Clamp(minDim / 390f, 1.5f, 3.5f);
+                logicalW /= dpr;
+            }
+
+            return Mathf.Clamp(canvasSize.x / Mathf.Max(280f, logicalW), 0.5f, 4.5f);
+        }
+
+        private bool IsMobileViewport()
+        {
+            float w = forcedLogicalWidth > 0f ? forcedLogicalWidth : Screen.width;
+            float h = forcedLogicalHeight > 0f ? forcedLogicalHeight : Screen.height;
+            return Application.isMobilePlatform || Touchscreen.current != null || w <= 960f || h <= 540f;
         }
 
         private void BuildFadeOverlay(Transform root)
@@ -312,10 +607,7 @@ namespace YunaLegend.Arena.Runtime
 
             virtualDPad = ArenaVirtualDPad.CreateVisualDPad(mobileControlsRoot.transform, uiFont);
 
-            // Dois botoes lado a lado no canto inferior direito fieis ao legado:
-            // Esquerdo: "X / ESPADA" (dourado-creme com borda branca)
-            // Direito: "Y / ESPECIAL / 1 USO" (cinza-ardosia com borda branca)
-            CreateLegacyCombatButton(
+            attackMobileButton = CreateLegacyCombatButton(
                 "Btn_Attack",
                 mobileControlsRoot.transform,
                 "X",
@@ -347,6 +639,7 @@ namespace YunaLegend.Arena.Runtime
         private void BuildPausePanel(Transform root)
         {
             pausePanel = CreateModalPanel("Pause_Panel", root, "Arena Pausada", out var container);
+            pauseBoxRect = container as RectTransform;
             CreateModalButton("Continuar", container, new Vector2(0f, 26f), () => OnPauseToggled?.Invoke(false));
             CreateModalButton("Reiniciar Arena", container, new Vector2(0f, -34f), () => OnRestartRequested?.Invoke());
             CreateModalButton("Voltar ao Menu", container, new Vector2(0f, -94f), () => OnReturnToTitleRequested?.Invoke());
@@ -356,8 +649,10 @@ namespace YunaLegend.Arena.Runtime
         private void BuildOutcomePanel(Transform root)
         {
             outcomePanel = CreateModalPanel("Outcome_Panel", root, "Resultado", out var container);
+            outcomeBoxRect = container as RectTransform;
             outcomeTitleText = container.Find("Modal_Title").GetComponent<Text>();
             outcomeBodyText = CreateText("Outcome_Body", container, string.Empty, 18, new Color(0.90f, 0.85f, 0.76f), TextAnchor.MiddleCenter);
+            outcomeBodyText.horizontalOverflow = HorizontalWrapMode.Wrap;
             SetRect(outcomeBodyText.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0f, 38f), new Vector2(440f, 72f));
 
             CreateModalButton("Jogar Novamente", container, new Vector2(0f, -34f), () => OnRestartRequested?.Invoke());
@@ -376,6 +671,9 @@ namespace YunaLegend.Arena.Runtime
             box.transform.SetParent(overlay.transform, false);
             SetRect(box.GetComponent<RectTransform>(), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(500f, 320f));
             box.GetComponent<Image>().color = new Color(0.09f, 0.06f, 0.11f, 0.96f);
+            var outline = box.AddComponent<Outline>();
+            outline.effectColor = new Color(0.95f, 0.80f, 0.42f, 0.85f);
+            outline.effectDistance = new Vector2(2f, -2f);
             container = box.transform;
 
             var titleText = CreateText("Modal_Title", container, title, 30, new Color(1f, 0.90f, 0.68f), TextAnchor.MiddleCenter);
@@ -389,22 +687,30 @@ namespace YunaLegend.Arena.Runtime
             go.transform.SetParent(parent, false);
             SetRect(go.GetComponent<RectTransform>(), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), pos, new Vector2(260f, 46f));
             go.GetComponent<Image>().color = new Color(0.24f, 0.18f, 0.28f, 1f);
+            var outline = go.AddComponent<Outline>();
+            outline.effectColor = new Color(0.95f, 0.80f, 0.42f, 0.75f);
+            outline.effectDistance = new Vector2(1.5f, -1.5f);
             go.GetComponent<Button>().onClick.AddListener(() => onClick?.Invoke());
 
             var text = CreateText("Label", go.transform, label, 20, Color.white, TextAnchor.MiddleCenter);
             Stretch(text.rectTransform);
         }
 
-        private void CreateTopButton(string name, Transform root, string label, Vector2 anchoredPos, Action onClick)
+        private RectTransform CreateTopButton(string name, Transform root, string label, Vector2 anchoredPos, out Text labelText, Action onClick)
         {
             var go = new GameObject(name, typeof(RectTransform), typeof(Image), typeof(Button));
             go.transform.SetParent(root, false);
-            SetRect(go.GetComponent<RectTransform>(), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), anchoredPos, new Vector2(48f, 36f));
-            go.GetComponent<Image>().color = new Color(0.12f, 0.09f, 0.14f, 0.82f);
+            var rt = go.GetComponent<RectTransform>();
+            SetRect(rt, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), anchoredPos, new Vector2(48f, 36f));
+            go.GetComponent<Image>().color = new Color(0.12f, 0.09f, 0.14f, 0.86f);
+            var outline = go.AddComponent<Outline>();
+            outline.effectColor = new Color(0.90f, 0.78f, 0.48f, 0.75f);
+            outline.effectDistance = new Vector2(1.2f, -1.2f);
             go.GetComponent<Button>().onClick.AddListener(() => onClick?.Invoke());
 
-            var text = CreateText("Label", go.transform, label, 15, new Color(1f, 0.92f, 0.78f), TextAnchor.MiddleCenter);
-            Stretch(text.rectTransform);
+            labelText = CreateText("Label", go.transform, label, 15, new Color(1f, 0.92f, 0.78f), TextAnchor.MiddleCenter);
+            Stretch(labelText.rectTransform);
+            return rt;
         }
 
         private Button CreateLegacyCombatButton(
@@ -508,29 +814,6 @@ namespace YunaLegend.Arena.Runtime
             return Sprite.Create(tex, new Rect(0f, 0f, width, height), new Vector2(0.5f, 0.5f), 100f);
         }
 
-        private void CreateHoldButton(string name, Transform root, string label, Vector2 anchor, Vector2 pos, Vector2 size, Action onDown, Action onUp)
-        {
-            var go = new GameObject(name, typeof(RectTransform), typeof(Image), typeof(EventTrigger));
-            go.transform.SetParent(root, false);
-            SetRect(go.GetComponent<RectTransform>(), anchor, anchor, anchor, pos, size);
-            go.GetComponent<Image>().color = new Color(0.14f, 0.12f, 0.18f, 0.72f);
-
-            var trigger = go.GetComponent<EventTrigger>();
-            AddTrigger(trigger, EventTriggerType.PointerDown, _ => onDown?.Invoke());
-            AddTrigger(trigger, EventTriggerType.PointerUp, _ => onUp?.Invoke());
-            AddTrigger(trigger, EventTriggerType.PointerExit, _ => onUp?.Invoke());
-
-            var text = CreateText("Label", go.transform, label, 28, Color.white, TextAnchor.MiddleCenter);
-            Stretch(text.rectTransform);
-        }
-
-        private static void AddTrigger(EventTrigger trigger, EventTriggerType type, Action<BaseEventData> callback)
-        {
-            var entry = new EventTrigger.Entry { eventID = type };
-            entry.callback.AddListener(data => callback(data));
-            trigger.triggers.Add(entry);
-        }
-
         private Text CreateText(string name, Transform parent, string content, int size, Color color, TextAnchor align)
         {
             var go = new GameObject(name, typeof(RectTransform));
@@ -541,11 +824,26 @@ namespace YunaLegend.Arena.Runtime
             text.fontSize = size;
             text.color = color;
             text.alignment = align;
+            text.horizontalOverflow = HorizontalWrapMode.Wrap;
+            text.verticalOverflow = VerticalWrapMode.Overflow;
             text.raycastTarget = false;
             var shadow = go.AddComponent<Shadow>();
             shadow.effectColor = new Color(0f, 0f, 0f, 0.8f);
             shadow.effectDistance = new Vector2(1.5f, -1.5f);
             return text;
+        }
+
+        private static GameObject CreateHudPill(string name, Transform parent)
+        {
+            var go = new GameObject(name, typeof(RectTransform), typeof(Image));
+            go.transform.SetParent(parent, false);
+            var img = go.GetComponent<Image>();
+            img.color = new Color(0.102f, 0.063f, 0.149f, 0.86f);
+            img.raycastTarget = false;
+            var outline = go.AddComponent<Outline>();
+            outline.effectColor = new Color(0.980f, 0.800f, 0.082f, 0.88f);
+            outline.effectDistance = new Vector2(1.5f, -1.5f);
+            return go;
         }
 
         private static string FormatHearts(int hp, int maxHp)
