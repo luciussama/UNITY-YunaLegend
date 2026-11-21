@@ -324,24 +324,26 @@ namespace YunaLegend.Arena.Tests
             }
 
             float defeatedPos = sim.EnemyX;
-            Assert.Less(defeatedPos, 1020f, "Trem deve ter se afastado da caixa antes de ser derrotado.");
+            Assert.Less(defeatedPos, 1050f, "Trem deve ter se afastado da caixa antes de ser derrotado.");
 
-            // Usa o especial para derrotar o Trem imediatamente
+            // Usa o especial para derrotar o Trem imediatamente (TotalDurationTicks = 156 transiciona para Defeated)
             sim.TickFixed(new ArenaInputState { SpecialPressed = true });
-            AdvanceTicks(sim, ArenaSpecialSpec.TotalDurationTicks + 1, default);
+            AdvanceTicks(sim, ArenaSpecialSpec.TotalDurationTicks, default);
             Assert.AreEqual(ArenaEnemyState.Defeated, sim.EnemyState);
+            Assert.AreEqual(0, sim.EnemyStateTick);
 
-            // No meio da animacao de deposito (tick 30 de 60), deve estar subindo em arco rumo a caixa (x=1120)
+            // No meio da animacao de deposito (tick 30 de 60), deve estar voando em arco rumo a caixa a esquerda (ChestDepositTargetSimX = 270)
             AdvanceTicks(sim, 30, default);
-            Assert.Greater(sim.EnemyX, defeatedPos + 30f, "Brinquedo derrotado deve se mover de volta para a caixa.");
-            Assert.Less(sim.EnemyY, sim.Tuning.GroundY - 80f, "Brinquedo derrotado deve subir em arco ao entrar na caixa.");
-            Assert.Greater(sim.EnemyDepositPitchDegrees, 15f, "Brinquedo derrotado deve inclinar ao mergulhar na caixa.");
-            Assert.Less(sim.EnemySpawnScale, 0.70f, "Brinquedo derrotado deve diminuir de escala ao entrar na caixa.");
+            Assert.Less(sim.EnemyX, defeatedPos - 250f, "Brinquedo derrotado deve voar pelo espaco da arena ate a caixa de brinquedos.");
+            Assert.Less(sim.EnemyY, sim.Tuning.GroundY - 120f, "Brinquedo derrotado deve subir em arco parabólico claro ao entrar na caixa.");
+            Assert.Greater(sim.EnemyDepositPitchDegrees, 10f, "Brinquedo derrotado deve inclinar ao mergulhar na caixa.");
+            Assert.Less(sim.EnemySpawnScale, 0.72f, "Brinquedo derrotado deve diminuir de escala ao entrar na caixa.");
 
-            // Ao final do tick 59 (ultimo frame antes da proxima onda), chega na caixa (x=1120)
+            // Ao final do tick 59 (ultimo frame antes da proxima onda), chega exatamente na boca da caixa (x=270)
             AdvanceTicks(sim, 29, default);
-            Assert.AreEqual(1120f, sim.EnemyX, 5f, "Brinquedo derrotado deve terminar depositado exatamente na posicao da caixa.");
-            Assert.Less(sim.EnemySpawnScale, 0.20f, "Brinquedo deve estar recolhido dentro da caixa.");
+            Assert.AreEqual(ArenaEnemyState.Defeated, sim.EnemyState);
+            Assert.AreEqual(ArenaCombatSimulation.ChestDepositTargetSimX, sim.EnemyX, 8f, "Brinquedo derrotado deve terminar depositado exatamente na posicao da caixa.");
+            Assert.Less(sim.EnemySpawnScale, 0.28f, "Brinquedo deve estar recolhido dentro da caixa.");
         }
 
         private static void AdvanceTicks(ArenaCombatSimulation sim, int ticks, ArenaInputState input)

@@ -451,5 +451,31 @@ namespace YunaLegend.Tests
 
             GameObject.DestroyImmediate(root);
         }
+
+        [Test]
+        public void Test_SurfaceSoundCatalog_ProducesDistinctTimbresPerSteppedObject()
+        {
+            Assert.AreEqual(DarkRoomSurfaceSoundKind.PlushSoft, DarkRoomSurfaceSoundCatalog.ResolveSurfaceKind(0));
+            Assert.AreEqual(DarkRoomSurfaceSoundKind.PaperBooks, DarkRoomSurfaceSoundCatalog.ResolveSurfaceKind(1));
+            Assert.AreEqual(DarkRoomSurfaceSoundKind.HardWood, DarkRoomSurfaceSoundCatalog.ResolveSurfaceKind(2));
+            Assert.AreEqual(DarkRoomSurfaceSoundKind.ToyDrum, DarkRoomSurfaceSoundCatalog.ResolveSurfaceKind(5));
+            Assert.AreEqual(DarkRoomSurfaceSoundKind.MusicBoxTine, DarkRoomSurfaceSoundCatalog.ResolveSurfaceKind(8));
+            Assert.AreEqual(DarkRoomSurfaceSoundKind.CrystalChandelier, DarkRoomSurfaceSoundCatalog.ResolveSurfaceKind(17));
+            Assert.AreEqual(DarkRoomSurfaceSoundKind.XylophoneKey, DarkRoomSurfaceSoundCatalog.ResolveSurfaceKind(28));
+            Assert.AreEqual(DarkRoomSurfaceSoundKind.CardstockCastle, DarkRoomSurfaceSoundCatalog.ResolveSurfaceKind(30));
+            Assert.AreEqual(DarkRoomSurfaceSoundKind.TinMetal, DarkRoomSurfaceSoundCatalog.ResolveSurfaceKind(32));
+
+            var xylophoneStep0 = DarkRoomSurfaceSoundCatalog.EvaluateStepSpec(28, 0);
+            var xylophoneStep1 = DarkRoomSurfaceSoundCatalog.EvaluateStepSpec(28, 1);
+            var drumStep = DarkRoomSurfaceSoundCatalog.EvaluateStepSpec(5, 0);
+            var plushStep = DarkRoomSurfaceSoundCatalog.EvaluateStepSpec(0, 0);
+
+            Assert.AreNotEqual(xylophoneStep0.FundamentalHz, xylophoneStep1.FundamentalHz, "Passos consecutivos no xilofone devem tocar notas diferentes da escala pentatonica.");
+            Assert.Greater(xylophoneStep0.FundamentalHz, drumStep.FundamentalHz * 2f, "Xilofone deve ter frequencia fundamental muito mais aguda que o tambor.");
+            Assert.Greater(drumStep.FundamentalHz, plushStep.FundamentalHz * 1.5f, "Tambor deve ter frequencia mais alta que o impacto abafado na pelucia.");
+
+            float[] pcm = DarkRoomSurfaceSoundCatalog.SynthesizeSamples(xylophoneStep0, 22050);
+            Assert.Greater(pcm.Length, 1000);
+        }
     }
 }

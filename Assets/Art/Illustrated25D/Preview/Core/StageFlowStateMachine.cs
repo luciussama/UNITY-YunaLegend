@@ -165,6 +165,15 @@ namespace YunaLegend.Illustrated25D.Environment
             return true;
         }
 
+        public void RespawnAtStage1Checkpoint()
+        {
+            Stage2CheckpointReached = false;
+            Stage3CheckpointReached = false;
+            CastleCutsceneTriggered = false;
+            FalseDoorTriggered = false;
+            SetPhase(FlowPhase.PreJumpCue);
+        }
+
         public void RespawnAtStage2Checkpoint()
         {
             Stage2CheckpointReached = true;

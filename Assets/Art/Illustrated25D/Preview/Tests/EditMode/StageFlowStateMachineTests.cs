@@ -128,5 +128,23 @@ namespace YunaLegend.Illustrated25D.Tests
             Assert.IsTrue(sm.Stage3CheckpointReached);
             Assert.IsFalse(sm.ShowIdlePose);
         }
+
+        [Test]
+        public void Stage1CheckpointRespawn_SkipsBedWakeOpeningAndStartsAtPreJumpCue()
+        {
+            var sm = new StageFlowStateMachine();
+            sm.RespawnAtStage1Checkpoint();
+
+            Assert.AreEqual(StageFlowStateMachine.FlowPhase.PreJumpCue, sm.Phase);
+            Assert.IsFalse(sm.Stage2CheckpointReached);
+            Assert.IsFalse(sm.Stage3CheckpointReached);
+            Assert.IsFalse(sm.CastleCutsceneTriggered);
+            Assert.IsFalse(sm.FalseDoorTriggered);
+            Assert.IsTrue(sm.ShowIdlePose);
+
+            sm.Tick(0.016f, confirmPressed: false, jumpOrStartPressed: true);
+            Assert.AreEqual(StageFlowStateMachine.FlowPhase.Stage1Gameplay, sm.Phase);
+            Assert.IsFalse(sm.ShowIdlePose);
+        }
     }
 }

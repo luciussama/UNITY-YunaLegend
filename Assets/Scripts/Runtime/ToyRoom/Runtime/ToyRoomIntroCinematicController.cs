@@ -414,9 +414,9 @@ namespace YunaLegend.ToyRoom.Runtime
             string[] rawLines = sample.DialogueText.Split('\n');
             int lineCount = Mathf.Max(1, rawLines.Length);
             bool hasHeading = !string.IsNullOrEmpty(sample.DialogueHeading);
-            float headingHeight = hasHeading ? (isMobile ? 22f * pxScale : 30f * cssScale) : 0f;
-            float controlsHeight = isMobile ? 36f * pxScale : 30f * cssScale;
-            float verticalPad = isMobile ? 26f * pxScale : 38f * cssScale;
+            float headingHeight = hasHeading ? (isMobile ? 24f * pxScale : 30f * cssScale) : 0f;
+            float controlsHeight = isMobile ? 42f * pxScale : 30f * cssScale;
+            float verticalPad = isMobile ? 32f * pxScale : 38f * cssScale;
             float height = (lineCount * lineHeight) + verticalPad + headingHeight + controlsHeight;
 
             float xCenter = canvasSize.x * 0.5f;
@@ -441,25 +441,29 @@ namespace YunaLegend.ToyRoom.Runtime
             {
                 narrationHeadingText.text = sample.DialogueHeading;
                 narrationHeadingText.fontSize = headingFontPx;
-                narrationHeadingText.rectTransform.anchoredPosition = new Vector2(0f, -(8f * pxScale));
+                narrationHeadingText.rectTransform.anchoredPosition = new Vector2(0f, -(9f * pxScale));
                 narrationHeadingText.rectTransform.sizeDelta = new Vector2(width, 24f * pxScale);
             }
 
             narrationBodyText.text = sample.DialogueText;
             narrationBodyText.fontSize = bodyFontPx;
-            float bodyTop = ((isMobile ? 12f : 19f) * pxScale) + headingHeight;
+            float bodyTop = ((isMobile ? 13f : 19f) * pxScale) + headingHeight;
             float bodyHeight = lineCount * lineHeight;
             narrationBodyText.rectTransform.anchoredPosition = new Vector2(16f * pxScale, -bodyTop);
             narrationBodyText.rectTransform.sizeDelta = new Vector2(width - (32f * pxScale), bodyHeight + (6f * pxScale));
 
-            float controlsTop = height - controlsHeight - (5f * pxScale);
+            float controlsTop = height - controlsHeight - (10f * pxScale);
             float hintRowH = isMobile ? 18f * pxScale : 16f * pxScale;
             float hintRowGap = isMobile ? 16f * pxScale : 13f * pxScale;
 
+            Color softHintCol = new Color(122f / 255f, 92f / 255f, 95f / 255f, isMobile ? 0.68f : 0.85f);
+            narrationAutoHintText.fontStyle = FontStyle.Normal;
+            narrationAutoHintText.color = softHintCol;
             narrationAutoHintText.fontSize = hintFontPx;
             narrationAutoHintText.rectTransform.anchoredPosition = new Vector2(0f, -controlsTop);
             narrationAutoHintText.rectTransform.sizeDelta = new Vector2(width, hintRowH);
 
+            narrationClickHintText.color = softHintCol;
             narrationClickHintText.fontSize = hintFontPx;
             narrationClickHintText.rectTransform.anchoredPosition = new Vector2(0f, -(controlsTop + hintRowGap));
             narrationClickHintText.rectTransform.sizeDelta = new Vector2(width, hintRowH);

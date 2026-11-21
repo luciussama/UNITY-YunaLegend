@@ -25,6 +25,7 @@ namespace YunaLegend.Illustrated25D.Preview
         private StageFlowStateMachine.FlowPhase currentPhase;
         private float phaseElapsed;
         private bool activeOpening;
+        private bool skipBedHandoffOnNextPreJump;
 
         public float ChapterBannerAlpha { get; private set; }
         public float CurtainFadeAlpha { get; private set; }
@@ -55,10 +56,24 @@ namespace YunaLegend.Illustrated25D.Preview
             OnPhaseChanged(StageFlowStateMachine.FlowPhase.OpeningNandaWake1);
         }
 
+        public void PrepareRespawnAtPreJump()
+        {
+            skipBedHandoffOnNextPreJump = true;
+        }
+
         public void OnPhaseChanged(StageFlowStateMachine.FlowPhase next)
         {
             currentPhase = next;
             phaseElapsed = 0f;
+            if (next == StageFlowStateMachine.FlowPhase.PreJumpCue && skipBedHandoffOnNextPreJump)
+            {
+                skipBedHandoffOnNextPreJump = false;
+                activeOpening = false;
+                ClearOverrides();
+                return;
+            }
+
+            skipBedHandoffOnNextPreJump = false;
             activeOpening = next == StageFlowStateMachine.FlowPhase.OpeningNandaWake1
                 || next == StageFlowStateMachine.FlowPhase.OpeningPoeticIntro
                 || next == StageFlowStateMachine.FlowPhase.OpeningNandaWake2

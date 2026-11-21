@@ -209,9 +209,15 @@ namespace YunaLegend.Editor.Arena
                     new Color(0.66f, 0.56f, 0.48f), LoadTexture($"{EnvArtDir}/oak-trim-v1.png"));
             }
 
-            // Janela central iluminada e desobstruida
+            // Janela lateral-direita iluminada e desobstruida (igual a janela direita de room-v1.png)
             PlaceSpriteCard("Window_Curtains", envRoot, $"{EnvArtDir}/window-curtains-v1.png",
-                new Vector3(0f, 3.4f, 3.05f), Vector3.one * 2.0f, Color.white);
+                new Vector3(3.25f, 3.45f, 3.05f), Vector3.one * 1.95f, Color.white);
+
+            // Quadros infantis emoldurados na parede acima do Bau de Brinquedos (igual a room-v1.png)
+            CreateVerticalQuad("WallFrame_Left", envRoot, new Vector3(-4.85f, 3.65f, 3.08f), new Vector3(1.15f, 0.92f, 1f),
+                Color.white, LoadTexture("Assets/Materials/T_WallDrawing_Castle.png"));
+            CreateVerticalQuad("WallFrame_Oval", envRoot, new Vector3(-6.20f, 3.60f, 3.08f), new Vector3(0.68f, 0.85f, 1f),
+                Color.white, LoadTexture("Assets/Materials/T_WallDrawing_Sun.png"));
 
             // Tapete oval no chao (y = 0.015m)
             var rugTex = LoadTexture($"{EnvArtDir}/oval-rug-v1.png");
@@ -224,20 +230,169 @@ namespace YunaLegend.Editor.Arena
             RemoveCollider(rugGo);
             rugGo.GetComponent<Renderer>().sharedMaterial = CreateUnlitTransparentMat("M_Arena_Rug", rugTex, Color.white);
 
-            // Regressao 3: Ordem e posicionamento dos objetos no fundo da Arena mantem igualdade com o Quarto de Brinquedos
-            // No Quarto de Brinquedos (ToyRoomCatalog):
-            // - Estante de Livros (Bookshelf): esquerda (X = -4.67m na ToyRoom -> X = -5.15m na Arena)
-            // - Cavalinho de Pau (RockingHorse): centro-esquerda à frente da estante (X = -5.33m na ToyRoom -> X = -2.25m na Arena)
-            // - Bau/Caixa de Brinquedos (OpenChest): centro-direita ao lado da estante (X = +2.67m na ToyRoom -> X = +3.20m na Arena, alinhado a ChestOriginX = 1120)
-            // - Guarda-Roupa / Estante Alta (Wardrobe): extrema direita (X = +8.00m na ToyRoom -> X = +6.15m na Arena)
-            PlaceNormalizedModel("Bookshelf_3D", envRoot, $"{ToyPropsDir}/bookshelf.obj", $"{ToyPropsDir}/bookshelf_Albedo.png",
-                new Vector3(-5.15f, 0f, 2.25f), 1.65f, 180f, "M_Arena_Bookshelf");
+            // Regressao 3: Ordem, silhueta e posicionamento dos objetos no fundo da Arena mantem igualdade com o Quarto de Brinquedos (room-v1.png + ToyRoomCatalog)
+            // Da esquerda para a direita:
+            // 1) OpenChest_3D (Bau/Caixa de Brinquedos Aberta): a esquerda (X = -5.30m, Z = 2.02m, 100% visivel e desobstruida!)
+            // 2) Bookshelf_3D (Estante Alta de Livros e Brinquedos): ao centro-esquerda (X = -0.85m, Z = 2.28m, estante vertical alta de 3.25m com globo/casinha)
+            // 3) Armchair_3D (Poltrona Vermelha Aconchegante): ao centro-direita sob a janela (X = +2.65m, Z = 2.15m)
+            // 4) RockingHorse_3D (Cavalinho de Pau): a direita da poltrona (X = +4.65m, Z = 1.85m)
+            // 5) Wardrobe_3D (Guarda-Roupa / Armario Alto): na extrema direita (X = +6.75m, Z = 2.25m)
+            var openChestGo = BuildOpenToyChestWithOcclusionAndVfx(envRoot, new Vector3(-5.30f, 0f, 2.02f));
+            _ = openChestGo;
+
+            BuildTallVictorianBookshelf(envRoot, new Vector3(-0.85f, 0f, 2.28f));
+
+            PlaceNormalizedModel("Armchair_3D", envRoot, $"{ToyPropsDir}/armchair.obj", $"{ToyPropsDir}/armchair_Albedo.png",
+                new Vector3(2.65f, 0f, 2.15f), 1.55f, 158f, "M_Arena_Armchair");
+
             PlaceNormalizedModel("RockingHorse_3D", envRoot, $"{ArenaModelsDir}/rocking_horse_hunyuan.obj", $"{ArenaModelsDir}/T_RockingHorse_Albedo.png",
-                new Vector3(-2.25f, 0f, 1.95f), 1.32f, 145f, "M_Arena_HorseProp");
-            PlaceNormalizedModel("OpenChest_3D", envRoot, $"{ToyPropsDir}/toy-chest-open.obj", $"{ToyPropsDir}/toy-chest-open_Albedo.png",
-                new Vector3(3.20f, 0f, 1.55f), 1.75f, 198f, "M_Arena_OpenChest");
-            PlaceNormalizedModel("Wardrobe_3D", envRoot, $"{ToyPropsDir}/wardrobe.obj", $"{ToyPropsDir}/wardrobe_Albedo.png",
-                new Vector3(6.15f, 0f, 2.25f), 1.95f, 180f, "M_Arena_Wardrobe");
+                new Vector3(4.65f, 0f, 1.85f), 1.38f, -142f, "M_Arena_HorseProp");
+
+            var wardrobeGo = PlaceNormalizedModel("Wardrobe_3D", envRoot, $"{ToyPropsDir}/wardrobe.obj", $"{ToyPropsDir}/wardrobe_Albedo.png",
+                new Vector3(6.75f, 0f, 2.25f), 1.65f, 180f, "M_Arena_Wardrobe");
+            // Proporcao vertical de armario/estante lateral
+            wardrobeGo.transform.localScale = new Vector3(0.88f, 1.55f, 0.95f);
+        }
+
+        private static GameObject BuildOpenToyChestWithOcclusionAndVfx(Transform envRoot, Vector3 chestPos)
+        {
+            var chestGo = PlaceNormalizedModel("OpenChest_3D", envRoot, $"{ToyPropsDir}/toy-chest-open.obj", $"{ToyPropsDir}/toy-chest-open_Albedo.png",
+                chestPos, 1.82f, 166f, "M_Arena_OpenChest");
+
+            // Clona a propria malha do bau mas mantendo apenas a metade dianteira (borda frontal do bau em Z < 2.02m)
+            // posicionada em zLocal = -0.36m (frente para a camera), garantindo que o brinquedo derrotado (em Z = 2.02m)
+            // passe fisicamente POR TRAS da parede frontal amarela/vermelha do bau ao mergulhar dentro da caixa!
+            var baseMeshFilter = chestGo.transform.Find("Mesh")?.GetComponent<MeshFilter>();
+            var baseMeshRend = chestGo.transform.Find("Mesh")?.GetComponent<MeshRenderer>();
+            if (baseMeshFilter != null && baseMeshFilter.sharedMesh != null && baseMeshRend != null)
+            {
+                var frontLipMesh = CreateFrontHalfOcclusionMesh(baseMeshFilter.sharedMesh);
+                var frontLipGo = new GameObject("Chest_FrontOcclusionLip");
+                frontLipGo.transform.SetParent(chestGo.transform, false);
+                frontLipGo.transform.localPosition = baseMeshFilter.transform.localPosition + new Vector3(0f, 0f, 0.28f);
+                frontLipGo.transform.localRotation = baseMeshFilter.transform.localRotation;
+                frontLipGo.transform.localScale = baseMeshFilter.transform.localScale;
+                var mf = frontLipGo.AddComponent<MeshFilter>();
+                mf.sharedMesh = frontLipMesh;
+                var mr = frontLipGo.AddComponent<MeshRenderer>();
+                mr.sharedMaterial = baseMeshRend.sharedMaterial;
+            }
+
+            // Luz dourada interna do bau que brilha forte quando um brinquedo derrotado e depositado de volta
+            var glowGo = new GameObject("Chest_InteriorGlow");
+            glowGo.transform.SetParent(chestGo.transform, false);
+            glowGo.transform.localPosition = new Vector3(0f, 0.95f, -0.10f);
+            var glow = glowGo.AddComponent<Light>();
+            glow.type = LightType.Point;
+            glow.color = new Color(1.0f, 0.86f, 0.38f);
+            glow.range = 4.2f;
+            glow.intensity = 1.2f;
+
+            // Particulas magicas douradas que saltam da boca do bau no momento em que o brinquedo cai dentro da caixa
+            var burstGo = new GameObject("Chest_DepositSparkles");
+            burstGo.transform.SetParent(chestGo.transform, false);
+            burstGo.transform.localPosition = new Vector3(0f, 0.96f, 0f);
+            var ps = burstGo.AddComponent<ParticleSystem>();
+            var main = ps.main;
+            main.playOnAwake = false;
+            main.loop = false;
+            main.duration = 0.45f;
+            main.startLifetime = new ParticleSystem.MinMaxCurve(0.35f, 0.65f);
+            main.startSpeed = new ParticleSystem.MinMaxCurve(1.8f, 3.8f);
+            main.startSize = new ParticleSystem.MinMaxCurve(0.10f, 0.22f);
+            main.startColor = new Color(1.0f, 0.92f, 0.48f, 0.95f);
+            main.gravityModifier = 0.45f;
+            var em = ps.emission;
+            em.rateOverTime = 0f;
+            em.SetBursts(new[] { new ParticleSystem.Burst(0f, 22) });
+            var shape = ps.shape;
+            shape.shapeType = ParticleSystemShapeType.Cone;
+            shape.angle = 36f;
+            shape.radius = 0.45f;
+            shape.rotation = new Vector3(-90f, 0f, 0f);
+            burstGo.GetComponent<ParticleSystemRenderer>().sharedMaterial = GetSoftSparkVfxMat();
+
+            return chestGo;
+        }
+
+        private static Mesh CreateFrontHalfOcclusionMesh(Mesh source)
+        {
+            Bounds b = source.bounds;
+            float maxHeightFrontBody = b.min.y + (b.size.y * 0.54f); // Apenas a caixa inferior (sem a tampa aberta superior)
+            float midZ = b.center.z;
+
+            Vector3[] verts = source.vertices;
+            int[] tris = source.triangles;
+            var keptTris = new System.Collections.Generic.List<int>(tris.Length / 2);
+
+            for (int i = 0; i < tris.Length; i += 3)
+            {
+                Vector3 v0 = verts[tris[i]];
+                Vector3 v1 = verts[tris[i + 1]];
+                Vector3 v2 = verts[tris[i + 2]];
+                float cy = (v0.y + v1.y + v2.y) / 3f;
+                float cz = (v0.z + v1.z + v2.z) / 3f;
+                if (cy <= maxHeightFrontBody && cz >= midZ - (b.size.z * 0.08f))
+                {
+                    keptTris.Add(tris[i]);
+                    keptTris.Add(tris[i + 1]);
+                    keptTris.Add(tris[i + 2]);
+                }
+            }
+
+            var mesh = new Mesh
+            {
+                name = "ToyChest_FrontOcclusionLip",
+                vertices = verts,
+                normals = source.normals,
+                uv = source.uv,
+                triangles = keptTris.ToArray()
+            };
+            mesh.RecalculateBounds();
+            return mesh;
+        }
+
+        private static GameObject BuildTallVictorianBookshelf(Transform envRoot, Vector3 shelfPos)
+        {
+            // Constroi a Estante Alta de Livros e Brinquedos (3.25m de altura com 4 prateleiras, livros coloridos,
+            // casinha de madeira, globo e trenzinho decorativo, identica a estante central de room-v1.png!)
+            var shelfRoot = new GameObject("Bookshelf_3D");
+            shelfRoot.transform.SetParent(envRoot, false);
+            shelfRoot.transform.localPosition = shelfPos;
+
+            // Andar inferior (0..1.55m)
+            var lowerUnit = PlaceNormalizedModel("Bookshelf_Lower", shelfRoot.transform, $"{ToyPropsDir}/bookshelf.obj", $"{ToyPropsDir}/bookshelf_Albedo.png",
+                Vector3.zero, 1.58f, 180f, "M_Arena_Bookshelf");
+            lowerUnit.transform.localScale = new Vector3(0.76f, 1.0f, 0.92f);
+
+            // Andar superior (1.50..3.08m) formando a estante vertical alta de 4 andares
+            var upperUnit = PlaceNormalizedModel("Bookshelf_Upper", shelfRoot.transform, $"{ToyPropsDir}/bookshelf.obj", $"{ToyPropsDir}/bookshelf_Albedo.png",
+                new Vector3(0f, 1.50f, 0f), 1.58f, 180f, "M_Arena_Bookshelf");
+            upperUnit.transform.localScale = new Vector3(0.76f, 1.0f, 0.92f);
+
+            // Cornija vitoriana esculpida no topo (3.08..3.28m) com pomos laterais e folhagem verde
+            var woodMat = CreateLitMat("M_Arena_BookshelfCrown", "Assets/Materials/T_Furniture_Wood_Painted.png", new Color(0.76f, 0.50f, 0.28f));
+            var foliageMat = CreateLitMat("M_Arena_BookshelfVine", null, new Color(0.28f, 0.56f, 0.26f));
+            CreatePrimitivePart("Crown_Pediment", PrimitiveType.Cube, shelfRoot.transform, new Vector3(0f, 3.12f, 0f), new Vector3(2.28f, 0.16f, 0.86f), woodMat);
+            CreatePrimitivePart("Crown_Arch", PrimitiveType.Cylinder, shelfRoot.transform, new Vector3(0f, 3.22f, 0f), new Vector3(0.95f, 0.08f, 0.72f), woodMat);
+            CreatePrimitivePart("Crown_FinialL", PrimitiveType.Sphere, shelfRoot.transform, new Vector3(-1.02f, 3.26f, -0.32f), Vector3.one * 0.16f, woodMat);
+            CreatePrimitivePart("Crown_FinialR", PrimitiveType.Sphere, shelfRoot.transform, new Vector3(1.02f, 3.26f, -0.32f), Vector3.one * 0.16f, woodMat);
+
+            // Folhagem cascateando no topo da estante alta (como na pintura room-v1.png)
+            Vector3[] vineOffsets =
+            {
+                new Vector3(-0.25f, 3.30f, -0.28f),
+                new Vector3(0.05f, 3.34f, -0.30f),
+                new Vector3(0.35f, 3.28f, -0.28f),
+                new Vector3(0.62f, 3.18f, -0.32f),
+                new Vector3(0.78f, 2.95f, -0.34f)
+            };
+            for (int i = 0; i < vineOffsets.Length; i++)
+            {
+                CreatePrimitivePart($"Vine_Cluster_{i}", PrimitiveType.Sphere, shelfRoot.transform, vineOffsets[i], new Vector3(0.28f, 0.20f, 0.22f), foliageMat);
+            }
+
+            return shelfRoot;
         }
 
         private static ArenaActorView BuildPlayer3D(float startX)

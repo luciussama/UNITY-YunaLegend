@@ -76,6 +76,11 @@ namespace YunaLegend.Arena.Runtime
         private ArenaEnemyRigAnimator robotRigAnimator;
         private ArenaEnemyRigAnimator dinosaurRigAnimator;
         private ArenaEnemyRigAnimator bearRigAnimator;
+        private Transform openChestDepositTarget;
+        private Light openChestInteriorGlow;
+        private ParticleSystem openChestDepositBurst;
+        private Vector3 openChestBaseScale = Vector3.one;
+        private bool depositBurstTriggeredThisDefeat;
 
         private const float VisualComboDuration = 0.30f;
         private const float ImpactFlashDuration = 0.20f;
@@ -333,12 +338,16 @@ namespace YunaLegend.Arena.Runtime
 
             _ = catalog;
             float spawnScale = sim.EnemySpawnScale;
-            float depositProgress = sim.EnemyState == ArenaEnemyState.Defeated
+            bool isBeingDeposited = sim.EnemyState == ArenaEnemyState.Defeated;
+            float depositProgress = isBeingDeposited
                 ? Mathf.Clamp01(sim.EnemyStateTick / (float)Mathf.Max(1, sim.Tuning.EnemyDeathTicks))
-                : (sim.EnemyState == ArenaEnemyState.Spawning
-                    ? (1f - Mathf.Clamp01(sim.EnemyStateTick / (float)Mathf.Max(1, sim.Tuning.EnemySpawnTicks)))
-                    : 0f);
-            float enemyDepthZ = Mathf.Lerp(0.05f, 1.45f, depositProgress * depositProgress);
+                : 0f;
+
+            // O brinquedo derrotado viaja da profundidade do tapete (z=0.05m) para dentro da abertura do bau aberto (z=2.02m),
+            // ficando atras da parede frontal do bau (z=1.55m) e na frente da tampa traseira (z=2.45m) para oclusao 3D real!
+            float enemyDepthZ = isBeingDeposited
+                ? Mathf.Lerp(0.05f, 2.02f, Mathf.SmoothStep(0f, 1f, depositProgress))
+                : 0.05f;
             transform.position = ArenaCoordinateMapper.ToWorldPosition(sim.EnemyX, sim.EnemyY, enemyDepthZ);
             animTimer += dt;
 
@@ -353,12 +362,12 @@ namespace YunaLegend.Arena.Runtime
             float tiltX = 0f;
             float lungeZ = 0f;
 
-            if (sim.EnemyState == ArenaEnemyState.Defeated)
+            if (isBeingDeposited)
             {
-                // Regressao 4: Animacao do brinquedo derrotado sendo depositado de volta na caixa de brinquedos
+                // Regressao 4: Animacao do brinquedo derrotado voando em arco e mergulhando dentro da caixa de brinquedos
                 tiltX = sim.EnemyDepositPitchDegrees;
-                squashX = Mathf.Lerp(1f, 0.88f, depositProgress);
-                squashY = Mathf.Lerp(1f, 1.08f, Mathf.Sin(depositProgress * Mathf.PI));
+                squashX = Mathf.Lerp(1f, 0.90f, depositProgress);
+                squashY = Mathf.Lerp(1f, 1.06f, Mathf.Sin(depositProgress * Mathf.PI));
             }
             else if (sim.EnemyState == ArenaEnemyState.HitReaction)
             {
@@ -459,8 +468,60 @@ namespace YunaLegend.Arena.Runtime
                 hitFlashTimer -= dt;
             }
 
+            UpdateOpenChestDepositFeedback(sim, depositProgress);
             UpdateEnemyAttackVfx(sim);
             UpdateImpactBangFlash(sim.EnemyFacing, 1.15f, dt);
+        }
+
+        private void UpdateOpenChestDepositFeedback(ArenaCombatSimulation sim, float depositProgress)
+        {
+            if (openChestDepositTarget == null)
+            {
+                var chestGo = GameObject.Find("OpenChest_3D");
+                if (chestGo != null)
+                {
+                    openChestDepositTarget = chestGo.transform;
+                    openChestBaseScale = openChestDepositTarget.localScale;
+                    openChestInteriorGlow = chestGo.transform.Find("Chest_InteriorGlow")?.GetComponent<Light>();
+                    openChestDepositBurst = chestGo.transform.Find("Chest_DepositSparkles")?.GetComponent<ParticleSystem>();
+                }
+            }
+
+            if (openChestDepositTarget == null)
+            {
+                return;
+            }
+
+            if (sim.EnemyState == ArenaEnemyState.Defeated)
+            {
+                // Conforme o brinquedo chega na boca do bau (depositProgress > 0.60), o bau pulsa (squash & stretch) e acende por dentro
+                float arrivalWindow = Mathf.Clamp01((depositProgress - 0.58f) / 0.42f);
+                float bounce = Mathf.Sin(arrivalWindow * Mathf.PI);
+                openChestDepositTarget.localScale = new Vector3(
+                    openChestBaseScale.x * (1f + 0.09f * bounce),
+                    openChestBaseScale.y * (1f - 0.08f * bounce),
+                    openChestBaseScale.z * (1f + 0.09f * bounce));
+
+                if (openChestInteriorGlow != null)
+                {
+                    openChestInteriorGlow.intensity = 1.6f + (7.5f * Mathf.Sin(depositProgress * Mathf.PI));
+                }
+
+                if (!depositBurstTriggeredThisDefeat && depositProgress >= 0.68f)
+                {
+                    depositBurstTriggeredThisDefeat = true;
+                    openChestDepositBurst?.Play();
+                }
+            }
+            else
+            {
+                depositBurstTriggeredThisDefeat = false;
+                openChestDepositTarget.localScale = openChestBaseScale;
+                if (openChestInteriorGlow != null)
+                {
+                    openChestInteriorGlow.intensity = 1.4f;
+                }
+            }
         }
 
         private void UpdateImpactBangFlash(int facingDir, float forwardOffset, float dt)

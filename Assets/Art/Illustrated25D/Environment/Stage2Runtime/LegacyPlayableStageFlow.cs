@@ -516,7 +516,16 @@ namespace YunaLegend.Illustrated25D.Environment
 
             if (!stateMachine.Stage2CheckpointReached)
             {
-                preview.Retry();
+                Vector3 stage1Spawn = DarkRoomStartLayout.Position;
+                preview?.PlatformController?.Furniture?.ResetForRetry();
+                player.ResetPlayer(stage1Spawn, 1f);
+                player.SetRunSpeed(DarkRoomStartLayout.RunSpeed);
+                player.SetJumpHeight(DarkRoomStartLayout.JumpHeight);
+                player.ResetLastPlatformIndex();
+                player.AllowFloorLaunch(stage1Spawn.x);
+                openingCinematic?.PrepareRespawnAtPreJump();
+                stateMachine.RespawnAtStage1Checkpoint();
+                cam?.SnapToTargetX(stage1Spawn.x);
                 return;
             }
 

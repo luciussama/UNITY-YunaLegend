@@ -50,5 +50,28 @@ namespace YunaLegend.Illustrated25D.Tests
                 Assert.IsTrue(File.Exists(path), $"Texture file missing on disk: {path}");
             }
         }
+
+        [Test]
+        public void CardCastleCollapseTimeline_EvaluatesSteppedWobble_AndCascadingCollapseAfterJump()
+        {
+            Assert.AreEqual(30, CardCastleCollapseTimeline.PlatformIndex);
+
+            // Enquanto Yuna pisa nas cartas, os andares bamboleiam sutilmente sem cair
+            CardCastleTierSample wobbleTop = CardCastleCollapseTimeline.EvaluateSteppedWobble(3, 0.15f);
+            Assert.AreEqual(1f, wobbleTop.Alpha, 0.001f);
+            Assert.Greater(System.Math.Abs(wobbleTop.RotationDegrees), 0.1f);
+            Assert.Greater(wobbleTop.OffsetYMetres, -0.10f);
+
+            // Logo apos o pulo (t=0.45s), o topo (Tier 3) cede primeiro seguido pelos andares inferiores
+            CardCastleTierSample collapseTop = CardCastleCollapseTimeline.EvaluateCollapseTier(3, 0.45f);
+            CardCastleTierSample collapseBase = CardCastleCollapseTimeline.EvaluateCollapseTier(0, 0.45f);
+            Assert.Less(collapseTop.OffsetYMetres, collapseBase.OffsetYMetres, "Andar do topo deve cair na frente da base em cascata.");
+            Assert.Less(collapseBase.OffsetYMetres, -0.30f, "Base do castelo tambem deve desabar.");
+
+            // Cartas individuais inteiras esvoacam e giram durante o colapso
+            CardCastleFlutterCardSample flutter = CardCastleCollapseTimeline.EvaluateFlutterCard(14, 0.35f);
+            Assert.Greater(flutter.Alpha, 0.5f);
+            Assert.Greater(System.Math.Abs(flutter.RotationDegrees), 15f);
+        }
     }
 }

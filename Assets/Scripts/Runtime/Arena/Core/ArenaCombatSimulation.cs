@@ -11,6 +11,7 @@ namespace YunaLegend.Arena.Core
     public sealed class ArenaCombatSimulation
     {
         private const float FixedStepSeconds = 1f / 60f;
+        public const float ChestDepositTargetSimX = 270f;
         private const float ChestOriginX = 1120f;
         private const float PlayerStartX = 420f;
         private const float EnemyStartX = 1120f;
@@ -628,12 +629,14 @@ namespace YunaLegend.Arena.Core
                 case ArenaEnemyState.Defeated:
                     float exitT = Math.Clamp(EnemyStateTick / (float)tuning.EnemyDeathTicks, 0f, 1f);
                     float smoothT = exitT * exitT * (3f - (2f * exitT));
-                    EnemyX = defeatedStartX + ((ChestOriginX - defeatedStartX) * smoothT);
-                    float arc = (float)Math.Sin(exitT * Math.PI);
-                    EnemyDepositArcHeight = (arc * 185f) - (exitT * 52f);
+                    // Regressao 4: Brinquedo derrotado voa em arco parabolico da Arena ate mergulhar dentro da boca da Caixa de Brinquedos a esquerda (ChestDepositTargetSimX = 270)
+                    EnemyX = defeatedStartX + ((ChestDepositTargetSimX - defeatedStartX) * smoothT);
+                    float parabola = 4f * exitT * (1f - exitT);
+                    // No final (exitT -> 1), cai para dentro da cavidade interna do bau (ArcHeight = +24px acima do piso, abaixo da borda frontal do bau que tem 95px de altura!)
+                    EnemyDepositArcHeight = (parabola * 245f) + (smoothT * 24f);
                     EnemyY = tuning.GroundY - EnemyDepositArcHeight;
-                    EnemyDepositPitchDegrees = smoothT * 58f;
-                    EnemySpawnScale = 1f - (0.84f * smoothT);
+                    EnemyDepositPitchDegrees = smoothT * 34f;
+                    EnemySpawnScale = 1f - (0.76f * smoothT);
                     if (EnemyStateTick >= tuning.EnemyDeathTicks)
                     {
                         if (waveIndex + 1 < ArenaCatalog.WaveOrder.Length)

@@ -156,6 +156,14 @@ namespace YunaLegend.Illustrated25D.Preview.Controllers
             var view = marker.gameObject.AddComponent<IllustratedPlatformView>();
             view.Install(spec, painting, frontOverlay);
             AttachFootAlignment(player, view.Top, spec.index, pinVisibleSole: true);
+
+            // Melhoria 2 Quarto Escuro: Castelo de Cartas Bamboleante (Plataforma 30) desmorona logo apos Yuna pular
+            if (spec.index == CardCastleCollapseTimeline.PlatformIndex)
+            {
+                var cardCollapse = marker.gameObject.AddComponent<CardCastleCollapseView>();
+                cardCollapse.Install(view, player, painting, spec);
+            }
+
             genericViews[spec.index] = view;
             return view;
         }
