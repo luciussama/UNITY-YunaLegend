@@ -168,8 +168,9 @@ namespace YunaLegend.ToyRoom.Runtime
 
         public void PlaySwordReveal()
         {
-            PlayClip(swordClip);
-            PlaySwordMusic();
+            // Regressao 2: Quando a menina encontra a espada, a musica deve parar e ficar apenas o silencio.
+            // A nova musica ocorre apenas quando comeca a Arena Imaginaria.
+            StopMusic();
         }
 
         private void PlayLoopingTrack(AudioClip clip)

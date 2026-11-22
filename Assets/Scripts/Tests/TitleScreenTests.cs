@@ -21,7 +21,7 @@ namespace YunaLegend.Tests
             {
                 var controller = UnityEngine.Object.FindFirstObjectByType<TitleScreenController>();
                 Assert.IsNotNull(controller, "TitleScreenController ausente");
-                Assert.AreEqual("DarkRoom_Gameplay", controller.GameplaySceneName);
+                Assert.AreEqual("BearChase_Gameplay", controller.GameplaySceneName);
 
                 Assert.IsNotNull(UnityEngine.Object.FindFirstObjectByType<Canvas>(), "Canvas ausente");
                 Assert.IsNotNull(UnityEngine.Object.FindFirstObjectByType<EventSystem>(), "EventSystem ausente");
@@ -48,7 +48,7 @@ namespace YunaLegend.Tests
                 var selector = UnityEngine.Object.FindFirstObjectByType<TitlePhaseSelector>();
                 Assert.IsNotNull(selector, "Bandeirinha de fases ausente");
                 Assert.GreaterOrEqual(selector.ItemCount, 1, "Dropdown precisa listar ao menos uma fase");
-                Assert.AreEqual("DarkRoom_Gameplay", selector.CurrentPhaseScene);
+                Assert.AreEqual("BearChase_Gameplay", selector.CurrentPhaseScene);
             }
             finally
             {

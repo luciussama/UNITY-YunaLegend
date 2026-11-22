@@ -13,10 +13,30 @@ namespace YunaLegend.Editor.ToyRoom
     {
         private const string PainterlyShaderName = "YunaLegend/ToyRoom_Painterly3D";
         private const string MaterialsFolder = "Assets/Art/ToyRoom/Materials";
+        private const string DefaultMaterialPrefix = "M_ToyRoom_";
+        private static string activeMaterialsFolder = MaterialsFolder;
+        private static string activeMaterialPrefix = DefaultMaterialPrefix;
         private static int materialCounter;
+
+        public static void BeginMaterialScope(string folder, string prefix)
+        {
+            activeMaterialsFolder = string.IsNullOrEmpty(folder) ? MaterialsFolder : folder;
+            activeMaterialPrefix = string.IsNullOrEmpty(prefix) ? DefaultMaterialPrefix : prefix;
+            materialCounter = 0;
+            Directory.CreateDirectory(activeMaterialsFolder);
+        }
+
+        public static void EndMaterialScope()
+        {
+            activeMaterialsFolder = MaterialsFolder;
+            activeMaterialPrefix = DefaultMaterialPrefix;
+            materialCounter = 0;
+        }
 
         public static void ResetMaterialCounter()
         {
+            activeMaterialsFolder = MaterialsFolder;
+            activeMaterialPrefix = DefaultMaterialPrefix;
             materialCounter = 0;
             Directory.CreateDirectory(MaterialsFolder);
             Directory.CreateDirectory(ToyRoomYunaSculptor.ModelsFolder);
@@ -32,7 +52,8 @@ namespace YunaLegend.Editor.ToyRoom
             float outlineWidth = 0.0045f)
         {
             var shader = Shader.Find(PainterlyShaderName) ?? Shader.Find("Universal Render Pipeline/Lit");
-            string matPath = $"{MaterialsFolder}/M_ToyRoom_{materialCounter++:000}.mat";
+            Directory.CreateDirectory(activeMaterialsFolder);
+            string matPath = $"{activeMaterialsFolder}/{activeMaterialPrefix}{materialCounter++:000}.mat";
             var mat = AssetDatabase.LoadAssetAtPath<Material>(matPath);
             if (mat == null)
             {

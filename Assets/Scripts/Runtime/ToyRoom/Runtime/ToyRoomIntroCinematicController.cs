@@ -348,6 +348,35 @@ namespace YunaLegend.ToyRoom.Runtime
             warmCurtainImage.color = new Color(1.0f, 0.9804f, 0.9412f, alpha);
         }
 
+        private bool IsMobileViewport()
+        {
+            float w = forcedLogicalWidth > 0f ? forcedLogicalWidth : Screen.width;
+            float h = forcedLogicalHeight > 0f ? forcedLogicalHeight : Screen.height;
+            return Application.isMobilePlatform
+                || UnityEngine.InputSystem.Touchscreen.current != null
+                || w <= 960f
+                || h <= 540f;
+        }
+
+        private float ComputeMobileLogicalPxScale(Vector2 canvasSize)
+        {
+            float logicalW = forcedLogicalWidth > 0f ? forcedLogicalWidth : Screen.width;
+            float logicalH = forcedLogicalHeight > 0f ? forcedLogicalHeight : Screen.height;
+            if (logicalW <= 1f || logicalH <= 1f)
+            {
+                return canvasSize.x / 390f;
+            }
+
+            float minDim = Mathf.Min(logicalW, logicalH);
+            if (forcedLogicalWidth <= 0f && Application.isMobilePlatform && minDim >= 700f)
+            {
+                float dpr = Mathf.Clamp(minDim / 390f, 1.5f, 3.5f);
+                logicalW /= dpr;
+            }
+
+            return Mathf.Clamp(canvasSize.x / Mathf.Max(280f, logicalW), 0.5f, 4.5f);
+        }
+
         private void ApplyPoeticNarrationCard(ToyRoomIntroSample sample, Vector2 canvasSize, float cssScale)
         {
             if (narrationCardRoot == null)
@@ -363,56 +392,81 @@ namespace YunaLegend.ToyRoom.Runtime
 
             narrationCardRoot.SetActive(true);
 
-            float width = Mathf.Min(680f * cssScale, canvasSize.x - (32f * cssScale));
-            float font = Mathf.Min(25f * cssScale, canvasSize.x * 0.061f);
-            float lineHeight = font * 1.22f;
+            bool isMobile = IsMobileViewport();
+            float pxScale = isMobile ? ComputeMobileLogicalPxScale(canvasSize) : cssScale;
+
+            // Regressao 1: No modo mobile, todas as fontes da cena da Sala de Brinquedos respeitam 14 a 16 px logicos
+            int headingFontPx = isMobile
+                ? Mathf.RoundToInt(15f * pxScale)
+                : Mathf.Max(12, Mathf.RoundToInt(Mathf.Min(21f * cssScale, Mathf.Min(25f * cssScale, canvasSize.x * 0.061f))));
+            int bodyFontPx = isMobile
+                ? Mathf.RoundToInt(16f * pxScale)
+                : Mathf.Max(13, Mathf.RoundToInt(Mathf.Min(25f * cssScale, canvasSize.x * 0.061f)));
+            int hintFontPx = isMobile
+                ? Mathf.RoundToInt(14f * pxScale)
+                : Mathf.Max(10, Mathf.RoundToInt(11f * cssScale));
+
+            float width = isMobile
+                ? Mathf.Min(560f * pxScale, canvasSize.x - (24f * pxScale))
+                : Mathf.Min(680f * cssScale, canvasSize.x - (32f * cssScale));
+            float lineHeight = bodyFontPx * (isMobile ? 1.32f : 1.22f);
 
             string[] rawLines = sample.DialogueText.Split('\n');
             int lineCount = Mathf.Max(1, rawLines.Length);
             bool hasHeading = !string.IsNullOrEmpty(sample.DialogueHeading);
-            float headingHeight = hasHeading ? 30f * cssScale : 0f;
-            float controlsHeight = 30f * cssScale;
-            float height = (lineCount * lineHeight) + (38f * cssScale) + headingHeight + controlsHeight;
+            float headingHeight = hasHeading ? (isMobile ? 24f * pxScale : 30f * cssScale) : 0f;
+            float controlsHeight = isMobile ? 42f * pxScale : 30f * cssScale;
+            float verticalPad = isMobile ? 32f * pxScale : 38f * cssScale;
+            float height = (lineCount * lineHeight) + verticalPad + headingHeight + controlsHeight;
 
             float xCenter = canvasSize.x * 0.5f;
-            float yTop = 16f * cssScale;
+            float yTop = (isMobile ? 10f : 16f) * pxScale;
             float left = xCenter - (width * 0.5f);
 
             narrationCardRect.anchoredPosition = new Vector2(left, -yTop);
             narrationCardRect.sizeDelta = new Vector2(width, height);
 
-            narrationInnerRect.anchoredPosition = new Vector2(7f * cssScale, -(7f * cssScale));
-            narrationInnerRect.sizeDelta = new Vector2(width - (14f * cssScale), height - (14f * cssScale));
+            float borderInset = 7f * pxScale;
+            narrationInnerRect.anchoredPosition = new Vector2(borderInset, -borderInset);
+            narrationInnerRect.sizeDelta = new Vector2(width - (borderInset * 2f), height - (borderInset * 2f));
 
-            flowerLeftRect.anchoredPosition = new Vector2(15f * cssScale, -(15f * cssScale));
-            flowerLeftRect.localScale = Vector3.one * cssScale;
-            flowerRightRect.anchoredPosition = new Vector2(width - (15f * cssScale), -(15f * cssScale));
-            flowerRightRect.localScale = Vector3.one * cssScale;
+            float flowerOffset = 15f * pxScale;
+            flowerLeftRect.anchoredPosition = new Vector2(flowerOffset, -flowerOffset);
+            flowerLeftRect.localScale = Vector3.one * pxScale;
+            flowerRightRect.anchoredPosition = new Vector2(width - flowerOffset, -flowerOffset);
+            flowerRightRect.localScale = Vector3.one * pxScale;
 
             narrationHeadingText.gameObject.SetActive(hasHeading);
             if (hasHeading)
             {
                 narrationHeadingText.text = sample.DialogueHeading;
-                narrationHeadingText.fontSize = Mathf.Max(12, Mathf.RoundToInt(Mathf.Min(21f * cssScale, font)));
-                narrationHeadingText.rectTransform.anchoredPosition = new Vector2(0f, -(11f * cssScale));
-                narrationHeadingText.rectTransform.sizeDelta = new Vector2(width, 28f * cssScale);
+                narrationHeadingText.fontSize = headingFontPx;
+                narrationHeadingText.rectTransform.anchoredPosition = new Vector2(0f, -(9f * pxScale));
+                narrationHeadingText.rectTransform.sizeDelta = new Vector2(width, 24f * pxScale);
             }
 
             narrationBodyText.text = sample.DialogueText;
-            narrationBodyText.fontSize = Mathf.Max(13, Mathf.RoundToInt(font));
-            float bodyTop = (19f * cssScale) + headingHeight;
+            narrationBodyText.fontSize = bodyFontPx;
+            float bodyTop = ((isMobile ? 13f : 19f) * pxScale) + headingHeight;
             float bodyHeight = lineCount * lineHeight;
-            narrationBodyText.rectTransform.anchoredPosition = new Vector2(18f * cssScale, -bodyTop);
-            narrationBodyText.rectTransform.sizeDelta = new Vector2(width - (36f * cssScale), bodyHeight + (6f * cssScale));
+            narrationBodyText.rectTransform.anchoredPosition = new Vector2(16f * pxScale, -bodyTop);
+            narrationBodyText.rectTransform.sizeDelta = new Vector2(width - (32f * pxScale), bodyHeight + (6f * pxScale));
 
-            float controlsTop = height - controlsHeight - (6f * cssScale);
-            narrationAutoHintText.fontSize = Mathf.Max(10, Mathf.RoundToInt(11f * cssScale));
+            float controlsTop = height - controlsHeight - (10f * pxScale);
+            float hintRowH = isMobile ? 18f * pxScale : 16f * pxScale;
+            float hintRowGap = isMobile ? 16f * pxScale : 13f * pxScale;
+
+            Color softHintCol = new Color(122f / 255f, 92f / 255f, 95f / 255f, isMobile ? 0.68f : 0.85f);
+            narrationAutoHintText.fontStyle = FontStyle.Normal;
+            narrationAutoHintText.color = softHintCol;
+            narrationAutoHintText.fontSize = hintFontPx;
             narrationAutoHintText.rectTransform.anchoredPosition = new Vector2(0f, -controlsTop);
-            narrationAutoHintText.rectTransform.sizeDelta = new Vector2(width, 16f * cssScale);
+            narrationAutoHintText.rectTransform.sizeDelta = new Vector2(width, hintRowH);
 
-            narrationClickHintText.fontSize = Mathf.Max(10, Mathf.RoundToInt(10.5f * cssScale));
-            narrationClickHintText.rectTransform.anchoredPosition = new Vector2(0f, -(controlsTop + (13f * cssScale)));
-            narrationClickHintText.rectTransform.sizeDelta = new Vector2(width, 16f * cssScale);
+            narrationClickHintText.color = softHintCol;
+            narrationClickHintText.fontSize = hintFontPx;
+            narrationClickHintText.rectTransform.anchoredPosition = new Vector2(0f, -(controlsTop + hintRowGap));
+            narrationClickHintText.rectTransform.sizeDelta = new Vector2(width, hintRowH);
         }
 
         private void EnsureBuilt()

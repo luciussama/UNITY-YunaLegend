@@ -235,8 +235,9 @@ namespace YunaLegend.Arena.Runtime
                 hudController.OnPauseToggled += HandlePauseToggled;
                 hudController.OnMuteToggled += HandleMuteToggled;
                 hudController.OnRestartRequested += HandleRestartRequested;
+                hudController.OnReturnToTitleRequested -= HandleReturnToTitleRequested;
                 hudController.OnReturnToTitleRequested += HandleReturnToTitleRequested;
-                hudController.OnNextStageRequested += HandleReturnToTitleRequested;
+                hudController.OnNextStageRequested += HandleNextStageRequested;
             }
         }
 
@@ -260,7 +261,7 @@ namespace YunaLegend.Arena.Runtime
                 hudController.OnMuteToggled -= HandleMuteToggled;
                 hudController.OnRestartRequested -= HandleRestartRequested;
                 hudController.OnReturnToTitleRequested -= HandleReturnToTitleRequested;
-                hudController.OnNextStageRequested -= HandleReturnToTitleRequested;
+                hudController.OnNextStageRequested -= HandleNextStageRequested;
             }
         }
 
@@ -350,6 +351,12 @@ namespace YunaLegend.Arena.Runtime
         {
             Time.timeScale = 1f;
             SceneManager.LoadScene("TitleScreen");
+        }
+
+        private void HandleNextStageRequested()
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("BearChase_Gameplay");
         }
     }
 }

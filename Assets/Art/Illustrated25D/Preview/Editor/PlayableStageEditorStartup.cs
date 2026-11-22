@@ -87,7 +87,8 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             if (activeScene.path == IllustratedPreviewBuild.PlayableFullStageScene
                 || activeScene.path == "Assets/Scenes/ToyRoom_Gameplay.unity"
                 || activeScene.path == "Assets/Scenes/Arena_Gameplay.unity"
-                || activeScene.path == "Assets/Scenes/Arena_3D_Showcase.unity")
+                || activeScene.path == "Assets/Scenes/Arena_3D_Showcase.unity"
+                || activeScene.path == "Assets/Scenes/BearChase_Gameplay.unity")
             {
                 return;
             }
@@ -109,7 +110,8 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             string activePath = SceneManager.GetActiveScene().path;
             if (activePath == "Assets/Scenes/ToyRoom_Gameplay.unity"
                 || activePath == "Assets/Scenes/Arena_Gameplay.unity"
-                || activePath == "Assets/Scenes/Arena_3D_Showcase.unity")
+                || activePath == "Assets/Scenes/Arena_3D_Showcase.unity"
+                || activePath == "Assets/Scenes/BearChase_Gameplay.unity")
             {
                 EditorSceneManager.playModeStartScene = null;
                 return;

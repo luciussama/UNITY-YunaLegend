@@ -11,6 +11,7 @@ namespace YunaLegend.Arena.Core
     public sealed class ArenaCombatSimulation
     {
         private const float FixedStepSeconds = 1f / 60f;
+        public const float ChestDepositTargetSimX = 270f;
         private const float ChestOriginX = 1120f;
         private const float PlayerStartX = 420f;
         private const float EnemyStartX = 1120f;
@@ -61,6 +62,8 @@ namespace YunaLegend.Arena.Core
         public int EnemyHp { get; private set; }
         public int EnemyMaxHp => CurrentEnemySpec.MaxHp;
         public float EnemySpawnScale { get; private set; } = 0.16f;
+        public float EnemyDepositArcHeight { get; private set; }
+        public float EnemyDepositPitchDegrees { get; private set; }
         public ArenaEnemyState EnemyState { get; private set; }
         public int EnemyStateTick { get; private set; }
         public ArenaAttackKind ActiveAttackKind { get; private set; }
@@ -68,6 +71,7 @@ namespace YunaLegend.Arena.Core
         public bool EnemyHitAppliedThisAttack { get; private set; }
         public bool EnemyProtectedResponse { get; private set; }
         public bool BearEnraged { get; private set; }
+        private float defeatedStartX;
 
         // Especial Espada Arco-Iris
         public bool SpecialUsed { get; private set; }
@@ -191,6 +195,9 @@ namespace YunaLegend.Arena.Core
             EnemyKnockbackVx = 0f;
             EnemyFacing = -1;
             EnemySpawnScale = 0.16f;
+            EnemyDepositArcHeight = 0f;
+            EnemyDepositPitchDegrees = 0f;
+            defeatedStartX = ChestOriginX;
             EnemyState = ArenaEnemyState.Spawning;
             EnemyStateTick = 0;
             ActiveAttackKind = ArenaAttackKind.None;
@@ -474,6 +481,11 @@ namespace YunaLegend.Arena.Core
 
         private void EnterEnemyDefeated()
         {
+            defeatedStartX = EnemyX;
+            EnemyKnockbackVx = 0f;
+            EnemyVy = 0f;
+            EnemyDepositArcHeight = 0f;
+            EnemyDepositPitchDegrees = 0f;
             EnemyState = ArenaEnemyState.Defeated;
             EnemyStateTick = 0;
             ActiveAttackKind = ArenaAttackKind.None;
@@ -616,7 +628,15 @@ namespace YunaLegend.Arena.Core
 
                 case ArenaEnemyState.Defeated:
                     float exitT = Math.Clamp(EnemyStateTick / (float)tuning.EnemyDeathTicks, 0f, 1f);
-                    EnemySpawnScale = 1f - 0.84f * exitT;
+                    float smoothT = exitT * exitT * (3f - (2f * exitT));
+                    // Regressao 4: Brinquedo derrotado voa em arco parabolico da Arena ate mergulhar dentro da boca da Caixa de Brinquedos a esquerda (ChestDepositTargetSimX = 270)
+                    EnemyX = defeatedStartX + ((ChestDepositTargetSimX - defeatedStartX) * smoothT);
+                    float parabola = 4f * exitT * (1f - exitT);
+                    // No final (exitT -> 1), cai para dentro da cavidade interna do bau (ArcHeight = +24px acima do piso, abaixo da borda frontal do bau que tem 95px de altura!)
+                    EnemyDepositArcHeight = (parabola * 245f) + (smoothT * 24f);
+                    EnemyY = tuning.GroundY - EnemyDepositArcHeight;
+                    EnemyDepositPitchDegrees = smoothT * 34f;
+                    EnemySpawnScale = 1f - (0.76f * smoothT);
                     if (EnemyStateTick >= tuning.EnemyDeathTicks)
                     {
                         if (waveIndex + 1 < ArenaCatalog.WaveOrder.Length)

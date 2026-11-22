@@ -20,10 +20,14 @@ namespace YunaLegend.ToyRoom.Core
 
         public static readonly IReadOnlyList<FurnitureSpec> Furniture = new List<FurnitureSpec>
         {
-            new FurnitureSpec("toy-chest", "Bau de Brinquedos", new ToyRoomPoint(2.67f, HalfDepth - 1.35f * 0.5f - 0.06f), 2.30f, 1.35f, isToyChest: true),
-            new FurnitureSpec("bookshelf", "Estante de Livros", new ToyRoomPoint(FromLegacyCoordinates(520f, 30f).X, HalfDepth - 1.05f * 0.5f - 0.06f), 2.80f, 1.05f),
+            // Ordem da esquerda para a direita na parede do fundo igual a pintura oficial room-v1.png:
+            // 1) Bau/Caixa de Brinquedos a esquerda (legacyX=520 -> X=-4.67m)
+            // 2) Estante de Livros ao centro (legacyX=860 -> X=+1.00m)
+            // 3) Guarda-Roupa / Armario a direita (legacyX=1280 -> X=+8.00m)
+            new FurnitureSpec("toy-chest", "Bau de Brinquedos", new ToyRoomPoint(FromLegacyCoordinates(520f, 30f).X, HalfDepth - 1.35f * 0.5f - 0.06f), 2.30f, 1.35f, isToyChest: true),
+            new FurnitureSpec("bookshelf", "Estante de Livros", new ToyRoomPoint(FromLegacyCoordinates(860f, 30f).X, HalfDepth - 1.05f * 0.5f - 0.06f), 2.80f, 1.05f),
             new FurnitureSpec("wardrobe", "Guarda-Roupa", new ToyRoomPoint(FromLegacyCoordinates(1280f, 30f).X, HalfDepth - 1.05f * 0.5f - 0.06f), 1.85f, 1.05f),
-            new FurnitureSpec("rocking-horse", "Cavalinho de Pau", FromLegacyCoordinates(480f, 420f), 1.25f, 0.95f),
+            new FurnitureSpec("rocking-horse", "Cavalinho de Pau", FromLegacyCoordinates(1120f, 420f), 1.25f, 0.95f),
             new FurnitureSpec("table", "Mesinha Infantil", FromLegacyCoordinates(620f, 780f), 2.00f, 1.35f),
             new FurnitureSpec("armchair", "Poltrona Aconchegante", FromLegacyCoordinates(180f, 840f), 1.65f, 1.45f),
             new FurnitureSpec("block-fortress", "Fortaleza de Blocos", FromLegacyCoordinates(1240f, 800f), 2.70f, 2.05f)

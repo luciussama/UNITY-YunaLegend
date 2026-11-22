@@ -42,6 +42,9 @@ namespace YunaLegend.DarkRoom
 
         private float footstepTimer;
         private int footstepCount;
+        public DarkRoomSurfaceSoundKind LastPlayedStepSoundKind { get; private set; }
+        public float LastPlayedStepFrequencyHz { get; private set; }
+        public int TotalSurfaceFootstepsPlayed { get; private set; }
         public float FootstepInterval => 0.28f / Mathf.Max(0.5f, runSpeed / 3.6f);
         public float GaitPhase => Mathf.Repeat(footstepCount * .5f + .5f * (1f - footstepTimer / FootstepInterval), 1f);
 
@@ -237,7 +240,7 @@ namespace YunaLegend.DarkRoom
 
         private void UpdateFootsteps(float deltaTime)
         {
-            if(deltaTime<=0f)return;
+            if (deltaTime <= 0f) return;
             if (!autoRunActive || isDead || isCinematicFalling || !controller.isGrounded) return;
 
             footstepTimer -= deltaTime;
@@ -246,18 +249,43 @@ namespace YunaLegend.DarkRoom
                 float interval = FootstepInterval;
                 footstepTimer = interval;
                 footstepCount++;
+                PlaySurfaceStepAudio(lastLandedPlatformIndex, footstepCount, isLanding: false);
+            }
+        }
 
-                if (footstepWoodClips != null && footstepWoodClips.Length > 0 && audioSource != null)
+        public void PlaySurfaceStepAudio(int platformIndex, int stepIndex, bool isLanding)
+        {
+            AudioClip clip = isLanding
+                ? DarkRoomSurfaceAudioSynthesizer.GetOrCreateLandingClip(platformIndex, stepIndex, out DarkRoomFootstepAudioSpec spec)
+                : DarkRoomSurfaceAudioSynthesizer.GetOrCreateStepClip(platformIndex, stepIndex, out spec);
+
+            LastPlayedStepSoundKind = spec.Kind;
+            LastPlayedStepFrequencyHz = spec.FundamentalHz;
+            if (!isLanding)
+            {
+                TotalSurfaceFootstepsPlayed++;
+            }
+
+            if (audioSource == null)
+            {
+                audioSource = GetComponent<AudioSource>();
+                if (audioSource == null)
                 {
-                    int idx = UnityEngine.Random.Range(0, footstepWoodClips.Length);
-                    var clip = footstepWoodClips[idx];
-                    if (clip != null)
-                    {
-                        audioSource.pitch = UnityEngine.Random.Range(0.92f, 1.08f);
-                        audioSource.PlayOneShot(clip, 0.40f);
-                        audioSource.pitch = 1.0f;
-                    }
+                    audioSource = gameObject.AddComponent<AudioSource>();
+                    audioSource.playOnAwake = false;
+                    audioSource.spatialBlend = 0f;
                 }
+            }
+
+            if (audioSource != null && clip != null)
+            {
+                // Mantem pitch exato em notas musicais afinadas (xilofone, caixa de musica, cristal)
+                bool isTunedMusicalSurface = spec.Kind == DarkRoomSurfaceSoundKind.XylophoneKey
+                    || spec.Kind == DarkRoomSurfaceSoundKind.MusicBoxTine
+                    || spec.Kind == DarkRoomSurfaceSoundKind.CrystalChandelier;
+                audioSource.pitch = isTunedMusicalSurface ? 1.0f : UnityEngine.Random.Range(0.95f, 1.05f);
+                audioSource.PlayOneShot(clip, isLanding ? 0.72f : 0.58f);
+                audioSource.pitch = 1.0f;
             }
         }
 
@@ -583,10 +611,9 @@ namespace YunaLegend.DarkRoom
         {
             if (!wasGrounded && controller.isGrounded)
             {
-                AudioClip clipToPlay = landSfx;
-                if (lastLandedPlatformIndex == 0 && landPlushSfx != null) clipToPlay = landPlushSfx;
-                else if (lastLandedPlatformIndex == 5 && drumBounceSfx != null) clipToPlay = drumBounceSfx;
-                PlaySound(clipToPlay);
+                footstepCount++;
+                footstepTimer = FootstepInterval * 0.65f;
+                PlaySurfaceStepAudio(lastLandedPlatformIndex, footstepCount, isLanding: true);
             }
             wasGrounded = controller.isGrounded;
         }

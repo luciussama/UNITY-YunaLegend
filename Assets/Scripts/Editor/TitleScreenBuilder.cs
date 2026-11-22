@@ -24,8 +24,8 @@ namespace YunaLegend.EditorScripts
         private const string EvidenceFolder = "Evidence/title-screen-2026-11-11";
 
         // Fases disponiveis no dropdown da bandeirinha. Novas fases entram aqui.
-        private static readonly string[] PhaseLabels = { "O Quarto Escuro", "Quarto dos Brinquedos", "Arena Imaginária" };
-        private static readonly string[] PhaseScenes = { "Fase-Jogavel-Completa", "ToyRoom_Gameplay", "Arena_Gameplay" };
+        private static readonly string[] PhaseLabels = { "O Quarto Escuro", "Quarto dos Brinquedos", "Arena Imaginária", "Perseguição ao Urso" };
+        private static readonly string[] PhaseScenes = { "Fase-Jogavel-Completa", "ToyRoom_Gameplay", "Arena_Gameplay", "BearChase_Gameplay" };
 
         private static readonly Color Cream = new Color(0.95f, 0.90f, 0.78f);
         private static readonly Color Gold = new Color(1f, 0.84f, 0.55f);
@@ -141,7 +141,7 @@ namespace YunaLegend.EditorScripts
             var controller = controllerGo.AddComponent<TitleScreenController>();
             controller.Configure(
                 newGame, loadGame, easyMode, easyTag, footer, focusMarker,
-                settingsButton, panel, volumeSlider, closeButton, "Fase-Jogavel-Completa");
+                settingsButton, panel, volumeSlider, closeButton, PhaseScenes[PhaseScenes.Length - 1]);
 
             // Bandeirinha no topo: dropdown para escolher a fase.
             var flagSprite = LoadSprite($"{ArtFolder}/Title_Flag.png", 256);
@@ -183,9 +183,16 @@ namespace YunaLegend.EditorScripts
         {
             var scene = EditorSceneManager.OpenScene(ScenePath);
             var controller = Object.FindFirstObjectByType<TitleScreenController>();
-            if (controller == null) throw new System.InvalidOperationException("TitleScreenController ausente.");
-            if (controller.GameplaySceneName != "Fase-Jogavel-Completa")
+            if (controller == null)
+            {
+                throw new System.InvalidOperationException("TitleScreenController ausente.");
+            }
+
+            string expectedScene = PhaseScenes[PhaseScenes.Length - 1];
+            if (controller.GameplaySceneName != expectedScene)
+            {
                 throw new System.InvalidOperationException("Cena de destino inesperada: " + controller.GameplaySceneName);
+            }
 
             if (Object.FindFirstObjectByType<Canvas>() == null) throw new System.InvalidOperationException("Canvas ausente.");
             if (Object.FindFirstObjectByType<EventSystem>() == null) throw new System.InvalidOperationException("EventSystem ausente.");
@@ -649,12 +656,26 @@ namespace YunaLegend.EditorScripts
         private static void RegisterBuildScenes()
         {
             var scenes = new List<EditorBuildSettingsScene>(EditorBuildSettings.scenes);
-            scenes.RemoveAll(s => s.path == ScenePath || s.path == GameplayPath);
-            scenes.Insert(0, new EditorBuildSettingsScene(ScenePath, true));
-            if (AssetDatabase.LoadAssetAtPath<SceneAsset>(GameplayPath) != null)
+            string[] stagePaths =
             {
-                scenes.Insert(1, new EditorBuildSettingsScene(GameplayPath, true));
+                GameplayPath,
+                "Assets/Scenes/ToyRoom_Gameplay.unity",
+                "Assets/Scenes/Arena_Gameplay.unity",
+                "Assets/Scenes/BearChase_Gameplay.unity"
+            };
+
+            scenes.RemoveAll(s => s.path == ScenePath || System.Array.Exists(stagePaths, p => p == s.path));
+            scenes.Insert(0, new EditorBuildSettingsScene(ScenePath, true));
+
+            int insertIdx = 1;
+            for (int i = 0; i < stagePaths.Length; i++)
+            {
+                if (AssetDatabase.LoadAssetAtPath<SceneAsset>(stagePaths[i]) != null)
+                {
+                    scenes.Insert(insertIdx++, new EditorBuildSettingsScene(stagePaths[i], true));
+                }
             }
+
             EditorBuildSettings.scenes = scenes.ToArray();
         }
     }
