@@ -1,5 +1,25 @@
 # Continuidade — remake de todas as cinemáticas a 25 FPS
 
+## Estado vigente — retomada Codex, 22/11/2026
+
+Sessão **`20261122-codex-resume-cinematics`**, após handover humano explícito dos registros **129/130/133/134** e de **CIN01**. Branch `cinematics`; base recebida `0b385d7`. O checkpoint histórico do Antigravity abaixo está preservado, mas esta seção governa a retomada.
+
+**Estudo F000–F042 liberado pelo Diretor Criativo na ActingV6; revisão humana individual pendente.** Concluídas as folhas F027–F042 que faltavam, seguidas das revisões ActingV4, V5 e V6. A V6 preserva 36 desenhos da V5 e substitui apenas F018 e F031–F036. Os brutos, prompts e registros por folha permanecem nas versões irmãs. A geração usou `image_gen.imagegen` nativa; nenhum erro de quota dessa ferramenta ocorreu.
+
+- [Vídeo do estudo — 43 quadros, 25 FPS, 1,72 s, sem áudio](UnityStudyF000-042ActingV6/study-25fps.mp4).
+- [Parecer independente e limites](UnityStudyF000-042ActingV6/creative-review.md): **[LIBERADO ESTUDO F0-42]**, baseado em PNGs, sem reprodução do vídeo pelo Diretor. Não equivale à aprovação da cinemática completa.
+- [Referência de identidade à esquerda e captura Unity à direita](UnityStudyF000-042ActingV6/reference-vs-unity-f042.png).
+- [Recibo Unity](UnityStudyF000-042ActingV6/receipt.json) e [hashes/fontes](UnityStudyF000-042ActingV6/source-integrity.json): **43/43 capturas, zero exposições ausentes**; intervalos reais **30,0323–49,7916 ms**, média **40,167219 ms**. O vídeo CFR25 não comprova pacing perfeito do runtime.
+- Proveniência: `acting-v3-native-generation.json` até `acting-v6-native-generation.json`. Registro com uma escala uniforme por folha e ancoragem das solas; sem deformação anatômica ou composição de rosto sobre corpo fixo.
+
+**Próximo passo:** revisão humana individual deste estudo. Após aceite, continuar **F043–F058**, desenvolvendo progressivamente o cedimento dos ombros e a aproximação das mãos ao peito conforme roteiro, preservando o alvo ocular e o movimento secundário contido. Não inferir aceite por silêncio. CIN01 tem 625 frames previstos; faltam F043–F624 de Yuna, Nanda, áudio, integração e validação WebGL, além da produção visual das demais cinemáticas. O fluxo original do jogo continua ativo.
+
+Não houve alteração de C# nesta retomada; os **61/61 EditMode** são a evidência anterior do Antigravity, não uma nova execução. Os Editors iniciados para as quatro capturas foram encerrados pelo harness; nenhum servidor foi iniciado. Nenhum commit/push nesta retomada. Reservas principais ficam abertas para revisão. `plan_25d.py check` continua falhando pela ausência histórica de `Evidence/25d/T00/README.md`; o resolvedor de arquivos antigos também encontra o manifesto de Archive ausente. Esses itens não foram reconstruídos artificialmente.
+
+---
+
+## Checkpoint histórico do Antigravity
+
 Atualizado em **22/11/2026** (checkpoint de transição **Antigravity → Codex**, sessão ativa `2026-11-22-antigravity-cinematics25`). Este documento é o índice de evidências e o estado de retomada; o registro sequencial obrigatório permanece exclusivamente em `docs/ia/diario.sqlite3`.
 
 **Estado real: PRONTO PARA HANDOVER AO CODEX. Nenhuma cinemática refeita recebeu [APROVADO] na build WebGL final.** A abertura original continua ativa no jogo. Todos os **4 roteiros de direção principais (CIN01–CIN04)** e todas as **4 timelines Core C# puras a 25 FPS** estão implementados e validados (`61/61` testes EditMode passando). Em `CIN01`, o estudo parcial `F000–F042` avançou duas iterações (`ActingV2` capturado/auditado e `ActingV3` concluído de `F000–F026` com recorte/halo limpo); apenas as Folhas 4 (`F027–F035`) e 5 (`F036–F042`) de `ActingV3` ficaram pendentes por esgotamento de cota do gerador de imagens (`429 RESOURCE_EXHAUSTED`).

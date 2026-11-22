@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-22T18:28:39.168779+00:00",
+  "updated_at": "2026-11-22T21:06:16.579801+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -781,17 +781,17 @@
       "human_gate": false,
       "status": "active",
       "owner": {
-        "session": "2026-11-22-antigravity-cinematics25",
-        "agent": "Antigravity"
+        "session": "20261122-codex-resume-cinematics",
+        "agent": "Codex GPT-6"
       },
       "checkpoint": {
-        "done": "ActingV2 capturado/auditado; ActingV3 F0-26 pronto com alpha/halo limpo; Passo 1 WebGL+roteiros CIN02/03/04 concluidos; Core C# 25 FPS + 61/61 testes EditMode validados; README e commit preparados para handover ao Codex",
-        "next": "Codex assume via handover da sessao 2026-11-22-antigravity-cinematics25, conclui Folhas 4 (F27-35) e 5 (F36-42) de ActingV3, captura UnityStudyF000-042ActingV3 e envia ao Diretor Criativo",
-        "validation": "EditMode 61/61 Passed (Validation/timelines-cin01-04-editmode.xml); ActingV2 43/43 missed0; ActingV3 F0-26 0 clipping e vao entre pernas limpo; 14 capturas WebGL + 3 roteiros CIN02-04 persistidos",
-        "pending": "Folhas F27-42 de ActingV3, auditoria F0-42, restantes 582 frames Yuna, Nanda 625, audio, integracao/WebGL CIN01 e producao visual CIN02-CIN04",
-        "files": "Evidence/Cinematics25/README.md;Evidence/Cinematics25/CIN02-direcao.md;Evidence/Cinematics25/CIN03-direcao.md;Evidence/Cinematics25/CIN04-direcao.md;Evidence/Cinematics25/Validation/timelines-cin01-04-editmode.xml;Assets/Art/Illustrated25D/Preview/Core/DarkRoomHandDrawnTiming.cs;Assets/Scripts/Runtime/Arena/Core/ArenaSpecialHandDrawnTiming.cs;Assets/Scripts/Runtime/BearChase/Core/BearChaseHandDrawnTiming.cs",
-        "processes": "Nenhum Unity, servidor ou subagente ativo; pronto para handover ao Codex",
-        "updated_at": "2026-11-22T18:28:39.168779+00:00"
+        "done": "ActingV3completo;revisoesV4/V5/V6capturadas;DiretorLIBEROUestudoF000-042V6;43/43missed0;provenienciaehashes",
+        "next": "Revisao humana individualV6;aposaceite produzirF043-058 ombroscedendo/maosrumoaopeito conformeDiretor",
+        "validation": "UnityV6intervalos30.0323..49.7916msmedia40.167219;videoCFR25FPS1.72ssemaudio;DiretoravaliouPNGsnaovideo;nenhumaAPROVACAOcinematicacompleta",
+        "pending": "Aceitehumanoestudo;582desenhosYuna;Nanda625;audio;integracao;WebGL;demaiscinematicas",
+        "files": "Evidence/Cinematics25;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/diario.sqlite3",
+        "processes": "NenhumUnityEditorproprio/servidorativo;Diretorfinalizouparecer;semcommitpush",
+        "updated_at": "2026-11-22T21:06:16.579801+00:00"
       },
       "authorization": "Pedido explicito do usuario22/11/2026: refazer todas cinematícas com exatamente Diretor caixa-preta e Executor, roteiro antes de implementar e aprovacao individual do Diretor. Nova microentrega narrativa independente da expansao de plataformas; nao aceita nem altera T06/T07/T08."
     }
@@ -3000,6 +3000,27 @@
       "files": "Evidence/Cinematics25/README.md;Evidence/Cinematics25/CIN02-direcao.md;Evidence/Cinematics25/CIN03-direcao.md;Evidence/Cinematics25/CIN04-direcao.md;Evidence/Cinematics25/Validation/timelines-cin01-04-editmode.xml;Assets/Art/Illustrated25D/Preview/Core/DarkRoomHandDrawnTiming.cs;Assets/Scripts/Runtime/Arena/Core/ArenaSpecialHandDrawnTiming.cs;Assets/Scripts/Runtime/BearChase/Core/BearChaseHandDrawnTiming.cs",
       "processes": "Nenhum Unity, servidor ou subagente ativo; pronto para handover ao Codex",
       "at": "2026-11-22T18:28:39.168779+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "CIN01",
+      "session": "20261122-codex-resume-cinematics",
+      "agent": "Codex GPT-6",
+      "reason": "Pedido explicito do usuario nesta conversa: continue de onde o antigravity parou",
+      "from_session": "2026-11-22-antigravity-cinematics25",
+      "at": "2026-11-22T20:38:40.051384+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "CIN01",
+      "session": "20261122-codex-resume-cinematics",
+      "done": "ActingV3completo;revisoesV4/V5/V6capturadas;DiretorLIBEROUestudoF000-042V6;43/43missed0;provenienciaehashes",
+      "next": "Revisao humana individualV6;aposaceite produzirF043-058 ombroscedendo/maosrumoaopeito conformeDiretor",
+      "validation": "UnityV6intervalos30.0323..49.7916msmedia40.167219;videoCFR25FPS1.72ssemaudio;DiretoravaliouPNGsnaovideo;nenhumaAPROVACAOcinematicacompleta",
+      "pending": "Aceitehumanoestudo;582desenhosYuna;Nanda625;audio;integracao;WebGL;demaiscinematicas",
+      "files": "Evidence/Cinematics25;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/diario.sqlite3",
+      "processes": "NenhumUnityEditorproprio/servidorativo;Diretorfinalizouparecer;semcommitpush",
+      "at": "2026-11-22T21:06:16.579801+00:00"
     }
   ]
 }

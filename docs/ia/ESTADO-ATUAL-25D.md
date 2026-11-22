@@ -1,5 +1,17 @@
 # Estado atual — sala escura ilustrada
 
+## CIN01 — estudo ActingV6 F000–042 liberado pelo Diretor; revisão humana pendente (22/11/2026)
+
+Retomada por pedido humano após Antigravity. Sessão **`20261122-codex-resume-cinematics`**, handover dos registros **129/130/133/134** e de **CIN01**, que permanecem abertos. Folhas pendentes F027–F042 concluídas; revisões ActingV3/V4/V5/V6 preservadas como evidência.
+
+**Diretor Criativo: [LIBERADO ESTUDO F0-42]**, limitado à inspeção de PNGs brutos Unity, sem assistir ao MP4. Alvo ocular, continuidade do modelo, movimento secundário contido, boca neutra, pés apoiados e início dos braços aceitos no estudo. **A cinemática completa não está aprovada nem integrada.**
+
+[Vídeo de revisão, 43 desenhos/1,72 s a25FPS, sem áudio](../../Evidence/Cinematics25/UnityStudyF000-042ActingV6/study-25fps.mp4) · [Parecer](../../Evidence/Cinematics25/UnityStudyF000-042ActingV6/creative-review.md) · [Checkpoint técnico e proveniência](../../Evidence/Cinematics25/README.md).
+
+Unity Play Mode: **43/43 capturas, zero exposições ausentes**. Intervalos reais30,0323–49,7916ms, média40,167219ms; vídeoCFR25 não comprova pacing perfeito em runtime. Nenhum C# alterado; os61/61EditMode pertencem à validação anterior do Antigravity. Nenhum commit/push nesta retomada, nenhum Editor próprio ou servidor permanece ativo.
+
+**Próximo passo obrigatório:** revisão humana individual deste estudo antes da etapa dependente. Após aceite, produzir **F043–F058**, continuando o cedimento dos ombros e as mãos rumo ao peito; depois completarF059–F624, Nanda, áudio, integração e WebGL. Não inferir aceite humano da liberação do Diretor ou dos testes técnicos. A abertura original continua ativa. As seções abaixo são checkpoints históricos.
+
 ## CIN01 — remake das cinemáticas a 25 FPS — INTERROMPIDO POR QUOTA / revisão parcial pendente (22/11/2026)
 
 Pedido atual: refazer todas as cinemáticas em desenho tradicional 2D, com exatamente Diretor Criativo caixa-preta e Executor; conclusão somente com aprovação individual real do Diretor. Sessão `20261122-codex-executor-cinematics`; registros abertos 129, 130, 133 e 134; microentrega **CIN01 ativa** no coordenador. Nenhuma cinemática refeita foi aprovada ou integrada ao fluxo real.

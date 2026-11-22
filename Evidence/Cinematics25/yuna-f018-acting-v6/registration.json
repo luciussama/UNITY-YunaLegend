@@ -1,0 +1,19 @@
+{
+  "raw": "Evidence\\Cinematics25\\yuna-f018-acting-v6-raw.png",
+  "sha256": "aa8a564ad0c26eebd44f93825db64f4ca3f8a361f091506e1faa1624c6d68f26",
+  "pageScale": 0.40384615384615385,
+  "canvas": [
+    512,
+    512
+  ],
+  "frames": [
+    {
+      "frame": 18,
+      "translation": [
+        4,
+        4
+      ],
+      "soleY": 480
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "captured": 43,
+  "missed": 0,
+  "intervalMs": {
+    "min": 32.41270000000185,
+    "max": 40.583499999996775,
+    "mean": 39.806483333333254
+  },
+  "frames": [
+    {
+      "file": "Evidence/Cinematics25/yuna-f000-008-acting-v3/f000.png",
+      "sha256": "77e3fc49bf78953bc36f985ccd7e873caa903d8e5509abdbc920d0f44473adbf"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f000-008-acting-v3/f001.png",
+      "sha256": "953af573f9565586ecf63dbc3848ae68450bec18ec5d29b342cdadf86fc3e6e9"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f000-008-acting-v3/f002.png",
+      "sha256": "a6fe6826fd6e2a1fe58c76709d86b37a7236a539efc23c10e2dae0d1a1a14773"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f000-008-acting-v3/f003.png",
+      "sha256": "96c50d103ae313663a1aed10bc7d623ad1ae2a5809289ec12c22da28aa8d9ba3"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f000-008-acting-v3/f004.png",
+      "sha256": "a50f039c53f6fb08a079a1af18932d1490241c3629eb7d66b0b5c0c2153c9e88"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f000-008-acting-v3/f005.png",
+      "sha256": "69dcae4f97b335141295c179a498525939282e8eea9360f115a6d52e8a54365c"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f000-008-acting-v3/f006.png",
+      "sha256": "f6aaf3f6bc1dd2c43fcb015ef87c9a35598cbb6463d13785d69a855ff8e6ec48"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f000-008-acting-v3/f007.png",
+      "sha256": "ab180c2f28f2da3728673e1825b107618aa8319634a06b654a748952ae44b4bc"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f000-008-acting-v3/f008.png",
+      "sha256": "be978d38bebaf3b741a8724cec7ff629629cf828680e7574a8d6726fafdf9812"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f009-017-acting-v3/f009.png",
+      "sha256": "fc944d925d46b4b5928170c34a58aca6b342ff1aeca787a49b95b04995b18f21"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f009-017-acting-v3/f010.png",
+      "sha256": "620e174766d98779fa0f0ba0d20d7e3b15bc3de5bf6d06c92185e4b5bbbec083"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f009-017-acting-v3/f011.png",
+      "sha256": "1671f3a82b89995a3b4382055d32ee66c57caec0a3aa47699ba6d2e97b67f16d"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f009-017-acting-v3/f012.png",
+      "sha256": "3b195f1e1202e0818584424ef27d50df735ce2036a9e37442d4b5365db609a3e"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f009-017-acting-v3/f013.png",
+      "sha256": "80b38b4b4776edb7095507b76131da524230498b681982c6cb3ee0a4260f7b0b"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f009-017-acting-v3/f014.png",
+      "sha256": "fd8ed3cb69957fe473d0296491affecc58a398390de4513f3c139195685f5afe"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f009-017-acting-v3/f015.png",
+      "sha256": "f095a9447637f871265a4cbf4e80a2e28e81f3780f0f328b917c5a91e4747c91"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f009-017-acting-v3/f016.png",
+      "sha256": "8c836f7cefd3408ac4457b4e9659d3fff32af40044d98579167ff24c63abc3d0"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f009-017-acting-v3/f017.png",
+      "sha256": "75f9b75b928d284f7684110db960ffd5d2723949a96bf9aefd771069c3299ee3"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f018-026-acting-v3/f018.png",
+      "sha256": "0a3088b5415bf9275690ce9b251f0741cc258213f54ffca6dfea43f340586dc1"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f018-026-acting-v3/f019.png",
+      "sha256": "2c4ad425ad5380e0fa9b0fd088004542b6dd42437bbe2e6cbdac7f0ee88d9361"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f018-026-acting-v3/f020.png",
+      "sha256": "62882be03f6865764a668c0c0ca6f9732e13451e127bdf6eb4b750b771cd0be4"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f018-026-acting-v3/f021.png",
+      "sha256": "550ae0c11565e1db39505db6e05bc3a322455e7d8c8878f74f3cd24043369b21"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f018-026-acting-v3/f022.png",
+      "sha256": "8b0e0bd6f996f331b564ec78ce294a6eca370ca74999823e6f91ff9ff60ef2b9"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f018-026-acting-v3/f023.png",
+      "sha256": "78e8c954f3e396511ce81fc275c8dec0098307e0435271379c18a01cc61878fa"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f018-026-acting-v3/f024.png",
+      "sha256": "ad0cd8603d7485a2a5a8230bfc921ff47bb1e380f4b70009f449d7c5e4a39d82"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f018-026-acting-v3/f025.png",
+      "sha256": "dc85b72606e8701a87cc60834b965b854bfd031e55c131a5bf57031754af5d14"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f018-026-acting-v3/f026.png",
+      "sha256": "2b761eb86190708d404105c9e48093fadcbbd339c383ee1a4b07ff6796d43df9"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f027-035-acting-v3/f027.png",
+      "sha256": "59440d3f7af848b0dd8f3841a6c79defea8bf4bcbe3644509aeba2940e232fc2"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f027-035-acting-v3/f028.png",
+      "sha256": "7b84a0ad3ce3ec13ab31356ea62bfb99701a0ce3204c01d67fc38554d731885a"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f027-035-acting-v3/f029.png",
+      "sha256": "8b24fc3e221d17d58571198503aa8dab79a434ea8edf7bbdff4b276b032384a5"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f027-035-acting-v3/f030.png",
+      "sha256": "563d3bfb53457cbbf0a10776eb055b79d4fdf47aa5d80fe4ae12f8e2700179e3"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f027-035-acting-v3/f031.png",
+      "sha256": "4ee01c18c63a84bc563422fa6ef466daa8a56f4ced2c9208931199e3f97f77a1"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f027-035-acting-v3/f032.png",
+      "sha256": "2177c70c527c66e7dc4d539682c8b051ec1d391f7454c91e31463c80724b7a21"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f027-035-acting-v3/f033.png",
+      "sha256": "e7aee73595bae7efc337b17336c6e020af23eb55ce3e4fda1cc874a8660d7f94"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f027-035-acting-v3/f034.png",
+      "sha256": "02fad1ef8b39ecd98a361a3b20ca2beaeff95048e2dce37c03d1c7520263e5b0"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f027-035-acting-v3/f035.png",
+      "sha256": "7922cba71f4c4ef3ea9ba0d4afb8b1ea9ca737ad82a545133c4cc2cdd7457107"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f036-042-acting-v3/f036.png",
+      "sha256": "cd1fd2a5b523e553dc848fc3f4ba58a9717a66119276e35878917c43b3a001b5"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f036-042-acting-v3/f037.png",
+      "sha256": "02c2e967e1f71cb9b11b04d94666cc67d0507fe59a10a38d7d5d708c1a4707d9"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f036-042-acting-v3/f038.png",
+      "sha256": "0186e1c16d86f912cb55566264f3f4864d433c51f30f3978fe91d07e79643b09"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f036-042-acting-v3/f039.png",
+      "sha256": "4b36e15f564039bbdb87799ca8c76797e3ec6caf7f12efdc7ff381dc65e12ab9"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f036-042-acting-v3/f040.png",
+      "sha256": "39060e23e40f6758831bd02bd70caa30896c6b8c52c1bf92060f453e33907d64"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f036-042-acting-v3/f041.png",
+      "sha256": "85b2014e11bcfb170b107f2bbd9fa527c83aefa88bf313fbb842b7c02e167e11"
+    },
+    {
+      "file": "Evidence/Cinematics25/yuna-f036-042-acting-v3/f042.png",
+      "sha256": "8bfa265dd5f8843978bd1d1b9577e1ce1b5cd0ba7a1a3300cb139632c3367fee"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "raw": "Evidence\\Cinematics25\\yuna-f036-042-acting-v3-raw.png",
+  "sha256": "f6da5b8f72b69c691103ec93adbdfeb83cfb05b8457c9f316fa211d923f6fce8",
+  "pageScale": 1.227390180878553,
+  "canvas": [
+    512,
+    512
+  ],
+  "frames": [
+    {
+      "frame": 36,
+      "translation": [
+        1,
+        -3
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 37,
+      "translation": [
+        -2,
+        -3
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 38,
+      "translation": [
+        -3,
+        -3
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 39,
+      "translation": [
+        0,
+        -3
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 40,
+      "translation": [
+        -2,
+        -4
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 41,
+      "translation": [
+        -2,
+        -4
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 42,
+      "translation": [
+        0,
+        -7
+      ],
+      "soleY": 480
+    }
+  ]
+}

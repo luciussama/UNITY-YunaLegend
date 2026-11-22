@@ -1,0 +1,23 @@
+{
+  "tool": "image_gen.imagegen",
+  "transparent_background": true,
+  "retained": "36 drawings from ActingV5 retained byte-for-byte by study-manifest.json; only F018 and F031-036 replaced",
+  "processing": "prepare_sheet.py: uniform scale per sheet and sole registration; no pose warping or composited face replacement",
+  "images": [
+    {
+      "raw": "yuna-f018-acting-v6-raw.png",
+      "references": ["yuna-f018-026-acting-v5/f018.png", "yuna-f018-026-acting-v5/f019.png"],
+      "prompt": "Precise animation drawing correction of IMAGE1 frame018. Output ONE single fullbody character on transparent512squarecanvas. Change ONLY direction of both brown irises: they must look to the RIGHT side of screen, sustaining the same rightward target as IMAGE2 next019. Remove image1's isolated glanceleft. Preserve image1 face anatomy, exact head angle/nose/ears, headsize, bodypose, tinyclosedneutralmouth, dress/hair/curls, sleeves, hand positions, both shoe shapes/positions, overall watercolor detail and pixel framing. No smile, no pose change, no extra objects. This is a local painted correction within an existing fullbody animation, not a new character. Both eyes looking SAME rightward target, pupils shifted right with whitesvisibleleft, beautiful warmbrownirises, not crosseyed. Exact same fullbody character size and margins, clean true transparency outsidefigure/betweenlegs. No halo, shadow, text, coloredspeckles."
+    },
+    {
+      "raw": "yuna-f031-036-acting-v6-matte-raw.png",
+      "references": ["yuna-f027-035-acting-v5/f030.png", "yuna-f036-042-acting-v5/f036.png"],
+      "prompt": "SIX fullbody consecutive handpainted animation drawings031-036, exactly THREE COLUMNS TWO ROWS, rowmajor equal squarecells. Image1 preceding030:031head/chin finishes tiny upward turn,032-036head holds same upwardangle; image2 targetmodel036 for exact continuity. Only SMALL delayed secondary settling of ponytail/ribbon:031curls close to reference1,032movehairouteredge LEFT by2pixels,033another2pixels,034peak thenstartreturn,035halfreturn,036almostsettledmatchingimage2. Hair amplitude VERY SMALL, no more4sourcepixels at400pixelbodyheight; no horizontal ribbons or windblown hair. Ribbon tails stay drooping DOWN near skirt as inreference1 all6cells, with tinysoftflutter, never project horizontally. The earlier swing was too large: make this calm roomstillness, residual inertia only. Headface/nose stable032-036, tinybreath body/folds, handslowtogether, tinyclosedneutralmouth, no step. Exactly same child proportions, curls volume, sleevevolume, dresswidth/flowers/lace, watercolor detail, shoe shapes andfeetspacing, fullfigures registered same baseline. No scale/pose/hairstyle jumps at031or036. Truecleantransparency outsidefigure/betweenlegs, no halo, shadows, text, labels, grid or scenery. Adequatemargins."
+    },
+    {
+      "raw": "yuna-f031-036-acting-v6-raw.png",
+      "references": ["yuna-f031-036-acting-v6-matte-raw.png"],
+      "prompt": "Remove the blurred brown vignette/matte/background COMPLETELY from this exact six-drawing sprite sheet. Preserve all six fullbody painted characters EXACTLY as drawn, same size, positions, layout3columns2rows, colors and watercolor edges. Do not redraw or alter any anatomy, face, hair, bow, dress or shoes. All areas outside each figure including space between legs and shoes must become truly fully transparent alpha0; no brown glow, shadows, blurred field or halo. This is background removal only, output transparent PNG same3x2sheet. No addedcontent."
+    }
+  ]
+}
