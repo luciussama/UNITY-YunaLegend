@@ -26,7 +26,25 @@ namespace YunaLegend.Editor.BearChase
         private const string BearObjPath = "Assets/Art/Arena/Models/bear_hunyuan.obj";
         private const string BearTexPath = "Assets/Art/Arena/Models/T_Bear_Albedo.png";
 
-        [MenuItem("YunaLegend/Fase 4 - Bear Chase/Abrir Cena (BearChase_Gameplay)", false, 10)]
+        [MenuItem("YunaLegend/Fase 4 - Bear Chase/Jogar (Play Direto)", false, 10)]
+        public static void PlayBearChaseDirectly()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                return;
+            }
+
+            if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+            {
+                return;
+            }
+
+            EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
+            EditorSceneManager.playModeStartScene = null;
+            EditorApplication.isPlaying = true;
+        }
+
+        [MenuItem("YunaLegend/Fase 4 - Bear Chase/Abrir Cena", false, 20)]
         public static void OpenBearChaseScene()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode)
@@ -42,7 +60,7 @@ namespace YunaLegend.Editor.BearChase
             }
         }
 
-        [MenuItem("YunaLegend/Fase 4 - Bear Chase/Build Final Scene", false, 20)]
+        [MenuItem("YunaLegend/Fase 4 - Bear Chase/Reconstruir Cena", false, 30)]
         public static void BuildBearChaseScene()
         {
             EditorSceneManager.playModeStartScene = null;

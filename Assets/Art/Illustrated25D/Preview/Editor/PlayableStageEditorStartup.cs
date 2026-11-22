@@ -43,14 +43,12 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             set => EditorPrefs.SetBool(AutoPlayPrefKey, value);
         }
 
-        [MenuItem(ToggleMenuPath, false, 10)]
         private static void ToggleAutoPlayFullStage()
         {
             IsEnabled = !IsEnabled;
             ApplyPlayModeStartScene();
         }
 
-        [MenuItem(ToggleMenuPath, true)]
         private static bool ValidateToggleAutoPlayFullStage()
         {
             Menu.SetChecked(ToggleMenuPath, IsEnabled);
@@ -106,9 +104,11 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
 
         private static void ApplyPlayModeStartScene()
         {
-            // Se o usuario abriu explicitamente a Toy Room (Fase 2) ou a Arena (Fase 3), o Play deve iniciar nela
+            // Se o usuario abriu explicitamente a Dark Room completa ou uma das fases (Toy Room, Arena, Bear Chase),
+            // o Play deve iniciar diretamente na cena aberta sem redirecionar para TitleScreen.
             string activePath = SceneManager.GetActiveScene().path;
-            if (activePath == "Assets/Scenes/ToyRoom_Gameplay.unity"
+            if (activePath == IllustratedPreviewBuild.PlayableFullStageScene
+                || activePath == "Assets/Scenes/ToyRoom_Gameplay.unity"
                 || activePath == "Assets/Scenes/Arena_Gameplay.unity"
                 || activePath == "Assets/Scenes/Arena_3D_Showcase.unity"
                 || activePath == "Assets/Scenes/BearChase_Gameplay.unity")

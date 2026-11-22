@@ -19,7 +19,6 @@ namespace YunaLegend.EditorScripts
         private const int FrameW = 960;
         private const int FrameH = 540;
 
-        [MenuItem("YunaLegend/Fase 2 - Toy Room/Capture Intro Stop Motion Frames")]
         public static void CaptureAll()
         {
             Directory.CreateDirectory(OutputDir);

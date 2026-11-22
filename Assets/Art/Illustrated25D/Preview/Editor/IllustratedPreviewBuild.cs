@@ -87,7 +87,6 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             { Route.PlayableFullStage, new RouteSpec(PlayableFullStageScene, PlayableFullStageOutput, 37, playableLegacyMode: true) }
         };
 
-        [MenuItem("YunaLegend/Fase 1 - Dark Room/Abrir cena de acompanhamento", false, 20)]
         public static void OpenPreview()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode)
@@ -101,7 +100,25 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             }
         }
 
-        [MenuItem("YunaLegend/Fase 1 - Dark Room/Abrir fase jogável completa (2.5D)", false, 25)]
+        [MenuItem("YunaLegend/Fase 1 - Dark Room/Jogar (Play Direto)", false, 10)]
+        public static void PlayPlayableFullStage()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                return;
+            }
+
+            if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+            {
+                return;
+            }
+
+            EditorSceneManager.OpenScene(PlayableFullStageScene, OpenSceneMode.Single);
+            EditorSceneManager.playModeStartScene = null;
+            EditorApplication.isPlaying = true;
+        }
+
+        [MenuItem("YunaLegend/Fase 1 - Dark Room/Abrir Cena", false, 20)]
         public static void OpenPlayableFullStage()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode)
@@ -111,11 +128,11 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
 
             if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
             {
-                EditorSceneManager.OpenScene(PlayableFullStageScene);
+                EditorSceneManager.playModeStartScene = null;
+                EditorSceneManager.OpenScene(PlayableFullStageScene, OpenSceneMode.Single);
             }
         }
 
-        [MenuItem("YunaLegend/Fase 1 - Dark Room/Gerar build Windows de acompanhamento", false, 30)]
         public static void BuildFromEditor()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode || BuildPipeline.isBuildingPlayer)
@@ -143,7 +160,6 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             }
         }
 
-        [MenuItem("YunaLegend/Fase 1 - Dark Room/Abrir pasta da build", false, 40)]
         public static void OpenBuildFolder()
         {
             var folder = Path.GetDirectoryName(Path.GetFullPath(Output));

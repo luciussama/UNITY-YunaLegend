@@ -72,7 +72,6 @@ namespace YunaLegend.Editor.ToyRoom
             Debug.Log($"[ToyRoomWalkProofCapture] Batchmode capturou {TotalFrames} frames em {FramesDir}");
         }
 
-        [MenuItem("YunaLegend/Fase 2 - Toy Room/Capturar Prova de Caminhada", false, 30)]
         public static void StartWalkProof()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode)

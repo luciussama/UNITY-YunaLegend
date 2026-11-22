@@ -105,7 +105,25 @@ namespace YunaLegend.Editor.ToyRoom
             }
         }
 
-        [MenuItem("YunaLegend/Fase 2 - Toy Room/Abrir Cena (ToyRoom_Gameplay)", false, 10)]
+        [MenuItem("YunaLegend/Fase 2 - Toy Room/Jogar (Play Direto)", false, 10)]
+        public static void PlayToyRoomDirectly()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                return;
+            }
+
+            if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+            {
+                return;
+            }
+
+            EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
+            EditorSceneManager.playModeStartScene = null;
+            EditorApplication.isPlaying = true;
+        }
+
+        [MenuItem("YunaLegend/Fase 2 - Toy Room/Abrir Cena", false, 20)]
         public static void OpenToyRoomScene()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode)
@@ -121,7 +139,7 @@ namespace YunaLegend.Editor.ToyRoom
             }
         }
 
-        [MenuItem("YunaLegend/Fase 2 - Toy Room/Build Final Scene (P1-P8)", false, 20)]
+        [MenuItem("YunaLegend/Fase 2 - Toy Room/Reconstruir Cena", false, 30)]
         public static void BuildBaseScene()
         {
             AssetDatabase.Refresh();
@@ -235,7 +253,6 @@ namespace YunaLegend.Editor.ToyRoom
             }
         }
 
-        [MenuItem("YunaLegend/Fase 2 - Toy Room/Capture Preview")]
         public static void CapturePreview()
         {
             EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
@@ -277,7 +294,6 @@ namespace YunaLegend.Editor.ToyRoom
             cam.fieldOfView = origFov;
         }
 
-        [MenuItem("YunaLegend/Fase 2 - Toy Room/Capture Props Audit")]
         public static void CapturePropsAudit()
         {
             EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
@@ -347,7 +363,6 @@ namespace YunaLegend.Editor.ToyRoom
             Debug.Log($"[ToyRoomSceneBuilder] Preview salvo em {outputPath}");
         }
 
-        [MenuItem("YunaLegend/Fase 2 - Toy Room/Capture TitleScreen Preview")]
         public static void CaptureTitleScreenPreview()
         {
             EditorSceneManager.OpenScene("Assets/Scenes/TitleScreen.unity", OpenSceneMode.Single);
@@ -410,7 +425,6 @@ namespace YunaLegend.Editor.ToyRoom
             EditorBuildSettings.scenes = scenes.ToArray();
         }
 
-        [MenuItem("YunaLegend/Fase 2 - Toy Room/Register In TitleScreen")]
         public static void RegisterToyRoomInTitleScreen()
         {
             const string titleScenePath = "Assets/Scenes/TitleScreen.unity";

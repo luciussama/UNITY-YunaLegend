@@ -29,7 +29,7 @@ namespace YunaLegend.Editor.Arena
         private static bool pendingOpenAfterPlayExit;
         private static bool pendingPlayAfterPlayExit;
 
-        [MenuItem("YunaLegend/Fase 3 - Arena Imaginaria/Testar Arena Agora (Play Direto)", false, 5)]
+        [MenuItem("YunaLegend/Fase 3 - Arena Imaginária/Jogar (Play Direto)", false, 10)]
         public static void PlayArenaDirectly()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode)
@@ -45,7 +45,7 @@ namespace YunaLegend.Editor.Arena
             OpenAndOptionallyPlayArena(startPlayMode: true);
         }
 
-        [MenuItem("YunaLegend/Fase 3 - Arena Imaginaria/Abrir Cena (Arena_Gameplay)", false, 10)]
+        [MenuItem("YunaLegend/Fase 3 - Arena Imaginária/Abrir Cena", false, 20)]
         public static void OpenArenaScene()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode)
@@ -92,13 +92,14 @@ namespace YunaLegend.Editor.Arena
                 EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
             }
 
+            EditorSceneManager.playModeStartScene = null;
             if (startPlayMode)
             {
                 EditorApplication.isPlaying = true;
             }
         }
 
-        [MenuItem("YunaLegend/Fase 3 - Arena Imaginaria/Build Final Scene", false, 20)]
+        [MenuItem("YunaLegend/Fase 3 - Arena Imaginária/Reconstruir Cena", false, 30)]
         public static void BuildArenaScene()
         {
             EditorSceneManager.playModeStartScene = null;
@@ -1706,7 +1707,7 @@ namespace YunaLegend.Editor.Arena
                 AssetDatabase.LoadAssetAtPath<AudioClip>($"{AudioDir}/bear-attack.mp3"));
         }
 
-        [MenuItem("Yuna Legend/Arena/Exportar WebGL da Arena")]
+        [MenuItem("YunaLegend/Build/WebGL - Arena", false, 110)]
         public static void BuildArenaWebGL()
         {
             if (!BuildPipeline.IsBuildTargetSupported(BuildTargetGroup.WebGL, BuildTarget.WebGL))

@@ -81,7 +81,6 @@ namespace YunaLegend.Editor.Arena
             return go;
         }
 
-        [MenuItem("YunaLegend/Fase 3 - Arena Imaginaria/Testar Modelos 3D Agora (Play Direto)", false, 6)]
         public static void OpenAndPlayShowcase3D()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode)
@@ -147,7 +146,6 @@ namespace YunaLegend.Editor.Arena
             EditorApplication.isPlaying = true;
         }
 
-        [MenuItem("YunaLegend/Fase 3 - Arena Imaginaria/Gerar Amostras 3D (Dino, Urso, Cavalinho)", false, 30)]
         public static void CaptureModelSamples()
         {
             RenderSample("Dinosaur", () => BuildDinosaur3D(), new Vector3(0.55f, 0.72f, 1.65f), new Vector3(0f, 0.48f, 0f), "Logs/sample_dinosaur.png");

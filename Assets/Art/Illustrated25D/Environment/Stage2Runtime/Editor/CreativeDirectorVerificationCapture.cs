@@ -24,7 +24,6 @@ namespace YunaLegend.Illustrated25D.Environment
     {
         private const string OutputDir = "Logs/creative_director_audit";
 
-        [MenuItem("YunaLegend/Auditoria Creative Director/Capturar Todas as Provas do Jogo Pronto")]
         public static void CaptureAllProofs()
         {
             Directory.CreateDirectory(OutputDir);

@@ -20,7 +20,7 @@ namespace YunaLegend.EditorScripts
         private const string ToyRoomScene = "Assets/Scenes/ToyRoom_Gameplay.unity";
         private const string ArenaScene = "Assets/Scenes/Arena_Gameplay.unity";
 
-        [MenuItem("YunaLegend/Build Web para GitHub Pages", false, 100)]
+        [MenuItem("YunaLegend/Build/WebGL - GitHub Pages", false, 100)]
         public static void BuildFromMenu()
         {
             try
