@@ -52,5 +52,36 @@ namespace YunaLegend.Tests.EditMode.BearChase
             Assert.IsFalse(sim.IsEntrancePhase);
             Assert.AreEqual(BearChaseBearAction.Running, sim.BearAction);
         }
+
+        [Test]
+        public void EntranceApproach_DrivesStepsMonotonicallyByDistanceWithoutSlides()
+        {
+            BearChaseEntranceSample establishEnd = BearChaseEntranceTimeline.Evaluate(BearChaseEntranceTimeline.EstablishEnd - 0.01f);
+            BearChaseEntranceSample approachStart = BearChaseEntranceTimeline.Evaluate(BearChaseEntranceTimeline.EstablishEnd + 0.001f);
+            Assert.AreEqual(establishEnd.GirlFrameIndex, approachStart.GirlFrameIndex, "Inicio da caminhada deve continuar na mesma pose de Establish.");
+
+            float prevX = approachStart.NormalizedYunaX;
+            for (float t = BearChaseEntranceTimeline.EstablishEnd; t <= BearChaseEntranceTimeline.ReachEnd; t += 0.05f)
+            {
+                BearChaseEntranceSample s = BearChaseEntranceTimeline.Evaluate(t);
+                Assert.GreaterOrEqual(s.NormalizedYunaX, prevX - 0.0001f, $"Yuna nao deve recuar em t={t:F2}s.");
+                Assert.Less(s.NormalizedFairyX, s.NormalizedYunaX - 0.03f, $"Nanda deve manter separacao visual limpa atras da Yuna em t={t:F2}s.");
+                prevX = s.NormalizedYunaX;
+            }
+
+            // Pes plantados durante todo o alcance (zero deslizamento horizontal)
+            BearChaseEntranceSample reachStart = BearChaseEntranceTimeline.Evaluate(BearChaseEntranceTimeline.ApproachEnd + 0.02f);
+            BearChaseEntranceSample reachEnd = BearChaseEntranceTimeline.Evaluate(BearChaseEntranceTimeline.ReachEnd - 0.02f);
+            Assert.AreEqual(reachStart.NormalizedYunaX, reachEnd.NormalizedYunaX, 0.0001f, "Pes de Yuna devem permanecer plantados durante o alcance.");
+
+            // Urso dormindo espelhado com cabeca voltada a esquerda para continuidade anatomica no despertar
+            Assert.IsTrue(reachEnd.BearFlipX, "Urso dormindo deve ter cabeca orientada para a esquerda (direcao de Yuna).");
+            BearChaseEntranceSample wakeStart = BearChaseEntranceTimeline.Evaluate(BearChaseEntranceTimeline.ReachEnd + 0.02f);
+            Assert.IsFalse(wakeStart.BearFlipX, "Urso desperto ja tem cabeca a esquerda sem inversao de 180 graus.");
+
+            // Fade final atinge preto pleno (1.0) antes do corte
+            BearChaseEntranceSample finalFrame = BearChaseEntranceTimeline.Evaluate(BearChaseEntranceTimeline.TotalDuration - 0.03f);
+            Assert.AreEqual(1f, finalFrame.FadeAlpha, 0.001f, "Fade final deve atingir 100% preto antes da transicao.");
+        }
     }
 }

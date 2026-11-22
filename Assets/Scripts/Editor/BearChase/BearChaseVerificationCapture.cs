@@ -176,6 +176,138 @@ namespace YunaLegend.Editor.BearChase
             Debug.Log($"[BearChaseVerificationCapture] 8 capturas salvas em {outputDir}");
         }
 
+        public static void CaptureOpeningVideoFramesAndMobileHud()
+        {
+            BearChaseSceneBuilder.BuildBearChaseScene();
+            EditorSceneManager.OpenScene(BearChaseSceneBuilder.ScenePath, OpenSceneMode.Single);
+
+            string framesDir = Environment.GetEnvironmentVariable("BEAR_CHASE_VIDEO_FRAMES_DIR");
+            if (string.IsNullOrEmpty(framesDir))
+            {
+                framesDir = "Evidence/bear-chase-audit/opening_frames";
+            }
+
+            string outputDir = Environment.GetEnvironmentVariable("BEAR_CHASE_CAPTURE_DIR");
+            if (string.IsNullOrEmpty(outputDir))
+            {
+                outputDir = DefaultOutputDir;
+            }
+
+            Directory.CreateDirectory(framesDir);
+            Directory.CreateDirectory(outputDir);
+
+            Camera cam = Camera.main;
+            var camCtrl = UnityEngine.Object.FindFirstObjectByType<BearChaseCameraController>(FindObjectsInactive.Include);
+            var entranceCtrl = UnityEngine.Object.FindFirstObjectByType<BearChaseEntranceController>(FindObjectsInactive.Include);
+            var sceneryCtrl = UnityEngine.Object.FindFirstObjectByType<BearChaseSceneryController>(FindObjectsInactive.Include);
+            var lightingCtrl = UnityEngine.Object.FindFirstObjectByType<BearChaseLightingController>(FindObjectsInactive.Include);
+            var obstacleCtrl = UnityEngine.Object.FindFirstObjectByType<BearChaseObstacleController>(FindObjectsInactive.Include);
+            var player = UnityEngine.Object.FindFirstObjectByType<BearChasePlayerController>(FindObjectsInactive.Include);
+            var bear = UnityEngine.Object.FindFirstObjectByType<BearChaseBearAnimator>(FindObjectsInactive.Include);
+            var nanda = UnityEngine.Object.FindFirstObjectByType<BearChaseNandaController>(FindObjectsInactive.Include);
+            var hud = UnityEngine.Object.FindFirstObjectByType<BearChaseHudController>(FindObjectsInactive.Include);
+            var bootstrap = UnityEngine.Object.FindFirstObjectByType<BearChaseStageBootstrap>(FindObjectsInactive.Include);
+
+            if (cam == null || player == null || bear == null || entranceCtrl == null || sceneryCtrl == null || lightingCtrl == null)
+            {
+                Debug.LogError("[BearChaseVerificationCapture] Componentes principais ausentes para captura de video.");
+                return;
+            }
+
+            Vector3 chaseOrigin = bootstrap != null ? bootstrap.ChaseOrigin : new Vector3(0f, 0f, 40f);
+            var sim = new BearChaseSimulation();
+            lightingCtrl.ApplyAtmosphere();
+            entranceCtrl.EnsureBuilt();
+            entranceCtrl.SetCaptureCamera(cam);
+            hud?.EnsureBuilt();
+            hud?.SetHearts(sim.Hearts, sim.MaxHearts);
+            hud?.SetCaptureCamera(cam);
+
+            try
+            {
+                // Captura continua da abertura completa (0.0s .. 6.5s a 30 fps = 195 quadros em 1280x720)
+                const int fps = 30;
+                const float totalSeconds = 6.5f;
+                int totalFrames = Mathf.RoundToInt(totalSeconds * fps);
+                float dt = 1f / fps;
+
+                sim.ResetFullStage(skipEntrance: false, useEasyMode: false);
+                for (int f = 0; f < totalFrames; f++)
+                {
+                    if (f > 0)
+                    {
+                        StepAndSync(sim, dt, entranceCtrl, sceneryCtrl, lightingCtrl, obstacleCtrl, camCtrl, player, bear, nanda, hud, chaseOrigin);
+                    }
+                    else
+                    {
+                        StepAndSync(sim, 0f, entranceCtrl, sceneryCtrl, lightingCtrl, obstacleCtrl, camCtrl, player, bear, nanda, hud, chaseOrigin);
+                    }
+
+                    Canvas.ForceUpdateCanvases();
+                    RenderHdrToPng(cam, Path.Combine(framesDir, $"frame_{f:0000}.png"), 1280, 720);
+                }
+
+                // Captura de validacao do HUD mobile (14-16 px) em paisagem (844x390) e retrato (390x844)
+                sim.ResetFullStage(skipEntrance: true, useEasyMode: false);
+                hud?.SetHearts(sim.Hearts, sim.MaxHearts);
+                for (int i = 0; i < 90; i++)
+                {
+                    SteerAwayFromNearestToy(sim);
+                    StepAndSync(sim, 1f / 60f, entranceCtrl, sceneryCtrl, lightingCtrl, obstacleCtrl, camCtrl, player, bear, nanda, hud, chaseOrigin);
+                }
+
+                RenderMobileHudCapture(cam, hud, 844, 390, Path.Combine(outputDir, "mobile_hud_chase_landscape.png"));
+
+                hud?.HandlePhaseChanged(BearChasePhase.RetryModal, shouldOfferEasyMode: true);
+                RenderMobileHudCapture(cam, hud, 390, 844, Path.Combine(outputDir, "mobile_hud_modal_portrait.png"));
+            }
+            finally
+            {
+                hud?.SetViewportOverride(-1f, -1f);
+                entranceCtrl.SetCaptureCamera(null);
+                hud?.SetCaptureCamera(null);
+            }
+
+            Debug.Log($"[BearChaseVerificationCapture] Frames da abertura salvos em {framesDir} e HUD mobile em {outputDir}");
+        }
+
+        private static void RenderMobileHudCapture(Camera cam, BearChaseHudController hud, int width, int height, string path)
+        {
+            var hdr = new RenderTexture(width, height, 24, RenderTextureFormat.ARGBHalf, RenderTextureReadWrite.Linear);
+            var display = new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB);
+            RenderTexture prevTarget = cam.targetTexture;
+            RenderTexture prevActive = RenderTexture.active;
+            bool prevSrgb = GL.sRGBWrite;
+
+            try
+            {
+                cam.aspect = width / (float)height;
+                cam.targetTexture = hdr;
+                Canvas.ForceUpdateCanvases();
+                hud?.SetViewportOverride(width, height);
+                Canvas.ForceUpdateCanvases();
+                cam.Render();
+
+                GL.sRGBWrite = QualitySettings.activeColorSpace == ColorSpace.Linear;
+                Graphics.Blit(hdr, display);
+                RenderTexture.active = display;
+
+                var tex = new Texture2D(width, height, TextureFormat.RGB24, false);
+                tex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+                tex.Apply();
+                File.WriteAllBytes(path, tex.EncodeToPNG());
+                UnityEngine.Object.DestroyImmediate(tex);
+            }
+            finally
+            {
+                cam.targetTexture = prevTarget;
+                RenderTexture.active = prevActive;
+                GL.sRGBWrite = prevSrgb;
+                UnityEngine.Object.DestroyImmediate(hdr);
+                UnityEngine.Object.DestroyImmediate(display);
+            }
+        }
+
         private static bool HasMidFlightToy(BearChaseSimulation sim)
         {
             for (int i = 0; i < sim.ActiveThrownToys.Count; i++)

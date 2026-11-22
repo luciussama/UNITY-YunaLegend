@@ -12,18 +12,31 @@ namespace YunaLegend.BearChase.Runtime
     public sealed class BearChaseEntranceController : MonoBehaviour
     {
         private const string ResourceRoot = "BearChaseEntrance/";
+        private const float FairyLeftWingSplitRatio = 0.24f;
+        private const float FairyRightWingSplitRatio = 0.77f;
 
         private Canvas canvas;
         private RectTransform stageRect;
         private RectTransform yunaRect;
         private Image yunaImage;
         private RectTransform yunaShadowRect;
+        private Image yunaShadowImage;
+        private RectTransform yunaContactShadowRect;
+        private Image yunaContactShadowImage;
         private RectTransform bearRect;
         private Image bearImage;
         private RectTransform bearShadowRect;
+        private Image bearShadowImage;
+        private RectTransform bearContactShadowRect;
+        private Image bearContactShadowImage;
         private RectTransform fairyRect;
+        private RectTransform fairyBodyRect;
+        private RectTransform fairyLeftWingRect;
+        private RectTransform fairyRightWingRect;
         private RectTransform fairyGlowRect;
-        private Image fairyImage;
+        private Image fairyBodyImage;
+        private Image fairyLeftWingImage;
+        private Image fairyRightWingImage;
         private Image fadeOverlay;
 
         private readonly struct AlignedSpriteFrame
@@ -47,9 +60,13 @@ namespace YunaLegend.BearChase.Runtime
         private readonly AlignedSpriteFrame[] approachGirlFrames = new AlignedSpriteFrame[4];
         private readonly AlignedSpriteFrame[] approachBearFrames = new AlignedSpriteFrame[4];
         private readonly AlignedSpriteFrame[] reachGirlFrames = new AlignedSpriteFrame[4];
-        private Sprite fairySprite;
+        private Sprite fairyBodySprite;
+        private Sprite fairyLeftWingSprite;
+        private Sprite fairyRightWingSprite;
         private Sprite softCircleSprite;
         private Texture2D softCircleTexture;
+        private Sprite verticalFadeSprite;
+        private Texture2D verticalFadeTexture;
 
         private bool built;
 
@@ -62,6 +79,7 @@ namespace YunaLegend.BearChase.Runtime
 
             built = true;
             softCircleSprite = CreateRadialSoftSprite(128, out softCircleTexture);
+            verticalFadeSprite = CreateVerticalFadeSprite(64, out verticalFadeTexture);
             LoadSlicedSprites();
             BuildCanvasHierarchy();
         }
@@ -72,14 +90,26 @@ namespace YunaLegend.BearChase.Runtime
             DestroyFrameArray(approachBearFrames);
             DestroyFrameArray(reachGirlFrames);
 
-            DestroyObjectSafe(fairySprite);
-            fairySprite = null;
+            DestroyObjectSafe(fairyBodySprite);
+            fairyBodySprite = null;
+
+            DestroyObjectSafe(fairyLeftWingSprite);
+            fairyLeftWingSprite = null;
+
+            DestroyObjectSafe(fairyRightWingSprite);
+            fairyRightWingSprite = null;
 
             DestroyObjectSafe(softCircleSprite);
             softCircleSprite = null;
 
             DestroyObjectSafe(softCircleTexture);
             softCircleTexture = null;
+
+            DestroyObjectSafe(verticalFadeSprite);
+            verticalFadeSprite = null;
+
+            DestroyObjectSafe(verticalFadeTexture);
+            verticalFadeTexture = null;
         }
 
         private static void DestroyFrameArray(AlignedSpriteFrame[] frames)
@@ -174,24 +204,49 @@ namespace YunaLegend.BearChase.Runtime
                 float girlH = frame.HeightPx > 0f ? frame.HeightPx * frame.UiScale : 395f;
                 float pivotX = frame.WidthPx > 0f ? frame.AnchorNormX : 0.5f;
 
-                var yAnchor = new Vector2(sample.NormalizedYunaX, floorNormY);
+                var yAnchor = new Vector2(sample.NormalizedYunaX, floorNormY + sample.YunaWalkBobY);
                 yunaRect.anchorMin = yAnchor;
                 yunaRect.anchorMax = yAnchor;
                 yunaRect.pivot = new Vector2(pivotX, 0f);
                 yunaRect.anchoredPosition = Vector2.zero;
                 yunaRect.sizeDelta = new Vector2(girlW, girlH);
+                yunaRect.localScale = new Vector3(sample.YunaScaleX, sample.YunaScaleY, 1f);
+                yunaRect.localRotation = Quaternion.Euler(0f, 0f, sample.YunaTiltDeg);
+
+                float yunaAirFactor = Mathf.Clamp01(sample.YunaWalkBobY / 0.036f);
+                bool isWideStride = !sample.UseReachAtlas && (idx == 0 || idx == 2);
+                float baseShadowW = sample.UseReachAtlas ? 235f : (isWideStride ? 228f : 178f);
 
                 if (yunaShadowRect != null)
                 {
-                    var sAnchor = new Vector2(sample.NormalizedYunaX, floorNormY - 0.004f);
+                    float shrink = 1f - yunaAirFactor * 0.24f;
+                    var sAnchor = new Vector2(sample.NormalizedYunaX, floorNormY - 0.002f);
                     yunaShadowRect.anchorMin = sAnchor;
                     yunaShadowRect.anchorMax = sAnchor;
                     yunaShadowRect.anchoredPosition = Vector2.zero;
-                    yunaShadowRect.sizeDelta = new Vector2(215f, 34f);
+                    yunaShadowRect.sizeDelta = new Vector2(baseShadowW * shrink, 42f * shrink);
+                    if (yunaShadowImage != null)
+                    {
+                        yunaShadowImage.color = new Color(0.05f, 0.025f, 0.015f, Mathf.Lerp(0.56f, 0.34f, yunaAirFactor));
+                    }
+                }
+
+                if (yunaContactShadowRect != null)
+                {
+                    float coreShrink = 1f - yunaAirFactor * 0.38f;
+                    var cAnchor = new Vector2(sample.NormalizedYunaX, floorNormY - 0.001f);
+                    yunaContactShadowRect.anchorMin = cAnchor;
+                    yunaContactShadowRect.anchorMax = cAnchor;
+                    yunaContactShadowRect.anchoredPosition = Vector2.zero;
+                    yunaContactShadowRect.sizeDelta = new Vector2(baseShadowW * 0.72f * coreShrink, 20f * coreShrink);
+                    if (yunaContactShadowImage != null)
+                    {
+                        yunaContactShadowImage.color = new Color(0.03f, 0.015f, 0.01f, Mathf.Lerp(0.72f, 0.14f, yunaAirFactor));
+                    }
                 }
             }
 
-            // Urso dourado-mel caido/dormindo e despertando em sobressalto
+            // Urso dourado-mel caido/dormindo (espelhado com cabeca a esquerda) e despertando em sobressalto
             if (bearRect != null && bearImage != null)
             {
                 int bIdx = Mathf.Clamp(sample.BearFrameIndex, 0, approachBearFrames.Length - 1);
@@ -212,31 +267,82 @@ namespace YunaLegend.BearChase.Runtime
                 bearRect.pivot = new Vector2(bearPivotX, 0f);
                 bearRect.anchoredPosition = Vector2.zero;
                 bearRect.sizeDelta = new Vector2(bearW, bearH);
+                float bearSignX = sample.BearFlipX ? -1f : 1f;
+                bearRect.localScale = new Vector3(bearSignX * sample.BearScaleX, sample.BearScaleY, 1f);
+                bearRect.localRotation = Quaternion.Euler(0f, 0f, sample.BearTiltDeg);
+
+                float bearAirFactor = Mathf.Clamp01(sample.BearStartleOffsetY / 0.028f);
+                float bearShadowW = bIdx == 0 ? 430f : (bIdx == 1 ? 395f : (bIdx == 2 ? 355f : 390f));
+                float bearShadowH = bIdx == 3 ? 66f : (bIdx == 2 ? 56f : 52f);
+                float bearShadowY = bIdx == 3 ? (floorNormY + 0.008f) : (bIdx == 2 ? (floorNormY + 0.002f) : (floorNormY - 0.006f));
 
                 if (bearShadowRect != null)
                 {
-                    float shadowShrink = 1f - Mathf.Clamp01(sample.BearStartleOffsetY * 6f) * 0.22f;
-                    var bsAnchor = new Vector2(sample.NormalizedBearX, floorNormY - 0.010f);
+                    float shadowShrink = 1f - bearAirFactor * 0.18f;
+                    var bsAnchor = new Vector2(sample.NormalizedBearX, bearShadowY);
                     bearShadowRect.anchorMin = bsAnchor;
                     bearShadowRect.anchorMax = bsAnchor;
                     bearShadowRect.anchoredPosition = Vector2.zero;
-                    bearShadowRect.sizeDelta = new Vector2(360f * shadowShrink, 42f * shadowShrink);
+                    bearShadowRect.sizeDelta = new Vector2(bearShadowW * shadowShrink, bearShadowH * shadowShrink);
+                    if (bearShadowImage != null)
+                    {
+                        float baseAlpha = bIdx >= 2 ? 0.64f : 0.58f;
+                        bearShadowImage.color = new Color(0.04f, 0.02f, 0.01f, Mathf.Lerp(baseAlpha, 0.38f, bearAirFactor));
+                    }
+                }
+
+                if (bearContactShadowRect != null)
+                {
+                    float coreShrink = 1f - bearAirFactor * 0.34f;
+                    var bcAnchor = new Vector2(sample.NormalizedBearX, floorNormY - 0.006f);
+                    bearContactShadowRect.anchorMin = bcAnchor;
+                    bearContactShadowRect.anchorMax = bcAnchor;
+                    bearContactShadowRect.anchoredPosition = Vector2.zero;
+                    bearContactShadowRect.sizeDelta = new Vector2(bearShadowW * 0.78f * coreShrink, 26f * coreShrink);
+                    if (bearContactShadowImage != null)
+                    {
+                        bearContactShadowImage.color = new Color(0.025f, 0.012f, 0.008f, Mathf.Lerp(0.74f, 0.18f, bearAirFactor));
+                    }
                 }
             }
 
-            // Nanda azul-ciano acompanhando continuamente desde a poltrona
+            // Nanda azul-ciano acompanhando continuamente com asas articuladas sem deformar rosto/corpo
             if (fairyRect != null)
             {
                 float fy = sample.NormalizedFairyY + sample.FairyBobOffset;
                 var fAnchor = new Vector2(sample.NormalizedFairyX, fy);
                 const float fairyW = 118f;
                 const float fairyH = 128f;
+                float leftWingW = fairyW * FairyLeftWingSplitRatio;
+                float bodyW = fairyW * (FairyRightWingSplitRatio - FairyLeftWingSplitRatio);
+                float rightWingW = fairyW * (1f - FairyRightWingSplitRatio);
+                float bodyHalfW = bodyW * 0.5f;
+                float beat = Mathf.Clamp(sample.FairyWingScaleX, 0.35f, 1.05f);
 
                 fairyRect.anchorMin = fAnchor;
                 fairyRect.anchorMax = fAnchor;
                 fairyRect.anchoredPosition = Vector2.zero;
                 fairyRect.sizeDelta = new Vector2(fairyW, fairyH);
-                fairyRect.localScale = new Vector3(sample.FairyWingScaleX, 1f, 1f);
+                fairyRect.localScale = Vector3.one;
+                fairyRect.localRotation = Quaternion.Euler(0f, 0f, sample.FairyBobOffset * -240f);
+
+                if (fairyBodyRect != null)
+                {
+                    fairyBodyRect.anchoredPosition = Vector2.zero;
+                    fairyBodyRect.sizeDelta = new Vector2(bodyW, fairyH);
+                }
+
+                if (fairyLeftWingRect != null)
+                {
+                    fairyLeftWingRect.anchoredPosition = new Vector2(-bodyHalfW + 1f, 0f);
+                    fairyLeftWingRect.sizeDelta = new Vector2(leftWingW * beat, fairyH);
+                }
+
+                if (fairyRightWingRect != null)
+                {
+                    fairyRightWingRect.anchoredPosition = new Vector2(bodyHalfW - 1f, 0f);
+                    fairyRightWingRect.sizeDelta = new Vector2(rightWingW * beat, fairyH);
+                }
 
                 if (fairyGlowRect != null)
                 {
@@ -244,7 +350,7 @@ namespace YunaLegend.BearChase.Runtime
                     fairyGlowRect.anchorMin = fAnchor;
                     fairyGlowRect.anchorMax = fAnchor;
                     fairyGlowRect.anchoredPosition = Vector2.zero;
-                    fairyGlowRect.sizeDelta = new Vector2(280f * pulse, 280f * pulse);
+                    fairyGlowRect.sizeDelta = new Vector2(265f * pulse, 265f * pulse);
                 }
             }
 
@@ -268,13 +374,17 @@ namespace YunaLegend.BearChase.Runtime
                 int girlHeight = approachTex.height - girlStartY;
                 int bearHeight = Mathf.RoundToInt(374 * sy);
 
+                // Pivo estritamente em cabeca/tronco na caminhada elimina oscilacao lateral de f3 (+-1.7 px max)
                 BuildAlignedRow(
                     approachTex,
                     girlCols,
                     girlStartY,
                     girlHeight,
-                    anchorBandMin: 0.55f,
-                    anchorBandMax: 0.92f,
+                    primaryBandMin: 0.55f,
+                    primaryBandMax: 0.92f,
+                    secondaryBandMin: 0.00f,
+                    secondaryBandMax: 0.12f,
+                    secondaryWeight: 0f,
                     targetTallHeightUi: 395f,
                     approachGirlFrames);
 
@@ -283,8 +393,11 @@ namespace YunaLegend.BearChase.Runtime
                     bearCols,
                     0,
                     bearHeight,
-                    anchorBandMin: 0.00f,
-                    anchorBandMax: 0.24f,
+                    primaryBandMin: 0.00f,
+                    primaryBandMax: 0.24f,
+                    secondaryBandMin: 0.00f,
+                    secondaryBandMax: 0.24f,
+                    secondaryWeight: 0f,
                     targetTallHeightUi: 350f,
                     approachBearFrames);
             }
@@ -295,13 +408,17 @@ namespace YunaLegend.BearChase.Runtime
                 float rxScale = reachTex.width / 2172f;
                 int[] reachCols = { Mathf.RoundToInt(70 * rxScale), Mathf.RoundToInt(545 * rxScale), Mathf.RoundToInt(1099 * rxScale), Mathf.RoundToInt(1693 * rxScale), Mathf.RoundToInt(2120 * rxScale) };
 
+                // Ancora firmemente nos pes plantados no tapete enquanto tronco e braco avancam ate o urso e recuam no susto
                 BuildAlignedRow(
                     reachTex,
                     reachCols,
                     0,
                     reachTex.height,
-                    anchorBandMin: 0.00f,
-                    anchorBandMax: 0.16f,
+                    primaryBandMin: 0.00f,
+                    primaryBandMax: 0.12f,
+                    secondaryBandMin: 0.00f,
+                    secondaryBandMax: 0.12f,
+                    secondaryWeight: 0f,
                     targetTallHeightUi: 395f,
                     reachGirlFrames);
             }
@@ -309,10 +426,25 @@ namespace YunaLegend.BearChase.Runtime
             Texture2D fairyTex = Resources.Load<Texture2D>(ResourceRoot + "illustrated-fairy-v1");
             if (fairyTex != null)
             {
-                fairySprite = Sprite.Create(
+                float w = fairyTex.width;
+                float h = fairyTex.height;
+                float left = Mathf.Round(w * FairyLeftWingSplitRatio);
+                float right = Mathf.Round(w * FairyRightWingSplitRatio);
+
+                fairyLeftWingSprite = Sprite.Create(
                     fairyTex,
-                    new Rect(0, 0, fairyTex.width, fairyTex.height),
+                    new Rect(0f, 0f, left, h),
+                    new Vector2(1f, 0.5f),
+                    100f);
+                fairyBodySprite = Sprite.Create(
+                    fairyTex,
+                    new Rect(left, 0f, right - left, h),
                     new Vector2(0.5f, 0.5f),
+                    100f);
+                fairyRightWingSprite = Sprite.Create(
+                    fairyTex,
+                    new Rect(right, 0f, w - right, h),
+                    new Vector2(0f, 0.5f),
                     100f);
             }
         }
@@ -322,8 +454,11 @@ namespace YunaLegend.BearChase.Runtime
             int[] cols,
             int bandStartY,
             int bandHeight,
-            float anchorBandMin,
-            float anchorBandMax,
+            float primaryBandMin,
+            float primaryBandMax,
+            float secondaryBandMin,
+            float secondaryBandMax,
+            float secondaryWeight,
             float targetTallHeightUi,
             AlignedSpriteFrame[] dest)
         {
@@ -382,28 +517,15 @@ namespace YunaLegend.BearChase.Runtime
 
                 int tw = maxX - minX + 1;
                 int th = maxY - minY + 1;
-                int ayStart = minY + Mathf.Clamp(Mathf.FloorToInt(th * anchorBandMin), 0, th - 1);
-                int ayEnd = minY + Mathf.Clamp(Mathf.CeilToInt(th * anchorBandMax), 1, th);
 
-                double sumX = 0.0;
-                long weightSum = 0;
-                for (int y = ayStart; y < ayEnd; y++)
+                float primaryCenterX = ComputeBandCenterX(pixels, texW, minX, maxX, minY, th, primaryBandMin, primaryBandMax);
+                float centerX = primaryCenterX;
+                if (secondaryWeight > 0.001f)
                 {
-                    int rowBase = y * texW;
-                    for (int x = minX; x <= maxX; x++)
-                    {
-                        byte alpha = pixels[rowBase + x].a;
-                        if (alpha > 24)
-                        {
-                            sumX += (double)x * alpha;
-                            weightSum += alpha;
-                        }
-                    }
+                    float secondaryCenterX = ComputeBandCenterX(pixels, texW, minX, maxX, minY, th, secondaryBandMin, secondaryBandMax);
+                    centerX = Mathf.Lerp(primaryCenterX, secondaryCenterX, Mathf.Clamp01(secondaryWeight));
                 }
 
-                float centerX = weightSum > 0
-                    ? (float)(sumX / weightSum)
-                    : (minX + maxX) * 0.5f;
                 anchorsX[col] = Mathf.Clamp((centerX - minX) / tw, 0.25f, 0.75f);
                 tightRects[col] = new Rect(minX, minY, tw, th);
                 maxTightH = Mathf.Max(maxTightH, th);
@@ -416,6 +538,40 @@ namespace YunaLegend.BearChase.Runtime
                 Sprite sp = Sprite.Create(tex, r, new Vector2(anchorsX[col], 0f), 100f);
                 dest[col] = new AlignedSpriteFrame(sp, r.width, r.height, anchorsX[col], uniformScale);
             }
+        }
+
+        private static float ComputeBandCenterX(
+            Color32[] pixels,
+            int texW,
+            int minX,
+            int maxX,
+            int minY,
+            int tightH,
+            float bandMin,
+            float bandMax)
+        {
+            int ayStart = minY + Mathf.Clamp(Mathf.FloorToInt(tightH * bandMin), 0, tightH - 1);
+            int ayEnd = minY + Mathf.Clamp(Mathf.CeilToInt(tightH * bandMax), 1, tightH);
+
+            double sumX = 0.0;
+            long weightSum = 0;
+            for (int y = ayStart; y < ayEnd; y++)
+            {
+                int rowBase = y * texW;
+                for (int x = minX; x <= maxX; x++)
+                {
+                    byte alpha = pixels[rowBase + x].a;
+                    if (alpha > 24)
+                    {
+                        sumX += (double)x * alpha;
+                        weightSum += alpha;
+                    }
+                }
+            }
+
+            return weightSum > 0
+                ? (float)(sumX / weightSum)
+                : (minX + maxX) * 0.5f;
         }
 
         private void BuildCanvasHierarchy()
@@ -442,7 +598,6 @@ namespace YunaLegend.BearChase.Runtime
             BuildRoomBackdrop(stageRect);
             BuildWindowAndSunbeam(stageRect);
             BuildFloorAndRug(stageRect);
-            BuildArmchair(stageRect);
             BuildActors(stageRect);
             BuildFadeOverlay(stageRect);
         }
@@ -478,11 +633,19 @@ namespace YunaLegend.BearChase.Runtime
                 winImg.raycastTarget = false;
             }
 
-            var beamRt = CreateRect("WindowSunGlow", parent, new Vector2(0.675f, 0.45f), new Vector2(0.675f, 0.45f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(780f, 520f));
+            var beamRt = CreateRect("WindowSunGlow", parent, new Vector2(0.675f, 0.46f), new Vector2(0.675f, 0.46f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(820f, 540f));
             var beamImg = beamRt.gameObject.AddComponent<Image>();
             beamImg.sprite = softCircleSprite;
-            beamImg.color = new Color(1.0f, 0.90f, 0.62f, 0.22f);
+            beamImg.color = new Color(1.0f, 0.90f, 0.62f, 0.24f);
             beamImg.raycastTarget = false;
+
+            // Feixe diagonal suave de luz matinal da janela incidindo sobre o tapete e o urso
+            var shaftRt = CreateRect("WindowSunbeamShaft", parent, new Vector2(0.625f, 0.44f), new Vector2(0.625f, 0.44f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(460f, 760f));
+            shaftRt.localRotation = Quaternion.Euler(0f, 0f, -24f);
+            var shaftImg = shaftRt.gameObject.AddComponent<Image>();
+            shaftImg.sprite = softCircleSprite;
+            shaftImg.color = new Color(1.0f, 0.94f, 0.74f, 0.17f);
+            shaftImg.raycastTarget = false;
         }
 
         private void BuildFloorAndRug(RectTransform parent)
@@ -495,49 +658,55 @@ namespace YunaLegend.BearChase.Runtime
             floorRaw.color = new Color(0.95f, 0.89f, 0.80f, 1f);
             floorRaw.raycastTarget = false;
 
-            var wallShadeRt = CreateRect("BaseboardFloorShadow", parent, new Vector2(0f, 0.31f), new Vector2(1f, 0.35f), new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
+            // Sombra suave em gradiente vertical sob o rodape (sem corte retangular duro sobre o assoalho)
+            var wallShadeRt = CreateRect("BaseboardFloorShadow", parent, new Vector2(0f, 0.285f), new Vector2(1f, 0.348f), new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
             var wallShade = wallShadeRt.gameObject.AddComponent<Image>();
-            wallShade.color = new Color(0.12f, 0.06f, 0.03f, 0.32f);
+            wallShade.sprite = verticalFadeSprite;
+            wallShade.color = new Color(0.11f, 0.05f, 0.02f, 0.42f);
             wallShade.raycastTarget = false;
 
             Texture2D rugTex = Resources.Load<Texture2D>(ResourceRoot + "rectangular-rug-v1");
             if (rugTex != null)
             {
-                var rugRt = CreateRect("VintageRug", parent, new Vector2(0.575f, 0.215f), new Vector2(0.575f, 0.215f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(1060f, 250f));
+                var rugRt = CreateRect("VintageRug", parent, new Vector2(0.545f, 0.215f), new Vector2(0.545f, 0.215f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(1140f, 255f));
                 var rugImg = rugRt.gameObject.AddComponent<Image>();
                 rugImg.sprite = Sprite.Create(rugTex, new Rect(0, 0, rugTex.width, rugTex.height), new Vector2(0.5f, 0.5f));
                 rugImg.raycastTarget = false;
             }
-        }
 
-        private void BuildArmchair(RectTransform parent)
-        {
-            Texture2D chairTex = Resources.Load<Texture2D>(ResourceRoot + "armchair-v1");
-            if (chairTex == null)
-            {
-                return;
-            }
-
-            var chairRt = CreateRect("RedArmchair", parent, new Vector2(0.145f, 0.365f), new Vector2(0.145f, 0.365f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(360f, 405f));
-            var chairImg = chairRt.gameObject.AddComponent<Image>();
-            chairImg.sprite = Sprite.Create(chairTex, new Rect(0, 0, chairTex.width, chairTex.height), new Vector2(0.5f, 0.5f));
-            chairImg.preserveAspect = true;
-            chairImg.raycastTarget = false;
+            // Poca quente de sol da janela sobre o tapete e o urso dormindo para destacar o foco da cena
+            var sunPoolRt = CreateRect("WindowFloorSunPool", parent, new Vector2(0.655f, 0.240f), new Vector2(0.655f, 0.240f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(760f, 185f));
+            var sunPoolImg = sunPoolRt.gameObject.AddComponent<Image>();
+            sunPoolImg.sprite = softCircleSprite;
+            sunPoolImg.color = new Color(1.0f, 0.93f, 0.70f, 0.22f);
+            sunPoolImg.raycastTarget = false;
         }
 
         private void BuildActors(RectTransform parent)
         {
-            yunaShadowRect = CreateRect("YunaShadow", parent, Vector2.zero, Vector2.zero, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(200f, 36f));
-            var yShadowImg = yunaShadowRect.gameObject.AddComponent<Image>();
-            yShadowImg.sprite = softCircleSprite;
-            yShadowImg.color = new Color(0.12f, 0.06f, 0.03f, 0.42f);
-            yShadowImg.raycastTarget = false;
+            yunaShadowRect = CreateRect("YunaShadow", parent, Vector2.zero, Vector2.zero, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(215f, 42f));
+            yunaShadowImage = yunaShadowRect.gameObject.AddComponent<Image>();
+            yunaShadowImage.sprite = softCircleSprite;
+            yunaShadowImage.color = new Color(0.05f, 0.025f, 0.015f, 0.56f);
+            yunaShadowImage.raycastTarget = false;
 
-            bearShadowRect = CreateRect("BearShadow", parent, Vector2.zero, Vector2.zero, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(340f, 44f));
-            var bShadowImg = bearShadowRect.gameObject.AddComponent<Image>();
-            bShadowImg.sprite = softCircleSprite;
-            bShadowImg.color = new Color(0.12f, 0.06f, 0.03f, 0.48f);
-            bShadowImg.raycastTarget = false;
+            yunaContactShadowRect = CreateRect("YunaContactShadow", parent, Vector2.zero, Vector2.zero, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(155f, 20f));
+            yunaContactShadowImage = yunaContactShadowRect.gameObject.AddComponent<Image>();
+            yunaContactShadowImage.sprite = softCircleSprite;
+            yunaContactShadowImage.color = new Color(0.03f, 0.015f, 0.01f, 0.72f);
+            yunaContactShadowImage.raycastTarget = false;
+
+            bearShadowRect = CreateRect("BearShadow", parent, Vector2.zero, Vector2.zero, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(410f, 54f));
+            bearShadowImage = bearShadowRect.gameObject.AddComponent<Image>();
+            bearShadowImage.sprite = softCircleSprite;
+            bearShadowImage.color = new Color(0.04f, 0.02f, 0.01f, 0.60f);
+            bearShadowImage.raycastTarget = false;
+
+            bearContactShadowRect = CreateRect("BearContactShadow", parent, Vector2.zero, Vector2.zero, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(320f, 26f));
+            bearContactShadowImage = bearContactShadowRect.gameObject.AddComponent<Image>();
+            bearContactShadowImage.sprite = softCircleSprite;
+            bearContactShadowImage.color = new Color(0.025f, 0.012f, 0.008f, 0.74f);
+            bearContactShadowImage.raycastTarget = false;
 
             bearRect = CreateRect("BearActor", parent, Vector2.zero, Vector2.zero, new Vector2(0.5f, 0f), Vector2.zero, new Vector2(450f, 350f));
             bearImage = bearRect.gameObject.AddComponent<Image>();
@@ -549,17 +718,31 @@ namespace YunaLegend.BearChase.Runtime
             yunaImage.preserveAspect = false;
             yunaImage.raycastTarget = false;
 
-            fairyGlowRect = CreateRect("FairyBlueAura", parent, Vector2.zero, Vector2.zero, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(280f, 280f));
+            fairyGlowRect = CreateRect("FairyBlueAura", parent, Vector2.zero, Vector2.zero, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(265f, 265f));
             var glowImg = fairyGlowRect.gameObject.AddComponent<Image>();
             glowImg.sprite = softCircleSprite;
-            glowImg.color = new Color(0.24f, 0.84f, 1.0f, 0.46f);
+            glowImg.color = new Color(0.24f, 0.84f, 1.0f, 0.44f);
             glowImg.raycastTarget = false;
 
             fairyRect = CreateRect("FairyActor", parent, Vector2.zero, Vector2.zero, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(118f, 128f));
-            fairyImage = fairyRect.gameObject.AddComponent<Image>();
-            fairyImage.sprite = fairySprite;
-            fairyImage.preserveAspect = true;
-            fairyImage.raycastTarget = false;
+
+            fairyLeftWingRect = CreateRect("FairyLeftWing", fairyRect, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(1f, 0.5f), Vector2.zero, new Vector2(28f, 128f));
+            fairyLeftWingImage = fairyLeftWingRect.gameObject.AddComponent<Image>();
+            fairyLeftWingImage.sprite = fairyLeftWingSprite;
+            fairyLeftWingImage.preserveAspect = false;
+            fairyLeftWingImage.raycastTarget = false;
+
+            fairyRightWingRect = CreateRect("FairyRightWing", fairyRect, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0f, 0.5f), Vector2.zero, new Vector2(28f, 128f));
+            fairyRightWingImage = fairyRightWingRect.gameObject.AddComponent<Image>();
+            fairyRightWingImage.sprite = fairyRightWingSprite;
+            fairyRightWingImage.preserveAspect = false;
+            fairyRightWingImage.raycastTarget = false;
+
+            fairyBodyRect = CreateRect("FairyBody", fairyRect, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(62f, 128f));
+            fairyBodyImage = fairyBodyRect.gameObject.AddComponent<Image>();
+            fairyBodyImage.sprite = fairyBodySprite;
+            fairyBodyImage.preserveAspect = false;
+            fairyBodyImage.raycastTarget = false;
         }
 
         private void BuildFadeOverlay(RectTransform parent)
@@ -568,6 +751,29 @@ namespace YunaLegend.BearChase.Runtime
             fadeOverlay = fadeRt.gameObject.AddComponent<Image>();
             fadeOverlay.color = new Color(0.03f, 0.02f, 0.02f, 0f);
             fadeOverlay.raycastTarget = false;
+        }
+
+        private static Sprite CreateVerticalFadeSprite(int height, out Texture2D tex)
+        {
+            tex = new Texture2D(2, height, TextureFormat.RGBA32, false)
+            {
+                wrapMode = TextureWrapMode.Clamp
+            };
+            var pixels = new Color32[2 * height];
+
+            for (int y = 0; y < height; y++)
+            {
+                float t = y / (float)(height - 1);
+                float a = t * t;
+                byte alpha = (byte)Mathf.RoundToInt(a * 255f);
+                var c = new Color32(255, 255, 255, alpha);
+                pixels[y * 2] = c;
+                pixels[y * 2 + 1] = c;
+            }
+
+            tex.SetPixels32(pixels);
+            tex.Apply();
+            return Sprite.Create(tex, new Rect(0, 0, 2, height), new Vector2(0.5f, 0.5f), 100f);
         }
 
         private static Sprite CreateRadialSoftSprite(int size, out Texture2D tex)

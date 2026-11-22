@@ -31,6 +31,14 @@ namespace YunaLegend.BearChase.Core
         public readonly float FadeAlpha;
         public readonly int StepCueNumber;
         public readonly bool WakeCueActive;
+        public readonly float YunaWalkBobY;
+        public readonly float YunaScaleX;
+        public readonly float YunaScaleY;
+        public readonly float YunaTiltDeg;
+        public readonly bool BearFlipX;
+        public readonly float BearScaleX;
+        public readonly float BearScaleY;
+        public readonly float BearTiltDeg;
 
         public BearChaseEntranceSample(
             BearChaseEntranceBeat beat,
@@ -46,7 +54,15 @@ namespace YunaLegend.BearChase.Core
             float bearStartleOffsetY,
             float fadeAlpha,
             int stepCueNumber,
-            bool wakeCueActive)
+            bool wakeCueActive,
+            float yunaWalkBobY = 0f,
+            float yunaScaleX = 1f,
+            float yunaScaleY = 1f,
+            float yunaTiltDeg = 0f,
+            bool bearFlipX = false,
+            float bearScaleX = 1f,
+            float bearScaleY = 1f,
+            float bearTiltDeg = 0f)
         {
             Beat = beat;
             NormalizedYunaX = normalizedYunaX;
@@ -62,35 +78,50 @@ namespace YunaLegend.BearChase.Core
             FadeAlpha = fadeAlpha;
             StepCueNumber = stepCueNumber;
             WakeCueActive = wakeCueActive;
+            YunaWalkBobY = yunaWalkBobY;
+            YunaScaleX = yunaScaleX;
+            YunaScaleY = yunaScaleY;
+            YunaTiltDeg = yunaTiltDeg;
+            BearFlipX = bearFlipX;
+            BearScaleX = bearScaleX;
+            BearScaleY = bearScaleY;
+            BearTiltDeg = bearTiltDeg;
         }
     }
 
     /// <summary>
     /// Avaliador puro da cinematica de entrada (~6.5s):
-    /// Estabelecimento -> Aproximacao -> Alcance/Toque -> Despertar Subito -> Corte.
+    /// Estabelecimento -> Aproximacao (com parada natural) -> Alcance/Toque (pes plantados) -> Despertar Subito (salto de recuo) -> Corte preto pleno.
     /// </summary>
     public static class BearChaseEntranceTimeline
     {
         public const float EstablishEnd = 0.60f;
+        public const float WalkMoveEnd = 3.70f;
         public const float ApproachEnd = 4.00f;
         public const float ReachEnd = 5.00f;
         public const float WakeUpEnd = 6.00f;
         public const float TotalDuration = 6.50f;
 
-        public const float YunaStartX = 0.215f;
-        public const float YunaReachX = 0.525f;
+        public const float YunaStartX = 0.195f;
+        public const float YunaReachX = 0.495f;
         public const float BearRestX = 0.695f;
-        public const float FairyStartX = 0.195f;
-        public const float FairyStartY = 0.560f;
+        public const float FairyStartX = 0.130f;
+        public const float FairyStartY = 0.625f;
 
         public static BearChaseEntranceSample Evaluate(float elapsedSeconds)
         {
             float t = Math.Max(0f, Math.Min(TotalDuration, elapsedSeconds));
-            float wing = 0.62f + 0.38f * (float)Math.Abs(Math.Cos(t * 14.0));
+            float wing = 0.58f + 0.42f * (float)Math.Abs(Math.Cos(t * 15.0));
             float bob = (float)Math.Sin(t * 4.2) * 0.012f;
+
+            // Respiracao suave do urso dormindo (orientado com cabeca voltada a esquerda para continuidade com despertar)
+            float sleepBreath = (float)Math.Sin(t * 2.35);
+            float sleepBearScaleY = 1f + sleepBreath * 0.016f;
+            float sleepBearScaleX = 1f - sleepBreath * 0.008f;
 
             if (t < EstablishEnd)
             {
+                float idleBreathY = 1f + (float)Math.Sin(t * 3.0) * 0.006f;
                 return new BearChaseEntranceSample(
                     BearChaseEntranceBeat.Establish,
                     YunaStartX,
@@ -105,18 +136,91 @@ namespace YunaLegend.BearChase.Core
                     bearStartleOffsetY: 0f,
                     fadeAlpha: 0f,
                     stepCueNumber: 0,
-                    wakeCueActive: false);
+                    wakeCueActive: false,
+                    yunaWalkBobY: 0f,
+                    yunaScaleX: 1f,
+                    yunaScaleY: idleBreathY,
+                    yunaTiltDeg: 0f,
+                    bearFlipX: true,
+                    bearScaleX: sleepBearScaleX,
+                    bearScaleY: sleepBearScaleY,
+                    bearTiltDeg: 0f);
             }
 
             if (t < ApproachEnd)
             {
-                float u = (t - EstablishEnd) / (ApproachEnd - EstablishEnd);
-                float smoothU = u * u * (3f - 2f * u);
-                float yunaX = Lerp(YunaStartX, YunaReachX, smoothU);
-                float fairyX = Lerp(FairyStartX, 0.455f, smoothU);
-                float fairyY = Lerp(FairyStartY, 0.605f, smoothU) + (float)Math.Sin(u * Math.PI) * 0.045f + bob;
-                int walkFrame = ((int)Math.Floor((t - EstablishEnd) * 5.6f)) % 4;
-                int stepCue = 1 + (int)Math.Floor((t - EstablishEnd) / 0.42f);
+                // Caminhada ativa (0.60s -> 3.70s) seguida de parada estavel em f1 (3.70s -> 4.00s) sem pop de 1 quadro
+                if (t >= WalkMoveEnd)
+                {
+                    float settleBreathY = 1f + (float)Math.Sin(t * 3.0) * 0.005f;
+                    return new BearChaseEntranceSample(
+                        BearChaseEntranceBeat.Approach,
+                        YunaReachX,
+                        BearRestX,
+                        0.425f,
+                        0.635f + bob,
+                        wing,
+                        bob,
+                        useReachAtlas: false,
+                        girlFrameIndex: 1,
+                        bearFrameIndex: 0,
+                        bearStartleOffsetY: 0f,
+                        fadeAlpha: 0f,
+                        stepCueNumber: 8,
+                        wakeCueActive: false,
+                        yunaWalkBobY: 0f,
+                        yunaScaleX: 1f,
+                        yunaScaleY: settleBreathY,
+                        yunaTiltDeg: 0f,
+                        bearFlipX: true,
+                        bearScaleX: sleepBearScaleX,
+                        bearScaleY: sleepBearScaleY,
+                        bearTiltDeg: 0f);
+                }
+
+                float uWalk = (t - EstablishEnd) / (WalkMoveEnd - EstablishEnd);
+                float baseProgress = EvaluateWalkProgress(uWalk);
+
+                // 8 passos completos (4 ciclos de 4 quadros), iniciando o primeiro passo imediatamente ao mover
+                const int totalSteps = 8;
+                float stepFloat = baseProgress * totalSteps;
+                int stepIndex = Math.Min(totalSteps - 1, (int)Math.Floor(stepFloat));
+                float stepLocal = stepFloat - stepIndex;
+
+                // Pulso de marcha: 78% do avanco ocorre durante a passada aberta [0..0.58] e apenas 22% no apoio curto [0.58..1]
+                float modulatedLocal = ModulateStepAdvance(stepLocal);
+                float modulatedProgress = (stepIndex + modulatedLocal) / totalSteps;
+                float yunaX = Lerp(YunaStartX, YunaReachX, modulatedProgress);
+                float fairyX = Lerp(FairyStartX, 0.425f, baseProgress);
+                float fairyY = Lerp(FairyStartY, 0.635f, baseProgress) + (float)Math.Sin(uWalk * Math.PI) * 0.032f + bob;
+
+                int walkFrame;
+                float walkBobY = 0f;
+                int stepCue = stepIndex + 1;
+
+                if (baseProgress < 0.001f)
+                {
+                    // Primeiros milissegundos (dx < 1 px) mantem pose inicial antes da passada imediata
+                    walkFrame = 1;
+                    stepCue = 0;
+                }
+                else
+                {
+                    bool isPassingPose = stepLocal >= 0.58f;
+                    bool isEvenStep = (stepIndex % 2) == 0;
+                    if (!isPassingPose)
+                    {
+                        walkFrame = isEvenStep ? 2 : 0;
+                        float strideU = stepLocal / 0.58f;
+                        walkBobY = (float)Math.Sin(strideU * Math.PI) * 0.0022f;
+                    }
+                    else
+                    {
+                        walkFrame = isEvenStep ? 3 : 1;
+                        float passU = (stepLocal - 0.58f) / 0.42f;
+                        walkBobY = (float)Math.Sin(passU * Math.PI) * 0.0052f;
+                    }
+                }
 
                 return new BearChaseEntranceSample(
                     BearChaseEntranceBeat.Approach,
@@ -132,15 +236,26 @@ namespace YunaLegend.BearChase.Core
                     bearStartleOffsetY: 0f,
                     fadeAlpha: 0f,
                     stepCueNumber: stepCue,
-                    wakeCueActive: false);
+                    wakeCueActive: false,
+                    yunaWalkBobY: walkBobY,
+                    yunaScaleX: 1f,
+                    yunaScaleY: 1f,
+                    yunaTiltDeg: 0f,
+                    bearFlipX: true,
+                    bearScaleX: sleepBearScaleX,
+                    bearScaleY: sleepBearScaleY,
+                    bearTiltDeg: 0f);
             }
 
             if (t < ReachEnd)
             {
                 float u = (t - ApproachEnd) / (ReachEnd - ApproachEnd);
-                int reachFrame = u < 0.35f ? 0 : (u < 0.70f ? 1 : 2);
-                float fairyX = Lerp(0.455f, 0.485f, u);
-                float fairyY = 0.615f + bob;
+                float smoothU = SmoothStep(u);
+                int reachFrame = u < 0.30f ? 0 : (u < 0.58f ? 1 : 2);
+                // Pes 100% plantados no mesmo ponto do tapete durante todo o alcance (zero foot-sliding)
+                float fairyX = Lerp(0.425f, 0.445f, smoothU);
+                float fairyY = 0.640f + bob;
+                float reachTilt = -2.0f * smoothU;
 
                 return new BearChaseEntranceSample(
                     BearChaseEntranceBeat.Reach,
@@ -156,18 +271,135 @@ namespace YunaLegend.BearChase.Core
                     bearStartleOffsetY: 0f,
                     fadeAlpha: 0f,
                     stepCueNumber: 0,
-                    wakeCueActive: false);
+                    wakeCueActive: false,
+                    yunaWalkBobY: 0f,
+                    yunaScaleX: 1f,
+                    yunaScaleY: 1f,
+                    yunaTiltDeg: reachTilt,
+                    bearFlipX: true,
+                    bearScaleX: sleepBearScaleX,
+                    bearScaleY: sleepBearScaleY,
+                    bearTiltDeg: 0f);
             }
 
             if (t < WakeUpEnd)
             {
                 float u = (t - ReachEnd) / (WakeUpEnd - ReachEnd);
-                int bearFrame = u < 0.25f ? 1 : (u < 0.58f ? 2 : 3);
-                float startleHop = u < 0.55f ? (float)Math.Sin((u / 0.55f) * Math.PI) * 0.038f : 0f;
-                float bearX = Lerp(BearRestX, BearRestX + 0.04f, u);
-                float yunaX = Lerp(YunaReachX, YunaReachX - 0.025f, Math.Min(1f, u * 1.6f));
-                float fairyX = Lerp(0.485f, 0.420f, Math.Min(1f, u * 1.8f));
-                float fairyY = 0.640f + bob;
+
+                // Yuna: 0..0.08 recolhe a mao com pes plantados -> 0.08..0.36 saltinho de susto para tras no ar -> 0.36..1.00 pousada firme
+                int recoilGirlFrame;
+                float yunaX;
+                float yunaHopY = 0f;
+                float yunaScaleX = 1f;
+                float yunaScaleY = 1f;
+                float yunaTiltDeg = 0f;
+
+                if (u < 0.08f)
+                {
+                    recoilGirlFrame = 1;
+                    yunaX = YunaReachX;
+                    yunaTiltDeg = Lerp(-2.0f, 0f, u / 0.08f);
+                }
+                else if (u < 0.36f)
+                {
+                    recoilGirlFrame = 3;
+                    float hopU = (u - 0.08f) / 0.28f;
+                    float hopArc = (float)Math.Sin(hopU * Math.PI);
+                    yunaX = Lerp(YunaReachX, YunaReachX - 0.048f, SmoothStep(hopU));
+                    yunaHopY = hopArc * 0.036f;
+                    yunaScaleX = 1f - hopArc * 0.028f;
+                    yunaScaleY = 1f + hopArc * 0.036f;
+                    yunaTiltDeg = hopArc * 3.5f;
+                }
+                else
+                {
+                    recoilGirlFrame = 3;
+                    yunaX = YunaReachX - 0.048f;
+                    float settleU = Math.Min(1f, (u - 0.36f) / 0.14f);
+                    float landSquash = (float)Math.Sin(settleU * Math.PI);
+                    yunaScaleX = 1f + landSquash * 0.035f;
+                    yunaScaleY = 1f - landSquash * 0.042f;
+                }
+
+                // Urso: despertar organico com antecipacao, sobressalto, squash-and-stretch e deslocamento apenas durante os saltos
+                int bearFrame;
+                float startleHop = 0f;
+                float bearX;
+                float bearScaleX = 1f;
+                float bearScaleY = 1f;
+                float bearTiltDeg = 0f;
+
+                if (u < 0.28f)
+                {
+                    bearFrame = 1;
+                    float p1 = u / 0.28f;
+                    float arc1 = (float)Math.Sin(p1 * Math.PI);
+                    startleHop = arc1 * 0.024f;
+                    bearX = Lerp(BearRestX, BearRestX + 0.014f, SmoothStep(p1));
+                    if (p1 < 0.20f)
+                    {
+                        float sq = p1 / 0.20f;
+                        bearScaleX = 1f + 0.065f * sq;
+                        bearScaleY = 1f - 0.075f * sq;
+                    }
+                    else
+                    {
+                        float st = (float)Math.Sin(((p1 - 0.20f) / 0.80f) * Math.PI);
+                        bearScaleX = 1f - 0.055f * st;
+                        bearScaleY = 1f + 0.075f * st;
+                    }
+
+                    bearTiltDeg = -4.0f * arc1;
+                }
+                else if (u < 0.60f)
+                {
+                    bearFrame = 2;
+                    float p2 = (u - 0.28f) / 0.32f;
+                    float lift2 = p2 < 0.65f ? (float)Math.Sin((p2 / 0.65f) * Math.PI) : 0f;
+                    startleHop = lift2 * 0.014f;
+                    bearX = Lerp(BearRestX + 0.014f, BearRestX + 0.026f, SmoothStep(Math.Min(1f, p2 / 0.65f)));
+                    if (p2 < 0.45f)
+                    {
+                        float st = (float)Math.Sin((p2 / 0.45f) * Math.PI);
+                        bearScaleX = 1f - 0.045f * st;
+                        bearScaleY = 1f + 0.060f * st;
+                    }
+                    else
+                    {
+                        float sq = (float)Math.Sin(((p2 - 0.45f) / 0.55f) * Math.PI);
+                        bearScaleX = 1f + 0.055f * sq;
+                        bearScaleY = 1f - 0.052f * sq;
+                    }
+
+                    bearTiltDeg = 3.0f * (float)Math.Sin(p2 * Math.PI);
+                }
+                else
+                {
+                    bearFrame = 3;
+                    float p3 = (u - 0.60f) / 0.40f;
+                    if (p3 < 0.48f)
+                    {
+                        float hop3 = p3 / 0.48f;
+                        float arc3 = (float)Math.Sin(hop3 * Math.PI);
+                        startleHop = arc3 * 0.022f;
+                        bearX = Lerp(BearRestX + 0.026f, BearRestX + 0.042f, SmoothStep(hop3));
+                        bearScaleX = 1f - 0.040f * arc3;
+                        bearScaleY = 1f + 0.055f * arc3;
+                        bearTiltDeg = -3.0f * arc3;
+                    }
+                    else
+                    {
+                        bearX = BearRestX + 0.042f;
+                        float landU = Math.Min(1f, (p3 - 0.48f) / 0.30f);
+                        float sq = (float)Math.Sin(landU * Math.PI);
+                        bearScaleX = 1f + 0.048f * sq;
+                        bearScaleY = 1f - 0.046f * sq;
+                    }
+                }
+
+                float fairyRecoil = SmoothStep(Math.Min(1f, u * 2.4f));
+                float fairyX = Lerp(0.445f, 0.360f, fairyRecoil);
+                float fairyY = Lerp(0.640f, 0.715f, fairyRecoil) + bob;
 
                 return new BearChaseEntranceSample(
                     BearChaseEntranceBeat.BearWakeUp,
@@ -178,30 +410,89 @@ namespace YunaLegend.BearChase.Core
                     wing,
                     bob,
                     useReachAtlas: true,
-                    girlFrameIndex: 3,
+                    girlFrameIndex: recoilGirlFrame,
                     bearFrameIndex: bearFrame,
                     bearStartleOffsetY: startleHop,
                     fadeAlpha: 0f,
                     stepCueNumber: 0,
-                    wakeCueActive: true);
+                    wakeCueActive: true,
+                    yunaWalkBobY: yunaHopY,
+                    yunaScaleX: yunaScaleX,
+                    yunaScaleY: yunaScaleY,
+                    yunaTiltDeg: yunaTiltDeg,
+                    bearFlipX: false,
+                    bearScaleX: bearScaleX,
+                    bearScaleY: bearScaleY,
+                    bearTiltDeg: bearTiltDeg);
             }
 
-            float fadeU = (t - WakeUpEnd) / (TotalDuration - WakeUpEnd);
+            // Fade-out atinge preto pleno (100%) em t=6.38s e sustenta preto solido antes do corte
+            float fadeU = Math.Max(0f, Math.Min(1f, (t - WakeUpEnd) / 0.38f));
+            float smoothFade = SmoothStep(fadeU);
             return new BearChaseEntranceSample(
                 BearChaseEntranceBeat.TransitionToChase,
-                YunaReachX - 0.025f,
-                BearRestX + 0.04f,
-                0.420f,
-                0.640f + bob,
+                YunaReachX - 0.048f,
+                BearRestX + 0.042f,
+                0.360f,
+                0.715f + bob,
                 wing,
                 bob,
                 useReachAtlas: true,
                 girlFrameIndex: 3,
                 bearFrameIndex: 3,
                 bearStartleOffsetY: 0f,
-                fadeAlpha: Math.Max(0f, Math.Min(1f, fadeU)),
+                fadeAlpha: smoothFade,
                 stepCueNumber: 0,
-                wakeCueActive: false);
+                wakeCueActive: false,
+                yunaWalkBobY: 0f,
+                yunaScaleX: 1f,
+                yunaScaleY: 1f,
+                yunaTiltDeg: 0f,
+                bearFlipX: false,
+                bearScaleX: 1f,
+                bearScaleY: 1f,
+                bearTiltDeg: 0f);
+        }
+
+        private static float EvaluateWalkProgress(float u)
+        {
+            const float r = 0.05f;
+            float clamped = Math.Max(0f, Math.Min(1f, u));
+            float vMax = 1f / (1f - r);
+
+            if (clamped < r)
+            {
+                return 0.5f * vMax * (clamped * clamped / r);
+            }
+
+            if (clamped <= 1f - r)
+            {
+                return 0.5f * vMax * r + vMax * (clamped - r);
+            }
+
+            float tail = 1f - clamped;
+            return 1f - 0.5f * vMax * (tail * tail / r);
+        }
+
+        private static float ModulateStepAdvance(float p)
+        {
+            const float strideSplit = 0.58f;
+            const float strideShare = 0.78f;
+            float c = Math.Max(0f, Math.Min(1f, p));
+            if (c < strideSplit)
+            {
+                float s = c / strideSplit;
+                return strideShare * SmoothStep(s);
+            }
+
+            float q = (c - strideSplit) / (1f - strideSplit);
+            return strideShare + (1f - strideShare) * q;
+        }
+
+        private static float SmoothStep(float x)
+        {
+            float c = Math.Max(0f, Math.Min(1f, x));
+            return c * c * (3f - 2f * c);
         }
 
         private static float Lerp(float a, float b, float t)
