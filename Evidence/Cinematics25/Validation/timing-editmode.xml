@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="16" result="Passed" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0,0488934">
+  <test-suite type="TestSuite" id="1000" name="Yuna Legend - O Quarto dos Brinquedos" fullname="Yuna Legend - O Quarto dos Brinquedos" runstate="Runnable" testcasecount="128" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.048893" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1183" name="YunaLegend.ToyRoom.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Library/ScriptAssemblies/YunaLegend.ToyRoom.Tests.dll" runstate="Runnable" testcasecount="25" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.042188" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="4760" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1184" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="25" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.041762" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1185" name="ToyRoom" fullname="YunaLegend.ToyRoom" runstate="Runnable" testcasecount="25" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.041510" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1186" name="Tests" fullname="YunaLegend.ToyRoom.Tests" runstate="Runnable" testcasecount="25" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.041269" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1162" name="ToyRoomIntroTimelineTests" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" testcasecount="16" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.040384" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="ParameterizedMethod" id="1178" name="HandDrawnCaptionsRespectDirectorExposureRanges" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.017357" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1168" name="HandDrawnCaptionsRespectDirectorExposureRanges(74,&quot;&quot;,&quot;&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(74,&quot;&quot;,&quot;&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="1154230472" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.011468" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1169" name="HandDrawnCaptionsRespectDirectorExposureRanges(75,&quot;Yuna&quot;,&quot;Aqui também...&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(75,&quot;Yuna&quot;,&quot;Aqui também...&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="1982755977" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.000126" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1170" name="HandDrawnCaptionsRespectDirectorExposureRanges(124,&quot;Yuna&quot;,&quot;Aqui também...&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(124,&quot;Yuna&quot;,&quot;Aqui também...&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="975624070" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.000065" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1171" name="HandDrawnCaptionsRespectDirectorExposureRanges(125,&quot;Yuna&quot;,&quot;Eu queria espaço pra brincar.&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(125,&quot;Yuna&quot;,&quot;Eu queria espaço pra brincar.&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="1400215089" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.000054" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1172" name="HandDrawnCaptionsRespectDirectorExposureRanges(199,&quot;Yuna&quot;,&quot;Eu queria espaço pra brincar.&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(199,&quot;Yuna&quot;,&quot;Eu queria espaço pra brincar.&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="1347448690" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.000042" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1173" name="HandDrawnCaptionsRespectDirectorExposureRanges(200,&quot;&quot;,&quot;&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(200,&quot;&quot;,&quot;&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="2108889932" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.000035" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1174" name="HandDrawnCaptionsRespectDirectorExposureRanges(299,&quot;&quot;,&quot;&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(299,&quot;&quot;,&quot;&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="1654905509" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.000034" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1175" name="HandDrawnCaptionsRespectDirectorExposureRanges(300,&quot;Nanda&quot;,&quot;Vamos. Um de cada vez!&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(300,&quot;Nanda&quot;,&quot;Vamos. Um de cada vez!&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="189819820" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.000038" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1176" name="HandDrawnCaptionsRespectDirectorExposureRanges(399,&quot;Nanda&quot;,&quot;Vamos. Um de cada vez!&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(399,&quot;Nanda&quot;,&quot;Vamos. Um de cada vez!&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="72439775" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.000051" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1177" name="HandDrawnCaptionsRespectDirectorExposureRanges(400,&quot;&quot;,&quot;&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(400,&quot;&quot;,&quot;&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="2034511591" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.000039" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1166" name="HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.008379" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1163" name="HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate(30)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate(30)" methodname="HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="1537072317" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.003900" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1164" name="HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate(60)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate(60)" methodname="HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="1497933592" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.001308" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1165" name="HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate(120)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate(120)" methodname="HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="653781055" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.002371" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1167" name="HandDrawnExposureHoldsDrawingForFortyMilliseconds" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnExposureHoldsDrawingForFortyMilliseconds" methodname="HandDrawnExposureHoldsDrawingForFortyMilliseconds" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="928829626" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.001507" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1179" name="TimelineEvaluatesAllSevenStagesAndCompletesAtTotalDuration" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.TimelineEvaluatesAllSevenStagesAndCompletesAtTotalDuration" methodname="TimelineEvaluatesAllSevenStagesAndCompletesAtTotalDuration" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="1164490632" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.006200" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1180" name="TryAdvanceDialogueSkipsOnlyActiveDialogueBeatAndRespectsSilentBeats" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.TryAdvanceDialogueSkipsOnlyActiveDialogueBeatAndRespectsSilentBeats" methodname="TryAdvanceDialogueSkipsOnlyActiveDialogueBeatAndRespectsSilentBeats" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="388493470" result="Passed" start-time="2026-11-22 15:31:04Z" end-time="2026-11-22 15:31:04Z" duration="0.000475" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: C:/Users/sergi/AppData/LocalLow/DeepMindStudio/Yuna Legend - O Quarto dos Brinquedos\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

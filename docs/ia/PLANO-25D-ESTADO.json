@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-14T15:04:24.983150+00:00",
+  "updated_at": "2026-11-22T16:19:07.632421+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -768,6 +768,32 @@
         "at": "2026-11-14T15:04:24.983150+00:00",
         "human_required": true
       }
+    },
+    {
+      "id": "CIN01",
+      "title": "Remake da abertura ToyRoom em desenho tradicional a 25 FPS",
+      "depends_on": [
+        "T01"
+      ],
+      "resources": [
+        "cinematics-toyroom"
+      ],
+      "human_gate": false,
+      "status": "active",
+      "owner": {
+        "session": "20261122-codex-executor-cinematics",
+        "agent": "Codex GPT-6 Executor"
+      },
+      "checkpoint": {
+        "done": "43desenhosuniformizadosrenderizados;clock/legendas/player/harnessimplementados;16EditModee3regressoespassed;documentacaocompleta;paradaautorizadaaoatingir95%consumidos",
+        "next": "Retomar mesma sessão e concluir revisãoDiretor de UnityStudyF000-042UniformV1 nas fronteiras8-9,17-18,24-25,33-34;naogerarF43+antesdeliberacao;ajustarsemdeformarrecortes",
+        "validation": "43capturasmissed0;revisaouniformeinterrompida,vetoprevionaorevogado;nenhumaAPROVADOfinal;originalcontinuativo",
+        "pending": "Revisão43frames;582desenhosYuna,Nanda625,audio,integracao,25FPSreal,demaiscinematicas;GitHubsomentecheckpointWIP",
+        "files": "Evidence/Cinematics25/README.md;Evidence/Cinematics25/study-manifest.json;Evidence/Cinematics25/UnityStudyF000-042UniformV1;Evidence/Cinematics25/Validation;Assets/Scripts/Runtime/ToyRoom;Assets/Editor/Cinematics25StudyCapture.cs;docs/ia",
+        "processes": "Diretorinterrompido;semUnity/imagegen;servidor8087encerrado;viewportrestaurado;somenteoperacoesdecheckpointGit",
+        "updated_at": "2026-11-22T16:19:07.632421+00:00"
+      },
+      "authorization": "Pedido explicito do usuario22/11/2026: refazer todas cinematícas com exatamente Diretor caixa-preta e Executor, roteiro antes de implementar e aprovacao individual do Diretor. Nova microentrega narrativa independente da expansao de plataformas; nao aceita nem altera T06/T07/T08."
     }
   ],
   "history": [
@@ -2868,6 +2894,79 @@
       "reference": "Usuario nesta conversa apos preview120 do pouso y=125: Aceito, pode continuar. Aceite individual da microentrega T08E;nao cobre T06/T07 globais,estante,aparelhos/WebGL/audio/desempenho.",
       "human_approval": true,
       "at": "2026-11-14T15:04:24.983150+00:00"
+    },
+    {
+      "command": "add-microdelivery",
+      "task": "CIN01",
+      "session": "20261122-codex-executor-cinematics",
+      "reference": "Pedido atual de remake integral25FPS; roteiro do Diretor baseado em render original WebGL, preservar gameplay e fundo existente."
+    },
+    {
+      "command": "claim",
+      "task": "CIN01",
+      "session": "20261122-codex-executor-cinematics",
+      "agent": "Codex GPT-6 Executor",
+      "at": "2026-11-22T15:22:32.910398+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "CIN01",
+      "session": "20261122-codex-executor-cinematics",
+      "done": "Original WebGL reproduzido e roteiro final625frames25FPS recebido do Diretor; primeiro estudo25desenhos rejeitado criativamente e por alpha; correcao de atuacao em geracao",
+      "next": "Validar loteF0-24v2 e sua ordem/identidade com Diretor antes de integrar; depois completar625quadros e Nanda conforme roteiro",
+      "validation": "Capturas brutas Original10-16; roteiroCIN01-direcao.md; rawv1alpha70..254semtransparentes; nenhuma candidata final ou runtime alterado",
+      "pending": "625framesYuna/Nanda completos, clock25FPS, sons/vozes, EditMode/PlayMode, WebGLcandidata e auditoria final de todascinematicas; outras cenas ainda por dirigir",
+      "files": "Evidence/Cinematics25;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
+      "processes": "ServidorWebGL8087session2881necessario;Editorencerrado;imagegencell67emexecucao;Diretorociosoaposparecer",
+      "at": "2026-11-22T15:26:43.226724+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "CIN01",
+      "session": "20261122-codex-executor-cinematics",
+      "done": "Roteiro625frames definido; estudoF0-24v3em25desenhosrenderizadoUnityPlayMode; clock/legendasCoree16testesimplementados;DiretoravaliaestudoUnity",
+      "next": "ParecerDiretorUnityStudyV3Pass2;continuarF25-49ecompletar625quadrosYuna/Nanda;soativarremakequandoartecompleta",
+      "validation": "EditMode16/16;Unityestudo25quadrosmissed0;intervalosreais29.869..50.004msmedia40.195ms;videoCFR25FPS1segundosemaudio;semcandidatafinal",
+      "pending": "Demais600desenhosYuna,Nanda625,sons/vozes,integracaodirecao625,playback25FPSvalidado,WebGLremakeerevisaodetodascenas",
+      "files": "Assets/Scripts/Runtime/ToyRoom;Assets/Scripts/Tests/EditMode/ToyRoom;Assets/Editor/Cinematics25StudyCapture.cs;Evidence/Cinematics25;docs/ia",
+      "processes": "Editorsencerrados;servidor8087session2881mantidoparabaseline;Diretoravaliacaoestudo",
+      "at": "2026-11-22T15:38:49.961499+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "CIN01",
+      "session": "20261122-codex-executor-cinematics",
+      "done": "BaselineWebGLreproduzida;roteiro625framesdefinido;clock/legendas/adaptador/harnessimplementados;16testespassaram;43desenhosestudoproduzidos;checkpointcompletoemEvidence/Cinematics25/README.md",
+      "next": "CorrigirF24-25eF33-34:proporcoesinfantisdefinicaoeregistrodossapes;reapresentarF22-27/F31-36aoDiretorantesdenovoslotes",
+      "validation": "EditMode16/16;UnityF0-42captured43missed0;intervalosreais29.646-50.037msmedia39.896;DiretorREPROVOUcontinuidades;naoassistiuMP4;nenhumaprovadofinal",
+      "pending": "VetoDiretorpendente;582framesYunaaindanaoproduzidosmaisrevisoes0-42;Nanda625;audio;integracaoremakenofluxoreal;25FPSexecucao;demaiscinematicasindividualmente",
+      "files": "Evidence/Cinematics25/README.md;Evidence/Cinematics25/artifact-integrity.json;Evidence/Cinematics25/CIN01-direcao.md;Assets/Scripts/Runtime/ToyRoom;Assets/Editor/Cinematics25StudyCapture.cs;Assets/Scripts/Tests/EditMode/ToyRoom;docs/ia",
+      "processes": "NenhumEditor/imagegenativo;servidor8087PID18268session2881mantidoparaabausuario;Diretorociosoaposveto",
+      "at": "2026-11-22T15:54:31.289387+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "CIN01",
+      "session": "20261122-codex-executor-cinematics",
+      "done": "Documentacao completa salva;diagnostico corrigiu residuos noslandmarks;Diretor confirmou apoioF33-34 em nova prova43desenhos;veto persisteF24-25",
+      "next": "Concluir geracao de correcao anatomicaF25-33 no plano1399;salvarbruto,registrar porcomponenteconectado,renderizarF22-27/F31-36erevisarcomDiretor;naogerarF43+",
+      "validation": "UnityRegistrationV2:43capturasmissed0,media39.9249ms;DiretorliberouapoiomasnaoproporcoesF24-25;16EditModepassaram;nenhuma cena aprovada",
+      "pending": "Correcao anatomia/definicao24-25eponte33-34aposnovomodelo;restanteYuna/Nanda/audio/integracao/25FPSreal/demaiscinematicas",
+      "files": "Evidence/Cinematics25/README.md;Evidence/Cinematics25/prepare_sheet.py;Evidence/Cinematics25/UnityStudyF000-042RegistrationV2;Assets/Scripts/Runtime/ToyRoom;Assets/Editor/Cinematics25StudyCapture.cs;docs/ia",
+      "processes": "Editorsencerrados;imagegencell121emexecucao;servidor8087PID18268session2881necessario;Diretorociosoaposparecer",
+      "at": "2026-11-22T16:03:05.341763+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "CIN01",
+      "session": "20261122-codex-executor-cinematics",
+      "done": "43desenhosuniformizadosrenderizados;clock/legendas/player/harnessimplementados;16EditModee3regressoespassed;documentacaocompleta;paradaautorizadaaoatingir95%consumidos",
+      "next": "Retomar mesma sessão e concluir revisãoDiretor de UnityStudyF000-042UniformV1 nas fronteiras8-9,17-18,24-25,33-34;naogerarF43+antesdeliberacao;ajustarsemdeformarrecortes",
+      "validation": "43capturasmissed0;revisaouniformeinterrompida,vetoprevionaorevogado;nenhumaAPROVADOfinal;originalcontinuativo",
+      "pending": "Revisão43frames;582desenhosYuna,Nanda625,audio,integracao,25FPSreal,demaiscinematicas;GitHubsomentecheckpointWIP",
+      "files": "Evidence/Cinematics25/README.md;Evidence/Cinematics25/study-manifest.json;Evidence/Cinematics25/UnityStudyF000-042UniformV1;Evidence/Cinematics25/Validation;Assets/Scripts/Runtime/ToyRoom;Assets/Editor/Cinematics25StudyCapture.cs;docs/ia",
+      "processes": "Diretorinterrompido;semUnity/imagegen;servidor8087encerrado;viewportrestaurado;somenteoperacoesdecheckpointGit",
+      "at": "2026-11-22T16:19:07.632421+00:00"
     }
   ]
 }

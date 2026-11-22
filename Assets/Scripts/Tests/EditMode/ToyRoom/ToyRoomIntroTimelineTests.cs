@@ -5,6 +5,55 @@ namespace YunaLegend.ToyRoom.Tests
 {
     public class ToyRoomIntroTimelineTests
     {
+        [TestCase(30)]
+        [TestCase(60)]
+        [TestCase(120)]
+        public void HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate(int renderRate)
+        {
+            var seen = new bool[ToyRoomHandDrawnTiming.FrameCount];
+            int previousFrame = 0;
+
+            for (int tick = 0; tick < renderRate * 25; tick++)
+            {
+                int frame = ToyRoomHandDrawnTiming.FrameAt(tick / (double)renderRate);
+                Assert.That(frame - previousFrame, Is.InRange(0, 1));
+                seen[frame] = true;
+                previousFrame = frame;
+            }
+
+            Assert.That(seen, Is.All.True);
+            Assert.That(ToyRoomHandDrawnTiming.FrameAt(25d), Is.EqualTo(625));
+            Assert.That(ToyRoomHandDrawnTiming.ShotAt(625), Is.EqualTo(-1));
+        }
+
+        [Test]
+        public void HandDrawnExposureHoldsDrawingForFortyMilliseconds()
+        {
+            for (int frame = 0; frame < ToyRoomHandDrawnTiming.FrameCount; frame++)
+            {
+                double start = frame / 25d;
+                Assert.That(ToyRoomHandDrawnTiming.FrameAt(start), Is.EqualTo(frame));
+                Assert.That(ToyRoomHandDrawnTiming.FrameAt(start + 0.039999d), Is.EqualTo(frame));
+            }
+        }
+
+        [TestCase(74, "", "")]
+        [TestCase(75, "Yuna", "Aqui também...")]
+        [TestCase(124, "Yuna", "Aqui também...")]
+        [TestCase(125, "Yuna", "Eu queria espaço pra brincar.")]
+        [TestCase(199, "Yuna", "Eu queria espaço pra brincar.")]
+        [TestCase(200, "", "")]
+        [TestCase(299, "", "")]
+        [TestCase(300, "Nanda", "Vamos. Um de cada vez!")]
+        [TestCase(399, "Nanda", "Vamos. Um de cada vez!")]
+        [TestCase(400, "", "")]
+        public void HandDrawnCaptionsRespectDirectorExposureRanges(int frame, string speaker, string text)
+        {
+            ToyRoomHandDrawnTiming.CaptionAt(frame, out string actualSpeaker, out string actualText);
+            Assert.That(actualSpeaker, Is.EqualTo(speaker));
+            Assert.That(actualText, Is.EqualTo(text));
+        }
+
         [Test]
         public void TimelineEvaluatesAllSevenStagesAndCompletesAtTotalDuration()
         {

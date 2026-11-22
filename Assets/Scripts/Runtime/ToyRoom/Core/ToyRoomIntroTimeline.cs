@@ -3,6 +3,79 @@ using System.Collections.Generic;
 
 namespace YunaLegend.ToyRoom.Core
 {
+    /// <summary>
+    /// Exposure timing for the director's 625-drawing remake. The existing intro
+    /// remains available until the complete hand-drawn sequence is validated.
+    /// </summary>
+    public static class ToyRoomHandDrawnTiming
+    {
+        public const int FramesPerSecond = 25;
+        public const int FrameCount = 625;
+        public const double DurationSeconds = FrameCount / (double)FramesPerSecond;
+
+        private static readonly int[] ShotStarts = { 0, 75, 175, 275, 400, 525 };
+
+        public static int FrameAt(double elapsedSeconds)
+        {
+            if (double.IsNaN(elapsedSeconds) || elapsedSeconds <= 0d)
+            {
+                return 0;
+            }
+
+            if (elapsedSeconds >= DurationSeconds)
+            {
+                return FrameCount;
+            }
+
+            // Counter floating-point error at an exact exposure boundary.
+            return (int)Math.Floor((elapsedSeconds * FramesPerSecond) + 1e-9d);
+        }
+
+        public static int ShotAt(int frame)
+        {
+            if (frame >= FrameCount)
+            {
+                return -1;
+            }
+
+            for (int shot = ShotStarts.Length - 1; shot >= 0; shot--)
+            {
+                if (frame >= ShotStarts[shot])
+                {
+                    return shot;
+                }
+            }
+
+            return 0;
+        }
+
+        public static void CaptionAt(int frame, out string speaker, out string text)
+        {
+            speaker = string.Empty;
+            text = string.Empty;
+
+            if (frame >= 75 && frame <= 124)
+            {
+                speaker = "Yuna";
+                text = "Aqui também...";
+                return;
+            }
+
+            if (frame >= 125 && frame <= 199)
+            {
+                speaker = "Yuna";
+                text = "Eu queria espaço pra brincar.";
+                return;
+            }
+
+            if (frame >= 300 && frame <= 399)
+            {
+                speaker = "Nanda";
+                text = "Vamos. Um de cada vez!";
+            }
+        }
+    }
+
     public enum ToyRoomIntroStageId
     {
         Tr002,

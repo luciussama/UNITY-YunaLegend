@@ -1,5 +1,17 @@
 # Estado atual — sala escura ilustrada
 
+## CIN01 — remake das cinemáticas a 25 FPS — INTERROMPIDO POR QUOTA / revisão parcial pendente (22/11/2026)
+
+Pedido atual: refazer todas as cinemáticas em desenho tradicional 2D, com exatamente Diretor Criativo caixa-preta e Executor; conclusão somente com aprovação individual real do Diretor. Sessão `20261122-codex-executor-cinematics`; registros abertos 129, 130, 133 e 134; microentrega **CIN01 ativa** no coordenador. Nenhuma cinemática refeita foi aprovada ou integrada ao fluxo real.
+
+O original WebGL atual foi compilado e reproduzido. O Diretor fechou o roteiro da abertura ToyRoom em **625 frames / 25 segundos a 25 FPS**. Implementados clock/legendas puros, adaptador de exposição e harness de estudo Unity; **16/16 EditMode passaram**. Há somente **43 desenhos de estudo de Yuna**; Nanda e o restante da abertura não foram produzidos. A abertura original continua ativa.
+
+**Parada autorizada:** o contador confirmou **95% consumidos / 5% disponíveis**; por ordem do usuário, o Diretor foi interrompido, os processos próprios encerrados e o checkpoint preparado para GitHub na branch `cinematics`. Nenhuma cinemática concluída. Os registros de implementação e CIN01 continuam abertos para retomada.
+
+**Próximo passo obrigatório:** concluir a revisão criativa de `UnityStudyF000-042UniformV1/`, com 43 desenhos e definição/modelo uniformizados. O apoio F33→34 foi corrigido; as últimas correções de acabamento F0–24 e anatomia F34–42 foram renderizadas, mas a revisão foi interrompida por quota. O veto anterior não foi revogado. Verificar também F8→9, F17→18, F24→25 e F33→34. Não gerar F43+ até liberação explícita do Diretor. **16/16 EditMode e 3/3 regressões de landmarks passaram**, sem equivaler a aprovação visual ou comprovação de frame pacing perfeito.
+
+[Estado completo, arquivos, validações, limites e comandos de retomada](../../Evidence/Cinematics25/README.md) · [Roteiro definitivo do Diretor](../../Evidence/Cinematics25/CIN01-direcao.md). O diário sequencial permanece em `diario.sqlite3`. As seções antigas abaixo são preservadas como histórico e não substituem este checkpoint.
+
 ## T08L–T08Y: fase completa 2.5D (00→37), abertura direta no Unity Editor e ajustes visuais — EM REVISÃO (15/11/2026)
 
 - Cena jogável completa `Assets/Art/Illustrated25D/Environment/Stage2Runtime/Fase-Jogavel-Completa.unity` (`00..21` ida, plot twist da Porta Falsa e `22..37` retorno caótico até o Portal Verdadeiro) com exclusão mútua entre plataformas da ida (`00..21`) e do retorno (`22..37`).

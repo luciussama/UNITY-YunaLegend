@@ -1,0 +1,134 @@
+{
+    "kind": "Unity Play Mode study, not completed cinematic",
+    "expectedDrawings": 25,
+    "capturedDrawings": 25,
+    "missedExposures": 0,
+    "exposureRate": 25,
+    "exposures": [
+        {
+            "drawing": 0,
+            "realtimeSeconds": 0.007755399999998858,
+            "unityFrame": 5
+        },
+        {
+            "drawing": 1,
+            "realtimeSeconds": 0.05240240000000007,
+            "unityFrame": 10
+        },
+        {
+            "drawing": 2,
+            "realtimeSeconds": 0.09245829999999877,
+            "unityFrame": 14
+        },
+        {
+            "drawing": 3,
+            "realtimeSeconds": 0.13214999999999933,
+            "unityFrame": 18
+        },
+        {
+            "drawing": 4,
+            "realtimeSeconds": 0.1724344999999996,
+            "unityFrame": 22
+        },
+        {
+            "drawing": 5,
+            "realtimeSeconds": 0.21237670000000009,
+            "unityFrame": 26
+        },
+        {
+            "drawing": 6,
+            "realtimeSeconds": 0.2526118999999998,
+            "unityFrame": 30
+        },
+        {
+            "drawing": 7,
+            "realtimeSeconds": 0.29258089999999906,
+            "unityFrame": 34
+        },
+        {
+            "drawing": 8,
+            "realtimeSeconds": 0.33230259999999847,
+            "unityFrame": 38
+        },
+        {
+            "drawing": 9,
+            "realtimeSeconds": 0.37274929999999886,
+            "unityFrame": 42
+        },
+        {
+            "drawing": 10,
+            "realtimeSeconds": 0.4122237999999996,
+            "unityFrame": 46
+        },
+        {
+            "drawing": 11,
+            "realtimeSeconds": 0.4521091999999989,
+            "unityFrame": 50
+        },
+        {
+            "drawing": 12,
+            "realtimeSeconds": 0.49230209999999988,
+            "unityFrame": 54
+        },
+        {
+            "drawing": 13,
+            "realtimeSeconds": 0.5321103999999988,
+            "unityFrame": 58
+        },
+        {
+            "drawing": 14,
+            "realtimeSeconds": 0.5722068999999994,
+            "unityFrame": 62
+        },
+        {
+            "drawing": 15,
+            "realtimeSeconds": 0.6117958999999988,
+            "unityFrame": 66
+        },
+        {
+            "drawing": 16,
+            "realtimeSeconds": 0.6527777999999991,
+            "unityFrame": 70
+        },
+        {
+            "drawing": 17,
+            "realtimeSeconds": 0.6921644999999987,
+            "unityFrame": 74
+        },
+        {
+            "drawing": 18,
+            "realtimeSeconds": 0.7318898999999988,
+            "unityFrame": 78
+        },
+        {
+            "drawing": 19,
+            "realtimeSeconds": 0.7721719,
+            "unityFrame": 82
+        },
+        {
+            "drawing": 20,
+            "realtimeSeconds": 0.8123459999999998,
+            "unityFrame": 86
+        },
+        {
+            "drawing": 21,
+            "realtimeSeconds": 0.8422150999999989,
+            "unityFrame": 89
+        },
+        {
+            "drawing": 22,
+            "realtimeSeconds": 0.8922191999999996,
+            "unityFrame": 94
+        },
+        {
+            "drawing": 23,
+            "realtimeSeconds": 0.9330103999999988,
+            "unityFrame": 98
+        },
+        {
+            "drawing": 24,
+            "realtimeSeconds": 0.9724464999999984,
+            "unityFrame": 102
+        }
+    ]
+}
