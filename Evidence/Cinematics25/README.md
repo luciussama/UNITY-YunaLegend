@@ -1,10 +1,30 @@
 # Continuidade — remake de todas as cinemáticas a 25 FPS
 
-Atualizado em **22/11/2026**, a pedido do usuário. Este documento é o índice de evidências e o estado de retomada; o registro sequencial obrigatório permanece exclusivamente em `docs/ia/diario.sqlite3`.
+Atualizado em **22/11/2026** (checkpoint de transição **Antigravity → Codex**, sessão ativa `2026-11-22-antigravity-cinematics25`). Este documento é o índice de evidências e o estado de retomada; o registro sequencial obrigatório permanece exclusivamente em `docs/ia/diario.sqlite3`.
 
-**Estado real: INTERROMPIDO POR ORDEM DO USUÁRIO NO LIMIAR DE 5% DA QUOTA DISPONÍVEL. Nenhuma cinemática refeita recebeu [APROVADO].** A abertura original continua ativa no jogo. Há implementação de timing e apresentação de desenhos, mas somente um estudo parcial de Yuna, com 43 desenhos, foi produzido. A última revisão completa reprovou sua continuidade. Uma revisão uniforme posterior foi renderizada e ainda não teve parecer concluído. Não gerar novos lotes antes de resolver o veto.
+**Estado real: PRONTO PARA HANDOVER AO CODEX. Nenhuma cinemática refeita recebeu [APROVADO] na build WebGL final.** A abertura original continua ativa no jogo. Todos os **4 roteiros de direção principais (CIN01–CIN04)** e todas as **4 timelines Core C# puras a 25 FPS** estão implementados e validados (`61/61` testes EditMode passando). Em `CIN01`, o estudo parcial `F000–F042` avançou duas iterações (`ActingV2` capturado/auditado e `ActingV3` concluído de `F000–F026` com recorte/halo limpo); apenas as Folhas 4 (`F027–F035`) e 5 (`F036–F042`) de `ActingV3` ficaram pendentes por esgotamento de cota do gerador de imagens (`429 RESOURCE_EXHAUSTED`).
 
-## Ponto de retomada após interrupção
+## Ponto de retomada para o Codex (22/11/2026 — pós-Antigravity)
+
+- **Sessão ativa a assumir via `handover` explícito:** **`2026-11-22-antigravity-cinematics25`** (jobs abertos `129`, `130`, `133`, `134` no `agent_registry.py` e tarefa `CIN01` no `plan_25d.py`).
+- **O que foi concluído nesta sessão (Antigravity):**
+  1. **Auditoria de `UnityStudyF000-042UniformV1`:** Diretor Criativo aprovou proporções infantis, acabamento aquarelado e apoio dos pés, mas **REPROVOU** por corpo congelado abaixo do pescoço, falta de respiração (`F0–18`), falta de varredura de olhos com precedência de 2 frames (`F19–39`) e falta de cedimento de ombros/mãos (`F40–42`).
+  2. **Produção e auditoria de `UnityStudyF000-042ActingV2`:** 5 novas folhas 3×3 (`yuna-f000-008-acting-v2` a `yuna-f036-042-acting-v2`), capturadas no Unity `-batchmode` (`43/43`, `0` perdas). O Diretor **aprovou** a respiração em `F000–F017` (incluindo piscada em `F013`), a precedência de olhos em 2 frames (`F018–F021`), o modelo/aquarela e a pose emocional em `F041–F042`, exigindo **4 correções pontuais**: (a) remover halo branco e fundo branco preso entre as pernas em `F0–42`; (b) neutralizar sorriso em `F17–24`; (c) ampliar varredura ocular + *overlapping* em `F27–35`; (d) suavizar elevação dos braços/mãos em arco contínuo `F38–42` (sem *pop* em `F39→40`) com pés 100% travados em `F40–42`.
+  3. **Início de `ActingV3` (`F000–F026` prontos):** concluídos `yuna-f000-008-acting-v3/`, `yuna-f009-017-acting-v3/` (com boca `f017.png` neutralizada) e `yuna-f018-026-acting-v3/` (zero sorriso, precedência de olhos preservada), todos com limpeza total de halo branco e do vão entre as pernas/meias (`pageScale 1.4717–1.4843`, `0` clipping). **Bloqueio 429** impediu apenas a geração das Folhas 4 (`F027–F035`) e 5 (`F036–F042`) e a captura `UnityStudyF000-042ActingV3`. (`study-manifest.json` continua íntegro apontando para `UnityStudyF000-042ActingV2`.)
+  4. **Passo 1 concluído para CIN02, CIN03 e CIN04:** capturas brutas da build WebGL de referência arquivadas em `Original/DarkRoom/` (3 PNGs), `Original/Arena/` (5 PNGs) e `Original/BearChase/` (6 PNGs). O Diretor Criativo em caixa-preta redigiu os 3 novos roteiros completos a 25 FPS:
+     - **[CIN02-direcao.md](CIN02-direcao.md)** (*O Quarto Escuro* — Despertar com Nanda, `300 frames` / 12s, 4 planos, 3 falas literais de Nanda)
+     - **[CIN03-direcao.md](CIN03-direcao.md)** (*Arena Imaginária* — Vinheta/Cut-in do Golpe Especial Arco-Íris, `75 frames` / 3s, 3 planos, sem legendas)
+     - **[CIN04-direcao.md](CIN04-direcao.md)** (*Perseguição ao Urso* — Aproximação, Toque, Despertar e Fuga, `350 frames` / 14s, 4 planos, pantomima sem legendas)
+  5. **Core C# puro a 25 FPS + Testes EditMode (`61/61 Passed`):** implementados `DarkRoomHandDrawnTiming.cs`, `ArenaSpecialHandDrawnTiming.cs` e `BearChaseHandDrawnTiming.cs` (`noEngineReferences: true`, sem alterar fluxos legados) e suas suítes NUnit cobrindo 30/60/120 Hz, retenção de 40 ms, fronteiras de planos e legendas. Relatório em **`Validation/timelines-cin01-04-editmode.xml`** (`total=61, passed=61, failed=0, skipped=0`).
+- **Próxima ação exata para o Codex:**
+  1. Executar `handover` dos jobs `129`, `130`, `133`, `134` e de `CIN01` a partir da sessão `2026-11-22-antigravity-cinematics25`.
+  2. Gerar as **Folhas 4 (`F027–F035`)** e **5 (`F036–F042`)** de `acting-v3` (aplicando a mesma limpeza de halo branco e do vão entre as pernas usada em `F000–F026`, ancorando em `yuna-f018-026-acting-v3/f026.png` + modelo `yuna-f000-008-detail-v1/f000.png`), atualizar `study-manifest.json` para `UnityStudyF000-042ActingV3`, capturar no Unity `-batchmode` e submeter os renders brutos ao Diretor Criativo.
+  3. Assim que o Diretor liberar `F000–F042`, prosseguir com `F043–F624` de Yuna, atuação de Nanda azul, áudio, integração na cena, build WebGL e auditoria final `[APROVADO]` de `CIN01` antes de executar `CIN02`, `CIN03` e `CIN04`.
+- **Ambiente limpo:** nenhum Unity Editor, servidor WebGL ou gerador de imagens está ativo; `UNITY-YunaLegend.slnx` restaurado; branch `cinematics` sincronizada com `origin/cinematics`.
+
+---
+
+## Histórico do checkpoint anterior (interrupção inicial do Codex por quota)
 
 - O contador nativo de uso confirmou **95% consumidos / 5% disponíveis** na janela de 300 minutos. O usuário autorizou expressamente parar os agentes, atualizar o diário e enviar as alterações ao GitHub nesse limiar. A implementação foi suspensa; o Diretor foi interrompido durante a revisão, sem aprovação inferida.
 - Última candidata de **estudo**: `UnityStudyF000-042UniformV1/`, 43 desenhos capturados e zero exposições ausentes. Ela uniformiza definição de F0–24 e modelo de F25–42. **Revisão criativa pendente** das fronteiras F8→9, F17→18, F24→25 e F33→34.

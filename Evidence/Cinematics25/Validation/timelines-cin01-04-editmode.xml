@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="61" result="Passed" total="61" passed="61" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0,0759189">
+  <test-suite type="TestSuite" id="1000" name="Yuna Legend - O Quarto dos Brinquedos" fullname="Yuna Legend - O Quarto dos Brinquedos" runstate="Runnable" testcasecount="173" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.075919" total="61" passed="61" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1038" name="YunaLegend.Arena.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Library/ScriptAssemblies/YunaLegend.Arena.Tests.dll" runstate="Runnable" testcasecount="25" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.032012" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="22776" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1039" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="25" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.031237" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1040" name="Arena" fullname="YunaLegend.Arena" runstate="Runnable" testcasecount="25" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.030682" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1041" name="Tests" fullname="YunaLegend.Arena.Tests" runstate="Runnable" testcasecount="25" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.030150" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1024" name="ArenaSpecialHandDrawnTimingTests" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.029009" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="ParameterizedMethod" id="1028" name="ExposureCoversEveryDrawingRegardlessOfRenderRate" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.019219" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1025" name="ExposureCoversEveryDrawingRegardlessOfRenderRate(30)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate(30)" methodname="ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="2061188663" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.013579" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1026" name="ExposureCoversEveryDrawingRegardlessOfRenderRate(60)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate(60)" methodname="ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="68426365" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000221" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1027" name="ExposureCoversEveryDrawingRegardlessOfRenderRate(120)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate(120)" methodname="ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="1235047277" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000295" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1029" name="ExposureHoldsEachDrawingForFortyMilliseconds" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ExposureHoldsEachDrawingForFortyMilliseconds" methodname="ExposureHoldsEachDrawingForFortyMilliseconds" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="1197755722" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000278" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1037" name="ShotBoundariesMatchDirectorScript" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ShotBoundariesMatchDirectorScript" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.001747" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1030" name="ShotBoundariesMatchDirectorScript(0,0)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(0,0)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="1227437553" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000202" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1031" name="ShotBoundariesMatchDirectorScript(19,0)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(19,0)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="2117699780" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000048" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1032" name="ShotBoundariesMatchDirectorScript(20,1)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(20,1)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="44648017" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000030" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1033" name="ShotBoundariesMatchDirectorScript(49,1)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(49,1)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="1582705298" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000025" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1034" name="ShotBoundariesMatchDirectorScript(50,2)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(50,2)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="1564329411" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000028" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1035" name="ShotBoundariesMatchDirectorScript(74,2)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(74,2)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="1388587300" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000026" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1036" name="ShotBoundariesMatchDirectorScript(75,-1)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(75,-1)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="2082140704" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000026" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1081" name="YunaLegend.BearChase.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Library/ScriptAssemblies/YunaLegend.BearChase.Tests.dll" runstate="Runnable" testcasecount="31" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.009982" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="22776" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1082" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="31" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.009074" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1083" name="BearChase" fullname="YunaLegend.BearChase" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.008122" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1084" name="Tests" fullname="YunaLegend.BearChase.Tests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.007703" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1042" name="BearChaseHandDrawnTimingTests" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.007281" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="ParameterizedMethod" id="1046" name="ExposureCoversEveryDrawingRegardlessOfRenderRate" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.003486" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1043" name="ExposureCoversEveryDrawingRegardlessOfRenderRate(30)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate(30)" methodname="ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="1854233224" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000977" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1044" name="ExposureCoversEveryDrawingRegardlessOfRenderRate(60)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate(60)" methodname="ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="321092529" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000621" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1045" name="ExposureCoversEveryDrawingRegardlessOfRenderRate(120)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate(120)" methodname="ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="1277931792" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.001127" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1047" name="ExposureHoldsEachDrawingForFortyMilliseconds" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ExposureHoldsEachDrawingForFortyMilliseconds" methodname="ExposureHoldsEachDrawingForFortyMilliseconds" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="943301016" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000733" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1057" name="ShotBoundariesMatchDirectorScript" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.002021" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1048" name="ShotBoundariesMatchDirectorScript(0,0)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(0,0)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="1526900434" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000184" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1049" name="ShotBoundariesMatchDirectorScript(99,0)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(99,0)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="670662680" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000044" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1050" name="ShotBoundariesMatchDirectorScript(100,1)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(100,1)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="1700707836" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000032" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1051" name="ShotBoundariesMatchDirectorScript(174,1)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(174,1)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="1937330833" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000027" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1052" name="ShotBoundariesMatchDirectorScript(175,2)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(175,2)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="235193837" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000028" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1053" name="ShotBoundariesMatchDirectorScript(259,2)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(259,2)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="951466572" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000026" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1054" name="ShotBoundariesMatchDirectorScript(260,3)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(260,3)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="522497582" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000025" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1055" name="ShotBoundariesMatchDirectorScript(349,3)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(349,3)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="1662723016" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000025" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1056" name="ShotBoundariesMatchDirectorScript(350,-1)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(350,-1)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="1290588761" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000026" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1134" name="YunaLegend.Illustrated25D.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Library/ScriptAssemblies/YunaLegend.Illustrated25D.Tests.dll" runstate="Runnable" testcasecount="37" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.009226" total="21" passed="21" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="22776" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1135" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="37" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.008761" total="21" passed="21" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1136" name="Illustrated25D" fullname="YunaLegend.Illustrated25D" runstate="Runnable" testcasecount="37" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.008322" total="21" passed="21" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1140" name="Tests" fullname="YunaLegend.Illustrated25D.Tests" runstate="Runnable" testcasecount="31" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.007705" total="21" passed="21" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1100" name="DarkRoomHandDrawnTimingTests" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" testcasecount="21" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.006950" total="21" passed="21" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="ParameterizedMethod" id="1124" name="CaptionsMatchDirectorExposureRanges" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.CaptionsMatchDirectorExposureRanges" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.001565" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1116" name="CaptionsMatchDirectorExposureRanges(49,&quot;&quot;,&quot;&quot;)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.CaptionsMatchDirectorExposureRanges(49,&quot;&quot;,&quot;&quot;)" methodname="CaptionsMatchDirectorExposureRanges" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="1507833238" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000469" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1117" name="CaptionsMatchDirectorExposureRanges(50,&quot;Nanda&quot;,&quot;Levanta, dorminhoca.&quot;)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.CaptionsMatchDirectorExposureRanges(50,&quot;Nanda&quot;,&quot;Levanta, dorminhoca.&quot;)" methodname="CaptionsMatchDirectorExposureRanges" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="877064086" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000054" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1118" name="CaptionsMatchDirectorExposureRanges(84,&quot;Nanda&quot;,&quot;Levanta, dorminhoca.&quot;)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.CaptionsMatchDirectorExposureRanges(84,&quot;Nanda&quot;,&quot;Levanta, dorminhoca.&quot;)" methodname="CaptionsMatchDirectorExposureRanges" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="469222865" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000036" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1119" name="CaptionsMatchDirectorExposureRanges(85,&quot;Nanda&quot;,&quot;Temos que brincar.&quot;)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.CaptionsMatchDirectorExposureRanges(85,&quot;Nanda&quot;,&quot;Temos que brincar.&quot;)" methodname="CaptionsMatchDirectorExposureRanges" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="2014324173" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000035" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1120" name="CaptionsMatchDirectorExposureRanges(116,&quot;Nanda&quot;,&quot;Temos que brincar.&quot;)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.CaptionsMatchDirectorExposureRanges(116,&quot;Nanda&quot;,&quot;Temos que brincar.&quot;)" methodname="CaptionsMatchDirectorExposureRanges" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="858099088" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000031" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1121" name="CaptionsMatchDirectorExposureRanges(117,&quot;Nanda&quot;,&quot;Você dormiu demais.&quot;)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.CaptionsMatchDirectorExposureRanges(117,&quot;Nanda&quot;,&quot;Você dormiu demais.&quot;)" methodname="CaptionsMatchDirectorExposureRanges" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="1355206846" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000033" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1122" name="CaptionsMatchDirectorExposureRanges(149,&quot;Nanda&quot;,&quot;Você dormiu demais.&quot;)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.CaptionsMatchDirectorExposureRanges(149,&quot;Nanda&quot;,&quot;Você dormiu demais.&quot;)" methodname="CaptionsMatchDirectorExposureRanges" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="1953168125" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000030" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1123" name="CaptionsMatchDirectorExposureRanges(150,&quot;&quot;,&quot;&quot;)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.CaptionsMatchDirectorExposureRanges(150,&quot;&quot;,&quot;&quot;)" methodname="CaptionsMatchDirectorExposureRanges" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="1255016067" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000029" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1104" name="ExposureCoversEveryDrawingRegardlessOfRenderRate" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.002563" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1101" name="ExposureCoversEveryDrawingRegardlessOfRenderRate(30)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate(30)" methodname="ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="1869969088" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000645" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1102" name="ExposureCoversEveryDrawingRegardlessOfRenderRate(60)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate(60)" methodname="ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="312941896" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000526" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1103" name="ExposureCoversEveryDrawingRegardlessOfRenderRate(120)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate(120)" methodname="ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="1406840237" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000951" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1105" name="ExposureHoldsEachDrawingForFortyMilliseconds" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.ExposureHoldsEachDrawingForFortyMilliseconds" methodname="ExposureHoldsEachDrawingForFortyMilliseconds" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="553582669" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000611" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1115" name="ShotBoundariesMatchDirectorScript" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.ShotBoundariesMatchDirectorScript" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.001343" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1106" name="ShotBoundariesMatchDirectorScript(0,0)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(0,0)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="265614515" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000171" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1107" name="ShotBoundariesMatchDirectorScript(49,0)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(49,0)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="1836636951" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000048" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1108" name="ShotBoundariesMatchDirectorScript(50,1)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(50,1)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="1533551781" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000032" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1109" name="ShotBoundariesMatchDirectorScript(149,1)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(149,1)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="509583636" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000030" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1110" name="ShotBoundariesMatchDirectorScript(150,2)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(150,2)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="2136156003" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000026" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1111" name="ShotBoundariesMatchDirectorScript(234,2)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(234,2)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="1754952459" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000025" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1112" name="ShotBoundariesMatchDirectorScript(235,3)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(235,3)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="1723252924" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000026" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1113" name="ShotBoundariesMatchDirectorScript(299,3)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(299,3)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="786165220" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000026" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1114" name="ShotBoundariesMatchDirectorScript(300,-1)" fullname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(300,-1)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Illustrated25D.Tests.DarkRoomHandDrawnTimingTests" runstate="Runnable" seed="1471858861" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000027" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1240" name="YunaLegend.ToyRoom.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Library/ScriptAssemblies/YunaLegend.ToyRoom.Tests.dll" runstate="Runnable" testcasecount="25" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.015880" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="22776" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1241" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="25" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.015657" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1242" name="ToyRoom" fullname="YunaLegend.ToyRoom" runstate="Runnable" testcasecount="25" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.015485" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1243" name="Tests" fullname="YunaLegend.ToyRoom.Tests" runstate="Runnable" testcasecount="25" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.015310" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1219" name="ToyRoomIntroTimelineTests" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" testcasecount="16" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.014556" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="ParameterizedMethod" id="1235" name="HandDrawnCaptionsRespectDirectorExposureRanges" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.001459" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1225" name="HandDrawnCaptionsRespectDirectorExposureRanges(74,&quot;&quot;,&quot;&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(74,&quot;&quot;,&quot;&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="1244987303" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000401" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1226" name="HandDrawnCaptionsRespectDirectorExposureRanges(75,&quot;Yuna&quot;,&quot;Aqui também...&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(75,&quot;Yuna&quot;,&quot;Aqui também...&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="1918274728" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000062" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1227" name="HandDrawnCaptionsRespectDirectorExposureRanges(124,&quot;Yuna&quot;,&quot;Aqui também...&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(124,&quot;Yuna&quot;,&quot;Aqui também...&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="1374318996" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000058" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1228" name="HandDrawnCaptionsRespectDirectorExposureRanges(125,&quot;Yuna&quot;,&quot;Eu queria espaço pra brincar.&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(125,&quot;Yuna&quot;,&quot;Eu queria espaço pra brincar.&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="415777794" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000043" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1229" name="HandDrawnCaptionsRespectDirectorExposureRanges(199,&quot;Yuna&quot;,&quot;Eu queria espaço pra brincar.&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(199,&quot;Yuna&quot;,&quot;Eu queria espaço pra brincar.&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="1421052337" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000033" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1230" name="HandDrawnCaptionsRespectDirectorExposureRanges(200,&quot;&quot;,&quot;&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(200,&quot;&quot;,&quot;&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="1340755075" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000041" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1231" name="HandDrawnCaptionsRespectDirectorExposureRanges(299,&quot;&quot;,&quot;&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(299,&quot;&quot;,&quot;&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="1004333241" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000033" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1232" name="HandDrawnCaptionsRespectDirectorExposureRanges(300,&quot;Nanda&quot;,&quot;Vamos. Um de cada vez!&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(300,&quot;Nanda&quot;,&quot;Vamos. Um de cada vez!&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="203629352" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000034" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1233" name="HandDrawnCaptionsRespectDirectorExposureRanges(399,&quot;Nanda&quot;,&quot;Vamos. Um de cada vez!&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(399,&quot;Nanda&quot;,&quot;Vamos. Um de cada vez!&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="635583547" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000033" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1234" name="HandDrawnCaptionsRespectDirectorExposureRanges(400,&quot;&quot;,&quot;&quot;)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnCaptionsRespectDirectorExposureRanges(400,&quot;&quot;,&quot;&quot;)" methodname="HandDrawnCaptionsRespectDirectorExposureRanges" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="2081652412" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000029" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1223" name="HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.004535" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1220" name="HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate(30)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate(30)" methodname="HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="77277795" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000957" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1221" name="HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate(60)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate(60)" methodname="HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="1562314600" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.001091" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1222" name="HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate(120)" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate(120)" methodname="HandDrawnExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="265080441" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.002141" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1224" name="HandDrawnExposureHoldsDrawingForFortyMilliseconds" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.HandDrawnExposureHoldsDrawingForFortyMilliseconds" methodname="HandDrawnExposureHoldsDrawingForFortyMilliseconds" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="647527079" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.001382" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1236" name="TimelineEvaluatesAllSevenStagesAndCompletesAtTotalDuration" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.TimelineEvaluatesAllSevenStagesAndCompletesAtTotalDuration" methodname="TimelineEvaluatesAllSevenStagesAndCompletesAtTotalDuration" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="1423833619" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.005980" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1237" name="TryAdvanceDialogueSkipsOnlyActiveDialogueBeatAndRespectsSilentBeats" fullname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests.TryAdvanceDialogueSkipsOnlyActiveDialogueBeatAndRespectsSilentBeats" methodname="TryAdvanceDialogueSkipsOnlyActiveDialogueBeatAndRespectsSilentBeats" classname="YunaLegend.ToyRoom.Tests.ToyRoomIntroTimelineTests" runstate="Runnable" seed="1705591446" result="Passed" start-time="2026-11-22 18:23:38Z" end-time="2026-11-22 18:23:38Z" duration="0.000328" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: C:/Users/sergi/AppData/LocalLow/DeepMindStudio/Yuna Legend - O Quarto dos Brinquedos\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
