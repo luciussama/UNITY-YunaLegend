@@ -86,6 +86,11 @@ namespace YunaLegend.BearChase.Runtime
         private void OnDestroy()
         {
             Time.timeScale = 1f;
+            if (endingController != null)
+            {
+                endingController.OnEndingCompleted -= HandleEndingCompleted;
+            }
+
             BindSimulationEvents(bind: false);
             BindExternalEvents(bind: false);
         }
@@ -307,6 +312,7 @@ namespace YunaLegend.BearChase.Runtime
         {
             isPaused = false;
             Time.timeScale = 1f;
+            endingController?.StopEnding();
             hudController?.SetPaused(false);
             obstacleController?.ResetAll();
             cameraController?.ResetCameraPose();
@@ -319,6 +325,7 @@ namespace YunaLegend.BearChase.Runtime
         {
             isPaused = false;
             Time.timeScale = 1f;
+            endingController?.StopEnding();
             SceneManager.LoadScene("TitleScreen");
         }
     }
