@@ -343,21 +343,41 @@ namespace YunaLegend.BearChase.Runtime
                     : "A menina não alcançou o urso. Tentar novamente?\nA fadinha está pronta para acompanhar uma nova tentativa.";
                 primaryButtonLabel.text = "Tentar de novo";
                 easyButton.gameObject.SetActive(shouldOfferEasyMode);
+                if (titleButton != null)
+                {
+                    titleButton.gameObject.SetActive(true);
+                }
                 return;
             }
 
             if (phase == BearChasePhase.Victory)
             {
-                isVictoryState = true;
-                modalRoot.SetActive(true);
-                modalTitle.text = "✦ URSO ALCANÇADO! ✦";
-                modalBody.text = "A menina alcançou o urso fujão pelo corredor do quarto.\nA fadinha brilha satisfeita ao seu lado.";
-                primaryButtonLabel.text = "Voltar ao início";
-                easyButton.gameObject.SetActive(false);
+                // A cena de finalizacao ("Um Quarto Inteiro") roda antes do modal final
+                modalRoot.SetActive(false);
                 return;
             }
 
             modalRoot.SetActive(false);
+        }
+
+        public void ShowChapterCompletedModal()
+        {
+            EnsureBuilt();
+            if (modalRoot == null)
+            {
+                return;
+            }
+
+            isVictoryState = true;
+            modalRoot.SetActive(true);
+            modalTitle.text = "✦ CAPÍTULO 1 CONCLUÍDO! ✦";
+            modalBody.text = "A menina e Nanda guardaram todos os brinquedos a tempo.\nAgora o quarto inteiro está pronto para a próxima aventura!";
+            primaryButtonLabel.text = "Voltar ao início";
+            easyButton.gameObject.SetActive(false);
+            if (titleButton != null)
+            {
+                titleButton.gameObject.SetActive(false);
+            }
         }
 
         private void BuildUi()

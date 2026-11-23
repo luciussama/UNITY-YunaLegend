@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using YunaLegend.Qa.Core;
+using YunaLegend.Qa.Runtime;
 
 namespace YunaLegend.DarkRoom
 {
@@ -383,11 +385,75 @@ namespace YunaLegend.DarkRoom
             GetComponentInChildren<YunaCharacterView>()?.ResetPose();
         }
 
+        private void ApplyQaAutoJump()
+        {
+            if (routePlatforms == null)
+            {
+                routePlatforms = FindObjectsByType<DarkRoomPlatformMarker>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            }
+
+            bool hasCurrentEdge = false;
+            float currentEdgeX = 0f;
+            bool hasNext = false;
+            float nextNearEdgeX = 0f;
+            int nextIndex = lastLandedPlatformIndex < 0 ? (runDirection > 0f ? 0 : 22) : lastLandedPlatformIndex + 1;
+
+            if (routePlatforms != null)
+            {
+                for (int i = 0; i < routePlatforms.Length; i++)
+                {
+                    DarkRoomPlatformMarker marker = routePlatforms[i];
+                    if (marker == null || !marker.gameObject.activeInHierarchy)
+                    {
+                        continue;
+                    }
+
+                    if (marker.spec.index == lastLandedPlatformIndex)
+                    {
+                        hasCurrentEdge = true;
+                        currentEdgeX = runDirection > 0f ? marker.Support.MaxX : marker.Support.MinX;
+                    }
+                    else if (marker.spec.index == nextIndex)
+                    {
+                        hasNext = true;
+                        nextNearEdgeX = runDirection > 0f ? marker.Support.MinX : marker.Support.MaxX;
+                    }
+                }
+            }
+
+            bool shouldJump = DarkRoomQaPilot.ShouldJump(
+                transform.position.x,
+                runDirection,
+                runSpeed,
+                IsGrounded,
+                hasCurrentEdge,
+                currentEdgeX,
+                hasNext,
+                nextNearEdgeX);
+
+            if (shouldJump)
+            {
+                jumpBufferCounter = jumpBufferTime;
+                jumpHeld = true;
+                requireJumpRelease = false;
+            }
+            else if (IsGrounded)
+            {
+                jumpHeld = false;
+            }
+        }
+
         private void ReadJumpInput()
         {
             if (!autoRunActive)
             {
                 jumpHeld = false;
+                return;
+            }
+
+            if (WebQaRuntime.Current.AutoPlay)
+            {
+                ApplyQaAutoJump();
                 return;
             }
 

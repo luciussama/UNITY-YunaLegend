@@ -107,6 +107,8 @@ namespace YunaLegend.BearChase.Core
         public const float BearRestX = 0.695f;
         public const float FairyStartX = 0.130f;
         public const float FairyStartY = 0.625f;
+        public const int ApproachWalkFrameCount = 8;
+        public const int ApproachStandFrameIndex = 7;
         private const int ApproachSteps = 8;
 
         public static float ApproachSupportX(int stepCueNumber)
@@ -144,7 +146,7 @@ namespace YunaLegend.BearChase.Core
                     wing,
                     bob,
                     useReachAtlas: false,
-                    girlFrameIndex: 1,
+                    girlFrameIndex: ApproachStandFrameIndex,
                     bearFrameIndex: 0,
                     bearStartleOffsetY: 0f,
                     fadeAlpha: 0f,
@@ -175,7 +177,7 @@ namespace YunaLegend.BearChase.Core
                         wing,
                         bob,
                         useReachAtlas: false,
-                        girlFrameIndex: 1,
+                        girlFrameIndex: ApproachStandFrameIndex,
                         bearFrameIndex: 0,
                         bearStartleOffsetY: 0f,
                         fadeAlpha: 0f,
@@ -208,21 +210,14 @@ namespace YunaLegend.BearChase.Core
                 if (baseProgress < 0.001f)
                 {
                     // Primeiros milissegundos (dx < 1 px) mantem pose inicial antes da passada imediata
-                    walkFrame = 1;
+                    walkFrame = ApproachStandFrameIndex;
                     stepCue = 0;
                 }
                 else
                 {
-                    bool isPassingPose = stepLocal >= 0.58f;
+                    int subPhase = Math.Min(3, (int)Math.Floor(stepLocal * 4f));
                     bool isEvenStep = (stepIndex % 2) == 0;
-                    if (!isPassingPose)
-                    {
-                        walkFrame = isEvenStep ? 2 : 0;
-                    }
-                    else
-                    {
-                        walkFrame = isEvenStep ? 3 : 1;
-                    }
+                    walkFrame = (isEvenStep ? 0 : 4) + subPhase;
                 }
 
                 return new BearChaseEntranceSample(

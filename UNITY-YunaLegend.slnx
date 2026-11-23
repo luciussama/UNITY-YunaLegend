@@ -10,13 +10,16 @@
   <Project Path="YunaLegend.ToyRoom.Editor.csproj" />
   <Project Path="YunaLegend.BearChase.Editor.csproj" />
   <Project Path="YunaLegend.ToyRoom.Runtime.csproj" />
+  <Project Path="YunaLegend.Qa.Tests.csproj" />
   <Project Path="YunaLegend.Illustrated25D.Tests.csproj" />
   <Project Path="YunaLegend.RoutePhysics.Tests.csproj" />
   <Project Path="YunaLegend.Illustrated25D.Core.csproj" />
   <Project Path="YunaLegend.Tests.csproj" />
   <Project Path="YunaLegend.BearChase.Core.csproj" />
   <Project Path="YunaLegend.Arena.Editor.csproj" />
+  <Project Path="YunaLegend.Qa.Runtime.csproj" />
   <Project Path="YunaLegend.Arena.Runtime.csproj" />
   <Project Path="YunaLegend.BearChase.Tests.csproj" />
+  <Project Path="YunaLegend.Qa.Core.csproj" />
   <Project Path="YunaLegend.Arena.Tests.csproj" />
 </Solution>

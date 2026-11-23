@@ -26,7 +26,7 @@ namespace YunaLegend.Arena.Core
             float attackRange = minSep + 95f;
 
             bool enemyThreatening = simulation.EnemyState == ArenaEnemyState.Windup
-                || simulation.EnemyState == ArenaEnemyState.Active;
+                || simulation.EnemyState == ArenaEnemyState.ActiveAttack;
 
             if (enemyThreatening)
             {

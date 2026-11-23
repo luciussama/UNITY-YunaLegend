@@ -96,5 +96,37 @@ namespace YunaLegend.Tests.EditMode.BearChase
             BearChaseEntranceSample finalFrame = BearChaseEntranceTimeline.Evaluate(BearChaseEntranceTimeline.TotalDuration - 0.03f);
             Assert.AreEqual(1f, finalFrame.FadeAlpha, 0.001f, "Fade final deve atingir 100% preto antes da transicao.");
         }
+
+        [Test]
+        public void EntranceApproach_AdvancesPelvisSmoothlyWithoutDiscreteJumps()
+        {
+            const float exposureStep = 1f / BearChaseHandDrawnTiming.FramesPerSecond;
+            float prevX = BearChaseEntranceTimeline.Evaluate(BearChaseEntranceTimeline.EstablishEnd).NormalizedYunaX;
+
+            for (float t = BearChaseEntranceTimeline.EstablishEnd + exposureStep;
+                 t <= BearChaseEntranceTimeline.ApproachEnd;
+                 t += exposureStep)
+            {
+                BearChaseEntranceSample sample = BearChaseEntranceTimeline.Evaluate(t);
+                float dx = sample.NormalizedYunaX - prevX;
+                Assert.GreaterOrEqual(dx, -0.0001f, $"Sem recuo de quadril em t={t:F3}s.");
+                Assert.LessOrEqual(dx, 0.006f, $"Sem salto brusco de quadril em t={t:F3}s (dx={dx:F4}).");
+                prevX = sample.NormalizedYunaX;
+            }
+
+            BearChaseEntranceSample settle = BearChaseEntranceTimeline.Evaluate(BearChaseEntranceTimeline.WalkMoveEnd);
+            Assert.AreEqual(BearChaseEntranceTimeline.YunaReachX, settle.NormalizedYunaX, 0.0005f);
+            Assert.AreEqual(BearChaseEntranceTimeline.ApproachStandFrameIndex, settle.GirlFrameIndex, "Parada ao fim da aproximacao deve fechar na pose neutra sem pop.");
+
+            var visitedFrames = new System.Collections.Generic.HashSet<int>();
+            for (float t = BearChaseEntranceTimeline.EstablishEnd + exposureStep;
+                 t < BearChaseEntranceTimeline.WalkMoveEnd;
+                 t += exposureStep)
+            {
+                visitedFrames.Add(BearChaseEntranceTimeline.Evaluate(t).GirlFrameIndex);
+            }
+
+            Assert.AreEqual(BearChaseEntranceTimeline.ApproachWalkFrameCount, visitedFrames.Count, "Aproximacao deve percorrer todos os 8 quadros do novo ciclo de caminhada.");
+        }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using YunaLegend.Qa.Runtime;
 using YunaLegend.ToyRoom.Core;
 
 namespace YunaLegend.ToyRoom.Runtime
@@ -186,8 +187,94 @@ namespace YunaLegend.ToyRoom.Runtime
             UpdateContextualPrompt();
             UpdateNandaToyGuide();
 
+            if (WebQaRuntime.Current.AutoPlay)
+            {
+                ApplyQaAutoPlay();
+            }
+
             var playerPoint = new ToyRoomPoint(player.transform.position.x, player.transform.position.z);
             StateMachine.Tick(Time.deltaTime, playerPoint, IsInsideMainCameraFocus);
+        }
+
+        private void ApplyQaAutoPlay()
+        {
+            bool dialogueOrIntro = (introCinematic != null && introCinematic.IsActive)
+                || (narrative != null && narrative.IsPlaying);
+
+            bool hasTarget = false;
+            bool withinRange = false;
+            ToyRoomPoint targetPoint = default;
+
+            if (StateMachine.CurrentPhase == ToyRoomPhase.SeekingSword && swordView != null)
+            {
+                hasTarget = true;
+                targetPoint = new ToyRoomPoint(swordView.transform.position.x, swordView.transform.position.z);
+                withinRange = swordView.IsWithinPickupRange(player.transform.position);
+            }
+            else if (player.CarriedToy != null && chest != null)
+            {
+                hasTarget = true;
+                targetPoint = new ToyRoomPoint(chest.transform.position.x, chest.transform.position.z);
+                withinRange = chest.IsWithinDeliveryRange(player.transform.position);
+            }
+            else
+            {
+                ToyItemView nearest = null;
+                float bestDistSq = float.MaxValue;
+                for (int i = 0; i < toys.Count; i++)
+                {
+                    ToyItemView toy = toys[i];
+                    if (toy == null || !toy.gameObject.activeInHierarchy || toy.IsCarried || toy.IsStored)
+                    {
+                        continue;
+                    }
+
+                    Vector3 d = toy.transform.position - player.transform.position;
+                    d.y = 0f;
+                    if (d.sqrMagnitude < bestDistSq)
+                    {
+                        bestDistSq = d.sqrMagnitude;
+                        nearest = toy;
+                    }
+                }
+
+                if (nearest != null)
+                {
+                    hasTarget = true;
+                    targetPoint = new ToyRoomPoint(nearest.transform.position.x, nearest.transform.position.z);
+                    withinRange = bestDistSq <= 1.25f * 1.25f;
+                }
+            }
+
+            var playerPos = new ToyRoomPoint(player.transform.position.x, player.transform.position.z);
+            ToyRoomQaDecision decision = ToyRoomQaPilot.ComputeAction(
+                StateMachine.CurrentPhase,
+                playerPos,
+                hasTarget,
+                targetPoint,
+                withinRange,
+                dialogueOrIntro);
+
+            if (decision.ShouldAdvanceDialogue)
+            {
+                player.ScriptedMoveInput = Vector2.zero;
+                if (introCinematic != null && introCinematic.IsActive)
+                {
+                    introCinematic.TryAdvanceDialogue();
+                }
+                else if (narrative != null && narrative.IsPlaying)
+                {
+                    narrative.AdvanceActiveBeat();
+                }
+
+                return;
+            }
+
+            player.ScriptedMoveInput = new Vector2(decision.MoveX, decision.MoveZ);
+            if (decision.ShouldInteract)
+            {
+                RequestPlayerInteraction();
+            }
         }
 
         public void RequestPlayerInteraction()

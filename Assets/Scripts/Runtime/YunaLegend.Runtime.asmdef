@@ -1,7 +1,9 @@
-﻿{
+{
     "name": "YunaLegend.Runtime",
     "rootNamespace": "YunaLegend",
     "references": [
+        "YunaLegend.Qa.Core",
+        "YunaLegend.Qa.Runtime",
         "Unity.InputSystem",
         "Unity.TextMeshPro",
         "UnityEngine.UI",

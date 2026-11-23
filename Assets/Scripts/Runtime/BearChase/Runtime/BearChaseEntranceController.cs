@@ -14,8 +14,6 @@ namespace YunaLegend.BearChase.Runtime
         private const string ResourceRoot = "BearChaseEntrance/";
         private const float FairyLeftWingSplitRatio = 0.24f;
         private const float FairyRightWingSplitRatio = 0.77f;
-        // Centers of the grounded shoe soles, measured on the 1774 px approach sheet.
-        private static readonly float[] ApproachSoleX = { 312f, 674f, 1202f, 1535f };
 
         private Canvas canvas;
         private RectTransform stageRect;
@@ -59,7 +57,7 @@ namespace YunaLegend.BearChase.Runtime
             }
         }
 
-        private readonly AlignedSpriteFrame[] approachGirlFrames = new AlignedSpriteFrame[4];
+        private AlignedSpriteFrame[] approachGirlFrames = new AlignedSpriteFrame[8];
         private readonly AlignedSpriteFrame[] approachBearFrames = new AlignedSpriteFrame[4];
         private readonly AlignedSpriteFrame[] reachGirlFrames = new AlignedSpriteFrame[4];
         private Sprite fairyBodySprite;
@@ -205,19 +203,7 @@ namespace YunaLegend.BearChase.Runtime
                 float girlW = frame.WidthPx > 0f ? frame.WidthPx * frame.UiScale : (sample.UseReachAtlas ? 350f : 420f);
                 float girlH = frame.HeightPx > 0f ? frame.HeightPx * frame.UiScale : 395f;
                 float pivotX = frame.WidthPx > 0f ? frame.AnchorNormX : 0.5f;
-
                 float supportX = sample.NormalizedYunaX;
-                bool isGroundedStep = sample.Beat == BearChaseEntranceBeat.Approach
-                    && sample.StepCueNumber > 0
-                    && supportX < BearChaseEntranceTimeline.YunaReachX
-                    && frame.Sprite != null;
-                if (isGroundedStep)
-                {
-                    Rect spriteRect = frame.Sprite.rect;
-                    float soleX = ApproachSoleX[idx] * frame.Sprite.texture.width / 1774f;
-                    pivotX = Mathf.Clamp01((soleX - spriteRect.x) / spriteRect.width);
-                    supportX = BearChaseEntranceTimeline.ApproachSupportX(sample.StepCueNumber);
-                }
 
                 var yAnchor = new Vector2(supportX, floorNormY + sample.YunaWalkBobY);
                 yunaRect.anchorMin = yAnchor;
@@ -229,8 +215,8 @@ namespace YunaLegend.BearChase.Runtime
                 yunaRect.localRotation = Quaternion.Euler(0f, 0f, sample.YunaTiltDeg);
 
                 float yunaAirFactor = Mathf.Clamp01(sample.YunaWalkBobY / 0.036f);
-                bool isWideStride = !sample.UseReachAtlas && (idx == 0 || idx == 2);
-                float baseShadowW = sample.UseReachAtlas ? 235f : (isWideStride ? 228f : 178f);
+                bool isWideStride = !sample.UseReachAtlas && (idx == 0 || idx == 4);
+                float baseShadowW = sample.UseReachAtlas ? 235f : (isWideStride ? 215f : 185f);
 
                 if (yunaShadowRect != null)
                 {
@@ -377,6 +363,36 @@ namespace YunaLegend.BearChase.Runtime
 
         private void LoadSlicedSprites()
         {
+            Texture2D walkV2Tex = Resources.Load<Texture2D>(ResourceRoot + "yuna-approach-walk-atlas-v2");
+            bool loadedWalkV2 = false;
+            if (walkV2Tex != null)
+            {
+                const int cols = 4;
+                const int rows = 2;
+                float cellW = walkV2Tex.width / (float)cols;
+                float cellH = walkV2Tex.height / (float)rows;
+                float soleMarginY = cellH * (16f / 512f);
+                float contentH = cellH - soleMarginY;
+                float characterHeightPx = cellH * (456f / 512f);
+                float uiScale = 395f / characterHeightPx;
+
+                approachGirlFrames = new AlignedSpriteFrame[8];
+                for (int row = 0; row < rows; row++)
+                {
+                    // Unity Texture2D Y=0 fica na base: row 0 = metade superior, row 1 = metade inferior
+                    float rowOriginY = (rows - 1 - row) * cellH;
+                    for (int col = 0; col < cols; col++)
+                    {
+                        int frameIdx = row * cols + col;
+                        var rect = new Rect(col * cellW, rowOriginY + soleMarginY, cellW, contentH);
+                        Sprite sp = Sprite.Create(walkV2Tex, rect, new Vector2(0.5f, 0f), 100f);
+                        approachGirlFrames[frameIdx] = new AlignedSpriteFrame(sp, rect.width, rect.height, 0.5f, uiScale);
+                    }
+                }
+
+                loadedWalkV2 = true;
+            }
+
             Texture2D approachTex = Resources.Load<Texture2D>(ResourceRoot + "approach-atlas-adapted-v1")
                 ?? Resources.Load<Texture2D>(ResourceRoot + "approach-atlas-v1");
             if (approachTex != null)
@@ -389,19 +405,23 @@ namespace YunaLegend.BearChase.Runtime
                 int girlHeight = approachTex.height - girlStartY;
                 int bearHeight = Mathf.RoundToInt(374 * sy);
 
-                // Pivo estritamente em cabeca/tronco na caminhada elimina oscilacao lateral de f3 (+-1.7 px max)
-                BuildAlignedRow(
-                    approachTex,
-                    girlCols,
-                    girlStartY,
-                    girlHeight,
-                    primaryBandMin: 0.55f,
-                    primaryBandMax: 0.92f,
-                    secondaryBandMin: 0.00f,
-                    secondaryBandMax: 0.12f,
-                    secondaryWeight: 0f,
-                    targetTallHeightUi: 395f,
-                    approachGirlFrames);
+                if (!loadedWalkV2)
+                {
+                    approachGirlFrames = new AlignedSpriteFrame[4];
+                    // Fallback 4 quadros ancorado em pelve/tronco
+                    BuildAlignedRow(
+                        approachTex,
+                        girlCols,
+                        girlStartY,
+                        girlHeight,
+                        primaryBandMin: 0.36f,
+                        primaryBandMax: 0.78f,
+                        secondaryBandMin: 0.00f,
+                        secondaryBandMax: 0.12f,
+                        secondaryWeight: 0f,
+                        targetTallHeightUi: 395f,
+                        approachGirlFrames);
+                }
 
                 BuildAlignedRow(
                     approachTex,

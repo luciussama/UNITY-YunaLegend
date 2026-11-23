@@ -27,6 +27,7 @@ namespace YunaLegend.BearChase.Runtime
         [SerializeField] private Vector3 chaseOrigin = new Vector3(0f, 0f, 40f);
 
         private BearChaseSimulation simulation;
+        private BearChaseEndingController endingController;
         private bool isPaused;
         private bool qaLoggedFinalStretch;
         private int qaThrowsAfter460;
@@ -260,6 +261,29 @@ namespace YunaLegend.BearChase.Runtime
                 "bearchase_victory",
                 $"z={simulation.YunaZ:F2} hearts={simulation.Hearts}/{simulation.MaxHearts} throws_after_460={qaThrowsAfter460}");
             audioController?.PlayVictory();
+            BeginChapterEndingCinematic();
+        }
+
+        private void BeginChapterEndingCinematic()
+        {
+            if (endingController == null)
+            {
+                endingController = GetComponent<BearChaseEndingController>();
+                if (endingController == null)
+                {
+                    endingController = gameObject.AddComponent<BearChaseEndingController>();
+                }
+
+                endingController.OnEndingCompleted -= HandleEndingCompleted;
+                endingController.OnEndingCompleted += HandleEndingCompleted;
+            }
+
+            endingController.BeginEnding();
+        }
+
+        private void HandleEndingCompleted()
+        {
+            hudController?.ShowChapterCompletedModal();
         }
 
         private void HandlePauseToggled()

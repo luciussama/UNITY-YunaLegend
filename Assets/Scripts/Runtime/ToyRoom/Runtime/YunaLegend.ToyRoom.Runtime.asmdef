@@ -3,6 +3,8 @@
     "rootNamespace": "YunaLegend.ToyRoom.Runtime",
     "references": [
         "YunaLegend.ToyRoom.Core",
+        "YunaLegend.Qa.Core",
+        "YunaLegend.Qa.Runtime",
         "Unity.InputSystem",
         "UnityEngine.UI",
         "Unity.RenderPipelines.Universal.Runtime",
