@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using YunaLegend.BearChase.Core;
+using YunaLegend.Qa.Runtime;
 
 namespace YunaLegend.BearChase.Runtime
 {
@@ -27,6 +28,8 @@ namespace YunaLegend.BearChase.Runtime
 
         private BearChaseSimulation simulation;
         private bool isPaused;
+        private bool qaLoggedFinalStretch;
+        private int qaThrowsAfter460;
 
         public Vector3 ChaseOrigin => chaseOrigin;
 
@@ -95,9 +98,20 @@ namespace YunaLegend.BearChase.Runtime
             }
 
             float dt = Mathf.Min(0.1f, Time.deltaTime);
-            float lateral = inputAdapter != null ? inputAdapter.LateralAxis : 0f;
+            float lateral = WebQaRuntime.Current.AutoPlay
+                ? BearChaseQaPilot.ComputeLateralInput(simulation)
+                : (inputAdapter != null ? inputAdapter.LateralAxis : 0f);
             simulation.SetLateralInput(lateral);
             simulation.Step(dt);
+
+            if (WebQaRuntime.Current.Enabled && !qaLoggedFinalStretch && simulation.YunaZ >= 460f)
+            {
+                qaLoggedFinalStretch = true;
+                WebQaRuntime.LogEvent(
+                    "bearchase_entered_final_108m",
+                    $"z={simulation.YunaZ:F2} hearts={simulation.Hearts}/{simulation.MaxHearts}");
+            }
+
             UpdateControllers(dt);
         }
 
@@ -183,6 +197,9 @@ namespace YunaLegend.BearChase.Runtime
 
         private void HandlePhaseChanged(BearChasePhase phase)
         {
+            WebQaRuntime.LogEvent(
+                "bearchase_phase",
+                $"phase={phase} z={simulation.YunaZ:F2} hearts={simulation.Hearts}/{simulation.MaxHearts}");
             sceneryController?.ApplyPhaseVisibility(phase);
             hudController?.HandlePhaseChanged(phase, simulation.ShouldOfferEasyMode);
 
@@ -208,6 +225,11 @@ namespace YunaLegend.BearChase.Runtime
 
         private void HandleBearToyThrown(BearChaseThrownToyState toy)
         {
+            if (simulation != null && simulation.YunaZ >= 460f)
+            {
+                qaThrowsAfter460++;
+            }
+
             audioController?.PlayThrow();
         }
 
@@ -226,11 +248,17 @@ namespace YunaLegend.BearChase.Runtime
 
         private void HandleDefeat()
         {
+            WebQaRuntime.LogEvent(
+                "bearchase_defeat",
+                $"z={simulation.YunaZ:F2} throws_after_460={qaThrowsAfter460}");
             audioController?.PlayDefeat();
         }
 
         private void HandleVictory()
         {
+            WebQaRuntime.LogEvent(
+                "bearchase_victory",
+                $"z={simulation.YunaZ:F2} hearts={simulation.Hearts}/{simulation.MaxHearts} throws_after_460={qaThrowsAfter460}");
             audioController?.PlayVictory();
         }
 

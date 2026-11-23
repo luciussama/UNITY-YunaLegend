@@ -14,6 +14,8 @@ namespace YunaLegend.BearChase.Runtime
         private const string ResourceRoot = "BearChaseEntrance/";
         private const float FairyLeftWingSplitRatio = 0.24f;
         private const float FairyRightWingSplitRatio = 0.77f;
+        // Centers of the grounded shoe soles, measured on the 1774 px approach sheet.
+        private static readonly float[] ApproachSoleX = { 312f, 674f, 1202f, 1535f };
 
         private Canvas canvas;
         private RectTransform stageRect;
@@ -204,7 +206,20 @@ namespace YunaLegend.BearChase.Runtime
                 float girlH = frame.HeightPx > 0f ? frame.HeightPx * frame.UiScale : 395f;
                 float pivotX = frame.WidthPx > 0f ? frame.AnchorNormX : 0.5f;
 
-                var yAnchor = new Vector2(sample.NormalizedYunaX, floorNormY + sample.YunaWalkBobY);
+                float supportX = sample.NormalizedYunaX;
+                bool isGroundedStep = sample.Beat == BearChaseEntranceBeat.Approach
+                    && sample.StepCueNumber > 0
+                    && supportX < BearChaseEntranceTimeline.YunaReachX
+                    && frame.Sprite != null;
+                if (isGroundedStep)
+                {
+                    Rect spriteRect = frame.Sprite.rect;
+                    float soleX = ApproachSoleX[idx] * frame.Sprite.texture.width / 1774f;
+                    pivotX = Mathf.Clamp01((soleX - spriteRect.x) / spriteRect.width);
+                    supportX = BearChaseEntranceTimeline.ApproachSupportX(sample.StepCueNumber);
+                }
+
+                var yAnchor = new Vector2(supportX, floorNormY + sample.YunaWalkBobY);
                 yunaRect.anchorMin = yAnchor;
                 yunaRect.anchorMax = yAnchor;
                 yunaRect.pivot = new Vector2(pivotX, 0f);
@@ -234,7 +249,7 @@ namespace YunaLegend.BearChase.Runtime
                 if (yunaContactShadowRect != null)
                 {
                     float coreShrink = 1f - yunaAirFactor * 0.38f;
-                    var cAnchor = new Vector2(sample.NormalizedYunaX, floorNormY - 0.001f);
+                    var cAnchor = new Vector2(supportX, floorNormY - 0.001f);
                     yunaContactShadowRect.anchorMin = cAnchor;
                     yunaContactShadowRect.anchorMax = cAnchor;
                     yunaContactShadowRect.anchoredPosition = Vector2.zero;

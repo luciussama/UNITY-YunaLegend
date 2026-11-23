@@ -3,6 +3,8 @@
     "rootNamespace": "YunaLegend.BearChase.Runtime",
     "references": [
         "YunaLegend.BearChase.Core",
+        "YunaLegend.Qa.Core",
+        "YunaLegend.Qa.Runtime",
         "Unity.InputSystem",
         "UnityEngine.UI",
         "Unity.RenderPipelines.Universal.Runtime",

@@ -1,0 +1,14 @@
+{
+    "name": "YunaLegend.Qa.Core",
+    "rootNamespace": "YunaLegend.Qa.Core",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

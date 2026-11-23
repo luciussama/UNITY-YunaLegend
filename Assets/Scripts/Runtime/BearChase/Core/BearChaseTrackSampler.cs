@@ -13,7 +13,8 @@ namespace YunaLegend.BearChase.Core
             BearChaseTrackSpec s = spec ?? BearChaseTrackSpec.Default;
             float clampedZ = Math.Max(0f, Math.Min(s.TrackLength + 20f, z));
             float fadeIn = Math.Min(1f, clampedZ / s.EnvelopeFadeIn);
-            float fadeOut = Math.Min(1f, Math.Max(0f, (s.TrackLength - clampedZ) / s.EnvelopeFadeOut));
+            float openingEnd = Math.Min(s.TrackLength, BearChaseTrackSpec.FinaleStartZ);
+            float fadeOut = Math.Min(1f, Math.Max(0f, (openingEnd - clampedZ) / s.EnvelopeFadeOut));
             return fadeIn * fadeOut;
         }
 
@@ -24,7 +25,9 @@ namespace YunaLegend.BearChase.Core
             float envelope = ComputeEnvelope(clampedZ, s);
             double primary = Math.Sin(clampedZ * 0.038) * 5.6;
             double secondary = Math.Sin(clampedZ * 0.017 + 0.85) * 2.9;
-            return (float)((primary + secondary) * envelope);
+            float finaleZ = clampedZ - BearChaseTrackSpec.FinaleStartZ;
+            double finale = 5.5 * Math.Sin(finaleZ * 0.125) * FinaleEnvelope(clampedZ, s);
+            return (float)((primary + secondary) * envelope + finale);
         }
 
         public static float ElevationY(float z, BearChaseTrackSpec spec = null)
@@ -34,7 +37,9 @@ namespace YunaLegend.BearChase.Core
             float envelope = ComputeEnvelope(clampedZ, s);
             double primary = Math.Sin(clampedZ * 0.044) * 1.55;
             double secondary = Math.Sin(clampedZ * 0.020 + 1.25) * 0.95;
-            return (float)((primary + secondary) * envelope);
+            float finaleZ = clampedZ - BearChaseTrackSpec.FinaleStartZ;
+            double finale = 2.55 * Math.Sin(finaleZ * 0.135) * FinaleEnvelope(clampedZ, s);
+            return (float)((primary + secondary) * envelope + finale);
         }
 
         public static float TangentSlopeX(float z, BearChaseTrackSpec spec = null)
@@ -65,6 +70,36 @@ namespace YunaLegend.BearChase.Core
             float curvature = (TangentSlopeX(z + eps, spec) - TangentSlopeX(z - eps, spec)) / (2f * eps);
             float raw = -curvature * 115f;
             return Math.Max(-5.5f, Math.Min(5.5f, raw));
+        }
+
+        public static float ThrowPressure(float z, BearChaseTrackSpec spec = null)
+        {
+            BearChaseTrackSpec s = spec ?? BearChaseTrackSpec.Default;
+            // Look slightly ahead so the bear starts its windup on entry to the tight sector.
+            float sampleZ = z + 4f;
+            float envelope = FinaleEnvelope(sampleZ, s);
+            if (envelope <= 0f)
+            {
+                return 0f;
+            }
+
+            float turnRate = Math.Abs(TangentSlopeX(sampleZ + 1f, s) - TangentSlopeX(sampleZ - 1f, s)) * 0.5f;
+            float rampGrade = Math.Abs(TangentSlopeY(sampleZ, s));
+            float pressure = Math.Max(SmoothUnit((turnRate - 0.025f) / 0.055f), SmoothUnit((rampGrade - 0.12f) / 0.20f));
+            return envelope * pressure;
+        }
+
+        private static float FinaleEnvelope(float z, BearChaseTrackSpec spec)
+        {
+            float entry = SmoothUnit((z - BearChaseTrackSpec.FinaleStartZ) / 16f);
+            float exit = SmoothUnit((spec.TrackLength - z) / spec.EnvelopeFadeOut);
+            return entry * exit;
+        }
+
+        private static float SmoothUnit(float value)
+        {
+            float t = Math.Max(0f, Math.Min(1f, value));
+            return t * t * (3f - 2f * t);
         }
     }
 }

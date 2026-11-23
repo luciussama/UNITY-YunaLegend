@@ -99,7 +99,8 @@ namespace YunaLegend.BearChase.Core
                 return;
             }
 
-            cooldownTimer -= dt;
+            float pressure = BearChaseTrackSampler.ThrowPressure(yunaZ, track);
+            cooldownTimer -= dt * (1f + pressure * 0.85f);
             if (cooldownTimer <= 0f)
             {
                 isWindingUp = true;

@@ -6,6 +6,19 @@ namespace YunaLegend.Tests.EditMode.BearChase
     public sealed class BearChaseEntranceTimelineTests
     {
         [Test]
+        public void EntrancePose_HoldsEachExposureForFortyMilliseconds()
+        {
+            BearChaseEntranceSample early = BearChaseEntranceTimeline.Evaluate(1.201f);
+            BearChaseEntranceSample late = BearChaseEntranceTimeline.Evaluate(1.239f);
+            BearChaseEntranceSample next = BearChaseEntranceTimeline.Evaluate(1.241f);
+
+            Assert.AreEqual(early.NormalizedYunaX, late.NormalizedYunaX);
+            Assert.AreEqual(early.YunaWalkBobY, late.YunaWalkBobY);
+            Assert.AreEqual(early.GirlFrameIndex, late.GirlFrameIndex);
+            Assert.Greater(next.NormalizedYunaX, late.NormalizedYunaX);
+        }
+
+        [Test]
         public void EntranceTimeline_ProgressesThroughAllFiveCanonicalBeats()
         {
             BearChaseEntranceSample establish = BearChaseEntranceTimeline.Evaluate(0.25f);

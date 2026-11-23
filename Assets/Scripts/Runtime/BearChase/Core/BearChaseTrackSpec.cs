@@ -5,6 +5,8 @@ namespace YunaLegend.BearChase.Core
     /// </summary>
     public sealed class BearChaseTrackSpec
     {
+        public const float FinaleStartZ = 460f;
+        public const float DefaultTrackLength = 568f;
         public static readonly BearChaseTrackSpec Default = new BearChaseTrackSpec();
 
         public float TrackLength { get; }
@@ -15,7 +17,7 @@ namespace YunaLegend.BearChase.Core
         public float EnvelopeFadeOut { get; }
 
         public BearChaseTrackSpec(
-            float trackLength = 460f,
+            float trackLength = DefaultTrackLength,
             float laneHalfWidth = 2.85f,
             float corridorHalfWidth = 4.35f,
             float wallHeight = 5.0f,

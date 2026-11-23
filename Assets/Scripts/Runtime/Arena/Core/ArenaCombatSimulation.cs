@@ -135,6 +135,18 @@ namespace YunaLegend.Arena.Core
             StartWave(0);
         }
 
+        /// <summary>
+        /// Prepara a Arena diretamente na ultima onda com HP reduzido apenas para o Modo QA opt-in,
+        /// preservando o fluxo real de derrota do ultimo inimigo e corte para BearChase.
+        /// </summary>
+        public void PrepareFinalWaveForQa(int enemyHp = 2)
+        {
+            ResetBattle();
+            int finalWaveIndex = Math.Max(0, TotalWaves - 1);
+            StartWave(finalWaveIndex);
+            EnemyHp = Math.Clamp(enemyHp, 1, CurrentEnemySpec.MaxHp);
+        }
+
         public int Step(float dt, ArenaInputState input)
         {
             if (Outcome != ArenaBattleOutcome.Ongoing)

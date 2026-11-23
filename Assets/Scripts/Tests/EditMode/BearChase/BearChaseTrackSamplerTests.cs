@@ -45,7 +45,7 @@ namespace YunaLegend.Tests.EditMode.BearChase
         public void TrackSampler_SlopesAndAnglesStayContinuousAndNavigable()
         {
             BearChaseTrackSpec spec = BearChaseTrackSpec.Default;
-            for (float z = 1f; z <= spec.TrackLength - 1f; z += 5f)
+            for (float z = 1f; z < BearChaseTrackSpec.FinaleStartZ; z += 5f)
             {
                 float slopeX = BearChaseTrackSampler.TangentSlopeX(z, spec);
                 float slopeY = BearChaseTrackSampler.TangentSlopeY(z, spec);
@@ -56,6 +56,29 @@ namespace YunaLegend.Tests.EditMode.BearChase
                 Assert.Less(System.Math.Abs(slopeY), 0.28f, "Inclinacao vertical deve permanecer confortavel.");
                 Assert.LessOrEqual(System.Math.Abs(bank), 5.51f);
             }
+        }
+
+        [Test]
+        public void Finale_ExtendsTrackWithTighterTurnsAndSteeperGrades()
+        {
+            BearChaseTrackSpec spec = BearChaseTrackSpec.Default;
+            float peakGrade = 0f;
+            float peakLateralSlope = 0f;
+            float peakThrowPressure = 0f;
+
+            for (float z = BearChaseTrackSpec.FinaleStartZ; z < spec.TrackLength; z += 0.5f)
+            {
+                peakGrade = System.Math.Max(peakGrade, System.Math.Abs(BearChaseTrackSampler.TangentSlopeY(z, spec)));
+                peakLateralSlope = System.Math.Max(peakLateralSlope, System.Math.Abs(BearChaseTrackSampler.TangentSlopeX(z, spec)));
+                peakThrowPressure = System.Math.Max(peakThrowPressure, BearChaseTrackSampler.ThrowPressure(z, spec));
+            }
+
+            Assert.Greater(spec.TrackLength - BearChaseTrackSpec.FinaleStartZ, 100f);
+            Assert.Greater(peakGrade, 0.30f);
+            Assert.Less(peakGrade, 0.40f);
+            Assert.Greater(peakLateralSlope, 0.60f);
+            Assert.Greater(peakThrowPressure, 0.8f);
+            Assert.AreEqual(0f, BearChaseTrackSampler.ThrowPressure(400f, spec));
         }
     }
 }

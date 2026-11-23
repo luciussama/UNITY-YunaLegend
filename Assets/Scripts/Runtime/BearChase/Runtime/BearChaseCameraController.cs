@@ -87,7 +87,7 @@ namespace YunaLegend.BearChase.Runtime
 
             Vector3 lookTarget = chaseOrigin + new Vector3(
                 Mathf.Lerp(yunaWorldX, aheadX, 0.58f),
-                Mathf.Lerp(groundY, aheadY, 0.62f) + 1.18f,
+                Mathf.Lerp(groundY, aheadY, 0.62f) + 0.35f,
                 aheadZ);
 
             float speedAlpha = Mathf.InverseLerp(sim.TuningSpec.BaseForwardSpeed, sim.TuningSpec.MaxForwardSpeed, sim.CurrentForwardSpeed);

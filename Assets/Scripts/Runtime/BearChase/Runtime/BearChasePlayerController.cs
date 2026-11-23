@@ -4,9 +4,7 @@ using YunaLegend.BearChase.Core;
 namespace YunaLegend.BearChase.Runtime
 {
     /// <summary>
-    /// Adaptador fino da Yuna 3D na corrida da Fase 4:
-    /// acompanha curvas horizontais, elevacao e inclinacao do terreno em alta velocidade,
-    /// sem espada atravancando a silhueta, com sombra de contato e animacao expressiva de tropeço.
+    /// Apresenta Yuna ilustrada no corredor com profundidade e mantém o rig como fallback.
     /// </summary>
     public sealed class BearChasePlayerController : MonoBehaviour
     {
@@ -22,6 +20,12 @@ namespace YunaLegend.BearChase.Runtime
         private float smoothedInput;
         private float animClock;
         private Renderer[] renderers;
+        private SpriteRenderer illustration;
+        private Sprite[] sprintFrames;
+        private Camera chaseCamera;
+        private bool illustrationInitialized;
+        private int lastIllustrationExposure = -1;
+        private float displayedIllustrationRoll;
 
         public void Configure(
             Transform body,
@@ -53,6 +57,26 @@ namespace YunaLegend.BearChase.Runtime
             renderers = GetComponentsInChildren<Renderer>(true);
         }
 
+        private void OnDestroy()
+        {
+            if (sprintFrames == null)
+            {
+                return;
+            }
+
+            foreach (Sprite frame in sprintFrames)
+            {
+                if (Application.isPlaying)
+                {
+                    Destroy(frame);
+                }
+                else
+                {
+                    DestroyImmediate(frame);
+                }
+            }
+        }
+
         public void UpdatePlayer(BearChaseSimulation sim, Vector3 chaseOrigin, float dt)
         {
             if (sim == null || sim.IsEntrancePhase)
@@ -70,6 +94,7 @@ namespace YunaLegend.BearChase.Runtime
                 renderers = GetComponentsInChildren<Renderer>(true);
             }
 
+            EnsureIllustration();
             animClock += Mathf.Max(0f, dt);
 
             bool blinkOff = sim.InvulnerabilityRemaining > 0f
@@ -87,6 +112,7 @@ namespace YunaLegend.BearChase.Runtime
 
             Vector3 groundPos = chaseOrigin + new Vector3(centerX + sim.YunaLaneOffsetX, groundY, z);
             transform.position = groundPos;
+            float illustrationRoll = 0f;
 
             switch (sim.Phase)
             {
@@ -103,7 +129,12 @@ namespace YunaLegend.BearChase.Runtime
                     float lean = stumbling ? 30f : 22f;
                     float roll = -smoothedInput * 16f + (stumbling ? Mathf.Sin(animClock * 28f) * 14f : 0f);
 
-                    ApplySprintPose(sprintCycle, lean, roll, stumbling);
+                    if (illustration == null)
+                    {
+                        ApplySprintPose(sprintCycle, lean, roll, stumbling);
+                    }
+
+                    illustrationRoll = roll;
                     UpdateDustEmission(!stumbling && sim.CurrentForwardSpeed > 6f);
                     UpdateContactShadow(groundPos, pitchDeg, yawDeg, 1f);
                     break;
@@ -113,7 +144,10 @@ namespace YunaLegend.BearChase.Runtime
                 case BearChasePhase.RetryModal:
                 {
                     transform.rotation = Quaternion.Euler(pitchDeg, yawDeg, 0f);
-                    ApplyFallenPose(Mathf.Clamp01(sim.PhaseTimer / 0.32f));
+                    if (illustration == null)
+                    {
+                        ApplyFallenPose(Mathf.Clamp01(sim.PhaseTimer / 0.32f));
+                    }
                     UpdateDustEmission(false);
                     UpdateContactShadow(groundPos, pitchDeg, yawDeg, 1.25f);
                     break;
@@ -122,12 +156,83 @@ namespace YunaLegend.BearChase.Runtime
                 case BearChasePhase.Victory:
                 {
                     transform.rotation = Quaternion.Euler(pitchDeg, yawDeg, 0f);
-                    ApplyVictoryPose();
+                    if (illustration == null)
+                    {
+                        ApplyVictoryPose();
+                    }
                     UpdateDustEmission(false);
                     UpdateContactShadow(groundPos, pitchDeg, yawDeg, 1f);
                     break;
                 }
             }
+
+            if (illustration != null)
+            {
+                UpdateIllustration(sim, !blinkOff, illustrationRoll);
+            }
+        }
+
+        private void EnsureIllustration()
+        {
+            if (illustrationInitialized)
+            {
+                return;
+            }
+
+            illustrationInitialized = true;
+            Texture2D atlas = Resources.Load<Texture2D>("BearChaseEntrance/yuna-rear-sprint-atlas-v2");
+            if (atlas == null)
+            {
+                return;
+            }
+
+            const int columns = 3;
+            const int rows = 2;
+            float width = atlas.width / (float)columns;
+            float height = atlas.height / (float)rows;
+            var pivot = new Vector2(0.5f, 4f / height);
+            sprintFrames = new Sprite[columns * rows];
+            for (int i = 0; i < sprintFrames.Length; i++)
+            {
+                var rect = new Rect(i % columns * width, (rows - 1 - i / columns) * height, width, height);
+                sprintFrames[i] = Sprite.Create(atlas, rect, pivot, height / 2.2f, 0, SpriteMeshType.FullRect);
+            }
+
+            var visual = new GameObject("Yuna_Rear_Illustrated");
+            visual.transform.SetParent(transform, false);
+            illustration = visual.AddComponent<SpriteRenderer>();
+            chaseCamera = Camera.main;
+            if (bodyRoot != null)
+            {
+                bodyRoot.gameObject.SetActive(false);
+            }
+        }
+
+        private void UpdateIllustration(BearChaseSimulation sim, bool visible, float roll)
+        {
+            const int fps = BearChaseHandDrawnTiming.FramesPerSecond;
+            int exposure = Mathf.FloorToInt(animClock * fps);
+            if (exposure != lastIllustrationExposure)
+            {
+                lastIllustrationExposure = exposure;
+                bool sprinting = sim.Phase == BearChasePhase.Chasing || sim.Phase == BearChasePhase.Stumble;
+                illustration.sprite = sprintFrames[sprinting ? exposure / 2 % sprintFrames.Length : 1];
+                displayedIllustrationRoll = roll;
+                if (sim.Phase == BearChasePhase.Fallen)
+                {
+                    displayedIllustrationRoll = Mathf.Lerp(0f, 72f, Mathf.Clamp01(sim.PhaseTimer / 0.32f));
+                }
+                else if (sim.Phase == BearChasePhase.RetryModal)
+                {
+                    displayedIllustrationRoll = 72f;
+                }
+            }
+
+            illustration.enabled = visible;
+            Vector3 forward = chaseCamera != null ? chaseCamera.transform.forward : transform.forward;
+            forward.y = 0f;
+            Quaternion billboard = Quaternion.LookRotation(forward, Vector3.up);
+            illustration.transform.rotation = billboard * Quaternion.Euler(0f, 0f, displayedIllustrationRoll);
         }
 
         private void ApplySprintPose(float cycle, float forwardLean, float bankRoll, bool stumbling)

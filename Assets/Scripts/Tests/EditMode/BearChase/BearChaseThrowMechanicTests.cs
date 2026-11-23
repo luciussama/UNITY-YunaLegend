@@ -75,6 +75,28 @@ namespace YunaLegend.Tests.EditMode.BearChase
         }
 
         [Test]
+        public void ThrowScheduler_ThrowsMoreOftenThroughFinalCurvesAndRamps()
+        {
+            Assert.Greater(CountThrows(470f), CountThrows(360f));
+        }
+
+        private static int CountThrows(float startingZ)
+        {
+            var scheduler = new BearChaseThrowScheduler();
+            var track = BearChaseTrackSpec.Default;
+            var tuning = BearChaseTuningSpec.Default;
+            int count = 0;
+            for (int tick = 0; tick < 300; tick++)
+            {
+                const float dt = 1f / 60f;
+                float z = startingZ + tick * dt * 12f;
+                scheduler.Step(dt, z, 0f, 12f, z + 12f, 0f, 0.85f, tuning, track, null, _ => count++, null);
+            }
+
+            return count;
+        }
+
+        [Test]
         public void ThrowScheduler_NeverBlocksAllThreeLanesSimultaneously()
         {
             var scheduler = new BearChaseThrowScheduler(seed: 98765);

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using YunaLegend.Arena.Core;
+using YunaLegend.Qa.Runtime;
 
 namespace YunaLegend.Arena.Runtime
 {
@@ -51,6 +52,12 @@ namespace YunaLegend.Arena.Runtime
             bool easyMode = PlayerPrefs.GetInt("YunaLegend.EasyMode", 0) == 1;
             bool isMobileTouch = Application.isMobilePlatform || Touchscreen.current != null;
             simulation = new ArenaCombatSimulation(easyMode, isMobileTouch);
+            if (WebQaRuntime.Current.ArenaFinalWave)
+            {
+                simulation.PrepareFinalWaveForQa(enemyHp: 2);
+                WebQaRuntime.LogEvent("arena_qa_final_wave", $"wave={simulation.WaveIndex + 1}/{simulation.TotalWaves} enemy_hp={simulation.EnemyHp}");
+            }
+
             SubscribeEvents();
         }
 
@@ -79,7 +86,9 @@ namespace YunaLegend.Arena.Runtime
                 return;
             }
 
-            ArenaInputState rawInput = ReadInput();
+            ArenaInputState rawInput = WebQaRuntime.Current.AutoPlay
+                ? ArenaQaPilot.ComputeInput(simulation)
+                : ReadInput();
             if (rawInput.JumpPressed)
             {
                 jumpBufferTimer = 0.14f;
@@ -237,7 +246,7 @@ namespace YunaLegend.Arena.Runtime
                 hudController.OnRestartRequested += HandleRestartRequested;
                 hudController.OnReturnToTitleRequested -= HandleReturnToTitleRequested;
                 hudController.OnReturnToTitleRequested += HandleReturnToTitleRequested;
-                hudController.OnNextStageRequested += HandleNextStageRequested;
+                hudController.OnNextStageRequested += HandleReturnToTitleRequested;
             }
         }
 
@@ -261,7 +270,7 @@ namespace YunaLegend.Arena.Runtime
                 hudController.OnMuteToggled -= HandleMuteToggled;
                 hudController.OnRestartRequested -= HandleRestartRequested;
                 hudController.OnReturnToTitleRequested -= HandleReturnToTitleRequested;
-                hudController.OnNextStageRequested -= HandleNextStageRequested;
+                hudController.OnNextStageRequested -= HandleReturnToTitleRequested;
             }
         }
 
@@ -326,6 +335,15 @@ namespace YunaLegend.Arena.Runtime
 
         private void HandleBattleEnded(ArenaBattleOutcome outcome)
         {
+            if (outcome == ArenaBattleOutcome.Victory)
+            {
+                WebQaRuntime.LogEvent("arena_victory_cut_to_bearchase", "bubble=false");
+                Time.timeScale = 1f;
+                SceneManager.LoadScene("BearChase_Gameplay");
+                return;
+            }
+
+            WebQaRuntime.LogEvent("arena_defeat", $"wave={simulation.WaveIndex + 1}/{simulation.TotalWaves}");
             hudController?.ShowOutcome(outcome);
         }
 
@@ -353,10 +371,5 @@ namespace YunaLegend.Arena.Runtime
             SceneManager.LoadScene("TitleScreen");
         }
 
-        private void HandleNextStageRequested()
-        {
-            Time.timeScale = 1f;
-            SceneManager.LoadScene("BearChase_Gameplay");
-        }
     }
 }

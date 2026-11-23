@@ -3,6 +3,8 @@
     "rootNamespace": "YunaLegend.Arena.Runtime",
     "references": [
         "YunaLegend.Arena.Core",
+        "YunaLegend.Qa.Core",
+        "YunaLegend.Qa.Runtime",
         "YunaLegend.ToyRoom.Runtime",
         "Unity.InputSystem",
         "UnityEngine.UI",

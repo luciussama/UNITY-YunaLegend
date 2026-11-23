@@ -107,10 +107,23 @@ namespace YunaLegend.BearChase.Core
         public const float BearRestX = 0.695f;
         public const float FairyStartX = 0.130f;
         public const float FairyStartY = 0.625f;
+        private const int ApproachSteps = 8;
+
+        public static float ApproachSupportX(int stepCueNumber)
+        {
+            float stepProgress = (stepCueNumber - 0.2f) / ApproachSteps;
+            return Lerp(YunaStartX, YunaReachX, stepProgress);
+        }
 
         public static BearChaseEntranceSample Evaluate(float elapsedSeconds)
         {
             float t = Math.Max(0f, Math.Min(TotalDuration, elapsedSeconds));
+            if (t < TotalDuration)
+            {
+                const int fps = BearChaseHandDrawnTiming.FramesPerSecond;
+                t = (float)Math.Floor(t * fps) / fps;
+            }
+
             float wing = 0.58f + 0.42f * (float)Math.Abs(Math.Cos(t * 15.0));
             float bob = (float)Math.Sin(t * 4.2) * 0.012f;
 
@@ -182,20 +195,14 @@ namespace YunaLegend.BearChase.Core
                 float baseProgress = EvaluateWalkProgress(uWalk);
 
                 // 8 passos completos (4 ciclos de 4 quadros), iniciando o primeiro passo imediatamente ao mover
-                const int totalSteps = 8;
-                float stepFloat = baseProgress * totalSteps;
-                int stepIndex = Math.Min(totalSteps - 1, (int)Math.Floor(stepFloat));
+                float stepFloat = baseProgress * ApproachSteps;
+                int stepIndex = Math.Min(ApproachSteps - 1, (int)Math.Floor(stepFloat));
                 float stepLocal = stepFloat - stepIndex;
-
-                // Pulso de marcha: 78% do avanco ocorre durante a passada aberta [0..0.58] e apenas 22% no apoio curto [0.58..1]
-                float modulatedLocal = ModulateStepAdvance(stepLocal);
-                float modulatedProgress = (stepIndex + modulatedLocal) / totalSteps;
-                float yunaX = Lerp(YunaStartX, YunaReachX, modulatedProgress);
+                float yunaX = Lerp(YunaStartX, YunaReachX, baseProgress);
                 float fairyX = Lerp(FairyStartX, 0.425f, baseProgress);
                 float fairyY = Lerp(FairyStartY, 0.635f, baseProgress) + (float)Math.Sin(uWalk * Math.PI) * 0.032f + bob;
 
                 int walkFrame;
-                float walkBobY = 0f;
                 int stepCue = stepIndex + 1;
 
                 if (baseProgress < 0.001f)
@@ -211,14 +218,10 @@ namespace YunaLegend.BearChase.Core
                     if (!isPassingPose)
                     {
                         walkFrame = isEvenStep ? 2 : 0;
-                        float strideU = stepLocal / 0.58f;
-                        walkBobY = (float)Math.Sin(strideU * Math.PI) * 0.0022f;
                     }
                     else
                     {
                         walkFrame = isEvenStep ? 3 : 1;
-                        float passU = (stepLocal - 0.58f) / 0.42f;
-                        walkBobY = (float)Math.Sin(passU * Math.PI) * 0.0052f;
                     }
                 }
 
@@ -237,7 +240,7 @@ namespace YunaLegend.BearChase.Core
                     fadeAlpha: 0f,
                     stepCueNumber: stepCue,
                     wakeCueActive: false,
-                    yunaWalkBobY: walkBobY,
+                    yunaWalkBobY: 0f,
                     yunaScaleX: 1f,
                     yunaScaleY: 1f,
                     yunaTiltDeg: 0f,
@@ -472,21 +475,6 @@ namespace YunaLegend.BearChase.Core
 
             float tail = 1f - clamped;
             return 1f - 0.5f * vMax * (tail * tail / r);
-        }
-
-        private static float ModulateStepAdvance(float p)
-        {
-            const float strideSplit = 0.58f;
-            const float strideShare = 0.78f;
-            float c = Math.Max(0f, Math.Min(1f, p));
-            if (c < strideSplit)
-            {
-                float s = c / strideSplit;
-                return strideShare * SmoothStep(s);
-            }
-
-            float q = (c - strideSplit) / (1f - strideSplit);
-            return strideShare + (1f - strideShare) * q;
         }
 
         private static float SmoothStep(float x)
