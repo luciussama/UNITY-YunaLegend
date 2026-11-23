@@ -1,0 +1,9 @@
+{
+    "name": "YunaLegend.Picnic.Tests",
+    "references": ["UnityEngine.TestRunner", "UnityEditor.TestRunner", "YunaLegend.Picnic.Core"],
+    "includePlatforms": ["Editor"],
+    "overrideReferences": true,
+    "precompiledReferences": ["nunit.framework.dll"],
+    "autoReferenced": false,
+    "defineConstraints": ["UNITY_INCLUDE_TESTS"]
+}

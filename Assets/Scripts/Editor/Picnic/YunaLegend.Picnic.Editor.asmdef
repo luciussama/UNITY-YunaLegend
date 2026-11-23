@@ -1,0 +1,5 @@
+{
+    "name": "YunaLegend.Picnic.Editor",
+    "references": ["YunaLegend.Picnic.Core", "YunaLegend.Picnic.Runtime", "YunaLegend.Qa.Runtime", "YunaLegend.Runtime", "UnityEngine.UI", "Unity.InputSystem"],
+    "includePlatforms": ["Editor"]
+}

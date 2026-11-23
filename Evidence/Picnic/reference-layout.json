@@ -1,0 +1,2187 @@
+{
+  "source": "Geographical data only; no legacy implementation.",
+  "garden": {
+    "version": 7,
+    "width": 48168,
+    "goal": 47488,
+    "height": 720,
+    "ground": 590,
+    "playerHeight": 92,
+    "halfFoot": 35,
+    "speed": 220,
+    "jump": 720,
+    "gravity": 1600,
+    "step": 0.008333333333333333,
+    "waterY": 650,
+    "targetMinutes": 5
+  },
+  "home": {
+    "x": 30,
+    "y": 201,
+    "w": 500,
+    "h": 401,
+    "steps": [
+      {
+        "x": 338,
+        "y": 540
+      },
+      {
+        "x": 432,
+        "y": 546
+      },
+      {
+        "x": 476,
+        "y": 574
+      },
+      {
+        "x": 530,
+        "y": 590
+      }
+    ]
+  },
+  "terrains": {
+    "wood": {
+      "speed": 220,
+      "jump": 720
+    },
+    "soil": {
+      "speed": 220,
+      "jump": 720
+    },
+    "stone": {
+      "speed": 220,
+      "jump": 720
+    },
+    "cloud": {
+      "speed": 220,
+      "jump": 720
+    },
+    "grass": {
+      "speed": 100,
+      "jump": 720
+    },
+    "gravel": {
+      "speed": 410,
+      "jump": 720
+    }
+  },
+  "goal": 47488,
+  "width": 48168,
+  "finalStart": 45088,
+  "sections": [
+    {
+      "id": "saida",
+      "x": 0,
+      "end": 7350,
+      "name": "O portão de casa",
+      "chapter": 0
+    },
+    {
+      "id": "trecho-0",
+      "x": 7350,
+      "name": "Canteiros de margaridas",
+      "chapter": 1,
+      "end": 12420
+    },
+    {
+      "id": "trecho-2",
+      "x": 12420,
+      "name": "O caminho das hortênsias",
+      "chapter": 2,
+      "end": 17170
+    },
+    {
+      "id": "trecho-4",
+      "x": 17170,
+      "name": "Riachos de água clara",
+      "chapter": 3,
+      "end": 23628
+    },
+    {
+      "id": "aereo",
+      "x": 23628,
+      "end": 27988,
+      "name": "Por cima do jardim",
+      "chapter": 3
+    },
+    {
+      "id": "trecho-6",
+      "x": 27988,
+      "name": "Entre salgueiros",
+      "chapter": 4,
+      "end": 33038
+    },
+    {
+      "id": "trecho-8",
+      "x": 33038,
+      "name": "O jardim das borboletas",
+      "chapter": 5,
+      "end": 39108
+    },
+    {
+      "id": "trecho-10",
+      "x": 39108,
+      "name": "A alameda da grande árvore",
+      "chapter": 6,
+      "end": 45088
+    }
+  ],
+  "waters": [
+    {
+      "id": "primeiro-riacho",
+      "x": 2325,
+      "w": 940
+    },
+    {
+      "id": "trecho-0-rio",
+      "x": 10850,
+      "w": 920
+    },
+    {
+      "id": "trecho-4-rio",
+      "x": 19870,
+      "w": 1508
+    },
+    {
+      "id": "trecho-8-rio",
+      "x": 37188,
+      "w": 1270
+    },
+    {
+      "id": "trecho-10-rio",
+      "x": 42658,
+      "w": 1580
+    }
+  ],
+  "wheels": [
+    {
+      "id": "roda",
+      "x": 5050,
+      "y": 465,
+      "rx": 150,
+      "ry": 115,
+      "speed": 0.38
+    },
+    {
+      "id": "aerea-1",
+      "x": 24238,
+      "y": 465,
+      "rx": 150,
+      "ry": 115,
+      "speed": 0.38,
+      "phase": 0
+    },
+    {
+      "id": "aerea-2",
+      "x": 24718,
+      "y": 465,
+      "rx": 150,
+      "ry": 115,
+      "speed": -0.36,
+      "phase": 0.6
+    },
+    {
+      "id": "aerea-3",
+      "x": 25198,
+      "y": 465,
+      "rx": 150,
+      "ry": 115,
+      "speed": 0.34,
+      "phase": 1.2
+    }
+  ],
+  "checkpoints": [
+    120,
+    7470,
+    12540,
+    17290,
+    23748,
+    27748,
+    28108,
+    33158,
+    39228,
+    45208
+  ],
+  "platforms": [
+    {
+      "id": "entrada",
+      "x": 0,
+      "w": 680,
+      "type": "wood",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "suspensa-1",
+      "x": 790,
+      "w": 175,
+      "type": "wood",
+      "y": 535
+    },
+    {
+      "id": "suspensa-2",
+      "x": 1070,
+      "w": 175,
+      "type": "wood",
+      "y": 520
+    },
+    {
+      "id": "primeira-grama",
+      "x": 1330,
+      "w": 196,
+      "type": "grass",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "primeira-grama-relevo-1",
+      "x": 1526,
+      "w": 196,
+      "type": "grass",
+      "y": 545,
+      "ground": true
+    },
+    {
+      "id": "primeira-grama-relevo-2",
+      "x": 1722,
+      "w": 196,
+      "type": "grass",
+      "y": 500,
+      "ground": true
+    },
+    {
+      "id": "primeira-grama-relevo-3",
+      "x": 1918,
+      "w": 196,
+      "type": "grass",
+      "y": 545,
+      "ground": true
+    },
+    {
+      "id": "primeira-grama-relevo-4",
+      "x": 2114,
+      "w": 196,
+      "type": "grass",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "primeiro-riacho-pedra-0",
+      "x": 2440,
+      "w": 160,
+      "type": "stone",
+      "y": 550
+    },
+    {
+      "id": "primeiro-riacho-pedra-1",
+      "x": 2715,
+      "w": 160,
+      "type": "stone",
+      "y": 524
+    },
+    {
+      "id": "primeiro-riacho-pedra-2",
+      "x": 2990,
+      "w": 160,
+      "type": "stone",
+      "y": 550
+    },
+    {
+      "id": "grama-da-margem",
+      "x": 3200,
+      "w": 150,
+      "type": "grass",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "grama-da-margem-relevo-1",
+      "x": 3350,
+      "w": 150,
+      "type": "grass",
+      "y": 545,
+      "ground": true
+    },
+    {
+      "id": "grama-da-margem-relevo-2",
+      "x": 3500,
+      "w": 150,
+      "type": "grass",
+      "y": 500,
+      "ground": true
+    },
+    {
+      "id": "grama-da-margem-relevo-3",
+      "x": 3650,
+      "w": 150,
+      "type": "grass",
+      "y": 545,
+      "ground": true
+    },
+    {
+      "id": "grama-da-margem-relevo-4",
+      "x": 3800,
+      "w": 150,
+      "type": "grass",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "pedrinhas-da-roda",
+      "x": 3950,
+      "w": 382.5,
+      "type": "gravel",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "pedrinhas-da-roda-relevo-1",
+      "x": 4332.5,
+      "w": 212.5,
+      "type": "gravel",
+      "y": 520,
+      "ground": true
+    },
+    {
+      "id": "pedrinhas-da-roda-relevo-2",
+      "x": 4545,
+      "w": 255,
+      "type": "gravel",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "nuvem-inicial-0",
+      "x": 5350,
+      "w": 170,
+      "type": "cloud",
+      "y": 450,
+      "group": "initial"
+    },
+    {
+      "id": "nuvem-inicial-1",
+      "x": 5615,
+      "w": 170,
+      "type": "cloud",
+      "y": 480,
+      "group": "initial"
+    },
+    {
+      "id": "nuvem-inicial-2",
+      "x": 5880,
+      "w": 170,
+      "type": "cloud",
+      "y": 450,
+      "group": "initial"
+    },
+    {
+      "id": "primeiros-bichinhos",
+      "x": 6080,
+      "w": 1270,
+      "type": "soil",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "trecho-0-caminho",
+      "x": 7350,
+      "w": 1000,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "hill": 170,
+      "waves": 1
+    },
+    {
+      "id": "trecho-0-gramado",
+      "x": 8350,
+      "w": 440,
+      "type": "grass",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "trecho-0-gramado-relevo-1",
+      "x": 8790,
+      "w": 440,
+      "type": "grass",
+      "y": 545,
+      "ground": true
+    },
+    {
+      "id": "trecho-0-gramado-relevo-2",
+      "x": 9230,
+      "w": 440,
+      "type": "grass",
+      "y": 500,
+      "ground": true
+    },
+    {
+      "id": "trecho-0-gramado-relevo-3",
+      "x": 9670,
+      "w": 440,
+      "type": "grass",
+      "y": 545,
+      "ground": true
+    },
+    {
+      "id": "trecho-0-gramado-relevo-4",
+      "x": 10110,
+      "w": 440,
+      "type": "grass",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "trecho-0-margem",
+      "x": 10550,
+      "w": 300,
+      "type": "soil",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "trecho-0-rio-pedra-0",
+      "x": 10960,
+      "w": 160,
+      "type": "stone",
+      "y": 550
+    },
+    {
+      "id": "trecho-0-rio-pedra-1",
+      "x": 11230,
+      "w": 160,
+      "type": "stone",
+      "y": 524
+    },
+    {
+      "id": "trecho-0-rio-pedra-2",
+      "x": 11500,
+      "w": 160,
+      "type": "stone",
+      "y": 550
+    },
+    {
+      "id": "trecho-0-clareira",
+      "x": 11770,
+      "w": 650,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "profile": [
+        0
+      ]
+    },
+    {
+      "id": "trecho-2-caminho",
+      "x": 12420,
+      "w": 160,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "profile": [
+        0,
+        -55,
+        -110,
+        -55,
+        0
+      ]
+    },
+    {
+      "id": "trecho-2-caminho-relevo-1",
+      "x": 12580,
+      "w": 160,
+      "type": "soil",
+      "y": 535,
+      "ground": true,
+      "profile": [
+        0,
+        -55,
+        -110,
+        -55,
+        0
+      ]
+    },
+    {
+      "id": "trecho-2-caminho-relevo-2",
+      "x": 12740,
+      "w": 160,
+      "type": "soil",
+      "y": 480,
+      "ground": true,
+      "profile": [
+        0,
+        -55,
+        -110,
+        -55,
+        0
+      ]
+    },
+    {
+      "id": "trecho-2-caminho-relevo-3",
+      "x": 12900,
+      "w": 160,
+      "type": "soil",
+      "y": 535,
+      "ground": true,
+      "profile": [
+        0,
+        -55,
+        -110,
+        -55,
+        0
+      ]
+    },
+    {
+      "id": "trecho-2-caminho-relevo-4",
+      "x": 13060,
+      "w": 160,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "profile": [
+        0,
+        -55,
+        -110,
+        -55,
+        0
+      ]
+    },
+    {
+      "id": "trecho-2-gramado",
+      "x": 13220,
+      "w": 2400,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "hill": 180,
+      "waves": 1,
+      "grassPatches": [
+        {
+          "start": 0.17,
+          "end": 0.23
+        },
+        {
+          "start": 0.47,
+          "end": 0.54
+        },
+        {
+          "start": 0.77,
+          "end": 0.83
+        }
+      ]
+    },
+    {
+      "id": "trecho-2-pedrinhas",
+      "x": 15620,
+      "w": 292.5,
+      "type": "gravel",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "trecho-2-pedrinhas-relevo-1",
+      "x": 15912.5,
+      "w": 162.5,
+      "type": "gravel",
+      "y": 520,
+      "ground": true
+    },
+    {
+      "id": "trecho-2-pedrinhas-relevo-2",
+      "x": 16075,
+      "w": 195,
+      "type": "gravel",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "trecho-2-clareira",
+      "x": 16270,
+      "w": 900,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "hill": 85
+    },
+    {
+      "id": "trecho-4-caminho",
+      "x": 17170,
+      "w": 175,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "profile": [
+        0,
+        -60,
+        -60,
+        0
+      ]
+    },
+    {
+      "id": "trecho-4-caminho-relevo-1",
+      "x": 17345,
+      "w": 350,
+      "type": "soil",
+      "y": 530,
+      "ground": true,
+      "profile": [
+        0,
+        -60,
+        -60,
+        0
+      ]
+    },
+    {
+      "id": "trecho-4-caminho-relevo-3",
+      "x": 17695,
+      "w": 175,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "profile": [
+        0,
+        -60,
+        -60,
+        0
+      ]
+    },
+    {
+      "id": "trecho-4-gramado",
+      "x": 17870,
+      "w": 340,
+      "type": "grass",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "trecho-4-gramado-relevo-1",
+      "x": 18210,
+      "w": 340,
+      "type": "grass",
+      "y": 535,
+      "ground": true
+    },
+    {
+      "id": "trecho-4-gramado-relevo-2",
+      "x": 18550,
+      "w": 340,
+      "type": "grass",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "trecho-4-gramado-relevo-3",
+      "x": 18890,
+      "w": 340,
+      "type": "grass",
+      "y": 535,
+      "ground": true
+    },
+    {
+      "id": "trecho-4-gramado-relevo-4",
+      "x": 19230,
+      "w": 340,
+      "type": "grass",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "trecho-4-margem",
+      "x": 19570,
+      "w": 300,
+      "type": "soil",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "trecho-4-rio-pedra-0",
+      "x": 19988,
+      "w": 160,
+      "type": "stone",
+      "y": 550
+    },
+    {
+      "id": "trecho-4-rio-pedra-1",
+      "x": 20266,
+      "w": 160,
+      "type": "stone",
+      "y": 516
+    },
+    {
+      "id": "trecho-4-rio-pedra-2",
+      "x": 20544,
+      "w": 160,
+      "type": "stone",
+      "y": 550
+    },
+    {
+      "id": "trecho-4-rio-pedra-3",
+      "x": 20822,
+      "w": 160,
+      "type": "stone",
+      "y": 516
+    },
+    {
+      "id": "trecho-4-rio-pedra-4",
+      "x": 21100,
+      "w": 160,
+      "type": "stone",
+      "y": 550
+    },
+    {
+      "id": "trecho-4-clareira",
+      "x": 21378,
+      "w": 850,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "profile": [
+        0
+      ]
+    },
+    {
+      "id": "trecho-4-colina",
+      "x": 22228,
+      "w": 1400,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "hill": 210,
+      "waves": 1
+    },
+    {
+      "id": "aereo-entrada",
+      "x": 23628,
+      "w": 360,
+      "type": "soil",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "aereo-nuvem-0",
+      "x": 25468,
+      "w": 170,
+      "type": "cloud",
+      "y": 470,
+      "aerial": true,
+      "group": "aerial"
+    },
+    {
+      "id": "aereo-nuvem-1",
+      "x": 25728,
+      "w": 170,
+      "type": "cloud",
+      "y": 435,
+      "aerial": true,
+      "group": "aerial"
+    },
+    {
+      "id": "aereo-ilha-0",
+      "x": 25988,
+      "w": 180,
+      "type": "gravel",
+      "y": 470,
+      "aerial": true,
+      "group": "aerial"
+    },
+    {
+      "id": "aereo-nuvem-2",
+      "x": 26258,
+      "w": 170,
+      "type": "cloud",
+      "y": 430,
+      "aerial": true,
+      "group": "aerial"
+    },
+    {
+      "id": "aereo-nuvem-3",
+      "x": 26518,
+      "w": 170,
+      "type": "cloud",
+      "y": 465,
+      "aerial": true,
+      "group": "aerial"
+    },
+    {
+      "id": "aereo-ilha-1",
+      "x": 26778,
+      "w": 190,
+      "type": "gravel",
+      "y": 440,
+      "aerial": true,
+      "group": "aerial"
+    },
+    {
+      "id": "aereo-nuvem-4",
+      "x": 27068,
+      "w": 170,
+      "type": "cloud",
+      "y": 450,
+      "aerial": true,
+      "group": "aerial"
+    },
+    {
+      "id": "aereo-nuvem-5",
+      "x": 27338,
+      "w": 170,
+      "type": "cloud",
+      "y": 490,
+      "aerial": true,
+      "group": "aerial"
+    },
+    {
+      "id": "aereo-saida",
+      "x": 27628,
+      "w": 360,
+      "type": "soil",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "trecho-6-caminho",
+      "x": 27988,
+      "w": 130,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "profile": [
+        0,
+        -55,
+        -110,
+        -55,
+        0
+      ]
+    },
+    {
+      "id": "trecho-6-caminho-relevo-1",
+      "x": 28118,
+      "w": 130,
+      "type": "soil",
+      "y": 535,
+      "ground": true,
+      "profile": [
+        0,
+        -55,
+        -110,
+        -55,
+        0
+      ]
+    },
+    {
+      "id": "trecho-6-caminho-relevo-2",
+      "x": 28248,
+      "w": 130,
+      "type": "soil",
+      "y": 480,
+      "ground": true,
+      "profile": [
+        0,
+        -55,
+        -110,
+        -55,
+        0
+      ]
+    },
+    {
+      "id": "trecho-6-caminho-relevo-3",
+      "x": 28378,
+      "w": 130,
+      "type": "soil",
+      "y": 535,
+      "ground": true,
+      "profile": [
+        0,
+        -55,
+        -110,
+        -55,
+        0
+      ]
+    },
+    {
+      "id": "trecho-6-caminho-relevo-4",
+      "x": 28508,
+      "w": 130,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "profile": [
+        0,
+        -55,
+        -110,
+        -55,
+        0
+      ]
+    },
+    {
+      "id": "trecho-6-gramado",
+      "x": 28638,
+      "w": 2600,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "hill": 200,
+      "waves": 2,
+      "grassPatches": [
+        {
+          "start": 0.17,
+          "end": 0.23
+        },
+        {
+          "start": 0.47,
+          "end": 0.54
+        },
+        {
+          "start": 0.77,
+          "end": 0.83
+        }
+      ]
+    },
+    {
+      "id": "trecho-6-pedrinhas",
+      "x": 31238,
+      "w": 500,
+      "type": "gravel",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "trecho-6-clareira",
+      "x": 31738,
+      "w": 325,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "profile": [
+        0,
+        -60,
+        -60,
+        0
+      ]
+    },
+    {
+      "id": "trecho-6-clareira-relevo-1",
+      "x": 32063,
+      "w": 650,
+      "type": "soil",
+      "y": 530,
+      "ground": true,
+      "profile": [
+        0,
+        -60,
+        -60,
+        0
+      ]
+    },
+    {
+      "id": "trecho-6-clareira-relevo-3",
+      "x": 32713,
+      "w": 325,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "profile": [
+        0,
+        -60,
+        -60,
+        0
+      ]
+    },
+    {
+      "id": "trecho-8-caminho",
+      "x": 33038,
+      "w": 250,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "profile": [
+        0,
+        -60,
+        -60,
+        0
+      ]
+    },
+    {
+      "id": "trecho-8-caminho-relevo-1",
+      "x": 33288,
+      "w": 500,
+      "type": "soil",
+      "y": 530,
+      "ground": true,
+      "profile": [
+        0,
+        -60,
+        -60,
+        0
+      ]
+    },
+    {
+      "id": "trecho-8-caminho-relevo-3",
+      "x": 33788,
+      "w": 250,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "profile": [
+        0,
+        -60,
+        -60,
+        0
+      ]
+    },
+    {
+      "id": "trecho-8-pedrinhas",
+      "x": 34038,
+      "w": 270,
+      "type": "gravel",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "trecho-8-pedrinhas-relevo-1",
+      "x": 34308,
+      "w": 150,
+      "type": "gravel",
+      "y": 520,
+      "ground": true
+    },
+    {
+      "id": "trecho-8-pedrinhas-relevo-2",
+      "x": 34458,
+      "w": 180,
+      "type": "gravel",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "trecho-8-gramado",
+      "x": 34638,
+      "w": 375,
+      "type": "grass",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "trecho-8-gramado-relevo-1",
+      "x": 35013,
+      "w": 375,
+      "type": "grass",
+      "y": 525,
+      "ground": true
+    },
+    {
+      "id": "trecho-8-gramado-relevo-2",
+      "x": 35388,
+      "w": 375,
+      "type": "grass",
+      "y": 460,
+      "ground": true
+    },
+    {
+      "id": "trecho-8-gramado-relevo-3",
+      "x": 35763,
+      "w": 750,
+      "type": "grass",
+      "y": 525,
+      "ground": true
+    },
+    {
+      "id": "trecho-8-gramado-relevo-5",
+      "x": 36513,
+      "w": 375,
+      "type": "grass",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "trecho-8-margem",
+      "x": 36888,
+      "w": 300,
+      "type": "soil",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "trecho-8-rio-pedra-0",
+      "x": 37314,
+      "w": 160,
+      "type": "stone",
+      "y": 550
+    },
+    {
+      "id": "trecho-8-rio-pedra-1",
+      "x": 37600,
+      "w": 160,
+      "type": "stone",
+      "y": 508
+    },
+    {
+      "id": "trecho-8-rio-pedra-2",
+      "x": 37886,
+      "w": 160,
+      "type": "stone",
+      "y": 550
+    },
+    {
+      "id": "trecho-8-rio-pedra-3",
+      "x": 38172,
+      "w": 160,
+      "type": "stone",
+      "y": 508
+    },
+    {
+      "id": "trecho-8-clareira",
+      "x": 38458,
+      "w": 650,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "profile": [
+        0
+      ]
+    },
+    {
+      "id": "trecho-10-caminho",
+      "x": 39108,
+      "w": 170,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "profile": [
+        0,
+        -55,
+        -110,
+        -55,
+        0
+      ]
+    },
+    {
+      "id": "trecho-10-caminho-relevo-1",
+      "x": 39278,
+      "w": 170,
+      "type": "soil",
+      "y": 535,
+      "ground": true,
+      "profile": [
+        0,
+        -55,
+        -110,
+        -55,
+        0
+      ]
+    },
+    {
+      "id": "trecho-10-caminho-relevo-2",
+      "x": 39448,
+      "w": 170,
+      "type": "soil",
+      "y": 480,
+      "ground": true,
+      "profile": [
+        0,
+        -55,
+        -110,
+        -55,
+        0
+      ]
+    },
+    {
+      "id": "trecho-10-caminho-relevo-3",
+      "x": 39618,
+      "w": 170,
+      "type": "soil",
+      "y": 535,
+      "ground": true,
+      "profile": [
+        0,
+        -55,
+        -110,
+        -55,
+        0
+      ]
+    },
+    {
+      "id": "trecho-10-caminho-relevo-4",
+      "x": 39788,
+      "w": 170,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "profile": [
+        0,
+        -55,
+        -110,
+        -55,
+        0
+      ]
+    },
+    {
+      "id": "trecho-10-gramado",
+      "x": 39958,
+      "w": 2400,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "hill": 160,
+      "waves": 2,
+      "grassPatches": [
+        {
+          "start": 0.17,
+          "end": 0.23
+        },
+        {
+          "start": 0.47,
+          "end": 0.54
+        },
+        {
+          "start": 0.77,
+          "end": 0.83
+        }
+      ]
+    },
+    {
+      "id": "trecho-10-margem",
+      "x": 42358,
+      "w": 300,
+      "type": "soil",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "trecho-10-rio-pedra-0",
+      "x": 42788,
+      "w": 160,
+      "type": "stone",
+      "y": 550
+    },
+    {
+      "id": "trecho-10-rio-pedra-1",
+      "x": 43078,
+      "w": 160,
+      "type": "stone",
+      "y": 504
+    },
+    {
+      "id": "trecho-10-rio-pedra-2",
+      "x": 43368,
+      "w": 160,
+      "type": "stone",
+      "y": 550
+    },
+    {
+      "id": "trecho-10-rio-pedra-3",
+      "x": 43658,
+      "w": 160,
+      "type": "stone",
+      "y": 504
+    },
+    {
+      "id": "trecho-10-rio-pedra-4",
+      "x": 43948,
+      "w": 160,
+      "type": "stone",
+      "y": 550
+    },
+    {
+      "id": "trecho-10-clareira",
+      "x": 44238,
+      "w": 850,
+      "type": "soil",
+      "y": 590,
+      "ground": true,
+      "profile": [
+        0
+      ]
+    },
+    {
+      "id": "descanso-final",
+      "x": 45088,
+      "w": 450,
+      "type": "soil",
+      "y": 590,
+      "ground": true
+    },
+    {
+      "id": "nuvem-final-0",
+      "x": 45658,
+      "w": 170,
+      "type": "cloud",
+      "y": 530,
+      "group": "final"
+    },
+    {
+      "id": "nuvem-final-1",
+      "x": 45923,
+      "w": 170,
+      "type": "cloud",
+      "y": 494,
+      "group": "final"
+    },
+    {
+      "id": "nuvem-final-2",
+      "x": 46188,
+      "w": 170,
+      "type": "cloud",
+      "y": 530,
+      "group": "final"
+    },
+    {
+      "id": "nuvem-final-3",
+      "x": 46453,
+      "w": 170,
+      "type": "cloud",
+      "y": 494,
+      "group": "final"
+    },
+    {
+      "id": "arvore",
+      "x": 46718,
+      "w": 1450,
+      "type": "soil",
+      "y": 590,
+      "ground": true
+    }
+  ],
+  "enemies": [
+    {
+      "id": "primeira-lagarta",
+      "type": "caterpillar",
+      "supportId": "primeiros-bichinhos",
+      "x": 6464,
+      "y": 590,
+      "baseY": 590,
+      "left": 6270,
+      "right": 6570,
+      "w": 82,
+      "h": 42,
+      "speed": 30,
+      "period": 3.2,
+      "phase": 0
+    },
+    {
+      "id": "primeira-formiga",
+      "type": "ant",
+      "supportId": "primeiros-bichinhos",
+      "x": 7016,
+      "y": 590,
+      "baseY": 590,
+      "left": 6810,
+      "right": 7130,
+      "w": 56,
+      "h": 35,
+      "speed": 43,
+      "period": 3.2,
+      "phase": 0.71
+    },
+    {
+      "id": "trecho-0-caminho-formiga",
+      "type": "ant",
+      "supportId": "trecho-0-caminho",
+      "x": 7730,
+      "y": 443.03766666918,
+      "baseY": 443.03766666918,
+      "left": 7500,
+      "right": 7860,
+      "w": 56,
+      "h": 35,
+      "speed": 43,
+      "period": 3.2,
+      "phase": 1.42
+    },
+    {
+      "id": "trecho-0-gramado-lagarta",
+      "type": "caterpillar",
+      "supportId": "trecho-0-gramado-relevo-3",
+      "x": 9740,
+      "y": 545,
+      "baseY": 545,
+      "left": 9740,
+      "right": 10040,
+      "w": 82,
+      "h": 42,
+      "speed": 30,
+      "period": 3.2,
+      "phase": 2.13
+    },
+    {
+      "id": "trecho-0-gramado-formiga",
+      "type": "ant",
+      "supportId": "trecho-0-gramado-relevo-1",
+      "x": 9090,
+      "y": 545,
+      "baseY": 545,
+      "left": 8860,
+      "right": 9160,
+      "w": 56,
+      "h": 35,
+      "speed": 43,
+      "period": 3.2,
+      "phase": 2.84
+    },
+    {
+      "id": "trecho-0-gramado-formiga-2",
+      "type": "ant",
+      "supportId": "trecho-0-gramado-relevo-3",
+      "x": 10000,
+      "y": 545,
+      "baseY": 545,
+      "left": 9740,
+      "right": 10040,
+      "w": 56,
+      "h": 35,
+      "speed": 43,
+      "period": 3.2,
+      "phase": 3.55
+    },
+    {
+      "id": "trecho-0-clareira-lagarta",
+      "type": "caterpillar",
+      "supportId": "trecho-0-clareira",
+      "x": 12160,
+      "y": 590,
+      "baseY": 590,
+      "left": 11840,
+      "right": 12350,
+      "w": 82,
+      "h": 42,
+      "speed": 30,
+      "period": 3.2,
+      "phase": 4.26
+    },
+    {
+      "id": "trecho-2-caminho-formiga",
+      "type": "ant",
+      "supportId": "trecho-2-caminho-relevo-2",
+      "x": 12810,
+      "y": 480,
+      "baseY": 480,
+      "left": 12810,
+      "right": 12830,
+      "w": 56,
+      "h": 35,
+      "speed": 46.8,
+      "period": 3.06,
+      "phase": 4.97
+    },
+    {
+      "id": "trecho-2-gramado-lagarta",
+      "type": "caterpillar",
+      "supportId": "trecho-2-gramado",
+      "x": 14660,
+      "y": 427.1884705062547,
+      "baseY": 427.1884705062547,
+      "left": 13290,
+      "right": 15550,
+      "w": 82,
+      "h": 42,
+      "speed": 33.8,
+      "period": 3.06,
+      "phase": 5.68
+    },
+    {
+      "id": "trecho-2-gramado-formiga",
+      "type": "ant",
+      "supportId": "trecho-2-gramado",
+      "x": 14020,
+      "y": 455,
+      "baseY": 455,
+      "left": 13370,
+      "right": 14430,
+      "w": 56,
+      "h": 35,
+      "speed": 46.8,
+      "period": 3.06,
+      "phase": 6.39
+    },
+    {
+      "id": "trecho-2-gramado-formiga-2",
+      "type": "ant",
+      "supportId": "trecho-2-gramado",
+      "x": 15020,
+      "y": 500,
+      "baseY": 500,
+      "left": 14370,
+      "right": 15430,
+      "w": 56,
+      "h": 35,
+      "speed": 46.8,
+      "period": 3.06,
+      "phase": 7.1
+    },
+    {
+      "id": "trecho-2-pedrinhas-formiga",
+      "type": "ant",
+      "supportId": "trecho-2-pedrinhas",
+      "x": 15842.5,
+      "y": 590,
+      "baseY": 590,
+      "left": 15690,
+      "right": 15842.5,
+      "w": 56,
+      "h": 35,
+      "speed": 46.8,
+      "period": 3.06,
+      "phase": 7.81
+    },
+    {
+      "id": "trecho-2-clareira-lagarta",
+      "type": "caterpillar",
+      "supportId": "trecho-2-clareira",
+      "x": 16810,
+      "y": 513.1167777390647,
+      "baseY": 513.1167777390647,
+      "left": 16340,
+      "right": 17100,
+      "w": 82,
+      "h": 42,
+      "speed": 33.8,
+      "period": 3.06,
+      "phase": 8.52
+    },
+    {
+      "id": "trecho-4-caminho-formiga",
+      "type": "ant",
+      "supportId": "trecho-4-caminho-relevo-1",
+      "x": 17460,
+      "y": 530,
+      "baseY": 530,
+      "left": 17415,
+      "right": 17625,
+      "w": 56,
+      "h": 35,
+      "speed": 50.6,
+      "period": 2.9200000000000004,
+      "phase": 9.23
+    },
+    {
+      "id": "trecho-4-gramado-lagarta",
+      "type": "caterpillar",
+      "supportId": "trecho-4-gramado-relevo-3",
+      "x": 18960,
+      "y": 535,
+      "baseY": 535,
+      "left": 18960,
+      "right": 19160,
+      "w": 82,
+      "h": 42,
+      "speed": 37.6,
+      "period": 2.9200000000000004,
+      "phase": 9.94
+    },
+    {
+      "id": "trecho-4-gramado-formiga",
+      "type": "ant",
+      "supportId": "trecho-4-gramado-relevo-1",
+      "x": 18460,
+      "y": 535,
+      "baseY": 535,
+      "left": 18280,
+      "right": 18480,
+      "w": 56,
+      "h": 35,
+      "speed": 50.6,
+      "period": 2.9200000000000004,
+      "phase": 10.649999999999999
+    },
+    {
+      "id": "trecho-4-gramado-formiga-2",
+      "type": "ant",
+      "supportId": "trecho-4-gramado-relevo-3",
+      "x": 19145,
+      "y": 535,
+      "baseY": 535,
+      "left": 18960,
+      "right": 19160,
+      "w": 56,
+      "h": 35,
+      "speed": 50.6,
+      "period": 2.9200000000000004,
+      "phase": 11.36
+    },
+    {
+      "id": "trecho-4-rio-formiga-do-rio",
+      "type": "ant",
+      "x": 20346,
+      "y": 516,
+      "baseY": 516,
+      "left": 20346,
+      "right": 21180,
+      "w": 56,
+      "h": 35,
+      "speed": 60,
+      "period": 2.5,
+      "phase": 0,
+      "route": [
+        {
+          "x": 20346,
+          "y": 516
+        },
+        {
+          "x": 20624,
+          "y": 550
+        },
+        {
+          "x": 20902,
+          "y": 516
+        },
+        {
+          "x": 21180,
+          "y": 550
+        }
+      ]
+    },
+    {
+      "id": "trecho-4-clareira-lagarta",
+      "type": "caterpillar",
+      "supportId": "trecho-4-clareira",
+      "x": 21888,
+      "y": 590,
+      "baseY": 590,
+      "left": 21448,
+      "right": 22158,
+      "w": 82,
+      "h": 42,
+      "speed": 37.6,
+      "period": 2.9200000000000004,
+      "phase": 12.78
+    },
+    {
+      "id": "trecho-4-colina-lagarta",
+      "type": "caterpillar",
+      "supportId": "trecho-4-colina",
+      "x": 23068,
+      "y": 400.0532155906305,
+      "baseY": 400.0532155906305,
+      "left": 22298,
+      "right": 23558,
+      "w": 82,
+      "h": 42,
+      "speed": 37.6,
+      "period": 2.9200000000000004,
+      "phase": 13.489999999999998
+    },
+    {
+      "id": "trecho-6-caminho-formiga",
+      "type": "ant",
+      "supportId": "trecho-6-caminho-relevo-2",
+      "x": 28318,
+      "y": 480,
+      "baseY": 480,
+      "left": 28318,
+      "right": 28308,
+      "w": 56,
+      "h": 35,
+      "speed": 54.4,
+      "period": 2.7800000000000002,
+      "phase": 14.2
+    },
+    {
+      "id": "trecho-6-gramado-lagarta",
+      "type": "caterpillar",
+      "supportId": "trecho-6-gramado",
+      "x": 30198,
+      "y": 520.9016994374948,
+      "baseY": 520.9016994374948,
+      "left": 28708,
+      "right": 31168,
+      "w": 82,
+      "h": 42,
+      "speed": 41.4,
+      "period": 2.7800000000000002,
+      "phase": 14.91
+    },
+    {
+      "id": "trecho-6-gramado-formiga",
+      "type": "ant",
+      "supportId": "trecho-6-gramado",
+      "x": 29498,
+      "y": 437.2359755893867,
+      "baseY": 437.2359755893867,
+      "left": 28788,
+      "right": 29948,
+      "w": 56,
+      "h": 35,
+      "speed": 54.4,
+      "period": 2.7800000000000002,
+      "phase": 15.62
+    },
+    {
+      "id": "trecho-6-gramado-formiga-2",
+      "type": "ant",
+      "supportId": "trecho-6-gramado",
+      "x": 30588,
+      "y": 390,
+      "baseY": 390,
+      "left": 29878,
+      "right": 31038,
+      "w": 56,
+      "h": 35,
+      "speed": 54.4,
+      "period": 2.7800000000000002,
+      "phase": 16.33
+    },
+    {
+      "id": "trecho-6-pedrinhas-formiga",
+      "type": "ant",
+      "supportId": "trecho-6-pedrinhas",
+      "x": 31468,
+      "y": 590,
+      "baseY": 590,
+      "left": 31388,
+      "right": 31498,
+      "w": 56,
+      "h": 35,
+      "speed": 54.4,
+      "period": 2.7800000000000002,
+      "phase": 17.04
+    },
+    {
+      "id": "trecho-6-clareira-lagarta",
+      "type": "caterpillar",
+      "supportId": "trecho-6-clareira-relevo-1",
+      "x": 32518,
+      "y": 530,
+      "baseY": 530,
+      "left": 32133,
+      "right": 32643,
+      "w": 82,
+      "h": 42,
+      "speed": 41.4,
+      "period": 2.7800000000000002,
+      "phase": 17.75
+    },
+    {
+      "id": "trecho-8-caminho-formiga",
+      "type": "ant",
+      "supportId": "trecho-8-caminho-relevo-1",
+      "x": 33418,
+      "y": 530,
+      "baseY": 530,
+      "left": 33358,
+      "right": 33718,
+      "w": 56,
+      "h": 35,
+      "speed": 58.2,
+      "period": 2.64,
+      "phase": 18.46
+    },
+    {
+      "id": "trecho-8-pedrinhas-formiga",
+      "type": "ant",
+      "supportId": "trecho-8-pedrinhas",
+      "x": 34238,
+      "y": 590,
+      "baseY": 590,
+      "left": 34108,
+      "right": 34238,
+      "w": 56,
+      "h": 35,
+      "speed": 58.2,
+      "period": 2.64,
+      "phase": 19.169999999999998
+    },
+    {
+      "id": "trecho-8-gramado-lagarta",
+      "type": "caterpillar",
+      "supportId": "trecho-8-gramado-relevo-3",
+      "x": 35988,
+      "y": 525,
+      "baseY": 525,
+      "left": 35833,
+      "right": 36443,
+      "w": 82,
+      "h": 42,
+      "speed": 45.2,
+      "period": 2.64,
+      "phase": 19.88
+    },
+    {
+      "id": "trecho-8-gramado-formiga",
+      "type": "ant",
+      "supportId": "trecho-8-gramado-relevo-2",
+      "x": 35458,
+      "y": 460,
+      "baseY": 460,
+      "left": 35458,
+      "right": 35693,
+      "w": 56,
+      "h": 35,
+      "speed": 58.2,
+      "period": 2.64,
+      "phase": 20.59
+    },
+    {
+      "id": "trecho-8-gramado-formiga-2",
+      "type": "ant",
+      "supportId": "trecho-8-gramado-relevo-3",
+      "x": 36325.5,
+      "y": 525,
+      "baseY": 525,
+      "left": 35833,
+      "right": 36443,
+      "w": 56,
+      "h": 35,
+      "speed": 58.2,
+      "period": 2.64,
+      "phase": 21.299999999999997
+    },
+    {
+      "id": "trecho-8-rio-formiga-do-rio",
+      "type": "ant",
+      "x": 37680,
+      "y": 508,
+      "baseY": 508,
+      "left": 37680,
+      "right": 38252,
+      "w": 56,
+      "h": 35,
+      "speed": 60,
+      "period": 2.5,
+      "phase": 0,
+      "route": [
+        {
+          "x": 37680,
+          "y": 508
+        },
+        {
+          "x": 37966,
+          "y": 550
+        },
+        {
+          "x": 38252,
+          "y": 508
+        }
+      ]
+    },
+    {
+      "id": "trecho-8-clareira-lagarta",
+      "type": "caterpillar",
+      "supportId": "trecho-8-clareira",
+      "x": 38848,
+      "y": 590,
+      "baseY": 590,
+      "left": 38528,
+      "right": 39038,
+      "w": 82,
+      "h": 42,
+      "speed": 45.2,
+      "period": 2.64,
+      "phase": 22.72
+    },
+    {
+      "id": "trecho-10-caminho-formiga",
+      "type": "ant",
+      "supportId": "trecho-10-caminho-relevo-1",
+      "x": 39378,
+      "y": 535,
+      "baseY": 535,
+      "left": 39348,
+      "right": 39378,
+      "w": 56,
+      "h": 35,
+      "speed": 62,
+      "period": 2.5,
+      "phase": 23.43
+    },
+    {
+      "id": "trecho-10-gramado-lagarta",
+      "type": "caterpillar",
+      "supportId": "trecho-10-gramado",
+      "x": 41398,
+      "y": 534.7213595499958,
+      "baseY": 534.7213595499958,
+      "left": 40028,
+      "right": 42288,
+      "w": 82,
+      "h": 42,
+      "speed": 49,
+      "period": 2.5,
+      "phase": 24.14
+    },
+    {
+      "id": "trecho-10-gramado-formiga",
+      "type": "ant",
+      "supportId": "trecho-10-gramado",
+      "x": 40758,
+      "y": 470,
+      "baseY": 470,
+      "left": 40108,
+      "right": 41168,
+      "w": 56,
+      "h": 35,
+      "speed": 62,
+      "period": 2.5,
+      "phase": 24.849999999999998
+    },
+    {
+      "id": "trecho-10-gramado-formiga-2",
+      "type": "ant",
+      "supportId": "trecho-10-gramado",
+      "x": 41758,
+      "y": 430,
+      "baseY": 430,
+      "left": 41108,
+      "right": 42168,
+      "w": 56,
+      "h": 35,
+      "speed": 62,
+      "period": 2.5,
+      "phase": 25.56
+    },
+    {
+      "id": "trecho-10-rio-formiga-do-rio",
+      "type": "ant",
+      "x": 43158,
+      "y": 504,
+      "baseY": 504,
+      "left": 43158,
+      "right": 44028,
+      "w": 56,
+      "h": 35,
+      "speed": 60,
+      "period": 2.5,
+      "phase": 0,
+      "route": [
+        {
+          "x": 43158,
+          "y": 504
+        },
+        {
+          "x": 43448,
+          "y": 550
+        },
+        {
+          "x": 43738,
+          "y": 504
+        },
+        {
+          "x": 44028,
+          "y": 550
+        }
+      ]
+    },
+    {
+      "id": "trecho-10-clareira-lagarta",
+      "type": "caterpillar",
+      "supportId": "trecho-10-clareira",
+      "x": 44748,
+      "y": 590,
+      "baseY": 590,
+      "left": 44308,
+      "right": 45018,
+      "w": 82,
+      "h": 42,
+      "speed": 49,
+      "period": 2.5,
+      "phase": 26.979999999999997
+    }
+  ],
+  "beetles": [
+    {
+      "id": "besouro-riacho-1",
+      "x": 10670,
+      "safeBank": "trecho-0-clareira"
+    },
+    {
+      "id": "besouro-riacho-2",
+      "x": 19690,
+      "safeBank": "trecho-4-clareira"
+    },
+    {
+      "id": "besouro-nuvens-finais",
+      "x": 45418
+    }
+  ],
+  "encounters": {
+    "consumed": [],
+    "panic": null,
+    "exit": null,
+    "bees": [
+      {
+        "id": "abelha-0",
+        "type": "bee",
+        "supportId": "primeiros-bichinhos",
+        "homeX": 6715,
+        "homeY": 410,
+        "otherX": 6355,
+        "otherY": 410,
+        "perch": 0,
+        "arcDepth": 0,
+        "duration": 1.25,
+        "x": 6715,
+        "y": 410,
+        "w": 62,
+        "h": 32,
+        "alive": true,
+        "hp": 1,
+        "phase": "patrol",
+        "age": 0,
+        "cooldown": 0.8,
+        "defeatAge": 0,
+        "fromX": 6715,
+        "fromY": 410,
+        "targetX": 6715,
+        "targetY": 410,
+        "direction": -1
+      },
+      {
+        "id": "abelha-1",
+        "type": "bee",
+        "supportId": "trecho-0-clareira",
+        "homeX": 12095,
+        "homeY": 410,
+        "otherX": 11830,
+        "otherY": 410,
+        "perch": 0,
+        "arcDepth": 0,
+        "duration": 1.25,
+        "x": 12095,
+        "y": 410,
+        "w": 62,
+        "h": 32,
+        "alive": true,
+        "hp": 1,
+        "phase": "patrol",
+        "age": 0,
+        "cooldown": 0.8,
+        "defeatAge": 0,
+        "fromX": 12095,
+        "fromY": 410,
+        "targetX": 12095,
+        "targetY": 410,
+        "direction": -1
+      },
+      {
+        "id": "abelha-2",
+        "type": "bee",
+        "supportId": "trecho-2-clareira",
+        "homeX": 16720,
+        "homeY": 325,
+        "otherX": 16360,
+        "otherY": 325,
+        "perch": 0,
+        "arcDepth": 0,
+        "duration": 1.25,
+        "x": 16720,
+        "y": 325,
+        "w": 62,
+        "h": 32,
+        "alive": true,
+        "hp": 1,
+        "phase": "patrol",
+        "age": 0,
+        "cooldown": 0.8,
+        "defeatAge": 0,
+        "fromX": 16720,
+        "fromY": 325,
+        "targetX": 16720,
+        "targetY": 325,
+        "direction": -1
+      },
+      {
+        "id": "abelha-3",
+        "type": "bee",
+        "supportId": "trecho-6-clareira-relevo-1",
+        "homeX": 32388,
+        "homeY": 350,
+        "otherX": 32123,
+        "otherY": 350,
+        "perch": 0,
+        "arcDepth": 0,
+        "duration": 1.25,
+        "x": 32388,
+        "y": 350,
+        "w": 62,
+        "h": 32,
+        "alive": true,
+        "hp": 1,
+        "phase": "patrol",
+        "age": 0,
+        "cooldown": 0.8,
+        "defeatAge": 0,
+        "fromX": 32388,
+        "fromY": 350,
+        "targetX": 32388,
+        "targetY": 350,
+        "direction": -1
+      },
+      {
+        "id": "abelha-4",
+        "type": "bee",
+        "supportId": "trecho-8-clareira",
+        "homeX": 38783,
+        "homeY": 410,
+        "otherX": 38518,
+        "otherY": 410,
+        "perch": 0,
+        "arcDepth": 0,
+        "duration": 1.25,
+        "x": 38783,
+        "y": 410,
+        "w": 62,
+        "h": 32,
+        "alive": true,
+        "hp": 1,
+        "phase": "patrol",
+        "age": 0,
+        "cooldown": 0.8,
+        "defeatAge": 0,
+        "fromX": 38783,
+        "fromY": 410,
+        "targetX": 38783,
+        "targetY": 410,
+        "direction": -1
+      }
+    ],
+    "worms": [
+      {
+        "id": "minhoca-0",
+        "type": "worm",
+        "supportId": "pedrinhas-da-roda",
+        "x": 4130,
+        "y": 590,
+        "w": 32,
+        "h": 0,
+        "exposure": 0,
+        "emerging": false,
+        "alive": true
+      },
+      {
+        "id": "minhoca-1",
+        "type": "worm",
+        "supportId": "trecho-2-pedrinhas",
+        "x": 15800,
+        "y": 590,
+        "w": 32,
+        "h": 0,
+        "exposure": 0,
+        "emerging": false,
+        "alive": true
+      },
+      {
+        "id": "minhoca-2",
+        "type": "worm",
+        "supportId": "trecho-6-pedrinhas",
+        "x": 31418,
+        "y": 590,
+        "w": 32,
+        "h": 0,
+        "exposure": 0,
+        "emerging": false,
+        "alive": true
+      },
+      {
+        "id": "minhoca-3",
+        "type": "worm",
+        "supportId": "trecho-8-pedrinhas",
+        "x": 34213.5,
+        "y": 590,
+        "w": 32,
+        "h": 0,
+        "exposure": 0,
+        "emerging": false,
+        "alive": true
+      }
+    ]
+  }
+}

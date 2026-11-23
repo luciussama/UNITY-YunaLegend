@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-23T09:13:05.352297+00:00",
+  "updated_at": "2026-11-23T20:15:24.767520+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -794,6 +794,30 @@
         "updated_at": "2026-11-23T09:13:05.352297+00:00"
       },
       "authorization": "Pedido explicito do usuario22/11/2026: refazer todas cinematícas com exatamente Diretor caixa-preta e Executor, roteiro antes de implementar e aprovacao individual do Diretor. Nova microentrega narrativa independente da expansao de plataformas; nao aceita nem altera T06/T07/T08."
+    },
+    {
+      "id": "PIC01",
+      "title": "O Piquenique - jardim sensorial completo",
+      "depends_on": [],
+      "resources": [
+        "picnic-stage"
+      ],
+      "human_gate": false,
+      "status": "active",
+      "owner": {
+        "session": "codex-20261123-piquenique-impl",
+        "agent": "Codex"
+      },
+      "checkpoint": {
+        "done": "Cena conectada e menu preselecionado; preview inicial corrigido/aprovado por QA independente",
+        "next": "Usuario validar cena Picnic_Gameplay; depois concluir percurso/cinematicas e QA integral",
+        "validation": "Unity Editor10refs55sprites; reteste1578 personagemvisivel/fisica=sim/3saltos/semnovasexcecoes",
+        "pending": "QA integral de rios rodas final retry e WebGL; fase completa nao concluida",
+        "files": "Assets/Scenes/Picnic_Gameplay.unity;Evidence/Picnic/editor-play-qa-retest.png",
+        "processes": "Editor do usuario aberto; pilotoQA desligado; sem processo batch/servidor iniciado",
+        "updated_at": "2026-11-23T20:15:24.767520+00:00"
+      },
+      "evidence": []
     }
   ],
   "history": [
@@ -3105,6 +3129,73 @@
       "files": "checkpoint_state.json;Evidence/Cinematics25/README.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
       "processes": "Status: pausado, por enquanto. Nenhum timer, servidor, Unity Editor ou subagente ativo. Branch cinematics sendo mesclada em main e removida.",
       "at": "2026-11-23T09:13:05.352297+00:00"
+    },
+    {
+      "command": "claim",
+      "task": "PIC01",
+      "session": "codex-20261123-piquenique-impl",
+      "agent": "Codex",
+      "at": "2026-11-23T19:18:17.129672+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "PIC01",
+      "session": "codex-20261123-piquenique-impl",
+      "done": "Core, mapa exato e adaptadores parciais salvos;56assets preparados;branch piquenique",
+      "next": "Completar bootstrap HUD input cinematicas e builder cena; corrigir piloto e reexecutar testes",
+      "validation": "Ultimo XML anterior ao mapa exato:5/9passed,4falhas; banco integro;nenhum Unity ativo",
+      "pending": "Cena/menu/build/QA independente e correcoes;nenhuma fase completa ou aprovada",
+      "files": "Assets/Scripts/Runtime/Picnic;Assets/Art/Picnic;Evidence/Picnic",
+      "processes": "Nenhum Unity.exe em execucao apos queda de energia",
+      "at": "2026-11-23T19:51:24.138746+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "PIC01",
+      "session": "codex-20261123-picnic-preview-qa",
+      "agent": "Codex QA independente",
+      "reason": "QA independente exigido pelo usuario; controle temporario do preview para teste, sem edicoes de fontes.",
+      "from_session": "codex-20261123-piquenique-impl",
+      "at": "2026-11-23T20:11:14.848816+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "PIC01",
+      "session": "codex-20261123-piquenique-impl",
+      "agent": "Codex",
+      "reason": "Devolucao coordenada apos QA independente solicitado pelo usuario; retomar correcoes root",
+      "from_session": "codex-20261123-picnic-preview-qa",
+      "at": "2026-11-23T20:13:00.008466+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "PIC01",
+      "session": "codex-20261123-picnic-preview-qa",
+      "agent": "Codex QA independente",
+      "reason": "Reteste do preview corrigido pelo QA independente exigido pelo usuario.",
+      "from_session": "codex-20261123-piquenique-impl",
+      "at": "2026-11-23T20:13:57.438143+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "PIC01",
+      "session": "codex-20261123-piquenique-impl",
+      "agent": "Codex",
+      "reason": "Reteste concluido apos QA independente solicitado pelo usuario; inicio preview aprovado, retomar controle root",
+      "from_session": "codex-20261123-picnic-preview-qa",
+      "at": "2026-11-23T20:14:53.407426+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "PIC01",
+      "session": "codex-20261123-piquenique-impl",
+      "done": "Cena conectada e menu preselecionado; preview inicial corrigido/aprovado por QA independente",
+      "next": "Usuario validar cena Picnic_Gameplay; depois concluir percurso/cinematicas e QA integral",
+      "validation": "Unity Editor10refs55sprites; reteste1578 personagemvisivel/fisica=sim/3saltos/semnovasexcecoes",
+      "pending": "QA integral de rios rodas final retry e WebGL; fase completa nao concluida",
+      "files": "Assets/Scenes/Picnic_Gameplay.unity;Evidence/Picnic/editor-play-qa-retest.png",
+      "processes": "Editor do usuario aberto; pilotoQA desligado; sem processo batch/servidor iniciado",
+      "at": "2026-11-23T20:15:24.767520+00:00"
     }
   ]
 }

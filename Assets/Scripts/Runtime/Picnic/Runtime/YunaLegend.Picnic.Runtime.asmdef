@@ -1,0 +1,5 @@
+{
+    "name": "YunaLegend.Picnic.Runtime",
+    "rootNamespace": "YunaLegend.Picnic.Runtime",
+    "references": ["YunaLegend.Picnic.Core", "YunaLegend.Qa.Core", "YunaLegend.Qa.Runtime", "Unity.InputSystem", "UnityEngine.UI", "Unity.RenderPipelines.Universal.Runtime"]
+}

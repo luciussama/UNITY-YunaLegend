@@ -1,0 +1,6 @@
+{
+    "name": "YunaLegend.Picnic.Core",
+    "rootNamespace": "YunaLegend.Picnic.Core",
+    "references": [],
+    "noEngineReferences": true
+}

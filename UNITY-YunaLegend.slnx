@@ -4,10 +4,12 @@
   <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="YunaLegend.BearChase.Runtime.csproj" />
   <Project Path="YunaLegend.ToyRoom.Core.csproj" />
+  <Project Path="YunaLegend.Picnic.Runtime.csproj" />
   <Project Path="YunaLegend.Runtime.csproj" />
   <Project Path="YunaLegend.ToyRoom.Tests.csproj" />
   <Project Path="YunaLegend.Editor.csproj" />
   <Project Path="YunaLegend.ToyRoom.Editor.csproj" />
+  <Project Path="YunaLegend.Picnic.Core.csproj" />
   <Project Path="YunaLegend.BearChase.Editor.csproj" />
   <Project Path="YunaLegend.ToyRoom.Runtime.csproj" />
   <Project Path="YunaLegend.Qa.Tests.csproj" />
@@ -17,9 +19,11 @@
   <Project Path="YunaLegend.Tests.csproj" />
   <Project Path="YunaLegend.BearChase.Core.csproj" />
   <Project Path="YunaLegend.Arena.Editor.csproj" />
+  <Project Path="YunaLegend.Picnic.Editor.csproj" />
+  <Project Path="YunaLegend.BearChase.Tests.csproj" />
   <Project Path="YunaLegend.Qa.Runtime.csproj" />
   <Project Path="YunaLegend.Arena.Runtime.csproj" />
-  <Project Path="YunaLegend.BearChase.Tests.csproj" />
   <Project Path="YunaLegend.Qa.Core.csproj" />
   <Project Path="YunaLegend.Arena.Tests.csproj" />
+  <Project Path="YunaLegend.Picnic.Tests.csproj" />
 </Solution>

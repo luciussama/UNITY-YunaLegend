@@ -1,0 +1,627 @@
+[
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\source\\objects-v1.png",
+    "output": "grass.png",
+    "crop": [
+      20,
+      153,
+      399,
+      197
+    ],
+    "source_sha256": "fd504d8a498c0a6feb27fe6d334f520a9a0c0723f1a4db6d9ea88c64b5c9d770",
+    "output_sha256": "900a90a875ef4fbdfc2d1b658aff1ab39f95dd85a386d82dc17af29da488645b"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\source\\objects-v1.png",
+    "output": "wood.png",
+    "crop": [
+      433,
+      179,
+      388,
+      173
+    ],
+    "source_sha256": "fd504d8a498c0a6feb27fe6d334f520a9a0c0723f1a4db6d9ea88c64b5c9d770",
+    "output_sha256": "8d54e6b928c98bb2bf1fa96d844e9bf69d54153018261988fcf80ae101381775"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\source\\objects-v1.png",
+    "output": "stone.png",
+    "crop": [
+      827,
+      186,
+      405,
+      161
+    ],
+    "source_sha256": "fd504d8a498c0a6feb27fe6d334f520a9a0c0723f1a4db6d9ea88c64b5c9d770",
+    "output_sha256": "7f3c79563405c459e8a56f9cdfbd8bd19cd43a64178e3693740a0755aa9c3dc0"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\source\\objects-v1.png",
+    "output": "cloud.png",
+    "crop": [
+      31,
+      563,
+      385,
+      173
+    ],
+    "source_sha256": "fd504d8a498c0a6feb27fe6d334f520a9a0c0723f1a4db6d9ea88c64b5c9d770",
+    "output_sha256": "5ce804ac373e9d96b4d691b3bfab037122f983dee46666b6fc7f4e57cbba19e8"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\source\\objects-v1.png",
+    "output": "ant0.png",
+    "crop": [
+      477,
+      482,
+      321,
+      272
+    ],
+    "source_sha256": "fd504d8a498c0a6feb27fe6d334f520a9a0c0723f1a4db6d9ea88c64b5c9d770",
+    "output_sha256": "96886c232f6d2c2e229ac0b47bed7910437a8d7df7803fe015b0fe65207a2d1d"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\source\\objects-v1.png",
+    "output": "ant1.png",
+    "crop": [
+      891,
+      487,
+      324,
+      266
+    ],
+    "source_sha256": "fd504d8a498c0a6feb27fe6d334f520a9a0c0723f1a4db6d9ea88c64b5c9d770",
+    "output_sha256": "3bb53a050af7d6dfe9899537b0cb0655018897d6e126c20d73c4d3434c81dc73"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\source\\objects-v1.png",
+    "output": "caterpillar0.png",
+    "crop": [
+      53,
+      919,
+      344,
+      255
+    ],
+    "source_sha256": "fd504d8a498c0a6feb27fe6d334f520a9a0c0723f1a4db6d9ea88c64b5c9d770",
+    "output_sha256": "dad4d958d04c69e771e41c6ca43b104ae405de843df0f098e4eb0bb07dd6f76b"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\source\\objects-v1.png",
+    "output": "caterpillar1.png",
+    "crop": [
+      449,
+      918,
+      340,
+      263
+    ],
+    "source_sha256": "fd504d8a498c0a6feb27fe6d334f520a9a0c0723f1a4db6d9ea88c64b5c9d770",
+    "output_sha256": "d46de303fb5c93cec240c4f2af465780c83ed317487a1c7b6585755da7355fee"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\source\\objects-v1.png",
+    "output": "tree.png",
+    "crop": [
+      826,
+      789,
+      417,
+      446
+    ],
+    "source_sha256": "fd504d8a498c0a6feb27fe6d334f520a9a0c0723f1a4db6d9ea88c64b5c9d770",
+    "output_sha256": "095dc3a144218f50ef24d9b7d424f6bbfae0251e489914698f11919952f545b6"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\source\\ambient-v2.png",
+    "output": "house.png",
+    "crop": [
+      11,
+      8,
+      673,
+      540
+    ],
+    "source_sha256": "d3421a9866821511ac227afcbaf9010ad2a6ce42435b58104fd59e98bd9a649f",
+    "output_sha256": "0eb1ac322fb2485a4c3c0a8b0b79919a3f9da3436328bae46322b11f199e19af"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\source\\ambient-v2.png",
+    "output": "tall-grass.png",
+    "crop": [
+      727,
+      134,
+      785,
+      413
+    ],
+    "source_sha256": "d3421a9866821511ac227afcbaf9010ad2a6ce42435b58104fd59e98bd9a649f",
+    "output_sha256": "b706e8e456cb869933f650b7d356f4aa95d95db13f830c1a4a51da1ccb7c8edd"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\source\\ambient-v2.png",
+    "output": "gravel.png",
+    "crop": [
+      12,
+      698,
+      701,
+      289
+    ],
+    "source_sha256": "d3421a9866821511ac227afcbaf9010ad2a6ce42435b58104fd59e98bd9a649f",
+    "output_sha256": "e4b28fb5cc52dcf9b3912c892147ea34e1003065d4f1c932fed7f8e1c2877a3f"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\source\\caterpillar-red-v1.png",
+    "output": "red-caterpillar0.png",
+    "crop": [
+      165,
+      140,
+      784,
+      549
+    ],
+    "source_sha256": "747344c1a7a7569610d67a28d780002190410810931c615a5c66e8e74ed80c38",
+    "output_sha256": "5fe1f0f8fb5c60626d0d43ed2407bc01de243673d5b516b6f345583ae1650686"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\source\\caterpillar-red-v1.png",
+    "output": "red-caterpillar1.png",
+    "crop": [
+      1065,
+      138,
+      751,
+      558
+    ],
+    "source_sha256": "747344c1a7a7569610d67a28d780002190410810931c615a5c66e8e74ed80c38",
+    "output_sha256": "89e4fe8544575f98f2a3089227f88f6328b07712caadb240941c665c6d8f0846"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\scenery-v1.png",
+    "output": "scenery.png",
+    "crop": null,
+    "source_sha256": "58fcd48d707483771dce9d4a9f7fc16eb6fbfc1ca42d0eb14e8c27da2bd7e267",
+    "output_sha256": "aadf993be313f83462a07ed7a526f803c167ff11b20990e95c228011f2b43738"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\scenery-v1.png",
+    "output": "scenery-tile.png",
+    "crop": [
+      480,
+      0,
+      1056,
+      1024
+    ],
+    "source_sha256": "58fcd48d707483771dce9d4a9f7fc16eb6fbfc1ca42d0eb14e8c27da2bd7e267",
+    "output_sha256": "4b5373e0b1c8b37b7a5ae299e28fe974a69a88f29144da22151249e0c6eb58e4"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\source\\wall-plant-v1.png",
+    "output": "wall.png",
+    "crop": null,
+    "source_sha256": "f39e98f2b6cf0d60d3b2fef8d6409a6e87625dc48c09e0afdeb1e35633072f39",
+    "output_sha256": "dc5d26b30773aa0dfd62c30ee6c2a19135a697291bd24d36e1e9363a5845368e"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\source\\soil-continuous-v1.png",
+    "output": "soil.png",
+    "crop": null,
+    "source_sha256": "49b56ecf5fb156e364c80533b2503671f553b15a3aa36ff92b3e6a1157c77c67",
+    "output_sha256": "24053a62e2efa0daab155b1c71b5d351fb2a6fcb184eec931eca63cb0316e441"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\cinematic\\house-without-actors-v1.png",
+    "output": "opening-bg.png",
+    "crop": null,
+    "source_sha256": "fa773928e5f21871f6d4ab9c80719d434519b2fdcd201fa7dfab9cf409e41985",
+    "output_sha256": "d514c29d46c1a5a8253d3b25642d319ae71e7a7f1213ac7f07e9678f1749b1d6"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\cinematic\\picnic-without-yuna-v1.png",
+    "output": "ending-bg.png",
+    "crop": null,
+    "source_sha256": "ddfbd20e45e36538a72bbe7ecea3ae6c155303ad265ee27abdabbbd6708b369e",
+    "output_sha256": "6cc572605911869adcbd7bbf3b175fbead06d5ded9d4833108e79ba15430e643"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\runtime\\picnic-lateral-v3.png",
+    "output": "picnic.png",
+    "crop": [
+      4,
+      4,
+      1753,
+      534
+    ],
+    "source_sha256": "5df978c869cd257855eec22dd45a7aae492ff0342ef206a8de58faee5de5a8a7",
+    "output_sha256": "f123b78e82377719b20b4b1c6e0c8ba1a733bba0adbb03101ca786c5d7e1d0df"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\runtime\\insects-v1.png",
+    "output": "bee0.png",
+    "crop": [
+      4,
+      4,
+      458,
+      400
+    ],
+    "source_sha256": "09da732fa5e302ed9248a77a82cfeedd9596c9819fa1e8958542dd8d71efb318",
+    "output_sha256": "59c4718740174991104cdef2d8b216b462b94a061daece44bfc52406c932ed40"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\runtime\\insects-v1.png",
+    "output": "bee1.png",
+    "crop": [
+      684,
+      4,
+      473,
+      241
+    ],
+    "source_sha256": "09da732fa5e302ed9248a77a82cfeedd9596c9819fa1e8958542dd8d71efb318",
+    "output_sha256": "c42ff9406d601f9ebd4443ab5fe8247f7167bde90f0818f6c4e394a49276c25f"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\runtime\\insects-v1.png",
+    "output": "beetle0.png",
+    "crop": [
+      1364,
+      4,
+      481,
+      346
+    ],
+    "source_sha256": "09da732fa5e302ed9248a77a82cfeedd9596c9819fa1e8958542dd8d71efb318",
+    "output_sha256": "1b49052568ea188badbbd9cdc8d53bcbab94f2ea1cfd0791bd0b8db2eb68fd38"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\runtime\\insects-v1.png",
+    "output": "beetle1.png",
+    "crop": [
+      4,
+      516,
+      563,
+      344
+    ],
+    "source_sha256": "09da732fa5e302ed9248a77a82cfeedd9596c9819fa1e8958542dd8d71efb318",
+    "output_sha256": "0b79d19dc4b18b62348106fb3bca6aecd49ea845dafecdfd41e5f7943f0df5a7"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\runtime\\insects-v1.png",
+    "output": "worm.png",
+    "crop": [
+      684,
+      516,
+      332,
+      359
+    ],
+    "source_sha256": "09da732fa5e302ed9248a77a82cfeedd9596c9819fa1e8958542dd8d71efb318",
+    "output_sha256": "0141150bed52fa4015f999c733c5f28aaff511cdb5b2083733bedc55035665ca"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\runtime\\life-aquatic-v1.png",
+    "output": "aquatic0.png",
+    "crop": [
+      4,
+      4,
+      312,
+      416
+    ],
+    "source_sha256": "0ff41a3c8f2e1c6ae9037587f52644d88754aedf61a52232bb9c11c0e1c9e8f1",
+    "output_sha256": "e396f04ec38bead8fe0502d0153318b8cbd99b8725ca32cd1153d45e4ae79a2c"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\runtime\\life-aquatic-v1.png",
+    "output": "aquatic1.png",
+    "crop": [
+      516,
+      4,
+      273,
+      124
+    ],
+    "source_sha256": "0ff41a3c8f2e1c6ae9037587f52644d88754aedf61a52232bb9c11c0e1c9e8f1",
+    "output_sha256": "55e331cd3e850ac48260b977948c074259e623d2340af2c1f908c301cf44b7c8"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\runtime\\life-aquatic-v1.png",
+    "output": "aquatic2.png",
+    "crop": [
+      1028,
+      4,
+      279,
+      127
+    ],
+    "source_sha256": "0ff41a3c8f2e1c6ae9037587f52644d88754aedf61a52232bb9c11c0e1c9e8f1",
+    "output_sha256": "d6676a54eb4ac8e161912eebd6000f0bd84fd5f7a760ccd0f6cbdce893e7f96b"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\runtime\\life-aquatic-v1.png",
+    "output": "aquatic3.png",
+    "crop": [
+      4,
+      516,
+      283,
+      123
+    ],
+    "source_sha256": "0ff41a3c8f2e1c6ae9037587f52644d88754aedf61a52232bb9c11c0e1c9e8f1",
+    "output_sha256": "8d430fbd26885290946ec7668d756af0d960747fab6e5c2efba74f8dbbf09b9f"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\runtime\\life-aquatic-v1.png",
+    "output": "aquatic4.png",
+    "crop": [
+      516,
+      516,
+      235,
+      393
+    ],
+    "source_sha256": "0ff41a3c8f2e1c6ae9037587f52644d88754aedf61a52232bb9c11c0e1c9e8f1",
+    "output_sha256": "7b8fb4f0c17af712d87affa47e2c8b88acad345b17104d1b9b770301778bdee1"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\art\\garden\\runtime\\life-aquatic-v1.png",
+    "output": "aquatic5.png",
+    "crop": [
+      1028,
+      516,
+      270,
+      268
+    ],
+    "source_sha256": "0ff41a3c8f2e1c6ae9037587f52644d88754aedf61a52232bb9c11c0e1c9e8f1",
+    "output_sha256": "ee88d25ece791a1ede1f16765a9dc004f63c279731226c97246e1accf5296dc7"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Yuna\\Run\\Yuna_Run_Atlas_v1.png",
+    "output": "yuna-run0.png",
+    "crop": [
+      0,
+      0,
+      362,
+      543
+    ],
+    "source_sha256": "921aa127071c245072074c63e5be61ed091f00f8a9829d937769286df3966eff",
+    "output_sha256": "1864f47eadd65cf9e5b69cc5bfd41f42646f0287bc85205b4259cd8634a1d2bf"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Yuna\\Run\\Yuna_Run_Atlas_v1.png",
+    "output": "yuna-run1.png",
+    "crop": [
+      362,
+      0,
+      362,
+      543
+    ],
+    "source_sha256": "921aa127071c245072074c63e5be61ed091f00f8a9829d937769286df3966eff",
+    "output_sha256": "366bec92c9eb7c3ff94186bbe2353e294e89d25dd028cffcaf76c604465dfb8b"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Yuna\\Run\\Yuna_Run_Atlas_v1.png",
+    "output": "yuna-run2.png",
+    "crop": [
+      724,
+      0,
+      362,
+      543
+    ],
+    "source_sha256": "921aa127071c245072074c63e5be61ed091f00f8a9829d937769286df3966eff",
+    "output_sha256": "f3f84b6d06ce89dac25c706bc2d93f6b85116b52d9646e6710d272a2ab8e8da0"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Yuna\\Run\\Yuna_Run_Atlas_v1.png",
+    "output": "yuna-run3.png",
+    "crop": [
+      1086,
+      0,
+      362,
+      543
+    ],
+    "source_sha256": "921aa127071c245072074c63e5be61ed091f00f8a9829d937769286df3966eff",
+    "output_sha256": "99bae2df9c72d1caa5870e0492fdbf3eb111003fc37ea41b059adfc7d59523d3"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Yuna\\Run\\Yuna_Run_Atlas_v1.png",
+    "output": "yuna-run4.png",
+    "crop": [
+      0,
+      543,
+      362,
+      543
+    ],
+    "source_sha256": "921aa127071c245072074c63e5be61ed091f00f8a9829d937769286df3966eff",
+    "output_sha256": "6edbabebb74a4f1ca78123c38aea1d32caeb04ed255ab9c0c7b5bddffbe0beae"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Yuna\\Run\\Yuna_Run_Atlas_v1.png",
+    "output": "yuna-run5.png",
+    "crop": [
+      362,
+      543,
+      362,
+      543
+    ],
+    "source_sha256": "921aa127071c245072074c63e5be61ed091f00f8a9829d937769286df3966eff",
+    "output_sha256": "898091d7d17e1eb74badb51dc303580e8cfb38e48473dd4ef64efac96e2fe3a9"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Yuna\\Run\\Yuna_Run_Atlas_v1.png",
+    "output": "yuna-run6.png",
+    "crop": [
+      724,
+      543,
+      362,
+      543
+    ],
+    "source_sha256": "921aa127071c245072074c63e5be61ed091f00f8a9829d937769286df3966eff",
+    "output_sha256": "dc71a85b40fb70e21e6951e65341bcd3fb236e666e3c1d0d55f2f35b8c8c9458"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Yuna\\Run\\Yuna_Run_Atlas_v1.png",
+    "output": "yuna-run7.png",
+    "crop": [
+      1086,
+      543,
+      362,
+      543
+    ],
+    "source_sha256": "921aa127071c245072074c63e5be61ed091f00f8a9829d937769286df3966eff",
+    "output_sha256": "6984ec644d9ed1a923d79c0a6fa2036d853b4679e6374aacfe6de0932311c3d0"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Yuna\\Yuna_Profile_v1.png",
+    "output": "yuna-idle.png",
+    "crop": null,
+    "source_sha256": "0b9315b4dd525f23f2ef14db04682846b43b3ca7793f47670129afc88dfb9044",
+    "output_sha256": "cf161fc7f3ae1e5e640f38e98cc5dd938e7bb7d07d5671a435f6d372b78d418a"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\BearChase\\Resources\\BearChaseEnding\\ending-yuna-poses-v1.png",
+    "output": "yuna-pose0.png",
+    "crop": [
+      0,
+      0,
+      512,
+      512
+    ],
+    "source_sha256": "81b71451d55d1cbdfac72898ef2beab6e88e8ce46d1d3f2ce632265e638927ef",
+    "output_sha256": "f7444d71b0957fbc9e74f75f7d8f5fa4abd6322ff057e49460383ba2df77d048"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\BearChase\\Resources\\BearChaseEnding\\ending-yuna-poses-v1.png",
+    "output": "yuna-pose1.png",
+    "crop": [
+      512,
+      0,
+      512,
+      512
+    ],
+    "source_sha256": "81b71451d55d1cbdfac72898ef2beab6e88e8ce46d1d3f2ce632265e638927ef",
+    "output_sha256": "3ded4d906251146c3e180efad9c9d1b463d4f4d0873d52744f388ad885305d9a"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\BearChase\\Resources\\BearChaseEnding\\ending-yuna-poses-v1.png",
+    "output": "yuna-pose2.png",
+    "crop": [
+      1024,
+      0,
+      512,
+      512
+    ],
+    "source_sha256": "81b71451d55d1cbdfac72898ef2beab6e88e8ce46d1d3f2ce632265e638927ef",
+    "output_sha256": "88ac2f2bfda4e3ba2bf2a8c49eda39f42ec8c7e6e7798b06e7a49c76f5cc6e7c"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Environment\\Opening\\Resources\\Opening\\Yuna_Sitting_Pose_v1.png",
+    "output": "yuna-sitting.png",
+    "crop": null,
+    "source_sha256": "fe22cdf5bd4589892796e9856cf5adb9590f8d84b876a9f86be902f20d36ab85",
+    "output_sha256": "b70b5ca6bae31344e9ee330b76c7fda2edaf185427841553acd996ee3e462c7c"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Environment\\Opening\\Resources\\Opening\\Yuna_Sleeping_Pose_v1.png",
+    "output": "yuna-sleeping.png",
+    "crop": null,
+    "source_sha256": "3fa82de7ac7b78b8df8ab4285a95dffc9c6c03cde01c60bca2dbca3a8d34bb32",
+    "output_sha256": "3041524684c5e0f6f78040048987e60ba8b2eeb58d09cd1bc973f0769992899e"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Nanda\\Flight\\Nanda_Flight_Atlas_v1.png",
+    "output": "nanda0.png",
+    "crop": [
+      0,
+      0,
+      512,
+      592
+    ],
+    "source_sha256": "3752ca206bbdfa85d09c8aee9313abcd8fdd77abf00315c2caca80c15b06af3a",
+    "output_sha256": "3b59571599ea265fed47627293ecc088d287a59e408ab98402b03f9744cb4f23"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Nanda\\Flight\\Nanda_Flight_Atlas_v1.png",
+    "output": "nanda1.png",
+    "crop": [
+      512,
+      0,
+      512,
+      592
+    ],
+    "source_sha256": "3752ca206bbdfa85d09c8aee9313abcd8fdd77abf00315c2caca80c15b06af3a",
+    "output_sha256": "f5f7c1edf094dcc8d14447cafbcb3c535c85cbe6e41925ccbf7fe1c49a1088b7"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Nanda\\Flight\\Nanda_Flight_Atlas_v1.png",
+    "output": "nanda2.png",
+    "crop": [
+      1024,
+      0,
+      512,
+      592
+    ],
+    "source_sha256": "3752ca206bbdfa85d09c8aee9313abcd8fdd77abf00315c2caca80c15b06af3a",
+    "output_sha256": "5fbe0ccca6a5fc00a6d2f01c3005d0ae35bbdaa7f2d2cd4dd52a524d15b2b4ad"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Nanda\\Flight\\Nanda_Flight_Atlas_v1.png",
+    "output": "nanda3.png",
+    "crop": [
+      1536,
+      0,
+      512,
+      592
+    ],
+    "source_sha256": "3752ca206bbdfa85d09c8aee9313abcd8fdd77abf00315c2caca80c15b06af3a",
+    "output_sha256": "0c310bfd51e4c42710d60a0e7ad2695274617a2448815c8c449275cfbdefc02e"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Nanda\\Flight\\Nanda_Flight_Atlas_v1.png",
+    "output": "nanda4.png",
+    "crop": [
+      0,
+      592,
+      512,
+      592
+    ],
+    "source_sha256": "3752ca206bbdfa85d09c8aee9313abcd8fdd77abf00315c2caca80c15b06af3a",
+    "output_sha256": "667188aaef7a291d1fb82fb9d0bafee44867d130246d77249a28f0a8d3bba119"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Nanda\\Flight\\Nanda_Flight_Atlas_v1.png",
+    "output": "nanda5.png",
+    "crop": [
+      512,
+      592,
+      512,
+      592
+    ],
+    "source_sha256": "3752ca206bbdfa85d09c8aee9313abcd8fdd77abf00315c2caca80c15b06af3a",
+    "output_sha256": "b65b92ea18992b6e50f925cfb106dfbfd9a4f51911119e22cf34b1c32b1c0f47"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Nanda\\Flight\\Nanda_Flight_Atlas_v1.png",
+    "output": "nanda6.png",
+    "crop": [
+      1024,
+      592,
+      512,
+      592
+    ],
+    "source_sha256": "3752ca206bbdfa85d09c8aee9313abcd8fdd77abf00315c2caca80c15b06af3a",
+    "output_sha256": "c1e4ca9391780271e5dc3cff55d14c6d76888a3a0e1f7dd3bf463ecabbadcb3e"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\Illustrated25D\\Nanda\\Flight\\Nanda_Flight_Atlas_v1.png",
+    "output": "nanda7.png",
+    "crop": [
+      1536,
+      592,
+      512,
+      592
+    ],
+    "source_sha256": "3752ca206bbdfa85d09c8aee9313abcd8fdd77abf00315c2caca80c15b06af3a",
+    "output_sha256": "d1a38613f2c95ec8224cd19d39f19b512784b8a839133ae9f1dd14ba03cc4532"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\UNITY-YunaLegend\\Assets\\Art\\BearChase\\Resources\\BearChaseEnding\\ending-nanda-blue-poses-v1.png",
+    "output": "nanda-rest.png",
+    "crop": [
+      0,
+      0,
+      512,
+      512
+    ],
+    "source_sha256": "145f5d326c7b3c92eadb1ae5b59bbcda83e28f6cb81bd4485796c9a5bc726423",
+    "output_sha256": "9c29fd5ba6b103e72ed1d823e2131d6f062f055cc8e74392a7a0772dde69f105"
+  },
+  {
+    "source": "C:\\Users\\sergi\\repos\\legendGirl\\assets\\audio\\Blues Shuffle Loop.mp3",
+    "output": "garden-music.mp3",
+    "source_sha256": "7854ddabc48a75265c357525010b01fe5486ef31fcca35358785df274e264114"
+  }
+]
