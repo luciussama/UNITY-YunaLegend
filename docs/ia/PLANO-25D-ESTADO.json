@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-22T21:06:16.579801+00:00",
+  "updated_at": "2026-11-23T09:13:05.352297+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -781,17 +781,17 @@
       "human_gate": false,
       "status": "active",
       "owner": {
-        "session": "20261122-codex-resume-cinematics",
-        "agent": "Codex GPT-6"
+        "session": "20261122-antigravity-cin-orquestrador",
+        "agent": "Antigravity"
       },
       "checkpoint": {
-        "done": "ActingV3completo;revisoesV4/V5/V6capturadas;DiretorLIBEROUestudoF000-042V6;43/43missed0;provenienciaehashes",
-        "next": "Revisao humana individualV6;aposaceite produzirF043-058 ombroscedendo/maosrumoaopeito conformeDiretor",
-        "validation": "UnityV6intervalos30.0323..49.7916msmedia40.167219;videoCFR25FPS1.72ssemaudio;DiretoravaliouPNGsnaovideo;nenhumaAPROVACAOcinematicacompleta",
-        "pending": "Aceitehumanoestudo;582desenhosYuna;Nanda625;audio;integracao;WebGL;demaiscinematicas",
-        "files": "Evidence/Cinematics25;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/diario.sqlite3",
-        "processes": "NenhumUnityEditorproprio/servidorativo;Diretorfinalizouparecer;semcommitpush",
-        "updated_at": "2026-11-22T21:06:16.579801+00:00"
+        "done": "Status atualizado para 'pausado, por enquanto' a pedido do usuario. F000-058 aprovados (diario 1465) intactos; Agente 1 revisou F059-074 v1 (REPROVADO SEG_01, diario 1489); checkpoint_state.json e README.md atualizados.",
+        "next": "Quando o usuario decidir retomar: assumir reservas 129/130/133/134 e CIN01 via handover --from-session 20261122-antigravity-cin-orquestrador e produzir F059-074 v2 ancorado em f058.png corrigindo os 6 itens da reprovacao 1489.",
+        "validation": "Pausado, por enquanto; nenhum arquivo v2 criado; F000-058 intactos",
+        "pending": "PAUSADO POR ENQUANTO — F059-074 v2 (SEG_01); SEG_02-SEG_06 Yuna; Nanda azul; audio; integracao; WebGL; videos FULL/SEGMENTS; CIN02, CIN03, CIN04",
+        "files": "checkpoint_state.json;Evidence/Cinematics25/README.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
+        "processes": "Status: pausado, por enquanto. Nenhum timer, servidor, Unity Editor ou subagente ativo. Branch cinematics sendo mesclada em main e removida.",
+        "updated_at": "2026-11-23T09:13:05.352297+00:00"
       },
       "authorization": "Pedido explicito do usuario22/11/2026: refazer todas cinematícas com exatamente Diretor caixa-preta e Executor, roteiro antes de implementar e aprovacao individual do Diretor. Nova microentrega narrativa independente da expansao de plataformas; nao aceita nem altera T06/T07/T08."
     }
@@ -3021,6 +3021,90 @@
       "files": "Evidence/Cinematics25;docs/ia/ESTADO-ATUAL-25D.md;docs/ia/diario.sqlite3",
       "processes": "NenhumUnityEditorproprio/servidorativo;Diretorfinalizouparecer;semcommitpush",
       "at": "2026-11-22T21:06:16.579801+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "CIN01",
+      "session": "20261122-antigravity-resume-cin01",
+      "agent": "Antigravity",
+      "reason": "Pedido explicito do usuario: fazer handover do Codex para Antigravity e continuar CIN01 a partir de F043-F058 apos aceite humano de ActingV6 F000-042",
+      "from_session": "20261122-codex-resume-cinematics",
+      "at": "2026-11-22T23:47:14.827081+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "CIN01",
+      "session": "20261122-antigravity-resume-cin01",
+      "done": "Handover concluido; F043-F058 produzido (V1 reprovada, V2 corrigida em 3 folhas com ponte 2x2 F048-051); UnityStudyF000-058V2 capturado 59/59 missed0; Diretor emitiu [LIBERADO ESTUDO F0-58]",
+      "next": "Revisao humana individual de UnityStudyF000-058V2/study-25fps.mp4; apos aceite, produzir F059-F074 (dedos entrelacam; olhar procura lugar livre) encerrando Yuna do Plano 1",
+      "validation": "Unity V2 59/59 missed0, intervalos 29.9397..50.0819ms media 40.1424ms; MP4 CFR25 2.36s sem audio; parecer [LIBERADO ESTUDO F0-58] via PNGs; nao aprova cinematica completa",
+      "pending": "Aceite humano estudo F000-058; F059-F624 Yuna (566 desenhos); Nanda 625; audio; integracao; WebGL; demais cinematicas",
+      "files": "Evidence/Cinematics25/UnityStudyF000-058V2;Evidence/Cinematics25/f043-058-v2-native-generation.json;Evidence/Cinematics25/README.md;docs/ia/diario.sqlite3",
+      "processes": "Nenhum Unity Editor ou servidor ativo; reservas 129/130/133/134 e CIN01 abertas aguardando revisao humana",
+      "at": "2026-11-23T00:10:48.576232+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "CIN01",
+      "session": "20261122-antigravity-resume-cin01",
+      "done": "UnityStudyF000-058V2 (59/59) LIBERADO pelo Diretor e APROVADO pelo usuario (entrada 1465); tentativa de F059-F074 iniciada mas bloqueada por cota do image-generator",
+      "next": "Aguardar reset de cota do image-generator (~4h30m) ou realizar handover explicito ao Codex para gerar F059-F074 (dedos entrelacam; olhar procura lugar livre) ancorado em yuna-f052-058-v2/f058.png e capturar UnityStudyF000-074V1",
+      "validation": "Unity V2 59/59 missed0 aprovado pelo usuario; study-manifest.json integro em UnityStudyF000-058V2; bloqueio 429 RESOURCE_EXHAUSTED registrado no plano 1466",
+      "pending": "F059-F624 Yuna (566 desenhos); Nanda 625; audio; integracao; WebGL; demais cinematicas",
+      "files": "Evidence/Cinematics25/UnityStudyF000-058V2;Evidence/Cinematics25/README.md;docs/ia/diario.sqlite3",
+      "processes": "Nenhum Unity Editor, servidor ou subagente ativo; reservas 129/130/133/134 e CIN01 preservadas com checkpoint",
+      "at": "2026-11-23T00:19:57.969678+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "CIN01",
+      "session": "20261123-codex-cin01-retomada",
+      "agent": "Codex",
+      "reason": "Sérgio autorizou: transfere para cá e continue de onde o antigravity parou.",
+      "from_session": "20261122-antigravity-resume-cin01",
+      "at": "2026-11-23T00:36:04.888642+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "CIN01",
+      "session": "20261123-cin01-handover-pendente",
+      "agent": "Próximo agente (pendente)",
+      "reason": "Sérgio solicitou handover para outro agente assumir. Checkpoint no diário 1480.",
+      "from_session": "20261123-codex-cin01-retomada",
+      "at": "2026-11-23T00:49:28.552189+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "CIN01",
+      "session": "20261122-antigravity-cin-orquestrador",
+      "agent": "Antigravity",
+      "reason": "Pedido explicito do usuario (Sergio): retomar producao das cinematicas a partir do checkpoint 1480",
+      "from_session": "20261123-cin01-handover-pendente",
+      "at": "2026-11-23T00:55:37.175904+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "CIN01",
+      "session": "20261122-antigravity-cin-orquestrador",
+      "done": "Handover assumido; checkpoint_state.json criado; Agente 1 revisou F059-074 v1 e emitiu REPROVADO SEG_01 (6 pontos no diario 1489 e checkpoint_state.json); venv .venv-cin (Pillow/numpy/ffmpeg) e study-manifest-f000-074.json preparados; tentativa v2 bloqueada por 429 (nenhum arquivo v2 criado)",
+      "next": "Assumir reservas 129/130/133/134 e CIN01 via handover --from-session 20261122-antigravity-cin-orquestrador; produzir F059-074 v2 em Evidence/Cinematics25/yuna-f059-074-v2 ancorado em f058.png (4 folhas 2x2) corrigindo os 6 itens do Agente 1; revalidar com Agente 1; capturar UnityStudyF000-074V1; seguir SEG_02-06, Nanda azul, audio, WebGL, videos FULL/SEGMENTS e CIN02-04",
+      "validation": "F000-058 aprovados (diario 1465) intactos; revisao Agente 1 sobre F059-074 v1 concluida (REPROVADO, diario 1489); nada de F059-074 v2 gerado",
+      "pending": "F059-074 v2 (SEG_01); SEG_02-SEG_06 Yuna (F075-F624); Nanda azul 625 frames; audio; integracao; WebGL + aprovacao final; videos FULL/SEGMENTS; CIN02, CIN03, CIN04",
+      "files": "checkpoint_state.json;Evidence/Cinematics25/README.md;Evidence/Cinematics25/study-manifest-f000-074.json;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
+      "processes": "Nenhum timer, servidor, Unity Editor ou subagente ativo (task-83 e subagentes encerrados); reservas 129/130/133/134 e CIN01 abertas sob 20261122-antigravity-cin-orquestrador prontas para handover",
+      "at": "2026-11-23T09:10:32.750217+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "CIN01",
+      "session": "20261122-antigravity-cin-orquestrador",
+      "done": "Status atualizado para 'pausado, por enquanto' a pedido do usuario. F000-058 aprovados (diario 1465) intactos; Agente 1 revisou F059-074 v1 (REPROVADO SEG_01, diario 1489); checkpoint_state.json e README.md atualizados.",
+      "next": "Quando o usuario decidir retomar: assumir reservas 129/130/133/134 e CIN01 via handover --from-session 20261122-antigravity-cin-orquestrador e produzir F059-074 v2 ancorado em f058.png corrigindo os 6 itens da reprovacao 1489.",
+      "validation": "Pausado, por enquanto; nenhum arquivo v2 criado; F000-058 intactos",
+      "pending": "PAUSADO POR ENQUANTO — F059-074 v2 (SEG_01); SEG_02-SEG_06 Yuna; Nanda azul; audio; integracao; WebGL; videos FULL/SEGMENTS; CIN02, CIN03, CIN04",
+      "files": "checkpoint_state.json;Evidence/Cinematics25/README.md;docs/ia/PLANO-25D-ESTADO.json;docs/ia/diario.sqlite3",
+      "processes": "Status: pausado, por enquanto. Nenhum timer, servidor, Unity Editor ou subagente ativo. Branch cinematics sendo mesclada em main e removida.",
+      "at": "2026-11-23T09:13:05.352297+00:00"
     }
   ]
 }

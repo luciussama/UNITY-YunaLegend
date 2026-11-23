@@ -1,0 +1,27 @@
+{
+  "tool": "antigravity image-generator (generate_image) + white_to_alpha.py + prepare_sheet.py",
+  "processing": "Flood-fill solid white background + enclosed leg gap to alpha=0 with 1px halo decontamination; prepare_sheet.py uniform scale per sheet and planted sole registration; no pose warping or face replacement; raw sheets retained.",
+  "sheets": [
+    {
+      "frames": "F043-F047",
+      "raw": "Evidence/Cinematics25/yuna-f043-047-v2-raw.png",
+      "sha256": "2c16f8b97b33d18283cb4e507929c2e8bff9812244e105b75c3d901cb6efd687",
+      "reference": "Evidence/Cinematics25/yuna-f036-042-acting-v5/f042.png",
+      "output": "Evidence/Cinematics25/yuna-f043-047-v2"
+    },
+    {
+      "frames": "F048-F051",
+      "raw": "Evidence/Cinematics25/yuna-f048-051-v2-raw.png",
+      "sha256": "602a7aab66ec307b155479762d12f6f3b7a2fa2dca1616118a1f778984978dde",
+      "reference": "Evidence/Cinematics25/yuna-f043-047-v2/f047.png",
+      "output": "Evidence/Cinematics25/yuna-f048-051-v2"
+    },
+    {
+      "frames": "F052-F058",
+      "raw": "Evidence/Cinematics25/yuna-f052-058-v2-raw.png",
+      "sha256": "8d3b90d30cdebd74ef307979b70ff06898fd623ea032bb8c87fa94b5def38e11",
+      "reference": "Evidence/Cinematics25/yuna-f048-051-v2/f051.png",
+      "output": "Evidence/Cinematics25/yuna-f052-058-v2"
+    }
+  ]
+}

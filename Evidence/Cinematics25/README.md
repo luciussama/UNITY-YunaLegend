@@ -1,6 +1,42 @@
 # Continuidade — remake de todas as cinemáticas a 25 FPS
 
-## Estado vigente — retomada Codex, 22/11/2026
+## Checkpoint — 23/11/2026 (`pausado, por enquanto`)
+
+**Status:** **`pausado, por enquanto`** (a pedido do usuário; branch `cinematics` mesclada em `main` e encerrada).
+
+Sessão ativa a assumir quando o trabalho for retomado via `handover --from-session 20261122-antigravity-cin-orquestrador`: **`20261122-antigravity-cin-orquestrador`** (registros **`129`, `130`, `133`, `134`** no `agent_registry.py` e tarefa **`CIN01`** no `plan_25d.py`). Estado estruturado também salvo em **`checkpoint_state.json`** na raiz do repositório.
+
+- **Aprovado e intocável (não alterar):** estudos parciais `UnityStudyF000-042ActingV6` e `UnityStudyF000-058V2` + todos os 59 frames `F000–F058` listados em `Evidence/Cinematics25/study-manifest.json` (aceite humano na entrada `1465` do diário). Nenhuma cena completa tem `LOCK_APPROVED` ainda.
+- **Avaliação do Agente 1 sobre `F059–F074 v1` (`yuna-f059-074-v1/`):** **`[REPROVADO: SEG_01]`** (diário `1489`):
+  1. `F058→F059`: pop de escala (~7px menor na saia, sapatos deslocados), traço suave e paleta lavada; redesenhar `F059–F061` na escala/linha/saturação de `F058` antes de entrelaçar dedos.
+  2. `F064→F065`: olhos e cabeça giram juntos; olhos devem iniciar busca em `F063` e cabeça acompanhar em `F065` (repetir atraso de 2 frames na volta `F069→F071`).
+  3. `F059–F074`: coque, elástico rosa e franja travados; desenhar arrasto de 2–5 frames após giro da cabeça (assenta em `F067–F070`).
+  4. `F065–F074`: laço lateral e barra da saia sem ondulação leve (2–4 frames) ao recolher braços.
+  5. `F071→F072`: figura salta ~5–7px para a esquerda e coque alarga; fixar pés no mesmo ponto.
+  6. `F066–F074`: pausa sem respiração; desenhar ciclo leve de ombros/peito (~12–16 frames) sem mudar escala.
+- **O que não foi gerado ainda:** `yuna-f059-074-v2/` não existe (geração bloqueada por `429 RESOURCE_EXHAUSTED` no gerador de imagens e cota individual do subagente, diário `1491` e `1493`). Manifesto auxiliar `study-manifest-f000-074.json` e `.venv-cin/` (Pillow + numpy + imageio-ffmpeg, ignorado em `.git/info/exclude`) ficaram prontos.
+- **Próximo passo exato:** assumir `129/130/133/134` e `CIN01` via handover; produzir **`F059–F074 v2`** em `Evidence/Cinematics25/yuna-f059-074-v2/` ancorado em `yuna-f052-058-v2/f058.png` (plano sugerido: 4 folhas 2×2 — `F059–062`, `F063–066`, `F067–070`, `F071–074` — com remoção de fundo/vão entre pernas + `prepare_sheet.py --columns 2 --rows 2 --count 4`); reenviar ao Diretor Criativo (Agente 1); com aprovação do trecho, capturar `UnityStudyF000-074V1` e seguir `SEG_02–SEG_06`, Nanda azul, áudio, integração, WebGL, vídeos `FULL`/`SEGMENTS` e demais cenas (`CIN02–CIN04`).
+- **Ambiente limpo:** timer agendado (`task-83`) cancelado; todos os subagentes encerrados; nenhum Unity Editor ou servidor ativo. Alterações locais preservadas no checkout central (sem commit/push nesta sessão).
+
+---
+
+## Estado vigente anterior — retomada Antigravity, 22/11/2026
+
+Sessão **`20261122-antigravity-resume-cin01`**, após handover humano explícito da sessão `20261122-codex-resume-cinematics` nos registros **129/130/133/134** e na tarefa **CIN01**, e após aceite humano individual do estudo `ActingV6 F000–F042` registrado na entrada **1459** do diário.
+
+**Estudo F000–F058 (`UnityStudyF000-058V2`) LIBERADO pelo Diretor Criativo e APROVADO pelo usuário (entrada `1465` do diário).** Retomada de `F059–F074` bloqueada por esgotamento temporário de cota do gerador de imagens (`429 RESOURCE_EXHAUSTED` em `gemini-3.1-flash-image`, reset previsto em ~4h30m).
+- A V1 (`UnityStudyF000-058V1`) foi reprovada pelo Diretor em caixa-preta por pop das mãos em `F046 -> F047`, flicker abre/fecha em `F047–F051` e ombros estáticos.
+- A V2 preservou integralmente os 43 desenhos aprovados de `ActingV6` (`F000–F042`) e produziu `F043–F058` em 3 folhas dedicadas (`yuna-f043-047-v2`, ponte 2×2 `yuna-f048-051-v2` e assentamento `yuna-f052-058-v2`), com limpeza de fundo/vão entre pernas (`white_to_alpha.py`), escala uniforme por folha e registro pelas solas (`prepare_sheet.py`).
+- [Vídeo do estudo — 59 quadros, 25 FPS, 2,36 s, sem áudio](UnityStudyF000-058V2/study-25fps.mp4) — **aceite humano individual registrado** (restrito ao estudo parcial `F000–F058`, não equivale à aprovação da cinemática completa).
+- [Parecer independente e limites](UnityStudyF000-058V2/creative-review.md): **[LIBERADO ESTUDO F0-58]**, baseado em PNGs brutos Unity, sem reprodução de vídeo ou áudio. Não equivale à aprovação da cinemática completa.
+- [Recibo Unity](UnityStudyF000-058V2/receipt.json) e [hashes/fontes](UnityStudyF000-058V2/source-integrity.json): **59/59 capturas, zero exposições ausentes**; intervalos reais **29,9397–50,0819 ms**, média **40,1424 ms**.
+- Proveniência: `f043-058-v2-native-generation.json` (e `f043-058-v1-native-generation.json` preservada). `study-manifest.json` permanece íntegro apontando para `UnityStudyF000-058V2`.
+
+**Próximo passo:** após reset de cota do gerador de imagens (ou via handover explícito ao Codex), produzir **`F059–F074`** (final do Plano 1 *Espaço ocupado*: *dedos entrelaçam; olhar procura lugar livre*, com precedência de olhos em 2 frames antes da cabeça) ancorado em `yuna-f052-058-v2/f058.png`, capturar `UnityStudyF000-074V1` (75/75) e submeter ao Diretor Criativo.
+
+---
+
+## Checkpoint histórico anterior — retomada Codex, 22/11/2026
 
 Sessão **`20261122-codex-resume-cinematics`**, após handover humano explícito dos registros **129/130/133/134** e de **CIN01**. Branch `cinematics`; base recebida `0b385d7`. O checkpoint histórico do Antigravity abaixo está preservado, mas esta seção governa a retomada.
 

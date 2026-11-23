@@ -1,0 +1,304 @@
+{
+    "kind": "Unity Play Mode study, not completed cinematic",
+    "expectedDrawings": 59,
+    "capturedDrawings": 59,
+    "missedExposures": 0,
+    "exposureRate": 25,
+    "exposures": [
+        {
+            "drawing": 0,
+            "realtimeSeconds": 0.004638292000000099,
+            "unityFrame": 5
+        },
+        {
+            "drawing": 1,
+            "realtimeSeconds": 0.05346708300000014,
+            "unityFrame": 10
+        },
+        {
+            "drawing": 2,
+            "realtimeSeconds": 0.09321566699999995,
+            "unityFrame": 14
+        },
+        {
+            "drawing": 3,
+            "realtimeSeconds": 0.13307312500000013,
+            "unityFrame": 18
+        },
+        {
+            "drawing": 4,
+            "realtimeSeconds": 0.17310787499999948,
+            "unityFrame": 22
+        },
+        {
+            "drawing": 5,
+            "realtimeSeconds": 0.21303424999999977,
+            "unityFrame": 26
+        },
+        {
+            "drawing": 6,
+            "realtimeSeconds": 0.25311508299999999,
+            "unityFrame": 30
+        },
+        {
+            "drawing": 7,
+            "realtimeSeconds": 0.2930421669999994,
+            "unityFrame": 34
+        },
+        {
+            "drawing": 8,
+            "realtimeSeconds": 0.3330428329999995,
+            "unityFrame": 38
+        },
+        {
+            "drawing": 9,
+            "realtimeSeconds": 0.3730310829999999,
+            "unityFrame": 42
+        },
+        {
+            "drawing": 10,
+            "realtimeSeconds": 0.4130368329999996,
+            "unityFrame": 46
+        },
+        {
+            "drawing": 11,
+            "realtimeSeconds": 0.45305787499999985,
+            "unityFrame": 50
+        },
+        {
+            "drawing": 12,
+            "realtimeSeconds": 0.4929434170000002,
+            "unityFrame": 54
+        },
+        {
+            "drawing": 13,
+            "realtimeSeconds": 0.5329862499999996,
+            "unityFrame": 58
+        },
+        {
+            "drawing": 14,
+            "realtimeSeconds": 0.5729774169999997,
+            "unityFrame": 62
+        },
+        {
+            "drawing": 15,
+            "realtimeSeconds": 0.6131058749999996,
+            "unityFrame": 66
+        },
+        {
+            "drawing": 16,
+            "realtimeSeconds": 0.6530464999999994,
+            "unityFrame": 70
+        },
+        {
+            "drawing": 17,
+            "realtimeSeconds": 0.6930912080000002,
+            "unityFrame": 74
+        },
+        {
+            "drawing": 18,
+            "realtimeSeconds": 0.7338743330000002,
+            "unityFrame": 78
+        },
+        {
+            "drawing": 19,
+            "realtimeSeconds": 0.7732709579999995,
+            "unityFrame": 82
+        },
+        {
+            "drawing": 20,
+            "realtimeSeconds": 0.8131326669999996,
+            "unityFrame": 86
+        },
+        {
+            "drawing": 21,
+            "realtimeSeconds": 0.8532823330000001,
+            "unityFrame": 90
+        },
+        {
+            "drawing": 22,
+            "realtimeSeconds": 0.8931854999999995,
+            "unityFrame": 94
+        },
+        {
+            "drawing": 23,
+            "realtimeSeconds": 0.9331558749999998,
+            "unityFrame": 98
+        },
+        {
+            "drawing": 24,
+            "realtimeSeconds": 0.9732087079999996,
+            "unityFrame": 102
+        },
+        {
+            "drawing": 25,
+            "realtimeSeconds": 1.013482625,
+            "unityFrame": 106
+        },
+        {
+            "drawing": 26,
+            "realtimeSeconds": 1.0532474579999996,
+            "unityFrame": 110
+        },
+        {
+            "drawing": 27,
+            "realtimeSeconds": 1.0933998750000003,
+            "unityFrame": 114
+        },
+        {
+            "drawing": 28,
+            "realtimeSeconds": 1.1335891670000003,
+            "unityFrame": 118
+        },
+        {
+            "drawing": 29,
+            "realtimeSeconds": 1.1733805419999995,
+            "unityFrame": 122
+        },
+        {
+            "drawing": 30,
+            "realtimeSeconds": 1.2133600829999996,
+            "unityFrame": 126
+        },
+        {
+            "drawing": 31,
+            "realtimeSeconds": 1.2532407919999998,
+            "unityFrame": 130
+        },
+        {
+            "drawing": 32,
+            "realtimeSeconds": 1.2931743749999996,
+            "unityFrame": 134
+        },
+        {
+            "drawing": 33,
+            "realtimeSeconds": 1.3337539170000002,
+            "unityFrame": 138
+        },
+        {
+            "drawing": 34,
+            "realtimeSeconds": 1.3733014580000003,
+            "unityFrame": 142
+        },
+        {
+            "drawing": 35,
+            "realtimeSeconds": 1.413106708,
+            "unityFrame": 146
+        },
+        {
+            "drawing": 36,
+            "realtimeSeconds": 1.4532658329999997,
+            "unityFrame": 150
+        },
+        {
+            "drawing": 37,
+            "realtimeSeconds": 1.4938773750000003,
+            "unityFrame": 154
+        },
+        {
+            "drawing": 38,
+            "realtimeSeconds": 1.5338207500000003,
+            "unityFrame": 158
+        },
+        {
+            "drawing": 39,
+            "realtimeSeconds": 1.5733763749999997,
+            "unityFrame": 162
+        },
+        {
+            "drawing": 40,
+            "realtimeSeconds": 1.6132034170000003,
+            "unityFrame": 166
+        },
+        {
+            "drawing": 41,
+            "realtimeSeconds": 1.6532584579999999,
+            "unityFrame": 170
+        },
+        {
+            "drawing": 42,
+            "realtimeSeconds": 1.6932762079999995,
+            "unityFrame": 174
+        },
+        {
+            "drawing": 43,
+            "realtimeSeconds": 1.7332045420000002,
+            "unityFrame": 178
+        },
+        {
+            "drawing": 44,
+            "realtimeSeconds": 1.7731969579999998,
+            "unityFrame": 182
+        },
+        {
+            "drawing": 45,
+            "realtimeSeconds": 1.813215167,
+            "unityFrame": 186
+        },
+        {
+            "drawing": 46,
+            "realtimeSeconds": 1.853253208,
+            "unityFrame": 190
+        },
+        {
+            "drawing": 47,
+            "realtimeSeconds": 1.8831929579999996,
+            "unityFrame": 193
+        },
+        {
+            "drawing": 48,
+            "realtimeSeconds": 1.9332748749999996,
+            "unityFrame": 198
+        },
+        {
+            "drawing": 49,
+            "realtimeSeconds": 1.973234625,
+            "unityFrame": 202
+        },
+        {
+            "drawing": 50,
+            "realtimeSeconds": 2.013115708,
+            "unityFrame": 206
+        },
+        {
+            "drawing": 51,
+            "realtimeSeconds": 2.053075292,
+            "unityFrame": 210
+        },
+        {
+            "drawing": 52,
+            "realtimeSeconds": 2.092998167,
+            "unityFrame": 214
+        },
+        {
+            "drawing": 53,
+            "realtimeSeconds": 2.1329407499999997,
+            "unityFrame": 218
+        },
+        {
+            "drawing": 54,
+            "realtimeSeconds": 2.173127083,
+            "unityFrame": 222
+        },
+        {
+            "drawing": 55,
+            "realtimeSeconds": 2.2130514999999999,
+            "unityFrame": 226
+        },
+        {
+            "drawing": 56,
+            "realtimeSeconds": 2.253055333,
+            "unityFrame": 230
+        },
+        {
+            "drawing": 57,
+            "realtimeSeconds": 2.2929643749999997,
+            "unityFrame": 234
+        },
+        {
+            "drawing": 58,
+            "realtimeSeconds": 2.332895667,
+            "unityFrame": 238
+        }
+    ]
+}

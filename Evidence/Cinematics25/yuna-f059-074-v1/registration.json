@@ -1,0 +1,141 @@
+{
+  "raw": "Evidence/Cinematics25/yuna-f059-074-v1-raw.png",
+  "sha256": "8100357962cab967398773bdec2f706310c339a4344acee080dfcde5830393d3",
+  "pageScale": 1.6066176470588236,
+  "canvas": [
+    512,
+    512
+  ],
+  "frames": [
+    {
+      "frame": 59,
+      "translation": [
+        -24,
+        23
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 60,
+      "translation": [
+        6,
+        23
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 61,
+      "translation": [
+        34,
+        23
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 62,
+      "translation": [
+        65,
+        23
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 63,
+      "translation": [
+        -24,
+        19
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 64,
+      "translation": [
+        4,
+        20
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 65,
+      "translation": [
+        34,
+        19
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 66,
+      "translation": [
+        64,
+        19
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 67,
+      "translation": [
+        -25,
+        14
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 68,
+      "translation": [
+        4,
+        14
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 69,
+      "translation": [
+        34,
+        14
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 70,
+      "translation": [
+        62,
+        14
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 71,
+      "translation": [
+        -29,
+        7
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 72,
+      "translation": [
+        -1,
+        7
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 73,
+      "translation": [
+        28,
+        7
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 74,
+      "translation": [
+        62,
+        6
+      ],
+      "soleY": 480
+    }
+  ],
+  "matte": "Remap generated alpha A to clamp(round((A-194)*255/47),0,255) before slicing",
+  "reference": "Evidence/Cinematics25/yuna-f052-058-v2/f058.png"
+}

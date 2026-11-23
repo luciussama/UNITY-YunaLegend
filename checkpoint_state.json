@@ -1,0 +1,76 @@
+{
+  "schema": "yuna-cinematics-checkpoint-v1",
+  "updated_at": "2026-11-23T06:13:00-03:00",
+  "status": "pausado, por enquanto",
+  "session": "20261122-antigravity-cin-orquestrador",
+  "handover_from_session": "20261122-antigravity-cin-orquestrador",
+  "registry_jobs": [129, 130, 133, 134],
+  "plan_task": "CIN01",
+  "fps": 25,
+  "active_scene": "CIN01",
+  "active_segment": "SEG_01",
+  "active_frames": "F059-F074",
+  "scenes": {
+    "CIN01": {
+      "title": "Abertura da Sala de Brinquedos",
+      "script": "Evidence/Cinematics25/CIN01-direcao.md",
+      "frames": 625,
+      "status": "EM_EXECUCAO",
+      "segments": {
+        "SEG_01": {
+          "name": "Espaco ocupado",
+          "frames": "0-74",
+          "status": "EM_EXECUCAO",
+          "note": "F000-058 aprovados (humano, diario 1465; intocaveis). F059-074 v1 (Evidence/Cinematics25/yuna-f059-074-v1) REPROVADO pelo Agente 1 (diario 1489). Proxima acao: redesenhar F059-074 v2 em Evidence/Cinematics25/yuna-f059-074-v2/ ancorado em yuna-f052-058-v2/f058.png (bbox 83,40,386,485), limpar alpha + registrar via prepare_sheet.py, reenviar ao Agente 1 e capturar UnityStudyF000-074V1.",
+          "agent1_rejection_v1": [
+            "F058->F059: pop de escala (~7px menor na saia, sapatos deslocados), traco mais suave e paleta lavada. Redesenhar F059-F061 na escala/linha/saturacao de F058 antes de entrelacar dedos.",
+            "F064->F065: olhos e cabeca mudam juntos. Olhos devem iniciar busca em F063, cabeca acompanha em F065; repetir atraso de 2 frames na volta (F069->F071).",
+            "F059-F074: coque, elastico rosa e franja travados. Desenhar arrasto de 2-5 frames apos giro da cabeca (coque assenta em F067-F070).",
+            "F065-F074: laco lateral e barra da saia sem reacao ao recolher bracos. Acrescentar ondulacao leve (2-4 frames).",
+            "F071->F072: figura salta ~5-7px para esquerda e coque alarga. Fixar pes no mesmo ponto.",
+            "F066-F074: pausa sem respiracao. Desenhar ciclo leve de ombros/peito (~12-16 frames) sem alterar escala."
+          ],
+          "planned_v2_sheets": [
+            "F059-F062 (2x2, ancora f058.png: mesma escala/cor/traco, inicio do entrelacar)",
+            "F063-F066 (2x2, ancora f062.png: olhos em F063, cabeca em F065)",
+            "F067-F070 (2x2, ancora f066.png: arrasto e assentamento do coque/laco/saia)",
+            "F071-F074 (2x2, ancora f070.png: volta olhos F069->cabeca F071, pes fixos, respiracao)"
+          ]
+        },
+        "SEG_02": {"name": "Frustracao", "frames": "75-174", "status": "PENDENTE"},
+        "SEG_03": {"name": "Aproximacao", "frames": "175-274", "status": "PENDENTE"},
+        "SEG_04": {"name": "Convite", "frames": "275-399", "status": "PENDENTE"},
+        "SEG_05": {"name": "Resposta", "frames": "400-524", "status": "PENDENTE"},
+        "SEG_06": {"name": "Primeiro passo", "frames": "525-624", "status": "PENDENTE"}
+      },
+      "pending_other": [
+        "Nanda azul F000-624",
+        "audio",
+        "integracao na cena",
+        "WebGL + Agente 1 [APROVADO]",
+        "FULL/SEGMENTS mp4 para avaliacao humana"
+      ]
+    },
+    "CIN02": {"title": "O Quarto Escuro", "script": "Evidence/Cinematics25/CIN02-direcao.md", "frames": 300, "status": "PENDENTE"},
+    "CIN03": {"title": "Arena Imaginaria - Golpe Arco-Iris", "script": "Evidence/Cinematics25/CIN03-direcao.md", "frames": 75, "status": "PENDENTE"},
+    "CIN04": {"title": "Perseguicao ao Urso", "script": "Evidence/Cinematics25/CIN04-direcao.md", "frames": 350, "status": "PENDENTE"}
+  },
+  "lock_approved": [],
+  "approved_partial_studies_do_not_touch": [
+    "Evidence/Cinematics25/UnityStudyF000-042ActingV6",
+    "Evidence/Cinematics25/UnityStudyF000-058V2",
+    "Todos os 59 frames F000-058 listados em Evidence/Cinematics25/study-manifest.json"
+  ],
+  "environment": {
+    "venv_python": ".venv-cin/bin/python (Pillow 11.3.0, numpy, imageio-ffmpeg; excluido via .git/info/exclude)",
+    "unity_editor": "/Applications/Unity/Hub/Editor/6000.3.28f1/Unity.app/Contents/MacOS/Unity",
+    "background_tasks": "Nenhum timer, servidor, Unity Editor ou subagente ativo (task-83 e subagentes encerrados).",
+    "git_note": "Trabalho preservado no checkout central (branch cinematics); ha modificacoes locais nao commitadas."
+  },
+  "blocked_previous_session": {
+    "reason": "Cota de geracao de imagem (429 RESOURCE_EXHAUSTED) e cota do modelo anterior no subagente executor.",
+    "cleared_for_handover": true
+  },
+  "agent3_pending": ["Nenhuma cena LOCK_APPROVED; Agente 3 inativo. Ver cleanup_audit.md (ciclo 1 anterior)."],
+  "resume_prompt": "Retomar producao das cinematicas a partir de checkpoint_state.json, assumindo reservas 129/130/133/134 e CIN01 via handover --from-session 20261122-antigravity-cin-orquestrador, respeitando todas as travas LOCK_APPROVED."
+}

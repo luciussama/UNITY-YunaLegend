@@ -1,0 +1,43 @@
+{
+  "raw": "Evidence/Cinematics25/yuna-f048-051-v2-raw.png",
+  "sha256": "602a7aab66ec307b155479762d12f6f3b7a2fa2dca1616118a1f778984978dde",
+  "pageScale": 0.9547325102880658,
+  "canvas": [
+    512,
+    512
+  ],
+  "frames": [
+    {
+      "frame": 48,
+      "translation": [
+        12,
+        -1
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 49,
+      "translation": [
+        -10,
+        1
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 50,
+      "translation": [
+        18,
+        17
+      ],
+      "soleY": 480
+    },
+    {
+      "frame": 51,
+      "translation": [
+        -4,
+        18
+      ],
+      "soleY": 480
+    }
+  ]
+}
