@@ -1,0 +1,14 @@
+{
+  "name": "YunaLegend.Picnic.Core",
+  "rootNamespace": "YunaLegend.Picnic.Core",
+  "references": [],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": true
+}

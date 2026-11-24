@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="5" result="Passed" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-24 18:34:01Z" end-time="2026-11-24 18:34:01Z" duration="0,0514301">
+  <test-suite type="TestSuite" id="1000" name="Yuna Legend - O Quarto dos Brinquedos" fullname="Yuna Legend - O Quarto dos Brinquedos" runstate="Runnable" testcasecount="196" result="Passed" start-time="2026-11-24 18:34:01Z" end-time="2026-11-24 18:34:01Z" duration="0.051430" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1158" name="YunaLegend.Picnic.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Build/PicnicVisualAuditProject/Library/ScriptAssemblies/YunaLegend.Picnic.Tests.dll" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-24 18:34:01Z" end-time="2026-11-24 18:34:01Z" duration="0.044603" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="29724" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1159" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-24 18:34:01Z" end-time="2026-11-24 18:34:01Z" duration="0.044150" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1160" name="Picnic" fullname="YunaLegend.Picnic" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-24 18:34:01Z" end-time="2026-11-24 18:34:01Z" duration="0.043990" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1161" name="Tests" fullname="YunaLegend.Picnic.Tests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-24 18:34:01Z" end-time="2026-11-24 18:34:01Z" duration="0.043843" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1152" name="PicnicCoreTests" fullname="YunaLegend.Picnic.Tests.PicnicCoreTests" classname="YunaLegend.Picnic.Tests.PicnicCoreTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-24 18:34:01Z" end-time="2026-11-24 18:34:01Z" duration="0.043120" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1156" name="IntroWalksDownStairsAndEntersRunning" fullname="YunaLegend.Picnic.Tests.PicnicCoreTests.IntroWalksDownStairsAndEntersRunning" methodname="IntroWalksDownStairsAndEntersRunning" classname="YunaLegend.Picnic.Tests.PicnicCoreTests" runstate="Runnable" seed="976206176" result="Passed" start-time="2026-11-24 18:34:01Z" end-time="2026-11-24 18:34:01Z" duration="0.028500" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1153" name="LevelCatalog_MatchesLegacyStructure" fullname="YunaLegend.Picnic.Tests.PicnicCoreTests.LevelCatalog_MatchesLegacyStructure" methodname="LevelCatalog_MatchesLegacyStructure" classname="YunaLegend.Picnic.Tests.PicnicCoreTests" runstate="Runnable" seed="1155584172" result="Passed" start-time="2026-11-24 18:34:01Z" end-time="2026-11-24 18:34:01Z" duration="0.001027" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1154" name="Narrative_Preserves9OpeningAnd14EndingCards" fullname="YunaLegend.Picnic.Tests.PicnicCoreTests.Narrative_Preserves9OpeningAnd14EndingCards" methodname="Narrative_Preserves9OpeningAnd14EndingCards" classname="YunaLegend.Picnic.Tests.PicnicCoreTests" runstate="Runnable" seed="1649983843" result="Passed" start-time="2026-11-24 18:34:01Z" end-time="2026-11-24 18:34:01Z" duration="0.000769" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1157" name="QaPilot_SkipsStoryAndAdvancesInRunning" fullname="YunaLegend.Picnic.Tests.PicnicCoreTests.QaPilot_SkipsStoryAndAdvancesInRunning" methodname="QaPilot_SkipsStoryAndAdvancesInRunning" classname="YunaLegend.Picnic.Tests.PicnicCoreTests" runstate="Runnable" seed="1781425598" result="Passed" start-time="2026-11-24 18:34:01Z" end-time="2026-11-24 18:34:01Z" duration="0.003077" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1155" name="SensorySpeeds_AndPoseSelection_MatchLegacy" fullname="YunaLegend.Picnic.Tests.PicnicCoreTests.SensorySpeeds_AndPoseSelection_MatchLegacy" methodname="SensorySpeeds_AndPoseSelection_MatchLegacy" classname="YunaLegend.Picnic.Tests.PicnicCoreTests" runstate="Runnable" seed="959726487" result="Passed" start-time="2026-11-24 18:34:01Z" end-time="2026-11-24 18:34:01Z" duration="0.000405" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: C:/Users/sergi/AppData/LocalLow/DeepMindStudio/Yuna Legend - O Quarto dos Brinquedos\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

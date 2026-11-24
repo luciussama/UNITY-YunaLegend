@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="5" result="Failed(Child)" total="5" passed="3" failed="2" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-24 18:18:53Z" end-time="2026-11-24 18:18:53Z" duration="0,0506226">
+  <test-suite type="TestSuite" id="1000" name="Yuna Legend - O Quarto dos Brinquedos" fullname="Yuna Legend - O Quarto dos Brinquedos" runstate="Runnable" testcasecount="196" result="Failed" site="Child" start-time="2026-11-24 18:18:53Z" end-time="2026-11-24 18:18:53Z" duration="0.050623" total="5" passed="3" failed="2" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1158" name="YunaLegend.Picnic.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Build/PicnicVisualAuditProject/Library/ScriptAssemblies/YunaLegend.Picnic.Tests.dll" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-11-24 18:18:53Z" end-time="2026-11-24 18:18:53Z" duration="0.043225" total="5" passed="3" failed="2" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="31088" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1159" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-11-24 18:18:53Z" end-time="2026-11-24 18:18:53Z" duration="0.042972" total="5" passed="3" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1160" name="Picnic" fullname="YunaLegend.Picnic" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-11-24 18:18:53Z" end-time="2026-11-24 18:18:53Z" duration="0.042821" total="5" passed="3" failed="2" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestSuite" id="1161" name="Tests" fullname="YunaLegend.Picnic.Tests" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-11-24 18:18:53Z" end-time="2026-11-24 18:18:53Z" duration="0.042706" total="5" passed="3" failed="2" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="TestFixture" id="1152" name="PicnicCoreTests" fullname="YunaLegend.Picnic.Tests.PicnicCoreTests" classname="YunaLegend.Picnic.Tests.PicnicCoreTests" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-11-24 18:18:53Z" end-time="2026-11-24 18:18:53Z" duration="0.042015" total="5" passed="3" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1156" name="IntroWalksDownStairsAndEntersRunning" fullname="YunaLegend.Picnic.Tests.PicnicCoreTests.IntroWalksDownStairsAndEntersRunning" methodname="IntroWalksDownStairsAndEntersRunning" classname="YunaLegend.Picnic.Tests.PicnicCoreTests" runstate="Runnable" seed="2075712705" result="Failed" start-time="2026-11-24 18:18:53Z" end-time="2026-11-24 18:18:53Z" duration="0.024038" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: Running
+  But was:  Intro
+]]></message>
+                  <stack-trace><![CDATA[at YunaLegend.Picnic.Tests.PicnicCoreTests.IntroWalksDownStairsAndEntersRunning () [0x00055] in C:\Users\sergi\repos\UNITY-YunaLegend\Build\PicnicVisualAuditProject\Assets\Scripts\Tests\EditMode\Picnic\PicnicCoreTests.cs:51
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1153" name="LevelCatalog_MatchesLegacyStructure" fullname="YunaLegend.Picnic.Tests.PicnicCoreTests.LevelCatalog_MatchesLegacyStructure" methodname="LevelCatalog_MatchesLegacyStructure" classname="YunaLegend.Picnic.Tests.PicnicCoreTests" runstate="Runnable" seed="977586654" result="Failed" start-time="2026-11-24 18:18:53Z" end-time="2026-11-24 18:18:53Z" duration="0.001126" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: 15
+  But was:  13
+]]></message>
+                  <stack-trace><![CDATA[at YunaLegend.Picnic.Tests.PicnicCoreTests.LevelCatalog_MatchesLegacyStructure () [0x0003d] in C:\Users\sergi\repos\UNITY-YunaLegend\Build\PicnicVisualAuditProject\Assets\Scripts\Tests\EditMode\Picnic\PicnicCoreTests.cs:15
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1154" name="Narrative_Preserves9OpeningAnd14EndingCards" fullname="YunaLegend.Picnic.Tests.PicnicCoreTests.Narrative_Preserves9OpeningAnd14EndingCards" methodname="Narrative_Preserves9OpeningAnd14EndingCards" classname="YunaLegend.Picnic.Tests.PicnicCoreTests" runstate="Runnable" seed="9795355" result="Passed" start-time="2026-11-24 18:18:53Z" end-time="2026-11-24 18:18:53Z" duration="0.002644" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1157" name="QaPilot_SkipsStoryAndAdvancesInRunning" fullname="YunaLegend.Picnic.Tests.PicnicCoreTests.QaPilot_SkipsStoryAndAdvancesInRunning" methodname="QaPilot_SkipsStoryAndAdvancesInRunning" classname="YunaLegend.Picnic.Tests.PicnicCoreTests" runstate="Runnable" seed="617174599" result="Passed" start-time="2026-11-24 18:18:53Z" end-time="2026-11-24 18:18:53Z" duration="0.004016" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1155" name="SensorySpeeds_AndPoseSelection_MatchLegacy" fullname="YunaLegend.Picnic.Tests.PicnicCoreTests.SensorySpeeds_AndPoseSelection_MatchLegacy" methodname="SensorySpeeds_AndPoseSelection_MatchLegacy" classname="YunaLegend.Picnic.Tests.PicnicCoreTests" runstate="Runnable" seed="1050522425" result="Passed" start-time="2026-11-24 18:18:53Z" end-time="2026-11-24 18:18:53Z" duration="0.000496" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: C:/Users/sergi/AppData/LocalLow/DeepMindStudio/Yuna Legend - O Quarto dos Brinquedos\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

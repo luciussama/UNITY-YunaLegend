@@ -17,7 +17,7 @@ namespace YunaLegend.UI
         public const string VolumeKey = "YunaLegend.MasterVolume";
 
         [Header("Cena de destino")]
-        [SerializeField] private string gameplaySceneName = "BearChase_Gameplay";
+        [SerializeField] private string gameplaySceneName = "Picnic_Gameplay";
         [SerializeField] private string selectedPhaseScene;
 
         [Header("Menu")]

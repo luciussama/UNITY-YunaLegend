@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BearChase_Gameplay.unity
     guid: 8c1a28a69a5a24830b7e03d97849a91f
+  - enabled: 1
+    path: Assets/Scenes/Picnic_Gameplay.unity
+    guid: b72759d87e1932644bc1727afdb90dc2
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
