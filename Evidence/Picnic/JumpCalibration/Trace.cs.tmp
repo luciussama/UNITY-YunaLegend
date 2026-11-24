@@ -1,0 +1,9 @@
+using System.Reflection;
+using YunaLegend.Picnic.Core;
+var s=new PicnicSimulation();s.SkipNarrative();
+for(int f=0;f<60*40&&s.Phase==PicnicPhase.Playing;f++)
+{
+var input=PicnicQaPilot.Read(s);
+if(s.X>39&&s.X<43 && (f%6==0||input.Jump))Console.WriteLine($"t={s.Time:F3} x={s.X:F4} y={s.Y:F3} vy={s.VelocityY:F3} sup={s.SupportIndex} health={s.Hearts} axis={input.Axis} jump={input.Jump}");
+s.Step(1f/60,input.Axis,input.Jump);
+}

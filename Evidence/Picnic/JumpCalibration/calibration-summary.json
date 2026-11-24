@@ -1,0 +1,257 @@
+{
+  "method": "Core C# compiled net8 console; normal player commands; independent prediction snapshots; no teleports, collider changes, altered velocities or disabled enemies.",
+  "supportCount": 135,
+  "neighbourRowsAtTimeZero": 134,
+  "neighboursAreNotMandatoryJumpRoute": true,
+  "takeoffAndLandingPointsAreFrameSampled": true,
+  "timeZeroMeasurementsUnit": "Unity world metres; seconds; angle radians",
+  "runs": [
+    {
+      "hz": 30,
+      "reachedEnding": true,
+      "Phase": 5,
+      "X": 476.79395,
+      "Y": 0,
+      "Time": 207.14648,
+      "SupportIndex": 115,
+      "Hearts": 3,
+      "Falls": 0,
+      "Jumps": 131,
+      "events": [
+        {
+          "e": "panic_started_0",
+          "X": 106.71325,
+          "Y": 0.6400008,
+          "Time": 46.96946,
+          "Hearts": 3
+        },
+        {
+          "e": "panic_ended_0",
+          "X": 116.33922,
+          "Y": 0.4,
+          "Time": 49.978436,
+          "Hearts": 3
+        },
+        {
+          "e": "panic_started_1",
+          "X": 196.91821,
+          "Y": 0,
+          "Time": 86.484276,
+          "Hearts": 3
+        },
+        {
+          "e": "panic_ended_1",
+          "X": 212.49487,
+          "Y": 0.4,
+          "Time": 91.349754,
+          "Hearts": 3
+        },
+        {
+          "e": "panic_started_2",
+          "X": 454.19675,
+          "Y": 0.44444448,
+          "Time": 199.60666,
+          "Hearts": 3
+        },
+        {
+          "e": "panic_ended_2",
+          "X": 473.40085,
+          "Y": 0,
+          "Time": 205.6052,
+          "Hearts": 3
+        }
+      ],
+      "wallSeconds": 8.1566534,
+      "pilotCalls": 6216,
+      "maxPilotMs": 24.368
+    },
+    {
+      "hz": 60,
+      "reachedEnding": true,
+      "Phase": 5,
+      "X": 476.79437,
+      "Y": 0,
+      "Time": 207.92963,
+      "SupportIndex": 115,
+      "Hearts": 3,
+      "Falls": 0,
+      "Jumps": 136,
+      "events": [
+        {
+          "e": "panic_started_0",
+          "X": 106.712845,
+          "Y": 0.05944542,
+          "Time": 47.26119,
+          "Hearts": 3
+        },
+        {
+          "e": "panic_ended_0",
+          "X": 116.5788,
+          "Y": 0.4,
+          "Time": 50.34518,
+          "Hearts": 3
+        },
+        {
+          "e": "panic_started_1",
+          "X": 196.91411,
+          "Y": 1.4400008,
+          "Time": 87.633995,
+          "Hearts": 3
+        },
+        {
+          "e": "panic_ended_1",
+          "X": 212.38408,
+          "Y": 0.4,
+          "Time": 92.46615,
+          "Hearts": 3
+        },
+        {
+          "e": "panic_started_2",
+          "X": 454.19717,
+          "Y": 0.44444448,
+          "Time": 200.3898,
+          "Hearts": 3
+        },
+        {
+          "e": "panic_ended_2",
+          "X": 473.40128,
+          "Y": 0,
+          "Time": 206.38834,
+          "Hearts": 3
+        }
+      ],
+      "wallSeconds": 7.8411236,
+      "pilotCalls": 12478,
+      "maxPilotMs": 6.1949
+    },
+    {
+      "hz": 120,
+      "reachedEnding": true,
+      "Phase": 5,
+      "X": 476.7954,
+      "Y": 0,
+      "Time": 206.98819,
+      "SupportIndex": 115,
+      "Hearts": 3,
+      "Falls": 0,
+      "Jumps": 131,
+      "events": [
+        {
+          "e": "panic_started_0",
+          "X": 106.7056,
+          "Y": 0.9000008,
+          "Time": 46.777752,
+          "Hearts": 3
+        },
+        {
+          "e": "panic_ended_0",
+          "X": 116.331566,
+          "Y": 0.4,
+          "Time": 49.786728,
+          "Hearts": 3
+        },
+        {
+          "e": "panic_started_1",
+          "X": 196.9173,
+          "Y": 0,
+          "Time": 86.33431,
+          "Hearts": 3
+        },
+        {
+          "e": "panic_ended_1",
+          "X": 212.3606,
+          "Y": 0.4,
+          "Time": 91.158134,
+          "Hearts": 3
+        },
+        {
+          "e": "panic_started_2",
+          "X": 454.1982,
+          "Y": 0.44444448,
+          "Time": 199.44836,
+          "Hearts": 3
+        },
+        {
+          "e": "panic_ended_2",
+          "X": 473.4023,
+          "Y": 0,
+          "Time": 205.4469,
+          "Hearts": 3
+        }
+      ],
+      "wallSeconds": 7.7047071,
+      "pilotCalls": 24842,
+      "maxPilotMs": 7.8267
+    },
+    {
+      "hz": 0,
+      "reachedEnding": true,
+      "Phase": 5,
+      "X": 474.89163,
+      "Y": 0,
+      "Time": 207.44977,
+      "SupportIndex": 115,
+      "Hearts": 2,
+      "Falls": 0,
+      "Jumps": 132,
+      "events": [
+        {
+          "e": "hit",
+          "X": 40.856617,
+          "Y": 0.44713333,
+          "Time": 17.439754,
+          "Hearts": 2
+        },
+        {
+          "e": "panic_started_0",
+          "X": 106.71587,
+          "Y": 0.8199984,
+          "Time": 46.8294,
+          "Hearts": 2
+        },
+        {
+          "e": "panic_ended_0",
+          "X": 116.51474,
+          "Y": 0.4,
+          "Time": 49.89221,
+          "Hearts": 2
+        },
+        {
+          "e": "panic_started_1",
+          "X": 196.9085,
+          "Y": 0,
+          "Time": 87.70076,
+          "Hearts": 2
+        },
+        {
+          "e": "panic_ended_1",
+          "X": 212.33617,
+          "Y": 0.4,
+          "Time": 92.52101,
+          "Hearts": 2
+        },
+        {
+          "e": "panic_started_2",
+          "X": 454.19247,
+          "Y": 0.49500003,
+          "Time": 200.77122,
+          "Hearts": 2
+        },
+        {
+          "e": "panic_ended_2",
+          "X": 473.39038,
+          "Y": 0,
+          "Time": 206.76797,
+          "Hearts": 2
+        }
+      ],
+      "wallSeconds": 6.9158276,
+      "pilotCalls": 8967,
+      "maxPilotMs": 6.8733
+    }
+  ],
+  "baselinePreserved": "Evidence/PicnicVisualAudit/TechnicalAudit/results.json",
+  "runtimePlayerPhysicsChanged": false,
+  "optInActivationChanged": false,
+  "unityAndWebGlValidation": "pending root validation"
+}

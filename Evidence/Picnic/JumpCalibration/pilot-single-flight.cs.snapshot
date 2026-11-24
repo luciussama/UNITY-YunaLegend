@@ -1,0 +1,163 @@
+using System;
+using System.Runtime.CompilerServices;
+
+namespace YunaLegend.Picnic.Core
+{
+    public readonly struct PicnicInput
+    {
+        public float Axis { get; }
+        public bool Jump { get; }
+
+        public PicnicInput(float axis, bool jump)
+        {
+            Axis = axis;
+            Jump = jump;
+        }
+    }
+
+    /// <summary>Opt-in pilot forecasts ordinary commands on independent copies of the real domain state.</summary>
+    public static class PicnicQaPilot
+    {
+        private sealed class Plan
+        {
+            public int Support = -1;
+            public float Recheck;
+            public float JumpAt = float.PositiveInfinity;
+            public float Axis = 1f;
+        }
+
+        private static readonly ConditionalWeakTable<PicnicSimulation, Plan> Plans =
+            new ConditionalWeakTable<PicnicSimulation, Plan>();
+
+        public static PicnicInput Read(PicnicSimulation sim)
+        {
+            if (sim.Phase != PicnicPhase.Playing)
+            {
+                return new PicnicInput(0f, false);
+            }
+            if (!sim.Grounded)
+            {
+                return new PicnicInput(1f, false);
+            }
+            Plan plan = Plans.GetOrCreateValue(sim);
+            if (plan.Support != sim.SupportIndex || sim.Time >= plan.Recheck)
+            {
+                BuildPlan(sim, plan);
+            }
+            bool jump = sim.Time + 0.0001f >= plan.JumpAt;
+            if (jump)
+            {
+                plan.Recheck = sim.Time + 0.12f;
+                plan.JumpAt = float.PositiveInfinity;
+            }
+            return new PicnicInput(plan.Axis, jump);
+        }
+
+        private static void BuildPlan(PicnicSimulation sim, Plan plan)
+        {
+            plan.Support = sim.SupportIndex;
+            plan.Recheck = sim.Time + 0.15f;
+            plan.JumpAt = float.PositiveInfinity;
+            plan.Axis = 1f;
+            PicnicSimulation walk = sim.CopyForPrediction();
+            bool safeWalk = true;
+            for (int step = 0; step < 84; step++)
+            {
+                walk.Step(1f / 60f, 1f);
+                if (!Safe(sim, walk))
+                {
+                    safeWalk = false;
+                    break;
+                }
+            }
+            if (safeWalk && (walk.Grounded || walk.VelocityY > 0f))
+            {
+                return;
+            }
+            float best = float.NegativeInfinity;
+            for (int mode = 0; mode < 2; mode++)
+            {
+                PicnicSimulation approach = sim.CopyForPrediction();
+                for (int delay = 0; delay <= 24; delay++)
+                {
+                    if (delay > 0)
+                    {
+                        approach.Step(1f / 30f, mode == 0 ? 1f : 0f);
+                    }
+                    if (!Safe(sim, approach) || !approach.Grounded)
+                    {
+                        break;
+                    }
+                    PicnicSimulation flight = approach.CopyForPrediction();
+                    flight.Step(1f / 120f, 1f, true);
+                    bool landed = false;
+                    for (int step = 0; step < 156; step++)
+                    {
+                        flight.Step(1f / 120f, 1f);
+                        if (!Safe(sim, flight))
+                        {
+                            break;
+                        }
+                        if (flight.Grounded)
+                        {
+                            landed = true;
+                            break;
+                        }
+                    }
+                    if (!landed || flight.X <= sim.X + 0.15f)
+                    {
+                        continue;
+                    }
+                    var support = sim.Stage.Supports[flight.SupportIndex];
+                    float margin = Math.Min(flight.X - support.Left(flight.Time), support.Right(flight.Time) - flight.X);
+                    float score = flight.X + Math.Min(0.3f, margin) * 0.2f - (approach.Time - sim.Time) * 4f;
+                    if (score <= best)
+                    {
+                        continue;
+                    }
+                    best = score;
+                    plan.Axis = mode == 0 ? 1f : 0f;
+                    plan.JumpAt = approach.Time;
+                }
+            }
+            if (!float.IsNegativeInfinity(best))
+            {
+                plan.Recheck = plan.JumpAt + 0.05f;
+            }
+            if (float.IsNegativeInfinity(best))
+            {
+                PicnicSimulation shortWalk = sim.CopyForPrediction();
+                for (int step = 0; step < 12; step++)
+                {
+                    shortWalk.Step(1f / 120f, 1f);
+                }
+                plan.Axis = Safe(sim, shortWalk) ? 1f : sim.Panic ? 1f : -1f;
+            }
+        }
+
+        private static bool Safe(PicnicSimulation original, PicnicSimulation forecast)
+        {
+            if (forecast.Phase == PicnicPhase.Defeat || forecast.Phase == PicnicPhase.Rescuing
+                || forecast.Hearts < original.Hearts || forecast.Falls != original.Falls)
+            {
+                return false;
+            }
+            foreach (var creature in forecast.Creatures)
+            {
+                if (!creature.Active || Math.Abs(forecast.X - creature.X) > 0.55f
+                    || (creature.Spec.Kind == PicnicCreatureKind.Worm && creature.Y < 0.1f))
+                {
+                    continue;
+                }
+                float top = creature.Y + (creature.Spec.Kind == PicnicCreatureKind.Worm ? 0f : 0.55f);
+                if (forecast.Y <= top + 0.2f && forecast.Y + 1.55f >= creature.Y)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+}
+
+

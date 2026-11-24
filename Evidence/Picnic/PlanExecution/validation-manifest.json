@@ -1,0 +1,70 @@
+{
+  "unity": "6000.3.28f1",
+  "session": "codex-20261124-picnic-plan-execution",
+  "sourceSha256": {
+    "Assets/Scripts/Runtime/Picnic/Core/PicnicNarrative.cs": "214db0c1a1375bc33ddfa24d5e74e5c44605af6212f4c5ef0b538cec2e55f918",
+    "Assets/Scripts/Runtime/Picnic/Core/PicnicOpeningComposition.cs": "969c28c176bc88aed443736630aed37a82d0d1f9e34f3abd72daf6a559a2964a",
+    "Assets/Scripts/Runtime/Picnic/Core/PicnicQaPilot.cs": "ed6e8bc291f5a5365cab51c66c0e74f2cf590fdae492da3463714a228157149b",
+    "Assets/Scripts/Runtime/Picnic/Core/PicnicReferenceLayout.cs": "ef34dab119c30b25f2a8a476262292ff36ec0f4968a7f9c87022973826cfd73d",
+    "Assets/Scripts/Runtime/Picnic/Core/PicnicSimulation.cs": "c102285e029c9607fc4425b3cae2fc94ec56b4efee5fc94b5c4d1edbdea2781c",
+    "Assets/Scripts/Runtime/Picnic/Core/PicnicStageSpec.cs": "3fce714c0583dab29a0a39750a13a15cb3ccf6d4195c25b08a45ea237686271e",
+    "Assets/Scripts/Runtime/Picnic/Core/PicnicSupportMeasurement.cs": "5613b59942bcfe2d111f6624ef95f138dc72011f38a5adedc02e9774e3d45a18",
+    "Assets/Scripts/Runtime/Picnic/Runtime/PicnicArt.cs": "cbe71036c42456476a3a3911fc72b39f759278df9a0725ddcf58babe6a654b7a",
+    "Assets/Scripts/Runtime/Picnic/Runtime/PicnicAudioController.cs": "d90a79e3c1e4879103137e83cda88a1daa5ce713623d2b5a87c8628ab24c5767",
+    "Assets/Scripts/Runtime/Picnic/Runtime/PicnicCharacterController.cs": "66c928ee3268679226a25b20f9091b92cf967ba2ba18baa65886b6a9a605340c",
+    "Assets/Scripts/Runtime/Picnic/Runtime/PicnicCreatureController.cs": "81ea18b81dc1956f9b2d1a1bed11bda66b8e0a1f7a9d332c6be5d4acaf267a5e",
+    "Assets/Scripts/Runtime/Picnic/Runtime/PicnicHoldButton.cs": "e09a5cc55eded0beeb485e3f0caab32339478f6b816d292c576e03ed5f7b2636",
+    "Assets/Scripts/Runtime/Picnic/Runtime/PicnicHudController.cs": "0ca876636f69a874179f8c06d6545fc97ad75f9e48ec310987265247d9e85830",
+    "Assets/Scripts/Runtime/Picnic/Runtime/PicnicHudSymbol.cs": "a73e3184ff8c5fdd86e9ce57e452195846805aa5d4f933a6264b1b86f89cb157",
+    "Assets/Scripts/Runtime/Picnic/Runtime/PicnicInputAdapter.cs": "b38d32ae4d255d3bee42c4104a92577cdb06867e4942bcaea4e864722b80d32b",
+    "Assets/Scripts/Runtime/Picnic/Runtime/PicnicNandaController.cs": "a9883922cc85e896e292587cb17bf05af2153e4f154f44586272561259650815",
+    "Assets/Scripts/Runtime/Picnic/Runtime/PicnicNarrativeController.cs": "c97b612ed556e3cf16e624ff1385aac8ade0fbebf9cbd55778409daad3fa8250",
+    "Assets/Scripts/Runtime/Picnic/Runtime/PicnicPlatformController.cs": "c4e8d544b8536fe602ae6b34c5b981fd6045422b095c19d28f42e81bd619050b",
+    "Assets/Scripts/Runtime/Picnic/Runtime/PicnicSceneryController.cs": "7c8f379e1b7b51f8befa550156767470aa377b8d86d8973cc0bc659a2163dc33",
+    "Assets/Scripts/Runtime/Picnic/Runtime/PicnicStageBootstrap.cs": "3b0b68bbd68c3a927497d00b7aad8e3e27e942fdfa473ad69aca518f38fdbe5a",
+    "Assets/Scripts/Runtime/Picnic/Runtime/PicnicUi.cs": "f821fc8effe8ae3b7d2bdfff751edddaa57d0297ce88274d1e6c53a1463541c2",
+    "Assets/Scripts/Runtime/Picnic/Runtime/PicnicWheelView.cs": "d434a7e530eae90108d063107536fdc3269a18f13d9438367da3b8bd5fab8ef6",
+    "Assets/Scripts/Tests/EditMode/Picnic/PicnicJumpPlanningTests.cs": "7c6850c2d64cd11d86bd1a4089b337728eb3bc074e9bd31233cbd2f4d1c09f01",
+    "Assets/Scripts/Tests/EditMode/Picnic/PicnicOpeningCompositionTests.cs": "5919c1d135032838184af6ab310a4c7dc0c6432d126ad8adda356251f9ed000d",
+    "Assets/Scripts/Tests/EditMode/Picnic/PicnicSimulationTests.cs": "c960f8fe76d925418d4c98341715c38d34ef46ef4c01ec4fef58033e3c565cd9",
+    "Assets/Art/Picnic/Resources/Picnic/opening-bg.png": "d514c29d46c1a5a8253d3b25642d319ae71e7a7f1213ac7f07e9678f1749b1d6",
+    "Assets/Art/Picnic/Resources/Picnic/yuna-pose1.png": "3ded4d906251146c3e180efad9c9d1b463d4f4d0873d52744f388ad885305d9a",
+    "Assets/Art/Picnic/Resources/Picnic/yuna-pose2.png": "88ac2f2bfda4e3ba2bf2a8c49eda39f42ec8c7e6e7798b06e7a49c76f5cc6e7c",
+    "Assets/Art/Picnic/Resources/Picnic/nanda0.png": "3b59571599ea265fed47627293ecc088d287a59e408ab98402b03f9744cb4f23"
+  },
+  "tests": {
+    "EditMode": {
+      "result": "Passed",
+      "total": "25",
+      "passed": "25",
+      "failed": "0",
+      "duration": "88,8870204"
+    },
+    "PlayMode": {
+      "result": "Passed",
+      "total": "3",
+      "passed": "3",
+      "failed": "0",
+      "duration": "0,148703"
+    }
+  },
+  "buildSha256": {
+    "WebGL/index.html": "6a16c8f975a435ba653c9a8e0b94cf1625f9f0ae9345c92982c28c1e9c4d2c5f",
+    "WebGL/Build/WebGL.data.unityweb": "cb4a61211f062c2a0444f1a1c953384ffb18d0773866162f1a04558ab4386483",
+    "WebGL/Build/WebGL.framework.js.unityweb": "d0ef5726328da9dadeea2ed1e38d1db88e9d8cc987be9ea77195612dbc385dff",
+    "WebGL/Build/WebGL.loader.js": "6292dcc4c7cf1694438cbc4d42ce4f5ca9bdc1b2e0a5b4ac488fb405ff6bc0b7",
+    "WebGL/Build/WebGL.wasm.unityweb": "29a1055d0725e5c26900d2efc34cb91bd716c600a5c3174ecc85e18351cf64da",
+    "WebGL/TemplateData/favicon.ico": "9c13beb90ee8f70580d52a21d5233970d1c89e71e4a34a462c22610941c3c77f",
+    "WebGL/TemplateData/fullscreen-button.png": "21221581673a54b8139d408d4a3f8d2b879e86827d4b6fc53b995ff7a99ee3e9",
+    "WebGL/TemplateData/MemoryProfiler.png": "0ce87be20d0c24ab6cb73b57de2004da261cc2a641e69319c6ae3fe11fc85483",
+    "WebGL/TemplateData/progress-bar-empty-dark.png": "bbee7131afe8a3365906240d89184dc86234c119467f390bc4bc6802328fdb4d",
+    "WebGL/TemplateData/progress-bar-empty-light.png": "143696c060ad43d6c30f19ff5f49000927a139a2a1e4c9f45fafaa2b90d7d2be",
+    "WebGL/TemplateData/progress-bar-full-dark.png": "3306a6244dcb3926fca38a28e3ced589df8ff1beed955eb17c0bbf01c918bc62",
+    "WebGL/TemplateData/progress-bar-full-light.png": "12395ea785480c5cdf12fade6e6cbf49666d5bb1cef7240c113dbcba6bdc5c87",
+    "WebGL/TemplateData/style.css": "8e3625e108a61dcd1d31303376d9e02d7bdc08921d254e8f4359b892b3825caa",
+    "WebGL/TemplateData/unity-logo-dark.png": "c1b72d26c096487dabc948b54bc203f8dac7ed4e3f5733918798e858acb4b159",
+    "WebGL/TemplateData/unity-logo-light.png": "002990aea0d946833cadc1519d5b7e50a4570bd537a0517dd79a59d3eec84da7",
+    "WebGL/TemplateData/unity-logo-title-footer.png": "9e8b3bdb67c2446d16362fe59449d892100931dbbadfe6a9d923a4142b57a79f",
+    "WebGL/TemplateData/webmemd-icon.png": "c56f5494640cedda273aad38d58e6ab9da625d5b3f4d875c0ff92c6192a569c2"
+  }
+}

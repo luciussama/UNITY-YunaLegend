@@ -1,0 +1,3 @@
+{"hz":30,"Phase":3,"X":116.06269,"Y":-2.8072217,"Time":57.063282,"SupportIndex":-1,"Hearts":1,"Falls":1,"Jumps":37,"events":[{"e":"hit","X":40.850365,"Y":0,"Time":18.25814,"Hearts":2},{"e":"hit","X":63.568966,"Y":0,"Time":28.116323,"Hearts":1},{"e":"panic_started_0","X":106.70337,"Y":1.4400008,"Time":54.137657,"Hearts":1},{"e":"defeat","X":116.06269,"Y":-2.8072217,"Time":57.063282,"Hearts":1}]}
+{"hz":60,"Phase":1,"X":40.799526,"Y":0,"Time":901.22284,"SupportIndex":16,"Hearts":3,"Falls":0,"Jumps":15,"events":[]}
+{"hz":120,"Phase":1,"X":40.710316,"Y":0,"Time":901.22284,"SupportIndex":16,"Hearts":3,"Falls":0,"Jumps":14,"events":[]}

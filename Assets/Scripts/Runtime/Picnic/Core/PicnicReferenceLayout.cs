@@ -152,7 +152,7 @@ namespace YunaLegend.Picnic.Core
             new PicnicSectionSpec("Entre salgueiros", 279.88f),
             new PicnicSectionSpec("O jardim das borboletas", 330.38f),
             new PicnicSectionSpec("A alameda da grande árvore", 391.08f),
-            new PicnicSectionSpec("A grande ?rvore", 450.88f),
+            new PicnicSectionSpec("A grande árvore", 450.88f),
         };
         internal static readonly PicnicCreatureSpec[] Creatures =
         {

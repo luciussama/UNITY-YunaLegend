@@ -1,0 +1,189 @@
+[
+  {
+    "from": 132,
+    "to": 0,
+    "takeoffX": 3.38,
+    "takeoffY": 0.5,
+    "takeoffTime": 0,
+    "landingX": 5.5076427,
+    "landingY": 0,
+    "landingTime": 0.96710455,
+    "gap": -3.7399998
+  },
+  {
+    "from": 0,
+    "to": 1,
+    "takeoffX": 6.2303658,
+    "takeoffY": 0,
+    "takeoffTime": 1.2956128,
+    "landingX": 8.044409,
+    "landingY": 0.55,
+    "landingTime": 2.1201742,
+    "gap": 1.0999994
+  },
+  {
+    "from": 1,
+    "to": 2,
+    "takeoffX": 8.820198,
+    "takeoffY": 0.55,
+    "takeoffTime": 2.4728096,
+    "landingX": 10.801159,
+    "landingY": 0.7,
+    "landingTime": 3.3732572,
+    "gap": 1.0500002
+  },
+  {
+    "from": 2,
+    "to": 3,
+    "takeoffX": 11.8191395,
+    "takeoffY": 0.7,
+    "takeoffTime": 3.8359811,
+    "landingX": 14.028696,
+    "landingY": 0,
+    "landingTime": 4.853954,
+    "gap": 0.8499994
+  },
+  {
+    "from": 3,
+    "to": 4,
+    "takeoffX": 14.028696,
+    "takeoffY": 0,
+    "takeoffTime": 4.853954,
+    "landingX": 15.851061,
+    "landingY": 0.45,
+    "landingTime": 5.6868377,
+    "gap": 0
+  },
+  {
+    "from": 4,
+    "to": 5,
+    "takeoffX": 15.851061,
+    "takeoffY": 0.45,
+    "takeoffTime": 5.6868377,
+    "landingX": 17.673426,
+    "landingY": 0.9,
+    "landingTime": 6.5197215,
+    "gap": 1.9073486E-06
+  },
+  {
+    "from": 5,
+    "to": 6,
+    "takeoffX": 17.673426,
+    "takeoffY": 0.9,
+    "takeoffTime": 6.5197215,
+    "landingX": 19.785965,
+    "landingY": 0.45,
+    "landingTime": 7.4876914,
+    "gap": 0
+  },
+  {
+    "from": 6,
+    "to": 7,
+    "takeoffX": 19.785965,
+    "takeoffY": 0.45,
+    "takeoffTime": 7.4876914,
+    "landingX": 21.901926,
+    "landingY": 0,
+    "landingTime": 8.463118,
+    "gap": 1.9073486E-06
+  },
+  {
+    "from": 7,
+    "to": 8,
+    "takeoffX": 22.693144,
+    "takeoffY": 0,
+    "takeoffTime": 9.254335,
+    "landingX": 24.607176,
+    "landingY": 0.4,
+    "landingTime": 10.128885,
+    "gap": 1.3000011
+  },
+  {
+    "from": 8,
+    "to": 9,
+    "takeoffX": 25.329893,
+    "takeoffY": 0.4,
+    "takeoffTime": 10.45739,
+    "landingX": 27.253925,
+    "landingY": 0.66,
+    "landingTime": 11.33194,
+    "gap": 1.1500015
+  },
+  {
+    "from": 9,
+    "to": 10,
+    "takeoffX": 27.976643,
+    "takeoffY": 0.66,
+    "takeoffTime": 11.660444,
+    "landingX": 30.10427,
+    "landingY": 0.4,
+    "landingTime": 12.627537,
+    "gap": 1.1500015
+  },
+  {
+    "from": 11,
+    "to": 12,
+    "takeoffX": 32.100243,
+    "takeoffY": 0,
+    "takeoffTime": 13.552963,
+    "landingX": 33.92266,
+    "landingY": 0.45,
+    "landingTime": 14.385847,
+    "gap": 0
+  },
+  {
+    "from": 12,
+    "to": 13,
+    "takeoffX": 33.92266,
+    "takeoffY": 0.45,
+    "takeoffTime": 14.385847,
+    "landingX": 35.74508,
+    "landingY": 0.9,
+    "landingTime": 15.218731,
+    "gap": 0
+  },
+  {
+    "from": 13,
+    "to": 14,
+    "takeoffX": 35.74508,
+    "takeoffY": 0.9,
+    "takeoffTime": 15.218731,
+    "landingX": 37.8261,
+    "landingY": 0.45,
+    "landingTime": 16.1867,
+    "gap": 0
+  },
+  {
+    "from": 14,
+    "to": 16,
+    "takeoffX": 37.8261,
+    "takeoffY": 0.45,
+    "takeoffTime": 16.1867,
+    "landingX": 39.99379,
+    "landingY": 0,
+    "landingTime": 17.162127,
+    "gap": 1.5
+  },
+  {
+    "from": 16,
+    "to": 16,
+    "takeoffX": 40.475735,
+    "takeoffY": 0,
+    "takeoffTime": 17.279669,
+    "landingX": 42.46786,
+    "landingY": 0,
+    "landingTime": 18.180096,
+    "gap": -3.824997
+  },
+  {
+    "from": 16,
+    "to": 17,
+    "takeoffX": 43.401173,
+    "takeoffY": 0,
+    "takeoffTime": 18.407724,
+    "landingX": 45.155823,
+    "landingY": 0.7,
+    "landingTime": 19.198065,
+    "gap": 3.8146973E-06
+  }
+]

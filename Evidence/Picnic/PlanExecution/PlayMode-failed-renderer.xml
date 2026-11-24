@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Failed(Child)" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-24 10:36:33Z" end-time="2026-11-24 10:36:33Z" duration="0,4327148">
+  <test-suite type="TestSuite" id="1066" name="Yuna Legend - O Quarto dos Brinquedos" fullname="Yuna Legend - O Quarto dos Brinquedos" runstate="Runnable" testcasecount="42" result="Failed" site="Child" start-time="2026-11-24 10:36:33Z" end-time="2026-11-24 10:36:33Z" duration="0.432715" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1012" name="YunaLegend.Picnic.Audit.PlayMode.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Build/PicnicVisualAuditProject/Library/ScriptAssemblies/YunaLegend.Picnic.Audit.PlayMode.dll" runstate="Runnable" testcasecount="6" result="Failed" site="Child" start-time="2026-11-24 10:36:33Z" end-time="2026-11-24 10:36:33Z" duration="0.425660" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="7064" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1013" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="6" result="Failed" site="Child" start-time="2026-11-24 10:36:33Z" end-time="2026-11-24 10:36:33Z" duration="0.425029" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1014" name="Picnic" fullname="YunaLegend.Picnic" runstate="Runnable" testcasecount="6" result="Failed" site="Child" start-time="2026-11-24 10:36:33Z" end-time="2026-11-24 10:36:33Z" duration="0.424623" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestSuite" id="1015" name="Audit" fullname="YunaLegend.Picnic.Audit" runstate="Runnable" testcasecount="6" result="Failed" site="Child" start-time="2026-11-24 10:36:33Z" end-time="2026-11-24 10:36:33Z" duration="0.424226" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="TestFixture" id="1008" name="PicnicPresentationRuntimeTests" fullname="YunaLegend.Picnic.Audit.PicnicPresentationRuntimeTests" classname="YunaLegend.Picnic.Audit.PicnicPresentationRuntimeTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-11-24 10:36:33Z" end-time="2026-11-24 10:36:33Z" duration="0.423186" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1009" name="HeartsAndUnlimitedLivesHaveVisibleMeshes" fullname="YunaLegend.Picnic.Audit.PicnicPresentationRuntimeTests.HeartsAndUnlimitedLivesHaveVisibleMeshes" methodname="HeartsAndUnlimitedLivesHaveVisibleMeshes" classname="YunaLegend.Picnic.Audit.PicnicPresentationRuntimeTests" runstate="Runnable" seed="654468389" result="Failed" label="Error" start-time="2026-11-24 10:36:33Z" end-time="2026-11-24 10:36:33Z" duration="0.365891" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[UnityEngine.MissingComponentException : There is no 'CanvasRenderer' attached to the "Heart 3" game object, but a script is trying to access it.
+You probably need to add a CanvasRenderer to the game object "Heart 3". Or your script needs to check if the component is attached before using it.]]></message>
+                  <stack-trace><![CDATA[  at UnityEngine.Object+MarshalledUnityObject.TryThrowEditorNullExceptionObject (UnityEngine.Object unityObj, System.String parameterName) [0x000cd] in <de88af24691e4d5d8139304fcf46f698>:0 
+  at UnityEngine.Bindings.ThrowHelper.ThrowNullReferenceException (System.Object obj) [0x00010] in <de88af24691e4d5d8139304fcf46f698>:0 
+  at UnityEngine.CanvasRenderer.GetMesh () [0x00006] in <8c2b4208710a44e1b3f14f6257e6182a>:0 
+  at YunaLegend.Picnic.Audit.PicnicPresentationRuntimeTests+<HeartsAndUnlimitedLivesHaveVisibleMeshes>d__0.MoveNext () [0x00152] in C:\Users\sergi\repos\UNITY-YunaLegend\Build\PicnicVisualAuditProject\Assets\AuditValidation\Picnic\PicnicPresentationRuntimeTests.cs:37 
+  at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@bd7f943e9647\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44 ]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1011" name="OpeningSoleAndPaintedStairCoincideOnActualCanvas" fullname="YunaLegend.Picnic.Audit.PicnicPresentationRuntimeTests.OpeningSoleAndPaintedStairCoincideOnActualCanvas" methodname="OpeningSoleAndPaintedStairCoincideOnActualCanvas" classname="YunaLegend.Picnic.Audit.PicnicPresentationRuntimeTests" runstate="Runnable" seed="2015236590" result="Passed" start-time="2026-11-24 10:36:33Z" end-time="2026-11-24 10:36:33Z" duration="0.044570" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1010" name="TouchDirectionAndJumpRemainIndependentAndPauseReleasesHold" fullname="YunaLegend.Picnic.Audit.PicnicPresentationRuntimeTests.TouchDirectionAndJumpRemainIndependentAndPauseReleasesHold" methodname="TouchDirectionAndJumpRemainIndependentAndPauseReleasesHold" classname="YunaLegend.Picnic.Audit.PicnicPresentationRuntimeTests" runstate="Runnable" seed="1169858980" result="Failed" label="Error" start-time="2026-11-24 10:36:33Z" end-time="2026-11-24 10:36:33Z" duration="0.003371" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.InvalidOperationException : Sequence contains more than one matching element]]></message>
+                  <stack-trace><![CDATA[  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x0004a] in <81c5c8bf15b24e768953dea9073a410f>:0 
+  at YunaLegend.Picnic.Audit.PicnicPresentationRuntimeTests+<TouchDirectionAndJumpRemainIndependentAndPauseReleasesHold>d__1.MoveNext () [0x00047] in C:\Users\sergi\repos\UNITY-YunaLegend\Build\PicnicVisualAuditProject\Assets\AuditValidation\Picnic\PicnicPresentationRuntimeTests.cs:64 
+  at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@bd7f943e9647\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44 ]]></stack-trace>
+                </failure>
+                <output><![CDATA[Saving results to: C:/Users/sergi/AppData/LocalLow/DeepMindStudio/Yuna Legend - O Quarto dos Brinquedos\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

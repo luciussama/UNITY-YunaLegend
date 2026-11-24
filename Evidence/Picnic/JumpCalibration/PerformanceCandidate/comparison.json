@@ -1,0 +1,42 @@
+[
+  {
+    "hz": 30,
+    "decisionsAndGameplayExactlyEqual": true,
+    "baselineAllocatedBytesIncludingHarness": 2938573776,
+    "pooledAllocatedBytesIncludingHarness": 576144,
+    "allocationReductionPercent": 99.98039375411618,
+    "baselineWallSeconds": 8.2618604,
+    "pooledWallSeconds": 6.8085732,
+    "decisionHash": "8A56C1F02D095A8E"
+  },
+  {
+    "hz": 60,
+    "decisionsAndGameplayExactlyEqual": true,
+    "baselineAllocatedBytesIncludingHarness": 2995816264,
+    "pooledAllocatedBytesIncludingHarness": 824512,
+    "allocationReductionPercent": 99.97247788491211,
+    "baselineWallSeconds": 7.8582923,
+    "pooledWallSeconds": 6.7492324,
+    "decisionHash": "6267CEDC1F50F071"
+  },
+  {
+    "hz": 120,
+    "decisionsAndGameplayExactlyEqual": true,
+    "baselineAllocatedBytesIncludingHarness": 3004680152,
+    "pooledAllocatedBytesIncludingHarness": 1318792,
+    "allocationReductionPercent": 99.95610873925726,
+    "baselineWallSeconds": 7.7645221,
+    "pooledWallSeconds": 6.7174235,
+    "decisionHash": "EA626305772A92A6"
+  },
+  {
+    "hz": 0,
+    "decisionsAndGameplayExactlyEqual": true,
+    "baselineAllocatedBytesIncludingHarness": 2629786128,
+    "pooledAllocatedBytesIncludingHarness": 1042568,
+    "allocationReductionPercent": 99.96035540727439,
+    "baselineWallSeconds": 6.8821542,
+    "pooledWallSeconds": 6.0450119,
+    "decisionHash": "A0C7EEB4B1916EAB"
+  }
+]

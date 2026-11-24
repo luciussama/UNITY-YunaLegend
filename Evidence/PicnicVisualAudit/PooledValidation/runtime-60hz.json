@@ -1,0 +1,13 @@
+{
+    "hz": 60,
+    "phase": "Ending",
+    "x": 476.7943420410156,
+    "simulationSeconds": 207.92962646484376,
+    "samples": 12478,
+    "falls": 0,
+    "jumps": 136,
+    "hearts": 3,
+    "panics": 3,
+    "maximumBodyErrorMetres": 0.0,
+    "maximumBodyStepMetres": 0.2427852749824524
+}

@@ -1,0 +1,19 @@
+{
+  "browser": "ChatGPT in-app browser",
+  "viewport": {
+    "width": 696,
+    "height": 730
+  },
+  "url": "http://127.0.0.1:8090/?qa=1&qa_autoplay=1",
+  "mode": "Normal, easy disabled in observed menu",
+  "firstRunFrames": 55,
+  "secondRunFrames": 148,
+  "endingBeats": 14,
+  "method": "Root collected screenshots using public UI; second run paused with P between batches to prevent unobserved progression; ending first run paused and advanced via Continue; reviewer independently reads images without code or logs",
+  "limitations": [
+    "Frame sampled, not continuous video",
+    "Pause intervals exclude realtime pacing conclusions",
+    "No audio or FPS measurement",
+    "No claim that every sole is fully inside the painted edge"
+  ]
+}

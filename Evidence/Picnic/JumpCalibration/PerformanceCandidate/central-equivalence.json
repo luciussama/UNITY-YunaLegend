@@ -1,0 +1,30 @@
+[
+  {
+    "hz": 30,
+    "sameDecisionHashAndResults": true,
+    "decisionHash": "8A56C1F02D095A8E",
+    "allocatedBytesIncludingHarness": 576144,
+    "wallSeconds": 6.8851084
+  },
+  {
+    "hz": 60,
+    "sameDecisionHashAndResults": true,
+    "decisionHash": "6267CEDC1F50F071",
+    "allocatedBytesIncludingHarness": 824512,
+    "wallSeconds": 6.9204921
+  },
+  {
+    "hz": 120,
+    "sameDecisionHashAndResults": true,
+    "decisionHash": "EA626305772A92A6",
+    "allocatedBytesIncludingHarness": 1318792,
+    "wallSeconds": 6.8283894
+  },
+  {
+    "hz": 0,
+    "sameDecisionHashAndResults": true,
+    "decisionHash": "A0C7EEB4B1916EAB",
+    "allocatedBytesIncludingHarness": 1042568,
+    "wallSeconds": 6.3325861
+  }
+]

@@ -21,6 +21,23 @@ namespace YunaLegend.Picnic.Core
             X = spec.X;
             Y = spec.Y;
         }
+        internal PicnicCreatureState CopyForPrediction()
+        {
+            return (PicnicCreatureState)MemberwiseClone();
+        }
+
+        internal void CopyPredictionFrom(PicnicCreatureState source)
+        {
+            Health = source.Health;
+            X = source.X;
+            Y = source.Y;
+            Clock = source.Clock;
+            Warning = source.Warning;
+            beeClock = source.beeClock;
+            beeFrom = source.beeFrom;
+            beeAtOther = source.beeAtOther;
+        }
+
         public void Step(float dt, float playerX)
         {
             if (!Active) return;
@@ -107,6 +124,62 @@ namespace YunaLegend.Picnic.Core
             Creatures = new PicnicCreatureState[Stage.Creatures.Count];
             for (int i = 0; i < Creatures.Length; i++) Creatures[i] = new PicnicCreatureState(Stage.Creatures[i]);
             TryLand(Y + 0.1f);
+        }
+
+        private PicnicSimulation(PicnicSimulation source)
+        {
+            Stage = source.Stage;
+            EasyMode = source.EasyMode;
+            CloudTimers = new float[source.CloudTimers.Length];
+            Creatures = new PicnicCreatureState[source.Creatures.Length];
+            for (int i = 0; i < Creatures.Length; i++)
+            {
+                Creatures[i] = source.Creatures[i].CopyForPrediction();
+            }
+            CopyPredictionFrom(source);
+        }
+
+        internal void CopyPredictionFrom(PicnicSimulation source)
+        {
+            if (!ReferenceEquals(Stage, source.Stage) || EasyMode != source.EasyMode || ReferenceEquals(this, source))
+            {
+                throw new ArgumentException("Prediction snapshots must belong to the same stage and be independent.");
+            }
+            Phase = source.Phase;
+            X = source.X;
+            Y = source.Y;
+            VelocityX = source.VelocityX;
+            VelocityY = source.VelocityY;
+            Time = source.Time;
+            Immunity = source.Immunity;
+            Hearts = source.Hearts;
+            Section = source.Section;
+            SupportIndex = source.SupportIndex;
+            Panic = source.Panic;
+            PanicIndex = source.PanicIndex;
+            PanicElapsed = source.PanicElapsed;
+            NarrativeTime = source.NarrativeTime;
+            RescueTime = source.RescueTime;
+            Falls = source.Falls;
+            Jumps = source.Jumps;
+            safeX = source.safeX;
+            safeY = source.safeY;
+            rescueX = source.rescueX;
+            rescueY = source.rescueY;
+            jumpBuffer = source.jumpBuffer;
+            coyote = source.coyote;
+            Array.Copy(source.panicSeen, panicSeen, panicSeen.Length);
+            Array.Copy(source.CloudTimers, CloudTimers, CloudTimers.Length);
+            for (int i = 0; i < Creatures.Length; i++)
+            {
+                Creatures[i].CopyPredictionFrom(source.Creatures[i]);
+            }
+            Event = null;
+        }
+
+        internal PicnicSimulation CopyForPrediction()
+        {
+            return new PicnicSimulation(this);
         }
 
         public void AdvanceNarrative()

@@ -1,0 +1,14 @@
+{
+    "name": "YunaLegend.Picnic.Audit.PlayMode",
+    "references": [
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "YunaLegend.Picnic.Core",
+        "YunaLegend.Picnic.Runtime",
+        "YunaLegend.Qa.Runtime"
+    ],
+    "overrideReferences": true,
+    "precompiledReferences": ["nunit.framework.dll"],
+    "autoReferenced": false,
+    "defineConstraints": ["UNITY_INCLUDE_TESTS"]
+}

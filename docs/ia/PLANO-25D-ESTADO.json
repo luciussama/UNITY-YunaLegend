@@ -8,7 +8,7 @@
     "session": "2026-11-12-codex-execute-25d-d28a",
     "agent": "Codex (GPT-6)"
   },
-  "updated_at": "2026-11-23T20:15:24.767520+00:00",
+  "updated_at": "2026-11-24T10:52:44.473994+00:00",
   "tasks": [
     {
       "id": "T00",
@@ -805,17 +805,17 @@
       "human_gate": false,
       "status": "active",
       "owner": {
-        "session": "codex-20261123-piquenique-impl",
+        "session": "codex-20261124-picnic-plan-execution",
         "agent": "Codex"
       },
       "checkpoint": {
-        "done": "Cena conectada e menu preselecionado; preview inicial corrigido/aprovado por QA independente",
-        "next": "Usuario validar cena Picnic_Gameplay; depois concluir percurso/cinematicas e QA integral",
-        "validation": "Unity Editor10refs55sprites; reteste1578 personagemvisivel/fisica=sim/3saltos/semnovasexcecoes",
-        "pending": "QA integral de rios rodas final retry e WebGL; fase completa nao concluida",
-        "files": "Assets/Scenes/Picnic_Gameplay.unity;Evidence/Picnic/editor-play-qa-retest.png",
-        "processes": "Editor do usuario aberto; pilotoQA desligado; sem processo batch/servidor iniciado",
-        "updated_at": "2026-11-23T20:15:24.767520+00:00"
+        "done": "Aceite humano24/11: Perfeito! para A03.1 apoio/escala inicial e simbolos/rotulos HUD apresentados.25EditMode3PlayModeWebGL e evidencias preservados. Roteiro de retomada detalhado no README.",
+        "next": "Aguardar pedido humano de retomada; depois iniciar A03.2 movimento/saida da abertura, poses0/1/2 nos9beats, aproximacaoNanda, passo/descida, fade0.45s e transicao para corpo fisico; microentrega separada antes de ending.",
+        "validation": "Validacoes existentes:25/25EditMode3/3PlayModeUI, WebGLexit0 IAB4aspectos console0erros. Nenhum teste/build repetido agora: somente documentacao e registro de aceite. Versao SHA256 em Evidence/Picnic/PlanExecution/validation-manifest.json.",
+        "pending": "Parada solicitada pelo usuario para continuacao posterior. A03.2 e final14beats; A04 mensagens por motivo de resgate, dica adaptada, foco/navegacao e capturas3/2/1Facil; A05-A13; A12 ergonomia320px/aparelho; desempenho/audio e novo longrunWebGL. Aceite nao encerra fase/plano.",
+        "files": "Evidence/Picnic/PlanExecution/README.md; Evidence/Picnic/PlanExecution/reviews/A03.1-A04-v1.md; Evidence/Picnic/PlanExecution/validation-manifest.json; Evidence/PicnicVisualAudit/PLANO-DE-ACAO.md; docs/ia/diario.sqlite3",
+        "processes": "Job155/PIC01 preservados abertos na sessao codex-20261124-picnic-plan-execution;163concluido. Sem Unity ou servidor proprio deixado aberto; sem continuacao automatica criada; sem commit/push.",
+        "updated_at": "2026-11-24T10:52:44.473994+00:00"
       },
       "evidence": []
     }
@@ -3196,6 +3196,84 @@
       "files": "Assets/Scenes/Picnic_Gameplay.unity;Evidence/Picnic/editor-play-qa-retest.png",
       "processes": "Editor do usuario aberto; pilotoQA desligado; sem processo batch/servidor iniciado",
       "at": "2026-11-23T20:15:24.767520+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "PIC01",
+      "session": "codex-20261123-picnic-jump-config",
+      "agent": "Codex programador de QA",
+      "reason": "Pedido humano nesta conversa para medir componentes e configurar decolagens/pousos do piloto QA com validacao real; demais pendencias preservadas.",
+      "from_session": "codex-20261123-piquenique-impl",
+      "at": "2026-11-24T01:39:46.872632+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "PIC01",
+      "session": "codex-20261123-picnic-jump-config",
+      "done": "135apoios medidos;plannerQA calibrado com copiasisoladasCore e pontosdegap reais;UnityEditMode13/13Passed;PlayMode30/60/120Passed;nenhuma mudanca de geometria/fisica/inimigos",
+      "next": "Root concluir buildWebGL PID35128 e QAindependente do percurso calibrado; verificar custo e saltos no navegador; depois tratar pendencias visuais/cinematicas do plano de auditoria",
+      "validation": "Core30/60/120Complete zeroquedas3coracoes3panicos131/136/131saltos;jitterCompletezeroquedas2coracoes;UnityEditMode13/13Passed96.31s;PlayMode3/3Passed124.05s,maxBody-Core0mnosframes;resultadosUnityobservadospeloRoot,nestaetapaapenasregistro",
+      "pending": "WebGLcalibrado ainda semresultado;aberturaflutuante,UI,arte/cinematicas/audio/inimigos e demaisachados de auditoria pendentes;PIC01e155abertos;fasecompletaevisuaisnaoaprovados",
+      "files": "Assets/Scripts/Runtime/Picnic/Core;Assets/Scripts/Tests/EditMode/Picnic/PicnicJumpPlanningTests.cs;Evidence/Picnic/JumpCalibration;Evidence/PicnicVisualAudit/RuntimeValidation/editmode.xml;Evidence/PicnicVisualAudit/RuntimeValidation/playmode.xml;Evidence/PicnicVisualAudit/RuntimeValidation/runtime-*hz.json",
+      "processes": "Root acompanha UnityWebGLPID35128;nenhumprocessoproprio do agenteprogramador;C#/assets/metascongelados",
+      "at": "2026-11-24T02:01:26.226798+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "PIC01",
+      "session": "codex-20261123-picnic-jump-config",
+      "done": "135apoios medidos e pilotoQAcalibrado;pooling80snapshotsreduziuGCsemalterardecisoes;Unitypool14/14EditModee3/3PlayModePassed;WebGLPooledcompilada;auditoria/planoacaoentreguescomcoberturavisualparcial",
+      "next": "Retomar captura independente com navegadorfuncional:observarcontinuamente56a100,individualizar3rodasaereas e14beatsfinais;revisaohumanadosachadosedemaiscorrecoes emPLANO-DE-ACAO.md",
+      "validation": "RootUnity14/14EditMode88.68s,3/3PlayMode113.93s;0quedas3vidas3panicos131/136/131saltos,maxBody-Core0m;WebGLexit0WASM6CB599478FF0BEF06024F4E8BFC04AC6A58EF796EE1015F1053E78076D4CC132;QAforeground2a25porcento46.687s,observadoate56eestado100modal,semcontinuidadetrecho56a100",
+      "pending": "PIC01e155abertos;fase evisuaisnaoaprovados;56a100visualcontinuo,3rodasaereasindividualizadas,14beatsfinaisnaocoletados;FinalCaptureinterrompida porComputerUse incapazdeterminarURLChrome;demaiscorrecoesabertura/UI/arte/audio/inimigosdopla nopendentes",
+      "files": "Assets/Scripts/Runtime/Picnic/Core;Assets/Scripts/Tests/EditMode/Picnic/PicnicJumpPlanningTests.cs;Evidence/Picnic/JumpCalibration;Evidence/PicnicVisualAudit/AUDITORIA.md;Evidence/PicnicVisualAudit/PLANO-DE-ACAO.md;Evidence/PicnicVisualAudit/RuntimeValidation",
+      "processes": "NenhumUnityservidorprocessopropriodoprogramador;Rootencerrandoservidor8090;ComputerUseparadoconformeordemdaferramenta,semcontorno",
+      "at": "2026-11-24T03:41:07.752468+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "PIC01",
+      "session": "codex-20261123-picnic-jump-config",
+      "done": "135 apoios medidos; piloto QA calibrado com pooling e decisões preservadas; coleta visual pendente concluída pelo Root via IAB2 e revisada independentemente: nove setores, três rodas aéreas, 56–100%, 14 quadros finais, conclusão/repetir/pular final/menu",
+      "next": "Executar correções por domínio conforme Evidence/PicnicVisualAudit/PLANO-DE-ACAO.md e obter revisão visual humana; priorizar apoio de Yuna na abertura/final, Nanda no pouso/sono, objetos narrados, minhoca/torrão, HUD e água",
+      "validation": "Mesmos fontes/WASM 6CB599478FF0BEF06024F4E8BFC04AC6A58EF796EE1015F1053E78076D4CC132; revisão pooling anterior Unity14/14EditMode e3/3PlayMode permanece válida; IabAudit55frames+148replays+14ending; três rodas replay0060/0062/0065; parecer independente Review/RELATORIO-INDEPENDENTE.md; nenhuma medição nova de FPS/áudio/animação contínua/solas integrais",
+      "pending": "PIC01 e155 abertos; fase e visuais não aprovados. Confirmados: Yuna sentada/deitada fora da toalha/no ar; Nanda de asas abertas/distante durante pouso/sono narrados; pão e copo ausentes nos quadros; minhoca/torrão parecem flutuar0087/0093; HUD/texto ?rvore/água persistem. Correções e revisão humana pendentes; bloqueio anterior de captura não é mais pendência atual",
+      "files": "Assets/Scripts/Runtime/Picnic/Core;Evidence/Picnic/JumpCalibration;Evidence/PicnicVisualAudit/IabAudit;Evidence/PicnicVisualAudit/AUDITORIA.md;Evidence/PicnicVisualAudit/PLANO-DE-ACAO.md",
+      "processes": "Nenhum pipeline ou processo próprio do programador; Root informou servidor37179 encerrado; sem nova compilação nem alteração de fontes nesta coleta",
+      "at": "2026-11-24T09:42:52.423256+00:00"
+    },
+    {
+      "command": "handover",
+      "task": "PIC01",
+      "session": "codex-20261124-picnic-plan-execution",
+      "agent": "Codex",
+      "reason": "Pedido humano explicito para executar plano; iniciar microentregas A03 e A04 com revisao individual antes das dependentes.",
+      "from_session": "codex-20261123-picnic-jump-config",
+      "at": "2026-11-24T10:25:21.026641+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "PIC01",
+      "session": "codex-20261124-picnic-plan-execution",
+      "done": "A03.1 abertura ancorada na pintura e A04 simbolos HUD implementados; candidata v1 em revisao humana; sem aceite presumido",
+      "next": "Revisar apoio escala e HUD nas capturas; apos aceite seguir microentregas dependentes A03 encenacao e encerramento",
+      "validation": "EditMode25/25 PlayModeUI3/3 WebGLexit0 IAB4aspectos console0erros; revisao visual independente confirma duas solas na madeira",
+      "pending": "Revisao humana A03.1/A04; A03 movimento e ending; A05-A13; A12 HUD320px pequeno e aparelho fisico; sem novo longrunWebGL nesta entrega",
+      "files": "Evidence/Picnic/PlanExecution/README.md; Evidence/Picnic/PlanExecution/reviews/A03.1-A04-v1.md; Assets/Scripts/Runtime/Picnic/Core/PicnicOpeningComposition.cs; Assets/Scripts/Runtime/Picnic/Runtime/PicnicNarrativeController.cs; Assets/Scripts/Runtime/Picnic/Runtime/PicnicHudController.cs; Assets/Scripts/Runtime/Picnic/Runtime/PicnicHudSymbol.cs",
+      "processes": "Nenhum processo de build ou servidor desta entrega aberto; job163 concluido; job155 mantido para revisao",
+      "at": "2026-11-24T10:44:22.501149+00:00"
+    },
+    {
+      "command": "checkpoint",
+      "task": "PIC01",
+      "session": "codex-20261124-picnic-plan-execution",
+      "done": "Aceite humano24/11: Perfeito! para A03.1 apoio/escala inicial e simbolos/rotulos HUD apresentados.25EditMode3PlayModeWebGL e evidencias preservados. Roteiro de retomada detalhado no README.",
+      "next": "Aguardar pedido humano de retomada; depois iniciar A03.2 movimento/saida da abertura, poses0/1/2 nos9beats, aproximacaoNanda, passo/descida, fade0.45s e transicao para corpo fisico; microentrega separada antes de ending.",
+      "validation": "Validacoes existentes:25/25EditMode3/3PlayModeUI, WebGLexit0 IAB4aspectos console0erros. Nenhum teste/build repetido agora: somente documentacao e registro de aceite. Versao SHA256 em Evidence/Picnic/PlanExecution/validation-manifest.json.",
+      "pending": "Parada solicitada pelo usuario para continuacao posterior. A03.2 e final14beats; A04 mensagens por motivo de resgate, dica adaptada, foco/navegacao e capturas3/2/1Facil; A05-A13; A12 ergonomia320px/aparelho; desempenho/audio e novo longrunWebGL. Aceite nao encerra fase/plano.",
+      "files": "Evidence/Picnic/PlanExecution/README.md; Evidence/Picnic/PlanExecution/reviews/A03.1-A04-v1.md; Evidence/Picnic/PlanExecution/validation-manifest.json; Evidence/PicnicVisualAudit/PLANO-DE-ACAO.md; docs/ia/diario.sqlite3",
+      "processes": "Job155/PIC01 preservados abertos na sessao codex-20261124-picnic-plan-execution;163concluido. Sem Unity ou servidor proprio deixado aberto; sem continuacao automatica criada; sem commit/push.",
+      "at": "2026-11-24T10:52:44.473994+00:00"
     }
   ]
 }

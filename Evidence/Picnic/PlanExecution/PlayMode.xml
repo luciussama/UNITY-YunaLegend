@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Passed" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-24 10:37:21Z" end-time="2026-11-24 10:37:22Z" duration="0,148703">
+  <test-suite type="TestSuite" id="1066" name="Yuna Legend - O Quarto dos Brinquedos" fullname="Yuna Legend - O Quarto dos Brinquedos" runstate="Runnable" testcasecount="42" result="Passed" start-time="2026-11-24 10:37:21Z" end-time="2026-11-24 10:37:22Z" duration="0.148703" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1012" name="YunaLegend.Picnic.Audit.PlayMode.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Build/PicnicVisualAuditProject/Library/ScriptAssemblies/YunaLegend.Picnic.Audit.PlayMode.dll" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-24 10:37:21Z" end-time="2026-11-24 10:37:22Z" duration="0.142088" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="17232" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1013" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-24 10:37:21Z" end-time="2026-11-24 10:37:22Z" duration="0.141494" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1014" name="Picnic" fullname="YunaLegend.Picnic" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-24 10:37:21Z" end-time="2026-11-24 10:37:22Z" duration="0.141078" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1015" name="Audit" fullname="YunaLegend.Picnic.Audit" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-24 10:37:21Z" end-time="2026-11-24 10:37:22Z" duration="0.140678" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1008" name="PicnicPresentationRuntimeTests" fullname="YunaLegend.Picnic.Audit.PicnicPresentationRuntimeTests" classname="YunaLegend.Picnic.Audit.PicnicPresentationRuntimeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-24 10:37:21Z" end-time="2026-11-24 10:37:22Z" duration="0.139512" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1009" name="HeartsAndUnlimitedLivesHaveVisibleMeshes" fullname="YunaLegend.Picnic.Audit.PicnicPresentationRuntimeTests.HeartsAndUnlimitedLivesHaveVisibleMeshes" methodname="HeartsAndUnlimitedLivesHaveVisibleMeshes" classname="YunaLegend.Picnic.Audit.PicnicPresentationRuntimeTests" runstate="Runnable" seed="1012133317" result="Passed" start-time="2026-11-24 10:37:21Z" end-time="2026-11-24 10:37:22Z" duration="0.098780" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1011" name="OpeningSoleAndPaintedStairCoincideOnActualCanvas" fullname="YunaLegend.Picnic.Audit.PicnicPresentationRuntimeTests.OpeningSoleAndPaintedStairCoincideOnActualCanvas" methodname="OpeningSoleAndPaintedStairCoincideOnActualCanvas" classname="YunaLegend.Picnic.Audit.PicnicPresentationRuntimeTests" runstate="Runnable" seed="433922887" result="Passed" start-time="2026-11-24 10:37:22Z" end-time="2026-11-24 10:37:22Z" duration="0.023229" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1010" name="TouchDirectionAndJumpRemainIndependentAndPauseReleasesHold" fullname="YunaLegend.Picnic.Audit.PicnicPresentationRuntimeTests.TouchDirectionAndJumpRemainIndependentAndPauseReleasesHold" methodname="TouchDirectionAndJumpRemainIndependentAndPauseReleasesHold" classname="YunaLegend.Picnic.Audit.PicnicPresentationRuntimeTests" runstate="Runnable" seed="560530871" result="Passed" start-time="2026-11-24 10:37:22Z" end-time="2026-11-24 10:37:22Z" duration="0.007227" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: C:/Users/sergi/AppData/LocalLow/DeepMindStudio/Yuna Legend - O Quarto dos Brinquedos\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

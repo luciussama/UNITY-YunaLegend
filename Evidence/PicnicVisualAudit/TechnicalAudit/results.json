@@ -1,0 +1,991 @@
+{
+  "method": "Unmodified C# Core compiled as net8 console; reflection used ONLY for synthetic segment/checkpoint setup, never continuous run. No Unity rendering/physics validated.",
+  "continuous900Seconds": [
+    {
+      "hz": 30,
+      "state": {
+        "Phase": 1,
+        "X": 22.76336,
+        "Y": 0,
+        "Time": 901.22284,
+        "SupportIndex": 7,
+        "Terrain": 2,
+        "Hearts": 3,
+        "Jumps": 5,
+        "Falls": 0
+      },
+      "input": {
+        "Axis": 0,
+        "Jump": false
+      },
+      "support": "primeira-grama-relevo-4"
+    },
+    {
+      "hz": 60,
+      "state": {
+        "Phase": 1,
+        "X": 22.76336,
+        "Y": 0,
+        "Time": 901.22284,
+        "SupportIndex": 7,
+        "Terrain": 2,
+        "Hearts": 3,
+        "Jumps": 5,
+        "Falls": 0
+      },
+      "input": {
+        "Axis": 0,
+        "Jump": false
+      },
+      "support": "primeira-grama-relevo-4"
+    },
+    {
+      "hz": 120,
+      "state": {
+        "Phase": 1,
+        "X": 22.753359,
+        "Y": 0,
+        "Time": 901.22284,
+        "SupportIndex": 7,
+        "Terrain": 2,
+        "Hearts": 3,
+        "Jumps": 5,
+        "Falls": 0
+      },
+      "input": {
+        "Axis": 0,
+        "Jump": false
+      },
+      "support": "primeira-grama-relevo-4"
+    }
+  ],
+  "synthetic20SecondSegmentsProblematic": [
+    {
+      "index": 7,
+      "id": "primeira-grama-relevo-4",
+      "start": 22.12,
+      "progress": 0.63332367,
+      "state": {
+        "Phase": 1,
+        "X": 22.753325,
+        "Y": 0,
+        "Time": 19.99978,
+        "SupportIndex": 7,
+        "Terrain": 2,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 0
+      }
+    },
+    {
+      "index": 16,
+      "id": "pedrinhas-da-roda",
+      "start": 41.4125,
+      "progress": 2.6558495,
+      "state": {
+        "Phase": 3,
+        "X": 44.068348,
+        "Y": -2.8799975,
+        "Time": 1.1999992,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 2,
+        "Jumps": 1,
+        "Falls": 1
+      }
+    },
+    {
+      "index": 30,
+      "id": "trecho-0-rio-pedra-0",
+      "start": 110.4,
+      "progress": 39.987617,
+      "state": {
+        "Phase": 3,
+        "X": 150.38762,
+        "Y": 1.443416,
+        "Time": 19.016462,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 0,
+        "Jumps": 9,
+        "Falls": 0
+      }
+    },
+    {
+      "index": 31,
+      "id": "trecho-0-rio-pedra-1",
+      "start": 113.1,
+      "progress": 34.337364,
+      "state": {
+        "Phase": 3,
+        "X": 147.43736,
+        "Y": 2.2233932,
+        "Time": 16.841496,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 0,
+        "Jumps": 8,
+        "Falls": 0
+      }
+    },
+    {
+      "index": 32,
+      "id": "trecho-0-rio-pedra-2",
+      "start": 115.8,
+      "progress": 30.036407,
+      "state": {
+        "Phase": 3,
+        "X": 145.83641,
+        "Y": 2.2233932,
+        "Time": 14.733194,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 0,
+        "Jumps": 6,
+        "Falls": 0
+      }
+    },
+    {
+      "index": 36,
+      "id": "trecho-2-caminho-relevo-2",
+      "start": 128.2,
+      "progress": 37.617233,
+      "state": {
+        "Phase": 3,
+        "X": 165.81723,
+        "Y": 1.5483363,
+        "Time": 18.883131,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 0,
+        "Jumps": 7,
+        "Falls": 0
+      }
+    },
+    {
+      "index": 37,
+      "id": "trecho-2-caminho-relevo-3",
+      "start": 129.8,
+      "progress": 36.027786,
+      "state": {
+        "Phase": 3,
+        "X": 165.82779,
+        "Y": 1.5512757,
+        "Time": 17.833147,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 0,
+        "Jumps": 6,
+        "Falls": 0
+      }
+    },
+    {
+      "index": 45,
+      "id": "trecho-4-caminho-relevo-1",
+      "start": 175.2,
+      "progress": 1.319458,
+      "state": {
+        "Phase": 1,
+        "X": 176.51945,
+        "Y": 0.6,
+        "Time": 19.99978,
+        "SupportIndex": 45,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 0
+      }
+    },
+    {
+      "index": 46,
+      "id": "trecho-4-caminho-relevo-3",
+      "start": 177.825,
+      "progress": 34.189697,
+      "state": {
+        "Phase": 3,
+        "X": 212.0147,
+        "Y": -2.8155549,
+        "Time": 16.616499,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 8,
+        "Falls": 1
+      }
+    },
+    {
+      "index": 47,
+      "id": "trecho-4-gramado",
+      "start": 180.4,
+      "progress": 31.614151,
+      "state": {
+        "Phase": 3,
+        "X": 212.01414,
+        "Y": -2.8155549,
+        "Time": 15.649847,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 2,
+        "Jumps": 7,
+        "Falls": 1
+      }
+    },
+    {
+      "index": 48,
+      "id": "trecho-4-gramado-relevo-1",
+      "start": 183.8,
+      "progress": 28.22345,
+      "state": {
+        "Phase": 3,
+        "X": 212.02345,
+        "Y": -2.8155549,
+        "Time": 12.649893,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 2,
+        "Jumps": 6,
+        "Falls": 1
+      }
+    },
+    {
+      "index": 50,
+      "id": "trecho-4-gramado-relevo-3",
+      "start": 190.6,
+      "progress": 21.42424,
+      "state": {
+        "Phase": 3,
+        "X": 212.02425,
+        "Y": -2.8155549,
+        "Time": 8.45829,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 5,
+        "Falls": 1
+      }
+    },
+    {
+      "index": 52,
+      "id": "trecho-4-margem",
+      "start": 197.2,
+      "progress": 14.821487,
+      "state": {
+        "Phase": 3,
+        "X": 212.02148,
+        "Y": -2.8155549,
+        "Time": 4.6333485,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 4,
+        "Falls": 1
+      }
+    },
+    {
+      "index": 53,
+      "id": "trecho-4-rio-pedra-0",
+      "start": 200.68,
+      "progress": 11.327408,
+      "state": {
+        "Phase": 3,
+        "X": 212.0074,
+        "Y": -2.8155549,
+        "Time": 3.5416856,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 2,
+        "Jumps": 3,
+        "Falls": 1
+      }
+    },
+    {
+      "index": 63,
+      "id": "aereo-ilha-0",
+      "start": 260.78,
+      "progress": 0.41015625,
+      "state": {
+        "Phase": 1,
+        "X": 261.19016,
+        "Y": 1.2,
+        "Time": 19.99978,
+        "SupportIndex": 63,
+        "Terrain": 3,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 0
+      }
+    },
+    {
+      "index": 66,
+      "id": "aereo-ilha-1",
+      "start": 268.73,
+      "progress": 0.47851562,
+      "state": {
+        "Phase": 1,
+        "X": 269.20853,
+        "Y": 1.5,
+        "Time": 19.99978,
+        "SupportIndex": 66,
+        "Terrain": 3,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 0
+      }
+    },
+    {
+      "index": 70,
+      "id": "trecho-6-caminho",
+      "start": 280.53,
+      "progress": 0.22009277,
+      "state": {
+        "Phase": 1,
+        "X": 280.7501,
+        "Y": 0,
+        "Time": 19.99978,
+        "SupportIndex": 70,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 0
+      }
+    },
+    {
+      "index": 76,
+      "id": "trecho-6-pedrinhas",
+      "start": 314.88,
+      "progress": 27.282227,
+      "state": {
+        "Phase": 3,
+        "X": 342.16223,
+        "Y": 0.8594453,
+        "Time": 11.841572,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 0,
+        "Jumps": 7,
+        "Falls": 0
+      }
+    },
+    {
+      "index": 88,
+      "id": "trecho-8-gramado-relevo-2",
+      "start": 355.755,
+      "progress": 23.206482,
+      "state": {
+        "Phase": 3,
+        "X": 378.9615,
+        "Y": -2.8955529,
+        "Time": 13.249884,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 2,
+        "Jumps": 7,
+        "Falls": 1
+      }
+    },
+    {
+      "index": 91,
+      "id": "trecho-8-margem",
+      "start": 370.38,
+      "progress": 8.950439,
+      "state": {
+        "Phase": 3,
+        "X": 379.33044,
+        "Y": -2.8955529,
+        "Time": 4.0666904,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 3,
+        "Falls": 1
+      }
+    },
+    {
+      "index": 99,
+      "id": "trecho-10-caminho-relevo-2",
+      "start": 395.33,
+      "progress": 38.790405,
+      "state": {
+        "Phase": 3,
+        "X": 434.1204,
+        "Y": -2.8555527,
+        "Time": 19.76645,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 6,
+        "Falls": 1
+      }
+    },
+    {
+      "index": 103,
+      "id": "trecho-10-margem",
+      "start": 425.08,
+      "progress": 9.023804,
+      "state": {
+        "Phase": 3,
+        "X": 434.1038,
+        "Y": -2.8555527,
+        "Time": 4.1000233,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 3,
+        "Falls": 1
+      }
+    },
+    {
+      "index": 115,
+      "id": "arvore",
+      "start": 474.43,
+      "progress": 0.4585266,
+      "state": {
+        "Phase": 4,
+        "X": 474.88852,
+        "Y": 0,
+        "Time": 0.2083334,
+        "SupportIndex": 115,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 0
+      }
+    }
+  ],
+  "syntheticCheckpointRetries": [
+    {
+      "index": 0,
+      "name": "O port\u00E3o de casa",
+      "state": {
+        "Phase": 1,
+        "X": 1,
+        "Y": 0,
+        "Time": 0,
+        "SupportIndex": 0,
+        "Terrain": 1,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 0
+      },
+      "support": "entrada"
+    },
+    {
+      "index": 1,
+      "name": "Canteiros de margaridas",
+      "state": {
+        "Phase": 1,
+        "X": 74.5,
+        "Y": 0.16233557,
+        "Time": 0,
+        "SupportIndex": 23,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 0
+      },
+      "support": "trecho-0-caminho"
+    },
+    {
+      "index": 2,
+      "name": "O caminho das hort\u00EAnsias",
+      "state": {
+        "Phase": 1,
+        "X": 125.2,
+        "Y": 0,
+        "Time": 0,
+        "SupportIndex": 34,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 0
+      },
+      "support": "trecho-2-caminho"
+    },
+    {
+      "index": 3,
+      "name": "Riachos de \u00E1gua clara",
+      "state": {
+        "Phase": 1,
+        "X": 172.7,
+        "Y": 0,
+        "Time": 0,
+        "SupportIndex": 44,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 0
+      },
+      "support": "trecho-4-caminho"
+    },
+    {
+      "index": 4,
+      "name": "Por cima do jardim",
+      "state": {
+        "Phase": 1,
+        "X": 237.28,
+        "Y": 0,
+        "Time": 0,
+        "SupportIndex": 60,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 0
+      },
+      "support": "aereo-entrada"
+    },
+    {
+      "index": 5,
+      "name": "Entre salgueiros",
+      "state": {
+        "Phase": 1,
+        "X": 280.88,
+        "Y": 0,
+        "Time": 0,
+        "SupportIndex": 70,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 0
+      },
+      "support": "trecho-6-caminho"
+    },
+    {
+      "index": 6,
+      "name": "O jardim das borboletas",
+      "state": {
+        "Phase": 1,
+        "X": 331.38,
+        "Y": 0,
+        "Time": 0,
+        "SupportIndex": 80,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 0
+      },
+      "support": "trecho-8-caminho"
+    },
+    {
+      "index": 7,
+      "name": "A alameda da grande \u00E1rvore",
+      "state": {
+        "Phase": 1,
+        "X": 392.08,
+        "Y": 0,
+        "Time": 0,
+        "SupportIndex": 97,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 0
+      },
+      "support": "trecho-10-caminho"
+    },
+    {
+      "index": 8,
+      "name": "A grande ?rvore",
+      "state": {
+        "Phase": 1,
+        "X": 451.88,
+        "Y": 0,
+        "Time": 0,
+        "SupportIndex": 110,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 0
+      },
+      "support": "descanso-final"
+    }
+  ],
+  "syntheticGrassToFirstStonePlayerJump": [
+    {
+      "hz": 30,
+      "start": 22.8,
+      "landed": 8,
+      "state": {
+        "Phase": 1,
+        "X": 24.696676,
+        "Y": 0.4,
+        "Time": 0.8666662,
+        "SupportIndex": 8,
+        "Terrain": 4,
+        "Hearts": 3,
+        "Jumps": 1,
+        "Falls": 0
+      }
+    },
+    {
+      "hz": 60,
+      "start": 22.8,
+      "landed": 8,
+      "state": {
+        "Phase": 1,
+        "X": 24.66001,
+        "Y": 0.4,
+        "Time": 0.84999955,
+        "SupportIndex": 8,
+        "Terrain": 4,
+        "Hearts": 3,
+        "Jumps": 1,
+        "Falls": 0
+      }
+    },
+    {
+      "hz": 120,
+      "start": 22.8,
+      "landed": 8,
+      "state": {
+        "Phase": 1,
+        "X": 24.641676,
+        "Y": 0.4,
+        "Time": 0.8416662,
+        "SupportIndex": 8,
+        "Terrain": 4,
+        "Hearts": 3,
+        "Jumps": 1,
+        "Falls": 0
+      }
+    }
+  ],
+  "syntheticPanicEventRuns": [
+    {
+      "seed": 29,
+      "events": [
+        {
+          "e": "panic_started_0",
+          "X": 107.01833,
+          "Y": 0,
+          "Time": 0.008333334,
+          "SupportIndex": 29,
+          "Panic": true,
+          "PanicIndex": 0
+        },
+        {
+          "e": "panic_ended_0",
+          "X": 116.51098,
+          "Y": 0.4,
+          "Time": 2.9750113,
+          "SupportIndex": 32,
+          "Panic": false,
+          "PanicIndex": 0
+        }
+      ],
+      "state": {
+        "Phase": 1,
+        "X": 150.2774,
+        "Y": 2.71903,
+        "Time": 19.99978,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 1,
+        "Jumps": 10,
+        "Falls": 0
+      }
+    },
+    {
+      "seed": 52,
+      "events": [
+        {
+          "e": "panic_started_1",
+          "X": 197.21832,
+          "Y": 0,
+          "Time": 0.008333334,
+          "SupportIndex": 52,
+          "Panic": true,
+          "PanicIndex": 1
+        }
+      ],
+      "state": {
+        "Phase": 3,
+        "X": 212.02148,
+        "Y": -2.8155549,
+        "Time": 4.6333485,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 4,
+        "Falls": 1
+      }
+    },
+    {
+      "seed": 110,
+      "events": [
+        {
+          "e": "panic_started_2",
+          "X": 454.1938,
+          "Y": 0,
+          "Time": 0.4833332,
+          "SupportIndex": 110,
+          "Panic": true,
+          "PanicIndex": 2
+        },
+        {
+          "e": "panic_ended_2",
+          "X": 473.3979,
+          "Y": 0,
+          "Time": 6.48332,
+          "SupportIndex": 115,
+          "Panic": false,
+          "PanicIndex": 2
+        },
+        {
+          "e": "ending_started",
+          "X": 474.8835,
+          "Y": 0,
+          "Time": 7.15831,
+          "SupportIndex": 115,
+          "Panic": false,
+          "PanicIndex": 2
+        }
+      ],
+      "state": {
+        "Phase": 4,
+        "X": 474.8835,
+        "Y": 0,
+        "Time": 7.15831,
+        "SupportIndex": 115,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 5,
+        "Falls": 0
+      }
+    }
+  ],
+  "syntheticCloudLifecycle": [
+    {
+      "easy": false,
+      "transitions": [
+        {
+          "elapsed": 0.016666668,
+          "active": 1,
+          "age": 0.016666668
+        },
+        {
+          "elapsed": 2.8,
+          "active": 0,
+          "age": 2.800009
+        }
+      ],
+      "state": {
+        "Phase": 3,
+        "X": 54.35,
+        "Y": -2.804999,
+        "Time": 3.5166852,
+        "SupportIndex": -1,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 1
+      }
+    },
+    {
+      "easy": true,
+      "transitions": [
+        {
+          "elapsed": 0.016666668,
+          "active": 1,
+          "age": 0.016666668
+        },
+        {
+          "elapsed": 3.8,
+          "active": 0,
+          "age": 3.8000224
+        },
+        {
+          "elapsed": 6.0333333,
+          "active": 1,
+          "age": -1
+        }
+      ],
+      "state": {
+        "Phase": 1,
+        "X": 3.380001,
+        "Y": 0.5,
+        "Time": 7.491638,
+        "SupportIndex": 132,
+        "Terrain": 1,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 1
+      }
+    }
+  ],
+  "riverAntTenSeconds": [
+    {
+      "homeX": 203.46,
+      "Y": 0.74,
+      "minY": 0.74,
+      "maxY": 0.74,
+      "minX": 202.16003,
+      "maxX": 204.76001
+    },
+    {
+      "homeX": 376.8,
+      "Y": 0.82,
+      "minY": 0.82,
+      "maxY": 0.82,
+      "minX": 375.5,
+      "maxX": 378.09998
+    },
+    {
+      "homeX": 431.58,
+      "Y": 0.86,
+      "minY": 0.86,
+      "maxY": 0.86,
+      "minX": 430.28,
+      "maxX": 432.87997
+    }
+  ],
+  "syntheticPlayerJumpsAtQaStalls": [
+    {
+      "sourceIndex": 7,
+      "source": "primeira-grama-relevo-4",
+      "start": 22.79,
+      "landed": 8,
+      "state": {
+        "Phase": 1,
+        "X": 24.631678,
+        "Y": 0.4,
+        "Time": 0.8416662,
+        "SupportIndex": 8,
+        "Terrain": 4,
+        "Hearts": 3,
+        "Jumps": 1,
+        "Falls": 0
+      }
+    },
+    {
+      "sourceIndex": 45,
+      "source": "trecho-4-caminho-relevo-1",
+      "start": 176.64,
+      "landed": 47,
+      "state": {
+        "Phase": 1,
+        "X": 178.80244,
+        "Y": 0,
+        "Time": 0.98333275,
+        "SupportIndex": 47,
+        "Terrain": 2,
+        "Hearts": 3,
+        "Jumps": 1,
+        "Falls": 0
+      }
+    },
+    {
+      "sourceIndex": 63,
+      "source": "aereo-ilha-0",
+      "start": 261.37,
+      "landed": 64,
+      "state": {
+        "Phase": 1,
+        "X": 263.23828,
+        "Y": 1.6,
+        "Time": 0.8416662,
+        "SupportIndex": 64,
+        "Terrain": 5,
+        "Hearts": 3,
+        "Jumps": 1,
+        "Falls": 0
+      }
+    },
+    {
+      "sourceIndex": 66,
+      "source": "aereo-ilha-1",
+      "start": 269.37003,
+      "landed": 67,
+      "state": {
+        "Phase": 1,
+        "X": 271.40338,
+        "Y": 1.4,
+        "Time": 0.91666615,
+        "SupportIndex": 67,
+        "Terrain": 5,
+        "Hearts": 3,
+        "Jumps": 1,
+        "Falls": 0
+      }
+    },
+    {
+      "sourceIndex": 70,
+      "source": "trecho-6-caminho",
+      "start": 280.87,
+      "landed": 72,
+      "state": {
+        "Phase": 1,
+        "X": 282.429,
+        "Y": 1.1,
+        "Time": 0.708333,
+        "SupportIndex": 72,
+        "Terrain": 0,
+        "Hearts": 3,
+        "Jumps": 1,
+        "Falls": 0
+      }
+    }
+  ],
+  "syntheticRemoteCloudLifecycleNoRescue": [
+    {
+      "easy": false,
+      "transitions": [
+        {
+          "elapsed": 0.016666668,
+          "active": 1,
+          "age": 0.016666668
+        },
+        {
+          "elapsed": 2.8,
+          "active": 0,
+          "age": 2.800009
+        },
+        {
+          "elapsed": 6.8166666,
+          "active": 1,
+          "age": -1
+        }
+      ],
+      "state": {
+        "Phase": 1,
+        "X": 3.38,
+        "Y": 0.5,
+        "Time": 8.9999485,
+        "SupportIndex": 132,
+        "Terrain": 1,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 0
+      }
+    },
+    {
+      "easy": true,
+      "transitions": [
+        {
+          "elapsed": 0.016666668,
+          "active": 1,
+          "age": 0.016666668
+        },
+        {
+          "elapsed": 3.8,
+          "active": 0,
+          "age": 3.8000224
+        },
+        {
+          "elapsed": 7.8166666,
+          "active": 1,
+          "age": -1
+        }
+      ],
+      "state": {
+        "Phase": 1,
+        "X": 3.38,
+        "Y": 0.5,
+        "Time": 8.9999485,
+        "SupportIndex": 132,
+        "Terrain": 1,
+        "Hearts": 3,
+        "Jumps": 0,
+        "Falls": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+rate=30;jumps=131;negativeMarginRows=7;outsideCoreToleranceRows=0;minimumMargin_m=-0.059814453;coreTolerance_m=0.08
+rate=60;jumps=136;negativeMarginRows=11;outsideCoreToleranceRows=0;minimumMargin_m=-0.07345581;coreTolerance_m=0.08
+rate=120;jumps=131;negativeMarginRows=14;outsideCoreToleranceRows=0;minimumMargin_m=-0.06826782;coreTolerance_m=0.08
+rate=0;jumps=132;negativeMarginRows=8;outsideCoreToleranceRows=0;minimumMargin_m=-0.068603516;coreTolerance_m=0.08

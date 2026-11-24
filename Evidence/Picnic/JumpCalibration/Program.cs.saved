@@ -1,0 +1,9 @@
+using System.Text.Json;
+using YunaLegend.Picnic.Core;
+foreach(int hz in new[]{30,60,120})
+{
+ var s=new PicnicSimulation();s.SkipNarrative();var events=new List<object>();
+ s.Event+=e=>{if(e.StartsWith("panic_")||e=="hit"||e=="defeat")events.Add(new{e,s.X,s.Y,s.Time,s.Hearts});};
+ for(int f=0;f<hz*900&&s.Phase==PicnicPhase.Playing;f++){var input=PicnicQaPilot.Read(s);s.Step(1f/hz,input.Axis,input.Jump);}
+ Console.WriteLine(JsonSerializer.Serialize(new{hz,s.Phase,s.X,s.Y,s.Time,s.SupportIndex,s.Hearts,s.Falls,s.Jumps,events}));
+}
