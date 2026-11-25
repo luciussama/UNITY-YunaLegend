@@ -1,0 +1,38 @@
+{
+  "checkedAtUtc": "2026-11-25T20:08:26.717341+00:00",
+  "releaseId": "20261125-hud-yuna-hd",
+  "mergeCommit": "1e704ee14df0f542fe08ee5ae1352e1487fad917",
+  "featureCommit": "ae27f46dfe22d22edfd186225b9a1af9fd0c3a6e",
+  "workflow": "https://github.com/luciussama/UNITY-YunaLegend/actions/runs/45691514983",
+  "workflowConclusion": "success",
+  "url": "https://luciussama.github.io/UNITY-YunaLegend/",
+  "manifestMatches": true,
+  "checks": [
+    {
+      "path": "Build/WebGL.data.unityweb",
+      "status": 200,
+      "bytes": 266729776
+    },
+    {
+      "path": "Build/WebGL.framework.js.unityweb",
+      "status": 200,
+      "bytes": 90230
+    },
+    {
+      "path": "Build/WebGL.loader.js",
+      "status": 200,
+      "bytes": 47867
+    },
+    {
+      "path": "Build/WebGL.wasm.unityweb",
+      "status": 200,
+      "bytes": 11994468
+    }
+  ],
+  "downloadContentMatchesAfterGitLineEndingNormalization": [
+    "index.html",
+    "Build/WebGL.loader.js"
+  ],
+  "validationHarnessSha256": "cba95e46fba869d8773d77b3b94dd18240991ea0114cf0f632efb218fe3f07da",
+  "provenanceNote": "The older Yuna validation-manifest harness hash predates the added GPU visible-content check; this report records the final harness hash. All ten other Yuna source and atlas hashes match. Final passing log: Build/PicnicVisualAuditProject/yuna-verified-content.log. No browser gameplay or physical mobile test claimed."
+}

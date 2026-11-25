@@ -41,3 +41,16 @@ O usuário fará o teste mobile da versão publicada.
 
 Destino: https://luciussama.github.io/UNITY-YunaLegend/
 O status final do deploy e os commits são acrescentados após o GitHub Pages concluir.
+
+## Publica??o conclu?da
+
+Branch enviada: `ae27f46`. Merge autorizado na main: `1e704ee`.
+GitHub Actions [45691514983](https://github.com/luciussama/UNITY-YunaLegend/actions/runs/45691514983): success.
+Manifesto p?blico id?ntico ao local; quatro arquivos da build HTTP200 com tamanhos corretos.
+Conte?do do index e loader corresponde ao local ap?s normalizar CRLF/LF do Git.
+Detalhes em `deployment.json`. O primeiro script de confer?ncia tentou buscar o index no manifesto,
+que lista apenas os quatro arquivos Build; corrigido para comparar o arquivo local diretamente.
+
+Rastreabilidade: o hash do harness no manifesto antigo de Yuna antecede a checagem GPU de conte?do.
+O hash final est? em `deployment.json`; os outros dez hashes de fontes/atlas conferem.
+Teste em aparelho f?sico e gameplay no navegador n?o foram realizados nesta publica??o.
