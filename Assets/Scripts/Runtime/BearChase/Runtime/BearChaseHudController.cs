@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using YunaLegend.Presentation;
 using YunaLegend.BearChase.Core;
 
 namespace YunaLegend.BearChase.Runtime
@@ -14,6 +15,7 @@ namespace YunaLegend.BearChase.Runtime
     public sealed class BearChaseHudController : MonoBehaviour
     {
         [SerializeField] private Font uiFont;
+        private Font functionalFont;
 
         private Canvas canvas;
         private RectTransform canvasRect;
@@ -271,6 +273,7 @@ namespace YunaLegend.BearChase.Runtime
             }
 
             UpdateModalForPhase(phase, shouldOfferEasyMode);
+            RefreshResponsiveLayout(force: true);
         }
 
         public void UpdatePerFrameOverlays(BearChaseSimulation sim)
@@ -387,6 +390,8 @@ namespace YunaLegend.BearChase.Runtime
                 uiFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             }
 
+            functionalFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+
             var canvasGo = new GameObject("BearChase_HudCanvas", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
             canvasGo.transform.SetParent(transform, false);
             canvas = canvasGo.GetComponent<Canvas>();
@@ -424,7 +429,7 @@ namespace YunaLegend.BearChase.Runtime
 
             heartsRoot = CreateRect("HeartsRow", root, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0f, -24f), new Vector2(360f, 48f));
             var bg = heartsRoot.gameObject.AddComponent<Image>();
-            bg.color = new Color(0.10f, 0.07f, 0.07f, 0.58f);
+            HudTheme.Panel(bg);
             bg.raycastTarget = false;
 
             var hlg = heartsRoot.gameObject.AddComponent<HorizontalLayoutGroup>();
@@ -437,7 +442,7 @@ namespace YunaLegend.BearChase.Runtime
 
         private void BuildTopRightControls(Transform root)
         {
-            controlsRoot = CreateRect("TopRightControls", root, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-28f, -22f), new Vector2(220f, 48f));
+            controlsRoot = CreateRect("TopRightControls", root, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-28f, -22f), new Vector2(244f, 52f));
             var clg = controlsRoot.gameObject.AddComponent<HorizontalLayoutGroup>();
             clg.childAlignment = TextAnchor.MiddleRight;
             clg.spacing = 10f;
@@ -461,31 +466,32 @@ namespace YunaLegend.BearChase.Runtime
         {
             hintPanelRect = CreateRect("DodgeHintBar", root, new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 18f), new Vector2(760f, 68f));
             var hintBg = hintPanelRect.gameObject.AddComponent<Image>();
-            hintBg.color = new Color(0.06f, 0.04f, 0.04f, 0.58f);
+            HudTheme.Panel(hintBg);
             hintBg.raycastTarget = false;
             hintRoot = hintPanelRect.gameObject;
 
             RectTransform hintTextRt = CreateRect("DodgeHintText", hintPanelRect, Vector2.zero, Vector2.one, new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
             hintText = hintTextRt.gameObject.AddComponent<Text>();
-            hintText.font = uiFont;
+            hintText.font = functionalFont;
             hintText.fontSize = 24;
             hintText.alignment = TextAnchor.MiddleCenter;
             hintText.horizontalOverflow = HorizontalWrapMode.Wrap;
             hintText.verticalOverflow = VerticalWrapMode.Overflow;
-            hintText.color = new Color(0.98f, 0.94f, 0.84f, 0.94f);
+            hintText.color = HudTheme.Ink;
             hintText.text = "← A · desvie · D →\nToque e segure nas laterais · P pausa · M som";
             hintText.raycastTarget = false;
             hintRoot.SetActive(false);
 
             pauseBadgeRect = CreateRect("PauseBadge", root, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(360f, 88f));
             var pauseBg = pauseBadgeRect.gameObject.AddComponent<Image>();
-            pauseBg.color = new Color(0.06f, 0.04f, 0.04f, 0.86f);
+            pauseBg.color = HudTheme.Plum;
+            HudTheme.Round(pauseBg);
             pauseBg.raycastTarget = false;
             pauseBadgeRoot = pauseBadgeRect.gameObject;
 
             RectTransform pauseTxtRt = CreateRect("PauseText", pauseBadgeRect, Vector2.zero, Vector2.one, new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
             pauseBadgeText = pauseTxtRt.gameObject.AddComponent<Text>();
-            pauseBadgeText.font = uiFont;
+            pauseBadgeText.font = functionalFont;
             pauseBadgeText.fontSize = 36;
             pauseBadgeText.alignment = TextAnchor.MiddleCenter;
             pauseBadgeText.color = new Color(1f, 0.88f, 0.58f);
@@ -493,17 +499,17 @@ namespace YunaLegend.BearChase.Runtime
             pauseBadgeRoot.SetActive(false);
 
             fallenBannerRect = CreateRect("FallenBanner", root, new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 52f), new Vector2(760f, 92f));
-            fallenBannerRect.gameObject.AddComponent<Image>().color = new Color(0.06f, 0.04f, 0.04f, 0.88f);
+            HudTheme.Panel(fallenBannerRect.gameObject.AddComponent<Image>());
             fallenBannerRoot = fallenBannerRect.gameObject;
 
             RectTransform bannerTextRt = CreateRect("BannerText", fallenBannerRect, Vector2.zero, Vector2.one, new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
             fallenBannerText = bannerTextRt.gameObject.AddComponent<Text>();
-            fallenBannerText.font = uiFont;
+            fallenBannerText.font = functionalFont;
             fallenBannerText.fontSize = 28;
             fallenBannerText.alignment = TextAnchor.MiddleCenter;
             fallenBannerText.horizontalOverflow = HorizontalWrapMode.Wrap;
             fallenBannerText.verticalOverflow = VerticalWrapMode.Overflow;
-            fallenBannerText.color = new Color(0.98f, 0.92f, 0.80f);
+            fallenBannerText.color = HudTheme.Ink;
             fallenBannerText.text = "A menina caiu.\nTente novamente pelos botões da tela.";
             fallenBannerRoot.SetActive(false);
         }
@@ -511,7 +517,7 @@ namespace YunaLegend.BearChase.Runtime
         private void BuildModal(Transform root)
         {
             modalBoxRect = CreateRect("CenterModal", root, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(680f, 360f));
-            modalBoxRect.gameObject.AddComponent<Image>().color = new Color(0.07f, 0.05f, 0.05f, 0.94f);
+            HudTheme.Panel(modalBoxRect.gameObject.AddComponent<Image>());
             Outline outline = modalBoxRect.gameObject.AddComponent<Outline>();
             outline.effectColor = new Color(0.86f, 0.72f, 0.45f, 0.85f);
             outline.effectDistance = new Vector2(2f, -2f);
@@ -522,16 +528,16 @@ namespace YunaLegend.BearChase.Runtime
             modalTitle.font = uiFont;
             modalTitle.fontSize = 34;
             modalTitle.alignment = TextAnchor.MiddleCenter;
-            modalTitle.color = new Color(1f, 0.86f, 0.56f);
+            modalTitle.color = HudTheme.Ink;
 
             modalBodyRect = CreateRect("Body", modalBoxRect, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0f, 22f), new Vector2(600f, 110f));
             modalBody = modalBodyRect.gameObject.AddComponent<Text>();
-            modalBody.font = uiFont;
+            modalBody.font = functionalFont;
             modalBody.fontSize = 25;
             modalBody.alignment = TextAnchor.MiddleCenter;
             modalBody.horizontalOverflow = HorizontalWrapMode.Wrap;
             modalBody.verticalOverflow = VerticalWrapMode.Overflow;
-            modalBody.color = new Color(0.96f, 0.92f, 0.84f);
+            modalBody.color = HudTheme.Ink;
 
             modalButtonsRowRect = CreateRect("Buttons", modalBoxRect, new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 34f), new Vector2(600f, 64f));
             var rowLayout = modalButtonsRowRect.gameObject.AddComponent<HorizontalLayoutGroup>();
@@ -606,15 +612,15 @@ namespace YunaLegend.BearChase.Runtime
             float topY = -10f * px;
             float usableW = Mathf.Max(240f * px, canvasSize.x - marginX * 2f);
 
-            int f14 = Mathf.RoundToInt(14f * px);
-            int f15 = Mathf.RoundToInt(15f * px);
-            int f16 = Mathf.RoundToInt(16f * px);
+            int f14 = Mathf.RoundToInt(16f * px);
+            int f15 = Mathf.RoundToInt(16f * px);
+            int f16 = Mathf.RoundToInt(20f * px);
 
             // Botoes superiores direitos (14 px)
-            float homeW = 54f * px;
-            float pauseW = 34f * px;
-            float muteW = 48f * px;
-            float btnH = 30f * px;
+            float homeW = 64f * px;
+            float pauseW = 48f * px;
+            float muteW = 56f * px;
+            float btnH = 48f * px;
             float btnGap = 6f * px;
             float controlsW = homeW + pauseW + muteW + btnGap * 2f;
 
@@ -651,7 +657,7 @@ namespace YunaLegend.BearChase.Runtime
             // Barra de coracoes adaptada sem colidir com os botoes no mobile
             if (heartsRoot != null)
             {
-                float heartSize = 22f * px;
+                float heartSize = 26f * px;
                 float heartsW = Mathf.Min(isPortrait ? usableW - controlsW - 8f * px : 210f * px, 220f * px);
                 if (isPortrait)
                 {
@@ -672,7 +678,7 @@ namespace YunaLegend.BearChase.Runtime
                 var hlg = heartsRoot.GetComponent<HorizontalLayoutGroup>();
                 if (hlg != null)
                 {
-                    hlg.spacing = 6f * px;
+                    hlg.spacing = 4f * px;
                 }
 
                 for (int i = 0; i < heartImages.Count; i++)
@@ -688,7 +694,7 @@ namespace YunaLegend.BearChase.Runtime
             if (hintPanelRect != null)
             {
                 hintPanelRect.anchoredPosition = new Vector2(0f, 12f * px);
-                hintPanelRect.sizeDelta = new Vector2(Mathf.Min(420f * px, usableW), 44f * px);
+                hintPanelRect.sizeDelta = new Vector2(Mathf.Min(420f * px, usableW), 54f * px);
             }
 
             SetFontSize(hintText, f14);
@@ -714,7 +720,7 @@ namespace YunaLegend.BearChase.Runtime
             if (modalBoxRect != null)
             {
                 float modalW = Mathf.Min(356f * px, usableW);
-                float modalH = isPortrait ? 210f * px : 190f * px;
+                float modalH = isPortrait ? 360f * px : 232f * px;
                 modalBoxRect.sizeDelta = new Vector2(modalW, modalH);
 
                 if (modalTitleRect != null)
@@ -731,20 +737,30 @@ namespace YunaLegend.BearChase.Runtime
 
                 if (modalButtonsRowRect != null)
                 {
-                    modalButtonsRowRect.anchoredPosition = new Vector2(0f, 16f * px);
-                    modalButtonsRowRect.sizeDelta = new Vector2(modalW - 20f * px, 42f * px);
+                    modalButtonsRowRect.anchoredPosition = new Vector2(0f, 20f * px);
+                    modalButtonsRowRect.sizeDelta = new Vector2(modalW - 20f * px, 54f * px);
                     var rowLayout = modalButtonsRowRect.GetComponent<HorizontalLayoutGroup>();
                     if (rowLayout != null)
                     {
-                        rowLayout.spacing = 6f * px;
+                        rowLayout.enabled = !isPortrait;
+                        rowLayout.spacing = 10f * px;
+                        if (!isPortrait)
+                        {
+                            RestoreModalButtonAnchors();
+                        }
                     }
                 }
 
                 float modalBtnW = Mathf.Clamp((modalW - 36f * px) / 3f, 92f * px, 136f * px);
-                float modalBtnH = 36f * px;
+                float modalBtnH = 52f * px;
                 SetButtonSize(primaryButton, modalBtnW, modalBtnH);
                 SetButtonSize(easyButton, modalBtnW, modalBtnH);
                 SetButtonSize(titleButton, modalBtnW, modalBtnH);
+
+                if (isPortrait)
+                {
+                    LayoutPortraitModal(modalW, px);
+                }
             }
 
             SetFontSize(modalTitle, f16);
@@ -754,37 +770,98 @@ namespace YunaLegend.BearChase.Runtime
             SetFontSize(titleButtonLabel, f15);
         }
 
+        private void LayoutPortraitModal(float width, float px)
+        {
+            Button[] buttons = { primaryButton, easyButton, titleButton };
+            int visibleCount = 0;
+            foreach (Button button in buttons)
+            {
+                if (button != null && button.gameObject.activeSelf)
+                {
+                    visibleCount++;
+                }
+            }
+
+            float rowHeight = visibleCount * 52f * px + Mathf.Max(0, visibleCount - 1) * 10f * px;
+            modalButtonsRowRect.sizeDelta = new Vector2(width - 32f * px, rowHeight);
+            modalButtonsRowRect.anchoredPosition = new Vector2(0f, 20f * px);
+            int index = 0;
+            foreach (Button button in buttons)
+            {
+                if (button == null || !button.gameObject.activeSelf)
+                {
+                    continue;
+                }
+
+                RectTransform rect = button.GetComponent<RectTransform>();
+                rect.anchorMin = new Vector2(0.5f, 1f);
+                rect.anchorMax = rect.anchorMin;
+                rect.pivot = rect.anchorMin;
+                rect.anchoredPosition = new Vector2(0f, -index * 62f * px);
+                rect.sizeDelta = new Vector2(width - 32f * px, 52f * px);
+                index++;
+            }
+
+            modalBodyRect.anchorMin = new Vector2(0.5f, 1f);
+            modalBodyRect.anchorMax = modalBodyRect.anchorMin;
+            modalBodyRect.pivot = modalBodyRect.anchorMin;
+            modalBodyRect.anchoredPosition = new Vector2(0f, -72f * px);
+            modalBodyRect.sizeDelta = new Vector2(width - 32f * px, 72f * px);
+        }
+
+        private void RestoreModalButtonAnchors()
+        {
+            Button[] buttons = { primaryButton, easyButton, titleButton };
+            foreach (Button button in buttons)
+            {
+                if (button == null)
+                {
+                    continue;
+                }
+
+                RectTransform rect = button.GetComponent<RectTransform>();
+                rect.anchorMin = new Vector2(0.5f, 0.5f);
+                rect.anchorMax = rect.anchorMin;
+                rect.pivot = rect.anchorMin;
+            }
+
+            modalBodyRect.anchorMin = new Vector2(0.5f, 0.5f);
+            modalBodyRect.anchorMax = modalBodyRect.anchorMin;
+            modalBodyRect.pivot = modalBodyRect.anchorMin;
+        }
+
         private void ApplyDesktopLayout()
         {
+            float utilityPx = 1f / Mathf.Max(0.01f, canvas.scaleFactor);
             if (controlsRoot != null)
             {
-                controlsRoot.anchoredPosition = new Vector2(-28f, -22f);
-                controlsRoot.sizeDelta = new Vector2(220f, 48f);
+                controlsRoot.anchoredPosition = new Vector2(-28f, -22f) * utilityPx;
+                controlsRoot.sizeDelta = new Vector2(244f, 52f) * utilityPx;
                 var clg = controlsRoot.GetComponent<HorizontalLayoutGroup>();
                 if (clg != null)
                 {
-                    clg.spacing = 10f;
+                    clg.spacing = 10f * utilityPx;
                 }
             }
 
             if (homeBtnRect != null)
             {
-                homeBtnRect.sizeDelta = new Vector2(62f, 42f);
+                homeBtnRect.sizeDelta = new Vector2(68f, 48f) * utilityPx;
             }
 
             if (pauseBtnRect != null)
             {
-                pauseBtnRect.sizeDelta = new Vector2(62f, 42f);
+                pauseBtnRect.sizeDelta = new Vector2(68f, 48f) * utilityPx;
             }
 
             if (muteBtnRect != null)
             {
-                muteBtnRect.sizeDelta = new Vector2(62f, 42f);
+                muteBtnRect.sizeDelta = new Vector2(68f, 48f) * utilityPx;
             }
 
-            SetFontSize(homeLabel, 18);
-            SetFontSize(pauseLabel, 18);
-            SetFontSize(muteLabel, 18);
+            SetFontSize(homeLabel, Mathf.RoundToInt(18f * utilityPx));
+            SetFontSize(pauseLabel, Mathf.RoundToInt(18f * utilityPx));
+            SetFontSize(muteLabel, Mathf.RoundToInt(18f * utilityPx));
 
             if (heartsRoot != null)
             {
@@ -853,7 +930,9 @@ namespace YunaLegend.BearChase.Runtime
                     var rowLayout = modalButtonsRowRect.GetComponent<HorizontalLayoutGroup>();
                     if (rowLayout != null)
                     {
+                        rowLayout.enabled = true;
                         rowLayout.spacing = 18f;
+                        RestoreModalButtonAnchors();
                     }
                 }
 
@@ -927,19 +1006,22 @@ namespace YunaLegend.BearChase.Runtime
 
         private Button CreateTopCircleButton(string name, string label, Transform parent, Action onClick)
         {
-            RectTransform rt = CreateRect(name, parent, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(62f, 42f));
+            RectTransform rt = CreateRect(name, parent, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(68f, 48f));
             Image img = rt.gameObject.AddComponent<Image>();
-            img.color = new Color(0.09f, 0.07f, 0.07f, 0.85f);
+            img.color = HudTheme.Plum;
+            HudTheme.Round(img);
             Button btn = rt.gameObject.AddComponent<Button>();
+            HudTheme.Button(btn);
             btn.onClick.AddListener(() => onClick?.Invoke());
 
             RectTransform txtRt = CreateRect("Label", rt, Vector2.zero, Vector2.one, new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
             Text txt = txtRt.gameObject.AddComponent<Text>();
-            txt.font = uiFont;
+            txt.font = functionalFont;
             txt.fontSize = 18;
             txt.alignment = TextAnchor.MiddleCenter;
             txt.color = new Color(0.96f, 0.90f, 0.78f);
             txt.text = label;
+            txt.raycastTarget = false;
             return btn;
         }
 
@@ -947,17 +1029,20 @@ namespace YunaLegend.BearChase.Runtime
         {
             RectTransform rt = CreateRect(name, parent, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(182f, 52f));
             Image img = rt.gameObject.AddComponent<Image>();
-            img.color = new Color(0.22f, 0.14f, 0.11f, 0.98f);
+            img.color = HudTheme.Plum;
+            HudTheme.Round(img);
             Button btn = rt.gameObject.AddComponent<Button>();
+            HudTheme.Button(btn);
             btn.onClick.AddListener(() => onClick?.Invoke());
 
             RectTransform txtRt = CreateRect("Label", rt, Vector2.zero, Vector2.one, new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
             labelText = txtRt.gameObject.AddComponent<Text>();
-            labelText.font = uiFont;
+            labelText.font = functionalFont;
             labelText.fontSize = 21;
             labelText.alignment = TextAnchor.MiddleCenter;
             labelText.color = new Color(1f, 0.90f, 0.66f);
             labelText.text = label;
+            labelText.raycastTarget = false;
             return btn;
         }
 

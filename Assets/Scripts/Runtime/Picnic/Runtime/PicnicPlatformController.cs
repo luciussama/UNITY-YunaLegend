@@ -37,6 +37,8 @@ namespace YunaLegend.Picnic.Runtime
         private Material woodPlatform3DMat;
         private Material spokeMat;
         private Material cloudBaseMat;
+        private Material grassSurfaceMat;
+        private readonly List<Mesh> grassSurfaceMeshes = new List<Mesh>();
 
         private Texture2D woodPlankTex;
         private Texture2D riverStoneTex;
@@ -197,6 +199,13 @@ namespace YunaLegend.Picnic.Runtime
             // Pivot at bottom-center (0.5, 0) for multi-Z 3D surface placement
             tileSoil = PicnicAtlasCatalog.FullSprite("tile-soil", new Vector2(0.5f, 0f));
             tileGrass = PicnicAtlasCatalog.FullSprite("tile-grass", new Vector2(0.5f, 0f));
+            if (tileGrass != null)
+            {
+                grassSurfaceMat = new Material(Shader.Find("Sprites/Default"))
+                {
+                    mainTexture = tileGrass.texture,
+                };
+            }
             tileGravel = PicnicAtlasCatalog.FullSprite("tile-gravel", new Vector2(0.5f, 0f));
             tileWood = PicnicAtlasCatalog.FullSprite("tile-wood", new Vector2(0.5f, 0f));
             sprWoodPlat = PicnicAtlasCatalog.Slice("objects-v1", PicnicAtlasCatalog.ObjetosFrames[1], 100f, "plat:wood");
@@ -531,32 +540,28 @@ namespace YunaLegend.Picnic.Runtime
             if (terrain == PicnicTerrain.Grass)
             {
                 if (tileGrass == null) return;
-                // 3 Z-rows across the 3D grass block (back at +1.15f, mid at +0.42f, front overhang at -0.26f in front of Yuna's ankles)
-                float[] zRows = { 1.15f, 0.42f, -0.26f };
+                // Keep every row inside the cap; each blade strip follows the ground along its full width.
+                float[] zRows = { 1.15f, 0.42f, FrontZ + 0.02f };
                 float[] alphas = { 0.98f, 0.92f, 0.56f };
                 int[] orders = { 3, 5, 15 };
                 int chunks = Mathf.Max(1, Mathf.RoundToInt(width / 196f));
                 float chunkW = width / chunks;
                 for (int c = 0; c < chunks; c++)
                 {
-                    float chunkCenterPx = startX + (c + 0.5f) * chunkW;
-                    float surfYPx = PicnicLevelData.SurfaceY(p, chunkCenterPx);
-                    Vector3 basePos = PicnicAtlasCatalog.ToUnity(chunkCenterPx, surfYPx);
                     for (int r = 0; r < zRows.Length; r++)
                     {
-                        var tuft = new GameObject($"Grass3DRow_{c}_{r}", typeof(SpriteRenderer));
+                        var tuft = new GameObject($"Grass3DRow_{c}_{r}", typeof(MeshFilter), typeof(MeshRenderer));
                         tuft.transform.SetParent(parent, false);
-                        var sr = tuft.GetComponent<SpriteRenderer>();
-                        sr.sprite = tileGrass;
-                        sr.sortingOrder = orders[r];
-                        sr.color = r == 0
+                        Color tint = r == 0
                             ? new Color(0.88f, 0.96f, 0.85f, alphas[r])
                             : new Color(1f, 1f, 1f, alphas[r]);
-                        tuft.transform.position = new Vector3(basePos.x, basePos.y - 0.14f, zRows[r]);
-                        tuft.transform.localScale = new Vector3(
-                            ((chunkW / 100f) + 0.10f) / tileGrass.bounds.size.x,
-                            1.06f / tileGrass.bounds.size.y,
-                            1f);
+                        Mesh mesh = CreateGroundedGrassMesh(p, startX + c * chunkW, chunkW, tint);
+                        grassSurfaceMeshes.Add(mesh);
+                        tuft.GetComponent<MeshFilter>().sharedMesh = mesh;
+                        var renderer = tuft.GetComponent<MeshRenderer>();
+                        renderer.sharedMaterial = grassSurfaceMat;
+                        renderer.sortingOrder = orders[r];
+                        tuft.transform.localPosition = new Vector3(0f, 0f, zRows[r]);
                     }
                 }
                 return;
@@ -570,6 +575,53 @@ namespace YunaLegend.Picnic.Runtime
 
             // Soil (meadow turf) and Wood (house deck) are 100% 3D blocks (TopCap3D / HillCap3D);
             // do not place 2D vertical strip cutouts (tile-soil / tile-wood) on top of them.
+        }
+
+        private static Mesh CreateGroundedGrassMesh(PicnicPlatformSpec platform, float startX, float width, Color tint)
+        {
+            int columns = Mathf.Max(1, Mathf.CeilToInt(width / 13f));
+            var vertices = new Vector3[(columns + 1) * 2];
+            var uvs = new Vector2[vertices.Length];
+            var colors = new Color[vertices.Length];
+            var triangles = new int[columns * 6];
+
+            for (int i = 0; i <= columns; i++)
+            {
+                float u = (float)i / columns;
+                float x = startX + width * u;
+                Vector3 surface = PicnicAtlasCatalog.ToUnity(x, PicnicLevelData.SurfaceY(platform, x));
+                // The texture has 48px of transparent padding below its roots (390px canvas).
+                // Embed that padding in the cap, keeping the visible roots at ground level.
+                vertices[i * 2] = new Vector3(surface.x, surface.y - 0.14f, 0f);
+                vertices[i * 2 + 1] = vertices[i * 2] + Vector3.up * 1.06f;
+                uvs[i * 2] = new Vector2(u, 0f);
+                uvs[i * 2 + 1] = new Vector2(u, 1f);
+                colors[i * 2] = tint;
+                colors[i * 2 + 1] = tint;
+
+                if (i == columns)
+                {
+                    continue;
+                }
+
+                int v = i * 2;
+                int t = i * 6;
+                triangles[t] = v;
+                triangles[t + 1] = v + 1;
+                triangles[t + 2] = v + 2;
+                triangles[t + 3] = v + 2;
+                triangles[t + 4] = v + 1;
+                triangles[t + 5] = v + 3;
+            }
+
+            var mesh = new Mesh { name = platform.Id + "_groundedGrass" };
+            mesh.vertices = vertices;
+            mesh.uv = uvs;
+            mesh.colors = colors;
+            mesh.triangles = triangles;
+            mesh.RecalculateNormals();
+            mesh.RecalculateBounds();
+            return mesh;
         }
 
         private void Build3DAerialGravelPlatform(Transform parent, PicnicPlatformSpec p)
@@ -1053,6 +1105,11 @@ namespace YunaLegend.Picnic.Runtime
             if (woodPlatform3DMat != null) Destroy(woodPlatform3DMat);
             if (spokeMat != null) Destroy(spokeMat);
             if (cloudBaseMat != null) Destroy(cloudBaseMat);
+            if (grassSurfaceMat != null) Destroy(grassSurfaceMat);
+            foreach (Mesh mesh in grassSurfaceMeshes)
+            {
+                if (mesh != null) Destroy(mesh);
+            }
             if (woodPlankTex != null) Destroy(woodPlankTex);
             if (riverStoneTex != null) Destroy(riverStoneTex);
             if (gravelCapTex != null) Destroy(gravelCapTex);

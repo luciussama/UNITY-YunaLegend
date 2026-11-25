@@ -1,0 +1,12 @@
+{
+  "unity": "6000.3.28f1",
+  "head": "bdb40bd",
+  "branch": "fix/picnic-editor-playmode",
+  "generalCaptures": 12,
+  "hillCaptures": 9,
+  "validation": "static Unity camera, not gameplay",
+  "sha256": {
+    "Assets\\Scripts\\Runtime\\Picnic\\Runtime\\PicnicPlatformController.cs": "1c0e4f2b5a8515e7d9471c8654de291d03808b1e5b5912b404d73fee6e1918c9",
+    "Evidence\\PicnicGrassAlignment\\GrassSurfaceReview.cs": "8ed59a682034cc32c51c1418bd63c215a37511c31cd62288e3fded8bcd1c11f4"
+  }
+}

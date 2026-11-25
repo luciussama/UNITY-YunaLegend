@@ -14,6 +14,8 @@ namespace YunaLegend.Picnic.Runtime
         private SpriteRenderer yunaRenderer;
         private Transform yunaShadow;
         private Material yunaShadowMat;
+        private Texture2D yunaShadowTexture;
+        private const float YunaArtScale = 1.15f;
         private SpriteRenderer[] sweatDrops;
         private Transform nandaRoot;
         private SpriteRenderer nandaRenderer;
@@ -53,20 +55,26 @@ namespace YunaLegend.Picnic.Runtime
             yunaArt.transform.SetParent(yunaRoot, false);
             yunaRenderer = yunaArt.GetComponent<SpriteRenderer>();
             yunaRenderer.sortingOrder = 12;
+            yunaArt.transform.localScale = Vector3.one * YunaArtScale;
 
             // Soft 3D contact shadow disc on the 3D ground surface beneath Yuna's feet
             var shadowQuad = GameObject.CreatePrimitive(PrimitiveType.Quad);
             shadowQuad.name = "YunaContactShadow3D";
             shadowQuad.transform.SetParent(yunaRoot, false);
             Destroy(shadowQuad.GetComponent<Collider>());
-            shadowQuad.transform.localPosition = new Vector3(0f, 0.02f, 0.05f);
+            shadowQuad.transform.localPosition = new Vector3(0f, 0.014f, 0.30f);
             shadowQuad.transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
-            shadowQuad.transform.localScale = new Vector3(0.72f, 0.34f, 1f);
+            shadowQuad.transform.localScale = new Vector3(0.72f * YunaArtScale, 0.34f * YunaArtScale, 1f);
+            yunaShadowTexture = CreateContactShadowTexture();
             yunaShadowMat = new Material(Shader.Find("Sprites/Default"))
             {
                 color = new Color(0.08f, 0.14f, 0.06f, 0.34f),
+                mainTexture = yunaShadowTexture,
             };
-            shadowQuad.GetComponent<MeshRenderer>().sharedMaterial = yunaShadowMat;
+            var shadowRenderer = shadowQuad.GetComponent<MeshRenderer>();
+            shadowRenderer.sharedMaterial = yunaShadowMat;
+            shadowRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            shadowRenderer.receiveShadows = false;
             yunaShadow = shadowQuad.transform;
 
             // 3 animated sweat droplets for grass/gravel sensory discomfort (GardenRenderer.effort)
@@ -253,6 +261,7 @@ namespace YunaLegend.Picnic.Runtime
             }
             yunaRenderer.transform.localPosition = new Vector3(0f, stepBounceY, 0f);
             yunaRenderer.transform.localRotation = Quaternion.Euler(0f, 0f, tiltDeg);
+            ApplyContactShadow(sim);
 
             // Sweat droplets falling from forehead during grass or gravel sensory discomfort
             bool showSweat = sim.Stage == PicnicStage.Running
@@ -268,7 +277,7 @@ namespace YunaLegend.Picnic.Runtime
                     float cycle = (sim.Time * 1.4f + i * 0.32f) % 1f;
                     float sx = sim.PlayerFacing * (0.21f + i * 0.055f);
                     float sy = 0.80f - cycle * 0.16f;
-                    sweatDrops[i].transform.localPosition = new Vector3(sx, sy, -0.02f);
+                    sweatDrops[i].transform.localPosition = new Vector3(sx * YunaArtScale, sy * YunaArtScale, -0.02f);
                     float alpha = Mathf.Sin(cycle * Mathf.PI) * 0.92f;
                     sweatDrops[i].color = new Color(1f, 1f, 1f, alpha);
                 }
@@ -399,6 +408,70 @@ namespace YunaLegend.Picnic.Runtime
             }
             tex.Apply();
             return Sprite.Create(tex, new Rect(0, 0, w, h), new Vector2(0.5f, 0.5f), 24f);
+        }
+
+        private void ApplyContactShadow(PicnicSimulation sim)
+        {
+            yunaShadow.gameObject.SetActive(sim.OnGround);
+            if (!sim.OnGround)
+            {
+                return;
+            }
+
+            float angle = 0f;
+            foreach (PicnicPlatformSpec platform in sim.Level.StaticPlatforms)
+            {
+                if (sim.PlayerX < platform.X || sim.PlayerX > platform.X + platform.Width)
+                {
+                    continue;
+                }
+
+                float left = PicnicLevelData.SurfaceY(platform, sim.PlayerX - 1f);
+                float right = PicnicLevelData.SurfaceY(platform, sim.PlayerX + 1f);
+                angle = Mathf.Atan2(left - right, 2f) * Mathf.Rad2Deg;
+                break;
+            }
+            yunaShadow.localRotation = Quaternion.AngleAxis(angle, Vector3.forward) * Quaternion.Euler(90f, 0f, 0f);
+        }
+
+        private static Texture2D CreateContactShadowTexture()
+        {
+            const int size = 128;
+            var texture = new Texture2D(size, size, TextureFormat.RGBA32, false)
+            {
+                name = "YunaSoftContactShadow",
+                wrapMode = TextureWrapMode.Clamp,
+                filterMode = FilterMode.Bilinear,
+            };
+            var pixels = new Color32[size * size];
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    float nx = (x + 0.5f) / size * 2f - 1f;
+                    float ny = (y + 0.5f) / size * 2f - 1f;
+                    float radius = Mathf.Sqrt(nx * nx + ny * ny);
+                    float alpha = 1f - Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.12f, 1f, radius));
+                    pixels[y * size + x] = new Color32(255, 255, 255, (byte)Mathf.RoundToInt(alpha * 255f));
+                }
+            }
+            texture.SetPixels32(pixels);
+            texture.Apply(false, true);
+            return texture;
+        }
+
+        private void OnDestroy()
+        {
+            if (Application.isPlaying)
+            {
+                Destroy(yunaShadowMat);
+                Destroy(yunaShadowTexture);
+            }
+            else
+            {
+                DestroyImmediate(yunaShadowMat);
+                DestroyImmediate(yunaShadowTexture);
+            }
         }
 
         private static void FitSprite(Transform t, Sprite s, float worldW, float worldH)

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using YunaLegend.Presentation;
 
 namespace YunaLegend.UI
 {
@@ -7,7 +8,7 @@ namespace YunaLegend.UI
     /// Adapta a tela de entrada entre o layout widescreen (desktop/notebook),
     /// mobile paisagem e mobile retrato:
     /// - Prioridade 1: textos na parte superior no celular, sem encobrir a menina na poltrona.
-    /// - Prioridade 2: fontes entre 14 e 16px logicos no celular.
+    /// - Prioridade 2: texto principal grande e alvos de toque de pelo menos 44px logicos.
     /// - Prioridade 3: preserva a estetica vitoriana/livro ilustrado original.
     /// - Prioridade 4: enfeites, paineis e enquadramentos cabem integralmente na tela do celular.
     /// </summary>
@@ -182,6 +183,7 @@ namespace YunaLegend.UI
             }
 
             ApplyPanels(size, isPortrait, isCompactLandscape, pxToCanvas);
+            ApplyVisualTheme();
         }
 
         private float ComputePxToCanvas(Vector2 canvasSize)
@@ -239,7 +241,8 @@ namespace YunaLegend.UI
 
             // Em retrato mobile: posiciona a menina na poltrona nos ~60% inferiores da tela,
             // deixando o topo livre para o titulo e menu sem encobrir a menina.
-            float lowerBandHeight = canvasSize.y * 0.64f;
+            float reservedMenuHeight = 350f * ComputePxToCanvas(canvasSize);
+            float lowerBandHeight = Mathf.Min(canvasSize.y * 0.64f, Mathf.Max(0f, canvasSize.y - reservedMenuHeight));
             float portraitArtHeight = Mathf.Max(lowerBandHeight, canvasSize.x / TargetArtAspect * 1.12f);
             float portraitArtWidth = portraitArtHeight * TargetArtAspect;
             artContainer.sizeDelta = new Vector2(portraitArtWidth, portraitArtHeight);
@@ -328,13 +331,13 @@ namespace YunaLegend.UI
             float colWidth = Mathf.Min(canvasSize.x * 0.44f, 320f * px);
             float topY = -18f * px;
 
-            int titleFont = Mathf.RoundToInt(16f * px);
-            int btnFont = Mathf.RoundToInt(15f * px);
+            int titleFont = Mathf.RoundToInt(24f * px);
+            int btnFont = Mathf.RoundToInt(18f * px);
             int smallFont = Mathf.RoundToInt(14f * px);
 
-            float titleH = 48f * px;
-            float btnH = 30f * px;
-            float btnGap = 6f * px;
+            float titleH = 56f * px;
+            float btnH = 48f * px;
+            float btnGap = 8f * px;
 
             if (titleText != null)
             {
@@ -379,13 +382,13 @@ namespace YunaLegend.UI
             if (settingsButtonRect != null)
             {
                 settingsButtonRect.anchoredPosition = new Vector2(-14f * px, -12f * px);
-                settingsButtonRect.sizeDelta = new Vector2(36f * px, 36f * px);
+                settingsButtonRect.sizeDelta = new Vector2(48f * px, 48f * px);
             }
 
             if (flagButtonRect != null)
             {
                 flagButtonRect.anchoredPosition = new Vector2(0f, -8f * px);
-                flagButtonRect.sizeDelta = new Vector2(38f * px, 48f * px);
+                flagButtonRect.sizeDelta = new Vector2(48f * px, 48f * px);
             }
         }
 
@@ -393,18 +396,18 @@ namespace YunaLegend.UI
         {
             // Prioridade 1: TODOS os textos na parte SUPERIOR da tela do celular,
             // abaixo da bandeirinha/engrenagem e ACIMA da menina na poltrona.
-            // Prioridade 2: fontes estritamente entre 14px e 16px logicos.
+            // Texto principal maior e botoes de 48px logicos, sem mudar as acoes do menu.
             float marginX = 18f * px;
             float contentWidth = Mathf.Max(200f * px, canvasSize.x - marginX * 2f);
 
-            int titleFont = Mathf.RoundToInt(16f * px);
-            int btnFont = Mathf.RoundToInt(15f * px);
+            int titleFont = Mathf.RoundToInt(24f * px);
+            int btnFont = Mathf.RoundToInt(18f * px);
             int smallFont = Mathf.RoundToInt(14f * px);
 
             float topIconsBottom = 56f * px;
-            float titleH = 48f * px;
-            float btnH = 34f * px;
-            float btnGap = 6f * px;
+            float titleH = 64f * px;
+            float btnH = 48f * px;
+            float btnGap = 8f * px;
             float footerH = 38f * px;
 
             float titleY = -topIconsBottom;
@@ -454,13 +457,13 @@ namespace YunaLegend.UI
             if (settingsButtonRect != null)
             {
                 settingsButtonRect.anchoredPosition = new Vector2(-14f * px, -10f * px);
-                settingsButtonRect.sizeDelta = new Vector2(36f * px, 36f * px);
+                settingsButtonRect.sizeDelta = new Vector2(48f * px, 48f * px);
             }
 
             if (flagButtonRect != null)
             {
                 flagButtonRect.anchoredPosition = new Vector2(0f, -6f * px);
-                flagButtonRect.sizeDelta = new Vector2(38f * px, 46f * px);
+                flagButtonRect.sizeDelta = new Vector2(48f * px, 48f * px);
             }
         }
 
@@ -475,7 +478,7 @@ namespace YunaLegend.UI
                 if (isMobile)
                 {
                     float panelWidth = Mathf.Min(346f * px, maxPanelW);
-                    float panelHeight = 192f * px;
+                    float panelHeight = 228f * px;
 
                     // Prioridade 1: em retrato, posicionar o painel de configuracoes na faixa SUPERIOR
                     // escura (acima da menina na poltrona) com backdrop opaco cobrindo o menu atras.
@@ -516,7 +519,7 @@ namespace YunaLegend.UI
                     var heading = settingsPanelRect.Find("Titulo_Painel")?.GetComponent<Text>();
                     if (heading != null)
                     {
-                        heading.fontSize = Mathf.RoundToInt(16f * px);
+                        heading.fontSize = Mathf.RoundToInt(22f * px);
                         heading.fontStyle = FontStyle.Bold;
                         SetTopLeft(heading.rectTransform, 18f * px, -14f * px, panelWidth - 36f * px, 28f * px);
                     }
@@ -524,20 +527,39 @@ namespace YunaLegend.UI
                     var volLabel = settingsPanelRect.Find("Rotulo_Volume")?.GetComponent<Text>();
                     if (volLabel != null)
                     {
-                        volLabel.fontSize = Mathf.RoundToInt(14f * px);
+                        volLabel.fontSize = Mathf.RoundToInt(18f * px);
                         SetTopLeft(volLabel.rectTransform, 18f * px, -52f * px, panelWidth - 36f * px, 24f * px);
                     }
 
                     if (volumeSliderRect != null)
                     {
-                        SetTopLeft(volumeSliderRect, 18f * px, -84f * px, panelWidth - 36f * px, 24f * px);
+                        SetTopLeft(volumeSliderRect, 22f * px, -84f * px, panelWidth - 44f * px, 48f * px);
+                        var slider = volumeSliderRect.GetComponent<Slider>();
+                        if (slider != null && slider.handleRect != null)
+                        {
+                            var handle = slider.handleRect;
+                            handle.anchorMin = new Vector2(handle.anchorMin.x, 0.5f);
+                            handle.anchorMax = new Vector2(handle.anchorMax.x, 0.5f);
+                            handle.pivot = new Vector2(0.5f, 0.5f);
+                            handle.anchoredPosition = new Vector2(handle.anchoredPosition.x, 0f);
+                            slider.handleRect.sizeDelta = new Vector2(44f * px, 44f * px);
+                            var handleArea = handle.parent as RectTransform;
+                            if (handleArea != null)
+                            {
+                                handleArea.offsetMin = new Vector2(22f * px, 0f);
+                                handleArea.offsetMax = new Vector2(-22f * px, 0f);
+                            }
+                        }
+
+                        SetSliderTrack(volumeSliderRect.Find("Fundo") as RectTransform, px);
+                        SetSliderTrack(volumeSliderRect.Find("Area_Preenchimento") as RectTransform, px);
                     }
 
                     var closeBtn = settingsPanelRect.Find("Botao_Fechar") as RectTransform;
                     if (closeBtn != null)
                     {
-                        SetTopLeft(closeBtn, 18f * px, -132f * px, 140f * px, 36f * px);
-                        SetTextSize(closeBtn, Mathf.RoundToInt(15f * px));
+                        SetTopLeft(closeBtn, 18f * px, -152f * px, panelWidth - 36f * px, 48f * px);
+                        SetTextSize(closeBtn, Mathf.RoundToInt(18f * px));
                     }
                 }
                 else
@@ -575,10 +597,11 @@ namespace YunaLegend.UI
                         }
                     }
 
-                    float headerH = 26f * px;
-                    float rowH = 36f * px;
+                    float headerH = 32f * px;
+                    float rowH = 48f * px;
                     float totalH = headerH + 16f * px + Mathf.Max(1, itemCount) * rowH + 12f * px;
-                    phasePanelRect.anchoredPosition = new Vector2(0f, -56f * px);
+                    float topInset = Mathf.Min(56f * px, Mathf.Max(8f * px, canvasSize.y - totalH - 12f * px));
+                    phasePanelRect.anchoredPosition = new Vector2(0f, -topInset);
                     phasePanelRect.sizeDelta = new Vector2(phaseWidth, totalH);
 
                     var phaseImg = phasePanelRect.GetComponent<Image>();
@@ -597,7 +620,7 @@ namespace YunaLegend.UI
                     var header = phasePanelRect.Find("Titulo_Fases")?.GetComponent<Text>();
                     if (header != null)
                     {
-                        header.fontSize = Mathf.RoundToInt(14f * px);
+                        header.fontSize = Mathf.RoundToInt(20f * px);
                         header.rectTransform.anchoredPosition = new Vector2(0f, -8f * px);
                         header.rectTransform.sizeDelta = new Vector2(-16f * px, headerH);
                     }
@@ -613,7 +636,7 @@ namespace YunaLegend.UI
 
                         child.anchoredPosition = new Vector2(0f, -(headerH + 12f * px + rowIdx * rowH));
                         child.sizeDelta = new Vector2(-18f * px, rowH - 4f * px);
-                        SetTextSize(child, Mathf.RoundToInt(15f * px));
+                        SetTextSize(child, Mathf.RoundToInt(17f * px));
                         rowIdx++;
                     }
                 }
@@ -621,6 +644,147 @@ namespace YunaLegend.UI
                 {
                     phasePanelRect.sizeDelta = new Vector2(420f, phasePanelRect.sizeDelta.y);
                 }
+            }
+        }
+
+        private static void SetSliderTrack(RectTransform rect, float px)
+        {
+            if (rect == null)
+            {
+                return;
+            }
+
+            rect.anchorMin = new Vector2(0f, 0.5f);
+            rect.anchorMax = new Vector2(1f, 0.5f);
+            rect.offsetMin = new Vector2(22f * px, -7f * px);
+            rect.offsetMax = new Vector2(-22f * px, 7f * px);
+        }
+
+        private void ApplyVisualTheme()
+        {
+            StyleMenuButton(newGameRect);
+            StyleMenuButton(loadGameRect);
+            StyleMenuButton(easyModeRect);
+            StyleCard(settingsPanelRect);
+            StyleCard(phasePanelRect);
+            StyleStatusPill(easyTagRect);
+            StyleStatusPill(footerRect);
+
+            if (settingsPanelRect != null)
+            {
+                StyleMenuButton(settingsPanelRect.Find("Botao_Fechar") as RectTransform);
+            }
+
+            if (phasePanelRect != null)
+            {
+                for (int i = 0; i < phasePanelRect.childCount; i++)
+                {
+                    var child = phasePanelRect.GetChild(i) as RectTransform;
+                    if (child != null && child.name.StartsWith("Fase_"))
+                    {
+                        StyleMenuButton(child);
+                    }
+                }
+            }
+
+            if (volumeSliderRect != null)
+            {
+                foreach (var image in volumeSliderRect.GetComponentsInChildren<Image>(true))
+                {
+                    HudTheme.Round(image);
+                    image.color = image.name == "Alca" ? HudTheme.Plum
+                        : image.name == "Preenchimento" ? HudTheme.Rose : HudTheme.Sage;
+                }
+            }
+        }
+
+        private static void StyleStatusPill(RectTransform textRect)
+        {
+            if (textRect == null || textRect.parent == null)
+            {
+                return;
+            }
+
+            string backgroundName = textRect.name + "_RoundedBackground";
+            var background = textRect.parent.Find(backgroundName) as RectTransform;
+            if (background == null)
+            {
+                var go = new GameObject(backgroundName, typeof(RectTransform), typeof(Image));
+                go.transform.SetParent(textRect.parent, false);
+                background = go.GetComponent<RectTransform>();
+                background.SetSiblingIndex(textRect.GetSiblingIndex());
+            }
+
+            background.anchorMin = textRect.anchorMin;
+            background.anchorMax = textRect.anchorMax;
+            background.pivot = textRect.pivot;
+            background.anchoredPosition = textRect.anchoredPosition;
+            background.sizeDelta = textRect.sizeDelta;
+            var image = background.GetComponent<Image>();
+            HudTheme.Round(image);
+            image.color = HudTheme.Plum;
+            image.raycastTarget = false;
+            var text = textRect.GetComponent<Text>();
+            if (text != null)
+            {
+                text.alignment = TextAnchor.MiddleCenter;
+            }
+        }
+
+        private static void StyleCard(RectTransform rect)
+        {
+            if (rect == null)
+            {
+                return;
+            }
+
+            var image = rect.GetComponent<Image>();
+            if (image != null)
+            {
+                HudTheme.Panel(image);
+            }
+
+            for (int i = 0; i < rect.childCount; i++)
+            {
+                var text = rect.GetChild(i).GetComponent<Text>();
+                if (text != null)
+                {
+                    text.color = HudTheme.Ink;
+                    var shadow = text.GetComponent<Shadow>();
+                    if (shadow != null)
+                    {
+                        shadow.enabled = false;
+                    }
+                }
+            }
+        }
+
+        private static void StyleMenuButton(RectTransform rect)
+        {
+            if (rect == null)
+            {
+                return;
+            }
+
+            var button = rect.GetComponent<Button>();
+            if (button == null)
+            {
+                return;
+            }
+
+            if (rect.GetComponent<Image>() == null)
+            {
+                rect.gameObject.AddComponent<Image>();
+            }
+
+            HudTheme.Button(button);
+            var text = rect.GetComponentInChildren<Text>(true);
+            if (text != null)
+            {
+                text.alignment = TextAnchor.MiddleCenter;
+                text.fontStyle = FontStyle.Bold;
+                text.raycastTarget = false;
+                text.color = button.interactable ? HudTheme.Paper : new Color(0.69f, 0.65f, 0.72f);
             }
         }
 

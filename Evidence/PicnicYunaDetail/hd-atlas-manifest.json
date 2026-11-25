@@ -1,0 +1,125 @@
+{
+  "method": "Upscayl 2.15.0 high-fidelity-4x, output scale2x; original crops, alpha, anchors and animation order retained",
+  "atlases": [
+    {
+      "file": "girl-running-v1.png",
+      "size": [
+        1432,
+        1044
+      ],
+      "frames": 8,
+      "cell": [
+        358,
+        522
+      ],
+      "scale": 2,
+      "padding": 4,
+      "sourceSha256": "da41ba7a0e1ea9898dcd789487df694edfa381b745d2a4ac59239d544e62526f"
+    },
+    {
+      "file": "girl-actions-v1.png",
+      "size": [
+        1648,
+        1040
+      ],
+      "frames": 8,
+      "cell": [
+        412,
+        520
+      ],
+      "scale": 2,
+      "padding": 4,
+      "sourceSha256": "763615f0c58bf0510c2373a1707409d68ad3cd01bfc6cd2d1a6999198d71142d"
+    },
+    {
+      "file": "girl-discomfort-v1.png",
+      "size": [
+        1616,
+        1048
+      ],
+      "frames": 8,
+      "cell": [
+        404,
+        524
+      ],
+      "scale": 2,
+      "padding": 4,
+      "sourceSha256": "e1ba4160eb01b324f122f2479a4722e958589658b1912ce0c092a36991d31069"
+    },
+    {
+      "file": "girl-pebbles-v2.png",
+      "size": [
+        1112,
+        1064
+      ],
+      "frames": 4,
+      "cell": [
+        556,
+        532
+      ],
+      "scale": 2,
+      "padding": 4,
+      "sourceSha256": "cb523c15906fb6cd2950ac25e80971a0a8957ff617387af9e457b8bc2f2a528e"
+    },
+    {
+      "file": "fear-v2-girl-running-v1.png",
+      "size": [
+        2872,
+        1044
+      ],
+      "frames": 8,
+      "cell": [
+        718,
+        522
+      ],
+      "scale": 2,
+      "padding": 4,
+      "sourceSha256": "4011d31983fea16a6af901fce39b529d82532eec55d5db27d7be3463e962273b"
+    },
+    {
+      "file": "fear-v2-girl-actions-v1.png",
+      "size": [
+        3088,
+        1040
+      ],
+      "frames": 8,
+      "cell": [
+        772,
+        520
+      ],
+      "scale": 2,
+      "padding": 4,
+      "sourceSha256": "cb6d48b06b696a2f5f184add345dcd11ad349d2ea2855d93da014daf21e85195"
+    },
+    {
+      "file": "fear-v2-girl-discomfort-v1.png",
+      "size": [
+        3056,
+        1048
+      ],
+      "frames": 8,
+      "cell": [
+        764,
+        524
+      ],
+      "scale": 2,
+      "padding": 4,
+      "sourceSha256": "cfc77d7f34b6ad5b40b05bb9651b62d11ccb438488252afea6e61d9b93251bd6"
+    },
+    {
+      "file": "fear-v2-girl-pebbles-v2.png",
+      "size": [
+        1832,
+        1064
+      ],
+      "frames": 4,
+      "cell": [
+        916,
+        532
+      ],
+      "scale": 2,
+      "padding": 4,
+      "sourceSha256": "889099d88c8c98e3463162c2430b472f4e55156bf729774cb97dc4884811ae84"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "WebGL.data.unityweb": {
+    "gzipValid": true,
+    "decompressedBytes": 309457596
+  },
+  "WebGL.framework.js.unityweb": {
+    "gzipValid": true,
+    "decompressedBytes": 472734
+  },
+  "WebGL.wasm.unityweb": {
+    "gzipValid": true,
+    "decompressedBytes": 48952734
+  }
+}

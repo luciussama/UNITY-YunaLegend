@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 using YunaLegend.Dialogue;
+using YunaLegend.Presentation;
 
 namespace YunaLegend.Illustrated25D.Environment
 {
@@ -150,7 +151,7 @@ namespace YunaLegend.Illustrated25D.Environment
                 pauseBtnLabel.text = paused ? "▶" : "II";
                 pauseBtnBg.color = paused
                     ? new Color(0.95f, 0.76f, 0.25f, 0.95f)
-                    : new Color(0.102f, 0.063f, 0.149f, 0.90f);
+                    : HudTheme.Plum;
                 pauseBtnLabel.color = paused
                     ? Color.black
                     : new Color(0.992f, 0.878f, 0.278f, 1f);
@@ -381,7 +382,8 @@ namespace YunaLegend.Illustrated25D.Environment
             btn.targetGraphic = bg;
             btn.onClick.AddListener(() => onClick?.Invoke());
 
-            txt = CreateText("Label", go.transform, label, 14, new Color(0.992f, 0.878f, 0.278f, 1f), TextAnchor.MiddleCenter, FontStyle.Bold);
+            HudTheme.Button(btn);
+            txt = CreateText("Label", go.transform, label, 16, Color.white, TextAnchor.MiddleCenter, FontStyle.Bold);
             Stretch(txt.rectTransform);
             return btn;
         }
@@ -479,8 +481,8 @@ namespace YunaLegend.Illustrated25D.Environment
             Stretch(portraitInitialText.rectTransform);
 
             dialogueSpeakerText = CreateText("Speaker", go.transform, "NANDA", 14, new Color(0.22f, 0.74f, 0.97f, 1f), TextAnchor.UpperLeft, FontStyle.Bold);
-            dialogueBodyText = CreateText("Body", go.transform, string.Empty, 15, new Color(0.996f, 0.988f, 0.910f, 1f), TextAnchor.MiddleLeft, FontStyle.Italic);
-            dialogueFooterText = CreateText("Footer", go.transform, string.Empty, 14, new Color(0.90f, 0.86f, 0.72f, 0.85f), TextAnchor.LowerRight, FontStyle.Normal);
+            dialogueBodyText = CreateText("Body", go.transform, string.Empty, 17, HudTheme.Ink, TextAnchor.MiddleLeft, FontStyle.Italic);
+            dialogueFooterText = CreateText("Footer", go.transform, string.Empty, 16, HudTheme.Plum, TextAnchor.LowerRight, FontStyle.Normal);
 
             var btn = go.AddComponent<Button>();
             btn.transition = Selectable.Transition.None;
@@ -533,9 +535,9 @@ namespace YunaLegend.Illustrated25D.Environment
             modalCard.anchorMax = new Vector2(0.5f, 0.5f);
             modalCard.pivot = new Vector2(0.5f, 0.5f);
 
-            modalHeaderText = CreateText("Header", cardGo.transform, string.Empty, 14, new Color(0.88f, 0.58f, 0.58f, 1f), TextAnchor.UpperCenter, FontStyle.Bold);
-            modalTitleText = CreateText("Title", cardGo.transform, string.Empty, 16, new Color(0.992f, 0.878f, 0.278f, 1f), TextAnchor.MiddleCenter, FontStyle.Bold);
-            modalSubtitleText = CreateText("Subtitle", cardGo.transform, string.Empty, 14, new Color(0.90f, 0.86f, 0.78f, 1f), TextAnchor.MiddleCenter, FontStyle.Italic);
+            modalHeaderText = CreateText("Header", cardGo.transform, string.Empty, 16, new Color(0.48f, 0.20f, 0.29f, 1f), TextAnchor.UpperCenter, FontStyle.Bold);
+            modalTitleText = CreateText("Title", cardGo.transform, string.Empty, 18, HudTheme.Ink, TextAnchor.MiddleCenter, FontStyle.Bold);
+            modalSubtitleText = CreateText("Subtitle", cardGo.transform, string.Empty, 16, HudTheme.Plum, TextAnchor.MiddleCenter, FontStyle.Italic);
 
             var primaryGo = CreateBorderedBox(
                 "PrimaryBtn",
@@ -560,6 +562,7 @@ namespace YunaLegend.Illustrated25D.Environment
             var sBtn = secondaryGo.AddComponent<Button>();
             sBtn.targetGraphic = secondaryGo.GetComponent<Image>();
             sBtn.onClick.AddListener(() => currentSecondaryAction?.Invoke());
+            HudTheme.Button(sBtn);
             modalSecondaryBtnLabel = CreateText("Label", secondaryGo.transform, string.Empty, 14, new Color(0.996f, 0.980f, 0.880f, 1f), TextAnchor.MiddleCenter, FontStyle.Bold);
             Stretch(modalSecondaryBtnLabel.rectTransform);
         }
@@ -572,15 +575,15 @@ namespace YunaLegend.Illustrated25D.Environment
             float marginX = 12f * px;
             float maxCardW = Mathf.Min(isMobile ? (isLandscape ? 520f * px : canvasSize.x - marginX * 2f) : 560f * px, canvasSize.x - marginX * 2f);
 
-            int f14 = Mathf.RoundToInt(14f * px);
-            int f15 = Mathf.RoundToInt(15f * px);
-            int f16 = Mathf.RoundToInt(16f * px);
+            int f14 = Mathf.RoundToInt(16f * px);
+            int f15 = Mathf.RoundToInt(17f * px);
+            int f16 = Mathf.RoundToInt(18f * px);
 
             // Botoes superiores direitos (R, II, SOM)
-            float btnH = 32f * px;
+            float btnH = 48f * px;
             float btnGap = 6f * px;
-            float muteW = 48f * px;
-            float sqW = 34f * px;
+            float muteW = 58f * px;
+            float sqW = 48f * px;
             float topBarY = -8f * px;
             SetAnchorTopRight(topButtonsRoot, -marginX, topBarY, muteW + sqW * 2f + btnGap * 2f, btnH);
 
@@ -594,7 +597,7 @@ namespace YunaLegend.Illustrated25D.Environment
             float topContentY = -(btnH + 14f * px);
 
             // Cartao poetico em pergaminho com flores nos cantos
-            float poeticH = 92f * px;
+            float poeticH = 104f * px;
             SetAnchorTopCenter(poeticRoot, 0f, topContentY, maxCardW, poeticH);
             poeticInnerBorder.offsetMin = new Vector2(5f * px, 5f * px);
             poeticInnerBorder.offsetMax = new Vector2(-5f * px, -5f * px);
@@ -612,7 +615,7 @@ namespace YunaLegend.Illustrated25D.Environment
             SetInsetRect(poeticFooterText.rectTransform, 14f * px, 9f * px, 14f * px, poeticH - 27f * px);
 
             // Caixa de dialogo vitoriana com retrato circular — NO TOPO
-            float dlgH = isLandscape ? 88f * px : 108f * px;
+            float dlgH = isLandscape ? 104f * px : 124f * px;
             SetAnchorTopCenter(dialogueRoot, 0f, topContentY, maxCardW, dlgH);
             dialogueInnerBorder.offsetMin = new Vector2(4f * px, 4f * px);
             dialogueInnerBorder.offsetMax = new Vector2(-4f * px, -4f * px);
@@ -647,7 +650,7 @@ namespace YunaLegend.Illustrated25D.Environment
 
             // Modal centralizado
             float modalW = Mathf.Min(356f * px, canvasSize.x - marginX * 2f);
-            float modalH = 224f * px;
+            float modalH = 244f * px;
             modalCard.sizeDelta = new Vector2(modalW, modalH);
             modalCard.anchoredPosition = Vector2.zero;
 
@@ -681,7 +684,7 @@ namespace YunaLegend.Illustrated25D.Environment
             poeticFooterText.text = footer ?? string.Empty;
 
             float px = ComputePxToCanvas(canvasRect.rect.size);
-            float h = hasFooter ? 92f * px : 72f * px;
+            float h = hasFooter ? 104f * px : 80f * px;
             poeticRoot.sizeDelta = new Vector2(poeticRoot.sizeDelta.x, h);
             SetInsetRect(poeticBodyText.rectTransform, 18f * px, hasFooter ? 28f * px : 10f * px, 18f * px, 10f * px);
         }
@@ -693,8 +696,8 @@ namespace YunaLegend.Illustrated25D.Environment
 
             dialogueSpeakerText.text = speaker;
             dialogueSpeakerText.color = isNanda
-                ? new Color(0.22f, 0.74f, 0.97f, 1f)
-                : new Color(0.99f, 0.84f, 0.67f, 1f);
+                ? new Color(0.08f, 0.34f, 0.48f, 1f)
+                : new Color(0.55f, 0.19f, 0.28f, 1f);
             portraitRingImg.color = isNanda
                 ? new Color(0.992f, 0.878f, 0.278f, 1f)
                 : new Color(0.96f, 0.45f, 0.71f, 1f);
@@ -702,14 +705,14 @@ namespace YunaLegend.Illustrated25D.Environment
                 ? new Color(0.02f, 0.71f, 0.83f, 0.35f)
                 : new Color(0.96f, 0.45f, 0.71f, 0.35f);
             portraitInitialText.text = isNanda ? "N" : "Y";
-            portraitInitialText.color = dialogueSpeakerText.color;
+            portraitInitialText.color = isNanda ? new Color(0.45f, 0.88f, 1f, 1f) : new Color(1f, 0.72f, 0.78f, 1f);
 
             dialogueBodyText.text = body;
             dialogueBodyText.fontStyle = boldBody ? FontStyle.Bold : FontStyle.Italic;
             dialogueFooterText.text = footer;
 
             float px = ComputePxToCanvas(canvasRect.rect.size);
-            float topContentY = -(32f * px + 14f * px);
+            float topContentY = -(48f * px + 14f * px);
             float y = stackedBelowPoetic ? topContentY - poeticRoot.sizeDelta.y - 6f * px : topContentY;
             dialogueRoot.anchoredPosition = new Vector2(0f, y);
         }
@@ -726,7 +729,7 @@ namespace YunaLegend.Illustrated25D.Environment
             preJumpRoot.gameObject.SetActive(true);
             preJumpText.text = label;
             float px = ComputePxToCanvas(canvasRect.rect.size);
-            float topContentY = -(32f * px + 14f * px);
+            float topContentY = -(48f * px + 14f * px);
             float y = belowBanner ? topContentY - bannerRoot.sizeDelta.y - 6f * px : topContentY;
             preJumpRoot.anchoredPosition = new Vector2(0f, y);
         }
@@ -757,7 +760,7 @@ namespace YunaLegend.Illustrated25D.Environment
 
             float px = ComputePxToCanvas(canvasRect.rect.size);
             float cardW = modalCard.sizeDelta.x;
-            float btnH = 38f * px;
+            float btnH = 48f * px;
             float bottomY = 14f * px;
 
             if (hasPrimary && hasSecondary)
@@ -911,6 +914,15 @@ namespace YunaLegend.Illustrated25D.Environment
             go.transform.SetParent(parent, false);
             var img = go.GetComponent<Image>();
             img.color = bgColor;
+            HudTheme.Round(img);
+            if (name == "DialogueBox" || name == "ModalCard")
+            {
+                img.color = HudTheme.Paper;
+            }
+            else if (bgColor.a > 0f && bgColor.maxColorComponent < 0.3f)
+            {
+                img.color = HudTheme.Plum;
+            }
             var outline = go.AddComponent<Outline>();
             outline.effectColor = borderColor;
             outline.effectDistance = new Vector2(borderWidth, -borderWidth);

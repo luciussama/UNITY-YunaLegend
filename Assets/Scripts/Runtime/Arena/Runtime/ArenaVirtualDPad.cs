@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using YunaLegend.Presentation;
 
 namespace YunaLegend.Arena.Runtime
 {
@@ -235,10 +236,10 @@ namespace YunaLegend.Arena.Runtime
             float invHalf = 1f / half;
             var pixels = new Color32[s * s];
 
-            Color discCol = new Color(0.08f, 0.08f, 0.11f, 0.66f);
-            Color crossFill = new Color(0.295f, 0.285f, 0.335f, 0.94f);
-            Color crossBorder = new Color(0.88f, 0.87f, 0.92f, 0.96f);
-            Color centerHole = new Color(0.15f, 0.15f, 0.19f, 0.96f);
+            Color discCol = new Color(0.95f, 0.91f, 0.82f, 0.88f);
+            Color crossFill = HudTheme.Plum;
+            Color crossBorder = HudTheme.Gold;
+            Color centerHole = HudTheme.Rose;
             Color arrowWhite = new Color(1f, 1f, 1f, 1f);
 
             const float armHalfW = 0.27f;
@@ -263,8 +264,8 @@ namespace YunaLegend.Arena.Runtime
                     col.a *= 1f - Mathf.SmoothStep(0.955f, 0.988f, r);
 
                     // 2) Cruz (+) com borda branca nitida (SDF exata da uniao de 2 retangulos)
-                    float dV = SdfBox(nx, ny, armHalfW, armLen);
-                    float dH = SdfBox(nx, ny, armLen, armHalfW);
+                    float dV = SdfBox(nx, ny, armHalfW - 0.05f, armLen - 0.05f) - 0.05f;
+                    float dH = SdfBox(nx, ny, armLen - 0.05f, armHalfW - 0.05f) - 0.05f;
                     float dCross = Mathf.Min(dV, dH);
 
                     if (dCross < 0.012f)
