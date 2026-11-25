@@ -5,7 +5,8 @@
         "YunaLegend.Picnic.Core",
         "YunaLegend.Qa.Core",
         "YunaLegend.Qa.Runtime",
-        "YunaLegend.Presentation"
+        "YunaLegend.Presentation",
+        "Unity.InputSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

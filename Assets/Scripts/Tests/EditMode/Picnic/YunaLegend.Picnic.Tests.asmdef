@@ -4,7 +4,9 @@
   "references": [
     "UnityEngine.TestRunner",
     "UnityEditor.TestRunner",
-    "YunaLegend.Picnic.Core"
+    "YunaLegend.Picnic.Core",
+    "YunaLegend.Picnic.Runtime",
+    "Unity.InputSystem"
   ],
   "includePlatforms": [
     "Editor"
