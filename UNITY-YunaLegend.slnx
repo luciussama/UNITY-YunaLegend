@@ -10,6 +10,7 @@
   <Project Path="YunaLegend.Editor.csproj" />
   <Project Path="YunaLegend.ToyRoom.Editor.csproj" />
   <Project Path="YunaLegend.BearChase.Editor.csproj" />
+  <Project Path="YunaLegend.Presentation.csproj" />
   <Project Path="YunaLegend.ToyRoom.Runtime.csproj" />
   <Project Path="YunaLegend.Qa.Tests.csproj" />
   <Project Path="YunaLegend.Illustrated25D.Tests.csproj" />

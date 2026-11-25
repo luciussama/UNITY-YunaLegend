@@ -1,0 +1,7 @@
+{
+    "name": "YunaLegend.Presentation",
+    "rootNamespace": "YunaLegend.Presentation",
+    "references": ["UnityEngine.UI"],
+    "autoReferenced": true,
+    "noEngineReferences": false
+}

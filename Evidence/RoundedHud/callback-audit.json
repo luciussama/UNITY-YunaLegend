@@ -1,0 +1,38 @@
+[
+  {
+    "file": "Assets/Art/Illustrated25D/Environment/Stage2Runtime/StageHudController.cs",
+    "beforeListeners": 5,
+    "afterListeners": 5,
+    "identicalCallbacks": true
+  },
+  {
+    "file": "Assets/Scripts/Runtime/ToyRoom/Runtime/ToyRoomHudController.cs",
+    "beforeListeners": 5,
+    "afterListeners": 5,
+    "identicalCallbacks": true
+  },
+  {
+    "file": "Assets/Scripts/Runtime/Arena/Runtime/ArenaHudController.cs",
+    "beforeListeners": 3,
+    "afterListeners": 3,
+    "identicalCallbacks": true
+  },
+  {
+    "file": "Assets/Scripts/Runtime/BearChase/Runtime/BearChaseHudController.cs",
+    "beforeListeners": 2,
+    "afterListeners": 2,
+    "identicalCallbacks": true
+  },
+  {
+    "file": "Assets/Scripts/Runtime/Picnic/Runtime/PicnicNarrativeAndHudController.cs",
+    "beforeListeners": 1,
+    "afterListeners": 1,
+    "identicalCallbacks": true
+  },
+  {
+    "file": "Assets/Scripts/Runtime/UI/TitleScreenResponsiveLayout.cs",
+    "beforeListeners": 0,
+    "afterListeners": 0,
+    "identicalCallbacks": true
+  }
+]

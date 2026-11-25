@@ -183,8 +183,27 @@ namespace YunaLegend.Picnic.Runtime
             if (!table.TryGetValue(setName, out var frames)) frames = table["girl-running-v1"];
             int idx = Mathf.Clamp(frameIndex, 0, frames.Length - 1);
             string file = fear ? "fear-v2-" + setName : setName;
-            // Legacy sprite height = 92 px at referenceHeight = 256 px -> ppu = 256 / 0.92
-            return Slice(file, frames[idx], 256f / (PicnicLevelData.PlayerHeight / Ppu), $"girl:{file}:{idx}");
+            const int resolutionScale = 2;
+            const int padding = 4;
+            int columns = frames.Length <= 4 ? 2 : 4;
+            int cellWidth = 0;
+            int cellHeight = 0;
+            foreach (AtlasFrameSpec frame in frames)
+            {
+                cellWidth = Mathf.Max(cellWidth, frame.W * resolutionScale + padding * 2);
+                cellHeight = Mathf.Max(cellHeight, frame.H * resolutionScale + padding * 2);
+            }
+
+            AtlasFrameSpec original = frames[idx];
+            var hdFrame = new AtlasFrameSpec(
+                idx % columns * cellWidth + padding,
+                idx / columns * cellHeight + padding,
+                original.W * resolutionScale,
+                original.H * resolutionScale,
+                original.AnchorX * resolutionScale,
+                original.AnchorY * resolutionScale);
+            float pixelsPerUnit = 256f * resolutionScale / (PicnicLevelData.PlayerHeight / Ppu);
+            return Slice("HD/" + file, hdFrame, pixelsPerUnit, $"girl:HD:{file}:{idx}");
         }
 
         public static Sprite GetBlueNandaFrame(int frameIndex)
@@ -345,8 +364,8 @@ namespace YunaLegend.Picnic.Runtime
             {
                 new AtlasFrameSpec(4, 4, 424, 254, 212f, 254f),
                 new AtlasFrameSpec(516, 4, 376, 256, 188f, 256f),
-                new AtlasFrameSpec(4, 516, 454, 259, 227f, 259f),
-                new AtlasFrameSpec(516, 516, 373, 262, 186.5f, 262f),
+                new AtlasFrameSpec(1028, 4, 454, 259, 227f, 259f),
+                new AtlasFrameSpec(1540, 4, 373, 262, 186.5f, 262f),
             },
         };
     }

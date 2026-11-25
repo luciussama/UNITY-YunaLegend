@@ -1,0 +1,32 @@
+{
+  "releaseId": "20261125-hud-yuna-hd",
+  "unity": "6000.3.28f1",
+  "builtAtUtc": "2026-11-25T20:01:42.756335+00:00",
+  "sourceBranch": "fix/picnic-editor-playmode",
+  "scenes": [
+    "TitleScreen",
+    "Fase-Jogavel-Completa",
+    "ToyRoom_Gameplay",
+    "Arena_Gameplay",
+    "BearChase_Gameplay",
+    "Picnic_Gameplay"
+  ],
+  "files": {
+    "Build/WebGL.data.unityweb": {
+      "bytes": 266729776,
+      "sha256": "e2dac233966dcf88c08291b668bce69bfb4baf2d06b1afede0e49182fabb367d"
+    },
+    "Build/WebGL.framework.js.unityweb": {
+      "bytes": 90230,
+      "sha256": "571058c5e8053dd346d70049b0b99b6bebc9dc557efd0e77e74c3c87fe9ec46c"
+    },
+    "Build/WebGL.loader.js": {
+      "bytes": 47867,
+      "sha256": "0b990a8a4245ff69b48edc5f8d64ffbec040bd007f73d78da735c6f900bffd26"
+    },
+    "Build/WebGL.wasm.unityweb": {
+      "bytes": 11994468,
+      "sha256": "e6dcc43ffa0ee88f618ef77b5f995299dd53a6af65bf3294f5e093804522d9fb"
+    }
+  }
+}

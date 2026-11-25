@@ -46,6 +46,24 @@ namespace YunaLegend.EditorScripts.Picnic
 
         private const string PicnicScenePath = "Assets/Scenes/Picnic_Gameplay.unity";
 
+        [MenuItem("YunaLegend/Fase 5 - Um Dia no Jardim/Reconstruir Cena", true)]
+        [MenuItem("YunaLegend/Fase 5 - Um Dia no Jardim/Capturar Segmentos PNG", true)]
+        private static bool ValidateSceneRebuild()
+        {
+            return !EditorApplication.isPlayingOrWillChangePlaymode;
+        }
+
+        private static bool CanRebuildScene()
+        {
+            if (ValidateSceneRebuild())
+            {
+                return true;
+            }
+
+            Debug.LogWarning("[Picnic1B] Pare o Play Mode antes de reconstruir a cena ou capturar segmentos.");
+            return false;
+        }
+
         [MenuItem("YunaLegend/Fase 5 - Um Dia no Jardim/Jogar (Play Direto)", false, 10)]
         public static void PlayPicnicDirectly()
         {
@@ -138,6 +156,11 @@ namespace YunaLegend.EditorScripts.Picnic
         [MenuItem("YunaLegend/Fase 5 - Um Dia no Jardim/Reconstruir Cena", false, 30)]
         public static void ConfigureTexturesAndBuildScene()
         {
+            if (!CanRebuildScene())
+            {
+                return;
+            }
+
             string folder = "Assets/Art/Picnic/Resources/Picnic";
             foreach (string path in Directory.GetFiles(folder, "*.png"))
             {
@@ -183,6 +206,11 @@ namespace YunaLegend.EditorScripts.Picnic
         [MenuItem("YunaLegend/Fase 5 - Um Dia no Jardim/Capturar Segmentos PNG", false, 40)]
         public static void CaptureAllSegments()
         {
+            if (!CanRebuildScene())
+            {
+                return;
+            }
+
             ConfigureTexturesAndBuildScene();
 
             string outDir = Path.GetFullPath("Evidence/Picnic1B/Segments");

@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
+using YunaLegend.Presentation;
 using YunaLegend.ToyRoom.Core;
 
 namespace YunaLegend.ToyRoom.Runtime
@@ -203,8 +204,8 @@ namespace YunaLegend.ToyRoom.Runtime
                 bool isNanda = beat.Speaker == ToyRoomSpeaker.Nanda;
                 speakerText.text = isNanda ? "NANDA" : "YUNA";
                 speakerText.color = isNanda
-                    ? new Color(0.22f, 0.74f, 0.97f, 1f)
-                    : new Color(0.99f, 0.84f, 0.67f, 1f);
+                    ? new Color(0.08f, 0.34f, 0.48f, 1f)
+                    : new Color(0.55f, 0.19f, 0.28f, 1f);
                 portraitRing.color = isNanda
                     ? new Color(0.99f, 0.88f, 0.28f, 1f)
                     : new Color(0.96f, 0.45f, 0.71f, 1f);
@@ -212,7 +213,7 @@ namespace YunaLegend.ToyRoom.Runtime
                     ? new Color(0.02f, 0.71f, 0.83f, 0.35f)
                     : new Color(0.96f, 0.45f, 0.71f, 0.35f);
                 portraitInitialText.text = isNanda ? "N" : "Y";
-                portraitInitialText.color = speakerText.color;
+                portraitInitialText.color = isNanda ? new Color(0.45f, 0.88f, 1f, 1f) : new Color(1f, 0.72f, 0.78f, 1f);
                 dialogueBodyText.text = beat.Text;
                 return;
             }
@@ -331,14 +332,14 @@ namespace YunaLegend.ToyRoom.Runtime
             float topY = -8f * px;
             float usableW = Mathf.Max(220f * px, canvasSize.x - marginX * 2f);
 
-            int f14 = Mathf.RoundToInt(14f * px);
-            int f15 = Mathf.RoundToInt(15f * px);
-            int f16 = Mathf.RoundToInt(16f * px);
+            int f14 = Mathf.RoundToInt(16f * px);
+            int f15 = Mathf.RoundToInt(17f * px);
+            int f16 = Mathf.RoundToInt(18f * px);
 
             // Top bar: Counter (left) + Som/Pausa (right), sem sobreposicao
-            float topBarH = isLandscape ? 36f * px : 44f * px;
+            float topBarH = 48f * px;
             float btnW = 58f * px;
-            float btnH = isLandscape ? 30f * px : 34f * px;
+            float btnH = 48f * px;
             float btnGap = 6f * px;
             float rightBlockW = btnW * 2f + btnGap;
             float counterW = Mathf.Min(230f * px, usableW - rightBlockW - 8f * px);
@@ -371,7 +372,7 @@ namespace YunaLegend.ToyRoom.Runtime
             float cardCenterX = isLandscape ? (counterW - rightBlockW) * 0.5f : 0f;
 
             // Prioridade 1: Caixa de Dialogo Vitoriana NO TOPO (acima de Yuna e Nanda)
-            float dlgH = isLandscape ? 72f * px : 108f * px;
+            float dlgH = isLandscape ? 100f * px : 124f * px;
             dialogueRect.anchorMin = new Vector2(0.5f, 1f);
             dialogueRect.anchorMax = new Vector2(0.5f, 1f);
             dialogueRect.pivot = new Vector2(0.5f, 1f);
@@ -402,7 +403,7 @@ namespace YunaLegend.ToyRoom.Runtime
             dialogueHintText.rectTransform.offsetMax = new Vector2(-12f * px, -8f * px);
 
             // Quadro Poetico em Pergaminho NO TOPO abaixo da barra superior (zero colisao com Counter/Botoes)
-            float poeticH = 102f * px;
+            float poeticH = 116f * px;
             poeticRect.anchorMin = new Vector2(0.5f, 1f);
             poeticRect.anchorMax = new Vector2(0.5f, 1f);
             poeticRect.pivot = new Vector2(0.5f, 1f);
@@ -433,29 +434,29 @@ namespace YunaLegend.ToyRoom.Runtime
             joystickHandleRect.sizeDelta = new Vector2(44f * px, 44f * px);
             joystickComponent.Configure(joystickRect, joystickHandleRect, 34f * px, 0.1f);
 
-            float orbSize = 88f * px;
-            float haloSize = 104f * px;
+            float orbSize = 104f * px;
+            float haloSize = 120f * px;
             promptRect.anchoredPosition = new Vector2(-(marginX + 12f * px), 22f * px);
             promptRect.sizeDelta = new Vector2(orbSize, orbSize);
             promptHaloRect.sizeDelta = new Vector2(haloSize, haloSize);
-            promptText.fontSize = f15;
-            promptText.rectTransform.offsetMin = new Vector2(6f * px, 22f * px);
-            promptText.rectTransform.offsetMax = new Vector2(-6f * px, -8f * px);
+            promptText.fontSize = Mathf.RoundToInt(16f * px);
+            promptText.rectTransform.offsetMin = new Vector2(6f * px, 32f * px);
+            promptText.rectTransform.offsetMax = new Vector2(-6f * px, -28f * px);
             promptSubLabel.fontSize = f14;
-            promptSubLabel.rectTransform.offsetMin = new Vector2(6f * px, 10f * px);
-            promptSubLabel.rectTransform.offsetMax = new Vector2(-6f * px, -44f * px);
+            promptSubLabel.rectTransform.offsetMin = new Vector2(6f * px, 14f * px);
+            promptSubLabel.rectTransform.offsetMax = new Vector2(-6f * px, -60f * px);
 
             // Menu de Pausa cabendo integralmente no celular
             float pauseW = Mathf.Min(320f * px, usableW);
-            float pauseH = 260f * px;
+            float pauseH = 302f * px;
             pauseCardRect.sizeDelta = new Vector2(pauseW, pauseH);
             pauseTitleText.fontSize = f16;
             pauseTitleText.rectTransform.anchoredPosition = new Vector2(0f, -14f * px);
             pauseTitleText.rectTransform.sizeDelta = new Vector2(-20f * px, 28f * px);
 
             float pBtnW = pauseW - 36f * px;
-            float pBtnH = 38f * px;
-            float[] yPositions = { 54f, 8f, -38f, -84f };
+            float pBtnH = 48f * px;
+            float[] yPositions = { 68f, 12f, -44f, -100f };
             for (int i = 0; i < pauseButtonRects.Length; i++)
             {
                 if (pauseButtonRects[i] != null)
@@ -482,13 +483,28 @@ namespace YunaLegend.ToyRoom.Runtime
             progressBgRect.sizeDelta = new Vector2(-36f, 11f);
 
             topRightContainer.anchoredPosition = new Vector2(-28f, -24f);
-            topRightContainer.sizeDelta = new Vector2(220f, 46f);
-            muteBtnRect.anchoredPosition = new Vector2(-116f, 0f);
-            muteBtnRect.sizeDelta = new Vector2(96f, 44f);
+            topRightContainer.sizeDelta = new Vector2(248f, 72f);
+            muteBtnRect.anchoredPosition = new Vector2(-132f, 0f);
+            muteBtnRect.sizeDelta = new Vector2(108f, 72f);
             pauseBtnRect.anchoredPosition = Vector2.zero;
-            pauseBtnRect.sizeDelta = new Vector2(104f, 44f);
-            muteButtonLabel.fontSize = 18;
-            pauseButtonLabel.fontSize = 18;
+            pauseBtnRect.sizeDelta = new Vector2(120f, 72f);
+            muteButtonLabel.fontSize = 24;
+            pauseButtonLabel.fontSize = 24;
+
+            // Restore the desktop action geometry and typography after a viewport rotation.
+            promptRect.anchoredPosition = new Vector2(-60f, 52f);
+            promptRect.sizeDelta = new Vector2(196f, 196f);
+            promptHaloRect.sizeDelta = new Vector2(236f, 236f);
+            promptText.fontSize = 26;
+            promptText.rectTransform.offsetMin = new Vector2(14f, 66f);
+            promptText.rectTransform.offsetMax = new Vector2(-14f, -36f);
+            promptSubLabel.fontSize = 20;
+            promptSubLabel.rectTransform.offsetMin = new Vector2(14f, 36f);
+            promptSubLabel.rectTransform.offsetMax = new Vector2(-14f, -128f);
+            joystickRect.anchoredPosition = new Vector2(168f, 158f);
+            joystickRect.sizeDelta = new Vector2(224f, 224f);
+            joystickHandleRect.sizeDelta = new Vector2(92f, 92f);
+            joystickComponent.Configure(joystickRect, joystickHandleRect, 72f, 0.1f);
 
             dialogueRect.anchorMin = new Vector2(0.5f, 0f);
             dialogueRect.anchorMax = new Vector2(0.5f, 0f);
@@ -573,7 +589,7 @@ namespace YunaLegend.ToyRoom.Runtime
             counterPanelRect = panel.GetComponent<RectTransform>();
             counterPanelRect.pivot = new Vector2(0f, 1f);
 
-            counterText = CreateLabel("CounterText", panel.transform, font, 22, TextAnchor.UpperLeft, new Color(0.992f, 0.878f, 0.278f, 1f));
+            counterText = CreateLabel("CounterText", panel.transform, font, 22, TextAnchor.UpperLeft, HudTheme.Ink);
             counterText.fontStyle = FontStyle.Bold;
             var rt = counterText.rectTransform;
             rt.anchorMin = Vector2.zero;
@@ -659,6 +675,7 @@ namespace YunaLegend.ToyRoom.Runtime
 
             promptText = CreateLabel("PromptText", promptRoot.transform, font, 30, TextAnchor.MiddleCenter, new Color(0.12f, 0.07f, 0.02f, 1f));
             promptText.fontStyle = FontStyle.Bold;
+            promptText.horizontalOverflow = HorizontalWrapMode.Overflow;
             promptText.raycastTarget = false;
             var textRt = promptText.rectTransform;
             textRt.anchorMin = Vector2.zero;
@@ -789,7 +806,7 @@ namespace YunaLegend.ToyRoom.Runtime
             sRt.anchoredPosition = new Vector2(138f, -18f);
             sRt.sizeDelta = new Vector2(-170f, 34f);
 
-            dialogueBodyText = CreateLabel("DialogueBody", dialogueRoot.transform, font, 26, TextAnchor.MiddleLeft, new Color(0.996f, 0.988f, 0.910f));
+            dialogueBodyText = CreateLabel("DialogueBody", dialogueRoot.transform, font, 26, TextAnchor.MiddleLeft, HudTheme.Ink);
             dialogueBodyText.fontStyle = FontStyle.Italic;
             var bRt = dialogueBodyText.rectTransform;
             bRt.anchorMin = Vector2.zero;
@@ -797,7 +814,7 @@ namespace YunaLegend.ToyRoom.Runtime
             bRt.offsetMin = new Vector2(138f, 34f);
             bRt.offsetMax = new Vector2(-32f, -50f);
 
-            dialogueHintText = CreateLabel("DialogueHint", dialogueRoot.transform, font, 15, TextAnchor.LowerRight, new Color(0.90f, 0.86f, 0.72f, 0.75f));
+            dialogueHintText = CreateLabel("DialogueHint", dialogueRoot.transform, font, 16, TextAnchor.LowerRight, HudTheme.Plum);
             dialogueHintText.text = IsMobileOrTouchDevice() ? "Toque na tela para avançar" : "Clique ou Espaço para avançar";
             var hRt = dialogueHintText.rectTransform;
             hRt.anchorMin = Vector2.zero;
@@ -880,7 +897,7 @@ namespace YunaLegend.ToyRoom.Runtime
             pauseCardRect = card.GetComponent<RectTransform>();
             pauseCardRect.pivot = new Vector2(0.5f, 0.5f);
 
-            pauseTitleText = CreateLabel("PauseTitle", card.transform, font, 30, TextAnchor.UpperCenter, new Color(0.992f, 0.878f, 0.278f, 1f));
+            pauseTitleText = CreateLabel("PauseTitle", card.transform, font, 30, TextAnchor.UpperCenter, HudTheme.Ink);
             pauseTitleText.fontStyle = FontStyle.Bold;
             pauseTitleText.text = "Quarto de Brinquedos";
             var titleRt = pauseTitleText.rectTransform;
@@ -956,6 +973,8 @@ namespace YunaLegend.ToyRoom.Runtime
 
             var btn = panel.AddComponent<Button>();
             btn.onClick.AddListener(() => onClick?.Invoke());
+            HudTheme.Button(btn);
+            txt.color = Color.white;
             return btn;
         }
 
@@ -980,6 +999,8 @@ namespace YunaLegend.ToyRoom.Runtime
 
             var btn = panel.AddComponent<Button>();
             btn.onClick.AddListener(() => onClick?.Invoke());
+            HudTheme.Button(btn);
+            txt.color = Color.white;
             return btn;
         }
 
@@ -995,6 +1016,16 @@ namespace YunaLegend.ToyRoom.Runtime
             float borderWidth)
         {
             var go = CreatePanel(name, parent, anchorMin, anchorMax, pos, size, bgColor);
+            var image = go.GetComponent<Image>();
+            HudTheme.Round(image);
+            if (name == "CounterPanel" || name == "DialogueBox" || name == "PauseCard")
+            {
+                image.color = HudTheme.Paper;
+            }
+            else if (bgColor.a > 0f && bgColor.maxColorComponent < 0.3f)
+            {
+                image.color = HudTheme.Plum;
+            }
             var outline = go.AddComponent<Outline>();
             outline.effectColor = borderColor;
             outline.effectDistance = new Vector2(borderWidth, -borderWidth);
@@ -1013,6 +1044,10 @@ namespace YunaLegend.ToyRoom.Runtime
             rt.sizeDelta = size;
             var img = go.AddComponent<Image>();
             img.color = color;
+            if (name != "PauseOverlay" && !name.StartsWith("Portrait"))
+            {
+                HudTheme.Round(img);
+            }
             return go;
         }
 

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using YunaLegend.Presentation;
 using YunaLegend.Arena.Core;
 
 namespace YunaLegend.Arena.Runtime
@@ -352,14 +353,14 @@ namespace YunaLegend.Arena.Runtime
             float topY = -10f * px;
             float usableW = Mathf.Max(220f * px, canvasSize.x - marginX * 2f);
 
-            int f14 = Mathf.RoundToInt(14f * px);
-            int f15 = Mathf.RoundToInt(15f * px);
-            int f16 = Mathf.RoundToInt(16f * px);
+            int f14 = Mathf.RoundToInt(16f * px);
+            int f15 = Mathf.RoundToInt(18f * px);
+            int f16 = Mathf.RoundToInt(20f * px);
 
             // Top-right utility buttons (SOM, II)
-            float muteW = 46f * px;
-            float pauseW = 36f * px;
-            float btnH = 28f * px;
+            float muteW = 56f * px;
+            float pauseW = 48f * px;
+            float btnH = 48f * px;
             float btnGap = 6f * px;
             SetRect(pauseBtnRect, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-marginX, topY), new Vector2(pauseW, btnH));
             SetRect(muteBtnRect, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-(marginX + pauseW + btnGap), topY), new Vector2(muteW, btnH));
@@ -373,8 +374,9 @@ namespace YunaLegend.Arena.Runtime
 
             if (isPortrait)
             {
-                float pillH = 44f * px;
-                float leftW = Mathf.Max(220f * px, usableW - buttonsTotalW);
+                float pillH = 92f * px;
+                float enemyPillH = 64f * px;
+                float leftW = Mathf.Max(120f * px, usableW - buttonsTotalW);
                 SetRect(yunaPillRect, new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(marginX, topY), new Vector2(leftW, pillH));
                 playerHeartsText.fontSize = f15;
                 playerHeartsText.alignment = TextAnchor.UpperLeft;
@@ -382,9 +384,9 @@ namespace YunaLegend.Arena.Runtime
 
                 specialReadyText.fontSize = f14;
                 specialReadyText.alignment = TextAnchor.UpperLeft;
-                SetRect(specialReadyText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(8f * px, -23f * px), new Vector2(-16f * px, 18f * px));
+                SetRect(specialReadyText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(8f * px, -23f * px), new Vector2(-16f * px, isPortrait ? 62f * px : 24f * px));
 
-                SetRect(enemyPillRect, new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(marginX, topY - pillH - 6f * px), new Vector2(usableW, pillH));
+                SetRect(enemyPillRect, new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(marginX, topY - pillH - 6f * px), new Vector2(usableW, enemyPillH));
                 enemyTitleText.fontSize = f15;
                 enemyTitleText.alignment = TextAnchor.UpperLeft;
                 SetRect(enemyTitleText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(8f * px, -4f * px), new Vector2(-16f * px, 20f * px));
@@ -396,11 +398,11 @@ namespace YunaLegend.Arena.Runtime
                 // Status Hint NO TOPO (Prioridade 1), acima da arena e dos controles
                 statusHintText.fontSize = f14;
                 statusHintText.alignment = TextAnchor.UpperCenter;
-                SetRect(statusHintText.rectTransform, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0f, topY - pillH * 2f - 14f * px), new Vector2(usableW, 38f * px));
+                SetRect(statusHintText.rectTransform, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0f, topY - pillH - enemyPillH - 14f * px), new Vector2(usableW, 38f * px));
             }
             else
             {
-                float pillH = 44f * px;
+                float pillH = isPortrait ? 72f * px : 56f * px;
                 float colW = Mathf.Max(220f * px, (usableW - buttonsTotalW - 12f * px) * 0.48f);
                 SetRect(yunaPillRect, new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(marginX, topY), new Vector2(colW, pillH));
                 playerHeartsText.fontSize = f15;
@@ -409,7 +411,7 @@ namespace YunaLegend.Arena.Runtime
 
                 specialReadyText.fontSize = f14;
                 specialReadyText.alignment = TextAnchor.UpperLeft;
-                SetRect(specialReadyText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(8f * px, -23f * px), new Vector2(-16f * px, 18f * px));
+                SetRect(specialReadyText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(8f * px, -23f * px), new Vector2(-16f * px, isPortrait ? 62f * px : 24f * px));
 
                 float rightOffset = -(marginX + buttonsTotalW);
                 SetRect(enemyPillRect, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(rightOffset, topY), new Vector2(colW, pillH));
@@ -426,17 +428,37 @@ namespace YunaLegend.Arena.Runtime
                 SetRect(statusHintText.rectTransform, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0f, topY - pillH - 8f * px), new Vector2(usableW, 34f * px));
             }
 
-            // Controles touch inferiores com margem esquerda e inferior seguras para todos os rotulos do D-Pad
+            bool narrowPortrait = isPortrait && canvasSize.x / px < 360f;
+
+            // Keep the labels inside the viewport and leave room for both combat actions.
             if (virtualDPad != null)
             {
-                float dpadSize = isPortrait ? 108f * px : 106f * px;
-                float dpadX = isPortrait ? (marginX + dpadSize * 0.5f + 18f * px) : (marginX + dpadSize * 0.5f + 28f * px);
+                float dpadSize = (narrowPortrait ? 84f : 108f) * px;
+                float dpadX = (narrowPortrait ? 58f : 98f) * px;
                 float dpadY = isPortrait ? 94f * px : 92f * px;
                 virtualDPad.ApplyMobileSizing(dpadSize, new Vector2(dpadX, dpadY), f14, px);
+
+                var topHint = virtualDPad.transform.Find("DPad_HintTop")?.GetComponent<Text>();
+                if (topHint != null)
+                {
+                    float labelCenter = Mathf.Max(dpadX, 110f * px);
+                    topHint.rectTransform.anchoredPosition = new Vector2(labelCenter - dpadX, dpadSize * 0.5f + 18f * px);
+                    topHint.rectTransform.sizeDelta = new Vector2(196f * px, 26f * px);
+                    topHint.horizontalOverflow = HorizontalWrapMode.Overflow;
+                }
+
+                var bottomHint = virtualDPad.transform.Find("DPad_HintBottom")?.GetComponent<Text>();
+                if (bottomHint != null)
+                {
+                    float labelCenter = Mathf.Max(dpadX, 92f * px);
+                    bottomHint.rectTransform.anchoredPosition = new Vector2(labelCenter - dpadX, (14f * px) - dpadY);
+                    bottomHint.rectTransform.sizeDelta = new Vector2(168f * px, 24f * px);
+                    bottomHint.horizontalOverflow = HorizontalWrapMode.Overflow;
+                }
             }
 
-            float combatW = isPortrait ? 80f * px : 92f * px;
-            float combatH = isPortrait ? 62f * px : 68f * px;
+            float combatW = (narrowPortrait ? 92f : 100f) * px;
+            float combatH = isPortrait ? 68f * px : 72f * px;
             float combatGap = 8f * px;
             float combatBottomY = 24f * px;
 
@@ -461,8 +483,8 @@ namespace YunaLegend.Arena.Runtime
             const float topY = -16f;
             const float pillH = 58f;
 
-            SetRect(pauseBtnRect, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-marginX, topY), new Vector2(44f, 36f));
-            SetRect(muteBtnRect, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-(marginX + 52f), topY), new Vector2(58f, 36f));
+            SetRect(pauseBtnRect, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-marginX, topY), new Vector2(48f, 48f));
+            SetRect(muteBtnRect, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-(marginX + 58f), topY), new Vector2(64f, 48f));
             muteBtnLabel.fontSize = 14;
             pauseBtnLabel.fontSize = 15;
 
@@ -477,7 +499,7 @@ namespace YunaLegend.Arena.Runtime
             SetRect(specialReadyText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(12f, -31f), new Vector2(-24f, 20f));
 
             var enemyPillRect = enemyTitleText.transform.parent as RectTransform;
-            SetRect(enemyPillRect, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-(marginX + 122f), topY), new Vector2(300f, pillH));
+            SetRect(enemyPillRect, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-(marginX + 142f), topY), new Vector2(300f, pillH));
             enemyTitleText.fontSize = 18;
             enemyTitleText.alignment = TextAnchor.UpperRight;
             SetRect(enemyTitleText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(12f, -6f), new Vector2(-24f, 22f));
@@ -525,7 +547,7 @@ namespace YunaLegend.Arena.Runtime
             }
 
             float w = Mathf.Min(330f * px, usableW);
-            float h = 240f * px;
+            float h = 270f * px;
             box.sizeDelta = new Vector2(w, h);
 
             var title = box.Find("Modal_Title")?.GetComponent<Text>();
@@ -543,7 +565,7 @@ namespace YunaLegend.Arena.Runtime
             }
 
             float btnW = w - 40f * px;
-            float btnH = 38f * px;
+            float btnH = 48f * px;
             int btnIndex = 0;
             for (int i = 0; i < box.childCount; i++)
             {
@@ -553,7 +575,7 @@ namespace YunaLegend.Arena.Runtime
                     continue;
                 }
 
-                float yOffset = body != null ? (-24f - btnIndex * 46f) * px : (34f - btnIndex * 48f) * px;
+                float yOffset = body != null ? (-24f - btnIndex * 56f) * px : (34f - btnIndex * 56f) * px;
                 child.anchoredPosition = new Vector2(0f, yOffset);
                 child.sizeDelta = new Vector2(btnW, btnH);
                 var lbl = child.GetComponentInChildren<Text>();
@@ -665,7 +687,7 @@ namespace YunaLegend.Arena.Runtime
                 "1 USO",
                 new Vector2(-20f, 26f),
                 new Vector2(156f, 114f),
-                new Color(0.290f, 0.275f, 0.337f, 0.92f),
+                HudTheme.Plum,
                 new Color(0.90f, 0.89f, 0.94f, 0.96f),
                 Color.white,
                 () => touchSpecialQueued = true);
@@ -688,7 +710,7 @@ namespace YunaLegend.Arena.Runtime
             outcomePanel = CreateModalPanel("Outcome_Panel", root, "Resultado", out var container);
             outcomeBoxRect = container as RectTransform;
             outcomeTitleText = container.Find("Modal_Title").GetComponent<Text>();
-            outcomeBodyText = CreateText("Outcome_Body", container, string.Empty, 18, new Color(0.90f, 0.85f, 0.76f), TextAnchor.MiddleCenter);
+            outcomeBodyText = CreateText("Outcome_Body", container, string.Empty, 18, HudTheme.Ink, TextAnchor.MiddleCenter);
             outcomeBodyText.horizontalOverflow = HorizontalWrapMode.Wrap;
             SetRect(outcomeBodyText.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0f, 38f), new Vector2(440f, 72f));
 
@@ -707,13 +729,13 @@ namespace YunaLegend.Arena.Runtime
             var box = new GameObject("Box", typeof(RectTransform), typeof(Image));
             box.transform.SetParent(overlay.transform, false);
             SetRect(box.GetComponent<RectTransform>(), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(500f, 320f));
-            box.GetComponent<Image>().color = new Color(0.09f, 0.06f, 0.11f, 0.96f);
+            HudTheme.Panel(box.GetComponent<Image>());
             var outline = box.AddComponent<Outline>();
             outline.effectColor = new Color(0.95f, 0.80f, 0.42f, 0.85f);
             outline.effectDistance = new Vector2(2f, -2f);
             container = box.transform;
 
-            var titleText = CreateText("Modal_Title", container, title, 30, new Color(1f, 0.90f, 0.68f), TextAnchor.MiddleCenter);
+            var titleText = CreateText("Modal_Title", container, title, 30, HudTheme.Ink, TextAnchor.MiddleCenter);
             SetRect(titleText.rectTransform, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0f, -38f), new Vector2(440f, 44f));
             return overlay;
         }
@@ -723,7 +745,7 @@ namespace YunaLegend.Arena.Runtime
             var go = new GameObject("Btn_" + label, typeof(RectTransform), typeof(Image), typeof(Button));
             go.transform.SetParent(parent, false);
             SetRect(go.GetComponent<RectTransform>(), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), pos, new Vector2(260f, 46f));
-            go.GetComponent<Image>().color = new Color(0.24f, 0.18f, 0.28f, 1f);
+            HudTheme.Button(go.GetComponent<Button>());
             var outline = go.AddComponent<Outline>();
             outline.effectColor = new Color(0.95f, 0.80f, 0.42f, 0.75f);
             outline.effectDistance = new Vector2(1.5f, -1.5f);
@@ -739,7 +761,7 @@ namespace YunaLegend.Arena.Runtime
             go.transform.SetParent(root, false);
             var rt = go.GetComponent<RectTransform>();
             SetRect(rt, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(1f, 1f), anchoredPos, new Vector2(48f, 36f));
-            go.GetComponent<Image>().color = new Color(0.12f, 0.09f, 0.14f, 0.86f);
+            HudTheme.Button(go.GetComponent<Button>());
             var outline = go.AddComponent<Outline>();
             outline.effectColor = new Color(0.90f, 0.78f, 0.48f, 0.75f);
             outline.effectDistance = new Vector2(1.2f, -1.2f);
@@ -767,11 +789,16 @@ namespace YunaLegend.Arena.Runtime
             go.transform.SetParent(root, false);
             SetRect(go.GetComponent<RectTransform>(), new Vector2(1f, 0f), new Vector2(1f, 0f), new Vector2(1f, 0f), pos, size);
             var img = go.GetComponent<Image>();
-            img.sprite = CreateRoundedRectSprite(256, 192, 26f, 5f, fillColor, borderColor);
-            img.color = Color.white;
+            HudTheme.Round(img);
+            img.color = fillColor;
 
             var btn = go.GetComponent<Button>();
             btn.targetGraphic = img;
+            ColorBlock feedback = btn.colors;
+            feedback.highlightedColor = new Color(1f, 0.97f, 0.86f);
+            feedback.pressedColor = new Color(0.78f, 0.72f, 0.86f);
+            feedback.selectedColor = feedback.highlightedColor;
+            btn.colors = feedback;
             btn.onClick.AddListener(() => onClick?.Invoke());
 
             var keyText = CreateTextNoShadow("KeyHint", go.transform, keyHint, 18, textColor, TextAnchor.UpperCenter);
@@ -864,9 +891,12 @@ namespace YunaLegend.Arena.Runtime
             text.horizontalOverflow = HorizontalWrapMode.Wrap;
             text.verticalOverflow = VerticalWrapMode.Overflow;
             text.raycastTarget = false;
-            var shadow = go.AddComponent<Shadow>();
-            shadow.effectColor = new Color(0f, 0f, 0f, 0.8f);
-            shadow.effectDistance = new Vector2(1.5f, -1.5f);
+            if (color != HudTheme.Ink)
+            {
+                var shadow = go.AddComponent<Shadow>();
+                shadow.effectColor = new Color(0.12f, 0.08f, 0.17f, 0.72f);
+                shadow.effectDistance = new Vector2(1f, -1f);
+            }
             return text;
         }
 
@@ -875,7 +905,8 @@ namespace YunaLegend.Arena.Runtime
             var go = new GameObject(name, typeof(RectTransform), typeof(Image));
             go.transform.SetParent(parent, false);
             var img = go.GetComponent<Image>();
-            img.color = new Color(0.102f, 0.063f, 0.149f, 0.86f);
+            img.color = HudTheme.Plum;
+            HudTheme.Round(img);
             img.raycastTarget = false;
             var outline = go.AddComponent<Outline>();
             outline.effectColor = new Color(0.980f, 0.800f, 0.082f, 0.88f);
