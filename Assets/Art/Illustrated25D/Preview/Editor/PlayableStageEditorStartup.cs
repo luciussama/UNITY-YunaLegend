@@ -1,3 +1,5 @@
+using System;
+using System.Reflection;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -24,7 +26,51 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
             }
 
             EditorSceneManager.activeSceneChangedInEditMode += OnActiveSceneChangedInEditMode;
+            EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
             EditorApplication.delayCall += ApplyStartupConfiguration;
+        }
+
+        private static void OnPlayModeStateChanged(PlayModeStateChange state)
+        {
+            if (state == PlayModeStateChange.EnteredPlayMode || state == PlayModeStateChange.ExitingEditMode)
+            {
+                DisableGameViewGizmos();
+            }
+        }
+
+        private static void DisableGameViewGizmos()
+        {
+            try
+            {
+                Type gameViewType = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.GameView");
+                if (gameViewType == null)
+                {
+                    return;
+                }
+
+                FieldInfo gizmosField = gameViewType.GetField("m_Gizmos", BindingFlags.Instance | BindingFlags.NonPublic);
+                if (gizmosField == null)
+                {
+                    return;
+                }
+
+                UnityEngine.Object[] views = Resources.FindObjectsOfTypeAll(gameViewType);
+                foreach (UnityEngine.Object view in views)
+                {
+                    if (view != null && gizmosField.GetValue(view) is bool enabled && enabled)
+                    {
+                        gizmosField.SetValue(view, false);
+                        if (view is EditorWindow window)
+                        {
+                            window.Repaint();
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                // Ignorar diferenças internas de versão do Editor
+            }
         }
 
         private static void OnActiveSceneChangedInEditMode(Scene previousScene, Scene newScene)
@@ -62,6 +108,7 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
                 return;
             }
 
+            DisableGameViewGizmos();
             ApplyPlayModeStartScene();
 
             if (!IsEnabled)

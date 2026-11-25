@@ -5,68 +5,223 @@ using YunaLegend.Picnic.Core;
 namespace YunaLegend.Picnic.Runtime
 {
     /// <summary>
-    /// 1:1 faithful Unity renderer of legacy GardenRenderer terrain, surface strips, foreground grass,
-    /// floating platforms (wood/stone/cloud/aerial gravel), and rotating wooden water wheels with spokes.
+    /// 3D diorama platform renderer for Picnic_Gameplay (1B faithful coordinates):
+    /// renders all ground terraces, hills, wooden decks, gravel beds, river stones,
+    /// floating wooden planks, rotating water wheels, and clouds as 3D meshes with URP lighting
+    /// and 100% bottom-of-screen floor coverage (FloorY = -4.2f), topped by multi-Z high-res
+    /// surface layers (780x390 tile-grass/gravel/soil/wood) while keeping Yuna, Nanda, and insects in 2D sprites.
     /// </summary>
     public sealed class PicnicPlatformController : MonoBehaviour
     {
+        // 3D platforms start at Z = -0.06f and extend back to Z = +2.14f (DepthZ = 2.20f)
+        // so the 3D top face is clearly visible in perspective while never depth-clipping Yuna (Z = -0.18f) or insects (Z = -0.14f).
+        public const float FrontZ = -0.06f;
+        public const float DepthZ = 2.20f;
+        public const float FloorY = -4.2f;
+
         private readonly List<GameObject> staticRoots = new List<GameObject>();
         private readonly List<PicnicPlatformSpec> staticSpecs = new List<PicnicPlatformSpec>();
-        private readonly List<SpriteRenderer> cloudRenderers = new List<SpriteRenderer>();
-        private readonly List<string> cloudIds = new List<string>();
+        private readonly List<CloudVisual> cloudVisuals = new List<CloudVisual>();
         private readonly List<WheelVisual> wheels = new List<WheelVisual>();
 
-        private Material wallPlantMat;
+        private Material ivyFaceMat;
+        private Material topGrassMat;
+        private Material topMeadowMat;
+        private Material earthRimMat;
+        private Material topGravelMat;
+        private Material topWoodMat;
         private Material woodBodyMat;
+        private Material stoneMat;
+        private Material stoneCapMat;
+        private Material riverStone3DMat;
+        private Material woodPlatform3DMat;
         private Material spokeMat;
+        private Material cloudBaseMat;
+
+        private Texture2D woodPlankTex;
+        private Texture2D riverStoneTex;
+        private Texture2D gravelCapTex;
+        private Texture2D cloudGradTex;
+
         private Sprite tileSoil;
         private Sprite tileGrass;
         private Sprite tileGravel;
         private Sprite tileWood;
         private Sprite sprWoodPlat;
         private Sprite sprStonePlat;
-        private Sprite sprCloudPlat;
         private Sprite sprRockPillar;
+
+        private sealed class CloudVisual
+        {
+            public string Id;
+            public MeshRenderer[] Renderers;
+            public Material InstanceMaterial;
+            public float LastAlpha = -1f;
+        }
 
         private sealed class WheelVisual
         {
             public PicnicWheelSpec Spec;
             public GameObject Root;
             public Transform[] Platforms;
-            public LineRenderer[] Spokes;
+            public Transform[] Spokes;
         }
 
         public void Build(PicnicLevelData level)
         {
-            Shader unlit = Shader.Find("Universal Render Pipeline/Unlit") ?? Shader.Find("Sprites/Default");
-            wallPlantMat = new Material(unlit);
+            Shader lit = Shader.Find("Universal Render Pipeline/Lit")
+                ?? Shader.Find("Standard")
+                ?? Shader.Find("Universal Render Pipeline/Unlit")
+                ?? Shader.Find("Sprites/Default");
+
             var wallTex = PicnicAtlasCatalog.LoadTexture("wall-plant-v1");
-            if (wallTex != null) { wallTex.wrapMode = TextureWrapMode.Repeat; wallPlantMat.mainTexture = wallTex; }
-            wallPlantMat.color = Color.white;
+            var soilTex = PicnicAtlasCatalog.LoadTexture("soil-continuous-v1");
+            if (wallTex != null) wallTex.wrapMode = TextureWrapMode.Repeat;
+            if (soilTex != null) soilTex.wrapMode = TextureWrapMode.Repeat;
 
-            woodBodyMat = new Material(unlit);
-            woodBodyMat.color = new Color(0.54f, 0.33f, 0.18f, 1f);
+            woodPlankTex = CreateWoodPlankTexture();
+            riverStoneTex = CreateRiverStoneTexture();
+            gravelCapTex = CreatePebbleCapTexture();
+            cloudGradTex = CreateCloudShadedTexture();
 
-            spokeMat = new Material(unlit);
-            spokeMat.color = new Color(0.655f, 0.475f, 0.302f, 1f); // #a7794d
+            ivyFaceMat = new Material(lit)
+            {
+                color = new Color(0.86f, 0.96f, 0.80f, 1f),
+            };
+            if (wallTex != null)
+            {
+                ivyFaceMat.mainTexture = wallTex;
+                ivyFaceMat.mainTextureScale = new Vector2(1f, 1f);
+            }
+            SetSmoothness(ivyFaceMat, 0.05f);
 
-            tileSoil = PicnicAtlasCatalog.FullSprite("tile-soil", new Vector2(0f, 1f));
-            tileGrass = PicnicAtlasCatalog.FullSprite("tile-grass", new Vector2(0f, 1f));
-            tileGravel = PicnicAtlasCatalog.FullSprite("tile-gravel", new Vector2(0f, 1f));
-            tileWood = PicnicAtlasCatalog.FullSprite("tile-wood", new Vector2(0f, 1f));
+            topGrassMat = new Material(lit)
+            {
+                color = new Color(0.54f, 0.76f, 0.24f, 1f),
+            };
+            if (wallTex != null)
+            {
+                topGrassMat.mainTexture = wallTex;
+                topGrassMat.mainTextureScale = new Vector2(1.4f, 1.4f);
+            }
+            SetSmoothness(topGrassMat, 0.08f);
 
+            // Meadow turf cap for Soil platforms (lush green garden lawn matching tile-soil & wall-plant)
+            topMeadowMat = new Material(lit)
+            {
+                color = new Color(0.56f, 0.78f, 0.26f, 1f),
+            };
+            if (wallTex != null)
+            {
+                topMeadowMat.mainTexture = wallTex;
+                topMeadowMat.mainTextureScale = new Vector2(1.3f, 1.3f);
+            }
+            SetSmoothness(topMeadowMat, 0.07f);
+
+            earthRimMat = new Material(lit)
+            {
+                color = new Color(0.56f, 0.40f, 0.25f, 1f),
+            };
+            if (soilTex != null)
+            {
+                earthRimMat.mainTexture = soilTex;
+            }
+            SetSmoothness(earthRimMat, 0.05f);
+
+            topGravelMat = new Material(lit)
+            {
+                color = new Color(0.72f, 0.66f, 0.60f, 1f),
+                mainTexture = gravelCapTex,
+            };
+            SetSmoothness(topGravelMat, 0.06f);
+
+            topWoodMat = new Material(lit)
+            {
+                color = new Color(0.84f, 0.64f, 0.42f, 1f),
+                mainTexture = woodPlankTex,
+            };
+            SetSmoothness(topWoodMat, 0.18f);
+
+            woodBodyMat = new Material(lit)
+            {
+                color = new Color(0.62f, 0.43f, 0.26f, 1f),
+                mainTexture = woodPlankTex,
+            };
+            SetSmoothness(woodBodyMat, 0.12f);
+
+            stoneMat = new Material(lit)
+            {
+                color = new Color(0.56f, 0.60f, 0.58f, 1f),
+                mainTexture = riverStoneTex,
+            };
+            SetSmoothness(stoneMat, 0.14f);
+
+            stoneCapMat = new Material(lit)
+            {
+                color = new Color(0.72f, 0.76f, 0.73f, 1f),
+                mainTexture = riverStoneTex,
+            };
+            SetSmoothness(stoneCapMat, 0.20f);
+
+            var stone3DTex = PicnicAtlasCatalog.LoadTexture("river-stone-3d-tex");
+            riverStone3DMat = new Material(lit)
+            {
+                color = new Color(0.76f, 0.76f, 0.75f, 1f),
+                mainTexture = stone3DTex,
+            };
+            SetSmoothness(riverStone3DMat, 0.04f);
+
+            var wood3DTex = PicnicAtlasCatalog.LoadTexture("wood-platform-3d-tex");
+            woodPlatform3DMat = new Material(lit)
+            {
+                color = new Color(0.80f, 0.78f, 0.76f, 1f),
+                mainTexture = wood3DTex,
+            };
+            SetSmoothness(woodPlatform3DMat, 0.05f);
+
+            spokeMat = new Material(lit)
+            {
+                color = new Color(0.72f, 0.52f, 0.33f, 1f),
+                mainTexture = woodPlankTex,
+            };
+            SetSmoothness(spokeMat, 0.15f);
+
+            var cloud3DTex = PicnicAtlasCatalog.LoadTexture("cloud-3d-tex");
+            Shader cloudShader = Shader.Find("Sprites/Default") ?? lit;
+            cloudBaseMat = new Material(cloudShader)
+            {
+                mainTexture = cloud3DTex != null ? cloud3DTex : cloudGradTex,
+                color = Color.white,
+            };
+
+            // Pivot at bottom-center (0.5, 0) for multi-Z 3D surface placement
+            tileSoil = PicnicAtlasCatalog.FullSprite("tile-soil", new Vector2(0.5f, 0f));
+            tileGrass = PicnicAtlasCatalog.FullSprite("tile-grass", new Vector2(0.5f, 0f));
+            tileGravel = PicnicAtlasCatalog.FullSprite("tile-gravel", new Vector2(0.5f, 0f));
+            tileWood = PicnicAtlasCatalog.FullSprite("tile-wood", new Vector2(0.5f, 0f));
             sprWoodPlat = PicnicAtlasCatalog.Slice("objects-v1", PicnicAtlasCatalog.ObjetosFrames[1], 100f, "plat:wood");
             sprStonePlat = PicnicAtlasCatalog.Slice("objects-v1", PicnicAtlasCatalog.ObjetosFrames[2], 100f, "plat:stone");
-            sprCloudPlat = PicnicAtlasCatalog.Slice("objects-v1", PicnicAtlasCatalog.ObjetosFrames[3], 100f, "plat:cloud");
             sprRockPillar = PicnicAtlasCatalog.Slice("life-aquatic-v1", PicnicAtlasCatalog.AquaticFrames[0], 100f, "plat:pillar");
 
             foreach (var p in level.StaticPlatforms)
             {
-                BuildStaticPlatform(p);
+                BuildStaticPlatform(p, level.Width);
             }
             foreach (var w in level.Wheels)
             {
                 BuildWheel(w);
+            }
+        }
+
+        private static void SetSmoothness(Material mat, float value)
+        {
+            if (mat.HasProperty("_Smoothness"))
+            {
+                mat.SetFloat("_Smoothness", value);
+            }
+            if (mat.HasProperty("_Glossiness"))
+            {
+                mat.SetFloat("_Glossiness", value);
             }
         }
 
@@ -76,45 +231,86 @@ namespace YunaLegend.Picnic.Runtime
             for (int i = 0; i < staticRoots.Count; i++)
             {
                 var p = staticSpecs[i];
-                bool near = p.X + p.Width >= px - 1400f && p.X <= px + 1400f;
-                if (p.Terrain == PicnicTerrain.Cloud)
+                bool near = p.X + p.Width >= px - 1250f && p.X <= px + 1250f;
+                bool active = near;
+                if (near && p.Terrain == PicnicTerrain.Cloud)
                 {
                     var st = PicnicLevelData.GetCloudStatus(p.Id, sim.Clouds, sim.Difficulty, sim.Time);
-                    staticRoots[i].SetActive(near && st.Solid);
+                    active = st.Solid;
                 }
-                else
+                if (staticRoots[i].activeSelf != active)
                 {
-                    staticRoots[i].SetActive(near);
+                    staticRoots[i].SetActive(active);
                 }
             }
 
-            for (int i = 0; i < cloudIds.Count; i++)
+            for (int i = 0; i < cloudVisuals.Count; i++)
             {
-                var st = PicnicLevelData.GetCloudStatus(cloudIds[i], sim.Clouds, sim.Difficulty, sim.Time);
-                cloudRenderers[i].color = new Color(1f, 1f, 1f, st.Alpha);
+                var cv = cloudVisuals[i];
+                if (cv.Renderers.Length == 0 || !cv.Renderers[0].gameObject.activeInHierarchy) continue;
+                var st = PicnicLevelData.GetCloudStatus(cv.Id, sim.Clouds, sim.Difficulty, sim.Time);
+                if (!Mathf.Approximately(cv.LastAlpha, st.Alpha))
+                {
+                    cv.LastAlpha = st.Alpha;
+                    cv.InstanceMaterial.color = new Color(1f, 1f, 1f, st.Alpha);
+                }
             }
 
             for (int i = 0; i < wheels.Count; i++)
             {
                 var wv = wheels[i];
-                bool near = Mathf.Abs(wv.Spec.X - px) < 1400f;
-                wv.Root.SetActive(near);
-                if (!near) continue;
-                Vector3 hub = PicnicAtlasCatalog.ToUnity(wv.Spec.X, wv.Spec.Y, 0.14f);
-                for (int k = 0; k < 4; k++)
+                bool near = Mathf.Abs(wv.Spec.X - px) < 1250f;
+                if (wv.Root.activeSelf != near)
                 {
-                    float angle = sim.Time * wv.Spec.Speed + wv.Spec.Phase + k * Mathf.PI * 0.5f;
-                    float platX = wv.Spec.X + Mathf.Cos(angle) * wv.Spec.Rx;
-                    float platY = wv.Spec.Y + Mathf.Sin(angle) * wv.Spec.Ry;
-                    Vector3 pos = PicnicAtlasCatalog.ToUnity(platX, platY - 8f, 0.05f);
-                    wv.Platforms[k].position = pos;
-                    wv.Spokes[k].SetPosition(0, hub);
-                    wv.Spokes[k].SetPosition(1, PicnicAtlasCatalog.ToUnity(platX, platY + 10f, 0.14f));
+                    wv.Root.SetActive(near);
+                }
+                if (!near) continue;
+                UpdateWheelTransforms(wv, sim.Time * wv.Spec.Speed + wv.Spec.Phase);
+            }
+        }
+
+        public void ShowAllForEditorPreview(PicnicSimulation sim)
+        {
+            for (int i = 0; i < staticRoots.Count; i++)
+            {
+                staticRoots[i].SetActive(true);
+            }
+            for (int i = 0; i < cloudVisuals.Count; i++)
+            {
+                cloudVisuals[i].InstanceMaterial.color = Color.white;
+            }
+            for (int i = 0; i < wheels.Count; i++)
+            {
+                var wv = wheels[i];
+                wv.Root.SetActive(true);
+                UpdateWheelTransforms(wv, wv.Spec.Phase);
+            }
+        }
+
+        private static void UpdateWheelTransforms(WheelVisual wv, float baseAngle)
+        {
+            Vector3 hub = PicnicAtlasCatalog.ToUnity(wv.Spec.X, wv.Spec.Y, FrontZ + 0.56f);
+            for (int k = 0; k < 4; k++)
+            {
+                float angle = baseAngle + k * Mathf.PI * 0.5f;
+                float platX = wv.Spec.X + Mathf.Cos(angle) * wv.Spec.Rx;
+                float platY = wv.Spec.Y + Mathf.Sin(angle) * wv.Spec.Ry;
+                Vector3 platPos = PicnicAtlasCatalog.ToUnity(platX, platY + 6f, FrontZ + 0.48f);
+                wv.Platforms[k].position = platPos;
+
+                Vector3 spokeEnd = PicnicAtlasCatalog.ToUnity(platX, platY + 18f, FrontZ + 0.56f);
+                Vector3 delta = spokeEnd - hub;
+                float len = delta.magnitude;
+                wv.Spokes[k].position = hub + delta * 0.5f;
+                wv.Spokes[k].localScale = new Vector3(0.09f, len, 0.09f);
+                if (len > 0.001f)
+                {
+                    wv.Spokes[k].up = delta / len;
                 }
             }
         }
 
-        private void BuildStaticPlatform(PicnicPlatformSpec p)
+        private void BuildStaticPlatform(PicnicPlatformSpec p, float levelWidth)
         {
             var go = new GameObject(p.Id);
             go.transform.SetParent(transform, false);
@@ -123,185 +319,315 @@ namespace YunaLegend.Picnic.Runtime
 
             if (p.Ground)
             {
-                BuildGroundBodyMesh(go.transform, p);
-                if (p.Terrain == PicnicTerrain.Grass)
-                {
-                    // Legacy draws soil strip underneath grass strip for clean blend
-                    BuildSurfaceStrip(go.transform, p, PicnicTerrain.Soil, p.X, p.Width, 3, 1f);
-                }
-                BuildSurfaceStrip(go.transform, p, p.Terrain, p.X, p.Width, 4, 1f);
-                if (p.Terrain == PicnicTerrain.Grass)
-                {
-                    // Translucent foreground grass in front of Yuna's legs (GardenRenderer.grassFront alpha = 0.45)
-                    BuildSurfaceStrip(go.transform, p, PicnicTerrain.Grass, p.X, p.Width, 15, 0.45f, -0.35f);
-                }
-                foreach (var patch in p.GrassPatches)
-                {
-                    float px = p.X + p.Width * patch.Start;
-                    float pw = p.Width * (patch.End - patch.Start);
-                    BuildSurfaceStrip(go.transform, p, PicnicTerrain.Grass, px, pw, 5, 1f);
-                    BuildSurfaceStrip(go.transform, p, PicnicTerrain.Grass, px, pw, 15, 0.45f, -0.35f);
-                }
+                Build3DGroundPlatform(go.transform, p, levelWidth);
                 return;
             }
 
             if (p.Aerial && p.Terrain == PicnicTerrain.Gravel)
             {
-                // Aerial gravel island: earth underside + gravel top strip
-                var under = new GameObject("AerialEarth", typeof(SpriteRenderer));
-                under.transform.SetParent(go.transform, false);
-                var ur = under.GetComponent<SpriteRenderer>();
-                ur.sprite = PicnicAtlasCatalog.Slice("objects-v1", PicnicAtlasCatalog.ObjetosFrames[0], 100f, "plat:soil");
-                ur.sortingOrder = 3;
-                under.transform.position = PicnicAtlasCatalog.ToUnity(p.X + p.Width * 0.5f, p.Y + 3f, 0.05f);
-                FitSprite(under.transform, ur.sprite, p.Width / 100f, 0.65f);
-                BuildSurfaceStrip(go.transform, p, PicnicTerrain.Gravel, p.X, p.Width, 4, 1f);
+                Build3DAerialGravelPlatform(go.transform, p);
                 return;
             }
 
-            // Floating wood, stone, or cloud
-            if (p.Terrain == PicnicTerrain.Stone && sprRockPillar != null)
+            if (p.Terrain == PicnicTerrain.Stone)
             {
-                var pillar = new GameObject("RockFoot", typeof(SpriteRenderer));
-                pillar.transform.SetParent(go.transform, false);
-                var pr = pillar.GetComponent<SpriteRenderer>();
-                pr.sprite = sprRockPillar;
-                pr.sortingOrder = 1;
-                float topY = p.Y + 26f;
-                float h = PicnicLevelData.RiverBedY - topY + 12f;
-                pillar.transform.position = PicnicAtlasCatalog.ToUnity(p.X + p.Width * 0.5f, topY, 0.12f);
-                FitSprite(pillar.transform, sprRockPillar, (p.Width * 0.94f) / 100f, h / 100f);
+                Build3DRiverStonePlatform(go.transform, p);
+                return;
             }
-
-            Sprite spr = p.Terrain == PicnicTerrain.Stone ? sprStonePlat : p.Terrain == PicnicTerrain.Cloud ? sprCloudPlat : sprWoodPlat;
-            float offsetY = p.Terrain == PicnicTerrain.Wood ? 8f : p.Terrain == PicnicTerrain.Stone ? 3f : 6f;
-            float drawH = p.Terrain == PicnicTerrain.Wood ? 53f : p.Terrain == PicnicTerrain.Stone ? 70f : 60f;
-            var plat = new GameObject("Top", typeof(SpriteRenderer));
-            plat.transform.SetParent(go.transform, false);
-            var sr = plat.GetComponent<SpriteRenderer>();
-            sr.sprite = spr;
-            sr.sortingOrder = 4;
-            plat.transform.position = PicnicAtlasCatalog.ToUnity(p.X + p.Width * 0.5f, p.Y - offsetY, 0.05f);
-            FitSprite(plat.transform, spr, p.Width / 100f, drawH / 100f);
 
             if (p.Terrain == PicnicTerrain.Cloud)
             {
-                cloudIds.Add(p.Id);
-                cloudRenderers.Add(sr);
+                Build3DCloudPlatform(go.transform, p);
+                return;
+            }
+
+            Build3DFloatingWoodPlatform(go.transform, p);
+        }
+
+        private void Build3DGroundPlatform(Transform parent, PicnicPlatformSpec p, float levelWidth)
+        {
+            float extraLeft = p.X <= 1f ? 320f : 0f;
+            float extraRight = (p.X + p.Width >= levelWidth - 1f) ? 320f : 0f;
+            float startPx = p.X - extraLeft;
+            float totalWidthPx = p.Width + extraLeft + extraRight;
+
+            Material topMat = p.Terrain == PicnicTerrain.Grass ? topGrassMat
+                : p.Terrain == PicnicTerrain.Gravel ? topGravelMat
+                : p.Terrain == PicnicTerrain.Wood ? topWoodMat
+                : topMeadowMat;
+            Material faceMat = p.Terrain == PicnicTerrain.Wood ? woodBodyMat : ivyFaceMat;
+
+            if (p.Hill <= 0f)
+            {
+                float xMin = startPx / 100f;
+                float w = totalWidthPx / 100f;
+                float topY = PicnicAtlasCatalog.ToUnity(p.X, p.Y).y;
+
+                // 3D wall block starting at FrontZ = -0.06f so it never depth-clips Yuna (Z = -0.18f)
+                var wallGo = new GameObject("Wall3D", typeof(MeshFilter), typeof(MeshRenderer));
+                wallGo.transform.SetParent(parent, false);
+                wallGo.GetComponent<MeshFilter>().sharedMesh = CreateWorldUVBoxMesh(
+                    xMin - 0.02f, w + 0.04f, FloorY, topY - 0.04f, FrontZ + 0.04f, DepthZ - 0.04f);
+                wallGo.GetComponent<MeshRenderer>().sharedMaterial = faceMat;
+
+                // Overhanging 3D top turf/deck/meadow/gravel cap (front edge at FrontZ = -0.06f)
+                var capGo = new GameObject("TopCap3D", typeof(MeshFilter), typeof(MeshRenderer));
+                capGo.transform.SetParent(parent, false);
+                if (p.Terrain == PicnicTerrain.Gravel)
+                {
+                    // Lush 3D green moss/turf rim directly on top of the ivy wall (matching the grass terraces with zero 2D cutout mismatch)
+                    capGo.GetComponent<MeshFilter>().sharedMesh = CreateWorldUVBoxMesh(
+                        xMin - 0.06f, w + 0.12f, topY - 0.14f, topY - 0.01f, FrontZ, DepthZ + 0.08f, 3.2f);
+                    capGo.GetComponent<MeshRenderer>().sharedMaterial = topMeadowMat;
+
+                    // Dark earth bedding slab inset on the 3D top face beneath the 3D sculpted pebbles
+                    var earthBed = new GameObject("EarthBed3D", typeof(MeshFilter), typeof(MeshRenderer));
+                    earthBed.transform.SetParent(parent, false);
+                    earthBed.GetComponent<MeshFilter>().sharedMesh = CreateWorldUVBoxMesh(
+                        xMin - 0.02f, w + 0.04f, topY - 0.03f, topY + 0.01f, FrontZ + 0.04f, DepthZ - 0.02f, 2.0f);
+                    earthBed.GetComponent<MeshRenderer>().sharedMaterial = earthRimMat;
+
+                    // Combined 3D sculpted pebble/cobblestone field mesh covering the 3D top face (zero 2D cutout, zero mirror seam)
+                    var pebbleField = new GameObject("SculptedPebbles3D", typeof(MeshFilter), typeof(MeshRenderer));
+                    pebbleField.transform.SetParent(parent, false);
+                    pebbleField.GetComponent<MeshFilter>().sharedMesh = CreateSculpted3DPebbleFieldMesh(
+                        p.X / 100f, p.Width / 100f, topY + 0.005f, FrontZ + 0.05f, DepthZ - 0.10f);
+                    pebbleField.GetComponent<MeshRenderer>().sharedMaterial = topGravelMat;
+                }
+                else
+                {
+                    capGo.GetComponent<MeshFilter>().sharedMesh = CreateWorldUVBoxMesh(
+                        xMin - 0.06f, w + 0.12f, topY - 0.14f, topY, FrontZ, DepthZ + 0.08f,
+                        p.Terrain == PicnicTerrain.Wood ? 1.6f : 3.2f);
+                    capGo.GetComponent<MeshRenderer>().sharedMaterial = topMat;
+                }
+
+                if (p.Terrain == PicnicTerrain.Wood)
+                {
+                    BuildWoodenDeckPilings(parent, xMin, w, topY);
+                }
+            }
+            else
+            {
+                BuildExtrudedHill3DMesh(parent, p, startPx, totalWidthPx, faceMat, topMat);
+            }
+
+            // Multi-Z high-resolution surface layers (780x390) on top of the 3D cap
+            BuildMultiZSurfaceLayers(parent, p, p.Terrain, p.X, p.Width);
+
+            foreach (var patch in p.GrassPatches)
+            {
+                float px = p.X + p.Width * patch.Start;
+                float pw = p.Width * (patch.End - patch.Start);
+                BuildMultiZSurfaceLayers(parent, p, PicnicTerrain.Grass, px, pw);
             }
         }
 
-        private void BuildGroundBodyMesh(Transform parent, PicnicPlatformSpec p)
+        private void BuildWoodenDeckPilings(Transform parent, float xMin, float width, float topY)
         {
-            int cols = p.Hill > 0f ? Mathf.Max(8, Mathf.CeilToInt(p.Width / 24f)) : 1;
-            var verts = new Vector3[(cols + 1) * 2];
-            var uvs = new Vector2[verts.Length];
-            var tris = new int[cols * 6];
-            float bottomPy = PicnicLevelData.Height + 220f;
+            float step = 1.85f;
+            for (float x = xMin + 0.45f; x < xMin + width - 0.2f; x += step)
+            {
+                var post = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                post.name = "DeckPost3D";
+                post.transform.SetParent(parent, false);
+                Destroy(post.GetComponent<Collider>());
+                float h = topY - FloorY;
+                post.transform.position = new Vector3(x, FloorY + h * 0.5f - 0.08f, FrontZ + 0.02f);
+                post.transform.localScale = new Vector3(0.20f, h, 0.16f);
+                post.GetComponent<MeshRenderer>().sharedMaterial = spokeMat;
+            }
+        }
+
+        private void BuildExtrudedHill3DMesh(Transform parent, PicnicPlatformSpec p,
+            float startPx, float totalWidthPx, Material faceMat, Material topMat)
+        {
+            int cols = Mathf.Max(12, Mathf.CeilToInt(totalWidthPx / 26f));
+            float zFront = FrontZ + 0.04f;
+
+            // 1. Front 3D ivy wall mesh extending down to FloorY = -4.2f
+            var wallVerts = new Vector3[(cols + 1) * 2];
+            var wallUvs = new Vector2[wallVerts.Length];
+            var wallNormals = new Vector3[wallVerts.Length];
+            var wallTris = new int[cols * 6];
+
+            // 2. Top curved 3D cap ribbon with upward normals so it catches 3D directional sunlight
+            var capVerts = new Vector3[(cols + 1) * 4];
+            var capUvs = new Vector2[capVerts.Length];
+            var capNormals = new Vector3[capVerts.Length];
+            var capTris = new int[cols * 12];
+            float capZFront = FrontZ;
+            float capZBack = FrontZ + DepthZ + 0.08f;
 
             for (int i = 0; i <= cols; i++)
             {
-                float wx = p.X + p.Width * i / cols;
-                float wy = PicnicLevelData.SurfaceY(p, wx) + 2f;
-                verts[i * 2] = PicnicAtlasCatalog.ToUnity(wx, wy, 0.08f);
-                verts[i * 2 + 1] = PicnicAtlasCatalog.ToUnity(wx, bottomPy, 0.08f);
-                // World-space UVs (320 px tile) so adjacent platforms have ZERO seams!
-                uvs[i * 2] = new Vector2(wx / 320f, -wy / 320f);
-                uvs[i * 2 + 1] = new Vector2(wx / 320f, -bottomPy / 320f);
+                float wxPx = startPx + totalWidthPx * i / cols;
+                float samplePx = Mathf.Clamp(wxPx, p.X, p.X + p.Width);
+                float wyPx = PicnicLevelData.SurfaceY(p, samplePx);
+                Vector3 topPt = PicnicAtlasCatalog.ToUnity(wxPx, wyPx);
+
+                wallVerts[i * 2] = new Vector3(topPt.x, topPt.y - 0.04f, zFront);
+                wallVerts[i * 2 + 1] = new Vector3(topPt.x, FloorY, zFront);
+                wallUvs[i * 2] = new Vector2(topPt.x / 3.2f, topPt.y / 3.2f);
+                wallUvs[i * 2 + 1] = new Vector2(topPt.x / 3.2f, FloorY / 3.2f);
+                wallNormals[i * 2] = Vector3.back;
+                wallNormals[i * 2 + 1] = Vector3.back;
+
+                capVerts[i * 4] = new Vector3(topPt.x, topPt.y, capZFront);
+                capVerts[i * 4 + 1] = new Vector3(topPt.x, topPt.y, capZBack);
+                capVerts[i * 4 + 2] = new Vector3(topPt.x, topPt.y, capZFront);
+                capVerts[i * 4 + 3] = new Vector3(topPt.x, topPt.y - 0.14f, capZFront);
+
+                capUvs[i * 4] = new Vector2(topPt.x / 3.2f, capZFront / 3.2f);
+                capUvs[i * 4 + 1] = new Vector2(topPt.x / 3.2f, capZBack / 3.2f);
+                capUvs[i * 4 + 2] = new Vector2(topPt.x / 3.2f, topPt.y / 3.2f);
+                capUvs[i * 4 + 3] = new Vector2(topPt.x / 3.2f, (topPt.y - 0.14f) / 3.2f);
+
+                capNormals[i * 4] = Vector3.up;
+                capNormals[i * 4 + 1] = Vector3.up;
+                capNormals[i * 4 + 2] = Vector3.back;
+                capNormals[i * 4 + 3] = Vector3.back;
+
                 if (i == cols) continue;
                 int v = i * 2;
                 int t = i * 6;
-                tris[t] = v; tris[t + 1] = v + 2; tris[t + 2] = v + 1;
-                tris[t + 3] = v + 2; tris[t + 4] = v + 3; tris[t + 5] = v + 1;
+                wallTris[t] = v; wallTris[t + 1] = v + 2; wallTris[t + 2] = v + 1;
+                wallTris[t + 3] = v + 2; wallTris[t + 4] = v + 3; wallTris[t + 5] = v + 1;
+
+                int cv = i * 4;
+                int ct = i * 12;
+                capTris[ct] = cv; capTris[ct + 1] = cv + 1; capTris[ct + 2] = cv + 4;
+                capTris[ct + 3] = cv + 4; capTris[ct + 4] = cv + 1; capTris[ct + 5] = cv + 5;
+                capTris[ct + 6] = cv + 2; capTris[ct + 7] = cv + 6; capTris[ct + 8] = cv + 3;
+                capTris[ct + 9] = cv + 6; capTris[ct + 10] = cv + 7; capTris[ct + 11] = cv + 3;
             }
 
-            var mesh = new Mesh { name = p.Id + "_body" };
-            mesh.vertices = verts;
-            mesh.uv = uvs;
-            mesh.triangles = tris;
-            mesh.RecalculateNormals();
+            var wallMesh = new Mesh { name = p.Id + "_hillWall3D" };
+            wallMesh.vertices = wallVerts;
+            wallMesh.uv = wallUvs;
+            wallMesh.normals = wallNormals;
+            wallMesh.triangles = wallTris;
 
-            var body = new GameObject("Body", typeof(MeshFilter), typeof(MeshRenderer));
+            var wallGo = new GameObject("HillWall3D", typeof(MeshFilter), typeof(MeshRenderer));
+            wallGo.transform.SetParent(parent, false);
+            wallGo.GetComponent<MeshFilter>().sharedMesh = wallMesh;
+            wallGo.GetComponent<MeshRenderer>().sharedMaterial = faceMat;
+
+            var capMesh = new Mesh { name = p.Id + "_hillCap3D" };
+            capMesh.vertices = capVerts;
+            capMesh.uv = capUvs;
+            capMesh.normals = capNormals;
+            capMesh.triangles = capTris;
+
+            var capGo = new GameObject("HillCap3D", typeof(MeshFilter), typeof(MeshRenderer));
+            capGo.transform.SetParent(parent, false);
+            capGo.GetComponent<MeshFilter>().sharedMesh = capMesh;
+            capGo.GetComponent<MeshRenderer>().sharedMaterial = topMat;
+        }
+
+        private void BuildMultiZSurfaceLayers(Transform parent, PicnicPlatformSpec p, PicnicTerrain terrain,
+            float startX, float width)
+        {
+            if (terrain == PicnicTerrain.Grass)
+            {
+                if (tileGrass == null) return;
+                // 3 Z-rows across the 3D grass block (back at +1.15f, mid at +0.42f, front overhang at -0.26f in front of Yuna's ankles)
+                float[] zRows = { 1.15f, 0.42f, -0.26f };
+                float[] alphas = { 0.98f, 0.92f, 0.56f };
+                int[] orders = { 3, 5, 15 };
+                int chunks = Mathf.Max(1, Mathf.RoundToInt(width / 196f));
+                float chunkW = width / chunks;
+                for (int c = 0; c < chunks; c++)
+                {
+                    float chunkCenterPx = startX + (c + 0.5f) * chunkW;
+                    float surfYPx = PicnicLevelData.SurfaceY(p, chunkCenterPx);
+                    Vector3 basePos = PicnicAtlasCatalog.ToUnity(chunkCenterPx, surfYPx);
+                    for (int r = 0; r < zRows.Length; r++)
+                    {
+                        var tuft = new GameObject($"Grass3DRow_{c}_{r}", typeof(SpriteRenderer));
+                        tuft.transform.SetParent(parent, false);
+                        var sr = tuft.GetComponent<SpriteRenderer>();
+                        sr.sprite = tileGrass;
+                        sr.sortingOrder = orders[r];
+                        sr.color = r == 0
+                            ? new Color(0.88f, 0.96f, 0.85f, alphas[r])
+                            : new Color(1f, 1f, 1f, alphas[r]);
+                        tuft.transform.position = new Vector3(basePos.x, basePos.y - 0.14f, zRows[r]);
+                        tuft.transform.localScale = new Vector3(
+                            ((chunkW / 100f) + 0.10f) / tileGrass.bounds.size.x,
+                            1.06f / tileGrass.bounds.size.y,
+                            1f);
+                    }
+                }
+                return;
+            }
+
+            if (terrain == PicnicTerrain.Gravel)
+            {
+                // 3D sculpted pebbles already cover the entire 3D top surface
+                return;
+            }
+
+            // Soil (meadow turf) and Wood (house deck) are 100% 3D blocks (TopCap3D / HillCap3D);
+            // do not place 2D vertical strip cutouts (tile-soil / tile-wood) on top of them.
+        }
+
+        private void Build3DAerialGravelPlatform(Transform parent, PicnicPlatformSpec p)
+        {
+            float xMin = p.X / 100f;
+            float w = p.Width / 100f;
+            float topY = PicnicAtlasCatalog.ToUnity(p.X, p.Y).y;
+            float depth = 1.40f;
+
+            var body = new GameObject("AerialIsland3D", typeof(MeshFilter), typeof(MeshRenderer));
             body.transform.SetParent(parent, false);
-            body.GetComponent<MeshFilter>().mesh = mesh;
-            var mr = body.GetComponent<MeshRenderer>();
-            mr.sharedMaterial = p.Terrain == PicnicTerrain.Wood ? woodBodyMat : wallPlantMat;
-            mr.sortingOrder = 2;
+            body.GetComponent<MeshFilter>().sharedMesh = CreateWorldUVBoxMesh(
+                xMin, w, topY - 0.54f, topY - 0.05f, FrontZ + 0.04f, depth);
+            body.GetComponent<MeshRenderer>().sharedMaterial = ivyFaceMat;
+
+            var under = new GameObject("AerialBase3D", typeof(MeshFilter), typeof(MeshRenderer));
+            under.transform.SetParent(parent, false);
+            under.GetComponent<MeshFilter>().sharedMesh = CreateWorldUVBoxMesh(
+                xMin + w * 0.12f, w * 0.76f, topY - 0.76f, topY - 0.52f, FrontZ + 0.18f, depth * 0.76f);
+            under.GetComponent<MeshRenderer>().sharedMaterial = earthRimMat;
+
+            var cap = new GameObject("AerialGravelCap3D", typeof(MeshFilter), typeof(MeshRenderer));
+            cap.transform.SetParent(parent, false);
+            cap.GetComponent<MeshFilter>().sharedMesh = CreateWorldUVBoxMesh(
+                xMin - 0.05f, w + 0.10f, topY - 0.14f, topY - 0.01f, FrontZ, depth + 0.10f, 3.2f);
+            cap.GetComponent<MeshRenderer>().sharedMaterial = topMeadowMat;
+
+            var pebbleField = new GameObject("AerialSculptedPebbles3D", typeof(MeshFilter), typeof(MeshRenderer));
+            pebbleField.transform.SetParent(parent, false);
+            pebbleField.GetComponent<MeshFilter>().sharedMesh = CreateSculpted3DPebbleFieldMesh(
+                xMin, w, topY + 0.005f, FrontZ + 0.05f, depth - 0.06f);
+            pebbleField.GetComponent<MeshRenderer>().sharedMaterial = topGravelMat;
+
+            BuildMultiZSurfaceLayers(parent, p, PicnicTerrain.Gravel, p.X, p.Width);
         }
 
-        private void BuildSurfaceStrip(Transform parent, PicnicPlatformSpec p, PicnicTerrain terrain,
-            float startX, float width, int order, float alpha, float z = 0.02f)
+        private void Build3DRiverStonePlatform(Transform parent, PicnicPlatformSpec p)
         {
-            Sprite tile = terrain == PicnicTerrain.Grass ? tileGrass
-                : terrain == PicnicTerrain.Gravel ? tileGravel
-                : terrain == PicnicTerrain.Wood ? tileWood
-                : tileSoil;
-            if (tile == null) return;
-
-            float offset = terrain == PicnicTerrain.Grass ? 90f
-                : terrain == PicnicTerrain.Soil ? 18f
-                : 10f;
-            float tileH = terrain == PicnicTerrain.Wood ? 80f
-                : terrain == PicnicTerrain.Soil ? 60f
-                : 110f;
-
-            float step = p.Hill > 0f ? 44f : 220f;
-            for (float x = startX; x < startX + width - 0.5f; x += step)
+            Mesh stoneMesh = PicnicAtlasCatalog.LoadRiverStone3DMesh();
+            if (stoneMesh != null)
             {
-                float segW = Mathf.Min(step, startX + width - x);
-                float sampleY = PicnicLevelData.SurfaceY(p, x + segW * 0.5f) - offset;
-                var go = new GameObject("Surface_" + terrain, typeof(SpriteRenderer));
-                go.transform.SetParent(parent, false);
-                var sr = go.GetComponent<SpriteRenderer>();
-                sr.sprite = tile;
-                sr.sortingOrder = order;
-                sr.color = new Color(1f, 1f, 1f, alpha);
-                go.transform.position = PicnicAtlasCatalog.ToUnity(x, sampleY, z);
-                FitSprite(go.transform, tile, (segW + 2f) / 100f, tileH / 100f);
+                float w = p.Width / 100f;
+                float cx = (p.X + p.Width * 0.5f) / 100f;
+                float topY = PicnicAtlasCatalog.ToUnity(p.X, p.Y).y;
+                float bedY = PicnicAtlasCatalog.ToUnity(p.X, PicnicLevelData.RiverBedY + 26f).y;
+                float totalH = Mathf.Max(1.65f, topY - bedY);
+
+                var stoneGo = new GameObject("RiverStone3D", typeof(MeshFilter), typeof(MeshRenderer));
+                stoneGo.transform.SetParent(parent, false);
+                stoneGo.GetComponent<MeshFilter>().sharedMesh = stoneMesh;
+                stoneGo.GetComponent<MeshRenderer>().sharedMaterial = riverStone3DMat;
+
+                // Compensate perspective pitch (-0.07f Y at Z = FrontZ + 0.56f) so Yuna's feet at (topY, Z = -0.15f)
+                // rest right in the middle of the flat top plateau of the 3D stone.
+                stoneGo.transform.position = new Vector3(cx, topY - 0.07f, FrontZ + 0.56f);
+                stoneGo.transform.localScale = new Vector3(w * 1.04f, totalH, 1.24f);
+                return;
             }
-        }
-
-        private void BuildWheel(PicnicWheelSpec w)
-        {
-            var root = new GameObject("Wheel_" + w.Id);
-            root.transform.SetParent(transform, false);
-
-            // Center wooden hub
-            var hub = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-            hub.name = "Hub";
-            hub.transform.SetParent(root.transform, false);
-            Destroy(hub.GetComponent<Collider>());
-            hub.transform.position = PicnicAtlasCatalog.ToUnity(w.X, w.Y, 0.13f);
-            hub.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
-            hub.transform.localScale = new Vector3(0.32f, 0.02f, 0.32f);
-            var hubMr = hub.GetComponent<MeshRenderer>();
-            hubMr.sharedMaterial = spokeMat;
-            hubMr.sortingOrder = 3;
-
-            var plats = new Transform[4];
-            var spokes = new LineRenderer[4];
-            for (int k = 0; k < 4; k++)
-            {
-                var spokeGo = new GameObject("Spoke_" + k);
-                spokeGo.transform.SetParent(root.transform, false);
-                var lr = spokeGo.AddComponent<LineRenderer>();
-                lr.positionCount = 2;
-                lr.startWidth = 0.08f;
-                lr.endWidth = 0.08f;
-                lr.sharedMaterial = spokeMat;
-                lr.sortingOrder = 2;
-                spokes[k] = lr;
-
-                var platGo = new GameObject(w.Id + "-" + k, typeof(SpriteRenderer));
-                platGo.transform.SetParent(root.transform, false);
-                var sr = platGo.GetComponent<SpriteRenderer>();
-                sr.sprite = sprWoodPlat;
-                sr.sortingOrder = 4;
-                FitSprite(platGo.transform, sprWoodPlat, 1.44f, 0.53f);
-                plats[k] = platGo.transform;
-            }
-
-            wheels.Add(new WheelVisual { Spec = w, Root = root, Platforms = plats, Spokes = spokes });
         }
 
         private static void FitSprite(Transform t, Sprite s, float worldW, float worldH)
@@ -310,11 +636,431 @@ namespace YunaLegend.Picnic.Runtime
             t.localScale = new Vector3(worldW / s.bounds.size.x, worldH / s.bounds.size.y, 1f);
         }
 
+        private void Build3DFloatingWoodPlatform(Transform parent, PicnicPlatformSpec p)
+        {
+            Mesh woodMesh = PicnicAtlasCatalog.LoadWoodPlatform3DMesh();
+            if (woodMesh != null)
+            {
+                float w = p.Width / 100f;
+                float cx = (p.X + p.Width * 0.5f) / 100f;
+                float topY = PicnicAtlasCatalog.ToUnity(p.X, p.Y).y;
+
+                var woodGo = new GameObject("WoodPlatform3D", typeof(MeshFilter), typeof(MeshRenderer));
+                woodGo.transform.SetParent(parent, false);
+                woodGo.GetComponent<MeshFilter>().sharedMesh = woodMesh;
+                woodGo.GetComponent<MeshRenderer>().sharedMaterial = woodPlatform3DMat;
+
+                // Compensate perspective pitch (-0.06f Y at Z = FrontZ + 0.48f) so Yuna's feet rest on the center of the top plank
+                woodGo.transform.position = new Vector3(cx, topY - 0.06f, FrontZ + 0.48f);
+                woodGo.transform.localScale = new Vector3(w * 1.04f, 0.56f, 0.92f);
+                return;
+            }
+        }
+
+        private void Build3DCloudPlatform(Transform parent, PicnicPlatformSpec p)
+        {
+            float cx = (p.X + p.Width * 0.5f) / 100f;
+            float w = p.Width / 100f;
+            float topY = PicnicAtlasCatalog.ToUnity(p.X, p.Y).y;
+
+            var instMat = new Material(cloudBaseMat);
+            Mesh cloudMesh = PicnicAtlasCatalog.LoadCloud3DMesh();
+            if (cloudMesh != null)
+            {
+                var cloudGo = new GameObject("Cloud3D", typeof(MeshFilter), typeof(MeshRenderer));
+                cloudGo.transform.SetParent(parent, false);
+                cloudGo.GetComponent<MeshFilter>().sharedMesh = cloudMesh;
+                var mr = cloudGo.GetComponent<MeshRenderer>();
+                mr.sharedMaterial = instMat;
+
+                // Compensate perspective pitch (-0.06f Y at Z = FrontZ + 0.48f) so Yuna's feet rest on the fluffy top cushion of the cloud
+                cloudGo.transform.position = new Vector3(cx, topY - 0.06f, FrontZ + 0.48f);
+                cloudGo.transform.localScale = new Vector3(w * 1.06f, 0.64f, 0.96f);
+
+                cloudVisuals.Add(new CloudVisual
+                {
+                    Id = p.Id,
+                    Renderers = new[] { mr },
+                    InstanceMaterial = instMat,
+                });
+                return;
+            }
+        }
+
+        private void BuildWheel(PicnicWheelSpec w)
+        {
+            var root = new GameObject("Wheel3D_" + w.Id);
+            root.transform.SetParent(transform, false);
+
+            var hub = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            hub.name = "Hub3D";
+            hub.transform.SetParent(root.transform, false);
+            Destroy(hub.GetComponent<Collider>());
+            hub.transform.position = PicnicAtlasCatalog.ToUnity(w.X, w.Y, FrontZ + 0.56f);
+            hub.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+            hub.transform.localScale = new Vector3(0.42f, 0.34f, 0.42f);
+            hub.GetComponent<MeshRenderer>().sharedMaterial = woodBodyMat;
+
+            Mesh woodMesh = PicnicAtlasCatalog.LoadWoodPlatform3DMesh();
+            var plats = new Transform[4];
+            var spokes = new Transform[4];
+            for (int k = 0; k < 4; k++)
+            {
+                var spokeGo = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                spokeGo.name = "Spoke3D_" + k;
+                spokeGo.transform.SetParent(root.transform, false);
+                Destroy(spokeGo.GetComponent<Collider>());
+                spokeGo.GetComponent<MeshRenderer>().sharedMaterial = spokeMat;
+                spokes[k] = spokeGo.transform;
+
+                var platRoot = new GameObject(w.Id + "-" + k, typeof(MeshFilter), typeof(MeshRenderer));
+                platRoot.transform.SetParent(root.transform, false);
+                platRoot.GetComponent<MeshFilter>().sharedMesh = woodMesh;
+                platRoot.GetComponent<MeshRenderer>().sharedMaterial = woodPlatform3DMat;
+                platRoot.transform.localScale = new Vector3(1.50f, 0.56f, 0.92f);
+                plats[k] = platRoot.transform;
+            }
+
+            var wv = new WheelVisual { Spec = w, Root = root, Platforms = plats, Spokes = spokes };
+            wheels.Add(wv);
+            UpdateWheelTransforms(wv, w.Phase);
+        }
+
+        private static Texture2D CreateWoodPlankTexture()
+        {
+            const int W = 128;
+            const int H = 128;
+            var tex = new Texture2D(W, H, TextureFormat.RGBA32, false)
+            {
+                wrapMode = TextureWrapMode.Repeat,
+            };
+            for (int y = 0; y < H; y++)
+            {
+                bool plankGap = (y % 32) <= 2;
+                float boardTint = ((y / 32) % 2 == 0) ? 1.0f : 0.93f;
+                for (int x = 0; x < W; x++)
+                {
+                    float grain = Mathf.Sin(x * 0.22f + Mathf.Sin(y * 0.35f) * 2.5f) * 0.05f
+                                + Mathf.Sin(y * 0.85f + x * 0.08f) * 0.03f;
+                    float v = plankGap ? 0.58f : Mathf.Clamp01((0.92f + grain) * boardTint);
+                    tex.SetPixel(x, y, new Color(v, v * 0.92f, v * 0.82f, 1f));
+                }
+            }
+            tex.Apply();
+            return tex;
+        }
+
+        private static Texture2D CreateRiverStoneTexture()
+        {
+            const int W = 128;
+            const int H = 128;
+            var tex = new Texture2D(W, H, TextureFormat.RGBA32, false)
+            {
+                wrapMode = TextureWrapMode.Repeat,
+            };
+            for (int y = 0; y < H; y++)
+            {
+                for (int x = 0; x < W; x++)
+                {
+                    float n1 = Mathf.Sin(x * 0.19f + y * 0.13f) * Mathf.Cos(x * 0.11f - y * 0.17f);
+                    float n2 = Mathf.Sin(x * 0.47f - y * 0.39f) * 0.35f;
+                    float v = Mathf.Clamp(0.84f + (n1 + n2) * 0.12f, 0.62f, 0.98f);
+                    tex.SetPixel(x, y, new Color(v * 0.94f, v * 0.98f, v * 0.95f, 1f));
+                }
+            }
+            tex.Apply();
+            return tex;
+        }
+
+        private static Texture2D CreatePebbleCapTexture()
+        {
+            // 4x4 palette atlas of natural river pebble tones from ambient-v2 (warm ochre, amber, cream, sandstone, slate-grey)
+            const int W = 128;
+            const int H = 128;
+            var tex = new Texture2D(W, H, TextureFormat.RGBA32, false)
+            {
+                wrapMode = TextureWrapMode.Clamp,
+            };
+            Color[] palette =
+            {
+                new Color(0.86f, 0.65f, 0.42f, 1f), // warm ochre
+                new Color(0.78f, 0.56f, 0.35f, 1f), // terracotta amber
+                new Color(0.89f, 0.76f, 0.58f, 1f), // golden cream sandstone
+                new Color(0.52f, 0.56f, 0.59f, 1f), // river slate blue-grey
+                new Color(0.73f, 0.63f, 0.50f, 1f), // taupe stone
+                new Color(0.82f, 0.60f, 0.38f, 1f), // honey pebble
+                new Color(0.61f, 0.64f, 0.65f, 1f), // light granite grey
+                new Color(0.91f, 0.81f, 0.66f, 1f), // pale sand pebble
+                new Color(0.68f, 0.50f, 0.33f, 1f), // roasted brown pebble
+                new Color(0.84f, 0.70f, 0.51f, 1f), // warm buff
+                new Color(0.46f, 0.50f, 0.53f, 1f), // dark slate pebble
+                new Color(0.88f, 0.67f, 0.45f, 1f), // bright ochre
+                new Color(0.76f, 0.67f, 0.56f, 1f), // warm limestone
+                new Color(0.80f, 0.58f, 0.37f, 1f), // copper stone
+                new Color(0.65f, 0.58f, 0.49f, 1f), // weathered stone
+                new Color(0.87f, 0.74f, 0.55f, 1f), // sunlit sand stone
+            };
+            for (int y = 0; y < H; y++)
+            {
+                int row = (y / 32) % 4;
+                for (int x = 0; x < W; x++)
+                {
+                    int col = (x / 32) % 4;
+                    Color baseCol = palette[row * 4 + col];
+                    float grain = Mathf.Sin(x * 0.7f + y * 0.5f) * 0.03f + Mathf.Cos(x * 1.3f - y * 1.1f) * 0.02f;
+                    tex.SetPixel(x, y, new Color(
+                        Mathf.Clamp01(baseCol.r + grain),
+                        Mathf.Clamp01(baseCol.g + grain),
+                        Mathf.Clamp01(baseCol.b + grain),
+                        1f));
+                }
+            }
+            tex.Apply();
+            return tex;
+        }
+
+        /// <summary>
+        /// Generates a single combined 3D mesh of hundreds of individual rounded 3D river pebbles/cobblestones
+        /// packed across the 3D top face of a gravel platform. Each pebble is a 3D ellipsoid dome with real 3D normals,
+        /// random size/orientation, and a natural ochre/sandstone/slate-grey color cell from the 4x4 pebble palette.
+        /// </summary>
+        public static Mesh CreateSculpted3DPebbleFieldMesh(float xMin, float width, float baseY, float zMin, float depth)
+        {
+            const int Segs = 10;
+            const int Rings = 3;
+            const int VertsPerPebble = 1 + Rings * Segs;
+            const int TrisPerPebble = Segs + (Rings - 1) * Segs * 2;
+
+            float stepX = 0.145f;
+            float stepZ = 0.165f;
+            int cols = Mathf.Max(2, Mathf.FloorToInt(width / stepX));
+            int rows = Mathf.Max(2, Mathf.FloorToInt(depth / stepZ));
+            int totalPebbles = cols * rows;
+
+            var verts = new Vector3[totalPebbles * VertsPerPebble];
+            var norms = new Vector3[verts.Length];
+            var uvs = new Vector2[verts.Length];
+            var tris = new int[totalPebbles * TrisPerPebble * 3];
+
+            int vIdx = 0;
+            int tIdx = 0;
+
+            for (int r = 0; r < rows; r++)
+            {
+                for (int c = 0; c < cols; c++)
+                {
+                    // Deterministic hash per pebble in world coordinates with hexagonal row offset (zero grid lines)
+                    int seed = Mathf.Abs(Mathf.RoundToInt((xMin + c * stepX) * 173f) * 73856093 ^ (r * 19349663));
+                    float h1 = ((seed & 0xFF) / 255f) - 0.5f;
+                    float h2 = (((seed >> 8) & 0xFF) / 255f) - 0.5f;
+                    float h3 = ((seed >> 16) & 0xFF) / 255f;
+                    float h4 = ((seed >> 24) & 0x7F) / 127f;
+
+                    float rowShift = (r & 1) * 0.5f;
+                    float cx = xMin + (c + 0.35f + rowShift + h1 * 0.78f) * (width / cols);
+                    float cz = zMin + (r + 0.5f + h2 * 0.78f) * (depth / rows);
+                    cx = Mathf.Clamp(cx, xMin + 0.03f, xMin + width - 0.03f);
+                    cz = Mathf.Clamp(cz, zMin + 0.03f, zMin + depth - 0.03f);
+
+                    float rx = Mathf.Lerp(0.082f, 0.142f, h3);
+                    float rz = Mathf.Lerp(0.076f, 0.132f, h4);
+                    float ry = Mathf.Lerp(0.048f, 0.088f, (h3 + h4) * 0.5f);
+                    float yaw = (h1 - h2) * Mathf.PI;
+                    float cosY = Mathf.Cos(yaw);
+                    float sinY = Mathf.Sin(yaw);
+
+                    int palCell = seed & 15;
+                    Vector2 cellUvCenter = new Vector2(((palCell % 4) + 0.5f) * 0.25f, ((palCell / 4) + 0.5f) * 0.25f);
+
+                    int baseV = vIdx;
+                    // Top apex vertex
+                    verts[vIdx] = new Vector3(cx, baseY + ry, cz);
+                    norms[vIdx] = Vector3.up;
+                    uvs[vIdx] = cellUvCenter;
+                    vIdx++;
+
+                    for (int ring = 1; ring <= Rings; ring++)
+                    {
+                        float phi = (ring / (float)Rings) * (Mathf.PI * 0.52f);
+                        float sinPhi = Mathf.Sin(phi);
+                        float cosPhi = Mathf.Cos(phi);
+
+                        for (int s = 0; s < Segs; s++)
+                        {
+                            float theta = (s / (float)Segs) * Mathf.PI * 2f;
+                            float lx = Mathf.Cos(theta) * sinPhi;
+                            float lz = Mathf.Sin(theta) * sinPhi;
+                            float ly = cosPhi;
+
+                            float wx = (lx * rx) * cosY - (lz * rz) * sinY;
+                            float wz = (lx * rx) * sinY + (lz * rz) * cosY;
+                            float wy = (ly - 0.12f) * ry;
+
+                            Vector3 n = new Vector3(lx * cosY - lz * sinY, ly * 1.15f, lx * sinY + lz * cosY).normalized;
+                            verts[vIdx] = new Vector3(cx + wx, baseY + wy, cz + wz);
+                            norms[vIdx] = n;
+                            uvs[vIdx] = cellUvCenter + new Vector2(lx * 0.08f, lz * 0.08f);
+                            vIdx++;
+                        }
+                    }
+
+                    // Apex fan triangles
+                    for (int s = 0; s < Segs; s++)
+                    {
+                        int nextS = (s + 1) % Segs;
+                        tris[tIdx++] = baseV;
+                        tris[tIdx++] = baseV + 1 + nextS;
+                        tris[tIdx++] = baseV + 1 + s;
+                    }
+
+                    // Ring strip triangles
+                    for (int ring = 0; ring < Rings - 1; ring++)
+                    {
+                        int r0 = baseV + 1 + ring * Segs;
+                        int r1 = r0 + Segs;
+                        for (int s = 0; s < Segs; s++)
+                        {
+                            int nextS = (s + 1) % Segs;
+                            tris[tIdx++] = r0 + s;
+                            tris[tIdx++] = r0 + nextS;
+                            tris[tIdx++] = r1 + s;
+
+                            tris[tIdx++] = r0 + nextS;
+                            tris[tIdx++] = r1 + nextS;
+                            tris[tIdx++] = r1 + s;
+                        }
+                    }
+                }
+            }
+
+            var mesh = new Mesh
+            {
+                name = "Sculpted3DPebbleField",
+                indexFormat = verts.Length > 65000
+                    ? UnityEngine.Rendering.IndexFormat.UInt32
+                    : UnityEngine.Rendering.IndexFormat.UInt16,
+            };
+            mesh.vertices = verts;
+            mesh.normals = norms;
+            mesh.uv = uvs;
+            mesh.triangles = tris;
+            mesh.RecalculateBounds();
+            return mesh;
+        }
+
+        private static Texture2D CreateCloudShadedTexture()
+        {
+            const int W = 64;
+            const int H = 64;
+            var tex = new Texture2D(W, H, TextureFormat.RGBA32, false)
+            {
+                wrapMode = TextureWrapMode.Clamp,
+            };
+            Color bottom = new Color(0.76f, 0.87f, 0.95f, 0.96f);
+            Color mid = new Color(0.92f, 0.96f, 1.00f, 0.98f);
+            Color top = new Color(1.00f, 1.00f, 1.00f, 1.00f);
+            for (int y = 0; y < H; y++)
+            {
+                float t = y / (float)(H - 1);
+                Color row = t < 0.45f
+                    ? Color.Lerp(bottom, mid, t / 0.45f)
+                    : Color.Lerp(mid, top, (t - 0.45f) / 0.55f);
+                for (int x = 0; x < W; x++)
+                {
+                    tex.SetPixel(x, y, row);
+                }
+            }
+            tex.Apply();
+            return tex;
+        }
+
+        /// <summary>
+        /// Builds a 3D rectangular prism mesh with distinct normals per face (for crisp URP 3D lighting)
+        /// and world-space UVs so adjacent blocks tile seamlessly without texture seams.
+        /// </summary>
+        public static Mesh CreateWorldUVBoxMesh(float xMin, float width, float yMin, float yMax, float zMin, float depth, float uvTileMeters = 3.2f)
+        {
+            float xMax = xMin + width;
+            float zMax = zMin + depth;
+
+            Vector3 p000 = new Vector3(xMin, yMin, zMin);
+            Vector3 p100 = new Vector3(xMax, yMin, zMin);
+            Vector3 p110 = new Vector3(xMax, yMax, zMin);
+            Vector3 p010 = new Vector3(xMin, yMax, zMin);
+
+            Vector3 p001 = new Vector3(xMin, yMin, zMax);
+            Vector3 p101 = new Vector3(xMax, yMin, zMax);
+            Vector3 p111 = new Vector3(xMax, yMax, zMax);
+            Vector3 p011 = new Vector3(xMin, yMax, zMax);
+
+            var verts = new Vector3[]
+            {
+                p000, p010, p110, p100,
+                p010, p011, p111, p110,
+                p001, p011, p010, p000,
+                p100, p110, p111, p101,
+                p001, p000, p100, p101,
+            };
+
+            var normals = new Vector3[]
+            {
+                Vector3.back, Vector3.back, Vector3.back, Vector3.back,
+                Vector3.up, Vector3.up, Vector3.up, Vector3.up,
+                Vector3.left, Vector3.left, Vector3.left, Vector3.left,
+                Vector3.right, Vector3.right, Vector3.right, Vector3.right,
+                Vector3.down, Vector3.down, Vector3.down, Vector3.down,
+            };
+
+            float s = 1f / uvTileMeters;
+            var uvs = new Vector2[]
+            {
+                new Vector2(xMin * s, yMin * s), new Vector2(xMin * s, yMax * s), new Vector2(xMax * s, yMax * s), new Vector2(xMax * s, yMin * s),
+                new Vector2(xMin * s, zMin * s), new Vector2(xMin * s, zMax * s), new Vector2(xMax * s, zMax * s), new Vector2(xMax * s, zMin * s),
+                new Vector2(zMax * s, yMin * s), new Vector2(zMax * s, yMax * s), new Vector2(zMin * s, yMax * s), new Vector2(zMin * s, yMin * s),
+                new Vector2(zMin * s, yMin * s), new Vector2(zMin * s, yMax * s), new Vector2(zMax * s, yMax * s), new Vector2(zMax * s, yMin * s),
+                new Vector2(xMin * s, zMax * s), new Vector2(xMin * s, zMin * s), new Vector2(xMax * s, zMin * s), new Vector2(xMax * s, zMax * s),
+            };
+
+            var tris = new int[]
+            {
+                0, 1, 2, 0, 2, 3,
+                4, 5, 6, 4, 6, 7,
+                8, 9, 10, 8, 10, 11,
+                12, 13, 14, 12, 14, 15,
+                16, 17, 18, 16, 18, 19,
+            };
+
+            var mesh = new Mesh { name = "WorldUVBox3D" };
+            mesh.vertices = verts;
+            mesh.normals = normals;
+            mesh.uv = uvs;
+            mesh.triangles = tris;
+            return mesh;
+        }
+
         private void OnDestroy()
         {
-            if (wallPlantMat != null) Destroy(wallPlantMat);
+            if (ivyFaceMat != null) Destroy(ivyFaceMat);
+            if (topGrassMat != null) Destroy(topGrassMat);
+            if (topMeadowMat != null) Destroy(topMeadowMat);
+            if (earthRimMat != null) Destroy(earthRimMat);
+            if (topGravelMat != null) Destroy(topGravelMat);
+            if (topWoodMat != null) Destroy(topWoodMat);
             if (woodBodyMat != null) Destroy(woodBodyMat);
+            if (stoneMat != null) Destroy(stoneMat);
+            if (stoneCapMat != null) Destroy(stoneCapMat);
+            if (riverStone3DMat != null) Destroy(riverStone3DMat);
+            if (woodPlatform3DMat != null) Destroy(woodPlatform3DMat);
             if (spokeMat != null) Destroy(spokeMat);
+            if (cloudBaseMat != null) Destroy(cloudBaseMat);
+            if (woodPlankTex != null) Destroy(woodPlankTex);
+            if (riverStoneTex != null) Destroy(riverStoneTex);
+            if (gravelCapTex != null) Destroy(gravelCapTex);
+            if (cloudGradTex != null) Destroy(cloudGradTex);
+            for (int i = 0; i < cloudVisuals.Count; i++)
+            {
+                if (cloudVisuals[i].InstanceMaterial != null) Destroy(cloudVisuals[i].InstanceMaterial);
+            }
         }
     }
 }

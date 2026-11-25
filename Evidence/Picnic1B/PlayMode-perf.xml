@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-25 00:50:38Z" end-time="2026-11-25 00:50:39Z" duration="1,0798369">
+  <test-suite type="TestSuite" id="1060" name="Yuna Legend - O Quarto dos Brinquedos" fullname="Yuna Legend - O Quarto dos Brinquedos" runstate="Runnable" testcasecount="37" result="Passed" start-time="2026-11-25 00:50:38Z" end-time="2026-11-25 00:50:39Z" duration="1.079837" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1006" name="YunaLegend.Picnic.Audit.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Build/PicnicVisualAuditProject/Library/ScriptAssemblies/YunaLegend.Picnic.Audit.dll" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-25 00:50:38Z" end-time="2026-11-25 00:50:39Z" duration="1.071812" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="40408" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1007" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-25 00:50:38Z" end-time="2026-11-25 00:50:39Z" duration="1.071268" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1008" name="Picnic" fullname="YunaLegend.Picnic" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-25 00:50:38Z" end-time="2026-11-25 00:50:39Z" duration="1.070985" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1009" name="Audit" fullname="YunaLegend.Picnic.Audit" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-25 00:50:38Z" end-time="2026-11-25 00:50:39Z" duration="1.070724" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1004" name="PicnicPlayModePerfAudit" fullname="YunaLegend.Picnic.Audit.PicnicPlayModePerfAudit" classname="YunaLegend.Picnic.Audit.PicnicPlayModePerfAudit" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-25 00:50:38Z" end-time="2026-11-25 00:50:39Z" duration="1.069537" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1005" name="MeasureRealPlayModePerformanceAndWormPlacement" fullname="YunaLegend.Picnic.Audit.PicnicPlayModePerfAudit.MeasureRealPlayModePerformanceAndWormPlacement" methodname="MeasureRealPlayModePerformanceAndWormPlacement" classname="YunaLegend.Picnic.Audit.PicnicPlayModePerfAudit" runstate="Runnable" seed="478691857" result="Passed" start-time="2026-11-25 00:50:38Z" end-time="2026-11-25 00:50:39Z" duration="1.058602" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[PERF_AUDIT] totalTransforms=871 totalSpriteRenderers=563 activeSpriteRenderers=71
+[PERF_AUDIT] frameMs p50=0,30 p95=0,41 max=15,44 | simMs p50=0,008 max=7,348 | gcDeltaKB=48,0
+[WORM_AUDIT] id=minhoca-0 x=4130,0 y=590,0 supportId=pedrinhas-da-roda supX=3950,0..4332,5 supY=590,0 goPos=null
+Saving results to: C:/Users/sergi/AppData/LocalLow/DeepMindStudio/Yuna Legend - O Quarto dos Brinquedos\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

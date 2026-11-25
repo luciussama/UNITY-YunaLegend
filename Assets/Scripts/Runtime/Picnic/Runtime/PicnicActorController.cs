@@ -12,6 +12,8 @@ namespace YunaLegend.Picnic.Runtime
         private CharacterController body;
         private Transform yunaRoot;
         private SpriteRenderer yunaRenderer;
+        private Transform yunaShadow;
+        private Material yunaShadowMat;
         private SpriteRenderer[] sweatDrops;
         private Transform nandaRoot;
         private SpriteRenderer nandaRenderer;
@@ -44,11 +46,28 @@ namespace YunaLegend.Picnic.Runtime
             body.radius = 0.16f;
             body.center = new Vector3(0f, 0.45f, 0f);
             body.skinWidth = 0.015f;
+            // Core simulation is authoritative; keeping CharacterController disabled avoids per-frame PhysX actor rebuilds.
+            body.enabled = false;
 
             var yunaArt = new GameObject("YunaSprite", typeof(SpriteRenderer));
             yunaArt.transform.SetParent(yunaRoot, false);
             yunaRenderer = yunaArt.GetComponent<SpriteRenderer>();
             yunaRenderer.sortingOrder = 12;
+
+            // Soft 3D contact shadow disc on the 3D ground surface beneath Yuna's feet
+            var shadowQuad = GameObject.CreatePrimitive(PrimitiveType.Quad);
+            shadowQuad.name = "YunaContactShadow3D";
+            shadowQuad.transform.SetParent(yunaRoot, false);
+            Destroy(shadowQuad.GetComponent<Collider>());
+            shadowQuad.transform.localPosition = new Vector3(0f, 0.02f, 0.05f);
+            shadowQuad.transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
+            shadowQuad.transform.localScale = new Vector3(0.72f, 0.34f, 1f);
+            yunaShadowMat = new Material(Shader.Find("Sprites/Default"))
+            {
+                color = new Color(0.08f, 0.14f, 0.06f, 0.34f),
+            };
+            shadowQuad.GetComponent<MeshRenderer>().sharedMaterial = yunaShadowMat;
+            yunaShadow = shadowQuad.transform;
 
             // 3 animated sweat droplets for grass/gravel sensory discomfort (GardenRenderer.effort)
             Sprite dropSprite = CreateSweatDropSprite();
@@ -130,20 +149,50 @@ namespace YunaLegend.Picnic.Runtime
                 beeBodies[i] = br;
             }
 
-            // Worms
+            // Worms (Proposal A: burrowed inside the middle of the pebble bed with back dirt mound + front pebble collar)
             var wormSpr = PicnicAtlasCatalog.Slice("insects-v1", PicnicAtlasCatalog.InsectFrames[4], 100f, "en:worm");
+            var wormFrame = PicnicAtlasCatalog.InsectFrames[4];
+            var moundFrame = new AtlasFrameSpec(wormFrame.X, wormFrame.Y + Mathf.RoundToInt(wormFrame.H * 0.72f),
+                wormFrame.W, Mathf.RoundToInt(wormFrame.H * 0.28f), wormFrame.W * 0.5f, Mathf.RoundToInt(wormFrame.H * 0.22f));
+            var moundSpr = PicnicAtlasCatalog.Slice("insects-v1", moundFrame, 100f, "en:worm-mound-v2");
+
             wormRoots = new Transform[sim.Encounters.Worms.Length];
             wormRenderers = new SpriteRenderer[sim.Encounters.Worms.Length];
             for (int i = 0; i < sim.Encounters.Worms.Length; i++)
             {
-                var go = new GameObject(sim.Encounters.Worms[i].Id, typeof(SpriteRenderer));
-                go.transform.SetParent(transform, false);
+                var w = sim.Encounters.Worms[i];
+                var container = new GameObject(w.Id + "_Root");
+                container.transform.SetParent(transform, false);
+                // Seated right on the 3D sculpted pebble surface (w.Y + 2f in pixel space, Z = -0.10f)
+                container.transform.position = PicnicAtlasCatalog.ToUnity(w.X, w.Y + 2f, -0.10f);
+
+                var backMoundGo = new GameObject("BackDirtMound", typeof(SpriteRenderer));
+                backMoundGo.transform.SetParent(container.transform, false);
+                var bmr = backMoundGo.GetComponent<SpriteRenderer>();
+                bmr.sprite = moundSpr;
+                bmr.sortingOrder = 8;
+                bmr.color = new Color(0.86f, 0.82f, 0.78f, 1f);
+                backMoundGo.transform.localPosition = new Vector3(0f, 0.03f, 0.02f);
+                FitSprite(backMoundGo.transform, moundSpr, 0.82f, 0.24f);
+
+                var go = new GameObject(w.Id, typeof(SpriteRenderer));
+                go.transform.SetParent(container.transform, false);
                 var sr = go.GetComponent<SpriteRenderer>();
                 sr.sprite = wormSpr;
                 sr.sortingOrder = 9;
-                FitSprite(go.transform, wormSpr, 0.52f, 0.72f);
+                FitSprite(go.transform, wormSpr, 0.56f, 0.76f);
+                go.SetActive(false);
                 wormRoots[i] = go.transform;
                 wormRenderers[i] = sr;
+
+                // Front pebble & soil collar in front of the worm's lower base so it emerges from inside the pebbles
+                var frontMoundGo = new GameObject("FrontPebbleCollar", typeof(SpriteRenderer));
+                frontMoundGo.transform.SetParent(container.transform, false);
+                var fmr = frontMoundGo.GetComponent<SpriteRenderer>();
+                fmr.sprite = moundSpr;
+                fmr.sortingOrder = 10;
+                frontMoundGo.transform.localPosition = new Vector3(0f, -0.02f, -0.02f);
+                FitSprite(frontMoundGo.transform, moundSpr, 0.76f, 0.21f);
             }
 
             // Chasing beetle
@@ -169,11 +218,8 @@ namespace YunaLegend.Picnic.Runtime
 
         public void Apply(PicnicSimulation sim)
         {
-            // Yuna
-            Vector3 yunaPos = PicnicAtlasCatalog.ToUnity(sim.PlayerX, sim.PlayerY, -0.15f);
-            body.enabled = false;
-            yunaRoot.position = yunaPos;
-            body.enabled = true;
+            // Yuna (direct transform placement without toggling CharacterController every frame)
+            yunaRoot.position = PicnicAtlasCatalog.ToUnity(sim.PlayerX, sim.PlayerY, -0.15f);
 
             var pose = PicnicContact.SelectGirlPose(sim.OnGround, sim.PlayerVx, sim.PlayerVy,
                 sim.Terrain, sim.Discomfort, sim.Time, sim.BalancePose);
@@ -237,11 +283,11 @@ namespace YunaLegend.Picnic.Runtime
             for (int i = 0; i < sim.Enemies.Length; i++)
             {
                 var e = sim.Enemies[i];
-                bool near = Mathf.Abs(e.X - sim.PlayerX) < 1200f && (e.Alive || e.DefeatAge < 0.7f);
-                enemyRoots[i].gameObject.SetActive(near);
+                bool near = Mathf.Abs(e.X - sim.PlayerX) < 1100f && (e.Alive || e.DefeatAge < 0.7f);
+                if (enemyRoots[i].gameObject.activeSelf != near) enemyRoots[i].gameObject.SetActive(near);
                 if (!near) continue;
 
-                enemyRoots[i].position = PicnicAtlasCatalog.ToUnity(e.X, e.Y, -0.05f);
+                enemyRoots[i].position = PicnicAtlasCatalog.ToUnity(e.X, e.Y + 4f, -0.05f);
                 int frame = e.Alive ? Mathf.FloorToInt(sim.Time * (e.Spec.Kind == PicnicEnemyKind.Caterpillar && e.Hp == 1 ? 12f : 7f)) % 2 : 0;
                 Sprite spr = e.Spec.Kind == PicnicEnemyKind.Ant
                     ? antSprites[frame]
@@ -260,7 +306,7 @@ namespace YunaLegend.Picnic.Runtime
             {
                 var b = sim.Encounters.Bees[i];
                 bool near = Mathf.Abs(b.X - sim.PlayerX) < 1100f && b.Alive;
-                beeRoots[i].gameObject.SetActive(near);
+                if (beeRoots[i].gameObject.activeSelf != near) beeRoots[i].gameObject.SetActive(near);
                 if (!near) continue;
                 beeRoots[i].position = PicnicAtlasCatalog.ToUnity(b.X, b.Y, -0.06f);
                 beeRoots[i].localScale = new Vector3(b.Direction < 0 ? 1f : -1f, 1f, 1f);
@@ -269,16 +315,20 @@ namespace YunaLegend.Picnic.Runtime
                 beeWings[i].transform.localScale = new Vector3(ws.x, Mathf.Abs(ws.y) > 0.001f ? Mathf.Sign(ws.y) * (0.27f / beeWings[i].sprite.bounds.size.y) * flap : ws.y, 1f);
             }
 
-            // Worms (anchored cleanly on ground surface, rising smoothly by Exposure)
+            // Worms (anchored cleanly inside dirt mound on ground surface, rising smoothly by Y scale without floating)
             for (int i = 0; i < sim.Encounters.Worms.Length; i++)
             {
                 var w = sim.Encounters.Worms[i];
-                bool near = Mathf.Abs(w.X - sim.PlayerX) < 1100f && w.Exposure > 0.02f;
-                wormRoots[i].gameObject.SetActive(near);
-                if (!near) continue;
-                // Sink underground when Exposure < 1 so base stays grounded on surface Y!
-                float hiddenDrop = (1f - w.Exposure) * 72f;
-                wormRoots[i].position = PicnicAtlasCatalog.ToUnity(w.X, w.Y + hiddenDrop, -0.04f);
+                bool visible = Mathf.Abs(w.X - sim.PlayerX) < 1100f && w.Exposure > 0.02f;
+                if (wormRoots[i].gameObject.activeSelf != visible) wormRoots[i].gameObject.SetActive(visible);
+                if (!visible) continue;
+                var spr = wormRenderers[i].sprite;
+                if (spr != null && spr.bounds.size.y > 0.0001f)
+                {
+                    float sx = 0.52f / spr.bounds.size.x;
+                    float sy = (0.72f * Mathf.Clamp01(w.Exposure)) / spr.bounds.size.y;
+                    wormRoots[i].localScale = new Vector3(sx, sy, 1f);
+                }
             }
 
             // Chasing Beetle
@@ -295,6 +345,33 @@ namespace YunaLegend.Picnic.Runtime
             else
             {
                 beetleRoot.gameObject.SetActive(false);
+            }
+        }
+
+        public void ShowAllForEditorPreview(PicnicSimulation sim)
+        {
+            Apply(sim);
+            for (int i = 0; i < sim.Enemies.Length; i++)
+            {
+                var e = sim.Enemies[i];
+                enemyRoots[i].gameObject.SetActive(true);
+                enemyRoots[i].position = PicnicAtlasCatalog.ToUnity(e.X, e.Y + 4f, -0.05f);
+                Sprite spr = e.Spec.Kind == PicnicEnemyKind.Ant ? antSprites[0] : greenCatSprites[0];
+                enemyRenderers[i].sprite = spr;
+                enemyRenderers[i].color = Color.white;
+                FitSprite(enemyRoots[i], spr, e.Spec.Width / 100f, e.Spec.Height / 100f);
+            }
+            for (int i = 0; i < sim.Encounters.Bees.Length; i++)
+            {
+                var b = sim.Encounters.Bees[i];
+                beeRoots[i].gameObject.SetActive(true);
+                beeRoots[i].position = PicnicAtlasCatalog.ToUnity(b.HomeX, b.HomeY, -0.06f);
+            }
+            for (int i = 0; i < sim.Encounters.Worms.Length; i++)
+            {
+                var w = sim.Encounters.Worms[i];
+                wormRoots[i].gameObject.SetActive(true);
+                wormRoots[i].position = PicnicAtlasCatalog.ToUnity(w.X, w.Y, -0.04f);
             }
         }
 

@@ -27,9 +27,12 @@ namespace YunaLegend.Picnic.Runtime
 
         private bool paused;
         private float lastJumpTime = -10f;
+        private float cachedMasterVolume = 1f;
+        private float nextVolumeCheckTime;
 
         public void Build()
         {
+            cachedMasterVolume = Mathf.Clamp01(PlayerPrefs.GetFloat("YunaLegend.MasterVolume", 1f));
             musicSource = gameObject.AddComponent<AudioSource>();
             musicSource.loop = true;
             musicSource.playOnAwake = false;
@@ -211,9 +214,14 @@ namespace YunaLegend.Picnic.Runtime
             }
         }
 
-        private static float MasterVolume()
+        private float MasterVolume()
         {
-            return Mathf.Clamp01(PlayerPrefs.GetFloat("YunaLegend.MasterVolume", 1f));
+            if (Time.unscaledTime >= nextVolumeCheckTime)
+            {
+                nextVolumeCheckTime = Time.unscaledTime + 0.5f;
+                cachedMasterVolume = Mathf.Clamp01(PlayerPrefs.GetFloat("YunaLegend.MasterVolume", 1f));
+            }
+            return cachedMasterVolume;
         }
 
         private static AudioClip CreateSweepClip(string name, float startHz, float endHz, float duration, float peak)

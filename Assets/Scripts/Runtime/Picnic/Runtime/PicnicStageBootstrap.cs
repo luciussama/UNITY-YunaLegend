@@ -35,6 +35,17 @@ namespace YunaLegend.Picnic.Runtime
 
         private void Start()
         {
+            var editorPreview = GameObject.Find("PicnicEditorPreview");
+            if (editorPreview != null)
+            {
+                Destroy(editorPreview);
+                if (stageCamera != null)
+                {
+                    var oldBg = stageCamera.transform.Find("GardenPanorama");
+                    if (oldBg != null) Destroy(oldBg.gameObject);
+                }
+            }
+
             bool easy = PlayerPrefs.GetInt("YunaLegend.EasyMode", 0) == 1;
             Simulation = new PicnicSimulation(easy);
             Simulation.Event += HandleDomainEvent;

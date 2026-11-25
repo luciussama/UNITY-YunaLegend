@@ -117,6 +117,10 @@ namespace YunaLegend.Picnic.Core
         public PicnicRecoveryState Recovery { get; private set; }
 
         private readonly List<string> trail = new List<string> { "entrada" };
+        private readonly List<PicnicPlatformSpec> scratchOldPlatforms = new List<PicnicPlatformSpec>(32);
+        private readonly List<PicnicPlatformSpec> scratchPlatforms = new List<PicnicPlatformSpec>(32);
+        private readonly HashSet<string> scratchSeenIds = new HashSet<string>();
+        private readonly List<string> scratchExpiredClouds = new List<string>(8);
         private string safeGround = "entrada";
         private bool jumpHeld;
         private float jumpBuffer;
@@ -430,17 +434,22 @@ namespace YunaLegend.Picnic.Core
                 return;
             }
 
-            // Expire respawned clouds
-            float cloudDuration = Difficulty == PicnicDifficulty.Easy ? 3.8f : 2.8f;
-            var expiredClouds = new List<string>();
-            foreach (var kv in Clouds)
+            // Expire respawned clouds (zero allocation)
+            if (Clouds.Count > 0)
             {
-                if (Time - kv.Value >= cloudDuration + 4f) expiredClouds.Add(kv.Key);
+                float cloudDuration = Difficulty == PicnicDifficulty.Easy ? 3.8f : 2.8f;
+                scratchExpiredClouds.Clear();
+                foreach (var kv in Clouds)
+                {
+                    if (Time - kv.Value >= cloudDuration + 4f) scratchExpiredClouds.Add(kv.Key);
+                }
+                for (int i = 0; i < scratchExpiredClouds.Count; i++) Clouds.Remove(scratchExpiredClouds[i]);
             }
-            for (int i = 0; i < expiredClouds.Count; i++) Clouds.Remove(expiredClouds[i]);
 
-            var oldPlatforms = Level.QueryPlatforms(Time - dt, Clouds, Difficulty, PlayerX, 650f);
-            var platforms = Level.QueryPlatforms(Time, Clouds, Difficulty, PlayerX, 650f);
+            Level.QueryPlatformsInto(scratchOldPlatforms, scratchSeenIds, Time - dt, Clouds, Difficulty, PlayerX, 650f);
+            Level.QueryPlatformsInto(scratchPlatforms, scratchSeenIds, Time, Clouds, Difficulty, PlayerX, 650f);
+            var oldPlatforms = scratchOldPlatforms;
+            var platforms = scratchPlatforms;
 
             bool pressed = input.Jump && !jumpHeld;
             bool released = !input.Jump && jumpHeld;

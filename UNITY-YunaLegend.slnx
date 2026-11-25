@@ -21,9 +21,9 @@
   <Project Path="YunaLegend.Arena.Editor.csproj" />
   <Project Path="YunaLegend.Picnic.Tests.csproj" />
   <Project Path="YunaLegend.BearChase.Tests.csproj" />
+  <Project Path="YunaLegend.Picnic.Editor.csproj" />
   <Project Path="YunaLegend.Qa.Runtime.csproj" />
   <Project Path="YunaLegend.Arena.Runtime.csproj" />
   <Project Path="YunaLegend.Qa.Core.csproj" />
   <Project Path="YunaLegend.Arena.Tests.csproj" />
-  <Project Path="YunaLegend.Picnic.Editor.csproj" />
 </Solution>

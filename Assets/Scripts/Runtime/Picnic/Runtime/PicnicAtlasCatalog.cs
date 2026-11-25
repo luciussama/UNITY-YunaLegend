@@ -35,6 +35,90 @@ namespace YunaLegend.Picnic.Runtime
 
         private static readonly Dictionary<string, Texture2D> Textures = new Dictionary<string, Texture2D>();
         private static readonly Dictionary<string, Sprite> Sprites = new Dictionary<string, Sprite>();
+        private static Mesh riverStone3DMesh;
+        private static Mesh woodPlatform3DMesh;
+        private static Mesh cloud3DMesh;
+
+        public static Mesh LoadRiverStone3DMesh()
+        {
+            if (riverStone3DMesh == null)
+            {
+                riverStone3DMesh = LoadBinaryMesh("Picnic/river-stone-3d-mesh", "RiverStone3D_Hunyuan");
+            }
+            return riverStone3DMesh;
+        }
+
+        public static Mesh LoadWoodPlatform3DMesh()
+        {
+            if (woodPlatform3DMesh == null)
+            {
+                woodPlatform3DMesh = LoadBinaryMesh("Picnic/wood-platform-3d-mesh", "WoodPlatform3D_Hunyuan");
+            }
+            return woodPlatform3DMesh;
+        }
+
+        public static Mesh LoadCloud3DMesh()
+        {
+            if (cloud3DMesh == null)
+            {
+                cloud3DMesh = LoadBinaryMesh("Picnic/cloud-3d-mesh", "Cloud3D_Hunyuan");
+            }
+            return cloud3DMesh;
+        }
+
+        private static Mesh LoadBinaryMesh(string resourcePath, string meshName)
+        {
+            var asset = Resources.Load<TextAsset>(resourcePath);
+            if (asset == null || asset.bytes == null || asset.bytes.Length < 8)
+            {
+                Debug.LogError("[Picnic1B] Missing " + resourcePath + ".bytes");
+                return null;
+            }
+
+            byte[] data = asset.bytes;
+            int vCount = System.BitConverter.ToInt32(data, 0);
+            int iCount = System.BitConverter.ToInt32(data, 4);
+            int offset = 8;
+
+            var posFloats = new float[vCount * 3];
+            System.Buffer.BlockCopy(data, offset, posFloats, 0, posFloats.Length * 4);
+            offset += posFloats.Length * 4;
+
+            var normFloats = new float[vCount * 3];
+            System.Buffer.BlockCopy(data, offset, normFloats, 0, normFloats.Length * 4);
+            offset += normFloats.Length * 4;
+
+            var uvFloats = new float[vCount * 2];
+            System.Buffer.BlockCopy(data, offset, uvFloats, 0, uvFloats.Length * 4);
+            offset += uvFloats.Length * 4;
+
+            var indices = new int[iCount];
+            System.Buffer.BlockCopy(data, offset, indices, 0, indices.Length * 4);
+
+            var verts = new Vector3[vCount];
+            var norms = new Vector3[vCount];
+            var uvs = new Vector2[vCount];
+            for (int i = 0; i < vCount; i++)
+            {
+                int i3 = i * 3;
+                int i2 = i * 2;
+                verts[i] = new Vector3(posFloats[i3], posFloats[i3 + 1], posFloats[i3 + 2]);
+                norms[i] = new Vector3(normFloats[i3], normFloats[i3 + 1], normFloats[i3 + 2]);
+                uvs[i] = new Vector2(uvFloats[i2], uvFloats[i2 + 1]);
+            }
+
+            var mesh = new Mesh
+            {
+                name = meshName,
+                indexFormat = UnityEngine.Rendering.IndexFormat.UInt32,
+            };
+            mesh.vertices = verts;
+            mesh.normals = norms;
+            mesh.uv = uvs;
+            mesh.triangles = indices;
+            mesh.RecalculateBounds();
+            return mesh;
+        }
 
         public static Vector3 ToUnity(float px, float py, float z = 0f)
         {
@@ -49,6 +133,10 @@ namespace YunaLegend.Picnic.Runtime
                 if (tex == null)
                 {
                     Debug.LogError("[Picnic1B] Missing texture in Resources/Picnic/: " + name);
+                }
+                else if (name != "wall-plant-v1" && name != "soil-continuous-v1" && name != "gravel-top-seamless")
+                {
+                    tex.wrapMode = TextureWrapMode.Clamp;
                 }
                 Textures[name] = tex;
             }

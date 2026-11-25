@@ -37,6 +37,12 @@ namespace YunaLegend.Picnic.Runtime
         private Text modalBody;
         private Font uiFont;
 
+        private int lastHudPct = -1;
+        private string lastHudSection;
+        private int lastHudHp = -1;
+        private PicnicDifficulty lastHudDifficulty;
+        private int lastModalMode = -1;
+
         public bool ConsumeTouchJump()
         {
             bool v = touchJumpQueued;
@@ -55,17 +61,18 @@ namespace YunaLegend.Picnic.Runtime
         public void Apply(PicnicSimulation sim, bool paused)
         {
             bool showStory = sim.IsReadingStory || (sim.Stage == PicnicStage.Complete && sim.EndingDone);
-            storyCanvas.SetActive(showStory);
-            hudCanvas.SetActive(!showStory);
+            if (storyCanvas.activeSelf != showStory) storyCanvas.SetActive(showStory);
+            if (hudCanvas.activeSelf == showStory) hudCanvas.SetActive(!showStory);
 
             if (showStory)
             {
                 bool ending = sim.Stage == PicnicStage.Complete;
                 int idx = ending ? sim.EndingIndex : sim.OpeningIndex;
                 var state = PicnicNarrativeData.Evaluate(ending, idx, sim.CardAge, sim.Age, sim.Time, Screen.height > Screen.width);
-                storySpeaker.text = state.Card.Speaker;
-                storyBody.text = state.Card.Text;
-                storyBg.sprite = PicnicAtlasCatalog.FullSprite(ending ? "picnic-without-yuna-v1" : "house-without-actors-v1", new Vector2(0.5f, 0.5f));
+                if (storySpeaker.text != state.Card.Speaker) storySpeaker.text = state.Card.Speaker;
+                if (storyBody.text != state.Card.Text) storyBody.text = state.Card.Text;
+                var bgSpr = PicnicAtlasCatalog.FullSprite(ending ? "picnic-without-yuna-v1" : "house-without-actors-v1", new Vector2(0.5f, 0.5f));
+                if (storyBg.sprite != bgSpr) storyBg.sprite = bgSpr;
 
                 ApplyCinematicActors(state, sim.Time);
                 return;
@@ -73,34 +80,52 @@ namespace YunaLegend.Picnic.Runtime
 
             var sec = sim.Level.SectionAt(sim.PlayerX);
             int pct = Mathf.Clamp(Mathf.RoundToInt(sim.PlayerX / sim.Level.Goal * 100f), 0, 100);
-            hudStatus.text = $"{pct}% - {sec.Name}";
-            hudHearts.text = sim.Difficulty == PicnicDifficulty.Easy
-                ? "MODO FACIL (VIDA INFINITA)"
-                : $"VIDAS: {sim.Hp}/3";
+            if (pct != lastHudPct || sec.Name != lastHudSection)
+            {
+                lastHudPct = pct;
+                lastHudSection = sec.Name;
+                hudStatus.text = $"{pct}% - {sec.Name}";
+            }
+            if (sim.Hp != lastHudHp || sim.Difficulty != lastHudDifficulty)
+            {
+                lastHudHp = sim.Hp;
+                lastHudDifficulty = sim.Difficulty;
+                hudHearts.text = sim.Difficulty == PicnicDifficulty.Easy
+                    ? "MODO FACIL (VIDA INFINITA)"
+                    : $"VIDAS: {sim.Hp}/3";
+            }
 
-            bool showModal = paused || sim.Stage == PicnicStage.GameOver || sim.Stage == PicnicStage.Rescuing || sim.Stage == PicnicStage.Disoriented;
-            modalPanel.SetActive(showModal);
-            if (paused)
+            int modalMode = paused ? 1
+                : sim.Stage == PicnicStage.GameOver ? 2
+                : sim.Stage == PicnicStage.Disoriented ? 3
+                : sim.Stage == PicnicStage.Rescuing ? 4
+                : 0;
+            if (modalMode != lastModalMode)
             {
-                TouchAxis = 0f;
-                modalTitle.text = "PAUSA";
-                modalBody.text = "O jardim espera por voce.";
-            }
-            else if (sim.Stage == PicnicStage.GameOver)
-            {
-                TouchAxis = 0f;
-                modalTitle.text = "TENTAR NOVAMENTE";
-                modalBody.text = "Vamos tentar esse trechinho de novo.";
-            }
-            else if (sim.Stage == PicnicStage.Disoriented)
-            {
-                modalTitle.text = "COM CALMA";
-                modalBody.text = "Respira fundo, eu te levo de volta.";
-            }
-            else if (sim.Stage == PicnicStage.Rescuing)
-            {
-                modalTitle.text = "ESTOU AQUI";
-                modalBody.text = "Nanda segura voce com carinho.";
+                lastModalMode = modalMode;
+                modalPanel.SetActive(modalMode != 0);
+                if (modalMode == 1)
+                {
+                    TouchAxis = 0f;
+                    modalTitle.text = "PAUSA";
+                    modalBody.text = "O jardim espera por voce.";
+                }
+                else if (modalMode == 2)
+                {
+                    TouchAxis = 0f;
+                    modalTitle.text = "TENTAR NOVAMENTE";
+                    modalBody.text = "Vamos tentar esse trechinho de novo.";
+                }
+                else if (modalMode == 3)
+                {
+                    modalTitle.text = "COM CALMA";
+                    modalBody.text = "Respira fundo, eu te levo de volta.";
+                }
+                else if (modalMode == 4)
+                {
+                    modalTitle.text = "ESTOU AQUI";
+                    modalBody.text = "Nanda segura voce com carinho.";
+                }
             }
         }
 

@@ -642,6 +642,15 @@ namespace YunaLegend.Picnic.Core
             PicnicDifficulty difficulty, float? center = null, float radius = 1000f)
         {
             var result = new List<PicnicPlatformSpec>(32);
+            QueryPlatformsInto(result, null, time, clouds, difficulty, center, radius);
+            return result;
+        }
+
+        public void QueryPlatformsInto(List<PicnicPlatformSpec> result, HashSet<string> seenScratch,
+            float time, IReadOnlyDictionary<string, float> clouds,
+            PicnicDifficulty difficulty, float? center = null, float radius = 1000f)
+        {
+            result.Clear();
             if (!center.HasValue)
             {
                 for (int i = 0; i < StaticPlatforms.Count; i++)
@@ -658,7 +667,8 @@ namespace YunaLegend.Picnic.Core
                 float c = center.Value;
                 int b0 = (int)Math.Floor((c - radius) / 1024f);
                 int b1 = (int)Math.Floor((c + radius) / 1024f);
-                var seen = new HashSet<string>();
+                var seen = seenScratch ?? new HashSet<string>();
+                seen.Clear();
                 for (int b = b0; b <= b1; b++)
                 {
                     if (!buckets.TryGetValue(b, out var list)) continue;
@@ -694,7 +704,6 @@ namespace YunaLegend.Picnic.Core
                         wheelId: w.Id));
                 }
             }
-            return result;
         }
 
         private static bool TryParseTrechoIndex(string id, out int index)
