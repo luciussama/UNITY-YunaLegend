@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="37" result="Passed" total="37" passed="37" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0,0735062">
+  <test-suite type="TestSuite" id="1000" name="Yuna Legend - O Quarto dos Brinquedos" fullname="Yuna Legend - O Quarto dos Brinquedos" runstate="Runnable" testcasecount="217" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.073506" total="37" passed="37" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1056" name="YunaLegend.Arena.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Build/PicnicVisualAuditProject/Library/ScriptAssemblies/YunaLegend.Arena.Tests.dll" runstate="Runnable" testcasecount="37" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.066137" total="37" passed="37" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="47224" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1057" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="37" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.065847" total="37" passed="37" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1058" name="Arena" fullname="YunaLegend.Arena" runstate="Runnable" testcasecount="37" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.065741" total="37" passed="37" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1059" name="Tests" fullname="YunaLegend.Arena.Tests" runstate="Runnable" testcasecount="37" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.065580" total="37" passed="37" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1008" name="ArenaCombatSimulationTests" fullname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests" classname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.039827" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1018" name="BodyCollision_PreventsPlayerAndEnemyOverlap_EvenAgainstArenaWall" fullname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests.BodyCollision_PreventsPlayerAndEnemyOverlap_EvenAgainstArenaWall" methodname="BodyCollision_PreventsPlayerAndEnemyOverlap_EvenAgainstArenaWall" classname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests" runstate="Runnable" seed="825811859" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.015644" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1009" name="Catalog_MatchesCanonicalSwordRanges_InNormalAndEasy" fullname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests.Catalog_MatchesCanonicalSwordRanges_InNormalAndEasy" methodname="Catalog_MatchesCanonicalSwordRanges_InNormalAndEasy" classname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests" runstate="Runnable" seed="1197733856" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.003187" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1023" name="DefeatedEnemy_ReturnsToToyChestInArc_AndShrinksIntoChest" fullname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests.DefeatedEnemy_ReturnsToToyChestInArc_AndShrinksIntoChest" methodname="DefeatedEnemy_ReturnsToToyChestInArc_AndShrinksIntoChest" classname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests" runstate="Runnable" seed="704379640" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.001882" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1020" name="EnemyAttack_PushesPlayerBack_OnHitAndOnBlock" fullname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests.EnemyAttack_PushesPlayerBack_OnHitAndOnBlock" methodname="EnemyAttack_PushesPlayerBack_OnHitAndOnBlock" classname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests" runstate="Runnable" seed="673763578" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000847" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1013" name="FullGamethrough_DefeatsAllFourWaves_TriggersBearEnrage_AndReachesVictory" fullname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests.FullGamethrough_DefeatsAllFourWaves_TriggersBearEnrage_AndReachesVictory" methodname="FullGamethrough_DefeatsAllFourWaves_TriggersBearEnrage_AndReachesVictory" classname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests" runstate="Runnable" seed="263249680" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.001653" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1011" name="HoldingBack_BlocksEnemyAttack_WithoutLosingHearts" fullname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests.HoldingBack_BlocksEnemyAttack_WithoutLosingHearts" methodname="HoldingBack_BlocksEnemyAttack_WithoutLosingHearts" classname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests" runstate="Runnable" seed="286152773" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000440" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1017" name="JumpInput_WithLatching_WorksReliably_At30_60_And120Hz" fullname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests.JumpInput_WithLatching_WorksReliably_At30_60_And120Hz" classname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.002635" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1014" name="JumpInput_WithLatching_WorksReliably_At30_60_And120Hz(30.0f)" fullname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests.JumpInput_WithLatching_WorksReliably_At30_60_And120Hz(30.0f)" methodname="JumpInput_WithLatching_WorksReliably_At30_60_And120Hz" classname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests" runstate="Runnable" seed="499598440" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000584" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1015" name="JumpInput_WithLatching_WorksReliably_At30_60_And120Hz(60.0f)" fullname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests.JumpInput_WithLatching_WorksReliably_At30_60_And120Hz(60.0f)" methodname="JumpInput_WithLatching_WorksReliably_At30_60_And120Hz" classname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests" runstate="Runnable" seed="644504320" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000110" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1016" name="JumpInput_WithLatching_WorksReliably_At30_60_And120Hz(120.0f)" fullname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests.JumpInput_WithLatching_WorksReliably_At30_60_And120Hz(120.0f)" methodname="JumpInput_WithLatching_WorksReliably_At30_60_And120Hz" classname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests" runstate="Runnable" seed="1131192386" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000061" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1022" name="MobileTouchAssist_ReducesEnemyAggression_WithoutChangingDesktopDefaults" fullname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests.MobileTouchAssist_ReducesEnemyAggression_WithoutChangingDesktopDefaults" methodname="MobileTouchAssist_ReducesEnemyAggression_WithoutChangingDesktopDefaults" classname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests" runstate="Runnable" seed="692041368" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000801" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1012" name="RainbowSpecial_DefeatsTrainInOneUse_AndLeavesBearAtOneHp" fullname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests.RainbowSpecial_DefeatsTrainInOneUse_AndLeavesBearAtOneHp" methodname="RainbowSpecial_DefeatsTrainInOneUse_AndLeavesBearAtOneHp" classname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests" runstate="Runnable" seed="2007110469" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000361" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1021" name="SwordCombo_CyclesThreeSteps_AndResetsAfterPause" fullname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests.SwordCombo_CyclesThreeSteps_AndResetsAfterPause" methodname="SwordCombo_CyclesThreeSteps_AndResetsAfterPause" classname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests" runstate="Runnable" seed="783487693" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000295" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1010" name="SwordHit_DamagesTrain_AndTransfersHeartWhenPlayerWounded" fullname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests.SwordHit_DamagesTrain_AndTransfersHeartWhenPlayerWounded" methodname="SwordHit_DamagesTrain_AndTransfersHeartWhenPlayerWounded" classname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests" runstate="Runnable" seed="1045297550" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000463" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1019" name="SwordHit_PushesEnemyBackLightly_SmoothlyOverTicks" fullname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests.SwordHit_PushesEnemyBackLightly_SmoothlyOverTicks" methodname="SwordHit_PushesEnemyBackLightly_SmoothlyOverTicks" classname="YunaLegend.Arena.Tests.ArenaCombatSimulationTests" runstate="Runnable" seed="707988407" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000337" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1024" name="ArenaMobileCameraFramingTests" fullname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests" classname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.018703" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="ParameterizedMethod" id="1027" name="CloseShotIsCloserThanPreviousMobileFloor" fullname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests.CloseShotIsCloserThanPreviousMobileFloor" classname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.001204" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1025" name="CloseShotIsCloserThanPreviousMobileFloor(0.4620853f)" fullname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests.CloseShotIsCloserThanPreviousMobileFloor(0.4620853f)" methodname="CloseShotIsCloserThanPreviousMobileFloor" classname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests" runstate="Runnable" seed="2000189963" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000839" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1026" name="CloseShotIsCloserThanPreviousMobileFloor(2.164103f)" fullname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests.CloseShotIsCloserThanPreviousMobileFloor(2.164103f)" methodname="CloseShotIsCloserThanPreviousMobileFloor" classname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests" runstate="Runnable" seed="2108231788" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000062" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1039" name="ExponentialSmoothingHasSameOneSecondResponse" fullname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests.ExponentialSmoothingHasSameOneSecondResponse" classname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.001339" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1036" name="ExponentialSmoothingHasSameOneSecondResponse(30)" fullname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests.ExponentialSmoothingHasSameOneSecondResponse(30)" methodname="ExponentialSmoothingHasSameOneSecondResponse" classname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests" runstate="Runnable" seed="1936040773" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000785" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1037" name="ExponentialSmoothingHasSameOneSecondResponse(60)" fullname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests.ExponentialSmoothingHasSameOneSecondResponse(60)" methodname="ExponentialSmoothingHasSameOneSecondResponse" classname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests" runstate="Runnable" seed="1889790647" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000069" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1038" name="ExponentialSmoothingHasSameOneSecondResponse(120)" fullname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests.ExponentialSmoothingHasSameOneSecondResponse(120)" methodname="ExponentialSmoothingHasSameOneSecondResponse" classname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests" runstate="Runnable" seed="1421964779" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000051" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1033" name="KeepsBothCombatantsInsideFrameEvenNearArenaEdge" fullname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests.KeepsBothCombatantsInsideFrameEvenNearArenaEdge" classname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.006729" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1031" name="KeepsBothCombatantsInsideFrameEvenNearArenaEdge(0.4620853f)" fullname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests.KeepsBothCombatantsInsideFrameEvenNearArenaEdge(0.4620853f)" methodname="KeepsBothCombatantsInsideFrameEvenNearArenaEdge" classname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests" runstate="Runnable" seed="1177276100" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.003358" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1032" name="KeepsBothCombatantsInsideFrameEvenNearArenaEdge(2.164103f)" fullname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests.KeepsBothCombatantsInsideFrameEvenNearArenaEdge(2.164103f)" methodname="KeepsBothCombatantsInsideFrameEvenNearArenaEdge" classname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests" runstate="Runnable" seed="2112825082" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.003021" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1035" name="LandscapeCloseShotKeepsApprovedScaleAndCenter" fullname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests.LandscapeCloseShotKeepsApprovedScaleAndCenter" methodname="LandscapeCloseShotKeepsApprovedScaleAndCenter" classname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests" runstate="Runnable" seed="1656457931" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000454" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1034" name="PortraitReservesRoomForTheMeasuredLocomotiveWidth" fullname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests.PortraitReservesRoomForTheMeasuredLocomotiveWidth" methodname="PortraitReservesRoomForTheMeasuredLocomotiveWidth" classname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests" runstate="Runnable" seed="1906983014" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000235" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1030" name="PullsBackContinuouslyAsOpponentsSeparate" fullname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests.PullsBackContinuouslyAsOpponentsSeparate" classname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.007794" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1028" name="PullsBackContinuouslyAsOpponentsSeparate(0.4620853f)" fullname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests.PullsBackContinuouslyAsOpponentsSeparate(0.4620853f)" methodname="PullsBackContinuouslyAsOpponentsSeparate" classname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests" runstate="Runnable" seed="527785563" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.003712" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1029" name="PullsBackContinuouslyAsOpponentsSeparate(2.164103f)" fullname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests.PullsBackContinuouslyAsOpponentsSeparate(2.164103f)" methodname="PullsBackContinuouslyAsOpponentsSeparate" classname="YunaLegend.Arena.Tests.ArenaMobileCameraFramingTests" runstate="Runnable" seed="1729127684" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.003628" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+            </test-suite>
+            <test-suite type="TestFixture" id="1040" name="ArenaQaPilotTests" fullname="YunaLegend.Arena.Tests.ArenaQaPilotTests" classname="YunaLegend.Arena.Tests.ArenaQaPilotTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.001388" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1041" name="PrepareFinalWaveForQa_WithQaPilot_ReachesVictoryDeterministically" fullname="YunaLegend.Arena.Tests.ArenaQaPilotTests.PrepareFinalWaveForQa_WithQaPilot_ReachesVictoryDeterministically" methodname="PrepareFinalWaveForQa_WithQaPilot_ReachesVictoryDeterministically" classname="YunaLegend.Arena.Tests.ArenaQaPilotTests" runstate="Runnable" seed="943739776" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000880" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1042" name="ArenaSpecialHandDrawnTimingTests" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.004881" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="ParameterizedMethod" id="1046" name="ExposureCoversEveryDrawingRegardlessOfRenderRate" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.002883" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1043" name="ExposureCoversEveryDrawingRegardlessOfRenderRate(30)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate(30)" methodname="ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="1649165777" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.002017" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1044" name="ExposureCoversEveryDrawingRegardlessOfRenderRate(60)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate(60)" methodname="ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="1910328584" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000208" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1045" name="ExposureCoversEveryDrawingRegardlessOfRenderRate(120)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate(120)" methodname="ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="988757312" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000327" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1047" name="ExposureHoldsEachDrawingForFortyMilliseconds" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ExposureHoldsEachDrawingForFortyMilliseconds" methodname="ExposureHoldsEachDrawingForFortyMilliseconds" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="849769432" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000317" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1055" name="ShotBoundariesMatchDirectorScript" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ShotBoundariesMatchDirectorScript" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.001118" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1048" name="ShotBoundariesMatchDirectorScript(0,0)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(0,0)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="1604433215" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000286" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1049" name="ShotBoundariesMatchDirectorScript(19,0)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(19,0)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="1513789371" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000057" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1050" name="ShotBoundariesMatchDirectorScript(20,1)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(20,1)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="159352165" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000032" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1051" name="ShotBoundariesMatchDirectorScript(49,1)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(49,1)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="499960133" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000029" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1052" name="ShotBoundariesMatchDirectorScript(50,2)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(50,2)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="1012890497" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000028" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1053" name="ShotBoundariesMatchDirectorScript(74,2)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(74,2)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="795476940" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000026" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1054" name="ShotBoundariesMatchDirectorScript(75,-1)" fullname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(75,-1)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.Arena.Tests.ArenaSpecialHandDrawnTimingTests" runstate="Runnable" seed="1918033543" result="Passed" start-time="2026-11-26 12:35:23Z" end-time="2026-11-26 12:35:23Z" duration="0.000028" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[Saving results to: C:/Users/sergi/AppData/LocalLow/DeepMindStudio/Yuna Legend - O Quarto dos Brinquedos\TestResults.xml
+]]></output>
+                </test-case>
+              </test-suite>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

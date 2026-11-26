@@ -1,8 +1,8 @@
 {
-  "releaseId": "20261125-jardim-multitouch",
+  "releaseId": "20261126-mobile-camera-dialogues",
   "unity": "6000.3.28f1",
-  "builtAtUtc": "2026-11-25T23:12:43.328597+00:00",
-  "sourceBranch": "regress\u00e3o-jardim",
+  "builtAtUtc": "2026-11-26T13:04:05+00:00",
+  "sourceBranch": "fix/mobile-camera-dialogues",
   "scenes": [
     "TitleScreen",
     "Fase-Jogavel-Completa",
@@ -12,22 +12,26 @@
     "Picnic_Gameplay"
   ],
   "files": {
+    "index.html": {
+      "bytes": 6614,
+      "sha256": "6a16c8f975a435ba653c9a8e0b94cf1625f9f0ae9345c92982c28c1e9c4d2c5f"
+    },
     "Build/WebGL.data.unityweb": {
-      "bytes": 266730980,
-      "sha256": "b5f4e7930976d34e28dc0093ab26270bf67f107abecd8f0b41697bc426a4be1c"
+      "bytes": 266730923,
+      "sha256": "1b7dda05e94e792bf5cf34270d3e5200a3e89fe1a9a33df2847cab3c5fe26305"
     },
     "Build/WebGL.framework.js.unityweb": {
       "bytes": 90230,
-      "sha256": "5477dce064fedebc57fa19dab4688561b98931e508fd3544e34d3dfa8a47280d"
+      "sha256": "0a594b1c831cf32091ed19add38729c8fbfa9f3536e16d9e3390de97cf6b1300"
     },
     "Build/WebGL.loader.js": {
       "bytes": 47867,
-      "sha256": "f35a448b840b7ca7ea07010ec24e5e5dec777700a0b99549a98cfb2abce5d528"
+      "sha256": "c6443c3ba630fd8521e6a16dd7937d6396dfdf3902cd161321423bec2db8f06b"
     },
     "Build/WebGL.wasm.unityweb": {
-      "bytes": 11993671,
-      "sha256": "a4c3707bd88b172e9c4ca0b435d0f4e66520b235e7f64bd14659f5ec1b03dd1a"
+      "bytes": 12003833,
+      "sha256": "74ed9cabae1a9f1224d9eaf7f42f3bc09592c33d164d52384f7b4f540fe8b92d"
     }
   },
-  "testResult": "Picnic EditMode 15/15; pointer events and simulation 30/60/120Hz; no physical mobile test"
+  "testResult": "Arena EditMode 37/37; Picnic EditMode 25/25; MobileCards PlayMode 2/2 (30/60/120Hz); MobileDialogue 15 static + 4 PlayMode + TITLE_DESKTOP_NO_MUTATION_OK; WebCiBuild YUNA_WEB_PAGES_OK; no physical mobile device test"
 }

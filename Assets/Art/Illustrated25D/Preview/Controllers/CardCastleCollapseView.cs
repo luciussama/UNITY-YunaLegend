@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using YunaLegend.DarkRoom;
 
@@ -36,6 +37,69 @@ namespace YunaLegend.Illustrated25D.Preview.Controllers
         private float steppedElapsed;
         private float collapseElapsed;
 
+        public bool? MobilePresentationOverride { get; set; }
+        private bool IsMobilePresentation => MobilePresentationOverride ?? Application.isMobilePlatform;
+        private Material mobilePenumbraMaterial;
+        private readonly Dictionary<SpriteRenderer, Material> mobileOriginalMaterials = new Dictionary<SpriteRenderer, Material>();
+
+        private void LateUpdate()
+        {
+            ApplyMobilePenumbra();
+        }
+
+        public void ApplyMobilePenumbra()
+        {
+            if (!IsMobilePresentation)
+            {
+                RestoreMobileMaterials();
+                return;
+            }
+            if (mobilePenumbraMaterial == null)
+            {
+                var shader = Shader.Find("YunaLegend/RoomPenumbraT054");
+                if (shader == null)
+                {
+                    return;
+                }
+                mobilePenumbraMaterial = new Material(shader) { name = "Mobile_CardScenery_Penumbra" };
+                mobilePenumbraMaterial.SetFloat("_Sprite", 1f);
+                mobilePenumbraMaterial.SetFloat("_SceneryPenumbra", 1f);
+                mobilePenumbraMaterial.SetFloat("_ZWrite", 0f);
+            }
+            UseMobileMaterial(mainPainting);
+            foreach (var renderer in tierRenderers)
+            {
+                UseMobileMaterial(renderer);
+            }
+            foreach (var renderer in flutterRenderers)
+            {
+                UseMobileMaterial(renderer);
+            }
+        }
+
+        private void UseMobileMaterial(SpriteRenderer renderer)
+        {
+            if (renderer == null || renderer.sharedMaterial == mobilePenumbraMaterial)
+            {
+                return;
+            }
+            // Lighting installation happens after platform installation; retain its latest material for desktop.
+            mobileOriginalMaterials[renderer] = renderer.sharedMaterial;
+            renderer.sharedMaterial = mobilePenumbraMaterial;
+        }
+
+        private void RestoreMobileMaterials()
+        {
+            foreach (var pair in mobileOriginalMaterials)
+            {
+                if (pair.Key != null && pair.Key.sharedMaterial == mobilePenumbraMaterial)
+                {
+                    pair.Key.sharedMaterial = pair.Value;
+                }
+            }
+            mobileOriginalMaterials.Clear();
+        }
+
         public bool PlayerHasSteppedOnCastle => playerHasSteppedOnCastle;
         public bool IsCollapsing => isCollapsing;
         public bool CollapseCompleted => collapseCompleted;
@@ -59,6 +123,12 @@ namespace YunaLegend.Illustrated25D.Preview.Controllers
 
         private void OnDestroy()
         {
+            RestoreMobileMaterials();
+            if (mobilePenumbraMaterial != null)
+            {
+                if (Application.isPlaying) Destroy(mobilePenumbraMaterial);
+                else DestroyImmediate(mobilePenumbraMaterial);
+            }
             for (int i = 0; i < CardCastleCollapseTimeline.IndividualCardCount; i++)
             {
                 if (generatedCardSprites[i] != null) Destroy(generatedCardSprites[i]);

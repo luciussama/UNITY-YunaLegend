@@ -20,10 +20,17 @@ namespace YunaLegend.Arena.Runtime
         private float shakeAmplitude;
         private Vector3 smoothedBasePos;
         private bool hasInitializedPos;
+        private bool? mobileViewportOverride;
+        private float smoothedMobileLookY;
 
         public void Configure(Camera cam)
         {
             targetCamera = cam;
+        }
+
+        public void SetMobileViewportOverride(bool? isMobile)
+        {
+            mobileViewportOverride = isMobile;
         }
 
         public void AddShake(float amplitude, float duration)
@@ -54,8 +61,9 @@ namespace YunaLegend.Arena.Runtime
             Vector3 ePos = ArenaCoordinateMapper.ToWorldPosition(sim.EnemyX, sim.EnemyY);
 
             float aspect = Mathf.Max(0.45f, targetCamera.aspect);
-            bool isMobile = Application.isMobilePlatform || Touchscreen.current != null;
-            bool wideMobileMode = isMobile || aspect < 1.45f;
+            bool isMobile = mobileViewportOverride ?? Application.isMobilePlatform;
+            // Keep the pre-existing desktop/touchscreen/aspect fallback unchanged.
+            bool wideMobileMode = Application.isMobilePlatform || Touchscreen.current != null || aspect < 1.45f;
 
             float effMinWidth = wideMobileMode ? Mathf.Max(minWorldWidth, 12.8f) : minWorldWidth;
             float effMaxWidth = wideMobileMode ? Mathf.Max(maxWorldWidth, 19.5f) : maxWorldWidth;
@@ -92,16 +100,33 @@ namespace YunaLegend.Arena.Runtime
             }
 
             float lookY = Mathf.Max(1.10f, (pPos.y + ePos.y) * 0.35f + Mathf.Lerp(1.12f, 1.48f, zoomT) - (wideMobileMode ? 0.12f : 0f));
+            if (isMobile)
+            {
+                ArenaMobileCameraFrame mobileFrame = ArenaMobileCameraFraming.Evaluate(
+                    pPos.x, pPos.y, ePos.x, ePos.y, aspect,
+                    sim.EnemyState == ArenaEnemyState.Windup || sim.IsSpecialActive);
+                centerX = mobileFrame.CenterX;
+                distance = mobileFrame.Distance;
+                lookY = mobileFrame.LookY;
+            }
             Vector3 targetPos = new Vector3(centerX, lookY + distance * 0.11f, -distance);
 
             if (!hasInitializedPos)
             {
                 smoothedBasePos = targetPos;
                 hasInitializedPos = true;
+                smoothedMobileLookY = lookY;
             }
             else
             {
-                smoothedBasePos = Vector3.Lerp(smoothedBasePos, targetPos, Mathf.Clamp01(dt * smoothSpeed));
+                float factor = isMobile
+                    ? ArenaMobileCameraFraming.SmoothingFactor(dt, smoothSpeed)
+                    : Mathf.Clamp01(dt * smoothSpeed);
+                smoothedBasePos = Vector3.Lerp(smoothedBasePos, targetPos, factor);
+                if (isMobile)
+                {
+                    smoothedMobileLookY = Mathf.Lerp(smoothedMobileLookY, lookY, factor);
+                }
             }
 
             // Aplica a tremida de impacto APOS o Lerp para manter nitidez e peso real no golpe
@@ -123,7 +148,8 @@ namespace YunaLegend.Arena.Runtime
             }
 
             transform.position = smoothedBasePos + shakeOffset;
-            transform.LookAt(new Vector3(smoothedBasePos.x + shakeOffset.x * 0.35f, lookY + shakeOffset.y * 0.35f, 0f));
+            float finalLookY = isMobile ? smoothedMobileLookY : lookY;
+            transform.LookAt(new Vector3(smoothedBasePos.x + shakeOffset.x * 0.35f, finalLookY + shakeOffset.y * 0.35f, 0f));
         }
     }
 }

@@ -20,6 +20,12 @@ namespace YunaLegend.Picnic.Runtime
         private const float CameraFovDeg = 27f;
 
         private Camera stageCamera;
+        private bool? mobileViewportOverride;
+        private bool mobileCameraInitialized;
+        private float mobileGroundAnchorY;
+        private Vector3 mobileCameraPosition;
+        private readonly List<PicnicPlatformSpec> cameraPlatforms = new List<PicnicPlatformSpec>(32);
+        private readonly HashSet<string> cameraSeenIds = new HashSet<string>();
         private SpriteRenderer backdrop;
         private Light directionalSun;
         private readonly List<FishEntry> fishes = new List<FishEntry>();
@@ -139,7 +145,18 @@ namespace YunaLegend.Picnic.Runtime
             BuildCheckpoints(level);
         }
 
+        public void SetMobileViewportOverride(bool? isMobile)
+        {
+            mobileViewportOverride = isMobile;
+            mobileCameraInitialized = false;
+        }
+
         public void Apply(PicnicSimulation sim)
+        {
+            Apply(sim, Time.deltaTime);
+        }
+
+        public void Apply(PicnicSimulation sim, float cameraDeltaTime)
         {
             if (stageCamera == null) return;
 
@@ -160,6 +177,36 @@ namespace YunaLegend.Picnic.Runtime
 
             stageCamera.transform.position = new Vector3(camX, targetY + camYOffset, -CameraDistanceZ);
             stageCamera.transform.rotation = Quaternion.Euler(CameraPitchDeg, 0f, 0f);
+
+            if (mobileViewportOverride ?? Application.isMobilePlatform)
+            {
+                sim.Level.QueryPlatformsInto(cameraPlatforms, cameraSeenIds, sim.Time, sim.Clouds,
+                    sim.Difficulty, sim.PlayerX, 500f);
+                PicnicCameraLanding landing = PicnicMobileCameraFraming.FindNextLanding(cameraPlatforms,
+                    sim.SupportId, sim.PlayerX, sim.PlayerY, sim.PlayerFacing);
+                if (!mobileCameraInitialized || sim.OnGround)
+                {
+                    mobileGroundAnchorY = PicnicAtlasCatalog.ToUnity(sim.PlayerX, sim.PlayerY).y;
+                }
+                PicnicMobileCameraFrame frame = PicnicMobileCameraFraming.Evaluate(sim.PlayerX / 100f,
+                    mobileGroundAnchorY, worldW, stageCamera.aspect, sim.PlayerFacing, landing);
+                float offsetY = frame.Distance * Mathf.Tan(CameraPitchDeg * Mathf.Deg2Rad);
+                Vector3 desiredPosition = new Vector3(frame.CenterX, frame.TargetY + offsetY, -frame.Distance);
+                if (!mobileCameraInitialized)
+                {
+                    mobileCameraPosition = desiredPosition;
+                    mobileCameraInitialized = true;
+                }
+                else
+                {
+                    mobileCameraPosition = Vector3.Lerp(mobileCameraPosition, desiredPosition,
+                        PicnicMobileCameraFraming.SmoothingFactor(cameraDeltaTime));
+                }
+                stageCamera.transform.position = mobileCameraPosition;
+                orthoWidth = frame.WorldWidth;
+                ox = Mathf.Clamp(frame.CenterX - orthoWidth * 0.5f, 0f, Mathf.Max(0f, worldW - orthoWidth));
+            }
+
 
             if (backdrop != null && backdrop.sprite != null)
             {
