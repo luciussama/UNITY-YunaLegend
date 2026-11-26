@@ -38,7 +38,10 @@ namespace YunaLegend.Picnic.Runtime
         private Material spokeMat;
         private Material cloudBaseMat;
         private Material grassSurfaceMat;
+        private Material cornerIvyTrimMat;
+        private Texture2D cornerIvyTrimTex;
         private readonly List<Mesh> grassSurfaceMeshes = new List<Mesh>();
+        private readonly List<Mesh> generatedMeshes = new List<Mesh>();
 
         private Texture2D woodPlankTex;
         private Texture2D riverStoneTex;
@@ -198,6 +201,13 @@ namespace YunaLegend.Picnic.Runtime
                 color = Color.white,
             };
 
+            cornerIvyTrimTex = CreateCornerIvyTrimTexture();
+            cornerIvyTrimMat = new Material(Shader.Find("Sprites/Default") ?? lit)
+            {
+                mainTexture = cornerIvyTrimTex,
+                color = Color.white,
+            };
+
             // Pivot at bottom-center (0.5, 0) for multi-Z 3D surface placement
             tileSoil = PicnicAtlasCatalog.FullSprite("tile-soil", new Vector2(0.5f, 0f));
             tileGrass = PicnicAtlasCatalog.FullSprite("tile-grass", new Vector2(0.5f, 0f));
@@ -216,7 +226,7 @@ namespace YunaLegend.Picnic.Runtime
 
             foreach (var p in level.StaticPlatforms)
             {
-                BuildStaticPlatform(p, level.Width);
+                BuildStaticPlatform(p, level.Width, level.StaticPlatforms);
             }
             foreach (var w in level.Wheels)
             {
@@ -321,7 +331,7 @@ namespace YunaLegend.Picnic.Runtime
             }
         }
 
-        private void BuildStaticPlatform(PicnicPlatformSpec p, float levelWidth)
+        private void BuildStaticPlatform(PicnicPlatformSpec p, float levelWidth, IReadOnlyList<PicnicPlatformSpec> allPlatforms)
         {
             var go = new GameObject(p.Id);
             go.transform.SetParent(transform, false);
@@ -330,7 +340,7 @@ namespace YunaLegend.Picnic.Runtime
 
             if (p.Ground)
             {
-                Build3DGroundPlatform(go.transform, p, levelWidth);
+                Build3DGroundPlatform(go.transform, p, levelWidth, allPlatforms);
                 return;
             }
 
@@ -355,7 +365,32 @@ namespace YunaLegend.Picnic.Runtime
             Build3DFloatingWoodPlatform(go.transform, p);
         }
 
-        private void Build3DGroundPlatform(Transform parent, PicnicPlatformSpec p, float levelWidth)
+        private static bool IsGroundCornerExposed(PicnicPlatformSpec p, IReadOnlyList<PicnicPlatformSpec> allPlatforms, bool isRight, float levelWidth)
+        {
+            if (!isRight && p.X <= 1f) return false;
+            if (isRight && p.X + p.Width >= levelWidth - 1f) return false;
+
+            float edgeX = isRight ? (p.X + p.Width) : p.X;
+            if (allPlatforms == null) return true;
+
+            for (int i = 0; i < allPlatforms.Count; i++)
+            {
+                PicnicPlatformSpec q = allPlatforms[i];
+                if (q == null || q == p || !q.Ground) continue;
+                if (edgeX >= q.X - 6f && edgeX <= q.X + q.Width + 6f)
+                {
+                    // In top-down pixel Y, smaller Y means higher in world space.
+                    // If an adjacent ground platform is at the same height or taller, this corner is buried.
+                    if (q.Y <= p.Y + 4f)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        private void Build3DGroundPlatform(Transform parent, PicnicPlatformSpec p, float levelWidth, IReadOnlyList<PicnicPlatformSpec> allPlatforms)
         {
             float extraLeft = p.X <= 1f ? 320f : 0f;
             float extraRight = (p.X + p.Width >= levelWidth - 1f) ? 320f : 0f;
@@ -368,54 +403,96 @@ namespace YunaLegend.Picnic.Runtime
                 : topMeadowMat;
             Material faceMat = p.Terrain == PicnicTerrain.Wood ? woodBodyMat : ivyFaceMat;
 
+            bool leftExposed = IsGroundCornerExposed(p, allPlatforms, false, levelWidth);
+            bool rightExposed = IsGroundCornerExposed(p, allPlatforms, true, levelWidth);
+
             if (p.Hill <= 0f)
             {
                 float xMin = startPx / 100f;
                 float w = totalWidthPx / 100f;
                 float topY = PicnicAtlasCatalog.ToUnity(p.X, p.Y).y;
 
-                // 3D wall block starting at FrontZ = -0.06f so it never depth-clips Yuna (Z = -0.18f)
+                float cornerRadius = p.Terrain == PicnicTerrain.Wood ? 0.28f : 0.42f;
+                float rTopLeft = leftExposed ? cornerRadius : 0f;
+                float rTopRight = rightExposed ? cornerRadius : 0f;
+                float frontBevel = p.Terrain == PicnicTerrain.Wood ? 0.06f : 0.085f;
+
+                // 3D wall block with generous rounded top shoulders on exposed corners (lower body remains full width to seal cleanly against river water)
                 var wallGo = new GameObject("Wall3D", typeof(MeshFilter), typeof(MeshRenderer));
                 wallGo.transform.SetParent(parent, false);
-                wallGo.GetComponent<MeshFilter>().sharedMesh = CreateWorldUVBoxMesh(
-                    xMin - 0.02f, w + 0.04f, FloorY, topY - 0.04f, FrontZ + 0.04f, DepthZ - 0.04f);
+                Mesh wallMesh = CreateRoundedTopExtrudedMesh(
+                    xMin - 0.02f, w + 0.04f, FloorY, topY - 0.02f, FrontZ + 0.04f, DepthZ - 0.04f,
+                    rTopLeft, rTopRight, 0f, 0f, frontBevel * 0.7f, 3.2f);
+                generatedMeshes.Add(wallMesh);
+                wallGo.GetComponent<MeshFilter>().sharedMesh = wallMesh;
                 wallGo.GetComponent<MeshRenderer>().sharedMaterial = faceMat;
 
-                // Overhanging 3D top turf/deck/meadow/gravel cap (front edge at FrontZ = -0.06f)
+                // Generous overhanging rounded 3D top turf/deck/meadow/gravel cap matching the full rounded shoulder arc
                 var capGo = new GameObject("TopCap3D", typeof(MeshFilter), typeof(MeshRenderer));
                 capGo.transform.SetParent(parent, false);
+                float capHeight = p.Terrain == PicnicTerrain.Wood ? 0.34f : 0.46f;
+                float capRadiusLeft = leftExposed ? cornerRadius : 0f;
+                float capRadiusRight = rightExposed ? cornerRadius : 0f;
+                float capBotLeft = leftExposed ? 0.05f : 0f;
+                float capBotRight = rightExposed ? 0.05f : 0f;
+
                 if (p.Terrain == PicnicTerrain.Gravel)
                 {
-                    // Lush 3D green moss/turf rim directly on top of the ivy wall (matching the grass terraces with zero 2D cutout mismatch)
-                    capGo.GetComponent<MeshFilter>().sharedMesh = CreateWorldUVBoxMesh(
-                        xMin - 0.06f, w + 0.12f, topY - 0.14f, topY - 0.01f, FrontZ, DepthZ + 0.08f, 3.2f);
+                    Mesh capMesh = CreateRoundedTopExtrudedMesh(
+                        xMin - 0.06f, w + 0.12f, topY - capHeight, topY - 0.01f, FrontZ, DepthZ + 0.08f,
+                        capRadiusLeft, capRadiusRight, capBotLeft, capBotRight, frontBevel, 3.2f);
+                    generatedMeshes.Add(capMesh);
+                    capGo.GetComponent<MeshFilter>().sharedMesh = capMesh;
                     capGo.GetComponent<MeshRenderer>().sharedMaterial = topMeadowMat;
 
-                    // Dark earth bedding slab inset on the 3D top face beneath the 3D sculpted pebbles
+                    float pebbleInsetL = leftExposed ? 0.16f : 0f;
+                    float pebbleInsetR = rightExposed ? 0.16f : 0f;
+                    float pebbleX = p.X / 100f + pebbleInsetL;
+                    float pebbleW = Mathf.Max(0.24f, p.Width / 100f - pebbleInsetL - pebbleInsetR);
+
                     var earthBed = new GameObject("EarthBed3D", typeof(MeshFilter), typeof(MeshRenderer));
                     earthBed.transform.SetParent(parent, false);
-                    earthBed.GetComponent<MeshFilter>().sharedMesh = CreateWorldUVBoxMesh(
-                        xMin - 0.02f, w + 0.04f, topY - 0.03f, topY + 0.01f, FrontZ + 0.04f, DepthZ - 0.02f, 2.0f);
+                    Mesh earthMesh = CreateRoundedTopExtrudedMesh(
+                        pebbleX - 0.02f, pebbleW + 0.04f, topY - 0.03f, topY + 0.01f, FrontZ + 0.05f, DepthZ - 0.04f,
+                        0.02f, 0.02f, 0f, 0f, 0.015f, 2.0f);
+                    generatedMeshes.Add(earthMesh);
+                    earthBed.GetComponent<MeshFilter>().sharedMesh = earthMesh;
                     earthBed.GetComponent<MeshRenderer>().sharedMaterial = earthRimMat;
 
-                    // Combined 3D sculpted pebble/cobblestone field mesh covering the 3D top face (zero 2D cutout, zero mirror seam)
                     var pebbleField = new GameObject("SculptedPebbles3D", typeof(MeshFilter), typeof(MeshRenderer));
                     pebbleField.transform.SetParent(parent, false);
-                    pebbleField.GetComponent<MeshFilter>().sharedMesh = CreateSculpted3DPebbleFieldMesh(
-                        p.X / 100f, p.Width / 100f, topY + 0.005f, FrontZ + 0.05f, DepthZ - 0.10f);
+                    Mesh pebbleMesh = CreateSculpted3DPebbleFieldMesh(
+                        pebbleX, pebbleW, topY + 0.005f, FrontZ + 0.06f, DepthZ - 0.12f);
+                    generatedMeshes.Add(pebbleMesh);
+                    pebbleField.GetComponent<MeshFilter>().sharedMesh = pebbleMesh;
                     pebbleField.GetComponent<MeshRenderer>().sharedMaterial = topGravelMat;
                 }
                 else
                 {
-                    capGo.GetComponent<MeshFilter>().sharedMesh = CreateWorldUVBoxMesh(
-                        xMin - 0.06f, w + 0.12f, topY - 0.14f, topY, FrontZ, DepthZ + 0.08f,
+                    Mesh capMesh = CreateRoundedTopExtrudedMesh(
+                        xMin - 0.06f, w + 0.12f, topY - capHeight, topY, FrontZ, DepthZ + 0.08f,
+                        capRadiusLeft, capRadiusRight, capBotLeft, capBotRight, frontBevel,
                         p.Terrain == PicnicTerrain.Wood ? 1.6f : 3.2f);
+                    generatedMeshes.Add(capMesh);
+                    capGo.GetComponent<MeshFilter>().sharedMesh = capMesh;
                     capGo.GetComponent<MeshRenderer>().sharedMaterial = topMat;
                 }
 
                 if (p.Terrain == PicnicTerrain.Wood)
                 {
-                    BuildWoodenDeckPilings(parent, xMin, w, topY);
+                    BuildWoodenDeckPilings(parent, xMin, w, topY, leftExposed, rightExposed);
+                }
+
+                // Painterly hanging ivy/blossom corner sprigs hugging the rounded shoulders
+                float platLeftX = p.X / 100f;
+                float platRightX = (p.X + p.Width) / 100f;
+                if (leftExposed)
+                {
+                    BuildCornerOrnament(parent, platLeftX, topY, FrontZ, false, p.Terrain, p.Id.GetHashCode() ^ 31);
+                }
+                if (rightExposed)
+                {
+                    BuildCornerOrnament(parent, platRightX, topY, FrontZ, true, p.Terrain, p.Id.GetHashCode() ^ 97);
                 }
             }
             else
@@ -434,18 +511,24 @@ namespace YunaLegend.Picnic.Runtime
             }
         }
 
-        private void BuildWoodenDeckPilings(Transform parent, float xMin, float width, float topY)
+        private void BuildWoodenDeckPilings(Transform parent, float xMin, float width, float topY, bool leftExposed, bool rightExposed)
         {
             float step = 1.85f;
-            for (float x = xMin + 0.45f; x < xMin + width - 0.2f; x += step)
+            float startX = xMin + (leftExposed ? 0.55f : 0.45f);
+            float endX = xMin + width - (rightExposed ? 0.48f : 0.20f);
+            for (float x = startX; x < endX; x += step)
             {
                 var post = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 post.name = "DeckPost3D";
                 post.transform.SetParent(parent, false);
-                Destroy(post.GetComponent<Collider>());
+                var col = post.GetComponent<Collider>();
+                if (col != null)
+                {
+                    if (Application.isPlaying) Destroy(col); else DestroyImmediate(col);
+                }
                 float h = topY - FloorY;
-                post.transform.position = new Vector3(x, FloorY + h * 0.5f - 0.08f, FrontZ + 0.02f);
-                post.transform.localScale = new Vector3(0.20f, h, 0.16f);
+                post.transform.position = new Vector3(x, FloorY + h * 0.5f - 0.16f, FrontZ + 0.02f);
+                post.transform.localScale = new Vector3(0.20f, h - 0.16f, 0.16f);
                 post.GetComponent<MeshRenderer>().sharedMaterial = spokeMat;
             }
         }
@@ -635,27 +718,41 @@ namespace YunaLegend.Picnic.Runtime
 
             var body = new GameObject("AerialIsland3D", typeof(MeshFilter), typeof(MeshRenderer));
             body.transform.SetParent(parent, false);
-            body.GetComponent<MeshFilter>().sharedMesh = CreateWorldUVBoxMesh(
-                xMin, w, topY - 0.54f, topY - 0.05f, FrontZ + 0.04f, depth);
+            Mesh bodyMesh = CreateRoundedTopExtrudedMesh(
+                xMin, w, topY - 0.54f, topY - 0.05f, FrontZ + 0.04f, depth,
+                0.20f, 0.20f, 0.22f, 0.22f, 0.065f, 3.2f);
+            generatedMeshes.Add(bodyMesh);
+            body.GetComponent<MeshFilter>().sharedMesh = bodyMesh;
             body.GetComponent<MeshRenderer>().sharedMaterial = ivyFaceMat;
 
             var under = new GameObject("AerialBase3D", typeof(MeshFilter), typeof(MeshRenderer));
             under.transform.SetParent(parent, false);
-            under.GetComponent<MeshFilter>().sharedMesh = CreateWorldUVBoxMesh(
-                xMin + w * 0.12f, w * 0.76f, topY - 0.76f, topY - 0.52f, FrontZ + 0.18f, depth * 0.76f);
+            Mesh underMesh = CreateRoundedTopExtrudedMesh(
+                xMin + w * 0.12f, w * 0.76f, topY - 0.76f, topY - 0.50f, FrontZ + 0.18f, depth * 0.76f,
+                0.10f, 0.10f, 0.16f, 0.16f, 0.05f, 3.2f);
+            generatedMeshes.Add(underMesh);
+            under.GetComponent<MeshFilter>().sharedMesh = underMesh;
             under.GetComponent<MeshRenderer>().sharedMaterial = earthRimMat;
 
             var cap = new GameObject("AerialGravelCap3D", typeof(MeshFilter), typeof(MeshRenderer));
             cap.transform.SetParent(parent, false);
-            cap.GetComponent<MeshFilter>().sharedMesh = CreateWorldUVBoxMesh(
-                xMin - 0.05f, w + 0.10f, topY - 0.14f, topY - 0.01f, FrontZ, depth + 0.10f, 3.2f);
+            Mesh capMesh = CreateRoundedTopExtrudedMesh(
+                xMin - 0.05f, w + 0.10f, topY - 0.16f, topY - 0.01f, FrontZ, depth + 0.10f,
+                0.14f, 0.14f, 0.06f, 0.06f, 0.065f, 3.2f);
+            generatedMeshes.Add(capMesh);
+            cap.GetComponent<MeshFilter>().sharedMesh = capMesh;
             cap.GetComponent<MeshRenderer>().sharedMaterial = topMeadowMat;
 
             var pebbleField = new GameObject("AerialSculptedPebbles3D", typeof(MeshFilter), typeof(MeshRenderer));
             pebbleField.transform.SetParent(parent, false);
-            pebbleField.GetComponent<MeshFilter>().sharedMesh = CreateSculpted3DPebbleFieldMesh(
+            Mesh pebbleMesh = CreateSculpted3DPebbleFieldMesh(
                 xMin, w, topY + 0.005f, FrontZ + 0.05f, depth - 0.06f);
+            generatedMeshes.Add(pebbleMesh);
+            pebbleField.GetComponent<MeshFilter>().sharedMesh = pebbleMesh;
             pebbleField.GetComponent<MeshRenderer>().sharedMaterial = topGravelMat;
+
+            BuildCornerOrnament(parent, xMin, topY, FrontZ, false, PicnicTerrain.Gravel, p.Id.GetHashCode() ^ 17);
+            BuildCornerOrnament(parent, xMin + w, topY, FrontZ, true, PicnicTerrain.Gravel, p.Id.GetHashCode() ^ 53);
 
             BuildMultiZSurfaceLayers(parent, p, PicnicTerrain.Gravel, p.X, p.Width);
         }
@@ -1090,6 +1187,411 @@ namespace YunaLegend.Picnic.Runtime
             return tex;
         }
 
+        private void BuildCornerOrnament(Transform parent, float cornerX, float topY, float frontZ, bool isRight, PicnicTerrain terrain, int seed)
+        {
+            if (cornerIvyTrimMat == null) return;
+            float dir = isRight ? 1f : -1f;
+            int h = Mathf.Abs(seed * 73856093);
+
+            // Painterly alpha-cutout hanging ivy & flower sprig draping naturally around the rounded corner
+            float w = terrain == PicnicTerrain.Wood ? 0.62f : 0.68f;
+            float hh = terrain == PicnicTerrain.Wood ? 0.72f : 0.76f;
+            float cx = cornerX - dir * (terrain == PicnicTerrain.Wood ? 0.18f : 0.22f);
+            float cy = topY - hh * 0.44f + 0.05f;
+            float cz = frontZ - 0.015f;
+
+            var sprig = new GameObject(isRight ? "CornerIvySprig_R" : "CornerIvySprig_L", typeof(MeshFilter), typeof(MeshRenderer));
+            sprig.transform.SetParent(parent, false);
+            Mesh quad = CreateFlippedQuadMesh(w, hh, !isRight);
+            generatedMeshes.Add(quad);
+            sprig.GetComponent<MeshFilter>().sharedMesh = quad;
+            var mr = sprig.GetComponent<MeshRenderer>();
+            mr.sharedMaterial = cornerIvyTrimMat;
+            mr.sortingOrder = 14;
+            sprig.transform.position = new Vector3(cx, cy, cz);
+            sprig.transform.localRotation = Quaternion.Euler(0f, 0f, (h % 5 - 2) * 1.8f);
+        }
+
+        private static Mesh CreateFlippedQuadMesh(float width, float height, bool flipX)
+        {
+            float hw = width * 0.5f;
+            float hh = height * 0.5f;
+            float u0 = flipX ? 1f : 0f;
+            float u1 = flipX ? 0f : 1f;
+            var mesh = new Mesh { name = "CornerTrimQuad" };
+            mesh.vertices = new[]
+            {
+                new Vector3(-hw, -hh, 0f),
+                new Vector3(-hw, hh, 0f),
+                new Vector3(hw, hh, 0f),
+                new Vector3(hw, -hh, 0f),
+            };
+            mesh.normals = new[] { Vector3.back, Vector3.back, Vector3.back, Vector3.back };
+            mesh.uv = new[]
+            {
+                new Vector2(u0, 0f),
+                new Vector2(u0, 1f),
+                new Vector2(u1, 1f),
+                new Vector2(u1, 0f),
+            };
+            mesh.triangles = new[] { 0, 1, 2, 0, 2, 3 };
+            mesh.RecalculateBounds();
+            return mesh;
+        }
+
+        /// <summary>
+        /// Generates a 128x128 hand-painted alpha-cutout hanging ivy & meadow blossom sprig
+        /// designed for right-hand rounded corners (mirrored horizontally for left corners),
+        /// matching the crisp dark-outlined illustrated foliage on the floating wooden logs.
+        /// </summary>
+        private static Texture2D CreateCornerIvyTrimTexture()
+        {
+            const int S = 128;
+            var tex = new Texture2D(S, S, TextureFormat.RGBA32, false)
+            {
+                wrapMode = TextureWrapMode.Clamp,
+                filterMode = FilterMode.Bilinear,
+            };
+            var px = new Color[S * S];
+            for (int i = 0; i < px.Length; i++) px[i] = Color.clear;
+
+            Color outline = new Color(0.11f, 0.22f, 0.08f, 1f);
+            Color deepLeaf = new Color(0.22f, 0.48f, 0.14f, 1f);
+            Color midLeaf = new Color(0.42f, 0.70f, 0.18f, 1f);
+            Color brightLeaf = new Color(0.68f, 0.88f, 0.26f, 1f);
+            Color petalWhite = new Color(0.99f, 0.97f, 0.88f, 1f);
+            Color petalGold = new Color(0.99f, 0.80f, 0.26f, 1f);
+
+            // Leaf cluster curving smoothly along top-right rounded shoulder and draping down the right edge
+            // (cx, cy in [0..128], rx, ry, angleDeg, shade 0=deep, 1=mid, 2=bright)
+            var leaves = new (float cx, float cy, float rx, float ry, float ang, int shade)[]
+            {
+                // Back dark layer for rich silhouette
+                (44f, 102f, 18f, 12f, -12f, 0),
+                (68f, 100f, 20f, 13f, -24f, 0),
+                (88f, 88f, 19f, 13f, -48f, 0),
+                (98f, 68f, 17f, 12f, -72f, 0),
+                (99f, 46f, 15f, 11f, -84f, 0),
+                (95f, 26f, 12f, 9f, -92f, 0),
+                // Mid sunlit ivy leaves
+                (34f, 105f, 14f, 9f, -6f, 1),
+                (56f, 104f, 17f, 11f, -18f, 1),
+                (78f, 95f, 17f, 11f, -40f, 1),
+                (92f, 77f, 16f, 11f, -64f, 1),
+                (96f, 56f, 14f, 10f, -80f, 1),
+                (93f, 36f, 11f, 8f, -88f, 1),
+                (76f, 76f, 13f, 9f, -52f, 1),
+                // Bright sunlit top-edge leaf highlights
+                (46f, 108f, 12f, 7f, -10f, 2),
+                (69f, 102f, 13f, 8f, -28f, 2),
+                (87f, 86f, 12f, 8f, -54f, 2),
+                (95f, 65f, 10f, 7f, -76f, 2),
+                (94f, 44f, 8f, 6f, -86f, 2),
+            };
+
+            for (int li = 0; li < leaves.Length; li++)
+            {
+                var lf = leaves[li];
+                float rad = lf.ang * Mathf.Deg2Rad;
+                float cosA = Mathf.Cos(rad);
+                float sinA = Mathf.Sin(rad);
+                int minX = Mathf.Max(0, Mathf.FloorToInt(lf.cx - lf.rx - 4));
+                int maxX = Mathf.Min(S - 1, Mathf.CeilToInt(lf.cx + lf.rx + 4));
+                int minY = Mathf.Max(0, Mathf.FloorToInt(lf.cy - lf.ry - 4));
+                int maxY = Mathf.Min(S - 1, Mathf.CeilToInt(lf.cy + lf.ry + 4));
+
+                for (int y = minY; y <= maxY; y++)
+                {
+                    for (int x = minX; x <= maxX; x++)
+                    {
+                        float dx = x - lf.cx;
+                        float dy = y - lf.cy;
+                        float lx = (dx * cosA + dy * sinA) / lf.rx;
+                        float ly = (-dx * sinA + dy * cosA) / lf.ry;
+                        // Pointed teardrop leaf shape (narrower at +lx tip)
+                        float tipTaper = 1f - Mathf.Clamp01(lx * 0.35f);
+                        float d = lx * lx + (ly / Mathf.Max(0.45f, tipTaper)) * (ly / Mathf.Max(0.45f, tipTaper));
+                        if (d > 1.24f) continue;
+
+                        Color col;
+                        if (d > 0.88f)
+                        {
+                            col = outline;
+                        }
+                        else
+                        {
+                            Color baseCol = lf.shade == 0 ? deepLeaf : (lf.shade == 1 ? midLeaf : brightLeaf);
+                            float vein = Mathf.Abs(ly) < 0.10f ? 0.14f : 0f;
+                            float shadeGrad = Mathf.Clamp01(0.55f + ly * 0.35f - lx * 0.15f);
+                            col = Color.Lerp(deepLeaf, baseCol, shadeGrad);
+                            col = Color.Lerp(col, brightLeaf, vein);
+                            col.a = 1f;
+                        }
+                        px[y * S + x] = col;
+                    }
+                }
+            }
+
+            // Two delicate illustrated garden blossoms nestled along the curve
+            DrawBlossom(px, S, 62f, 103f, 7.5f, petalWhite, petalGold, outline);
+            DrawBlossom(px, S, 91f, 75f, 6.5f, petalWhite, petalGold, outline);
+
+            tex.SetPixels(px);
+            tex.Apply();
+            return tex;
+        }
+
+        private static void DrawBlossom(Color[] px, int S, float cx, float cy, float radius, Color petal, Color center, Color outline)
+        {
+            int minX = Mathf.Max(0, Mathf.FloorToInt(cx - radius - 2));
+            int maxX = Mathf.Min(S - 1, Mathf.CeilToInt(cx + radius + 2));
+            int minY = Mathf.Max(0, Mathf.FloorToInt(cy - radius - 2));
+            int maxY = Mathf.Min(S - 1, Mathf.CeilToInt(cy + radius + 2));
+
+            for (int y = minY; y <= maxY; y++)
+            {
+                for (int x = minX; x <= maxX; x++)
+                {
+                    float dx = x - cx;
+                    float dy = y - cy;
+                    float r = Mathf.Sqrt(dx * dx + dy * dy);
+                    float ang = Mathf.Atan2(dy, dx);
+                    float petalEdge = radius * (0.78f + 0.22f * Mathf.Cos(ang * 5f));
+                    if (r > petalEdge + 1.3f) continue;
+
+                    if (r <= radius * 0.34f)
+                    {
+                        px[y * S + x] = center;
+                    }
+                    else if (r <= petalEdge)
+                    {
+                        px[y * S + x] = petal;
+                    }
+                    else
+                    {
+                        px[y * S + x] = outline;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Builds a 3D extruded prism with smooth rounded X-Y corners and a sunlit front bevel,
+        /// using world-space UVs so textures wrap seamlessly around every curved shoulder.
+        /// </summary>
+        public static Mesh CreateRoundedTopExtrudedMesh(
+            float xMin, float width, float yMin, float yMax, float zMin, float depth,
+            float rTopLeft, float rTopRight, float rBotLeft, float rBotRight,
+            float frontBevel, float uvTileMeters = 3.2f)
+        {
+            const int ArcSegs = 6;
+            float xMax = xMin + width;
+            float zMax = zMin + depth;
+            float h = Mathf.Max(0.02f, yMax - yMin);
+
+            float maxW = width * 0.44f;
+            float maxTopH = (rBotLeft > 0.001f || rBotRight > 0.001f) ? (h - Mathf.Max(rBotLeft, rBotRight) - 0.01f) : (h * 0.90f);
+            float maxTopR = Mathf.Max(0f, Mathf.Min(maxW, maxTopH));
+            float maxBotR = Mathf.Max(0f, Mathf.Min(maxW, h * 0.46f));
+            rTopLeft = Mathf.Clamp(rTopLeft, 0f, maxTopR);
+            rTopRight = Mathf.Clamp(rTopRight, 0f, maxTopR);
+            rBotLeft = Mathf.Clamp(rBotLeft, 0f, maxBotR);
+            rBotRight = Mathf.Clamp(rBotRight, 0f, maxBotR);
+            float bevel = Mathf.Clamp(frontBevel, 0f, Mathf.Min(depth * 0.25f, width * 0.18f, h * 0.35f));
+
+            var profile = new List<Vector2>(32);
+
+            // Clockwise 2D profile (viewed from -Z: +X right, +Y up)
+            // 1. Bottom-left corner
+            if (rBotLeft > 0.001f)
+            {
+                Vector2 c = new Vector2(xMin + rBotLeft, yMin + rBotLeft);
+                for (int i = 0; i <= ArcSegs; i++)
+                {
+                    float a = Mathf.Lerp(-Mathf.PI * 0.5f, -Mathf.PI, i / (float)ArcSegs);
+                    profile.Add(c + new Vector2(Mathf.Cos(a) * rBotLeft, Mathf.Sin(a) * rBotLeft));
+                }
+            }
+            else
+            {
+                profile.Add(new Vector2(xMin, yMin));
+            }
+
+            // 2. Top-left corner
+            if (rTopLeft > 0.001f)
+            {
+                Vector2 c = new Vector2(xMin + rTopLeft, yMax - rTopLeft);
+                for (int i = 0; i <= ArcSegs; i++)
+                {
+                    float a = Mathf.Lerp(Mathf.PI, Mathf.PI * 0.5f, i / (float)ArcSegs);
+                    profile.Add(c + new Vector2(Mathf.Cos(a) * rTopLeft, Mathf.Sin(a) * rTopLeft));
+                }
+            }
+            else
+            {
+                profile.Add(new Vector2(xMin, yMax));
+            }
+
+            // 3. Top-right corner
+            if (rTopRight > 0.001f)
+            {
+                Vector2 c = new Vector2(xMax - rTopRight, yMax - rTopRight);
+                for (int i = 0; i <= ArcSegs; i++)
+                {
+                    float a = Mathf.Lerp(Mathf.PI * 0.5f, 0f, i / (float)ArcSegs);
+                    profile.Add(c + new Vector2(Mathf.Cos(a) * rTopRight, Mathf.Sin(a) * rTopRight));
+                }
+            }
+            else
+            {
+                profile.Add(new Vector2(xMax, yMax));
+            }
+
+            // 4. Bottom-right corner
+            if (rBotRight > 0.001f)
+            {
+                Vector2 c = new Vector2(xMax - rBotRight, yMin + rBotRight);
+                for (int i = 0; i <= ArcSegs; i++)
+                {
+                    float a = Mathf.Lerp(0f, -Mathf.PI * 0.5f, i / (float)ArcSegs);
+                    profile.Add(c + new Vector2(Mathf.Cos(a) * rBotRight, Mathf.Sin(a) * rBotRight));
+                }
+            }
+            else
+            {
+                profile.Add(new Vector2(xMax, yMin));
+            }
+
+            int n = profile.Count;
+            var outNormals = new Vector2[n];
+            Vector2 centroid = Vector2.zero;
+            for (int i = 0; i < n; i++)
+            {
+                centroid += profile[i];
+                Vector2 prev = profile[(i - 1 + n) % n];
+                Vector2 curr = profile[i];
+                Vector2 next = profile[(i + 1) % n];
+
+                Vector2 e1 = (curr - prev);
+                Vector2 e2 = (next - curr);
+                // For a clockwise polygon in XY, outward normal of edge (dx, dy) is (-dy, dx)
+                Vector2 n1 = e1.sqrMagnitude > 1e-8f ? new Vector2(-e1.y, e1.x).normalized : Vector2.zero;
+                Vector2 n2 = e2.sqrMagnitude > 1e-8f ? new Vector2(-e2.y, e2.x).normalized : Vector2.zero;
+                Vector2 avg = n1 + n2;
+                outNormals[i] = avg.sqrMagnitude > 1e-6f ? avg.normalized : (n1.sqrMagnitude > 1e-6f ? n1 : Vector2.up);
+            }
+            centroid /= n;
+
+            // Cumulative perimeter arc length for seamless UV wrapping along curved shoulders
+            var arcLen = new float[n + 1];
+            for (int i = 0; i < n; i++)
+            {
+                arcLen[i + 1] = arcLen[i] + Vector2.Distance(profile[i], profile[(i + 1) % n]);
+            }
+
+            float s = 1f / uvTileMeters;
+            var verts = new List<Vector3>(n * 7 + 1);
+            var norms = new List<Vector3>(n * 7 + 1);
+            var uvs = new List<Vector2>(n * 7 + 1);
+            var tris = new List<int>(n * 18);
+
+            // A. Front flat face (at z = zMin, inset by bevel along outward normal so front lip rolls smoothly)
+            int centerIdx = verts.Count;
+            verts.Add(new Vector3(centroid.x, centroid.y, zMin));
+            norms.Add(Vector3.back);
+            uvs.Add(new Vector2(centroid.x * s, centroid.y * s));
+
+            int frontRingStart = verts.Count;
+            var frontPts = new Vector2[n];
+            for (int i = 0; i < n; i++)
+            {
+                // Do not inset vertices touching the floor (y == yMin) when bottom corners are unrounded
+                float insetScale = (profile[i].y <= yMin + 0.002f && rBotLeft <= 0.001f && rBotRight <= 0.001f) ? 0f : bevel;
+                Vector2 fp = profile[i] - outNormals[i] * insetScale;
+                frontPts[i] = fp;
+                verts.Add(new Vector3(fp.x, fp.y, zMin));
+                norms.Add(Vector3.back);
+                uvs.Add(new Vector2(fp.x * s, fp.y * s));
+            }
+            for (int i = 0; i < n; i++)
+            {
+                int next = (i + 1) % n;
+                tris.Add(centerIdx);
+                tris.Add(frontRingStart + i);
+                tris.Add(frontRingStart + next);
+            }
+
+            // B. Front bevel ribbon (zMin -> zMin + bevel)
+            float zShoulder = zMin + bevel;
+            if (bevel > 0.001f)
+            {
+                int bevStart = verts.Count;
+                for (int i = 0; i <= n; i++)
+                {
+                    int idx = i % n;
+                    Vector2 fp = frontPts[idx];
+                    Vector2 sp = profile[idx];
+                    Vector2 on = outNormals[idx];
+                    Vector3 bevNorm = new Vector3(on.x, on.y, -0.75f).normalized;
+
+                    verts.Add(new Vector3(fp.x, fp.y, zMin));
+                    norms.Add(bevNorm);
+                    uvs.Add(new Vector2((xMin + arcLen[i]) * s, zMin * s));
+
+                    verts.Add(new Vector3(sp.x, sp.y, zShoulder));
+                    norms.Add(new Vector3(on.x, on.y, -0.15f).normalized);
+                    uvs.Add(new Vector2((xMin + arcLen[i]) * s, zShoulder * s));
+                }
+                for (int i = 0; i < n; i++)
+                {
+                    int v0 = bevStart + i * 2;
+                    int v1 = v0 + 1;
+                    int v2 = v0 + 2;
+                    int v3 = v0 + 3;
+                    tris.Add(v0); tris.Add(v1); tris.Add(v3);
+                    tris.Add(v0); tris.Add(v3); tris.Add(v2);
+                }
+            }
+
+            // C. Main extruded outer ribbon (zShoulder -> zMax)
+            int extStart = verts.Count;
+            for (int i = 0; i <= n; i++)
+            {
+                int idx = i % n;
+                Vector2 sp = profile[idx];
+                Vector2 on = outNormals[idx];
+                Vector3 extNorm = new Vector3(on.x, on.y, 0f).normalized;
+
+                // Use world X for top/bottom faces and world Y for vertical sides via arcLen
+                float uCoord = Mathf.Abs(on.y) > 0.65f ? sp.x * s : (sp.x + sp.y) * s * 0.75f;
+
+                verts.Add(new Vector3(sp.x, sp.y, zShoulder));
+                norms.Add(extNorm);
+                uvs.Add(new Vector2(uCoord, zShoulder * s));
+
+                verts.Add(new Vector3(sp.x, sp.y, zMax));
+                norms.Add(extNorm);
+                uvs.Add(new Vector2(uCoord, zMax * s));
+            }
+            for (int i = 0; i < n; i++)
+            {
+                int v0 = extStart + i * 2;
+                int v1 = v0 + 1;
+                int v2 = v0 + 2;
+                int v3 = v0 + 3;
+                tris.Add(v0); tris.Add(v1); tris.Add(v3);
+                tris.Add(v0); tris.Add(v3); tris.Add(v2);
+            }
+
+            var mesh = new Mesh { name = "RoundedWorldUV3D" };
+            mesh.SetVertices(verts);
+            mesh.SetNormals(norms);
+            mesh.SetUVs(0, uvs);
+            mesh.SetTriangles(tris, 0);
+            mesh.RecalculateBounds();
+            return mesh;
+        }
+
         /// <summary>
         /// Builds a 3D rectangular prism mesh with distinct normals per face (for crisp URP 3D lighting)
         /// and world-space UVs so adjacent blocks tile seamlessly without texture seams.
@@ -1170,7 +1672,13 @@ namespace YunaLegend.Picnic.Runtime
             if (spokeMat != null) Destroy(spokeMat);
             if (cloudBaseMat != null) Destroy(cloudBaseMat);
             if (grassSurfaceMat != null) Destroy(grassSurfaceMat);
+            if (cornerIvyTrimMat != null) Destroy(cornerIvyTrimMat);
+            if (cornerIvyTrimTex != null) Destroy(cornerIvyTrimTex);
             foreach (Mesh mesh in grassSurfaceMeshes)
+            {
+                if (mesh != null) Destroy(mesh);
+            }
+            foreach (Mesh mesh in generatedMeshes)
             {
                 if (mesh != null) Destroy(mesh);
             }
