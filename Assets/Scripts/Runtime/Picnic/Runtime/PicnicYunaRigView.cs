@@ -28,6 +28,8 @@ namespace YunaLegend.Picnic.Runtime
         private Transform legBackBone;
 
         private SpriteRenderer headRenderer;
+        private Material headShadowMat;
+        private Mesh headShadowMesh;
         private Sprite headHappySprite;
         private Sprite headStrainSprite;
         private Sprite headScaredSprite;
@@ -46,7 +48,12 @@ namespace YunaLegend.Picnic.Runtime
         private bool hasSmoothedPose;
         private PicnicYunaRigPose smoothedPose;
         private bool wasOnGround = true;
-        private float landingSquashTimer;
+        private float jumpAnticipationTimer;
+        private float landingTimer;
+
+        private const float JumpAnticipationDuration = 0.070f;
+        private const float LandingCrouchDuration = 0.130f;
+        private const float LandingRecoveryDuration = 0.110f;
 
         public bool IsBuilt => isBuilt;
 
@@ -156,37 +163,72 @@ namespace YunaLegend.Picnic.Runtime
                 return;
             }
 
-            if (!wasOnGround && onGround)
+            // Detect takeoff (ground -> rising air) for snappy zero-lag anticipation crouch,
+            // and touchdown (air -> ground) for cushioned landing + smooth recovery.
+            if (wasOnGround && !onGround && targetPose.Motion == PicnicYunaMotionKind.JumpRise)
             {
-                landingSquashTimer = 0.16f;
+                jumpAnticipationTimer = JumpAnticipationDuration;
+                landingTimer = 0f;
+            }
+            else if (!wasOnGround && onGround)
+            {
+                landingTimer = LandingCrouchDuration + LandingRecoveryDuration;
+                jumpAnticipationTimer = 0f;
             }
             wasOnGround = onGround;
 
-            if (landingSquashTimer > 0f && deltaTime > 0f)
+            if (jumpAnticipationTimer > 0f && deltaTime > 0f)
             {
-                landingSquashTimer = Mathf.Max(0f, landingSquashTimer - deltaTime);
+                jumpAnticipationTimer = Mathf.Max(0f, jumpAnticipationTimer - deltaTime);
+            }
+            if (landingTimer > 0f && deltaTime > 0f)
+            {
+                landingTimer = Mathf.Max(0f, landingTimer - deltaTime);
             }
 
-            PicnicYunaRigPose pose = targetPose;
+            // Override/blend targetPose with anticipation crouch or landing cushion + recovery
+            PicnicYunaRigPose effectiveTarget = targetPose;
+            float anticipationAnchorY = 0f;
+            if (!onGround && jumpAnticipationTimer > 0f)
+            {
+                float ratio = jumpAnticipationTimer / JumpAnticipationDuration;
+                var crouch = PicnicYunaRigState.EvaluateJumpAnticipation(targetPose.Expression);
+                effectiveTarget = LerpPose(targetPose, crouch, Mathf.SmoothStep(0f, 1f, ratio));
+                anticipationAnchorY = -0.045f * ratio;
+            }
+            else if (onGround && landingTimer > 0f)
+            {
+                var landPose = PicnicYunaRigState.EvaluateJumpLanding(targetPose.Expression);
+                if (landingTimer > LandingRecoveryDuration)
+                {
+                    // Full impact absorption crouch
+                    effectiveTarget = landPose;
+                }
+                else
+                {
+                    // Smooth recovery rising back into Run or Idle
+                    float recoverT = 1f - (landingTimer / LandingRecoveryDuration);
+                    effectiveTarget = LerpPose(landPose, targetPose, Mathf.SmoothStep(0f, 1f, recoverT));
+                }
+            }
+
+            PicnicYunaRigPose pose = effectiveTarget;
             if (hasSmoothedPose && deltaTime > 0f && deltaTime < 0.25f)
             {
-                float blend = 1f - Mathf.Exp(-20f * deltaTime);
-                pose = LerpPose(smoothedPose, targetPose, blend);
+                float speed = (jumpAnticipationTimer > 0f || landingTimer > LandingRecoveryDuration) ? 32f : 22f;
+                float blend = 1f - Mathf.Exp(-speed * deltaTime);
+                pose = LerpPose(smoothedPose, effectiveTarget, blend);
             }
 
             smoothedPose = pose;
             hasSmoothedPose = true;
 
-            float landRatio = landingSquashTimer > 0f ? Mathf.Sin((landingSquashTimer / 0.16f) * Mathf.PI) : 0f;
-            float landScaleX = 1f + landRatio * 0.10f;
-            float landScaleY = 1f - landRatio * 0.10f;
-
             float dir = facing < 0 ? -1f : 1f;
-            rigRoot.localScale = new Vector3(dir * pose.ScaleX * landScaleX, pose.ScaleY * landScaleY, 1f);
-            rigRoot.localPosition = new Vector3(0f, extraBounceY, 0f);
+            rigRoot.localScale = new Vector3(dir * pose.ScaleX, pose.ScaleY, 1f);
+            rigRoot.localPosition = new Vector3(0f, extraBounceY + anticipationAnchorY, 0f);
             rigRoot.localRotation = Quaternion.Euler(0f, 0f, extraTiltDeg);
 
-            hipsBone.localPosition = new Vector3(0f, BaseHipsY + pose.HipsBobY - landRatio * 0.025f, 0f);
+            hipsBone.localPosition = new Vector3(0f, BaseHipsY + pose.HipsBobY, 0f);
             torsoBone.localRotation = Quaternion.Euler(0f, 0f, pose.TorsoLeanDeg);
             chestBone.localRotation = Quaternion.Euler(0f, 0f, pose.ChestBendDeg * 0.72f);
             headBone.localRotation = Quaternion.Euler(0f, 0f, pose.HeadTiltDeg);
@@ -202,7 +244,7 @@ namespace YunaLegend.Picnic.Runtime
             legBackMesh.DeformThreeBoneChain(kneeV: 0.46f, kneeDeg: pose.BackKneeDeg, ankleV: 0.21f, ankleDeg: pose.BackAnkleDeg);
             armFrontMesh.DeformTwoBoneChain(jointV: 0.48f, bendDeg: pose.FrontElbowDeg);
             armBackMesh.DeformTwoBoneChain(jointV: 0.48f, bendDeg: pose.BackElbowDeg);
-            torsoMesh.DeformTorsoAndSkirt(pose.ChestBendDeg, pose.SkirtSwayDeg, pose.SkirtFlare + landRatio * 0.08f);
+            torsoMesh.DeformTorsoAndSkirt(pose.ChestBendDeg, pose.SkirtSwayDeg, pose.SkirtFlare);
             pigtailBackMesh.DeformTwoBoneChain(jointV: 0.46f, bendDeg: pose.BackPigtailTipDeg - pose.BackPigtailDeg);
             pigtailFarMesh.DeformTwoBoneChain(jointV: 0.46f, bendDeg: -(pose.FrontPigtailTipDeg - pose.FrontPigtailDeg) * 0.85f);
 
@@ -221,6 +263,8 @@ namespace YunaLegend.Picnic.Runtime
 
         private void OnDestroy()
         {
+            if (headShadowMat != null) DestroyImmediate(headShadowMat);
+            if (headShadowMesh != null) DestroyImmediate(headShadowMesh);
             if (allMeshes == null) return;
             for (int i = 0; i < allMeshes.Length; i++)
             {
@@ -236,7 +280,7 @@ namespace YunaLegend.Picnic.Runtime
             return go.transform;
         }
 
-        private static SpriteRenderer AttachStaticSprite(
+        private SpriteRenderer AttachStaticSprite(
             string name,
             Transform bone,
             Sprite sprite,
@@ -252,8 +296,57 @@ namespace YunaLegend.Picnic.Runtime
             {
                 float s = targetHeightUnits / sprite.bounds.size.y;
                 go.transform.localScale = new Vector3(s, s, 1f);
+
+                // Alpha-clipped URP ShadowsOnly twin so the 2D head casts a real 3D directional shadow
+                headShadowMat = CreateAlphaClipShadowMaterial(sprite.texture);
+                if (headShadowMat != null)
+                {
+                    var b = sprite.bounds;
+                    headShadowMesh = new Mesh { name = name + "_ShadowMesh" };
+                    headShadowMesh.vertices = new[]
+                    {
+                        new Vector3(b.min.x, b.min.y, 0f),
+                        new Vector3(b.max.x, b.min.y, 0f),
+                        new Vector3(b.min.x, b.max.y, 0f),
+                        new Vector3(b.max.x, b.max.y, 0f),
+                    };
+                    headShadowMesh.uv = new[]
+                    {
+                        new Vector2(0f, 0f), new Vector2(1f, 0f),
+                        new Vector2(0f, 1f), new Vector2(1f, 1f),
+                    };
+                    headShadowMesh.triangles = new[] { 0, 2, 1, 1, 2, 3 };
+                    headShadowMesh.RecalculateNormals();
+
+                    var shGo = new GameObject(name + "_ShadowCaster", typeof(MeshFilter), typeof(MeshRenderer));
+                    shGo.transform.SetParent(go.transform, false);
+                    shGo.GetComponent<MeshFilter>().sharedMesh = headShadowMesh;
+                    var smr = shGo.GetComponent<MeshRenderer>();
+                    smr.sharedMaterial = headShadowMat;
+                    smr.shadowCastingMode = ShadowCastingMode.ShadowsOnly;
+                    smr.receiveShadows = false;
+                }
             }
             return sr;
+        }
+
+        internal static Material CreateAlphaClipShadowMaterial(Texture2D tex)
+        {
+            // Must use URP/Lit (or Simple Lit / Standard) because URP/Unlit has NO ShadowCaster pass!
+            Shader sh = Shader.Find("Universal Render Pipeline/Lit")
+                ?? Shader.Find("Universal Render Pipeline/Simple Lit")
+                ?? Shader.Find("Standard");
+            if (sh == null || tex == null) return null;
+
+            var mat = new Material(sh) { mainTexture = tex };
+            if (mat.HasProperty("_BaseMap")) mat.SetTexture("_BaseMap", tex);
+            if (mat.HasProperty("_BaseColor")) mat.SetColor("_BaseColor", Color.white);
+            if (mat.HasProperty("_AlphaClip")) mat.SetFloat("_AlphaClip", 1f);
+            if (mat.HasProperty("_Cutoff")) mat.SetFloat("_Cutoff", 0.40f);
+            if (mat.HasProperty("_Cull")) mat.SetFloat("_Cull", 0f);
+            mat.EnableKeyword("_ALPHATEST_ON");
+            mat.SetShaderPassEnabled("ShadowCaster", true);
+            return mat;
         }
 
         private static DeformablePartMesh CreateDeformablePart(
@@ -344,6 +437,7 @@ namespace YunaLegend.Picnic.Runtime
         {
             private readonly Mesh mesh;
             private readonly Material material;
+            private readonly Material shadowMaterial;
             private readonly Vector3[] baseVertices;
             private readonly Vector3[] workVertices;
             private readonly float[] vertexU;
@@ -430,6 +524,20 @@ namespace YunaLegend.Picnic.Runtime
                 mr.sortingOrder = sortingOrder;
                 mr.shadowCastingMode = ShadowCastingMode.Off;
                 mr.receiveShadows = false;
+
+                // Share the exact animated mesh with an alpha-clipped ShadowsOnly twin so every
+                // bending limb, skirt, and pigtail casts a real-time 3D directional shadow onto the ground.
+                shadowMaterial = CreateAlphaClipShadowMaterial(texture);
+                if (shadowMaterial != null)
+                {
+                    var shGo = new GameObject(go.name + "_ShadowCaster", typeof(MeshFilter), typeof(MeshRenderer));
+                    shGo.transform.SetParent(go.transform, false);
+                    shGo.GetComponent<MeshFilter>().sharedMesh = mesh;
+                    var smr = shGo.GetComponent<MeshRenderer>();
+                    smr.sharedMaterial = shadowMaterial;
+                    smr.shadowCastingMode = ShadowCastingMode.ShadowsOnly;
+                    smr.receiveShadows = false;
+                }
             }
 
             public void DeformTwoBoneChain(float jointV, float bendDeg)
@@ -522,6 +630,7 @@ namespace YunaLegend.Picnic.Runtime
             {
                 if (mesh != null) UnityEngine.Object.DestroyImmediate(mesh);
                 if (material != null) UnityEngine.Object.DestroyImmediate(material);
+                if (shadowMaterial != null) UnityEngine.Object.DestroyImmediate(shadowMaterial);
             }
 
             private void Commit()

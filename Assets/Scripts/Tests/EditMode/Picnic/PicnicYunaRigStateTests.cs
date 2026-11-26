@@ -144,5 +144,23 @@ namespace YunaLegend.Picnic.Tests
             Assert.Greater(launch.ScaleY, 1.09f, "Jump launch should stretch vertically with upward momentum.");
             Assert.Greater(launch.FrontArmDeg, 55f, "Arms thrust upward during jump impulse.");
         }
+
+        [Test]
+        public void JumpAnticipationAndLanding_CrouchWithBentKneesAndForwardArms()
+        {
+            var anticipation = PicnicYunaRigState.EvaluateJumpAnticipation(PicnicYunaExpression.Happy);
+            var landing = PicnicYunaRigState.EvaluateJumpLanding(PicnicYunaExpression.Happy);
+
+            Assert.AreEqual(PicnicYunaMotionKind.JumpAnticipation, anticipation.Motion);
+            Assert.Less(anticipation.HipsBobY, -0.05f, "Anticipation must crouch hips downward.");
+            Assert.Less(anticipation.FrontKneeDeg, -55f, "Anticipation must flex knees deeply.");
+            Assert.Greater(anticipation.FrontArmDeg, 40f, "Anticipation brings front arm forward to prepare impulse.");
+            Assert.Greater(anticipation.BackArmDeg, 30f, "Anticipation brings back arm forward to prepare impulse.");
+
+            Assert.AreEqual(PicnicYunaMotionKind.JumpLand, landing.Motion);
+            Assert.Less(landing.HipsBobY, -0.05f, "Landing must crouch to absorb impact.");
+            Assert.Less(landing.FrontKneeDeg, -50f, "Landing knees flex to cushion impact.");
+            Assert.Less(landing.ScaleY, 0.90f, "Landing applies crisp squash.");
+        }
     }
 }

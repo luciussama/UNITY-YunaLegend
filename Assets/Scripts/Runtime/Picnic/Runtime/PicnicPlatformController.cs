@@ -139,17 +139,19 @@ namespace YunaLegend.Picnic.Runtime
 
             topWoodMat = new Material(lit)
             {
-                color = new Color(0.84f, 0.64f, 0.42f, 1f),
+                color = new Color(1.00f, 0.94f, 0.84f, 1f),
                 mainTexture = woodPlankTex,
+                mainTextureScale = new Vector2(0.85f, 0.85f),
             };
-            SetSmoothness(topWoodMat, 0.18f);
+            SetSmoothness(topWoodMat, 0.14f);
 
             woodBodyMat = new Material(lit)
             {
-                color = new Color(0.62f, 0.43f, 0.26f, 1f),
+                color = new Color(0.78f, 0.66f, 0.54f, 1f),
                 mainTexture = woodPlankTex,
+                mainTextureScale = new Vector2(0.85f, 0.85f),
             };
-            SetSmoothness(woodBodyMat, 0.12f);
+            SetSmoothness(woodBodyMat, 0.10f);
 
             stoneMat = new Material(lit)
             {
@@ -778,24 +780,86 @@ namespace YunaLegend.Picnic.Runtime
             UpdateWheelTransforms(wv, w.Phase);
         }
 
-        private static Texture2D CreateWoodPlankTexture()
+        public static Texture2D CreateWoodPlankTexture()
         {
-            const int W = 128;
-            const int H = 128;
+            const int W = 256;
+            const int H = 256;
+            const int PlankH = 64;
             var tex = new Texture2D(W, H, TextureFormat.RGBA32, false)
             {
                 wrapMode = TextureWrapMode.Repeat,
+                filterMode = FilterMode.Bilinear,
             };
+
+            Color seamDark = new Color(0.20f, 0.09f, 0.03f, 1f);
+            Color deepGrain = new Color(0.42f, 0.21f, 0.08f, 1f);
+            Color midCedar = new Color(0.72f, 0.42f, 0.18f, 1f);
+            Color warmAmber = new Color(0.92f, 0.66f, 0.30f, 1f);
+            Color bevelHighlight = new Color(0.98f, 0.82f, 0.48f, 1f);
+
             for (int y = 0; y < H; y++)
             {
-                bool plankGap = (y % 32) <= 2;
-                float boardTint = ((y / 32) % 2 == 0) ? 1.0f : 0.93f;
+                int plankRow = y / PlankH;
+                int localY = y % PlankH;
+                float rowSeed = plankRow * 17.3f;
+                int jointX = (plankRow % 2 == 0) ? 128 : 24;
+                float boardVariation = 0.90f + ((plankRow * 37) % 10) * 0.018f;
+
                 for (int x = 0; x < W; x++)
                 {
-                    float grain = Mathf.Sin(x * 0.22f + Mathf.Sin(y * 0.35f) * 2.5f) * 0.05f
-                                + Mathf.Sin(y * 0.85f + x * 0.08f) * 0.03f;
-                    float v = plankGap ? 0.58f : Mathf.Clamp01((0.92f + grain) * boardTint);
-                    tex.SetPixel(x, y, new Color(v, v * 0.92f, v * 0.82f, 1f));
+                    // Horizontal plank seam + warm top bevel + shaded bottom edge
+                    if (localY <= 3)
+                    {
+                        tex.SetPixel(x, y, seamDark);
+                        continue;
+                    }
+
+                    // Staggered vertical plank end-joint seam
+                    int dxJoint = Mathf.Abs(x - jointX);
+                    if (dxJoint <= 2)
+                    {
+                        tex.SetPixel(x, y, Color.Lerp(seamDark, deepGrain, 0.35f));
+                        continue;
+                    }
+
+                    // Organic wood grain rings & flowing cedar fibers (periodic across W=256)
+                    float fx = (x / (float)W) * Mathf.PI * 2f;
+                    float fy = localY / (float)PlankH;
+                    float warp = Mathf.Sin(fx * 2f + rowSeed) * 2.4f
+                               + Mathf.Sin(fx * 5f - rowSeed * 0.7f) * 0.9f;
+                    float knotDx = ((x - (jointX + 76 + plankRow * 41) % W + W) % W) - 128f;
+                    float knotDy = (localY - PlankH * 0.52f) * 2.4f;
+                    float knotDist = Mathf.Sqrt(knotDx * knotDx * 0.06f + knotDy * knotDy * 0.16f);
+                    float knotRing = Mathf.Exp(-knotDist * 0.35f) * Mathf.Sin(knotDist * 2.6f) * 0.35f;
+
+                    float fiberWave = Mathf.Sin((localY * 0.42f) + warp + knotRing * 4f) * 0.5f + 0.5f;
+                    float fineStreak = Mathf.Sin(localY * 1.65f + Mathf.Sin(fx * 4f + rowSeed) * 1.8f) * 0.5f + 0.5f;
+                    float tGrain = Mathf.Clamp01(fiberWave * 0.62f + fineStreak * 0.28f + knotRing * 0.25f);
+
+                    Color col = tGrain < 0.45f
+                        ? Color.Lerp(deepGrain, midCedar, tGrain / 0.45f)
+                        : Color.Lerp(midCedar, warmAmber, (tGrain - 0.45f) / 0.55f);
+
+                    // Top edge highlight bevel & bottom edge shadow per plank for crisp hand-painted depth
+                    if (localY >= PlankH - 4)
+                    {
+                        col = Color.Lerp(col, bevelHighlight, 0.42f);
+                    }
+                    else if (localY <= 8)
+                    {
+                        col = Color.Lerp(col, deepGrain, 0.38f);
+                    }
+
+                    // Small dark iron nail heads near vertical plank joints
+                    if (dxJoint >= 6 && dxJoint <= 10 && (Mathf.Abs(localY - 14) <= 2 || Mathf.Abs(localY - (PlankH - 14)) <= 2))
+                    {
+                        col = Color.Lerp(col, seamDark, 0.78f);
+                    }
+
+                    col.r = Mathf.Clamp01(col.r * boardVariation);
+                    col.g = Mathf.Clamp01(col.g * boardVariation);
+                    col.b = Mathf.Clamp01(col.b * boardVariation);
+                    tex.SetPixel(x, y, col);
                 }
             }
             tex.Apply();
