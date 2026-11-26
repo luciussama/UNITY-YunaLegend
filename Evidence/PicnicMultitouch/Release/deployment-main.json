@@ -1,0 +1,36 @@
+{
+  "releaseId": "20261125-jardim-multitouch",
+  "mergeCommit": "b659cffca4779c9ffc63b4671925eae9c8e012b3",
+  "sourceBranch": "regress\u00e3o-jardim",
+  "publicationBranch": "main",
+  "workflow": "https://github.com/luciussama/UNITY-YunaLegend/actions/runs/45735150787",
+  "url": "https://luciussama.github.io/UNITY-YunaLegend/?v=20261125-jardim-multitouch",
+  "manifestMatches": true,
+  "indexMatchesAfterGitLineEndingNormalization": true,
+  "wasmDownloadSha256Matches": true,
+  "files": [
+    {
+      "path": "Build/WebGL.data.unityweb",
+      "status": 200,
+      "bytes": 266730980
+    },
+    {
+      "path": "Build/WebGL.framework.js.unityweb",
+      "status": 200,
+      "bytes": 90230
+    },
+    {
+      "path": "Build/WebGL.loader.js",
+      "status": 200,
+      "bytes": 47867
+    },
+    {
+      "path": "Build/WebGL.wasm.unityweb",
+      "status": 200,
+      "bytes": 11993671
+    }
+  ],
+  "checkedAtUtc": "2026-11-26T01:22:27.365397+00:00",
+  "physicalMobileTest": false,
+  "workflowConclusion": "success"
+}
