@@ -1,37 +1,37 @@
-{
-  "releaseId": "20261126-mobile-camera-dialogues",
-  "unity": "6000.3.28f1",
-  "builtAtUtc": "2026-11-26T13:04:05+00:00",
-  "sourceBranch": "fix/mobile-camera-dialogues",
-  "scenes": [
-    "TitleScreen",
-    "Fase-Jogavel-Completa",
-    "ToyRoom_Gameplay",
-    "Arena_Gameplay",
-    "BearChase_Gameplay",
-    "Picnic_Gameplay"
-  ],
-  "files": {
-    "index.html": {
-      "bytes": 6614,
-      "sha256": "6a16c8f975a435ba653c9a8e0b94cf1625f9f0ae9345c92982c28c1e9c4d2c5f"
-    },
-    "Build/WebGL.data.unityweb": {
-      "bytes": 266730923,
-      "sha256": "1b7dda05e94e792bf5cf34270d3e5200a3e89fe1a9a33df2847cab3c5fe26305"
-    },
-    "Build/WebGL.framework.js.unityweb": {
-      "bytes": 90230,
-      "sha256": "0a594b1c831cf32091ed19add38729c8fbfa9f3536e16d9e3390de97cf6b1300"
-    },
-    "Build/WebGL.loader.js": {
-      "bytes": 47867,
-      "sha256": "c6443c3ba630fd8521e6a16dd7937d6396dfdf3902cd161321423bec2db8f06b"
-    },
-    "Build/WebGL.wasm.unityweb": {
-      "bytes": 12003833,
-      "sha256": "74ed9cabae1a9f1224d9eaf7f42f3bc09592c33d164d52384f7b4f540fe8b92d"
-    }
-  },
-  "testResult": "Arena EditMode 37/37; Picnic EditMode 25/25; MobileCards PlayMode 2/2 (30/60/120Hz); MobileDialogue 15 static + 4 PlayMode + TITLE_DESKTOP_NO_MUTATION_OK; WebCiBuild YUNA_WEB_PAGES_OK; no physical mobile device test"
+﻿{
+    "releaseId":  "20261126-picnic-yuna-rig2d-mobile",
+    "unity":  "6000.3.28f1",
+    "builtAtUtc":  "2026-11-26T17:04:01+00:00",
+    "sourceBranch":  "feat/picnic-yuna-2d-rig",
+    "scenes":  [
+                   "TitleScreen",
+                   "Fase-Jogavel-Completa",
+                   "ToyRoom_Gameplay",
+                   "Arena_Gameplay",
+                   "BearChase_Gameplay",
+                   "Picnic_Gameplay"
+               ],
+    "files":  {
+                  "index.html":  {
+                                     "bytes":  6614,
+                                     "sha256":  "6a16c8f975a435ba653c9a8e0b94cf1625f9f0ae9345c92982c28c1e9c4d2c5f"
+                                 },
+                  "Build/WebGL.data.unityweb":  {
+                                                    "bytes":  268157734,
+                                                    "sha256":  "2b3ec123585bf99ab9bb981ec82395758f33d95d68af81bd7af683465d1034de"
+                                                },
+                  "Build/WebGL.framework.js.unityweb":  {
+                                                            "bytes":  90391,
+                                                            "sha256":  "1990549b9b95a5fa1c304df14cfecec37b31db7b92f158641409116353cdad11"
+                                                        },
+                  "Build/WebGL.loader.js":  {
+                                                "bytes":  47867,
+                                                "sha256":  "e02bcd05857c9599d74d7fe510d2752d6ec608a4727f2d41e2a5091186584c4d"
+                                            },
+                  "Build/WebGL.wasm.unityweb":  {
+                                                    "bytes":  12368098,
+                                                    "sha256":  "0ce4f3823bbb942c2841138459e8c80274e0ca7c187526fb08da778f9ef55e89"
+                                                }
+              },
+    "testResult":  "Arena EditMode 37/37; Picnic EditMode 34/34 (Rig 2D v5 16 joints + 4 expressions + waist jump arch); MobileCards PlayMode 2/2 (30/60/120Hz); MobileDialogue 15 static + 4 PlayMode + TITLE_DESKTOP_NO_MUTATION_OK; WebCiBuild YUNA_WEB_PAGES_OK; ready for physical mobile device testing"
 }

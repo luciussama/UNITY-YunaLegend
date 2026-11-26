@@ -74,3 +74,8 @@ Toda nova funcionalidade ou refatoração deve observar obrigatoriamente os segu
   - Fase 2 (`ToyRoom_Gameplay`): `ToyRoomQaPilot` (`YunaLegend.ToyRoom.Core`) + `ToyRoomStageBootstrap`
   - Fase 3 (`Arena_Gameplay`): `ArenaQaPilot` (`YunaLegend.Arena.Core`) + `ArenaStageBootstrap`
   - Fase 4 (`BearChase_Gameplay`): `BearChaseQaPilot` (`YunaLegend.BearChase.Core`) + `BearChaseStageBootstrap`
+
+## 10. Padrão Unificado Obrigatório Entre Fases (26/11/2026)
+- **Documento canônico obrigatório:** Toda fase nova e toda evolução/refatoração de fase existente deve seguir integralmente [PADRAO-UNIFICADO-FASES-25D.md](docs/ia/PADRAO-UNIFICADO-FASES-25D.md) para garantir continuidade de jogabilidade, estética, controles e qualidade técnica entre fases.
+- **Animação 2D Esqueletal (`Unity 2D Animation`):** Personagens 2D ilustrados devem usar rig modular por ossos (`com.unity.feature.2d`), alternância real de passadas (`180°`), contra-balanço de braços, movimento secundário (cabelo/roupa), troca de expressão facial e clipes `.anim` 60 FPS + avaliador puro em `Core` (referência: `PicnicYunaRigState` / `PicnicYunaRigView` / `PicnicYunaRigBuilder`). Proibido ciclo de corrida sem alternância real de pernas.
+- **Câmera, Controles e Diálogos Unificados:** Toda fase deve possuir perfil puro de câmera mobile em `Core` (sem alterar desktop/`TitleScreen`), controles touch multitouch consistentes com o teclado, diálogos mobile via `MobileDialoguePresenter` compartilhado e validação `EditMode` + evidência visual em `Evidence/` antes de qualquer release WebGL.

@@ -12,6 +12,10 @@ namespace YunaLegend.Picnic.Runtime
         private CharacterController body;
         private Transform yunaRoot;
         private SpriteRenderer yunaRenderer;
+        private PicnicYunaRigView yunaRigView;
+        private float lastStridePlayerX;
+        private bool hasLastStrideX;
+        private float accumulatedStridePx;
         private Transform yunaShadow;
         private Material yunaShadowMat;
         private Texture2D yunaShadowTexture;
@@ -56,6 +60,19 @@ namespace YunaLegend.Picnic.Runtime
             yunaRenderer = yunaArt.GetComponent<SpriteRenderer>();
             yunaRenderer.sortingOrder = 12;
             yunaArt.transform.localScale = Vector3.one * YunaArtScale;
+
+            var rigHost = new GameObject("YunaRigHost");
+            rigHost.transform.SetParent(yunaRoot, false);
+            rigHost.transform.localScale = Vector3.one * YunaArtScale;
+            yunaRigView = rigHost.AddComponent<PicnicYunaRigView>();
+            if (yunaRigView.TryBuild(12))
+            {
+                yunaRenderer.enabled = false;
+            }
+            else
+            {
+                yunaRigView = null;
+            }
 
             // Soft 3D contact shadow disc on the 3D ground surface beneath Yuna's feet
             var shadowQuad = GameObject.CreatePrimitive(PrimitiveType.Quad);
@@ -224,10 +241,29 @@ namespace YunaLegend.Picnic.Runtime
             beetleRoot.gameObject.SetActive(false);
         }
 
-        public void Apply(PicnicSimulation sim)
+        public void Apply(PicnicSimulation sim, float? deltaTimeOverride = null)
         {
             // Yuna (direct transform placement without toggling CharacterController every frame)
             yunaRoot.position = PicnicAtlasCatalog.ToUnity(sim.PlayerX, sim.PlayerY, -0.15f);
+
+            if (!hasLastStrideX)
+            {
+                lastStridePlayerX = sim.PlayerX;
+                hasLastStrideX = true;
+            }
+            else if (sim.OnGround)
+            {
+                float dx = Mathf.Abs(sim.PlayerX - lastStridePlayerX);
+                if (dx < 120f)
+                {
+                    accumulatedStridePx += dx;
+                }
+                lastStridePlayerX = sim.PlayerX;
+            }
+            else
+            {
+                lastStridePlayerX = sim.PlayerX;
+            }
 
             var pose = PicnicContact.SelectGirlPose(sim.OnGround, sim.PlayerVx, sim.PlayerVy,
                 sim.Terrain, sim.Discomfort, sim.Time, sim.BalancePose);
@@ -259,8 +295,27 @@ namespace YunaLegend.Picnic.Runtime
             {
                 tiltDeg = -sim.PlayerFacing * (5f + Mathf.Sin(sim.Time * 18f) * 3f);
             }
-            yunaRenderer.transform.localPosition = new Vector3(0f, stepBounceY, 0f);
-            yunaRenderer.transform.localRotation = Quaternion.Euler(0f, 0f, tiltDeg);
+            if (yunaRigView != null && yunaRigView.IsBuilt)
+            {
+                var rigPose = PicnicYunaRigState.Evaluate(
+                    sim.OnGround,
+                    sim.PlayerVx,
+                    sim.PlayerVy,
+                    sim.Terrain,
+                    sim.Discomfort,
+                    sim.Time,
+                    sim.BalancePose.HasValue,
+                    sim.IsPanic,
+                    sim.HurtRemaining,
+                    accumulatedStridePx);
+                float dt = deltaTimeOverride.HasValue ? deltaTimeOverride.Value : Time.deltaTime;
+                yunaRigView.ApplyPose(rigPose, sim.PlayerFacing, blink ? 0.45f : 1f, dt, tiltDeg, stepBounceY, sim.OnGround);
+            }
+            else
+            {
+                yunaRenderer.transform.localPosition = new Vector3(0f, stepBounceY, 0f);
+                yunaRenderer.transform.localRotation = Quaternion.Euler(0f, 0f, tiltDeg);
+            }
             ApplyContactShadow(sim);
 
             // Sweat droplets falling from forehead during grass or gravel sensory discomfort
