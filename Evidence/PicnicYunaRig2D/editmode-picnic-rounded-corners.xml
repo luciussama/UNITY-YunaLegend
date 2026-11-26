@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="35" result="Passed" total="35" passed="35" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:51:00Z" duration="0,1855102">
+  <test-suite type="TestSuite" id="1000" name="Yuna Legend - O Quarto dos Brinquedos" fullname="Yuna Legend - O Quarto dos Brinquedos" runstate="Runnable" testcasecount="240" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:51:00Z" duration="0.185510" total="35" passed="35" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1217" name="YunaLegend.Picnic.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Build/PicnicVisualAuditProject/Library/ScriptAssemblies/YunaLegend.Picnic.Tests.dll" runstate="Runnable" testcasecount="35" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:51:00Z" duration="0.179628" total="35" passed="35" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="19416" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1218" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="35" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:51:00Z" duration="0.179418" total="35" passed="35" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1219" name="Picnic" fullname="YunaLegend.Picnic" runstate="Runnable" testcasecount="35" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:51:00Z" duration="0.179344" total="35" passed="35" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1220" name="Tests" fullname="YunaLegend.Picnic.Tests" runstate="Runnable" testcasecount="35" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:51:00Z" duration="0.179241" total="35" passed="35" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1173" name="PicnicCoreTests" fullname="YunaLegend.Picnic.Tests.PicnicCoreTests" classname="YunaLegend.Picnic.Tests.PicnicCoreTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.041398" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1177" name="IntroWalksDownStairsAndEntersRunning" fullname="YunaLegend.Picnic.Tests.PicnicCoreTests.IntroWalksDownStairsAndEntersRunning" methodname="IntroWalksDownStairsAndEntersRunning" classname="YunaLegend.Picnic.Tests.PicnicCoreTests" runstate="Runnable" seed="1195966874" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.027346" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1174" name="LevelCatalog_MatchesLegacyStructure" fullname="YunaLegend.Picnic.Tests.PicnicCoreTests.LevelCatalog_MatchesLegacyStructure" methodname="LevelCatalog_MatchesLegacyStructure" classname="YunaLegend.Picnic.Tests.PicnicCoreTests" runstate="Runnable" seed="15009896" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.000972" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1175" name="Narrative_Preserves9OpeningAnd14EndingCards" fullname="YunaLegend.Picnic.Tests.PicnicCoreTests.Narrative_Preserves9OpeningAnd14EndingCards" methodname="Narrative_Preserves9OpeningAnd14EndingCards" classname="YunaLegend.Picnic.Tests.PicnicCoreTests" runstate="Runnable" seed="1929635005" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.000783" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1178" name="QaPilot_SkipsStoryAndAdvancesInRunning" fullname="YunaLegend.Picnic.Tests.PicnicCoreTests.QaPilot_SkipsStoryAndAdvancesInRunning" methodname="QaPilot_SkipsStoryAndAdvancesInRunning" classname="YunaLegend.Picnic.Tests.PicnicCoreTests" runstate="Runnable" seed="1547349928" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.002867" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1176" name="SensorySpeeds_AndPoseSelection_MatchLegacy" fullname="YunaLegend.Picnic.Tests.PicnicCoreTests.SensorySpeeds_AndPoseSelection_MatchLegacy" methodname="SensorySpeeds_AndPoseSelection_MatchLegacy" classname="YunaLegend.Picnic.Tests.PicnicCoreTests" runstate="Runnable" seed="2097797583" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.000416" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1179" name="PicnicMobileCameraFramingTests" fullname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests" classname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.007784" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1188" name="CameraStaysInsideLevelAtBothEnds" fullname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests.CameraStaysInsideLevelAtBothEnds" methodname="CameraStaysInsideLevelAtBothEnds" classname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests" runstate="Runnable" seed="2043341359" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.001024" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1192" name="FramingSmoothingHasSameOneSecondResponse" fullname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests.FramingSmoothingHasSameOneSecondResponse" classname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.003692" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1189" name="FramingSmoothingHasSameOneSecondResponse(30)" fullname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests.FramingSmoothingHasSameOneSecondResponse(30)" methodname="FramingSmoothingHasSameOneSecondResponse" classname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests" runstate="Runnable" seed="510648002" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.000259" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1190" name="FramingSmoothingHasSameOneSecondResponse(60)" fullname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests.FramingSmoothingHasSameOneSecondResponse(60)" methodname="FramingSmoothingHasSameOneSecondResponse" classname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests" runstate="Runnable" seed="402783812" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.000044" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1191" name="FramingSmoothingHasSameOneSecondResponse(120)" fullname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests.FramingSmoothingHasSameOneSecondResponse(120)" methodname="FramingSmoothingHasSameOneSecondResponse" classname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests" runstate="Runnable" seed="1866698055" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.000030" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1187" name="LandingSelectionIgnoresBehindFarAndUnreachableHighPlatforms" fullname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests.LandingSelectionIgnoresBehindFarAndUnreachableHighPlatforms" methodname="LandingSelectionIgnoresBehindFarAndUnreachableHighPlatforms" classname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests" runstate="Runnable" seed="494627190" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.000830" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1180" name="LandscapePullbackIsModerateAndHasExplicitFloor" fullname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests.LandscapePullbackIsModerateAndHasExplicitFloor" methodname="LandscapePullbackIsModerateAndHasExplicitFloor" classname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests" runstate="Runnable" seed="1494581974" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.000152" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1183" name="PortraitShowsPlanningWidthWithoutUnlimitedZoom" fullname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests.PortraitShowsPlanningWidthWithoutUnlimitedZoom" classname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.000510" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1181" name="PortraitShowsPlanningWidthWithoutUnlimitedZoom(0.4620853f)" fullname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests.PortraitShowsPlanningWidthWithoutUnlimitedZoom(0.4620853f)" methodname="PortraitShowsPlanningWidthWithoutUnlimitedZoom" classname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests" runstate="Runnable" seed="1930941431" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.000228" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1182" name="PortraitShowsPlanningWidthWithoutUnlimitedZoom(0.45f)" fullname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests.PortraitShowsPlanningWidthWithoutUnlimitedZoom(0.45f)" methodname="PortraitShowsPlanningWidthWithoutUnlimitedZoom" classname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests" runstate="Runnable" seed="491372919" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.000040" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1186" name="RelevantLandingAndPlayerStayInView" fullname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests.RelevantLandingAndPlayerStayInView" classname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.000524" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1184" name="RelevantLandingAndPlayerStayInView(1)" fullname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests.RelevantLandingAndPlayerStayInView(1)" methodname="RelevantLandingAndPlayerStayInView" classname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests" runstate="Runnable" seed="851097785" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.000250" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1185" name="RelevantLandingAndPlayerStayInView(-1)" fullname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests.RelevantLandingAndPlayerStayInView(-1)" methodname="RelevantLandingAndPlayerStayInView" classname="YunaLegend.Picnic.Tests.PicnicMobileCameraFramingTests" runstate="Runnable" seed="553718317" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.000045" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+            </test-suite>
+            <test-suite type="TestFixture" id="1193" name="PicnicTouchInputTests" fullname="YunaLegend.Picnic.Tests.PicnicTouchInputTests" classname="YunaLegend.Picnic.Tests.PicnicTouchInputTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:51:00Z" duration="0.123128" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1194" name="DirectionAndJumpBelongToIndependentFingers" fullname="YunaLegend.Picnic.Tests.PicnicTouchInputTests.DirectionAndJumpBelongToIndependentFingers" methodname="DirectionAndJumpBelongToIndependentFingers" classname="YunaLegend.Picnic.Tests.PicnicTouchInputTests" runstate="Runnable" seed="1595525581" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.002117" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1201" name="HudPointerEventsStartJumpBeforeReleaseAndKeepDirectionDuringThumbDrift" fullname="YunaLegend.Picnic.Tests.PicnicTouchInputTests.HudPointerEventsStartJumpBeforeReleaseAndKeepDirectionDuringThumbDrift" methodname="HudPointerEventsStartJumpBeforeReleaseAndKeepDirectionDuringThumbDrift" classname="YunaLegend.Picnic.Tests.PicnicTouchInputTests" runstate="Runnable" seed="1462114752" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.096878" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1195" name="QuickTapBetweenFramesIsNotLost" fullname="YunaLegend.Picnic.Tests.PicnicTouchInputTests.QuickTapBetweenFramesIsNotLost" methodname="QuickTapBetweenFramesIsNotLost" classname="YunaLegend.Picnic.Tests.PicnicTouchInputTests" runstate="Runnable" seed="1092934391" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.000221" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1196" name="ReleasingOneOfTwoDirectionFingersKeepsTheOther" fullname="YunaLegend.Picnic.Tests.PicnicTouchInputTests.ReleasingOneOfTwoDirectionFingersKeepsTheOther" methodname="ReleasingOneOfTwoDirectionFingersKeepsTheOther" classname="YunaLegend.Picnic.Tests.PicnicTouchInputTests" runstate="Runnable" seed="1956614100" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.000192" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1205" name="TouchTargetsAreLargeAndSeparate" fullname="YunaLegend.Picnic.Tests.PicnicTouchInputTests.TouchTargetsAreLargeAndSeparate" classname="YunaLegend.Picnic.Tests.PicnicTouchInputTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:51:00Z" duration="0.021369" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1202" name="TouchTargetsAreLargeAndSeparate(320,568)" fullname="YunaLegend.Picnic.Tests.PicnicTouchInputTests.TouchTargetsAreLargeAndSeparate(320,568)" methodname="TouchTargetsAreLargeAndSeparate" classname="YunaLegend.Picnic.Tests.PicnicTouchInputTests" runstate="Runnable" seed="490142804" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:50:59Z" duration="0.007170" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1203" name="TouchTargetsAreLargeAndSeparate(390,844)" fullname="YunaLegend.Picnic.Tests.PicnicTouchInputTests.TouchTargetsAreLargeAndSeparate(390,844)" methodname="TouchTargetsAreLargeAndSeparate" classname="YunaLegend.Picnic.Tests.PicnicTouchInputTests" runstate="Runnable" seed="1799167842" result="Passed" start-time="2026-11-26 21:50:59Z" end-time="2026-11-26 21:51:00Z" duration="0.005000" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1204" name="TouchTargetsAreLargeAndSeparate(844,390)" fullname="YunaLegend.Picnic.Tests.PicnicTouchInputTests.TouchTargetsAreLargeAndSeparate(844,390)" methodname="TouchTargetsAreLargeAndSeparate" classname="YunaLegend.Picnic.Tests.PicnicTouchInputTests" runstate="Runnable" seed="829335403" result="Passed" start-time="2026-11-26 21:51:00Z" end-time="2026-11-26 21:51:00Z" duration="0.008250" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1200" name="TwoFingersMoveAndJumpInActualSimulation" fullname="YunaLegend.Picnic.Tests.PicnicTouchInputTests.TwoFingersMoveAndJumpInActualSimulation" classname="YunaLegend.Picnic.Tests.PicnicTouchInputTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-26 21:51:00Z" end-time="2026-11-26 21:51:00Z" duration="0.001527" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1197" name="TwoFingersMoveAndJumpInActualSimulation(30)" fullname="YunaLegend.Picnic.Tests.PicnicTouchInputTests.TwoFingersMoveAndJumpInActualSimulation(30)" methodname="TwoFingersMoveAndJumpInActualSimulation" classname="YunaLegend.Picnic.Tests.PicnicTouchInputTests" runstate="Runnable" seed="504470195" result="Passed" start-time="2026-11-26 21:51:00Z" end-time="2026-11-26 21:51:00Z" duration="0.000535" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1198" name="TwoFingersMoveAndJumpInActualSimulation(60)" fullname="YunaLegend.Picnic.Tests.PicnicTouchInputTests.TwoFingersMoveAndJumpInActualSimulation(60)" methodname="TwoFingersMoveAndJumpInActualSimulation" classname="YunaLegend.Picnic.Tests.PicnicTouchInputTests" runstate="Runnable" seed="164475981" result="Passed" start-time="2026-11-26 21:51:00Z" end-time="2026-11-26 21:51:00Z" duration="0.000165" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1199" name="TwoFingersMoveAndJumpInActualSimulation(120)" fullname="YunaLegend.Picnic.Tests.PicnicTouchInputTests.TwoFingersMoveAndJumpInActualSimulation(120)" methodname="TwoFingersMoveAndJumpInActualSimulation" classname="YunaLegend.Picnic.Tests.PicnicTouchInputTests" runstate="Runnable" seed="1798996412" result="Passed" start-time="2026-11-26 21:51:00Z" end-time="2026-11-26 21:51:00Z" duration="0.000106" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+            </test-suite>
+            <test-suite type="TestFixture" id="1206" name="PicnicYunaRigStateTests" fullname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests" classname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-11-26 21:51:00Z" end-time="2026-11-26 21:51:00Z" duration="0.005814" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1214" name="BeetlePanicSprint_UsesPanicExpressionWithSteepLeanAndExplosiveStride" fullname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests.BeetlePanicSprint_UsesPanicExpressionWithSteepLeanAndExplosiveStride" methodname="BeetlePanicSprint_UsesPanicExpressionWithSteepLeanAndExplosiveStride" classname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests" runstate="Runnable" seed="679360282" result="Passed" start-time="2026-11-26 21:51:00Z" end-time="2026-11-26 21:51:00Z" duration="0.001462" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1212" name="GrassTrudge_UsesStrainExpressionWithHeavyForwardLeanAndDeepKneeLift" fullname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests.GrassTrudge_UsesStrainExpressionWithHeavyForwardLeanAndDeepKneeLift" methodname="GrassTrudge_UsesStrainExpressionWithHeavyForwardLeanAndDeepKneeLift" classname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests" runstate="Runnable" seed="1299168310" result="Passed" start-time="2026-11-26 21:51:00Z" end-time="2026-11-26 21:51:00Z" duration="0.000499" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1213" name="GravelSlip_UsesScaredExpressionWithBackwardSlipAndRaisedBalanceArms" fullname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests.GravelSlip_UsesScaredExpressionWithBackwardSlipAndRaisedBalanceArms" methodname="GravelSlip_UsesScaredExpressionWithBackwardSlipAndRaisedBalanceArms" classname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests" runstate="Runnable" seed="1893668575" result="Passed" start-time="2026-11-26 21:51:00Z" end-time="2026-11-26 21:51:00Z" duration="0.000441" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1210" name="Idle_KeepsLegsGroundedAndBreathingSubtle" fullname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests.Idle_KeepsLegsGroundedAndBreathingSubtle" methodname="Idle_KeepsLegsGroundedAndBreathingSubtle" classname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests" runstate="Runnable" seed="1849928641" result="Passed" start-time="2026-11-26 21:51:00Z" end-time="2026-11-26 21:51:00Z" duration="0.000730" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1211" name="JumpAndFall_ClassifyAirborneStatesAndTrailPigtails" fullname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests.JumpAndFall_ClassifyAirborneStatesAndTrailPigtails" methodname="JumpAndFall_ClassifyAirborneStatesAndTrailPigtails" classname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests" runstate="Runnable" seed="1154373866" result="Passed" start-time="2026-11-26 21:51:00Z" end-time="2026-11-26 21:51:00Z" duration="0.000281" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1216" name="JumpAnticipationAndLanding_CrouchWithBentKneesAndForwardArms" fullname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests.JumpAnticipationAndLanding_CrouchWithBentKneesAndForwardArms" methodname="JumpAnticipationAndLanding_CrouchWithBentKneesAndForwardArms" classname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests" runstate="Runnable" seed="862914994" result="Passed" start-time="2026-11-26 21:51:00Z" end-time="2026-11-26 21:51:00Z" duration="0.000322" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1215" name="JumpTakeoff_ArchesChestAtWaistForUpwardImpulse" fullname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests.JumpTakeoff_ArchesChestAtWaistForUpwardImpulse" methodname="JumpTakeoff_ArchesChestAtWaistForUpwardImpulse" classname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests" runstate="Runnable" seed="607328940" result="Passed" start-time="2026-11-26 21:51:00Z" end-time="2026-11-26 21:51:00Z" duration="0.000163" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1207" name="RunCycle_AlternatesFrontAndBackLegsInOppositePhases" fullname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests.RunCycle_AlternatesFrontAndBackLegsInOppositePhases" methodname="RunCycle_AlternatesFrontAndBackLegsInOppositePhases" classname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests" runstate="Runnable" seed="215167755" result="Passed" start-time="2026-11-26 21:51:00Z" end-time="2026-11-26 21:51:00Z" duration="0.000455" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1208" name="RunCycle_BendsKneeStronglyDuringRecoveryAndElbowsThroughoutRun" fullname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests.RunCycle_BendsKneeStronglyDuringRecoveryAndElbowsThroughoutRun" methodname="RunCycle_BendsKneeStronglyDuringRecoveryAndElbowsThroughoutRun" classname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests" runstate="Runnable" seed="1019829841" result="Passed" start-time="2026-11-26 21:51:00Z" end-time="2026-11-26 21:51:00Z" duration="0.000163" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1209" name="RunCycle_SwingsArmsOppositeToSameSideLegs" fullname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests.RunCycle_SwingsArmsOppositeToSameSideLegs" methodname="RunCycle_SwingsArmsOppositeToSameSideLegs" classname="YunaLegend.Picnic.Tests.PicnicYunaRigStateTests" runstate="Runnable" seed="1452445064" result="Passed" start-time="2026-11-26 21:51:00Z" end-time="2026-11-26 21:51:00Z" duration="0.000151" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: C:/Users/sergi/AppData/LocalLow/DeepMindStudio/Yuna Legend - O Quarto dos Brinquedos\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

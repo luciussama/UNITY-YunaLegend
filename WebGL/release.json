@@ -1,8 +1,8 @@
 ﻿{
-    "releaseId":  "20261126-picnic-yuna-rig2d-mobile",
+    "releaseId":  "20261126-picnic-rounded-bearchase-rig2d",
     "unity":  "6000.3.28f1",
-    "builtAtUtc":  "2026-11-26T17:04:01+00:00",
-    "sourceBranch":  "feat/picnic-yuna-2d-rig",
+    "builtAtUtc":  "2026-11-26T22:00:20+00:00",
+    "sourceBranch":  "feat/picnic-rounded-corners",
     "scenes":  [
                    "TitleScreen",
                    "Fase-Jogavel-Completa",
@@ -17,21 +17,21 @@
                                      "sha256":  "6a16c8f975a435ba653c9a8e0b94cf1625f9f0ae9345c92982c28c1e9c4d2c5f"
                                  },
                   "Build/WebGL.data.unityweb":  {
-                                                    "bytes":  268157734,
-                                                    "sha256":  "2b3ec123585bf99ab9bb981ec82395758f33d95d68af81bd7af683465d1034de"
+                                                    "bytes":  268385799,
+                                                    "sha256":  "eeda95aab34201de8677810de3336fef9ddc6b9804eb6300d8fae500f8a2c629"
                                                 },
                   "Build/WebGL.framework.js.unityweb":  {
-                                                            "bytes":  90391,
-                                                            "sha256":  "1990549b9b95a5fa1c304df14cfecec37b31db7b92f158641409116353cdad11"
+                                                            "bytes":  90504,
+                                                            "sha256":  "795b2fdbc890892b8a876c01570ec6167573a02bb55c28a39ff8cfa774e0ad4e"
                                                         },
                   "Build/WebGL.loader.js":  {
                                                 "bytes":  47867,
-                                                "sha256":  "e02bcd05857c9599d74d7fe510d2752d6ec608a4727f2d41e2a5091186584c4d"
+                                                "sha256":  "9fe9b8378345d93c72970e71bb15405b0fcbeb79968102fb4ed0df5af667b07f"
                                             },
                   "Build/WebGL.wasm.unityweb":  {
-                                                    "bytes":  12368098,
-                                                    "sha256":  "0ce4f3823bbb942c2841138459e8c80274e0ca7c187526fb08da778f9ef55e89"
+                                                    "bytes":  12401442,
+                                                    "sha256":  "77d9e9843f7de9c51f62a783eb1017c688141fffb89d74945ca87c324afacbdd"
                                                 }
               },
-    "testResult":  "Arena EditMode 37/37; Picnic EditMode 34/34 (Rig 2D v5 16 joints + 4 expressions + waist jump arch); MobileCards PlayMode 2/2 (30/60/120Hz); MobileDialogue 15 static + 4 PlayMode + TITLE_DESKTOP_NO_MUTATION_OK; WebCiBuild YUNA_WEB_PAGES_OK; ready for physical mobile device testing"
+    "testResult":  "Picnic EditMode 35/35 (ground alignment, 4-phase jump, 3D river/fish, shadows URP/Lit, rounded 3D corners \u0026 ivy trim); BearChase EditMode 41/41 (16-joint LBS 2D rig entrance cinematic); WebCiBuild YUNA_WEB_PAGES_OK"
 }
