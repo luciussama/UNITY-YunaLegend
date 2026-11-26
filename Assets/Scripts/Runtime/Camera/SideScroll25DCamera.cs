@@ -98,6 +98,34 @@ namespace YunaLegend.Camera25D
             => Mathf.Lerp(7f, desktopWidth, Mathf.InverseLerp(.6f, 1.6f, aspect));
         private float ResponsiveMinimum => ResponsiveMinimumWidth(Aspect, minimumViewWidth);
 
+        // Test/capture override is explicit; narrow desktop windows and touch laptops keep desktop behavior.
+        public bool? MobilePresentationOverride { get; set; }
+        private bool IsMobilePresentation => MobilePresentationOverride ?? Application.isMobilePlatform;
+        private Vector3 mobileCardSupport;
+        private bool hasMobileCardSupport;
+
+        private void CacheMobileCardSupport()
+        {
+            if (!IsMobilePresentation)
+            {
+                return;
+            }
+            var card = FindPlatform(30);
+            if (card == null || card.Support.IsEmpty)
+            {
+                return;
+            }
+            bool onCard = playerTarget != null && playerTarget.CurrentSupportIndex == 30;
+            if (onCard && !playerTarget.IsGrounded && hasMobileCardSupport)
+            {
+                return;
+            }
+            // Capture the actual takeoff point, not a surface point sliding under the airborne girl.
+            float x = onCard ? playerTarget.transform.position.x : card.transform.position.x + card.spec.contact.offsetX;
+            mobileCardSupport = card.Support.PointNear(x);
+            hasMobileCardSupport = true;
+        }
+
         private Camera targetCamera;
 
         public bool AutoScrollActive { get => autoScrollActive; set => autoScrollActive = value; }
@@ -116,6 +144,7 @@ namespace YunaLegend.Camera25D
         private void LateUpdate()
         {
             if (targetCamera == null) targetCamera = GetComponent<Camera>();
+            CacheMobileCardSupport();
             if (Mathf.Abs(framedAspect - Aspect) > .005f)
             {
                 framedAspect = Aspect;
@@ -175,6 +204,13 @@ namespace YunaLegend.Camera25D
             var support = index == 0 || index == 22 ? null : FindPlatform(index - 1);
             float anchorX = support != null ? (support.spec.index==YieldingWoodFurniture.PlatformIndex?support.GetTakeoffPoint(scrollDirection,.35f).x:support.GetTopCenterWorld().x) : playerTarget.transform.position.x;
             float anchorY = support != null ? support.GetTopCenterWorld().y : playerTarget.transform.position.y;
+            CacheMobileCardSupport();
+            if (IsMobilePresentation && support != null && support.spec.index == 30
+                && support.Support.IsEmpty && hasMobileCardSupport)
+            {
+                anchorX = mobileCardSupport.x;
+                anchorY = mobileCardSupport.y;
+            }
             float reach = target != null ? (target.spec.index==YieldingWoodFurniture.PlatformIndex
                 ? Mathf.Abs(target.GetLandingPoint(scrollDirection).x-anchorX)+1.9f
                 : Mathf.Max(Mathf.Abs(target.Support.MinX-anchorX),Mathf.Abs(target.Support.MaxX-anchorX))+.7f) : 0f;
@@ -227,8 +263,17 @@ namespace YunaLegend.Camera25D
             float direction = Mathf.Sign(playerTarget.RunDirection);
             float width = effectiveSpan * Aspect;
             var current = FindPlatform(playerTarget.CurrentSupportIndex);
+            CacheMobileCardSupport();
             float groundY = DarkRoomPlatformGeometry.FloorSurfaceY;
-            if (current != null && !current.Support.IsEmpty)
+            bool mobileCardFlight = IsMobilePresentation && current != null && current.spec.index == 30
+                && hasMobileCardSupport;
+            if (mobileCardFlight)
+            {
+                // The last landing remains the jump's camera anchor after its physical collider disappears.
+                // Collapsing scenery must never drag the camera toward the room floor.
+                groundY = mobileCardSupport.y;
+            }
+            if (!mobileCardFlight && current != null && !current.Support.IsEmpty)
             {
                 groundY = current.Support.PointNear(playerTarget.transform.position.x).y;
             }
@@ -367,6 +412,7 @@ namespace YunaLegend.Camera25D
                 framedTarget = -1;
                 platforms = null;
                 guide = null;
+                hasMobileCardSupport = false;
             }
         }
 

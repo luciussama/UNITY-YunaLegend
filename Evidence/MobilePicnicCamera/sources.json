@@ -1,0 +1,18 @@
+{
+  "Assets/Scripts/Runtime/Picnic/Runtime/PicnicSceneryController.cs": {
+    "sha256": "5feb55428b604f58d34b2b31d52c15c3154832987beca9ae2f6acabc12de2da7",
+    "centralCloneMatch": true
+  },
+  "Assets/Scripts/Runtime/Picnic/Core/PicnicMobileCameraFraming.cs": {
+    "sha256": "0ed716b0ae336ffb986a641e99879ee9446ae0fd75e6d19cc43cc8923516c0f2",
+    "centralCloneMatch": true
+  },
+  "Assets/Scripts/Tests/EditMode/Picnic/PicnicMobileCameraFramingTests.cs": {
+    "sha256": "09171046f7bbe4f65b44720146880afe8c3de48f01998ee575f98b7e829ca8f3",
+    "centralCloneMatch": true
+  },
+  "Assets/Editor/PicnicMobileCameraReview.cs": {
+    "sha256": "db0a95287aea013b77b146e813685af12014224ed1b99f48562244ab693f6f15",
+    "centralCloneMatch": true
+  }
+}

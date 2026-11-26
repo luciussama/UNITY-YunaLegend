@@ -1,0 +1,6 @@
+{
+  "ProjectSettings/EditorBuildSettings.asset": "a8fc54cfb40e563cf17cba1f09dc8b21ecd934865a0b6e193c27675516fb4ee6",
+  "Assets/Scripts/Runtime/UI/TitlePhaseSelector.cs": "7a9b3663d5df6313ae2443972bf5edc9f50c6dd88579b5d25db2d0649919b6f1",
+  "Assets/Scripts/Runtime/UI/TitleScreenController.cs": "712a7e52b03878aebab7c683793a21654344a8f1d301e931c5e22fd5437ac075",
+  "Assets/Scenes/TitleScreen.unity": "06fe3befb082dfc30e8bb0c2ade0d9524efb3649b5ad2c888bdf15188cd08b39"
+}

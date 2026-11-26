@@ -1,0 +1,32 @@
+[
+  {
+    "hz": 30,
+    "framesPerTrial": 26,
+    "cameraDt": [
+      0.0333333351
+    ],
+    "maxCollapseInfluenceOnCameraMetres": 0.0,
+    "maxPhysicsTrajectoryDifferenceMetres": 0.0,
+    "maxCameraFrameDisplacementMetres": 0.20356503914360663
+  },
+  {
+    "hz": 60,
+    "framesPerTrial": 52,
+    "cameraDt": [
+      0.0166666675
+    ],
+    "maxCollapseInfluenceOnCameraMetres": 0.0,
+    "maxPhysicsTrajectoryDifferenceMetres": 0.0,
+    "maxCameraFrameDisplacementMetres": 0.10093514442430221
+  },
+  {
+    "hz": 120,
+    "framesPerTrial": 103,
+    "cameraDt": [
+      0.008333334
+    ],
+    "maxCollapseInfluenceOnCameraMetres": 0.0,
+    "maxPhysicsTrajectoryDifferenceMetres": 0.0,
+    "maxCameraFrameDisplacementMetres": 0.05025902063419391
+  }
+]

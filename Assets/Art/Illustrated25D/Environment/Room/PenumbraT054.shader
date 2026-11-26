@@ -10,6 +10,7 @@ Shader "YunaLegend/RoomPenumbraT054"
         _BlinkTex ("Approved closed eye", 2D) = "white" {}
         _BlinkEnabled ("Use approved eye mask", Float) = 0
         _SuppressHaze ("Use approved stumble alpha", Float) = 0
+        _SceneryPenumbra ("Keep scenery outside projected lights", Float) = 0
         _HasMoonWindow ("Panel contains moon window", Float) = 1
     }
     SubShader
@@ -27,7 +28,7 @@ Shader "YunaLegend/RoomPenumbraT054"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/2D/Include/Core2D.hlsl"
             TEXTURE2D(_MainTex); SAMPLER(sampler_MainTex);
             TEXTURE2D(_BlinkTex); SAMPLER(sampler_BlinkTex);
-            float _Blink, _BlinkEnabled, _SuppressHaze;
+            float _Blink, _BlinkEnabled, _SuppressHaze, _SceneryPenumbra;
             float4 _Color, _MoonPosition, _NandaPosition;
             float _Sprite, _Role, _MoonStrength, _NandaStrength, _Phosphor, _HasMoonWindow;
             float4 _FloorContact0, _FloorContact1, _FloorContact2;
@@ -66,6 +67,11 @@ Shader "YunaLegend/RoomPenumbraT054"
                         saturate(_Blink) * mask);
                 }
                 if (_SuppressHaze > .5) c.a *= smoothstep(.075,.18,c.a);
+                if (_SceneryPenumbra > .5)
+                {
+                    // Mobile card scenery stays in penumbra regardless of the fairy/moon crossing it.
+                    return half4(c.rgb * float3(.018,.022,.035),c.a);
+                }
                 if (_Role > 2.5) return half4(c.rgb * float3(.88,1.02,1.18),c.a);
                 // These are projected illustration lights, in the existing 3D world.
                 // They never move the physical support or modify the source painting.
