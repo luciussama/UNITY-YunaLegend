@@ -1,8 +1,8 @@
 {
-  "releaseId": "20261125-hud-yuna-hd",
+  "releaseId": "20261125-jardim-multitouch",
   "unity": "6000.3.28f1",
-  "builtAtUtc": "2026-11-25T20:01:42.756335+00:00",
-  "sourceBranch": "fix/picnic-editor-playmode",
+  "builtAtUtc": "2026-11-25T23:12:43.328597+00:00",
+  "sourceBranch": "regress\u00e3o-jardim",
   "scenes": [
     "TitleScreen",
     "Fase-Jogavel-Completa",
@@ -13,20 +13,21 @@
   ],
   "files": {
     "Build/WebGL.data.unityweb": {
-      "bytes": 266729776,
-      "sha256": "e2dac233966dcf88c08291b668bce69bfb4baf2d06b1afede0e49182fabb367d"
+      "bytes": 266730980,
+      "sha256": "b5f4e7930976d34e28dc0093ab26270bf67f107abecd8f0b41697bc426a4be1c"
     },
     "Build/WebGL.framework.js.unityweb": {
       "bytes": 90230,
-      "sha256": "571058c5e8053dd346d70049b0b99b6bebc9dc557efd0e77e74c3c87fe9ec46c"
+      "sha256": "5477dce064fedebc57fa19dab4688561b98931e508fd3544e34d3dfa8a47280d"
     },
     "Build/WebGL.loader.js": {
       "bytes": 47867,
-      "sha256": "0b990a8a4245ff69b48edc5f8d64ffbec040bd007f73d78da735c6f900bffd26"
+      "sha256": "f35a448b840b7ca7ea07010ec24e5e5dec777700a0b99549a98cfb2abce5d528"
     },
     "Build/WebGL.wasm.unityweb": {
-      "bytes": 11994468,
-      "sha256": "e6dcc43ffa0ee88f618ef77b5f995299dd53a6af65bf3294f5e093804522d9fb"
+      "bytes": 11993671,
+      "sha256": "a4c3707bd88b172e9c4ca0b435d0f4e66520b235e7f64bd14659f5ec1b03dd1a"
     }
-  }
+  },
+  "testResult": "Picnic EditMode 15/15; pointer events and simulation 30/60/120Hz; no physical mobile test"
 }

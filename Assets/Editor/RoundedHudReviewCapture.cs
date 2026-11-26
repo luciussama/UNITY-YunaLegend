@@ -202,14 +202,20 @@ namespace YunaLegend.EditorScripts
             {
                 if (count != 1) throw new Exception("Picnic UI event lost or duplicated");
             }
-            if (!hud.ConsumeTouchJump() || hud.ConsumeTouchJump()) throw new Exception("Jump event changed");
-            foreach (var trigger in hud.GetComponentsInChildren<EventTrigger>(true))
+            var jump = hud.transform.Find("PicnicHudCanvas/SafeArea/Jump").GetComponent<PicnicTouchButton>();
+            var jumpPointer = new PointerEventData(EventSystem.current) { pointerId = 2 };
+            ExecuteEvents.Execute(jump.gameObject, jumpPointer, ExecuteEvents.pointerDownHandler);
+            if (!hud.ConsumeTouchJump() || !hud.ConsumeTouchJump()) throw new Exception("Jump press/hold lost");
+            ExecuteEvents.Execute(jump.gameObject, jumpPointer, ExecuteEvents.pointerUpHandler);
+            if (hud.ConsumeTouchJump()) throw new Exception("Jump release lost");
+            foreach (var button in hud.GetComponentsInChildren<PicnicTouchButton>(true))
             {
-                var pointer = new PointerEventData(EventSystem.current);
-                ExecuteEvents.Execute(trigger.gameObject, pointer, ExecuteEvents.pointerDownHandler);
-                float expected = trigger.name == "Left" ? -1f : 1f;
+                if (button.name == "Jump") continue;
+                var pointer = new PointerEventData(EventSystem.current) { pointerId = 1 };
+                ExecuteEvents.Execute(button.gameObject, pointer, ExecuteEvents.pointerDownHandler);
+                float expected = button.name == "Left" ? -1f : 1f;
                 if (hud.TouchAxis != expected) throw new Exception("Hold direction changed");
-                ExecuteEvents.Execute(trigger.gameObject, pointer, ExecuteEvents.pointerUpHandler);
+                ExecuteEvents.Execute(button.gameObject, pointer, ExecuteEvents.pointerUpHandler);
                 if (hud.TouchAxis != 0f) throw new Exception("Hold release changed");
             }
             Debug.Log("PICNIC_UI_EVENTS_OK five actions, jump, hold and release");

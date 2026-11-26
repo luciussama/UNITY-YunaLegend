@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 using YunaLegend.Picnic.Core;
 using YunaLegend.Presentation;
@@ -19,8 +20,8 @@ namespace YunaLegend.Picnic.Runtime
         public event Action MenuRequested;
         public event Action PauseRequested;
 
-        public float TouchAxis { get; private set; }
-        private bool touchJumpQueued;
+        public float TouchAxis => touchInput.Axis;
+        private readonly PicnicTouchInput touchInput = new PicnicTouchInput();
 
         private GameObject storyCanvas;
         private Image storyBg;
@@ -52,9 +53,7 @@ namespace YunaLegend.Picnic.Runtime
 
         public bool ConsumeTouchJump()
         {
-            bool v = touchJumpQueued;
-            touchJumpQueued = false;
-            return v;
+            return touchInput.ReadJump();
         }
 
         public void Build()
@@ -86,6 +85,7 @@ namespace YunaLegend.Picnic.Runtime
             if (hudCanvas.activeSelf == showStory) hudCanvas.SetActive(!showStory);
             if (visibilityChanged)
             {
+                touchInput.Clear();
                 Canvas.ForceUpdateCanvases();
             }
             RefreshLayout(visibilityChanged);
@@ -129,16 +129,15 @@ namespace YunaLegend.Picnic.Runtime
             if (modalMode != lastModalMode)
             {
                 lastModalMode = modalMode;
+                touchInput.Clear();
                 modalPanel.SetActive(modalMode != 0);
                 if (modalMode == 1)
                 {
-                    TouchAxis = 0f;
                     modalTitle.text = "PAUSA";
                     modalBody.text = "O jardim espera por voce.";
                 }
                 else if (modalMode == 2)
                 {
-                    TouchAxis = 0f;
                     modalTitle.text = "TENTAR NOVAMENTE";
                     modalBody.text = "Vamos tentar esse trechinho de novo.";
                 }
@@ -253,7 +252,7 @@ namespace YunaLegend.Picnic.Runtime
             CreateButton("Pause", hudSafeArea, new Vector2(0.88f, 0.90f), new Vector2(0.98f, 0.98f), "Pausa", () => PauseRequested?.Invoke());
             CreateHoldButton("Left", hudSafeArea, new Vector2(0.02f, 0.04f), new Vector2(0.12f, 0.16f), "ESQ", -1f);
             CreateHoldButton("Right", hudSafeArea, new Vector2(0.14f, 0.04f), new Vector2(0.24f, 0.16f), "DIR", 1f);
-            CreateButton("Jump", hudSafeArea, new Vector2(0.84f, 0.04f), new Vector2(0.98f, 0.16f), "PULAR", () => touchJumpQueued = true);
+            CreateTouchButton("Jump", hudSafeArea, new Vector2(0.84f, 0.04f), new Vector2(0.98f, 0.16f), "PULAR", touchInput.PressJump);
 
             modalPanel = CreateImage("Modal", hudSafeArea, new Vector2(0.26f, 0.34f), new Vector2(0.74f, 0.68f), HudTheme.Paper).gameObject;
             modalTitle = CreateText("ModalTitle", modalPanel.transform, new Vector2(0.05f, 0.68f), new Vector2(0.95f, 0.92f), "", 24, new Color(0.22f, 0.32f, 0.2f));
@@ -265,32 +264,30 @@ namespace YunaLegend.Picnic.Runtime
 
         private void CreateHoldButton(string name, Transform parent, Vector2 min, Vector2 max, string label, float dir)
         {
-            var img = CreateImage(name, parent, min, max, HudTheme.Plum);
-            CreateText("Label", img.transform, Vector2.zero, Vector2.one, label, 20, Color.white);
-            var trigger = img.gameObject.AddComponent<EventTrigger>();
-            AddTrigger(trigger, EventTriggerType.PointerDown, () =>
-            {
-                TouchAxis = dir;
-                img.color = HudTheme.Rose;
-            });
-            AddTrigger(trigger, EventTriggerType.PointerUp, () => ReleaseHold(img, dir));
-            AddTrigger(trigger, EventTriggerType.PointerExit, () => ReleaseHold(img, dir));
+            CreateTouchButton(name, parent, min, max, label, pointer => touchInput.PressDirection(pointer, dir));
         }
 
-        private void ReleaseHold(Image image, float direction)
+        private void CreateTouchButton(string name, Transform parent, Vector2 min, Vector2 max, string label, Action<int> press)
         {
-            if (Mathf.Approximately(TouchAxis, direction))
+            var image = CreateImage(name, parent, min, max, HudTheme.Plum);
+            var button = image.gameObject.AddComponent<PicnicTouchButton>();
+            button.Pressed = press;
+            button.Released = touchInput.Release;
+            CreateText("Label", image.transform, Vector2.zero, Vector2.one, label, 20, Color.white);
+            HudTheme.Button(button);
+        }
+
+        private void OnApplicationFocus(bool focused)
+        {
+            if (!focused)
             {
-                TouchAxis = 0f;
+                touchInput.Clear();
             }
-            image.color = HudTheme.Plum;
         }
 
-        private static void AddTrigger(EventTrigger trigger, EventTriggerType type, Action cb)
+        private void OnDisable()
         {
-            var entry = new EventTrigger.Entry { eventID = type };
-            entry.callback.AddListener(_ => cb());
-            trigger.triggers.Add(entry);
+            touchInput.Clear();
         }
 
         private GameObject CreateCanvas(string name, int order)
@@ -404,9 +401,9 @@ namespace YunaLegend.Picnic.Runtime
             hudHearts.fontSize = Mathf.RoundToInt(18 * scale);
             hudStatus.fontSize = Mathf.RoundToInt(16 * scale);
             Place(hudSafeArea.Find("Pause"), Vector2.one, Vector2.one, -12, -12, 60, 52, scale);
-            Place(hudSafeArea.Find("Left"), Vector2.zero, Vector2.zero, 12, 16, 64, 64, scale);
-            Place(hudSafeArea.Find("Right"), Vector2.zero, Vector2.zero, 88, 16, 64, 64, scale);
-            Place(hudSafeArea.Find("Jump"), new Vector2(1f, 0f), new Vector2(1f, 0f), -12, 16, 108, 64, scale);
+            Place(hudSafeArea.Find("Left"), Vector2.zero, Vector2.zero, 12, 16, 80, 80, scale);
+            Place(hudSafeArea.Find("Right"), Vector2.zero, Vector2.zero, 104, 16, 80, 80, scale);
+            Place(hudSafeArea.Find("Jump"), new Vector2(1f, 0f), new Vector2(1f, 0f), -12, 16, 108, 80, scale);
 
             float cardWidth = Mathf.Min(width - 32, 540);
             float cardHeight = portrait ? 320 : 232;
@@ -472,10 +469,22 @@ namespace YunaLegend.Picnic.Runtime
 
         private static void EnsureEventSystem()
         {
-            if (FindFirstObjectByType<EventSystem>() == null)
+            var events = FindFirstObjectByType<EventSystem>();
+            if (events == null)
             {
-                new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
+                events = new GameObject("EventSystem", typeof(EventSystem)).GetComponent<EventSystem>();
             }
+            var legacy = events.GetComponent<StandaloneInputModule>();
+            if (legacy != null)
+            {
+                legacy.enabled = false;
+            }
+            var module = events.GetComponent<InputSystemUIInputModule>();
+            if (module == null)
+            {
+                module = events.gameObject.AddComponent<InputSystemUIInputModule>();
+            }
+            module.pointerBehavior = UIPointerBehavior.AllPointersAsIs;
         }
     }
 }
