@@ -19,6 +19,9 @@ namespace YunaLegend.BearChase.Runtime
         private RectTransform stageRect;
         private RectTransform yunaRect;
         private Image yunaImage;
+        private BearChaseYunaRigUiView yunaRigView;
+        private float trackedEntranceElapsed;
+        private bool wasEntranceActive;
         private RectTransform yunaShadowRect;
         private Image yunaShadowImage;
         private RectTransform yunaContactShadowRect;
@@ -178,18 +181,80 @@ namespace YunaLegend.BearChase.Runtime
             Canvas.ForceUpdateCanvases();
         }
 
-        public void ApplySample(BearChaseEntranceSample sample, bool isEntranceActive)
+        public void ApplySample(BearChaseEntranceSample sample, bool isEntranceActive, float? elapsedSecondsOverride = null)
         {
             SetVisible(isEntranceActive);
             if (!isEntranceActive || stageRect == null)
             {
+                wasEntranceActive = false;
+                trackedEntranceElapsed = 0f;
                 return;
             }
 
+            if (elapsedSecondsOverride.HasValue)
+            {
+                trackedEntranceElapsed = elapsedSecondsOverride.Value;
+            }
+            else
+            {
+                if (!wasEntranceActive)
+                {
+                    trackedEntranceElapsed = 0f;
+                }
+                else
+                {
+                    trackedEntranceElapsed += Mathf.Min(0.1f, Time.deltaTime);
+                }
+            }
+            wasEntranceActive = true;
+
             const float floorNormY = 0.245f;
 
-            // Yuna (caminhada suave com pivo de cabeca/tronco continuo ou alcance ancorado nos pes)
-            if (yunaRect != null && yunaImage != null)
+            // Yuna (Rig 2D esqueletal 16 juntas LBS quando disponivel, com fallback seguro para spritesheet legado)
+            if (yunaRigView != null && yunaRigView.IsBuilt)
+            {
+                if (yunaImage != null && yunaImage.enabled)
+                {
+                    yunaImage.enabled = false;
+                }
+
+                float supportX = sample.NormalizedYunaX;
+                var yAnchor = new Vector2(supportX, floorNormY + sample.YunaWalkBobY);
+                BearChaseYunaRigPose rigPose = BearChaseYunaRigState.Evaluate(trackedEntranceElapsed, sample);
+                yunaRigView.ApplyPose(rigPose, yAnchor, sample.YunaScaleX, sample.YunaScaleY, 0f);
+
+                float yunaAirFactor = Mathf.Clamp01(sample.YunaWalkBobY / 0.036f);
+                float baseShadowW = rigPose.Beat == BearChaseEntranceBeat.Reach ? 225f : 195f;
+
+                if (yunaShadowRect != null)
+                {
+                    float shrink = 1f - yunaAirFactor * 0.24f;
+                    var sAnchor = new Vector2(supportX, floorNormY - 0.002f);
+                    yunaShadowRect.anchorMin = sAnchor;
+                    yunaShadowRect.anchorMax = sAnchor;
+                    yunaShadowRect.anchoredPosition = Vector2.zero;
+                    yunaShadowRect.sizeDelta = new Vector2(baseShadowW * shrink, 42f * shrink);
+                    if (yunaShadowImage != null)
+                    {
+                        yunaShadowImage.color = new Color(0.05f, 0.025f, 0.015f, Mathf.Lerp(0.56f, 0.34f, yunaAirFactor));
+                    }
+                }
+
+                if (yunaContactShadowRect != null)
+                {
+                    float coreShrink = 1f - yunaAirFactor * 0.38f;
+                    var cAnchor = new Vector2(supportX, floorNormY - 0.001f);
+                    yunaContactShadowRect.anchorMin = cAnchor;
+                    yunaContactShadowRect.anchorMax = cAnchor;
+                    yunaContactShadowRect.anchoredPosition = Vector2.zero;
+                    yunaContactShadowRect.sizeDelta = new Vector2(baseShadowW * 0.72f * coreShrink, 20f * coreShrink);
+                    if (yunaContactShadowImage != null)
+                    {
+                        yunaContactShadowImage.color = new Color(0.03f, 0.015f, 0.01f, Mathf.Lerp(0.72f, 0.14f, yunaAirFactor));
+                    }
+                }
+            }
+            else if (yunaRect != null && yunaImage != null)
             {
                 AlignedSpriteFrame[] activeSet = sample.UseReachAtlas ? reachGirlFrames : approachGirlFrames;
                 int idx = Mathf.Clamp(sample.GirlFrameIndex, 0, activeSet.Length - 1);
@@ -752,6 +817,18 @@ namespace YunaLegend.BearChase.Runtime
             yunaImage = yunaRect.gameObject.AddComponent<Image>();
             yunaImage.preserveAspect = false;
             yunaImage.raycastTarget = false;
+
+            var rigHost = new GameObject("YunaRig2DHost", typeof(BearChaseYunaRigUiView));
+            rigHost.transform.SetParent(parent, false);
+            yunaRigView = rigHost.GetComponent<BearChaseYunaRigUiView>();
+            if (yunaRigView.TryBuild(parent, 395f))
+            {
+                yunaImage.enabled = false;
+            }
+            else
+            {
+                yunaRigView = null;
+            }
 
             fairyGlowRect = CreateRect("FairyBlueAura", parent, Vector2.zero, Vector2.zero, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(265f, 265f));
             var glowImg = fairyGlowRect.gameObject.AddComponent<Image>();

@@ -6,9 +6,11 @@ namespace YunaLegend.Picnic.Core
     {
         Idle,
         Run,
+        JumpAnticipation,
         JumpRise,
         JumpApex,
         Fall,
+        JumpLand,
         DiscomfortWalk,
         GravelStumble,
         Balance,
@@ -612,6 +614,67 @@ namespace YunaLegend.Picnic.Core
                 backElbowDeg: 22f,
                 scaleX: 1f,
                 scaleY: 1f,
+                expression: expression);
+        }
+
+        public static PicnicYunaRigPose EvaluateJumpAnticipation(PicnicYunaExpression expression)
+        {
+            // Quick coiled crouch right before/at takeoff: knees flexed, torso leaning forward,
+            // both arms reaching forward to gather upward momentum.
+            return new PicnicYunaRigPose(
+                PicnicYunaMotionKind.JumpAnticipation,
+                hipsBobY: -0.075f,
+                torsoLeanDeg: -16f,
+                chestBendDeg: -10f,
+                skirtSwayDeg: -10f,
+                skirtFlare: 0.11f,
+                headTiltDeg: 8f,
+                frontPigtailDeg: -12f,
+                frontPigtailTipDeg: -18f,
+                backPigtailDeg: -14f,
+                backPigtailTipDeg: -22f,
+                frontLegDeg: 32f,
+                frontKneeDeg: -64f,
+                frontAnkleDeg: 28f,
+                backLegDeg: 18f,
+                backKneeDeg: -58f,
+                backAnkleDeg: 24f,
+                frontArmDeg: 48f,
+                frontElbowDeg: 36f,
+                backArmDeg: 36f,
+                backElbowDeg: 32f,
+                scaleX: 1.11f,
+                scaleY: 0.89f,
+                expression: expression);
+        }
+
+        public static PicnicYunaRigPose EvaluateJumpLanding(PicnicYunaExpression expression)
+        {
+            // Cushioned landing crouch absorbing downward impact before smoothly rising back to run/idle.
+            return new PicnicYunaRigPose(
+                PicnicYunaMotionKind.JumpLand,
+                hipsBobY: -0.072f,
+                torsoLeanDeg: -14f,
+                chestBendDeg: -9f,
+                skirtSwayDeg: 6f,
+                skirtFlare: 0.15f,
+                headTiltDeg: -6f,
+                frontPigtailDeg: -16f,
+                frontPigtailTipDeg: -24f,
+                backPigtailDeg: -18f,
+                backPigtailTipDeg: -26f,
+                frontLegDeg: 30f,
+                frontKneeDeg: -60f,
+                frontAnkleDeg: 24f,
+                backLegDeg: 16f,
+                backKneeDeg: -54f,
+                backAnkleDeg: 20f,
+                frontArmDeg: 36f,
+                frontElbowDeg: 40f,
+                backArmDeg: -22f,
+                backElbowDeg: 34f,
+                scaleX: 1.13f,
+                scaleY: 0.87f,
                 expression: expression);
         }
 

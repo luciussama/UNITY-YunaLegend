@@ -20,6 +20,12 @@ namespace YunaLegend.Picnic.Runtime
         private Material yunaShadowMat;
         private Texture2D yunaShadowTexture;
         private const float YunaArtScale = 1.15f;
+        // Perspective pitch compensation: 3D ground terraces extend back in +Z (DepthZ = 2.20),
+        // so lifting Yuna & ground insects ~0.12u places their soles/bases naturally ON TOP
+        // of the walkable lawn/pebble surface instead of hanging off the front bottom edge.
+        private const float GroundSurfaceBaselineOffsetY = 0.12f;
+        private const float WormSurfaceBaselineOffsetPx = -14f;
+        private const float EnemySurfaceBaselineOffsetPx = -11f;
         private SpriteRenderer[] sweatDrops;
         private Transform nandaRoot;
         private SpriteRenderer nandaRenderer;
@@ -188,8 +194,8 @@ namespace YunaLegend.Picnic.Runtime
                 var w = sim.Encounters.Worms[i];
                 var container = new GameObject(w.Id + "_Root");
                 container.transform.SetParent(transform, false);
-                // Seated right on the 3D sculpted pebble surface (w.Y + 2f in pixel space, Z = -0.10f)
-                container.transform.position = PicnicAtlasCatalog.ToUnity(w.X, w.Y + 2f, -0.10f);
+                // Seated naturally on the walkable center of the 3D sculpted pebble surface (not the front cliff edge)
+                container.transform.position = PicnicAtlasCatalog.ToUnity(w.X, w.Y + WormSurfaceBaselineOffsetPx, -0.10f);
 
                 var backMoundGo = new GameObject("BackDirtMound", typeof(SpriteRenderer));
                 backMoundGo.transform.SetParent(container.transform, false);
@@ -243,8 +249,10 @@ namespace YunaLegend.Picnic.Runtime
 
         public void Apply(PicnicSimulation sim, float? deltaTimeOverride = null)
         {
-            // Yuna (direct transform placement without toggling CharacterController every frame)
-            yunaRoot.position = PicnicAtlasCatalog.ToUnity(sim.PlayerX, sim.PlayerY, -0.15f);
+            // Yuna (aligned naturally onto the walkable top surface of the 2.5D terrain)
+            Vector3 yunaPos = PicnicAtlasCatalog.ToUnity(sim.PlayerX, sim.PlayerY, -0.15f);
+            yunaPos.y += GroundSurfaceBaselineOffsetY;
+            yunaRoot.position = yunaPos;
 
             if (!hasLastStrideX)
             {
@@ -351,7 +359,7 @@ namespace YunaLegend.Picnic.Runtime
                 if (enemyRoots[i].gameObject.activeSelf != near) enemyRoots[i].gameObject.SetActive(near);
                 if (!near) continue;
 
-                enemyRoots[i].position = PicnicAtlasCatalog.ToUnity(e.X, e.Y + 4f, -0.05f);
+                enemyRoots[i].position = PicnicAtlasCatalog.ToUnity(e.X, e.Y + EnemySurfaceBaselineOffsetPx, -0.05f);
                 int frame = e.Alive ? Mathf.FloorToInt(sim.Time * (e.Spec.Kind == PicnicEnemyKind.Caterpillar && e.Hp == 1 ? 12f : 7f)) % 2 : 0;
                 Sprite spr = e.Spec.Kind == PicnicEnemyKind.Ant
                     ? antSprites[frame]
@@ -419,7 +427,7 @@ namespace YunaLegend.Picnic.Runtime
             {
                 var e = sim.Enemies[i];
                 enemyRoots[i].gameObject.SetActive(true);
-                enemyRoots[i].position = PicnicAtlasCatalog.ToUnity(e.X, e.Y + 4f, -0.05f);
+                enemyRoots[i].position = PicnicAtlasCatalog.ToUnity(e.X, e.Y + EnemySurfaceBaselineOffsetPx, -0.05f);
                 Sprite spr = e.Spec.Kind == PicnicEnemyKind.Ant ? antSprites[0] : greenCatSprites[0];
                 enemyRenderers[i].sprite = spr;
                 enemyRenderers[i].color = Color.white;
