@@ -394,16 +394,15 @@ namespace YunaLegend.ToyRoom.Runtime
             speakerText.rectTransform.sizeDelta = new Vector2(-(textLeft + 10f * px), 20f * px);
 
             dialogueBodyText.fontSize = f15;
-            dialogueBodyText.rectTransform.offsetMin = new Vector2(textLeft, isLandscape ? 22f * px : 28f * px);
-            dialogueBodyText.rectTransform.offsetMax = new Vector2(-12f * px, isLandscape ? -22f * px : -28f * px);
+            dialogueBodyText.rectTransform.offsetMin = new Vector2(textLeft, 8f * px);
+            dialogueBodyText.rectTransform.offsetMax = new Vector2(-26f * px, isLandscape ? -22f * px : -26f * px);
 
-            dialogueHintText.fontSize = f14;
-            dialogueHintText.text = "Toque na tela para avançar";
-            dialogueHintText.rectTransform.offsetMin = new Vector2(textLeft, isLandscape ? 6f * px : 9f * px);
-            dialogueHintText.rectTransform.offsetMax = new Vector2(-12f * px, -8f * px);
+            dialogueHintText.enabled = false;
+            dialogueHintText.text = string.Empty;
+            HudTheme.EnsureCornerTapCue(dialogueRoot.transform, 18f * px, 8f * px, 6f * px, new Color(HudTheme.Plum.r, HudTheme.Plum.g, HudTheme.Plum.b, 0.68f));
 
             // Quadro Poetico em Pergaminho NO TOPO abaixo da barra superior (zero colisao com Counter/Botoes)
-            float poeticH = 116f * px;
+            float poeticH = 98f * px;
             poeticRect.anchorMin = new Vector2(0.5f, 1f);
             poeticRect.anchorMax = new Vector2(0.5f, 1f);
             poeticRect.pivot = new Vector2(0.5f, 1f);
@@ -419,13 +418,12 @@ namespace YunaLegend.ToyRoom.Runtime
             flowerRightRect.localScale = Vector3.one * flowerScale;
 
             poeticText.fontSize = f16;
-            poeticText.rectTransform.offsetMin = new Vector2(18f * px, 22f * px);
-            poeticText.rectTransform.offsetMax = new Vector2(-18f * px, -14f * px);
+            poeticText.rectTransform.offsetMin = new Vector2(18f * px, 10f * px);
+            poeticText.rectTransform.offsetMax = new Vector2(-28f * px, -10f * px);
 
-            poeticHintText.fontSize = f14;
-            poeticHintText.text = "Toque na tela para avançar";
-            poeticHintText.rectTransform.offsetMin = new Vector2(12f * px, 6f * px);
-            poeticHintText.rectTransform.offsetMax = new Vector2(-12f * px, -8f * px);
+            poeticHintText.enabled = false;
+            poeticHintText.text = string.Empty;
+            HudTheme.EnsureCornerTapCue(poeticRoot.transform, 18f * px, 8f * px, 6f * px, new Color(HudTheme.Plum.r, HudTheme.Plum.g, HudTheme.Plum.b, 0.68f));
 
             // Controles inferiores (Joystick + Botao Dourado PEGAR/GUARDAR) cabendo integralmente no enquadramento
             float joySize = 104f * px;
@@ -506,45 +504,45 @@ namespace YunaLegend.ToyRoom.Runtime
             joystickHandleRect.sizeDelta = new Vector2(92f, 92f);
             joystickComponent.Configure(joystickRect, joystickHandleRect, 72f, 0.1f);
 
-            dialogueRect.anchorMin = new Vector2(0.5f, 0f);
-            dialogueRect.anchorMax = new Vector2(0.5f, 0f);
-            dialogueRect.pivot = new Vector2(0.5f, 0f);
-            dialogueRect.anchoredPosition = new Vector2(0f, 38f);
-            dialogueRect.sizeDelta = new Vector2(980f, 174f);
-            dialogueInnerRect.sizeDelta = new Vector2(-14f, -14f);
-            portraitHaloRect.anchoredPosition = new Vector2(72f, 6f);
-            portraitHaloRect.sizeDelta = new Vector2(106f, 106f);
-            portraitRingRect.anchoredPosition = new Vector2(72f, 6f);
-            portraitRingRect.sizeDelta = new Vector2(92f, 92f);
-            portraitInitialText.fontSize = 36;
-            speakerText.fontSize = 22;
-            speakerText.rectTransform.anchoredPosition = new Vector2(138f, -18f);
-            speakerText.rectTransform.sizeDelta = new Vector2(-170f, 34f);
-            dialogueBodyText.fontSize = 26;
-            dialogueBodyText.rectTransform.offsetMin = new Vector2(138f, 34f);
-            dialogueBodyText.rectTransform.offsetMax = new Vector2(-32f, -50f);
-            dialogueHintText.fontSize = 15;
-            dialogueHintText.text = "Clique ou Espaço para avançar";
-            dialogueHintText.rectTransform.offsetMin = new Vector2(138f, 12f);
-            dialogueHintText.rectTransform.offsetMax = new Vector2(-24f, -12f);
+            // Desktop: place DialogueBox & PoeticNarration in the top-center safe band between Counter and Pause/Mute
+            // so they stay crisp and legible without ever covering Yuna or the room art.
+            dialogueRect.anchorMin = new Vector2(0.5f, 1f);
+            dialogueRect.anchorMax = new Vector2(0.5f, 1f);
+            dialogueRect.pivot = new Vector2(0.5f, 1f);
+            dialogueRect.anchoredPosition = new Vector2(0f, -18f);
+            dialogueRect.sizeDelta = new Vector2(560f, 118f);
+            dialogueInnerRect.sizeDelta = new Vector2(-12f, -12f);
+            portraitHaloRect.anchoredPosition = new Vector2(54f, 0f);
+            portraitHaloRect.sizeDelta = new Vector2(80f, 80f);
+            portraitRingRect.anchoredPosition = new Vector2(54f, 0f);
+            portraitRingRect.sizeDelta = new Vector2(68f, 68f);
+            portraitInitialText.fontSize = 28;
+            speakerText.fontSize = 18;
+            speakerText.rectTransform.anchoredPosition = new Vector2(104f, -12f);
+            speakerText.rectTransform.sizeDelta = new Vector2(-124f, 26f);
+            dialogueBodyText.fontSize = 21;
+            dialogueBodyText.rectTransform.offsetMin = new Vector2(104f, 12f);
+            dialogueBodyText.rectTransform.offsetMax = new Vector2(-36f, -38f);
+            dialogueHintText.enabled = false;
+            dialogueHintText.text = string.Empty;
+            HudTheme.EnsureCornerTapCue(dialogueRoot.transform, 22f, 10f, 8f, new Color(HudTheme.Plum.r, HudTheme.Plum.g, HudTheme.Plum.b, 0.78f));
 
             poeticRect.anchorMin = new Vector2(0.5f, 1f);
             poeticRect.anchorMax = new Vector2(0.5f, 1f);
             poeticRect.pivot = new Vector2(0.5f, 1f);
-            poeticRect.anchoredPosition = new Vector2(0f, -34f);
-            poeticRect.sizeDelta = new Vector2(780f, 168f);
-            poeticInnerRect.sizeDelta = new Vector2(-16f, -16f);
-            flowerLeftRect.anchoredPosition = new Vector2(18f, -18f);
-            flowerLeftRect.localScale = Vector3.one;
-            flowerRightRect.anchoredPosition = new Vector2(-18f, -18f);
-            flowerRightRect.localScale = Vector3.one;
-            poeticText.fontSize = 32;
-            poeticText.rectTransform.offsetMin = new Vector2(36f, 28f);
-            poeticText.rectTransform.offsetMax = new Vector2(-36f, -20f);
-            poeticHintText.fontSize = 14;
-            poeticHintText.text = "Avança automaticamente · clique para adiantar";
-            poeticHintText.rectTransform.offsetMin = new Vector2(20f, 10f);
-            poeticHintText.rectTransform.offsetMax = new Vector2(-20f, -10f);
+            poeticRect.anchoredPosition = new Vector2(0f, -18f);
+            poeticRect.sizeDelta = new Vector2(560f, 112f);
+            poeticInnerRect.sizeDelta = new Vector2(-12f, -12f);
+            flowerLeftRect.anchoredPosition = new Vector2(16f, -16f);
+            flowerLeftRect.localScale = Vector3.one * 0.85f;
+            flowerRightRect.anchoredPosition = new Vector2(-16f, -16f);
+            flowerRightRect.localScale = Vector3.one * 0.85f;
+            poeticText.fontSize = 26;
+            poeticText.rectTransform.offsetMin = new Vector2(28f, 12f);
+            poeticText.rectTransform.offsetMax = new Vector2(-36f, -12f);
+            poeticHintText.enabled = false;
+            poeticHintText.text = string.Empty;
+            HudTheme.EnsureCornerTapCue(poeticRoot.transform, 20f, 10f, 8f, new Color(HudTheme.Plum.r, HudTheme.Plum.g, HudTheme.Plum.b, 0.68f));
         }
 
         private float ComputePxToCanvas(Vector2 canvasSize)
@@ -815,7 +813,9 @@ namespace YunaLegend.ToyRoom.Runtime
             bRt.offsetMax = new Vector2(-32f, -50f);
 
             dialogueHintText = CreateLabel("DialogueHint", dialogueRoot.transform, font, 16, TextAnchor.LowerRight, HudTheme.Plum);
-            dialogueHintText.text = IsMobileOrTouchDevice() ? "Toque na tela para avançar" : "Clique ou Espaço para avançar";
+            dialogueHintText.text = string.Empty;
+            dialogueHintText.enabled = false;
+            HudTheme.EnsureCornerTapCue(dialogueRoot.transform, 22f, 10f, 8f, new Color(HudTheme.Plum.r, HudTheme.Plum.g, HudTheme.Plum.b, 0.78f));
             var hRt = dialogueHintText.rectTransform;
             hRt.anchorMin = Vector2.zero;
             hRt.anchorMax = Vector2.one;
@@ -867,7 +867,9 @@ namespace YunaLegend.ToyRoom.Runtime
             tRt.offsetMax = new Vector2(-36f, -20f);
 
             poeticHintText = CreateLabel("PoeticHint", poeticRoot.transform, uiFont, 14, TextAnchor.LowerCenter, new Color(0.518f, 0.392f, 0.404f, 0.78f));
-            poeticHintText.text = IsMobileOrTouchDevice() ? "Toque na tela para avançar" : "Avança automaticamente · clique para adiantar";
+            poeticHintText.text = string.Empty;
+            poeticHintText.enabled = false;
+            HudTheme.EnsureCornerTapCue(poeticRoot.transform, 20f, 10f, 8f, new Color(HudTheme.Plum.r, HudTheme.Plum.g, HudTheme.Plum.b, 0.68f));
             var hRt = poeticHintText.rectTransform;
             hRt.anchorMin = Vector2.zero;
             hRt.anchorMax = Vector2.one;

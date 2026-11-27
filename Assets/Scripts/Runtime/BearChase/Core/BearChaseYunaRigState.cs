@@ -102,17 +102,22 @@ namespace YunaLegend.BearChase.Core
     public static class BearChaseYunaRigState
     {
         private const float TwoPi = (float)(Math.PI * 2.0);
-        private const float WalkCyclesAcrossApproach = 4.0f; // 4 full 2-step cycles = 8 steps
+        private const float DegToRad = (float)(Math.PI / 180.0);
+        private const float RadToDeg = (float)(180.0 / Math.PI);
 
-        // Cautious storybook walk cycle (8 cyclic phases: Contact -> Down -> Passing -> Push-off -> Toe-off -> Knee Lift -> Swing -> Pre-contact)
-        private static readonly float[] WalkHipDeg         = {  24f,  14f,  -2f, -20f, -24f, -10f,  10f,  22f };
-        private static readonly float[] WalkKneeDeg        = {  -6f, -20f, -10f, -10f, -28f, -52f, -34f, -12f };
-        private static readonly float[] WalkAnkleDeg       = {  14f,   2f,  -4f, -20f, -22f, -10f,   4f,  12f };
-        private static readonly float[] WalkFrontArmDeg    = { -18f, -12f,   0f,  14f,  18f,  10f,  -2f, -14f };
-        private static readonly float[] WalkFrontElbowDeg  = {  22f,  26f,  30f,  36f,  38f,  32f,  26f,  22f };
-        private static readonly float[] WalkBackArmDeg     = { -20f, -14f,   0f,  16f,  22f,  12f,  -2f, -16f };
-        private static readonly float[] WalkBackElbowDeg   = {  24f,  28f,  34f,  40f,  42f,  36f,  28f,  24f };
-        private static readonly float[] WalkHipsBobY       = { 0.002f, -0.020f, -0.002f, 0.028f, 0.002f, -0.020f, -0.002f, 0.028f };
+        // Exact physical foot-lock coupling:
+        // Total travel across 1920px canvas = (0.495 - 0.195) * 1920 = 576 px.
+        // Hip-to-sole length L = 0.45 * 395 = 177.75 px; one step at ±24 deg covers 2 * 177.75 * sin(24 deg) = 144.6 px.
+        // 576 / 144.6 = 3.98 steps -> exactly 2.0 full 2-step cycles (4 calm, cautious steps, zero foot sliding).
+        public const float WalkCyclesAcrossApproach = 2.0f;
+        public const float WalkStrideMaxDeg = 23.9f;
+        private static readonly float WalkStrideSinMax = (float)Math.Sin(WalkStrideMaxDeg * DegToRad);
+
+        // Arm swing tables synchronized with the 2.0-cycle cautious walk
+        private static readonly float[] WalkFrontArmDeg    = { -14f, -10f,   0f,  10f,  14f,   8f,  -2f, -10f };
+        private static readonly float[] WalkFrontElbowDeg  = {  20f,  24f,  28f,  32f,  34f,  28f,  24f,  20f };
+        private static readonly float[] WalkBackArmDeg     = { -16f, -12f,   0f,  12f,  16f,  10f,  -2f, -12f };
+        private static readonly float[] WalkBackElbowDeg   = {  22f,  26f,  30f,  36f,  38f,  32f,  26f,  22f };
 
         public static BearChaseYunaRigPose Evaluate(float elapsedSeconds, BearChaseEntranceSample sample)
         {
@@ -142,41 +147,49 @@ namespace YunaLegend.BearChase.Core
                     ? Clamp01((sample.NormalizedYunaX - BearChaseEntranceTimeline.YunaStartX) / travelSpan)
                     : 0f;
 
-                // Fade stride amplitude smoothly at start (0..0.06) and end (0.90..1.00) so start/stop feels organic
-                float startEnv = SmoothStep(Clamp01(walkProgress / 0.06f));
-                float endEnv = SmoothStep(Clamp01((1f - walkProgress) / 0.10f));
+                // Tight start/end envelope so full foot-locked stance engages immediately and plants cleanly at stop
+                float startEnv = SmoothStep(Clamp01(walkProgress / 0.04f));
+                float endEnv = SmoothStep(Clamp01((1f - walkProgress) / 0.06f));
                 float env = startEnv * endEnv;
 
                 float phase = PositiveMod(walkProgress * WalkCyclesAcrossApproach, 1f);
                 float opposite = PositiveMod(phase + 0.5f, 1f);
                 float doubleRad = phase * 2f * TwoPi;
 
-                float bobY = SampleCyclic(WalkHipsBobY, phase) * env;
+                EvaluateFootLockedLeg(phase, out float fHip, out float fKnee, out float fAnkle);
+                EvaluateFootLockedLeg(opposite, out float bHip, out float bKnee, out float bAnkle);
+
+                // Geometric hip bob from supporting leg arc (highest at mid-stance theta=0, lowest at crossover)
+                float stanceHipDeg = phase < 0.5f ? fHip : bHip;
+                float cosStance = (float)Math.Cos(stanceHipDeg * DegToRad);
+                float cosMax = (float)Math.Cos(WalkStrideMaxDeg * DegToRad);
+                float bobY = (cosStance - cosMax) * 0.45f * env - 0.008f * env;
+
                 float hairRoot = (float)Math.Sin(doubleRad - 0.85f);
                 float hairTip = (float)Math.Sin(doubleRad - 1.75f);
 
                 return new BearChaseYunaRigPose(
                     BearChaseEntranceBeat.Approach,
                     hipsBobY: bobY,
-                    torsoLeanDeg: (-4.5f + (float)Math.Sin(doubleRad) * 1.8f) * env,
-                    chestBendDeg: (float)Math.Sin(doubleRad - 0.5f) * 3.0f * env,
-                    skirtSwayDeg: (float)Math.Sin(phase * TwoPi - 0.55f) * 7.5f * env,
-                    skirtFlare: Math.Max(0f, -bobY * 2.2f) + 0.015f * env,
-                    headTiltDeg: -3.0f + (float)Math.Sin(doubleRad - 1.0f) * 2.4f * env,
-                    ponytailRootDeg: 8f * env + hairRoot * 10f * env,
-                    ponytailTipDeg: 12f * env + hairTip * 17f * env,
-                    frontLegDeg: SampleCyclic(WalkHipDeg, phase) * env,
-                    frontKneeDeg: Lerp(-4f, SampleCyclic(WalkKneeDeg, phase), env),
-                    frontAnkleDeg: Lerp(4f, SampleCyclic(WalkAnkleDeg, phase), env),
-                    backLegDeg: SampleCyclic(WalkHipDeg, opposite) * env,
-                    backKneeDeg: Lerp(-4f, SampleCyclic(WalkKneeDeg, opposite), env),
-                    backAnkleDeg: Lerp(4f, SampleCyclic(WalkAnkleDeg, opposite), env),
+                    torsoLeanDeg: (-4.0f + (float)Math.Sin(doubleRad) * 1.4f) * env,
+                    chestBendDeg: (float)Math.Sin(doubleRad - 0.5f) * 2.4f * env,
+                    skirtSwayDeg: (float)Math.Sin(phase * TwoPi - 0.55f) * 6.0f * env,
+                    skirtFlare: Math.Max(0f, -bobY * 1.6f) + 0.012f * env,
+                    headTiltDeg: -3.0f + (float)Math.Sin(doubleRad - 1.0f) * 2.0f * env,
+                    ponytailRootDeg: 7f * env + hairRoot * 8.5f * env,
+                    ponytailTipDeg: 10f * env + hairTip * 14f * env,
+                    frontLegDeg: fHip * env,
+                    frontKneeDeg: Lerp(-4f, fKnee, env),
+                    frontAnkleDeg: Lerp(4f, fAnkle, env),
+                    backLegDeg: bHip * env,
+                    backKneeDeg: Lerp(-4f, bKnee, env),
+                    backAnkleDeg: Lerp(4f, bAnkle, env),
                     frontArmDeg: SampleCyclic(WalkFrontArmDeg, phase) * env,
                     frontElbowDeg: Lerp(14f, SampleCyclic(WalkFrontElbowDeg, phase), env),
                     backArmDeg: SampleCyclic(WalkBackArmDeg, opposite) * env,
                     backElbowDeg: Lerp(14f, SampleCyclic(WalkBackElbowDeg, opposite), env),
-                    scaleX: 1f + Math.Max(0f, -bobY * 1.1f),
-                    scaleY: 1f - Math.Max(0f, -bobY * 1.1f),
+                    scaleX: 1f + Math.Max(0f, -bobY * 0.8f),
+                    scaleY: 1f - Math.Max(0f, -bobY * 0.8f),
                     expression: walkProgress > 0.78f ? BearChaseYunaExpression.Focused : BearChaseYunaExpression.Calm);
             }
 
@@ -318,6 +331,38 @@ namespace YunaLegend.BearChase.Core
 
             // 5. TransitionToChase (6.00 -> 6.50s): tense shocked guard stance during fade-out
             return EvaluateShockedGuard(t, BearChaseEntranceBeat.TransitionToChase);
+        }
+
+        /// <summary>
+        /// Evaluates a single leg's hip, knee, and ankle angles so that during stance (phase 0..0.5),
+        /// the planted foot moves backward at constant horizontal velocity matching the body's forward translation
+        /// (zero foot sliding), while during swing (phase 0.5..1.0) the knee lifts cleanly off the floor.
+        /// </summary>
+        private static void EvaluateFootLockedLeg(float phase, out float hipDeg, out float kneeDeg, out float ankleDeg)
+        {
+            float p = PositiveMod(phase, 1f);
+            if (p < 0.5f)
+            {
+                // Stance phase: linear horizontal sweep from +sinMax to -sinMax locks shoe to floorboard
+                float stanceU = p * 2f;
+                float sinTheta = Lerp(WalkStrideSinMax, -WalkStrideSinMax, stanceU);
+                hipDeg = (float)Math.Asin(Math.Max(-0.95f, Math.Min(0.95f, sinTheta))) * RadToDeg;
+
+                // Gentle knee cushioning at weight acceptance, straight through mid-stance
+                float cushion = (float)Math.Sin(stanceU * Math.PI);
+                kneeDeg = -4f - 5f * cushion;
+
+                // Keep shoe sole flat on the floor during stance
+                ankleDeg = -hipDeg * 0.72f - kneeDeg * 0.35f;
+                return;
+            }
+
+            // Swing phase: lift knee clearly off the floor and bring foot forward to next contact
+            float swingU = (p - 0.5f) * 2f;
+            float lift = (float)Math.Sin(swingU * Math.PI);
+            hipDeg = Lerp(-WalkStrideMaxDeg, WalkStrideMaxDeg, SmoothStep(swingU));
+            kneeDeg = -6f - 44f * lift;
+            ankleDeg = -14f * lift + (swingU > 0.75f ? Lerp(0f, 10f, (swingU - 0.75f) / 0.25f) : 0f);
         }
 
         private static BearChaseYunaRigPose EvaluateIdle(

@@ -234,10 +234,15 @@ namespace YunaLegend.Picnic.Runtime
             storyNanda.preserveAspect = true;
 
             storySafeArea = CreateSafeArea(storyCanvas.transform);
-            var box = CreateImage("DialogueBox", storySafeArea, new Vector2(0.12f, 0.04f), new Vector2(0.88f, 0.28f), HudTheme.Paper);
-            storySpeaker = CreateText("Speaker", box.transform, new Vector2(0.03f, 0.72f), new Vector2(0.97f, 0.96f), "", 20, new Color(0.22f, 0.32f, 0.2f));
-            storyBody = CreateText("Body", box.transform, new Vector2(0.03f, 0.24f), new Vector2(0.97f, 0.72f), "", 22, new Color(0.18f, 0.16f, 0.12f));
-            CreateButton("Continue", box.transform, new Vector2(0.70f, 0.04f), new Vector2(0.97f, 0.24f), "Continuar", () => AdvanceRequested?.Invoke());
+            var box = CreateImage("DialogueBox", storySafeArea, new Vector2(0.18f, 0.80f), new Vector2(0.82f, 0.98f), HudTheme.Paper);
+            box.raycastTarget = true;
+            var boxButton = box.gameObject.AddComponent<Button>();
+            boxButton.transition = Selectable.Transition.None;
+            boxButton.onClick.AddListener(() => AdvanceRequested?.Invoke());
+
+            storySpeaker = CreateText("Speaker", box.transform, new Vector2(0.03f, 0.72f), new Vector2(0.95f, 0.95f), "", 20, new Color(0.22f, 0.32f, 0.2f));
+            storyBody = CreateText("Body", box.transform, new Vector2(0.03f, 0.08f), new Vector2(0.92f, 0.72f), "", 22, new Color(0.18f, 0.16f, 0.12f));
+            HudTheme.EnsureCornerTapCue(box.transform, 20f, 10f, 8f, new Color(HudTheme.Plum.r, HudTheme.Plum.g, HudTheme.Plum.b, 0.68f));
             CreateButton("Skip", storySafeArea, new Vector2(0.84f, 0.91f), new Vector2(0.98f, 0.98f), "Pular cena", () => SkipRequested?.Invoke());
         }
 
@@ -423,14 +428,18 @@ namespace YunaLegend.Picnic.Runtime
                 Place(modalPanel.transform.Find("MenuBtn"), new Vector2(1f, 0f), new Vector2(1f, 0f), -20, 24, (cardWidth - 52) * 0.5f, 52, scale);
             }
 
-            float storyWidth = Mathf.Min(width - 24, 760);
-            float storyHeight = portrait ? 300 : 200;
+            // Place story DialogueBox in the upper sky band so it never covers Yuna, Nanda, or the cottage/garden art.
+            // Message covers the entire balloon with only a discreet corner tap icon in the bottom-right.
+            float storyWidth = portrait ? Mathf.Min(width - 24f, 520f) : Mathf.Min(width - 296f, 680f);
+            float storyHeight = portrait ? 168f : 118f;
             Transform box = storySafeArea.Find("DialogueBox");
-            Place(box, new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), 0, 12, storyWidth, storyHeight, scale);
-            Place(storySpeaker.transform, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), 0, -12, storyWidth - 32, 28, scale);
-            Place(storyBody.transform, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), 0, -44, storyWidth - 32, storyHeight - 120, scale);
-            Place(box.Find("Continue"), new Vector2(1f, 0f), new Vector2(1f, 0f), -16, 12, 152, 52, scale);
-            Place(storySafeArea.Find("Skip"), Vector2.one, Vector2.one, -12, -12, 132, 52, scale);
+            Place(box, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), portrait ? 0f : -64f, -12f, storyWidth, storyHeight, scale);
+            Place(storySpeaker.transform, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), 0f, -10f, storyWidth - 28f, 26f, scale);
+            Place(storyBody.transform, new Vector2(0f, 1f), new Vector2(0f, 1f), 14f, -38f, storyWidth - 44f, storyHeight - 48f, scale);
+            HudTheme.EnsureCornerTapCue(box, 22f * scale, 10f * scale, 8f * scale, new Color(HudTheme.Plum.r, HudTheme.Plum.g, HudTheme.Plum.b, 0.78f));
+            float skipW = portrait ? 88f : 124f;
+            float skipH = portrait ? 34f : 44f;
+            Place(storySafeArea.Find("Skip"), Vector2.one, Vector2.one, -10, -10, skipW, skipH, scale);
             storySpeaker.fontSize = Mathf.RoundToInt(18 * scale);
             storyBody.fontSize = Mathf.RoundToInt(18 * scale);
             foreach (Text label in hudSafeArea.GetComponentsInChildren<Text>(true))
@@ -444,7 +453,7 @@ namespace YunaLegend.Picnic.Runtime
             {
                 if (label.name == "Label")
                 {
-                    label.fontSize = Mathf.RoundToInt(18 * scale);
+                    label.fontSize = Mathf.RoundToInt((portrait ? 14 : 16) * scale);
                 }
             }
         }
