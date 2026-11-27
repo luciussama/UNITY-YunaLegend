@@ -357,11 +357,11 @@ namespace YunaLegend.BearChase.Runtime
             RectTransform outerRt = CreateRect(
                 "EndingDialogueCard",
                 parent,
-                new Vector2(0.5f, 0.76f),
-                new Vector2(0.5f, 0.76f),
-                new Vector2(0.5f, 0.5f),
+                new Vector2(0.5f, 0.96f),
+                new Vector2(0.5f, 0.96f),
+                new Vector2(0.5f, 1f),
                 Vector2.zero,
-                new Vector2(1260f, 270f));
+                new Vector2(860f, 156f));
             dialogueBoxRoot = outerRt.gameObject;
 
             Image outerBg = outerRt.gameObject.AddComponent<Image>();
@@ -380,32 +380,25 @@ namespace YunaLegend.BearChase.Runtime
             innerBg.color = new Color(0.99f, 0.97f, 0.93f, 0.98f);
             innerBg.raycastTarget = false;
 
-            RectTransform headerRt = CreateRect("SpeakerHeader", innerRt, new Vector2(0.05f, 0.74f), new Vector2(0.95f, 0.95f), new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
+            RectTransform headerRt = CreateRect("SpeakerHeader", innerRt, new Vector2(0.05f, 0.72f), new Vector2(0.95f, 0.94f), new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
             speakerHeaderText = headerRt.gameObject.AddComponent<Text>();
             speakerHeaderText.font = font;
-            speakerHeaderText.fontSize = 30;
+            speakerHeaderText.fontSize = 26;
             speakerHeaderText.fontStyle = FontStyle.Italic;
             speakerHeaderText.alignment = TextAnchor.MiddleCenter;
             speakerHeaderText.color = new Color(0.45f, 0.37f, 0.36f, 1f);
             speakerHeaderText.raycastTarget = false;
 
-            RectTransform bodyRt = CreateRect("DialogueBody", innerRt, new Vector2(0.06f, 0.24f), new Vector2(0.94f, 0.74f), new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
+            RectTransform bodyRt = CreateRect("DialogueBody", innerRt, new Vector2(0.05f, 0.08f), new Vector2(0.92f, 0.72f), new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
             dialogueBodyText = bodyRt.gameObject.AddComponent<Text>();
             dialogueBodyText.font = font;
-            dialogueBodyText.fontSize = 34;
+            dialogueBodyText.fontSize = 30;
             dialogueBodyText.fontStyle = FontStyle.Italic;
             dialogueBodyText.alignment = TextAnchor.MiddleCenter;
             dialogueBodyText.color = new Color(0.24f, 0.18f, 0.16f, 1f);
             dialogueBodyText.raycastTarget = false;
 
-            RectTransform footerRt = CreateRect("AdvanceHint", innerRt, new Vector2(0.10f, 0.03f), new Vector2(0.90f, 0.22f), new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
-            Text footerText = footerRt.gameObject.AddComponent<Text>();
-            footerText.font = font;
-            footerText.fontSize = 18;
-            footerText.alignment = TextAnchor.MiddleCenter;
-            footerText.color = new Color(0.46f, 0.40f, 0.38f, 0.88f);
-            footerText.text = "Avança sozinho\nClique/toque ou Enter adianta";
-            footerText.raycastTarget = false;
+            YunaLegend.Presentation.HudTheme.EnsureCornerTapCue(outerRt, 22f, 12f, 10f, new Color(0.30f, 0.24f, 0.39f, 0.76f));
         }
 
         private static RectTransform CreateRect(

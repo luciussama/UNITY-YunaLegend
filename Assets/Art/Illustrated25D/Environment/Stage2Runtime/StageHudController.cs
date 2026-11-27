@@ -200,8 +200,9 @@ namespace YunaLegend.Illustrated25D.Environment
             }
 
             bool isMobile = IsMobileViewport();
-            string autoFooter = isMobile ? "Toque na tela para adiantar" : "Avança sozinho · Clique ou Enter adianta";
-            string clickFooter = isMobile ? "Toque na tela para continuar" : "Clique ou pressione Espaço / Enter para continuar";
+            // Regra UI/UX: nenhuma instrucao textual de clique/toque para avancar — apenas o icone sutil no canto do balao.
+            const string autoFooter = "";
+            const string clickFooter = "";
 
             int openingBeat = GetOpeningDialogueBeat != null ? GetOpeningDialogueBeat() : 0;
             var phase = GetPhase();
@@ -259,7 +260,7 @@ namespace YunaLegend.Illustrated25D.Environment
                     ShowDialogue(
                         "YUNA",
                         DarkRoomDialogueScript.CastleYuna.text,
-                        isMobile ? "Toque para iniciar A Fuga" : "Clique ou pressione Espaço / Enter para iniciar A Fuga",
+                        string.Empty,
                         boldBody: false,
                         stackedBelowPoetic: false);
                     break;
@@ -292,7 +293,7 @@ namespace YunaLegend.Illustrated25D.Environment
                     ShowDialogue(
                         "NANDA",
                         DarkRoomDialogueScript.FalseDoorNanda.text,
-                        isMobile ? "Toque para iniciar A Subida Caótica" : "Clique ou pressione Espaço / Enter para iniciar A Subida Caótica",
+                        string.Empty,
                         boldBody: false,
                         stackedBelowPoetic: true);
                     break;
@@ -416,6 +417,8 @@ namespace YunaLegend.Illustrated25D.Environment
 
             poeticBodyText = CreateText("PoeticBody", go.transform, string.Empty, 16, new Color(0.224f, 0.141f, 0.133f, 1f), TextAnchor.MiddleCenter, FontStyle.Italic);
             poeticFooterText = CreateText("PoeticFooter", go.transform, string.Empty, 14, new Color(0.518f, 0.392f, 0.404f, 0.92f), TextAnchor.LowerCenter, FontStyle.Normal);
+            poeticFooterText.gameObject.SetActive(false);
+            HudTheme.EnsureCornerTapCue(go.transform, 18f, 8f, 6f, new Color(HudTheme.Plum.r, HudTheme.Plum.g, HudTheme.Plum.b, 0.72f));
 
             var btn = go.AddComponent<Button>();
             btn.transition = Selectable.Transition.None;
@@ -483,6 +486,8 @@ namespace YunaLegend.Illustrated25D.Environment
             dialogueSpeakerText = CreateText("Speaker", go.transform, "NANDA", 14, new Color(0.22f, 0.74f, 0.97f, 1f), TextAnchor.UpperLeft, FontStyle.Bold);
             dialogueBodyText = CreateText("Body", go.transform, string.Empty, 17, HudTheme.Ink, TextAnchor.MiddleLeft, FontStyle.Italic);
             dialogueFooterText = CreateText("Footer", go.transform, string.Empty, 16, HudTheme.Plum, TextAnchor.LowerRight, FontStyle.Normal);
+            dialogueFooterText.gameObject.SetActive(false);
+            HudTheme.EnsureCornerTapCue(go.transform, 18f, 8f, 6f, new Color(HudTheme.Plum.r, HudTheme.Plum.g, HudTheme.Plum.b, 0.72f));
 
             var btn = go.AddComponent<Button>();
             btn.transition = Selectable.Transition.None;
@@ -596,8 +601,8 @@ namespace YunaLegend.Illustrated25D.Environment
 
             float topContentY = -(btnH + 14f * px);
 
-            // Cartao poetico em pergaminho com flores nos cantos
-            float poeticH = 104f * px;
+            // Cartao poetico em pergaminho com flores nos cantos (mensagem ocupa o balao inteiro + icone discreto no canto)
+            float poeticH = 88f * px;
             SetAnchorTopCenter(poeticRoot, 0f, topContentY, maxCardW, poeticH);
             poeticInnerBorder.offsetMin = new Vector2(5f * px, 5f * px);
             poeticInnerBorder.offsetMax = new Vector2(-5f * px, -5f * px);
@@ -610,12 +615,12 @@ namespace YunaLegend.Illustrated25D.Environment
             flowerRightRect.localScale = Vector3.one * flowerScale;
 
             poeticBodyText.fontSize = f16;
-            SetInsetRect(poeticBodyText.rectTransform, 18f * px, 28f * px, 18f * px, 10f * px);
-            poeticFooterText.fontSize = f14;
-            SetInsetRect(poeticFooterText.rectTransform, 14f * px, 9f * px, 14f * px, poeticH - 27f * px);
+            SetInsetRect(poeticBodyText.rectTransform, 18f * px, 10f * px, 28f * px, 10f * px);
+            poeticFooterText.gameObject.SetActive(false);
+            HudTheme.EnsureCornerTapCue(poeticRoot, 18f * px, 8f * px, 6f * px, new Color(HudTheme.Plum.r, HudTheme.Plum.g, HudTheme.Plum.b, 0.72f));
 
-            // Caixa de dialogo vitoriana com retrato circular — NO TOPO
-            float dlgH = isLandscape ? 104f * px : 124f * px;
+            // Caixa de dialogo vitoriana com retrato circular — NO TOPO (mensagem ocupa o balao inteiro + icone discreto no canto)
+            float dlgH = isLandscape ? 92f * px : 108f * px;
             SetAnchorTopCenter(dialogueRoot, 0f, topContentY, maxCardW, dlgH);
             dialogueInnerBorder.offsetMin = new Vector2(4f * px, 4f * px);
             dialogueInnerBorder.offsetMax = new Vector2(-4f * px, -4f * px);
@@ -632,9 +637,9 @@ namespace YunaLegend.Illustrated25D.Environment
             dialogueSpeakerText.fontSize = f14;
             SetInsetRect(dialogueSpeakerText.rectTransform, textLeft, dlgH - 24f * px, 14f * px, 8f * px);
             dialogueBodyText.fontSize = f15;
-            SetInsetRect(dialogueBodyText.rectTransform, textLeft, 28f * px, 14f * px, 26f * px);
-            dialogueFooterText.fontSize = f14;
-            SetInsetRect(dialogueFooterText.rectTransform, textLeft, 9f * px, 14f * px, dlgH - 27f * px);
+            SetInsetRect(dialogueBodyText.rectTransform, textLeft, 10f * px, 28f * px, 26f * px);
+            dialogueFooterText.gameObject.SetActive(false);
+            HudTheme.EnsureCornerTapCue(dialogueRoot, 18f * px, 8f * px, 6f * px, new Color(HudTheme.Plum.r, HudTheme.Plum.g, HudTheme.Plum.b, 0.72f));
 
             // Banner de fase
             float bannerW = Mathf.Min(340f * px, maxCardW);
@@ -679,14 +684,14 @@ namespace YunaLegend.Illustrated25D.Environment
         {
             poeticRoot.gameObject.SetActive(true);
             poeticBodyText.text = text;
-            bool hasFooter = !string.IsNullOrEmpty(footer);
-            poeticFooterText.gameObject.SetActive(hasFooter);
-            poeticFooterText.text = footer ?? string.Empty;
+            poeticFooterText.gameObject.SetActive(false);
+            poeticFooterText.text = string.Empty;
 
             float px = ComputePxToCanvas(canvasRect.rect.size);
-            float h = hasFooter ? 104f * px : 80f * px;
+            float h = 88f * px;
             poeticRoot.sizeDelta = new Vector2(poeticRoot.sizeDelta.x, h);
-            SetInsetRect(poeticBodyText.rectTransform, 18f * px, hasFooter ? 28f * px : 10f * px, 18f * px, 10f * px);
+            SetInsetRect(poeticBodyText.rectTransform, 18f * px, 10f * px, 28f * px, 10f * px);
+            HudTheme.EnsureCornerTapCue(poeticRoot, 18f * px, 8f * px, 6f * px, new Color(HudTheme.Plum.r, HudTheme.Plum.g, HudTheme.Plum.b, 0.72f));
         }
 
         private void ShowDialogue(string speaker, string body, string footer, bool boldBody, bool stackedBelowPoetic)
@@ -709,9 +714,11 @@ namespace YunaLegend.Illustrated25D.Environment
 
             dialogueBodyText.text = body;
             dialogueBodyText.fontStyle = boldBody ? FontStyle.Bold : FontStyle.Italic;
-            dialogueFooterText.text = footer;
+            dialogueFooterText.gameObject.SetActive(false);
+            dialogueFooterText.text = string.Empty;
 
             float px = ComputePxToCanvas(canvasRect.rect.size);
+            HudTheme.EnsureCornerTapCue(dialogueRoot, 18f * px, 8f * px, 6f * px, new Color(HudTheme.Plum.r, HudTheme.Plum.g, HudTheme.Plum.b, 0.72f));
             float topContentY = -(48f * px + 14f * px);
             float y = stackedBelowPoetic ? topContentY - poeticRoot.sizeDelta.y - 6f * px : topContentY;
             dialogueRoot.anchoredPosition = new Vector2(0f, y);

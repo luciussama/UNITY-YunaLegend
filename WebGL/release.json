@@ -1,8 +1,8 @@
 ﻿{
-    "releaseId":  "20261127-ui-dialogues-footlock-webgl-stage1",
+    "releaseId":  "20261127-ui-zero-advance-prompts-webgl",
     "unity":  "6000.3.28f1",
-    "builtAtUtc":  "2026-11-27T17:37:08+00:00",
-    "sourceBranch":  "fix/ui-dialogue-balloons-layout",
+    "builtAtUtc":  "2026-11-27T18:06:24+00:00",
+    "sourceBranch":  "main",
     "defaultWebStartScene":  "Fase-Jogavel-Completa",
     "scenes":  [
                    "TitleScreen",
@@ -18,21 +18,21 @@
                                      "sha256":  "6a16c8f975a435ba653c9a8e0b94cf1625f9f0ae9345c92982c28c1e9c4d2c5f"
                                  },
                   "Build/WebGL.data.unityweb":  {
-                                                    "bytes":  268387292,
-                                                    "sha256":  "dec6ec83506b34939ecfecdcef0a9e9680a62bddf8cb25e6fb9db877ce568422"
+                                                    "bytes":  268385705,
+                                                    "sha256":  "4287e6c8621ef72b8016b1b424c6e0c2a21f7dbceaaefcea3c39133dd36991be"
                                                 },
                   "Build/WebGL.framework.js.unityweb":  {
                                                             "bytes":  90587,
-                                                            "sha256":  "00064126b1ea0c2982cb77eb6aa64d917cfd0fdff4c69afd1fbf5cdfd7bc919b"
+                                                            "sha256":  "db3b5f184b9f7ae5bbc5436c5c0e216d48d3265f18d40cc8fd909cb93ee3f190"
                                                         },
                   "Build/WebGL.loader.js":  {
                                                 "bytes":  47867,
-                                                "sha256":  "83895ac4b8e68ef5427c56284b2472dc3461221be30db55a08ef02523e278fea"
+                                                "sha256":  "dd6a6f37e037f6f4865278529193be0eb9360cd172824f8ca030e5bdf7292a0a"
                                             },
                   "Build/WebGL.wasm.unityweb":  {
-                                                    "bytes":  12407844,
-                                                    "sha256":  "5372469bf0df6b82f1e7d812d7cecdbf5dcb67a3d5b6c30369170db9fd5bf454"
+                                                    "bytes":  12407961,
+                                                    "sha256":  "5dabbf60d843217c09ae7aad339256c00084418a2f11138f53b19419e27af922"
                                                 }
               },
-    "testResult":  "EditMode 142/142 passed (Picnic 35, ToyRoom 28, BearChase 42 incl. foot-lock \u003c8px, Arena 37); Desktop \u0026 Mobile UI dialogue audit 4/4 screens OK; WebGL forced first-stage start (Fase-Jogavel-Completa); WebCiBuild YUNA_WEB_PAGES_OK"
+    "testResult":  "EditMode 142/142 passed; zero tap/click-to-advance text prompts across all 5 stages (StageHudController, BearChaseEndingController, ToyRoomHudController, PicnicNarrativeAndHudController, DarkRoomProgressionManager + MobileDialoguePresenter defensive filter); WebCiBuild YUNA_WEB_PAGES_OK"
 }

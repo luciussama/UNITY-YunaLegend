@@ -20,7 +20,7 @@ namespace YunaLegend.Presentation
         };
         private static readonly string[] SuppressedHintNames =
         {
-            "DialogueHint", "PoeticHint", "AutoHintText", "ClickHintText", "AdvanceHint"
+            "DialogueHint", "PoeticHint", "AutoHintText", "ClickHintText", "AdvanceHint", "Footer", "PoeticFooter", "DialogueFooter"
         };
         private static readonly string[] TapAdvancePanelNames =
         {
@@ -108,10 +108,10 @@ namespace YunaLegend.Presentation
                     continue;
                 }
 
-                // Suppress verbose "Avança sozinho / Clique/toque no quadro adianta" labels on desktop too
+                // Suppress ANY verbose "Avança sozinho / Clique/toque no quadro adianta / Toque na tela para adiantar" label on desktop too
                 foreach (Text text in panel.GetComponentsInChildren<Text>(true))
                 {
-                    if (Array.IndexOf(SuppressedHintNames, text.name) >= 0)
+                    if (Array.IndexOf(SuppressedHintNames, text.name) >= 0 || IsAdvancePromptText(text.text))
                     {
                         text.enabled = false;
                     }
@@ -242,11 +242,11 @@ namespace YunaLegend.Presentation
             float tapIconSize = 18f * unit;
             float tapCornerClearance = isTapAdvancePanel ? (tapIconSize + 6f * unit) : 0f;
 
-            // Suppress verbose "Clique para pular / Toque para avançar" labels so the message fills the entire balloon
+            // Suppress ANY verbose "Clique / Toque / Adianta / Avançar / Continuar" label so the message fills the entire balloon
             var texts = new List<Text>();
             foreach (Text text in panel.GetComponentsInChildren<Text>(true))
             {
-                if (Array.IndexOf(SuppressedHintNames, text.name) >= 0)
+                if (isTapAdvancePanel && (Array.IndexOf(SuppressedHintNames, text.name) >= 0 || IsAdvancePromptText(text.text)))
                 {
                     text.enabled = false;
                     continue;
@@ -428,6 +428,25 @@ namespace YunaLegend.Presentation
                 }
             }
             return clearance;
+        }
+
+        private static bool IsAdvancePromptText(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return false;
+            }
+            string lower = value.ToLowerInvariant();
+            return lower.Contains("toque na tela")
+                || lower.Contains("toque para")
+                || lower.Contains("clique para")
+                || lower.Contains("clique ou")
+                || lower.Contains("clique/toque")
+                || lower.Contains("avança sozinho")
+                || lower.Contains("avança automaticamente")
+                || lower.Contains("para adiantar")
+                || lower.Contains("para avançar")
+                || lower.Contains("para continuar");
         }
 
         private static int Rank(string name)
