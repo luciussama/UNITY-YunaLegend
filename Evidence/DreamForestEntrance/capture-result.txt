@@ -1,0 +1,1 @@
+DREAM_ENTRANCE_CAPTURE_OK: 40 native Unity renders; fixture, not PlayMode.

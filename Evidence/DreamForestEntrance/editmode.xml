@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="26" result="Passed" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0,1269624">
+  <test-suite type="TestSuite" id="1000" name="Yuna Legend - O Quarto dos Brinquedos" fullname="Yuna Legend - O Quarto dos Brinquedos" runstate="Runnable" testcasecount="26" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.126962" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1017" name="YunaLegend.DreamForest.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Evidence/DreamForestEntrance/ValidationProject/Library/ScriptAssemblies/YunaLegend.DreamForest.Tests.dll" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.045894" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="27184" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1018" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.045588" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1019" name="DreamForest" fullname="YunaLegend.DreamForest" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.045459" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1020" name="Tests" fullname="YunaLegend.DreamForest.Tests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.045320" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1009" name="DreamForestCoreTests" fullname="YunaLegend.DreamForest.Tests.DreamForestCoreTests" classname="YunaLegend.DreamForest.Tests.DreamForestCoreTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.044405" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1012" name="Act1_JumpFromStartLeafAndClimbSwayingGrassBlade" fullname="YunaLegend.DreamForest.Tests.DreamForestCoreTests.Act1_JumpFromStartLeafAndClimbSwayingGrassBlade" methodname="Act1_JumpFromStartLeafAndClimbSwayingGrassBlade" classname="YunaLegend.DreamForest.Tests.DreamForestCoreTests" runstate="Runnable" seed="2144151667" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.020587" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1013" name="Glider_LaunchesFromBranchAndQaPilotSteersCleanly" fullname="YunaLegend.DreamForest.Tests.DreamForestCoreTests.Glider_LaunchesFromBranchAndQaPilotSteersCleanly" methodname="Glider_LaunchesFromBranchAndQaPilotSteersCleanly" classname="YunaLegend.DreamForest.Tests.DreamForestCoreTests" runstate="Runnable" seed="1662045870" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.005803" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1011" name="LevelData_BuildsAllSixSectionsThornsMudLakesAndCovers" fullname="YunaLegend.DreamForest.Tests.DreamForestCoreTests.LevelData_BuildsAllSixSectionsThornsMudLakesAndCovers" methodname="LevelData_BuildsAllSixSectionsThornsMudLakesAndCovers" classname="YunaLegend.DreamForest.Tests.DreamForestCoreTests" runstate="Runnable" seed="1259910692" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000316" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1016" name="MobileCameraFraming_AdaptsForPortraitAndLandscape" fullname="YunaLegend.DreamForest.Tests.DreamForestCoreTests.MobileCameraFraming_AdaptsForPortraitAndLandscape" methodname="MobileCameraFraming_AdaptsForPortraitAndLandscape" classname="YunaLegend.DreamForest.Tests.DreamForestCoreTests" runstate="Runnable" seed="519460086" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.002984" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1015" name="Nightmare_MudSubmersionHidesPlayerFromSpotlights" fullname="YunaLegend.DreamForest.Tests.DreamForestCoreTests.Nightmare_MudSubmersionHidesPlayerFromSpotlights" methodname="Nightmare_MudSubmersionHidesPlayerFromSpotlights" classname="YunaLegend.DreamForest.Tests.DreamForestCoreTests" runstate="Runnable" seed="212234853" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.002097" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1014" name="Nightmare_RaycastSpotlightsOccludedByRockCoversAndMudLakes" fullname="YunaLegend.DreamForest.Tests.DreamForestCoreTests.Nightmare_RaycastSpotlightsOccludedByRockCoversAndMudLakes" methodname="Nightmare_RaycastSpotlightsOccludedByRockCoversAndMudLakes" classname="YunaLegend.DreamForest.Tests.DreamForestCoreTests" runstate="Runnable" seed="1536153106" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000825" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1010" name="Opening_AdvancesThroughAllSevenBeatsIntoRunning" fullname="YunaLegend.DreamForest.Tests.DreamForestCoreTests.Opening_AdvancesThroughAllSevenBeatsIntoRunning" methodname="Opening_AdvancesThroughAllSevenBeatsIntoRunning" classname="YunaLegend.DreamForest.Tests.DreamForestCoreTests" runstate="Runnable" seed="1932662545" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000260" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1046" name="YunaLegend.DreamForestEntrance.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Evidence/DreamForestEntrance/ValidationProject/Library/ScriptAssemblies/YunaLegend.DreamForestEntrance.Tests.dll" runstate="Runnable" testcasecount="19" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.074643" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="27184" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1047" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="19" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.073890" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1048" name="DreamForestEntrance" fullname="YunaLegend.DreamForestEntrance" runstate="Runnable" testcasecount="19" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.073782" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1049" name="Tests" fullname="YunaLegend.DreamForestEntrance.Tests" runstate="Runnable" testcasecount="19" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.073684" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1022" name="DreamEntranceTests" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" testcasecount="19" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.073509" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1044" name="AdvanceDismissesOneDialogueAndPreservesActingMinimum" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.AdvanceDismissesOneDialogueAndPreservesActingMinimum" methodname="AdvanceDismissesOneDialogueAndPreservesActingMinimum" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="1055853744" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000678" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1033" name="AutomaticOpening_PreservesAllSevenBeatsAnd38Seconds" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.AutomaticOpening_PreservesAllSevenBeatsAnd38Seconds" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.001972" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1030" name="AutomaticOpening_PreservesAllSevenBeatsAnd38Seconds(30)" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.AutomaticOpening_PreservesAllSevenBeatsAnd38Seconds(30)" methodname="AutomaticOpening_PreservesAllSevenBeatsAnd38Seconds" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="1456668666" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.001217" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1031" name="AutomaticOpening_PreservesAllSevenBeatsAnd38Seconds(60)" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.AutomaticOpening_PreservesAllSevenBeatsAnd38Seconds(60)" methodname="AutomaticOpening_PreservesAllSevenBeatsAnd38Seconds" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="1683020707" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000134" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1032" name="AutomaticOpening_PreservesAllSevenBeatsAnd38Seconds(120)" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.AutomaticOpening_PreservesAllSevenBeatsAnd38Seconds(120)" methodname="AutomaticOpening_PreservesAllSevenBeatsAnd38Seconds" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="1648631889" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000163" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1042" name="CameraCoverAndActorScale_AreFiniteAndUseOriginalAspectRatio" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.CameraCoverAndActorScale_AreFiniteAndUseOriginalAspectRatio" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.002089" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1038" name="CameraCoverAndActorScale_AreFiniteAndUseOriginalAspectRatio(390,844)" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.CameraCoverAndActorScale_AreFiniteAndUseOriginalAspectRatio(390,844)" methodname="CameraCoverAndActorScale_AreFiniteAndUseOriginalAspectRatio" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="1955108609" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.001453" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1039" name="CameraCoverAndActorScale_AreFiniteAndUseOriginalAspectRatio(844,390)" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.CameraCoverAndActorScale_AreFiniteAndUseOriginalAspectRatio(844,390)" methodname="CameraCoverAndActorScale_AreFiniteAndUseOriginalAspectRatio" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="1839605682" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000092" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1040" name="CameraCoverAndActorScale_AreFiniteAndUseOriginalAspectRatio(1200,720)" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.CameraCoverAndActorScale_AreFiniteAndUseOriginalAspectRatio(1200,720)" methodname="CameraCoverAndActorScale_AreFiniteAndUseOriginalAspectRatio" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="1813337875" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000060" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1041" name="CameraCoverAndActorScale_AreFiniteAndUseOriginalAspectRatio(1043,840)" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.CameraCoverAndActorScale_AreFiniteAndUseOriginalAspectRatio(1043,840)" methodname="CameraCoverAndActorScale_AreFiniteAndUseOriginalAspectRatio" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="1881545737" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000050" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1043" name="Departure_FadesOnlyInTheLast1Point2Seconds" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.Departure_FadesOnlyInTheLast1Point2Seconds" methodname="Departure_FadesOnlyInTheLast1Point2Seconds" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="261742871" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000323" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1037" name="Discover_UsesAuthoredLookInsteadOfMirroredOrTwistedStandingPose" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.Discover_UsesAuthoredLookInsteadOfMirroredOrTwistedStandingPose" methodname="Discover_UsesAuthoredLookInsteadOfMirroredOrTwistedStandingPose" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="1708251133" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000308" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1029" name="EntranceAudio_CrossfadesAtAuthoredDepartureTime" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.EntranceAudio_CrossfadesAtAuthoredDepartureTime" methodname="EntranceAudio_CrossfadesAtAuthoredDepartureTime" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="1924685167" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000645" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1036" name="KneelingHand_IsAnchoredToSleepingNandasShoulder" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.KneelingHand_IsAnchoredToSleepingNandasShoulder" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000681" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1034" name="KneelingHand_IsAnchoredToSleepingNandasShoulder(2,455,217)" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.KneelingHand_IsAnchoredToSleepingNandasShoulder(2,455,217)" methodname="KneelingHand_IsAnchoredToSleepingNandasShoulder" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="2093633942" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000336" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1035" name="KneelingHand_IsAnchoredToSleepingNandasShoulder(4,490,168)" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.KneelingHand_IsAnchoredToSleepingNandasShoulder(4,490,168)" methodname="KneelingHand_IsAnchoredToSleepingNandasShoulder" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="1399104992" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000053" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1045" name="Music_RemainsSilentUntilFinalDepartureFade" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.Music_RemainsSilentUntilFinalDepartureFade" methodname="Music_RemainsSilentUntilFinalDepartureFade" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="1193638079" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000258" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1027" name="RasterProfile_PreservesLegacyCanvasResolution" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.RasterProfile_PreservesLegacyCanvasResolution" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000789" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1023" name="RasterProfile_PreservesLegacyCanvasResolution(1043,840,671,540)" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.RasterProfile_PreservesLegacyCanvasResolution(1043,840,671,540)" methodname="RasterProfile_PreservesLegacyCanvasResolution" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="947694583" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000288" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1024" name="RasterProfile_PreservesLegacyCanvasResolution(390,844,540,1169)" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.RasterProfile_PreservesLegacyCanvasResolution(390,844,540,1169)" methodname="RasterProfile_PreservesLegacyCanvasResolution" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="173062424" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000047" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1025" name="RasterProfile_PreservesLegacyCanvasResolution(844,390,1169,540)" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.RasterProfile_PreservesLegacyCanvasResolution(844,390,1169,540)" methodname="RasterProfile_PreservesLegacyCanvasResolution" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="470226397" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000034" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1026" name="RasterProfile_PreservesLegacyCanvasResolution(1200,720,900,540)" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.RasterProfile_PreservesLegacyCanvasResolution(1200,720,900,540)" methodname="RasterProfile_PreservesLegacyCanvasResolution" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="50010669" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.000033" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1028" name="SilenceBed_IsQuietDeterministicAndHasNoDcOffset" fullname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests.SilenceBed_IsQuietDeterministicAndHasNoDcOffset" methodname="SilenceBed_IsQuietDeterministicAndHasNoDcOffset" classname="YunaLegend.DreamForestEntrance.Tests.DreamEntranceTests" runstate="Runnable" seed="1252323828" result="Passed" start-time="2026-11-27 20:30:26Z" end-time="2026-11-27 20:30:26Z" duration="0.064360" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: C:/Users/sergi/AppData/LocalLow/DeepMindStudio/Yuna Legend - O Quarto dos Brinquedos\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

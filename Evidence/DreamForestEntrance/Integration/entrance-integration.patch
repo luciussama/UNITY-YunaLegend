@@ -1,0 +1,153 @@
+diff --git a/Assets/Scripts/Runtime/DreamForest/Runtime/DreamForestStageBootstrap.cs b/Assets/Scripts/Runtime/DreamForest/Runtime/DreamForestStageBootstrap.cs
+--- a/Assets/Scripts/Runtime/DreamForest/Runtime/DreamForestStageBootstrap.cs
++++ b/Assets/Scripts/Runtime/DreamForest/Runtime/DreamForestStageBootstrap.cs
+@@ -2,6 +2,8 @@
+ using UnityEngine.InputSystem;
+ using UnityEngine.SceneManagement;
+ using YunaLegend.DreamForest.Core;
++using YunaLegend.DreamForestEntrance.Core;
++using YunaLegend.DreamForestEntrance.Runtime;
+ using YunaLegend.Qa.Runtime;
+ 
+ namespace YunaLegend.DreamForest.Runtime
+@@ -17,6 +19,8 @@
+         private DreamForestActorController actor;
+         private DreamForestAudioController audioCtrl;
+         private DreamForestHudController hud;
++        private DreamEntranceView entrance;
++        private DreamEntranceAmbience entranceAmbience;
+ 
+         private bool paused;
+ 
+@@ -55,26 +59,43 @@
+             hud.RetryRequested += OnRetryRequested;
+             hud.MenuRequested += OnMenuRequested;
+ 
++            entrance = new GameObject("DreamForestEntrance").AddComponent<DreamEntranceView>();
++            entrance.transform.SetParent(transform, false);
++            entrance.Build();
++            entrance.AdvanceRequested += OnAdvanceRequested;
++            entrance.PauseRequested += OnPauseRequested;
++            entrance.MuteRequested += OnMuteRequested;
++            entrance.StageRequested += OnStageRequested;
++            entranceAmbience = new GameObject("DreamForestEntranceAmbience").AddComponent<DreamEntranceAmbience>();
++            entranceAmbience.transform.SetParent(transform, false);
++            entranceAmbience.Build(audioCtrl.GetComponent<AudioSource>());
++
+             ApplyVisuals();
+         }
+ 
+         private void Update()
+         {
+             var kb = Keyboard.current;
+-            if (kb != null && kb.escapeKey.wasPressedThisFrame)
++            bool inEntrance = simulation.Stage == DreamForestStage.Opening;
++            bool closedPhaseMenu = inEntrance && kb != null && kb.escapeKey.wasPressedThisFrame && entrance.ClosePhaseMenu();
++            if (kb != null && ((kb.escapeKey.wasPressedThisFrame && !closedPhaseMenu) || (inEntrance && kb.pKey.wasPressedThisFrame)))
+             {
+                 OnPauseRequested();
+             }
+ 
++            if (inEntrance && kb != null && kb.mKey.wasPressedThisFrame)
++            {
++                OnMuteRequested();
++            }
++
+             if (paused)
+             {
+-                audioCtrl.Apply(simulation, paused: true);
+-                hud.Apply(simulation, paused: true, audioCtrl.IsMuted);
++                ApplyVisuals();
+                 return;
+             }
+ 
+             DreamForestInput input = WebQaRuntime.Current.AutoPlay
+-                ? DreamForestQaPilot.ComputeInput(simulation)
++                ? (inEntrance ? DreamEntranceQaPilot.ComputeInput() : DreamForestQaPilot.ComputeInput(simulation))
+                 : SamplePlayerInput(kb);
+ 
+             var events = simulation.Step(input, Time.deltaTime);
+@@ -98,7 +119,10 @@
+                 else if (kb.downArrowKey.isPressed || kb.sKey.isPressed) y = 1f;
+ 
+                 if (kb.spaceKey.isPressed || kb.zKey.isPressed) jump = true;
+-                if (kb.enterKey.wasPressedThisFrame || kb.spaceKey.wasPressedThisFrame) advance = true;
++                if (kb.enterKey.wasPressedThisFrame || kb.spaceKey.wasPressedThisFrame)
++                {
++                    advance = simulation.Stage != DreamForestStage.Opening || !EntranceAdvanceSurface.ControlHasKeyboardFocus;
++                }
+             }
+ 
+             return new DreamForestInput(x, y, jump, advance);
+@@ -106,13 +130,44 @@
+ 
+         private void ApplyVisuals()
+         {
+-            scenery.Apply(simulation);
+-            actor.Apply(simulation);
++            bool opening = simulation.Stage == DreamForestStage.Opening;
++            scenery.gameObject.SetActive(!opening);
++            actor.gameObject.SetActive(!opening);
++            hud.gameObject.SetActive(!opening);
++            entrance.Apply(simulation, paused, audioCtrl.IsMuted);
++            if (!opening)
++            {
++                scenery.Apply(simulation);
++                actor.Apply(simulation);
++                hud.Apply(simulation, paused, audioCtrl.IsMuted);
++            }
+             audioCtrl.Apply(simulation, paused);
+-            hud.Apply(simulation, paused, audioCtrl.IsMuted);
++            entranceAmbience.Apply(simulation, paused, audioCtrl.IsMuted);
+         }
+ 
+-        private void OnAdvanceRequested() => simulation.AdvanceDialogue();
++        private void OnAdvanceRequested()
++        {
++            if (!paused)
++            {
++                simulation.AdvanceDialogue();
++            }
++        }
++
++        private void OnApplicationFocus(bool hasFocus)
++        {
++            if (simulation != null && simulation.Stage == DreamForestStage.Opening)
++            {
++                paused = !hasFocus;
++            }
++        }
++
++        private void OnApplicationPause(bool isPaused)
++        {
++            if (simulation != null && simulation.Stage == DreamForestStage.Opening)
++            {
++                paused = isPaused;
++            }
++        }
+         private void OnPauseRequested() => paused = !paused;
+         private void OnMuteRequested() => audioCtrl.SetMuted(!audioCtrl.IsMuted);
+ 
+@@ -135,5 +190,10 @@
+         {
+             SceneManager.LoadScene("TitleScreen");
+         }
++
++        private static void OnStageRequested(string scene)
++        {
++            SceneManager.LoadScene(scene);
++        }
+     }
+ }
+diff --git a/Assets/Scripts/Runtime/DreamForest/Runtime/YunaLegend.DreamForest.Runtime.asmdef b/Assets/Scripts/Runtime/DreamForest/Runtime/YunaLegend.DreamForest.Runtime.asmdef
+--- a/Assets/Scripts/Runtime/DreamForest/Runtime/YunaLegend.DreamForest.Runtime.asmdef
++++ b/Assets/Scripts/Runtime/DreamForest/Runtime/YunaLegend.DreamForest.Runtime.asmdef
+@@ -3,6 +3,8 @@
+     "rootNamespace": "YunaLegend.DreamForest.Runtime",
+     "references": [
+         "YunaLegend.DreamForest.Core",
++        "YunaLegend.DreamForestEntrance.Core",
++        "YunaLegend.DreamForestEntrance.Runtime",
+         "YunaLegend.Presentation",
+         "YunaLegend.Qa.Core",
+         "YunaLegend.Qa.Runtime",

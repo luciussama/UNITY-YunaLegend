@@ -1,0 +1,22 @@
+{
+  "Assets/Scripts/Runtime/DreamForestEntrance/Core/DreamEntranceComposition.cs": "d6ab375d11735d6716e59e7a6e73396642ca6e1e6cc749de0e123fd7ce64ae3a",
+  "Assets/Scripts/Runtime/DreamForestEntrance/Core/DreamEntranceSound.cs": "f7ec43a9a4d1f82bb564e17f02055c824e2ba654bf73481ae1c21ecf4f08a7b8",
+  "Assets/Scripts/Runtime/DreamForestEntrance/Core/YunaLegend.DreamForestEntrance.Core.asmdef": "64062323c8f88e2d063a74ebc855cf1d0efdd53024f6267221089b3727940fd4",
+  "Assets/Scripts/Runtime/DreamForestEntrance/Runtime/DreamEntranceAmbience.cs": "25194fcc34d4bc24eed658120cb7e8c24213403f631442a0c5182530020c752a",
+  "Assets/Scripts/Runtime/DreamForestEntrance/Runtime/DreamEntranceView.cs": "829108ae3ab607b7d7674e557e821be70ced4b8c3a8254316a458678e9919f35",
+  "Assets/Scripts/Runtime/DreamForestEntrance/Runtime/EntranceAdvanceSurface.cs": "c45a02dd65878601cff24491b57906825311595262477064304d52a8bfbfe5aa",
+  "Assets/Scripts/Runtime/DreamForestEntrance/Runtime/EntranceFlagGraphic.cs": "e3fcf7c4b17df3d25b38d74b3c268b323f12002fd29094dc05cddb8fc9f76df4",
+  "Assets/Scripts/Runtime/DreamForestEntrance/Runtime/EntrancePaperGraphic.cs": "af4f18756d3a04661e5de3b050249304aa4236fad012e26c763894bbdd403607",
+  "Assets/Scripts/Runtime/DreamForestEntrance/Runtime/EntrancePhaseMenuView.cs": "d0c4860cc18e7608e707211b7ce4521c02f05ead56c4fa3a09e7defc06406586",
+  "Assets/Scripts/Runtime/DreamForestEntrance/Runtime/YunaLegend.DreamForestEntrance.Runtime.asmdef": "cabb448261de8c3b161ef313af55efbb0afb8d3417ac67cc390fef860e5970d6",
+  "Assets/Scripts/Editor/DreamForestEntrance/DreamEntranceAudit.cs": "7e6ddb12b4a3df10ee2fdfb58b79048b0708f5c235d4bfc38117120ad86a699d",
+  "Assets/Scripts/Editor/DreamForestEntrance/DreamEntranceInteractionAudit.cs": "cf99a9b41ce2f0058e643a240950fd0566d809bb809705c4ac339a8df32ac363",
+  "Assets/Scripts/Editor/DreamForestEntrance/DreamEntranceMotionCapture.cs": "b120094781e0e4ac153be59e3a8bba1a6fbfe6b0af7f95e5cb99daf54968dc2a",
+  "Assets/Scripts/Editor/DreamForestEntrance/EntranceAssetImporter.cs": "46ce342d5e5b3ca2ca7b3e6bdedf344eabca7902131d9cef1b43511b6e6d49a6",
+  "Assets/Scripts/Editor/DreamForestEntrance/YunaLegend.DreamForestEntrance.Editor.asmdef": "5c23ea5b600ba6bda428ea120db950ffb00583c3f0c6364b3c819697098fe148",
+  "Assets/Scripts/Tests/EditMode/DreamForestEntrance/DreamEntranceTests.cs": "e2e7119a6d024cffb6c03b4e4e413fd5df90b0e42a4ca32dccc3139a66e7e77e",
+  "Assets/Scripts/Tests/EditMode/DreamForestEntrance/YunaLegend.DreamForestEntrance.Tests.asmdef": "c89bde2753a58c04ca69b23feadbe6d0dbab10dfedb78b01b2498b60ae8d5c4b",
+  "Assets/Art/DreamForestEntrance/Resources/DreamForestEntrance/LegacyActor.shader": "0da5e2aabfcd470125b6c5cb3bac7bba5e3615d02985e1770f4b48afa3db1d48",
+  "Assets/Scripts/Runtime/DreamForest/Runtime/DreamForestStageBootstrap.cs": "78b33a31b097de955faa0a617e57d0874d4c2b0647ad3e785ec62041b74461cd",
+  "Assets/Scripts/Runtime/DreamForest/Runtime/YunaLegend.DreamForest.Runtime.asmdef": "8aa9675c66bd96f41d5ef1702a2df3140f6681856d6d733ff5cea519aa6fc5c2"
+}

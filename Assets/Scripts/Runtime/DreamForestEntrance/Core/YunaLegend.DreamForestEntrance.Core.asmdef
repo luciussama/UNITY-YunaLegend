@@ -1,0 +1,6 @@
+{
+    "name": "YunaLegend.DreamForestEntrance.Core",
+    "references": ["YunaLegend.DreamForest.Core"],
+    "noEngineReferences": true,
+    "autoReferenced": true
+}

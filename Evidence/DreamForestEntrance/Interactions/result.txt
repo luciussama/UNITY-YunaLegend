@@ -1,0 +1,1 @@
+ENTRANCE_INTERACTIONS_OK: mouse/touch pointer paths and keyboard Submit; selector open/close preserves scene and clock; paused clock/narration frozen; resume works; one-touch narration; scene reload only after dropdown selection. Native UI events in PlayMode, not physical hardware injection.

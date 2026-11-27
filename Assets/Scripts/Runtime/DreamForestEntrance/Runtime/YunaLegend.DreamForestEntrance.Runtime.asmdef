@@ -1,0 +1,5 @@
+{
+    "name": "YunaLegend.DreamForestEntrance.Runtime",
+    "references": ["YunaLegend.DreamForest.Core", "YunaLegend.DreamForestEntrance.Core", "UnityEngine.UI"],
+    "autoReferenced": true
+}

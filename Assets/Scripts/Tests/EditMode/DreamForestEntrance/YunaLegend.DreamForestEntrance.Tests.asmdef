@@ -1,0 +1,10 @@
+{
+    "name": "YunaLegend.DreamForestEntrance.Tests",
+    "references": ["YunaLegend.DreamForest.Core", "YunaLegend.DreamForestEntrance.Core"],
+    "includePlatforms": ["Editor"],
+    "overrideReferences": true,
+    "precompiledReferences": ["nunit.framework.dll"],
+    "autoReferenced": false,
+    "defineConstraints": ["UNITY_INCLUDE_TESTS"],
+    "noEngineReferences": true
+}

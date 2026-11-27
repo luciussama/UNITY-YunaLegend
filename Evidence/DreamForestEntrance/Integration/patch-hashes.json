@@ -1,0 +1,10 @@
+{
+  "Assets/Scripts/Runtime/DreamForest/Runtime/DreamForestStageBootstrap.cs": {
+    "before": "acaefa2c9a453c28926d00b22b994a961d3588d6033c82cd54b057a760954dc3",
+    "after": "78b33a31b097de955faa0a617e57d0874d4c2b0647ad3e785ec62041b74461cd"
+  },
+  "Assets/Scripts/Runtime/DreamForest/Runtime/YunaLegend.DreamForest.Runtime.asmdef": {
+    "before": "5315820b9387a685b45486a9a1b74f5bf7520ea9ef1a6e56034c9610bfce7149",
+    "after": "8aa9675c66bd96f41d5ef1702a2df3140f6681856d6d733ff5cea519aa6fc5c2"
+  }
+}
