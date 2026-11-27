@@ -54,5 +54,37 @@ namespace YunaLegend.BearChase.Tests
             Assert.Less(poseLand.HipsBobY, -0.04f, "Startle hop lands in cushioned crouch.");
             Assert.Less(poseLand.ScaleY, 0.94f, "Landing applies squash.");
         }
+
+        [Test]
+        public void ApproachWalk_LocksPlantedFootToFloorWithNaturalFourStepCadence()
+        {
+            Assert.AreEqual(2.0f, BearChaseYunaRigState.WalkCyclesAcrossApproach, 0.01f,
+                "576px approach at 144.6px/step must take 2.0 full cycles (4 natural cautious steps), not 8.");
+
+            // Measure world-space planted foot X across the middle of a full stance phase (walkProgress 0.52 -> 0.72)
+            // Front leg is in stance during phase [0.00, 0.50], i.e. walkProgress [0.50, 0.75] on cycle 2.
+            const float canvasW = 1920f;
+            const float legLengthPx = 0.45f * 395f;
+            float minFootX = float.MaxValue;
+            float maxFootX = float.MinValue;
+
+            for (float t = 2.15f; t <= 2.75f; t += 0.05f)
+            {
+                var sample = BearChaseEntranceTimeline.Evaluate(t);
+                float travelSpan = BearChaseEntranceTimeline.YunaReachX - BearChaseEntranceTimeline.YunaStartX;
+                float walkProgress = (sample.NormalizedYunaX - BearChaseEntranceTimeline.YunaStartX) / travelSpan;
+                float phase = (walkProgress * BearChaseYunaRigState.WalkCyclesAcrossApproach) % 1f;
+                if (phase < 0.05f || phase > 0.45f) continue;
+
+                var pose = BearChaseYunaRigState.Evaluate(t, sample);
+                float worldFootX = sample.NormalizedYunaX * canvasW
+                    + legLengthPx * (float)System.Math.Sin(pose.FrontLegDeg * System.Math.PI / 180.0);
+                if (worldFootX < minFootX) minFootX = worldFootX;
+                if (worldFootX > maxFootX) maxFootX = worldFootX;
+            }
+
+            Assert.Less(maxFootX - minFootX, 8f,
+                "Planted foot world X must stay locked within 8px during stance (zero foot sliding).");
+        }
     }
 }

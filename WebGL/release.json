@@ -1,8 +1,9 @@
 ﻿{
-    "releaseId":  "20261126-picnic-rounded-bearchase-rig2d",
+    "releaseId":  "20261127-ui-dialogues-footlock-webgl-stage1",
     "unity":  "6000.3.28f1",
-    "builtAtUtc":  "2026-11-26T22:00:20+00:00",
-    "sourceBranch":  "feat/picnic-rounded-corners",
+    "builtAtUtc":  "2026-11-27T17:37:08+00:00",
+    "sourceBranch":  "fix/ui-dialogue-balloons-layout",
+    "defaultWebStartScene":  "Fase-Jogavel-Completa",
     "scenes":  [
                    "TitleScreen",
                    "Fase-Jogavel-Completa",
@@ -17,21 +18,21 @@
                                      "sha256":  "6a16c8f975a435ba653c9a8e0b94cf1625f9f0ae9345c92982c28c1e9c4d2c5f"
                                  },
                   "Build/WebGL.data.unityweb":  {
-                                                    "bytes":  268385799,
-                                                    "sha256":  "eeda95aab34201de8677810de3336fef9ddc6b9804eb6300d8fae500f8a2c629"
+                                                    "bytes":  268387292,
+                                                    "sha256":  "dec6ec83506b34939ecfecdcef0a9e9680a62bddf8cb25e6fb9db877ce568422"
                                                 },
                   "Build/WebGL.framework.js.unityweb":  {
-                                                            "bytes":  90504,
-                                                            "sha256":  "795b2fdbc890892b8a876c01570ec6167573a02bb55c28a39ff8cfa774e0ad4e"
+                                                            "bytes":  90587,
+                                                            "sha256":  "00064126b1ea0c2982cb77eb6aa64d917cfd0fdff4c69afd1fbf5cdfd7bc919b"
                                                         },
                   "Build/WebGL.loader.js":  {
                                                 "bytes":  47867,
-                                                "sha256":  "9fe9b8378345d93c72970e71bb15405b0fcbeb79968102fb4ed0df5af667b07f"
+                                                "sha256":  "83895ac4b8e68ef5427c56284b2472dc3461221be30db55a08ef02523e278fea"
                                             },
                   "Build/WebGL.wasm.unityweb":  {
-                                                    "bytes":  12401442,
-                                                    "sha256":  "77d9e9843f7de9c51f62a783eb1017c688141fffb89d74945ca87c324afacbdd"
+                                                    "bytes":  12407844,
+                                                    "sha256":  "5372469bf0df6b82f1e7d812d7cecdbf5dcb67a3d5b6c30369170db9fd5bf454"
                                                 }
               },
-    "testResult":  "Picnic EditMode 35/35 (ground alignment, 4-phase jump, 3D river/fish, shadows URP/Lit, rounded 3D corners \u0026 ivy trim); BearChase EditMode 41/41 (16-joint LBS 2D rig entrance cinematic); WebCiBuild YUNA_WEB_PAGES_OK"
+    "testResult":  "EditMode 142/142 passed (Picnic 35, ToyRoom 28, BearChase 42 incl. foot-lock \u003c8px, Arena 37); Desktop \u0026 Mobile UI dialogue audit 4/4 screens OK; WebGL forced first-stage start (Fase-Jogavel-Completa); WebCiBuild YUNA_WEB_PAGES_OK"
 }

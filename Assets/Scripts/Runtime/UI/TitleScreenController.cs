@@ -15,6 +15,19 @@ namespace YunaLegend.UI
         public const string SaveKey = "YunaLegend.HasSave";
         public const string EasyModeKey = "YunaLegend.EasyMode";
         public const string VolumeKey = "YunaLegend.MasterVolume";
+        public const string FirstStageSceneName = "Fase-Jogavel-Completa";
+
+        /// <summary>
+        /// Regra obrigatoria: toda build WebGL deve iniciar Novo Jogo pela primeira fase (Fase-Jogavel-Completa).
+        /// </summary>
+        public static bool ShouldForceFirstStageOnStart()
+        {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            return true;
+#else
+            return false;
+#endif
+        }
 
         [Header("Cena de destino")]
         [SerializeField] private string gameplaySceneName = "Picnic_Gameplay";
@@ -94,7 +107,15 @@ namespace YunaLegend.UI
                 volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
             }
 
-            if (string.IsNullOrEmpty(selectedPhaseScene)) selectedPhaseScene = gameplaySceneName;
+            if (ShouldForceFirstStageOnStart())
+            {
+                gameplaySceneName = FirstStageSceneName;
+                selectedPhaseScene = FirstStageSceneName;
+            }
+            else if (string.IsNullOrEmpty(selectedPhaseScene))
+            {
+                selectedPhaseScene = gameplaySceneName;
+            }
             AudioListener.volume = MasterVolume;
             RefreshState();
         }

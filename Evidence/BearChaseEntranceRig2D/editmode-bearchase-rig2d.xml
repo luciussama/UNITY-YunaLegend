@@ -1,117 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<test-run id="2" testcasecount="41" result="Passed" total="41" passed="41" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0,0953886">
-  <test-suite type="TestSuite" id="1000" name="Yuna Legend - O Quarto dos Brinquedos" fullname="Yuna Legend - O Quarto dos Brinquedos" runstate="Runnable" testcasecount="240" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.095389" total="41" passed="41" failed="0" inconclusive="0" skipped="0" asserts="0">
+<test-run id="2" testcasecount="42" result="Passed" total="42" passed="42" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0,0847238">
+  <test-suite type="TestSuite" id="1000" name="Yuna Legend - O Quarto dos Brinquedos" fullname="Yuna Legend - O Quarto dos Brinquedos" runstate="Runnable" testcasecount="241" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.084724" total="42" passed="42" failed="0" inconclusive="0" skipped="0" asserts="0">
     <properties>
       <property name="platform" value="EditMode" />
     </properties>
-    <test-suite type="Assembly" id="1113" name="YunaLegend.BearChase.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Build/PicnicVisualAuditProject/Library/ScriptAssemblies/YunaLegend.BearChase.Tests.dll" runstate="Runnable" testcasecount="41" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.087639" total="41" passed="41" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <test-suite type="Assembly" id="1114" name="YunaLegend.BearChase.Tests.dll" fullname="C:/Users/sergi/repos/UNITY-YunaLegend/Build/PicnicVisualAuditProject/Library/ScriptAssemblies/YunaLegend.BearChase.Tests.dll" runstate="Runnable" testcasecount="42" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.079126" total="42" passed="42" failed="0" inconclusive="0" skipped="0" asserts="0">
       <properties>
-        <property name="_PID" value="8280" />
+        <property name="_PID" value="34384" />
         <property name="_APPDOMAIN" value="Unity Child Domain" />
         <property name="platform" value="EditMode" />
         <property name="EditorOnly" value="True" />
       </properties>
-      <test-suite type="TestSuite" id="1114" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="41" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.087297" total="41" passed="41" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <test-suite type="TestSuite" id="1115" name="YunaLegend" fullname="YunaLegend" runstate="Runnable" testcasecount="42" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.078913" total="42" passed="42" failed="0" inconclusive="0" skipped="0" asserts="0">
         <properties />
-        <test-suite type="TestSuite" id="1118" name="BearChase" fullname="YunaLegend.BearChase" runstate="Runnable" testcasecount="19" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.052567" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <test-suite type="TestSuite" id="1119" name="BearChase" fullname="YunaLegend.BearChase" runstate="Runnable" testcasecount="20" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.047479" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
           <properties />
-          <test-suite type="TestSuite" id="1119" name="Tests" fullname="YunaLegend.BearChase.Tests" runstate="Runnable" testcasecount="19" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.052378" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <test-suite type="TestSuite" id="1120" name="Tests" fullname="YunaLegend.BearChase.Tests" runstate="Runnable" testcasecount="20" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.047381" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
             <properties />
-            <test-suite type="TestFixture" id="1088" name="BearChaseEndingTimelineTests" fullname="YunaLegend.BearChase.Tests.BearChaseEndingTimelineTests" classname="YunaLegend.BearChase.Tests.BearChaseEndingTimelineTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.027444" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <test-suite type="TestFixture" id="1088" name="BearChaseEndingTimelineTests" fullname="YunaLegend.BearChase.Tests.BearChaseEndingTimelineTests" classname="YunaLegend.BearChase.Tests.BearChaseEndingTimelineTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.024801" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
               <properties />
-              <test-case id="1089" name="Evaluate_ProgressesThroughAllFiveLegacyBeatsWithLiteralTexts" fullname="YunaLegend.BearChase.Tests.BearChaseEndingTimelineTests.Evaluate_ProgressesThroughAllFiveLegacyBeatsWithLiteralTexts" methodname="Evaluate_ProgressesThroughAllFiveLegacyBeatsWithLiteralTexts" classname="YunaLegend.BearChase.Tests.BearChaseEndingTimelineTests" runstate="Runnable" seed="800087389" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.015245" asserts="0">
+              <test-case id="1089" name="Evaluate_ProgressesThroughAllFiveLegacyBeatsWithLiteralTexts" fullname="YunaLegend.BearChase.Tests.BearChaseEndingTimelineTests.Evaluate_ProgressesThroughAllFiveLegacyBeatsWithLiteralTexts" methodname="Evaluate_ProgressesThroughAllFiveLegacyBeatsWithLiteralTexts" classname="YunaLegend.BearChase.Tests.BearChaseEndingTimelineTests" runstate="Runnable" seed="2030823968" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.015975" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1090" name="GetNextAdvanceTime_AdvancesBeatByBeatMonotonically" fullname="YunaLegend.BearChase.Tests.BearChaseEndingTimelineTests.GetNextAdvanceTime_AdvancesBeatByBeatMonotonically" methodname="GetNextAdvanceTime_AdvancesBeatByBeatMonotonically" classname="YunaLegend.BearChase.Tests.BearChaseEndingTimelineTests" runstate="Runnable" seed="1895391024" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000234" asserts="0">
+              <test-case id="1090" name="GetNextAdvanceTime_AdvancesBeatByBeatMonotonically" fullname="YunaLegend.BearChase.Tests.BearChaseEndingTimelineTests.GetNextAdvanceTime_AdvancesBeatByBeatMonotonically" methodname="GetNextAdvanceTime_AdvancesBeatByBeatMonotonically" classname="YunaLegend.BearChase.Tests.BearChaseEndingTimelineTests" runstate="Runnable" seed="995793506" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000181" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
             </test-suite>
-            <test-suite type="TestFixture" id="1091" name="BearChaseHandDrawnTimingTests" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.008462" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <test-suite type="TestFixture" id="1091" name="BearChaseHandDrawnTimingTests" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.007308" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
               <properties />
-              <test-suite type="ParameterizedMethod" id="1095" name="ExposureCoversEveryDrawingRegardlessOfRenderRate" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.005176" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <test-suite type="ParameterizedMethod" id="1095" name="ExposureCoversEveryDrawingRegardlessOfRenderRate" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.004452" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
                 <properties />
-                <test-case id="1092" name="ExposureCoversEveryDrawingRegardlessOfRenderRate(30)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate(30)" methodname="ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="1633565329" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.002725" asserts="0">
+                <test-case id="1092" name="ExposureCoversEveryDrawingRegardlessOfRenderRate(30)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate(30)" methodname="ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="870210749" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.002354" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1093" name="ExposureCoversEveryDrawingRegardlessOfRenderRate(60)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate(60)" methodname="ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="343962324" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000683" asserts="0">
+                <test-case id="1093" name="ExposureCoversEveryDrawingRegardlessOfRenderRate(60)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate(60)" methodname="ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="401944317" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000608" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1094" name="ExposureCoversEveryDrawingRegardlessOfRenderRate(120)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate(120)" methodname="ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="727256003" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.001199" asserts="0">
+                <test-case id="1094" name="ExposureCoversEveryDrawingRegardlessOfRenderRate(120)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ExposureCoversEveryDrawingRegardlessOfRenderRate(120)" methodname="ExposureCoversEveryDrawingRegardlessOfRenderRate" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="724966096" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.001070" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
               </test-suite>
-              <test-case id="1096" name="ExposureHoldsEachDrawingForFortyMilliseconds" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ExposureHoldsEachDrawingForFortyMilliseconds" methodname="ExposureHoldsEachDrawingForFortyMilliseconds" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="518955915" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000803" asserts="0">
+              <test-case id="1096" name="ExposureHoldsEachDrawingForFortyMilliseconds" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ExposureHoldsEachDrawingForFortyMilliseconds" methodname="ExposureHoldsEachDrawingForFortyMilliseconds" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="351130726" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000806" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-suite type="ParameterizedMethod" id="1106" name="ShotBoundariesMatchDirectorScript" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.001402" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <test-suite type="ParameterizedMethod" id="1106" name="ShotBoundariesMatchDirectorScript" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.001183" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
                 <properties />
-                <test-case id="1097" name="ShotBoundariesMatchDirectorScript(0,0)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(0,0)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="1092600158" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000245" asserts="0">
+                <test-case id="1097" name="ShotBoundariesMatchDirectorScript(0,0)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(0,0)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="1320792735" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000193" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1098" name="ShotBoundariesMatchDirectorScript(99,0)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(99,0)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="774394177" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000058" asserts="0">
+                <test-case id="1098" name="ShotBoundariesMatchDirectorScript(99,0)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(99,0)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="662048153" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000044" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1099" name="ShotBoundariesMatchDirectorScript(100,1)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(100,1)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="873169331" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000045" asserts="0">
+                <test-case id="1099" name="ShotBoundariesMatchDirectorScript(100,1)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(100,1)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="1012851404" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000031" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1100" name="ShotBoundariesMatchDirectorScript(174,1)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(174,1)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="834185870" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000038" asserts="0">
+                <test-case id="1100" name="ShotBoundariesMatchDirectorScript(174,1)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(174,1)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="483330755" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000033" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1101" name="ShotBoundariesMatchDirectorScript(175,2)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(175,2)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="1622464986" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000030" asserts="0">
+                <test-case id="1101" name="ShotBoundariesMatchDirectorScript(175,2)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(175,2)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="1173259885" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000032" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1102" name="ShotBoundariesMatchDirectorScript(259,2)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(259,2)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="800753479" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000028" asserts="0">
+                <test-case id="1102" name="ShotBoundariesMatchDirectorScript(259,2)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(259,2)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="472305367" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000027" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1103" name="ShotBoundariesMatchDirectorScript(260,3)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(260,3)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="1674730129" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000032" asserts="0">
+                <test-case id="1103" name="ShotBoundariesMatchDirectorScript(260,3)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(260,3)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="689641433" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000026" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1104" name="ShotBoundariesMatchDirectorScript(349,3)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(349,3)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="847758122" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000028" asserts="0">
+                <test-case id="1104" name="ShotBoundariesMatchDirectorScript(349,3)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(349,3)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="1937028004" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000026" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1105" name="ShotBoundariesMatchDirectorScript(350,-1)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(350,-1)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="1490772297" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000030" asserts="0">
+                <test-case id="1105" name="ShotBoundariesMatchDirectorScript(350,-1)" fullname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests.ShotBoundariesMatchDirectorScript(350,-1)" methodname="ShotBoundariesMatchDirectorScript" classname="YunaLegend.BearChase.Tests.BearChaseHandDrawnTimingTests" runstate="Runnable" seed="401981986" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000025" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
@@ -119,30 +119,36 @@
                 </test-case>
               </test-suite>
             </test-suite>
-            <test-suite type="TestFixture" id="1107" name="BearChaseQaPilotTests" fullname="YunaLegend.BearChase.Tests.BearChaseQaPilotTests" classname="YunaLegend.BearChase.Tests.BearChaseQaPilotTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.012130" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <test-suite type="TestFixture" id="1107" name="BearChaseQaPilotTests" fullname="YunaLegend.BearChase.Tests.BearChaseQaPilotTests" classname="YunaLegend.BearChase.Tests.BearChaseQaPilotTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.011074" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
               <properties />
-              <test-case id="1108" name="QaPilot_CompletesFullNormalChaseToVictoryWithThrowsAfter460m" fullname="YunaLegend.BearChase.Tests.BearChaseQaPilotTests.QaPilot_CompletesFullNormalChaseToVictoryWithThrowsAfter460m" methodname="QaPilot_CompletesFullNormalChaseToVictoryWithThrowsAfter460m" classname="YunaLegend.BearChase.Tests.BearChaseQaPilotTests" runstate="Runnable" seed="1116047343" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.011638" asserts="0">
+              <test-case id="1108" name="QaPilot_CompletesFullNormalChaseToVictoryWithThrowsAfter460m" fullname="YunaLegend.BearChase.Tests.BearChaseQaPilotTests.QaPilot_CompletesFullNormalChaseToVictoryWithThrowsAfter460m" methodname="QaPilot_CompletesFullNormalChaseToVictoryWithThrowsAfter460m" classname="YunaLegend.BearChase.Tests.BearChaseQaPilotTests" runstate="Runnable" seed="1116351993" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.010765" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
             </test-suite>
-            <test-suite type="TestFixture" id="1109" name="BearChaseYunaRigStateTests" fullname="YunaLegend.BearChase.Tests.BearChaseYunaRigStateTests" classname="YunaLegend.BearChase.Tests.BearChaseYunaRigStateTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.003389" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <test-suite type="TestFixture" id="1109" name="BearChaseYunaRigStateTests" fullname="YunaLegend.BearChase.Tests.BearChaseYunaRigStateTests" classname="YunaLegend.BearChase.Tests.BearChaseYunaRigStateTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.003405" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
               <properties />
-              <test-case id="1110" name="ApproachWalk_AlternatesLegsAndBendsKneeOnRecovery" fullname="YunaLegend.BearChase.Tests.BearChaseYunaRigStateTests.ApproachWalk_AlternatesLegsAndBendsKneeOnRecovery" methodname="ApproachWalk_AlternatesLegsAndBendsKneeOnRecovery" classname="YunaLegend.BearChase.Tests.BearChaseYunaRigStateTests" runstate="Runnable" seed="154419063" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.001809" asserts="0">
+              <test-case id="1110" name="ApproachWalk_AlternatesLegsAndBendsKneeOnRecovery" fullname="YunaLegend.BearChase.Tests.BearChaseYunaRigStateTests.ApproachWalk_AlternatesLegsAndBendsKneeOnRecovery" methodname="ApproachWalk_AlternatesLegsAndBendsKneeOnRecovery" classname="YunaLegend.BearChase.Tests.BearChaseYunaRigStateTests" runstate="Runnable" seed="1752946247" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.001763" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1112" name="BearWakeUp_SwitchesToShockedExpressionWithRecoilHopAndLandingCrouch" fullname="YunaLegend.BearChase.Tests.BearChaseYunaRigStateTests.BearWakeUp_SwitchesToShockedExpressionWithRecoilHopAndLandingCrouch" methodname="BearWakeUp_SwitchesToShockedExpressionWithRecoilHopAndLandingCrouch" classname="YunaLegend.BearChase.Tests.BearChaseYunaRigStateTests" runstate="Runnable" seed="1507900885" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000526" asserts="0">
+              <test-case id="1113" name="ApproachWalk_LocksPlantedFootToFloorWithNaturalFourStepCadence" fullname="YunaLegend.BearChase.Tests.BearChaseYunaRigStateTests.ApproachWalk_LocksPlantedFootToFloorWithNaturalFourStepCadence" methodname="ApproachWalk_LocksPlantedFootToFloorWithNaturalFourStepCadence" classname="YunaLegend.BearChase.Tests.BearChaseYunaRigStateTests" runstate="Runnable" seed="1337332921" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000322" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1111" name="ReachBeat_BendsWaistForwardTiltsHeadDownAndExtendsBackArm" fullname="YunaLegend.BearChase.Tests.BearChaseYunaRigStateTests.ReachBeat_BendsWaistForwardTiltsHeadDownAndExtendsBackArm" methodname="ReachBeat_BendsWaistForwardTiltsHeadDownAndExtendsBackArm" classname="YunaLegend.BearChase.Tests.BearChaseYunaRigStateTests" runstate="Runnable" seed="1095280518" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000218" asserts="0">
+              <test-case id="1112" name="BearWakeUp_SwitchesToShockedExpressionWithRecoilHopAndLandingCrouch" fullname="YunaLegend.BearChase.Tests.BearChaseYunaRigStateTests.BearWakeUp_SwitchesToShockedExpressionWithRecoilHopAndLandingCrouch" methodname="BearWakeUp_SwitchesToShockedExpressionWithRecoilHopAndLandingCrouch" classname="YunaLegend.BearChase.Tests.BearChaseYunaRigStateTests" runstate="Runnable" seed="513447993" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000530" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1111" name="ReachBeat_BendsWaistForwardTiltsHeadDownAndExtendsBackArm" fullname="YunaLegend.BearChase.Tests.BearChaseYunaRigStateTests.ReachBeat_BendsWaistForwardTiltsHeadDownAndExtendsBackArm" methodname="ReachBeat_BendsWaistForwardTiltsHeadDownAndExtendsBackArm" classname="YunaLegend.BearChase.Tests.BearChaseYunaRigStateTests" runstate="Runnable" seed="1686934646" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000219" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
@@ -151,153 +157,153 @@
             </test-suite>
           </test-suite>
         </test-suite>
-        <test-suite type="TestSuite" id="1115" name="Tests" fullname="YunaLegend.Tests" runstate="Runnable" testcasecount="22" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.034561" total="22" passed="22" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <test-suite type="TestSuite" id="1116" name="Tests" fullname="YunaLegend.Tests" runstate="Runnable" testcasecount="22" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.031339" total="22" passed="22" failed="0" inconclusive="0" skipped="0" asserts="0">
           <properties />
-          <test-suite type="TestSuite" id="1116" name="EditMode" fullname="YunaLegend.Tests.EditMode" runstate="Runnable" testcasecount="22" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.034327" total="22" passed="22" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <test-suite type="TestSuite" id="1117" name="EditMode" fullname="YunaLegend.Tests.EditMode" runstate="Runnable" testcasecount="22" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.031230" total="22" passed="22" failed="0" inconclusive="0" skipped="0" asserts="0">
             <properties />
-            <test-suite type="TestSuite" id="1117" name="BearChase" fullname="YunaLegend.Tests.EditMode.BearChase" runstate="Runnable" testcasecount="22" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.034154" total="22" passed="22" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <test-suite type="TestSuite" id="1118" name="BearChase" fullname="YunaLegend.Tests.EditMode.BearChase" runstate="Runnable" testcasecount="22" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.031127" total="22" passed="22" failed="0" inconclusive="0" skipped="0" asserts="0">
               <properties />
-              <test-suite type="TestFixture" id="1061" name="BearChaseEntranceTimelineTests" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.004721" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <test-suite type="TestFixture" id="1061" name="BearChaseEntranceTimelineTests" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.004024" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
                 <properties />
-                <test-case id="1066" name="EntranceApproach_AdvancesPelvisSmoothlyWithoutDiscreteJumps" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests.EntranceApproach_AdvancesPelvisSmoothlyWithoutDiscreteJumps" methodname="EntranceApproach_AdvancesPelvisSmoothlyWithoutDiscreteJumps" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests" runstate="Runnable" seed="734777362" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.001752" asserts="0">
+                <test-case id="1066" name="EntranceApproach_AdvancesPelvisSmoothlyWithoutDiscreteJumps" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests.EntranceApproach_AdvancesPelvisSmoothlyWithoutDiscreteJumps" methodname="EntranceApproach_AdvancesPelvisSmoothlyWithoutDiscreteJumps" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests" runstate="Runnable" seed="964734142" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.001642" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1065" name="EntranceApproach_DrivesStepsMonotonicallyByDistanceWithoutSlides" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests.EntranceApproach_DrivesStepsMonotonicallyByDistanceWithoutSlides" methodname="EntranceApproach_DrivesStepsMonotonicallyByDistanceWithoutSlides" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests" runstate="Runnable" seed="508034530" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000758" asserts="0">
+                <test-case id="1065" name="EntranceApproach_DrivesStepsMonotonicallyByDistanceWithoutSlides" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests.EntranceApproach_DrivesStepsMonotonicallyByDistanceWithoutSlides" methodname="EntranceApproach_DrivesStepsMonotonicallyByDistanceWithoutSlides" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests" runstate="Runnable" seed="630453889" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000636" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1062" name="EntrancePose_HoldsEachExposureForFortyMilliseconds" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests.EntrancePose_HoldsEachExposureForFortyMilliseconds" methodname="EntrancePose_HoldsEachExposureForFortyMilliseconds" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests" runstate="Runnable" seed="1407877509" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000566" asserts="0">
+                <test-case id="1062" name="EntrancePose_HoldsEachExposureForFortyMilliseconds" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests.EntrancePose_HoldsEachExposureForFortyMilliseconds" methodname="EntrancePose_HoldsEachExposureForFortyMilliseconds" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests" runstate="Runnable" seed="823886850" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000441" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1064" name="EntranceSimulation_TransitionsSmoothlyToChasingAtTotalDuration" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests.EntranceSimulation_TransitionsSmoothlyToChasingAtTotalDuration" methodname="EntranceSimulation_TransitionsSmoothlyToChasingAtTotalDuration" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests" runstate="Runnable" seed="1197687912" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000339" asserts="0">
+                <test-case id="1064" name="EntranceSimulation_TransitionsSmoothlyToChasingAtTotalDuration" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests.EntranceSimulation_TransitionsSmoothlyToChasingAtTotalDuration" methodname="EntranceSimulation_TransitionsSmoothlyToChasingAtTotalDuration" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests" runstate="Runnable" seed="1287564654" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000325" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1063" name="EntranceTimeline_ProgressesThroughAllFiveCanonicalBeats" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests.EntranceTimeline_ProgressesThroughAllFiveCanonicalBeats" methodname="EntranceTimeline_ProgressesThroughAllFiveCanonicalBeats" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests" runstate="Runnable" seed="886463264" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000328" asserts="0">
+                <test-case id="1063" name="EntranceTimeline_ProgressesThroughAllFiveCanonicalBeats" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests.EntranceTimeline_ProgressesThroughAllFiveCanonicalBeats" methodname="EntranceTimeline_ProgressesThroughAllFiveCanonicalBeats" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseEntranceTimelineTests" runstate="Runnable" seed="2086784274" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000312" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
               </test-suite>
-              <test-suite type="TestFixture" id="1067" name="BearChasePaceAndDeterminismTests" fullname="YunaLegend.Tests.EditMode.BearChase.BearChasePaceAndDeterminismTests" classname="YunaLegend.Tests.EditMode.BearChase.BearChasePaceAndDeterminismTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.003630" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <test-suite type="TestFixture" id="1067" name="BearChasePaceAndDeterminismTests" fullname="YunaLegend.Tests.EditMode.BearChase.BearChasePaceAndDeterminismTests" classname="YunaLegend.Tests.EditMode.BearChase.BearChasePaceAndDeterminismTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.003189" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
                 <properties />
-                <test-case id="1069" name="FixedStepSimulation_ProducesIdenticalResultsAt30_60_120Hz" fullname="YunaLegend.Tests.EditMode.BearChase.BearChasePaceAndDeterminismTests.FixedStepSimulation_ProducesIdenticalResultsAt30_60_120Hz" methodname="FixedStepSimulation_ProducesIdenticalResultsAt30_60_120Hz" classname="YunaLegend.Tests.EditMode.BearChase.BearChasePaceAndDeterminismTests" runstate="Runnable" seed="517095363" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.001613" asserts="0">
+                <test-case id="1069" name="FixedStepSimulation_ProducesIdenticalResultsAt30_60_120Hz" fullname="YunaLegend.Tests.EditMode.BearChase.BearChasePaceAndDeterminismTests.FixedStepSimulation_ProducesIdenticalResultsAt30_60_120Hz" methodname="FixedStepSimulation_ProducesIdenticalResultsAt30_60_120Hz" classname="YunaLegend.Tests.EditMode.BearChase.BearChasePaceAndDeterminismTests" runstate="Runnable" seed="1370226266" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.001531" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1070" name="ResetFullStage_ResetsThrowSchedulerDeterministically" fullname="YunaLegend.Tests.EditMode.BearChase.BearChasePaceAndDeterminismTests.ResetFullStage_ResetsThrowSchedulerDeterministically" methodname="ResetFullStage_ResetsThrowSchedulerDeterministically" classname="YunaLegend.Tests.EditMode.BearChase.BearChasePaceAndDeterminismTests" runstate="Runnable" seed="1480715621" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000809" asserts="0">
+                <test-case id="1070" name="ResetFullStage_ResetsThrowSchedulerDeterministically" fullname="YunaLegend.Tests.EditMode.BearChase.BearChasePaceAndDeterminismTests.ResetFullStage_ResetsThrowSchedulerDeterministically" methodname="ResetFullStage_ResetsThrowSchedulerDeterministically" classname="YunaLegend.Tests.EditMode.BearChase.BearChasePaceAndDeterminismTests" runstate="Runnable" seed="669203553" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000777" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1068" name="Simulation_MaintainsHighSpeedAndAcceleratesAcrossTrack" fullname="YunaLegend.Tests.EditMode.BearChase.BearChasePaceAndDeterminismTests.Simulation_MaintainsHighSpeedAndAcceleratesAcrossTrack" methodname="Simulation_MaintainsHighSpeedAndAcceleratesAcrossTrack" classname="YunaLegend.Tests.EditMode.BearChase.BearChasePaceAndDeterminismTests" runstate="Runnable" seed="1213907246" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000432" asserts="0">
+                <test-case id="1068" name="Simulation_MaintainsHighSpeedAndAcceleratesAcrossTrack" fullname="YunaLegend.Tests.EditMode.BearChase.BearChasePaceAndDeterminismTests.Simulation_MaintainsHighSpeedAndAcceleratesAcrossTrack" methodname="Simulation_MaintainsHighSpeedAndAcceleratesAcrossTrack" classname="YunaLegend.Tests.EditMode.BearChase.BearChasePaceAndDeterminismTests" runstate="Runnable" seed="1003951994" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000399" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
               </test-suite>
-              <test-suite type="TestFixture" id="1071" name="BearChaseSimulationTests" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.017637" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <test-suite type="TestFixture" id="1071" name="BearChaseSimulationTests" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.018021" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
                 <properties />
-                <test-case id="1077" name="Bear_AlwaysStaysAheadOfYuna_UntilFinalCatchupAtVictory" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests.Bear_AlwaysStaysAheadOfYuna_UntilFinalCatchupAtVictory" methodname="Bear_AlwaysStaysAheadOfYuna_UntilFinalCatchupAtVictory" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests" runstate="Runnable" seed="214303454" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.011190" asserts="0">
+                <test-case id="1077" name="Bear_AlwaysStaysAheadOfYuna_UntilFinalCatchupAtVictory" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests.Bear_AlwaysStaysAheadOfYuna_UntilFinalCatchupAtVictory" methodname="Bear_AlwaysStaysAheadOfYuna_UntilFinalCatchupAtVictory" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests" runstate="Runnable" seed="877811082" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.013196" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1075" name="DodgingThrownToys_ReachesVictoryAtTrackEnd" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests.DodgingThrownToys_ReachesVictoryAtTrackEnd" methodname="DodgingThrownToys_ReachesVictoryAtTrackEnd" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests" runstate="Runnable" seed="229538096" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.002369" asserts="0">
+                <test-case id="1075" name="DodgingThrownToys_ReachesVictoryAtTrackEnd" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests.DodgingThrownToys_ReachesVictoryAtTrackEnd" methodname="DodgingThrownToys_ReachesVictoryAtTrackEnd" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests" runstate="Runnable" seed="1254887373" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.002070" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1072" name="EntranceSequence_FollowsExactLegacyCadence" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests.EntranceSequence_FollowsExactLegacyCadence" methodname="EntranceSequence_FollowsExactLegacyCadence" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests" runstate="Runnable" seed="1534823019" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000386" asserts="0">
+                <test-case id="1072" name="EntranceSequence_FollowsExactLegacyCadence" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests.EntranceSequence_FollowsExactLegacyCadence" methodname="EntranceSequence_FollowsExactLegacyCadence" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests" runstate="Runnable" seed="763136363" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000313" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1076" name="LateralInput_ClampsInsideTrackWidthAndIgnoresZeroDt" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests.LateralInput_ClampsInsideTrackWidthAndIgnoresZeroDt" methodname="LateralInput_ClampsInsideTrackWidthAndIgnoresZeroDt" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests" runstate="Runnable" seed="1223113581" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000346" asserts="0">
+                <test-case id="1076" name="LateralInput_ClampsInsideTrackWidthAndIgnoresZeroDt" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests.LateralInput_ClampsInsideTrackWidthAndIgnoresZeroDt" methodname="LateralInput_ClampsInsideTrackWidthAndIgnoresZeroDt" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests" runstate="Runnable" seed="1550912365" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000237" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1073" name="ThrownToyHits_TriggerStumbleThenFallenAndDefeatEvent" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests.ThrownToyHits_TriggerStumbleThenFallenAndDefeatEvent" methodname="ThrownToyHits_TriggerStumbleThenFallenAndDefeatEvent" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests" runstate="Runnable" seed="1695222231" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000956" asserts="0">
+                <test-case id="1073" name="ThrownToyHits_TriggerStumbleThenFallenAndDefeatEvent" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests.ThrownToyHits_TriggerStumbleThenFallenAndDefeatEvent" methodname="ThrownToyHits_TriggerStumbleThenFallenAndDefeatEvent" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests" runstate="Runnable" seed="1391632425" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000734" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1074" name="TwoFailures_OffersEasyModeWithSixHeartsAndClearsOfferAfterActivation" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests.TwoFailures_OffersEasyModeWithSixHeartsAndClearsOfferAfterActivation" methodname="TwoFailures_OffersEasyModeWithSixHeartsAndClearsOfferAfterActivation" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests" runstate="Runnable" seed="931729867" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.001066" asserts="0">
+                <test-case id="1074" name="TwoFailures_OffersEasyModeWithSixHeartsAndClearsOfferAfterActivation" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests.TwoFailures_OffersEasyModeWithSixHeartsAndClearsOfferAfterActivation" methodname="TwoFailures_OffersEasyModeWithSixHeartsAndClearsOfferAfterActivation" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseSimulationTests" runstate="Runnable" seed="668699714" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000746" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
               </test-suite>
-              <test-suite type="TestFixture" id="1078" name="BearChaseThrowMechanicTests" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.004649" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <test-suite type="TestFixture" id="1078" name="BearChaseThrowMechanicTests" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.003356" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
                 <properties />
-                <test-case id="1079" name="ChaseStartsWithZeroPrePlacedObstacles_AndBearActivelyThrowsToys" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests.ChaseStartsWithZeroPrePlacedObstacles_AndBearActivelyThrowsToys" methodname="ChaseStartsWithZeroPrePlacedObstacles_AndBearActivelyThrowsToys" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests" runstate="Runnable" seed="1687923891" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000640" asserts="0">
+                <test-case id="1079" name="ChaseStartsWithZeroPrePlacedObstacles_AndBearActivelyThrowsToys" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests.ChaseStartsWithZeroPrePlacedObstacles_AndBearActivelyThrowsToys" methodname="ChaseStartsWithZeroPrePlacedObstacles_AndBearActivelyThrowsToys" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests" runstate="Runnable" seed="873393512" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000490" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1080" name="ThrownToys_AlwaysTravelBackwardFromBearTowardYuna" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests.ThrownToys_AlwaysTravelBackwardFromBearTowardYuna" methodname="ThrownToys_AlwaysTravelBackwardFromBearTowardYuna" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests" runstate="Runnable" seed="863482226" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.001164" asserts="0">
+                <test-case id="1080" name="ThrownToys_AlwaysTravelBackwardFromBearTowardYuna" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests.ThrownToys_AlwaysTravelBackwardFromBearTowardYuna" methodname="ThrownToys_AlwaysTravelBackwardFromBearTowardYuna" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests" runstate="Runnable" seed="2000785183" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000989" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1082" name="ThrowScheduler_NeverBlocksAllThreeLanesSimultaneously" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests.ThrowScheduler_NeverBlocksAllThreeLanesSimultaneously" methodname="ThrowScheduler_NeverBlocksAllThreeLanesSimultaneously" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests" runstate="Runnable" seed="214577467" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.001089" asserts="0">
+                <test-case id="1082" name="ThrowScheduler_NeverBlocksAllThreeLanesSimultaneously" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests.ThrowScheduler_NeverBlocksAllThreeLanesSimultaneously" methodname="ThrowScheduler_NeverBlocksAllThreeLanesSimultaneously" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests" runstate="Runnable" seed="480110814" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000781" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1081" name="ThrowScheduler_ThrowsMoreOftenThroughFinalCurvesAndRamps" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests.ThrowScheduler_ThrowsMoreOftenThroughFinalCurvesAndRamps" methodname="ThrowScheduler_ThrowsMoreOftenThroughFinalCurvesAndRamps" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests" runstate="Runnable" seed="2096346711" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000614" asserts="0">
+                <test-case id="1081" name="ThrowScheduler_ThrowsMoreOftenThroughFinalCurvesAndRamps" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests.ThrowScheduler_ThrowsMoreOftenThroughFinalCurvesAndRamps" methodname="ThrowScheduler_ThrowsMoreOftenThroughFinalCurvesAndRamps" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseThrowMechanicTests" runstate="Runnable" seed="1592678308" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000525" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
               </test-suite>
-              <test-suite type="TestFixture" id="1083" name="BearChaseTrackSamplerTests" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.002869" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <test-suite type="TestFixture" id="1083" name="BearChaseTrackSamplerTests" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.002173" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
                 <properties />
-                <test-case id="1087" name="Finale_ExtendsTrackWithTighterTurnsAndSteeperGrades" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests.Finale_ExtendsTrackWithTighterTurnsAndSteeperGrades" methodname="Finale_ExtendsTrackWithTighterTurnsAndSteeperGrades" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests" runstate="Runnable" seed="1258038423" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000749" asserts="0">
+                <test-case id="1087" name="Finale_ExtendsTrackWithTighterTurnsAndSteeperGrades" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests.Finale_ExtendsTrackWithTighterTurnsAndSteeperGrades" methodname="Finale_ExtendsTrackWithTighterTurnsAndSteeperGrades" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests" runstate="Runnable" seed="1506911419" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000657" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1084" name="TrackSampler_HasSmoothZeroEnvelopeAtStartAndEnd" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests.TrackSampler_HasSmoothZeroEnvelopeAtStartAndEnd" methodname="TrackSampler_HasSmoothZeroEnvelopeAtStartAndEnd" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests" runstate="Runnable" seed="1286917926" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000159" asserts="0">
+                <test-case id="1084" name="TrackSampler_HasSmoothZeroEnvelopeAtStartAndEnd" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests.TrackSampler_HasSmoothZeroEnvelopeAtStartAndEnd" methodname="TrackSampler_HasSmoothZeroEnvelopeAtStartAndEnd" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests" runstate="Runnable" seed="663197406" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000116" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1085" name="TrackSampler_ProducesNonLinearLateralCurvesAndVerticalHillsAndDips" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests.TrackSampler_ProducesNonLinearLateralCurvesAndVerticalHillsAndDips" methodname="TrackSampler_ProducesNonLinearLateralCurvesAndVerticalHillsAndDips" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests" runstate="Runnable" seed="739869003" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000300" asserts="0">
+                <test-case id="1085" name="TrackSampler_ProducesNonLinearLateralCurvesAndVerticalHillsAndDips" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests.TrackSampler_ProducesNonLinearLateralCurvesAndVerticalHillsAndDips" methodname="TrackSampler_ProducesNonLinearLateralCurvesAndVerticalHillsAndDips" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests" runstate="Runnable" seed="2135210582" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000242" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />
                   </properties>
                 </test-case>
-                <test-case id="1086" name="TrackSampler_SlopesAndAnglesStayContinuousAndNavigable" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests.TrackSampler_SlopesAndAnglesStayContinuousAndNavigable" methodname="TrackSampler_SlopesAndAnglesStayContinuousAndNavigable" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests" runstate="Runnable" seed="585000697" result="Passed" start-time="2026-11-26 21:15:10Z" end-time="2026-11-26 21:15:10Z" duration="0.000688" asserts="0">
+                <test-case id="1086" name="TrackSampler_SlopesAndAnglesStayContinuousAndNavigable" fullname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests.TrackSampler_SlopesAndAnglesStayContinuousAndNavigable" methodname="TrackSampler_SlopesAndAnglesStayContinuousAndNavigable" classname="YunaLegend.Tests.EditMode.BearChase.BearChaseTrackSamplerTests" runstate="Runnable" seed="1182530431" result="Passed" start-time="2026-11-27 17:19:14Z" end-time="2026-11-27 17:19:14Z" duration="0.000603" asserts="0">
                   <properties>
                     <property name="retryIteration" value="0" />
                     <property name="repeatIteration" value="0" />

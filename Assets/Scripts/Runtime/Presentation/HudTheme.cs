@@ -14,6 +14,107 @@ namespace YunaLegend.Presentation
         public static readonly Color Sage = new Color(0.27f, 0.39f, 0.33f, 1f);
 
         private static Sprite roundedSprite;
+        private static Sprite tapCueSprite;
+
+        /// <summary>
+        /// Discreet corner tap/click indicator sprite (soft ripple ring + downward chevron)
+        /// replacing verbose "Clique para pular / Toque para avançar" labels across all dialogue balloons.
+        /// </summary>
+        public static Sprite TapCueSprite
+        {
+            get
+            {
+                if (tapCueSprite != null)
+                {
+                    return tapCueSprite;
+                }
+
+                const int size = 64;
+                var texture = new Texture2D(size, size, TextureFormat.RGBA32, false)
+                {
+                    name = "HudTapCueIcon",
+                    wrapMode = TextureWrapMode.Clamp,
+                    filterMode = FilterMode.Bilinear,
+                    hideFlags = HideFlags.HideAndDontSave,
+                };
+                var pixels = new Color32[size * size];
+                float cx = size * 0.5f;
+                float cy = size * 0.5f;
+
+                for (int y = 0; y < size; y++)
+                {
+                    for (int x = 0; x < size; x++)
+                    {
+                        float px = x + 0.5f - cx;
+                        float py = y + 0.5f - cy;
+                        float r = Mathf.Sqrt(px * px + py * py);
+
+                        // Outer subtle tap-ripple ring (r = 22..25)
+                        float outerRing = Mathf.Clamp01(1.8f - Mathf.Abs(r - 23.5f)) * 0.52f;
+
+                        // Inner soft circle border (r = 14..16.5)
+                        float innerRing = Mathf.Clamp01(1.6f - Mathf.Abs(r - 15.2f)) * 0.78f;
+
+                        // Crisp downward-right advance chevron inside (pointing down: V-shape)
+                        float ay = py + 1.5f;
+                        float legDist = Mathf.Abs(Mathf.Abs(px) - (ay + 5.5f));
+                        float inChevronY = (ay >= -5.5f && ay <= 4.5f && Mathf.Abs(px) <= 10.5f) ? 1f : 0f;
+                        float chevron = inChevronY * Mathf.Clamp01(2.2f - legDist);
+
+                        float alpha = Mathf.Clamp01(Mathf.Max(outerRing, Mathf.Max(innerRing, chevron)));
+                        pixels[y * size + x] = new Color32(255, 255, 255, (byte)Mathf.RoundToInt(alpha * 255f));
+                    }
+                }
+
+                texture.SetPixels32(pixels);
+                texture.Apply(false, true);
+                tapCueSprite = Sprite.Create(texture, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), 100f);
+                tapCueSprite.name = "HudTapCueIcon";
+                tapCueSprite.hideFlags = HideFlags.HideAndDontSave;
+                return tapCueSprite;
+            }
+        }
+
+        /// <summary>
+        /// Ensures a discreet corner tap/click icon exists in the bottom-right corner of a dialogue/poetic card.
+        /// </summary>
+        public static Image EnsureCornerTapCue(Transform panel, float sizePx, float insetRightPx, float insetBottomPx, Color tint)
+        {
+            if (panel == null)
+            {
+                return null;
+            }
+
+            Transform existing = panel.Find("TapCueIcon");
+            GameObject go;
+            Image icon;
+            if (existing != null)
+            {
+                go = existing.gameObject;
+                icon = go.GetComponent<Image>() ?? go.AddComponent<Image>();
+            }
+            else
+            {
+                go = new GameObject("TapCueIcon", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+                go.transform.SetParent(panel, false);
+                icon = go.GetComponent<Image>();
+            }
+
+            go.SetActive(true);
+            icon.sprite = TapCueSprite;
+            icon.color = tint;
+            icon.preserveAspect = true;
+            icon.raycastTarget = false;
+
+            var rt = (RectTransform)go.transform;
+            rt.anchorMin = new Vector2(1f, 0f);
+            rt.anchorMax = new Vector2(1f, 0f);
+            rt.pivot = new Vector2(1f, 0f);
+            rt.anchoredPosition = new Vector2(-insetRightPx, insetBottomPx);
+            rt.sizeDelta = new Vector2(sizePx, sizePx);
+            go.transform.SetAsLastSibling();
+            return icon;
+        }
 
         public static void Round(Image image)
         {

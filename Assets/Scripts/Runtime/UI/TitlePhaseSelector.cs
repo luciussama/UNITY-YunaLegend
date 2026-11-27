@@ -26,9 +26,20 @@ namespace YunaLegend.UI
         private string selectedScene;
         public string CurrentPhaseScene
         {
-            get => !string.IsNullOrEmpty(selectedScene) ? selectedScene
-                : itemScenes != null && itemScenes.Length > 0 ? itemScenes[itemScenes.Length - 1] : null;
+            get => !string.IsNullOrEmpty(selectedScene) ? selectedScene : ResolveDefaultPhaseScene();
             private set => selectedScene = value;
+        }
+
+        private string ResolveDefaultPhaseScene()
+        {
+            if (itemScenes == null || itemScenes.Length == 0)
+            {
+                return null;
+            }
+
+            return TitleScreenController.ShouldForceFirstStageOnStart()
+                ? itemScenes[0]
+                : itemScenes[itemScenes.Length - 1];
         }
 
         private void Awake()
@@ -60,7 +71,7 @@ namespace YunaLegend.UI
                     }
                 }
             }
-            CurrentPhaseScene = itemScenes != null && itemScenes.Length > 0 ? itemScenes[itemScenes.Length - 1] : null;
+            CurrentPhaseScene = ResolveDefaultPhaseScene();
             if (controller != null && !string.IsNullOrEmpty(CurrentPhaseScene))
             {
                 controller.SetPhase(CurrentPhaseScene);
@@ -137,7 +148,7 @@ namespace YunaLegend.UI
             itemButtons = buttons;
             itemLabels = labels;
             itemScenes = scenes;
-            if (scenes != null && scenes.Length > 0) CurrentPhaseScene = scenes[scenes.Length - 1];
+            if (scenes != null && scenes.Length > 0) CurrentPhaseScene = ResolveDefaultPhaseScene();
         }
     }
 }
