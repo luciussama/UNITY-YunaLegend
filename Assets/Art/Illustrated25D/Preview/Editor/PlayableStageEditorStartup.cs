@@ -134,7 +134,8 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
                 || activeScene.path == "Assets/Scenes/Arena_Gameplay.unity"
                 || activeScene.path == "Assets/Scenes/Arena_3D_Showcase.unity"
                 || activeScene.path == "Assets/Scenes/BearChase_Gameplay.unity"
-                || activeScene.path == "Assets/Scenes/Picnic_Gameplay.unity")
+                || activeScene.path == "Assets/Scenes/Picnic_Gameplay.unity"
+                || activeScene.path == "Assets/Scenes/DreamForest_Gameplay.unity")
             {
                 return;
             }
@@ -160,7 +161,8 @@ namespace YunaLegend.Illustrated25D.Preview.Editor
                 || activePath == "Assets/Scenes/Arena_Gameplay.unity"
                 || activePath == "Assets/Scenes/Arena_3D_Showcase.unity"
                 || activePath == "Assets/Scenes/BearChase_Gameplay.unity"
-                || activePath == "Assets/Scenes/Picnic_Gameplay.unity")
+                || activePath == "Assets/Scenes/Picnic_Gameplay.unity"
+                || activePath == "Assets/Scenes/DreamForest_Gameplay.unity")
             {
                 EditorSceneManager.playModeStartScene = null;
                 return;

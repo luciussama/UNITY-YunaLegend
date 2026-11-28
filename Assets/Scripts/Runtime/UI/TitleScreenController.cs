@@ -30,7 +30,7 @@ namespace YunaLegend.UI
         }
 
         [Header("Cena de destino")]
-        [SerializeField] private string gameplaySceneName = "Picnic_Gameplay";
+        [SerializeField] private string gameplaySceneName = "DreamForest_Gameplay";
         [SerializeField] private string selectedPhaseScene;
 
         [Header("Menu")]

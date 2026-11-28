@@ -1,0 +1,23 @@
+{
+    "name": "YunaLegend.DreamForest.Runtime",
+    "rootNamespace": "YunaLegend.DreamForest.Runtime",
+    "references": [
+        "YunaLegend.DreamForest.Core",
+        "YunaLegend.DreamForestEntrance.Core",
+        "YunaLegend.DreamForestEntrance.Runtime",
+        "YunaLegend.Presentation",
+        "YunaLegend.Qa.Core",
+        "YunaLegend.Qa.Runtime",
+        "Unity.InputSystem",
+        "UnityEngine.UI"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

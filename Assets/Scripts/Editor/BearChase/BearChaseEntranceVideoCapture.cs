@@ -15,7 +15,7 @@ namespace YunaLegend.EditorScripts.BearChase
     {
         private const string EvidenceDir = "Evidence/BearChaseEntranceRig2D";
 
-        [MenuItem("YunaLegend/BearChase/Capture Entrance Rig 2D Video")]
+        [MenuItem("YunaLegend/Fase 4 - Bear Chase/Capturar Vídeo Rig 2D", false, 40)]
         public static void CaptureAll()
         {
             string framesDir = Path.Combine(EvidenceDir, "video_frames");

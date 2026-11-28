@@ -18,7 +18,7 @@ namespace YunaLegend.EditorScripts.Picnic
         private const string RigAssetDir = "Assets/Art/Picnic/YunaRig2D";
         private const string EvidenceDir = "Evidence/PicnicYunaRig2D";
 
-        [MenuItem("YunaLegend/Picnic/Build Yuna 2D Rig & Clips")]
+        [MenuItem("YunaLegend/Fase 5 - Um Dia no Jardim/Reconstruir Rig 2D e Clipes", false, 50)]
         public static void BuildAllAndCapture()
         {
             ConfigurePartImporters();
@@ -223,7 +223,7 @@ namespace YunaLegend.EditorScripts.Picnic
             UnityEngine.Object.DestroyImmediate(tex);
         }
 
-        [MenuItem("YunaLegend/Picnic/Capture Yuna 2D Rig Walk Video Frames")]
+        [MenuItem("YunaLegend/Fase 5 - Um Dia no Jardim/Capturar Vídeo Caminhada 2D", false, 51)]
         public static void CaptureWalkVideoFrames()
         {
             string framesDir = Path.Combine(EvidenceDir, "video_frames");
@@ -306,7 +306,7 @@ namespace YunaLegend.EditorScripts.Picnic
             Debug.Log($"PICNIC_YUNA_RIG2D_VIDEO_FRAMES_OK {totalFrames} frames -> {framesDir}");
         }
 
-        [MenuItem("YunaLegend/Picnic/Capture 3 Expressive Garden Animations Video")]
+        [MenuItem("YunaLegend/Fase 5 - Um Dia no Jardim/Capturar Vídeo 3 Animações", false, 52)]
         public static void CaptureThreeAnimationsVideoFrames()
         {
             string framesDir = Path.Combine(EvidenceDir, "video_3anims_frames");

@@ -1,0 +1,20 @@
+{
+    "name": "YunaLegend.DreamForest.Editor",
+    "rootNamespace": "YunaLegend.DreamForest.Editor",
+    "references": [
+        "YunaLegend.DreamForest.Core",
+        "YunaLegend.DreamForest.Runtime",
+        "YunaLegend.Presentation"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
