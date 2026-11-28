@@ -3,58 +3,6 @@ using System.Collections.Generic;
 
 namespace YunaLegend.Arena.Core
 {
-    public enum ArenaEnemyId
-    {
-        Train = 0,
-        Robot = 1,
-        Dinosaur = 2,
-        Bear = 3
-    }
-
-    public enum ArenaEnemyState
-    {
-        Spawning,
-        Idle,
-        Approaching,
-        Retreating,
-        Evading,
-        Windup,
-        ActiveAttack,
-        Recovery,
-        HitReaction,
-        Defeated
-    }
-
-    public enum ArenaAttackKind
-    {
-        None,
-        SteamBlast,
-        FrontCharge,
-        LaserBeam,
-        RocketPunch,
-        Bite,
-        Rush,
-        BearHug,
-        BellyCharge,
-        ToyLeap
-    }
-
-    public enum ArenaSpecialPhase
-    {
-        Inactive,
-        Charge,
-        Pullback,
-        Launch,
-        Impact,
-        Fade
-    }
-
-    public enum ArenaBattleOutcome
-    {
-        Ongoing,
-        Victory,
-        Defeat
-    }
 
     public struct ArenaInputState
     {

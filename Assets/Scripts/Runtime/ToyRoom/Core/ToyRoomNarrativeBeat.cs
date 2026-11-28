@@ -1,18 +1,5 @@
 namespace YunaLegend.ToyRoom.Core
 {
-    public enum ToyRoomBeatKind
-    {
-        Pause,
-        Dialogue,
-        Poetic
-    }
-
-    public enum ToyRoomSpeaker
-    {
-        None,
-        Menina,
-        Nanda
-    }
 
     /// <summary>
     /// Descritor imutavel de um beat narrativo (dialogo, narracao poetica ou respiro visual).

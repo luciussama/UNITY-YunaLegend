@@ -3,10 +3,6 @@ using System.Collections.Generic;
 
 namespace YunaLegend.Picnic.Core
 {
-    public enum PicnicTerrain { Wood, Soil, Stone, Cloud, Grass, Gravel }
-    public enum PicnicStage { Intro, Running, Rescuing, Disoriented, Complete, Falling, GameOver }
-    public enum PicnicEnemyKind { Ant, Caterpillar }
-    public enum PicnicDifficulty { Normal, Easy }
 
     public readonly struct PicnicGrassPatch
     {

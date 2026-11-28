@@ -1,1 +1,0 @@
-PlayMode v3 2/2Passed; camera/player max delta0 at30/60/120. First PNG capture attempt invalid: opening suppressed actor/visual updates were paused. Superseded visual capture will be supplied by v4; CSV and physics results remain valid.

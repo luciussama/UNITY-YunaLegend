@@ -1,1 +1,0 @@
-PLAYMODE_ENTRANCE_OK; frames=449; stage=Running; entranceInactive=True; gameplayRestored=True; elapsed=38,429s. Offscreen view, real bootstrap clock.

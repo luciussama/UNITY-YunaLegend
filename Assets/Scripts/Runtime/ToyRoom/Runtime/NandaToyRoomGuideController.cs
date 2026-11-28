@@ -2,12 +2,6 @@ using UnityEngine;
 
 namespace YunaLegend.ToyRoom.Runtime
 {
-    public enum NandaGuideTargetMode
-    {
-        FollowPlayer,
-        BeaconOverChest,
-        HoverOverSword
-    }
 
     /// <summary>
     /// Fadinha guia Nanda (aparencia e luz azulada conforme diretriz do projeto) na Sala de Brinquedos.

@@ -1,2 +1,0 @@
-System.InvalidOperationException: Unknown entrance audit command
-  at YunaLegend.DreamForestEntrance.Editor.DreamEntranceAudit.Poll () [0x000b5] in C:\Users\sergi\repos\UNITY-YunaLegend\Assets\Scripts\Editor\DreamForestEntrance\DreamEntranceAudit.cs:45 

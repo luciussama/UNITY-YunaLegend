@@ -2,12 +2,6 @@ using System;
 
 namespace YunaLegend.BearChase.Core
 {
-    public enum BearChaseYunaExpression
-    {
-        Calm,
-        Focused,
-        Shocked,
-    }
 
     /// <summary>
     /// Pure 16-joint articulated 2D skeletal pose for Yuna during the BearChase entrance cinematic

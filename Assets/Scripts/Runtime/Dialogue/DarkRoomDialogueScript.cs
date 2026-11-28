@@ -3,22 +3,6 @@ using UnityEngine;
 
 namespace YunaLegend.Dialogue
 {
-    public enum SpeakerId
-    {
-        Nanda,
-        Menina,
-        Yuna,
-        PoeticNarrator
-    }
-
-    public enum NandaMood
-    {
-        Normal,
-        Happy,
-        Annoyed,
-        Determined,
-        Facepalm
-    }
 
     [Serializable]
     public class DialogueLine

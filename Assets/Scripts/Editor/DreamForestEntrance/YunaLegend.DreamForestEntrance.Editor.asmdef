@@ -1,5 +1,0 @@
-{
-    "name": "YunaLegend.DreamForestEntrance.Editor",
-    "references": ["YunaLegend.DreamForest.Core", "YunaLegend.DreamForest.Runtime", "YunaLegend.DreamForestEntrance.Core", "YunaLegend.DreamForestEntrance.Runtime", "UnityEngine.UI", "UnityEditor.TestRunner"],
-    "includePlatforms": ["Editor"]
-}

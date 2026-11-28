@@ -114,11 +114,13 @@ namespace YunaLegend.DarkRoom
                     jumpBufferCounter = 0f;
                     jumpHeld = false;
                     requireJumpRelease = true;
+                    autoRunChangedFrame = Time.frameCount;
                 }
                 autoRunActive = value;
             }
         }
         private bool requireJumpRelease = true;
+        private int autoRunChangedFrame = -1;
 
         public void PrepareForOpening(Vector3 position)
         {
@@ -508,14 +510,65 @@ namespace YunaLegend.DarkRoom
                 }
             }
 
-            // Regra 4.1: comando que avanca o dialogo/abertura nao pode vazar como pulo no frame seguinte
+#if ENABLE_LEGACY_INPUT_MANAGER
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetMouseButtonDown(0))
+            {
+                rawJumpPressed = true;
+            }
+            if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetMouseButton(0))
+            {
+                rawJumpHeld = true;
+            }
+            if (Input.touchCount > 0)
+            {
+                var touch = Input.GetTouch(0);
+                if (touch.phase == UnityEngine.TouchPhase.Began)
+                {
+                    rawJumpPressed = true;
+                }
+                if (touch.phase != UnityEngine.TouchPhase.Ended && touch.phase != UnityEngine.TouchPhase.Canceled)
+                {
+                    rawJumpHeld = true;
+                }
+            }
+#endif
+
+#if ENABLE_LEGACY_INPUT_MANAGER
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+            {
+                rawJumpPressed = true;
+            }
+            if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+            {
+                rawJumpHeld = true;
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                rawJumpPressed = true;
+            }
+            if (Input.GetMouseButton(0))
+            {
+                rawJumpHeld = true;
+            }
+#endif
+
+            // Regra 4.1: comando que avanca o dialogo/abertura nao pode vazar como pulo no mesmo frame,
+            // mas qualquer novo toque/pressionamento em frame posterior libera o pulo imediatamente.
             if (requireJumpRelease)
             {
                 if (!rawJumpHeld)
                 {
                     requireJumpRelease = false;
+                    return;
                 }
-                return;
+                if (rawJumpPressed && Time.frameCount > autoRunChangedFrame)
+                {
+                    requireJumpRelease = false;
+                }
+                else
+                {
+                    return;
+                }
             }
 
             jumpHeld = rawJumpHeld;
@@ -763,6 +816,7 @@ namespace YunaLegend.DarkRoom
             hasRouteSupport = false;
             routePlatforms = null;
             requireJumpRelease = true;
+            autoRunChangedFrame = Time.frameCount;
             autoRunActive = true;
         }
 

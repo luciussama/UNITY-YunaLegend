@@ -2,16 +2,6 @@ using System;
 
 namespace YunaLegend.ToyRoom.Core
 {
-    public enum ToyRoomPhase
-    {
-        Intro,
-        Exploring,
-        RecurrenceMystery,
-        InvestigationCutscene,
-        SeekingSword,
-        SwordPickup,
-        Completed
-    }
 
     /// <summary>
     /// Maquina de estados pura da Fase 2 (Toy Room), coordenando fluxo narrativo e eventos de dominio.

@@ -1,6 +1,0 @@
-{
-  "Assets/Scripts/Runtime/Picnic/Core/PicnicTouchInput.cs": "0a8d98eab82ae88a03fdbe1f4487aef0e7f52ddeae341ea6bc084f4856e2e63b",
-  "Assets/Scripts/Runtime/Picnic/Runtime/PicnicTouchButton.cs": "cfa0a8314788cc76ca1b967bcb61cf4ef3b034d40265011c650b3fdbfe08b45c",
-  "Assets/Scripts/Runtime/Picnic/Runtime/PicnicNarrativeAndHudController.cs": "385ca7f2997182e1f2ac3f24b9a7a0e74ad825a2e5295c1ae363595394957695",
-  "Assets/Editor/RoundedHudReviewCapture.cs": "325ef311eebde28dd8a3fad3e9f1fec436fb5aa240b7c4eb8fa072c49841e7d8"
-}

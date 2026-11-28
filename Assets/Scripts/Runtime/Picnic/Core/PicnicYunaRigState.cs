@@ -2,29 +2,6 @@ using System;
 
 namespace YunaLegend.Picnic.Core
 {
-    public enum PicnicYunaMotionKind
-    {
-        Idle,
-        Run,
-        JumpAnticipation,
-        JumpRise,
-        JumpApex,
-        Fall,
-        JumpLand,
-        DiscomfortWalk,
-        GravelStumble,
-        Balance,
-        PanicRun,
-        Hurt,
-    }
-
-    public enum PicnicYunaExpression
-    {
-        Happy,
-        Strain,
-        Scared,
-        Panic,
-    }
 
     /// <summary>
     /// Articulated 16-joint 2D skeletal pose for Yuna (hips, chest, skirt, head, 2-bone pigtails,

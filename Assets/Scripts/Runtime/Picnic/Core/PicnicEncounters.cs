@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace YunaLegend.Picnic.Core
 {
-    public enum PicnicBeePhase { Patrol, Prepare, Dive }
 
     public sealed class PicnicBeeState
     {

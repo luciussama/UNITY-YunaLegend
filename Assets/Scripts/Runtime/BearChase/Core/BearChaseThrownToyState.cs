@@ -1,12 +1,5 @@
 namespace YunaLegend.BearChase.Core
 {
-    public enum BearChaseThrownToyPhase
-    {
-        InFlight = 0,
-        Sliding = 1,
-        Deflected = 2,
-        Expired = 3
-    }
 
     /// <summary>
     /// Snapshot imutavel de um brinquedo arremessado pelo urso durante a perseguiçao.

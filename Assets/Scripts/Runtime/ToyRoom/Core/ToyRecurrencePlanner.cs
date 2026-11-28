@@ -3,13 +3,6 @@ using System.Collections.Generic;
 
 namespace YunaLegend.ToyRoom.Core
 {
-    public enum ToyPlacementState
-    {
-        OnFloor,
-        Carried,
-        Organized,
-        PendingReturn
-    }
 
     /// <summary>
     /// Planeja o comportamento normal (brinquedos 1..6) e a recorrencia silenciosa

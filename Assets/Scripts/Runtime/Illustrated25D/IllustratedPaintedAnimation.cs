@@ -3,7 +3,6 @@ using YunaLegend.DarkRoom;
 
 namespace YunaLegend.Illustrated25D
 {
-    public enum PaintedPose { Idle, Run, Jump, Fall, Land, Stumble }
 
     /// <summary>
     /// T02.3 proof only: drives the painted skin from the existing controller state, without touching

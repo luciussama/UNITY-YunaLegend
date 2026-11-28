@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace YunaLegend.DarkRoom
 {
-    public enum YunaStudyPose { Idle, Run, Jump, Fall, Land, Stumble }
 
     /// <summary>First articulated study: presentation only, never moves the player root or its collider.</summary>
     [DefaultExecutionOrder(200)]

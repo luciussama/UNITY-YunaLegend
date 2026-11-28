@@ -7,13 +7,6 @@ using YunaLegend.Presentation;
 
 namespace YunaLegend.DarkRoom
 {
-    public enum CutsceneType
-    {
-        None,
-        CastleRest,
-        FalseDoorPlotTwist,
-        TruePortalVictory
-    }
 
     public class DarkRoomProgressionManager : MonoBehaviour
     {
